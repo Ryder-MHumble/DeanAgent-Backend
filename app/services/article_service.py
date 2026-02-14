@@ -9,6 +9,8 @@ from app.models.article import Article
 from app.schemas.article import ArticleSearchParams, ArticleUpdate
 from app.schemas.common import PaginatedResponse
 
+_ALLOWED_SORT_FIELDS = {"crawled_at", "published_at", "title", "importance"}
+
 
 async def list_articles(
     db: AsyncSession, params: ArticleSearchParams
@@ -35,8 +37,9 @@ async def list_articles(
     count_query = select(func.count()).select_from(query.subquery())
     total = (await db.execute(count_query)).scalar() or 0
 
-    # Sorting
-    sort_column = getattr(Article, params.sort_by, Article.crawled_at)
+    # Sorting (whitelist to prevent arbitrary column access)
+    sort_field = params.sort_by if params.sort_by in _ALLOWED_SORT_FIELDS else "crawled_at"
+    sort_column = getattr(Article, sort_field)
     if params.order == "asc":
         query = query.order_by(sort_column.asc())
     else:

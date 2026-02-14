@@ -4,7 +4,10 @@ import logging
 from datetime import datetime, timezone
 from typing import Any
 
-from app.crawlers.base import CrawlResult, CrawlStatus
+from sqlalchemy import update
+from sqlalchemy.dialects.postgresql import insert as pg_insert
+
+from app.crawlers.base import CrawlStatus
 from app.crawlers.registry import CrawlerRegistry
 from app.crawlers.utils.dedup import compute_url_hash
 from app.crawlers.utils.json_storage import save_crawl_result_json
@@ -44,9 +47,9 @@ async def execute_crawl_job(source_config: dict[str, Any]) -> None:
     async with async_session_factory() as session:
         result = await crawler.run(db_session=session)
 
-        # Persist new articles
+        # Persist new articles (ON CONFLICT DO NOTHING to avoid unique constraint failures)
         for item in result.items:
-            article = Article(
+            stmt = pg_insert(Article).values(
                 source_id=item.source_id or source_id,
                 dimension=item.dimension or source_config.get("dimension", ""),
                 url=item.url,
@@ -59,8 +62,8 @@ async def execute_crawl_job(source_config: dict[str, Any]) -> None:
                 published_at=item.published_at,
                 tags=list(set(item.tags + source_config.get("tags", []))),
                 extra=item.extra,
-            )
-            session.add(article)
+            ).on_conflict_do_nothing(index_elements=["url_hash"])
+            await session.execute(stmt)
 
         # Save to local JSON (independent of DB)
         try:
@@ -83,8 +86,6 @@ async def execute_crawl_job(source_config: dict[str, Any]) -> None:
 
         # Update source status
         now = datetime.now(timezone.utc)
-        from sqlalchemy import update
-
         update_values: dict[str, Any] = {"last_crawl_at": now}
         if result.status in (CrawlStatus.SUCCESS, CrawlStatus.NO_NEW_CONTENT):
             update_values["last_success_at"] = now

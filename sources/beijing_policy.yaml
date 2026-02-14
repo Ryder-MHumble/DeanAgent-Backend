@@ -29,7 +29,10 @@ sources:
       list_item: "ul.zc_news_list li"
       title: "a"
       link: "a"
-    base_url: "https://www.beijing.gov.cn/zhengce"
+    base_url: "https://www.beijing.gov.cn/zhengce/"
+    detail_selectors:
+      content: "div.TRS_UEDITOR"
+    detail_use_playwright: false
     tags: ["policy", "beijing_gov"]
 
   - id: "bjkw_policy"
@@ -48,6 +51,8 @@ sources:
       date: "span"
       date_format: "%Y-%m-%d"
     base_url: "https://kw.beijing.gov.cn"
+    detail_selectors:
+      content: "div.TRS_UEDITOR"
     tags: ["policy", "bjkw", "science"]
 
   - id: "bjjw_policy"
@@ -62,7 +67,8 @@ sources:
       list_item: "ul.z-mylist li"
       title: "a"
       link: "a"
-    base_url: "https://jw.beijing.gov.cn"
+    detail_selectors:
+      content: "div.TRS_UEDITOR"
     tags: ["policy", "education", "beijing"]
 
   - id: "bjrsj_policy"
@@ -77,7 +83,8 @@ sources:
       list_item: "ul.allList li"
       title: "a"
       link: "a"
-    base_url: "https://rsj.beijing.gov.cn"
+    detail_selectors:
+      content: "div.TRS_UEDITOR"
     tags: ["policy", "hr", "beijing"]
 
   - id: "zgc_policy"
@@ -110,6 +117,8 @@ sources:
       title: "a"
       link: "a"
     base_url: "https://www.ncsti.gov.cn"
+    detail_selectors:
+      content: "div.TRS_UEDITOR"
     tags: ["policy", "innovation", "science"]
 
   - id: "bjfgw_policy"
@@ -160,6 +169,8 @@ sources:
       title: "a"
       link: "a"
     base_url: "https://www.beijing.gov.cn"
+    detail_selectors:
+      content: "div.TRS_UEDITOR"
     tags: ["news", "beijing_gov"]
 
   - id: "bjd_news"
@@ -196,6 +207,8 @@ sources:
       - "免职"
       - "人事"
       - "选举"
+    detail_selectors:
+      content: "div.TRS_UEDITOR"
     tags: ["personnel", "bjrd"]
 
   - id: "beijing_rsrm"

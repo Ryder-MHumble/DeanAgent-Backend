@@ -1,19 +1,9 @@
-from collections.abc import AsyncGenerator
+from fastapi import Query
 
-from fastapi import Depends, Query
-from sqlalchemy.ext.asyncio import AsyncSession
-
-from app.database import get_db
 from app.schemas.article import ArticleSearchParams
 
 
-async def get_db_session() -> AsyncGenerator[AsyncSession, None]:
-    async for session in get_db():
-        yield session
-
-
 def get_article_search_params(
-    q: str | None = Query(None, description="Full-text search query"),
     dimension: str | None = Query(None, description="Filter by dimension"),
     source_id: str | None = Query(None, description="Filter by source ID"),
     keyword: str | None = Query(None, description="Keyword filter in title/summary"),
@@ -25,7 +15,6 @@ def get_article_search_params(
     page_size: int = Query(20, ge=1, le=100, description="Items per page"),
 ) -> ArticleSearchParams:
     return ArticleSearchParams(
-        q=q,
         dimension=dimension,
         source_id=source_id,
         keyword=keyword,

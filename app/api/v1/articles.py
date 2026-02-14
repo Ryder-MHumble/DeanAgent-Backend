@@ -1,7 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.api.deps import get_article_search_params, get_db_session
+from app.api.deps import get_article_search_params
+from app.database import get_db
 from app.schemas.article import (
     ArticleBrief,
     ArticleDetail,
@@ -18,7 +19,7 @@ router = APIRouter()
 @router.get("/", response_model=PaginatedResponse[ArticleBrief])
 async def list_articles(
     params: ArticleSearchParams = Depends(get_article_search_params),
-    db: AsyncSession = Depends(get_db_session),
+    db: AsyncSession = Depends(get_db),
 ):
     """List articles with filtering, sorting, and pagination."""
     return await article_service.list_articles(db, params)
@@ -27,7 +28,7 @@ async def list_articles(
 @router.get("/search", response_model=PaginatedResponse[ArticleBrief])
 async def search_articles(
     params: ArticleSearchParams = Depends(get_article_search_params),
-    db: AsyncSession = Depends(get_db_session),
+    db: AsyncSession = Depends(get_db),
 ):
     """Full-text search across articles."""
     return await article_service.list_articles(db, params)
@@ -36,7 +37,7 @@ async def search_articles(
 @router.get("/stats", response_model=list[ArticleStats])
 async def get_stats(
     group_by: str = "dimension",
-    db: AsyncSession = Depends(get_db_session),
+    db: AsyncSession = Depends(get_db),
 ):
     """Get aggregated article statistics."""
     return await article_service.get_article_stats(db, group_by)
@@ -45,7 +46,7 @@ async def get_stats(
 @router.get("/{article_id}", response_model=ArticleDetail)
 async def get_article(
     article_id: int,
-    db: AsyncSession = Depends(get_db_session),
+    db: AsyncSession = Depends(get_db),
 ):
     """Get a single article with full content."""
     article = await article_service.get_article(db, article_id)
@@ -58,7 +59,7 @@ async def get_article(
 async def update_article(
     article_id: int,
     data: ArticleUpdate,
-    db: AsyncSession = Depends(get_db_session),
+    db: AsyncSession = Depends(get_db),
 ):
     """Update article metadata (mark read, set importance)."""
     article = await article_service.update_article(db, article_id, data)

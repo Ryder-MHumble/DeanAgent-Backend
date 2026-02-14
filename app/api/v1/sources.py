@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.api.deps import get_db_session
+from app.database import get_db
 from app.schemas.crawl_log import CrawlLogResponse
 from app.schemas.source import SourceResponse, SourceUpdate
 from app.services import crawl_service, source_service
@@ -12,7 +12,7 @@ router = APIRouter()
 @router.get("/", response_model=list[SourceResponse])
 async def list_sources(
     dimension: str | None = None,
-    db: AsyncSession = Depends(get_db_session),
+    db: AsyncSession = Depends(get_db),
 ):
     """List all sources with status information."""
     return await source_service.list_sources(db, dimension)
@@ -21,7 +21,7 @@ async def list_sources(
 @router.get("/{source_id}", response_model=SourceResponse)
 async def get_source(
     source_id: str,
-    db: AsyncSession = Depends(get_db_session),
+    db: AsyncSession = Depends(get_db),
 ):
     """Get a single source with details."""
     source = await source_service.get_source(db, source_id)
@@ -34,7 +34,7 @@ async def get_source(
 async def get_source_logs(
     source_id: str,
     limit: int = 20,
-    db: AsyncSession = Depends(get_db_session),
+    db: AsyncSession = Depends(get_db),
 ):
     """Get recent crawl logs for a source."""
     return await crawl_service.get_crawl_logs(db, source_id=source_id, limit=limit)
@@ -44,7 +44,7 @@ async def get_source_logs(
 async def update_source(
     source_id: str,
     data: SourceUpdate,
-    db: AsyncSession = Depends(get_db_session),
+    db: AsyncSession = Depends(get_db),
 ):
     """Enable or disable a source."""
     source = await source_service.get_source(db, source_id)
@@ -56,7 +56,7 @@ async def update_source(
 
 
 @router.post("/{source_id}/trigger")
-async def trigger_crawl(source_id: str, db: AsyncSession = Depends(get_db_session)):
+async def trigger_crawl(source_id: str, db: AsyncSession = Depends(get_db)):
     """Manually trigger a crawl for one source."""
     source = await source_service.get_source(db, source_id)
     if source is None:

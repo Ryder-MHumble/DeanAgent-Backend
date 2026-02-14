@@ -1,192 +1,209 @@
-# Information Crawler - Project Context
+# Information Crawler — AI 开发上下文
 
-## Overview
+中关村人工智能研究院信息监测系统。85 信源（63 启用）× 9 维度，5 种模板爬虫 + 7 个自定义 Parser，v1 API 14 端点。
+33 个信源已配置 detail_selectors，可自动抓取详情页正文（content/summary 字段）。
+技术栈：FastAPI + SQLAlchemy(async) + PostgreSQL(Supabase) + APScheduler 3.x + httpx + BS4 + Playwright。
 
-中关村人工智能研究院信息监测系统。自动爬取 ~100 个信源（横跨 8 个维度），通过 REST API 供前端查询，同时将爬取数据以 JSON 文件保存至本地。
+## ⚠ 每次修改后必须做的事
 
-**技术栈**: FastAPI + SQLAlchemy(async) + PostgreSQL(Supabase) + APScheduler 3.x + httpx + BeautifulSoup4 + Playwright + feedparser
+**代码改完 → 验证通过 → 更新文档。三步缺一不可。**
 
-## 8 个维度
+### 必须更新的文档
 
-| ID | 中文名 | 预估源数 |
-|---|---|---|
-| national_policy | 对国家 | ~21 |
-| beijing_policy | 对北京 | ~14 |
-| technology | 对技术 | ~23 |
-| talent | 对人才 | ~10 |
-| industry | 对产业 | ~13 |
-| sentiment | 对学院舆情 | ~6 |
-| universities | 对高校 | ~35 |
-| events | 对日程 | ~4 |
+每次修改爬虫代码、YAML 配置、或整体功能后，**必须同步更新以下文档**：
 
-## 项目结构
+| 改了什么 | 必须更新 | 更新什么 |
+|---------|---------|---------|
+| 某个信源的 YAML（选择器/URL/启用状态） | `docs/crawl_status/README.md` | 该信源所在维度的状态表（条目数、启用状态、说明） |
+| 新增/删除信源 | `docs/crawl_status/README.md` + `docs/TODO.md` | 总览表的源数统计、分组表、对应维度详情；TODO 中对应条目标记完成 |
+| 新增维度 | `docs/crawl_status/README.md` + `docs/TODO.md` + `app/services/dimension_service.py` | 总览表新增行、新建维度详情章节、DIMENSION_NAMES 新增 |
+| 爬虫模板改动 | `docs/crawl_status/README.md` | 「已完成的代码变更」章节追加记录 |
+| 修复禁用源 | `docs/crawl_status/README.md` + `docs/TODO.md` | 禁用源表删除该行、状态表更新为启用、TODO 对应条目打勾 |
+| API 端点增删 | `docs/TODO.md` | 更新 API 相关待办状态 |
+| 任何功能完成 | `docs/TODO.md` | 对应条目标记 `[x]` 完成 |
 
-```
-Information_Crawler/
-├── app/
-│   ├── main.py                    # FastAPI 入口 + lifespan（启动 scheduler、关闭 Playwright）
-│   ├── config.py                  # Pydantic Settings（DATABASE_URL, RSSHUB_BASE_URL 等）
-│   ├── database.py                # SQLAlchemy async engine + session factory
-│   ├── models/                    # ORM 模型
-│   │   ├── base.py                # DeclarativeBase
-│   │   ├── article.py             # articles 表（url_hash UNIQUE 去重）
-│   │   ├── source.py              # sources 表（信源注册）
-│   │   ├── crawl_log.py           # crawl_logs 表（爬取执行日志）
-│   │   └── snapshot.py            # snapshots 表（快照差异历史）
-│   ├── schemas/                   # Pydantic v2 请求/响应 schema
-│   ├── api/v1/                    # REST API 路由（19 个端点）
-│   │   ├── articles.py            # /api/v1/articles (CRUD + 搜索 + 统计)
-│   │   ├── sources.py             # /api/v1/sources (列表 + 手动触发)
-│   │   ├── dimensions.py          # /api/v1/dimensions (8 维度概览)
-│   │   └── health.py              # /api/v1/health (健康 + 爬取状态)
-│   ├── crawlers/
-│   │   ├── base.py                # BaseCrawler(ABC) + CrawledItem + CrawlResult + CrawlStatus
-│   │   ├── registry.py            # CrawlerRegistry: YAML config -> 爬虫实例
-│   │   ├── templates/             # 5 种模板爬虫
-│   │   │   ├── rss_crawler.py     # RSSCrawler (feedparser + httpx)
-│   │   │   ├── static_crawler.py  # StaticHTMLCrawler (httpx + BS4)
-│   │   │   ├── snapshot_crawler.py # SnapshotDiffCrawler (hashlib + difflib)
-│   │   │   ├── dynamic_crawler.py # DynamicPageCrawler (Playwright + BS4)
-│   │   │   └── social_crawler.py  # SocialMediaCrawler (placeholder)
-│   │   ├── parsers/               # 自定义 API Parser（尚未实现）
-│   │   │   └── __init__.py
-│   │   └── utils/
-│   │       ├── http_client.py     # 共享 httpx 客户端（重试、限速、UA 轮换）
-│   │       ├── playwright_pool.py # Playwright 浏览器单例池
-│   │       ├── dedup.py           # URL 归一化 + SHA-256 哈希（保留 fragment）
-│   │       └── text_extract.py    # HTML 转文本、摘要截断
-│   ├── scheduler/
-│   │   ├── manager.py             # SchedulerManager: 读取 YAML、注册 APScheduler 任务、auto-seed DB
-│   │   └── jobs.py                # execute_crawl_job: 实例化爬虫 -> 持久化 Article + CrawlLog
-│   └── services/                  # 业务逻辑层（article_service, source_service, crawl_service）
-├── sources/                       # YAML 信源配置（按维度分文件）
-│   ├── national_policy.yaml       # ✅ 已创建（6 源）
-│   └── technology.yaml            # ✅ 已创建（11 源）
-├── data/
-│   ├── raw/                       # 原始爬取数据（按 维度/分组/源/日期 组织）
-│   └── refined/                   # 业务数据（LLM 处理后，按日期/维度/场景 组织）
-├── scripts/
-│   ├── run_single_crawl.py        # CLI 单源测试
-│   └── seed_sources.py            # YAML -> sources 表同步
-├── alembic/                       # 数据库迁移（未生成 initial migration）
-├── tests/                         # 测试（空目录结构已创建）
-├── 信源爬取方案/                    # 9 份设计文档 + 实施任务计划
-├── pyproject.toml                 # Python 3.11+, 依赖列表
-├── Dockerfile
-└── render.yaml
+### 文档更新格式
+
+`docs/crawl_status/README.md` 顶部有「最后更新」行，每次修改都要更新日期和版本说明：
+```markdown
+> 最后更新: 2026-XX-XX (vN: 简述本次变更)
 ```
 
-## 架构核心
-
-### 配置驱动爬虫
-
-YAML 中的 `crawl_method` → 模板爬虫类；`crawler_class` → 自定义 Parser（优先级更高）。
-`CrawlerRegistry.create_crawler(config)` 完成路由。
-
-```yaml
-# 标准信源：零代码，只需 YAML 配置 + CSS 选择器
-- id: "ndrc_policy"
-  crawl_method: "static"
-  selectors: { list_item: "ul.u-list li", title: "a", link: "a", date: "span" }
-
-# API 信源：YAML 指定 crawler_class，parsers/ 下编写 Parser
-- id: "hacker_news"
-  crawler_class: "hacker_news_api"
+`docs/TODO.md` 顶部同理：
+```markdown
+> 最后更新: 2026-XX-XX
 ```
 
-### 去重策略
+---
 
-1. **URL 级**: `normalize_url()` 去 utm_* 参数 + lowercase → SHA-256 → `url_hash UNIQUE` 约束
-2. **内容级**: `compute_content_hash()` 折叠空白 → SHA-256 → `content_hash` 软检查
+## 问题定位索引
 
-### 调度
+**某个信源爬不到数据 / 选择器失效：**
+→ `sources/{dimension}.yaml` 找到该源的 `selectors` / `url` 配置
+→ `python scripts/run_single_crawl.py --source <id>` 单独测试
+→ `python scripts/analyze_selectors.py` 调试选择器
 
-- APScheduler 3.x `AsyncIOScheduler`（NOT 4.x alpha）
-- 频率: `2h`/`4h`/`daily`/`weekly`/`monthly` → IntervalTrigger / CronTrigger
-- 防雷群: 随机 jitter 0~300s
-- `max_instances=1` 防止单源重叠
+**某种爬虫类型（static/dynamic/rss/snapshot）整体出问题：**
+→ `app/crawlers/templates/{type}_crawler.py`
+→ `app/crawlers/utils/selector_parser.py`（static/dynamic 共享的列表解析、日期提取、详情页解析）
 
-### 数据输出
+**自定义 Parser（arxiv/github/twitter 等）出问题：**
+→ `app/crawlers/parsers/{name}.py`
+→ 路由映射在 `app/crawlers/registry.py` 的 `_CUSTOM_MAP`
 
-- **数据库**: PostgreSQL (Supabase) — articles 表，通过 REST API 查询
-- **JSON 文件**: `data/raw/{dimension}/{group}/{source_id}/{YYYY-MM-DD}.json` — 本地持久化备份（group 为 YAML 中的分组字段）
+**Playwright 页面加载失败 / 超时：**
+→ `app/crawlers/templates/dynamic_crawler.py`（爬虫逻辑）
+→ `app/crawlers/utils/playwright_pool.py`（浏览器池）
+→ YAML 中检查 `wait_for` / `wait_timeout`
 
-## 当前状态
+**文章重复入库 / 去重不对：**
+→ `app/crawlers/utils/dedup.py`（normalize_url + hash 逻辑）
+→ `app/models/article.py`（url_hash UNIQUE 约束）
 
-### 已完成
+**调度任务不执行 / 频率不对：**
+→ `app/scheduler/manager.py`（任务注册 + 频率映射）
+→ `app/scheduler/jobs.py`（单次执行逻辑）
+→ YAML 中检查 `schedule` / `is_enabled`
 
-- [x] 项目骨架（pyproject.toml, FastAPI app, config, database）
-- [x] 4 张 ORM 表（articles, sources, crawl_logs, snapshots）
-- [x] 5 种模板爬虫（rss, static, snapshot, dynamic, social placeholder）
-- [x] CrawlerRegistry + 共享工具（http_client, dedup, text_extract, playwright_pool）
-- [x] 19 个 REST API 端点
-- [x] APScheduler 调度管理器 + 任务执行器
-- [x] 2/8 YAML 配置（national_policy 6 源, technology 11 源）
-- [x] CLI 测试脚本（run_single_crawl.py, seed_sources.py）
-- [x] 代码审查 + 5 个关键 bug 修复
-- [x] ~126 个数据源可达性测试（HTTP accessibility check）
+**API 返回异常：**
+→ `app/api/v1/{articles,sources,dimensions,health}.py`
+→ `app/services/{article,source,crawl,dimension}_service.py`（业务逻辑）
+→ `app/schemas/`（请求/响应校验）
 
-### 未完成
+**JSON 文件没输出 / 路径不对：**
+→ `app/crawlers/utils/json_storage.py`
+→ 输出路径：`data/raw/{dimension}/{group}/{source_id}/{YYYY-MM-DD}.json`
 
-- [ ] 6 个 YAML 配置：beijing_policy, talent, industry, sentiment, universities, events
-- [ ] 5 个自定义 Parser: gov_json_api, arxiv_api, hacker_news_api, github_api, semantic_scholar
-- [x] JSON 本地文件输出功能（已实现，按 dimension/group/source_id/date.json 结构输出）
-- [ ] ~10 个失效 URL 更新（NSFC path 变更, gov.cn 部分路径 404 等）
-- [ ] RSSHub 替代方案（公共实例全部 403，需自部署或切换原生 feed）
-- [ ] Alembic initial migration
-- [ ] 单元测试 / 集成测试
-- [ ] 部署验证
+**HTTP 请求失败 / 限速 / UA 被封：**
+→ `app/crawlers/utils/http_client.py`（重试、限速、UA 轮换）
+
+**数据库连接 / 表结构问题：**
+→ `app/database.py`（engine + session）
+→ `app/models/{article,source,crawl_log,snapshot}.py`（4 张表）
+→ `app/config.py`（DATABASE_URL 配置）
+
+## 文件路由规则
+
+**配置驱动**：YAML `crawl_method` → 模板爬虫；`crawler_class` → 自定义 Parser（优先级更高）
+```
+crawl_method: static  → app/crawlers/templates/static_crawler.py
+crawl_method: dynamic → app/crawlers/templates/dynamic_crawler.py
+crawl_method: rss     → app/crawlers/templates/rss_crawler.py
+crawl_method: snapshot→ app/crawlers/templates/snapshot_crawler.py
+crawler_class: gov_json_api      → app/crawlers/parsers/gov_json_api.py
+crawler_class: arxiv_api         → app/crawlers/parsers/arxiv_api.py
+crawler_class: github_api        → app/crawlers/parsers/github_api.py
+crawler_class: hacker_news_api   → app/crawlers/parsers/hacker_news_api.py
+crawler_class: semantic_scholar  → app/crawlers/parsers/semantic_scholar.py
+crawler_class: twitter_kol       → app/crawlers/parsers/twitter_kol.py
+crawler_class: twitter_search    → app/crawlers/parsers/twitter_search.py
+```
+
+**维度 → YAML 文件**：
+```
+national_policy → sources/national_policy.yaml (6 源, 4 启用)
+beijing_policy  → sources/beijing_policy.yaml  (12 源, 7 启用)
+technology      → sources/technology.yaml      (12 源, 10 启用)
+talent          → sources/talent.yaml          (7 源, 4 启用)
+industry        → sources/industry.yaml        (8 源, 4 启用)
+universities    → sources/universities.yaml    (26 源, 22 启用)
+events          → sources/events.yaml          (4 源, 2 启用)
+personnel       → sources/personnel.yaml       (3 源, 3 启用)
+twitter         → sources/twitter.yaml         (7 源, 7 启用, 需 API key)
+```
+
+## 常用工作流
+
+### 修复某个信源的选择器
+```
+1. 读 sources/{dim}.yaml 找到该源配置
+2. 用 Playwright MCP 打开该源 URL，snapshot 分析真实 DOM 结构
+3. 修改 YAML 中 selectors
+4. 验证：python scripts/run_single_crawl.py --source <id>
+5. 确认输出有 items_new > 0
+6. 更新 docs/crawl_status/README.md 中该源的状态行
+```
+
+### 添加新标准信源
+```
+1. 用 Playwright MCP 打开目标网站，snapshot 分析列表页结构
+2. 确定 crawl_method（static 还是 dynamic）和 CSS 选择器
+3. 编辑 sources/{dim}.yaml 添加条目
+4. 验证：python scripts/run_single_crawl.py --source <new_id>
+5. 检查 data/raw/{dim}/{group}/{id}/ 下是否生成 JSON
+6. 更新 docs/crawl_status/README.md（总览表源数 + 该维度详情表新增行）
+7. 更新 docs/TODO.md（如果是待办中的信源，标记完成）
+```
+
+### 添加自定义 Parser
+```
+1. 在 app/crawlers/parsers/ 新建 {name}.py（继承 BaseCrawler，实现 fetch_and_parse）
+2. 在 app/crawlers/registry.py 的 _CUSTOM_MAP 中添加映射
+3. 在 sources/*.yaml 中配置 crawler_class: "{name}"
+4. 验证：python scripts/run_single_crawl.py --source <id>
+5. 更新 docs/crawl_status/README.md + docs/TODO.md
+```
+
+### 修改爬虫模板逻辑
+```
+1. 改 app/crawlers/templates/{type}_crawler.py
+2. 验证：选 2-3 个使用该模板的源分别测试
+   python scripts/run_single_crawl.py --source <id1>
+   python scripts/run_single_crawl.py --source <id2>
+3. ruff check app/crawlers/
+4. 更新 docs/crawl_status/README.md「已完成的代码变更」章节
+```
+
+### 修改 API / 数据库
+```
+1. 改 app/api/v1/ 或 app/services/ 或 app/models/
+2. 验证：uvicorn app.main:app --reload 后用 curl 或 /docs 测试
+3. ruff check app/
+4. 更新 docs/TODO.md 对应条目
+```
+
+### 使用 Playwright MCP 辅助开发
+分析网页结构时，优先用 Playwright MCP 工具：
+- `browser_navigate` → 打开目标 URL
+- `browser_snapshot` → 获取页面可访问性快照（比截图更适合分析 DOM）
+- 根据 snapshot 结果确定 CSS 选择器，填入 YAML
 
 ## 关键设计决策
 
-1. **APScheduler 3.x (NOT 4.x)**: 4.x 是 alpha，pip 安装不到稳定版
-2. **URL 归一化保留 fragment**: snapshot_crawler 用 `#snapshot-{hash}` 区分同 URL 的不同快照
-3. **scheduler 启动时 auto-seed sources 到 DB**: 避免 FK violation
-4. **CrawlLog 记录 crawler 创建失败**: 即使爬虫实例化出错也可通过 API 追溯
-5. **RSSHub 公共实例不可用**: rsshub.app / rsshub.rssforever.com / rsshub.moeyy.cn 全部限流/403。解决方案：(1) 自部署 RSSHub (2) 使用原生 RSS feed（机器之心 /rss, Google AI Blog 等都有原生 feed）
-
-## 可达性摘要
-
-| 维度 | 可行性 | 备注 |
-|---|---|---|
-| technology | ~90% | RSS/API 覆盖好；RSSHub 源需替换为原生 feed |
-| universities | ~90% | 高校官网大多正常 |
-| events | ~85% | aideadlines YAML, wikicfp 正常 |
-| talent | ~85% | people.cn/xinhuanet 正常 |
-| national_policy | ~80% | gov.cn 正常；NSFC/NPC 需路径修正 |
-| beijing_policy | ~75% | 部分 URL 已变更 |
-| industry | ~75% | 36kr/虎嗅/TMT 正常；交易所部分 403 |
-| sentiment | ~30% | 社交媒体需 Cookie 或逆向，难度最高 |
+1. **APScheduler 3.x，不用 4.x** — 4.x 是 alpha，pip 安装不到稳定版
+2. **URL 归一化保留 fragment** — snapshot_crawler 用 `#snapshot-{hash}` 区分同 URL 的不同快照
+3. **scheduler 启动时 auto-seed sources 到 DB** — 避免 FK violation（`manager.py`）
+4. **CrawlLog 记录 crawler 创建失败** — 即使实例化出错也可通过 API 追溯
+5. **RSSHub 公共实例不可用** — rsshub.app 等全部 403，需自部署或用原生 feed
+6. **Article 插入用 ON CONFLICT DO NOTHING** — 避免 url_hash UNIQUE 约束冲突导致整个事务回滚（`jobs.py`）
+7. **static/dynamic 共享解析逻辑** — `selector_parser.py` 提取公共函数，消除两个模板间 ~100 行重复代码
 
 ## 开发约定
 
-- **Python 3.11+**, 使用 `X | Y` 联合类型语法
-- **ruff** 格式化 + lint (line-length=100)
-- **pytest + pytest-asyncio** (asyncio_mode="auto")
-- **async everywhere**: 所有 DB 操作、HTTP 请求、爬虫都是 async
-- 爬虫新增信源：标准源只需 YAML；API 源在 `parsers/` 加一个类 + registry 注册
-- 环境变量通过 `.env` + `pydantic-settings` 管理
-- 不使用 `git add .`，按文件名显式暂存
+- **Python 3.11+**，`X | Y` 联合类型
+- **ruff** line-length=100，select E/F/I/W
+- **async everywhere**：所有 DB、HTTP、爬虫
+- 新增标准信源：只改 `sources/*.yaml`
+- 新增 API 信源：`parsers/` 加类 + `registry.py` 的 `_CUSTOM_MAP` 注册
+- **git add 按文件名**，不用 `git add .`
 
-## 运行命令
+## 项目文档索引
+
+| 文档 | 路径 | 内容 |
+|------|------|------|
+| 任务优先级 | `docs/TODO.md` | P0-P3 分级待办，每次完成功能后更新 |
+| 爬取状态 | `docs/crawl_status/README.md` | 各维度各源的实时状态、数据量、禁用原因、代码变更记录 |
+| 设计文档 | `docs/信源爬取方案/00-08` | 9 个维度的原始设计方案 |
+| 院长需求 | `docs/院长智能体.md` | 前端 Dean-Agent 功能需求 |
+
+## 常用命令
 
 ```bash
-# 安装依赖
-pip install -e ".[dev]"
-
-# 启动服务
-uvicorn app.main:app --reload
-
-# 测试单源爬取
-python scripts/run_single_crawl.py --source ndrc_policy
-
-# 运行测试
-pytest
-
-# Lint
-ruff check app/
+pip install -e ".[dev]"                              # 安装
+uvicorn app.main:app --reload                        # 启动
+python scripts/run_single_crawl.py --source <id>     # 测试单源
+python scripts/run_batch_crawl.py --dimension <dim>  # 批量测试
+python scripts/analyze_selectors.py                  # 调试选择器
+ruff check app/                                      # Lint
+pytest                                               # 测试
 ```
-
-## 设计文档
-
-详见 `信源爬取方案/` 目录下 9 份文档（00-08），以及 `09_实施任务计划.md` 中的后续实施步骤。

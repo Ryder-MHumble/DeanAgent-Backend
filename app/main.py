@@ -5,7 +5,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.v1.router import v1_router
-from app.api.v2.router import v2_router
 from app.scheduler.manager import SchedulerManager
 
 logging.basicConfig(
@@ -39,15 +38,15 @@ async def lifespan(app: FastAPI):
         from app.crawlers.utils.playwright_pool import close_browser
 
         await close_browser()
-    except Exception:
-        pass
+    except Exception as e:
+        logger.warning("Failed to close Playwright: %s", e)
 
     logger.info("Application shutdown complete")
 
 
 app = FastAPI(
     title="Information Crawler API",
-    description="信息监测系统 API - 爬取 ~100 个信源，覆盖 8 个维度",
+    description="信息监测系统 API - 爬取 ~100 个信源，覆盖 9 个维度",
     version="0.1.0",
     lifespan=lifespan,
 )
@@ -56,14 +55,12 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 # Register API routes
 app.include_router(v1_router)
-app.include_router(v2_router)
 
 
 @app.get("/")

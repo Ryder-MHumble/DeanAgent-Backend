@@ -48,7 +48,7 @@ sources:
       link: "a"
       date: "span"
       date_format: "%Y/%m/%d"
-    base_url: "https://www.ndrc.gov.cn/xxgk/zcfb/tz"
+    base_url: "https://www.ndrc.gov.cn/xxgk/zcfb/tz/"
     tags: ["policy", "ndrc"]
 
   - id: "moe_policy"
@@ -65,7 +65,7 @@ sources:
       link: "a"
       date: "span"
       date_format: "%Y-%m-%d"
-    base_url: "http://www.moe.gov.cn/jyb_xxgk/moe_1777/moe_1778"
+    base_url: "http://www.moe.gov.cn/jyb_xxgk/moe_1777/moe_1778/"
     tags: ["policy", "moe", "education"]
 
   - id: "most_policy"
@@ -82,7 +82,7 @@ sources:
       link: "a"
       date: "div.w_list_rq"
       date_format: "%Y年%m月%d日"
-    base_url: "https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr"
+    base_url: "https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/"
     tags: ["policy", "most", "science"]
 
   - id: "miit_policy"

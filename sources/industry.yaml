@@ -27,6 +27,8 @@ sources:
       link: "a.item-title"
       date: "span.time"
     base_url: "https://36kr.com"
+    detail_selectors:
+      content: "div.item-desc"
     tags: ["news", "36kr", "industry"]
 
   - id: "huxiu_news"
@@ -68,6 +70,8 @@ sources:
       title: "h3.card-list__title"
       link: "div.card-list__content a"
     base_url: "https://www.jiemian.com"
+    detail_selectors:
+      content: "div.article-content"
     tags: ["news", "jiemian", "tech"]
 
   - id: "thepaper_tech"
@@ -131,6 +135,8 @@ sources:
       - "人工智能"
       - "融资"
       - "大模型"
+    detail_selectors:
+      content: "div.article_slice_pc"
     tags: ["finance", "investment", "chinaventure"]
 
   - id: "36kr_investment"

@@ -39,7 +39,7 @@
 
 ## Phase 2B: 补全 YAML 配置（6 个维度）
 
-**目标**: 补全所有 8 个维度的 YAML 信源配置。
+**目标**: 补全所有 9 个维度的 YAML 信源配置。
 
 ### Task 2B-1: beijing_policy.yaml
 
@@ -107,6 +107,16 @@
   - QS/THE/ARWU 排名 — static（ShanghaiRanking 可访问）
   - Nature Index — static
 - **注意**: 南大新闻 SSL 失败 → 设 is_enabled: false 或用 HTTP
+
+### Task 2B-7: personnel.yaml ✅ 已完成 (2026-02-14)
+
+- **文件**: `sources/personnel.yaml`（新建）
+- **源数**: 3
+- **信源**:
+  - `mohrss_rsrm`: 人社部-国务院人事任免（dynamic + Playwright + detail_selectors 详情页正文抓取）
+  - `moe_renshi`: 教育部-人事任免（static，从 universities.yaml 迁移）
+  - `moe_renshi_si`: 教育部-人事司公告（static，从 universities.yaml 迁移）
+- **验证**: 3/3 全部通过，mohrss_rsrm 含详情页正文提取（任免人名+职位+单位）
 
 ### Task 2B-6: events.yaml
 

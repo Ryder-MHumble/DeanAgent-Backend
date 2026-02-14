@@ -79,7 +79,7 @@ sources:
       link: "a"
       date: "span"
       date_format: "%Y-%m-%d"
-    base_url: "https://www.moe.gov.cn/jyb_xxgk/s5743/s5744"
+    base_url: "https://www.moe.gov.cn/jyb_xxgk/s5743/s5744/"
     keyword_filter:
       - "长江学者"
       - "人才"
@@ -88,6 +88,8 @@ sources:
       - "名单"
       - "学位"
       - "教师"
+    detail_selectors:
+      content: "div.TRS_UEDITOR"
     tags: ["talent", "moe", "education"]
 
   - id: "nature_index"
@@ -126,6 +128,8 @@ sources:
       - "AI"
       - "人工智能"
       - "引进"
+    detail_selectors:
+      content: "#Content"
     tags: ["talent", "overseas"]
 
   - id: "aminer_ai"

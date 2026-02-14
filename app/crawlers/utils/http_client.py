@@ -4,6 +4,7 @@ import asyncio
 import logging
 import random
 from collections import defaultdict
+from collections.abc import Callable
 from urllib.parse import urlparse
 
 import httpx
@@ -41,16 +42,17 @@ async def _wait_for_domain(domain: str, delay: float) -> None:
     _domain_last_request[domain] = loop.time()
 
 
-async def fetch_page(
+async def _request_with_retry(
     url: str,
     *,
     headers: dict[str, str] | None = None,
-    encoding: str | None = None,
+    params: dict[str, str] | None = None,
     timeout: float = 30.0,
     max_retries: int = 3,
     request_delay: float | None = None,
-) -> str:
-    """Fetch a URL with retry, rate limiting, and UA rotation. Returns response text."""
+    extract: Callable[[httpx.Response], object],
+) -> object:
+    """Core retry logic shared by fetch_page and fetch_json."""
     domain = urlparse(url).netloc
     delay = request_delay or settings.DEFAULT_REQUEST_DELAY
 
@@ -62,26 +64,52 @@ async def fetch_page(
         await _wait_for_domain(domain, delay)
 
         last_exc: Exception | None = None
-        for attempt in range(max_retries):
-            try:
-                async with httpx.AsyncClient(
-                    timeout=timeout, follow_redirects=True
-                ) as client:
-                    response = await client.get(url, headers=merged_headers)
+        async with httpx.AsyncClient(
+            timeout=timeout, follow_redirects=True
+        ) as client:
+            for attempt in range(max_retries):
+                try:
+                    response = await client.get(
+                        url, headers=merged_headers, params=params,
+                    )
                     response.raise_for_status()
-                    if encoding:
-                        response.encoding = encoding
-                    return response.text
-            except (httpx.HTTPStatusError, httpx.RequestError) as e:
-                last_exc = e
-                wait_time = 2**attempt + random.uniform(0, 1)
-                logger.warning(
-                    "Request failed (attempt %d/%d) for %s: %s. Retrying in %.1fs",
-                    attempt + 1, max_retries, url, e, wait_time,
-                )
-                await asyncio.sleep(wait_time)
+                    return extract(response)
+                except (httpx.HTTPStatusError, httpx.RequestError) as e:
+                    last_exc = e
+                    wait_time = 2**attempt + random.uniform(0, 1)
+                    logger.warning(
+                        "Request failed (attempt %d/%d) for %s: %s. Retrying in %.1fs",
+                        attempt + 1, max_retries, url, e, wait_time,
+                    )
+                    await asyncio.sleep(wait_time)
 
         raise last_exc  # type: ignore[misc]
+
+
+async def fetch_page(
+    url: str,
+    *,
+    headers: dict[str, str] | None = None,
+    encoding: str | None = None,
+    timeout: float = 30.0,
+    max_retries: int = 3,
+    request_delay: float | None = None,
+) -> str:
+    """Fetch a URL with retry, rate limiting, and UA rotation. Returns response text."""
+
+    def _extract(response: httpx.Response) -> str:
+        if encoding:
+            response.encoding = encoding
+        return response.text
+
+    return await _request_with_retry(  # type: ignore[return-value]
+        url,
+        headers=headers,
+        timeout=timeout,
+        max_retries=max_retries,
+        request_delay=request_delay,
+        extract=_extract,
+    )
 
 
 async def fetch_json(
@@ -94,32 +122,12 @@ async def fetch_json(
     request_delay: float | None = None,
 ) -> dict:
     """Fetch a JSON API endpoint with retry and rate limiting."""
-    domain = urlparse(url).netloc
-    delay = request_delay or settings.DEFAULT_REQUEST_DELAY
-
-    merged_headers = {"User-Agent": _get_random_ua()}
-    if headers:
-        merged_headers.update(headers)
-
-    async with _domain_semaphores[domain]:
-        await _wait_for_domain(domain, delay)
-
-        last_exc: Exception | None = None
-        for attempt in range(max_retries):
-            try:
-                async with httpx.AsyncClient(
-                    timeout=timeout, follow_redirects=True
-                ) as client:
-                    response = await client.get(url, headers=merged_headers, params=params)
-                    response.raise_for_status()
-                    return response.json()
-            except (httpx.HTTPStatusError, httpx.RequestError) as e:
-                last_exc = e
-                wait_time = 2**attempt + random.uniform(0, 1)
-                logger.warning(
-                    "JSON request failed (attempt %d/%d) for %s: %s",
-                    attempt + 1, max_retries, url, e,
-                )
-                await asyncio.sleep(wait_time)
-
-        raise last_exc  # type: ignore[misc]
+    return await _request_with_retry(  # type: ignore[return-value]
+        url,
+        headers=headers,
+        params=params,
+        timeout=timeout,
+        max_retries=max_retries,
+        request_delay=request_delay,
+        extract=lambda r: r.json(),
+    )

@@ -15,6 +15,17 @@ logger = logging.getLogger(__name__)
 DATA_DIR = BASE_DIR / "data" / "raw"
 
 
+def build_source_dir(dimension: str, group: str | None, source_id: str) -> Path:
+    """Build the directory path for a source's JSON data.
+
+    Convention: data/raw/{dimension}/{group}/{source_id}/
+    or data/raw/{dimension}/{source_id}/ if group is None.
+    """
+    if group:
+        return DATA_DIR / dimension / group / source_id
+    return DATA_DIR / dimension / source_id
+
+
 def _serialize_item(item: Any) -> dict[str, Any]:
     """Convert a CrawledItem to a JSON-serializable dict."""
     return {
@@ -56,10 +67,7 @@ def save_crawl_result_json(
     source_id = source_config.get("id", "unknown")
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
-    if group:
-        output_dir = DATA_DIR / dimension / group / source_id
-    else:
-        output_dir = DATA_DIR / dimension / source_id
+    output_dir = build_source_dir(dimension, group, source_id)
     output_dir.mkdir(parents=True, exist_ok=True)
     output_file = output_dir / f"{today}.json"
 

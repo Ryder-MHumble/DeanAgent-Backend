@@ -1,0 +1,1 @@
+[      66ms] [ERROR] Failed to set referrer policy: The value 'value' is not one of 'no-referrer', 'no-referrer-when-downgrade', 'origin', 'origin-when-cross-origin', 'same-origin', 'strict-origin', 'strict-origin-when-cross-origin', or 'unsafe-url'. The referrer policy has been left unchanged. @ :0

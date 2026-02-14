@@ -3,15 +3,12 @@ from __future__ import annotations
 
 import json
 import logging
-from datetime import date, datetime, timezone
-from pathlib import Path
+from datetime import date, datetime
 from typing import Any
 
-from app.config import BASE_DIR
+from app.crawlers.utils.json_storage import DATA_DIR as RAW_DATA_DIR
 
 logger = logging.getLogger(__name__)
-
-RAW_DATA_DIR = BASE_DIR / "data" / "raw"
 
 
 def _parse_date(s: str | None) -> date | None:

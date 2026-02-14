@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 _pw: Playwright | None = None
 _browser: Browser | None = None
 _lock = asyncio.Lock()
+_context_semaphore = asyncio.Semaphore(settings.PLAYWRIGHT_MAX_CONTEXTS)
 
 
 async def _get_browser() -> Browser:
@@ -30,17 +31,21 @@ async def _get_browser() -> Browser:
 
 @asynccontextmanager
 async def get_page() -> AsyncGenerator[Page, None]:
-    """Acquire a browser page from the pool, yield it, then close."""
-    browser = await _get_browser()
-    context = await browser.new_context(
-        user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
-    )
-    page = await context.new_page()
-    try:
-        yield page
-    finally:
-        await page.close()
-        await context.close()
+    """Acquire a browser page from the pool, yield it, then close.
+
+    Limits concurrent contexts to PLAYWRIGHT_MAX_CONTEXTS to avoid resource exhaustion.
+    """
+    async with _context_semaphore:
+        browser = await _get_browser()
+        context = await browser.new_context(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+        )
+        page = await context.new_page()
+        try:
+            yield page
+        finally:
+            await page.close()
+            await context.close()
 
 
 async def close_browser() -> None:

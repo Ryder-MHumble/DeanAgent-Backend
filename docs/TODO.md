@@ -1,16 +1,25 @@
 # 后续任务清单
 
-> 最后更新: 2026-02-13
+> 最后更新: 2026-02-14 (v8: 修复详情页 URL 404 — base_url 解析 bug)
 > 基于前端 (Dean-Agent) 需求反推的优先级排序
 
 ---
 
-## P0: 已完成 ✅
+## P0: 基础架构（已完成）
 
-- [x] v2 业务 API 基础架构 (json_reader, llm_service, schemas, routes)
-- [x] 13 个 v2 API 端点实现 (Phase 1 规则处理 + Phase 2 LLM 增强)
-- [x] API 设计文档 (docs/api_design/README.md)
-- [x] 前端数据支撑状态文档 (crawl_status README 新增章节)
+- [x] 项目骨架 (FastAPI + SQLAlchemy async + PostgreSQL + APScheduler 3.x)
+- [x] 5 种模板爬虫 + 7 个自定义 Parser（全部注册）
+- [x] 9 个维度 YAML 信源配置（85 源，63 启用）
+- [x] v1 REST API 14 端点 (articles/sources/dimensions/health)
+- [x] 调度系统 + 去重 + JSON 本地输出（data/raw/ 已有 56 个文件）
+- [x] Twitter 服务 + LLM 服务（OpenRouter）实现
+- [x] 前端数据支撑状态文档 (crawl_status README)
+- [x] 全量代码 Review（v7）— 消除 ~100 行重复代码、修复 3 个 P0 Bug、统一架构分层、优化 http_client/playwright_pool
+
+### ⚠️ 已回退删除
+
+- ~~v2 业务 API（13 端点 + schemas + business services）~~ — 代码已删除，需重新规划
+- ~~API 设计文档 (docs/api_design/README.md)~~ — 随 v2 一起删除
 
 ---
 
@@ -23,11 +32,12 @@
 - [ ] 恢复 huxiu_news (寻找 RSS feed 或 API)
 
 ### LLM 集成
-- [ ] 配置 .env OPENROUTER_API_KEY
-- [ ] 验证 LLM 增强端点: /tech/trends, /briefing/daily, /policy?enhanced=true
+- [ ] 配置 .env OPENROUTER_API_KEY + TWITTER_API_KEY
+- [ ] 重新规划业务 API 层（v2 代码已删除，需决定是否重建）
 
 ### 数据质量
-- [ ] 详情页内容抓取 — 当前只有标题+URL，content/summary 为空
+- [x] ~~详情页内容抓取~~ — 已为 33 个信源配置 detail_selectors（universities 19, beijing_policy 7, industry 3, talent 2, personnel 2），可自动抓取详情页正文
+- [x] ~~修复详情页 URL 404 问题~~ — selector_parser.py 增加 `_normalize_base_url()` 防止 urljoin 丢失路径段；修复 9 个源的 base_url 配置（moe_renshi, moe_renshi_si, moe_talent, moe_policy, ndrc_policy, most_policy, bjjw_policy, bjrsj_policy, beijing_zhengce）
 - [ ] 人事变动 LLM 提取 — 从标题中提取人名、原职位、新职位
 
 ---
@@ -43,10 +53,10 @@
 - [ ] IEEE Fellow / ACM Fellow 年度公告源
 - [ ] 微信公众号方案（搜狗微信搜索 / 公号后台）
 
-### v2 API 扩展
-- [ ] /api/v2/policy/opportunities — 政策机会匹配 (LLM)
-- [ ] /api/v2/talent/mobility — 学术流动 (LLM)
-- [ ] /api/v2/tech/opportunities — 内参机会 (LLM)
+### 业务 API（阻塞：v2 基础层已删除，需先完成 P1 "重新规划业务 API"）
+- [ ] 政策机会匹配 (LLM)
+- [ ] 学术流动分析 (LLM)
+- [ ] 内参机会推荐 (LLM)
 
 ### 数据处理
 - [ ] refined/ 数据管线 — 定时将 raw 数据经 LLM 处理后存入 refined/
@@ -64,6 +74,12 @@
 
 ### 基础设施
 - [ ] Alembic 数据库迁移
+- [x] ~~代码重复消除~~ — selector_parser.py 提取共享逻辑、http_client 重试函数统一
+- [x] ~~Article IntegrityError 修复~~ — 改用 ON CONFLICT DO NOTHING
+- [x] ~~CORS 配置修复~~ — 去掉无效 allow_credentials
+- [x] ~~架构分层统一~~ — dimension_service.py、删除冗余 get_db_session、删除死字段 q
+- [x] ~~Playwright 并发控制~~ — semaphore 限制 MAX_CONTEXTS
+- [x] ~~sort_by 白名单~~ — 防止任意列名注入
 - [ ] 单元测试 / 集成测试
 - [ ] WebSocket 实时推送
 - [ ] 部署验证 (Render)

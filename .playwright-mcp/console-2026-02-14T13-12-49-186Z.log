@@ -1,0 +1,5 @@
+[     569ms] [ERROR] Failed to set referrer policy: The value 'value' is not one of 'no-referrer', 'no-referrer-when-downgrade', 'origin', 'origin-when-cross-origin', 'same-origin', 'strict-origin', 'strict-origin-when-cross-origin', or 'unsafe-url'. The referrer policy has been left unchanged. @ :0
+[    1023ms] Uncaught TypeError: Cannot read properties of null (reading 'attributes')
+    at <anonymous> (https://zfwzgl.www.gov.cn/exposure/jiucuo.js:8:50)
+[    1023ms] [ERROR] Mixed Content: The page at 'https://rsj.beijing.gov.cn/xxgk/' was loaded over HTTPS, but requested an insecure script 'http://ta.trs.cn/c/js/ta.js'. This request has been blocked; the content must be served over HTTPS. @ https://rsj.beijing.gov.cn/xxgk/:7017
+[    1025ms] [WARNING] Mixed Content: The page at 'https://rsj.beijing.gov.cn/xxgk/' was loaded over HTTPS, but requested an insecure element 'http://rsj.beijing.gov.cn/images/sidebarimg.png'. This request was automatically upgraded to HTTPS, For more information see https://blog.chromium.org/2019/10/no-more-mixed-messages-about-https.html @ https://rsj.beijing.gov.cn/xxgk/:0

@@ -79,10 +79,8 @@ class BaseCrawler(ABC):
             result.items_new = len(new_items)
             if new_items:
                 result.status = CrawlStatus.SUCCESS
-            elif items:
-                result.status = CrawlStatus.NO_NEW_CONTENT
             else:
-                result.status = CrawlStatus.SUCCESS
+                result.status = CrawlStatus.NO_NEW_CONTENT
         except Exception as e:
             logger.exception("Crawl failed for source %s", self.source_id)
             result.status = CrawlStatus.FAILED

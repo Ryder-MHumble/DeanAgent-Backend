@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.api.deps import get_db_session
+from app.database import get_db
 from app.schemas.crawl_log import CrawlHealthResponse
 from app.services import crawl_service
 
@@ -9,7 +9,7 @@ router = APIRouter()
 
 
 @router.get("/")
-async def health_check(db: AsyncSession = Depends(get_db_session)):
+async def health_check(db: AsyncSession = Depends(get_db)):
     """Basic system health check."""
     try:
         # Verify DB connection
@@ -33,6 +33,6 @@ async def health_check(db: AsyncSession = Depends(get_db_session)):
 
 
 @router.get("/crawl-status", response_model=CrawlHealthResponse)
-async def crawl_status(db: AsyncSession = Depends(get_db_session)):
+async def crawl_status(db: AsyncSession = Depends(get_db)):
     """Overview of crawl health across all sources."""
     return await crawl_service.get_crawl_health(db)

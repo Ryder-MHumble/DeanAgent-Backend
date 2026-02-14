@@ -31,7 +31,6 @@ class ArticleUpdate(BaseModel):
 
 
 class ArticleSearchParams(BaseModel):
-    q: str | None = None
     dimension: str | None = None
     source_id: str | None = None
     tags: list[str] | None = None
