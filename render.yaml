@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: information-crawler
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_KEY
+        sync: false
+      - key: RSSHUB_BASE_URL
+        value: https://rsshub.app
+      - key: MAX_CONCURRENT_CRAWLS
+        value: "3"
+      - key: PLAYWRIGHT_MAX_CONTEXTS
+        value: "2"

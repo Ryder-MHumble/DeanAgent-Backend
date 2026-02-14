@@ -1,0 +1,128 @@
+dimension: "national_policy"
+dimension_name: "对国家"
+description: "国家级政策文件、人事任免、领导讲话"
+
+default_keyword_filter:
+  - "教育"
+  - "科技"
+  - "人工智能"
+  - "AI"
+  - "人才"
+  - "成果转化"
+  - "大模型"
+  - "数字经济"
+  - "创新"
+
+sources:
+  # === A. 政策文件 ===
+  - id: "gov_cn_zhengce"
+    name: "中国政府网-最新政策"
+    group: "policy"
+    url: "https://www.gov.cn/zhengce/zuixin/"
+    crawl_method: "dynamic"
+    schedule: "2h"
+    priority: 1
+    is_enabled: true
+    wait_for: "div.list_2 li"
+    wait_timeout: 15000
+    selectors:
+      list_item: "div.list_2 li"
+      title: "h4 a"
+      link: "h4 a"
+      date: "span.date"
+      date_format: "%Y-%m-%d"
+    base_url: "https://www.gov.cn"
+    tags: ["policy", "gov_cn"]
+
+  - id: "ndrc_policy"
+    name: "国家发改委-通知公告"
+    group: "policy"
+    url: "https://www.ndrc.gov.cn/xxgk/zcfb/tz/"
+    crawl_method: "static"
+    schedule: "4h"
+    priority: 1
+    is_enabled: true
+    selectors:
+      list_item: "ul.u-list li"
+      title: "a"
+      link: "a"
+      date: "span"
+      date_format: "%Y/%m/%d"
+    base_url: "https://www.ndrc.gov.cn/xxgk/zcfb/tz"
+    tags: ["policy", "ndrc"]
+
+  - id: "moe_policy"
+    name: "教育部-政策法规"
+    group: "policy"
+    url: "http://www.moe.gov.cn/jyb_xxgk/moe_1777/moe_1778/"
+    crawl_method: "static"
+    schedule: "4h"
+    priority: 1
+    is_enabled: true
+    selectors:
+      list_item: "div.moe-list li"
+      title: "a"
+      link: "a"
+      date: "span"
+      date_format: "%Y-%m-%d"
+    base_url: "http://www.moe.gov.cn/jyb_xxgk/moe_1777/moe_1778"
+    tags: ["policy", "moe", "education"]
+
+  - id: "most_policy"
+    name: "科技部-信息公开"
+    group: "policy"
+    url: "https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/"
+    crawl_method: "static"
+    schedule: "4h"
+    priority: 1
+    is_enabled: true
+    selectors:
+      list_item: "ul.a_list li"
+      title: "a"
+      link: "a"
+      date: "div.w_list_rq"
+      date_format: "%Y年%m月%d日"
+    base_url: "https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr"
+    tags: ["policy", "most", "science"]
+
+  - id: "miit_policy"
+    name: "工信部-政策文件"
+    group: "policy"
+    url: "https://www.miit.gov.cn/zwgk/zcwj/"
+    crawl_method: "dynamic"
+    schedule: "daily"
+    priority: 2
+    is_enabled: false  # IP-level WAF block (403), needs proxy or VPN
+    wait_for: "networkidle"
+    wait_timeout: 15000
+    selectors:
+      list_item: "ul.gzdt-list li"
+      title: "a"
+      link: "a"
+      date: "span.date"
+      date_format: "%Y-%m-%d"
+    base_url: "https://www.miit.gov.cn"
+    tags: ["policy", "miit", "industry"]
+
+  - id: "nsfc_news"
+    name: "国家自然科学基金委-通知公告"
+    group: "policy"
+    url: "https://www.nsfc.gov.cn/publish/portal0/tab434/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 2
+    is_enabled: false  # URL 404 - NSFC has changed site structure, needs URL update
+    selectors:
+      list_item: "ul.list li"
+      title: "a"
+      link: "a"
+      date: "span"
+      date_format: "%Y-%m-%d"
+    base_url: "https://www.nsfc.gov.cn"
+    keyword_filter:
+      - "人工智能"
+      - "AI"
+      - "智能"
+      - "计算"
+      - "信息"
+    tags: ["funding", "nsfc"]

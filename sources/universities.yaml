@@ -1,0 +1,567 @@
+dimension: "universities"
+dimension_name: "对高校"
+description: "高校人事变动、科技成果、兄弟单位动态、院士/Fellow荣誉"
+
+default_keyword_filter:
+  - "人工智能"
+  - "AI"
+  - "人事"
+  - "任命"
+  - "院长"
+  - "校长"
+  - "院士"
+  - "科技"
+  - "成果"
+
+sources:
+  # === A. 高教人事首发源 ===
+  - id: "moe_renshi"
+    name: "教育部-人事任免"
+    group: "personnel"
+    url: "https://www.moe.gov.cn/jyb_xwfb/s271/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 1
+    is_enabled: true
+    selectors:
+      list_item: "div.moe-list li"
+      title: "a"
+      link: "a"
+      date: "span"
+      date_format: "%Y-%m-%d"
+    base_url: "https://www.moe.gov.cn"
+    tags: ["personnel", "moe"]
+
+  - id: "moe_renshi_si"
+    name: "教育部-人事司公告"
+    group: "personnel"
+    url: "https://www.moe.gov.cn/s78/A04/tongzhi/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 1
+    is_enabled: true
+    selectors:
+      list_item: "div.moe-list li"
+      title: "a"
+      link: "a"
+      date: "span"
+      date_format: "%Y-%m-%d"
+    base_url: "https://www.moe.gov.cn"
+    tags: ["personnel", "moe"]
+
+  # === B. 高校新闻网 ===
+  - id: "tsinghua_news"
+    name: "清华大学新闻网-最新动态"
+    group: "university_news"
+    url: "https://www.tsinghua.edu.cn/news/zxdt.htm"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 1
+    is_enabled: true
+    selectors:
+      list_item: "ul.ztxw_ul2 li"
+      title: "p.bt"
+      link: "a"
+      date: "div.sj"
+      date_format: "%d %Y.%m"
+    base_url: "https://www.tsinghua.edu.cn"
+    keyword_filter: []  # 高校新闻网不做关键词过滤
+    tags: ["university", "tsinghua", "news"]
+
+  - id: "pku_news"
+    name: "北京大学新闻网"
+    group: "university_news"
+    url: "https://news.pku.edu.cn/xwzh/index.htm"
+    crawl_method: "dynamic"
+    schedule: "daily"
+    priority: 1
+    is_enabled: true
+    wait_for: "ul.newsList01 li"
+    wait_timeout: 15000
+    selectors:
+      list_item: "ul.newsList01 li"
+      title: "h3 a"
+      link: "h3 a"
+      date: "span.item-date"
+      date_format: "%Y/%m/%d"
+    base_url: "https://news.pku.edu.cn/xwzh/"
+    keyword_filter: []  # 高校新闻网不做关键词过滤
+    tags: ["university", "pku", "news"]
+
+  - id: "ustc_news"
+    name: "中国科大新闻网-新闻博览"
+    group: "university_news"
+    url: "https://news.ustc.edu.cn/xwbl.htm"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 1
+    is_enabled: true
+    selectors:
+      list_item: "ul.info-list li"
+      title: "a"
+      link: "a"
+      date: "div.date"
+      date_format: "%Y-%m-%d"
+    base_url: "https://news.ustc.edu.cn"
+    keyword_filter: []  # 高校新闻网不做关键词过滤
+    tags: ["university", "ustc", "news"]
+
+  - id: "zju_news"
+    name: "浙江大学新闻网"
+    group: "university_news"
+    url: "https://www.zju.edu.cn/38199/list.htm"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 1
+    is_enabled: false  # URL needs re-investigation, main page returns error
+    selectors:
+      list_item: "ul.list li"
+      title: "a"
+      link: "a"
+      date: "span"
+    base_url: "https://www.zju.edu.cn"
+    tags: ["university", "zju", "news"]
+
+  - id: "sjtu_news"
+    name: "上海交大新闻网"
+    group: "university_news"
+    url: "https://news.sjtu.edu.cn/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 1
+    is_enabled: true
+    selectors:
+      list_item: "ul.list li"
+      title: "a"
+      link: "a"
+      date: "span"
+    base_url: "https://news.sjtu.edu.cn"
+    keyword_filter: []  # 高校新闻网不做关键词过滤
+    tags: ["university", "sjtu", "news"]
+
+  - id: "fudan_news"
+    name: "复旦大学新闻网"
+    group: "university_news"
+    url: "https://news.fudan.edu.cn/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 2
+    is_enabled: true
+    selectors:
+      list_item: "ul.news_list li"
+      title: "div.news_title a"
+      link: "div.news_title a"
+    base_url: "https://news.fudan.edu.cn"
+    keyword_filter: []  # 高校新闻网不做关键词过滤
+    tags: ["university", "fudan", "news"]
+
+  - id: "nju_news"
+    name: "南京大学新闻网"
+    group: "university_news"
+    url: "https://news.nju.edu.cn/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 2
+    is_enabled: false  # SSL certificate issues
+    selectors:
+      list_item: "ul.list li"
+      title: "a"
+      link: "a"
+      date: "span"
+    base_url: "https://news.nju.edu.cn"
+    tags: ["university", "nju", "news"]
+
+  # === C. AI研究机构 ===
+  - id: "baai_news"
+    name: "北京智源人工智能研究院(BAAI)-智源社区"
+    group: "ai_institutes"
+    url: "https://hub.baai.ac.cn/"
+    crawl_method: "dynamic"
+    schedule: "daily"
+    priority: 1
+    is_enabled: true
+    wait_for: "div.story-item"
+    wait_timeout: 15000
+    selectors:
+      list_item: "div.story-item"
+      title: "h6"
+      link: "a[href^='/view/']"
+      date: ".story-item-author a"
+      date_format: "%Y-%m-%d"
+      date_regex: "\\d{4}-\\d{2}-\\d{2}"
+    base_url: "https://hub.baai.ac.cn"
+    keyword_filter: []  # AI研究机构，内容天然相关
+    tags: ["institute", "baai", "ai"]
+
+  - id: "tsinghua_air"
+    name: "清华大学智能产业研究院(AIR)"
+    group: "ai_institutes"
+    url: "https://air.tsinghua.edu.cn/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 1
+    is_enabled: true
+    selectors:
+      list_item: "div.xinwdt div.xinwdt_lb"
+      title: "h2"
+      link: "a"
+      date: "b"
+      date_format: "%Y/%m/%d"
+    base_url: "https://air.tsinghua.edu.cn"
+    keyword_filter: []  # AI研究机构，内容天然相关
+    tags: ["institute", "tsinghua", "ai"]
+
+  - id: "shlab_news"
+    name: "上海人工智能实验室-科研动态"
+    group: "ai_institutes"
+    url: "https://www.shlab.org.cn/info"
+    crawl_method: "dynamic"
+    schedule: "daily"
+    priority: 1
+    is_enabled: true
+    wait_for: ".itembox a"
+    wait_timeout: 15000
+    selectors:
+      list_item: ".itembox a[href*='/news/']"
+      title: "h2"
+      link: "_self"
+      date: "p:last-of-type"
+      date_format: "%Y-%m-%d"
+    base_url: "https://www.shlab.org.cn"
+    keyword_filter: []  # AI研究机构，内容天然相关
+    tags: ["institute", "shlab", "ai"]
+
+  - id: "zhejianglab_news"
+    name: "之江实验室"
+    group: "ai_institutes"
+    url: "https://www.zhejianglab.org/lab/home"
+    crawl_method: "dynamic"
+    schedule: "daily"
+    priority: 2
+    is_enabled: false  # Complex SPA layout, needs custom parser; URL redirects to zhejianglab.org
+    wait_for: "networkidle"
+    wait_timeout: 15000
+    selectors:
+      list_item: "h5"
+      title: "_self"
+      link: "_self"
+    base_url: "https://www.zhejianglab.org"
+    tags: ["institute", "zhejianglab", "ai"]
+
+  - id: "pcl_news"
+    name: "鹏城实验室"
+    group: "ai_institutes"
+    url: "https://www.pcl.ac.cn/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 2
+    is_enabled: true
+    selectors:
+      list_item: "ul.sidelist33 li"
+      title: "a"
+      link: "a"
+      date: "span.label_datatime"
+      date_format: "%Y-%m-%d"
+    base_url: "https://www.pcl.ac.cn"
+    keyword_filter: []  # 研究机构，内容天然相关
+    tags: ["institute", "pcl", "ai"]
+
+  - id: "ia_cas_news"
+    name: "中科院自动化所"
+    group: "ai_institutes"
+    url: "http://www.ia.cas.cn/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 2
+    is_enabled: true
+    selectors:
+      list_item: "ul.focus-bottom li"
+      title: "a"
+      link: "a"
+      date: "span.data-s"
+      date_format: "%Y-%m-%d"
+    base_url: "http://www.ia.cas.cn"
+    keyword_filter: []  # 研究机构，内容天然相关
+    tags: ["institute", "cas", "automation"]
+
+  - id: "ict_cas_news"
+    name: "中科院计算所"
+    group: "ai_institutes"
+    url: "https://www.ict.ac.cn/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 2
+    is_enabled: true
+    selectors:
+      list_item: "ul.col-topnews-list li"
+      title: "a"
+      link: "a"
+      date: "time"
+      date_format: "%Y/%m/%d"
+    base_url: "https://www.ict.ac.cn"
+    keyword_filter: []  # 研究机构，内容天然相关
+    tags: ["institute", "cas", "computing"]
+
+  # === D. 高教新闻聚合 ===
+  - id: "shanghairanking_news"
+    name: "软科(Shanghai Ranking)"
+    group: "aggregators"
+    url: "https://www.shanghairanking.cn/news"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 2
+    is_enabled: false  # 404 - URL path has changed
+    selectors:
+      list_item: "ul.news-list li"
+      title: "a"
+      link: "a"
+      date: "span.time"
+    base_url: "https://www.shanghairanking.cn"
+    tags: ["ranking", "education", "aggregator"]
+
+  - id: "eol_news"
+    name: "中国教育在线"
+    group: "aggregators"
+    url: "https://www.eol.cn/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 2
+    is_enabled: true
+    selectors:
+      list_item: "ul.list li"
+      title: "a"
+      link: "a"
+      date: "span"
+    base_url: "https://www.eol.cn"
+    keyword_filter:
+      - "人工智能"
+      - "AI"
+      - "人事"
+      - "校长"
+      - "院士"
+    tags: ["education", "aggregator"]
+
+  - id: "jyb_news"
+    name: "中国教育报"
+    group: "aggregators"
+    url: "http://www.jyb.cn/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 2
+    is_enabled: true
+    selectors:
+      list_item: "div.doclist a"
+      title: "_self"
+      link: "_self"
+    base_url: "http://www.jyb.cn"
+    keyword_filter:
+      - "人工智能"
+      - "AI"
+      - "人事"
+      - "校长"
+      - "院士"
+      - "高校"
+    tags: ["education", "news", "official"]
+
+  # === E. 科技成果与荣誉 ===
+  - id: "cas_news"
+    name: "中国科学院"
+    group: "awards"
+    url: "https://www.cas.cn/"
+    crawl_method: "static"
+    schedule: "monthly"
+    priority: 1
+    is_enabled: true
+    selectors:
+      list_item: "ul.news_list li"
+      title: "a"
+      link: "a"
+    base_url: "https://www.cas.cn"
+    keyword_filter:
+      - "院士"
+      - "增选"
+      - "人工智能"
+      - "AI"
+    tags: ["academician", "cas"]
+
+  - id: "cae_news"
+    name: "中国工程院"
+    group: "awards"
+    url: "https://www.cae.cn/"
+    crawl_method: "static"
+    schedule: "monthly"
+    priority: 1
+    is_enabled: true
+    selectors:
+      list_item: "div.info_list_flex div.info_item"
+      title: "a.info_item_a"
+      link: "a.info_item_a"
+      date: "div.info_item_time"
+      date_format: "%Y-%m-%d"
+    base_url: "https://www.cae.cn"
+    keyword_filter:
+      - "院士"
+      - "增选"
+      - "人工智能"
+      - "AI"
+    tags: ["academician", "cae"]
+
+  - id: "nosta_news"
+    name: "国家科技奖励办"
+    group: "awards"
+    url: "https://www.nosta.gov.cn/"
+    crawl_method: "dynamic"
+    schedule: "monthly"
+    priority: 2
+    is_enabled: true
+    wait_for: "a.news-item"
+    wait_timeout: 15000
+    selectors:
+      list_item: "div.tzgg a.news-item"
+      title: "div.title"
+      link: "_self"
+      date: "div.time"
+      date_format: "%Y-%m-%d"
+    base_url: "https://www.nosta.gov.cn"
+    keyword_filter: []  # 科技奖励，内容天然相关
+    tags: ["award", "science", "national"]
+
+  - id: "moe_keji"
+    name: "教育部科学技术与信息化司"
+    group: "awards"
+    url: "https://www.moe.gov.cn/s78/A16/"
+    crawl_method: "static"
+    schedule: "monthly"
+    priority: 2
+    is_enabled: true
+    selectors:
+      list_item: "ul.siju-list li"
+      title: "a"
+      link: "a"
+      date: "span"
+      date_format: "%Y-%m-%d"
+    base_url: "https://www.moe.gov.cn/s78/A16/"
+    keyword_filter: []
+    tags: ["award", "moe", "tech"]
+
+  # === F. 省级教育厅 ===
+  - id: "beijing_jw"
+    name: "北京市教委-政务公开"
+    group: "provincial"
+    url: "https://jw.beijing.gov.cn/xxgk/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 2
+    is_enabled: true
+    selectors:
+      list_item: "ul.zwg.z-mylist.a-hov-c li"
+      title: "a"
+      link: "a"
+      date: "em"
+      date_format: "%Y-%m-%d"
+    base_url: "https://jw.beijing.gov.cn"
+    keyword_filter:
+      - "人工智能"
+      - "AI"
+      - "人事"
+      - "校长"
+      - "院士"
+      - "高校"
+    tags: ["education", "beijing", "policy"]
+
+  - id: "shanghai_jw"
+    name: "上海市教委-本市新闻"
+    group: "provincial"
+    url: "https://edu.sh.gov.cn/xwzx_bsxw/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 2
+    is_enabled: true
+    selectors:
+      list_item: "ul.list-cell2.border_b li"
+      title: "a"
+      link: "a"
+      date: "span.listTime"
+      date_format: "%Y.%m.%d"
+    base_url: "https://edu.sh.gov.cn"
+    keyword_filter:
+      - "人工智能"
+      - "AI"
+      - "人事"
+      - "校长"
+      - "院士"
+      - "高校"
+    tags: ["education", "shanghai", "policy"]
+
+  - id: "zhejiang_jyt"
+    name: "浙江省教育厅-教育动态"
+    group: "provincial"
+    url: "https://jyt.zj.gov.cn/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 2
+    is_enabled: true
+    selectors:
+      list_item: "#Education-list ul li"
+      title: "a"
+      link: "a"
+      date: "span"
+      date_format: "%Y-%m-%d"
+    base_url: "https://jyt.zj.gov.cn"
+    keyword_filter:
+      - "人工智能"
+      - "AI"
+      - "人事"
+      - "校长"
+      - "院士"
+      - "高校"
+      - "大学"
+    tags: ["education", "zhejiang", "policy"]
+
+  - id: "jiangsu_jyt"
+    name: "江苏省教育厅"
+    group: "provincial"
+    url: "https://jyt.jiangsu.gov.cn/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 2
+    is_enabled: true
+    selectors:
+      list_item: "div.listL ul.list li.cf"
+      title: "a"
+      link: "a"
+      # date: readlabel attribute has full YYYY-MM-DD, text only shows MM-DD
+    base_url: "https://jyt.jiangsu.gov.cn"
+    keyword_filter:
+      - "人工智能"
+      - "AI"
+      - "人事"
+      - "校长"
+      - "院士"
+      - "高校"
+      - "大学"
+    tags: ["education", "jiangsu", "policy"]
+
+  - id: "guangdong_jyt"
+    name: "广东省教育厅-教育新闻"
+    group: "provincial"
+    url: "https://edu.gd.gov.cn/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 2
+    is_enabled: true
+    selectors:
+      list_item: "div.gdjyxw ul.list li"
+      title: "a"
+      link: "a"
+      # no date element on homepage
+    base_url: "https://edu.gd.gov.cn"
+    keyword_filter:
+      - "人工智能"
+      - "AI"
+      - "人事"
+      - "校长"
+      - "院士"
+      - "高校"
+      - "大学"
+    tags: ["education", "guangdong", "policy"]

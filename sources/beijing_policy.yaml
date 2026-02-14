@@ -1,0 +1,216 @@
+dimension: "beijing_policy"
+dimension_name: "对北京"
+description: "北京市政策文件、市领导动态、委办局人事变动"
+
+default_keyword_filter:
+  - "教育"
+  - "科技"
+  - "人工智能"
+  - "AI"
+  - "人才"
+  - "中关村"
+  - "海淀"
+  - "创新"
+  - "数字经济"
+
+sources:
+  # === A. 政策文件 ===
+  - id: "beijing_zhengce"
+    name: "首都之窗-政策文件"
+    group: "policy"
+    url: "https://www.beijing.gov.cn/zhengce/"
+    crawl_method: "dynamic"
+    schedule: "4h"
+    priority: 1
+    is_enabled: true
+    wait_for: "ul.zc_news_list li"
+    wait_timeout: 15000
+    selectors:
+      list_item: "ul.zc_news_list li"
+      title: "a"
+      link: "a"
+    base_url: "https://www.beijing.gov.cn/zhengce"
+    tags: ["policy", "beijing_gov"]
+
+  - id: "bjkw_policy"
+    name: "北京市科委/中关村管委会"
+    group: "policy"
+    url: "https://kw.beijing.gov.cn/"
+    crawl_method: "static"
+    schedule: "4h"
+    priority: 1
+    is_enabled: true
+    keyword_filter: []  # All items from science/ZGC commission are relevant
+    selectors:
+      list_item: "ul.infoList li"
+      title: "a"
+      link: "a"
+      date: "span"
+      date_format: "%Y-%m-%d"
+    base_url: "https://kw.beijing.gov.cn"
+    tags: ["policy", "bjkw", "science"]
+
+  - id: "bjjw_policy"
+    name: "北京市教委"
+    group: "policy"
+    url: "https://jw.beijing.gov.cn/xxgk/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 1
+    is_enabled: true
+    selectors:
+      list_item: "ul.z-mylist li"
+      title: "a"
+      link: "a"
+    base_url: "https://jw.beijing.gov.cn"
+    tags: ["policy", "education", "beijing"]
+
+  - id: "bjrsj_policy"
+    name: "北京市人社局"
+    group: "policy"
+    url: "https://rsj.beijing.gov.cn/xxgk/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 2
+    is_enabled: true
+    selectors:
+      list_item: "ul.allList li"
+      title: "a"
+      link: "a"
+    base_url: "https://rsj.beijing.gov.cn"
+    tags: ["policy", "hr", "beijing"]
+
+  - id: "zgc_policy"
+    name: "中关村示范区"
+    group: "policy"
+    url: "https://zgc.beijing.gov.cn/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 1
+    is_enabled: false  # Connection reset by peer, domain may be restructured
+    selectors:
+      list_item: "ul.list li"
+      title: "a"
+      link: "a"
+      date: "span"
+      date_format: "%Y-%m-%d"
+    base_url: "https://zgc.beijing.gov.cn"
+    tags: ["policy", "zgc", "innovation"]
+
+  - id: "ncsti_policy"
+    name: "国际科创中心"
+    group: "policy"
+    url: "https://www.ncsti.gov.cn/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 2
+    is_enabled: true
+    selectors:
+      list_item: "ul.qcdt-list li"
+      title: "a"
+      link: "a"
+    base_url: "https://www.ncsti.gov.cn"
+    tags: ["policy", "innovation", "science"]
+
+  - id: "bjfgw_policy"
+    name: "北京市发改委"
+    group: "policy"
+    url: "https://fgw.beijing.gov.cn/fgwzwgk/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 2
+    is_enabled: false  # Multi-level JS redirect chain, cannot follow statically
+    selectors:
+      list_item: "ul.listTxt li"
+      title: "a"
+      link: "a"
+      date: "span"
+      date_format: "%Y-%m-%d"
+    base_url: "https://fgw.beijing.gov.cn"
+    tags: ["policy", "development", "beijing"]
+
+  - id: "bjhd_policy"
+    name: "海淀区政府"
+    group: "policy"
+    url: "https://www.bjhd.gov.cn/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 1
+    is_enabled: false  # /zwgk/ returns 404, root page has sparse content
+    selectors:
+      list_item: "ul.list li"
+      title: "a"
+      link: "a"
+      date: "span"
+      date_format: "%Y-%m-%d"
+    base_url: "https://www.bjhd.gov.cn"
+    tags: ["policy", "haidian", "district"]
+
+  # === B. 人事变动与要闻 ===
+  - id: "beijing_ywdt"
+    name: "首都之窗-要闻"
+    group: "news_personnel"
+    url: "https://www.beijing.gov.cn/ywdt/"
+    crawl_method: "static"
+    schedule: "4h"
+    priority: 1
+    is_enabled: true
+    selectors:
+      list_item: "ul.news_list li"
+      title: "a"
+      link: "a"
+    base_url: "https://www.beijing.gov.cn"
+    tags: ["news", "beijing_gov"]
+
+  - id: "bjd_news"
+    name: "北京日报"
+    group: "news_personnel"
+    url: "https://www.bjd.com.cn/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 2
+    is_enabled: false  # Homepage is complex layout with no clear news list structure, needs JS rendering
+    selectors:
+      list_item: "ul.news-list li"
+      title: "a"
+      link: "a"
+      date: "span.time"
+    base_url: "https://www.bjd.com.cn"
+    tags: ["news", "bjd", "media"]
+
+  - id: "bjrd_renshi"
+    name: "北京市人大常委会"
+    group: "news_personnel"
+    url: "https://www.bjrd.gov.cn/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 2
+    is_enabled: true
+    selectors:
+      list_item: "ul.txt_tab li"
+      title: "a"
+      link: "a"
+    base_url: "https://www.bjrd.gov.cn"
+    keyword_filter:
+      - "任命"
+      - "免职"
+      - "人事"
+      - "选举"
+    tags: ["personnel", "bjrd"]
+
+  - id: "beijing_rsrm"
+    name: "首都之窗-人事任免"
+    group: "news_personnel"
+    url: "https://www.beijing.gov.cn/gongkai/rsrm/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 1
+    is_enabled: false  # URL returns 404
+    selectors:
+      list_item: "ul.listTxt li"
+      title: "a"
+      link: "a"
+      date: "span"
+      date_format: "%Y-%m-%d"
+    base_url: "https://www.beijing.gov.cn"
+    tags: ["personnel", "beijing_gov"]

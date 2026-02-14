@@ -1,0 +1,169 @@
+dimension: "technology"
+dimension_name: "对技术"
+description: "AI 技术进展、国际热点讨论、KOL 观点"
+
+default_keyword_filter:
+  - "AI"
+  - "人工智能"
+  - "大模型"
+  - "LLM"
+  - "GPT"
+  - "机器学习"
+  - "深度学习"
+
+sources:
+  # === A. 国内科技媒体 (RSS) ===
+  - id: "jiqizhixin_rss"
+    name: "机器之心"
+    group: "domestic_media"
+    url: "https://www.jiqizhixin.com/rss"
+    crawl_method: "rss"
+    schedule: "2h"
+    priority: 2
+    is_enabled: true
+    max_entries: 20
+    tags: ["tech_media", "domestic"]
+
+  - id: "36kr_ai_rss"
+    name: "36氪-AI频道"
+    group: "domestic_media"
+    url: "https://36kr.com/feed"
+    crawl_method: "rss"
+    schedule: "2h"
+    priority: 2
+    is_enabled: true
+    max_entries: 20
+    keyword_filter: ["AI", "人工智能", "大模型", "GPT", "LLM", "机器学习"]
+    tags: ["tech_media", "domestic"]
+
+  # === B. 国际科技源 (RSS) ===
+  - id: "techcrunch_ai_rss"
+    name: "TechCrunch AI"
+    group: "international_media"
+    url: "https://techcrunch.com/category/artificial-intelligence/feed/"
+    crawl_method: "rss"
+    schedule: "2h"
+    priority: 1
+    is_enabled: true
+    max_entries: 15
+    tags: ["tech_media", "international"]
+
+  - id: "theverge_ai_rss"
+    name: "The Verge AI"
+    group: "international_media"
+    url: "https://www.theverge.com/rss/index.xml"
+    crawl_method: "rss"
+    schedule: "4h"
+    priority: 2
+    is_enabled: true
+    max_entries: 15
+    keyword_filter: ["AI", "artificial intelligence", "machine learning", "OpenAI", "GPT", "LLM"]
+    tags: ["tech_media", "international"]
+
+  - id: "mit_tech_review_rss"
+    name: "MIT Technology Review"
+    group: "international_media"
+    url: "https://www.technologyreview.com/feed/"
+    crawl_method: "rss"
+    schedule: "daily"
+    priority: 2
+    is_enabled: true
+    max_entries: 10
+    keyword_filter: ["AI", "artificial intelligence", "machine learning", "deep learning"]
+    tags: ["tech_media", "international", "academic"]
+
+  # === C. 公司官方博客 (静态爬取) ===
+  - id: "openai_blog"
+    name: "OpenAI Blog"
+    group: "company_blogs"
+    url: "https://openai.com/blog"
+    crawl_method: "dynamic"
+    schedule: "daily"
+    priority: 1
+    is_enabled: false  # Requires Playwright; enable when running with browser support
+    wait_for: "networkidle"
+    selectors:
+      list_item: "a[href^='/index/']"
+      title: "h3"
+      link: ""
+      link_attr: "href"
+    base_url: "https://openai.com"
+    tags: ["company_blog", "openai"]
+
+  - id: "anthropic_blog"
+    name: "Anthropic Research"
+    group: "company_blogs"
+    url: "https://www.anthropic.com/research"
+    crawl_method: "dynamic"
+    schedule: "daily"
+    priority: 1
+    is_enabled: false  # Requires Playwright; enable when running with browser support
+    wait_for: "networkidle"
+    selectors:
+      list_item: "a[href*='/research/']"
+      title: "h3"
+      link: ""
+      link_attr: "href"
+    base_url: "https://www.anthropic.com"
+    tags: ["company_blog", "anthropic"]
+
+  # === D. ArXiv AI论文 (自定义 API Parser) ===
+  - id: "arxiv_cs_ai"
+    name: "ArXiv cs.AI"
+    group: "academic"
+    url: "http://export.arxiv.org/api/query"
+    crawl_method: "static"
+    crawler_class: "arxiv_api"
+    search_query: "cat:cs.AI"
+    max_results: 20
+    schedule: "daily"
+    priority: 1
+    is_enabled: true
+    tags: ["academic", "arxiv", "papers"]
+
+  # === E. 社区讨论 ===
+  - id: "hacker_news"
+    name: "Hacker News"
+    group: "community"
+    url: "https://hacker-news.firebaseio.com/v0/"
+    crawl_method: "static"
+    crawler_class: "hacker_news_api"
+    schedule: "2h"
+    priority: 2
+    is_enabled: true
+    max_results: 30
+    tags: ["community", "hacker_news"]
+
+  - id: "reddit_ml_rss"
+    name: "Reddit r/MachineLearning"
+    group: "community"
+    url: "https://www.reddit.com/r/MachineLearning/.rss"
+    crawl_method: "rss"
+    schedule: "4h"
+    priority: 2
+    is_enabled: true
+    max_entries: 20
+    tags: ["community", "reddit", "academic"]
+
+  - id: "reddit_localllama_rss"
+    name: "Reddit r/LocalLLaMA"
+    group: "community"
+    url: "https://www.reddit.com/r/LocalLLaMA/.rss"
+    crawl_method: "rss"
+    schedule: "4h"
+    priority: 2
+    is_enabled: true
+    max_entries: 20
+    tags: ["community", "reddit", "open_source"]
+
+  - id: "github_trending"
+    name: "GitHub Trending"
+    group: "community"
+    url: "https://api.github.com"
+    crawl_method: "static"
+    crawler_class: "github_api"
+    schedule: "daily"
+    priority: 3
+    is_enabled: true
+    max_results: 20
+    tags: ["community", "github", "open_source"]
