@@ -30,7 +30,6 @@ class CrawledItem:
     url: str
     published_at: datetime | None = None
     author: str | None = None
-    summary: str | None = None
     content: str | None = None
     content_hash: str | None = None
     source_id: str | None = None
@@ -46,6 +45,7 @@ class CrawlResult:
     source_id: str
     status: CrawlStatus = CrawlStatus.SUCCESS
     items: list[CrawledItem] = field(default_factory=list)
+    items_all: list[CrawledItem] = field(default_factory=list)
     items_new: int = 0
     items_total: int = 0
     error_message: str | None = None
@@ -71,6 +71,7 @@ class BaseCrawler(ABC):
         try:
             items = await self.fetch_and_parse()
             result.items_total = len(items)
+            result.items_all = items
             if db_session is not None:
                 new_items = await self._dedup(items, db_session)
             else:

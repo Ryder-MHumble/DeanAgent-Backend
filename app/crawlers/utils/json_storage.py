@@ -14,6 +14,8 @@ logger = logging.getLogger(__name__)
 
 DATA_DIR = BASE_DIR / "data" / "raw"
 
+LATEST_FILENAME = "latest.json"
+
 
 def build_source_dir(dimension: str, group: str | None, source_id: str) -> Path:
     """Build the directory path for a source's JSON data.
@@ -26,89 +28,102 @@ def build_source_dir(dimension: str, group: str | None, source_id: str) -> Path:
     return DATA_DIR / dimension / source_id
 
 
-def _serialize_item(item: Any) -> dict[str, Any]:
-    """Convert a CrawledItem to a JSON-serializable dict."""
+def _serialize_item(item: Any, *, is_new: bool) -> dict[str, Any]:
+    """Convert a CrawledItem to a JSON-serializable dict with is_new flag."""
     return {
         "title": item.title,
         "url": item.url,
         "url_hash": compute_url_hash(item.url),
         "published_at": item.published_at.isoformat() if item.published_at else None,
         "author": item.author,
-        "summary": item.summary,
         "content": item.content,
         "content_hash": item.content_hash,
         "source_id": item.source_id,
         "dimension": item.dimension,
         "tags": item.tags,
         "extra": item.extra,
+        "is_new": is_new,
     }
+
+
+def _load_previous_hashes(file_path: Path) -> tuple[set[str], str | None]:
+    """Load url_hash set and crawled_at from previous latest.json.
+
+    Returns (set_of_url_hashes, previous_crawled_at_str).
+    """
+    if not file_path.exists():
+        return set(), None
+    try:
+        with open(file_path, encoding="utf-8") as f:
+            data = json.load(f)
+        hashes = {
+            item["url_hash"]
+            for item in data.get("items", [])
+            if item.get("url_hash")
+        }
+        return hashes, data.get("crawled_at")
+    except (json.JSONDecodeError, KeyError, OSError):
+        logger.warning("Could not read previous %s, treating as first crawl", file_path)
+        return set(), None
 
 
 def save_crawl_result_json(
     result: Any,
     source_config: dict[str, Any],
 ) -> Path | None:
-    """
-    Save crawl result items to a daily JSON file.
+    """Save all crawl result items to latest.json, overwriting the previous file.
 
-    Output path: data/raw/{dimension}/{group}/{source_id}/{YYYY-MM-DD}.json
-    If group is not set, falls back to: data/raw/{dimension}/{source_id}/{YYYY-MM-DD}.json
+    Output path: data/raw/{dimension}/{group}/{source_id}/latest.json
 
-    If the file already exists (same day, multiple crawls), merges items
-    by url_hash to avoid duplicates.
+    All items from the crawl are saved (pre-dedup). Each item is annotated
+    with is_new=true/false by comparing against the previous latest.json.
 
     Returns the path to the written file, or None if no items.
     """
-    if not result.items:
+    all_items = getattr(result, "items_all", None) or result.items
+    if not all_items:
         return None
 
     dimension = source_config.get("dimension", "unknown")
     group = source_config.get("group")
     source_id = source_config.get("id", "unknown")
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
     output_dir = build_source_dir(dimension, group, source_id)
     output_dir.mkdir(parents=True, exist_ok=True)
-    output_file = output_dir / f"{today}.json"
+    output_file = output_dir / LATEST_FILENAME
 
-    # Load existing data if file exists (merge with previous crawl of the same day)
-    existing_items: dict[str, dict] = {}
-    if output_file.exists():
-        try:
-            with open(output_file, encoding="utf-8") as f:
-                data = json.load(f)
-            for item in data.get("items", []):
-                url_hash = item.get("url_hash")
-                if url_hash:
-                    existing_items[url_hash] = item
-        except (json.JSONDecodeError, KeyError):
-            logger.warning("Corrupted JSON file %s, will overwrite", output_file)
+    prev_hashes, prev_crawled_at = _load_previous_hashes(output_file)
 
-    # Add new items
-    for item in result.items:
-        serialized = _serialize_item(item)
-        url_hash = serialized["url_hash"]
-        if url_hash not in existing_items:
-            existing_items[url_hash] = serialized
+    serialized_items = []
+    new_count = 0
+    for item in all_items:
+        url_hash = compute_url_hash(item.url)
+        is_new = url_hash not in prev_hashes
+        if is_new:
+            new_count += 1
+        serialized_items.append(_serialize_item(item, is_new=is_new))
 
-    # Write merged result
+    now_iso = datetime.now(timezone.utc).isoformat()
+
     output_data = {
         "source_id": source_id,
         "dimension": dimension,
         "group": group,
         "source_name": source_config.get("name", source_id),
-        "crawled_at": datetime.now(timezone.utc).isoformat(),
-        "item_count": len(existing_items),
-        "items": list(existing_items.values()),
+        "crawled_at": now_iso,
+        "previous_crawled_at": prev_crawled_at,
+        "item_count": len(serialized_items),
+        "new_item_count": new_count,
+        "items": serialized_items,
     }
 
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(output_data, f, ensure_ascii=False, indent=2)
 
     logger.info(
-        "Saved %d items to %s (total in file: %d)",
-        len(result.items),
+        "Saved %d items (%d new) to %s",
+        len(serialized_items),
+        new_count,
         output_file,
-        len(existing_items),
     )
     return output_file

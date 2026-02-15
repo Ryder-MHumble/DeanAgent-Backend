@@ -2,8 +2,6 @@ from __future__ import annotations
 
 import logging
 from datetime import datetime, timezone
-from email.utils import parsedate_to_datetime
-from typing import Any
 
 import feedparser
 
@@ -11,7 +9,7 @@ from app.config import settings
 from app.crawlers.base import BaseCrawler, CrawledItem
 from app.crawlers.utils.dedup import compute_content_hash
 from app.crawlers.utils.http_client import fetch_page
-from app.crawlers.utils.text_extract import html_to_text, truncate_summary
+from app.crawlers.utils.text_extract import html_to_text
 
 logger = logging.getLogger(__name__)
 
@@ -78,7 +76,6 @@ class RSSCrawler(BaseCrawler):
 
             # Clean HTML from content
             clean_content = html_to_text(content) if content else ""
-            summary = truncate_summary(clean_content) if clean_content else None
             content_hash = compute_content_hash(clean_content) if clean_content else None
 
             items.append(
@@ -87,7 +84,6 @@ class RSSCrawler(BaseCrawler):
                     url=link,
                     published_at=published_at,
                     author=entry.get("author"),
-                    summary=summary,
                     content=clean_content or None,
                     content_hash=content_hash,
                     source_id=self.source_id,

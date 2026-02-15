@@ -8,7 +8,6 @@ from typing import Any
 from app.crawlers.base import BaseCrawler, CrawledItem
 from app.crawlers.utils.dedup import compute_content_hash
 from app.crawlers.utils.http_client import fetch_json
-from app.crawlers.utils.text_extract import truncate_summary
 
 logger = logging.getLogger(__name__)
 
@@ -59,7 +58,6 @@ class SemanticScholarCrawler(BaseCrawler):
 
             # Abstract
             abstract = paper.get("abstract", "") or ""
-            summary = truncate_summary(abstract) if abstract else None
             content_hash = compute_content_hash(abstract) if abstract else None
 
             # Date
@@ -83,7 +81,6 @@ class SemanticScholarCrawler(BaseCrawler):
                     url=paper_url,
                     published_at=published_at,
                     author=author_str or None,
-                    summary=summary,
                     content=abstract or None,
                     content_hash=content_hash,
                     source_id=self.source_id,

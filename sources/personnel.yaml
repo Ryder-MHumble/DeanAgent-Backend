@@ -44,7 +44,7 @@ sources:
       date: "span"
       date_format: "%Y-%m-%d"
     detail_selectors:
-      content: "div.TRS_UEDITOR"
+      content: "div.TRS_Editor"
     tags: ["personnel", "moe"]
 
   - id: "moe_renshi_si"
@@ -62,5 +62,5 @@ sources:
       date: "span"
       date_format: "%Y-%m-%d"
     detail_selectors:
-      content: "div.TRS_UEDITOR"
+      content: "div.TRS_Editor"
     tags: ["personnel", "moe"]

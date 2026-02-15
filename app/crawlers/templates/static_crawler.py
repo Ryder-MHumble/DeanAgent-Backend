@@ -57,7 +57,7 @@ class StaticHTMLCrawler(BaseCrawler):
 
         items: list[CrawledItem] = []
         for raw in raw_items:
-            content = summary = author = content_hash = None
+            content = author = content_hash = None
 
             if detail_selectors:
                 try:
@@ -69,7 +69,6 @@ class StaticHTMLCrawler(BaseCrawler):
                     )
                     detail = parse_detail_html(detail_html, detail_selectors)
                     content = detail.content
-                    summary = detail.summary
                     author = detail.author
                     content_hash = detail.content_hash
                 except Exception as e:
@@ -81,7 +80,6 @@ class StaticHTMLCrawler(BaseCrawler):
                     url=raw.url,
                     published_at=raw.published_at,
                     author=author,
-                    summary=summary,
                     content=content,
                     content_hash=content_hash,
                     source_id=self.source_id,

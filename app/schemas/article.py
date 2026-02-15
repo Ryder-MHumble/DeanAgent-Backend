@@ -11,7 +11,6 @@ class ArticleBrief(BaseModel):
     dimension: str
     url: str
     title: str
-    summary: str | None = None
     author: str | None = None
     published_at: datetime | None = None
     crawled_at: datetime

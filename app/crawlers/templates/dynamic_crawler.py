@@ -25,10 +25,10 @@ class DynamicPageCrawler(BaseCrawler):
 
     async def _fetch_detail_with_playwright(
         self, page: Any, detail_url: str, detail_selectors: dict, wait_timeout: int,
-    ) -> tuple[str | None, str | None, str | None, str | None]:
+    ) -> tuple[str | None, str | None, str | None]:
         """Fetch a detail page using Playwright (same context, shares cookies).
 
-        Returns (content, summary, author, content_hash).
+        Returns (content, author, content_hash).
         """
         try:
             await page.goto(detail_url, wait_until="load", timeout=wait_timeout)
@@ -41,17 +41,17 @@ class DynamicPageCrawler(BaseCrawler):
             detail_html = await page.content()
 
             detail = parse_detail_html(detail_html, detail_selectors)
-            return detail.content, detail.summary, detail.author, detail.content_hash
+            return detail.content, detail.author, detail.content_hash
         except Exception as e:
             logger.warning("Failed to fetch detail page %s: %s", detail_url, e)
-            return None, None, None, None
+            return None, None, None
 
     async def _fetch_detail_with_httpx(
         self, detail_url: str, detail_selectors: dict,
-    ) -> tuple[str | None, str | None, str | None, str | None]:
+    ) -> tuple[str | None, str | None, str | None]:
         """Fetch a detail page using httpx (faster, for sites without JS protection).
 
-        Returns (content, summary, author, content_hash).
+        Returns (content, author, content_hash).
         """
         try:
             detail_html = await http_fetch_page(
@@ -61,10 +61,10 @@ class DynamicPageCrawler(BaseCrawler):
                 request_delay=self.config.get("request_delay"),
             )
             detail = parse_detail_html(detail_html, detail_selectors)
-            return detail.content, detail.summary, detail.author, detail.content_hash
+            return detail.content, detail.author, detail.content_hash
         except Exception as e:
             logger.warning("Failed to fetch detail page %s: %s", detail_url, e)
-            return None, None, None, None
+            return None, None, None
 
     async def fetch_and_parse(self) -> list[CrawledItem]:
         from app.crawlers.utils.playwright_pool import get_page
@@ -93,16 +93,16 @@ class DynamicPageCrawler(BaseCrawler):
 
             items: list[CrawledItem] = []
             for raw in raw_items:
-                content = summary = author = content_hash = None
+                content = author = content_hash = None
                 if detail_selectors:
                     if detail_use_playwright:
-                        content, summary, author, content_hash = (
+                        content, author, content_hash = (
                             await self._fetch_detail_with_playwright(
                                 page, raw.url, detail_selectors, wait_timeout,
                             )
                         )
                     else:
-                        content, summary, author, content_hash = (
+                        content, author, content_hash = (
                             await self._fetch_detail_with_httpx(
                                 raw.url, detail_selectors,
                             )
@@ -114,7 +114,6 @@ class DynamicPageCrawler(BaseCrawler):
                         url=raw.url,
                         published_at=raw.published_at,
                         author=author,
-                        summary=summary,
                         content=content,
                         content_hash=content_hash,
                         source_id=self.source_id,

@@ -4,6 +4,7 @@ Extracts date, list items, and detail page content from BeautifulSoup elements.
 """
 from __future__ import annotations
 
+import logging
 import re
 from dataclasses import dataclass
 from datetime import datetime
@@ -12,7 +13,9 @@ from urllib.parse import urljoin, urlparse, urlunparse
 from bs4 import BeautifulSoup, Tag
 
 from app.crawlers.utils.dedup import compute_content_hash
-from app.crawlers.utils.text_extract import html_to_text, truncate_summary
+from app.crawlers.utils.text_extract import html_to_text
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -29,7 +32,6 @@ class DetailResult:
     """Result from parsing a detail page."""
 
     content: str | None = None
-    summary: str | None = None
     author: str | None = None
     content_hash: str | None = None
 
@@ -124,7 +126,7 @@ def parse_list_items(
         if link_el is None:
             continue
         link_attr = selectors.get("link_attr", "href")
-        raw_link = link_el.get(link_attr, "")
+        raw_link = link_el.get(link_attr, "").strip()
         if not raw_link:
             continue
         url = urljoin(base_url, raw_link)
@@ -137,19 +139,35 @@ def parse_list_items(
 
         items.append(RawListItem(title=title, url=url, published_at=published_at))
 
-    return items
+    # Deduplicate by title (some sites expose the same article via multiple URL paths,
+    # e.g. most.gov.cn with/without /fdzdgknr/, ndrc.gov.cn with/without /tz/)
+    seen_titles: set[str] = set()
+    deduped: list[RawListItem] = []
+    for item in items:
+        if item.title not in seen_titles:
+            seen_titles.add(item.title)
+            deduped.append(item)
+        else:
+            logger.debug("Dropped duplicate title: %s (url=%s)", item.title, item.url)
+    if len(deduped) < len(items):
+        logger.info("Title dedup: %d → %d items", len(items), len(deduped))
+    return deduped
 
 
 def parse_detail_html(html: str, detail_selectors: dict) -> DetailResult:
-    """Parse a detail page HTML and extract content, summary, author, content_hash."""
-    detail_soup = BeautifulSoup(html, "lxml")
+    """Parse a detail page HTML and extract content, summary, author, content_hash.
+
+    Uses html.parser instead of lxml because some government sites (notably gov.cn)
+    produce deeply nested <table> structures that lxml fails to parse correctly.
+    html.parser handles all tested sites reliably.
+    """
+    detail_soup = BeautifulSoup(html, "html.parser")
     result = DetailResult()
 
     if content_sel := detail_selectors.get("content"):
         content_el = detail_soup.select_one(content_sel)
         if content_el:
             result.content = html_to_text(str(content_el))
-            result.summary = truncate_summary(result.content)
             result.content_hash = compute_content_hash(result.content)
 
     if author_sel := detail_selectors.get("author"):

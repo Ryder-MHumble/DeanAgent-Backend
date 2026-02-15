@@ -9,7 +9,6 @@ from typing import Any
 from app.crawlers.base import BaseCrawler, CrawledItem
 from app.crawlers.utils.dedup import compute_content_hash
 from app.crawlers.utils.http_client import fetch_json
-from app.crawlers.utils.text_extract import truncate_summary
 
 logger = logging.getLogger(__name__)
 
@@ -68,7 +67,6 @@ class HackerNewsAPICrawler(BaseCrawler):
                     published_at = datetime.fromtimestamp(ts, tz=timezone.utc)
 
                 text = story.get("text", "")
-                summary = truncate_summary(text) if text else None
                 content_hash = compute_content_hash(text) if text else None
 
                 items.append(
@@ -77,7 +75,6 @@ class HackerNewsAPICrawler(BaseCrawler):
                         url=url,
                         published_at=published_at,
                         author=story.get("by"),
-                        summary=summary,
                         content=text or None,
                         content_hash=content_hash,
                         source_id=self.source_id,

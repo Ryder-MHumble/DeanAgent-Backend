@@ -1,7 +1,7 @@
 # Information Crawler — AI 开发上下文
 
-中关村人工智能研究院信息监测系统。85 信源（63 启用）× 9 维度，5 种模板爬虫 + 7 个自定义 Parser，v1 API 14 端点。
-33 个信源已配置 detail_selectors，可自动抓取详情页正文（content/summary 字段）。
+中关村人工智能研究院信息监测系统。112 信源（85 启用）× 9 维度，5 种模板爬虫 + 7 个自定义 Parser，v1 API 14 端点。
+64 个启用信源已配置 detail_selectors，可自动抓取详情页正文（content 字段）。
 技术栈：FastAPI + SQLAlchemy(async) + PostgreSQL(Supabase) + APScheduler 3.x + httpx + BS4 + Playwright。
 
 ## ⚠ 每次修改后必须做的事
@@ -14,19 +14,19 @@
 
 | 改了什么 | 必须更新 | 更新什么 |
 |---------|---------|---------|
-| 某个信源的 YAML（选择器/URL/启用状态） | `docs/crawl_status/README.md` | 该信源所在维度的状态表（条目数、启用状态、说明） |
-| 新增/删除信源 | `docs/crawl_status/README.md` + `docs/TODO.md` | 总览表的源数统计、分组表、对应维度详情；TODO 中对应条目标记完成 |
-| 新增维度 | `docs/crawl_status/README.md` + `docs/TODO.md` + `app/services/dimension_service.py` | 总览表新增行、新建维度详情章节、DIMENSION_NAMES 新增 |
-| 爬虫模板改动 | `docs/crawl_status/README.md` | 「已完成的代码变更」章节追加记录 |
-| 修复禁用源 | `docs/crawl_status/README.md` + `docs/TODO.md` | 禁用源表删除该行、状态表更新为启用、TODO 对应条目打勾 |
+| 某个信源的 YAML（选择器/URL/启用状态） | `docs/CrawlStatus.md` | 该信源所在维度的状态表（条目数、启用状态、说明） |
+| 新增/删除信源 | `docs/CrawlStatus.md` + `docs/TODO.md` | 总览表的源数统计、分组表、对应维度详情；TODO 中对应条目标记完成 |
+| 新增维度 | `docs/CrawlStatus.md` + `docs/TODO.md` + `app/services/dimension_service.py` | 总览表新增行、新建维度详情章节、DIMENSION_NAMES 新增 |
+| 爬虫模板改动 | `docs/CrawlStatus.md` | 如影响信源状态则更新对应维度表 |
+| 修复禁用源 | `docs/CrawlStatus.md` + `docs/TODO.md` | 禁用源表删除该行、状态表更新为启用、TODO 对应条目打勾 |
 | API 端点增删 | `docs/TODO.md` | 更新 API 相关待办状态 |
 | 任何功能完成 | `docs/TODO.md` | 对应条目标记 `[x]` 完成 |
 
 ### 文档更新格式
 
-`docs/crawl_status/README.md` 顶部有「最后更新」行，每次修改都要更新日期和版本说明：
+`docs/CrawlStatus.md` 顶部有「最后更新」行，每次修改都要更新日期：
 ```markdown
-> 最后更新: 2026-XX-XX (vN: 简述本次变更)
+> 最后更新: 2026-XX-XX
 ```
 
 `docs/TODO.md` 顶部同理：
@@ -41,7 +41,7 @@
 **某个信源爬不到数据 / 选择器失效：**
 → `sources/{dimension}.yaml` 找到该源的 `selectors` / `url` 配置
 → `python scripts/run_single_crawl.py --source <id>` 单独测试
-→ `python scripts/analyze_selectors.py` 调试选择器
+→ 用 Playwright MCP `browser_snapshot` 分析真实 DOM 结构
 
 **某种爬虫类型（static/dynamic/rss/snapshot）整体出问题：**
 → `app/crawlers/templates/{type}_crawler.py`
@@ -72,7 +72,7 @@
 
 **JSON 文件没输出 / 路径不对：**
 → `app/crawlers/utils/json_storage.py`
-→ 输出路径：`data/raw/{dimension}/{group}/{source_id}/{YYYY-MM-DD}.json`
+→ 输出路径：`data/raw/{dimension}/{group}/{source_id}/latest.json`
 
 **HTTP 请求失败 / 限速 / UA 被封：**
 → `app/crawlers/utils/http_client.py`（重试、限速、UA 轮换）
@@ -106,10 +106,11 @@ beijing_policy  → sources/beijing_policy.yaml  (12 源, 7 启用)
 technology      → sources/technology.yaml      (12 源, 10 启用)
 talent          → sources/talent.yaml          (7 源, 4 启用)
 industry        → sources/industry.yaml        (8 源, 4 启用)
-universities    → sources/universities.yaml    (26 源, 22 启用)
+universities    → sources/universities.yaml    (53 源, 44 启用)
 events          → sources/events.yaml          (4 源, 2 启用)
 personnel       → sources/personnel.yaml       (3 源, 3 启用)
 twitter         → sources/twitter.yaml         (7 源, 7 启用, 需 API key)
+                  ↳ 按 dimension 分配: technology 4源, industry 1源, talent 1源, sentiment 1源
 ```
 
 ## 常用工作流
@@ -121,7 +122,7 @@ twitter         → sources/twitter.yaml         (7 源, 7 启用, 需 API key)
 3. 修改 YAML 中 selectors
 4. 验证：python scripts/run_single_crawl.py --source <id>
 5. 确认输出有 items_new > 0
-6. 更新 docs/crawl_status/README.md 中该源的状态行
+6. 更新 docs/CrawlStatus.md 中该源的状态行
 ```
 
 ### 添加新标准信源
@@ -131,7 +132,7 @@ twitter         → sources/twitter.yaml         (7 源, 7 启用, 需 API key)
 3. 编辑 sources/{dim}.yaml 添加条目
 4. 验证：python scripts/run_single_crawl.py --source <new_id>
 5. 检查 data/raw/{dim}/{group}/{id}/ 下是否生成 JSON
-6. 更新 docs/crawl_status/README.md（总览表源数 + 该维度详情表新增行）
+6. 更新 docs/CrawlStatus.md（总览表源数 + 该维度详情表新增行）
 7. 更新 docs/TODO.md（如果是待办中的信源，标记完成）
 ```
 
@@ -141,7 +142,7 @@ twitter         → sources/twitter.yaml         (7 源, 7 启用, 需 API key)
 2. 在 app/crawlers/registry.py 的 _CUSTOM_MAP 中添加映射
 3. 在 sources/*.yaml 中配置 crawler_class: "{name}"
 4. 验证：python scripts/run_single_crawl.py --source <id>
-5. 更新 docs/crawl_status/README.md + docs/TODO.md
+5. 更新 docs/CrawlStatus.md + docs/TODO.md
 ```
 
 ### 修改爬虫模板逻辑
@@ -151,7 +152,7 @@ twitter         → sources/twitter.yaml         (7 源, 7 启用, 需 API key)
    python scripts/run_single_crawl.py --source <id1>
    python scripts/run_single_crawl.py --source <id2>
 3. ruff check app/crawlers/
-4. 更新 docs/crawl_status/README.md「已完成的代码变更」章节
+4. 如影响信源状态则更新 docs/CrawlStatus.md 对应维度表
 ```
 
 ### 修改 API / 数据库
@@ -192,8 +193,8 @@ twitter         → sources/twitter.yaml         (7 源, 7 启用, 需 API key)
 | 文档 | 路径 | 内容 |
 |------|------|------|
 | 任务优先级 | `docs/TODO.md` | P0-P3 分级待办，每次完成功能后更新 |
-| 爬取状态 | `docs/crawl_status/README.md` | 各维度各源的实时状态、数据量、禁用原因、代码变更记录 |
-| 设计文档 | `docs/信源爬取方案/00-08` | 9 个维度的原始设计方案 |
+| 爬取状态 | `docs/CrawlStatus.md` | 各维度各源的爬取状态、数据量、禁用原因 |
+| 部署指南 | `docs/deployment.md` | 服务器需求、资源控制、扩容计划 |
 | 院长需求 | `docs/院长智能体.md` | 前端 Dean-Agent 功能需求 |
 
 ## 常用命令
@@ -202,8 +203,7 @@ twitter         → sources/twitter.yaml         (7 源, 7 启用, 需 API key)
 pip install -e ".[dev]"                              # 安装
 uvicorn app.main:app --reload                        # 启动
 python scripts/run_single_crawl.py --source <id>     # 测试单源
-python scripts/run_batch_crawl.py --dimension <dim>  # 批量测试
-python scripts/analyze_selectors.py                  # 调试选择器
+python scripts/run_all_crawl.py                      # 批量运行所有启用源
 ruff check app/                                      # Lint
 pytest                                               # 测试
 ```

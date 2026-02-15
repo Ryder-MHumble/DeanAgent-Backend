@@ -4,12 +4,10 @@ from __future__ import annotations
 import logging
 from datetime import datetime, timezone
 from typing import Any
-from urllib.parse import quote
 
 from app.crawlers.base import BaseCrawler, CrawledItem
 from app.crawlers.utils.dedup import compute_content_hash
 from app.crawlers.utils.http_client import fetch_json
-from app.crawlers.utils.text_extract import truncate_summary
 
 logger = logging.getLogger(__name__)
 
@@ -86,10 +84,8 @@ class GovJSONAPICrawler(BaseCrawler):
                     except ValueError:
                         pass
 
-            # Content/summary
             content = result.get("content", "") or ""
             content = content.replace("<em>", "").replace("</em>", "")
-            summary = truncate_summary(content) if content else None
             content_hash = compute_content_hash(content) if content else None
 
             items.append(
@@ -98,7 +94,6 @@ class GovJSONAPICrawler(BaseCrawler):
                     url=url,
                     published_at=published_at,
                     author=result.get("source"),
-                    summary=summary,
                     content=content or None,
                     content_hash=content_hash,
                     source_id=self.source_id,

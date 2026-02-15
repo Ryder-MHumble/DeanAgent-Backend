@@ -89,7 +89,7 @@ sources:
       - "学位"
       - "教师"
     detail_selectors:
-      content: "div.TRS_UEDITOR"
+      content: "div.TRS_Editor"
     tags: ["talent", "moe", "education"]
 
   - id: "nature_index"
@@ -107,6 +107,8 @@ sources:
       link: "a"
       date: "time"
     base_url: "https://www.nature.com"
+    detail_selectors:
+      content: "div.c-article-body"
     tags: ["ranking", "academic", "nature"]
 
   - id: "wrsa_talent"

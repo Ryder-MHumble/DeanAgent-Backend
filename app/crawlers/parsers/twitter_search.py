@@ -22,7 +22,6 @@ from typing import Any
 
 from app.crawlers.base import BaseCrawler, CrawledItem
 from app.crawlers.utils.dedup import compute_content_hash
-from app.crawlers.utils.text_extract import truncate_summary
 from app.services.twitter_service import twitter_client
 
 logger = logging.getLogger(__name__)
@@ -81,7 +80,6 @@ class TwitterSearchCrawler(BaseCrawler):
                 url=tweet.url,
                 published_at=tweet.created_at,
                 author=f"{tweet.author_name} (@{tweet.author_username})",
-                summary=truncate_summary(text) if text else None,
                 content=text,
                 content_hash=compute_content_hash(text) if text else None,
                 source_id=self.source_id,

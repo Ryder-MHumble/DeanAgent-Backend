@@ -2,13 +2,12 @@
 from __future__ import annotations
 
 import logging
-from datetime import datetime, timezone
+from datetime import datetime
 from typing import Any
 
 from app.crawlers.base import BaseCrawler, CrawledItem
 from app.crawlers.utils.dedup import compute_content_hash
 from app.crawlers.utils.http_client import fetch_json
-from app.crawlers.utils.text_extract import truncate_summary
 
 logger = logging.getLogger(__name__)
 
@@ -50,7 +49,6 @@ class GitHubAPICrawler(BaseCrawler):
                 continue
 
             description = repo.get("description", "") or ""
-            summary = truncate_summary(description) if description else None
             content_hash = compute_content_hash(description) if description else None
 
             published_at = None
@@ -68,7 +66,6 @@ class GitHubAPICrawler(BaseCrawler):
                     url=url,
                     published_at=published_at,
                     author=repo.get("owner", {}).get("login"),
-                    summary=summary,
                     content=description or None,
                     content_hash=content_hash,
                     source_id=self.source_id,

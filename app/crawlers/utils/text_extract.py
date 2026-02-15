@@ -24,15 +24,3 @@ def extract_text_by_selector(html: str, selector: str) -> str:
     if element is None:
         return ""
     return element.get_text(separator="\n").strip()
-
-
-def truncate_summary(text: str, max_length: int = 500) -> str:
-    """Create a summary by truncating text to max_length characters."""
-    if len(text) <= max_length:
-        return text
-    # Try to break at a sentence boundary
-    truncated = text[:max_length]
-    last_period = max(truncated.rfind("。"), truncated.rfind("."), truncated.rfind("\n"))
-    if last_period > max_length // 2:
-        return truncated[: last_period + 1]
-    return truncated + "..."

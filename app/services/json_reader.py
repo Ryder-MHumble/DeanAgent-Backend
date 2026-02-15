@@ -7,6 +7,7 @@ from datetime import date, datetime
 from typing import Any
 
 from app.crawlers.utils.json_storage import DATA_DIR as RAW_DATA_DIR
+from app.crawlers.utils.json_storage import LATEST_FILENAME
 
 logger = logging.getLogger(__name__)
 
@@ -27,10 +28,9 @@ def get_articles(
     date_from: date | None = None,
     date_to: date | None = None,
 ) -> list[dict[str, Any]]:
-    """
-    Read articles from data/raw/{dimension}/ JSON files.
+    """Read articles from data/raw/{dimension}/ latest.json files.
 
-    Supports filtering by group, source_id, and date range.
+    Supports filtering by group, source_id, and date range (via published_at).
     Returns a flat list of article dicts sorted by published_at desc.
     """
     dim_dir = RAW_DATA_DIR / dimension
@@ -39,10 +39,9 @@ def get_articles(
         return []
 
     all_items: list[dict[str, Any]] = []
-    json_files = list(dim_dir.rglob("*.json"))
+    json_files = list(dim_dir.rglob(LATEST_FILENAME))
 
     for json_file in json_files:
-        # Extract group from path: data/raw/{dim}/{group}/{source}/{date}.json
         rel = json_file.relative_to(dim_dir)
         parts = rel.parts
 
@@ -54,27 +53,11 @@ def get_articles(
         else:
             continue
 
-        # Filter by group
         if group and file_group != group:
             continue
-
-        # Filter by source_id
         if source_id and file_source != source_id:
             continue
 
-        # Filter by date range (from filename YYYY-MM-DD.json)
-        file_date_str = json_file.stem
-        try:
-            file_date = date.fromisoformat(file_date_str)
-        except ValueError:
-            continue
-
-        if date_from and file_date < date_from:
-            continue
-        if date_to and file_date > date_to:
-            continue
-
-        # Read and parse
         try:
             with open(json_file, encoding="utf-8") as f:
                 data = json.load(f)
@@ -91,21 +74,23 @@ def get_articles(
         }
 
         for item in data.get("items", []):
+            pub_date = _parse_date(item.get("published_at"))
+            if date_from and pub_date and pub_date < date_from:
+                continue
+            if date_to and pub_date and pub_date > date_to:
+                continue
             item.update({k: v for k, v in source_meta.items() if k not in item})
             all_items.append(item)
 
-    # Sort by published_at desc (nulls last)
     def sort_key(item: dict) -> str:
-        pa = item.get("published_at") or ""
-        return pa
+        return item.get("published_at") or ""
 
     all_items.sort(key=sort_key, reverse=True)
     return all_items
 
 
 def get_dimension_stats() -> dict[str, dict[str, Any]]:
-    """
-    Get statistics for all dimensions.
+    """Get statistics for all dimensions.
 
     Returns dict keyed by dimension with counts, source counts, latest date.
     """
@@ -123,7 +108,7 @@ def get_dimension_stats() -> dict[str, dict[str, Any]]:
         sources: set[str] = set()
         latest_date: str | None = None
 
-        for json_file in dim_dir.rglob("*.json"):
+        for json_file in dim_dir.rglob(LATEST_FILENAME):
             try:
                 with open(json_file, encoding="utf-8") as f:
                     data = json.load(f)
@@ -149,18 +134,22 @@ def get_dimension_stats() -> dict[str, dict[str, Any]]:
 
 
 def get_available_dates(dimension: str) -> list[str]:
-    """Get all available dates for a dimension, sorted desc."""
+    """Get all available crawled_at dates for a dimension, sorted desc."""
     dim_dir = RAW_DATA_DIR / dimension
     if not dim_dir.exists():
         return []
 
     dates: set[str] = set()
-    for json_file in dim_dir.rglob("*.json"):
-        d = json_file.stem
+    for json_file in dim_dir.rglob(LATEST_FILENAME):
         try:
-            date.fromisoformat(d)
-            dates.add(d)
-        except ValueError:
+            with open(json_file, encoding="utf-8") as f:
+                data = json.load(f)
+            crawled_at = data.get("crawled_at")
+            if crawled_at:
+                d = _parse_date(crawled_at)
+                if d:
+                    dates.add(d.isoformat())
+        except (json.JSONDecodeError, OSError):
             continue
 
     return sorted(dates, reverse=True)

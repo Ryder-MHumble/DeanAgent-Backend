@@ -6,7 +6,7 @@ from app.schemas.article import ArticleSearchParams
 def get_article_search_params(
     dimension: str | None = Query(None, description="Filter by dimension"),
     source_id: str | None = Query(None, description="Filter by source ID"),
-    keyword: str | None = Query(None, description="Keyword filter in title/summary"),
+    keyword: str | None = Query(None, description="Keyword filter in title/content"),
     date_from: str | None = Query(None, description="Start date (ISO format)"),
     date_to: str | None = Query(None, description="End date (ISO format)"),
     sort_by: str = Query("crawled_at", description="Sort field"),

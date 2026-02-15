@@ -23,6 +23,7 @@ sources:
     schedule: "2h"
     priority: 1
     is_enabled: true
+    keyword_filter: []  # gov.cn aggregates all national policies; no title-level filter
     wait_for: "div.list_2 li"
     wait_timeout: 15000
     selectors:
@@ -32,6 +33,9 @@ sources:
       date: "span.date"
       date_format: "%Y-%m-%d"
     base_url: "https://www.gov.cn"
+    detail_selectors:
+      content: "div.pages_content"
+    detail_use_playwright: false
     tags: ["policy", "gov_cn"]
 
   - id: "ndrc_policy"
@@ -49,6 +53,8 @@ sources:
       date: "span"
       date_format: "%Y/%m/%d"
     base_url: "https://www.ndrc.gov.cn/xxgk/zcfb/tz/"
+    detail_selectors:
+      content: "div.TRS_Editor"
     tags: ["policy", "ndrc"]
 
   - id: "moe_policy"
@@ -66,6 +72,8 @@ sources:
       date: "span"
       date_format: "%Y-%m-%d"
     base_url: "http://www.moe.gov.cn/jyb_xxgk/moe_1777/moe_1778/"
+    detail_selectors:
+      content: "div.TRS_Editor"
     tags: ["policy", "moe", "education"]
 
   - id: "most_policy"
@@ -83,6 +91,8 @@ sources:
       date: "div.w_list_rq"
       date_format: "%Y年%m月%d日"
     base_url: "https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/"
+    detail_selectors:
+      content: "div.TRS_UEDITOR"
     tags: ["policy", "most", "science"]
 
   - id: "miit_policy"

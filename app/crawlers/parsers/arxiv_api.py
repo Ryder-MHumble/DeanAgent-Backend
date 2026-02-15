@@ -3,14 +3,12 @@ from __future__ import annotations
 
 import logging
 from datetime import datetime, timezone
-from typing import Any
 
 import feedparser
 
 from app.crawlers.base import BaseCrawler, CrawledItem
 from app.crawlers.utils.dedup import compute_content_hash
 from app.crawlers.utils.http_client import fetch_page
-from app.crawlers.utils.text_extract import truncate_summary
 
 logger = logging.getLogger(__name__)
 
@@ -59,7 +57,6 @@ class ArxivAPICrawler(BaseCrawler):
 
             # Parse abstract
             abstract = entry.get("summary", "").strip().replace("\n", " ")
-            summary = truncate_summary(abstract) if abstract else None
             content_hash = compute_content_hash(abstract) if abstract else None
 
             # Parse date
@@ -79,7 +76,6 @@ class ArxivAPICrawler(BaseCrawler):
                     url=link,
                     published_at=published_at,
                     author=author_str or None,
-                    summary=summary,
                     content=abstract or None,
                     content_hash=content_hash,
                     source_id=self.source_id,

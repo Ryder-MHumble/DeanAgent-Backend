@@ -200,7 +200,7 @@ sources:
     base_url: "https://news.bnu.edu.cn"
     keyword_filter: []
     detail_selectors:
-      content: "div.v_news_content"
+      content: "div.article"
     tags: ["university", "bnu", "news"]
 
   - id: "bupt_news"
@@ -239,7 +239,7 @@ sources:
     base_url: "https://news.ruc.edu.cn"
     keyword_filter: []
     detail_selectors:
-      content: "div.v_news_content"
+      content: "div.page-content"
     tags: ["university", "ruc", "news"]
 
   - id: "nankai_news"
@@ -311,7 +311,7 @@ sources:
     base_url: "https://news.jlu.edu.cn/jdxw/"
     keyword_filter: []
     detail_selectors:
-      content: "div.v_news_content"
+      content: "#vsb_content_2"
     tags: ["university", "jlu", "news"]
 
   - id: "hit_news"
@@ -524,8 +524,10 @@ sources:
     is_enabled: true
     selectors:
       list_item: "div.hot_news-item"
-      title: "div.wrap a"
-      link: "div.wrap a"
+      title: "a.title"
+      link: "a.title"
+      date: "span.date"
+      date_format: "%Y-%m-%d"
     base_url: "https://news.uestc.edu.cn"
     keyword_filter: []
     detail_selectors:
@@ -604,7 +606,7 @@ sources:
     base_url: "https://newshub.sustech.edu.cn"
     keyword_filter: []
     detail_selectors:
-      content: "div.v_news_content"
+      content: "div.u-content"
     tags: ["university", "sustech", "news"]
 
   # === C. AI研究机构 ===
@@ -786,7 +788,7 @@ sources:
     base_url: "https://www.slai.edu.cn"
     keyword_filter: []  # 兄弟研究院，内容天然相关
     detail_selectors:
-      content: "div.layout__region--content"
+      content: "div.field-item"
     tags: ["institute", "slai", "brother"]
 
   # === D. 高教新闻聚合 ===
@@ -919,6 +921,8 @@ sources:
       date_format: "%Y-%m-%d"
     base_url: "https://www.nosta.gov.cn"
     keyword_filter: []  # 科技奖励，内容天然相关
+    detail_selectors:
+      content: "div.TRS_UEDITOR"
     tags: ["award", "science", "national"]
 
   - id: "moe_keji"
@@ -937,6 +941,8 @@ sources:
       date_format: "%Y-%m-%d"
     base_url: "https://www.moe.gov.cn/s78/A16/"
     keyword_filter: []
+    detail_selectors:
+      content: "div.TRS_Editor"
     tags: ["award", "moe", "tech"]
 
   # === F. 省级教育厅 ===
@@ -955,6 +961,8 @@ sources:
       date: "em"
       date_format: "%Y-%m-%d"
     base_url: "https://jw.beijing.gov.cn"
+    detail_selectors:
+      content: "div.TRS_UEDITOR"
     keyword_filter:
       - "人工智能"
       - "AI"

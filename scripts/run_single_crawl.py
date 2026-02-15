@@ -39,7 +39,7 @@ async def run_crawl(source_id: str, no_db: bool = False):
         async with async_session_factory() as session:
             result = await crawler.run(db_session=session)
 
-    print(f"\n=== Results ===")
+    print("\n=== Results ===")
     print(f"Status: {result.status.value}")
     print(f"Items found: {result.items_total}")
     print(f"Items new: {result.items_new}")
@@ -58,8 +58,8 @@ async def run_crawl(source_id: str, no_db: bool = False):
         for item in result.items[:5]:
             print(f"  [{item.published_at or 'no date'}] {item.title}")
             print(f"    URL: {item.url}")
-            if item.summary:
-                print(f"    Summary: {item.summary[:100]}...")
+            if item.content:
+                print(f"    Content: {item.content[:100]}...")
             print()
 
 

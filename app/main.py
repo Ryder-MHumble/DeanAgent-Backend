@@ -46,7 +46,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="Information Crawler API",
-    description="信息监测系统 API - 爬取 ~100 个信源，覆盖 9 个维度",
+    description="信息监测系统 API - 爬取 ~112 个信源，覆盖 9 个维度",
     version="0.1.0",
     lifespan=lifespan,
 )

@@ -1,6 +1,7 @@
 # Information Crawler
 
-中关村人工智能研究院**信息监测系统**。自动爬取 85 个信源（63 启用，横跨 9 个维度），通过 v1 REST API（14 端点）供前端查询，同时以 JSON 文件保存至本地。
+中关村人工智能研究院**信息监测系统**。自动爬取 112 个信源（85 启用，横跨 9 个维度），通过 v1 REST API（14 端点）供前端查询，同时以 JSON 文件保存至本地。
+64 个启用信源已配置 `detail_selectors`，可自动抓取详情页正文。
 
 **技术栈**：FastAPI · SQLAlchemy (async) · PostgreSQL (Supabase) · APScheduler 3.x · httpx · BeautifulSoup4 · Playwright · feedparser
 
@@ -60,11 +61,10 @@ uvicorn app.main:app --reload
 | 脚本 | 用途 |
 |------|------|
 | `scripts/run_single_crawl.py --source <id>` | 隔离测试单个信源 |
-| `scripts/run_batch_crawl.py --dimension <dim>` | 批量测试某维度 |
-| `scripts/analyze_selectors.py` | 在目标网页上调试 CSS 选择器 |
-| `scripts/investigate_sources.py` | 批量检测信源 URL 可达性 |
+| `scripts/run_all_crawl.py` | 批量运行所有启用信源 |
 | `scripts/seed_sources.py` | YAML → 数据库同步 |
 | `scripts/generate_index.py` | 生成 `data/index.json` 索引 |
+| `scripts/migrate_json_to_latest.py` | 日期文件迁移为 `latest.json` 格式 |
 
 ---
 
@@ -72,26 +72,30 @@ uvicorn app.main:app --reload
 
 ### 9 个监测维度
 
-| 维度 ID | 名称 | 源数 | YAML 文件 | 覆盖率 |
-|---------|------|------|-----------|--------|
-| `national_policy` | 对国家 | 6 | `sources/national_policy.yaml` | ~80% |
-| `beijing_policy` | 对北京 | 12 | `sources/beijing_policy.yaml` | ~75% |
-| `technology` | 对技术 | 12 | `sources/technology.yaml` | ~90% |
-| `talent` | 对人才 | 7 | `sources/talent.yaml` | ~85% |
-| `industry` | 对产业 | 8 | `sources/industry.yaml` | ~75% |
-| `universities` | 对高校 | 26 | `sources/universities.yaml` | ~90% |
-| `events` | 对日程 | 4 | `sources/events.yaml` | ~85% |
-| `personnel` | 对人事 | 3 | `sources/personnel.yaml` | ~100% |
-| `sentiment` | 对学院舆情 | — | 未创建 | ~30% |
-| *(跨维度)* | Twitter 监控 | 7 | `sources/twitter.yaml` | — |
+| 维度 ID | 名称 | 源数 | 启用 | YAML 文件 | 正文覆盖率 |
+|---------|------|------|------|-----------|-----------|
+| `national_policy` | 对国家 | 6 | 4 | `sources/national_policy.yaml` | 91% |
+| `beijing_policy` | 对北京 | 12 | 7 | `sources/beijing_policy.yaml` | 61% |
+| `technology` | 对技术 | 12+4† | 10+4† | `sources/technology.yaml` + twitter | 96% |
+| `talent` | 对人才 | 7+1† | 4+1† | `sources/talent.yaml` + twitter | 81% |
+| `industry` | 对产业 | 8+1† | 4+1† | `sources/industry.yaml` + twitter | 100% |
+| `universities` | 对高校 | 53 | 44 | `sources/universities.yaml` | 76% |
+| `events` | 对日程 | 4 | 2 | `sources/events.yaml` | 0%* |
+| `personnel` | 对人事 | 3 | 3 | `sources/personnel.yaml` | 97% |
+| `sentiment` | 对学院舆情 | 1† | 1† | twitter 跨维度 | 100% |
+| **合计** | | **112** | **85** | | **70%** |
+
+> † `sources/twitter.yaml` 的 7 个源按 `dimension` 字段分配到 4 个维度：technology 4源、industry 1源、talent 1源、sentiment 1源。
+>
+> \* events 维度为会议列表页，无文章正文。
 
 ### 爬虫类型分布
 
 ```
-58 个源 → static（httpx + BS4）
-12 个源 → dynamic（Playwright）
- 8 个源 → rss（feedparser）
- 7 个源 → 自定义 Parser（gov_json_api, twitter_kol, twitter_search, arxiv_api, github_api, hacker_news_api, semantic_scholar）
+~78 个源 → static（httpx + BS4）
+~19 个源 → dynamic（Playwright）
+  8 个源 → rss（feedparser）
+  7 个源 → 自定义 Parser（gov_json_api, twitter_kol, twitter_search, arxiv_api, github_api, hacker_news_api, semantic_scholar）
 ```
 
 ### 配置 → 爬虫路由
@@ -172,8 +176,9 @@ app/
 │   └── utils/
 │       ├── http_client.py         # 共享 httpx（重试、限速、UA 轮换）
 │       ├── playwright_pool.py     # Playwright 浏览器单例池
+│       ├── selector_parser.py     # 列表解析 + 日期提取 + 详情页正文（static/dynamic 共享）
 │       ├── dedup.py               # URL 归一化 + SHA-256
-│       ├── json_storage.py        # JSON 文件输出
+│       ├── json_storage.py        # JSON 文件输出（latest.json 覆盖模式）
 │       └── text_extract.py        # HTML → 文本
 ├── scheduler/
 │   ├── manager.py                 # 读取 YAML → 注册 APScheduler 任务
@@ -274,12 +279,12 @@ dynamic 类型额外需要：
 
 **数据库**：4 张表 — `articles`（url_hash 去重）· `sources` · `crawl_logs` · `snapshots`
 
-**JSON 文件**：`data/raw/{dimension}/{group}/{source_id}/{YYYY-MM-DD}.json`
+**JSON 文件**：`data/raw/{dimension}/{group}/{source_id}/latest.json`（覆盖模式，每条标记 `is_new`）
 ```
 data/raw/
-├── national_policy/policy/gov_cn_zhengce/2026-02-13.json
-├── technology/academic/arxiv_cs_ai/2026-02-13.json
-└── universities/ai_institutes/tsinghua_air/2026-02-13.json
+├── national_policy/policy/gov_cn_zhengce/latest.json
+├── technology/academic/arxiv_cs_ai/latest.json
+└── universities/ai_institutes/tsinghua_air/latest.json
 ```
 
 ---
@@ -300,10 +305,10 @@ docker run -p 8000:8000 --env-file .env information-crawler
 
 ## 项目状态
 
-**已完成**：项目骨架 · 4 ORM 表 · 5 模板爬虫 + 7 自定义 Parser · v1 API 14 端点 · 85 信源配置（63 启用）· APScheduler 调度 · JSON 输出（56 个数据文件）· LLM/Twitter 服务
+**已完成**：项目骨架 · 4 ORM 表 · 5 模板爬虫 + 7 自定义 Parser · v1 API 14 端点 · 112 信源配置（85 启用）· APScheduler 调度 · JSON 输出（85 个 latest.json）· 64 源详情页正文抓取 · LLM/Twitter 服务 · 全量代码 Review（消除 ~100 行重复）
 
 **已删除**：v2 业务 API 层（13 端点 + schemas + business services）— 需重新规划
 
-**待完成**：业务 API 重建 · 详情页内容抓取 · sentiment 维度 · ~10 失效 URL · RSSHub 替代 · Alembic 迁移 · 测试 · 部署验证
+**待完成**：refined/ 数据管线（LLM 处理）· 业务 API 重建 · sentiment 维度扩展 · ~9 禁用高校源修复 · Alembic 迁移 · 测试 · 部署验证
 
-**设计文档**：`docs/信源爬取方案/`（9 份按维度）· `docs/TODO.md`（任务优先级）
+**项目文档**：`docs/CrawlStatus.md`（爬取状态总览）· `docs/TODO.md`（任务优先级）· `docs/deployment.md`（部署指南）

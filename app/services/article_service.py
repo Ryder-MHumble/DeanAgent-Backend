@@ -25,7 +25,7 @@ async def list_articles(
         query = query.where(Article.source_id == params.source_id)
     if params.keyword:
         pattern = f"%{params.keyword}%"
-        query = query.where(Article.title.ilike(pattern) | Article.summary.ilike(pattern))
+        query = query.where(Article.title.ilike(pattern) | Article.content.ilike(pattern))
     if params.tags:
         query = query.where(Article.tags.overlap(params.tags))
     if params.date_from:

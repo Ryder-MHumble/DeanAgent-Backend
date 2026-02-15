@@ -2,7 +2,6 @@ import hashlib
 import re
 from urllib.parse import parse_qs, urlencode, urlparse, urlunparse
 
-
 # Tracking parameters to strip from URLs
 _TRACKING_PARAMS = {
     "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content",

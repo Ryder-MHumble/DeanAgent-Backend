@@ -86,7 +86,7 @@ async def run_all(
 
             # 统计有内容的条目
             items_with_content = sum(
-                1 for item in result.items if item.summary or item.content
+                1 for item in result.items if item.content
             )
 
             # 保存 JSON
@@ -174,8 +174,12 @@ async def run_all(
         )
     total_items = sum(r["items_total"] for r in results)
     total_content = sum(r["items_with_content"] for r in results)
-    total_success = sum(1 for r in results if r["status"] in ("success", "no_new_content"))
-    total_failed = sum(1 for r in results if r["status"] not in ("success", "no_new_content"))
+    total_success = sum(
+        1 for r in results if r["status"] in ("success", "no_new_content")
+    )
+    total_failed = sum(
+        1 for r in results if r["status"] not in ("success", "no_new_content")
+    )
     print("─" * 50)
     print(
         f"{'合计':<18} {total_success:>4} {total_failed:>4} "
@@ -183,7 +187,9 @@ async def run_all(
     )
 
     # 失败列表
-    failed = [r for r in results if r["status"] not in ("success", "no_new_content")]
+    failed = [
+        r for r in results if r["status"] not in ("success", "no_new_content")
+    ]
     if failed:
         print(f"\n🔴 失败信源 ({len(failed)}):")
         for r in failed:
