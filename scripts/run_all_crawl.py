@@ -4,6 +4,7 @@ import asyncio
 import logging
 import sys
 import time
+import unicodedata
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -14,6 +15,19 @@ logging.basicConfig(
 )
 # 只让脚本自身的输出可见，爬虫内部日志静默
 logging.getLogger("app").setLevel(logging.WARNING)
+
+
+def _display_width(s: str) -> int:
+    """计算字符串的终端显示宽度（CJK 字符占 2 列）"""
+    return sum(2 if unicodedata.east_asian_width(c) in ('W', 'F') else 1 for c in s)
+
+
+def _ljust(s: str, width: int) -> str:
+    return s + ' ' * max(0, width - _display_width(s))
+
+
+def _rjust(s: str, width: int) -> str:
+    return ' ' * max(0, width - _display_width(s)) + s
 
 
 def _status_icon(status_value: str) -> str:
@@ -164,13 +178,23 @@ async def run_all(
         ds["items"] += r["items_total"]
         ds["content"] += r["items_with_content"]
 
-    print(f"\n{'维度':<18} {'成功':>4} {'失败':>4} {'条目':>6} {'有内容':>6}")
-    print("─" * 50)
+    # 列宽定义
+    W_DIM, W_N, W_ITEM = 18, 6, 8
+    sep_width = W_DIM + W_N * 2 + W_ITEM * 2 + 4  # 4 个列间空格
+
+    print()
+    print(
+        f"{_ljust('维度', W_DIM)} "
+        f"{_rjust('成功', W_N)} {_rjust('失败', W_N)} "
+        f"{_rjust('条目', W_ITEM)} {_rjust('有内容', W_ITEM)}"
+    )
+    print("─" * sep_width)
     for dim in sorted(dim_summary):
         ds = dim_summary[dim]
         print(
-            f"{dim:<18} {ds['success']:>4} {ds['failed']:>4} "
-            f"{ds['items']:>6} {ds['content']:>6}"
+            f"{_ljust(dim, W_DIM)} "
+            f"{ds['success']:>{W_N}} {ds['failed']:>{W_N}} "
+            f"{ds['items']:>{W_ITEM}} {ds['content']:>{W_ITEM}}"
         )
     total_items = sum(r["items_total"] for r in results)
     total_content = sum(r["items_with_content"] for r in results)
@@ -180,10 +204,11 @@ async def run_all(
     total_failed = sum(
         1 for r in results if r["status"] not in ("success", "no_new_content")
     )
-    print("─" * 50)
+    print("─" * sep_width)
     print(
-        f"{'合计':<18} {total_success:>4} {total_failed:>4} "
-        f"{total_items:>6} {total_content:>6}"
+        f"{_ljust('合计', W_DIM)} "
+        f"{total_success:>{W_N}} {total_failed:>{W_N}} "
+        f"{total_items:>{W_ITEM}} {total_content:>{W_ITEM}}"
     )
 
     # 失败列表

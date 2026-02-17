@@ -149,16 +149,18 @@ sources:
   - id: "buaa_news"
     name: "北京航空航天大学新闻网"
     group: "university_news"
-    url: "https://news.buaa.edu.cn/"
+    url: "https://news.buaa.edu.cn/zhxw.htm"
     crawl_method: "static"
     schedule: "daily"
     priority: 2
     is_enabled: true
     selectors:
-      list_item: "div.s1-c ul li"
-      title: "a"
+      list_item: "div.twlist ul li"
+      title: "h3"
       link: "a"
-      date: "span"
+      date: "div.pub_date"
+      date_format: "%d %Y.%m"
+      date_regex: "\\d{1,2} \\d{4}\\.\\d{2}"
     base_url: "https://news.buaa.edu.cn"
     keyword_filter: []
     detail_selectors:
@@ -756,15 +758,18 @@ sources:
   - id: "sii_news"
     name: "上海创智学院"
     group: "ai_institutes"
-    url: "https://www.sii.edu.cn/"
+    url: "https://www.sii.edu.cn/czxw/list.htm"
     crawl_method: "static"
     schedule: "daily"
     priority: 1
     is_enabled: true
     selectors:
       list_item: "ul.news_list li.news"
-      title: "div.news_imgs a"
-      link: "div.news_imgs a"
+      title: "div.news_title"
+      link: "a"
+      date: "div.news_date"
+      date_format: "%Y%m/%d"
+      date_regex: "\\d{4}\\d{2}/\\d{2}"
     base_url: "https://www.sii.edu.cn"
     keyword_filter: []  # 兄弟研究院，内容天然相关
     detail_selectors:
@@ -790,6 +795,58 @@ sources:
     detail_selectors:
       content: "div.field-item"
     tags: ["institute", "slai", "brother"]
+
+  - id: "cesi_news"
+    name: "中国电子标准化研究院"
+    group: "ai_institutes"
+    url: "https://www.cesi.cn/page/second2.jsp?catalog=/002/002-001"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 2
+    is_enabled: true
+    selectors:
+      list_item: "#rmlbsed li"
+      title: "a"
+      link: "a"
+      date: "span"
+      date_format: "%Y-%m-%d"
+    base_url: "https://www.cesi.cn"
+    keyword_filter:
+      - "人工智能"
+      - "AI"
+      - "标准"
+      - "智能"
+      - "大模型"
+      - "算法"
+    detail_selectors:
+      content: "div.content3"
+    tags: ["institute", "cesi", "standards"]
+
+  - id: "iie_cas_news"
+    name: "中科院信工所-科研动态"
+    group: "ai_institutes"
+    url: "https://iie.cas.cn/xwdt/kydt/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 2
+    is_enabled: true
+    selectors:
+      list_item: "ul.ipn-list li"
+      title: "dt"
+      link: "a"
+      date: "dd"
+      date_format: "%Y-%m-%d"
+    base_url: "https://iie.cas.cn/xwdt/kydt"
+    keyword_filter:
+      - "人工智能"
+      - "AI"
+      - "安全"
+      - "智能"
+      - "大模型"
+      - "网络"
+    detail_selectors:
+      content: "div.about-content"
+    tags: ["institute", "iie_cas", "cybersecurity"]
 
   # === D. 高教新闻聚合 ===
   - id: "shanghairanking_news"

@@ -95,6 +95,63 @@ sources:
       content: "div.TRS_UEDITOR"
     tags: ["policy", "most", "science"]
 
+  - id: "cac_policy"
+    name: "国家网信办-政策法规"
+    group: "policy"
+    url: "https://www.cac.gov.cn/wxzw/zcfg/A093703index_1.htm"
+    crawl_method: "static"
+    schedule: "4h"
+    priority: 1
+    is_enabled: true
+    selectors:
+      list_item: "div.default li"
+      title: "h5 a"
+      link: "h5 a"
+      date: "div.times"
+      date_format: "%Y-%m-%d"
+    base_url: "https://www.cac.gov.cn"
+    detail_selectors:
+      content: "div.TRS_Editor"
+    keyword_filter:
+      - "人工智能"
+      - "AI"
+      - "算法"
+      - "数据"
+      - "网络安全"
+      - "生成式"
+      - "大模型"
+      - "深度合成"
+      - "智能"
+    tags: ["policy", "cac", "ai_governance"]
+
+  - id: "samr_news"
+    name: "国家市监总局-要闻"
+    group: "policy"
+    url: "https://www.samr.gov.cn/xw/zj/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 2
+    is_enabled: true
+    selectors:
+      list_item: "div.Three_zhnlist_02 > ul"
+      title: "li.nav04Left02_content a"
+      link: "li.nav04Left02_content a"
+      date: "li.nav04Left02_contenttime"
+      date_format: "%Y-%m-%d"
+    base_url: "https://www.samr.gov.cn"
+    keyword_filter:
+      - "人工智能"
+      - "AI"
+      - "算法"
+      - "数据"
+      - "反垄断"
+      - "平台"
+      - "科技"
+      - "智能"
+    detail_selectors:
+      content: "#zoom"
+    tags: ["policy", "samr", "regulation"]
+
   - id: "miit_policy"
     name: "工信部-政策文件"
     group: "policy"

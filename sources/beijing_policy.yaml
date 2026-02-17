@@ -121,21 +121,84 @@ sources:
       content: "div.TRS_UEDITOR"
     tags: ["policy", "innovation", "science"]
 
-  - id: "bjfgw_policy"
-    name: "北京市发改委"
+  - id: "bjjxj_policy"
+    name: "北京市经信局-通知公告"
     group: "policy"
-    url: "https://fgw.beijing.gov.cn/fgwzwgk/"
+    url: "https://jxj.beijing.gov.cn/jxdt/tzgg/"
+    crawl_method: "static"
+    schedule: "4h"
+    priority: 1
+    is_enabled: true
+    selectors:
+      list_item: "ul.list li"
+      title: "a"
+      link: "a"
+      date: "span.date"
+      date_format: "[%Y-%m-%d]"
+    base_url: "https://jxj.beijing.gov.cn"
+    keyword_filter:
+      - "人工智能"
+      - "AI"
+      - "数字经济"
+      - "大模型"
+      - "智能"
+      - "数据"
+      - "高精尖"
+      - "软件"
+    detail_selectors:
+      content: "div.TRS_UEDITOR"
+    tags: ["policy", "bjjxj", "industry", "ai"]
+
+  - id: "bjzscqj_policy"
+    name: "北京市知识产权局-通知公告"
+    group: "policy"
+    url: "https://zscqj.beijing.gov.cn/zscqj/zwgk/tzgg/index.html"
     crawl_method: "static"
     schedule: "daily"
     priority: 2
-    is_enabled: false  # Multi-level JS redirect chain, cannot follow statically
+    is_enabled: true
     selectors:
-      list_item: "ul.listTxt li"
+      list_item: "ul.subpageCon-conList li"
+      title: "a"
+      link: "a"
+      date: "span"
+      date_format: "%Y-%m-%d"
+    base_url: "https://zscqj.beijing.gov.cn"
+    keyword_filter:
+      - "人工智能"
+      - "AI"
+      - "专利"
+      - "知识产权"
+      - "创新"
+      - "科技"
+    detail_selectors:
+      content: "div.article-word"
+    tags: ["policy", "ip", "beijing"]
+
+  - id: "bjfgw_policy"
+    name: "北京市发改委-政策文件"
+    group: "policy"
+    url: "https://fgw.beijing.gov.cn/fgwzwgk/2024zcwj/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 2
+    is_enabled: true  # Fixed: changed URL from /fgwzwgk/ (JS redirect) to /fgwzwgk/2024zcwj/ (static list)
+    selectors:
+      list_item: "ul.list li"
       title: "a"
       link: "a"
       date: "span"
       date_format: "%Y-%m-%d"
     base_url: "https://fgw.beijing.gov.cn"
+    keyword_filter:
+      - "人工智能"
+      - "AI"
+      - "数字经济"
+      - "科技"
+      - "创新"
+      - "数据"
+    detail_selectors:
+      content: "div.TRS_UEDITOR"
     tags: ["policy", "development", "beijing"]
 
   - id: "bjhd_policy"

@@ -1,7 +1,7 @@
 # Information Crawler — AI 开发上下文
 
-中关村人工智能研究院信息监测系统。112 信源（85 启用）× 9 维度，5 种模板爬虫 + 7 个自定义 Parser，v1 API 14 端点。
-64 个启用信源已配置 detail_selectors，可自动抓取详情页正文（content 字段）。
+中关村人工智能研究院信息监测系统。129 信源（105 启用）× 9 维度，5 种模板爬虫 + 7 个自定义 Parser，v1 API 22 端点（含 intel 业务智能 8 端点）。
+78 个启用信源已配置 detail_selectors 或 RSS/API 自带正文，可自动获取文章正文（content 字段）。
 技术栈：FastAPI + SQLAlchemy(async) + PostgreSQL(Supabase) + APScheduler 3.x + httpx + BS4 + Playwright。
 
 ## ⚠ 每次修改后必须做的事
@@ -66,8 +66,10 @@
 → YAML 中检查 `schedule` / `is_enabled`
 
 **API 返回异常：**
-→ `app/api/v1/{articles,sources,dimensions,health}.py`
-→ `app/services/{article,source,crawl,dimension}_service.py`（业务逻辑）
+→ `app/api/v1/{articles,sources,dimensions,health}.py`（核心端点）
+→ `app/api/v1/intel/{policy,personnel}.py`（业务智能端点）
+→ `app/services/{article,source,crawl,dimension}_service.py`（核心业务逻辑）
+→ `app/services/intel/{policy,personnel}/service.py`（业务智能逻辑）
 → `app/schemas/`（请求/响应校验）
 
 **JSON 文件没输出 / 路径不对：**
@@ -101,17 +103,43 @@ crawler_class: twitter_search    → app/crawlers/parsers/twitter_search.py
 
 **维度 → YAML 文件**：
 ```
-national_policy → sources/national_policy.yaml (6 源, 4 启用)
-beijing_policy  → sources/beijing_policy.yaml  (12 源, 7 启用)
-technology      → sources/technology.yaml      (12 源, 10 启用)
+national_policy → sources/national_policy.yaml (8 源, 6 启用)
+beijing_policy  → sources/beijing_policy.yaml  (14 源, 10 启用)
+technology      → sources/technology.yaml      (18 源, 18 启用)
 talent          → sources/talent.yaml          (7 源, 4 启用)
-industry        → sources/industry.yaml        (8 源, 4 启用)
-universities    → sources/universities.yaml    (53 源, 44 启用)
-events          → sources/events.yaml          (4 源, 2 启用)
-personnel       → sources/personnel.yaml       (3 源, 3 启用)
+industry        → sources/industry.yaml        (10 源, 6 启用)
+universities    → sources/universities.yaml    (55 源, 46 启用)
+events          → sources/events.yaml          (6 源, 4 启用)
+personnel       → sources/personnel.yaml       (4 源, 4 启用)
 twitter         → sources/twitter.yaml         (7 源, 7 启用, 需 API key)
                   ↳ 按 dimension 分配: technology 4源, industry 1源, talent 1源, sentiment 1源
 ```
+
+**业务智能模块 (intel/)**：
+```
+app/api/v1/intel/router.py          → intel 子路由（聚合所有业务智能端点）
+app/api/v1/intel/policy.py          → 政策智能 API (feed/opportunities/stats)
+app/api/v1/intel/personnel.py       → 人事情报 API (feed/changes/stats/enriched-feed/enriched-stats)
+
+app/services/intel/shared.py        → 共享工具（keyword_score, extract_*, load_intel_json）
+app/services/intel/policy/rules.py  → 政策规则引擎（Tier 1 评分）
+app/services/intel/policy/llm.py    → 政策 LLM 富化（Tier 2）
+app/services/intel/policy/service.py→ 政策数据服务（读 processed JSON）
+app/services/intel/personnel/rules.py  → 人事规则引擎（任免正则提取）
+app/services/intel/personnel/llm.py    → 人事 LLM 富化（Tier 2，relevance/group/actionSuggestion）
+app/services/intel/personnel/service.py→ 人事数据服务
+
+app/schemas/intel/policy.py         → 政策 Pydantic schemas
+app/schemas/intel/personnel.py      → 人事 Pydantic schemas（含 PersonnelChangeEnriched）
+
+scripts/process_policy_intel.py     → 政策数据处理脚本（两级管线）
+scripts/process_personnel_intel.py  → 人事数据处理脚本（规则 + --enrich LLM）
+
+data/processed/policy_intel/        → 政策处理输出 (feed.json, opportunities.json)
+data/processed/personnel_intel/     → 人事处理输出 (feed.json, changes.json, enriched_feed.json)
+```
+
+新增业务智能模块时，在 `services/intel/` 下新建子包，在 `api/v1/intel/` 添加端点，在 `intel/router.py` 注册子路由。
 
 ## 常用工作流
 
@@ -178,6 +206,7 @@ twitter         → sources/twitter.yaml         (7 源, 7 启用, 需 API key)
 5. **RSSHub 公共实例不可用** — rsshub.app 等全部 403，需自部署或用原生 feed
 6. **Article 插入用 ON CONFLICT DO NOTHING** — 避免 url_hash UNIQUE 约束冲突导致整个事务回滚（`jobs.py`）
 7. **static/dynamic 共享解析逻辑** — `selector_parser.py` 提取公共函数，消除两个模板间 ~100 行重复代码
+8. **业务智能模块子包结构** — `services/intel/{domain}/` 每个维度一个子包（rules + service + llm），共享工具在 `shared.py`，避免 services/ 膨胀
 
 ## 开发约定
 
@@ -204,6 +233,9 @@ pip install -e ".[dev]"                              # 安装
 uvicorn app.main:app --reload                        # 启动
 python scripts/run_single_crawl.py --source <id>     # 测试单源
 python scripts/run_all_crawl.py                      # 批量运行所有启用源
+python scripts/process_policy_intel.py --dry-run     # 政策智能预览
+python scripts/process_personnel_intel.py --dry-run  # 人事情报预览
+python scripts/process_personnel_intel.py --enrich --force  # 人事 LLM 富化
 ruff check app/                                      # Lint
 pytest                                               # 测试
 ```

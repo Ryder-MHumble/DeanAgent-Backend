@@ -48,6 +48,51 @@ sources:
     base_url: "http://www.wikicfp.com"
     tags: ["conference", "cfp", "academic"]
 
+  - id: "ccf_focus"
+    name: "CCF聚焦"
+    group: "academic"
+    url: "https://www.ccf.org.cn/Focus/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 1
+    is_enabled: true
+    keyword_filter:
+      - "AI"
+      - "人工智能"
+      - "机器学习"
+      - "深度学习"
+      - "大模型"
+      - "会议"
+      - "论坛"
+      - "峰会"
+      - "学术"
+    selectors:
+      list_item: "ul.ul-imgtxt2 > li"
+      title: "h3.tit > a"
+      link: "h3.tit > a"
+      date: "span.time"
+      date_format: "%Y-%m-%d"
+    base_url: "https://www.ccf.org.cn"
+    tags: ["conference", "ccf", "academic", "domestic"]
+
+  - id: "caai_news"
+    name: "CAAI学会新闻"
+    group: "academic"
+    url: "https://www.caai.cn/site/term/13.html"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 1
+    is_enabled: true
+    keyword_filter: []  # All CAAI news is AI-relevant
+    selectors:
+      list_item: "ul.news-list-page > li"
+      title: "h4"
+      link: "a"
+      date: "span.date"
+      date_format: "%Y-%m-%d"
+    base_url: "https://www.caai.cn"
+    tags: ["conference", "caai", "academic", "domestic"]
+
   - id: "huodongxing"
     name: "活动行-人工智能"
     group: "industry"

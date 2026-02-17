@@ -72,38 +72,77 @@ sources:
     keyword_filter: ["AI", "artificial intelligence", "machine learning", "deep learning"]
     tags: ["tech_media", "international", "academic"]
 
+  - id: "venturebeat_ai_rss"
+    name: "VentureBeat AI"
+    group: "international_media"
+    url: "https://venturebeat.com/category/ai/feed/"
+    crawl_method: "rss"
+    schedule: "4h"
+    priority: 2
+    is_enabled: true
+    max_entries: 15
+    tags: ["tech_media", "international"]
+
+  - id: "ieee_spectrum_ai_rss"
+    name: "IEEE Spectrum AI"
+    group: "international_media"
+    url: "https://spectrum.ieee.org/feeds/topic/artificial-intelligence.rss"
+    crawl_method: "rss"
+    schedule: "daily"
+    priority: 2
+    is_enabled: true
+    max_entries: 15
+    tags: ["tech_media", "international", "academic"]
+
+  - id: "wired_ai_rss"
+    name: "Wired AI"
+    group: "international_media"
+    url: "https://www.wired.com/feed/tag/ai/latest/rss"
+    crawl_method: "rss"
+    schedule: "daily"
+    priority: 2
+    is_enabled: true
+    max_entries: 15
+    keyword_filter: ["AI", "artificial intelligence", "machine learning", "OpenAI", "GPT", "LLM"]
+    tags: ["tech_media", "international"]
+
+  - id: "arstechnica_ai_rss"
+    name: "Ars Technica AI"
+    group: "international_media"
+    url: "https://arstechnica.com/ai/feed/"
+    crawl_method: "rss"
+    schedule: "daily"
+    priority: 2
+    is_enabled: true
+    max_entries: 15
+    tags: ["tech_media", "international"]
+
   # === C. 公司官方博客 (静态爬取) ===
   - id: "openai_blog"
     name: "OpenAI Blog"
     group: "company_blogs"
-    url: "https://openai.com/blog"
-    crawl_method: "dynamic"
+    url: "https://openai.com/news/rss.xml"
+    crawl_method: "rss"
     schedule: "daily"
     priority: 1
-    is_enabled: false  # Requires Playwright; enable when running with browser support
-    wait_for: "networkidle"
-    selectors:
-      list_item: "a[href^='/index/']"
-      title: "h3"
-      link: ""
-      link_attr: "href"
-    base_url: "https://openai.com"
+    is_enabled: true  # Fixed: switched from dynamic to RSS feed
+    max_entries: 15
     tags: ["company_blog", "openai"]
 
   - id: "anthropic_blog"
     name: "Anthropic Research"
     group: "company_blogs"
     url: "https://www.anthropic.com/research"
-    crawl_method: "dynamic"
+    crawl_method: "static"
     schedule: "daily"
     priority: 1
-    is_enabled: false  # Requires Playwright; enable when running with browser support
-    wait_for: "networkidle"
+    is_enabled: true  # Fixed: SSR page works with static; updated selectors
     selectors:
-      list_item: "a[href*='/research/']"
-      title: "h3"
-      link: ""
-      link_attr: "href"
+      list_item: "main article ul li"
+      title: "span"
+      link: "a"
+      date: "time"
+      date_format: "%b %d, %Y"
     base_url: "https://www.anthropic.com"
     tags: ["company_blog", "anthropic"]
 
@@ -120,6 +159,32 @@ sources:
     priority: 1
     is_enabled: true
     tags: ["academic", "arxiv", "papers"]
+
+  - id: "arxiv_cs_lg"
+    name: "ArXiv cs.LG (机器学习)"
+    group: "academic"
+    url: "http://export.arxiv.org/api/query"
+    crawl_method: "static"
+    crawler_class: "arxiv_api"
+    search_query: "cat:cs.LG"
+    max_results: 20
+    schedule: "daily"
+    priority: 1
+    is_enabled: true
+    tags: ["academic", "arxiv", "papers", "machine_learning"]
+
+  - id: "arxiv_cs_cl"
+    name: "ArXiv cs.CL (NLP/大模型)"
+    group: "academic"
+    url: "http://export.arxiv.org/api/query"
+    crawl_method: "static"
+    crawler_class: "arxiv_api"
+    search_query: "cat:cs.CL"
+    max_results: 20
+    schedule: "daily"
+    priority: 1
+    is_enabled: true
+    tags: ["academic", "arxiv", "papers", "nlp"]
 
   # === E. 社区讨论 ===
   - id: "hacker_news"

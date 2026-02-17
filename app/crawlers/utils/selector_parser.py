@@ -72,6 +72,30 @@ def extract_date(el: Tag, selectors: dict) -> datetime | None:
     return None
 
 
+def extract_date_from_url(url: str) -> datetime | None:
+    """Extract date from URL path, common in Chinese government websites.
+
+    Supports:
+    - /t20250701_xxx.html  → 2025-07-01
+    - /202507/txxx.html    → 2025-07-01 (day from tYYYYMMDD if present, else 1st)
+    """
+    # Pattern 1: tYYYYMMDD_ (most specific)
+    m = re.search(r'/t(\d{4})(\d{2})(\d{2})_', url)
+    if m:
+        try:
+            return datetime(int(m[1]), int(m[2]), int(m[3]))
+        except ValueError:
+            pass
+    # Pattern 2: /YYYYMM/ directory with t-prefixed filename
+    m = re.search(r'/(\d{4})(\d{2})/t\d+', url)
+    if m:
+        try:
+            return datetime(int(m[1]), int(m[2]), 1)
+        except ValueError:
+            pass
+    return None
+
+
 def _normalize_base_url(base_url: str) -> str:
     """Ensure base_url ends with '/' so urljoin treats the last segment as a directory.
 
@@ -136,6 +160,8 @@ def parse_list_items(
             continue
 
         published_at = extract_date(el, selectors)
+        if published_at is None:
+            published_at = extract_date_from_url(url)
 
         items.append(RawListItem(title=title, url=url, published_at=published_at))
 

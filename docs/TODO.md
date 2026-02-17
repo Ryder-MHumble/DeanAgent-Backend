@@ -1,6 +1,6 @@
 # 后续任务清单
 
-> 最后更新: 2026-02-15 (v12: 同步文档数据 — 112 源/85 启用，detail_selectors 64 个，universities 禁用源 9 个)
+> 最后更新: 2026-02-17 (v17: 人事变动 LLM 富化 + enriched API 端点)
 > 基于前端 (Dean-Agent) 需求反推的优先级排序
 
 ---
@@ -9,8 +9,8 @@
 
 - [x] 项目骨架 (FastAPI + SQLAlchemy async + PostgreSQL + APScheduler 3.x)
 - [x] 5 种模板爬虫 + 7 个自定义 Parser（全部注册）
-- [x] 9 个维度 YAML 信源配置（112 源，85 启用）
-- [x] v1 REST API 14 端点 (articles/sources/dimensions/health)
+- [x] 9 个维度 YAML 信源配置（129 源，105 启用；v16 扩展 +17 新源 +3 恢复）
+- [x] v1 REST API 22 端点 (articles/sources/dimensions/health + intel/policy 3 + intel/personnel 5)
 - [x] 调度系统 + 去重 + JSON 本地输出（data/raw/ 88 个 latest.json，覆盖模式 + is_new 标记）
 - [x] Twitter 服务 + LLM 服务（OpenRouter）实现
 - [x] 前端数据支撑状态文档 (crawl_status README)
@@ -27,19 +27,21 @@
 
 ### 信源补充
 - [ ] 新增「领导讲话」信源 — gov.cn 国务院领导活动页 + 部委领导讲话
-- [ ] 恢复 bjfgw_policy (改用 dynamic 方法)
+- [x] ~~恢复 bjfgw_policy~~ — v16: 改 URL 为 /fgwzwgk/2024zcwj/ 静态列表，static 可用
 - [ ] 恢复 thepaper_tech (解析 __NEXT_DATA__ JSON)
 - [ ] 恢复 huxiu_news (寻找 RSS feed 或 API)
 
 ### LLM 集成
 - [ ] 配置 .env OPENROUTER_API_KEY + TWITTER_API_KEY
-- [ ] 重新规划业务 API 层（v2 代码已删除，需决定是否重建）
+- [x] ~~重新规划业务 API 层~~ — v14: 政策智能两级处理（rules + LLM，减少 70% API 调用）；v15: 架构重构为 `services/intel/{domain}/` 子包结构，提取共享工具到 `shared.py`，迁移 policy 模块 + 新建 personnel 模块，URL 迁移至 `/api/v1/intel/...`
 
 ### 数据质量
 - [x] ~~详情页内容抓取~~ — 已为 64 个启用信源配置 detail_selectors（universities 44, beijing_policy 7, national_policy 4, industry 3, talent 3, personnel 3），可自动抓取详情页正文。v11 修复 10 个源的错误选择器，新增 4 源。
 - [x] ~~修复详情页 URL 404 问题~~ — selector_parser.py 增加 `_normalize_base_url()` 防止 urljoin 丢失路径段；修复 9 个源的 base_url 配置
 - [x] ~~修复 title-only 源~~ — v11: 修复 bnu/ruc/jlu/sustech/slai 错误选择器，修复 uestc_news 列表选择器，修复 moe_renshi/si/talent TRS_UEDITOR→TRS_Editor，修复 jyb_news URL 空格 bug，新增 nosta/moe_keji/beijing_jw/nature_index detail_selectors
-- [ ] 人事变动 LLM 提取 — 从标题中提取人名、原职位、新职位
+- [x] ~~修复 sii_news/buaa_news~~ — v13: sii_news 首页改版导致 404，改用 /czxw/list.htm (6→14条); buaa_news 首页 banner 仅 2 项，改用 /zhxw.htm (2→5条)
+- [x] ~~人事变动提取~~ — v15: 纯规则引擎（正则）从 47 篇 personnel 文章中提取 84 条结构化任免记录（姓名、动作、职位、部门、日期），3 个 API 端点 (/api/v1/intel/personnel/feed|changes|stats)
+- [x] ~~人事变动 LLM 富化~~ — v17: 为 84 条人事变动记录增加 LLM 分析（relevance/importance/group/note/actionSuggestion/background/signals/aiInsight），输出 enriched_feed.json，新增 2 个 API 端点 (/api/v1/intel/personnel/enriched-feed|enriched-stats)
 
 ---
 
@@ -51,11 +53,13 @@
 - [ ] IT桔子/企查查 — 更全面投融资数据
 - [ ] 补充高校 HR/组织部页面 (15 所, snapshot 模式)
 - [ ] 补充 AI 院系官网 (8 个)
-- [ ] IEEE Fellow / ACM Fellow 年度公告源
+- [ ] IEEE Fellow / ACM Fellow 年度公告源（awards.acm.org / ieee.org 为静态年度页面，非持续更新源）
 - [ ] 微信公众号方案（搜狗微信搜索 / 公号后台）
+- [x] ~~v16 信源拓展~~ — 新增 17 源 + 恢复 3 源：technology +6 RSS/ArXiv +2 恢复 (OpenAI/Anthropic blog)、national_policy +2 (网信办/市监总局)、beijing_policy +2 新 +1 恢复 (经信局/知产局/发改委)、events +2 (CCF/CAAI)、industry +2 (创业邦/信通院)、personnel +1 (中科院)、universities +2 (CESI/信工所)
 
-### 业务 API（阻塞：v2 基础层已删除，需先完成 P1 "重新规划业务 API"）
-- [ ] 政策机会匹配 (LLM)
+### 业务 API
+
+- [x] ~~政策机会匹配~~ — v14: /api/v1/intel/policy/opportunities 端点 + 规则引擎自动检测机会（资金/截止日期正则）+ LLM 深度分析
 - [ ] 学术流动分析 (LLM)
 - [ ] 内参机会推荐 (LLM)
 
