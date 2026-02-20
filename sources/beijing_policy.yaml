@@ -12,6 +12,16 @@ default_keyword_filter:
   - "海淀"
   - "创新"
   - "数字经济"
+  - "智能"
+  - "数据"
+  - "高精尖"
+  - "芯片"
+  - "机器人"
+  - "算力"
+  - "软件"
+  - "信息化"
+  - "数字"
+  - "高新"
 
 sources:
   # === A. 政策文件 ===
@@ -112,6 +122,7 @@ sources:
     schedule: "daily"
     priority: 2
     is_enabled: true
+    keyword_filter: []  # 科创中心内容全部与科技创新相关，不做过滤
     selectors:
       list_item: "ul.qcdt-list li"
       title: "a"
@@ -129,22 +140,13 @@ sources:
     schedule: "4h"
     priority: 1
     is_enabled: true
+    keyword_filter: []  # 经信局内容全部与产业/信息化相关，不做过滤
     selectors:
       list_item: "ul.list li"
       title: "a"
       link: "a"
       date: "span.date"
       date_format: "[%Y-%m-%d]"
-    base_url: "https://jxj.beijing.gov.cn"
-    keyword_filter:
-      - "人工智能"
-      - "AI"
-      - "数字经济"
-      - "大模型"
-      - "智能"
-      - "数据"
-      - "高精尖"
-      - "软件"
     detail_selectors:
       content: "div.TRS_UEDITOR"
     tags: ["policy", "bjjxj", "industry", "ai"]
@@ -164,13 +166,7 @@ sources:
       date: "span"
       date_format: "%Y-%m-%d"
     base_url: "https://zscqj.beijing.gov.cn"
-    keyword_filter:
-      - "人工智能"
-      - "AI"
-      - "专利"
-      - "知识产权"
-      - "创新"
-      - "科技"
+    keyword_filter: []  # 知识产权局内容与创新/专利相关，不做过滤
     detail_selectors:
       content: "div.article-word"
     tags: ["policy", "ip", "beijing"]
@@ -178,18 +174,17 @@ sources:
   - id: "bjfgw_policy"
     name: "北京市发改委-政策文件"
     group: "policy"
-    url: "https://fgw.beijing.gov.cn/fgwzwgk/2024zcwj/"
+    url: "https://fgw.beijing.gov.cn/gzdt/fgzs/"
     crawl_method: "static"
     schedule: "daily"
     priority: 2
-    is_enabled: true  # Fixed: changed URL from /fgwzwgk/ (JS redirect) to /fgwzwgk/2024zcwj/ (static list)
+    is_enabled: true
     selectors:
       list_item: "ul.list li"
       title: "a"
       link: "a"
       date: "span"
       date_format: "%Y-%m-%d"
-    base_url: "https://fgw.beijing.gov.cn"
     keyword_filter:
       - "人工智能"
       - "AI"
@@ -197,6 +192,12 @@ sources:
       - "科技"
       - "创新"
       - "数据"
+      - "高精尖"
+      - "产业"
+      - "新质生产力"
+      - "智能"
+      - "营商环境"
+      - "经济"
     detail_selectors:
       content: "div.TRS_UEDITOR"
     tags: ["policy", "development", "beijing"]

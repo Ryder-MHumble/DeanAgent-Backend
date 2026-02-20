@@ -1,6 +1,6 @@
 # 信源爬取状态总览
 
-> 最后更新: 2026-02-17
+> 最后更新: 2026-02-18
 
 ---
 
@@ -66,8 +66,8 @@ data/processed/
 
 | 模块 | 脚本 | 方法 | 输入 | 产出 | API 前缀 |
 |------|------|------|------|------|---------|
-| policy_intel | `scripts/process_policy_intel.py` | 规则 + LLM (两级) | national_policy + beijing_policy 维度 raw JSON | feed.json, opportunities.json | `/api/v1/intel/policy/` |
-| personnel_intel | `scripts/process_personnel_intel.py` | 纯规则 (正则提取) | personnel 维度 raw JSON (47篇) | feed.json (47条), changes.json (84人次) | `/api/v1/intel/personnel/` |
+| policy_intel | `scripts/process_policy_intel.py` | 规则 + LLM (两级) | national_policy + beijing_policy + personnel 维度 raw JSON (184篇) | feed.json (184条, 55 LLM增强), opportunities.json (18条) | `/api/v1/intel/policy/` |
+| personnel_intel | `scripts/process_personnel_intel.py` | 纯规则 (正则提取) | personnel 维度 raw JSON (62篇) | feed.json (62条), changes.json (84人次) | `/api/v1/intel/personnel/` |
 
 ```bash
 # 运行政策智能加工（Tier 1 规则 + Tier 2 LLM 增强）
@@ -89,16 +89,16 @@ python scripts/process_personnel_intel.py --dry-run
 
 | 维度 | 已配置 | 已启用 | 产出数据 | 正文覆盖率 | YAML 文件 |
 |------|--------|--------|---------|-----------|----------|
-| personnel (对人事) | 4 | 4 | ✅ 47条+ | 97% | `sources/personnel.yaml` |
-| universities (对高校) | 55 | 46 | ✅ 584条+ | 78% | `sources/universities.yaml` |
-| technology (对技术) | 18+4† | 18+4† | ✅ 272条+ | 96% | `sources/technology.yaml` + twitter |
-| national_policy (对国家) | 8 | 6 | ✅ 37条+ | 91% | `sources/national_policy.yaml` |
-| beijing_policy (对北京) | 14 | 10 | ✅ 39条+ | 61% | `sources/beijing_policy.yaml` |
-| industry (对产业) | 10+1† | 6+1† | ✅ 56条+ | 100% | `sources/industry.yaml` + twitter |
-| talent (对人才) | 7+1† | 4+1† | ✅ 49条+ | 81% | `sources/talent.yaml` + twitter |
+| personnel (对人事) | 4 | 4 | ✅ 62条 | 98% | `sources/personnel.yaml` |
+| universities (对高校) | 55 | 46 | ✅ 528条 | 81% | `sources/universities.yaml` |
+| technology (对技术) | 18+4† | 18+4† | ✅ 299条 | 97% | `sources/technology.yaml` + twitter |
+| national_policy (对国家) | 8 | 6 | ✅ 52条 | 73% | `sources/national_policy.yaml` |
+| beijing_policy (对北京) | 14 | 10 | ✅ 70条 | 96% | `sources/beijing_policy.yaml` |
+| industry (对产业) | 10+1† | 6+1† | ✅ 49条 | 100% | `sources/industry.yaml` + twitter |
+| talent (对人才) | 7+1† | 4+1† | ✅ 51条 | 86% | `sources/talent.yaml` + twitter |
 | sentiment (对学院舆情) | 1† | 1† | ✅ 20条 | 100% | twitter 跨维度 |
-| events (对日程) | 6 | 4 | ✅ 212条+ | 0% (会议列表) | `sources/events.yaml` |
-| **合计** | **129** | **105** | **1316条+** | **—** | **105 个数据文件** |
+| events (对日程) | 6 | 4 | ✅ 221条 | 0% (会议列表) | `sources/events.yaml` |
+| **合计** | **129** | **105** | **1352条** | **74%** | **105 个数据文件** |
 
 > † `sources/twitter.yaml` 的 7 个源按 `dimension` 字段分配到 4 个维度：technology 4源、industry 1源、talent 1源、sentiment 1源。
 >
@@ -124,14 +124,14 @@ python scripts/process_personnel_intel.py --dry-run
 
 | source_id | 名称 | 方法 | 条目数 | 详情页 | 说明 |
 |-----------|------|------|--------|--------|------|
-| mohrss_rsrm | 人社部-国务院人事任免 | dynamic | 20 | ✅ | Playwright + detail_selectors `div.TRS_Editor` |
-| moe_renshi | 教育部-人事任免 | static | 20 | ✅ | `div.TRS_Editor` (20/20) |
-| moe_renshi_si | 教育部-人事司公告 | static | 7 | ✅ | `div.TRS_Editor` (6/7) |
-| cas_renshi | 中科院-人事任免 | static | — | ✅ | `div.cobtbox`，关键词过滤任免/人事/选举 |
+| mohrss_rsrm | 人社部-国务院人事任免 | dynamic | 20 | ✅ (20/20) | Playwright + detail_selectors `div.TRS_Editor` |
+| moe_renshi | 教育部-人事任免 | static | 20 | ✅ (20/20) | `div.TRS_Editor` |
+| moe_renshi_si | 教育部-人事司公告 | static | 7 | ✅ (6/7) | `div.TRS_Editor` |
+| cas_renshi | 中科院-人事任免 | static | 15 | ✅ (15/15) | `div.cobtbox`，关键词过滤任免/人事/选举 |
 
 ### 详细状态：universities (对高校) — 46/55 启用
 
-46 个数据文件，584 条目+，453 有正文 (78%)。全部 46 启用源已配置 detail_selectors。
+46 个数据文件，528 条目，427 有正文 (81%)。全部 46 启用源已配置 detail_selectors。
 
 #### A. 高校新闻网 (32 源, 25 启用)
 
@@ -269,12 +269,12 @@ python scripts/process_personnel_intel.py --dry-run
 
 | source_id | 名称 | 方法 | 启用 | 条目数 | 详情页 | content selector |
 |-----------|------|------|------|--------|--------|-----------------|
-| gov_cn_zhengce | 国务院-最新政策 | dynamic | ✅ | 20 | ✅ | `div.pages_content` |
-| ndrc_policy | 发改委-通知通告 | static | ✅ | 3 | ✅ | `div.TRS_Editor` |
-| moe_policy | 教育部-政策法规 | static | ✅ | 8 | ✅ | `div.TRS_Editor` |
-| most_policy | 科技部-信息公开 | static | ✅ | 6 | ✅ (3/6) | `div.TRS_UEDITOR` (PDF 项无正文) |
-| cac_policy | 国家网信办-政策法规 | static | ✅ | — | ✅ | `div.TRS_Editor` **新增** AI 治理核心监管 |
-| samr_news | 国家市监总局-要闻 | static | ✅ | — | ✅ | `#zoom` **新增** 反垄断/AI 监管 |
+| gov_cn_zhengce | 国务院-最新政策 | dynamic | ✅ | 20 | ✅ (20/20) | `div.pages_content` |
+| ndrc_policy | 发改委-通知通告 | static | ✅ | 5 | ✅ (4/5) | `div.TRS_Editor` |
+| moe_policy | 教育部-政策法规 | static | ✅ | 8 | ✅ (8/8) | `div.TRS_Editor` |
+| most_policy | 科技部-信息公开 | static | ✅ | 10 | ✅ (6/10) | `div.TRS_UEDITOR` (PDF 项无正文) |
+| cac_policy | 国家网信办-政策法规 | static | ✅ | 9 | 🔶 (0/9) | `div.TRS_Editor` AI 治理核心监管 |
+| samr_news | 国家市监总局-要闻 | static | ✅ | 0 | — | `#zoom` 当期无匹配关键词 |
 | miit_policy | 工信部-政策文件 | dynamic | ❌ | — | — | IP 级 WAF 封锁 (403) |
 | nsfc_news | 国家自然科学基金委 | static | ❌ | — | — | URL 404 |
 
@@ -286,27 +286,25 @@ python scripts/process_personnel_intel.py --dry-run
 
 | source_id | 名称 | 方法 | 启用 | 条目数 | 详情页 |
 |-----------|------|------|------|--------|--------|
-| beijing_zhengce | 首都之窗-政策文件 | dynamic | ✅ | 1 | ✅ |
-| bjkw_policy | 北京市科委/中关村管委会 | static | ✅ | 4 | ✅ |
-| bjjw_policy | 北京市教委 | static | ✅ | 14 | ✅ |
-| bjrsj_policy | 北京市人社局 | static | ✅ | 1 | ✅ |
+| beijing_zhengce | 首都之窗-政策文件 | dynamic | ✅ | 2 | ✅ (2/2) |
+| bjkw_policy | 北京市科委/中关村管委会 | static | ✅ | 4 | ✅ (4/4) |
+| bjjw_policy | 北京市教委 | static | ✅ | 14 | ✅ (13/14) |
+| bjrsj_policy | 北京市人社局 | static | ✅ | 3 | ✅ (3/3) |
 | zgc_policy | 中关村示范区 | static | ❌ | — | 域名连接被重置 |
-| ncsti_policy | 国际科创中心 | static | ✅ | 5 | ✅ |
-| bjjxj_policy | 北京市经信局-通知公告 | static | ✅ | — | ✅ `div.TRS_UEDITOR` **新增** AI 政策核心部门 |
-| bjzscqj_policy | 北京市知识产权局 | static | ✅ | — | ✅ `div.article-word` **新增** AI 专利/创新基金 |
-| bjfgw_policy | 北京市发改委-政策文件 | static | ✅ | — | ✅ **恢复**：改 URL 为 /fgwzwgk/2024zcwj/ 静态列表 |
+| ncsti_policy | 国际科创中心 | static | ✅ | 6 | ✅ (6/6) keyword_filter=[] 不过滤 |
+| bjjxj_policy | 北京市经信局-通知公告 | static | ✅ | 20 | ✅ (20/20) keyword_filter=[] 不过滤，base_url 已修复 |
+| bjzscqj_policy | 北京市知识产权局 | static | ✅ | 10 | ✅ (10/10) keyword_filter=[] 不过滤 |
+| bjfgw_policy | 北京市发改委-政策文件 | static | ✅ | 7 | ✅ (7/7) base_url 已修复，关键词已扩展 |
 | bjhd_policy | 海淀区政府 | static | ❌ | — | 404 |
 
 #### B. 人事变动与要闻
 
 | source_id | 名称 | 方法 | 启用 | 条目数 | 详情页 |
 |-----------|------|------|------|--------|--------|
-| beijing_ywdt | 首都之窗-要闻 | static | ✅ | 0* | ✅ |
+| beijing_ywdt | 首都之窗-要闻 | static | ✅ | 3 | ✅ (1/3) |
 | bjd_news | 北京日报 | static | ❌ | — | 布局复杂 |
-| bjrd_renshi | 北京市人大常委会 | static | ✅ | 1 | ✅ |
+| bjrd_renshi | 北京市人大常委会 | static | ✅ | 1 | ✅ (1/1) |
 | beijing_rsrm | 首都之窗-人事任免 | static | ❌ | — | URL 404 |
-
-> * beijing_ywdt: 0 条是因为当前首页要闻标题不含 AI/教育/科技关键词。
 
 ### 详细状态：industry (对产业) — 6/10 启用 + 1 Twitter
 
@@ -314,16 +312,16 @@ python scripts/process_personnel_intel.py --dry-run
 
 | source_id | 名称 | 方法 | 启用 | 条目数 | 详情页 |
 |-----------|------|------|------|--------|--------|
-| 36kr_news | 36氪-快讯 | static | ✅ | 3 | 部分 (SSR 有效, CSR 无) |
+| 36kr_news | 36氪-快讯 | static | ✅ | 3 | ✅ (3/3) |
 | huxiu_news | 虎嗅 | static | ❌ | — | WAF 反爬 |
-| tmtpost_news | 钛媒体 | rss | ✅ | 3 | RSS 自带 |
-| jiemian_tech | 界面新闻-科技 | static | ✅ | 3 | ✅ `div.article-content` |
+| tmtpost_news | 钛媒体 | rss | ✅ | 12 | RSS 自带 |
+| jiemian_tech | 界面新闻-科技 | static | ✅ | 6 | ✅ (6/6) `div.article-content` |
 | thepaper_tech | 澎湃新闻-科技 | static | ❌ | — | Next.js SPA |
 | iyiou_ai | 亿欧-AI | static | ❌ | — | 空壳页面 |
-| chinaventure_news | 投中网 | static | ✅ | 8 | ✅ `div.article_slice_pc` |
+| chinaventure_news | 投中网 | static | ✅ | 9 | ✅ (9/9) `div.article_slice_pc` |
 | 36kr_investment | 36氪-融资频道 | static | ❌ | — | URL 已下线 |
-| cyzone_news | 创业邦 | rss | ✅ | — | RSS 自带 **新增** AI 创投报道 |
-| caict_news | 中国信通院-动态 | static | ✅ | — | — **新增** 产业报告/AI 白皮书 |
+| cyzone_news | 创业邦 | rss | ✅ | 🔴 | RSS feed 404 (URL 已失效) |
+| caict_news | 中国信通院-动态 | static | ✅ | 🔴 | HTTP 412 Precondition Failed |
 
 ### 详细状态：talent (对人才) — 4/7 启用 + 1 Twitter
 
@@ -332,23 +330,21 @@ python scripts/process_personnel_intel.py --dry-run
 | source_id | 名称 | 方法 | 启用 | 条目数 | 详情页 |
 |-----------|------|------|------|--------|--------|
 | csrankings | CSRankings | static | ❌ | — | React SPA |
-| semantic_scholar_ai | Semantic Scholar | API | ✅ | 0† | API 自带 |
-| nature_index | Nature Index | static | ✅ | 4 | ✅ `div.c-article-body` |
+| semantic_scholar_ai | Semantic Scholar | API | ✅ | 20 | API 自带 (13/20 有 abstract) |
+| nature_index | Nature Index | static | ✅ | 4 | ✅ (4/4) `div.c-article-body` |
 | aminer_ai | AMiner-AI学者 | static | ❌ | — | JS SPA |
 | nsfc_talent | NSFC杰青/优青公示 | static | ❌ | — | URL 404 |
-| moe_talent | 教育部人才计划公示 | static | ✅ | 6 | ✅ `div.TRS_Editor` |
-| wrsa_talent | 欧美同学会 | static | ✅ | 2 | ✅ `#Content` |
-
-> † semantic_scholar_ai 使用自定义 API Parser，因 429 限速偶尔失败，定时任务自动重试。
+| moe_talent | 教育部人才计划公示 | static | ✅ | 5 | ✅ (5/5) `div.TRS_Editor` |
+| wrsa_talent | 欧美同学会 | static | ✅ | 2 | ✅ (2/2) `#Content` |
 
 ### 详细状态：events (对日程) — 4/6 启用
 
 | source_id | 名称 | 方法 | 启用 | 条目数 | 说明 |
 |-----------|------|------|------|--------|------|
-| aideadlines | AI Conference Deadlines | dynamic | ✅ | 192 | 全量 AI 会议 |
+| aideadlines | AI Conference Deadlines | dynamic | ✅ | 191 | 全量 AI 会议 |
 | wikicfp | WikiCFP-AI | static | ✅ | 20 | AI 会议 CFP |
-| ccf_focus | CCF 焦点 | static | ✅ | — | **新增** 国内计算机学会活动 |
-| caai_news | CAAI 新闻 | static | ✅ | — | **新增** 中国人工智能学会 |
+| ccf_focus | CCF 焦点 | static | ✅ | 0 | 当期无匹配关键词 |
+| caai_news | CAAI 新闻 | static | ✅ | 10 | 中国人工智能学会 |
 | huodongxing | 活动行-人工智能 | static | ❌ | — | CAPTCHA/反爬 |
 | meeting_edu | 中国学术会议在线 | static | ❌ | — | 站点无法连接 |
 

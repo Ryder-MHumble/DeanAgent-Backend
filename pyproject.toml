@@ -24,6 +24,7 @@ dependencies = [
     "apscheduler>=3.10,<4.0",
     "playwright>=1.49",
     "pyyaml>=6.0",
+    "scalar-fastapi>=1.0",
 ]
 
 [project.optional-dependencies]

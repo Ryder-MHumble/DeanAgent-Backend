@@ -10,6 +10,14 @@ default_keyword_filter:
   - "deep learning"
   - "NLP"
   - "computer vision"
+  - "大模型"
+  - "机器人"
+  - "数据"
+  - "智能"
+  - "芯片"
+  - "算力"
+  - "LLM"
+  - "robotics"
 
 sources:
   - id: "aideadlines"
@@ -66,6 +74,11 @@ sources:
       - "论坛"
       - "峰会"
       - "学术"
+      - "智能"
+      - "计算"
+      - "数据"
+      - "芯片"
+      - "机器人"
     selectors:
       list_item: "ul.ul-imgtxt2 > li"
       title: "h3.tit > a"

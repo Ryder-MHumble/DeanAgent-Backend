@@ -1,35 +1,70 @@
 from datetime import datetime
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class ArticleBrief(BaseModel):
+    """文章摘要信息，用于列表展示。"""
+
     model_config = {"from_attributes": True}
 
-    id: int
-    source_id: str
-    dimension: str
-    url: str
-    title: str
-    author: str | None = None
-    published_at: datetime | None = None
-    crawled_at: datetime
-    tags: list[str] = []
-    is_read: bool = False
-    importance: int | None = None
+    id: int = Field(description="文章唯一 ID", examples=[1024])
+    source_id: str = Field(description="所属信源 ID", examples=["tech_arxiv"])
+    dimension: str = Field(
+        description="所属维度",
+        examples=["technology"],
+    )
+    url: str = Field(
+        description="文章原始链接",
+        examples=["https://arxiv.org/abs/2401.12345"],
+    )
+    title: str = Field(
+        description="文章标题",
+        examples=["Large Language Models for Code Generation: A Survey"],
+    )
+    author: str | None = Field(
+        default=None, description="作者", examples=["张三"]
+    )
+    published_at: datetime | None = Field(
+        default=None, description="发布时间（ISO 8601）"
+    )
+    crawled_at: datetime = Field(description="爬取时间（ISO 8601）")
+    tags: list[str] = Field(
+        default=[], description="标签列表", examples=[["AI", "LLM", "政策"]]
+    )
+    is_read: bool = Field(default=False, description="是否已读")
+    importance: int | None = Field(
+        default=None, description="重要度评分（0-100）", examples=[85]
+    )
 
 
 class ArticleDetail(ArticleBrief):
-    content: str | None = None
-    extra: dict = {}
+    """文章详情，包含正文内容和额外字段。"""
+
+    content: str | None = Field(
+        default=None, description="文章正文（HTML 或纯文本）"
+    )
+    extra: dict = Field(
+        default={},
+        description="额外元数据（JSON），不同信源可能包含不同字段",
+        examples=[{"pdf_url": "https://arxiv.org/pdf/2401.12345"}],
+    )
 
 
 class ArticleUpdate(BaseModel):
-    is_read: bool | None = None
-    importance: int | None = None
+    """文章更新请求体。"""
+
+    is_read: bool | None = Field(
+        default=None, description="标记为已读/未读"
+    )
+    importance: int | None = Field(
+        default=None, description="设置重要度评分（0-100）", examples=[90]
+    )
 
 
 class ArticleSearchParams(BaseModel):
+    """文章搜索参数（内部使用）。"""
+
     dimension: str | None = None
     source_id: str | None = None
     tags: list[str] | None = None
@@ -43,5 +78,10 @@ class ArticleSearchParams(BaseModel):
 
 
 class ArticleStats(BaseModel):
-    group: str
-    count: int
+    """文章统计信息。"""
+
+    group: str = Field(
+        description="分组名称（维度名或信源 ID）",
+        examples=["technology"],
+    )
+    count: int = Field(description="该分组下的文章总数", examples=[342])
