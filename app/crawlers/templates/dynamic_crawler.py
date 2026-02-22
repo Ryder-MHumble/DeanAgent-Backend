@@ -25,10 +25,10 @@ class DynamicPageCrawler(BaseCrawler):
 
     async def _fetch_detail_with_playwright(
         self, page: Any, detail_url: str, detail_selectors: dict, wait_timeout: int,
-    ) -> tuple[str | None, str | None, str | None]:
+    ) -> tuple[str | None, str | None, str | None, str | None]:
         """Fetch a detail page using Playwright (same context, shares cookies).
 
-        Returns (content, author, content_hash).
+        Returns (content, author, content_hash, pdf_url).
         """
         try:
             await page.goto(detail_url, wait_until="load", timeout=wait_timeout)
@@ -40,18 +40,18 @@ class DynamicPageCrawler(BaseCrawler):
                 pass  # Content may already be available or selector optional
             detail_html = await page.content()
 
-            detail = parse_detail_html(detail_html, detail_selectors)
-            return detail.content, detail.author, detail.content_hash
+            detail = parse_detail_html(detail_html, detail_selectors, detail_url, self.config)
+            return detail.content, detail.author, detail.content_hash, detail.pdf_url
         except Exception as e:
             logger.warning("Failed to fetch detail page %s: %s", detail_url, e)
-            return None, None, None
+            return None, None, None, None
 
     async def _fetch_detail_with_httpx(
         self, detail_url: str, detail_selectors: dict,
-    ) -> tuple[str | None, str | None, str | None]:
+    ) -> tuple[str | None, str | None, str | None, str | None]:
         """Fetch a detail page using httpx (faster, for sites without JS protection).
 
-        Returns (content, author, content_hash).
+        Returns (content, author, content_hash, pdf_url).
         """
         try:
             detail_html = await http_fetch_page(
@@ -60,11 +60,11 @@ class DynamicPageCrawler(BaseCrawler):
                 encoding=self.config.get("encoding"),
                 request_delay=self.config.get("request_delay"),
             )
-            detail = parse_detail_html(detail_html, detail_selectors)
-            return detail.content, detail.author, detail.content_hash
+            detail = parse_detail_html(detail_html, detail_selectors, detail_url, self.config)
+            return detail.content, detail.author, detail.content_hash, detail.pdf_url
         except Exception as e:
             logger.warning("Failed to fetch detail page %s: %s", detail_url, e)
-            return None, None, None
+            return None, None, None, None
 
     async def fetch_and_parse(self) -> list[CrawledItem]:
         from app.crawlers.utils.playwright_pool import get_page
@@ -93,20 +93,24 @@ class DynamicPageCrawler(BaseCrawler):
 
             items: list[CrawledItem] = []
             for raw in raw_items:
-                content = author = content_hash = None
+                content = author = content_hash = pdf_url = None
                 if detail_selectors:
                     if detail_use_playwright:
-                        content, author, content_hash = (
+                        content, author, content_hash, pdf_url = (
                             await self._fetch_detail_with_playwright(
                                 page, raw.url, detail_selectors, wait_timeout,
                             )
                         )
                     else:
-                        content, author, content_hash = (
+                        content, author, content_hash, pdf_url = (
                             await self._fetch_detail_with_httpx(
                                 raw.url, detail_selectors,
                             )
                         )
+
+                extra = {}
+                if pdf_url:
+                    extra["pdf_url"] = pdf_url
 
                 items.append(
                     CrawledItem(
@@ -119,6 +123,7 @@ class DynamicPageCrawler(BaseCrawler):
                         source_id=self.source_id,
                         dimension=self.config.get("dimension"),
                         tags=self.config.get("tags", []),
+                        extra=extra,
                     )
                 )
 
