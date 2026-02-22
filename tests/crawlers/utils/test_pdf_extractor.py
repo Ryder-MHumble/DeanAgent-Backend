@@ -1,6 +1,5 @@
 """Tests for PDF URL extraction."""
 from bs4 import BeautifulSoup
-import pytest
 
 from app.crawlers.utils.pdf_extractor import extract_pdf_url
 
