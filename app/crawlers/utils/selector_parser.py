@@ -13,6 +13,7 @@ from urllib.parse import urljoin, urlparse, urlunparse
 from bs4 import BeautifulSoup, Tag
 
 from app.crawlers.utils.dedup import compute_content_hash
+from app.crawlers.utils.pdf_extractor import extract_pdf_url
 from app.crawlers.utils.text_extract import html_to_text
 
 logger = logging.getLogger(__name__)
@@ -34,6 +35,7 @@ class DetailResult:
     content: str | None = None
     author: str | None = None
     content_hash: str | None = None
+    pdf_url: str | None = None
 
 
 def extract_date(el: Tag, selectors: dict) -> datetime | None:
@@ -180,12 +182,23 @@ def parse_list_items(
     return deduped
 
 
-def parse_detail_html(html: str, detail_selectors: dict) -> DetailResult:
-    """Parse a detail page HTML and extract content, summary, author, content_hash.
+def parse_detail_html(
+    html: str,
+    detail_selectors: dict,
+    page_url: str = "",
+    config: dict | None = None,
+) -> DetailResult:
+    """Parse a detail page HTML and extract content, author, content_hash, and PDF URL.
 
     Uses html.parser instead of lxml because some government sites (notably gov.cn)
     produce deeply nested <table> structures that lxml fails to parse correctly.
     html.parser handles all tested sites reliably.
+
+    Args:
+        html: HTML string to parse
+        detail_selectors: Selector config for content/author
+        page_url: Current page URL for PDF extraction
+        config: Full source config for PDF extraction
     """
     detail_soup = BeautifulSoup(html, "html.parser")
     result = DetailResult()
@@ -200,5 +213,10 @@ def parse_detail_html(html: str, detail_selectors: dict) -> DetailResult:
         author_el = detail_soup.select_one(author_sel)
         if author_el:
             result.author = author_el.get_text(strip=True)
+
+    # Extract PDF URL
+    if config and page_url:
+        title = config.get("name", "")
+        result.pdf_url = extract_pdf_url(detail_soup, page_url, title, config)
 
     return result
