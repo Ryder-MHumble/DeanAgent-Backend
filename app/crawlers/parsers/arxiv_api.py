@@ -70,6 +70,13 @@ class ArxivAPICrawler(BaseCrawler):
             # Extract categories
             categories = [t.get("term", "") for t in entry.get("tags", [])]
 
+            # Construct PDF URL from abstract page URL
+            # https://arxiv.org/abs/2501.00001 -> https://arxiv.org/pdf/2501.00001.pdf
+            pdf_url = None
+            if "/abs/" in link:
+                arxiv_id = link.split("/abs/")[-1]
+                pdf_url = f"https://arxiv.org/pdf/{arxiv_id}.pdf"
+
             items.append(
                 CrawledItem(
                     title=title,
@@ -81,7 +88,10 @@ class ArxivAPICrawler(BaseCrawler):
                     source_id=self.source_id,
                     dimension=self.config.get("dimension"),
                     tags=self.config.get("tags", []) + categories[:3],
-                    extra={"categories": categories},
+                    extra={
+                        "categories": categories,
+                        "pdf_url": pdf_url,
+                    },
                 )
             )
 
