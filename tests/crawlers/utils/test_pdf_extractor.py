@@ -59,3 +59,42 @@ def test_extract_smart_match_basic():
     result = extract_pdf_url(soup, "https://example.com", "Paper Title", config)
 
     assert result == "https://example.com/paper.pdf"
+
+
+def test_smart_match_prioritizes_pdf_keyword():
+    """Test smart matching prioritizes links with 'PDF' text."""
+    html = """
+    <html>
+        <body>
+            <a href="/ad.pdf">Advertisement</a>
+            <a href="/doc.pdf">下载PDF文档</a>
+        </body>
+    </html>
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    config = {}
+
+    result = extract_pdf_url(soup, "https://example.com", "Doc Title", config)
+
+    # Should pick the one with "PDF" in text
+    assert result == "https://example.com/doc.pdf"
+
+
+def test_smart_match_ignores_low_weight_links():
+    """Test smart matching ignores links with weight < threshold."""
+    html = """
+    <html>
+        <body>
+            <footer>
+                <a href="/random.pdf">Random Footer Link</a>
+            </footer>
+        </body>
+    </html>
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    config = {}
+
+    # Footer link without good indicators should not be returned
+    result = extract_pdf_url(soup, "https://example.com", "Main Article", config)
+
+    assert result is None

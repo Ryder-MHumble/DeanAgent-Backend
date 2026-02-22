@@ -68,16 +68,53 @@ def _smart_match_pdf(
     title: str,
 ) -> str | None:
     """
-    Smart match PDF links in page.
+    Smart match PDF links with weighted scoring.
 
-    Finds all links ending with .pdf and returns the first one.
+    Weight calculation:
+    - Link text contains "PDF"/"下载"/"附件" → +10
+    - Link in div.attachments/div.download/etc → +8
+    - Link in article/main/content → +3
+    - href ends with .pdf → +2
+
+    Returns highest weight link if weight >= 5, else None.
     """
-    # Find all <a> tags
     links = soup.find_all("a", href=True)
+    candidates = []
 
     for link in links:
         href = link.get("href", "")
-        if href.lower().endswith(".pdf"):
-            return urljoin(page_url, href)
+        if not href.lower().endswith(".pdf"):
+            continue
 
-    return None
+        weight = 2  # Base weight for .pdf link
+        link_text = link.get_text(strip=True).lower()
+
+        # Check link text keywords
+        pdf_keywords = ["pdf", "下载", "附件", "download", "attachment"]
+        if any(kw in link_text for kw in pdf_keywords):
+            weight += 10
+
+        # Check parent containers
+        parent_containers = ["attachments", "download", "file", "fujian"]
+        for parent in link.parents:
+            parent_class = " ".join(parent.get("class", [])).lower()
+            parent_id = parent.get("id", "").lower()
+            if any(cont in parent_class or cont in parent_id for cont in parent_containers):
+                weight += 8
+                break
+
+        # Check if in main content area
+        content_containers = ["article", "main", "content"]
+        for parent in link.parents:
+            if parent.name in content_containers:
+                weight += 3
+                break
+
+        abs_url = urljoin(page_url, href)
+        candidates.append((weight, abs_url))
+
+    # Sort by weight descending, filter >= 5
+    candidates.sort(reverse=True, key=lambda x: x[0])
+    valid_candidates = [url for weight, url in candidates if weight >= 5]
+
+    return valid_candidates[0] if valid_candidates else None
