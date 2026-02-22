@@ -1,6 +1,6 @@
 # 信源爬取状态总览
 
-> 最后更新: 2026-02-18
+> 最后更新: 2026-02-22
 
 ---
 
@@ -36,12 +36,17 @@ data/raw/{dimension}/{group}/{source_id}/latest.json
       "source_id": "pku_news",
       "dimension": "universities",
       "tags": ["university", "pku", "news"],
-      "extra": {},
+      "extra": {
+        "pdf_url": "https://example.com/document.pdf"
+      },
       "is_new": true
     }
   ]
 }
 ```
+
+**字段说明：**
+- `extra.pdf_url`：可选字段，包含页面中找到的 PDF 下载链接（绝对 URL）。如果页面无 PDF，此字段为空或不存在。
 
 ---
 
