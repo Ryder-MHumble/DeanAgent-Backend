@@ -57,7 +57,7 @@ class StaticHTMLCrawler(BaseCrawler):
 
         items: list[CrawledItem] = []
         for raw in raw_items:
-            content = author = content_hash = None
+            content = author = content_hash = pdf_url = None
 
             if detail_selectors:
                 try:
@@ -67,12 +67,17 @@ class StaticHTMLCrawler(BaseCrawler):
                         encoding=self.config.get("encoding"),
                         request_delay=self.config.get("request_delay"),
                     )
-                    detail = parse_detail_html(detail_html, detail_selectors)
+                    detail = parse_detail_html(detail_html, detail_selectors, raw.url, self.config)
                     content = detail.content
                     author = detail.author
                     content_hash = detail.content_hash
+                    pdf_url = detail.pdf_url
                 except Exception as e:
                     logger.warning("Failed to fetch detail page %s: %s", raw.url, e)
+
+            extra = {}
+            if pdf_url:
+                extra["pdf_url"] = pdf_url
 
             items.append(
                 CrawledItem(
@@ -85,6 +90,7 @@ class StaticHTMLCrawler(BaseCrawler):
                     source_id=self.source_id,
                     dimension=self.config.get("dimension"),
                     tags=self.config.get("tags", []),
+                    extra=extra,
                 )
             )
 
