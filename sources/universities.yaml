@@ -109,7 +109,7 @@ sources:
     base_url: "https://news.sjtu.edu.cn"
     keyword_filter: []  # 高校新闻网不做关键词过滤
     detail_selectors:
-      content: "div.info"
+      content: "div.Article_content"  # 修复：原 div.info 已失效，改为正确的 Article_content
     tags: ["university", "sjtu", "news"]
 
   - id: "fudan_news"
@@ -325,7 +325,7 @@ sources:
     priority: 2
     is_enabled: true
     selectors:
-      list_item: "ul.ul-cnn li"
+      list_item: "div.col-r ul.ul-cnn li"
       title: "a"
       link: "a"
     base_url: "https://news.hit.edu.cn"

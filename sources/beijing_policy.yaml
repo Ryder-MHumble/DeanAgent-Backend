@@ -29,12 +29,10 @@ sources:
     name: "首都之窗-政策文件"
     group: "policy"
     url: "https://www.beijing.gov.cn/zhengce/"
-    crawl_method: "dynamic"
+    crawl_method: "static"
     schedule: "4h"
     priority: 1
     is_enabled: true
-    wait_for: "ul.zc_news_list li"
-    wait_timeout: 15000
     selectors:
       list_item: "ul.zc_news_list li"
       title: "a"
@@ -42,7 +40,6 @@ sources:
     base_url: "https://www.beijing.gov.cn/zhengce/"
     detail_selectors:
       content: "div.TRS_UEDITOR"
-    detail_use_playwright: false
     tags: ["policy", "beijing_gov"]
 
   - id: "bjkw_policy"
@@ -232,7 +229,7 @@ sources:
       list_item: "ul.news_list li"
       title: "a"
       link: "a"
-    base_url: "https://www.beijing.gov.cn"
+    base_url: "https://www.beijing.gov.cn/ywdt/"
     detail_selectors:
       content: "div.TRS_UEDITOR"
     tags: ["news", "beijing_gov"]

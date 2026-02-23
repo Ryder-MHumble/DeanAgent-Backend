@@ -13,6 +13,8 @@ from urllib.parse import urljoin, urlparse, urlunparse
 from bs4 import BeautifulSoup, Tag
 
 from app.crawlers.utils.dedup import compute_content_hash
+from app.crawlers.utils.html_sanitizer import sanitize_html
+from app.crawlers.utils.image_extractor import extract_images
 from app.crawlers.utils.pdf_extractor import extract_pdf_url
 from app.crawlers.utils.text_extract import html_to_text
 
@@ -33,9 +35,11 @@ class DetailResult:
     """Result from parsing a detail page."""
 
     content: str | None = None
+    content_html: str | None = None
     author: str | None = None
     content_hash: str | None = None
     pdf_url: str | None = None
+    images: list[dict[str, str]] | None = None
 
 
 def extract_date(el: Tag, selectors: dict) -> datetime | None:
@@ -206,8 +210,11 @@ def parse_detail_html(
     if content_sel := detail_selectors.get("content"):
         content_el = detail_soup.select_one(content_sel)
         if content_el:
-            result.content = html_to_text(str(content_el))
+            raw_html = str(content_el)
+            result.content = html_to_text(raw_html)
             result.content_hash = compute_content_hash(result.content)
+            result.content_html = sanitize_html(raw_html, base_url=page_url)
+            result.images = extract_images(raw_html, base_url=page_url)
 
     if author_sel := detail_selectors.get("author"):
         author_el = detail_soup.select_one(author_sel)

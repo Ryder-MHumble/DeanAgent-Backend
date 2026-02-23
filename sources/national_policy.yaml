@@ -120,7 +120,7 @@ sources:
       date_format: "%Y-%m-%d"
     base_url: "https://www.cac.gov.cn"
     detail_selectors:
-      content: "div.TRS_Editor"
+      content: "div.main-content"
     keyword_filter:
       - "人工智能"
       - "AI"

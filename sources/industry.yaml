@@ -127,13 +127,19 @@ sources:
   - id: "cyzone_news"
     name: "创业邦"
     group: "news"
-    url: "https://www.cyzone.cn/feed/"
-    crawl_method: "rss"
+    url: "https://www.cyzone.cn/"
+    crawl_method: "static"
     schedule: "4h"
     priority: 2
     is_enabled: true
-    max_entries: 15
+    selectors:
+      list_item: "div.article-item"
+      title: "a.item-title"
+      link: "a.item-title"
+    base_url: "https://www.cyzone.cn"
     keyword_filter: ["AI", "人工智能", "大模型", "融资", "机器人", "智能", "芯片", "科技", "投资", "创业"]
+    detail_selectors:
+      content: "div.g-art-content"
     tags: ["news", "cyzone", "startup"]
 
   # === B. 融资/IPO ===

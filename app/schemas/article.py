@@ -42,12 +42,18 @@ class ArticleDetail(ArticleBrief):
     """文章详情，包含正文内容和额外字段。"""
 
     content: str | None = Field(
-        default=None, description="文章正文（HTML 或纯文本）"
+        default=None, description="文章正文（纯文本，用于搜索）"
+    )
+    content_html: str | None = Field(
+        default=None, description="文章正文（富文本 HTML，保留图片和格式标签）"
     )
     extra: dict = Field(
         default={},
         description="额外元数据（JSON），不同信源可能包含不同字段",
-        examples=[{"pdf_url": "https://arxiv.org/pdf/2401.12345"}],
+        examples=[{
+            "pdf_url": "https://arxiv.org/pdf/2401.12345",
+            "images": [{"src": "https://example.com/fig1.png", "alt": "Figure 1"}],
+        }],
     )
 
 

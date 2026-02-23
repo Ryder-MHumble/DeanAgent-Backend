@@ -26,6 +26,7 @@ _CUSTOM_MAP: dict[str, str] = {
     "semantic_scholar": "app.crawlers.parsers.semantic_scholar.SemanticScholarCrawler",
     "twitter_kol": "app.crawlers.parsers.twitter_kol.TwitterKOLCrawler",
     "twitter_search": "app.crawlers.parsers.twitter_search.TwitterSearchCrawler",
+    "hunyuan_api": "app.crawlers.parsers.hunyuan_api.HunyuanAPICrawler",
 }
 
 

@@ -1,6 +1,6 @@
 # 后续任务清单
 
-> 最后更新: 2026-02-22 (v18: PDF URL 提取功能)
+> 最后更新: 2026-02-23 (v19: 中国 AI 大厂信源 + content_html 富文本)
 > 基于前端 (Dean-Agent) 需求反推的优先级排序
 
 ---
@@ -8,8 +8,8 @@
 ## P0: 基础架构（已完成）
 
 - [x] 项目骨架 (FastAPI + SQLAlchemy async + PostgreSQL + APScheduler 3.x)
-- [x] 5 种模板爬虫 + 7 个自定义 Parser（全部注册）
-- [x] 9 个维度 YAML 信源配置（129 源，105 启用；v16 扩展 +17 新源 +3 恢复）
+- [x] 5 种模板爬虫 + 8 个自定义 Parser（全部注册）
+- [x] 9 个维度 YAML 信源配置（134 源，109 启用；v19 新增 5 中国 AI 大厂）
 - [x] v1 REST API 22 端点 (articles/sources/dimensions/health + intel/policy 3 + intel/personnel 5)
 - [x] 调度系统 + 去重 + JSON 本地输出（data/raw/ 88 个 latest.json，覆盖模式 + is_new 标记）
 - [x] Twitter 服务 + LLM 服务（OpenRouter）实现
@@ -56,6 +56,7 @@
 - [ ] IEEE Fellow / ACM Fellow 年度公告源（awards.acm.org / ieee.org 为静态年度页面，非持续更新源）
 - [ ] 微信公众号方案（搜狗微信搜索 / 公号后台）
 - [x] ~~v16 信源拓展~~ — 新增 17 源 + 恢复 3 源：technology +6 RSS/ArXiv +2 恢复 (OpenAI/Anthropic blog)、national_policy +2 (网信办/市监总局)、beijing_policy +2 新 +1 恢复 (经信局/知产局/发改委)、events +2 (CCF/CAAI)、industry +2 (创业邦/信通院)、personnel +1 (中科院)、universities +2 (CESI/信工所)
+- [x] ~~v19 中国 AI 大厂信源 + content_html 富文本~~ — 新增 5 中国 AI 公司博客 (Qwen/MiniMax/Moonshot/Hunyuan/Zhipu，4 启用)；新增 content_html 字段保留富文本 HTML（含图片标签）；新增 image_extractor + html_sanitizer 工具；新增 hunyuan_api 自定义 Parser
 
 ### 业务 API
 

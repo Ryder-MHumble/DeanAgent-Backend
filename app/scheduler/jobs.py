@@ -56,6 +56,7 @@ async def execute_crawl_job(source_config: dict[str, Any]) -> None:
                 url_hash=compute_url_hash(item.url),
                 title=item.title,
                 content=item.content,
+                content_html=item.content_html,
                 content_hash=item.content_hash,
                 author=item.author,
                 published_at=item.published_at,

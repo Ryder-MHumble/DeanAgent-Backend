@@ -31,6 +31,7 @@ class CrawledItem:
     published_at: datetime | None = None
     author: str | None = None
     content: str | None = None
+    content_html: str | None = None
     content_hash: str | None = None
     source_id: str | None = None
     dimension: str | None = None

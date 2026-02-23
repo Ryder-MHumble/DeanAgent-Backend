@@ -1,6 +1,6 @@
 # 信源爬取状态总览
 
-> 最后更新: 2026-02-22
+> 最后更新: 2026-02-23
 
 ---
 
@@ -46,7 +46,11 @@ data/raw/{dimension}/{group}/{source_id}/latest.json
 ```
 
 **字段说明：**
+
+- `content`：纯文本正文（`html_to_text()` 提取），用于全文搜索。
+- `content_html`：清洗后的富文本 HTML（保留 `<img>`, `<a>`, `<table>` 等标签），用于前端渲染。
 - `extra.pdf_url`：可选字段，包含页面中找到的 PDF 下载链接（绝对 URL）。如果页面无 PDF，此字段为空或不存在。
+- `extra.images`：可选字段，图片元数据数组 `[{src, alt}]`，从正文 HTML 中提取。
 
 ---
 
@@ -96,14 +100,14 @@ python scripts/process_personnel_intel.py --dry-run
 |------|--------|--------|---------|-----------|----------|
 | personnel (对人事) | 4 | 4 | ✅ 62条 | 98% | `sources/personnel.yaml` |
 | universities (对高校) | 55 | 46 | ✅ 528条 | 81% | `sources/universities.yaml` |
-| technology (对技术) | 18+4† | 18+4† | ✅ 299条 | 97% | `sources/technology.yaml` + twitter |
+| technology (对技术) | 34+4† | 33+4† | ✅ 299条+ | 97% | `sources/technology.yaml` + twitter |
 | national_policy (对国家) | 8 | 6 | ✅ 52条 | 73% | `sources/national_policy.yaml` |
 | beijing_policy (对北京) | 14 | 10 | ✅ 70条 | 96% | `sources/beijing_policy.yaml` |
 | industry (对产业) | 10+1† | 6+1† | ✅ 49条 | 100% | `sources/industry.yaml` + twitter |
 | talent (对人才) | 7+1† | 4+1† | ✅ 51条 | 86% | `sources/talent.yaml` + twitter |
 | sentiment (对学院舆情) | 1† | 1† | ✅ 20条 | 100% | twitter 跨维度 |
 | events (对日程) | 6 | 4 | ✅ 221条 | 0% (会议列表) | `sources/events.yaml` |
-| **合计** | **129** | **105** | **1352条** | **74%** | **105 个数据文件** |
+| **合计** | **134** | **109** | **1352条+** | **74%** | **109 个数据文件** |
 
 > † `sources/twitter.yaml` 的 7 个源按 `dimension` 字段分配到 4 个维度：technology 4源、industry 1源、talent 1源、sentiment 1源。
 >
@@ -115,13 +119,13 @@ python scripts/process_personnel_intel.py --dry-run
 
 | 类型 | 源数 | 说明 |
 |------|------|------|
-| detail_selectors 抓取 | 77 (1 失效) | 爬虫自动进入详情页提取正文 |
+| detail_selectors 抓取 | 78 | 爬虫自动进入详情页提取正文 |
 | RSS 自带正文 | 13 | 36kr_ai_rss, mit_tech_review_rss, techcrunch_ai_rss, reddit_ml_rss, reddit_localllama_rss, tmtpost_news, theverge_ai_rss, venturebeat_ai_rss, wired_ai_rss, arstechnica_ai_rss, ieee_spectrum_ai_rss, openai_blog, cyzone_news |
 | API Parser | 5 | arxiv_cs_ai/cs_lg/cs_cl (abstract), github_trending (description), semantic_scholar_ai (abstract) |
 | Twitter API | 7 | 全部 100% 正文 |
-| 结构性无正文 | 4 | jiqizhixin_rss (仅标题), hacker_news (元数据), aideadlines/wikicfp (会议列表) |
+| 结构性无正文 | 4 | jiqizhixin_rss (RSS 无正文字段), hacker_news (元数据), aideadlines/wikicfp (会议列表) |
 
-> sjtu_news (46 条, 0 正文) 的 `div.info` 选择器可能已失效，需排查。
+> sjtu_news 的 `div.info` 选择器已修复为 `div.Article_content`，46/46 正文恢复。
 
 ---
 
@@ -145,7 +149,7 @@ python scripts/process_personnel_intel.py --dry-run
 | tsinghua_news | 清华大学新闻网 | static | 10 | 10 | `div.content` |
 | pku_news | 北京大学新闻网 | dynamic | 10 | 10 | `div.article` |
 | ustc_news | 中国科大新闻网 | static | 30 | 30 | `div.article-content` |
-| sjtu_news | 上海交大新闻网 | static | 46 | 0 | `div.info` ⚠️ |
+| sjtu_news | 上海交大新闻网 | static | 46 | 46 | `div.Article_content` |
 | fudan_news | 复旦大学新闻网 | static | 16 | 16 | `div.article` |
 | buaa_news | 北京航空航天大学 | static | 5 | 4 | `div.v_news_content` |
 | bit_news | 北京理工大学 | static | 21 | 21 | `div.article` |
@@ -154,7 +158,7 @@ python scripts/process_personnel_intel.py --dry-run
 | tju_news | 天津大学 | static | 4 | 4 | `div.v_news_content` |
 | tongji_news | 同济大学 | static | 5 | 2 | `div.v_news_content` |
 | jlu_news | 吉林大学 | static | 10 | 10 | `#vsb_content_2` |
-| hit_news | 哈尔滨工业大学 | static | 14 | 8 | `div.wp_articlecontent` |
+| hit_news | 哈尔滨工业大学 | static | 8 | 8 | `div.wp_articlecontent` |
 | seu_news | 东南大学 | static | 5 | 1 | `div.wp_articlecontent` |
 | xmu_news | 厦门大学 | static | 16 | 5 | `div.v_news_content` |
 | sdu_news | 山东大学 | static | 19 | 19 | `div.nymain` |
@@ -223,13 +227,13 @@ python scripts/process_personnel_intel.py --dry-run
 | zhejianglab_news | 之江实验室 | 复杂 SPA |
 | shanghairanking_news | 软科 | URL 404 |
 
-### 详细状态：technology (对技术) — 18/18 启用 + 4 Twitter
+### 详细状态：technology (对技术) — 33/34 启用 + 4 Twitter
 
 #### A. 国内科技媒体 (2 源, 2 启用)
 
 | source_id | 名称 | 方法 | 说明 |
 |-----------|------|------|------|
-| jiqizhixin_rss | 机器之心 | rss | 仅标题，无正文 |
+| jiqizhixin_rss | 机器之心 | rss | keyword_filter=[] 覆盖维度默认，12 条（RSS 无正文） |
 | 36kr_ai_rss | 36氪-AI频道 | rss | RSS 自带正文 |
 
 #### B. 国际科技源 (8 源, 8 启用)
@@ -244,12 +248,22 @@ python scripts/process_personnel_intel.py --dry-run
 | wired_ai_rss | Wired AI | rss | **新增** keyword_filter 过滤 |
 | arstechnica_ai_rss | Ars Technica AI | rss | **新增** 深度技术分析 |
 
-#### C. 公司官方博客 (2 源, 2 启用)
+#### C. 公司官方博客 (13 源, 13 启用) ⭐ **新增 11 个头部 AI 大厂**
 
 | source_id | 名称 | 方法 | 说明 |
 |-----------|------|------|------|
 | openai_blog | OpenAI Blog | rss | **恢复**：发现 RSS feed (openai.com/news/rss.xml) |
 | anthropic_blog | Anthropic Research | static | **恢复**：SSR 页面，static 可用 |
+| google_deepmind_blog | Google DeepMind Blog | dynamic | **新增**：Gemini、AlphaFold 等前沿研究 |
+| meta_ai_blog | Meta AI Blog | dynamic | **新增**：Llama 系列、开源 AI |
+| microsoft_ai_blog | Microsoft AI Blog | static | **新增**：Copilot、Azure AI |
+| mistral_ai_news | Mistral AI News | dynamic | **新增**：欧洲开源大模型领军 |
+| xai_blog | xAI Blog (Grok) | dynamic | **新增**：Elon Musk 的 AGI 研究 |
+| cohere_blog | Cohere Blog | static | **新增**：企业级 AI，2026 拟 IPO |
+| stability_ai_news | Stability AI News | dynamic | **新增**：Stable Diffusion 图像生成 |
+| huggingface_blog | Hugging Face Blog | static | **新增**：Transformers 开源社区 |
+| runway_blog | Runway Blog | dynamic | **新增**：视频生成 AI (Gen-3) |
+| inflection_ai_blog | Inflection AI Blog | static | **新增**：Pi 对话 AI |
 
 #### D. ArXiv 论文 (3 源, 3 启用)
 
@@ -268,6 +282,16 @@ python scripts/process_personnel_intel.py --dry-run
 | reddit_localllama_rss | Reddit r/LocalLLaMA | rss | RSS 自带正文 |
 | github_trending | GitHub Trending | github_api | description |
 
+#### F. 中国 AI 公司博客 (5 源, 4 启用) ⭐ **新增**
+
+| source_id | 名称 | 方法 | 启用 | 说明 |
+|-----------|------|------|------|------|
+| qwen_blog | Qwen Blog (阿里通义千问) | static | ✅ | Hugo 博客，detail_selectors 取正文+content_html |
+| minimax_news | MiniMax 新闻动态 | dynamic | ✅ | Next.js SPA，Playwright 抓取 |
+| moonshot_research | 月之暗面-最新研究 | dynamic | ✅ | 外链聚合（kimi.com/blog, HuggingFace 等） |
+| hunyuan_news | 腾讯混元-最新动态 | hunyuan_api | ✅ | 自定义 API Parser，数据来自公众号文章 |
+| zhipu_news | 智谱AI-最新动态 | dynamic | ❌ | React SPA 无 DOM 链接，新闻更新停滞 |
+
 ### 详细状态：national_policy (对国家) — 6/8 启用
 
 全部 6 启用源已配置 detail_selectors。
@@ -278,7 +302,7 @@ python scripts/process_personnel_intel.py --dry-run
 | ndrc_policy | 发改委-通知通告 | static | ✅ | 5 | ✅ (4/5) | `div.TRS_Editor` |
 | moe_policy | 教育部-政策法规 | static | ✅ | 8 | ✅ (8/8) | `div.TRS_Editor` |
 | most_policy | 科技部-信息公开 | static | ✅ | 10 | ✅ (6/10) | `div.TRS_UEDITOR` (PDF 项无正文) |
-| cac_policy | 国家网信办-政策法规 | static | ✅ | 9 | 🔶 (0/9) | `div.TRS_Editor` AI 治理核心监管 |
+| cac_policy | 国家网信办-政策法规 | static | ✅ | 9 | ✅ (9/9) | `div.main-content` AI 治理核心监管 |
 | samr_news | 国家市监总局-要闻 | static | ✅ | 0 | — | `#zoom` 当期无匹配关键词 |
 | miit_policy | 工信部-政策文件 | dynamic | ❌ | — | — | IP 级 WAF 封锁 (403) |
 | nsfc_news | 国家自然科学基金委 | static | ❌ | — | — | URL 404 |
@@ -306,7 +330,7 @@ python scripts/process_personnel_intel.py --dry-run
 
 | source_id | 名称 | 方法 | 启用 | 条目数 | 详情页 |
 |-----------|------|------|------|--------|--------|
-| beijing_ywdt | 首都之窗-要闻 | static | ✅ | 3 | ✅ (1/3) |
+| beijing_ywdt | 首都之窗-要闻 | static | ✅ | 2 | ✅ (2/2) |
 | bjd_news | 北京日报 | static | ❌ | — | 布局复杂 |
 | bjrd_renshi | 北京市人大常委会 | static | ✅ | 1 | ✅ (1/1) |
 | beijing_rsrm | 首都之窗-人事任免 | static | ❌ | — | URL 404 |
@@ -349,7 +373,7 @@ python scripts/process_personnel_intel.py --dry-run
 | aideadlines | AI Conference Deadlines | dynamic | ✅ | 191 | 全量 AI 会议 |
 | wikicfp | WikiCFP-AI | static | ✅ | 20 | AI 会议 CFP |
 | ccf_focus | CCF 焦点 | static | ✅ | 0 | 当期无匹配关键词 |
-| caai_news | CAAI 新闻 | static | ✅ | 10 | 中国人工智能学会 |
+| caai_news | CAAI 新闻 | static | ✅ | 10 | 中国人工智能学会，已配置 detail_selectors `div.content` (10/10 正文) |
 | huodongxing | 活动行-人工智能 | static | ❌ | — | CAPTCHA/反爬 |
 | meeting_edu | 中国学术会议在线 | static | ❌ | — | 站点无法连接 |
 

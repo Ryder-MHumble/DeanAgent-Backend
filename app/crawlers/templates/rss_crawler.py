@@ -2,13 +2,16 @@ from __future__ import annotations
 
 import logging
 from datetime import datetime, timezone
+from typing import Any
 
 import feedparser
 
 from app.config import settings
 from app.crawlers.base import BaseCrawler, CrawledItem
 from app.crawlers.utils.dedup import compute_content_hash
+from app.crawlers.utils.html_sanitizer import sanitize_html
 from app.crawlers.utils.http_client import fetch_page
+from app.crawlers.utils.image_extractor import extract_images
 from app.crawlers.utils.text_extract import html_to_text
 
 logger = logging.getLogger(__name__)
@@ -77,6 +80,12 @@ class RSSCrawler(BaseCrawler):
             # Clean HTML from content
             clean_content = html_to_text(content) if content else ""
             content_hash = compute_content_hash(clean_content) if clean_content else None
+            content_html = sanitize_html(content, base_url=link) if content else None
+            rss_images = extract_images(content, base_url=link) if content else None
+
+            extra: dict[str, Any] = {}
+            if rss_images:
+                extra["images"] = rss_images
 
             items.append(
                 CrawledItem(
@@ -85,10 +94,12 @@ class RSSCrawler(BaseCrawler):
                     published_at=published_at,
                     author=entry.get("author"),
                     content=clean_content or None,
+                    content_html=content_html,
                     content_hash=content_hash,
                     source_id=self.source_id,
                     dimension=self.config.get("dimension"),
                     tags=self.config.get("tags", []),
+                    extra=extra,
                 )
             )
 

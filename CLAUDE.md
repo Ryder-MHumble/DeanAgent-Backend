@@ -1,7 +1,7 @@
 # Information Crawler — AI 开发上下文
 
-中关村人工智能研究院信息监测系统。129 信源（105 启用）× 9 维度，5 种模板爬虫 + 7 个自定义 Parser，v1 API 22 端点（含 intel 业务智能 8 端点）。
-78 个启用信源已配置 detail_selectors 或 RSS/API 自带正文，可自动获取文章正文（content 字段）。
+中关村人工智能研究院信息监测系统。134 信源（109 启用）× 9 维度，5 种模板爬虫 + 8 个自定义 Parser，v1 API 22 端点（含 intel 业务智能 8 端点）。
+82 个启用信源已配置 detail_selectors 或 RSS/API 自带正文，可自动获取文章正文（content 字段）。
 技术栈：FastAPI + SQLAlchemy(async) + PostgreSQL(Supabase) + APScheduler 3.x + httpx + BS4 + Playwright。
 
 ## ⚠ 每次修改后必须做的事
@@ -99,13 +99,14 @@ crawler_class: hacker_news_api   → app/crawlers/parsers/hacker_news_api.py
 crawler_class: semantic_scholar  → app/crawlers/parsers/semantic_scholar.py
 crawler_class: twitter_kol       → app/crawlers/parsers/twitter_kol.py
 crawler_class: twitter_search    → app/crawlers/parsers/twitter_search.py
+crawler_class: hunyuan_api      → app/crawlers/parsers/hunyuan_api.py
 ```
 
 **维度 → YAML 文件**：
 ```
 national_policy → sources/national_policy.yaml (8 源, 6 启用)
 beijing_policy  → sources/beijing_policy.yaml  (14 源, 10 启用)
-technology      → sources/technology.yaml      (18 源, 18 启用)
+technology      → sources/technology.yaml      (34 源, 33 启用)
 talent          → sources/talent.yaml          (7 源, 4 启用)
 industry        → sources/industry.yaml        (10 源, 6 启用)
 universities    → sources/universities.yaml    (55 源, 46 启用)

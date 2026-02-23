@@ -22,6 +22,7 @@ sources:
     priority: 2
     is_enabled: true
     max_entries: 20
+    keyword_filter: []  # 机器之心全站均为 AI 内容，无需关键词过滤
     tags: ["tech_media", "domestic"]
 
   - id: "36kr_ai_rss"
@@ -146,6 +147,188 @@ sources:
     base_url: "https://www.anthropic.com"
     tags: ["company_blog", "anthropic"]
 
+  - id: "google_deepmind_blog"
+    name: "Google DeepMind Blog"
+    group: "company_blogs"
+    url: "https://deepmind.google/discover/blog/"
+    crawl_method: "dynamic"
+    schedule: "daily"
+    priority: 1
+    is_enabled: true
+    wait_for: "article"
+    wait_timeout: 15000
+    selectors:
+      list_item: "article"
+      title: "h3"
+      link: "a"
+      date: "time"
+    base_url: "https://deepmind.google"
+    keyword_filter: []  # All DeepMind content is AI-relevant
+    tags: ["company_blog", "google", "deepmind"]
+
+  - id: "meta_ai_blog"
+    name: "Meta AI Blog"
+    group: "company_blogs"
+    url: "https://ai.meta.com/blog/"
+    crawl_method: "dynamic"
+    schedule: "daily"
+    priority: 1
+    is_enabled: true
+    wait_for: "article"
+    wait_timeout: 15000
+    selectors:
+      list_item: "article"
+      title: "h2"
+      link: "a"
+      date: "time"
+    base_url: "https://ai.meta.com"
+    keyword_filter: []  # All Meta AI content is AI-relevant
+    tags: ["company_blog", "meta", "llama"]
+
+  - id: "microsoft_ai_blog"
+    name: "Microsoft AI Blog"
+    group: "company_blogs"
+    url: "https://blogs.microsoft.com/ai/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 1
+    is_enabled: true
+    selectors:
+      list_item: "article.c-card"
+      title: "h3"
+      link: "a"
+      date: "time"
+    base_url: "https://blogs.microsoft.com"
+    keyword_filter: []  # All Microsoft AI blog content is relevant
+    tags: ["company_blog", "microsoft", "copilot"]
+
+  - id: "mistral_ai_news"
+    name: "Mistral AI News"
+    group: "company_blogs"
+    url: "https://mistral.ai/news/"
+    crawl_method: "dynamic"
+    schedule: "daily"
+    priority: 1
+    is_enabled: true
+    wait_for: "article"
+    wait_timeout: 15000
+    selectors:
+      list_item: "article"
+      title: "h2"
+      link: "a"
+      date: "time"
+    base_url: "https://mistral.ai"
+    keyword_filter: []  # All Mistral AI content is relevant
+    tags: ["company_blog", "mistral", "open_source"]
+
+  - id: "xai_blog"
+    name: "xAI Blog (Grok)"
+    group: "company_blogs"
+    url: "https://x.ai/blog"
+    crawl_method: "dynamic"
+    schedule: "daily"
+    priority: 1
+    is_enabled: true
+    wait_for: "article"
+    wait_timeout: 15000
+    selectors:
+      list_item: "article"
+      title: "h2"
+      link: "a"
+      date: "time"
+    base_url: "https://x.ai"
+    keyword_filter: []  # All xAI content is relevant (Grok, AGI research)
+    tags: ["company_blog", "xai", "grok", "elon_musk"]
+
+  - id: "cohere_blog"
+    name: "Cohere Blog"
+    group: "company_blogs"
+    url: "https://cohere.com/blog"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 2
+    is_enabled: true
+    selectors:
+      list_item: "article"
+      title: "h2"
+      link: "a"
+      date: "time"
+    base_url: "https://cohere.com"
+    keyword_filter: []  # All Cohere content is enterprise AI relevant
+    tags: ["company_blog", "cohere", "enterprise"]
+
+  - id: "stability_ai_news"
+    name: "Stability AI News"
+    group: "company_blogs"
+    url: "https://stability.ai/news"
+    crawl_method: "dynamic"
+    schedule: "daily"
+    priority: 2
+    is_enabled: true
+    wait_for: "article"
+    wait_timeout: 15000
+    selectors:
+      list_item: "article"
+      title: "h2"
+      link: "a"
+      date: "time"
+    base_url: "https://stability.ai"
+    keyword_filter: []  # All Stability AI content is relevant (Stable Diffusion, generative AI)
+    tags: ["company_blog", "stability_ai", "image_generation"]
+
+  - id: "huggingface_blog"
+    name: "Hugging Face Blog"
+    group: "company_blogs"
+    url: "https://huggingface.co/blog"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 1
+    is_enabled: true
+    selectors:
+      list_item: "article"
+      title: "h2"
+      link: "a"
+      date: "time"
+    base_url: "https://huggingface.co"
+    keyword_filter: []  # All Hugging Face content is AI/ML relevant
+    tags: ["company_blog", "huggingface", "open_source", "transformers"]
+
+  - id: "runway_blog"
+    name: "Runway Blog"
+    group: "company_blogs"
+    url: "https://runwayml.com/blog/"
+    crawl_method: "dynamic"
+    schedule: "weekly"
+    priority: 2
+    is_enabled: true
+    wait_for: "article"
+    wait_timeout: 15000
+    selectors:
+      list_item: "article"
+      title: "h2"
+      link: "a"
+      date: "time"
+    base_url: "https://runwayml.com"
+    keyword_filter: []  # All Runway content is generative AI relevant
+    tags: ["company_blog", "runway", "video_generation"]
+
+  - id: "inflection_ai_blog"
+    name: "Inflection AI Blog"
+    group: "company_blogs"
+    url: "https://inflection.ai/blog"
+    crawl_method: "static"
+    schedule: "weekly"
+    priority: 2
+    is_enabled: true
+    selectors:
+      list_item: "article"
+      title: "h2"
+      link: "a"
+      date: "time"
+    base_url: "https://inflection.ai"
+    keyword_filter: []  # All Inflection AI content is relevant (Pi assistant)
+    tags: ["company_blog", "inflection_ai", "conversational_ai"]
+
   # === D. ArXiv AI论文 (自定义 API Parser) ===
   - id: "arxiv_cs_ai"
     name: "ArXiv cs.AI"
@@ -232,3 +415,101 @@ sources:
     is_enabled: true
     max_results: 20
     tags: ["community", "github", "open_source"]
+
+  # === F. 中国 AI 公司博客 ===
+  - id: "qwen_blog"
+    name: "Qwen Blog (阿里通义千问)"
+    group: "cn_ai_company"
+    url: "https://qwenlm.github.io/blog/"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 1
+    is_enabled: true
+    selectors:
+      list_item: "main article.post-entry"
+      title: "h2"
+      link: "a.entry-link"
+      date: "footer span"
+      date_format: "%B %d, %Y"
+      date_regex: "[A-Z][a-z]+ \\d{1,2}, \\d{4}"
+    base_url: "https://qwenlm.github.io"
+    detail_selectors:
+      content: ".post-content, .entry-content"
+    keyword_filter: []
+    tags: ["company_blog", "qwen", "alibaba", "cn_ai"]
+
+  - id: "minimax_news"
+    name: "MiniMax 新闻动态"
+    group: "cn_ai_company"
+    url: "https://www.minimaxi.com/news"
+    crawl_method: "dynamic"
+    schedule: "daily"
+    priority: 1
+    is_enabled: true
+    wait_for: "h3"
+    wait_timeout: 20000
+    selectors:
+      list_item: "a[href^='/news/']:has(h3)"
+      title: "h3"
+      link: "_self"
+      date: "section section > span"
+      date_format: "%Y-%m-%d"
+      date_regex: "\\d{4}-\\d{2}-\\d{2}"
+    base_url: "https://www.minimaxi.com"
+    detail_selectors:
+      content: "article, main section"
+    detail_use_playwright: true
+    keyword_filter: []
+    tags: ["company_blog", "minimax", "hailuo", "cn_ai"]
+
+  - id: "moonshot_research"
+    name: "月之暗面-最新研究"
+    group: "cn_ai_company"
+    url: "https://www.moonshot.cn/news"
+    crawl_method: "dynamic"
+    schedule: "daily"
+    priority: 1
+    is_enabled: true
+    wait_for: "h2"
+    wait_timeout: 15000
+    selectors:
+      list_item: "a[href*='blog'], a[href*='github'], a[href*='huggingface']"
+      title: "h2"
+      link: "_self"
+      date: "p"
+      date_format: "%Y-%m-%d"
+      date_regex: "\\d{4}-\\d{2}-\\d{2}"
+    keyword_filter: []
+    tags: ["company_blog", "moonshot", "kimi", "cn_ai"]
+
+  - id: "hunyuan_news"
+    name: "腾讯混元-最新动态"
+    group: "cn_ai_company"
+    url: "https://api.hunyuan.tencent.com/api/vision_platform/public/auditOpenAPI/dynamic/list"
+    crawler_class: "hunyuan_api"
+    crawl_method: "static"
+    schedule: "daily"
+    priority: 2
+    is_enabled: true
+    max_results: 20
+    tags: ["company_blog", "tencent", "hunyuan", "cn_ai"]
+
+  - id: "zhipu_news"
+    name: "智谱AI-最新动态"
+    group: "cn_ai_company"
+    url: "https://www.zhipuai.cn"
+    crawl_method: "dynamic"
+    schedule: "daily"
+    priority: 2
+    is_enabled: false  # React SPA with JS-only click handlers, no DOM links; news is stale (last update 2025/08)
+    wait_for: "networkidle"
+    wait_timeout: 20000
+    selectors:
+      list_item: "div[class*='news'] a, div[class*='dynamic'] a"
+      title: "h3"
+      link: "_self"
+      date: "p"
+      date_format: "%Y/%m/%d"
+      date_regex: "\\d{4}/\\d{2}/\\d{2}"
+    keyword_filter: []
+    tags: ["company_blog", "zhipu", "glm", "cn_ai"]

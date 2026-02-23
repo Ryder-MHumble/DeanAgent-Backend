@@ -37,6 +37,7 @@ def _serialize_item(item: Any, *, is_new: bool) -> dict[str, Any]:
         "published_at": item.published_at.isoformat() if item.published_at else None,
         "author": item.author,
         "content": item.content,
+        "content_html": item.content_html,
         "content_hash": item.content_hash,
         "source_id": item.source_id,
         "dimension": item.dimension,
