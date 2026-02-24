@@ -133,6 +133,96 @@ def get_dimension_stats() -> dict[str, dict[str, Any]]:
     return stats
 
 
+def get_all_articles(
+    dimension: str | None = None,
+    source_id: str | None = None,
+    keyword: str | None = None,
+    tags: list[str] | None = None,
+    date_from: date | None = None,
+    date_to: date | None = None,
+) -> list[dict[str, Any]]:
+    """Read articles from all dimensions (or a specific one) with filtering.
+
+    Scans data/raw/ for all latest.json files. Supports keyword search
+    (title + content), tags overlap, source_id, and date range filtering.
+    Returns a flat list of article dicts sorted by published_at desc.
+    """
+    if not RAW_DATA_DIR.exists():
+        return []
+
+    if dimension:
+        dimensions = [dimension]
+    else:
+        dimensions = [
+            d.name for d in RAW_DATA_DIR.iterdir() if d.is_dir()
+        ]
+
+    all_items: list[dict[str, Any]] = []
+    keyword_lower = keyword.lower() if keyword else None
+
+    for dim in dimensions:
+        dim_dir = RAW_DATA_DIR / dim
+        if not dim_dir.exists():
+            continue
+
+        for json_file in dim_dir.rglob(LATEST_FILENAME):
+            rel = json_file.relative_to(dim_dir)
+            parts = rel.parts
+
+            if len(parts) == 3:
+                file_group, file_source, _ = parts
+            elif len(parts) == 2:
+                file_group = None
+                file_source, _ = parts
+            else:
+                continue
+
+            if source_id and file_source != source_id:
+                continue
+
+            try:
+                with open(json_file, encoding="utf-8") as f:
+                    data = json.load(f)
+            except (json.JSONDecodeError, OSError) as e:
+                logger.warning("Failed to read %s: %s", json_file, e)
+                continue
+
+            source_meta = {
+                "source_id": data.get("source_id", file_source),
+                "source_name": data.get("source_name", file_source),
+                "dimension": data.get("dimension", dim),
+                "group": data.get("group", file_group),
+                "crawled_at": data.get("crawled_at"),
+            }
+
+            for item in data.get("items", []):
+                # Date range filter
+                pub_date = _parse_date(item.get("published_at"))
+                if date_from and pub_date and pub_date < date_from:
+                    continue
+                if date_to and pub_date and pub_date > date_to:
+                    continue
+
+                # Keyword filter (title + content)
+                if keyword_lower:
+                    title = (item.get("title") or "").lower()
+                    content = (item.get("content") or "").lower()
+                    if keyword_lower not in title and keyword_lower not in content:
+                        continue
+
+                # Tags overlap filter
+                if tags:
+                    item_tags = item.get("tags") or []
+                    if not set(tags) & set(item_tags):
+                        continue
+
+                item.update({k: v for k, v in source_meta.items() if k not in item})
+                all_items.append(item)
+
+    all_items.sort(key=lambda x: x.get("published_at") or "", reverse=True)
+    return all_items
+
+
 def get_available_dates(dimension: str) -> list[str]:
     """Get all available crawled_at dates for a dimension, sorted desc."""
     dim_dir = RAW_DATA_DIR / dimension

@@ -27,7 +27,7 @@ TAG_METADATA = [
     {
         "name": "sources",
         "description": "信源管理 — 查看信源配置与状态，启用/禁用信源，手动触发爬取，查看爬取日志。"
-        "系统共 129 个信源（105 个启用），覆盖 9 个维度。",
+        "系统共 134 个信源（109 个启用），覆盖 9 个维度。",
     },
     {
         "name": "dimensions",
@@ -36,7 +36,7 @@ TAG_METADATA = [
     },
     {
         "name": "health",
-        "description": "系统健康 — 数据库连接检查、调度器状态、全局爬取健康度概览。",
+        "description": "系统健康 — 调度器状态、全局爬取健康度概览。",
     },
     {
         "name": "policy-intel",
@@ -55,29 +55,18 @@ async def _validate_startup() -> dict[str, str]:
     """Validate critical dependencies at startup. Returns issues dict."""
     issues: dict[str, str] = {}
 
-    # 1. Database connectivity
-    try:
-        from sqlalchemy import text
-
-        from app.database import async_session_factory
-
-        async with async_session_factory() as session:
-            await session.execute(text("SELECT 1"))
-        logger.info("Startup check: database connection OK")
-    except Exception as e:
-        issues["database"] = str(e)
-        logger.error("Startup check: database connection FAILED: %s", e)
-
-    # 2. Data directories (create if missing)
+    # 1. Data directories (create if missing)
     for subdir in [
         "data/raw",
         "data/processed/policy_intel",
         "data/processed/personnel_intel",
+        "data/state",
+        "data/logs",
     ]:
         (BASE_DIR / subdir).mkdir(parents=True, exist_ok=True)
     logger.info("Startup check: data directories OK")
 
-    # 3. Playwright browser (non-blocking)
+    # 2. Playwright browser (non-blocking)
     try:
         from playwright.async_api import async_playwright
 
@@ -97,37 +86,12 @@ async def _validate_startup() -> dict[str, str]:
 
 async def _check_needs_initial_data() -> bool:
     """Check if this is a fresh installation with no crawled data."""
-    # Check 1: Any JSON in data/raw/?
     raw_dir = BASE_DIR / "data" / "raw"
-    has_local_data = False
     if raw_dir.exists():
         for child in raw_dir.iterdir():
             if child.is_dir():
                 for _ in child.rglob("*.json"):
-                    has_local_data = True
-                    break
-            if has_local_data:
-                break
-
-    if has_local_data:
-        return False
-
-    # Check 2: Any articles in database?
-    try:
-        from sqlalchemy import text
-
-        from app.database import async_session_factory
-
-        async with async_session_factory() as session:
-            result = await session.execute(
-                text("SELECT EXISTS (SELECT 1 FROM articles LIMIT 1)")
-            )
-            has_db_data = result.scalar()
-            if has_db_data:
-                return False
-    except Exception:
-        pass  # Table might not exist yet
-
+                    return False
     return True
 
 
@@ -141,15 +105,8 @@ async def lifespan(app: FastAPI):
     # Step 1: Validate dependencies
     startup_issues = await _validate_startup()
 
-    db_available = "database" not in startup_issues
-    if not db_available:
-        logger.warning(
-            "Database unavailable — running in file-only mode. "
-            "Crawl results will be saved as local JSON only."
-        )
-
-    # Step 2: Start scheduler (works with or without DB)
-    scheduler = SchedulerManager(db_available=db_available)
+    # Step 2: Start scheduler
+    scheduler = SchedulerManager()
     try:
         await scheduler.start()
     except Exception as e:
@@ -198,17 +155,17 @@ app = FastAPI(
     summary="中关村人工智能研究院 — 信息监测系统",
     description=(
         "## 概述\n\n"
-        "信息监测系统 API，自动爬取 **129 个信源**（105 个启用），覆盖 **9 个维度**，"
+        "信息监测系统 API，自动爬取 **134 个信源**（109 个启用），覆盖 **9 个维度**，"
         "为中关村人工智能研究院提供全方位的信息监测与商业智能服务。\n\n"
         "## 功能模块\n\n"
         "| 模块 | 说明 |\n"
         "|------|------|\n"
         "| **文章管理** | 全量文章的查询、搜索、统计 |\n"
-        "| **信源管理** | 129 个信源的配置、状态监控、手动触发 |\n"
+        "| **信源管理** | 134 个信源的配置、状态监控、手动触发 |\n"
         "| **维度视图** | 9 大维度的文章聚合浏览 |\n"
         "| **政策智能** | 规则引擎 + LLM 二级管线，政策机会挖掘 |\n"
         "| **人事情报** | 任免信息自动提取，LLM 相关性分析 |\n"
-        "| **系统健康** | 数据库、调度器、爬取健康度监控 |\n\n"
+        "| **系统健康** | 调度器、爬取健康度监控 |\n\n"
         "## 维度说明\n\n"
         "- `national_policy` — 国家政策（国务院、部委）\n"
         "- `beijing_policy` — 北京政策（市/区政府）\n"
@@ -220,10 +177,10 @@ app = FastAPI(
         "- `personnel` — 人事变动\n"
         "- `twitter` — Twitter/X KOL 动态\n\n"
         "## 技术栈\n\n"
-        "FastAPI + SQLAlchemy(async) + PostgreSQL(Supabase) + APScheduler + "
+        "FastAPI + Local JSON Storage + APScheduler + "
         "httpx + BeautifulSoup4 + Playwright"
     ),
-    version="0.1.0",
+    version="0.2.0",
     openapi_tags=TAG_METADATA,
     contact={
         "name": "中关村人工智能研究院",
@@ -254,7 +211,7 @@ app.include_router(v1_router)
 async def root():
     return {
         "message": "Information Crawler API",
-        "version": "0.1.0",
+        "version": "0.2.0",
         "docs": "/docs",
         "swagger": "/swagger",
         "openapi": "/openapi.json",

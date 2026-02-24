@@ -1,84 +1,45 @@
 from __future__ import annotations
 
-from datetime import datetime, timedelta, timezone
+from typing import Any
 
-from sqlalchemy import func, select
-from sqlalchemy.ext.asyncio import AsyncSession
-
-from app.models.article import Article
-from app.models.crawl_log import CrawlLog
-from app.models.source import Source
+from app.scheduler.manager import load_all_source_configs
 from app.schemas.crawl_log import CrawlHealthResponse
+from app.services.crawl_log_store import get_crawl_logs as _get_logs
+from app.services.crawl_log_store import get_recent_log_stats
+from app.services.source_state import get_all_source_states
 
 
 async def get_crawl_logs(
-    db: AsyncSession, source_id: str | None = None, limit: int = 50
-) -> list[CrawlLog]:
-    query = select(CrawlLog).order_by(CrawlLog.started_at.desc()).limit(limit)
-    if source_id:
-        query = query.where(CrawlLog.source_id == source_id)
-    result = await db.execute(query)
-    return list(result.scalars().all())
+    source_id: str | None = None, limit: int = 50
+) -> list[dict[str, Any]]:
+    return _get_logs(source_id=source_id, limit=limit)
 
 
-async def get_crawl_health(db: AsyncSession) -> CrawlHealthResponse:
-    """Aggregate crawl health statistics."""
-    now = datetime.now(timezone.utc)
-    yesterday = now - timedelta(hours=24)
+async def get_crawl_health() -> CrawlHealthResponse:
+    """Aggregate crawl health statistics from YAML configs + source state + logs."""
+    configs = load_all_source_configs()
+    states = get_all_source_states()
 
-    # Source counts
-    total_sources = (await db.execute(select(func.count()).select_from(Source))).scalar() or 0
-    enabled_sources = (
-        await db.execute(
-            select(func.count()).select_from(Source).where(Source.is_enabled.is_(True))
-        )
-    ).scalar() or 0
+    total_sources = len(configs)
 
-    # Health classification: healthy=0 failures, warning=1-2, failing=3+
-    healthy = (
-        await db.execute(
-            select(func.count())
-            .select_from(Source)
-            .where(Source.is_enabled.is_(True), Source.consecutive_failures == 0)
-        )
-    ).scalar() or 0
+    # Count enabled (with override support)
+    enabled_sources = 0
+    healthy = warning = failing = 0
+    for c in configs:
+        state = states.get(c["id"], {})
+        override = state.get("is_enabled_override")
+        is_enabled = override if override is not None else c.get("is_enabled", True)
+        if is_enabled:
+            enabled_sources += 1
+            failures = state.get("consecutive_failures", 0)
+            if failures == 0:
+                healthy += 1
+            elif failures <= 2:
+                warning += 1
+            else:
+                failing += 1
 
-    warning = (
-        await db.execute(
-            select(func.count())
-            .select_from(Source)
-            .where(
-                Source.is_enabled.is_(True),
-                Source.consecutive_failures > 0,
-                Source.consecutive_failures <= 2,
-            )
-        )
-    ).scalar() or 0
-
-    failing = (
-        await db.execute(
-            select(func.count())
-            .select_from(Source)
-            .where(Source.is_enabled.is_(True), Source.consecutive_failures > 2)
-        )
-    ).scalar() or 0
-
-    # Last 24h stats
-    last_24h_crawls = (
-        await db.execute(
-            select(func.count())
-            .select_from(CrawlLog)
-            .where(CrawlLog.started_at >= yesterday)
-        )
-    ).scalar() or 0
-
-    last_24h_articles = (
-        await db.execute(
-            select(func.count())
-            .select_from(Article)
-            .where(Article.crawled_at >= yesterday)
-        )
-    ).scalar() or 0
+    recent = get_recent_log_stats(hours=24)
 
     return CrawlHealthResponse(
         total_sources=total_sources,
@@ -86,6 +47,6 @@ async def get_crawl_health(db: AsyncSession) -> CrawlHealthResponse:
         healthy=healthy,
         warning=warning,
         failing=failing,
-        last_24h_crawls=last_24h_crawls,
-        last_24h_new_articles=last_24h_articles,
+        last_24h_crawls=recent["crawls"],
+        last_24h_new_articles=recent["new_articles"],
     )

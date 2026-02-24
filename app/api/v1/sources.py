@@ -1,7 +1,5 @@
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi import APIRouter, HTTPException
 
-from app.database import get_db
 from app.schemas.common import ErrorResponse
 from app.schemas.crawl_log import CrawlLogResponse
 from app.schemas.source import SourceResponse, SourceUpdate
@@ -18,9 +16,8 @@ router = APIRouter()
 )
 async def list_sources(
     dimension: str | None = None,
-    db: AsyncSession = Depends(get_db),
 ):
-    return await source_service.list_sources(db, dimension)
+    return await source_service.list_sources(dimension)
 
 
 @router.get(
@@ -32,9 +29,8 @@ async def list_sources(
 )
 async def get_source(
     source_id: str,
-    db: AsyncSession = Depends(get_db),
 ):
-    source = await source_service.get_source(db, source_id)
+    source = await source_service.get_source(source_id)
     if source is None:
         raise HTTPException(status_code=404, detail="Source not found")
     return source
@@ -49,9 +45,8 @@ async def get_source(
 async def get_source_logs(
     source_id: str,
     limit: int = 20,
-    db: AsyncSession = Depends(get_db),
 ):
-    return await crawl_service.get_crawl_logs(db, source_id=source_id, limit=limit)
+    return await crawl_service.get_crawl_logs(source_id=source_id, limit=limit)
 
 
 @router.patch(
@@ -64,13 +59,12 @@ async def get_source_logs(
 async def update_source(
     source_id: str,
     data: SourceUpdate,
-    db: AsyncSession = Depends(get_db),
 ):
-    source = await source_service.get_source(db, source_id)
+    source = await source_service.get_source(source_id)
     if source is None:
         raise HTTPException(status_code=404, detail="Source not found")
     if data.is_enabled is not None:
-        return await source_service.update_source(db, source_id, data.is_enabled)
+        return await source_service.update_source(source_id, data.is_enabled)
     return source
 
 
@@ -83,11 +77,10 @@ async def update_source(
         503: {"model": ErrorResponse, "description": "调度器未运行"},
     },
 )
-async def trigger_crawl(source_id: str, db: AsyncSession = Depends(get_db)):
-    source = await source_service.get_source(db, source_id)
+async def trigger_crawl(source_id: str):
+    source = await source_service.get_source(source_id)
     if source is None:
         raise HTTPException(status_code=404, detail="Source not found")
-    # Import here to avoid circular imports at module level
     from app.scheduler.manager import get_scheduler_manager
 
     manager = get_scheduler_manager()

@@ -41,7 +41,6 @@ def _status_icon(status_value: str) -> str:
 
 async def run_all(
     dimension_filter: str | None = None,
-    no_db: bool = True,
     concurrency: int = 1,
 ):
     from app.crawlers.registry import CrawlerRegistry
@@ -96,7 +95,7 @@ async def run_all(
 
         try:
             crawler = CrawlerRegistry.create_crawler(config)
-            result = await crawler.run(db_session=None)
+            result = await crawler.run()
 
             # 统计有内容的条目
             items_with_content = sum(
@@ -256,11 +255,5 @@ if __name__ == "__main__":
         "--dimension", "-d",
         help="只爬取指定维度 (如 technology, universities)",
     )
-    parser.add_argument(
-        "--no-db",
-        action="store_true",
-        default=True,
-        help="跳过数据库, 仅输出 JSON (默认)",
-    )
     args = parser.parse_args()
-    asyncio.run(run_all(dimension_filter=args.dimension, no_db=args.no_db))
+    asyncio.run(run_all(dimension_filter=args.dimension))

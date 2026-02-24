@@ -6,20 +6,19 @@ from pydantic import BaseModel, Field
 class CrawlLogResponse(BaseModel):
     """单次爬取任务的日志记录。"""
 
-    model_config = {"from_attributes": True}
-
-    id: int = Field(description="日志 ID", examples=[5678])
     source_id: str = Field(description="信源 ID", examples=["tech_arxiv"])
     status: str = Field(
         description="爬取状态: success / partial / failed",
         examples=["success"],
     )
     items_total: int = Field(description="本次解析到的条目总数", examples=[25])
-    items_new: int = Field(description="新增入库的条目数", examples=[12])
+    items_new: int = Field(description="新增的条目数", examples=[12])
     error_message: str | None = Field(
         default=None, description="错误信息（成功时为 null）"
     )
-    started_at: datetime = Field(description="任务开始时间")
+    started_at: datetime | None = Field(
+        default=None, description="任务开始时间"
+    )
     finished_at: datetime | None = Field(
         default=None, description="任务结束时间"
     )

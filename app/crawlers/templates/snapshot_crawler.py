@@ -7,12 +7,10 @@ import re
 from datetime import datetime, timezone
 
 from bs4 import BeautifulSoup
-from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.crawlers.base import BaseCrawler, CrawledItem
+from app.crawlers.base import BaseCrawler, CrawledItem, CrawlResult, CrawlStatus
 from app.crawlers.utils.http_client import fetch_page
-from app.models.snapshot import Snapshot
+from app.services.snapshot_store import get_last_snapshot, save_snapshot
 
 logger = logging.getLogger(__name__)
 
@@ -31,13 +29,10 @@ class SnapshotDiffCrawler(BaseCrawler):
     """
 
     async def fetch_and_parse(self) -> list[CrawledItem]:
-        # This crawler needs DB access for snapshots, handled specially in run()
-        raise NotImplementedError("Use run() directly; fetch_and_parse requires db_session")
+        raise NotImplementedError("Use run() directly; fetch_and_parse not used for snapshots")
 
-    async def run(self, db_session: AsyncSession):
-        """Override run() to handle snapshot comparison with DB."""
-        from app.crawlers.base import CrawlResult, CrawlStatus
-
+    async def run(self) -> CrawlResult:
+        """Override run() to handle snapshot comparison."""
         result = CrawlResult(source_id=self.source_id)
         result.started_at = datetime.now(timezone.utc)
 
@@ -69,16 +64,10 @@ class SnapshotDiffCrawler(BaseCrawler):
             # Compute hash
             content_hash = hashlib.sha256(text.encode("utf-8")).hexdigest()
 
-            # Get last snapshot
-            stmt = (
-                select(Snapshot)
-                .where(Snapshot.source_id == self.source_id)
-                .order_by(Snapshot.captured_at.desc())
-                .limit(1)
-            )
-            last_snapshot = (await db_session.execute(stmt)).scalar_one_or_none()
+            # Get last snapshot from local JSON
+            last = get_last_snapshot(self.source_id)
 
-            if last_snapshot and last_snapshot.content_hash == content_hash:
+            if last and last.get("content_hash") == content_hash:
                 # No change
                 result.status = CrawlStatus.NO_NEW_CONTENT
                 result.items_total = 0
@@ -86,25 +75,18 @@ class SnapshotDiffCrawler(BaseCrawler):
             else:
                 # Content changed (or first snapshot)
                 diff_text = None
-                if last_snapshot and last_snapshot.content_text:
+                if last and last.get("content_text"):
                     diff_lines = difflib.unified_diff(
-                        last_snapshot.content_text.splitlines(),
+                        last["content_text"].splitlines(),
                         text.splitlines(),
                         lineterm="",
                     )
                     diff_text = "\n".join(diff_lines)
 
                 # Store new snapshot
-                new_snapshot = Snapshot(
-                    source_id=self.source_id,
-                    content_hash=content_hash,
-                    content_text=text,
-                    diff_text=diff_text,
-                )
-                db_session.add(new_snapshot)
+                save_snapshot(self.source_id, content_hash, text, diff_text)
 
                 # Create a CrawledItem for the change
-                # Append content_hash fragment to make each change a unique URL for dedup
                 title = f"[变更检测] {self.config.get('name', self.source_id)}"
                 item_url = f"{url}#snapshot-{content_hash[:12]}"
                 item = CrawledItem(
@@ -115,7 +97,7 @@ class SnapshotDiffCrawler(BaseCrawler):
                     source_id=self.source_id,
                     dimension=self.config.get("dimension"),
                     tags=self.config.get("tags", []) + ["snapshot_diff"],
-                    extra={"is_first_snapshot": last_snapshot is None},
+                    extra={"is_first_snapshot": last is None},
                 )
                 result.items = [item]
                 result.items_total = 1

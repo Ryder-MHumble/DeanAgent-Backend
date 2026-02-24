@@ -1,7 +1,5 @@
-from fastapi import APIRouter, Depends, Query
-from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi import APIRouter, Query
 
-from app.database import get_db
 from app.schemas.article import ArticleBrief, ArticleSearchParams
 from app.schemas.common import PaginatedResponse
 from app.services import article_service, dimension_service
@@ -14,8 +12,8 @@ router = APIRouter()
     summary="维度列表",
     description="列出全部 9 个维度，返回每个维度的文章数量和最后更新时间。",
 )
-async def list_dimensions(db: AsyncSession = Depends(get_db)):
-    return await dimension_service.list_dimensions(db)
+async def list_dimensions():
+    return await dimension_service.list_dimensions()
 
 
 @router.get(
@@ -33,7 +31,6 @@ async def get_dimension_articles(
     order: str = Query("desc"),
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),
-    db: AsyncSession = Depends(get_db),
 ):
     params = ArticleSearchParams(
         dimension=dimension,
@@ -43,4 +40,4 @@ async def get_dimension_articles(
         page=page,
         page_size=page_size,
     )
-    return await article_service.list_articles(db, params)
+    return await article_service.list_articles(params)

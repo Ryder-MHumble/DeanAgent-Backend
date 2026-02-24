@@ -6,9 +6,7 @@ from pydantic import BaseModel, Field
 class ArticleBrief(BaseModel):
     """文章摘要信息，用于列表展示。"""
 
-    model_config = {"from_attributes": True}
-
-    id: int = Field(description="文章唯一 ID", examples=[1024])
+    id: str = Field(description="文章唯一 ID (url_hash)", examples=["a1b2c3d4e5f6"])
     source_id: str = Field(description="所属信源 ID", examples=["tech_arxiv"])
     dimension: str = Field(
         description="所属维度",
@@ -28,7 +26,9 @@ class ArticleBrief(BaseModel):
     published_at: datetime | None = Field(
         default=None, description="发布时间（ISO 8601）"
     )
-    crawled_at: datetime = Field(description="爬取时间（ISO 8601）")
+    crawled_at: datetime | None = Field(
+        default=None, description="爬取时间（ISO 8601）"
+    )
     tags: list[str] = Field(
         default=[], description="标签列表", examples=[["AI", "LLM", "政策"]]
     )

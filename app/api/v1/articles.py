@@ -1,8 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps import get_article_search_params
-from app.database import get_db
 from app.schemas.article import (
     ArticleBrief,
     ArticleDetail,
@@ -24,9 +22,8 @@ router = APIRouter()
 )
 async def list_articles(
     params: ArticleSearchParams = Depends(get_article_search_params),
-    db: AsyncSession = Depends(get_db),
 ):
-    return await article_service.list_articles(db, params)
+    return await article_service.list_articles(params)
 
 
 @router.get(
@@ -37,9 +34,8 @@ async def list_articles(
 )
 async def search_articles(
     params: ArticleSearchParams = Depends(get_article_search_params),
-    db: AsyncSession = Depends(get_db),
 ):
-    return await article_service.list_articles(db, params)
+    return await article_service.list_articles(params)
 
 
 @router.get(
@@ -50,23 +46,21 @@ async def search_articles(
 )
 async def get_stats(
     group_by: str = "dimension",
-    db: AsyncSession = Depends(get_db),
 ):
-    return await article_service.get_article_stats(db, group_by)
+    return await article_service.get_article_stats(group_by)
 
 
 @router.get(
     "/{article_id}",
     response_model=ArticleDetail,
     summary="文章详情",
-    description="根据文章 ID 获取完整文章内容，包含正文和额外元数据。",
+    description="根据文章 ID (url_hash) 获取完整文章内容，包含正文和额外元数据。",
     responses={404: {"model": ErrorResponse, "description": "文章不存在"}},
 )
 async def get_article(
-    article_id: int,
-    db: AsyncSession = Depends(get_db),
+    article_id: str,
 ):
-    article = await article_service.get_article(db, article_id)
+    article = await article_service.get_article(article_id)
     if article is None:
         raise HTTPException(status_code=404, detail="Article not found")
     return article
@@ -80,11 +74,10 @@ async def get_article(
     responses={404: {"model": ErrorResponse, "description": "文章不存在"}},
 )
 async def update_article(
-    article_id: int,
+    article_id: str,
     data: ArticleUpdate,
-    db: AsyncSession = Depends(get_db),
 ):
-    article = await article_service.update_article(db, article_id, data)
+    article = await article_service.update_article(article_id, data)
     if article is None:
         raise HTTPException(status_code=404, detail="Article not found")
     return article

@@ -128,7 +128,7 @@ async def _stage_crawl_all() -> dict[str, Any]:
 
     from scripts.run_all_crawl import run_all
 
-    result = await run_all(no_db=True)
+    result = await run_all()
     return result or {}
 
 

@@ -10,7 +10,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 
 
-async def run_crawl(source_id: str, no_db: bool = False):
+async def run_crawl(source_id: str):
     from app.crawlers.registry import CrawlerRegistry
     from app.crawlers.utils.json_storage import save_crawl_result_json
     from app.scheduler.manager import load_all_source_configs
@@ -26,18 +26,10 @@ async def run_crawl(source_id: str, no_db: bool = False):
     print(f"\n=== Crawling: {config.get('name', source_id)} ===")
     print(f"Method: {config.get('crawl_method')}")
     print(f"URL: {config.get('url')}")
-    print(f"Mode: {'no-db (JSON only)' if no_db else 'database + JSON'}")
     print()
 
     crawler = CrawlerRegistry.create_crawler(config)
-
-    if no_db:
-        result = await crawler.run(db_session=None)
-    else:
-        from app.database import async_session_factory
-
-        async with async_session_factory() as session:
-            result = await crawler.run(db_session=session)
+    result = await crawler.run()
 
     print("\n=== Results ===")
     print(f"Status: {result.status.value}")
@@ -66,8 +58,5 @@ async def run_crawl(source_id: str, no_db: bool = False):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Test crawl a single source")
     parser.add_argument("--source", "-s", required=True, help="Source ID to crawl")
-    parser.add_argument(
-        "--no-db", action="store_true", help="Skip database, output JSON only"
-    )
     args = parser.parse_args()
-    asyncio.run(run_crawl(args.source, no_db=args.no_db))
+    asyncio.run(run_crawl(args.source))

@@ -155,6 +155,8 @@ cmd_init() {
     mkdir -p "$PROJECT_DIR/data/raw"
     mkdir -p "$PROJECT_DIR/data/processed/policy_intel"
     mkdir -p "$PROJECT_DIR/data/processed/personnel_intel"
+    mkdir -p "$PROJECT_DIR/data/state"
+    mkdir -p "$PROJECT_DIR/data/logs"
     mkdir -p "$PROJECT_DIR/logs"
     green "  目录创建完成"
 
@@ -162,15 +164,10 @@ cmd_init() {
     echo ""
     if [[ ! -f "$PROJECT_DIR/.env" ]]; then
         yellow ".env 文件不存在"
-        echo "  请创建 .env 文件并配置 DATABASE_URL:"
+        echo "  请创建 .env 文件:"
         echo "  cp .env.example .env && vi .env"
     else
         green ".env 文件存在"
-        if grep -q "DATABASE_URL" "$PROJECT_DIR/.env" && ! grep -q "DATABASE_URL=postgresql+asyncpg://postgres:password@" "$PROJECT_DIR/.env"; then
-            green "  DATABASE_URL: 已配置"
-        else
-            yellow "  DATABASE_URL: 使用默认值 (请修改为实际数据库地址)"
-        fi
         if grep -q "OPENROUTER_API_KEY=.\+" "$PROJECT_DIR/.env"; then
             green "  OPENROUTER_API_KEY: 已配置 (LLM 富化将自动启用)"
         else

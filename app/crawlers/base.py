@@ -7,11 +7,6 @@ from datetime import datetime, timezone
 from enum import Enum
 from typing import Any
 
-from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
-
-from app.crawlers.utils.dedup import compute_url_hash
-
 logger = logging.getLogger(__name__)
 
 
@@ -62,24 +57,17 @@ class BaseCrawler(ABC):
         self.config = source_config
         self.source_id: str = source_config["id"]
 
-    async def run(self, db_session: AsyncSession | None = None) -> CrawlResult:
-        """Orchestrate: timing, error handling, dedup, logging.
-
-        When db_session is None, dedup is skipped and all items are returned.
-        """
+    async def run(self) -> CrawlResult:
+        """Orchestrate: timing, error handling, logging."""
         result = CrawlResult(source_id=self.source_id)
         result.started_at = datetime.now(timezone.utc)
         try:
             items = await self.fetch_and_parse()
             result.items_total = len(items)
             result.items_all = items
-            if db_session is not None:
-                new_items = await self._dedup(items, db_session)
-            else:
-                new_items = items
-            result.items = new_items
-            result.items_new = len(new_items)
-            if new_items:
+            result.items = items
+            result.items_new = len(items)
+            if items:
                 result.status = CrawlStatus.SUCCESS
             else:
                 result.status = CrawlStatus.NO_NEW_CONTENT
@@ -96,23 +84,3 @@ class BaseCrawler(ABC):
     async def fetch_and_parse(self) -> list[CrawledItem]:
         """Subclasses implement: fetch the source, parse, return items."""
         ...
-
-    async def _dedup(
-        self, items: list[CrawledItem], db_session: AsyncSession
-    ) -> list[CrawledItem]:
-        """Check URL hashes against existing articles in DB."""
-        if not items:
-            return []
-
-        from app.models.article import Article
-
-        url_hashes = [compute_url_hash(item.url) for item in items]
-        stmt = select(Article.url_hash).where(Article.url_hash.in_(url_hashes))
-        result = await db_session.execute(stmt)
-        existing_hashes = {row[0] for row in result.fetchall()}
-
-        new_items = []
-        for item, url_hash in zip(items, url_hashes):
-            if url_hash not in existing_hashes:
-                new_items.append(item)
-        return new_items

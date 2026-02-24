@@ -2,7 +2,7 @@
 
 中关村人工智能研究院信息监测系统。134 信源（109 启用）× 9 维度，5 种模板爬虫 + 8 个自定义 Parser，v1 API 22 端点（含 intel 业务智能 8 端点）。
 82 个启用信源已配置 detail_selectors 或 RSS/API 自带正文，可自动获取文章正文（content 字段）。
-技术栈：FastAPI + SQLAlchemy(async) + PostgreSQL(Supabase) + APScheduler 3.x + httpx + BS4 + Playwright。
+技术栈：FastAPI + Local JSON Storage + APScheduler 3.x + httpx + BS4 + Playwright。
 
 ## ⚠ 每次修改后必须做的事
 
@@ -56,9 +56,9 @@
 → `app/crawlers/utils/playwright_pool.py`（浏览器池）
 → YAML 中检查 `wait_for` / `wait_timeout`
 
-**文章重复入库 / 去重不对：**
+**文章重复 / 去重不对：**
 → `app/crawlers/utils/dedup.py`（normalize_url + hash 逻辑）
-→ `app/models/article.py`（url_hash UNIQUE 约束）
+→ `app/crawlers/utils/json_storage.py`（JSON 级去重，对比 previous url_hashes）
 
 **调度任务不执行 / 频率不对：**
 → `app/scheduler/manager.py`（任务注册 + 频率映射）
@@ -78,13 +78,31 @@
 → `app/crawlers/utils/json_storage.py`
 → 输出路径：`data/raw/{dimension}/{group}/{source_id}/latest.json`
 
+**运行状态 / 爬取日志问题：**
+→ `app/services/source_state.py`（信源运行状态：`data/state/source_state.json`）
+→ `app/services/crawl_log_store.py`（爬取日志：`data/logs/{source_id}/crawl_logs.json`）
+→ `app/services/snapshot_store.py`（快照数据：`data/state/snapshots/{source_id}.json`）
+
 **HTTP 请求失败 / 限速 / UA 被封：**
 → `app/crawlers/utils/http_client.py`（重试、限速、UA 轮换）
 
-**数据库连接 / 表结构问题：**
-→ `app/database.py`（engine + session）
-→ `app/models/{article,source,crawl_log,snapshot}.py`（4 张表）
-→ `app/config.py`（DATABASE_URL 配置）
+## 数据存储结构
+
+所有数据存储在本地 JSON 文件中，无需数据库：
+
+```
+data/
+├── raw/{dimension}/{group?}/{source_id}/latest.json   # 爬取原始数据
+├── processed/
+│   ├── policy_intel/                                   # 政策智能处理输出
+│   └── personnel_intel/                                # 人事情报处理输出
+├── state/
+│   ├── source_state.json           # 信源运行状态（last_crawl_at, failures, is_enabled_override）
+│   ├── article_annotations.json    # 文章标注（is_read, importance）
+│   └── snapshots/{source_id}.json  # 快照数据（替代原 DB snapshots 表）
+├── logs/{source_id}/crawl_logs.json # 爬取执行日志（每源最多 100 条）
+└── index.json                       # 前端索引（Pipeline Stage 5 生成）
+```
 
 ## 文件路由规则
 
@@ -186,9 +204,9 @@ data/processed/personnel_intel/     → 人事处理输出 (feed.json, changes.j
 4. 如影响信源状态则更新 docs/CrawlStatus.md 对应维度表
 ```
 
-### 修改 API / 数据库
+### 修改 API / 服务
 ```
-1. 改 app/api/v1/ 或 app/services/ 或 app/models/
+1. 改 app/api/v1/ 或 app/services/
 2. 验证：uvicorn app.main:app --reload 后用 curl 或 /docs 测试
 3. ruff check app/
 4. 更新 docs/TODO.md 对应条目
@@ -204,21 +222,23 @@ data/processed/personnel_intel/     → 人事处理输出 (feed.json, changes.j
 
 1. **APScheduler 3.x，不用 4.x** — 4.x 是 alpha，pip 安装不到稳定版
 2. **URL 归一化保留 fragment** — snapshot_crawler 用 `#snapshot-{hash}` 区分同 URL 的不同快照
-3. **scheduler 启动时 auto-seed sources 到 DB** — 避免 FK violation（`manager.py`）
-4. **CrawlLog 记录 crawler 创建失败** — 即使实例化出错也可通过 API 追溯
-5. **RSSHub 公共实例不可用** — rsshub.app 等全部 403，需自部署或用原生 feed
-6. **Article 插入用 ON CONFLICT DO NOTHING** — 避免 url_hash UNIQUE 约束冲突导致整个事务回滚（`jobs.py`）
-7. **static/dynamic 共享解析逻辑** — `selector_parser.py` 提取公共函数，消除两个模板间 ~100 行重复代码
-8. **业务智能模块子包结构** — `services/intel/{domain}/` 每个维度一个子包（rules + service + llm），共享工具在 `shared.py`，避免 services/ 膨胀
-9. **每日 Pipeline 5 阶段** — 爬取→政策处理→人事处理→LLM 富化（条件）→索引生成，Stage 4 由 `ENABLE_LLM_ENRICHMENT` + `OPENROUTER_API_KEY` 共同控制
-10. **APScheduler 单 worker 限制** — 3.x 不支持多进程协调，`--workers 1` 是唯一安全配置
-11. **首次启动自动触发 Pipeline** — `_check_needs_initial_data()` 检测空数据后异步触发，API 不阻塞
+3. **纯 JSON 存储，无数据库** — 所有数据存本地 JSON 文件，轻量可维护
+4. **信源配置读 YAML，运行状态存 JSON** — YAML 是静态配置源，`source_state.json` 存动态状态（last_crawl_at, failures, is_enabled_override）
+5. **CrawlLog 记录 crawler 创建失败** — 即使实例化出错也可通过 API 追溯
+6. **RSSHub 公共实例不可用** — rsshub.app 等全部 403，需自部署或用原生 feed
+7. **JSON 级去重** — `json_storage.py` 通过对比 previous latest.json 的 url_hashes 标记 is_new
+8. **static/dynamic 共享解析逻辑** — `selector_parser.py` 提取公共函数，消除两个模板间 ~100 行重复代码
+9. **业务智能模块子包结构** — `services/intel/{domain}/` 每个维度一个子包（rules + service + llm），共享工具在 `shared.py`，避免 services/ 膨胀
+10. **每日 Pipeline 5 阶段** — 爬取→政策处理→人事处理→LLM 富化（条件）→索引生成，Stage 4 由 `ENABLE_LLM_ENRICHMENT` + `OPENROUTER_API_KEY` 共同控制
+11. **APScheduler 单 worker 限制** — 3.x 不支持多进程协调，`--workers 1` 是唯一安全配置
+12. **首次启动自动触发 Pipeline** — `_check_needs_initial_data()` 检测空数据后异步触发，API 不阻塞
+13. **文章 ID 使用 url_hash** — 64 字符 SHA-256 hex 字符串，替代原 DB 自增 ID
 
 ## 开发约定
 
 - **Python 3.11+**，`X | Y` 联合类型
 - **ruff** line-length=100，select E/F/I/W
-- **async everywhere**：所有 DB、HTTP、爬虫
+- **async everywhere**：所有 HTTP、爬虫
 - 新增标准信源：只改 `sources/*.yaml`
 - 新增 API 信源：`parsers/` 加类 + `registry.py` 的 `_CUSTOM_MAP` 注册
 - **git add 按文件名**，不用 `git add .`

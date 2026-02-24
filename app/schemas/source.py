@@ -6,8 +6,6 @@ from pydantic import BaseModel, Field
 class SourceResponse(BaseModel):
     """信源详情。"""
 
-    model_config = {"from_attributes": True}
-
     id: str = Field(description="信源唯一 ID", examples=["tech_arxiv"])
     name: str = Field(description="信源名称", examples=["ArXiv AI Papers"])
     url: str = Field(

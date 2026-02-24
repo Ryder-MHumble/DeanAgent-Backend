@@ -1,9 +1,6 @@
 from __future__ import annotations
 
-from sqlalchemy import func, select
-from sqlalchemy.ext.asyncio import AsyncSession
-
-from app.models.article import Article
+from app.services.json_reader import get_dimension_stats
 
 DIMENSION_NAMES = {
     "national_policy": "对国家",
@@ -18,41 +15,30 @@ DIMENSION_NAMES = {
 }
 
 
-async def list_dimensions(db: AsyncSession) -> list[dict]:
+async def list_dimensions() -> list[dict]:
     """List all dimensions with article counts and last updated timestamps."""
-    query = select(
-        Article.dimension,
-        func.count().label("article_count"),
-        func.max(Article.crawled_at).label("last_updated"),
-    ).group_by(Article.dimension)
-    result = await db.execute(query)
-
-    rows = result.fetchall()
+    stats = get_dimension_stats()
 
     dimensions = []
     found = set()
-    for row in rows:
-        found.add(row.dimension)
-        dimensions.append(
-            {
-                "id": row.dimension,
-                "name": DIMENSION_NAMES.get(row.dimension, row.dimension),
-                "article_count": row.article_count,
-                "last_updated": row.last_updated,
-            }
-        )
+    for dim_id, dim_stats in stats.items():
+        found.add(dim_id)
+        dimensions.append({
+            "id": dim_id,
+            "name": DIMENSION_NAMES.get(dim_id, dim_id),
+            "article_count": dim_stats.get("total_items", 0),
+            "last_updated": dim_stats.get("latest_crawl"),
+        })
 
     # Include dimensions with zero articles
     for dim_id, dim_name in DIMENSION_NAMES.items():
         if dim_id not in found:
-            dimensions.append(
-                {
-                    "id": dim_id,
-                    "name": dim_name,
-                    "article_count": 0,
-                    "last_updated": None,
-                }
-            )
+            dimensions.append({
+                "id": dim_id,
+                "name": dim_name,
+                "article_count": 0,
+                "last_updated": None,
+            })
 
     dim_order = list(DIMENSION_NAMES.keys())
     return sorted(
