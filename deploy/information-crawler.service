@@ -1,0 +1,50 @@
+# Information Crawler — systemd unit file
+#
+# Install:
+#   sudo cp deploy/information-crawler.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now information-crawler
+#
+# NOTE: APScheduler 3.x does not support multi-process coordination.
+#       Keep --workers 1 to avoid duplicate job execution.
+
+[Unit]
+Description=Information Crawler - AI Research Academy Monitoring System
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=exec
+User=crawler
+Group=crawler
+WorkingDirectory=/opt/information-crawler
+EnvironmentFile=/opt/information-crawler/.env
+
+ExecStart=/opt/information-crawler/.venv/bin/uvicorn app.main:app \
+    --host 0.0.0.0 \
+    --port 8000 \
+    --workers 1
+
+Restart=always
+RestartSec=10
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+# Resource limits
+MemoryMax=2G
+CPUQuota=200%
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=information-crawler
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/information-crawler/data /opt/information-crawler/logs
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

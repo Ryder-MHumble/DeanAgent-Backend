@@ -63,7 +63,9 @@
 **调度任务不执行 / 频率不对：**
 → `app/scheduler/manager.py`（任务注册 + 频率映射）
 → `app/scheduler/jobs.py`（单次执行逻辑）
+→ `app/scheduler/pipeline.py`（5 阶段 Pipeline 编排）
 → YAML 中检查 `schedule` / `is_enabled`
+→ `.env` 中检查 `PIPELINE_CRON_HOUR` / `PIPELINE_CRON_MINUTE`
 
 **API 返回异常：**
 → `app/api/v1/{articles,sources,dimensions,health}.py`（核心端点）
@@ -208,6 +210,9 @@ data/processed/personnel_intel/     → 人事处理输出 (feed.json, changes.j
 6. **Article 插入用 ON CONFLICT DO NOTHING** — 避免 url_hash UNIQUE 约束冲突导致整个事务回滚（`jobs.py`）
 7. **static/dynamic 共享解析逻辑** — `selector_parser.py` 提取公共函数，消除两个模板间 ~100 行重复代码
 8. **业务智能模块子包结构** — `services/intel/{domain}/` 每个维度一个子包（rules + service + llm），共享工具在 `shared.py`，避免 services/ 膨胀
+9. **每日 Pipeline 5 阶段** — 爬取→政策处理→人事处理→LLM 富化（条件）→索引生成，Stage 4 由 `ENABLE_LLM_ENRICHMENT` + `OPENROUTER_API_KEY` 共同控制
+10. **APScheduler 单 worker 限制** — 3.x 不支持多进程协调，`--workers 1` 是唯一安全配置
+11. **首次启动自动触发 Pipeline** — `_check_needs_initial_data()` 检测空数据后异步触发，API 不阻塞
 
 ## 开发约定
 
@@ -231,7 +236,7 @@ data/processed/personnel_intel/     → 人事处理输出 (feed.json, changes.j
 
 ```bash
 pip install -e ".[dev]"                              # 安装
-uvicorn app.main:app --reload                        # 启动
+uvicorn app.main:app --reload                        # 启动（前台）
 python scripts/run_single_crawl.py --source <id>     # 测试单源
 python scripts/run_all_crawl.py                      # 批量运行所有启用源
 python scripts/process_policy_intel.py --dry-run     # 政策智能预览
@@ -239,4 +244,14 @@ python scripts/process_personnel_intel.py --dry-run  # 人事情报预览
 python scripts/process_personnel_intel.py --enrich --force  # 人事 LLM 富化
 ruff check app/                                      # Lint
 pytest                                               # 测试
+
+# 服务管理（后台运行）
+./scripts/service.sh init                            # 首次初始化（依赖+Playwright+目录+配置检查）
+./scripts/service.sh start                           # 启动（开发模式，含 --reload）
+./scripts/service.sh start --production              # 启动（生产模式，无 --reload）
+./scripts/service.sh stop                            # 停止
+./scripts/service.sh restart                         # 重启
+./scripts/service.sh status                          # 查看状态 + 资源占用
+./scripts/service.sh logs --follow                   # 持续跟踪日志
+./scripts/service.sh start --port 8080 --workers 2   # 自定义端口和 worker 数
 ```

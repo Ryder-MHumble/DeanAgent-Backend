@@ -1,6 +1,6 @@
 # 信源爬取状态总览
 
-> 最后更新: 2026-02-23
+> 最后更新: 2026-02-24
 
 ---
 
@@ -115,15 +115,15 @@ python scripts/process_personnel_intel.py --dry-run
 
 ### 正文来源分类
 
-78 个启用信源配置 `detail_selectors`，自动抓取详情页正文。其余来源：
+81 个启用信源配置 `detail_selectors`，自动抓取详情页正文。其余来源：
 
 | 类型 | 源数 | 说明 |
 |------|------|------|
-| detail_selectors 抓取 | 78 | 爬虫自动进入详情页提取正文 |
-| RSS 自带正文 | 13 | 36kr_ai_rss, mit_tech_review_rss, techcrunch_ai_rss, reddit_ml_rss, reddit_localllama_rss, tmtpost_news, theverge_ai_rss, venturebeat_ai_rss, wired_ai_rss, arstechnica_ai_rss, ieee_spectrum_ai_rss, openai_blog, cyzone_news |
-| API Parser | 5 | arxiv_cs_ai/cs_lg/cs_cl (abstract), github_trending (description), semantic_scholar_ai (abstract) |
+| detail_selectors 抓取 | 81 | 爬虫自动进入详情页提取正文（v19: +caai_news, +cyzone_news, +qwen_blog, +minimax_news） |
+| RSS 自带正文 | 12 | 36kr_ai_rss, mit_tech_review_rss, techcrunch_ai_rss, reddit_ml_rss, reddit_localllama_rss, tmtpost_news, theverge_ai_rss, venturebeat_ai_rss, wired_ai_rss, arstechnica_ai_rss, ieee_spectrum_ai_rss, openai_blog |
+| API Parser | 6 | arxiv_cs_ai/cs_lg/cs_cl (abstract), github_trending (description), semantic_scholar_ai (abstract), hunyuan_news (content_brief) |
 | Twitter API | 7 | 全部 100% 正文 |
-| 结构性无正文 | 4 | jiqizhixin_rss (RSS 无正文字段), hacker_news (元数据), aideadlines/wikicfp (会议列表) |
+| 仅列表/无正文 | 15 | jiqizhixin_rss (RSS 无正文字段), hacker_news (元数据), aideadlines/wikicfp (会议列表), 11 个新增国际 AI 公司博客（待配置 detail_selectors） |
 
 > sjtu_news 的 `div.info` 选择器已修复为 `div.Article_content`，46/46 正文恢复。
 
@@ -133,7 +133,7 @@ python scripts/process_personnel_intel.py --dry-run
 
 | source_id | 名称 | 方法 | 条目数 | 详情页 | 说明 |
 |-----------|------|------|--------|--------|------|
-| mohrss_rsrm | 人社部-国务院人事任免 | dynamic | 20 | ✅ (20/20) | Playwright + detail_selectors `div.TRS_Editor` |
+| mohrss_rsrm | 人社部-国务院人事任免 | dynamic | 20 | ✅ (20/20) | Playwright + `detail_fetch_js` (JS fetch 避免 Clear-Site-Data 反爬) + `div.TRS_Editor` |
 | moe_renshi | 教育部-人事任免 | static | 20 | ✅ (20/20) | `div.TRS_Editor` |
 | moe_renshi_si | 教育部-人事司公告 | static | 7 | ✅ (6/7) | `div.TRS_Editor` |
 | cas_renshi | 中科院-人事任免 | static | 15 | ✅ (15/15) | `div.cobtbox`，关键词过滤任免/人事/选举 |
@@ -250,20 +250,22 @@ python scripts/process_personnel_intel.py --dry-run
 
 #### C. 公司官方博客 (13 源, 13 启用) ⭐ **新增 11 个头部 AI 大厂**
 
-| source_id | 名称 | 方法 | 说明 |
-|-----------|------|------|------|
-| openai_blog | OpenAI Blog | rss | **恢复**：发现 RSS feed (openai.com/news/rss.xml) |
-| anthropic_blog | Anthropic Research | static | **恢复**：SSR 页面，static 可用 |
-| google_deepmind_blog | Google DeepMind Blog | dynamic | **新增**：Gemini、AlphaFold 等前沿研究 |
-| meta_ai_blog | Meta AI Blog | dynamic | **新增**：Llama 系列、开源 AI |
-| microsoft_ai_blog | Microsoft AI Blog | static | **新增**：Copilot、Azure AI |
-| mistral_ai_news | Mistral AI News | dynamic | **新增**：欧洲开源大模型领军 |
-| xai_blog | xAI Blog (Grok) | dynamic | **新增**：Elon Musk 的 AGI 研究 |
-| cohere_blog | Cohere Blog | static | **新增**：企业级 AI，2026 拟 IPO |
-| stability_ai_news | Stability AI News | dynamic | **新增**：Stable Diffusion 图像生成 |
-| huggingface_blog | Hugging Face Blog | static | **新增**：Transformers 开源社区 |
-| runway_blog | Runway Blog | dynamic | **新增**：视频生成 AI (Gen-3) |
-| inflection_ai_blog | Inflection AI Blog | static | **新增**：Pi 对话 AI |
+> ⚠️ 新增 11 个博客暂未配置 `detail_selectors`，仅抓取列表页标题/链接，正文待后续补充。
+
+| source_id | 名称 | 方法 | 正文 | 说明 |
+|-----------|------|------|------|------|
+| openai_blog | OpenAI Blog | rss | ✅ RSS | **恢复**：发现 RSS feed (openai.com/news/rss.xml) |
+| anthropic_blog | Anthropic Research | static | ✅ detail | **恢复**：SSR 页面，static 可用 |
+| google_deepmind_blog | Google DeepMind Blog | dynamic | ❌ | **新增**：Gemini、AlphaFold 等前沿研究 |
+| meta_ai_blog | Meta AI Blog | dynamic | ❌ | **新增**：Llama 系列、开源 AI |
+| microsoft_ai_blog | Microsoft AI Blog | static | ❌ | **新增**：Copilot、Azure AI |
+| mistral_ai_news | Mistral AI News | dynamic | ❌ | **新增**：欧洲开源大模型领军 |
+| xai_blog | xAI Blog (Grok) | dynamic | ❌ | **新增**：Elon Musk 的 AGI 研究 |
+| cohere_blog | Cohere Blog | static | ❌ | **新增**：企业级 AI，2026 拟 IPO |
+| stability_ai_news | Stability AI News | dynamic | ❌ | **新增**：Stable Diffusion 图像生成 |
+| huggingface_blog | Hugging Face Blog | static | ❌ | **新增**：Transformers 开源社区 |
+| runway_blog | Runway Blog | dynamic | ❌ | **新增**：视频生成 AI (Gen-3) |
+| inflection_ai_blog | Inflection AI Blog | static | ❌ | **新增**：Pi 对话 AI |
 
 #### D. ArXiv 论文 (3 源, 3 启用)
 
@@ -315,7 +317,7 @@ python scripts/process_personnel_intel.py --dry-run
 
 | source_id | 名称 | 方法 | 启用 | 条目数 | 详情页 |
 |-----------|------|------|------|--------|--------|
-| beijing_zhengce | 首都之窗-政策文件 | dynamic | ✅ | 2 | ✅ (2/2) |
+| beijing_zhengce | 首都之窗-政策文件 | static | ✅ | 2 | ✅ (2/2) |
 | bjkw_policy | 北京市科委/中关村管委会 | static | ✅ | 4 | ✅ (4/4) |
 | bjjw_policy | 北京市教委 | static | ✅ | 14 | ✅ (13/14) |
 | bjrsj_policy | 北京市人社局 | static | ✅ | 3 | ✅ (3/3) |
@@ -337,7 +339,7 @@ python scripts/process_personnel_intel.py --dry-run
 
 ### 详细状态：industry (对产业) — 6/10 启用 + 1 Twitter
 
-5 启用源配置 detail_selectors，1 RSS 自带正文。
+5 启用源配置 detail_selectors（含 cyzone_news 从 RSS 改为 static），1 RSS 自带正文。
 
 | source_id | 名称 | 方法 | 启用 | 条目数 | 详情页 |
 |-----------|------|------|------|--------|--------|
@@ -349,7 +351,7 @@ python scripts/process_personnel_intel.py --dry-run
 | iyiou_ai | 亿欧-AI | static | ❌ | — | 空壳页面 |
 | chinaventure_news | 投中网 | static | ✅ | 9 | ✅ (9/9) `div.article_slice_pc` |
 | 36kr_investment | 36氪-融资频道 | static | ❌ | — | URL 已下线 |
-| cyzone_news | 创业邦 | rss | ✅ | 🔴 | RSS feed 404 (URL 已失效) |
+| cyzone_news | 创业邦 | static | ✅ | ✅ | `div.g-art-content` (v19 从 RSS 改为 static + detail_selectors) |
 | caict_news | 中国信通院-动态 | static | ✅ | 🔴 | HTTP 412 Precondition Failed |
 
 ### 详细状态：talent (对人才) — 4/7 启用 + 1 Twitter

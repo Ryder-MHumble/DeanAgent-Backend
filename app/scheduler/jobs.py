@@ -4,50 +4,36 @@ import logging
 from datetime import datetime, timezone
 from typing import Any
 
-from sqlalchemy import update
-from sqlalchemy.dialects.postgresql import insert as pg_insert
-
 from app.crawlers.base import CrawlStatus
 from app.crawlers.registry import CrawlerRegistry
-from app.crawlers.utils.dedup import compute_url_hash
 from app.crawlers.utils.json_storage import save_crawl_result_json
-from app.database import async_session_factory
-from app.models.article import Article
-from app.models.crawl_log import CrawlLog
-from app.models.source import Source
 
 logger = logging.getLogger(__name__)
 
 
-async def execute_crawl_job(source_config: dict[str, Any]) -> None:
-    """Execute a crawl for a single source. Called by APScheduler."""
-    source_id = source_config["id"]
-    logger.info("Starting crawl: %s", source_id)
+def _is_db_available() -> bool:
+    """Check if the scheduler manager reports DB availability."""
+    from app.scheduler.manager import get_scheduler_manager
 
-    try:
-        crawler = CrawlerRegistry.create_crawler(source_config)
-    except Exception as e:
-        logger.error("Failed to create crawler for %s: %s", source_id, e)
-        # Still record a failed CrawlLog so the failure is visible via API
-        async with async_session_factory() as session:
-            log = CrawlLog(
-                source_id=source_id,
-                status=CrawlStatus.FAILED.value,
-                items_total=0,
-                items_new=0,
-                error_message=f"Crawler creation failed: {e}",
-                started_at=datetime.now(timezone.utc),
-                finished_at=datetime.now(timezone.utc),
-                duration_seconds=0.0,
-            )
-            session.add(log)
-            await session.commit()
-        return
+    mgr = get_scheduler_manager()
+    return mgr.db_available if mgr else False
+
+
+async def _persist_to_db(result, source_config: dict[str, Any]) -> None:
+    """Persist crawl results to database. Only called when DB is available."""
+    from sqlalchemy import update
+    from sqlalchemy.dialects.postgresql import insert as pg_insert
+
+    from app.crawlers.utils.dedup import compute_url_hash
+    from app.database import async_session_factory
+    from app.models.article import Article
+    from app.models.crawl_log import CrawlLog
+    from app.models.source import Source
+
+    source_id = source_config["id"]
 
     async with async_session_factory() as session:
-        result = await crawler.run(db_session=session)
-
-        # Persist new articles (ON CONFLICT DO NOTHING to avoid unique constraint failures)
+        # Persist new articles
         for item in result.items:
             stmt = pg_insert(Article).values(
                 source_id=item.source_id or source_id,
@@ -64,12 +50,6 @@ async def execute_crawl_job(source_config: dict[str, Any]) -> None:
                 extra=item.extra,
             ).on_conflict_do_nothing(index_elements=["url_hash"])
             await session.execute(stmt)
-
-        # Save to local JSON (independent of DB)
-        try:
-            save_crawl_result_json(result, source_config)
-        except Exception as e:
-            logger.warning("Failed to save JSON for %s: %s", source_id, e)
 
         # Log the crawl result
         log = CrawlLog(
@@ -98,6 +78,55 @@ async def execute_crawl_job(source_config: dict[str, Any]) -> None:
         )
 
         await session.commit()
+
+
+async def execute_crawl_job(source_config: dict[str, Any]) -> None:
+    """Execute a crawl for a single source. Called by APScheduler."""
+    source_id = source_config["id"]
+    logger.info("Starting crawl: %s", source_id)
+
+    try:
+        crawler = CrawlerRegistry.create_crawler(source_config)
+    except Exception as e:
+        logger.error("Failed to create crawler for %s: %s", source_id, e)
+        # Record failure to DB if available
+        if _is_db_available():
+            try:
+                from app.database import async_session_factory
+                from app.models.crawl_log import CrawlLog
+
+                async with async_session_factory() as session:
+                    log = CrawlLog(
+                        source_id=source_id,
+                        status=CrawlStatus.FAILED.value,
+                        items_total=0,
+                        items_new=0,
+                        error_message=f"Crawler creation failed: {e}",
+                        started_at=datetime.now(timezone.utc),
+                        finished_at=datetime.now(timezone.utc),
+                        duration_seconds=0.0,
+                    )
+                    session.add(log)
+                    await session.commit()
+            except Exception as db_err:
+                logger.warning("Failed to log crawl error to DB: %s", db_err)
+        return
+
+    # Run crawler (db_session=None skips dedup, which is fine for file-only mode)
+    result = await crawler.run(db_session=None)
+
+    # Save to local JSON (always)
+    try:
+        save_crawl_result_json(result, source_config)
+    except Exception as e:
+        logger.warning("Failed to save JSON for %s: %s", source_id, e)
+
+    # Persist to DB (only when available)
+    if _is_db_available():
+        try:
+            await _persist_to_db(result, source_config)
+        except Exception as e:
+            logger.warning("Failed to persist to DB for %s: %s (JSON saved)", source_id, e)
 
     logger.info(
         "Crawl complete: %s | status=%s | new=%d/%d | duration=%.1fs",

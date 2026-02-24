@@ -2,7 +2,6 @@ from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -38,6 +37,17 @@ class Settings(BaseSettings):
     # Twitter API (twitterapi.io)
     TWITTER_API_KEY: str = ""
     TWITTER_API_PROXY: str = ""  # e.g. http://127.0.0.1:7890
+
+    # Pipeline schedule (UTC)
+    PIPELINE_CRON_HOUR: int = 6
+    PIPELINE_CRON_MINUTE: int = 0
+
+    # LLM enrichment in daily pipeline (requires OPENROUTER_API_KEY)
+    ENABLE_LLM_ENRICHMENT: bool = True
+    LLM_THRESHOLD: int = 40  # min matchScore for policy LLM enrichment
+
+    # Startup behavior
+    STARTUP_CRAWL_ENABLED: bool = True  # trigger pipeline on first start if no data
 
     # Paths
     SOURCES_DIR: Path = BASE_DIR / "sources"

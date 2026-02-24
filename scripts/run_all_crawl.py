@@ -239,6 +239,16 @@ async def run_all(
         f"数据质量: {total_items} 条目, {total_content} 有内容 ({content_rate:.0f}%)"
     )
 
+    return {
+        "total_sources": total,
+        "success": total_success,
+        "failed": total_failed,
+        "total_items": total_items,
+        "total_with_content": total_content,
+        "duration_seconds": round(total_duration, 1),
+        "content_rate_pct": round(content_rate, 1),
+    }
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="全量爬取所有启用的信源")

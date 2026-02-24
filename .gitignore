@@ -29,5 +29,12 @@ env/
 playwright-report/
 test-results/
 
+# Service runtime
+logs/
+.service.pid
+
+# Playwright MCP
+.playwright-mcp/
+
 # Crawled data output
 data/

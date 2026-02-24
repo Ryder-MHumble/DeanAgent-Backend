@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import asyncio
 import logging
 import random
 from typing import Any
@@ -62,11 +61,12 @@ def load_all_source_configs() -> list[dict[str, Any]]:
 
 
 class SchedulerManager:
-    def __init__(self) -> None:
+    def __init__(self, *, db_available: bool = True) -> None:
         self.scheduler = AsyncIOScheduler(
             job_defaults={"coalesce": True, "max_instances": 1}
         )
         self._source_configs: list[dict[str, Any]] = []
+        self.db_available = db_available
 
     async def start(self) -> None:
         global _scheduler_manager
@@ -74,8 +74,11 @@ class SchedulerManager:
 
         self._source_configs = load_all_source_configs()
 
-        # Auto-seed sources into DB to avoid FK violations
-        await self._ensure_sources_in_db()
+        # Auto-seed sources into DB to avoid FK violations (skip if no DB)
+        if self.db_available:
+            await self._ensure_sources_in_db()
+        else:
+            logger.info("Skipping DB source sync (file-only mode)")
 
         # Import job function here to avoid circular imports
         from app.scheduler.jobs import execute_crawl_job
@@ -106,10 +109,29 @@ class SchedulerManager:
             )
             logger.debug("Registered crawl job: %s (schedule=%s)", job_id, schedule_key)
 
+        # Register daily pipeline job (5 stages)
+        from app.scheduler.pipeline import execute_daily_pipeline
+
+        self.scheduler.add_job(
+            execute_daily_pipeline,
+            trigger=CronTrigger(
+                hour=settings.PIPELINE_CRON_HOUR,
+                minute=settings.PIPELINE_CRON_MINUTE,
+            ),
+            id="daily_pipeline",
+            replace_existing=True,
+            misfire_grace_time=3600,
+        )
+
         self.scheduler.start()
+        enabled_count = len(
+            [c for c in self._source_configs if c.get("is_enabled", True)]
+        )
         logger.info(
-            "Scheduler started with %d source jobs",
-            len([c for c in self._source_configs if c.get("is_enabled", True)]),
+            "Scheduler started with %d source jobs + daily pipeline (%02d:%02d UTC)",
+            enabled_count,
+            settings.PIPELINE_CRON_HOUR,
+            settings.PIPELINE_CRON_MINUTE,
         )
 
     async def stop(self) -> None:
@@ -117,6 +139,17 @@ class SchedulerManager:
         self.scheduler.shutdown(wait=False)
         _scheduler_manager = None
         logger.info("Scheduler stopped")
+
+    async def trigger_pipeline(self) -> None:
+        """Manually trigger the full daily pipeline."""
+        from app.scheduler.pipeline import execute_daily_pipeline
+
+        self.scheduler.add_job(
+            execute_daily_pipeline,
+            id="manual_pipeline",
+            replace_existing=True,
+        )
+        logger.info("Manually triggered daily pipeline")
 
     async def trigger_source(self, source_id: str) -> None:
         """Manually trigger a crawl for one source."""

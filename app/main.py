@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from scalar_fastapi import get_scalar_api_reference
 
 from app.api.v1.router import v1_router
+from app.config import BASE_DIR, settings
 from app.scheduler.manager import SchedulerManager
 
 logging.basicConfig(
@@ -50,26 +51,138 @@ TAG_METADATA = [
 ]
 
 
+async def _validate_startup() -> dict[str, str]:
+    """Validate critical dependencies at startup. Returns issues dict."""
+    issues: dict[str, str] = {}
+
+    # 1. Database connectivity
+    try:
+        from sqlalchemy import text
+
+        from app.database import async_session_factory
+
+        async with async_session_factory() as session:
+            await session.execute(text("SELECT 1"))
+        logger.info("Startup check: database connection OK")
+    except Exception as e:
+        issues["database"] = str(e)
+        logger.error("Startup check: database connection FAILED: %s", e)
+
+    # 2. Data directories (create if missing)
+    for subdir in [
+        "data/raw",
+        "data/processed/policy_intel",
+        "data/processed/personnel_intel",
+    ]:
+        (BASE_DIR / subdir).mkdir(parents=True, exist_ok=True)
+    logger.info("Startup check: data directories OK")
+
+    # 3. Playwright browser (non-blocking)
+    try:
+        from playwright.async_api import async_playwright
+
+        pw = await async_playwright().start()
+        browser = await pw.chromium.launch(headless=True)
+        await browser.close()
+        await pw.stop()
+        logger.info("Startup check: Playwright browser OK")
+    except Exception as e:
+        issues["playwright"] = str(e)
+        logger.warning(
+            "Startup check: Playwright unavailable: %s (dynamic crawls will fail)", e
+        )
+
+    return issues
+
+
+async def _check_needs_initial_data() -> bool:
+    """Check if this is a fresh installation with no crawled data."""
+    # Check 1: Any JSON in data/raw/?
+    raw_dir = BASE_DIR / "data" / "raw"
+    has_local_data = False
+    if raw_dir.exists():
+        for child in raw_dir.iterdir():
+            if child.is_dir():
+                for _ in child.rglob("*.json"):
+                    has_local_data = True
+                    break
+            if has_local_data:
+                break
+
+    if has_local_data:
+        return False
+
+    # Check 2: Any articles in database?
+    try:
+        from sqlalchemy import text
+
+        from app.database import async_session_factory
+
+        async with async_session_factory() as session:
+            result = await session.execute(
+                text("SELECT EXISTS (SELECT 1 FROM articles LIMIT 1)")
+            )
+            has_db_data = result.scalar()
+            if has_db_data:
+                return False
+    except Exception:
+        pass  # Table might not exist yet
+
+    return True
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Manage startup and shutdown of scheduler and other resources."""
-    # Startup
-    scheduler = SchedulerManager()
+    logger.info("=" * 60)
+    logger.info("  Information Crawler starting")
+    logger.info("=" * 60)
+
+    # Step 1: Validate dependencies
+    startup_issues = await _validate_startup()
+
+    db_available = "database" not in startup_issues
+    if not db_available:
+        logger.warning(
+            "Database unavailable — running in file-only mode. "
+            "Crawl results will be saved as local JSON only."
+        )
+
+    # Step 2: Start scheduler (works with or without DB)
+    scheduler = SchedulerManager(db_available=db_available)
     try:
         await scheduler.start()
-        logger.info("Application startup complete")
     except Exception as e:
         logger.error("Scheduler failed to start: %s", e)
+        scheduler = None
+
+    # Step 3: Initial data population (if fresh install)
+    if scheduler and settings.STARTUP_CRAWL_ENABLED:
+        try:
+            needs_initial = await _check_needs_initial_data()
+            if needs_initial:
+                logger.info(
+                    "Fresh installation detected — triggering initial pipeline"
+                )
+                await scheduler.trigger_pipeline()
+        except Exception as e:
+            logger.warning("Initial data check failed: %s", e)
+
+    # Step 4: Summary
+    if startup_issues:
+        logger.warning("Startup completed with issues: %s", list(startup_issues))
+    else:
+        logger.info("Application startup complete — all checks passed")
 
     yield
 
     # Shutdown
-    try:
-        await scheduler.stop()
-    except Exception as e:
-        logger.error("Scheduler failed to stop cleanly: %s", e)
+    if scheduler:
+        try:
+            await scheduler.stop()
+        except Exception as e:
+            logger.error("Scheduler failed to stop cleanly: %s", e)
 
-    # Close Playwright browser if active
     try:
         from app.crawlers.utils.playwright_pool import close_browser
 

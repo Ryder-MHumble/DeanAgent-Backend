@@ -1,6 +1,6 @@
 # 后续任务清单
 
-> 最后更新: 2026-02-23 (v19: 中国 AI 大厂信源 + content_html 富文本)
+> 最后更新: 2026-02-24 (v20: 统一后端服务 — 5 阶段 Pipeline + 自动化部署)
 > 基于前端 (Dean-Agent) 需求反推的优先级排序
 
 ---
@@ -65,8 +65,8 @@
 - [ ] 内参机会推荐 (LLM)
 
 ### 数据处理
-- [ ] refined/ 数据管线 — 定时将 raw 数据经 LLM 处理后存入 refined/
-- [ ] 缓存层 — LLM 处理结果缓存，避免重复调用
+- [x] ~~refined/ 数据管线~~ — v20: LLM 富化集成到每日 5 阶段 Pipeline（Stage 4），自动处理 policy + personnel，输出到 data/processed/
+- [x] ~~缓存层~~ — v20: LLM 处理结果缓存在 _enriched/ 目录，增量追踪 hash 避免重复调用
 
 ---
 
@@ -77,6 +77,12 @@
 - [ ] 青塔 (Nuxt SPA，需 Playwright 深度适配)
 - [ ] CNIPA 专利公告
 - [ ] 修复 universities 禁用源 (zju, nju, bupt, nankai, nwpu, scu, lzu, zhejianglab, shanghairanking)
+
+### 服务化 / 部署
+- [x] ~~统一后端服务~~ — v20: 5 阶段 Pipeline（爬取→政策→人事→LLM 富化→索引）、启动健康验证、首次部署自动填充数据
+- [x] ~~Pipeline 配置化~~ — v20: PIPELINE_CRON_HOUR/MINUTE 可配置调度时间、ENABLE_LLM_ENRICHMENT 控制 LLM 开关
+- [x] ~~service.sh 增强~~ — v20: init 初始化命令、--production 生产模式、启动后健康检查
+- [x] ~~systemd 部署~~ — v20: deploy/information-crawler.service + deploy/setup.sh 一键部署
 
 ### 基础设施
 - [ ] Alembic 数据库迁移
