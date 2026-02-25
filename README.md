@@ -1,30 +1,52 @@
 # Information Crawler
 
-中关村人工智能研究院**信息监测系统**。自动爬取 134 个信源（109 启用，横跨 9 个维度），通过 v1 REST API（22 端点，含 intel 业务智能 8 端点）供前端查询，同时以 JSON 文件保存至本地。
+中关村人工智能研究院**信息监测系统**。自动爬取 134 个信源（109 启用，横跨 9 个维度），通过 v1 REST API（27 端点，含 intel 业务智能 13 端点）供前端查询，所有数据以本地 JSON 文件存储。
 82 个启用信源已配置 `detail_selectors` 或 RSS/API 自带正文，可自动获取文章正文。
 
-**技术栈**：FastAPI · SQLAlchemy (async) · PostgreSQL (Supabase) · APScheduler 3.x · httpx · BeautifulSoup4 · Playwright · feedparser
+**技术栈**：FastAPI · APScheduler 3.x · httpx · BeautifulSoup4 · Playwright · feedparser · 纯 JSON 存储（无数据库）
 
 ---
 
-## 快速开始
+## 部署
+
+**线上环境已部署：**
+
+| 服务 | 地址 |
+|------|------|
+| 后端 API | <http://43.98.254.243:8001/> |
+| API 文档 | <http://43.98.254.243:8001/docs> |
+| 前端 (Dean-Agent) | <http://43.98.254.243:8080/> |
+
+```bash
+# 服务管理
+./scripts/service.sh init                            # 首次初始化
+./scripts/service.sh start --production              # 生产模式启动
+./scripts/service.sh stop                            # 停止
+./scripts/service.sh restart                         # 重启
+./scripts/service.sh status                          # 查看状态
+./scripts/service.sh logs --follow                   # 持续跟踪日志
+```
+
+---
+
+## 快速开始（本地开发）
 
 ```bash
 # 安装
 pip install -e ".[dev]"
 playwright install chromium
 
-# 配置（必填 DATABASE_URL）
+# 配置
 cp .env.example .env
 
-# 启动（自动同步信源 + 注册调度）
+# 启动（自动注册调度 + 首次数据初始化）
 uvicorn app.main:app --reload
 # API 文档 → http://localhost:8000/docs
 ```
 
-环境要求：Python 3.11+ · PostgreSQL · Node.js（Playwright 需要）
+环境要求：Python 3.11+ · Node.js（Playwright 需要）
 
-完整环境变量见 [.env.example](.env.example)，必填项只有 `DATABASE_URL`。
+完整环境变量见 [.env.example](.env.example)。
 
 ---
 
@@ -50,11 +72,10 @@ uvicorn app.main:app --reload
 |------|----------|
 | HTTP 请求失败 / 被封 / 限速 | `app/crawlers/utils/http_client.py`（重试、UA 轮换、限速） |
 | Playwright 浏览器池异常 | `app/crawlers/utils/playwright_pool.py` |
-| 文章重复入库 / 去重失效 | `app/crawlers/utils/dedup.py` + `app/models/article.py`（url_hash UNIQUE） |
+| 文章重复 / 去重失效 | `app/crawlers/utils/dedup.py`（url_hash SHA-256） |
 | JSON 文件没输出 | `app/crawlers/utils/json_storage.py` |
 | 调度不执行 / 频率不对 | `app/scheduler/manager.py` + YAML 中 `schedule`/`is_enabled` |
-| API 返回异常 | `app/api/v1/{articles,sources,dimensions,health}.py` |
-| 数据库连接失败 | `app/config.py`（DATABASE_URL） + `app/database.py` |
+| API 返回异常 | `app/api/v1/` 各模块 |
 
 ### 调试脚本
 
@@ -62,9 +83,11 @@ uvicorn app.main:app --reload
 |------|------|
 | `scripts/run_single_crawl.py --source <id>` | 隔离测试单个信源 |
 | `scripts/run_all_crawl.py` | 批量运行所有启用信源 |
-| `scripts/seed_sources.py` | YAML → 数据库同步 |
+| `scripts/process_policy_intel.py --dry-run` | 政策智能预览 |
+| `scripts/process_personnel_intel.py --dry-run` | 人事情报预览 |
+| `scripts/process_tech_frontier.py --dry-run` | 科技前沿预览 |
+| `scripts/process_university_eco.py --dry-run` | 高校生态预览 |
 | `scripts/generate_index.py` | 生成 `data/index.json` 索引 |
-| `scripts/migrate_json_to_latest.py` | 日期文件迁移为 `latest.json` 格式 |
 
 ---
 
@@ -145,21 +168,24 @@ graph TD
     Custom --> Base["BaseCrawler<br/>去重 · 计时 · 异常处理"]
     Templates --> Base
 
-    Base --> DB["PostgreSQL (Supabase)<br/>articles · sources<br/>crawl_logs · snapshots"]
     Base --> JSON["本地 JSON<br/>data/raw/{dim}/{group}/{id}/"]
 
-    DB --> CoreAPI["核心 API ×14<br/>/articles · /sources<br/>/dimensions · /health"]
-    DB --> IntelAPI["业务智能 API ×8<br/>/intel/policy · /intel/personnel"]
+    JSON --> Pipeline["9 阶段 Pipeline<br/>规则引擎 + LLM 富化"]
+    Pipeline --> Processed["data/processed/<br/>5 模块处理输出"]
+
+    Processed --> CoreAPI["核心 API ×14<br/>/articles · /sources<br/>/dimensions · /health"]
+    Processed --> IntelAPI["业务智能 API ×13<br/>/intel/policy · /intel/personnel<br/>/intel/tech-frontier · /intel/university<br/>/intel/daily-briefing"]
 
     style YAML fill:#e1f5fe
     style Registry fill:#e8eaf6
     style Base fill:#e8f5e9
-    style DB fill:#fff3e0
+    style JSON fill:#fff3e0
+    style Pipeline fill:#e0f2f1
     style CoreAPI fill:#fce4ec
     style IntelAPI fill:#f3e5f5
 ```
 
-### 数据流（文本版）
+### 数据流
 
 ```
 sources/*.yaml → APScheduler → CrawlerRegistry → 模板/自定义爬虫
@@ -168,13 +194,14 @@ sources/*.yaml → APScheduler → CrawlerRegistry → 模板/自定义爬虫
                                                        ↓
                                                  URL 去重 (SHA-256)
                                                        ↓
-                                   ┌───────────────────┴──────────────────┐
-                                   ↓                                      ↓
-                          PostgreSQL (articles)                 JSON (data/raw/)
-                                   ↓
-                     ┌─────────────┴──────────────┐
-                     ↓                            ↓
-              核心 API (/api/v1)         业务智能 (/api/v1/intel)
+                                              JSON (data/raw/)
+                                                       ↓
+                                              9 阶段 Pipeline
+                                                       ↓
+                               ┌───────────────────────┴───────────────────────┐
+                               ↓                                               ↓
+                      核心 API (/api/v1)                          业务智能 (/api/v1/intel)
+                      14 端点                                     13 端点（5 个模块）
 ```
 
 ### 项目结构
@@ -182,73 +209,69 @@ sources/*.yaml → APScheduler → CrawlerRegistry → 模板/自定义爬虫
 ```text
 app/
 ├── main.py                        # FastAPI 入口 + lifespan（启动 scheduler）
-├── config.py                      # 配置（DATABASE_URL 等）
-├── database.py                    # SQLAlchemy async engine + session
-├── models/                        # 4 张 ORM 表
-│   ├── article.py                 #   articles（url_hash UNIQUE 去重）
-│   ├── source.py                  #   sources（信源注册）
-│   ├── crawl_log.py               #   crawl_logs（爬取日志）
-│   └── snapshot.py                #   snapshots（快照变更）
-├── api/v1/                        # REST API（22 个端点）
+├── config.py                      # 配置
+├── api/v1/                        # REST API（27 个端点）
 │   ├── articles.py                #   /articles CRUD + 搜索 + 统计
 │   ├── sources.py                 #   /sources 管理 + 手动触发
 │   ├── dimensions.py              #   /dimensions 9 维度概览
 │   ├── health.py                  #   /health 健康检查
-│   └── intel/                     #   业务智能子路由
+│   └── intel/                     #   业务智能子路由（5 个模块）
 │       ├── router.py              #     聚合注册
-│       ├── policy.py              #     政策智能（feed/opportunities/stats）
-│       └── personnel.py           #     人事情报（feed/changes/stats/enriched）
+│       ├── policy.py              #     政策智能
+│       ├── personnel.py           #     人事情报
+│       ├── tech_frontier.py       #     科技前沿
+│       ├── university.py          #     高校生态
+│       └── daily_briefing.py      #     每日简报
 ├── crawlers/
 │   ├── base.py                    # BaseCrawler + CrawledItem + CrawlResult
 │   ├── registry.py                # YAML → 爬虫实例路由（双轨：模板 + 自定义）
 │   ├── templates/                 # 4 种模板爬虫
-│   │   ├── static_crawler.py      #   httpx + BS4
-│   │   ├── dynamic_crawler.py     #   Playwright + BS4
-│   │   ├── rss_crawler.py         #   feedparser
-│   │   └── snapshot_crawler.py    #   hashlib + difflib
 │   ├── parsers/                   # 8 个自定义 API Parser
-│   │   ├── gov_json_api.py        #   国务院 JSON 搜索
-│   │   ├── arxiv_api.py           #   ArXiv Atom
-│   │   ├── github_api.py          #   GitHub REST
-│   │   ├── hacker_news_api.py     #   HN Firebase
-│   │   ├── semantic_scholar.py    #   学术搜索
-│   │   ├── twitter_kol.py         #   Twitter KOL
-│   │   ├── twitter_search.py      #   Twitter 搜索
-│   │   └── hunyuan_api.py         #   腾讯混元
 │   └── utils/                     # 共享工具
-│       ├── selector_parser.py     #   列表/详情页解析引擎（static/dynamic 共享）
-│       ├── http_client.py         #   httpx（重试、限速、UA 轮换）
-│       ├── playwright_pool.py     #   Playwright 浏览器池
-│       ├── dedup.py               #   URL 归一化 + SHA-256
-│       ├── json_storage.py        #   JSON 文件输出（latest.json）
-│       ├── html_sanitizer.py      #   HTML 清洗
-│       └── image_extractor.py     #   图片提取
 ├── scheduler/
 │   ├── manager.py                 # 读取 YAML → 注册 APScheduler 任务
-│   └── jobs.py                    # 单次爬取执行 → 持久化
+│   ├── jobs.py                    # 单次爬取执行
+│   └── pipeline.py                # 9 阶段 Pipeline 编排
 ├── services/                      # 核心业务逻辑
 │   ├── article_service.py
 │   ├── source_service.py
 │   ├── crawl_service.py
 │   ├── dimension_service.py
-│   └── intel/                     # 业务智能模块
-│       ├── shared.py              #   共享工具（keyword_score 等）
+│   ├── source_state.py            # 信源运行状态（JSON）
+│   ├── crawl_log_store.py         # 爬取日志（JSON）
+│   ├── json_reader.py             # 原始数据读取
+│   └── intel/                     # 业务智能模块（5 个子包）
+│       ├── shared.py              #   共享工具
+│       ├── pipeline/              #   Pipeline 处理器
+│       │   ├── base.py            #     HashTracker + save_output_json
+│       │   ├── policy_processor.py
+│       │   ├── personnel_processor.py
+│       │   ├── tech_frontier_processor.py
+│       │   ├── university_eco_processor.py
+│       │   └── briefing_processor.py
 │       ├── policy/                #   政策智能（rules + llm + service）
-│       └── personnel/             #   人事情报（rules + llm + service）
+│       ├── personnel/             #   人事情报（rules + llm + service）
+│       ├── tech_frontier/         #   科技前沿（rules + llm + service）
+│       ├── university/            #   高校生态（rules + service）
+│       └── daily_briefing/        #   每日简报（rules + llm + service）
 └── schemas/                       # Pydantic v2 请求/响应
     └── intel/                     # 业务智能 schemas
 
 sources/                           # YAML 配置（每维度一个文件）
 scripts/                           # 运维脚本
-data/raw/                          # 本地 JSON 输出
-data/processed/                    # 业务智能处理输出
+data/
+├── raw/                           # 爬取原始数据
+├── processed/                     # 业务智能处理输出（5 个模块）
+├── state/                         # 运行状态
+├── logs/                          # 爬取日志
+└── index.json                     # 前端索引
 ```
 
 ---
 
 ## API 参考
 
-基础路径 `/api/v1`，启动后访问 `/docs` 查看 Swagger UI。共 22 个端点。
+基础路径 `/api/v1`，Swagger UI：<http://43.98.254.243:8001/docs>。共 27 个端点。
 
 ### 核心端点（14 个）
 
@@ -283,12 +306,12 @@ data/processed/                    # 业务智能处理输出
 
 | 方法 | 路径 | 说明 |
 |------|------|------|
-| GET | `/` | 系统状态（DB + Scheduler） |
+| GET | `/` | 系统状态（Scheduler 运行状态） |
 | GET | `/crawl-status` | 爬取健康（healthy/warning/failing 统计） |
 
-### 业务智能端点（8 个）`/intel`
+### 业务智能端点（13 个）`/intel`
 
-**政策智能 `/intel/policy`**
+**政策智能 `/intel/policy`**（3 端点）
 
 | 方法 | 路径 | 说明 |
 |------|------|------|
@@ -296,7 +319,7 @@ data/processed/                    # 业务智能处理输出
 | GET | `/opportunities` | 政策机会（筛选可申报的资助/项目） |
 | GET | `/stats` | 政策统计（按分类、重要性、时间聚合） |
 
-**人事情报 `/intel/personnel`**
+**人事情报 `/intel/personnel`**（5 端点）
 
 | 方法 | 路径 | 说明 |
 |------|------|------|
@@ -305,6 +328,31 @@ data/processed/                    # 业务智能处理输出
 | GET | `/stats` | 人事统计 |
 | GET | `/enriched-feed` | LLM 富化 Feed（含 relevance/group/actionSuggestion） |
 | GET | `/enriched-stats` | 富化统计 |
+
+**科技前沿 `/intel/tech-frontier`**（4 端点）
+
+| 方法 | 路径 | 说明 |
+|------|------|------|
+| GET | `/topics` | 8 大技术主题（热度趋势、信号、KOL 声音） |
+| GET | `/opportunities` | 技术机会（合作/申报/采购） |
+| GET | `/stats` | 科技前沿 KPI |
+| GET | `/signals` | 技术信号流 |
+
+**高校生态 `/intel/university`**（3 端点）
+
+| 方法 | 路径 | 说明 |
+|------|------|------|
+| GET | `/feed` | 高校动态 Feed |
+| GET | `/overview` | 高校生态总览（分组统计） |
+| GET | `/research-outputs` | 研究成果（论文/专利/获奖分类） |
+
+**每日简报 `/intel/daily-briefing`**（3 端点）
+
+| 方法 | 路径 | 说明 |
+|------|------|------|
+| GET | `/today` | 今日简报 |
+| GET | `/latest` | 最近一期简报 |
+| GET | `/history` | 历史简报列表 |
 
 ---
 
@@ -350,9 +398,9 @@ dynamic 类型额外需要：
 
 ## 数据输出
 
-**数据库**：4 张表 — `articles`（url_hash 去重）· `sources` · `crawl_logs` · `snapshots`
+**纯 JSON 存储**（无数据库）：
 
-**原始 JSON**：`data/raw/{dimension}/{group}/{source_id}/latest.json`（覆盖模式，每条标记 `is_new`）
+**原始数据**：`data/raw/{dimension}/{group}/{source_id}/latest.json`（覆盖模式，每条标记 `is_new`）
 
 ```text
 data/raw/
@@ -367,26 +415,43 @@ data/raw/
 data/processed/
 ├── policy_intel/          # 政策智能
 │   ├── feed.json          #   政策动态（规则引擎 + LLM 评分）
-│   └── opportunities.json #   政策机会（可申报项目）
-└── personnel_intel/       # 人事情报
-    ├── feed.json          #   人事动态
-    ├── changes.json       #   任免变动（正则提取）
-    └── enriched_feed.json #   LLM 富化版
+│   └── opportunities.json #   政策机会
+├── personnel_intel/       # 人事情报
+│   ├── feed.json          #   人事动态
+│   ├── changes.json       #   任免变动（正则提取）
+│   └── enriched_feed.json #   LLM 富化版
+├── tech_frontier/         # 科技前沿
+│   ├── topics.json        #   8 大技术主题
+│   ├── opportunities.json #   技术机会
+│   └── stats.json         #   KPI 指标
+├── university_eco/        # 高校生态
+│   ├── overview.json      #   总览统计
+│   ├── feed.json          #   高校动态
+│   └── research_outputs.json # 研究成果
+└── daily_briefing/        # 每日简报
+    └── briefing.json      #   当日简报
 ```
+
+**运行状态**：`data/state/source_state.json`（信源运行状态）、`data/logs/{source_id}/crawl_logs.json`（爬取日志）
 
 ---
 
-## 部署
+## 每日 Pipeline
 
-```bash
-# Docker
-docker build -t information-crawler .
-docker run -p 8000:8000 --env-file .env information-crawler
+9 阶段自动处理，由 APScheduler 每日触发：
 
-# Render（render.yaml 已配置）
-# 健康检查：/api/v1/health
-# 免费计划建议：MAX_CONCURRENT_CRAWLS=3, PLAYWRIGHT_MAX_CONTEXTS=2
-```
+| 阶段 | 名称 | 说明 |
+|------|------|------|
+| 1 | 爬取 | 运行所有启用信源 |
+| 2 | 政策处理 | 规则引擎评分 |
+| 3 | 人事处理 | 正则提取任免变动 |
+| 4 | 高校生态 | 关键词分类研究成果 |
+| 5 | 科技前沿 | 8 主题匹配 + 热度计算 |
+| 6 | LLM 富化 | 政策 + 人事 + 科技前沿（条件触发） |
+| 7 | 索引生成 | 前端 data/index.json |
+| 8 | 每日简报 | 9 维度汇总叙事 |
+
+LLM 富化阶段由 `ENABLE_LLM_ENRICHMENT` + `OPENROUTER_API_KEY` 共同控制。
 
 ---
 
@@ -394,14 +459,15 @@ docker run -p 8000:8000 --env-file .env information-crawler
 
 **已完成**：
 
-- 4 ORM 表 + 4 种模板爬虫 + 8 个自定义 Parser
+- 4 种模板爬虫 + 8 个自定义 Parser
 - 134 信源配置（109 启用），82 源可获取正文
-- v1 API 22 端点（含 intel 业务智能 8 端点）
-- APScheduler 定时调度 + JSON 本地输出
-- 业务智能：政策智能（规则引擎 + LLM 二级管线）+ 人事情报（正则提取 + LLM 富化）
-- 代码 Review：static/dynamic 共享 selector_parser，消除 ~100 行重复
+- v1 API 27 端点（含 intel 业务智能 13 端点）
+- 9 阶段每日 Pipeline（爬取→处理→LLM→索引→简报）
+- 5 个业务智能模块：政策智能 · 人事情报 · 科技前沿 · 高校生态 · 每日简报
+- 纯 JSON 存储，无数据库依赖
+- 前后端已部署至线上服务器
 
-**待完成**：sentiment 维度扩展 · 部分禁用高校源修复 · Alembic 迁移 · 测试覆盖 · 部署验证
+**待完成**：sentiment 维度扩展 · 部分禁用高校源修复 · 测试覆盖
 
 详见 `docs/TODO.md`。
 

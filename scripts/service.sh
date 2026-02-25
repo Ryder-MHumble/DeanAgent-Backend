@@ -155,6 +155,9 @@ cmd_init() {
     mkdir -p "$PROJECT_DIR/data/raw"
     mkdir -p "$PROJECT_DIR/data/processed/policy_intel"
     mkdir -p "$PROJECT_DIR/data/processed/personnel_intel"
+    mkdir -p "$PROJECT_DIR/data/processed/tech_frontier"
+    mkdir -p "$PROJECT_DIR/data/processed/university_eco"
+    mkdir -p "$PROJECT_DIR/data/processed/daily_briefing"
     mkdir -p "$PROJECT_DIR/data/state"
     mkdir -p "$PROJECT_DIR/data/logs"
     mkdir -p "$PROJECT_DIR/logs"
@@ -184,9 +187,9 @@ cmd_init() {
     green "=== 初始化完成 ==="
     echo ""
     echo "下一步:"
-    echo "  1. 确保 .env 中配置了正确的 DATABASE_URL"
-    echo "  2. 启动服务: ./scripts/service.sh start"
-    echo "  3. 查看文档: http://localhost:8000/docs"
+    echo "  1. 确保 .env 文件已配置 (cp .env.example .env && vi .env)"
+    echo "  2. 启动服务: ./scripts/service.sh start --production"
+    echo "  3. 查看文档: http://localhost:$PORT/docs"
     echo "  4. 首次启动会自动触发全量数据采集 Pipeline"
 }
 

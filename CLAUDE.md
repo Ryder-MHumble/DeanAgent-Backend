@@ -4,9 +4,21 @@
 82 个启用信源已配置 detail_selectors 或 RSS/API 自带正文，可自动获取文章正文（content 字段）。
 技术栈：FastAPI + Local JSON Storage + APScheduler 3.x + httpx + BS4 + Playwright。
 
+## 部署环境
+
+| 服务 | 地址 | 说明 |
+|------|------|------|
+| 后端 API | http://43.98.254.243:8001/ | FastAPI，API 文档：http://43.98.254.243:8001/docs |
+| 前端 | http://43.98.254.243:8080/ | Next.js (Dean-Agent) |
+
+服务器项目路径：
+
+- 后端：`/home/ecs-user/Dean-Agent-Project/DeanAgent-Backend`
+- 前端：`/home/ecs-user/Dean-Agent-Project/Dean-Agent-Fronted`
+
 ## 前端项目
 
-前端项目（院长智能体 Dean-Agent）位于 `/Users/sunminghao/Desktop/Dean-Agent`，使用 Next.js + TypeScript。
+前端项目（院长智能体 Dean-Agent）位于本地 `/Users/sunminghao/Desktop/Dean-Agent`，服务器 `/home/ecs-user/Dean-Agent-Project/Dean-Agent-Fronted`，使用 Next.js + TypeScript。
 当用户提到「前端」时，指的是该项目。
 
 ## ⚠ 每次修改后必须做的事

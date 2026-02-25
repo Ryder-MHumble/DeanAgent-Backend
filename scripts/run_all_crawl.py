@@ -9,12 +9,14 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-logging.basicConfig(
-    level=logging.WARNING,
-    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
-)
-# 只让脚本自身的输出可见，爬虫内部日志静默
-logging.getLogger("app").setLevel(logging.WARNING)
+# Only configure logging when run as a script (not imported by pipeline)
+if __name__ == "__main__":
+    logging.basicConfig(
+        level=logging.WARNING,
+        format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+    )
+    # 只让脚本自身的输出可见，爬虫内部日志静默
+    logging.getLogger("app").setLevel(logging.WARNING)
 
 
 def _display_width(s: str) -> int:

@@ -71,6 +71,8 @@ async def _validate_startup() -> dict[str, str]:
         "data/raw",
         "data/processed/policy_intel",
         "data/processed/personnel_intel",
+        "data/processed/tech_frontier",
+        "data/processed/university_eco",
         "data/processed/daily_briefing",
         "data/state",
         "data/logs",
@@ -97,14 +99,24 @@ async def _validate_startup() -> dict[str, str]:
 
 
 async def _check_needs_initial_data() -> bool:
-    """Check if this is a fresh installation with no crawled data."""
-    raw_dir = BASE_DIR / "data" / "raw"
-    if raw_dir.exists():
-        for child in raw_dir.iterdir():
-            if child.is_dir():
-                for _ in child.rglob("*.json"):
-                    return False
-    return True
+    """Check if processed intel data is missing and pipeline should run.
+
+    Returns True if ANY of these processed output files are missing,
+    meaning the pipeline processing stages have never completed successfully.
+    This handles the case where raw data exists (from individual crawl jobs)
+    but processed data was never generated.
+    """
+    required_files = [
+        "data/processed/policy_intel/feed.json",
+        "data/processed/personnel_intel/feed.json",
+        "data/processed/tech_frontier/topics.json",
+        "data/processed/university_eco/feed.json",
+    ]
+    for rel_path in required_files:
+        if not (BASE_DIR / rel_path).exists():
+            logger.info("Missing processed file: %s — pipeline needed", rel_path)
+            return True
+    return False
 
 
 @asynccontextmanager
@@ -131,7 +143,7 @@ async def lifespan(app: FastAPI):
             needs_initial = await _check_needs_initial_data()
             if needs_initial:
                 logger.info(
-                    "Fresh installation detected — triggering initial pipeline"
+                    "Processed data missing — triggering initial pipeline"
                 )
                 await scheduler.trigger_pipeline()
         except Exception as e:
