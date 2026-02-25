@@ -1,278 +1,187 @@
 #!/usr/bin/env bash
-# ══════════════════════════════════════════════════════════════
-# Information Crawler — 统一部署管理脚本
-#
-# 用法:
-#   ./deploy.sh              智能部署（检测状态，该装装该启启）
-#   ./deploy.sh deploy       同上
-#   ./deploy.sh start        启动服务
-#   ./deploy.sh stop         停止服务
-#   ./deploy.sh restart      重启服务
-#   ./deploy.sh status       查看详细状态
-#   ./deploy.sh logs [-f]    查看日志
-#   ./deploy.sh init         仅初始化（不启动）
-#   ./deploy.sh help         帮助信息
-# ══════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════
+#  Information Crawler — Deploy & Manage
+#  Usage:  ./deploy.sh [command] [options]
+# ═══════════════════════════════════════════════════════════════
 set -euo pipefail
 
-# ── Constants ─────────────────────────────────────────────────
 PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
 VENV_DIR="$PROJECT_DIR/.venv"
 PID_FILE="$PROJECT_DIR/.service.pid"
 LOG_DIR="$PROJECT_DIR/logs"
 LOG_FILE="$LOG_DIR/server.log"
-VERSION=$(grep '^version' "$PROJECT_DIR/pyproject.toml" 2>/dev/null | head -1 | sed 's/.*"\(.*\)".*/\1/' || echo "0.0.0")
+VERSION=$(grep '^version' "$PROJECT_DIR/pyproject.toml" 2>/dev/null \
+    | head -1 | sed 's/.*"\(.*\)".*/\1/' || echo "0.0.0")
 
-# Defaults
 PORT=8001
 WORKERS=1
 TAIL_LINES=50
 FOLLOW=false
 PRODUCTION=false
 
-# ── Colors ────────────────────────────────────────────────────
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[0;33m'
-BLUE='\033[0;34m'
-CYAN='\033[0;36m'
-BOLD='\033[1m'
-DIM='\033[2m'
+# ── ANSI ──────────────────────────────────────────────────────
+R='\033[0;31m';   G='\033[0;32m';  Y='\033[0;33m'
+B='\033[0;34m';   M='\033[0;35m';  C='\033[0;36m'
+W='\033[0;37m';   D='\033[0;90m';  BOLD='\033[1m'
+BG_G='\033[42;30m'; BG_R='\033[41;37m'; BG_Y='\033[43;30m'; BG_B='\033[44;37m'
 NC='\033[0m'
 
-# ── UI Helpers ────────────────────────────────────────────────
-W=62  # box width
+# ── Utilities ─────────────────────────────────────────────────
+_hr()  { printf "${D}"; printf '─%.0s' $(seq 1 60); printf "${NC}\n"; }
+_pad() { printf "%-${1}s" "$2"; }
 
-_repeat() { printf '%*s' "$1" '' | tr ' ' "$2"; }
-
-badge_ok()   { printf "${GREEN}[  OK  ]${NC}"; }
-badge_warn() { printf "${YELLOW}[ WARN ]${NC}"; }
-badge_fail() { printf "${RED}[ FAIL ]${NC}"; }
-badge_skip() { printf "${DIM}[ SKIP ]${NC}"; }
-
-show_header() {
-    local line
-    line=$(_repeat $((W - 2)) "═")
-    echo ""
-    printf "${CYAN}╔${line}╗${NC}\n"
-    printf "${CYAN}║${NC}                                                            ${CYAN}║${NC}\n"
-    printf "${CYAN}║${NC}${BOLD}   Information Crawler  v%s${NC}%*s${CYAN}║${NC}\n" "$VERSION" $((W - 29 - ${#VERSION})) ""
-    printf "${CYAN}║${NC}   中关村人工智能研究院 · 信息监测系统              ${CYAN}║${NC}\n"
-    printf "${CYAN}║${NC}                                                            ${CYAN}║${NC}\n"
-    printf "${CYAN}╚${line}╝${NC}\n"
-    echo ""
-}
-
-section_open() {
-    local title="$1"
-    local tlen=${#title}
-    local dash_right=$((W - 6 - tlen))
-    printf "${BLUE}┌─── %s $(_repeat $dash_right "─")┐${NC}\n" "$title"
-    echo ""
-}
-
-section_mid() {
-    local title="$1"
-    local tlen=${#title}
-    local dash_right=$((W - 6 - tlen))
-    echo ""
-    printf "${BLUE}├─── %s $(_repeat $dash_right "─")┤${NC}\n" "$title"
-    echo ""
-}
-
-section_close() {
-    local line
-    line=$(_repeat $((W - 2)) "─")
-    echo ""
-    printf "${BLUE}└${line}┘${NC}\n"
-}
-
-# Print step line: "  [1/7]  message ............. "  (no newline)
-step() {
-    local n="$1" total="$2" msg="$3"
-    local prefix
-    prefix=$(printf "  [%d/%d]  %s " "$n" "$total" "$msg")
-    local plen=${#prefix}
-    local dots=$((W - plen - 10))
-    [[ $dots -lt 3 ]] && dots=3
-    printf "%s%s " "$prefix" "$(_repeat $dots ".")"
-}
-
-# Print sub-item: "         ├ key .............. "
-sub_item() {
-    local key="$1" last="${2:-false}"
-    local sym="├"
-    [[ "$last" == "true" ]] && sym="└"
-    local prefix
-    prefix=$(printf "         %s %s " "$sym" "$key")
-    local plen=${#prefix}
-    local dots=$((W - plen - 10))
-    [[ $dots -lt 3 ]] && dots=3
-    printf "%s%s " "$prefix" "$(_repeat $dots ".")"
-}
-
-info()    { printf "  ${DIM}%s${NC}\n" "$*"; }
-success() { printf "  ${GREEN}✓  %s${NC}\n" "$*"; }
-warning() { printf "  ${YELLOW}⚠  %s${NC}\n" "$*"; }
-error()   { printf "  ${RED}✗  %s${NC}\n" "$*"; }
+ok()   { printf " ${G}✓${NC}  %b\n" "$*"; }
+warn() { printf " ${Y}!${NC}  %b\n" "$*"; }
+fail() { printf " ${R}✗${NC}  %b\n" "$*"; }
+dim()  { printf " ${D}%b${NC}\n" "$*"; }
 
 spinner() {
     local pid=$1 msg="$2"
-    local frames='⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'
+    local chars='⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'
     local i=0
     while kill -0 "$pid" 2>/dev/null; do
-        printf "\r  ${CYAN}%s${NC} %s" "${frames:i%${#frames}:1}" "$msg"
+        printf "\r ${C}%s${NC} %s" "${chars:i%10:1}" "$msg"
         i=$((i + 1))
-        sleep 0.12
+        sleep 0.1
     done
-    printf "\r%*s\r" $((${#msg} + 6)) ""
+    printf "\r\033[2K"
 }
 
-# ── Environment Functions ─────────────────────────────────────
+# ── Header ────────────────────────────────────────────────────
+show_banner() {
+    printf "\n"
+    printf "${C}${BOLD}"
+    printf "    ╦╔╗╔╔═╗╔═╗  ╔═╗╦═╗╔═╗╦ ╦╦  ╔═╗╦═╗\n"
+    printf "    ║║║║╠╣ ║ ║  ║  ╠╦╝╠═╣║║║║  ║╣ ╠╦╝\n"
+    printf "    ╩╝╚╝╚  ╚═╝  ╚═╝╩╚═╩ ╩╚╩╝╩═╝╚═╝╩╚═\n"
+    printf "${NC}\n"
+    printf "    ${D}中关村人工智能研究院 · 信息监测系统${NC}\n"
+    printf "    ${D}v%s · port %s · %s${NC}\n" "$VERSION" "$PORT" "$(date '+%Y-%m-%d %H:%M')"
+    printf "\n"
+    _hr
+}
+
+# ── Environment ───────────────────────────────────────────────
 validate_python() {
-    local ver
-    ver=$(python3 -c "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')" 2>/dev/null || echo "0.0")
-    if python3 -c "import sys; exit(0 if sys.version_info >= (3, 11) else 1)" 2>/dev/null; then
-        printf "Python %s" "$ver"
-        return 0
-    else
-        printf "Python %s (需要 >= 3.11)" "$ver"
-        return 1
-    fi
+    python3 -c "import sys; exit(0 if sys.version_info >= (3, 11) else 1)" 2>/dev/null
 }
 
-# ensure_venv [--create]
-# --create: create venv if missing (for deploy/init)
-# without --create: fail if missing (for start/stop/etc)
+get_python_ver() {
+    python3 -c "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')" 2>/dev/null || echo "?"
+}
+
 ensure_venv() {
-    local create=false
-    [[ "${1:-}" == "--create" ]] && create=true
-
-    # Already inside correct venv
-    if [[ -n "${VIRTUAL_ENV:-}" && "$VIRTUAL_ENV" == "$VENV_DIR" ]]; then
-        return 0
-    fi
-
-    # Venv exists — activate
-    if [[ -d "$VENV_DIR" && -f "$VENV_DIR/bin/activate" ]]; then
+    local create="${1:-false}"
+    # Already active
+    [[ -n "${VIRTUAL_ENV:-}" && "$VIRTUAL_ENV" == "$VENV_DIR" ]] && return 0
+    # Exists — activate
+    if [[ -f "$VENV_DIR/bin/activate" ]]; then
         # shellcheck disable=SC1091
         source "$VENV_DIR/bin/activate"
         return 0
     fi
-
-    # Venv does not exist
+    # Create
     if [[ "$create" == "true" ]]; then
         python3 -m venv "$VENV_DIR" 2>/dev/null
         # shellcheck disable=SC1091
         source "$VENV_DIR/bin/activate"
-        pip install --upgrade pip --quiet 2>/dev/null
+        pip install --upgrade pip -q 2>/dev/null
         return 0
-    else
-        return 1
     fi
+    return 1
 }
 
-validate_env() {
-    local status=0
-
+validate_env_file() {
     if [[ ! -f "$PROJECT_DIR/.env" ]]; then
-        if [[ -f "$PROJECT_DIR/.env.example" ]]; then
-            cp "$PROJECT_DIR/.env.example" "$PROJECT_DIR/.env"
-            printf "created from .env.example"
-        else
-            printf "missing"
-            return 1
-        fi
+        [[ -f "$PROJECT_DIR/.env.example" ]] && cp "$PROJECT_DIR/.env.example" "$PROJECT_DIR/.env"
         return 0
     fi
-
-    # Clean garbage lines (vim/editor typos)
+    # Clean garbage from bad vim exits
     if grep -qE '^(exit\(\)|q|:q|:wq|:x)\s*$' "$PROJECT_DIR/.env" 2>/dev/null; then
         if [[ "$(uname)" == "Darwin" ]]; then
             sed -i '' '/^exit()$/d; /^q$/d; /^:q$/d; /^:wq$/d; /^:x$/d' "$PROJECT_DIR/.env"
         else
             sed -i '/^exit()$/d; /^q$/d; /^:q$/d; /^:wq$/d; /^:x$/d' "$PROJECT_DIR/.env"
         fi
-        printf "cleaned"
-    else
-        printf "ok"
     fi
-    return $status
 }
 
-check_env_key() {
-    local key="$1"
-    if grep -q "${key}=.\+" "$PROJECT_DIR/.env" 2>/dev/null; then
-        return 0
-    fi
-    return 1
-}
+has_env_key() { grep -q "${1}=.\+" "$PROJECT_DIR/.env" 2>/dev/null; }
 
 install_deps() {
     cd "$PROJECT_DIR"
-    pip install -e ".[dev]" --quiet 2>&1 | tail -1 &
+    pip install -e ".[dev]" -q 2>&1 | tail -1 &
     local pid=$!
-    spinner $pid "Installing dependencies..."
+    spinner $pid "Installing Python dependencies..."
     wait $pid 2>/dev/null
     return ${PIPESTATUS[0]:-0}
 }
 
 check_playwright() {
-    # Test if chromium is usable
-    if python3 -c "
+    python3 -c "
 from playwright.sync_api import sync_playwright
 pw = sync_playwright().start()
 try:
-    b = pw.chromium.launch(headless=True)
-    b.close()
+    b = pw.chromium.launch(headless=True); b.close()
 finally:
     pw.stop()
-" 2>/dev/null; then
-        return 0
-    fi
-    return 1
+" 2>/dev/null
 }
 
 install_playwright() {
     playwright install chromium --with-deps 2>/dev/null &
     local pid=$!
     spinner $pid "Installing Playwright Chromium..."
-    wait $pid 2>/dev/null
-    if [[ $? -ne 0 ]]; then
+    wait $pid 2>/dev/null || {
         playwright install chromium 2>/dev/null &
         pid=$!
-        spinner $pid "Retrying without --with-deps..."
+        spinner $pid "Retrying Playwright install..."
         wait $pid 2>/dev/null
-    fi
+    }
 }
 
-ensure_directories() {
-    local dirs=(
-        "data/raw"
-        "data/processed/policy_intel"
-        "data/processed/personnel_intel"
-        "data/processed/tech_frontier"
-        "data/processed/university_eco"
-        "data/processed/daily_briefing"
-        "data/state"
-        "data/logs"
-        "logs"
-    )
-    for dir in "${dirs[@]}"; do
-        mkdir -p "$PROJECT_DIR/$dir"
+ensure_dirs() {
+    for d in data/raw \
+        data/processed/{policy_intel,personnel_intel,tech_frontier,university_eco,daily_briefing} \
+        data/state data/logs logs; do
+        mkdir -p "$PROJECT_DIR/$d"
     done
 }
 
-# ── Service Functions ─────────────────────────────────────────
-_is_running() {
-    if [[ -f "$PID_FILE" ]]; then
-        local pid
-        pid=$(cat "$PID_FILE")
-        if kill -0 "$pid" 2>/dev/null; then
-            return 0
-        fi
-        rm -f "$PID_FILE"
+# ── Git ───────────────────────────────────────────────────────
+do_git_pull() {
+    cd "$PROJECT_DIR"
+    if ! git rev-parse --is-inside-work-tree &>/dev/null; then
+        warn "Not a git repo — skipping pull"
+        return 0
     fi
+    local branch
+    branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown")
+    local before
+    before=$(git rev-parse HEAD 2>/dev/null)
+
+    printf " ${C}⟳${NC}  Pulling latest code ${D}(%s)${NC}..." "$branch"
+    if git pull --ff-only -q 2>/dev/null; then
+        local after
+        after=$(git rev-parse HEAD 2>/dev/null)
+        if [[ "$before" == "$after" ]]; then
+            printf "\r ${G}✓${NC}  Code is up-to-date ${D}(%s)${NC}        \n" "$branch"
+        else
+            local count
+            count=$(git rev-list "$before".."$after" --count 2>/dev/null || echo "?")
+            printf "\r ${G}✓${NC}  Pulled ${BOLD}%s${NC} new commit(s) ${D}(%s)${NC}       \n" "$count" "$branch"
+        fi
+    else
+        printf "\r ${Y}!${NC}  Pull failed — continuing with local code\n"
+    fi
+}
+
+# ── Service ───────────────────────────────────────────────────
+_is_running() {
+    [[ -f "$PID_FILE" ]] || return 1
+    local pid; pid=$(cat "$PID_FILE")
+    kill -0 "$pid" 2>/dev/null && return 0
+    rm -f "$PID_FILE"
     return 1
 }
 
@@ -281,553 +190,408 @@ _get_pid() { cat "$PID_FILE" 2>/dev/null || echo ""; }
 _pids_on_port() { lsof -ti "tcp:$PORT" 2>/dev/null || true; }
 
 _free_port() {
-    local pids
-    pids=$(_pids_on_port)
+    local pids; pids=$(_pids_on_port)
     [[ -z "$pids" ]] && return 0
-
-    warning "Port $PORT occupied (PIDs: $(echo "$pids" | tr '\n' ' '))"
     echo "$pids" | xargs kill 2>/dev/null || true
     sleep 2
     pids=$(_pids_on_port)
-    if [[ -n "$pids" ]]; then
-        echo "$pids" | xargs kill -9 2>/dev/null || true
-        sleep 1
-    fi
+    [[ -n "$pids" ]] && { echo "$pids" | xargs kill -9 2>/dev/null || true; sleep 1; }
     pids=$(_pids_on_port)
-    if [[ -n "$pids" ]]; then
-        error "Cannot free port $PORT"
-        return 1
+    [[ -n "$pids" ]] && { fail "Cannot free port $PORT"; return 1; }
+    return 0
+}
+
+_stop_service() {
+    if ! _is_running; then
+        _free_port 2>/dev/null || true
+        return 0
     fi
+    local pid; pid=$(_get_pid)
+    kill -- -"$pid" 2>/dev/null || kill "$pid" 2>/dev/null || true
+    local w=0
+    while kill -0 "$pid" 2>/dev/null && [[ $w -lt 10 ]]; do sleep 1; w=$((w+1)); done
+    kill -0 "$pid" 2>/dev/null && { kill -9 -- -"$pid" 2>/dev/null || kill -9 "$pid" 2>/dev/null || true; }
+    rm -f "$PID_FILE"
+    _free_port 2>/dev/null || true
 }
 
-_wait_for_health() {
-    local max_wait=30 waited=0
-    local frames='⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'
-    printf "  Waiting for health check "
-    while [[ $waited -lt $max_wait ]]; do
-        if curl -sf "http://localhost:$PORT/api/v1/health/" >/dev/null 2>&1; then
-            printf "\r"
-            step "$1" "$2" "Health check"
-            badge_ok
-            printf "\n"
-            return 0
-        fi
-        printf "\b${CYAN}%s${NC}" "${frames:waited%${#frames}:1}"
-        sleep 1
-        waited=$((waited + 1))
-    done
-    printf "\r"
-    step "$1" "$2" "Health check"
-    badge_warn
-    printf "\n"
-    info "Service may still be initializing (${max_wait}s timeout)"
-}
-
-_launch_uvicorn() {
+_start_service() {
     mkdir -p "$LOG_DIR"
     _free_port || return 1
     rm -f "$PID_FILE"
 
     local extra_args=()
-    local mode="production"
-    if [[ "$PRODUCTION" != "true" && "$WORKERS" -eq 1 ]]; then
-        extra_args+=(--reload)
-        mode="development"
-    fi
+    [[ "$PRODUCTION" != "true" && "$WORKERS" -eq 1 ]] && extra_args+=(--reload)
 
     cd "$PROJECT_DIR"
     nohup "$VENV_DIR/bin/python" -m uvicorn app.main:app \
-        --host 0.0.0.0 \
-        --port "$PORT" \
-        --workers "$WORKERS" \
-        "${extra_args[@]}" \
-        >> "$LOG_FILE" 2>&1 &
+        --host 0.0.0.0 --port "$PORT" --workers "$WORKERS" \
+        "${extra_args[@]}" >> "$LOG_FILE" 2>&1 &
 
-    local pid=$!
-    echo "$pid" > "$PID_FILE"
+    echo $! > "$PID_FILE"
     sleep 2
-
-    if kill -0 "$pid" 2>/dev/null; then
-        printf "%s  PID %s" "$(badge_ok)" "$pid"
-        return 0
-    else
-        badge_fail
-        printf "  see %s" "$LOG_FILE"
-        rm -f "$PID_FILE"
-        return 1
-    fi
+    kill -0 "$(cat "$PID_FILE")" 2>/dev/null
 }
 
-# ── Status Display ────────────────────────────────────────────
-show_service_status() {
-    section_open "Service Status"
-
-    if _is_running; then
-        local pid etime cpu mem
-        pid=$(_get_pid)
-        etime=$(ps -p "$pid" -o etime= 2>/dev/null | xargs || echo "N/A")
-        cpu=$(ps -p "$pid" -o %cpu= 2>/dev/null | xargs || echo "N/A")
-        mem=$(ps -p "$pid" -o rss= 2>/dev/null | xargs || echo "0")
-        local mem_mb
-        mem_mb=$(echo "$mem" | awk '{printf "%.1f", $1/1024}')
-
-        printf "  ${BOLD}Status:${NC}    ${GREEN}● Running${NC}%*s" 19 ""
-        printf "${BOLD}Port:${NC} %s\n" "$PORT"
-        printf "  ${BOLD}PID:${NC}       %-*s" 28 "$pid"
-        printf "${BOLD}Workers:${NC} %s\n" "$WORKERS"
-        printf "  ${BOLD}Uptime:${NC}    %-*s" 28 "$etime"
-        printf "${BOLD}CPU:${NC} %s%%\n" "$cpu"
-        printf "  ${BOLD}Memory:${NC}    %s MB\n" "$mem_mb"
-        echo ""
-        printf "  ${DIM}API Docs:${NC}  http://localhost:%s/docs\n" "$PORT"
-        printf "  ${DIM}Health:${NC}    http://localhost:%s/api/v1/health/\n" "$PORT"
-    else
-        printf "  ${BOLD}Status:${NC}    ${RED}● Stopped${NC}\n"
-    fi
-}
-
-show_pipeline_status() {
-    local response
-    response=$(curl -sf "http://localhost:$PORT/api/v1/health/pipeline-status" 2>/dev/null) || return 0
-
-    local status
-    status=$(echo "$response" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('status','unknown'))" 2>/dev/null || echo "unknown")
-
-    section_mid "Pipeline"
-
-    if [[ "$status" == "never_run" ]]; then
-        printf "  ${YELLOW}○${NC} Pipeline has not run yet\n"
-        info "It will auto-trigger on first start, or manually:"
-        info "curl -X POST http://localhost:$PORT/api/v1/health/pipeline-trigger"
-    elif [[ "$status" == "success" ]]; then
-        printf "  ${GREEN}●${NC} Last run: ${GREEN}success${NC}\n"
-        echo "$response" | python3 -c "
-import json, sys
-d = json.load(sys.stdin)
-for s in d.get('stages', []):
-    icon = '✓' if s.get('status') == 'success' else ('⊘' if s.get('status') == 'skipped' else '✗')
-    color = '32' if s.get('status') == 'success' else ('90' if s.get('status') == 'skipped' else '31')
-    dur = s.get('duration_seconds', 0)
-    dur_str = f'{dur:.1f}s' if dur else ''
-    print(f'  \033[{color}m{icon}\033[0m  {s[\"name\"]:<30} {dur_str}')
-" 2>/dev/null || true
-    else
-        printf "  ${RED}●${NC} Last run: ${RED}%s${NC}\n" "$status"
-        echo "$response" | python3 -c "
-import json, sys
-d = json.load(sys.stdin)
-for s in d.get('stages', []):
-    if s.get('status') == 'failed':
-        print(f'  \033[31m✗\033[0m  {s[\"name\"]}: {s.get(\"error\", \"unknown\")}')
-" 2>/dev/null || true
-    fi
-}
-
-show_data_stats() {
-    section_mid "Processed Data"
-
-    local modules=("policy_intel:Policy Intel" "personnel_intel:Personnel Intel" "tech_frontier:Tech Frontier" "university_eco:University Eco" "daily_briefing:Daily Briefing")
-    local all_ok=true
-
-    for entry in "${modules[@]}"; do
-        local dir_name="${entry%%:*}"
-        local display="${entry##*:}"
-        local dir="$PROJECT_DIR/data/processed/$dir_name"
-        local count=0
-        if [[ -d "$dir" ]]; then
-            count=$(find "$dir" -name "*.json" -not -name "_*" 2>/dev/null | wc -l | tr -d ' ')
+_wait_health() {
+    local max=30 i=0
+    local chars='⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'
+    printf " ${C}⟳${NC} Waiting for health check..."
+    while [[ $i -lt $max ]]; do
+        if curl -sf "http://localhost:$PORT/api/v1/health/" >/dev/null 2>&1; then
+            printf "\r ${G}✓${NC}  Health check passed           \n"
+            return 0
         fi
-
-        if [[ $count -gt 0 ]]; then
-            printf "  %-24s %2s files %*s" "$display" "$count" $((W - 46)) ""
-            badge_ok
-        else
-            printf "  %-24s    empty %*s" "$display" $((W - 46)) ""
-            badge_warn
-            all_ok=false
-        fi
-        printf "\n"
-    done
-
-    if [[ "$all_ok" == "false" ]]; then
-        echo ""
-        info "Empty modules will be populated when Pipeline runs."
-    fi
-}
-
-# ── Command Implementations ───────────────────────────────────
-cmd_deploy() {
-    local total=7
-    PRODUCTION=true
-
-    show_header
-    section_open "Deploy"
-
-    # [1] Python
-    step 1 $total "Python"
-    local py_info
-    if py_info=$(validate_python); then
-        printf "%s  %s\n" "$(badge_ok)" "$py_info"
-    else
-        printf "%s  %s\n" "$(badge_fail)" "$py_info"
-        error "Python >= 3.11 is required"
-        section_close
-        return 1
-    fi
-
-    # [2] Virtual environment
-    step 2 $total "Virtual environment"
-    if [[ -d "$VENV_DIR" ]]; then
-        ensure_venv --create
-        printf "%s  %s\n" "$(badge_ok)" ".venv (existing)"
-    else
-        ensure_venv --create
-        printf "%s  %s\n" "$(badge_ok)" ".venv (created)"
-    fi
-
-    # [3] Environment file
-    step 3 $total "Environment (.env)"
-    local env_status
-    if env_status=$(validate_env); then
-        printf "%s  %s\n" "$(badge_ok)" "$env_status"
-    else
-        printf "%s  %s\n" "$(badge_fail)" "$env_status"
-        section_close
-        return 1
-    fi
-    # Sub-items for important keys
-    sub_item "OPENROUTER_API_KEY"
-    if check_env_key "OPENROUTER_API_KEY"; then
-        badge_ok
-    else
-        badge_warn
-        printf "  not set (LLM enrichment disabled)"
-    fi
-    printf "\n"
-    sub_item "TWITTER_API_KEY" true
-    if check_env_key "TWITTER_API_KEY"; then
-        badge_ok
-    else
-        badge_warn
-        printf "  not set (Twitter sources disabled)"
-    fi
-    printf "\n"
-
-    # [4] Dependencies
-    step 4 $total "Dependencies"
-    local t_start t_end t_dur
-    t_start=$(date +%s)
-    if install_deps; then
-        t_end=$(date +%s)
-        t_dur=$((t_end - t_start))
-        step 4 $total "Dependencies"
-        printf "%s  %ss\n" "$(badge_ok)" "$t_dur"
-    else
-        step 4 $total "Dependencies"
-        printf "%s\n" "$(badge_fail)"
-        error "pip install failed — check logs"
-        section_close
-        return 1
-    fi
-
-    # [5] Playwright
-    step 5 $total "Playwright Chromium"
-    if check_playwright; then
-        printf "%s\n" "$(badge_ok)"
-    else
-        printf "%s  installing...\n" "$(badge_warn)"
-        install_playwright
-        step 5 $total "Playwright Chromium"
-        if check_playwright; then
-            printf "%s\n" "$(badge_ok)"
-        else
-            printf "%s  dynamic crawls unavailable\n" "$(badge_warn)"
-        fi
-    fi
-
-    # [6] Data directories
-    step 6 $total "Data directories"
-    ensure_directories
-    printf "%s\n" "$(badge_ok)"
-
-    # [7] Service
-    step 7 $total "Service"
-    if _is_running; then
-        local old_pid
-        old_pid=$(_get_pid)
-        printf "%s  restarting (was PID %s)...\n" "$(badge_warn)" "$old_pid"
-        cmd_stop_quiet
+        printf "\r ${C}%s${NC} Waiting for health check..." "${chars:i%10:1}"
         sleep 1
-        step 7 $total "Service"
-        _launch_uvicorn
-        printf "\n"
-    else
-        _launch_uvicorn
-        printf "\n"
-    fi
+        i=$((i+1))
+    done
+    printf "\r ${Y}!${NC}  Health check timeout (%ss)     \n" "$max"
+    return 1
+}
 
-    section_close
-    echo ""
+# ── Dashboard ─────────────────────────────────────────────────
+show_dashboard() {
+    local pid etime cpu mem_kb mem_mb conns log_size
+    printf "\n"
+    printf " ${BOLD}${C}◆ Dashboard${NC}\n"
+    _hr
 
-    # Status display
     if _is_running; then
-        _wait_for_health 0 0 2>/dev/null || true
-        sleep 2
-        show_service_status
-        show_pipeline_status
-        show_data_stats
-        section_close
-        echo ""
-        success "Deploy complete"
+        pid=$(_get_pid)
+        etime=$(ps -p "$pid" -o etime= 2>/dev/null | xargs || echo "-")
+        cpu=$(ps -p "$pid" -o %cpu= 2>/dev/null | xargs || echo "-")
+        mem_kb=$(ps -p "$pid" -o rss= 2>/dev/null | xargs || echo "0")
+        mem_mb=$(echo "$mem_kb" | awk '{printf "%.1f", $1/1024}')
+        conns=$(lsof -i "tcp:$PORT" 2>/dev/null | grep -c ESTABLISHED || echo "0")
+
+        printf "\n"
+        printf "   ${BOLD}SERVICE${NC}\n"
+        printf "   %-18s ${G}● Running${NC}\n" "Status"
+        printf "   %-18s %s\n" "PID" "$pid"
+        printf "   %-18s %s\n" "Port" "$PORT"
+        printf "   %-18s %s\n" "Uptime" "$etime"
+        printf "\n"
+        printf "   ${BOLD}RESOURCES${NC}\n"
+        printf "   %-18s %s%%\n" "CPU" "$cpu"
+        printf "   %-18s %s MB\n" "Memory" "$mem_mb"
+        printf "   %-18s %s\n" "Connections" "$conns"
+
+        if [[ -f "$LOG_FILE" ]]; then
+            log_size=$(du -h "$LOG_FILE" | cut -f1 | xargs)
+            printf "   %-18s %s\n" "Log size" "$log_size"
+        fi
+
+        # Pipeline status
+        local pipe_json
+        pipe_json=$(curl -sf "http://localhost:$PORT/api/v1/health/pipeline-status" 2>/dev/null) || pipe_json=""
+        if [[ -n "$pipe_json" ]]; then
+            printf "\n"
+            printf "   ${BOLD}PIPELINE${NC}\n"
+            echo "$pipe_json" | python3 -c "
+import json, sys
+d = json.load(sys.stdin)
+st = d.get('status', 'unknown')
+color = '32' if st == 'success' else ('33' if st == 'never_run' else '31')
+icon = '●' if st == 'success' else ('○' if st == 'never_run' else '✗')
+print(f'   Status             \033[{color}m{icon} {st}\033[0m')
+dur = d.get('duration_seconds')
+if dur: print(f'   Duration            {dur:.0f}s')
+stages = d.get('stages', [])
+if stages:
+    ok = sum(1 for s in stages if s.get('status') == 'success')
+    total = len(stages)
+    print(f'   Stages              {ok}/{total} passed')
+    for s in stages:
+        si = '✓' if s['status'] == 'success' else ('⊘' if s['status'] == 'skipped' else '✗')
+        sc = '32' if s['status'] == 'success' else ('90' if s['status'] == 'skipped' else '31')
+        print(f'   \033[{sc}m{si}\033[0m {s[\"name\"]}')
+" 2>/dev/null || dim "   (could not parse pipeline status)"
+        fi
+
+        # Processed data
+        printf "\n"
+        printf "   ${BOLD}DATA${NC}\n"
+        local modules=("policy_intel:政策智能" "personnel_intel:人事情报" "tech_frontier:科技前沿" "university_eco:高校生态" "daily_briefing:每日简报")
+        for entry in "${modules[@]}"; do
+            local dname="${entry%%:*}" label="${entry##*:}"
+            local dir="$PROJECT_DIR/data/processed/$dname"
+            local cnt=0
+            [[ -d "$dir" ]] && cnt=$(find "$dir" -name "*.json" -not -name "_*" 2>/dev/null | wc -l | tr -d ' ')
+            if [[ $cnt -gt 0 ]]; then
+                printf "   ${G}●${NC} %-14s %s files\n" "$label" "$cnt"
+            else
+                printf "   ${D}○${NC} %-14s ${D}empty${NC}\n" "$label"
+            fi
+        done
+
+        # Endpoints
+        printf "\n"
+        printf "   ${BOLD}ENDPOINTS${NC}\n"
+        printf "   ${D}Docs${NC}     http://localhost:%s/docs\n" "$PORT"
+        printf "   ${D}Health${NC}   http://localhost:%s/api/v1/health/\n" "$PORT"
+        printf "   ${D}Pipeline${NC} http://localhost:%s/api/v1/health/pipeline-status\n" "$PORT"
     else
-        error "Service failed to start — check: $LOG_FILE"
+        printf "\n"
+        printf "   ${BOLD}SERVICE${NC}\n"
+        printf "   %-18s ${R}● Stopped${NC}\n" "Status"
+        if [[ -f "$LOG_FILE" ]]; then
+            log_size=$(du -h "$LOG_FILE" | cut -f1 | xargs)
+            printf "   %-18s %s\n" "Log size" "$log_size"
+        fi
     fi
 
-    echo ""
-    printf "  ${DIM}Useful commands:${NC}\n"
-    printf "    ./deploy.sh status          Show service status\n"
-    printf "    ./deploy.sh logs -f         Tail logs in real-time\n"
-    printf "    ./deploy.sh restart         Restart service\n"
-    printf "    ./deploy.sh stop            Stop service\n"
-    echo ""
+    printf "\n"
+    _hr
+}
+
+# ── Pipeline Hint ─────────────────────────────────────────────
+_check_pipeline_hint() {
+    # Check if processed data is missing or stale (>24h)
+    local feed="$PROJECT_DIR/data/processed/policy_intel/feed.json"
+    if [[ ! -f "$feed" ]]; then
+        printf "\n"
+        warn "Processed data missing — Pipeline will auto-trigger on startup"
+        dim "   Or trigger manually: curl -X POST http://localhost:$PORT/api/v1/health/pipeline-trigger"
+        return
+    fi
+
+    # Check freshness: if feed.json is older than 24 hours
+    local now file_ts age_hours
+    now=$(date +%s)
+    if [[ "$(uname)" == "Darwin" ]]; then
+        file_ts=$(stat -f %m "$feed" 2>/dev/null || echo "$now")
+    else
+        file_ts=$(stat -c %Y "$feed" 2>/dev/null || echo "$now")
+    fi
+    age_hours=$(( (now - file_ts) / 3600 ))
+    if [[ $age_hours -gt 24 ]]; then
+        printf "\n"
+        warn "Pipeline data is ${BOLD}${age_hours}h${NC}${Y} old — consider re-running:${NC}"
+        dim "   curl -X POST http://localhost:$PORT/api/v1/health/pipeline-trigger"
+    fi
+}
+
+# ── Commands ──────────────────────────────────────────────────
+cmd_deploy() {
+    PRODUCTION=true
+    show_banner
+
+    printf "\n ${BOLD}${C}◆ Deploy${NC}\n"
+    _hr
+    printf "\n"
+
+    # 1. Git pull
+    do_git_pull
+
+    # 2. Python
+    if validate_python; then
+        ok "Python $(get_python_ver)"
+    else
+        fail "Python >= 3.11 required (found $(get_python_ver))"
+        return 1
+    fi
+
+    # 3. Venv
+    if [[ -f "$VENV_DIR/bin/activate" ]]; then
+        ensure_venv true
+        ok "Virtual environment ${D}.venv${NC}"
+    else
+        ensure_venv true
+        ok "Virtual environment ${D}.venv (created)${NC}"
+    fi
+
+    # 4. .env
+    validate_env_file
+    if [[ -f "$PROJECT_DIR/.env" ]]; then
+        ok "Environment file ${D}.env${NC}"
+        if has_env_key "OPENROUTER_API_KEY"; then
+            dim "   OPENROUTER_API_KEY configured"
+        else
+            warn "OPENROUTER_API_KEY not set — LLM enrichment disabled"
+        fi
+        if has_env_key "TWITTER_API_KEY"; then
+            dim "   TWITTER_API_KEY configured"
+        else
+            warn "TWITTER_API_KEY not set — Twitter sources disabled"
+        fi
+    else
+        fail "No .env file"
+        return 1
+    fi
+
+    # 5. Dependencies
+    local t0; t0=$(date +%s)
+    if install_deps; then
+        ok "Dependencies installed ${D}$(($(date +%s) - t0))s${NC}"
+    else
+        fail "pip install failed"
+        return 1
+    fi
+
+    # 6. Directories
+    ensure_dirs
+    ok "Data directories"
+
+    # 7. Service
+    printf "\n"
+    if _is_running; then
+        local old_pid; old_pid=$(_get_pid)
+        printf " ${Y}⟳${NC}  Restarting service ${D}(was PID %s)${NC}...\n" "$old_pid"
+        _stop_service
+        sleep 1
+    fi
+
+    if _start_service; then
+        ok "Service started ${D}PID $(cat "$PID_FILE")${NC}"
+    else
+        fail "Service failed to start — check logs/$LOG_FILE"
+        return 1
+    fi
+
+    # 9. Health
+    _wait_health || true
+
+    # Dashboard
+    show_dashboard
+
+    # Check if pipeline data might be stale
+    _check_pipeline_hint
+
+    printf " ${G}${BOLD}Deploy complete.${NC}\n\n"
+    dim "  ./deploy.sh status    View dashboard"
+    dim "  ./deploy.sh logs -f   Follow logs"
+    dim "  ./deploy.sh stop      Stop service"
+    printf "\n"
 }
 
 cmd_init() {
-    local total=6
+    show_banner
 
-    show_header
-    section_open "Initialize"
+    printf "\n ${BOLD}${C}◆ Initialize${NC}\n"
+    _hr
+    printf "\n"
 
-    # [1] Python
-    step 1 $total "Python"
-    local py_info
-    if py_info=$(validate_python); then
-        printf "%s  %s\n" "$(badge_ok)" "$py_info"
+    if validate_python; then
+        ok "Python $(get_python_ver)"
     else
-        printf "%s  %s\n" "$(badge_fail)" "$py_info"
-        error "Python >= 3.11 is required"
-        section_close
-        return 1
+        fail "Python >= 3.11 required"; return 1
     fi
 
-    # [2] Virtual environment
-    step 2 $total "Virtual environment"
-    if [[ -d "$VENV_DIR" ]]; then
-        ensure_venv --create
-        printf "%s  %s\n" "$(badge_ok)" ".venv (existing)"
-    else
-        ensure_venv --create
-        printf "%s  %s\n" "$(badge_ok)" ".venv (created)"
-    fi
+    ensure_venv true
+    ok "Virtual environment"
 
-    # [3] Environment file
-    step 3 $total "Environment (.env)"
-    local env_status
-    if env_status=$(validate_env); then
-        printf "%s  %s\n" "$(badge_ok)" "$env_status"
-    else
-        printf "%s  %s\n" "$(badge_fail)" "$env_status"
-    fi
+    validate_env_file
+    ok "Environment file"
 
-    # [4] Dependencies
-    step 4 $total "Dependencies"
-    local t_start t_end t_dur
-    t_start=$(date +%s)
-    if install_deps; then
-        t_end=$(date +%s)
-        t_dur=$((t_end - t_start))
-        step 4 $total "Dependencies"
-        printf "%s  %ss\n" "$(badge_ok)" "$t_dur"
-    else
-        step 4 $total "Dependencies"
-        printf "%s\n" "$(badge_fail)"
-    fi
+    local t0; t0=$(date +%s)
+    install_deps && ok "Dependencies ${D}$(($(date +%s) - t0))s${NC}" || fail "pip install failed"
 
-    # [5] Playwright
-    step 5 $total "Playwright Chromium"
     if check_playwright; then
-        printf "%s\n" "$(badge_ok)"
+        ok "Playwright Chromium"
     else
-        printf "%s  installing...\n" "$(badge_warn)"
         install_playwright
-        step 5 $total "Playwright Chromium"
-        if check_playwright; then
-            printf "%s\n" "$(badge_ok)"
-        else
-            printf "%s  dynamic crawls unavailable\n" "$(badge_warn)"
-        fi
+        check_playwright && ok "Playwright Chromium" || warn "Playwright unavailable"
     fi
 
-    # [6] Data directories
-    step 6 $total "Data directories"
-    ensure_directories
-    printf "%s\n" "$(badge_ok)"
+    ensure_dirs
+    ok "Data directories"
 
-    section_close
-    echo ""
-    success "Initialization complete"
-    echo ""
-    printf "  ${DIM}Next steps:${NC}\n"
-    printf "    1. Edit .env:          vi .env\n"
-    printf "    2. Start service:      ./deploy.sh start\n"
-    printf "    3. Or full deploy:     ./deploy.sh deploy\n"
-    echo ""
+    printf "\n"
+    _hr
+    printf "\n ${G}${BOLD}Init complete.${NC} Next:\n\n"
+    dim "  vi .env               Edit config"
+    dim "  ./deploy.sh           Full deploy"
+    dim "  ./deploy.sh start     Start only"
+    printf "\n"
 }
 
 cmd_start() {
-    show_header
+    show_banner
 
     if ! ensure_venv; then
-        error "Virtual environment not found. Run: ./deploy.sh init"
+        fail "No virtual environment. Run: ./deploy.sh init"
         return 1
     fi
 
     if _is_running; then
-        warning "Service already running (PID $(_get_pid))"
-        cmd_status_compact
+        warn "Already running (PID $(_get_pid))"
+        show_dashboard
         return 0
     fi
 
     PRODUCTION=true
-    printf "  Starting service (port %s, production mode)...\n" "$PORT"
-    _launch_uvicorn
-    printf "\n"
+    printf " ${C}⟳${NC}  Starting service...\n"
 
-    if _is_running; then
-        _wait_for_health 0 0 2>/dev/null || true
-        sleep 1
-        echo ""
-        success "Service started"
-        printf "  ${DIM}API Docs: http://localhost:%s/docs${NC}\n" "$PORT"
-        printf "  ${DIM}Logs:     ./deploy.sh logs -f${NC}\n"
+    if _start_service; then
+        ok "Service started ${D}PID $(cat "$PID_FILE")${NC}"
+        _wait_health || true
+        show_dashboard
+    else
+        fail "Failed to start — check $LOG_FILE"
     fi
-    echo ""
-}
-
-# Stop without output (used by deploy restart)
-cmd_stop_quiet() {
-    if ! _is_running; then
-        local orphans
-        orphans=$(_pids_on_port)
-        if [[ -n "$orphans" ]]; then
-            _free_port
-        fi
-        return 0
-    fi
-
-    local pid
-    pid=$(_get_pid)
-    kill -- -"$pid" 2>/dev/null || kill "$pid" 2>/dev/null || true
-    local waited=0
-    while kill -0 "$pid" 2>/dev/null && [[ $waited -lt 10 ]]; do
-        sleep 1
-        waited=$((waited + 1))
-    done
-    if kill -0 "$pid" 2>/dev/null; then
-        kill -9 -- -"$pid" 2>/dev/null || kill -9 "$pid" 2>/dev/null || true
-    fi
-    rm -f "$PID_FILE"
-    _free_port 2>/dev/null || true
 }
 
 cmd_stop() {
-    show_header
+    show_banner
 
     if ! _is_running; then
-        local orphans
-        orphans=$(_pids_on_port)
+        local orphans; orphans=$(_pids_on_port)
         if [[ -n "$orphans" ]]; then
-            warning "No PID file, but port $PORT is occupied — cleaning up"
+            warn "No PID file, but port $PORT occupied"
             _free_port
-            success "Port freed"
+            ok "Port freed"
         else
-            info "Service is not running"
+            dim "Service is not running."
         fi
-        echo ""
         return 0
     fi
 
-    local pid
-    pid=$(_get_pid)
-    printf "  Stopping service (PID %s) ...\n" "$pid"
-    cmd_stop_quiet
-    success "Service stopped"
-    echo ""
+    local pid; pid=$(_get_pid)
+    printf " ${C}⟳${NC}  Stopping service (PID %s)...\n" "$pid"
+    _stop_service
+    ok "Service stopped"
 }
 
 cmd_restart() {
-    show_header
+    show_banner
 
     if ! ensure_venv; then
-        error "Virtual environment not found. Run: ./deploy.sh init"
+        fail "No virtual environment. Run: ./deploy.sh init"
         return 1
     fi
 
     PRODUCTION=true
 
     if _is_running; then
-        local pid
-        pid=$(_get_pid)
-        printf "  Restarting service (PID %s) ...\n" "$pid"
-        cmd_stop_quiet
+        local pid; pid=$(_get_pid)
+        printf " ${C}⟳${NC}  Restarting (PID %s)...\n" "$pid"
+        _stop_service
         sleep 1
-    else
-        printf "  Service not running, starting...\n"
     fi
 
-    _launch_uvicorn
-    printf "\n"
-
-    if _is_running; then
-        _wait_for_health 0 0 2>/dev/null || true
-        sleep 1
-        echo ""
-        success "Service restarted"
-        printf "  ${DIM}API Docs: http://localhost:%s/docs${NC}\n" "$PORT"
-    fi
-    echo ""
-}
-
-cmd_status_compact() {
-    if _is_running; then
-        local pid etime
-        pid=$(_get_pid)
-        etime=$(ps -p "$pid" -o etime= 2>/dev/null | xargs || echo "N/A")
-        printf "  ${GREEN}●${NC} Running — PID %s, port %s, uptime %s\n" "$pid" "$PORT" "$etime"
+    if _start_service; then
+        ok "Service started ${D}PID $(cat "$PID_FILE")${NC}"
+        _wait_health || true
+        show_dashboard
     else
-        printf "  ${RED}●${NC} Stopped\n"
+        fail "Failed to start — check $LOG_FILE"
     fi
 }
 
 cmd_status() {
-    show_header
-    show_service_status
-
-    if _is_running; then
-        show_pipeline_status
-        show_data_stats
-    fi
-
-    section_close
-
-    # Log info
-    if [[ -f "$LOG_FILE" ]]; then
-        echo ""
-        local log_size
-        log_size=$(du -h "$LOG_FILE" | cut -f1)
-        info "Log file: $LOG_FILE ($log_size)"
-    fi
-    echo ""
+    show_banner
+    show_dashboard
 }
 
 cmd_logs() {
     if [[ ! -f "$LOG_FILE" ]]; then
-        warning "Log file not found: $LOG_FILE"
+        warn "Log file not found: $LOG_FILE"
         return 0
     fi
-
     if [[ "$FOLLOW" == "true" ]]; then
-        printf "  ${DIM}Tailing %s (Ctrl+C to stop)${NC}\n\n" "$LOG_FILE"
+        dim "Tailing $LOG_FILE (Ctrl+C to stop)"
+        printf "\n"
         tail -n "$TAIL_LINES" -f "$LOG_FILE"
     else
         tail -n "$TAIL_LINES" "$LOG_FILE"
@@ -835,39 +599,34 @@ cmd_logs() {
 }
 
 cmd_help() {
-    show_header
-    printf "  ${BOLD}Usage:${NC}  ./deploy.sh <command> [options]\n"
-    printf "\n"
-    printf "  ${BOLD}Commands:${NC}\n"
-    printf "\n"
-    printf "    ${GREEN}deploy${NC}       Full deploy: venv + deps + Playwright + start\n"
-    printf "                 (default when no command given)\n"
-    printf "    ${GREEN}init${NC}         Initialize environment only (no start)\n"
-    printf "    ${GREEN}start${NC}        Start service\n"
-    printf "    ${GREEN}stop${NC}         Stop service\n"
-    printf "    ${GREEN}restart${NC}      Restart service\n"
-    printf "    ${GREEN}status${NC}       Show detailed status\n"
-    printf "    ${GREEN}logs${NC}         View service logs\n"
-    printf "    ${GREEN}help${NC}         Show this help\n"
-    printf "\n"
-    printf "  ${BOLD}Options:${NC}\n"
-    printf "\n"
-    printf "    --port N         Listen port (default: %s)\n" "$PORT"
-    printf "    --workers N      Worker count (default: %s)\n" "$WORKERS"
-    printf "    --production     Production mode (no auto-reload)\n"
-    printf "    --tail N         Log lines to show (default: %s)\n" "$TAIL_LINES"
-    printf "    --follow, -f     Follow log output\n"
-    printf "\n"
-    printf "  ${BOLD}Examples:${NC}\n"
-    printf "\n"
-    printf "    ./deploy.sh                     Smart deploy (most common)\n"
-    printf "    ./deploy.sh start --port 8080   Start on custom port\n"
-    printf "    ./deploy.sh logs -f             Tail logs\n"
-    printf "    ./deploy.sh status              Check everything\n"
+    show_banner
+    printf " ${BOLD}Usage${NC}  ./deploy.sh ${D}[command] [options]${NC}\n\n"
+
+    printf " ${BOLD}Commands${NC}\n\n"
+    printf "   ${G}deploy${NC}     Full deploy: pull → venv → deps → start  ${D}(default)${NC}\n"
+    printf "   ${G}init${NC}       Initialize environment only\n"
+    printf "   ${G}start${NC}      Start service\n"
+    printf "   ${G}stop${NC}       Stop service\n"
+    printf "   ${G}restart${NC}    Restart service\n"
+    printf "   ${G}status${NC}     Show dashboard\n"
+    printf "   ${G}logs${NC}       View logs ${D}(-f to follow)${NC}\n"
+    printf "   ${G}help${NC}       This message\n"
+
+    printf "\n ${BOLD}Options${NC}\n\n"
+    printf "   --port N          Listen port ${D}(default: %s)${NC}\n" "$PORT"
+    printf "   --workers N       Worker count ${D}(default: %s)${NC}\n" "$WORKERS"
+    printf "   --production      Disable auto-reload\n"
+    printf "   --tail N          Log lines ${D}(default: %s)${NC}\n" "$TAIL_LINES"
+    printf "   -f, --follow      Follow log output\n"
+
+    printf "\n ${BOLD}Examples${NC}\n\n"
+    printf "   ${D}\$${NC} ./deploy.sh              ${D}# one-command deploy${NC}\n"
+    printf "   ${D}\$${NC} ./deploy.sh logs -f       ${D}# follow logs${NC}\n"
+    printf "   ${D}\$${NC} ./deploy.sh status         ${D}# view dashboard${NC}\n"
     printf "\n"
 }
 
-# ── Argument Parsing ──────────────────────────────────────────
+# ── Parse Args ────────────────────────────────────────────────
 COMMAND="${1:-deploy}"
 shift 2>/dev/null || true
 
@@ -878,18 +637,18 @@ while [[ $# -gt 0 ]]; do
         --tail)       TAIL_LINES="$2"; shift 2 ;;
         --follow|-f)  FOLLOW=true; shift ;;
         --production) PRODUCTION=true; shift ;;
-        *) error "Unknown option: $1"; cmd_help; exit 1 ;;
+        *) fail "Unknown option: $1"; cmd_help; exit 1 ;;
     esac
 done
 
 case "$COMMAND" in
-    deploy)  cmd_deploy ;;
-    init)    cmd_init ;;
-    start)   cmd_start ;;
-    stop)    cmd_stop ;;
-    restart) cmd_restart ;;
-    status)  cmd_status ;;
-    logs)    cmd_logs ;;
+    deploy)         cmd_deploy ;;
+    init)           cmd_init ;;
+    start)          cmd_start ;;
+    stop)           cmd_stop ;;
+    restart)        cmd_restart ;;
+    status)         cmd_status ;;
+    logs)           cmd_logs ;;
     help|--help|-h) cmd_help ;;
-    *)       error "Unknown command: $COMMAND"; cmd_help; exit 1 ;;
+    *)              fail "Unknown: $COMMAND"; cmd_help; exit 1 ;;
 esac
