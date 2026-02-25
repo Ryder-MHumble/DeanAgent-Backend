@@ -48,6 +48,17 @@ TAG_METADATA = [
         "description": "人事情报 — 自动提取任免信息，LLM 富化分析。"
         "提供人事动态 Feed、结构化任免变动、LLM 富化 Feed（含相关性评分/行动建议）和统计。",
     },
+    {
+        "name": "daily-briefing",
+        "description": "AI 早报 — LLM 生成的每日简报，包含叙事段落（带交互链接）和聚合指标卡片。"
+        "数据来自全部 9 个维度的爬取结果和已处理的政策/人事情报。",
+    },
+    {
+        "name": "university-eco",
+        "description": "高校生态 — 45 所高校及 AI 研究机构新闻动态监测。"
+        "提供总览仪表盘、分页文章 Feed（支持分组/信源/关键词/日期过滤）、"
+        "文章详情和信源状态。",
+    },
 ]
 
 
@@ -60,6 +71,7 @@ async def _validate_startup() -> dict[str, str]:
         "data/raw",
         "data/processed/policy_intel",
         "data/processed/personnel_intel",
+        "data/processed/daily_briefing",
         "data/state",
         "data/logs",
     ]:

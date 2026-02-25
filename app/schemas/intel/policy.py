@@ -15,7 +15,7 @@ class PolicyFeedItem(BaseModel):
         examples=["关于印发《新一代人工智能发展规划》的通知"],
     )
     summary: str = Field(description="政策摘要")
-    category: Literal["国家政策", "北京政策", "领导讲话", "政策机会"] = Field(
+    category: Literal["国家政策", "北京政策", "领导讲话", "政策机会", "一般"] = Field(
         description="政策分类"
     )
     importance: Literal["紧急", "重要", "关注", "一般"] = Field(

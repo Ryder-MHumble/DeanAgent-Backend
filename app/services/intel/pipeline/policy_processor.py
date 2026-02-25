@@ -18,7 +18,7 @@ from app.services.json_reader import get_articles
 
 logger = logging.getLogger(__name__)
 
-DIMENSIONS = ["national_policy", "beijing_policy", "personnel"]
+DIMENSIONS = ["national_policy", "beijing_policy"]
 PROCESSED_DIR = BASE_DIR / "data" / "processed" / "policy_intel"
 ENRICHED_DIR = PROCESSED_DIR / "_enriched"
 HASHES_FILE = PROCESSED_DIR / "_processed_hashes.json"
@@ -115,11 +115,6 @@ def _determine_category(article: dict, llm_result: dict) -> str:
     if llm_result.get("isOpportunity"):
         return "政策机会"
     dim = article.get("dimension", "")
-    group = article.get("group", "")
-    if dim == "personnel":
-        return "领导讲话"
-    if dim == "beijing_policy" and group == "news_personnel":
-        return "领导讲话"
     if dim == "beijing_policy":
         return "北京政策"
     if dim == "national_policy":
@@ -251,6 +246,12 @@ async def process_policy_pipeline(
         logger.info("Policy pipeline: loaded %d articles from %s", len(articles), dim)
         all_articles.extend(articles)
 
+    # Exclude personnel-related groups (belong in personnel pipeline)
+    all_articles = [
+        a for a in all_articles
+        if not (a.get("dimension") == "beijing_policy" and a.get("group") == "news_personnel")
+    ]
+
     # Deduplicate by url_hash
     seen: set[str] = set()
     unique_articles: list[dict] = []
@@ -285,8 +286,12 @@ async def process_policy_pipeline(
         _save_processed_hashes(all_hashes)
         logger.info("Policy pipeline: scored %d new articles", len(new_hashes))
 
-    # Rebuild output files from ALL enriched data
-    all_enriched = _load_all_enriched()
+    # Rebuild output files from ALL enriched data (excluding personnel)
+    all_enriched = [
+        (a, llm) for a, llm in _load_all_enriched()
+        if a.get("dimension") not in ("personnel",)
+        and not (a.get("dimension") == "beijing_policy" and a.get("group") == "news_personnel")
+    ]
     feed_count, opp_count = _rebuild_output_files(all_enriched)
 
     return {

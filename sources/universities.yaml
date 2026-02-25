@@ -380,9 +380,11 @@ sources:
     priority: 2
     is_enabled: true
     selectors:
-      list_item: "div.i-list a"
-      title: "_self"
-      link: "_self"
+      list_item: "div.i-list ul li"
+      title: "h3"
+      link: "a"
+      date: "em"
+      date_format: "%Y-%m-%d"
     base_url: "https://www.view.sdu.edu.cn/"
     keyword_filter: []
     detail_selectors:
@@ -462,17 +464,18 @@ sources:
     tags: ["university", "xidian", "news"]
 
   - id: "xjtu_news"
-    name: "西安交通大学新闻网"
+    name: "西安交通大学新闻网-要闻聚焦"
     group: "university_news"
-    url: "https://news.xjtu.edu.cn/"
+    url: "https://news.xjtu.edu.cn/ywjj.htm"
     crawl_method: "static"
     schedule: "daily"
     priority: 2
     is_enabled: true
     selectors:
-      list_item: "div.bd ul li"
-      title: "a"
-      link: "a"
+      list_item: "ul.listq1-3 li"
+      title: "a.tit"
+      link: "a.tit"
+      date: "a.dateyw"
     base_url: "https://news.xjtu.edu.cn"
     keyword_filter: []
     detail_selectors:

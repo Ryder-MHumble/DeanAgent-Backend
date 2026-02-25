@@ -1,8 +1,13 @@
 # Information Crawler — AI 开发上下文
 
-中关村人工智能研究院信息监测系统。134 信源（109 启用）× 9 维度，5 种模板爬虫 + 8 个自定义 Parser，v1 API 22 端点（含 intel 业务智能 8 端点）。
+中关村人工智能研究院信息监测系统。134 信源（109 启用）× 9 维度，5 种模板爬虫 + 8 个自定义 Parser，v1 API 27 端点（含 intel 业务智能 13 端点）。
 82 个启用信源已配置 detail_selectors 或 RSS/API 自带正文，可自动获取文章正文（content 字段）。
 技术栈：FastAPI + Local JSON Storage + APScheduler 3.x + httpx + BS4 + Playwright。
+
+## 前端项目
+
+前端项目（院长智能体 Dean-Agent）位于 `/Users/sunminghao/Desktop/Dean-Agent`，使用 Next.js + TypeScript。
+当用户提到「前端」时，指的是该项目。
 
 ## ⚠ 每次修改后必须做的事
 
@@ -95,7 +100,8 @@ data/
 ├── raw/{dimension}/{group?}/{source_id}/latest.json   # 爬取原始数据
 ├── processed/
 │   ├── policy_intel/                                   # 政策智能处理输出
-│   └── personnel_intel/                                # 人事情报处理输出
+│   ├── personnel_intel/                                # 人事情报处理输出
+│   └── tech_frontier/                                  # 科技前沿处理输出
 ├── state/
 │   ├── source_state.json           # 信源运行状态（last_crawl_at, failures, is_enabled_override）
 │   ├── article_annotations.json    # 文章标注（is_read, importance）
@@ -141,6 +147,7 @@ twitter         → sources/twitter.yaml         (7 源, 7 启用, 需 API key)
 app/api/v1/intel/router.py          → intel 子路由（聚合所有业务智能端点）
 app/api/v1/intel/policy.py          → 政策智能 API (feed/opportunities/stats)
 app/api/v1/intel/personnel.py       → 人事情报 API (feed/changes/stats/enriched-feed/enriched-stats)
+app/api/v1/intel/tech_frontier.py   → 科技前沿 API (topics/opportunities/stats/signals)
 
 app/services/intel/shared.py        → 共享工具（keyword_score, extract_*, load_intel_json）
 app/services/intel/policy/rules.py  → 政策规则引擎（Tier 1 评分）
@@ -149,15 +156,21 @@ app/services/intel/policy/service.py→ 政策数据服务（读 processed JSON�
 app/services/intel/personnel/rules.py  → 人事规则引擎（任免正则提取）
 app/services/intel/personnel/llm.py    → 人事 LLM 富化（Tier 2，relevance/group/actionSuggestion）
 app/services/intel/personnel/service.py→ 人事数据服务
+app/services/intel/tech_frontier/rules.py  → 科技前沿规则引擎（8 主题关键词匹配 + 热度计算）
+app/services/intel/tech_frontier/llm.py    → 科技前沿 LLM 富化（Tier 2，aiSummary/aiInsight/memoSuggestion）
+app/services/intel/tech_frontier/service.py→ 科技前沿数据服务
 
 app/schemas/intel/policy.py         → 政策 Pydantic schemas
 app/schemas/intel/personnel.py      → 人事 Pydantic schemas（含 PersonnelChangeEnriched）
+app/schemas/intel/tech_frontier.py  → 科技前沿 Pydantic schemas（TechTopic/Opportunity/SignalItem）
 
 scripts/process_policy_intel.py     → 政策数据处理脚本（两级管线）
 scripts/process_personnel_intel.py  → 人事数据处理脚本（规则 + --enrich LLM）
+scripts/process_tech_frontier.py    → 科技前沿处理脚本（规则 + --enrich LLM）
 
 data/processed/policy_intel/        → 政策处理输出 (feed.json, opportunities.json)
 data/processed/personnel_intel/     → 人事处理输出 (feed.json, changes.json, enriched_feed.json)
+data/processed/tech_frontier/       → 科技前沿输出 (topics.json, opportunities.json, stats.json)
 ```
 
 新增业务智能模块时，在 `services/intel/` 下新建子包，在 `api/v1/intel/` 添加端点，在 `intel/router.py` 注册子路由。
@@ -229,7 +242,7 @@ data/processed/personnel_intel/     → 人事处理输出 (feed.json, changes.j
 7. **JSON 级去重** — `json_storage.py` 通过对比 previous latest.json 的 url_hashes 标记 is_new
 8. **static/dynamic 共享解析逻辑** — `selector_parser.py` 提取公共函数，消除两个模板间 ~100 行重复代码
 9. **业务智能模块子包结构** — `services/intel/{domain}/` 每个维度一个子包（rules + service + llm），共享工具在 `shared.py`，避免 services/ 膨胀
-10. **每日 Pipeline 5 阶段** — 爬取→政策处理→人事处理→LLM 富化（条件）→索引生成，Stage 4 由 `ENABLE_LLM_ENRICHMENT` + `OPENROUTER_API_KEY` 共同控制
+10. **每日 Pipeline 9 阶段** — 爬取→政策处理→人事处理→高校生态→科技前沿→LLM 富化（条件：policy+personnel+tech_frontier）→索引生成→每日简报，Stage 4 由 `ENABLE_LLM_ENRICHMENT` + `OPENROUTER_API_KEY` 共同控制
 11. **APScheduler 单 worker 限制** — 3.x 不支持多进程协调，`--workers 1` 是唯一安全配置
 12. **首次启动自动触发 Pipeline** — `_check_needs_initial_data()` 检测空数据后异步触发，API 不阻塞
 13. **文章 ID 使用 url_hash** — 64 字符 SHA-256 hex 字符串，替代原 DB 自增 ID

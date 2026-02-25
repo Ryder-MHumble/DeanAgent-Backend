@@ -1,6 +1,6 @@
 # 后续任务清单
 
-> 最后更新: 2026-02-24 (v20: 统一后端服务 — 5 阶段 Pipeline + 自动化部署)
+> 最后更新: 2026-02-25 (v21: 科技前沿模块 — 8 主题分类 + 热度趋势 + 9 阶段 Pipeline)
 > 基于前端 (Dean-Agent) 需求反推的优先级排序
 
 ---
@@ -61,6 +61,7 @@
 ### 业务 API
 
 - [x] ~~政策机会匹配~~ — v14: /api/v1/intel/policy/opportunities 端点 + 规则引擎自动检测机会（资金/截止日期正则）+ LLM 深度分析
+- [x] ~~科技前沿数据 API~~ — v21: 8 主题分类（具身智能/多模态/AI Agent/AI4Science/端侧AI/大语言模型/AI安全/生成式AI应用），聚合 technology+industry+twitter+universities 4 维度 56 信源，规则引擎关键词匹配 + 热度趋势计算，5 个 API 端点 (/api/v1/intel/tech-frontier/topics|opportunities|stats|signals)
 - [ ] 学术流动分析 (LLM)
 - [ ] 内参机会推荐 (LLM)
 
@@ -79,7 +80,7 @@
 - [ ] 修复 universities 禁用源 (zju, nju, bupt, nankai, nwpu, scu, lzu, zhejianglab, shanghairanking)
 
 ### 服务化 / 部署
-- [x] ~~统一后端服务~~ — v20: 5 阶段 Pipeline（爬取→政策→人事→LLM 富化→索引）、启动健康验证、首次部署自动填充数据
+- [x] ~~统一后端服务~~ — v20: 5 阶段 Pipeline（爬取→政策→人事→LLM 富化→索引）、启动健康验证、首次部署自动填充数据；v21: 扩展至 9 阶段（新增科技前沿处理 + 高校生态 + 每日简报）
 - [x] ~~Pipeline 配置化~~ — v20: PIPELINE_CRON_HOUR/MINUTE 可配置调度时间、ENABLE_LLM_ENRICHMENT 控制 LLM 开关
 - [x] ~~service.sh 增强~~ — v20: init 初始化命令、--production 生产模式、启动后健康检查
 - [x] ~~systemd 部署~~ — v20: deploy/information-crawler.service + deploy/setup.sh 一键部署

@@ -1,6 +1,6 @@
 # 信源爬取状态总览
 
-> 最后更新: 2026-02-24
+> 最后更新: 2026-02-25
 
 ---
 
@@ -77,6 +77,18 @@ data/processed/
 |------|------|------|------|------|---------|
 | policy_intel | `scripts/process_policy_intel.py` | 规则 + LLM (两级) | national_policy + beijing_policy + personnel 维度 raw JSON (184篇) | feed.json (184条, 55 LLM增强), opportunities.json (18条) | `/api/v1/intel/policy/` |
 | personnel_intel | `scripts/process_personnel_intel.py` | 纯规则 (正则提取) | personnel 维度 raw JSON (62篇) | feed.json (62条), changes.json (84人次) | `/api/v1/intel/personnel/` |
+| tech_frontier | `scripts/process_tech_frontier.py` | 规则 + LLM (两级) | technology + industry + twitter + universities(AI院所) 4维度 raw JSON (518篇) | topics.json (8主题, 168信号), opportunities.json (37条), stats.json | `/api/v1/intel/tech-frontier/` |
+
+```
+data/processed/
+  ...
+  tech_frontier/
+    topics.json              # 8 个技术主题 + 内嵌 relatedNews/kolVoices
+    opportunities.json       # 结构化机会（会议/合作/内参）
+    stats.json               # KPI 指标（总主题数、飙升数、缺口数、周新信号）
+    _enriched/               # LLM 增强结果缓存
+    _processed_hashes.json   # 增量处理哈希追踪
+```
 
 ```bash
 # 运行政策智能加工（Tier 1 规则 + Tier 2 LLM 增强）
@@ -85,9 +97,13 @@ python scripts/process_policy_intel.py
 # 运行人事情报加工（纯规则，无 LLM 费用）
 python scripts/process_personnel_intel.py
 
+# 运行科技前沿加工（8 主题分类 + 热度趋势）
+python scripts/process_tech_frontier.py
+
 # 试运行（不写文件）
 python scripts/process_policy_intel.py --dry-run
 python scripts/process_personnel_intel.py --dry-run
+python scripts/process_tech_frontier.py --dry-run
 ```
 
 ---
@@ -161,12 +177,12 @@ python scripts/process_personnel_intel.py --dry-run
 | hit_news | 哈尔滨工业大学 | static | 8 | 8 | `div.wp_articlecontent` |
 | seu_news | 东南大学 | static | 5 | 1 | `div.wp_articlecontent` |
 | xmu_news | 厦门大学 | static | 16 | 5 | `div.v_news_content` |
-| sdu_news | 山东大学 | static | 19 | 19 | `div.nymain` |
+| sdu_news | 山东大学 | static | 16 | 16 | `div.nymain` |
 | whu_news | 武汉大学 | static | 6 | 6 | `div.v_news_content` |
 | hust_news | 华中科技大学 | static | 6 | 5 | `div.v_news_content` |
 | csu_news | 中南大学 | static | 14 | 12 | `div.v_news_content` |
 | xidian_news | 西安电子科技大学 | static | 12 | 12 | `div.v_news_content` |
-| xjtu_news | 西安交通大学 | static | 45 | 42 | `div.v_news_content` |
+| xjtu_news | 西安交通大学(要闻聚焦) | static | 10 | 10 | `div.v_news_content` |
 | uestc_news | 电子科技大学 | static | 55 | 45 | `div.v_news_content` |
 | nudt_news | 国防科技大学 | static | 22 | 22 | `div.pageCon` |
 | sysu_news | 中山大学 | dynamic | 11 | 4 | `div.v_news_content` |

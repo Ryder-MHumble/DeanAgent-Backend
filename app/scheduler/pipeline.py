@@ -1,10 +1,11 @@
-"""Unified daily pipeline: crawl → policy → personnel → LLM enrich → index.
+"""Unified daily pipeline: crawl → process → LLM enrich → index → briefing.
 
 Registered as a single APScheduler job. Each stage runs sequentially and
 logs progress. If crawling fails, processing still runs on existing data/raw/.
 
 Stage 4 (LLM enrichment) is conditional on ENABLE_LLM_ENRICHMENT + API key.
 Stage 5 (index generation) always runs.
+Stage 6 (daily briefing) always runs — uses LLM when available, fallback otherwise.
 """
 from __future__ import annotations
 
@@ -168,6 +169,33 @@ async def _stage_enrich_personnel_llm() -> dict[str, Any]:
     return await process_personnel_llm_enrichment()
 
 
+async def _stage_process_university_eco() -> dict[str, Any]:
+    """Stage 3b: Process university ecosystem (keyword classification)."""
+    from app.services.intel.pipeline.university_eco_processor import (
+        process_university_eco_pipeline,
+    )
+
+    return await process_university_eco_pipeline()
+
+
+async def _stage_process_tech_frontier() -> dict[str, Any]:
+    """Stage 3c: Process tech frontier (topic classification + heat)."""
+    from app.services.intel.pipeline.tech_frontier_processor import (
+        process_tech_frontier_pipeline,
+    )
+
+    return await process_tech_frontier_pipeline()
+
+
+async def _stage_enrich_tech_frontier_llm() -> dict[str, Any]:
+    """Stage 4c: LLM enrichment for tech frontier topics (conditional)."""
+    from app.services.intel.pipeline.tech_frontier_processor import (
+        process_tech_frontier_llm_enrichment,
+    )
+
+    return await process_tech_frontier_llm_enrichment()
+
+
 async def _stage_generate_index() -> dict[str, Any]:
     """Stage 5: Generate data/index.json for frontend."""
     import asyncio
@@ -194,6 +222,15 @@ async def _stage_generate_index() -> dict[str, Any]:
     }
 
 
+async def _stage_generate_briefing() -> dict[str, Any]:
+    """Stage 6: Generate AI daily briefing."""
+    from app.services.intel.pipeline.briefing_processor import (
+        process_daily_briefing,
+    )
+
+    return await process_daily_briefing()
+
+
 def _skipped_stage(name: str, reason: str) -> StageResult:
     """Create a skipped stage result."""
     now = datetime.now(timezone.utc)
@@ -211,13 +248,16 @@ def _skipped_stage(name: str, reason: str) -> StageResult:
 # ---------------------------------------------------------------------------
 
 async def execute_daily_pipeline() -> PipelineResult:
-    """Execute the full daily pipeline (5 stages).
+    """Execute the full daily pipeline (9 stages).
 
-    Stage 1: Crawl all enabled sources
-    Stage 2: Process policy intelligence (rules)
-    Stage 3: Process personnel intelligence (rules)
-    Stage 4: LLM enrichment — policy + personnel (conditional)
-    Stage 5: Generate data index
+    Stage 1:  Crawl all enabled sources
+    Stage 2:  Process policy intelligence (rules)
+    Stage 3:  Process personnel intelligence (rules)
+    Stage 3b: Process university ecosystem (keyword classification)
+    Stage 3c: Process tech frontier (topic classification + heat)
+    Stage 4:  LLM enrichment — policy + personnel + tech_frontier (conditional)
+    Stage 5:  Generate data index
+    Stage 6:  Generate AI daily briefing
 
     Called by APScheduler daily. Each stage runs sequentially.
     If crawling fails, processing stages still run on existing data.
@@ -251,6 +291,18 @@ async def execute_daily_pipeline() -> PipelineResult:
     )
     pipeline.stages.append(personnel_stage)
 
+    # Stage 3b: University ecosystem processing (keyword classification)
+    uni_eco_stage = await _run_stage(
+        "process_university_eco", _stage_process_university_eco,
+    )
+    pipeline.stages.append(uni_eco_stage)
+
+    # Stage 3c: Tech frontier processing (topic classification + heat)
+    tf_stage = await _run_stage(
+        "process_tech_frontier", _stage_process_tech_frontier,
+    )
+    pipeline.stages.append(tf_stage)
+
     # Stage 4: LLM enrichment (conditional)
     llm_enabled = settings.ENABLE_LLM_ENRICHMENT and settings.OPENROUTER_API_KEY
     if llm_enabled:
@@ -263,6 +315,11 @@ async def execute_daily_pipeline() -> PipelineResult:
             "enrich_personnel_llm", _stage_enrich_personnel_llm,
         )
         pipeline.stages.append(llm_personnel)
+
+        llm_tech_frontier = await _run_stage(
+            "enrich_tech_frontier_llm", _stage_enrich_tech_frontier_llm,
+        )
+        pipeline.stages.append(llm_tech_frontier)
     else:
         reason = (
             "OPENROUTER_API_KEY not set"
@@ -271,10 +328,19 @@ async def execute_daily_pipeline() -> PipelineResult:
         )
         pipeline.stages.append(_skipped_stage("enrich_policy_llm", reason))
         pipeline.stages.append(_skipped_stage("enrich_personnel_llm", reason))
+        pipeline.stages.append(
+            _skipped_stage("enrich_tech_frontier_llm", reason),
+        )
 
     # Stage 5: Generate index (always runs)
     index_stage = await _run_stage("generate_index", _stage_generate_index)
     pipeline.stages.append(index_stage)
+
+    # Stage 6: Generate daily briefing (always runs, fallback if no LLM)
+    briefing_stage = await _run_stage(
+        "generate_briefing", _stage_generate_briefing,
+    )
+    pipeline.stages.append(briefing_stage)
 
     pipeline.finished_at = datetime.now(timezone.utc)
     _last_pipeline_result = pipeline
