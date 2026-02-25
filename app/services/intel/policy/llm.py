@@ -2,9 +2,17 @@
 from __future__ import annotations
 
 import logging
-from datetime import date, datetime
 from typing import Any
 
+from app.services.intel.shared import (
+    clamp_value as _clamp,
+)
+from app.services.intel.shared import (
+    compute_days_left as _compute_days_left,
+)
+from app.services.intel.shared import (
+    parse_date_str as _parse_date_str,
+)
 from app.services.llm_service import LLMError, call_llm_json
 
 logger = logging.getLogger(__name__)
@@ -105,43 +113,6 @@ def build_user_prompt(article: dict[str, Any]) -> str:
         f"标签：{tags}\n"
         f"正文：\n{content}"
     )
-
-
-def _clamp(value: Any, lo: int, hi: int, default: int) -> int:
-    """Clamp a numeric value to [lo, hi], returning default if invalid."""
-    try:
-        v = int(value)
-        return max(lo, min(hi, v))
-    except (TypeError, ValueError):
-        return default
-
-
-def _parse_date_str(s: str | None) -> str | None:
-    """Try to parse a date string to YYYY-MM-DD, return None on failure."""
-    if not s:
-        return None
-    for fmt in ("%Y-%m-%d", "%Y/%m/%d", "%Y年%m月%d日"):
-        try:
-            return datetime.strptime(s, fmt).strftime("%Y-%m-%d")
-        except ValueError:
-            continue
-    # Try ISO format
-    try:
-        return datetime.fromisoformat(s).strftime("%Y-%m-%d")
-    except (ValueError, TypeError):
-        return None
-
-
-def _compute_days_left(deadline_str: str | None) -> int | None:
-    """Compute days from today to deadline. Returns None if no deadline."""
-    if not deadline_str:
-        return None
-    try:
-        deadline = datetime.strptime(deadline_str, "%Y-%m-%d").date()
-        delta = (deadline - date.today()).days
-        return max(0, delta)
-    except (ValueError, TypeError):
-        return None
 
 
 def parse_llm_response(raw: dict[str, Any], article: dict[str, Any]) -> dict[str, Any]:

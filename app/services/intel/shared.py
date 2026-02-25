@@ -4,7 +4,7 @@ from __future__ import annotations
 import json
 import logging
 import re
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from typing import Any
 
 from app.config import BASE_DIR
@@ -182,3 +182,102 @@ def get_intel_stats(*modules_and_files: tuple[str, str]) -> dict[str, Any]:
             "generated_at": data.get("generated_at"),
         }
     return stats
+
+
+# ---------------------------------------------------------------------------
+# Article date / datetime utilities
+# ---------------------------------------------------------------------------
+
+# Gov-site URL date patterns (for policy articles where published_at is missing)
+_GOV_URL_DATE_RE1 = re.compile(r"/t(\d{4})(\d{2})(\d{2})_")
+_GOV_URL_DATE_RE2 = re.compile(r"/(\d{4})(\d{2})/t\d+")
+
+
+def article_date(article: dict, *, url_fallback: bool = False) -> str:
+    """Extract YYYY-MM-DD date string from article.
+
+    *url_fallback*: if True, attempt to parse date from gov-site URL patterns
+    when published_at is unavailable (used by policy processor).
+    """
+    pub = article.get("published_at")
+    if pub:
+        try:
+            return datetime.fromisoformat(pub).strftime("%Y-%m-%d")
+        except (ValueError, TypeError):
+            pass
+    if url_fallback:
+        url = article.get("url", "")
+        m = _GOV_URL_DATE_RE1.search(url)
+        if m:
+            return f"{m[1]}-{m[2]}-{m[3]}"
+        m = _GOV_URL_DATE_RE2.search(url)
+        if m:
+            return f"{m[1]}-{m[2]}-01"
+    return date.today().isoformat()
+
+
+def article_datetime(article: dict) -> datetime:
+    """Extract datetime from article, fallback to now(UTC)."""
+    pub = article.get("published_at")
+    if pub:
+        try:
+            return datetime.fromisoformat(pub)
+        except (ValueError, TypeError):
+            pass
+    return datetime.now(timezone.utc)
+
+
+# ---------------------------------------------------------------------------
+# Deduplication
+# ---------------------------------------------------------------------------
+
+
+def deduplicate_articles(articles: list[dict]) -> list[dict]:
+    """Deduplicate articles by url_hash, keeping first occurrence."""
+    seen: set[str] = set()
+    unique: list[dict] = []
+    for a in articles:
+        h = a.get("url_hash", "")
+        if h and h not in seen:
+            seen.add(h)
+            unique.append(a)
+    return unique
+
+
+# ---------------------------------------------------------------------------
+# LLM response helpers
+# ---------------------------------------------------------------------------
+
+
+def clamp_value(value: Any, lo: int, hi: int, default: int) -> int:
+    """Clamp a numeric value to [lo, hi], returning *default* if invalid type."""
+    try:
+        v = int(value)
+        return max(lo, min(hi, v))
+    except (TypeError, ValueError):
+        return default
+
+
+def str_or_none(value: Any) -> str | None:
+    """Normalize value to a non-empty string or None."""
+    if value is None:
+        return None
+    s = str(value).strip()
+    if not s or s.lower() in ("null", "none", ""):
+        return None
+    return s
+
+
+def parse_date_str(s: str | None) -> str | None:
+    """Try to parse a date string in various formats to YYYY-MM-DD."""
+    if not s:
+        return None
+    for fmt in ("%Y-%m-%d", "%Y/%m/%d", "%Y年%m月%d日"):
+        try:
+            return datetime.strptime(s, fmt).strftime("%Y-%m-%d")
+        except ValueError:
+            continue
+    try:
+        return datetime.fromisoformat(s).strftime("%Y-%m-%d")
+    except (ValueError, TypeError):
+        return None

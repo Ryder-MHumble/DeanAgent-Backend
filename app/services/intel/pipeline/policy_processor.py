@@ -8,12 +8,12 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
-import re
-from datetime import date, datetime, timezone
 from typing import Any
 
 from app.config import BASE_DIR, settings
+from app.services.intel.pipeline.base import HashTracker, save_output_json
 from app.services.intel.policy.rules import enrich_by_rules
+from app.services.intel.shared import article_date
 from app.services.json_reader import get_articles
 
 logger = logging.getLogger(__name__)
@@ -21,32 +21,8 @@ logger = logging.getLogger(__name__)
 DIMENSIONS = ["national_policy", "beijing_policy"]
 PROCESSED_DIR = BASE_DIR / "data" / "processed" / "policy_intel"
 ENRICHED_DIR = PROCESSED_DIR / "_enriched"
-HASHES_FILE = PROCESSED_DIR / "_processed_hashes.json"
 
-
-# ---------------------------------------------------------------------------
-# Hash tracking
-# ---------------------------------------------------------------------------
-
-def _load_processed_hashes() -> set[str]:
-    if not HASHES_FILE.exists():
-        return set()
-    try:
-        with open(HASHES_FILE, encoding="utf-8") as f:
-            data = json.load(f)
-        return set(data.get("hashes", []))
-    except (json.JSONDecodeError, OSError):
-        return set()
-
-
-def _save_processed_hashes(hashes: set[str]) -> None:
-    PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
-    with open(HASHES_FILE, "w", encoding="utf-8") as f:
-        json.dump(
-            {"hashes": sorted(hashes),
-             "last_run": datetime.now(timezone.utc).isoformat()},
-            f, ensure_ascii=False, indent=2,
-        )
+_hash_tracker = HashTracker(PROCESSED_DIR / "_processed_hashes.json", PROCESSED_DIR)
 
 
 # ---------------------------------------------------------------------------
@@ -94,21 +70,8 @@ def _load_all_enriched() -> list[tuple[dict, dict]]:
 # Output builders (mirrors scripts/process_policy_intel.py)
 # ---------------------------------------------------------------------------
 
-def _article_date(article: dict) -> str:
-    pub = article.get("published_at")
-    if pub:
-        try:
-            return datetime.fromisoformat(pub).strftime("%Y-%m-%d")
-        except (ValueError, TypeError):
-            pass
-    url = article.get("url", "")
-    m = re.search(r'/t(\d{4})(\d{2})(\d{2})_', url)
-    if m:
-        return f"{m[1]}-{m[2]}-{m[3]}"
-    m = re.search(r'/(\d{4})(\d{2})/t\d+', url)
-    if m:
-        return f"{m[1]}-{m[2]}-01"
-    return date.today().isoformat()
+def _article_date(a: dict) -> str:
+    return article_date(a, url_fallback=True)
 
 
 def _determine_category(article: dict, llm_result: dict) -> str:
@@ -190,9 +153,6 @@ def _build_opportunity_item(article: dict, llm: dict) -> dict | None:
 
 def _rebuild_output_files(all_enriched: list[tuple[dict, dict]]) -> tuple[int, int]:
     """Regenerate feed.json and opportunities.json. Returns (feed_count, opp_count)."""
-    PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
-    now_iso = datetime.now(timezone.utc).isoformat()
-
     feed_items: list[dict] = []
     opportunity_items: list[dict] = []
     for article, llm in all_enriched:
@@ -204,20 +164,8 @@ def _rebuild_output_files(all_enriched: list[tuple[dict, dict]]) -> tuple[int, i
     feed_items.sort(key=lambda x: x.get("date", ""), reverse=True)
     opportunity_items.sort(key=lambda x: x.get("daysLeft", 999))
 
-    feed_path = PROCESSED_DIR / "feed.json"
-    with open(feed_path, "w", encoding="utf-8") as f:
-        json.dump(
-            {"generated_at": now_iso, "item_count": len(feed_items), "items": feed_items},
-            f, ensure_ascii=False, indent=2,
-        )
-
-    opp_path = PROCESSED_DIR / "opportunities.json"
-    with open(opp_path, "w", encoding="utf-8") as f:
-        json.dump(
-            {"generated_at": now_iso, "item_count": len(opportunity_items),
-             "items": opportunity_items},
-            f, ensure_ascii=False, indent=2,
-        )
+    save_output_json(PROCESSED_DIR, "feed.json", feed_items)
+    save_output_json(PROCESSED_DIR, "opportunities.json", opportunity_items)
 
     logger.info(
         "Policy output: %d feed items, %d opportunities",
@@ -262,7 +210,7 @@ async def process_policy_pipeline(
             unique_articles.append(a)
 
     # Filter already-processed (incremental)
-    processed_hashes = set() if force else _load_processed_hashes()
+    processed_hashes = set() if force else _hash_tracker.load()
     new_articles = [
         a for a in unique_articles if a.get("url_hash", "") not in processed_hashes
     ]
@@ -283,7 +231,7 @@ async def process_policy_pipeline(
                 new_hashes.add(h)
 
         all_hashes = processed_hashes | new_hashes
-        _save_processed_hashes(all_hashes)
+        _hash_tracker.save(all_hashes)
         logger.info("Policy pipeline: scored %d new articles", len(new_hashes))
 
     # Rebuild output files from ALL enriched data (excluding personnel)

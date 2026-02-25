@@ -19,6 +19,7 @@ from datetime import datetime, timezone
 from typing import Any
 
 from app.config import BASE_DIR
+from app.services.intel.pipeline.base import HashTracker, save_output_json
 from app.services.intel.tech_frontier.rules import (
     TOPICS_CONFIG,
     UNI_AI_INSTITUTE_SOURCES,
@@ -35,7 +36,8 @@ from app.services.json_reader import get_articles
 logger = logging.getLogger(__name__)
 
 PROCESSED_DIR = BASE_DIR / "data" / "processed" / "tech_frontier"
-HASHES_FILE = PROCESSED_DIR / "_processed_hashes.json"
+
+_hash_tracker = HashTracker(PROCESSED_DIR / "_processed_hashes.json", PROCESSED_DIR)
 
 # Dimensions and source filters
 PRIMARY_DIMENSIONS = ["technology"]
@@ -52,34 +54,6 @@ UNIVERSITY_DIMENSION = "universities"
 # Limits per topic to keep output manageable
 MAX_NEWS_PER_TOPIC = 30
 MAX_KOL_PER_TOPIC = 10
-
-
-# ---------------------------------------------------------------------------
-# Hash tracking (incremental processing)
-# ---------------------------------------------------------------------------
-
-
-def _load_processed_hashes() -> set[str]:
-    if not HASHES_FILE.exists():
-        return set()
-    try:
-        with open(HASHES_FILE, encoding="utf-8") as f:
-            data = json.load(f)
-        return set(data.get("hashes", []))
-    except (json.JSONDecodeError, OSError):
-        return set()
-
-
-def _save_processed_hashes(hashes: set[str]) -> None:
-    PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
-    with open(HASHES_FILE, "w", encoding="utf-8") as f:
-        json.dump(
-            {
-                "hashes": sorted(hashes),
-                "last_run": datetime.now(timezone.utc).isoformat(),
-            },
-            f, ensure_ascii=False, indent=2,
-        )
 
 
 # ---------------------------------------------------------------------------
@@ -277,7 +251,7 @@ async def process_tech_frontier_pipeline(
     logger.info("Tech frontier pipeline: %d unique articles", len(unique))
 
     # Incremental hash tracking
-    processed_hashes = set() if force else _load_processed_hashes()
+    processed_hashes = set() if force else _hash_tracker.load()
     new_articles = [
         a for a in unique if a.get("url_hash", "") not in processed_hashes
     ]
@@ -295,35 +269,18 @@ async def process_tech_frontier_pipeline(
             if h:
                 processed_hashes.add(h)
                 new_count += 1
-        _save_processed_hashes(processed_hashes)
+        _hash_tracker.save(processed_hashes)
 
     # Process ALL unique articles (not just new) to rebuild complete output
     topics, opportunities, stats = _process_articles(unique)
 
     # Write output files
+    save_output_json(PROCESSED_DIR, "topics.json", topics)
+    save_output_json(PROCESSED_DIR, "opportunities.json", opportunities)
+
+    # stats.json has a custom schema — write manually
     PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
-    now_iso = datetime.now(timezone.utc).isoformat()
-
-    topics_path = PROCESSED_DIR / "topics.json"
-    with open(topics_path, "w", encoding="utf-8") as f:
-        json.dump(
-            {"generated_at": now_iso, "item_count": len(topics), "items": topics},
-            f, ensure_ascii=False, indent=2,
-        )
-
-    opps_path = PROCESSED_DIR / "opportunities.json"
-    with open(opps_path, "w", encoding="utf-8") as f:
-        json.dump(
-            {
-                "generated_at": now_iso,
-                "item_count": len(opportunities),
-                "items": opportunities,
-            },
-            f, ensure_ascii=False, indent=2,
-        )
-
-    stats_path = PROCESSED_DIR / "stats.json"
-    with open(stats_path, "w", encoding="utf-8") as f:
+    with open(PROCESSED_DIR / "stats.json", "w", encoding="utf-8") as f:
         json.dump(stats, f, ensure_ascii=False, indent=2)
 
     logger.info(
@@ -396,19 +353,8 @@ async def process_tech_frontier_llm_enrichment() -> dict[str, Any]:
             opp_enriched += 1
 
     # Write updated files
-    PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
-
-    with open(PROCESSED_DIR / "topics.json", "w", encoding="utf-8") as f:
-        json.dump(
-            {"generated_at": now_iso, "item_count": len(topics), "items": topics},
-            f, ensure_ascii=False, indent=2,
-        )
-
-    with open(PROCESSED_DIR / "opportunities.json", "w", encoding="utf-8") as f:
-        json.dump(
-            {"generated_at": now_iso, "item_count": len(opps), "items": opps},
-            f, ensure_ascii=False, indent=2,
-        )
+    save_output_json(PROCESSED_DIR, "topics.json", topics)
+    save_output_json(PROCESSED_DIR, "opportunities.json", opps)
 
     logger.info(
         "Tech frontier LLM enrichment: %d topics, %d opportunities enriched",

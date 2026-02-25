@@ -5,10 +5,15 @@ into structured topic objects aligned with the frontend TechTopic type.
 """
 from __future__ import annotations
 
-from datetime import date, datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone
 from typing import Any
 
-from app.services.intel.shared import extract_deadline, keyword_score
+from app.services.intel.shared import (
+    article_date,
+    article_datetime,
+    extract_deadline,
+    keyword_score,
+)
 
 # ---------------------------------------------------------------------------
 # Topic configuration (8 topics)
@@ -427,24 +432,8 @@ UNI_AI_INSTITUTE_SOURCES: set[str] = {
 # ---------------------------------------------------------------------------
 
 
-def _article_date(article: dict) -> str:
-    pub = article.get("published_at")
-    if pub:
-        try:
-            return datetime.fromisoformat(pub).strftime("%Y-%m-%d")
-        except (ValueError, TypeError):
-            pass
-    return date.today().isoformat()
-
-
-def _article_datetime(article: dict) -> datetime:
-    pub = article.get("published_at")
-    if pub:
-        try:
-            return datetime.fromisoformat(pub)
-        except (ValueError, TypeError):
-            pass
-    return datetime.now(timezone.utc)
+_article_date = article_date
+_article_datetime = article_datetime
 
 
 def _compute_priority(opp_score: int, deadline: str | None) -> str:
@@ -453,7 +442,7 @@ def _compute_priority(opp_score: int, deadline: str | None) -> str:
     if deadline:
         try:
             dl = datetime.strptime(deadline, "%Y-%m-%d").date()
-            days_left = (dl - date.today()).days
+            days_left = (dl - datetime.now(timezone.utc).date()).days
         except ValueError:
             pass
 

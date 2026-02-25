@@ -12,7 +12,7 @@ import hashlib
 import json
 import logging
 import re
-from datetime import date, datetime
+from datetime import datetime
 from typing import Any
 
 from app.config import BASE_DIR
@@ -21,6 +21,7 @@ from app.services.intel.personnel.rules import (
     compute_match_score,
     extract_changes,
 )
+from app.services.intel.shared import article_date
 from app.services.json_reader import get_articles
 
 logger = logging.getLogger(__name__)
@@ -55,14 +56,8 @@ def _load_enriched_cache() -> dict[str, dict[str, Any]]:
 # Live data computation
 # ---------------------------------------------------------------------------
 
-def _article_date(article: dict[str, Any]) -> str:
-    pub = article.get("published_at")
-    if pub:
-        try:
-            return datetime.fromisoformat(pub).strftime("%Y-%m-%d")
-        except (ValueError, TypeError):
-            pass
-    return date.today().isoformat()
+def _article_date(a: dict[str, Any]) -> str:
+    return article_date(a)
 
 
 def _article_id(article: dict[str, Any]) -> str:

@@ -68,7 +68,7 @@
 **调度任务不执行 / 频率不对：**
 → `app/scheduler/manager.py`（任务注册 + 频率映射）
 → `app/scheduler/jobs.py`（单次执行逻辑）
-→ `app/scheduler/pipeline.py`（5 阶段 Pipeline 编排）
+→ `app/scheduler/pipeline.py`（9 阶段 Pipeline 编排）
 → YAML 中检查 `schedule` / `is_enabled`
 → `.env` 中检查 `PIPELINE_CRON_HOUR` / `PIPELINE_CRON_MINUTE`
 
@@ -101,7 +101,9 @@ data/
 ├── processed/
 │   ├── policy_intel/                                   # 政策智能处理输出
 │   ├── personnel_intel/                                # 人事情报处理输出
-│   └── tech_frontier/                                  # 科技前沿处理输出
+│   ├── tech_frontier/                                  # 科技前沿处理输出
+│   ├── university_eco/                                 # 高校生态处理输出
+│   └── daily_briefing/                                 # 每日简报处理输出
 ├── state/
 │   ├── source_state.json           # 信源运行状态（last_crawl_at, failures, is_enabled_override）
 │   ├── article_annotations.json    # 文章标注（is_read, importance）
@@ -148,32 +150,43 @@ app/api/v1/intel/router.py          → intel 子路由（聚合所有业务智�
 app/api/v1/intel/policy.py          → 政策智能 API (feed/opportunities/stats)
 app/api/v1/intel/personnel.py       → 人事情报 API (feed/changes/stats/enriched-feed/enriched-stats)
 app/api/v1/intel/tech_frontier.py   → 科技前沿 API (topics/opportunities/stats/signals)
+app/api/v1/intel/university.py      → 高校生态 API (feed/overview/research-outputs)
+app/api/v1/intel/daily_briefing.py  → 每日简报 API (today/latest/history)
 
-app/services/intel/shared.py        → 共享工具（keyword_score, extract_*, load_intel_json）
-app/services/intel/policy/rules.py  → 政策规则引擎（Tier 1 评分）
-app/services/intel/policy/llm.py    → 政策 LLM 富化（Tier 2）
-app/services/intel/policy/service.py→ 政策数据服务（读 processed JSON）
-app/services/intel/personnel/rules.py  → 人事规则引擎（任免正则提取）
-app/services/intel/personnel/llm.py    → 人事 LLM 富化（Tier 2，relevance/group/actionSuggestion）
-app/services/intel/personnel/service.py→ 人事数据服务
-app/services/intel/tech_frontier/rules.py  → 科技前沿规则引擎（8 主题关键词匹配 + 热度计算）
-app/services/intel/tech_frontier/llm.py    → 科技前沿 LLM 富化（Tier 2，aiSummary/aiInsight/memoSuggestion）
-app/services/intel/tech_frontier/service.py→ 科技前沿数据服务
+app/services/intel/shared.py        → 共享工具（article_date, deduplicate_articles, clamp_value,
+                                       keyword_score, extract_*, load_intel_json, parse_date_str）
+app/services/intel/pipeline/base.py → Pipeline 共享基础（HashTracker 增量追踪 + save_output_json 统一输出）
+app/services/intel/pipeline/policy_processor.py        → 政策处理管线
+app/services/intel/pipeline/personnel_processor.py     → 人事处理管线
+app/services/intel/pipeline/tech_frontier_processor.py → 科技前沿处理管线
+app/services/intel/pipeline/university_eco_processor.py→ 高校生态处理管线
+app/services/intel/pipeline/briefing_processor.py      → 每日简报处理管线
+
+app/services/intel/policy/          → 政策智能 {rules, llm, service}
+app/services/intel/personnel/       → 人事情报 {rules, llm, service}
+app/services/intel/tech_frontier/   → 科技前沿 {rules, llm, service}
+app/services/intel/university/      → 高校生态 {rules, service}
+app/services/intel/daily_briefing/  → 每日简报 {rules, llm, service}
 
 app/schemas/intel/policy.py         → 政策 Pydantic schemas
 app/schemas/intel/personnel.py      → 人事 Pydantic schemas（含 PersonnelChangeEnriched）
 app/schemas/intel/tech_frontier.py  → 科技前沿 Pydantic schemas（TechTopic/Opportunity/SignalItem）
+app/schemas/intel/university.py     → 高校生态 Pydantic schemas
+app/schemas/intel/daily_briefing.py → 每日简报 Pydantic schemas
 
 scripts/process_policy_intel.py     → 政策数据处理脚本（两级管线）
 scripts/process_personnel_intel.py  → 人事数据处理脚本（规则 + --enrich LLM）
 scripts/process_tech_frontier.py    → 科技前沿处理脚本（规则 + --enrich LLM）
+scripts/process_university_eco.py   → 高校生态处理脚本
 
 data/processed/policy_intel/        → 政策处理输出 (feed.json, opportunities.json)
 data/processed/personnel_intel/     → 人事处理输出 (feed.json, changes.json, enriched_feed.json)
 data/processed/tech_frontier/       → 科技前沿输出 (topics.json, opportunities.json, stats.json)
+data/processed/university_eco/      → 高校生态输出 (overview.json, feed.json, research_outputs.json)
+data/processed/daily_briefing/      → 每日简报输出 (briefing.json)
 ```
 
-新增业务智能模块时，在 `services/intel/` 下新建子包，在 `api/v1/intel/` 添加端点，在 `intel/router.py` 注册子路由。
+新增业务智能模块时，在 `services/intel/` 下新建子包，在 `api/v1/intel/` 添加端点，在 `intel/router.py` 注册子路由。Pipeline 处理器继承 `pipeline/base.py` 的 HashTracker + save_output_json 共享工具。
 
 ## 常用工作流
 

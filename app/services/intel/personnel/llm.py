@@ -8,6 +8,8 @@ from __future__ import annotations
 import logging
 from typing import Any
 
+from app.services.intel.shared import clamp_value as _clamp
+from app.services.intel.shared import str_or_none as _str_or_none
 from app.services.llm_service import LLMError, call_llm_json
 
 logger = logging.getLogger(__name__)
@@ -195,22 +197,3 @@ async def enrich_changes_batch(
     return parse_llm_response(raw, changes)
 
 
-# ---------------------------------------------------------------------------
-# Helpers
-# ---------------------------------------------------------------------------
-
-def _clamp(value: Any, lo: int, hi: int, default: int) -> int:
-    try:
-        v = int(value)
-        return max(lo, min(hi, v))
-    except (TypeError, ValueError):
-        return default
-
-
-def _str_or_none(value: Any) -> str | None:
-    if value is None:
-        return None
-    s = str(value).strip()
-    if not s or s.lower() in ("null", "none", ""):
-        return None
-    return s

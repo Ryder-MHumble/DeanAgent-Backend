@@ -15,18 +15,21 @@ import json
 import logging
 import re
 from collections import defaultdict
-from datetime import date, datetime, timezone
+from datetime import datetime, timezone
 from typing import Any
 
 from app.config import BASE_DIR
-from app.services.intel.university_eco.rules import classify_article
+from app.services.intel.pipeline.base import HashTracker, save_output_json
+from app.services.intel.shared import article_date
+from app.services.intel.university.rules import classify_article
 from app.services.json_reader import get_articles
 
 logger = logging.getLogger(__name__)
 
 DIMENSION = "universities"
 PROCESSED_DIR = BASE_DIR / "data" / "processed" / "university_eco"
-HASHES_FILE = PROCESSED_DIR / "_processed_hashes.json"
+
+_hash_tracker = HashTracker(PROCESSED_DIR / "_processed_hashes.json", PROCESSED_DIR)
 
 GROUP_NAMES: dict[str, str] = {
     "university_news": "高校新闻",
@@ -38,48 +41,15 @@ GROUP_NAMES: dict[str, str] = {
 
 
 # ---------------------------------------------------------------------------
-# Hash tracking (incremental processing)
-# ---------------------------------------------------------------------------
-
-def _load_processed_hashes() -> set[str]:
-    if not HASHES_FILE.exists():
-        return set()
-    try:
-        with open(HASHES_FILE, encoding="utf-8") as f:
-            data = json.load(f)
-        return set(data.get("hashes", []))
-    except (json.JSONDecodeError, OSError):
-        return set()
-
-
-def _save_processed_hashes(hashes: set[str]) -> None:
-    PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
-    with open(HASHES_FILE, "w", encoding="utf-8") as f:
-        json.dump(
-            {
-                "hashes": sorted(hashes),
-                "last_run": datetime.now(timezone.utc).isoformat(),
-            },
-            f, ensure_ascii=False, indent=2,
-        )
-
-
-# ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
 
-def _article_date(article: dict) -> str:
-    pub = article.get("published_at")
-    if pub:
-        try:
-            return datetime.fromisoformat(pub).strftime("%Y-%m-%d")
-        except (ValueError, TypeError):
-            pass
-    return date.today().isoformat()
+def _article_date(a: dict) -> str:
+    return article_date(a)
 
 
 def _is_today(article: dict) -> bool:
-    return _article_date(article) == date.today().isoformat()
+    return _article_date(article) == datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
 
 # ---------------------------------------------------------------------------
@@ -214,7 +184,7 @@ async def process_university_eco_pipeline(
     )
 
     # Incremental hash tracking
-    processed_hashes = set() if force else _load_processed_hashes()
+    processed_hashes = set() if force else _hash_tracker.load()
     new_articles = [
         a for a in valid if a.get("url_hash", "") not in processed_hashes
     ]
@@ -232,7 +202,7 @@ async def process_university_eco_pipeline(
             if h:
                 processed_hashes.add(h)
                 new_count += 1
-        _save_processed_hashes(processed_hashes)
+        _hash_tracker.save(processed_hashes)
 
     # ── Build outputs from ALL valid articles ─────────────────────────
     PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
@@ -299,25 +269,13 @@ async def process_university_eco_pipeline(
 
     # ── Write output files ────────────────────────────────────────────────
 
-    overview_path = PROCESSED_DIR / "overview.json"
-    with open(overview_path, "w", encoding="utf-8") as f:
+    # overview.json has a custom schema — write manually
+    PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
+    with open(PROCESSED_DIR / "overview.json", "w", encoding="utf-8") as f:
         json.dump(overview, f, ensure_ascii=False, indent=2)
 
-    feed_path = PROCESSED_DIR / "feed.json"
-    with open(feed_path, "w", encoding="utf-8") as f:
-        json.dump(
-            {"generated_at": now_iso, "item_count": len(feed_items),
-             "items": feed_items},
-            f, ensure_ascii=False, indent=2,
-        )
-
-    research_path = PROCESSED_DIR / "research_outputs.json"
-    with open(research_path, "w", encoding="utf-8") as f:
-        json.dump(
-            {"generated_at": now_iso, "item_count": len(research_outputs),
-             "items": research_outputs},
-            f, ensure_ascii=False, indent=2,
-        )
+    save_output_json(PROCESSED_DIR, "feed.json", feed_items)
+    save_output_json(PROCESSED_DIR, "research_outputs.json", research_outputs)
 
     logger.info(
         "University eco output: %d feed, %d research (论文=%d 专利=%d 获奖=%d)",

@@ -9,11 +9,12 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
-from datetime import date, datetime, timezone
 from typing import Any
 
 from app.config import BASE_DIR
 from app.services.intel.personnel.rules import change_id, enrich_by_rules
+from app.services.intel.pipeline.base import HashTracker, save_output_json
+from app.services.intel.shared import article_date
 from app.services.json_reader import get_articles
 
 logger = logging.getLogger(__name__)
@@ -21,47 +22,17 @@ logger = logging.getLogger(__name__)
 DIMENSION = "personnel"
 PROCESSED_DIR = BASE_DIR / "data" / "processed" / "personnel_intel"
 ENRICHED_DIR = PROCESSED_DIR / "_enriched"
-HASHES_FILE = PROCESSED_DIR / "_processed_hashes.json"
-ENRICH_HASHES_FILE = PROCESSED_DIR / "_enriched_hashes.json"
 
-
-# ---------------------------------------------------------------------------
-# Hash tracking
-# ---------------------------------------------------------------------------
-
-def _load_processed_hashes() -> set[str]:
-    if not HASHES_FILE.exists():
-        return set()
-    try:
-        with open(HASHES_FILE, encoding="utf-8") as f:
-            data = json.load(f)
-        return set(data.get("hashes", []))
-    except (json.JSONDecodeError, OSError):
-        return set()
-
-
-def _save_processed_hashes(hashes: set[str]) -> None:
-    PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
-    with open(HASHES_FILE, "w", encoding="utf-8") as f:
-        json.dump(
-            {"hashes": sorted(hashes),
-             "last_run": datetime.now(timezone.utc).isoformat()},
-            f, ensure_ascii=False, indent=2,
-        )
+_hash_tracker = HashTracker(PROCESSED_DIR / "_processed_hashes.json", PROCESSED_DIR)
+_enrich_tracker = HashTracker(PROCESSED_DIR / "_enriched_hashes.json", PROCESSED_DIR)
 
 
 # ---------------------------------------------------------------------------
 # Output builder
 # ---------------------------------------------------------------------------
 
-def _article_date(article: dict) -> str:
-    pub = article.get("published_at")
-    if pub:
-        try:
-            return datetime.fromisoformat(pub).strftime("%Y-%m-%d")
-        except (ValueError, TypeError):
-            pass
-    return date.today().isoformat()
+def _article_date(a: dict) -> str:
+    return article_date(a)
 
 
 def _build_feed_item(article: dict, enrichment: dict) -> dict:
@@ -102,7 +73,7 @@ async def process_personnel_pipeline(
             unique.append(a)
 
     # Filter already-processed (incremental)
-    processed_hashes = set() if force else _load_processed_hashes()
+    processed_hashes = set() if force else _hash_tracker.load()
     new_articles = [
         a for a in unique if a.get("url_hash", "") not in processed_hashes
     ]
@@ -120,12 +91,9 @@ async def process_personnel_pipeline(
             if h:
                 processed_hashes.add(h)
                 new_count += 1
-        _save_processed_hashes(processed_hashes)
+        _hash_tracker.save(processed_hashes)
 
     # Rebuild output files from ALL unique articles
-    PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
-    now_iso = datetime.now(timezone.utc).isoformat()
-
     feed_items: list[dict] = []
     all_changes: list[dict] = []
     for article in unique:
@@ -136,21 +104,8 @@ async def process_personnel_pipeline(
     feed_items.sort(key=lambda x: x.get("date", ""), reverse=True)
     all_changes.sort(key=lambda x: x.get("date", ""), reverse=True)
 
-    feed_path = PROCESSED_DIR / "feed.json"
-    with open(feed_path, "w", encoding="utf-8") as f:
-        json.dump(
-            {"generated_at": now_iso, "item_count": len(feed_items),
-             "items": feed_items},
-            f, ensure_ascii=False, indent=2,
-        )
-
-    changes_path = PROCESSED_DIR / "changes.json"
-    with open(changes_path, "w", encoding="utf-8") as f:
-        json.dump(
-            {"generated_at": now_iso, "item_count": len(all_changes),
-             "items": all_changes},
-            f, ensure_ascii=False, indent=2,
-        )
+    save_output_json(PROCESSED_DIR, "feed.json", feed_items)
+    save_output_json(PROCESSED_DIR, "changes.json", all_changes)
 
     logger.info(
         "Personnel output: %d feed items, %d changes",
@@ -171,25 +126,6 @@ async def process_personnel_pipeline(
 # LLM enrichment helpers
 # ---------------------------------------------------------------------------
 
-def _load_enriched_hashes() -> set[str]:
-    if not ENRICH_HASHES_FILE.exists():
-        return set()
-    try:
-        with open(ENRICH_HASHES_FILE, encoding="utf-8") as f:
-            data = json.load(f)
-        return set(data.get("hashes", []))
-    except (json.JSONDecodeError, OSError):
-        return set()
-
-
-def _save_enriched_hashes(hashes: set[str]) -> None:
-    PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
-    with open(ENRICH_HASHES_FILE, "w", encoding="utf-8") as f:
-        json.dump(
-            {"hashes": sorted(hashes),
-             "last_run": datetime.now(timezone.utc).isoformat()},
-            f, ensure_ascii=False, indent=2,
-        )
 
 
 def _save_enriched_article(article: dict, enriched_changes: list[dict]) -> None:
@@ -297,7 +233,7 @@ async def process_personnel_llm_enrichment(
         return {"skipped": True, "reason": "no changes to enrich"}
 
     # Filter already-enriched (incremental)
-    enriched_hashes = _load_enriched_hashes()
+    enriched_hashes = _enrich_tracker.load()
     new_articles = [
         (a, c) for a, c in articles_with_changes
         if a.get("url_hash", "") not in enriched_hashes
@@ -331,7 +267,7 @@ async def process_personnel_llm_enrichment(
 
         tasks = [_enrich_one(a, c) for a, c in new_articles]
         await asyncio.gather(*tasks)
-        _save_enriched_hashes(enriched_hashes)
+        _enrich_tracker.save(enriched_hashes)
 
     # Rebuild enriched_feed.json from all cached enriched data
     all_enriched = _load_all_enriched_changes()
@@ -343,22 +279,16 @@ async def process_personnel_llm_enrichment(
         ),
     )
 
-    now_iso = datetime.now(timezone.utc).isoformat()
     action_count = sum(1 for x in all_enriched if x.get("group") == "action")
 
-    enriched_path = PROCESSED_DIR / "enriched_feed.json"
-    PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
-    with open(enriched_path, "w", encoding="utf-8") as f:
-        json.dump(
-            {
-                "generated_at": now_iso,
-                "total_count": len(all_enriched),
-                "action_count": action_count,
-                "watch_count": len(all_enriched) - action_count,
-                "items": all_enriched,
-            },
-            f, ensure_ascii=False, indent=2,
-        )
+    save_output_json(
+        PROCESSED_DIR, "enriched_feed.json", all_enriched,
+        extra={
+            "total_count": len(all_enriched),
+            "action_count": action_count,
+            "watch_count": len(all_enriched) - action_count,
+        },
+    )
 
     logger.info(
         "Personnel LLM output: %d enriched changes (action=%d, watch=%d)",
