@@ -18,13 +18,16 @@
 | 前端 (Dean-Agent) | <http://43.98.254.243:8080/> |
 
 ```bash
-# 服务管理
-./scripts/service.sh init                            # 首次初始化
-./scripts/service.sh start --production              # 生产模式启动
-./scripts/service.sh stop                            # 停止
-./scripts/service.sh restart                         # 重启
-./scripts/service.sh status                          # 查看状态
-./scripts/service.sh logs --follow                   # 持续跟踪日志
+# 一键部署（自动处理 venv、依赖、Playwright、启动）
+./deploy.sh
+
+# 或分步操作
+./deploy.sh init         # 仅初始化
+./deploy.sh start        # 启动服务
+./deploy.sh stop         # 停止
+./deploy.sh restart      # 重启
+./deploy.sh status       # 查看详细状态
+./deploy.sh logs -f      # 持续跟踪日志
 ```
 
 ---
@@ -32,14 +35,16 @@
 ## 快速开始（本地开发）
 
 ```bash
-# 安装
+# 一键初始化 + 启动
+./deploy.sh
+
+# 或手动方式
+python3 -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
 playwright install chromium
-
-# 配置
 cp .env.example .env
 
-# 启动（自动注册调度 + 首次数据初始化）
+# 前台启动（开发用）
 uvicorn app.main:app --reload
 # API 文档 → http://localhost:8000/docs
 ```

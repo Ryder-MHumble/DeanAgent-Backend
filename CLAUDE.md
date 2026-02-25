@@ -293,8 +293,17 @@ data/processed/daily_briefing/      → 每日简报输出 (briefing.json)
 ## 常用命令
 
 ```bash
-pip install -e ".[dev]"                              # 安装
-uvicorn app.main:app --reload                        # 启动（前台）
+# 部署管理（根目录 deploy.sh，集成 venv/依赖/Playwright/服务管理）
+./deploy.sh                                          # 智能部署（一键搞定所有事）
+./deploy.sh init                                     # 仅初始化（不启动）
+./deploy.sh start                                    # 启动服务
+./deploy.sh stop                                     # 停止服务
+./deploy.sh restart                                  # 重启服务
+./deploy.sh status                                   # 查看详细状态
+./deploy.sh logs -f                                  # 持续跟踪日志
+
+# 开发调试
+uvicorn app.main:app --reload                        # 前台启动（开发用）
 python scripts/run_single_crawl.py --source <id>     # 测试单源
 python scripts/run_all_crawl.py                      # 批量运行所有启用源
 python scripts/process_policy_intel.py --dry-run     # 政策智能预览
@@ -302,14 +311,4 @@ python scripts/process_personnel_intel.py --dry-run  # 人事情报预览
 python scripts/process_personnel_intel.py --enrich --force  # 人事 LLM 富化
 ruff check app/                                      # Lint
 pytest                                               # 测试
-
-# 服务管理（后台运行）
-./scripts/service.sh init                            # 首次初始化（依赖+Playwright+目录+配置检查）
-./scripts/service.sh start                           # 启动（开发模式，含 --reload）
-./scripts/service.sh start --production              # 启动（生产模式，无 --reload）
-./scripts/service.sh stop                            # 停止
-./scripts/service.sh restart                         # 重启
-./scripts/service.sh status                          # 查看状态 + 资源占用
-./scripts/service.sh logs --follow                   # 持续跟踪日志
-./scripts/service.sh start --port 8080 --workers 2   # 自定义端口和 worker 数
 ```
