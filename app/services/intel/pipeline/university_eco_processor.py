@@ -39,6 +39,8 @@ GROUP_NAMES: dict[str, str] = {
     "aggregators": "教育媒体",
 }
 
+FEED_MIN_SCORE = 20  # Minimum matchScore for articles to appear in research_outputs
+
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -222,6 +224,9 @@ async def process_university_eco_pipeline(
         enrichment = classify_article(article)
         if enrichment:
             research_outputs.append(_build_research_output(article, enrichment))
+    research_outputs = [
+        ro for ro in research_outputs if (ro.get("matchScore") or 0) >= FEED_MIN_SCORE
+    ]
     research_outputs.sort(key=lambda x: x.get("date", ""), reverse=True)
 
     # 3. Overview stats

@@ -55,6 +55,8 @@ UNIVERSITY_DIMENSION = "universities"
 MAX_NEWS_PER_TOPIC = 30
 MAX_KOL_PER_TOPIC = 10
 
+FEED_MIN_SCORE = 20  # Minimum match_score for articles to appear in relatedNews
+
 
 # ---------------------------------------------------------------------------
 # Data loading
@@ -171,7 +173,7 @@ def _process_articles(
                 if len(kol_voices) < MAX_KOL_PER_TOPIC:
                     kol_voices.append(build_kol_voice(article))
             else:
-                if len(related_news) < MAX_NEWS_PER_TOPIC:
+                if score >= FEED_MIN_SCORE and len(related_news) < MAX_NEWS_PER_TOPIC:
                     related_news.append(build_topic_news(article, score))
 
         # Sort news by date descending
