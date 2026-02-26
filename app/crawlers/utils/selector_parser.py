@@ -124,6 +124,7 @@ def parse_list_items(
     selectors: dict,
     base_url: str,
     keyword_filter: list[str] | None = None,
+    keyword_blacklist: list[str] | None = None,
 ) -> list[RawListItem]:
     """Parse a list page and extract title, link, and date for each item.
 
@@ -163,6 +164,10 @@ def parse_list_items(
 
         # Keyword filtering
         if keyword_filter and not any(kw in title for kw in keyword_filter):
+            continue
+
+        # Blacklist filtering (drop if title contains any blacklist keyword)
+        if keyword_blacklist and any(bw in title for bw in keyword_blacklist):
             continue
 
         published_at = extract_date(el, selectors)
