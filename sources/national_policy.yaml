@@ -21,6 +21,29 @@ default_keyword_filter:
   - "高新"
   - "软件"
 
+default_keyword_blacklist:
+  - "供水"
+  - "用水"
+  - "排水"
+  - "停水"
+  - "防汛"
+  - "防灾"
+  - "卫生许可"
+  - "消防检查"
+  - "食品安全"
+  - "租赁"
+  - "住房公积金"
+  - "婚姻登记"
+  - "道路施工"
+  - "绿化"
+  - "环卫"
+  - "垃圾"
+  - "农业补贴"
+  - "粮食"
+  - "畜牧"
+  - "基层选举"
+  - "居委会"
+
 sources:
   # === A. 政策文件 ===
   - id: "gov_cn_zhengce"
@@ -32,6 +55,7 @@ sources:
     priority: 1
     is_enabled: true
     keyword_filter: []  # gov.cn aggregates all national policies; no title-level filter
+    keyword_blacklist: []  # 内容专一，不做黑名单过滤
     wait_for: "div.list_2 li"
     wait_timeout: 15000
     selectors:
@@ -93,6 +117,7 @@ sources:
     priority: 1
     is_enabled: true
     keyword_filter: []  # 科技部内容全部与科技相关，不做过滤
+    keyword_blacklist: []  # 内容专一，不做黑名单过滤
     selectors:
       list_item: "ul.a_list li"
       title: "a"
