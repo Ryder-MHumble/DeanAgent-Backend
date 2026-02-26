@@ -43,6 +43,7 @@ class StaticHTMLCrawler(BaseCrawler):
         selectors = self.config.get("selectors", {})
         base_url = self.config.get("base_url", url)
         keyword_filter = self.config.get("keyword_filter", [])
+        keyword_blacklist = self.config.get("keyword_blacklist", [])
         detail_selectors = self.config.get("detail_selectors")
 
         html = await fetch_page(
@@ -53,7 +54,7 @@ class StaticHTMLCrawler(BaseCrawler):
         )
 
         soup = BeautifulSoup(html, "lxml")
-        raw_items = parse_list_items(soup, selectors, base_url, keyword_filter)
+        raw_items = parse_list_items(soup, selectors, base_url, keyword_filter, keyword_blacklist)
 
         items: list[CrawledItem] = []
         for raw in raw_items:

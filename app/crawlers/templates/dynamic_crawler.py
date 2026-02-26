@@ -93,6 +93,7 @@ class DynamicPageCrawler(BaseCrawler):
         selectors = self.config.get("selectors", {})
         base_url = self.config.get("base_url", url)
         keyword_filter = self.config.get("keyword_filter", [])
+        keyword_blacklist = self.config.get("keyword_blacklist", [])
         detail_selectors = self.config.get("detail_selectors")
         detail_use_playwright = self.config.get("detail_use_playwright", True)
         detail_fetch_js = self.config.get("detail_fetch_js", False)
@@ -110,7 +111,9 @@ class DynamicPageCrawler(BaseCrawler):
             html = await page.content()
 
             soup = BeautifulSoup(html, "lxml")
-            raw_items = parse_list_items(soup, selectors, base_url, keyword_filter)
+            raw_items = parse_list_items(
+                soup, selectors, base_url, keyword_filter, keyword_blacklist
+            )
 
             request_delay = self.config.get("request_delay", 0)
 
