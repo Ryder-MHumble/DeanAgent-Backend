@@ -20,6 +20,7 @@ logger = logging.getLogger(__name__)
 
 DIMENSIONS = ["national_policy", "beijing_policy"]
 PROCESSED_DIR = BASE_DIR / "data" / "processed" / "policy_intel"
+FEED_MIN_SCORE = 20  # Minimum matchScore for articles to appear in feed output
 ENRICHED_DIR = PROCESSED_DIR / "_enriched"
 
 _hash_tracker = HashTracker(PROCESSED_DIR / "_processed_hashes.json", PROCESSED_DIR)
@@ -161,6 +162,7 @@ def _rebuild_output_files(all_enriched: list[tuple[dict, dict]]) -> tuple[int, i
         if opp:
             opportunity_items.append(opp)
 
+    feed_items = [item for item in feed_items if (item.get("matchScore") or 0) >= FEED_MIN_SCORE]
     feed_items.sort(key=lambda x: x.get("date", ""), reverse=True)
     opportunity_items.sort(key=lambda x: x.get("daysLeft", 999))
 
