@@ -235,7 +235,7 @@ sources:
     wait_timeout: 15000
     schedule: "weekly"
     priority: 2
-    is_enabled: false  # 页面需 JS 渲染，服务器无 Playwright 暂不启用
+    is_enabled: true  # 已验证可正常爬取 7 位教师
     base_url: "https://www.ee.tsinghua.edu.cn/"
     faculty_selectors:
       list_item: "ul.ul-listb3 li"
@@ -696,7 +696,7 @@ sources:
     use_playwright: false
     schedule: "weekly"
     priority: 3
-    is_enabled: false  # URL待确认
+    is_enabled: false  # 404 错误：URL 已失效或网站结构变更
     base_url: "https://www.insc.tsinghua.edu.cn"
     faculty_selectors:
       list_item: "ul li"
@@ -714,7 +714,7 @@ sources:
     use_playwright: false
     schedule: "weekly"
     priority: 3
-    is_enabled: false  # URL待确认
+    is_enabled: false  # 连接错误：域名无法访问或网络限制
     base_url: "https://ias.tsinghua.edu.cn"
     faculty_selectors:
       list_item: "ul li"
@@ -732,7 +732,7 @@ sources:
     use_playwright: false
     schedule: "weekly"
     priority: 3
-    is_enabled: false  # URL待确认
+    is_enabled: false  # 404 错误：URL 已失效或网站结构变更
     base_url: "https://thfl.tsinghua.edu.cn"
     faculty_selectors:
       list_item: "ul li"
