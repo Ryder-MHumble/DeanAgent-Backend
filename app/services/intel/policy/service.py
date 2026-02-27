@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from app.services.intel.shared import load_intel_json
+from app.services.intel.shared import load_intel_json, parse_source_filter
 
 MODULE = "policy_intel"
 
@@ -13,12 +13,21 @@ def get_policy_feed(
     importance: str | None = None,
     min_match_score: int | None = None,
     keyword: str | None = None,
+    source_id: str | None = None,
+    source_ids: str | None = None,
+    source_name: str | None = None,
+    source_names: str | None = None,
     limit: int = 50,
     offset: int = 0,
 ) -> dict[str, Any]:
     """Read feed.json and apply optional filters."""
     data = load_intel_json(MODULE, "feed.json")
     items = data.get("items", [])
+
+    # 应用信源筛选（优先筛选，减少后续处理量）
+    source_filter = parse_source_filter(source_id, source_ids, source_name, source_names)
+    if source_filter:
+        items = [i for i in items if i.get("source_id") in source_filter]
 
     if category:
         items = [i for i in items if i.get("category") == category]
