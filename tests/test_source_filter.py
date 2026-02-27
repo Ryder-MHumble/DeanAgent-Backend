@@ -1,6 +1,7 @@
 # tests/test_source_filter.py
 import pytest
-from app.services.intel.shared import parse_source_filter
+from unittest.mock import patch
+from app.services.intel.shared import parse_source_filter, resolve_source_ids_by_names
 
 
 def test_parse_source_filter_returns_none_when_all_params_empty():
@@ -37,3 +38,80 @@ def test_parse_source_filter_all_empty_strings():
     """全是空字符串时返回空集合"""
     result = parse_source_filter("", " , , ", None, None)
     assert result == set()
+
+
+def test_resolve_source_ids_by_names_exact_match():
+    """精确匹配信源名称"""
+    mock_sources = [
+        {"id": "gov_cn", "name": "中国政府网"},
+        {"id": "xinhua", "name": "新华社"},
+    ]
+    with patch('app.services.source_service.list_sources', return_value=mock_sources):
+        result = resolve_source_ids_by_names(["中国政府网"])
+        assert result == {"gov_cn"}
+
+
+def test_resolve_source_ids_by_names_fuzzy_match():
+    """模糊匹配：子串匹配"""
+    mock_sources = [
+        {"id": "gov_cn", "name": "中国政府网-最新政策"},
+        {"id": "beijing_gov", "name": "北京市人民政府网"},
+        {"id": "xinhua", "name": "新华社"},
+    ]
+    with patch('app.services.source_service.list_sources', return_value=mock_sources):
+        result = resolve_source_ids_by_names(["政府网"])
+        assert result == {"gov_cn", "beijing_gov"}
+
+
+def test_resolve_source_ids_by_names_case_insensitive():
+    """大小写不敏感"""
+    mock_sources = [
+        {"id": "arxiv", "name": "ArXiv CS.AI"},
+    ]
+    with patch('app.services.source_service.list_sources', return_value=mock_sources):
+        result = resolve_source_ids_by_names(["arxiv"])
+        assert result == {"arxiv"}
+
+
+def test_resolve_source_ids_by_names_space_handling():
+    """去除空格后匹配"""
+    mock_sources = [
+        {"id": "gov", "name": "中国 政府 网"},
+    ]
+    with patch('app.services.source_service.list_sources', return_value=mock_sources):
+        result = resolve_source_ids_by_names(["政府网"])
+        assert result == {"gov"}
+
+
+def test_resolve_source_ids_by_names_no_match():
+    """没有匹配时返回空集合"""
+    mock_sources = [
+        {"id": "gov", "name": "中国政府网"},
+    ]
+    with patch('app.services.source_service.list_sources', return_value=mock_sources):
+        result = resolve_source_ids_by_names(["不存在的信源"])
+        assert result == set()
+
+
+def test_resolve_source_ids_by_names_multiple_patterns():
+    """多个名称模式"""
+    mock_sources = [
+        {"id": "gov", "name": "中国政府网"},
+        {"id": "xinhua", "name": "新华社"},
+        {"id": "people", "name": "人民日报"},
+    ]
+    with patch('app.services.source_service.list_sources', return_value=mock_sources):
+        result = resolve_source_ids_by_names(["政府", "新华"])
+        assert result == {"gov", "xinhua"}
+
+
+def test_parse_source_filter_mixed_id_and_name():
+    """混合使用 ID 和名称参数"""
+    mock_sources = [
+        {"id": "gov", "name": "中国政府网"},
+        {"id": "xinhua", "name": "新华社"},
+    ]
+    with patch('app.services.source_service.list_sources', return_value=mock_sources):
+        result = parse_source_filter("arxiv", "github", "政府", None)
+        # arxiv, github (ID) + gov (from "政府" name match)
+        assert result == {"arxiv", "github", "gov"}

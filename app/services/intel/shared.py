@@ -288,6 +288,33 @@ def parse_date_str(s: str | None) -> str | None:
 # ---------------------------------------------------------------------------
 
 
+def resolve_source_ids_by_names(names: list[str]) -> set[str]:
+    """根据信源名称（模糊匹配）解析出信源 ID 集合。
+
+    Args:
+        names: 待匹配的名称列表
+
+    Returns:
+        匹配到的信源 ID 集合
+    """
+    # 避免循环导入，在函数内部导入
+    import asyncio
+    from app.services.source_service import list_sources
+
+    # 同步调用异步函数获取所有信源
+    all_sources = asyncio.run(list_sources())
+    matched_ids = set()
+
+    for name_pattern in names:
+        pattern_lower = name_pattern.lower().replace(' ', '')
+        for source in all_sources:
+            source_name_lower = source['name'].lower().replace(' ', '')
+            if pattern_lower in source_name_lower:
+                matched_ids.add(source['id'])
+
+    return matched_ids
+
+
 def parse_source_filter(
     source_id: str | None,
     source_ids: str | None,
@@ -319,8 +346,18 @@ def parse_source_filter(
             if s.strip():
                 result.add(s.strip())
 
-    # TODO: 处理 name（模糊匹配）- 在 Task 2 实现
+    # 处理 name（模糊匹配）
     if source_name or source_names:
-        raise NotImplementedError("Name filtering not yet implemented")
+        names = []
+        if source_name and source_name.strip():
+            names.append(source_name.strip())
+        if source_names:
+            for s in source_names.split(','):
+                if s.strip():
+                    names.append(s.strip())
+
+        if names:
+            resolved_ids = resolve_source_ids_by_names(names)
+            result.update(resolved_ids)
 
     return result if result else set()
