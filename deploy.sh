@@ -26,6 +26,9 @@ W='\033[0;37m';   D='\033[0;90m';  BOLD='\033[1m'
 BW='\033[1;97m';  BC='\033[1;36m'
 BG_G='\033[42;30m'; BG_R='\033[41;37m'; BG_Y='\033[43;30m'; BG_B='\033[44;37m'
 NC='\033[0m'
+# 256-color gradient (violet → cyan)
+P1='\033[38;5;57m'; P2='\033[38;5;63m'; P3='\033[38;5;69m'
+P4='\033[38;5;75m'; P5='\033[38;5;81m'; P6='\033[38;5;87m'
 
 # ── Utilities ─────────────────────────────────────────────────
 _hr()  { printf "${D}"; printf '─%.0s' $(seq 1 60); printf "${NC}\n"; }
@@ -51,14 +54,24 @@ spinner() {
 # ── Header ────────────────────────────────────────────────────
 show_banner() {
     printf "\n"
-    printf "  ${BW}  ███    ███████   █████   ██   ██   █████ ${NC}\n"
-    printf "  ${BW} ██ ██  ██   ██  ██       ██   ██  ██     ${NC}\n"
-    printf "  ${BC}███████  ███████  ██ ████  ██   ██   ████  ${NC}\n"
-    printf "  ${BC}██   ██  ████     ██   ██  ██   ██      ██ ${NC}\n"
-    printf "  ${BC}██   ██  ██   ██   █████    █████   █████  ${NC}\n"
-    printf "  ${D}─────────────────────────────────────────────${NC}\n"
-    printf "  ${D}中关村人工智能研究院 · 信息监测系统${NC}\n"
-    printf "  ${D}v%s · port %s · %s${NC}\n" "$VERSION" "$PORT" "$(date '+%Y-%m-%d %H:%M')"
+    printf "  ${P1}${BOLD}██████╗ ███████╗ █████╗ ███╗   ██╗${NC}\n"
+    printf "  ${P2}${BOLD}██╔══██╗██╔════╝██╔══██╗████╗  ██║${NC}\n"
+    printf "  ${P3}${BOLD}██║  ██║█████╗  ███████║██╔██╗ ██║${NC}\n"
+    printf "  ${P4}${BOLD}██║  ██║██╔══╝  ██╔══██║██║╚██╗██║${NC}\n"
+    printf "  ${P5}${BOLD}██████╔╝███████╗██║  ██║██║ ╚████║${NC}\n"
+    printf "  ${P6}${BOLD}╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝${NC}\n"
+    printf "\n"
+    printf "  ${P3}%s${NC}\n" "$(printf '%.0s═' {1..56})"
+    printf "  ${P2}${BOLD}院长智能体${NC} ${D}·${NC} ${D}Dean AI Agent — Backend Service${NC}\n"
+    printf "  ${P3}%s${NC}\n" "$(printf '%.0s═' {1..56})"
+    printf "\n"
+    local _branch _py _time
+    _branch=$(git branch --show-current 2>/dev/null || echo 'unknown')
+    _py=$(python3 --version 2>/dev/null | cut -d' ' -f2 || echo 'N/A')
+    _time=$(date '+%Y-%m-%d  %H:%M:%S')
+    printf "  ${D}TIME${NC}   ${BW}%s${NC}    ${D}PORT${NC}   ${BC}${BOLD}:%s${NC}\n" "$_time" "$PORT"
+    printf "  ${D}BRANCH${NC} ${Y}%s${NC}          ${D}PYTHON${NC} ${G}%s${NC}\n" "$_branch" "$_py"
+    printf "  ${D}TARGET${NC} ${D}43.98.254.243${NC}    ${D}v%s${NC}\n" "$VERSION"
     printf "\n"
     _hr
 }
@@ -240,7 +253,7 @@ _wait_health() {
     local chars='⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'
     printf " ${C}⟳${NC} Waiting for health check..."
     while [[ $i -lt $max ]]; do
-        if curl -sf "http://localhost:$PORT/api/v1/health/" >/dev/null 2>&1; then
+        if curl -sf "http://43.98.254.243:$PORT/api/v1/health/" >/dev/null 2>&1; then
             printf "\r ${G}✓${NC}  Health check passed           \n"
             return 0
         fi
@@ -286,7 +299,7 @@ show_dashboard() {
 
         # Pipeline status
         local pipe_json
-        pipe_json=$(curl -sf "http://localhost:$PORT/api/v1/health/pipeline-status" 2>/dev/null) || pipe_json=""
+        pipe_json=$(curl -sf "http://43.98.254.243:$PORT/api/v1/health/pipeline-status" 2>/dev/null) || pipe_json=""
         if [[ -n "$pipe_json" ]]; then
             printf "\n"
             printf "   ${BOLD}PIPELINE${NC}\n"
@@ -330,9 +343,9 @@ if stages:
         # Endpoints
         printf "\n"
         printf "   ${BOLD}ENDPOINTS${NC}\n"
-        printf "   ${D}Docs${NC}     http://localhost:%s/docs\n" "$PORT"
-        printf "   ${D}Health${NC}   http://localhost:%s/api/v1/health/\n" "$PORT"
-        printf "   ${D}Pipeline${NC} http://localhost:%s/api/v1/health/pipeline-status\n" "$PORT"
+        printf "   ${D}Docs${NC}     http://43.98.254.243:%s/docs\n" "$PORT"
+        printf "   ${D}Health${NC}   http://43.98.254.243:%s/api/v1/health/\n" "$PORT"
+        printf "   ${D}Pipeline${NC} http://43.98.254.243:%s/api/v1/health/pipeline-status\n" "$PORT"
     else
         printf "\n"
         printf "   ${BOLD}SERVICE${NC}\n"
@@ -354,7 +367,7 @@ _check_pipeline_hint() {
     if [[ ! -f "$feed" ]]; then
         printf "\n"
         warn "Processed data missing — Pipeline will auto-trigger on startup"
-        dim "   Or trigger manually: curl -X POST http://localhost:$PORT/api/v1/health/pipeline-trigger"
+        dim "   Or trigger manually: curl -X POST http://43.98.254.243:$PORT/api/v1/health/pipeline-trigger"
         return
     fi
 
@@ -370,7 +383,7 @@ _check_pipeline_hint() {
     if [[ $age_hours -gt 24 ]]; then
         printf "\n"
         warn "Pipeline data is ${BOLD}${age_hours}h${NC}${Y} old — consider re-running:${NC}"
-        dim "   curl -X POST http://localhost:$PORT/api/v1/health/pipeline-trigger"
+        dim "   curl -X POST http://43.98.254.243:$PORT/api/v1/health/pipeline-trigger"
     fi
 }
 
