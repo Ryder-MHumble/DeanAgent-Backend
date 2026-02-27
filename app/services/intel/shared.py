@@ -281,3 +281,46 @@ def parse_date_str(s: str | None) -> str | None:
         return datetime.fromisoformat(s).strftime("%Y-%m-%d")
     except (ValueError, TypeError):
         return None
+
+
+# ---------------------------------------------------------------------------
+# Source filtering
+# ---------------------------------------------------------------------------
+
+
+def parse_source_filter(
+    source_id: str | None,
+    source_ids: str | None,
+    source_name: str | None,
+    source_names: str | None,
+) -> set[str] | None:
+    """解析信源筛选参数，返回信源 ID 集合。
+
+    Args:
+        source_id: 单个信源 ID（精确）
+        source_ids: 多个信源 ID，逗号分隔（精确）
+        source_name: 单个信源名称（模糊）
+        source_names: 多个信源名称，逗号分隔（模糊）
+
+    Returns:
+        None: 不筛选（返回所有信源）
+        set[str]: 信源 ID 集合（已去重）
+    """
+    if not any([source_id, source_ids, source_name, source_names]):
+        return None
+
+    result = set()
+
+    # 处理 ID（精确匹配）
+    if source_id and source_id.strip():
+        result.add(source_id.strip())
+    if source_ids:
+        for s in source_ids.split(','):
+            if s.strip():
+                result.add(s.strip())
+
+    # TODO: 处理 name（模糊匹配）- 在 Task 2 实现
+    if source_name or source_names:
+        raise NotImplementedError("Name filtering not yet implemented")
+
+    return result if result else set()
