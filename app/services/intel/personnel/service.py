@@ -21,7 +21,7 @@ from app.services.intel.personnel.rules import (
     compute_match_score,
     extract_changes,
 )
-from app.services.intel.shared import article_date
+from app.services.intel.shared import article_date, parse_source_filter
 from app.services.json_reader import get_articles
 
 logger = logging.getLogger(__name__)
@@ -218,6 +218,10 @@ def get_personnel_feed(
     importance: str | None = None,
     min_match_score: int | None = None,
     keyword: str | None = None,
+    source_id: str | None = None,
+    source_ids: str | None = None,
+    source_name: str | None = None,
+    source_names: str | None = None,
     limit: int = 50,
     offset: int = 0,
 ) -> dict[str, Any]:
@@ -226,6 +230,11 @@ def get_personnel_feed(
 
     data = load_intel_json("personnel_intel", "feed.json")
     items = data.get("items", [])
+
+    # 应用信源筛选（优先筛选，减少后续处理量）
+    source_filter = parse_source_filter(source_id, source_ids, source_name, source_names)
+    if source_filter:
+        items = [i for i in items if i.get("source_id") in source_filter]
 
     if importance:
         items = [i for i in items if i.get("importance") == importance]
@@ -308,11 +317,20 @@ def get_enriched_feed(
     importance: str | None = None,
     min_relevance: int | None = None,
     keyword: str | None = None,
+    source_id: str | None = None,
+    source_ids: str | None = None,
+    source_name: str | None = None,
+    source_names: str | None = None,
     limit: int = 50,
     offset: int = 0,
 ) -> dict[str, Any]:
     """Dynamically compute enriched feed from latest raw data + cached LLM enrichments."""
     items = _compute_live_changes()
+
+    # 应用信源筛选（优先筛选，减少后续处理量）
+    source_filter = parse_source_filter(source_id, source_ids, source_name, source_names)
+    if source_filter:
+        items = [i for i in items if i.get("source_id") in source_filter]
 
     if group:
         items = [i for i in items if i.get("group") == group]
