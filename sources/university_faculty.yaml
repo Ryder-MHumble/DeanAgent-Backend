@@ -50,10 +50,18 @@ sources:
     base_url: "https://www.cs.tsinghua.edu.cn"
     faculty_selectors:
       # 页面按研究所分 dd 区块，每块内 ul.clear > li > div.pic + h2 a
+      # 列表页结构: li > div.text > h2 + p(职称) + p(电话) + p(邮箱)
       list_item: "dd li"
       name: "h2"
       link: "h2 a"
       photo: "div.pic img"
+      email: "div.text p:nth-of-type(3)"  # 第三个p标签是邮箱
+    detail_selectors:
+      # 详情页结构: h4标题 + 后续p段落
+      # 关键章节: "教育背景"、"研究领域"、"研究概况"、"学术兼职"、"学术成果"等
+      heading_sections:
+        bio: "教育背景"
+        research_areas: "研究领域"
     tags: ["faculty", "tsinghua", "cs"]
 
   # ===== 北京大学 =====
