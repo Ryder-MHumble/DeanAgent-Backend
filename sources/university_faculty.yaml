@@ -196,6 +196,12 @@ sources:
       link: "a"
       photo: "div.img img"
       bio: "div.bottom"
+    detail_selectors:
+      # Email displayed as image (not scrapable)
+      # Detail page structure: h3 headings with content in .v_news_content or .arc-con
+      heading_sections:
+        education: "教育背景"
+        bio: "工作经历"
     tags: ["faculty", "tsinghua", "cs", "ai"]
 
   - id: "tsinghua_se_faculty"
