@@ -20,8 +20,7 @@ logger = logging.getLogger(__name__)
 PLATFORM_LABELS: dict[str, str] = {
     "xhs": "小红书",
     "dy": "抖音",
-    "bilibili": "哔哩哔哩",
-    "weibo": "微博",
+    "bili": "哔哩哔哩",
     "zhihu": "知乎",
 }
 
