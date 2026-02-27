@@ -1,6 +1,6 @@
 # tests/test_source_filter.py
-import pytest
 from unittest.mock import patch
+
 from app.services.intel.shared import parse_source_filter, resolve_source_ids_by_names
 
 

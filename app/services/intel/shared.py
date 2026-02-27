@@ -299,6 +299,7 @@ def resolve_source_ids_by_names(names: list[str]) -> set[str]:
     """
     # 避免循环导入，在函数内部导入
     import asyncio
+
     from app.services.source_service import list_sources
 
     # 同步调用异步函数获取所有信源
