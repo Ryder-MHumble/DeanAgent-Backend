@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from app.services.intel.shared import load_intel_json
+from app.services.intel.shared import load_intel_json, parse_source_filter
 
 MODULE = "tech_frontier"
 
@@ -112,6 +112,10 @@ def get_signals(
     topic_id: str | None = None,
     signal_type: str | None = None,
     keyword: str | None = None,
+    source_id: str | None = None,
+    source_ids: str | None = None,
+    source_name: str | None = None,
+    source_names: str | None = None,
     limit: int = 50,
     offset: int = 0,
 ) -> dict[str, Any]:
@@ -159,6 +163,11 @@ def get_signals(
         if sid and sid not in seen:
             seen.add(sid)
             unique.append(s)
+
+    # 应用信源筛选
+    source_filter = parse_source_filter(source_id, source_ids, source_name, source_names)
+    if source_filter:
+        unique = [s for s in unique if s["data"].get("source_id") in source_filter]
 
     # Keyword filter
     if keyword:

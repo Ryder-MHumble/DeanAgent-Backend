@@ -109,6 +109,10 @@ async def get_signals(
     keyword: str | None = Query(
         None, description="关键词搜索"
     ),
+    source_id: str | None = Query(None, description="按单个信源 ID 筛选（精确匹配）"),
+    source_ids: str | None = Query(None, description="按多个信源 ID 筛选（逗号分隔，精确匹配）"),
+    source_name: str | None = Query(None, description="按单个信源名称筛选（模糊匹配）"),
+    source_names: str | None = Query(None, description="按多个信源名称筛选（逗号分隔，模糊匹配）"),
     limit: int = Query(50, ge=1, le=200, description="返回条数上限"),
     offset: int = Query(0, ge=0, description="偏移量"),
 ):
@@ -116,6 +120,10 @@ async def get_signals(
         topic_id=topic_id,
         signal_type=signal_type,
         keyword=keyword,
+        source_id=source_id,
+        source_ids=source_ids,
+        source_name=source_name,
+        source_names=source_names,
         limit=limit,
         offset=offset,
     )
