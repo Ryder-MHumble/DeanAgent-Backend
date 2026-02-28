@@ -118,6 +118,8 @@ def _build_feed_item(article: dict, llm: dict) -> dict:
         "importance": llm.get("importance", "一般"),
         "date": _article_date(article),
         "source": article.get("source_name", ""),
+        "source_id": article.get("source_id", ""),
+        "source_name": article.get("source_name", ""),
         "tags": merged_tags,
         "matchScore": llm.get("matchScore"),
         "funding": llm.get("funding"),

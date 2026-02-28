@@ -349,6 +349,8 @@ def build_kol_voice(article: dict) -> dict:
         "statement": (article.get("title") or "")[:200],
         "platform": "X",
         "sourceUrl": article.get("url", ""),
+        "source_id": article.get("source_id", ""),
+        "source_name": article.get("source_name", ""),
         "date": _article_date(article),
     }
 
@@ -360,6 +362,8 @@ def build_topic_news(article: dict, match_score: int) -> dict:
         "id": article.get("url_hash", ""),
         "title": article.get("title", ""),
         "source": article.get("source_name") or article.get("source_id", ""),
+        "source_id": article.get("source_id", ""),
+        "source_name": article.get("source_name", ""),
         "sourceUrl": article.get("url", ""),
         "type": detect_news_type(article),
         "date": _article_date(article),
