@@ -1,4 +1,4 @@
-"""全量爬取脚本 - 遍历所有启用的信源，逐个爬取并输出进度和汇总。"""
+"""全量爬取脚本 - 并行爬取所有启用的信源，实时进度条 + 完整报告。"""
 import argparse
 import asyncio
 import logging
@@ -17,6 +17,12 @@ if __name__ == "__main__":
     )
     # 只让脚本自身的输出可见，爬虫内部日志静默
     logging.getLogger("app").setLevel(logging.WARNING)
+
+try:
+    from tqdm import tqdm
+    HAS_TQDM = True
+except ImportError:
+    HAS_TQDM = False
 
 
 def _display_width(s: str) -> int:
@@ -41,12 +47,68 @@ def _status_icon(status_value: str) -> str:
     }.get(status_value, "❓")
 
 
-async def run_all(
-    dimension_filter: str | None = None,
-    concurrency: int = 1,
-):
+async def _crawl_single_source(config: dict, pbar=None) -> dict:
+    """爬取单个信源并返回结果字典"""
     from app.crawlers.registry import CrawlerRegistry
     from app.crawlers.utils.json_storage import save_crawl_result_json
+
+    source_id = config["id"]
+    name = config.get("name", source_id)
+    dim = config.get("dimension", "?")
+    method = config.get("crawl_method", "?")
+
+    try:
+        crawler = CrawlerRegistry.create_crawler(config)
+        result = await crawler.run()
+
+        # 统计有内容的条目
+        items_with_content = sum(
+            1 for item in result.items if item.content
+        )
+
+        # 保存 JSON
+        json_path = save_crawl_result_json(result, config)
+
+        status_str = result.status.value
+
+        if pbar:
+            pbar.set_postfix_str(f"{dim}/{source_id[:20]}")
+            pbar.update(1)
+
+        return {
+            "source_id": source_id,
+            "name": name,
+            "dimension": dim,
+            "method": method,
+            "status": status_str,
+            "items_total": result.items_total,
+            "items_with_content": items_with_content,
+            "duration": result.duration_seconds,
+            "error": result.error_message,
+            "json_path": str(json_path) if json_path else None,
+        }
+
+    except Exception as exc:
+        if pbar:
+            pbar.update(1)
+        return {
+            "source_id": source_id,
+            "name": name,
+            "dimension": dim,
+            "method": method,
+            "status": "failed",
+            "items_total": 0,
+            "items_with_content": 0,
+            "duration": 0,
+            "error": str(exc),
+            "json_path": None,
+        }
+
+
+async def run_all(
+    dimension_filter: str | None = None,
+    concurrency: int = 5,
+):
     from app.crawlers.utils.playwright_pool import close_browser
     from app.scheduler.manager import load_all_source_configs
 
@@ -74,10 +136,10 @@ async def run_all(
     total = len(enabled)
     print("=" * 70)
     print(f"  全量爬取 — 共 {total} 个启用信源，{len(dim_groups)} 个维度")
+    print(f"  并发度: {concurrency}")
     print("=" * 70)
     for dim, sources in sorted(dim_groups.items()):
-        names = ", ".join(s.get("name", s["id"]) for s in sources)
-        print(f"  {dim} ({len(sources)}): {names}")
+        print(f"  {dim}: {len(sources)} 源")
     print("=" * 70)
     print()
 
@@ -85,69 +147,25 @@ async def run_all(
     results: list[dict] = []
     global_start = time.time()
 
-    for idx, config in enumerate(enabled, 1):
-        source_id = config["id"]
-        name = config.get("name", source_id)
-        dim = config.get("dimension", "?")
-        method = config.get("crawl_method", "?")
+    # 创建进度条
+    if HAS_TQDM:
+        pbar = tqdm(total=total, desc="爬取进度", unit="源", ncols=80)
+    else:
+        pbar = None
+        print(f"开始爬取 {total} 个信源...")
 
-        header = f"[{idx}/{total}] {dim}/{source_id}"
-        print(f"{header}  {name}  ({method})")
-        print(f"{'─' * 60}")
+    # 并发爬取
+    semaphore = asyncio.Semaphore(concurrency)
 
-        try:
-            crawler = CrawlerRegistry.create_crawler(config)
-            result = await crawler.run()
+    async def _crawl_with_semaphore(cfg):
+        async with semaphore:
+            return await _crawl_single_source(cfg, pbar)
 
-            # 统计有内容的条目
-            items_with_content = sum(
-                1 for item in result.items if item.content
-            )
+    tasks = [_crawl_with_semaphore(cfg) for cfg in enabled]
+    results = await asyncio.gather(*tasks)
 
-            # 保存 JSON
-            json_path = save_crawl_result_json(result, config)
-
-            status_str = result.status.value
-            icon = _status_icon(status_str)
-
-            print(
-                f"  {icon} {status_str}  "
-                f"条目: {result.items_total}  "
-                f"有内容: {items_with_content}  "
-                f"耗时: {result.duration_seconds:.1f}s"
-            )
-            if result.error_message:
-                print(f"  ⚠️  {result.error_message[:120]}")
-            if json_path:
-                print(f"  📁 {json_path}")
-
-            results.append({
-                "source_id": source_id,
-                "name": name,
-                "dimension": dim,
-                "method": method,
-                "status": status_str,
-                "items_total": result.items_total,
-                "items_with_content": items_with_content,
-                "duration": result.duration_seconds,
-                "error": result.error_message,
-            })
-
-        except Exception as exc:
-            print(f"  🔴 创建爬虫失败: {exc}")
-            results.append({
-                "source_id": source_id,
-                "name": name,
-                "dimension": dim,
-                "method": method,
-                "status": "failed",
-                "items_total": 0,
-                "items_with_content": 0,
-                "duration": 0,
-                "error": str(exc),
-            })
-
-        print()
+    if pbar:
+        pbar.close()
 
     # 关闭 Playwright（如果有 dynamic 源启动了它）
     try:
@@ -257,5 +275,14 @@ if __name__ == "__main__":
         "--dimension", "-d",
         help="只爬取指定维度 (如 technology, universities)",
     )
+    parser.add_argument(
+        "--concurrency", "-c",
+        type=int,
+        default=5,
+        help="并发爬取数量 (默认 5)",
+    )
     args = parser.parse_args()
-    asyncio.run(run_all(dimension_filter=args.dimension))
+    asyncio.run(run_all(
+        dimension_filter=args.dimension,
+        concurrency=args.concurrency,
+    ))

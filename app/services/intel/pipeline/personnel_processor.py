@@ -19,6 +19,12 @@ from app.services.json_reader import get_articles
 
 logger = logging.getLogger(__name__)
 
+try:
+    from tqdm import tqdm
+    HAS_TQDM = True
+except ImportError:
+    HAS_TQDM = False
+
 DIMENSION = "personnel"
 PROCESSED_DIR = BASE_DIR / "data" / "processed" / "personnel_intel"
 ENRICHED_DIR = PROCESSED_DIR / "_enriched"

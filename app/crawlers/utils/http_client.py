@@ -3,6 +3,7 @@ from __future__ import annotations
 import asyncio
 import logging
 import random
+import ssl
 from collections import defaultdict
 from collections.abc import Callable
 from urllib.parse import urlparse
@@ -50,13 +51,27 @@ async def _request_with_retry(
     timeout: float = 30.0,
     max_retries: int = 3,
     request_delay: float | None = None,
+    verify: bool = True,
     extract: Callable[[httpx.Response], object],
 ) -> object:
     """Core retry logic shared by fetch_page and fetch_json."""
     domain = urlparse(url).netloc
     delay = request_delay or settings.DEFAULT_REQUEST_DELAY
 
-    merged_headers = {"User-Agent": _get_random_ua()}
+    # Build complete browser-like headers
+    merged_headers = {
+        "User-Agent": _get_random_ua(),
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+        "Accept-Encoding": "gzip, deflate",
+        "Connection": "keep-alive",
+        "Upgrade-Insecure-Requests": "1",
+        "Sec-Fetch-Dest": "document",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Site": "none",
+        "Sec-Fetch-User": "?1",
+        "Cache-Control": "max-age=0",
+    }
     if headers:
         merged_headers.update(headers)
 
@@ -64,8 +79,18 @@ async def _request_with_retry(
         await _wait_for_domain(domain, delay)
 
         last_exc: Exception | None = None
+        # When verify=False, use a legacy SSL context that allows old cipher suites
+        # (needed for servers with SSLv3 alert handshake failures)
+        if not verify:
+            ssl_ctx = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+            ssl_ctx.check_hostname = False
+            ssl_ctx.verify_mode = ssl.CERT_NONE
+            ssl_ctx.set_ciphers("DEFAULT:@SECLEVEL=0")
+            ssl_param: bool | ssl.SSLContext = ssl_ctx
+        else:
+            ssl_param = True
         async with httpx.AsyncClient(
-            timeout=timeout, follow_redirects=True
+            timeout=timeout, follow_redirects=True, verify=ssl_param
         ) as client:
             for attempt in range(max_retries):
                 try:
@@ -94,6 +119,7 @@ async def fetch_page(
     timeout: float = 30.0,
     max_retries: int = 3,
     request_delay: float | None = None,
+    verify: bool = True,
 ) -> str:
     """Fetch a URL with retry, rate limiting, and UA rotation. Returns response text."""
 
@@ -108,6 +134,7 @@ async def fetch_page(
         timeout=timeout,
         max_retries=max_retries,
         request_delay=request_delay,
+        verify=verify,
         extract=_extract,
     )
 

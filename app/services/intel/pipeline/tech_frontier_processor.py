@@ -35,6 +35,12 @@ from app.services.json_reader import get_articles
 
 logger = logging.getLogger(__name__)
 
+try:
+    from tqdm import tqdm
+    HAS_TQDM = True
+except ImportError:
+    HAS_TQDM = False
+
 PROCESSED_DIR = BASE_DIR / "data" / "processed" / "tech_frontier"
 
 _hash_tracker = HashTracker(PROCESSED_DIR / "_processed_hashes.json", PROCESSED_DIR)

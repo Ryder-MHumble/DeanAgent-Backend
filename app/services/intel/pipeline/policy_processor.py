@@ -18,6 +18,12 @@ from app.services.json_reader import get_articles
 
 logger = logging.getLogger(__name__)
 
+try:
+    from tqdm import tqdm
+    HAS_TQDM = True
+except ImportError:
+    HAS_TQDM = False
+
 DIMENSIONS = ["national_policy", "beijing_policy"]
 PROCESSED_DIR = BASE_DIR / "data" / "processed" / "policy_intel"
 FEED_MIN_SCORE = 20  # Minimum matchScore for articles to appear in feed output
@@ -191,11 +197,13 @@ async def process_policy_pipeline(
 
     Returns summary dict for the pipeline orchestrator.
     """
+    logger.info("开始处理政策智能数据...")
+
     # Load raw articles from all relevant dimensions
     all_articles: list[dict] = []
     for dim in DIMENSIONS:
         articles = get_articles(dim)
-        logger.info("Policy pipeline: loaded %d articles from %s", len(articles), dim)
+        logger.info("  从 %s 加载 %d 篇文章", dim, len(articles))
         all_articles.extend(articles)
 
     # Exclude personnel-related groups (belong in personnel pipeline)
@@ -220,14 +228,20 @@ async def process_policy_pipeline(
     ]
 
     logger.info(
-        "Policy pipeline: %d unique, %d new (previously processed: %d)",
+        "  去重后 %d 篇，新增 %d 篇（已处理 %d 篇）",
         len(unique_articles), len(new_articles), len(processed_hashes),
     )
 
     # Tier 1: Rule-based scoring for new articles
     new_hashes: set[str] = set()
     if new_articles:
-        for article in new_articles:
+        logger.info("  规则引擎评分中...")
+        if HAS_TQDM:
+            pbar = tqdm(new_articles, desc="政策评分", unit="篇", ncols=80)
+        else:
+            pbar = new_articles
+
+        for article in pbar:
             rules_result = enrich_by_rules(article)
             _save_enriched(article, rules_result)
             h = article.get("url_hash", "")
@@ -236,7 +250,7 @@ async def process_policy_pipeline(
 
         all_hashes = processed_hashes | new_hashes
         _hash_tracker.save(all_hashes)
-        logger.info("Policy pipeline: scored %d new articles", len(new_hashes))
+        logger.info("  ✓ 完成 %d 篇新文章评分", len(new_hashes))
 
     # Rebuild output files from ALL enriched data (excluding personnel)
     all_enriched = [

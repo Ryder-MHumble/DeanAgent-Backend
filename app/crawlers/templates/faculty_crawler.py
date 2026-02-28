@@ -52,6 +52,13 @@ from app.schemas.scholar import (
     parse_research_areas,
 )
 
+# Optional LLM enhancement (only imported if enabled)
+try:
+    from app.crawlers.utils.faculty_llm_extractor import extract_faculty_fields_with_llm
+    LLM_AVAILABLE = True
+except ImportError:
+    LLM_AVAILABLE = False
+
 logger = logging.getLogger(__name__)
 
 # Regex for extracting email addresses from text
@@ -120,6 +127,7 @@ class FacultyCrawler(BaseCrawler):
             headers=self.config.get("headers"),
             encoding=self.config.get("encoding"),
             request_delay=self.config.get("request_delay"),
+            verify=self.config.get("verify_ssl", True),
         )
 
     async def _fetch_html_playwright(self, url: str) -> str:
@@ -143,7 +151,13 @@ class FacultyCrawler(BaseCrawler):
         """Fetch individual profile page and extract detailed faculty info."""
         result: dict = {}
         try:
-            html = await self._fetch_html_static(profile_url)
+            html = await fetch_page(
+                profile_url,
+                headers=self.config.get("headers"),
+                encoding=self.config.get("encoding"),
+                request_delay=self.config.get("request_delay"),
+                verify=self.config.get("verify_ssl", True),
+            )
             soup = BeautifulSoup(html, "lxml")
 
             if name_sel := detail_selectors.get("name"):

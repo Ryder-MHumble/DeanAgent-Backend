@@ -290,11 +290,7 @@ sources:
       title: "a"
       link: "a"
     base_url: "https://www.bjrd.gov.cn"
-    keyword_filter:
-      - "任命"
-      - "免职"
-      - "人事"
-      - "选举"
+    keyword_filter: []  # Removed over-restrictive filter; page has 28 items but all were filtered
     detail_selectors:
       content: "div.TRS_UEDITOR"
     tags: ["personnel", "bjrd"]

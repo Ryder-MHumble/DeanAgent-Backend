@@ -806,7 +806,7 @@ sources:
     crawl_method: "static"
     schedule: "daily"
     priority: 2
-    is_enabled: true
+    is_enabled: false  # 360 Cloud Protection firewall challenge; returns 3.6KB challenge page
     selectors:
       list_item: "#rmlbsed li"
       title: "a"
@@ -869,19 +869,18 @@ sources:
     tags: ["ranking", "education", "aggregator"]
 
   - id: "eol_news"
-    name: "中国教育在线"
+    name: "中国教育在线-要闻"
     group: "aggregators"
-    url: "https://www.eol.cn/"
+    url: "https://news.eol.cn/yaowen/"
     crawl_method: "static"
     schedule: "daily"
     priority: 2
-    is_enabled: true
+    is_enabled: true  # Fixed: URL to news.eol.cn/yaowen/, selector div.list → div.fline a
     selectors:
-      list_item: "ul.list li"
-      title: "a"
-      link: "a"
-      date: "span"
-    base_url: "https://www.eol.cn"
+      list_item: "div.list"
+      title: "div.fline a"
+      link: "div.fline a"
+    base_url: "https://news.eol.cn/yaowen/"
     keyword_filter:
       - "人工智能"
       - "AI"

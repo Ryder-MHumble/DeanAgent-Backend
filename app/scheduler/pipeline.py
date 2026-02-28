@@ -95,21 +95,24 @@ async def _run_stage(name: str, func, **kwargs) -> StageResult:
     """Run a pipeline stage with timing and error isolation."""
     stage = StageResult(name=name, status="running")
     stage.started_at = datetime.now(timezone.utc)
-    logger.info("Pipeline stage [%s] starting", name)
+    logger.info("=" * 70)
+    logger.info("  Pipeline Stage: %s", name)
+    logger.info("=" * 70)
     try:
         summary = await func(**kwargs)
         stage.status = "success"
         stage.summary = summary or {}
-        logger.info("Pipeline stage [%s] completed: %s", name, stage.summary)
+        logger.info("✓ Stage [%s] completed: %s", name, stage.summary)
     except Exception as e:
         stage.status = "failed"
         stage.error = str(e)
-        logger.exception("Pipeline stage [%s] failed: %s", name, e)
+        logger.exception("✗ Stage [%s] failed: %s", name, e)
     finally:
         stage.finished_at = datetime.now(timezone.utc)
         stage.duration_seconds = (
             stage.finished_at - stage.started_at
         ).total_seconds()
+        logger.info("  Duration: %.1fs", stage.duration_seconds)
     return stage
 
 
@@ -129,7 +132,8 @@ async def _stage_crawl_all() -> dict[str, Any]:
 
     from scripts.run_all_crawl import run_all
 
-    result = await run_all()
+    logger.info("Stage 1: 开始爬取所有启用信源...")
+    result = await run_all(concurrency=5)
     return result or {}
 
 

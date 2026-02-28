@@ -443,20 +443,69 @@ data/processed/
 
 ## 每日 Pipeline
 
-9 阶段自动处理，由 APScheduler 每日触发：
+9 阶段自动处理，由 APScheduler 每日触发（支持并行爬取 + 实时进度条）：
 
-| 阶段 | 名称 | 说明 |
-|------|------|------|
-| 1 | 爬取 | 运行所有启用信源 |
-| 2 | 政策处理 | 规则引擎评分 |
-| 3 | 人事处理 | 正则提取任免变动 |
-| 4 | 高校生态 | 关键词分类研究成果 |
-| 5 | 科技前沿 | 8 主题匹配 + 热度计算 |
-| 6 | LLM 富化 | 政策 + 人事 + 科技前沿（条件触发） |
-| 7 | 索引生成 | 前端 data/index.json |
-| 8 | 每日简报 | 9 维度汇总叙事 |
+```mermaid
+graph TD
+    Start([开始 Pipeline]) --> Stage1[Stage 1: 并行爬取<br/>109 个启用信源<br/>并发度 5]
 
-LLM 富化阶段由 `ENABLE_LLM_ENRICHMENT` + `OPENROUTER_API_KEY` 共同控制。
+    Stage1 --> Stage2[Stage 2: 政策智能处理<br/>规则引擎评分<br/>national_policy + beijing_policy]
+
+    Stage2 --> Stage3[Stage 3: 人事情报处理<br/>正则提取任免变动<br/>personnel 维度]
+
+    Stage3 --> Stage3b[Stage 3b: 高校生态处理<br/>关键词分类研究成果<br/>universities 维度]
+
+    Stage3b --> Stage3c[Stage 3c: 科技前沿处理<br/>8 主题匹配 + 热度计算<br/>technology + twitter]
+
+    Stage3c --> LLMCheck{LLM 富化<br/>已启用?}
+
+    LLMCheck -->|是| Stage4a[Stage 4a: 政策 LLM 富化<br/>高分文章深度分析]
+    Stage4a --> Stage4b[Stage 4b: 人事 LLM 富化<br/>关联度评估]
+    Stage4b --> Stage4c[Stage 4c: 科技前沿 LLM 富化<br/>趋势洞察]
+
+    LLMCheck -->|否| Stage5[Stage 5: 生成前端索引<br/>data/index.json]
+    Stage4c --> Stage5
+
+    Stage5 --> Stage6[Stage 6: 生成每日简报<br/>9 维度汇总叙事]
+
+    Stage6 --> End([Pipeline 完成])
+
+    style Start fill:#e1f5fe
+    style Stage1 fill:#fff3e0
+    style Stage2 fill:#f3e5f5
+    style Stage3 fill:#e8f5e9
+    style Stage3b fill:#e8f5e9
+    style Stage3c fill:#e8f5e9
+    style LLMCheck fill:#fff9c4
+    style Stage4a fill:#fce4ec
+    style Stage4b fill:#fce4ec
+    style Stage4c fill:#fce4ec
+    style Stage5 fill:#e0f2f1
+    style Stage6 fill:#e1bee7
+    style End fill:#c5e1a5
+```
+
+### Pipeline 阶段详情
+
+| 阶段 | 名称 | 说明 | 耗时估算 |
+| ---- | ---- | ---- | -------- |
+| 1 | 并行爬取 | 109 个启用信源，并发度 5，实时进度条 | ~5-10 分钟 |
+| 2 | 政策处理 | 规则引擎评分（national_policy + beijing_policy） | ~30 秒 |
+| 3 | 人事处理 | 正则提取任免变动（personnel） | ~10 秒 |
+| 3b | 高校生态 | 关键词分类研究成果（universities） | ~20 秒 |
+| 3c | 科技前沿 | 8 主题匹配 + 热度计算（technology + twitter） | ~40 秒 |
+| 4a-c | LLM 富化 | 政策 + 人事 + 科技前沿（条件触发） | ~2-5 分钟 |
+| 5 | 索引生成 | 前端 data/index.json | ~5 秒 |
+| 6 | 每日简报 | 9 维度汇总叙事 | ~30 秒 |
+
+**LLM 富化阶段**由 `ENABLE_LLM_ENRICHMENT` + `OPENROUTER_API_KEY` 共同控制。
+
+**手动触发 Pipeline**：
+
+```bash
+python scripts/run_all_crawl.py --concurrency 5  # 仅爬取阶段
+# 完整 Pipeline 由 APScheduler 自动触发，或通过 API 手动触发
+```
 
 ---
 

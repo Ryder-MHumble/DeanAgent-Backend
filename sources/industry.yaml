@@ -177,7 +177,7 @@ sources:
     crawl_method: "static"
     schedule: "daily"
     priority: 2
-    is_enabled: true
+    is_enabled: false  # 412 Precondition Failed - server blocks all automated requests regardless of User-Agent
     selectors:
       list_item: "tr"
       title: "a.main_t_list"

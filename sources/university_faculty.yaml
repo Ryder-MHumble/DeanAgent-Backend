@@ -368,16 +368,11 @@ sources:
   university: 上海交通大学
   department: 计算机科学与工程系
   url: https://www.cs.sjtu.edu.cn/jiaoshiml.html
-  crawl_method: faculty
-  use_playwright: false
+  # Uses AJAX POST endpoint — handled by custom parser
+  crawler_class: sjtu_cs_faculty
   schedule: weekly
   priority: 2
-  is_enabled: false
-  base_url: https://www.cs.sjtu.edu.cn
-  faculty_selectors:
-    list_item: ul li
-    name: a
-    link: a
+  is_enabled: true
   tags:
   - faculty
   - sjtu
@@ -412,12 +407,20 @@ sources:
   use_playwright: false
   schedule: weekly
   priority: 2
-  is_enabled: false
+  is_enabled: true
   base_url: https://infosec.sjtu.edu.cn
   faculty_selectors:
-    list_item: ul li
-    name: a
+    list_item: div.Faculty li
+    name: h2
     link: a
+    photo: img
+    position: h5
+    email: p
+  detail_selectors:
+    email: a[href^="mailto:"]
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
   tags:
   - faculty
   - sjtu
@@ -427,17 +430,26 @@ sources:
   group: fudan
   university: 复旦大学
   department: 计算与智能创新学院
-  url: http://ai.fudan.edu.cn/53161/list.htm
+  url: https://ai.fudan.edu.cn/53161/list.htm
   crawl_method: faculty
-  use_playwright: false
+  use_playwright: true
+  wait_for: li.news .news_title a
+  wait_timeout: 20000
   schedule: weekly
   priority: 2
-  is_enabled: false
-  base_url: http://ai.fudan.edu.cn
+  is_enabled: true
+  base_url: https://ai.fudan.edu.cn
   faculty_selectors:
-    list_item: ul li
-    name: a
-    link: a
+    list_item: li.news
+    name: .news_title a
+    link: .news_title a
+    photo: .news_imgs img
+    email: .news_kz
+  detail_selectors:
+    email: a[href^="mailto:"]
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
   tags:
   - faculty
   - fudan
@@ -469,17 +481,23 @@ sources:
   group: nju
   university: 南京大学
   department: 计算机科学与技术系
-  url: https://cs.nju.edu.cn/1651/list.htm
+  url: https://cs.nju.edu.cn/2639/list.htm
   crawl_method: faculty
   use_playwright: false
+  verify_ssl: false
   schedule: weekly
   priority: 2
-  is_enabled: false
+  is_enabled: true
   base_url: https://cs.nju.edu.cn
   faculty_selectors:
-    list_item: ul li
-    name: a
-    link: a
+    list_item: li.list_item
+    name: span.Article_Title a
+    link: span.Article_Title a
+  detail_selectors:
+    email: a[href^="mailto:"]
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
   tags:
   - faculty
   - nju
@@ -489,17 +507,24 @@ sources:
   group: nju
   university: 南京大学
   department: 人工智能学院
-  url: http://ai.nju.edu.cn/people/list.htm
+  url: https://ai.nju.edu.cn/18540/list.htm
   crawl_method: faculty
   use_playwright: false
+  verify_ssl: false
   schedule: weekly
   priority: 2
-  is_enabled: false
-  base_url: http://ai.nju.edu.cn
+  is_enabled: true
+  base_url: https://ai.nju.edu.cn
   faculty_selectors:
-    list_item: ul li
-    name: a
-    link: a
+    list_item: li.news
+    name: .news_title a
+    link: .news_title a
+    photo: .news_images img
+  detail_selectors:
+    email: a[href^="mailto:"]
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
   tags:
   - faculty
   - nju
@@ -532,14 +557,20 @@ sources:
   url: https://is.nju.edu.cn/szdw/list.htm
   crawl_method: faculty
   use_playwright: false
+  verify_ssl: false
   schedule: weekly
   priority: 3
-  is_enabled: false
+  is_enabled: true
   base_url: https://is.nju.edu.cn
   faculty_selectors:
-    list_item: ul li
-    name: a
-    link: a
+    list_item: li.news
+    name: span.news_title a
+    link: span.news_title a
+  detail_selectors:
+    email: a[href^="mailto:"]
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
   tags:
   - faculty
   - nju
@@ -575,12 +606,19 @@ sources:
   use_playwright: false
   schedule: weekly
   priority: 2
-  is_enabled: false
+  is_enabled: true
   base_url: http://cs.ustc.edu.cn
   faculty_selectors:
-    list_item: ul li
-    name: a
-    link: a
+    list_item: li.news
+    name: .news_title a
+    link: .news_title a
+    photo: .news_images img
+    email: .news_tel
+    research_areas: .news_email
+  detail_selectors:
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
   tags:
   - faculty
   - ustc
@@ -589,18 +627,26 @@ sources:
   name: 中国科学技术大学信息科学技术学院-师资
   group: ustc
   university: 中国科学技术大学
-  department: 信息科学技术学院
-  url: https://sist.ustc.edu.cn/5140/list.htm
+  department: 信息科学技术学院（电子工程与信息科学系）
+  # SIST is a portal; faculty are hosted on sub-dept sites.
+  # Using EEIS (电子工程与信息科学系) professors page — page 1 only (8 cards per page, 8 pages total)
+  url: http://eeis.ustc.edu.cn/2648/list.htm
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
   priority: 2
-  is_enabled: false
-  base_url: https://sist.ustc.edu.cn
+  is_enabled: true
+  base_url: http://eeis.ustc.edu.cn
   faculty_selectors:
-    list_item: ul li
-    name: a
+    list_item: div.card
+    name: .card-title
     link: a
+    research_areas: .card-text
+  detail_selectors:
+    email: a[href^="mailto:"]
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
   tags:
   - faculty
   - ustc
@@ -651,7 +697,7 @@ sources:
   group: zju
   university: 浙江大学
   department: 网络空间安全学院
-  url: https://icsr.zju.edu.cn/szdw/zzjs/list.htm
+  url: https://icsr.zju.edu.cn/szdw/list.htm
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
@@ -659,9 +705,9 @@ sources:
   is_enabled: false
   base_url: https://icsr.zju.edu.cn
   faculty_selectors:
-    list_item: ul li
-    name: a
-    link: a
+    list_item: li.news
+    name: span.news_title a
+    link: span.news_title a
   tags:
   - faculty
   - zju
@@ -737,12 +783,19 @@ sources:
   use_playwright: false
   schedule: weekly
   priority: 2
-  is_enabled: false
+  is_enabled: true
   base_url: http://ai.ruc.edu.cn
   faculty_selectors:
-    list_item: ul li
-    name: a
-    link: a
+    list_item: div.tutor
+    name: h2 a
+    link: h2 a
+    position: small.fs-16
+    bio: p.position
+  detail_selectors:
+    email: a[href^="mailto:"]
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
   tags:
   - faculty
   - ruc
