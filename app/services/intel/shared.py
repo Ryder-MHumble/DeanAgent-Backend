@@ -298,18 +298,16 @@ def resolve_source_ids_by_names(names: list[str]) -> set[str]:
         匹配到的信源 ID 集合
     """
     # 避免循环导入，在函数内部导入
-    import asyncio
+    from app.scheduler.manager import load_all_source_configs
 
-    from app.services.source_service import list_sources
-
-    # 同步调用异步函数获取所有信源
-    all_sources = asyncio.run(list_sources())
+    # 直接读取 YAML 配置文件（同步操作，避免事件循环冲突）
+    all_sources = load_all_source_configs()
     matched_ids = set()
 
     for name_pattern in names:
         pattern_lower = name_pattern.lower().replace(' ', '')
         for source in all_sources:
-            source_name_lower = source['name'].lower().replace(' ', '')
+            source_name_lower = source.get('name', '').lower().replace(' ', '')
             if pattern_lower in source_name_lower:
                 matched_ids.add(source['id'])
 

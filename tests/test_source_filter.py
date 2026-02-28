@@ -46,7 +46,7 @@ def test_resolve_source_ids_by_names_exact_match():
         {"id": "gov_cn", "name": "中国政府网"},
         {"id": "xinhua", "name": "新华社"},
     ]
-    with patch('app.services.source_service.list_sources', return_value=mock_sources):
+    with patch('app.scheduler.manager.load_all_source_configs', return_value=mock_sources):
         result = resolve_source_ids_by_names(["中国政府网"])
         assert result == {"gov_cn"}
 
@@ -58,7 +58,7 @@ def test_resolve_source_ids_by_names_fuzzy_match():
         {"id": "beijing_gov", "name": "北京市人民政府网"},
         {"id": "xinhua", "name": "新华社"},
     ]
-    with patch('app.services.source_service.list_sources', return_value=mock_sources):
+    with patch('app.scheduler.manager.load_all_source_configs', return_value=mock_sources):
         result = resolve_source_ids_by_names(["政府网"])
         assert result == {"gov_cn", "beijing_gov"}
 
@@ -68,7 +68,7 @@ def test_resolve_source_ids_by_names_case_insensitive():
     mock_sources = [
         {"id": "arxiv", "name": "ArXiv CS.AI"},
     ]
-    with patch('app.services.source_service.list_sources', return_value=mock_sources):
+    with patch('app.scheduler.manager.load_all_source_configs', return_value=mock_sources):
         result = resolve_source_ids_by_names(["arxiv"])
         assert result == {"arxiv"}
 
@@ -78,7 +78,7 @@ def test_resolve_source_ids_by_names_space_handling():
     mock_sources = [
         {"id": "gov", "name": "中国 政府 网"},
     ]
-    with patch('app.services.source_service.list_sources', return_value=mock_sources):
+    with patch('app.scheduler.manager.load_all_source_configs', return_value=mock_sources):
         result = resolve_source_ids_by_names(["政府网"])
         assert result == {"gov"}
 
@@ -88,7 +88,7 @@ def test_resolve_source_ids_by_names_no_match():
     mock_sources = [
         {"id": "gov", "name": "中国政府网"},
     ]
-    with patch('app.services.source_service.list_sources', return_value=mock_sources):
+    with patch('app.scheduler.manager.load_all_source_configs', return_value=mock_sources):
         result = resolve_source_ids_by_names(["不存在的信源"])
         assert result == set()
 
@@ -100,7 +100,7 @@ def test_resolve_source_ids_by_names_multiple_patterns():
         {"id": "xinhua", "name": "新华社"},
         {"id": "people", "name": "人民日报"},
     ]
-    with patch('app.services.source_service.list_sources', return_value=mock_sources):
+    with patch('app.scheduler.manager.load_all_source_configs', return_value=mock_sources):
         result = resolve_source_ids_by_names(["政府", "新华"])
         assert result == {"gov", "xinhua"}
 
@@ -111,7 +111,7 @@ def test_parse_source_filter_mixed_id_and_name():
         {"id": "gov", "name": "中国政府网"},
         {"id": "xinhua", "name": "新华社"},
     ]
-    with patch('app.services.source_service.list_sources', return_value=mock_sources):
+    with patch('app.scheduler.manager.load_all_source_configs', return_value=mock_sources):
         result = parse_source_filter("arxiv", "github", "政府", None)
         # arxiv, github (ID) + gov (from "政府" name match)
         assert result == {"arxiv", "github", "gov"}
