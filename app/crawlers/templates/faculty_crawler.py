@@ -64,9 +64,22 @@ logger = logging.getLogger(__name__)
 # Regex for extracting email addresses from text
 _EMAIL_RE = re.compile(r"[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}")
 
+# Regex to remove spaces/\xa0 between CJK characters (alignment padding in Chinese names)
+_CJK_SPACE_RE = re.compile(r"(?<=[\u4e00-\u9fff])\s+(?=[\u4e00-\u9fff])")
+
 
 def _now_iso() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def _clean_name(name: str) -> str:
+    """Normalize a faculty name: collapse whitespace (incl. \xa0) and remove
+    alignment spaces between CJK characters (common in Chinese academic CMS)."""
+    # Replace non-breaking spaces and normalize all whitespace to single space
+    name = " ".join(name.replace("\xa0", " ").split())
+    # Remove spaces between adjacent Chinese characters (visual alignment padding)
+    name = _CJK_SPACE_RE.sub("", name)
+    return name
 
 
 def _is_valid_href(href: str) -> bool:
@@ -162,7 +175,7 @@ class FacultyCrawler(BaseCrawler):
 
             if name_sel := detail_selectors.get("name"):
                 if name_text := _extract_text(soup, name_sel):
-                    result["name"] = name_text
+                    result["name"] = _clean_name(name_text)
 
             if pos_sel := detail_selectors.get("position"):
                 if pos_text := _extract_text(soup, pos_sel):
@@ -173,8 +186,12 @@ class FacultyCrawler(BaseCrawler):
                     result["bio"] = bio_text
 
             if ra_sel := detail_selectors.get("research_areas"):
-                if ra_text := _extract_text(soup, ra_sel):
-                    result["research_areas"] = parse_research_areas(ra_text)
+                found = soup.select_one(ra_sel)
+                if found:
+                    # Use newline separator so <li> items are delimited for parse_research_areas
+                    ra_text = found.get_text(separator="\n").strip()
+                    if ra_text:
+                        result["research_areas"] = parse_research_areas(ra_text)
 
             if email_sel := detail_selectors.get("email"):
                 if email_text := _extract_text(soup, email_sel):
@@ -189,12 +206,12 @@ class FacultyCrawler(BaseCrawler):
                 if photo_url := _extract_img_src(soup, photo_sel, base):
                     result["photo_url"] = photo_url
 
-            # heading_sections: {field: "heading text"} — find h2/h3/h4/p by text, extract next sibling
+            # heading_sections: {field: "heading text"} — find h2/h3/h4/p/div by text, extract next sibling
             # Useful for pages where sections are identified by heading text (common on Chinese academic sites)
             if heading_sections := detail_selectors.get("heading_sections"):
                 for field, heading_text in heading_sections.items():
-                    # Check both heading tags (h2/h3/h4) and paragraph tags (some sites use p for headings)
-                    for tag in soup.find_all(["h2", "h3", "h4", "p"]):
+                    # Check heading tags, paragraph tags, and short divs (some sites use div for headings)
+                    for tag in soup.find_all(["h2", "h3", "h4", "p", "div"]):
                         if tag.get_text(strip=True) == heading_text:
                             # Look for content in next sibling or parent's next sibling
                             sibling = tag.find_next_sibling()
@@ -205,6 +222,24 @@ class FacultyCrawler(BaseCrawler):
                                         result[field] = parse_research_areas(text)
                                     else:
                                         result[field] = text
+                            break
+
+            # label_prefix_sections: {field: "Label："} — find element starting with prefix, extract remainder
+            # Searches <p> and <li> tags (handles both paragraph and list-item label+value patterns)
+            # Useful for pages where fields are in "Label：Value" format within a single element
+            if label_prefix_sections := detail_selectors.get("label_prefix_sections"):
+                for field, label_prefix in label_prefix_sections.items():
+                    if result.get(field):  # already extracted, skip
+                        continue
+                    for el in soup.find_all(["p", "li"]):
+                        text = el.get_text(strip=True)
+                        if text.startswith(label_prefix):
+                            value = text[len(label_prefix):].strip()
+                            if value:
+                                if field == "research_areas":
+                                    result[field] = parse_research_areas(value)
+                                else:
+                                    result[field] = value
                             break
 
         except Exception as e:
@@ -218,135 +253,175 @@ class FacultyCrawler(BaseCrawler):
         faculty_sel = self.config.get("faculty_selectors", {})
         detail_selectors = self.config.get("detail_selectors")
         request_delay = self.config.get("request_delay", 1.0)
+        # Pagination: follow "next page" links up to max_pages (default 1 = no pagination)
+        # next_page_text is treated as a regex; default r"下一?页" matches "下页" and "下一页" variants
+        max_pages = self.config.get("max_pages", 1)
+        next_page_text = self.config.get("next_page_text", r"下一?页")
 
         university = self.config.get("university", "")
         department = self.config.get("department", "")
         source_id = self.source_id
         crawled_at = _now_iso()
 
-        # 1. Fetch faculty list page
-        if use_playwright:
-            html = await self._fetch_html_playwright(url)
-        else:
-            html = await self._fetch_html_static(url)
-
-        soup = BeautifulSoup(html, "lxml")
-
-        # 2. Locate faculty entries
+        # Extract selectors once (shared across all pages)
         list_item_sel = faculty_sel.get("list_item", "li")
-        entries = soup.select(list_item_sel)
-
-        if not entries:
-            logger.warning(
-                "FacultyCrawler[%s]: no entries found with selector %r on %s",
-                self.source_id, list_item_sel, url,
-            )
-
         name_sel = faculty_sel.get("name", "h2")
         bio_sel = faculty_sel.get("bio")
         link_sel = faculty_sel.get("link", "a")
         photo_sel = faculty_sel.get("photo")
         position_sel = faculty_sel.get("position")
         email_sel = faculty_sel.get("email")
+        ra_sel = faculty_sel.get("research_areas")  # optional list-page research_areas
 
         items: list[CrawledItem] = []
         seen_urls: set[str] = set()
+        current_url = url
+        page_num = 1
 
-        for entry in entries:
-            # --- Name ---
-            name_text = _extract_text(entry, name_sel)
-            if not name_text:
-                continue
+        while True:
+            # 1. Fetch current page
+            if use_playwright:
+                html = await self._fetch_html_playwright(current_url)
+            else:
+                html = await self._fetch_html_static(current_url)
 
-            # --- Profile URL ---
-            profile_url = ""
-            if link_sel:
-                link_el = entry.select_one(link_sel)
-                if link_el:
-                    href = link_el.get("href", "").strip()
+            soup = BeautifulSoup(html, "lxml")
+
+            # 2. Locate faculty entries
+            entries = soup.select(list_item_sel)
+
+            if not entries and page_num == 1:
+                logger.warning(
+                    "FacultyCrawler[%s]: no entries found with selector %r on %s",
+                    self.source_id, list_item_sel, current_url,
+                )
+
+            # 3. Process entries
+            for entry in entries:
+                # --- Name ---
+                name_text = _extract_text(entry, name_sel)
+                # Fallback: when list_item selector directly selects <a> elements (e.g., ul > a without <li>)
+                if not name_text and entry.name == "a":
+                    name_text = entry.get_text(strip=True)
+                name_text = _clean_name(name_text)
+                if not name_text:
+                    continue
+
+                # --- Profile URL ---
+                profile_url = ""
+                # Fallback: when list_item selector directly selects <a> elements, use element's own href
+                if entry.name == "a":
+                    href = entry.get("href", "").strip()
                     if _is_valid_href(href):
                         profile_url = _resolve_url(href, base_url)
+                if not profile_url and link_sel:
+                    link_el = entry.select_one(link_sel)
+                    if link_el:
+                        href = link_el.get("href", "").strip()
+                        if _is_valid_href(href):
+                            profile_url = _resolve_url(href, base_url)
 
-            # Synthetic URL for faculty without real profile pages
-            if not profile_url:
-                name_hash = compute_url_hash(f"{url}#{name_text}")
-                profile_url = f"{url}#{name_hash[:16]}"
+                # Synthetic URL for faculty without real profile pages
+                if not profile_url:
+                    name_hash = compute_url_hash(f"{url}#{name_text}")
+                    profile_url = f"{url}#{name_hash[:16]}"
 
-            # Skip exact duplicates (same profile URL)
-            if profile_url in seen_urls:
-                continue
-            seen_urls.add(profile_url)
+                # Skip exact duplicates (same profile URL)
+                if profile_url in seen_urls:
+                    continue
+                seen_urls.add(profile_url)
 
-            # --- Fields from list page ---
-            position_text = _extract_text(entry, position_sel) if position_sel else ""
-            bio_text = _extract_text(entry, bio_sel) if bio_sel else ""
-            photo_url = _extract_img_src(entry, photo_sel, base_url) if photo_sel else ""
-            email_text = _extract_text(entry, email_sel) if email_sel else ""
-            research_areas: list[str] = []
+                # --- Fields from list page ---
+                position_text = _extract_text(entry, position_sel) if position_sel else ""
+                bio_text = _extract_text(entry, bio_sel) if bio_sel else ""
+                photo_url = _extract_img_src(entry, photo_sel, base_url) if photo_sel else ""
+                email_text = _extract_text(entry, email_sel) if email_sel else ""
+                research_areas: list[str] = []
+                if ra_sel:
+                    ra_text = _extract_text(entry, ra_sel)
+                    if ra_text:
+                        research_areas = parse_research_areas(ra_text)
 
-            # --- Optional: fetch detail page ---
-            if detail_selectors and not profile_url.startswith(f"{url}#"):
-                if request_delay:
-                    await asyncio.sleep(request_delay)
-                detail = await self._fetch_detail(profile_url, detail_selectors)
-                if detail.get("name"):
-                    name_text = detail["name"]
-                if detail.get("bio"):
-                    bio_text = detail["bio"]
-                if detail.get("position"):
-                    position_text = detail["position"]
-                if detail.get("email"):
-                    email_text = detail["email"]
-                if detail.get("photo_url"):
-                    photo_url = detail["photo_url"]
-                if detail.get("research_areas"):
-                    research_areas = detail["research_areas"]
+                # --- Optional: fetch detail page ---
+                if detail_selectors and not profile_url.startswith(f"{url}#"):
+                    if request_delay:
+                        await asyncio.sleep(request_delay)
+                    detail = await self._fetch_detail(profile_url, detail_selectors)
+                    if detail.get("name"):
+                        name_text = detail["name"]
+                    if detail.get("bio"):
+                        bio_text = detail["bio"]
+                    if detail.get("position"):
+                        position_text = detail["position"]
+                    if detail.get("email"):
+                        email_text = detail["email"]
+                    if detail.get("photo_url"):
+                        photo_url = detail["photo_url"]
+                    if detail.get("research_areas"):
+                        research_areas = detail["research_areas"]
 
-            # --- Build ScholarRecord ---
-            record = ScholarRecord(
-                # 基本信息
-                name=name_text,
-                photo_url=photo_url,
-                # 机构归属
-                university=university,
-                department=department,
-                # 职称
-                position=position_text,
-                # 研究
-                research_areas=research_areas,
-                bio=bio_text,
-                # 联系方式
-                email=email_text,
-                # 主页链接
-                profile_url=profile_url,
-                # 元信息
-                source_id=source_id,
-                source_url=url,
-                crawled_at=crawled_at,
-                last_seen_at=crawled_at,
-                is_active=True,
-            )
-            record.data_completeness = compute_scholar_completeness(record)
-
-            content_hash = compute_content_hash(bio_text) if bio_text else None
-
-            items.append(
-                CrawledItem(
-                    title=name_text,
-                    url=profile_url,
-                    published_at=None,
-                    author=None,
-                    content=bio_text or None,
-                    content_hash=content_hash,
+                # --- Build ScholarRecord ---
+                record = ScholarRecord(
+                    # 基本信息
+                    name=name_text,
+                    photo_url=photo_url,
+                    # 机构归属
+                    university=university,
+                    department=department,
+                    # 职称
+                    position=position_text,
+                    # 研究
+                    research_areas=research_areas,
+                    bio=bio_text,
+                    # 联系方式
+                    email=email_text,
+                    # 主页链接
+                    profile_url=profile_url,
+                    # 元信息
                     source_id=source_id,
-                    dimension=self.config.get("dimension"),
-                    tags=self.config.get("tags", []),
-                    extra=record.model_dump(),
+                    source_url=url,
+                    crawled_at=crawled_at,
+                    last_seen_at=crawled_at,
+                    is_active=True,
                 )
-            )
+                record.data_completeness = compute_scholar_completeness(record)
+
+                content_hash = compute_content_hash(bio_text) if bio_text else None
+
+                items.append(
+                    CrawledItem(
+                        title=name_text,
+                        url=profile_url,
+                        published_at=None,
+                        author=None,
+                        content=bio_text or None,
+                        content_hash=content_hash,
+                        source_id=source_id,
+                        dimension=self.config.get("dimension"),
+                        tags=self.config.get("tags", []),
+                        extra=record.model_dump(),
+                    )
+                )
+
+            # 4. Pagination: find and follow "next page" link
+            if page_num >= max_pages:
+                break
+            next_link = soup.find("a", string=re.compile(next_page_text))
+            if not next_link:
+                break
+            next_href = (next_link.get("href") or "").strip()
+            if not _is_valid_href(next_href):
+                break
+            next_url = _resolve_url(next_href, current_url)
+            if next_url == current_url:  # guard against infinite loop
+                break
+            current_url = next_url
+            page_num += 1
+            if request_delay:
+                await asyncio.sleep(request_delay)
 
         logger.info(
-            "FacultyCrawler[%s]: extracted %d faculty from %s",
-            self.source_id, len(items), url,
+            "FacultyCrawler[%s]: extracted %d faculty from %s (%d page(s))",
+            self.source_id, len(items), url, page_num,
         )
         return items

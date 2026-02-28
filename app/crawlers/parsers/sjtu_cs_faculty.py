@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import re as _re
 from datetime import datetime, timezone
 from urllib.parse import urljoin
 
@@ -20,7 +21,8 @@ from bs4 import BeautifulSoup
 
 from app.crawlers.base import BaseCrawler, CrawledItem
 from app.crawlers.utils.dedup import compute_url_hash
-from app.schemas.scholar import ScholarRecord, compute_scholar_completeness
+from app.crawlers.utils.http_client import fetch_page
+from app.schemas.scholar import ScholarRecord, compute_scholar_completeness, parse_research_areas
 
 logger = logging.getLogger(__name__)
 
@@ -38,8 +40,53 @@ def _now_iso() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+def _extract_text(el: BeautifulSoup | None, selector: str | None) -> str:
+    """Extract stripped text from a sub-element found by selector."""
+    if el is None or not selector:
+        return ""
+    found = el.select_one(selector)
+    return found.get_text(strip=True) if found else ""
+
+
+def _extract_email_from_text(text: str) -> str:
+    """Find the first email address in text."""
+    m = _re.search(r"[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}", text)
+    return m.group(0) if m else ""
+
+
 class SJTUCSFacultyCrawler(BaseCrawler):
     """Crawler for SJTU CS faculty list via AJAX POST endpoint."""
+
+    async def _fetch_detail(self, profile_url: str, detail_selectors: dict) -> dict:
+        """Fetch individual profile page and extract detailed faculty info."""
+        result: dict = {}
+        try:
+            html = await fetch_page(profile_url)
+            soup = BeautifulSoup(html, "lxml")
+
+            if bio_sel := detail_selectors.get("bio"):
+                if bio_text := _extract_text(soup, bio_sel):
+                    result["bio"] = bio_text
+
+            if ra_sel := detail_selectors.get("research_areas"):
+                if ra_text := _extract_text(soup, ra_sel):
+                    result["research_areas"] = parse_research_areas(ra_text)
+
+            if email_sel := detail_selectors.get("email"):
+                if email_text := _extract_text(soup, email_sel):
+                    result["email"] = email_text
+            if not result.get("email"):
+                full_text = soup.get_text()
+                if email := _extract_email_from_text(full_text):
+                    result["email"] = email
+
+            if pos_sel := detail_selectors.get("position"):
+                if pos_text := _extract_text(soup, pos_sel):
+                    result["position"] = pos_text
+
+        except Exception as e:
+            logger.debug("Failed to fetch faculty detail %s: %s", profile_url, e)
+        return result
 
     async def fetch_and_parse(self) -> list[CrawledItem]:
         university = self.config.get("university", "上海交通大学")
@@ -83,6 +130,8 @@ class SJTUCSFacultyCrawler(BaseCrawler):
 
         items: list[CrawledItem] = []
         seen_urls: set[str] = set()
+        detail_selectors = self.config.get("detail_selectors")
+        request_delay = self.config.get("request_delay", 1.0)
 
         for a_tag in faculty_links:
             name_text = a_tag.get_text(strip=True)
@@ -101,6 +150,20 @@ class SJTUCSFacultyCrawler(BaseCrawler):
                 continue
             seen_urls.add(profile_url)
 
+            # Optional: fetch detail page for enriched data
+            bio_text = ""
+            position_text = ""
+            email_text = ""
+            research_areas: list[str] = []
+            if detail_selectors and not profile_url.startswith(f"{source_url}#"):
+                if request_delay:
+                    await asyncio.sleep(request_delay)
+                detail = await self._fetch_detail(profile_url, detail_selectors)
+                bio_text = detail.get("bio", "")
+                position_text = detail.get("position", "")
+                email_text = detail.get("email", "")
+                research_areas = detail.get("research_areas", [])
+
             record = ScholarRecord(
                 name=name_text,
                 university=university,
@@ -111,6 +174,10 @@ class SJTUCSFacultyCrawler(BaseCrawler):
                 crawled_at=crawled_at,
                 last_seen_at=crawled_at,
                 is_active=True,
+                bio=bio_text,
+                position=position_text,
+                email=email_text,
+                research_areas=research_areas,
             )
             record.data_completeness = compute_scholar_completeness(record)
 

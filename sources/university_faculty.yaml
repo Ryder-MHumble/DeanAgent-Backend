@@ -66,11 +66,13 @@ sources:
   priority: 2
   is_enabled: true
   base_url: https://cs.pku.edu.cn
+  # 每页 12 人，共 10 页，约 120 人；follow "下页" 链接翻页
+  max_pages: 10
   faculty_selectors:
     list_item: ul li
     name: h3
     link: a
-    photo: h6 img
+    photo: img
   tags:
   - faculty
   - pku
@@ -94,10 +96,15 @@ sources:
   priority: 2
   is_enabled: true
   base_url: http://www.cis.pku.edu.cn
+  # 每页 8 人，共 5 页，约 40 人；follow "下页" 链接翻页
+  max_pages: 5
   faculty_selectors:
     list_item: ul li
     name: h3
     link: a
+    photo: img
+    # 研究领域在列表页第 2 个 <p> 标签（含 "研究领域：" 前缀）
+    research_areas: p:nth-of-type(2)
   tags:
   - faculty
   - pku
@@ -131,9 +138,10 @@ sources:
   - cas
   - ai
   detail_selectors:
-    bio: div.content
-    research_areas: div.research
-    email: a[href^="mailto:"]
+    # 详情页结构: div.tem01-people-content (多个section: 简历/论著/获奖等)
+    # div.content 和 div.research 均不存在于实际页面中
+    bio: div.tem01-people-content
+    # email 以明文出现，由 FacultyCrawler 的正则 _extract_email_from_text 自动提取
 - id: casia_faculty
   name: 中科院自动化研究所-研究员
   group: cas_ia
@@ -226,9 +234,15 @@ sources:
   is_enabled: true
   base_url: https://www.thss.tsinghua.edu.cn/
   faculty_selectors:
-    list_item: div.group-people
-    name: div.name-container a
-    link: div.name-container a
+    # div.name-container 是单个教师的容器（41人），div.group-people 是按组分类（仅5组）
+    list_item: div.name-container
+    name: a.name
+    link: a.name
+  detail_selectors:
+    email: a[href^="mailto:"]
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
   tags:
   - faculty
   - tsinghua
@@ -241,16 +255,24 @@ sources:
   url: https://www.ee.tsinghua.edu.cn/ryqk/teacher/xxgdzyjs/js2.htm
   crawl_method: faculty
   use_playwright: true
-  wait_for: ul.ul-listb3
+  # 等待 .line 元素渲染完成（页面 JS 动态填充研究所分组）
+  wait_for: .line
   wait_timeout: 15000
   schedule: weekly
   priority: 2
   is_enabled: true
   base_url: https://www.ee.tsinghua.edu.cn/
   faculty_selectors:
-    list_item: ul.ul-listb3 li
+    # 每个 <a> 直接放在 ul 下（无 <li> 包裹），使用代码层兜底提取 name 和 href
+    list_item: .line .t ul a
     name: a
     link: a
+  # 详情页有两套模板，用 CSS "," 多选兼容两种布局
+  detail_selectors:
+    bio: ".t_grjj_nr, .siglecrifbx"
+    email: "a[href^='mailto:']"
+    heading_sections:
+      research_areas: "研究方向"
   tags:
   - faculty
   - tsinghua
@@ -260,6 +282,7 @@ sources:
   group: tsinghua
   university: 清华大学
   department: 自动化系
+  # 暂覆盖控制与决策研究所（7人），完整列表需遍历8个研究所页，留待自定义 Parser 处理
   url: https://www.au.tsinghua.edu.cn/szdw/jsdw1/ayjscz/kzyjcyjs.htm
   crawl_method: faculty
   use_playwright: false
@@ -269,9 +292,15 @@ sources:
   base_url: https://www.au.tsinghua.edu.cn/
   faculty_selectors:
     list_item: ul.list13 li
-    name: div.con
+    # div.con 包含 h3 姓名 + h6 院士标识，改用 h3 提取纯姓名
+    name: h3
     link: a
     photo: div.img img
+  detail_selectors:
+    bio: "div.fl02"
+    email: "section.leader_d ul.list21 a[href^='mailto:']"
+    heading_sections:
+      research_areas: "研究领域"
   tags:
   - faculty
   - tsinghua
@@ -282,7 +311,8 @@ sources:
   group: pku
   university: 北京大学
   department: 王选计算机研究所
-  url: https://www.icst.pku.edu.cn/xstd/index.htm
+  # 原 index.htm 是 JS 重定向页面，静态爬虫无法跟随，改为直接访问真实内容页
+  url: https://www.icst.pku.edu.cn/xstd/xstd_01/index.htm
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
@@ -291,10 +321,12 @@ sources:
   base_url: https://www.icst.pku.edu.cn
   faculty_selectors:
     list_item: ul.m-list li
-    name: a
-    link: a
-    position: em
-    bio: p
+    name: div.m-tt a
+    link: div.m-tt a
+    position: div.m-tt em
+    bio: div.m-tt p
+    # div.m-tt p 存储的是逗号分隔的研究领域文本，同时作为 bio 和 research_areas 来源
+    research_areas: div.m-tt p
   tags:
   - faculty
   - pku
@@ -304,18 +336,26 @@ sources:
   group: pku
   university: 北京大学
   department: 集成电路学院
-  url: https://ic.pku.edu.cn/szdw/zzjs/index.htm
+  # 原 zzjs/index.htm 是 JS 重定向至 jcwndzx1/index.htm，改为直接访问
+  url: https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
   priority: 2
   is_enabled: true
-  base_url: https://ic.pku.edu.cn
+  # 相对链接形如 "hqq/index.htm"，必须以列表页 URL 为 base 才能正确解析
+  base_url: https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm
   faculty_selectors:
-    list_item: ul.list03 li
-    name: a
+    # 教师列表: ul.list03 li.zhuanzhi，结构: <li><a><img><span class="name"><b>姓名</b> 职称</span></a></li>
+    list_item: ul.list03 li.zhuanzhi
+    name: span.name b
     link: a
-    photo: img
+    photo: span.gp-img-responsive img
+  # 详情页: div.contents 内含 <p>研究领域：X,Y</p> 格式字段，以及 div.teacherIntro 研究成果
+  detail_selectors:
+    bio: "div.teacherIntro"
+    label_prefix_sections:
+      research_areas: "研究领域："
   tags:
   - faculty
   - pku
@@ -325,17 +365,25 @@ sources:
   group: pku
   university: 北京大学
   department: 软件与微电子学院
-  url: https://ss.pku.edu.cn/sztd/index.htm
+  # 原 sztd/index.htm 是 JS 重定向至 xssbsz/index.htm，改为直接访问
+  url: https://ss.pku.edu.cn/sztd/xssbsz/index.htm
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
   priority: 2
   is_enabled: true
-  base_url: https://ss.pku.edu.cn
+  # 相对链接形如 "c6ee5dd9f3bf49c88581bb9deeb96aca.htm"，必须以列表页 URL 为 base 才能正确解析
+  base_url: https://ss.pku.edu.cn/sztd/xssbsz/index.htm
   faculty_selectors:
-    list_item: div[class*='v_news_content'] ul li
-    name: a, generic
+    # 教师列表: ul.tab-content-list li，名字在 span.name-text 内，部分有主页链接
+    list_item: ul.tab-content-list li
+    name: span.name-text
     link: a
+  # 详情页: 约1/3教师有个人主页，提取职称/简介/研究方向
+  detail_selectors:
+    bio: "div.jianjie"
+    position: "div.zw span"
+    research_areas: "div.jianjie1"
   tags:
   - faculty
   - pku
@@ -351,12 +399,19 @@ sources:
   schedule: weekly
   priority: 2
   is_enabled: true
-  base_url: https://cfcs.pku.edu.cn
+  # 相对链接需以列表页 URL 为 base 才能正确解析（faculty 用 kuancheng/...，directors 用 ../directors/...）
+  base_url: https://cfcs.pku.edu.cn/people/faculty/index.htm
   faculty_selectors:
-    list_item: div[class*='v_news_content'] ul li
-    name: a
-    link: a
-    photo: img
+    # 教师列表: ul.pku-list03 li，结构: div.artImg + div.artText(a.name + span.title)
+    list_item: ul.pku-list03 li
+    name: a.name
+    link: a.name
+    photo: div.artImg img
+    position: span.title
+  # 详情页: span.sampleText 研究方向；div.d_inner 含简介文本（混合在父 div 中，不在子 p 内）
+  detail_selectors:
+    research_areas: "span.sampleText"
+    bio: "div.d_inner"
   tags:
   - faculty
   - pku
@@ -368,11 +423,20 @@ sources:
   university: 上海交通大学
   department: 计算机科学与工程系
   url: https://www.cs.sjtu.edu.cn/jiaoshiml.html
-  # Uses AJAX POST endpoint — handled by custom parser
+  # Uses AJAX POST endpoint — handled by custom parser (sjtu_cs_faculty)
   crawler_class: sjtu_cs_faculty
   schedule: weekly
   priority: 2
   is_enabled: true
+  request_delay: 1.0
+  detail_selectors:
+    # Profile pages have "个人简介" section followed by bio text in p tags
+    # Email is in label format "Email：xxx@sjtu.edu.cn"
+    email: "a[href^='mailto:']"
+    label_prefix_sections:
+      email: "Email："
+      position: "职称："
+      research_areas: "研究方向："
   tags:
   - faculty
   - sjtu
@@ -493,11 +557,12 @@ sources:
     list_item: li.list_item
     name: span.Article_Title a
     link: span.Article_Title a
+  # 详情页无 "个人简介"/"研究方向" 标题，bio 在 div.detail，email 为纯文本（正则兜底）
   detail_selectors:
-    email: a[href^="mailto:"]
-    heading_sections:
-      bio: 个人简介
-      research_areas: 研究方向
+    bio: "div.wp_articlecontent div.detail"
+    email: "a[href^='mailto:']"
+    label_prefix_sections:
+      research_areas: "研究方向："
   tags:
   - faculty
   - nju
@@ -520,11 +585,10 @@ sources:
     name: .news_title a
     link: .news_title a
     photo: .news_images img
+  # 详情页为各教师个人主页（结构差异大），无统一"个人简介"/"研究方向"标题
+  # email 通过正则兜底从页面文本提取
   detail_selectors:
-    email: a[href^="mailto:"]
-    heading_sections:
-      bio: 个人简介
-      research_areas: 研究方向
+    email: "a[href^='mailto:']"
   tags:
   - faculty
   - nju
@@ -539,12 +603,16 @@ sources:
   use_playwright: false
   schedule: weekly
   priority: 2
-  is_enabled: false
+  is_enabled: true
   base_url: https://software.nju.edu.cn
   faculty_selectors:
-    list_item: ul li
+    # 教师列表: div.content 下的表格，每个 td 对应一位教师，通过 a 链接到个人页面
+    list_item: div.content table td
     name: a
     link: a
+  # 详情页: bio 在 #aRight div.middle，email 为纯文本（正则兜底可提取）
+  detail_selectors:
+    bio: "#aRight div.middle"
   tags:
   - faculty
   - nju
@@ -566,11 +634,12 @@ sources:
     list_item: li.news
     name: span.news_title a
     link: span.news_title a
+  # 详情页无 "个人简介"/"研究方向" 标题；bio 在 div.wp_articlecontent
   detail_selectors:
-    email: a[href^="mailto:"]
-    heading_sections:
-      bio: 个人简介
-      research_areas: 研究方向
+    bio: "div.wp_articlecontent"
+    email: "a[href^='mailto:']"
+    label_prefix_sections:
+      research_areas: "研究方向："
   tags:
   - faculty
   - nju
@@ -580,42 +649,56 @@ sources:
   group: nju
   university: 南京大学
   department: 智能软件与工程学院
-  url: https://ise.nju.edu.cn/szdw/list.htm
+  # 原 /szdw/list.htm 404；正确页面在 szll/zjzjs.htm（专兼职教师）
+  # 页面为 table 布局：每行多列，每列 td 含一名教师 <a> 链接
+  url: https://ise.nju.edu.cn/szll/zjzjs.htm
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
   priority: 3
-  is_enabled: false
-  base_url: https://ise.nju.edu.cn
+  is_enabled: true
+  base_url: https://ise.nju.edu.cn/szll/zjzjs.htm
+  verify_ssl: false
   faculty_selectors:
-    list_item: ul li
+    list_item: "table tr td"
     name: a
     link: a
+  detail_selectors:
+    email: "a[href^='mailto:']"
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
+    label_prefix_sections:
+      bio: 个人简介：
+      research_areas: 研究方向：
   tags:
   - faculty
   - nju
   - se
   - ai
 - id: ustc_cs_faculty
-  name: 中国科学技术大学计算机学院-师资队伍
+  name: 中国科学技术大学计算机学院-教授
   group: ustc
   university: 中国科学技术大学
   department: 计算机学院
-  url: http://cs.ustc.edu.cn/zgj_23225/list.htm
+  # 原 zgj_23225/list.htm 仅为院士页（2人）；改为教授完整列表页，共 32 人分 2 页
+  url: http://cs.ustc.edu.cn/js_23235/list.htm
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
   priority: 2
   is_enabled: true
   base_url: http://cs.ustc.edu.cn
+  max_pages: 2
   faculty_selectors:
     list_item: li.news
     name: .news_title a
     link: .news_title a
     photo: .news_images img
-    email: .news_tel
-    research_areas: .news_email
+    # email 在第一个 .news_text 中；research_areas 在后续 .news_text，由 detail_selectors 处理
+    email: .news_text
   detail_selectors:
+    email: a[href^="mailto:"]
     heading_sections:
       bio: 个人简介
       research_areas: 研究方向
@@ -758,17 +841,27 @@ sources:
   group: ruc
   university: 中国人民大学
   department: 信息学院
-  url: http://info.ruc.edu.cn/jsky/szdw/index.htm
+  # 原 URL 经多级 JS 跳转：index.htm → ajxjgcx/index.htm → bx/index.htm → bx/bx1/index.htm
+  # 直接使用最终落地页（静态爬虫可获取，无需 Playwright）
+  # 每页 20 人，共 5 页；暂用 page1（20人），完整覆盖需按院系分别配置
+  url: http://info.ruc.edu.cn/jsky/szdw/ajxjgcx/bx/bx1/index.htm
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
   priority: 2
-  is_enabled: false
+  is_enabled: true
   base_url: http://info.ruc.edu.cn
   faculty_selectors:
-    list_item: ul li
-    name: a
+    list_item: div.research
+    name: div.text1
     link: a
+    photo: "div.research-img img"
+    research_areas: div.text3
+  detail_selectors:
+    email: "a[href^='mailto:']"
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
   tags:
   - faculty
   - ruc
@@ -805,17 +898,27 @@ sources:
   group: tsinghua
   university: 清华大学
   department: 网络研究院
-  url: https://www.insc.tsinghua.edu.cn/szdw.htm
+  # 原 /szdw.htm 404；教师名录在 szdw_/jsml.htm，富文本格式（非列表 HTML）
+  # 教师姓名以 <a href="../info/1157/XXXX.htm"> 形式分散在 div.article-txt 中
+  # list_item 直接选 <a>，利用 faculty_crawler.py 的 <a>直选回退逻辑
+  # 详情页结构：div.tt（标题）→ div.con（内容），heading 为"研究领域"和"研究概况"
+  url: https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
   priority: 3
-  is_enabled: false
-  base_url: https://www.insc.tsinghua.edu.cn
+  is_enabled: true
+  base_url: https://www.insc.tsinghua.edu.cn/szdw_/
   faculty_selectors:
-    list_item: ul li
-    name: a
+    list_item: "div.article-txt a[href*='/info/']"
     link: a
+  detail_selectors:
+    email: "a[href^='mailto:']"
+    heading_sections:
+      bio: 研究概况
+      research_areas: 研究领域
+    label_prefix_sections:
+      position: 职称：
   tags:
   - faculty
   - tsinghua
@@ -825,17 +928,24 @@ sources:
   group: tsinghua
   university: 清华大学
   department: 高等研究院
-  url: https://ias.tsinghua.edu.cn/szdw.htm
+  # 原 ias.tsinghua.edu.cn/szdw.htm 无法访问；实际教师列表在 www.ias.tsinghua.edu.cn/yjry/jy.htm
+  # 页面为静态 HTML 表格: 姓名 | 职称 | 研究领域 | 电子邮箱（邮件地址混淆）
+  url: https://www.ias.tsinghua.edu.cn/yjry/jy.htm
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
   priority: 3
-  is_enabled: false
-  base_url: https://ias.tsinghua.edu.cn
+  is_enabled: true
+  base_url: https://www.ias.tsinghua.edu.cn
   faculty_selectors:
-    list_item: ul li
-    name: a
-    link: a
+    # table tr: 第一行是表头(无 a 标签，会被自动跳过)，其余行为教师数据
+    # 列顺序：姓名 | 职称 | 研究领域 | 电子邮箱（(at) 混淆格式）
+    list_item: table tr
+    name: td a
+    link: td a
+    position: td:nth-child(2)
+    research_areas: td:nth-child(3)
+    email: td:nth-child(4)
   tags:
   - faculty
   - tsinghua
@@ -845,17 +955,26 @@ sources:
   group: tsinghua
   university: 清华大学
   department: 未来实验室
-  url: https://thfl.tsinghua.edu.cn/yjdw.htm
+  # 原 /yjdw.htm 404；研究人员在 /yjdw/jzg/zxjg.htm（中心教职）
+  # 页面为 ul.teacher li 卡片布局，含照片、姓名、职称
+  url: https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
   priority: 3
-  is_enabled: false
-  base_url: https://thfl.tsinghua.edu.cn
+  is_enabled: true
+  base_url: https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm
   faculty_selectors:
-    list_item: ul li
-    name: a
+    list_item: "ul.teacher li"
+    name: .title
     link: a
+    photo: img
+    position: .tip
+  detail_selectors:
+    email: "a[href^='mailto:']"
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
   tags:
   - faculty
   - tsinghua
@@ -866,7 +985,9 @@ sources:
   group: tsinghua
   university: 清华大学
   department: 丘成桐数学中心
-  url: https://ymsc.tsinghua.edu.cn/yjdw.htm
+  # 原 /yjdw.htm 404；中心教师页 /sxxr/zxjs.htm 存在但无个人主页链接
+  # 页面仅有介绍文字和 Tsinghua 图书馆学者库外链，无法用标准 FacultyCrawler 爬取
+  url: https://ymsc.tsinghua.edu.cn/sxxr/zxjs.htm
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
@@ -886,17 +1007,26 @@ sources:
   group: tsinghua
   university: 清华大学
   department: 生命科学学院
-  url: https://life.tsinghua.edu.cn/szdw/jsdw.htm
+  # 原 /szdw/jsdw.htm 404；教职员工列表在 /szdw/jzyg1/All1/All.htm
+  # div.pepolelist ul.clearfix li 结构，每 li 含一个 <a> 链接和教师姓名（含全角空格补位）
+  # 不能用 ul.clearfix li，因为页面有 13 个同名 ul（其中含导航栏/字母筛选条）
+  # 详情页：.v_news_content 包含完整简历文本（教育经历+研究领域+论文等）
+  # h2 标题含 \xa0 前缀，结构为 h2 内联于 .v_news_content，无法用 heading_sections 提取子段
+  url: https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
   priority: 3
-  is_enabled: false
-  base_url: https://life.tsinghua.edu.cn
+  is_enabled: true
+  base_url: https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm
   faculty_selectors:
-    list_item: ul li
+    list_item: "div.pepolelist li"
     name: a
     link: a
+  detail_selectors:
+    email: "a[href^='mailto:']"
+    photo: ".v_news_content img, .pic img"
+    bio: ".v_news_content"
   tags:
   - faculty
   - tsinghua
@@ -949,17 +1079,25 @@ sources:
   group: pku
   university: 北京大学
   department: 数学学院
-  url: https://www.math.pku.edu.cn/teachers/index.htm
+  # 原 /teachers/index.htm 返回 403；实际教师列表在 /jsdw/js_20180628175159671361/index.htm
+  url: https://www.math.pku.edu.cn/jsdw/js_20180628175159671361/index.htm
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
   priority: 3
-  is_enabled: false
+  is_enabled: true
   base_url: https://www.math.pku.edu.cn
   faculty_selectors:
-    list_item: ul li
-    name: a
-    link: a
+    # 结构: ul.subDoctor_stateList > li > div.subDoctor_state_info
+    #        div.left > div.left_img(照片) + div.left_info > h3 > a(姓名链接)
+    #        div.right > p(1:职称) > p(2:研究方向) > p(3:系别)，均含 strong 标签和 i 值
+    list_item: ul.subDoctor_stateList li
+    name: h3 a
+    link: h3 a
+    photo: div.left_img img
+    position: div.right p i
+    # 第2个 p 的 i 通常是研究方向（按顺序取，边缘情况可能偏差）
+    research_areas: "div.right p:nth-of-type(2) i"
   tags:
   - faculty
   - pku
@@ -1055,14 +1193,22 @@ sources:
   url: https://cybersec.ustc.edu.cn/szdw_23805/list.htm
   crawl_method: faculty
   use_playwright: false
+  verify_ssl: false
   schedule: weekly
   priority: 3
-  is_enabled: false
+  is_enabled: true
   base_url: https://cybersec.ustc.edu.cn
   faculty_selectors:
-    list_item: ul li
+    # 教师按职级分组，结构: div.teacher > ul > li(各职级) > dl.cle > dd.fl > a(教师名+链接)
+    list_item: div.teacher dl.cle dd.fl
     name: a
     link: a
+  # 详情页结构为 div.wp_articlecontent > <p>字段：值</p> 的键值对格式
+  detail_selectors:
+    label_prefix_sections:
+      position: "职称："
+      email: "邮箱："
+      research_areas: "研究方向："
   tags:
   - faculty
   - ustc

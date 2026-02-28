@@ -1,6 +1,6 @@
 # 信源爬取状态总览
 
-> 最后更新: 2026-02-28 (v26 批量修复 brotli 编码问题 + 各源选择器/方法/关键词过滤)
+> 最后更新: 2026-02-28 (v29 university_faculty 全面完成 P3 禁用源恢复 + sjtu_cs 改进：5个源已启用(+160师资)、sjtu_cs detail_selectors增强(email+label_prefix)；faculty_crawler/_clean_name规范化中文名字；已启用源32/47，总1427师资、平均48%)
 
 ---
 
@@ -123,8 +123,8 @@ python scripts/process_tech_frontier.py --dry-run
 | talent (对人才) | 7+1† | 4+1† | ✅ 51条 | 86% | `sources/talent.yaml` + twitter |
 | sentiment (对学院舆情) | 1† | 1† | ✅ 20条 | 100% | twitter 跨维度 |
 | events (对日程) | 6 | 4 | ✅ 221条 | 0% (会议列表) | `sources/events.yaml` |
-| university_faculty (高校师资) | 47 | 23 | ✅ 1005位教师 | N/A (师资无正文) | `sources/university_faculty.yaml` |
-| **合计** | **181** | **132** | **2357条+** | **74%** | **132 个数据文件** |
+| university_faculty (高校师资) | 47 | 32 | ✅ 1427位教师 | N/A (师资无正文) | `sources/university_faculty.yaml` |
+| **合计** | **181** | **136** | **2619条+** | **74%** | **136 个数据文件** |
 
 > † `sources/twitter.yaml` 的 7 个源按 `dimension` 字段分配到 4 个维度：technology 4源、industry 1源、talent 1源、sentiment 1源。
 >
@@ -396,7 +396,7 @@ python scripts/process_tech_frontier.py --dry-run
 | huodongxing | 活动行-人工智能 | static | ❌ | — | CAPTCHA/反爬 |
 | meeting_edu | 中国学术会议在线 | static | ❌ | — | 站点无法连接 |
 
-### 详细状态：university_faculty (高校师资) — 23/47 启用
+### 详细状态：university_faculty (高校师资) — 27/47 启用
 
 > 新增维度 (2026-02-27)。专用 `FacultyCrawler` 模板（`crawl_method: faculty`），支持静态/Playwright 模式，
 > 通过 `faculty_selectors` 配置提取姓名、职称、简介、联系方式、照片。
@@ -404,6 +404,7 @@ python scripts/process_tech_frontier.py --dry-run
 > 字段：`title`=姓名, `extra.university`, `extra.department`, `extra.position`, `extra.email`, `extra.photo_url`
 > 2026-02-28 v25：启用 9 个新信源（SJTU CS/InfoSec、Fudan CS、NJU CS/AI/IS、USTC CS/SIST、RUC AI）；
 > SJTU CS 使用自定义 AJAX Parser（`crawler_class: sjtu_cs_faculty`）；
+> 2026-02-28 v27：修复 4 个 PKU 数据零源（JS 重定向 URL + 错误选择器）；启用 nju_software/ustc_cyber/pku_math/tsinghua_ias 4 个新信源；修复 ict_cas 详情页选择器（completeness 35%→60%）。
 > NJU 系列使用 `verify_ssl: false` 绕过老旧 TLS 握手失败；
 > Fudan CS 使用 Playwright 等待 AJAX 加载；
 > USTC SIST 指向 EEIS 子系教授列表（门户结构限制）。
@@ -414,14 +415,14 @@ python scripts/process_tech_frontier.py --dry-run
 | tsinghua_cs_faculty | 清华大学 | 计算机系 | ✅ 135人 | `dd li > h2`，按研究所分块 |
 | tsinghua_iiis_faculty | 清华大学 | 交叉信息研究院 | ✅ 77人 | 已启用 |
 | tsinghua_se_faculty | 清华大学 | 软件学院 | ✅ 5人 | 已启用 |
-| tsinghua_ee_faculty | 清华大学 | 电子工程系 | ✅ 7人 | 已启用 |
-| tsinghua_au_faculty | 清华大学 | 自动化系 | ✅ 7人 | 已启用 |
-| tsinghua_insc_faculty | 清华大学 | 网络研究院 | ❌ 待启用 | URL 404，站点改版 |
-| tsinghua_ias_faculty | 清华大学 | 高等研究院 | ❌ 待启用 | 连接超时 |
-| tsinghua_futurelab_faculty | 清华大学 | 未来实验室 | ❌ 待启用 | URL 待确认 |
-| tsinghua_ymsc_faculty | 清华大学 | 丘成桐数学中心 | ❌ 待启用 | URL 待确认 |
-| tsinghua_life_faculty | 清华大学 | 生命科学学院 | ❌ 待启用 | URL 待确认 |
-| tsinghua_sigs_faculty | 清华大学 | 数据与信息研究院（深圳） | ❌ 待启用 | URL 404，站点改版 |
+| tsinghua_ee_faculty | 清华大学 | 电子工程系 | ✅ 147人 | v28 修复：.line .t ul a 选择器，含detail_selectors(bio/email/research_areas) |
+| tsinghua_au_faculty | 清华大学 | 自动化系 | ✅ 7人 | v28 修复：name改为h3，添加detail_selectors(bio/email/research_areas) |
+| tsinghua_insc_faculty | 清华大学 | 网络研究院 | ✅ 53人 | v29 修复：URL → www.insc.tsinghua.edu.cn/szdw_/jsml.htm，<a>直选，heading_sections(bio/research_areas) |
+| tsinghua_ias_faculty | 清华大学 | 高等研究院 | ✅ 29人 | v27 修复，URL → www.ias.tsinghua.edu.cn/yjry/jy.htm |
+| tsinghua_futurelab_faculty | 清华大学 | 未来实验室 | ✅ 35人 | v29 修复：URL → thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm，ul.teacher li 结构 |
+| tsinghua_ymsc_faculty | 清华大学 | 丘成桐数学中心 | ❌ 禁用 | URL 存在但无个人主页链接，仅学者库外链 |
+| tsinghua_life_faculty | 清华大学 | 生命科学学院 | ✅ 122人 | v29 修复：URL → life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm，div.pepolelist li 结构，bio 选择器 |
+| tsinghua_sigs_faculty | 清华大学 | 数据与信息研究院（深圳） | ❌ 待Playwright | URL → www.sigs.tsinghua.edu.cn/7644/list.htm，JS加载faculty cards（需filter加载） |
 | tsinghua_iaiig_faculty | 清华大学 | 人工智能国际治理研究院 | ❌ 待启用 | 连接超时 |
 | pku_cs_faculty | 北京大学 | 计算机学院 | ✅ 12人 | `ul li > h3` |
 | pku_cis_faculty | 北京大学 | 智能学院 | ✅ 8人 | `ul li > h3+dd` |
@@ -429,7 +430,7 @@ python scripts/process_tech_frontier.py --dry-run
 | pku_ic_faculty | 北京大学 | 集成电路学院 | ✅ 已启用 | 待下次爬取 |
 | pku_ss_faculty | 北京大学 | 软件与微电子学院 | ✅ 已启用 | 待下次爬取 |
 | pku_cfcs_faculty | 北京大学 | 前沿计算研究中心 | ✅ 已启用 | 待下次爬取 |
-| pku_math_faculty | 北京大学 | 数学学院 | ❌ 待启用 | URL 待确认 |
+| pku_math_faculty | 北京大学 | 数学学院 | ✅ 20人 | v27 修复，URL → jsdw/js_20180628175159671361/index.htm |
 | pku_eecs_sz_faculty | 北京大学 | 信息工程学院（深圳） | ❌ 待启用 | URL 404 |
 | pku_coe_faculty | 北京大学 | 工学院 | ❌ 待启用 | URL 待确认 |
 | ict_cas_faculty | 中国科学院 | 计算技术研究所 | ✅ 24人 | `ul li > h5 a:last-child` |
@@ -444,18 +445,18 @@ python scripts/process_tech_frontier.py --dry-run
 | fudan_ai_robot_faculty | 复旦大学 | 智能机器人与先进制造创新学院 | ❌ 待启用 | URL 待确认 |
 | nju_cs_faculty | 南京大学 | 计算机系 | ✅ 65人 | `li.list_item`，`verify_ssl: false` |
 | nju_ai_faculty | 南京大学 | 人工智能学院 | ✅ 36人 | `li.news`，`verify_ssl: false` |
-| nju_software_faculty | 南京大学 | 软件学院 | ❌ 待启用 | URL 已验证，选择器待测试 |
+| nju_software_faculty | 南京大学 | 软件学院 | ✅ 56人 | v27 启用，table 结构，含 profile 链接 |
 | nju_is_faculty | 南京大学 | 智能科学与技术学院 | ✅ 14人 | `li.news`，`verify_ssl: false` |
-| nju_ise_faculty | 南京大学 | 智能软件与工程学院 | ❌ 待启用 | URL 404 |
+| nju_ise_faculty | 南京大学 | 智能软件与工程学院 | ✅ 15人 | v29 修复：URL → ise.nju.edu.cn/szll/zjzjs.htm，table tr td 结构，verify_ssl: false |
 | ustc_cs_faculty | 中国科学技术大学 | 计算机学院 | ✅ 2人 | `li.news`，疑似仅首页少量数据 |
 | ustc_sist_faculty | 中国科学技术大学 | 信息科学技术学院 | ✅ 8人 | EEIS 子系教授，页1（门户结构） |
 | ustc_se_faculty | 中国科学技术大学 | 软件学院 | ❌ 待启用 | 连接超时 |
 | ustc_ds_faculty | 中国科学技术大学 | 大数据学院 | ❌ 待启用 | 连接超时 |
-| ustc_cyber_faculty | 中国科学技术大学 | 网络空间安全学院 | ❌ 待启用 | 无标准选择器，结构待分析 |
+| ustc_cyber_faculty | 中国科学技术大学 | 网络空间安全学院 | ✅ 59人 | v27 启用，dd.fl 分职级列表结构 |
 | zju_cs_faculty | 浙江大学 | 计算机学院 | ❌ 待启用 | 连接超时（本地），服务器可访问 |
 | zju_cyber_faculty | 浙江大学 | 网络空间安全学院 | ❌ 待启用 | URL 已修正为 `/szdw/list.htm` |
 | zju_soft_faculty | 浙江大学 | 软件学院 | ❌ 待启用 | URL 待确认 |
-| ruc_info_faculty | 中国人民大学 | 信息学院 | ❌ 待启用 | URL 403 Forbidden |
+| ruc_info_faculty | 中国人民大学 | 信息学院 | ✅ 20人 | v29 修复：URL → info.ruc.edu.cn/jsky/szdw/ajxjgcx/bx/bx1/index.htm（JS redirect），div.research 结构 |
 | ruc_ai_faculty | 中国人民大学 | 高瓴人工智能学院 | ✅ 26人 | `div.tutor`，含 bio |
 
 ---
@@ -491,7 +492,7 @@ uvicorn app.main:app --reload
 
 | 总源数 | 已启用 | 已禁用 | 覆盖学校 | 总教师数 | 平均完整度 |
 |--------|--------|--------|---------|---------|-----------|
-| 47 | 23 | 24 | 清华/北大/中科院/上交/复旦/南大/中科大/浙大/人大 | 1005 | 43.9% |
+| 47 | 27 | 20 | 清华/北大/中科院/上交/复旦/南大/中科大/浙大/人大 | 1267 | 47.2% |
 
 **数据说明：**
 - 完整度评分基于 ScholarRecord schema（0-100分）
@@ -502,52 +503,57 @@ uvicorn app.main:app --reload
 
 | 学校组 | 源数 | 已启用 | 教师数 | 平均完整度 | 说明 |
 |--------|------|--------|--------|-----------|------|
-| **tsinghua** | 13 | 6 | 268 | 46.3% | 清华大学各院系，7个待启用 |
-| **pku** | 9 | 6 | 20 | 30.0% | 北大各院系，4个已启用但暂无数据 |
-| **cas** | 3 | 2 | 44 | 57.4% | 中科院研究所，casia 79.8% |
+| **tsinghua** | 13 | 10 | 476 | 54.9% | 清华大学各院系，v29修复insc/futurelab/life（+53/35/122人），3个待启用/禁用 |
+| **pku** | 9 | 7 | 158 | 41.2% | 北大各院系，+icst/ic/ss/cfcs/math共138人 |
+| **cas** | 3 | 2 | 44 | 67.6% | 中科院研究所，ict_cas 35%→60% |
 | **sjtu** | 5 | 2 | 333 | 42.5% | 上交大，CS用AJAX自定义Parser |
 | **fudan** | 2 | 1 | 189 | 45.0% | 复旦大学，Playwright AJAX加载 |
-| **nju** | 5 | 3 | 115 | 34.6% | 南京大学，verify_ssl: false |
-| **ustc** | 5 | 2 | 10 | 51.0% | 中科大，仅部分页面数据 |
+| **nju** | 5 | 5 | 186 | 41.6% | 南京大学，v29修复nju_ise（+15人），全部启用 |
+| **ustc** | 5 | 3 | 69 | 52.3% | 中科大（+cyber 59人） |
 | zju | 3 | 0 | 0 | - | 浙江大学，连接超时（本地） |
-| **ruc** | 2 | 1 | 26 | 55.0% | 中国人民大学 |
+| **ruc** | 2 | 2 | 46 | 51.5% | 中国人民大学，v29修复ruc_info（+20人，50%），全部启用 |
 
 ### 已启用信源详情
 
-#### 清华大学 (6/9 启用)
+#### 清华大学 (10/13 启用)
 
 | source_id | 教师数 | 完整度 | 状态 | 说明 |
 |-----------|--------|--------|------|------|
 | tsinghua_air_faculty | 37 | 50.5% | ⚠️ 可接受 | 智能产业研究院，网站结构限制 |
 | tsinghua_cs_faculty | 135 | 69.1% | ⚠️ 可接受 | 计算机系，接近优秀级别 |
 | tsinghua_iiis_faculty | 77 | 62.9% | ⚠️ 可接受 | 交叉信息研究院，邮箱为图片 |
-| tsinghua_se_faculty | 5 | 30.0% | ❌ 基础 | 软件学院，仅列表页数据 |
-| tsinghua_au_faculty | 7 | 35.0% | ❌ 基础 | 自动化系，仅列表页数据 |
-| tsinghua_ee_faculty | 7 | 30.0% | ❌ 基础 | 电子工程系，已从Playwright降级为静态 |
+| tsinghua_se_faculty | 5 | 30.0% | ❌ 基础 | 软件学院，仅列表页5人（可能仅在职/权限限制） |
+| tsinghua_au_faculty | 7 | 75.0% | ✅ 良好 | 自动化系，v28 修复 name选择器 + detail_selectors |
+| tsinghua_ee_faculty | 147 | 50.3% | ⚠️ 可接受 | 电子工程系，v28 修复 a 直选+detail_selectors，从7人→147人 |
+| tsinghua_ias_faculty | 29 | 45.0% | ⚠️ 可接受 | 高等研究院，v27 修复 URL → www.ias.tsinghua.edu.cn/yjry/jy.htm |
+| tsinghua_insc_faculty | 53 | 75.9% | ✅ 优秀 | 网络研究院，v29 修复 URL → www.insc.tsinghua.edu.cn/szdw_/jsml.htm，<a>直选 + heading_sections(bio/research_areas) |
+| tsinghua_futurelab_faculty | 35 | 55.0% | ⚠️ 可接受 | 未来实验室，v29 修复 URL → thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm，ul.teacher li 卡片结构 |
+| tsinghua_life_faculty | 122 | 43.3% | ⚠️ 可接受 | 生命科学学院，v29 修复 URL → life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm，div.pepolelist li + bio选择器 |
 
-#### 北京大学 (6/9 启用, 4个暂无数据)
+#### 北京大学 (7/9 启用)
 
 | source_id | 教师数 | 完整度 | 状态 | 说明 |
 |-----------|--------|--------|------|------|
-| pku_cs_faculty | 12 | 30.0% | ❌ 基础 | 计算机学院，需添加detail_selectors |
-| pku_cis_faculty | 8 | 30.0% | ❌ 基础 | 智能学院，需添加detail_selectors |
-| pku_icst_faculty | 0 | - | ⚠️ 已启用 | 王选所，待下次爬取验证 |
-| pku_ic_faculty | 0 | - | ⚠️ 已启用 | 集成电路学院，待下次爬取验证 |
-| pku_ss_faculty | 0 | - | ⚠️ 已启用 | 软件与微电子学院，待下次爬取验证 |
-| pku_cfcs_faculty | 0 | - | ⚠️ 已启用 | 前沿计算研究中心，待下次爬取验证 |
+| pku_cs_faculty | 12 | 30.0% | ❌ 基础 | 计算机学院，页面 lazy-load 仅显示12条 |
+| pku_cis_faculty | 8 | 30.0% | ❌ 基础 | 智能学院，同上 |
+| pku_icst_faculty | 20 | 70.0% | ✅ 良好 | 王选所，v28 添加 research_areas 选择器 |
+| pku_ic_faculty | 27 | 75.0% | ✅ 良好 | 集成电路学院，v28 修复 base_url + detail_selectors(bio/label_prefix_sections) |
+| pku_ss_faculty | 15 | 37.0% | ❌ 基础 | 软件与微电子学院，v28 修复 base_url，detail_selectors，仅5人有个人主页 |
+| pku_cfcs_faculty | 36 | 69.0% | ✅ 良好 | 前沿计算研究中心，v28 修复 bio 选择器 + base_url + research_areas |
+| pku_math_faculty | 20 | 60.0% | ✅ 良好 | 数学学院，v28 添加 research_areas 选择器 |
 
 #### 中国科学院 (2/3 启用)
 
 | source_id | 教师数 | 完整度 | 状态 | 说明 |
 |-----------|--------|--------|------|------|
 | casia_faculty | 20 | 79.8% | ✅ 优秀 | 自动化所，已配置detail_selectors+heading_sections |
-| ict_cas_faculty | 24 | 35.0% | ❌ 基础 | 计算技术研究所，需添加detail_selectors |
+| ict_cas_faculty | 24 | 60.0% | ⚠️ 可接受 | 计算技术研究所，v27 修复 detail_selectors → bio+email 均提取成功 |
 
 #### 上海交通大学 (2/5 启用)
 
 | source_id | 教师数 | 完整度 | 状态 | 说明 |
 |-----------|--------|--------|------|------|
-| sjtu_cs_faculty | 253 | 30.0% | ⚠️ 基础 | 计算机系，AJAX自定义Parser，仅名称+链接 |
+| sjtu_cs_faculty | 253 | 39.8% | ⚠️ 基础 | 计算机系，AJAX自定义Parser，v29添加detail_selectors(email/label_prefix_sections)，email+name+profile |
 | sjtu_infosec_faculty | 80 | 55.0% | ⚠️ 可接受 | 网安学院，含职称和邮箱 |
 
 #### 复旦大学 (1/2 启用)
@@ -556,35 +562,38 @@ uvicorn app.main:app --reload
 |-----------|--------|--------|------|------|
 | fudan_cs_faculty | 189 | 45.0% | ⚠️ 可接受 | 计算与智能学院，Playwright AJAX |
 
-#### 南京大学 (3/5 启用)
+#### 南京大学 (5/5 启用)
 
 | source_id | 教师数 | 完整度 | 状态 | 说明 |
 |-----------|--------|--------|------|------|
-| nju_cs_faculty | 65 | 37.8% | ❌ 基础 | 计算机系，verify_ssl: false |
-| nju_ai_faculty | 36 | 32.5% | ❌ 基础 | 人工智能学院，verify_ssl: false |
-| nju_is_faculty | 14 | 33.6% | ❌ 基础 | 智能科学与技术学院，verify_ssl: false |
+| nju_cs_faculty | 65 | 44.0% | ⚠️ 可接受 | 计算机系，v28 修复 bio 选择器+label_prefix_sections，verify_ssl: false |
+| nju_ai_faculty | 36 | 33.0% | ❌ 基础 | 人工智能学院，个人网站结构多样难统一，verify_ssl: false |
+| nju_is_faculty | 14 | 49.0% | ⚠️ 可接受 | 智能科学技术学院，v28 修复 bio+research_areas，verify_ssl: false |
+| nju_software_faculty | 56 | 47.0% | ⚠️ 可接受 | 软件学院，v28 添加 detail_selectors bio，table 结构 |
+| nju_ise_faculty | 15 | 40.0% | ⚠️ 可接受 | 智能软件与工程学院，v29 修复 URL → ise.nju.edu.cn/szll/zjzjs.htm，table tr td 结构，verify_ssl: false |
 
-#### 中国科学技术大学 (2/5 启用)
+#### 中国科学技术大学 (3/5 启用)
 
 | source_id | 教师数 | 完整度 | 状态 | 说明 |
 |-----------|--------|--------|------|------|
 | ustc_cs_faculty | 2 | 45.0% | ⚠️ 异常 | 计算机学院，数据极少（疑似首页条数限制） |
 | ustc_sist_faculty | 8 | 56.9% | ⚠️ 可接受 | 信息学院→EEIS子系教授，仅第1页 |
+| ustc_cyber_faculty | 59 | 60.0% | ✅ 良好 | 网安学院，v28 添加 label_prefix_sections(职称/邮箱/研究方向) |
 
-#### 中国人民大学 (1/2 启用)
+#### 中国人民大学 (2/2 启用)
 
 | source_id | 教师数 | 完整度 | 状态 | 说明 |
 |-----------|--------|--------|------|------|
 | ruc_ai_faculty | 26 | 55.0% | ⚠️ 可接受 | 高瓴人工智能学院，含bio |
+| ruc_info_faculty | 20 | 50.0% | ⚠️ 可接受 | 信息学院，v29 修复 JS重定向URL → info.ruc.edu.cn/jsky/szdw/ajxjgcx/bx/bx1/index.htm，div.research 结构 |
 
 ### 禁用信源详情
 
-#### URL失效/网站问题 (3个)
+#### URL失效/网站问题 (2个)
 
 | source_id | 学校 | 原因 | 建议措施 |
 |-----------|------|------|---------|
 | tsinghua_insc_faculty | 清华大学 | 404 Not Found | URL已失效，需更新或移除 |
-| tsinghua_ias_faculty | 清华大学 | Connection Error | 域名无法访问 |
 | tsinghua_futurelab_faculty | 清华大学 | 404 Not Found | URL已失效，需更新或移除 |
 
 #### 连接超时/无法访问 (6个，服务器可能可访问)
@@ -598,27 +607,30 @@ uvicorn app.main:app --reload
 | zju_cs_faculty | 浙江大学 | 本地连接超时 | 服务器环境测试 |
 | zju_cyber_faculty | 浙江大学 | URL已修正，连接超时 | 服务器环境测试 |
 
-#### 待修复/待启用 (15个)
+#### 待修复/待启用 (12个)
 
 | source_id | 学校 | 原因 | 建议措施 |
 |-----------|------|------|---------|
 | sjtu_ai_faculty | 上海交通大学 | SPA+Three.js | 无法爬取，需API |
-| fudan_ai_robot_faculty | 复旦大学 | URL待确认 | 查找正确URL |
-| nju_software_faculty | 南京大学 | URL已验证，选择器待测 | 配置选择器 |
+| fudan_ai_robot_faculty | 复旦大学 | domain not found | 查找正确域名/URL |
 | nju_ise_faculty | 南京大学 | URL 404 | URL已失效 |
-| ustc_cyber_faculty | 中国科学技术大学 | 结构待分析 | Playwright MCP分析 |
 | zju_soft_faculty | 浙江大学 | URL待确认 | 查找正确URL |
-| iscas_faculty | 中国科学院 | URL已验证，选择器待测 | 配置选择器 |
-| ruc_info_faculty | 中国人民大学 | 403 Forbidden | 需添加请求头 |
-| tsinghua_ymsc_faculty | 清华大学 | URL待确认 | 查找正确URL |
-| tsinghua_life_faculty | 清华大学 | URL待确认 | 查找正确URL |
+| iscas_faculty | 中国科学院 | 纯文本姓名列表 | 需自定义 Parser |
+| ruc_info_faculty | 中国人民大学 | JS渲染 | 内容极少(~300B)，需Playwright |
+| tsinghua_ymsc_faculty | 清华大学 | URL 404 → JS渲染 | 需Playwright |
+| tsinghua_life_faculty | 清华大学 | URL 404 → JS渲染 | 需Playwright |
 | tsinghua_sigs_faculty | 清华大学 | URL 404 | URL已失效 |
 | tsinghua_iaiig_faculty | 清华大学 | 连接超时 | 确认域名可访问性 |
-| pku_math_faculty | 北京大学 | URL待确认 | 查找正确URL |
-| pku_eecs_sz_faculty | 北京大学 | URL 404 | URL已失效 |
+| pku_eecs_sz_faculty | 北京大学 | 院系已拆分为多院 | 需按计算机/电子/集成电路分别配置 |
 | pku_coe_faculty | 北京大学 | URL待确认 | 查找正确URL |
 
 ### 技术改进
+
+**faculty_crawler.py 增强 (2026-02-28 v28):**
+- 新增 `label_prefix_sections`：扫描 `<p>/<li>` 元素，提取"Label：Value"格式字段（适合 ustc_cyber/pku_ic 等中文页面）
+- 新增 `list_item` 直选 `<a>` 回退：当 list_item 选择器选中 `<a>` 而非容器元素时，自动提取 get_text()/href（适合 tsinghua_ee 等无 `<li>` 包裹的列表）
+- research_areas 详情页提取改用 `separator="\n"`：确保 `<li>` 列表项被换行分隔，parse_research_areas 可正确切割
+- heading_sections 扩展支持 `<div>` 标签（之前仅支持 h2/h3/h4/p）
 
 **faculty_crawler.py 增强 (2026-02-27):**
 - 支持 `<p>` 标签作为章节标题（之前仅支持 h2/h3/h4）
@@ -648,7 +660,7 @@ detail_selectors:
 
 1. **修复低数据源** - `ustc_cs_faculty` 仅 2 条（正常应 100+），需分析页面结构
 2. **扩展 USTC SIST** - 当前仅 EEIS 子系第1页(8人)，探索分页或门户子系批量爬取
-3. **优化低质量源** - 为 pku_cs/pku_cis/ict_cas/nju 系列添加 detail_selectors 提升完整度
+3. **优化低质量源** - 为 pku_cs/pku_cis/nju 系列添加 detail_selectors 提升完整度（当前 30-38%）
 4. **服务器环境测试** - 测试浙大/上交软件学院等本地超时源（服务器可能可访问）
-5. **验证 pku 4个新源** - pku_icst/ic/ss/cfcs 已启用但暂无数据，需运行爬取确认
-6. **LLM 富化** - 对已爬取1005条教师数据进行学术指标补充（Google Scholar/DBLP）
+5. **处理 iscas_faculty** - 页面为纯文本名字列表（无HTML列表结构），需自定义 Parser
+6. **LLM 富化** - 对已爬取1267条教师数据进行学术指标补充（Google Scholar/DBLP）
