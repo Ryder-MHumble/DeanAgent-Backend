@@ -15,6 +15,7 @@ _TEMPLATE_MAP: dict[str, str] = {
     "snapshot": "app.crawlers.templates.snapshot_crawler.SnapshotDiffCrawler",
     "dynamic": "app.crawlers.templates.dynamic_crawler.DynamicPageCrawler",
     "social": "app.crawlers.templates.social_crawler.SocialMediaCrawler",
+    "faculty": "app.crawlers.templates.faculty_crawler.FacultyCrawler",
 }
 
 # Custom parser mapping

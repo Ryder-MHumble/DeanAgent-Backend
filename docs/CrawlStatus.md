@@ -1,6 +1,6 @@
 # 信源爬取状态总览
 
-> 最后更新: 2026-02-25
+> 最后更新: 2026-02-28
 
 ---
 
@@ -123,7 +123,8 @@ python scripts/process_tech_frontier.py --dry-run
 | talent (对人才) | 7+1† | 4+1† | ✅ 51条 | 86% | `sources/talent.yaml` + twitter |
 | sentiment (对学院舆情) | 1† | 1† | ✅ 20条 | 100% | twitter 跨维度 |
 | events (对日程) | 6 | 4 | ✅ 221条 | 0% (会议列表) | `sources/events.yaml` |
-| **合计** | **134** | **109** | **1352条+** | **74%** | **109 个数据文件** |
+| university_faculty (高校师资) | 92 | 12 | ✅ 290位教师 | N/A (师资无正文) | `sources/university_faculty.yaml` |
+| **合计** | **226** | **121** | **1642条+** | **74%** | **121 个数据文件** |
 
 > † `sources/twitter.yaml` 的 7 个源按 `dimension` 字段分配到 4 个维度：technology 4源、industry 1源、talent 1源、sentiment 1源。
 >
@@ -395,6 +396,70 @@ python scripts/process_tech_frontier.py --dry-run
 | huodongxing | 活动行-人工智能 | static | ❌ | — | CAPTCHA/反爬 |
 | meeting_edu | 中国学术会议在线 | static | ❌ | — | 站点无法连接 |
 
+### 详细状态：university_faculty (高校师资) — 6/52 启用
+
+> 新增维度 (2026-02-27)。专用 `FacultyCrawler` 模板（`crawl_method: faculty`），支持静态/Playwright 模式，
+> 通过 `faculty_selectors` 配置提取姓名、职称、简介、联系方式、照片。
+> 数据输出：`data/raw/university_faculty/{group}/{source_id}/latest.json`
+> 字段：`title`=姓名, `extra.university`, `extra.department`, `extra.position`, `extra.email`, `extra.photo_url`
+> 新增信源（2026-02-27 v23）：从截图补充完整高校清单，共 35 个信源覆盖 9 所高校+中科院 3 所；
+> 扩充（2026-02-27 v24）：从用户完整列表补充 17 个缺失信源，共 52 个信源覆盖清华 17 个单位、北大 9 个、交大 4 个、复旦 2 个、南大 5 个、中科大 5 个、浙大 3 个、中科院 3 所、人大 2 个；
+> 未启用源 URL 已从各高校官网验证，选择器（faculty_selectors）待个别测试后启用。
+
+| source_id | 机构 | 院系 | 状态 | 说明 |
+| --------- | ---- | ---- | ---- | ---- |
+| tsinghua_air_faculty | 清华大学 | 智能产业研究院 | ✅ 已爬取 37 人 | `ul li > h2+p` |
+| tsinghua_cs_faculty | 清华大学 | 计算机系 | ✅ 已爬取 135 人 | `dd li > h2`，按研究所分块 |
+| tsinghua_iiis_faculty | 清华大学 | 交叉信息研究院 | ❌ 待启用 | `ul.ls16 li > h4`，URL 已验证 |
+| tsinghua_se_faculty | 清华大学 | 软件学院 | ❌ 待启用 | URL 已验证，选择器待测试 |
+| tsinghua_ee_faculty | 清华大学 | 电子工程系 | ❌ 待启用 | URL 已验证，选择器待测试 |
+| tsinghua_au_faculty | 清华大学 | 自动化系 | ❌ 待启用 | URL 已验证，选择器待测试 |
+| tsinghua_insc_faculty | 清华大学 | 网络研究院 | ❌ 待启用 | URL 待确认 |
+| tsinghua_ias_faculty | 清华大学 | 高等研究院 | ❌ 待启用 | URL 待确认 |
+| tsinghua_futurelab_faculty | 清华大学 | 未来实验室 | ❌ 待启用 | URL 待确认 |
+| tsinghua_ymsc_faculty | 清华大学 | 丘成桐数学中心 | ❌ 待启用 | URL 待确认 |
+| tsinghua_life_faculty | 清华大学 | 生命科学学院 | ❌ 待启用 | URL 待确认 |
+| tsinghua_sigs_faculty | 清华大学 | 数据与信息研究院（深圳） | ❌ 待启用 | URL 待确认 |
+| tsinghua_grad_faculty | 清华大学 | 研究生院 | ❌ 待启用 | 行政部门，URL 待确认 |
+| tsinghua_gradunion_faculty | 清华大学 | 研究生会 | ❌ 待启用 | 学生组织，URL 待确认 |
+| tsinghua_iaiig_faculty | 清华大学 | 人工智能国际治理研究院 | ❌ 待启用 | URL 待确认 |
+| tsinghua_intl_faculty | 清华大学 | 国际处 | ❌ 待启用 | 行政部门，URL 待确认 |
+| tsinghua_research_office_faculty | 清华大学 | 科研院 | ❌ 待启用 | 行政部门，URL 待确认 |
+| pku_cs_faculty | 北京大学 | 计算机学院 | ✅ 已爬取 12 人 | `ul li > h3`，当前页面仅首页 |
+| pku_cis_faculty | 北京大学 | 智能学院 | ✅ 已爬取 8 人 | `ul li > h3+dd` |
+| pku_icst_faculty | 北京大学 | 王选计算机研究所 | ❌ 待启用 | URL 已验证（学术团队页），选择器待测试 |
+| pku_ic_faculty | 北京大学 | 集成电路学院 | ❌ 待启用 | URL 已验证，选择器待测试 |
+| pku_ss_faculty | 北京大学 | 软件与微电子学院 | ❌ 待启用 | URL 已验证，选择器待测试 |
+| pku_cfcs_faculty | 北京大学 | 前沿计算研究中心 | ❌ 待启用 | URL 已验证，选择器待测试 |
+| pku_math_faculty | 北京大学 | 数学学院 | ❌ 待启用 | URL 待确认 |
+| pku_eecs_sz_faculty | 北京大学 | 信息工程学院（深圳） | ❌ 待启用 | URL 待确认 |
+| pku_coe_faculty | 北京大学 | 工学院 | ❌ 待启用 | URL 待确认 |
+| ict_cas_faculty | 中国科学院 | 计算技术研究所 | ✅ 已爬取 24 人 | `ul li > h5 a:last-child`，首页 4 页 |
+| casia_faculty | 中国科学院 | 自动化研究所 | ✅ 已爬取 20 人 | `ul.row li > div.name`，首页 7 页 |
+| iscas_faculty | 中国科学院 | 软件研究所 | ❌ 待启用 | URL 已验证（研究员页），选择器待测试 |
+| sjtu_ai_faculty | 上海交通大学 | 人工智能研究院 | ❌ 禁用 | SPA 页，后端 API 返回错误 |
+| sjtu_cs_faculty | 上海交通大学 | 计算机系 | ❌ 待启用 | URL 已验证，选择器待测试 |
+| sjtu_se_faculty | 上海交通大学 | 软件学院 | ❌ 待启用 | URL 待确认（官网有时超时） |
+| sjtu_infosec_faculty | 上海交通大学 | 网络空间安全学院 | ❌ 待启用 | URL 已验证（Directory.aspx），选择器待测试 |
+| sjtu_qingyuan_faculty | 上海交通大学 | 清源研究院 | ❌ 待启用 | URL 待确认 |
+| fudan_cs_faculty | 复旦大学 | 计算与智能创新学院 | ❌ 待启用 | URL 已验证，选择器待测试 |
+| fudan_ai_robot_faculty | 复旦大学 | 智能机器人与先进制造创新学院 | ❌ 待启用 | URL 待确认（新成立学院） |
+| nju_cs_faculty | 南京大学 | 计算机系 | ❌ 待启用 | URL 已验证，选择器待测试 |
+| nju_ai_faculty | 南京大学 | 人工智能学院 | ❌ 待启用 | URL 已验证，选择器待测试 |
+| nju_software_faculty | 南京大学 | 软件学院 | ❌ 待启用 | URL 已验证，选择器待测试 |
+| nju_is_faculty | 南京大学 | 智能科学与技术学院 | ❌ 待启用 | URL 待确认 |
+| nju_ise_faculty | 南京大学 | 智能软件与工程学院 | ❌ 待启用 | URL 待确认 |
+| ustc_cs_faculty | 中国科学技术大学 | 计算机学院 | ❌ 待启用 | URL 已验证，选择器待测试 |
+| ustc_sist_faculty | 中国科学技术大学 | 信息科学技术学院 | ❌ 待启用 | URL 已验证，选择器待测试 |
+| ustc_se_faculty | 中国科学技术大学 | 软件学院 | ❌ 待启用 | URL 待确认 |
+| ustc_ds_faculty | 中国科学技术大学 | 大数据学院 | ❌ 待启用 | URL 待确认 |
+| ustc_cyber_faculty | 中国科学技术大学 | 网络空间安全学院 | ❌ 待启用 | URL 待确认 |
+| zju_cs_faculty | 浙江大学 | 计算机学院 | ❌ 禁用 | 网站连接被重置，待排查 |
+| zju_cyber_faculty | 浙江大学 | 网络空间安全学院 | ❌ 待启用 | URL 待确认 |
+| zju_soft_faculty | 浙江大学 | 软件学院 | ❌ 待启用 | URL 待确认 |
+| ruc_info_faculty | 中国人民大学 | 信息学院 | ❌ 待启用 | URL 已验证，选择器待测试 |
+| ruc_ai_faculty | 中国人民大学 | 高瓴人工智能学院 | ❌ 待启用 | URL 已验证，选择器待测试 |
+
 ---
 
 ## 四、运行方式
@@ -419,3 +484,107 @@ python scripts/generate_index.py
 # 启动完整服务（含调度器）
 uvicorn app.main:app --reload
 ```
+
+---
+
+## 九、高校师资 (university_faculty)
+
+### 总览
+
+| 总源数 | 已启用 | 已禁用 | 覆盖学校 | 平均完整度 |
+|--------|--------|--------|---------|-----------|
+| 92 | 12 | 80 | 清华/北大/中科院/上交/复旦/南大/中科大/浙大 | 51.2% |
+
+**数据说明：**
+- 完整度评分基于 ScholarRecord schema（0-100分）
+- 评分权重：name(20), bio(15), research_areas(15), position(10), email(10), profile_url(10), photo(5), 其他(15)
+- 典型分数：列表页 ~25-30，含详情页 ~50-70，LLM富化 ~100
+
+### 按学校分组
+
+| 学校组 | 源数 | 已启用 | 平均完整度 | 说明 |
+|--------|------|--------|-----------|------|
+| **tsinghua** | 9 | 6 | 48.5% | 清华大学各院系，3个URL失效 |
+| **pku** | 6 | 2 | 30.0% | 北京大学各院系，4个选择器待修 |
+| **cas** | 5 | 2 | 57.4% | 中科院研究所，1个优秀(79.8%) |
+| sjtu | 4 | 0 | - | 上海交大，待测试 |
+| fudan | 2 | 0 | - | 复旦大学，待测试 |
+| nju | 5 | 0 | - | 南京大学，待测试 |
+| ustc | 3 | 0 | - | 中国科学技术大学，待测试 |
+| zju | 3 | 0 | - | 浙江大学，待测试 |
+| ruc | 2 | 0 | - | 中国人民大学，待测试 |
+| 其他 | 53 | 0 | - | 其他高校，待测试 |
+
+### 已启用信源详情
+
+#### 清华大学 (6/9 启用)
+
+| source_id | 教师数 | 完整度 | 状态 | 说明 |
+|-----------|--------|--------|------|------|
+| tsinghua_air_faculty | 37 | 50.5% | ⚠️ 可接受 | 智能产业研究院，网站结构限制 |
+| tsinghua_cs_faculty | 135 | 69.1% | ⚠️ 可接受 | 计算机系，接近优秀级别 |
+| tsinghua_iiis_faculty | 77 | 62.9% | ⚠️ 可接受 | 交叉信息研究院，邮箱为图片 |
+| tsinghua_se_faculty | 5 | 30.0% | ❌ 基础 | 软件学院，仅列表页数据 |
+| tsinghua_au_faculty | 7 | 35.0% | ❌ 基础 | 自动化系，仅列表页数据 |
+| tsinghua_ee_faculty | 7 | 30.0% | ❌ 基础 | 电子工程系，已从Playwright降级为静态 |
+
+#### 北京大学 (2/6 启用)
+
+| source_id | 教师数 | 完整度 | 状态 | 说明 |
+|-----------|--------|--------|------|------|
+| pku_cs_faculty | 12 | 30.0% | ❌ 基础 | 计算机学院，需添加detail_selectors |
+| pku_cis_faculty | 8 | 30.0% | ❌ 基础 | 智能学院，需添加detail_selectors |
+
+#### 中国科学院 (2/5 启用)
+
+| source_id | 教师数 | 完整度 | 状态 | 说明 |
+|-----------|--------|--------|------|------|
+| casia_faculty | 20 | 79.8% | ✅ 优秀 | 自动化所，已配置detail_selectors+heading_sections |
+| ict_cas_faculty | 24 | 35.0% | ❌ 基础 | 计算技术研究所，需添加detail_selectors |
+
+### 禁用信源详情
+
+#### URL失效/网站问题 (3个)
+
+| source_id | 学校 | 原因 | 建议措施 |
+|-----------|------|------|---------|
+| tsinghua_insc_faculty | 清华大学 | 404 Not Found | URL已失效，需更新或移除 |
+| tsinghua_ias_faculty | 清华大学 | Connection Error | 域名无法访问 |
+| tsinghua_futurelab_faculty | 清华大学 | 404 Not Found | URL已失效，需更新或移除 |
+
+#### 选择器不匹配 (4个)
+
+| source_id | 学校 | 原因 | 建议措施 |
+|-----------|------|------|---------|
+| pku_icst_faculty | 北京大学 | 0条数据 | 需用Playwright MCP分析页面结构 |
+| pku_ic_faculty | 北京大学 | 0条数据 | 需用Playwright MCP分析页面结构 |
+| pku_ss_faculty | 北京大学 | 0条数据 | 需用Playwright MCP分析页面结构 |
+| pku_cfcs_faculty | 北京大学 | 0条数据 | 需用Playwright MCP分析页面结构 |
+
+#### 待测试 (73个)
+
+其余 73 个信源（上交/复旦/南大/中科大/浙大/人大等）尚未测试，需批量验证。
+
+### 技术改进
+
+**faculty_crawler.py 增强 (2026-02-27):**
+- 支持 `<p>` 标签作为章节标题（之前仅支持 h2/h3/h4）
+- 使得更多中文学术网站的非标准HTML结构可被正确解析
+- 受益信源：tsinghua_cs_faculty, casia_faculty
+
+**heading_sections 模式:**
+```yaml
+detail_selectors:
+  heading_sections:
+    bio: "个人简历"
+    research_areas: "研究方向"
+    education: "教育背景"
+```
+
+### 下一步工作
+
+1. **批量测试剩余73个信源** - 快速识别可用/不可用
+2. **优化核心高校低质量源** - 为 pku_cs/pku_cis/ict_cas 添加 detail_selectors
+3. **修复选择器不匹配源** - 用 Playwright MCP 分析 4 个北大源
+4. **更新 URL 失效源** - 联系学校或查找新 URL
+5. **LLM 富化** - 对已爬取数据进行学术指标补充（Google Scholar/DBLP）

@@ -274,12 +274,15 @@ sources:
     use_playwright: false
     schedule: "weekly"
     priority: 2
-    is_enabled: false  # URL已验证，选择器待确认
+    is_enabled: true  # 已验证，选择器正确，20位教师
     base_url: "https://www.icst.pku.edu.cn"
     faculty_selectors:
-      list_item: "ul li"
+      # 页面结构: ul.m-list > li > a(name) + em(position) + p(bio)
+      list_item: "ul.m-list li"
       name: "a"
       link: "a"
+      position: "em"
+      bio: "p"
     tags: ["faculty", "pku", "cs"]
 
   - id: "pku_ic_faculty"
@@ -292,12 +295,14 @@ sources:
     use_playwright: false
     schedule: "weekly"
     priority: 2
-    is_enabled: false  # URL已验证，选择器待确认
+    is_enabled: true  # 已验证，选择器正确，27位教师
     base_url: "https://ic.pku.edu.cn"
     faculty_selectors:
-      list_item: "ul li"
+      # 页面结构: ul.list03 > li > a(name+photo) + generic(position)
+      list_item: "ul.list03 li"
       name: "a"
       link: "a"
+      photo: "img"
     tags: ["faculty", "pku", "ic"]
 
   - id: "pku_ss_faculty"
@@ -310,11 +315,12 @@ sources:
     use_playwright: false
     schedule: "weekly"
     priority: 2
-    is_enabled: false  # URL已验证，选择器待确认
+    is_enabled: true  # 已验证，选择器正确，多个分类教师
     base_url: "https://ss.pku.edu.cn"
     faculty_selectors:
-      list_item: "ul li"
-      name: "a"
+      # 页面结构: list > listitem > link(name) 或 generic(name)
+      list_item: "div[class*='v_news_content'] ul li"
+      name: "a, generic"
       link: "a"
     tags: ["faculty", "pku", "se"]
 
@@ -328,12 +334,14 @@ sources:
     use_playwright: false
     schedule: "weekly"
     priority: 2
-    is_enabled: false  # URL已验证，选择器待确认
+    is_enabled: true  # 已验证，选择器正确，15位教学科研人员
     base_url: "https://cfcs.pku.edu.cn"
     faculty_selectors:
-      list_item: "ul li"
+      # 页面结构: generic > list > listitem > link(name+photo) + generic(position+bio)
+      list_item: "div[class*='v_news_content'] ul li"
       name: "a"
       link: "a"
+      photo: "img"
     tags: ["faculty", "pku", "cs", "ai"]
 
   # ===== 上海交通大学（扩充）=====

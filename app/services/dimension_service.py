@@ -12,6 +12,7 @@ DIMENSION_NAMES = {
     "universities": "对高校",
     "events": "对日程",
     "personnel": "对人事",
+    "university_faculty": "高校师资",
 }
 
 
