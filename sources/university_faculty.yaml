@@ -712,7 +712,7 @@ sources:
   university: 中国科学技术大学
   department: 信息科学技术学院（电子工程与信息科学系）
   # SIST is a portal; faculty are hosted on sub-dept sites.
-  # Using EEIS (电子工程与信息科学系) professors page — page 1 only (8 cards per page, 8 pages total)
+  # Using EEIS (电子工程与信息科学系) professors page — 8 per page, 59 total, 8 pages
   url: http://eeis.ustc.edu.cn/2648/list.htm
   crawl_method: faculty
   use_playwright: false
@@ -720,6 +720,8 @@ sources:
   priority: 2
   is_enabled: true
   base_url: http://eeis.ustc.edu.cn
+  max_pages: 8
+  next_page_text: "下一页"
   faculty_selectors:
     list_item: div.card
     name: .card-title
@@ -760,17 +762,26 @@ sources:
   group: zju
   university: 浙江大学
   department: 计算机学院
-  url: https://www.cs.zju.edu.cn/csen/28085/list.htm
+  # 英文版 /csen/28085 在开发环境不可访问（ECONNREFUSED），服务器环境可访问
+  # 尝试中文版 URL，使用 Playwright 渲染以应对可能的 JS 加载
+  url: https://www.cs.zju.edu.cn/23779/list.htm
   crawl_method: faculty
-  use_playwright: false
+  use_playwright: true
+  wait_for: "ul li a"
+  wait_timeout: 20000
   schedule: weekly
   priority: 3
-  is_enabled: false
+  is_enabled: true
   base_url: https://www.cs.zju.edu.cn
   faculty_selectors:
     list_item: ul li
     name: a
     link: a
+  detail_selectors:
+    email: "a[href^='mailto:']"
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
   tags:
   - faculty
   - zju
@@ -781,16 +792,12 @@ sources:
   university: 浙江大学
   department: 网络空间安全学院
   url: https://icsr.zju.edu.cn/szdw/list.htm
-  crawl_method: faculty
-  use_playwright: false
+  # 使用自定义 Parser（富文本表格 + 文本解析），因为页面超链接全部指向同一 URL（网站 bug）
+  crawler_class: zju_cyber_faculty
   schedule: weekly
   priority: 3
-  is_enabled: false
+  is_enabled: true
   base_url: https://icsr.zju.edu.cn
-  faculty_selectors:
-    list_item: li.news
-    name: span.news_title a
-    link: span.news_title a
   tags:
   - faculty
   - zju
@@ -800,17 +807,26 @@ sources:
   group: zju
   university: 浙江大学
   department: 软件学院
+  # 开发环境不可访问（ECONNREFUSED），服务器环境可访问
+  # 使用 Playwright 渲染以应对可能的 JS 加载
   url: https://www.zjuse.zju.edu.cn/szdw/list.htm
   crawl_method: faculty
-  use_playwright: false
+  use_playwright: true
+  wait_for: "ul li a"
+  wait_timeout: 20000
   schedule: weekly
   priority: 3
-  is_enabled: false
+  is_enabled: true
   base_url: https://www.zjuse.zju.edu.cn
   faculty_selectors:
     list_item: ul li
     name: a
     link: a
+  detail_selectors:
+    email: "a[href^='mailto:']"
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
   tags:
   - faculty
   - zju
@@ -821,16 +837,17 @@ sources:
   university: 中国科学院
   department: 软件研究所
   url: http://www.iscas.ac.cn/rcdw2016/yjyzgjgcs2016/
-  crawl_method: faculty
-  use_playwright: false
+  # 使用自定义 Parser（纯文本名单 + 可选详情页）
+  crawler_class: iscas_faculty
   schedule: weekly
   priority: 2
-  is_enabled: false
+  is_enabled: true
   base_url: http://www.iscas.ac.cn
-  faculty_selectors:
-    list_item: ul li
-    name: a
-    link: a
+  # detail_selectors 用于可选的详情页解析
+  detail_selectors:
+    bio: "div.intro, div.bio"
+    research_areas: "div.research"
+    email: "a[href^='mailto:']"
   tags:
   - faculty
   - iscas
@@ -1033,26 +1050,31 @@ sources:
   - life
   - bio
 - id: tsinghua_sigs_faculty
-  name: 清华大学数据与信息研究院（深圳）-师资
+  name: 清华大学深圳国际研究生院-师资队伍
   group: tsinghua
   university: 清华大学
-  department: 数据与信息研究院（深圳）
-  url: https://www.sigs.tsinghua.edu.cn/szdw.htm
+  department: 深圳国际研究生院
+  # 原 /szdw.htm 404；实际在 /7644/list.htm，但 AJAX + GsapAnimate 动态加载
+  # Playwright 等待后仍无法获取教师列表（需特定 POST 请求或 filter 交互触发）
+  # 需开发自定义 Parser 来模拟 AJAX 请求获取数据
+  url: https://www.sigs.tsinghua.edu.cn/7644/list.htm
   crawl_method: faculty
-  use_playwright: false
+  use_playwright: true
+  wait_for: ".list-item"
+  wait_timeout: 15000
   schedule: weekly
   priority: 3
   is_enabled: false
   base_url: https://www.sigs.tsinghua.edu.cn
   faculty_selectors:
-    list_item: ul li
+    list_item: ".list-item"
     name: a
     link: a
+    photo: img
   tags:
   - faculty
   - tsinghua
   - shenzhen
-  - data
 - id: tsinghua_iaiig_faculty
   name: 清华大学人工智能国际治理研究院-研究员
   group: tsinghua

@@ -1,6 +1,6 @@
 # Information Crawler — AI 开发上下文
 
-中关村人工智能研究院信息监测系统。134 信源（109 启用）× 9 维度，5 种模板爬虫 + 8 个自定义 Parser，v1 API 27 端点（含 intel 业务智能 13 端点）。
+中关村人工智能研究院信息监测系统。181 信源（138 启用）× 10 维度，6 种模板爬虫 + 11 个自定义 Parser，v1 API 27 端点（含 intel 业务智能 13 端点）。
 82 个启用信源已配置 detail_selectors 或 RSS/API 自带正文，可自动获取文章正文（content 字段）。
 技术栈：FastAPI + Local JSON Storage + APScheduler 3.x + httpx + BS4 + Playwright。
 
@@ -151,6 +151,9 @@ crawler_class: semantic_scholar  → app/crawlers/parsers/semantic_scholar.py
 crawler_class: twitter_kol       → app/crawlers/parsers/twitter_kol.py
 crawler_class: twitter_search    → app/crawlers/parsers/twitter_search.py
 crawler_class: hunyuan_api      → app/crawlers/parsers/hunyuan_api.py
+crawler_class: sjtu_cs_faculty   → app/crawlers/parsers/sjtu_cs_faculty.py
+crawler_class: iscas_faculty     → app/crawlers/parsers/iscas_faculty.py
+crawler_class: zju_cyber_faculty → app/crawlers/parsers/zju_cyber_faculty.py
 ```
 
 **维度 → YAML 文件**：
@@ -163,6 +166,7 @@ industry        → sources/industry.yaml        (10 源, 6 启用)
 universities    → sources/universities.yaml    (55 源, 46 启用)
 events          → sources/events.yaml          (6 源, 4 启用)
 personnel       → sources/personnel.yaml       (4 源, 4 启用)
+university_faculty → sources/university_faculty.yaml (47 源, 34 启用)
 twitter         → sources/twitter.yaml         (7 源, 7 启用, 需 API key)
                   ↳ 按 dimension 分配: technology 4源, industry 1源, talent 1源, sentiment 1源
 ```
