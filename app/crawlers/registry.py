@@ -29,6 +29,7 @@ _CUSTOM_MAP: dict[str, str] = {
     "twitter_search": "app.crawlers.parsers.twitter_search.TwitterSearchCrawler",
     "hunyuan_api": "app.crawlers.parsers.hunyuan_api.HunyuanAPICrawler",
     "sjtu_cs_faculty": "app.crawlers.parsers.sjtu_cs_faculty.SJTUCSFacultyCrawler",
+    "sjtu_ai_faculty": "app.crawlers.parsers.sjtu_ai_faculty.SJTUAIFacultyCrawler",
     "iscas_faculty": "app.crawlers.parsers.iscas_faculty.ISCASFacultyCrawler",
     "zju_cyber_faculty": "app.crawlers.parsers.zju_cyber_faculty.ZJUCyberFacultyCrawler",
 }

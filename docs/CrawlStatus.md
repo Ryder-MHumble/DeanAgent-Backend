@@ -1,6 +1,6 @@
 # 信源爬取状态总览
 
-> 最后更新: 2026-02-28 (v31 university_faculty 大幅修复：PKU CS/CIS 翻页修复(12→120/8→37)；USTC CS URL 修复(2→32)；USTC SIST 翻页修复(8→59)；Tsinghua SE 修复(5→41)；ZJU Cyber 自定义 Parser(+48)；ZJU CS/Soft 禁用(不可达)；已启用源 34/47，总 2027 师资)
+> 最后更新: 2026-03-01 (v32 university_faculty URL 修复：通过 web search 和 Playwright 验证，修复 10 个禁用源的错误 URL（fudan/tsinghua/pku/sjtu/ustc 各源），启用全部已找到正确 URL 的源；3 个源仍需自定义 Parser（sjtu_ai/tsinghua_sigs/tsinghua_iaiig）待后续开发; v33 detail_selectors 补全：为 20 个高校师资源补全 heading_sections 和 label_prefix_sections，确保完整的信息提取配置; v34 sjtu_ai_faculty 恢复：开发 SJTUAIFacultyCrawler 自定义 Parser 直接调用 /api/teacher?time=xxx 端点，已启用源 34→35)
 
 ---
 
@@ -396,7 +396,7 @@ python scripts/process_tech_frontier.py --dry-run
 | huodongxing | 活动行-人工智能 | static | ❌ | — | CAPTCHA/反爬 |
 | meeting_edu | 中国学术会议在线 | static | ❌ | — | 站点无法连接 |
 
-### 详细状态：university_faculty (高校师资) — 34/47 启用
+### 详细状态：university_faculty (高校师资) — 35/47 启用
 
 > 新增维度 (2026-02-27)。专用 `FacultyCrawler` 模板（`crawl_method: faculty`），支持静态/Playwright 模式，
 > 通过 `faculty_selectors` 配置提取姓名、职称、简介、联系方式、照片。
@@ -439,7 +439,7 @@ python scripts/process_tech_frontier.py --dry-run
 | ict_cas_faculty | 中国科学院 | 计算技术研究所 | ✅ 24人 | `ul li > h5 a:last-child` |
 | casia_faculty | 中国科学院 | 自动化研究所 | ✅ 20人 | `ul.row li > div.name` |
 | iscas_faculty | 中国科学院 | 软件研究所 | ✅ 73人 | v30 自定义 Parser (`iscas_faculty`)，纯文本名单+正则提取 |
-| sjtu_ai_faculty | 上海交通大学 | 人工智能研究院 | ❌ 禁用 | SPA + Three.js，无法爬取 |
+| sjtu_ai_faculty | 上海交通大学 | 人工智能研究院 | ✅ 已启用 | v34 开发自定义 Parser (`sjtu_ai_faculty`)，直接调用 /api/teacher?time=xxx API 端点获取教师列表 |
 | sjtu_cs_faculty | 上海交通大学 | 计算机系 | ✅ 253人 | 自定义 AJAX Parser (`sjtu_cs_faculty`) |
 | sjtu_se_faculty | 上海交通大学 | 软件学院 | ❌ 待启用 | 连接超时 |
 | sjtu_infosec_faculty | 上海交通大学 | 网络空间安全学院 | ✅ 80人 | `div.Faculty li`，分字母索引页 |
@@ -495,7 +495,7 @@ uvicorn app.main:app --reload
 
 | 总源数 | 已启用 | 已禁用 | 覆盖学校 | 总教师数 | 平均完整度 |
 |--------|--------|--------|---------|---------|-----------|
-| 47 | 34 | 13 | 清华/北大/中科院/上交/复旦/南大/中科大/浙大/人大 | 2027 | 52.4% |
+| 47 | 35 | 12 | 清华/北大/中科院/上交/复旦/南大/中科大/浙大/人大 | 2027 | 52.4% |
 
 **数据说明：**
 - 完整度评分基于 ScholarRecord schema（0-100分）

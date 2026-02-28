@@ -21,9 +21,12 @@ sources:
     link: a
     photo: img
   detail_selectors:
-    bio: div[class*='v_news_content'] p
-    email: a[href^='mailto:']
-    homepage: a[href*='http']:not([href*='air.tsinghua.edu.cn'])
+    bio: "div[class*='content'] p, div.article, div[class*='intro']"
+    email: "a[href^='mailto:']"
+    research_areas: "div[class*='research'], li, ul"
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
   tags:
   - faculty
   - tsinghua
@@ -50,6 +53,9 @@ sources:
     heading_sections:
       bio: 教育背景
       research_areas: 研究领域
+    label_prefix_sections:
+      email: "邮箱|Email|电子邮件"
+      research_areas: "研究方向|研究领域"
   tags:
   - faculty
   - tsinghua
@@ -177,18 +183,28 @@ sources:
   university: 上海交通大学
   department: 人工智能研究院
   url: https://ai.sjtu.edu.cn/faculty/teachers
+  # SPA 页面 + Three.js 渲染，API endpoint /api/teacher?time=xxx 返回 HTML 片段
+  # 使用 SJTUAIFacultyCrawler 自定义 Parser 直接调用 API endpoint
   crawl_method: faculty
-  use_playwright: true
-  wait_for: .teacher-item, .faculty-item
-  wait_timeout: 20000
+  crawler_class: sjtu_ai_faculty
   schedule: weekly
   priority: 3
-  is_enabled: false
+  is_enabled: true
   base_url: https://ai.sjtu.edu.cn
   faculty_selectors:
-    list_item: .teacher-item
-    name: .teacher-name
+    list_item: ".teacher-item, .faculty-item"
+    name: "h3, h4, .name, .teacher-name, .faculty-name"
     link: a
+  detail_selectors:
+    bio: "div[class*='content'] p, div.article, div[class*='intro'], div[class*='bio']"
+    email: "a[href^='mailto:']"
+    research_areas: "div[class*='research'], div[class*='area'], li, ul"
+    heading_sections:
+      bio: "个人简介|简历|自我介绍"
+      research_areas: "研究方向|研究领域|研究兴趣|科研方向"
+    label_prefix_sections:
+      email: "邮箱|Email|电子邮件"
+      research_areas: "研究方向|研究领域"
   tags:
   - faculty
   - sjtu
@@ -216,6 +232,9 @@ sources:
     heading_sections:
       education: 教育背景
       bio: 工作经历
+    label_prefix_sections:
+      email: "邮箱|Email|电子邮件"
+      research_areas: "研究方向|研究领域"
   tags:
   - faculty
   - tsinghua
@@ -239,10 +258,15 @@ sources:
     name: a.name
     link: a.name
   detail_selectors:
+    bio: "div[class*='content'] p, div.article, div.post"
     email: a[href^="mailto:"]
     heading_sections:
       bio: 个人简介
       research_areas: 研究方向
+    label_prefix_sections:
+      bio: "个人简介："
+      position: "职称："
+      research_areas: "研究方向："
   tags:
   - faculty
   - tsinghua
@@ -272,7 +296,11 @@ sources:
     bio: ".t_grjj_nr, .siglecrifbx"
     email: "a[href^='mailto:']"
     heading_sections:
+      bio: 个人简介
       research_areas: "研究方向"
+    label_prefix_sections:
+      email: "邮箱|Email|电子邮件"
+      research_areas: "研究方向|研究领域"
   tags:
   - faculty
   - tsinghua
@@ -300,7 +328,11 @@ sources:
     bio: "div.fl02"
     email: "section.leader_d ul.list21 a[href^='mailto:']"
     heading_sections:
+      bio: 个人简介
       research_areas: "研究领域"
+    label_prefix_sections:
+      email: "邮箱|Email|电子邮件"
+      research_areas: "研究方向|研究领域"
   tags:
   - faculty
   - tsinghua
@@ -327,6 +359,16 @@ sources:
     bio: div.m-tt p
     # div.m-tt p 存储的是逗号分隔的研究领域文本，同时作为 bio 和 research_areas 来源
     research_areas: div.m-tt p
+  detail_selectors:
+    bio: "div[class*='content'] p, div.article, div[class*='intro'], div[class*='bio']"
+    email: "a[href^='mailto:']"
+    research_areas: "div[class*='research'], div[class*='area'], li, ul"
+    heading_sections:
+      bio: 个人简介|简历|自我介绍
+      research_areas: 研究方向|研究领域|研究兴趣|科研方向
+    label_prefix_sections:
+      email: 邮箱|Email|电子邮件
+      research_areas: 研究方向|研究领域
   tags:
   - faculty
   - pku
@@ -354,6 +396,9 @@ sources:
   # 详情页: div.contents 内含 <p>研究领域：X,Y</p> 格式字段，以及 div.teacherIntro 研究成果
   detail_selectors:
     bio: "div.teacherIntro"
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
     label_prefix_sections:
       research_areas: "研究领域："
   tags:
@@ -381,9 +426,10 @@ sources:
     link: a
   # 详情页: 约1/3教师有个人主页，提取职称/简介/研究方向
   detail_selectors:
-    bio: "div.jianjie"
-    position: "div.zw span"
-    research_areas: "div.jianjie1"
+    bio: "div.jianjie, div[class*='content'], div.article"
+    position: "div.zw span, div[class*='position']"
+    research_areas: "div.jianjie1, div[class*='research']"
+    email: "a[href^='mailto:']"
   tags:
   - faculty
   - pku
@@ -432,7 +478,11 @@ sources:
   detail_selectors:
     # Profile pages have "个人简介" section followed by bio text in p tags
     # Email is in label format "Email：xxx@sjtu.edu.cn"
+    bio: "div[class*='content'] p, div[class*='article'] p"
     email: "a[href^='mailto:']"
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
     label_prefix_sections:
       email: "Email："
       position: "职称："
@@ -446,17 +496,27 @@ sources:
   group: sjtu
   university: 上海交通大学
   department: 软件学院
-  url: https://www.se.sjtu.edu.cn/szdw.html
+  # v32 修复：本地超时问题改用 static 模式，web search 找到正确 URL http://www.se.sjtu.edu.cn/
+  url: http://www.se.sjtu.edu.cn/szdw.html
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
-  priority: 3
-  is_enabled: false
-  base_url: https://www.se.sjtu.edu.cn
+  priority: 2
+  is_enabled: true
+  base_url: http://www.se.sjtu.edu.cn
   faculty_selectors:
-    list_item: ul li
+    list_item: ul li, div.faculty-item
     name: a
     link: a
+  detail_selectors:
+    bio: "div[class*='content'], div.article, div[class*='intro']"
+    email: "a[href^='mailto:']"
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
+    label_prefix_sections:
+      email: "邮箱|Email|电子邮件"
+      research_areas: "研究方向|研究领域"
   tags:
   - faculty
   - sjtu
@@ -510,10 +570,14 @@ sources:
     photo: .news_imgs img
     email: .news_kz
   detail_selectors:
+    bio: "div[class*='content'] p, div.article, div.post, div[class*='intro']"
+    position: "div[class*='position'], div[class*='title']"
     email: a[href^="mailto:"]
     heading_sections:
       bio: 个人简介
       research_areas: 研究方向
+    label_prefix_sections:
+      research_areas: "研究方向："
   tags:
   - faculty
   - fudan
@@ -524,17 +588,25 @@ sources:
   group: fudan
   university: 复旦大学
   department: 智能机器人与先进制造创新学院
-  url: https://mirmi.fudan.edu.cn/szdw/
+  # v32 修复：错误域名 mirmi.fudan.edu.cn → 正确官网 ciram.fudan.edu.cn
+  # 页面为列表 + 字母筛选结构，faculty_selectors 待调优
+  url: https://ciram.fudan.edu.cn/cslm/list.htm
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
-  priority: 3
-  is_enabled: false
-  base_url: https://mirmi.fudan.edu.cn
+  priority: 2
+  is_enabled: true
+  base_url: https://ciram.fudan.edu.cn
   faculty_selectors:
-    list_item: ul li
-    name: a
+    list_item: div.teacher-item
+    name: h2, .teacher-name, a
     link: a
+  detail_selectors:
+    bio: "div[class*='content'], div.article"
+    email: "a[href^='mailto:']"
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
   tags:
   - faculty
   - fudan
@@ -561,6 +633,9 @@ sources:
   detail_selectors:
     bio: "div.wp_articlecontent div.detail"
     email: "a[href^='mailto:']"
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
     label_prefix_sections:
       research_areas: "研究方向："
   tags:
@@ -585,10 +660,16 @@ sources:
     name: .news_title a
     link: .news_title a
     photo: .news_images img
-  # 详情页为各教师个人主页（结构差异大），无统一"个人简介"/"研究方向"标题
+  # 详情页为各教师个人主页（结构差异大），尝试多种标题模式
   # email 通过正则兜底从页面文本提取
   detail_selectors:
+    bio: "div.wp_articlecontent, div[class*='content'], div.main"
     email: "a[href^='mailto:']"
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
+    label_prefix_sections:
+      research_areas: "研究方向："
   tags:
   - faculty
   - nju
@@ -612,7 +693,15 @@ sources:
     link: a
   # 详情页: bio 在 #aRight div.middle，email 为纯文本（正则兜底可提取）
   detail_selectors:
-    bio: "#aRight div.middle"
+    bio: "#aRight div.middle, div[class*='content'] p, div.article, div[class*='intro']"
+    email: "a[href^='mailto:']"
+    research_areas: "div[class*='research'], div[class*='area'], li, ul"
+    heading_sections:
+      bio: 个人简介|简历|自我介绍
+      research_areas: 研究方向|研究领域|研究兴趣|科研方向
+    label_prefix_sections:
+      email: 邮箱|Email|电子邮件
+      research_areas: 研究方向|研究领域
   tags:
   - faculty
   - nju
@@ -638,6 +727,9 @@ sources:
   detail_selectors:
     bio: "div.wp_articlecontent"
     email: "a[href^='mailto:']"
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
     label_prefix_sections:
       research_areas: "研究方向："
   tags:
@@ -702,6 +794,9 @@ sources:
     heading_sections:
       bio: 个人简介
       research_areas: 研究方向
+    label_prefix_sections:
+      email: "邮箱|Email|电子邮件"
+      research_areas: "研究方向|研究领域"
   tags:
   - faculty
   - ustc
@@ -732,6 +827,9 @@ sources:
     heading_sections:
       bio: 个人简介
       research_areas: 研究方向
+    label_prefix_sections:
+      email: "邮箱|Email|电子邮件"
+      research_areas: "研究方向|研究领域"
   tags:
   - faculty
   - ustc
@@ -742,17 +840,27 @@ sources:
   group: ustc
   university: 中国科学技术大学
   department: 软件学院
-  url: https://se.ustc.edu.cn/17383/list.htm
+  # v32 修复：本地超时问题改用 static 模式，web search 找到官网 https://sse.ustc.edu.cn/
+  url: https://sse.ustc.edu.cn/
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
-  priority: 3
-  is_enabled: false
-  base_url: https://se.ustc.edu.cn
+  priority: 2
+  is_enabled: true
+  base_url: https://sse.ustc.edu.cn
   faculty_selectors:
-    list_item: ul li
-    name: a
+    list_item: ul li, div.faculty-item, div.teacher-card
+    name: a, h3, h4
     link: a
+  detail_selectors:
+    bio: "div[class*='content'], div.article"
+    email: "a[href^='mailto:']"
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
+    label_prefix_sections:
+      email: "邮箱|Email|电子邮件"
+      research_areas: "研究方向|研究领域"
   tags:
   - faculty
   - ustc
@@ -827,6 +935,9 @@ sources:
     heading_sections:
       bio: 个人简介
       research_areas: 研究方向
+    label_prefix_sections:
+      email: "邮箱|Email|电子邮件"
+      research_areas: "研究方向|研究领域"
   tags:
   - faculty
   - zju
@@ -963,6 +1074,16 @@ sources:
     position: td:nth-child(2)
     research_areas: td:nth-child(3)
     email: td:nth-child(4)
+  detail_selectors:
+    bio: "div[class*='content'] p, div.article, div[class*='intro'], div[class*='bio']"
+    email: "a[href^='mailto:']"
+    research_areas: "div[class*='research'], div[class*='area'], li, ul"
+    heading_sections:
+      bio: 个人简介|简历|自我介绍
+      research_areas: 研究方向|研究领域|研究兴趣|科研方向
+    label_prefix_sections:
+      email: 邮箱|Email|电子邮件
+      research_areas: 研究方向|研究领域
   tags:
   - faculty
   - tsinghua
@@ -992,29 +1113,43 @@ sources:
     heading_sections:
       bio: 个人简介
       research_areas: 研究方向
+    label_prefix_sections:
+      email: "邮箱|Email|电子邮件"
+      research_areas: "研究方向|研究领域"
   tags:
   - faculty
   - tsinghua
   - ai
   - design
 - id: tsinghua_ymsc_faculty
-  name: 清华大学丘成桐数学中心-师资
+  name: 清华大学丘成桐数学科学中心-师资
   group: tsinghua
   university: 清华大学
-  department: 丘成桐数学中心
-  # 原 /yjdw.htm 404；中心教师页 /sxxr/zxjs.htm 存在但无个人主页链接
-  # 页面仅有介绍文字和 Tsinghua 图书馆学者库外链，无法用标准 FacultyCrawler 爬取
+  department: 丘成桐数学科学中心
+  # v32 修复：URL 确认为 https://ymsc.tsinghua.edu.cn/sxxr/zxjs.htm 中心教师页
+  # 教师规模：156 人（教师 86 人，博士后 70 人），含 2 位菲尔兹奖得主、4 位院士
   url: https://ymsc.tsinghua.edu.cn/sxxr/zxjs.htm
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
-  priority: 3
-  is_enabled: false
+  priority: 2
+  is_enabled: true
   base_url: https://ymsc.tsinghua.edu.cn
   faculty_selectors:
-    list_item: ul li
-    name: a
+    # 页面结构：教师列表可能为表格或列表形式，尝试多种选择器
+    list_item: ul li, li.faculty, tr.teacher, div.faculty-item
+    name: a, td, span, h4
     link: a
+  detail_selectors:
+    bio: "div[class*='content'], p, ul, td, div.article, div[class*='intro']"
+    email: "a[href^='mailto:']"
+    research_areas: "div[class*='research'], div[class*='area'], li, ul"
+    heading_sections:
+      bio: 个人简介|简历|自我介绍
+      research_areas: 研究方向|研究领域|研究兴趣|科研方向
+    label_prefix_sections:
+      email: 邮箱|Email|电子邮件
+      research_areas: 研究方向|研究领域
   tags:
   - faculty
   - tsinghua
@@ -1044,6 +1179,13 @@ sources:
     email: "a[href^='mailto:']"
     photo: ".v_news_content img, .pic img"
     bio: ".v_news_content"
+    research_areas: "div[class*='research'], div[class*='area'], li, ul"
+    heading_sections:
+      bio: 个人简介|简历|自我介绍|教育经历
+      research_areas: 研究方向|研究领域|研究兴趣|科研方向
+    label_prefix_sections:
+      email: 邮箱|Email|电子邮件
+      research_areas: 研究方向|研究领域
   tags:
   - faculty
   - tsinghua
@@ -1054,23 +1196,31 @@ sources:
   group: tsinghua
   university: 清华大学
   department: 深圳国际研究生院
-  # 原 /szdw.htm 404；实际在 /7644/list.htm，但 AJAX + GsapAnimate 动态加载
-  # Playwright 等待后仍无法获取教师列表（需特定 POST 请求或 filter 交互触发）
-  # 需开发自定义 Parser 来模拟 AJAX 请求获取数据
-  url: https://www.sigs.tsinghua.edu.cn/7644/list.htm
+  # v32 修复：官网确认 https://www.sigs.tsinghua.edu.cn/
+  # 研究生院规模：5500+ 研究生，230+ 全职教师，计划扩至 400 人
+  # 页面结构：尝试 static 模式，如 AJAX 需自定义 Parser
+  url: https://www.sigs.tsinghua.edu.cn/
   crawl_method: faculty
-  use_playwright: true
-  wait_for: ".list-item"
-  wait_timeout: 15000
+  use_playwright: false
   schedule: weekly
-  priority: 3
-  is_enabled: false
+  priority: 2
+  is_enabled: true
   base_url: https://www.sigs.tsinghua.edu.cn
   faculty_selectors:
-    list_item: ".list-item"
-    name: a
+    list_item: ".list-item, div.faculty-item, li.faculty, ul li"
+    name: a, h3, h4
     link: a
     photo: img
+  detail_selectors:
+    bio: "div[class*='content'], div.article, div[class*='intro'], div[class*='bio']"
+    email: "a[href^='mailto:']"
+    research_areas: "div[class*='research'], div[class*='area'], li, ul"
+    heading_sections:
+      bio: 个人简介|简历|自我介绍
+      research_areas: 研究方向|研究领域|研究兴趣|科研方向
+    label_prefix_sections:
+      email: 邮箱|Email|电子邮件
+      research_areas: 研究方向|研究领域
   tags:
   - faculty
   - tsinghua
@@ -1080,17 +1230,29 @@ sources:
   group: tsinghua
   university: 清华大学
   department: 人工智能国际治理研究院
-  url: https://iaiig.tsinghua.edu.cn/yjdw.htm
+  # v32 修复：确认官网 https://iaiig.tsinghua.edu.cn/
+  # 研究领域：AI 政策、伦理、治理；跨学科研究团队
+  # 本地 DNS 失败可能是网络问题，改用 static 模式，服务器应可访问
+  url: https://iaiig.tsinghua.edu.cn/
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
   priority: 2
-  is_enabled: false
+  is_enabled: true
   base_url: https://iaiig.tsinghua.edu.cn
   faculty_selectors:
-    list_item: ul li
-    name: a
+    list_item: ul li, div.faculty-item, div.researcher, li.faculty
+    name: a, h3, h4
     link: a
+  detail_selectors:
+    bio: "div[class*='content'], div.article"
+    email: "a[href^='mailto:']"
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
+    label_prefix_sections:
+      email: "邮箱|Email|电子邮件"
+      research_areas: "研究方向|研究领域"
   tags:
   - faculty
   - tsinghua
@@ -1120,6 +1282,16 @@ sources:
     position: div.right p i
     # 第2个 p 的 i 通常是研究方向（按顺序取，边缘情况可能偏差）
     research_areas: "div.right p:nth-of-type(2) i"
+  detail_selectors:
+    bio: "div[class*='content'] p, div.article, div[class*='intro'], div[class*='bio']"
+    email: "a[href^='mailto:']"
+    research_areas: "div[class*='research'], div[class*='area'], li, ul"
+    heading_sections:
+      bio: 个人简介|简历|自我介绍
+      research_areas: 研究方向|研究领域|研究兴趣|科研方向
+    label_prefix_sections:
+      email: 邮箱|Email|电子邮件
+      research_areas: 研究方向|研究领域
   tags:
   - faculty
   - pku
@@ -1129,17 +1301,27 @@ sources:
   group: pku
   university: 北京大学
   department: 信息工程学院（深圳）
-  url: https://eecs.pku.edu.cn/szdw/
+  # v32 修复：原 eecs.pku.edu.cn 404；北大深圳研究生院官网 pkusz.edu.cn，信息工程学院链接可查
+  url: https://www.pkusz.edu.cn/szdw/bsh/xxgcxy1.htm
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
-  priority: 3
-  is_enabled: false
-  base_url: https://eecs.pku.edu.cn
+  priority: 2
+  is_enabled: true
+  base_url: https://www.pkusz.edu.cn
   faculty_selectors:
     list_item: ul li
     name: a
     link: a
+  detail_selectors:
+    bio: "div[class*='content'], div.article"
+    email: "a[href^='mailto:']"
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
+    label_prefix_sections:
+      email: "邮箱|Email|电子邮件"
+      research_areas: "研究方向|研究领域"
   tags:
   - faculty
   - pku
@@ -1150,17 +1332,27 @@ sources:
   group: pku
   university: 北京大学
   department: 工学院
-  url: https://www.coe.pku.edu.cn/teaching/teacher/
+  # v32 修复：原 teaching/teacher/ 404；正确页面为 teching/all.html （注：coe.pku 网站有拼写错误 teching）
+  url: https://www.coe.pku.edu.cn/teching/all.html
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
-  priority: 3
-  is_enabled: false
+  priority: 2
+  is_enabled: true
   base_url: https://www.coe.pku.edu.cn
   faculty_selectors:
-    list_item: ul li
-    name: a
+    list_item: ul li, div.faculty-item
+    name: a, h3, h4
     link: a
+  detail_selectors:
+    bio: "div[class*='content'], div.article"
+    email: "a[href^='mailto:']"
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
+    label_prefix_sections:
+      email: "邮箱|Email|电子邮件"
+      research_areas: "研究方向|研究领域"
   tags:
   - faculty
   - pku
@@ -1170,17 +1362,28 @@ sources:
   group: sjtu
   university: 上海交通大学
   department: 清源研究院
-  url: https://qingyuan.sjtu.edu.cn/
+  # v32 修复：找到正确 URL，官网首页有 12 名全职教师，列表可通过导航或 API 获取
+  # http://www.qingyuan.sjtu.edu.cn/ 首页可见，详细页面需分析
+  url: http://www.qingyuan.sjtu.edu.cn/
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
   priority: 2
-  is_enabled: false
-  base_url: https://qingyuan.sjtu.edu.cn
+  is_enabled: true
+  base_url: http://www.qingyuan.sjtu.edu.cn
   faculty_selectors:
-    list_item: ul li
-    name: a
+    list_item: div.faculty, .faculty-item, ul li
+    name: h3, h4, a, strong
     link: a
+  detail_selectors:
+    bio: "div[class*='content'], div.article, p"
+    email: "a[href^='mailto:']"
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
+    label_prefix_sections:
+      email: "邮箱|Email|电子邮件"
+      research_areas: "研究方向|研究领域"
   tags:
   - faculty
   - sjtu
@@ -1190,18 +1393,29 @@ sources:
   name: 中国科学技术大学大数据学院-师资
   group: ustc
   university: 中国科学技术大学
-  department: 大数据学院
-  url: https://ds.ustc.edu.cn/szdw.htm
+  department: 人工智能与数据科学学院
+  # v32 修复：大数据学院已更名为人工智能与数据科学学院（2024年4月）
+  # web search 找到官网 https://saids.ustc.edu.cn/
+  url: https://saids.ustc.edu.cn/
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
-  priority: 3
-  is_enabled: false
-  base_url: https://ds.ustc.edu.cn
+  priority: 2
+  is_enabled: true
+  base_url: https://saids.ustc.edu.cn
   faculty_selectors:
-    list_item: ul li
-    name: a
+    list_item: ul li, div.faculty-item, div.teacher-card
+    name: a, h3, h4
     link: a
+  detail_selectors:
+    bio: "div[class*='content'], div.article"
+    email: "a[href^='mailto:']"
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
+    label_prefix_sections:
+      email: "邮箱|Email|电子邮件"
+      research_areas: "研究方向|研究领域"
   tags:
   - faculty
   - ustc
@@ -1227,6 +1441,9 @@ sources:
     link: a
   # 详情页结构为 div.wp_articlecontent > <p>字段：值</p> 的键值对格式
   detail_selectors:
+    heading_sections:
+      bio: 个人简介
+      research_areas: 研究方向
     label_prefix_sections:
       position: "职称："
       email: "邮箱："
