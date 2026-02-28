@@ -73,6 +73,9 @@ class ArticleSearchParams(BaseModel):
 
     dimension: str | None = None
     source_id: str | None = None
+    source_ids: str | None = None
+    source_name: str | None = None
+    source_names: str | None = None
     tags: list[str] | None = None
     keyword: str | None = None
     date_from: datetime | None = None

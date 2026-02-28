@@ -10,6 +10,7 @@ from typing import Any
 from app.config import BASE_DIR
 from app.schemas.article import ArticleSearchParams, ArticleUpdate
 from app.schemas.common import PaginatedResponse
+from app.services.intel.shared import parse_source_filter
 from app.services.json_reader import get_all_articles
 
 logger = logging.getLogger(__name__)
@@ -103,14 +104,24 @@ async def list_articles(params: ArticleSearchParams) -> PaginatedResponse:
             except ValueError:
                 pass
 
+    # 应用信源筛选（优先筛选，减少后续处理量）
+    source_filter = parse_source_filter(
+        params.source_id, params.source_ids, params.source_name, params.source_names
+    )
+
+    # 如果有 source_filter，不传 source_id 给 get_all_articles，之后手动过滤
     items = get_all_articles(
         dimension=params.dimension,
-        source_id=params.source_id,
+        source_id=None if source_filter else params.source_id,
         keyword=params.keyword,
         tags=params.tags,
         date_from=date_from,
         date_to=date_to,
     )
+
+    # 手动应用信源过滤
+    if source_filter:
+        items = [item for item in items if item.get("source_id") in source_filter]
 
     # Apply annotations
     briefs = [_to_brief(item) for item in items]
