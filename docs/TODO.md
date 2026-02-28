@@ -1,6 +1,6 @@
 # 后续任务清单
 
-> 最后更新: 2026-02-25 (v21: 科技前沿模块 — 8 主题分类 + 热度趋势 + 9 阶段 Pipeline)
+> 最后更新: 2026-02-27 (v25: Feed API 信源过滤 — 所有 feed 类 API 支持 4 参数信源筛选：source_id/source_ids/source_name/source_names，精确+模糊匹配，覆盖 policy/personnel/university/tech_frontier/articles 6 个端点)
 > 基于前端 (Dean-Agent) 需求反推的优先级排序
 
 ---
@@ -52,7 +52,7 @@
 - [ ] ArXiv affiliation 变更检测 — 人才回流信号
 - [ ] IT桔子/企查查 — 更全面投融资数据
 - [ ] 补充高校 HR/组织部页面 (15 所, snapshot 模式)
-- [ ] 补充 AI 院系官网 (8 个)
+- [x] 补充 AI 院系官网 (8 个) — v22: 新建 university_faculty 维度，FacultyCrawler 模板；v23: 扩充至 35 个信源；v24: 再补充 17 个，共 52 个信源，覆盖清华 17 个单位/北大 9 个/中科院 3 所/交大 4 个/复旦 2 个/南大 5 个/中科大 5 个/浙大 3 个/人大 2 个，URL 已从各高校官网验证，选择器待逐一测试启用
 - [ ] IEEE Fellow / ACM Fellow 年度公告源（awards.acm.org / ieee.org 为静态年度页面，非持续更新源）
 - [ ] 微信公众号方案（搜狗微信搜索 / 公号后台）
 - [x] ~~v16 信源拓展~~ — 新增 17 源 + 恢复 3 源：technology +6 RSS/ArXiv +2 恢复 (OpenAI/Anthropic blog)、national_policy +2 (网信办/市监总局)、beijing_policy +2 新 +1 恢复 (经信局/知产局/发改委)、events +2 (CCF/CAAI)、industry +2 (创业邦/信通院)、personnel +1 (中科院)、universities +2 (CESI/信工所)
@@ -62,6 +62,7 @@
 
 - [x] ~~政策机会匹配~~ — v14: /api/v1/intel/policy/opportunities 端点 + 规则引擎自动检测机会（资金/截止日期正则）+ LLM 深度分析
 - [x] ~~科技前沿数据 API~~ — v21: 8 主题分类（具身智能/多模态/AI Agent/AI4Science/端侧AI/大语言模型/AI安全/生成式AI应用），聚合 technology+industry+twitter+universities 4 维度 56 信源，规则引擎关键词匹配 + 热度趋势计算，5 个 API 端点 (/api/v1/intel/tech-frontier/topics|opportunities|stats|signals)
+- [x] ~~Feed API 信源过滤~~ — v25: 所有 feed 类 API 支持 4 参数信源筛选（source_id/source_ids/source_name/source_names），精确+模糊匹配，覆盖 policy/feed, personnel/feed, personnel/enriched-feed, university/feed, tech_frontier/signals, articles/ 共 6 个端点，共享工具 parse_source_filter + resolve_source_ids_by_names，13 个单元测试全通过
 - [ ] 学术流动分析 (LLM)
 - [ ] 内参机会推荐 (LLM)
 

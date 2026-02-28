@@ -86,10 +86,21 @@
 
 **API 返回异常：**
 → `app/api/v1/{articles,sources,dimensions,health}.py`（核心端点）
-→ `app/api/v1/intel/{policy,personnel}.py`（业务智能端点）
+→ `app/api/v1/intel/{policy,personnel,tech_frontier,university}.py`（业务智能端点）
 → `app/services/{article,source,crawl,dimension}_service.py`（核心业务逻辑）
-→ `app/services/intel/{policy,personnel}/service.py`（业务智能逻辑）
+→ `app/services/intel/{policy,personnel,tech_frontier,university}/service.py`（业务智能逻辑）
+→ `app/services/intel/shared.py`（共享工具：parse_source_filter 信源筛选、keyword_score 等）
 → `app/schemas/`（请求/响应校验）
+
+**信源过滤不生效：**
+→ `app/services/intel/shared.py` 的 `parse_source_filter()` 和 `resolve_source_ids_by_names()`
+→ 所有 feed 类 API 支持 4 个信源过滤参数：
+  - `source_id`: 单个信源 ID（精确匹配）
+  - `source_ids`: 多个信源 ID，逗号分隔（精确匹配）
+  - `source_name`: 单个信源名称（模糊匹配，子串、大小写不敏感、忽略空格）
+  - `source_names`: 多个信源名称，逗号分隔（模糊匹配）
+→ 支持的 API：policy/feed, personnel/feed, personnel/enriched-feed, university/feed, tech_frontier/signals, articles/
+→ 测试：`pytest tests/test_source_filter.py -v`
 
 **JSON 文件没输出 / 路径不对：**
 → `app/crawlers/utils/json_storage.py`
