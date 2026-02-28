@@ -40,7 +40,10 @@ async def get_feed(
     group: str | None = Query(
         None, description="按分组过滤 (university_news/ai_institutes 等)",
     ),
-    source_id: str | None = Query(None, description="按信源 ID 过滤"),
+    source_id: str | None = Query(None, description="按单个信源 ID 筛选（精确匹配）"),
+    source_ids: str | None = Query(None, description="按多个信源 ID 筛选（逗号分隔，精确匹配）"),
+    source_name: str | None = Query(None, description="按单个信源名称筛选（模糊匹配）"),
+    source_names: str | None = Query(None, description="按多个信源名称筛选（逗号分隔，模糊匹配）"),
     keyword: str | None = Query(None, description="标题关键词搜索"),
     date_from: date | None = Query(None, description="起始日期 (YYYY-MM-DD)"),
     date_to: date | None = Query(None, description="截止日期 (YYYY-MM-DD)"),
@@ -50,6 +53,9 @@ async def get_feed(
     return uni_service.get_feed(
         group=group,
         source_id=source_id,
+        source_ids=source_ids,
+        source_name=source_name,
+        source_names=source_names,
         keyword=keyword,
         date_from=date_from,
         date_to=date_to,

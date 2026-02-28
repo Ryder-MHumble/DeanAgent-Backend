@@ -10,6 +10,7 @@ from typing import Any
 from app.config import BASE_DIR
 from app.crawlers.utils.json_storage import DATA_DIR as RAW_DATA_DIR
 from app.crawlers.utils.json_storage import LATEST_FILENAME
+from app.services.intel.shared import parse_source_filter
 from app.services.json_reader import get_articles
 from app.services.source_state import get_all_source_states
 
@@ -169,6 +170,9 @@ def get_overview() -> dict[str, Any]:
 def get_feed(
     group: str | None = None,
     source_id: str | None = None,
+    source_ids: str | None = None,
+    source_name: str | None = None,
+    source_names: str | None = None,
     keyword: str | None = None,
     date_from: date | None = None,
     date_to: date | None = None,
@@ -176,13 +180,21 @@ def get_feed(
     page_size: int = 20,
 ) -> dict[str, Any]:
     """Paginated article feed with filtering."""
+    # 应用信源筛选（优先筛选，减少后续处理量）
+    source_filter = parse_source_filter(source_id, source_ids, source_name, source_names)
+
+    # 如果有 source_filter，不传 source_id 给 get_articles，之后手动过滤
     articles = get_articles(
         DIMENSION,
         group=group,
-        source_id=source_id,
+        source_id=None if source_filter else source_id,
         date_from=date_from,
         date_to=date_to,
     )
+
+    # 手动应用信源过滤
+    if source_filter:
+        articles = [a for a in articles if a.get("source_id") in source_filter]
 
     # Keyword filter on title
     if keyword:
