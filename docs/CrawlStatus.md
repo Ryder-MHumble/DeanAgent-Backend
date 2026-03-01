@@ -690,3 +690,31 @@ detail_selectors:
 5. ~~**处理 iscas_faculty**~~ ✅ 2026-02-28 - 创建自定义 Parser，成功提取 73 名研究员
 6. **服务器环境测试** - 测试上交软件学院/清源等本地超时源（服务器可能可访问）
 7. **LLM 富化** - 对已爬取 1928 条教师数据进行学术指标补充（Google Scholar/DBLP）
+
+## 2026-03-01 更新：ISCAS 爬虫优化
+
+### ICT CAS（计算技术研究所）
+- **优化内容**：更新faculty detail页面选择器，针对实际页面结构
+- **选择器目标**：
+  - 基础信息：`dl.fl.w100.swwls_lm_imgtextlist_dl`
+  - 简历：`dl.fl.w100.swwls_lm_imgtextlist_dl dd`
+  - 研究方向：`div.fl.w100.swwls_ryxl_mod1 p`
+- **验证结果**：✅ 成功提取24名研究员
+
+### ISCAS（软件研究所）新增配置
+
+ISCAS的三个列表页面只包含名称，已分别创建source条目：
+
+| Source ID | 列表名称 | URL | 数量 |
+|-----------|---------|-----|------|
+| iscas_academician | 院士专家 | .../rcdw2016/yszj2016/ | 6 |
+| iscas_researcher | 研究员 | .../rcdw2016/yjyzgjgcs2016/ | 60 |
+| iscas_associate_researcher | 副研究员 | .../rcdw2016/fyjygjgcs2016/ | 112 |
+
+**爬虫改进**：
+1. 支持通过 `faculty_selectors.list_item` 配置列表项选择器
+2. 自动分割空格分隔的人名（研究员/副研究员列表）
+3. 特殊处理院士名字提取（匹配"XX院士"格式）
+
+**总计**：178名ISCAS师资人员
+

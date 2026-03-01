@@ -133,7 +133,7 @@ async def _stage_crawl_all() -> dict[str, Any]:
     from scripts.run_all_crawl import run_all
 
     logger.info("Stage 1: 开始爬取所有启用信源...")
-    result = await run_all(concurrency=5)
+    result = await run_all(strategy="grouped")
     return result or {}
 
 

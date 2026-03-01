@@ -24,7 +24,14 @@ sources:
   - cas
   - ai
   detail_selectors:
-    bio: div.tem01-people-content
+    # 基础信息 (姓名、职位等)
+    basic_info: dl.fl.w100.swwls_lm_imgtextlist_dl
+    # 简历 (dl 内的文本内容，通过 dt/dd 对提取)
+    bio: dl.fl.w100.swwls_lm_imgtextlist_dl dd
+    # 主要论著、研究方向等结构化信息
+    research_sections: div.fl.w100.swwls_ryxl_mod1
+    # 研究方向/论著具体项
+    research_areas: div.fl.w100.swwls_ryxl_mod1 p
 - id: casia_faculty
   name: 中科院自动化研究所-研究员
   group: cas_ia
@@ -44,17 +51,44 @@ sources:
     link: a
     photo: img
   detail_selectors:
-    position: ul.gunius-item li:first-child
     photo: div.gunius-top img
+    # 职称在 <li>职　　称: <span>正高级</span></li> 中，直接用CSS选择器提取 span
+    position: "ul.gunius-item li:first-child span"
+    # 电子邮件用 label 前缀提取
+    label_prefix_sections:
+      email: "电子邮件:"
+    # 用 heading_sections 按文本定位部分（从 h3 开始搜索下一个 sibling）
     heading_sections:
-      bio: 个人简历
-      research_areas: 研究方向
+      bio: "^个人简历$"
+      research_areas: "^研究方向$"
   tags:
   - faculty
   - casia
   - cas
   - ai
-- id: iscas_faculty
+- id: iscas_academician
+  name: 中科院软件研究所-院士专家
+  group: cas_iscas
+  university: 中国科学院
+  department: 软件研究所
+  url: http://www.iscas.ac.cn/rcdw2016/yszj2016/
+  crawler_class: iscas_faculty
+  schedule: weekly
+  priority: 2
+  is_enabled: true
+  base_url: http://www.iscas.ac.cn
+  request_delay: 0.5
+  faculty_selectors:
+    # 院士页面的 <p> 元素包含完整描述，使用特殊处理来提取仅院士名字
+    list_item: "div.text p"
+    # 从 <p> 开头提取院士名字（通常是 "XX院士，" 格式）
+    name: "text_prefix_pattern:^([\\u4e00-\\u9fff]{2,4})院士"
+  tags:
+  - faculty
+  - iscas
+  - cas
+  - cs
+- id: iscas_researcher
   name: 中科院软件研究所-研究员
   group: cas_iscas
   university: 中国科学院
@@ -65,10 +99,28 @@ sources:
   priority: 2
   is_enabled: true
   base_url: http://www.iscas.ac.cn
-  detail_selectors:
-    bio: div.intro, div.bio
-    research_areas: div.research
-    email: a[href^='mailto:']
+  request_delay: 0.5
+  faculty_selectors:
+    list_item: "div.text p"
+  tags:
+  - faculty
+  - iscas
+  - cas
+  - cs
+- id: iscas_associate_researcher
+  name: 中科院软件研究所-副研究员
+  group: cas_iscas
+  university: 中国科学院
+  department: 软件研究所
+  url: http://www.iscas.ac.cn/rcdw2016/fyjygjgcs2016/
+  crawler_class: iscas_faculty
+  schedule: weekly
+  priority: 2
+  is_enabled: true
+  base_url: http://www.iscas.ac.cn
+  request_delay: 0.5
+  faculty_selectors:
+    list_item: "div.text p"
   tags:
   - faculty
   - iscas

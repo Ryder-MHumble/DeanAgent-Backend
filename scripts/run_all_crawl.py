@@ -7,6 +7,8 @@ import time
 import unicodedata
 from pathlib import Path
 
+import yaml
+
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 # Only configure logging when run as a script (not imported by pipeline)
@@ -45,6 +47,126 @@ def _status_icon(status_value: str) -> str:
         "no_new_content": "⚪",
         "failed": "🔴",
     }.get(status_value, "❓")
+
+
+def _load_crawl_concurrency_config() -> dict[str, object]:
+    """
+    Load the crawl_concurrency.yaml configuration file.
+
+    Returns a dict with concurrency settings. If the file doesn't exist,
+    returns sensible defaults with both 'grouped' and 'fixed' strategies.
+
+    Returns:
+        dict: Configuration with structure like:
+            {
+                'strategy': 'grouped' or 'fixed',
+                'grouped': {'static': 20, 'rss': 20, 'dynamic': 8, 'snapshot': 10},
+                'fixed': {'default': 12}
+            }
+    """
+    project_root = Path(__file__).resolve().parent.parent
+    config_path = project_root / "app" / "config" / "crawl_concurrency.yaml"
+
+    # Default configuration (fallback if file doesn't exist)
+    defaults: dict[str, object] = {
+        "strategy": "grouped",
+        "grouped": {
+            "static": 20,
+            "rss": 20,
+            "dynamic": 8,
+            "snapshot": 10,
+        },
+        "fixed": {
+            "default": 12,
+        },
+    }
+
+    if not config_path.exists():
+        return defaults
+
+    try:
+        with open(config_path, "r") as f:
+            loaded = yaml.safe_load(f)
+        if loaded and isinstance(loaded, dict):
+            return loaded
+    except Exception as exc:
+        logging.warning(
+            f"Failed to load crawl_concurrency.yaml from {config_path}: {exc}"
+        )
+
+    return defaults
+
+
+def _group_configs_by_method(configs: list[dict]) -> dict[str, list[dict]]:
+    """
+    Group source configurations by their crawl_method field.
+
+    Configs without a 'crawl_method' field default to 'static'.
+
+    Args:
+        configs: List of source configuration dicts
+
+    Returns:
+        dict: Grouped configs, e.g. {'static': [cfg1, cfg2], 'dynamic': [cfg3]}
+    """
+    grouped = {}
+    for cfg in configs:
+        method = cfg.get("crawl_method", "static")
+        grouped.setdefault(method, []).append(cfg)
+    return grouped
+
+
+async def _run_grouped_concurrently(
+    grouped: dict[str, list[dict]],
+    concurrency_map: dict[str, int],
+    pbar: object = None,
+) -> list[dict]:
+    """
+    Run all crawl groups concurrently, with per-group concurrency control.
+
+    This function orchestrates parallel execution of different crawl methods:
+    - Each crawl method (static, dynamic, rss, snapshot) gets its own Semaphore
+    - Within each group, tasks are limited by the concurrency value in concurrency_map
+    - All groups run in parallel using asyncio.gather()
+    - NOTE: Semaphore is bound per-method via default parameter to ensure proper isolation
+
+    Args:
+        grouped: Dict mapping crawl method to list of source configs
+                 e.g. {'static': [cfg1, cfg2], 'dynamic': [cfg3], ...}
+        concurrency_map: Dict mapping crawl method to max concurrent tasks
+                        e.g. {'static': 20, 'dynamic': 8, 'snapshot': 10}
+        pbar: Optional progress bar object (tqdm)
+
+    Returns:
+        list[dict]: Flattened list of crawl results from all groups
+    """
+    all_group_tasks = []
+
+    for method, configs in grouped.items():
+        # Get concurrency limit for this method, default to 5 if not specified
+        max_concurrent = concurrency_map.get(method, 5)
+        semaphore = asyncio.Semaphore(max_concurrent)
+
+        async def _crawl_with_semaphore(cfg, sem=semaphore):
+            """Acquire semaphore, run crawl, then release.
+
+            Note: sem is bound at definition time (default parameter) to ensure
+            each iteration captures its own semaphore instance, not by reference.
+            """
+            async with sem:
+                return await _crawl_single_source(cfg, pbar)
+
+        # Create tasks for all configs in this group
+        group_tasks = [_crawl_with_semaphore(cfg) for cfg in configs]
+
+        # Schedule this group to run
+        all_group_tasks.append(asyncio.gather(*group_tasks))
+
+    # Run all groups in parallel and flatten results
+    group_results = await asyncio.gather(*all_group_tasks)
+    flattened = [result for group in group_results for result in group]
+
+    return flattened
 
 
 async def _crawl_single_source(config: dict, pbar=None) -> dict:
@@ -107,7 +229,8 @@ async def _crawl_single_source(config: dict, pbar=None) -> dict:
 
 async def run_all(
     dimension_filter: str | None = None,
-    concurrency: int = 5,
+    concurrency: int | None = None,
+    strategy: str = "grouped",
 ):
     from app.crawlers.utils.playwright_pool import close_browser
     from app.scheduler.manager import load_all_source_configs
@@ -127,6 +250,32 @@ async def run_all(
             print(f"可用维度: {', '.join(dims)}")
         return
 
+    # Load concurrency configuration
+    conc_config = _load_crawl_concurrency_config()
+
+    # Determine execution strategy and concurrency settings
+    concurrency_map: dict[str, int] | int
+    if strategy == "grouped":
+        concurrency_map = conc_config.get("strategies", {}).get("grouped", {
+            "static": 20,
+            "rss": 20,
+            "dynamic": 8,
+            "snapshot": 10,
+        })
+        if isinstance(concurrency_map, dict):
+            strategy_desc = (
+                f"分组 (static/rss={concurrency_map.get('static', 20)}, "
+                f"dynamic={concurrency_map.get('dynamic', 8)}, "
+                f"snapshot={concurrency_map.get('snapshot', 10)})"
+            )
+        else:
+            strategy_desc = "分组 (默认)"
+    else:  # fixed
+        fixed_config = conc_config.get("strategies", {}).get("fixed", {})
+        conc_val = concurrency or fixed_config.get("default", 5)
+        concurrency_map = conc_val
+        strategy_desc = f"固定 (并发={conc_val})"
+
     # 按维度分组统计
     dim_groups: dict[str, list[dict]] = {}
     for c in enabled:
@@ -136,7 +285,7 @@ async def run_all(
     total = len(enabled)
     print("=" * 70)
     print(f"  全量爬取 — 共 {total} 个启用信源，{len(dim_groups)} 个维度")
-    print(f"  并发度: {concurrency}")
+    print(f"  策略: {strategy_desc}")
     print("=" * 70)
     for dim, sources in sorted(dim_groups.items()):
         print(f"  {dim}: {len(sources)} 源")
@@ -154,15 +303,21 @@ async def run_all(
         pbar = None
         print(f"开始爬取 {total} 个信源...")
 
-    # 并发爬取
-    semaphore = asyncio.Semaphore(concurrency)
+    # 并发爬取 - 根据策略选择执行方式
+    if strategy == "grouped":
+        grouped = _group_configs_by_method(enabled)
+        assert isinstance(concurrency_map, dict)
+        results = await _run_grouped_concurrently(grouped, concurrency_map, pbar)
+    else:  # fixed
+        assert isinstance(concurrency_map, int)
+        semaphore = asyncio.Semaphore(concurrency_map)
 
-    async def _crawl_with_semaphore(cfg):
-        async with semaphore:
-            return await _crawl_single_source(cfg, pbar)
+        async def _crawl_with_semaphore(cfg):
+            async with semaphore:
+                return await _crawl_single_source(cfg, pbar)
 
-    tasks = [_crawl_with_semaphore(cfg) for cfg in enabled]
-    results = await asyncio.gather(*tasks)
+        tasks = [_crawl_with_semaphore(cfg) for cfg in enabled]
+        results = await asyncio.gather(*tasks)
 
     if pbar:
         pbar.close()
@@ -278,11 +433,17 @@ if __name__ == "__main__":
     parser.add_argument(
         "--concurrency", "-c",
         type=int,
-        default=5,
-        help="并发爬取数量 (默认 5)",
+        help="并发爬取数量 (仅在 --strategy fixed 时使用)",
+    )
+    parser.add_argument(
+        "--strategy", "-s",
+        choices=["grouped", "fixed"],
+        default="grouped",
+        help="执行策略: grouped (按方法分组) 或 fixed (固定并发) (默认 grouped)",
     )
     args = parser.parse_args()
     asyncio.run(run_all(
         dimension_filter=args.dimension,
         concurrency=args.concurrency,
+        strategy=args.strategy,
     ))

@@ -37,7 +37,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
-import re
+import re as _re
 from datetime import datetime, timezone
 from urllib.parse import urljoin
 
@@ -63,10 +63,10 @@ except ImportError:
 logger = logging.getLogger(__name__)
 
 # Regex for extracting email addresses from text
-_EMAIL_RE = re.compile(r"[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}")
+_EMAIL_RE = _re.compile(r"[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}")
 
 # Regex to remove spaces/\xa0 between CJK characters (alignment padding in Chinese names)
-_CJK_SPACE_RE = re.compile(r"(?<=[\u4e00-\u9fff])\s+(?=[\u4e00-\u9fff])")
+_CJK_SPACE_RE = _re.compile(r"(?<=[\u4e00-\u9fff])\s+(?=[\u4e00-\u9fff])")
 
 
 def _now_iso() -> str:
@@ -453,7 +453,7 @@ class FacultyCrawler(BaseCrawler):
             # 4. Pagination: find and follow "next page" link
             if page_num >= max_pages:
                 break
-            next_link = soup.find("a", string=re.compile(next_page_text))
+            next_link = soup.find("a", string=_re.compile(next_page_text))
             if not next_link:
                 break
             next_href = (next_link.get("href") or "").strip()
