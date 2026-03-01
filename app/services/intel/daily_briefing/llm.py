@@ -129,6 +129,7 @@ async def generate_briefing_narrative(
         system_prompt=SYSTEM_PROMPT,
         temperature=0.3,
         max_tokens=4000,
+        stage="daily_briefing_generation",
     )
 
     if not isinstance(raw, dict):

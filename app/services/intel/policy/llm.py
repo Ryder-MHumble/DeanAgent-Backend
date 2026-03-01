@@ -194,6 +194,11 @@ async def enrich_article(article: dict[str, Any]) -> dict[str, Any]:
         system_prompt=SYSTEM_PROMPT,
         temperature=0.1,
         max_tokens=1500,
+        stage="policy_tier1",
+        article_id=article.get("url_hash"),
+        article_title=article.get("title"),
+        source_id=article.get("source_id"),
+        dimension=article.get("dimension"),
     )
 
     if not isinstance(raw, dict):
@@ -225,6 +230,11 @@ async def enrich_article_lite(
         system_prompt=SYSTEM_PROMPT_LITE,
         temperature=0.1,
         max_tokens=800,
+        stage="policy_tier2",
+        article_id=article.get("url_hash"),
+        article_title=article.get("title"),
+        source_id=article.get("source_id"),
+        dimension=article.get("dimension"),
     )
 
     if not isinstance(raw, dict):

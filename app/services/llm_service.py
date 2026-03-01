@@ -3,11 +3,13 @@ from __future__ import annotations
 
 import json
 import logging
+import time
 from typing import Any
 
 import httpx
 
 from app.config import settings
+from app.services.llm_call_tracker import get_tracker
 
 logger = logging.getLogger(__name__)
 
@@ -21,6 +23,12 @@ async def call_llm(
     temperature: float = 0.3,
     max_tokens: int = 2000,
     json_mode: bool = False,
+    *,
+    stage: str = "general",
+    article_id: str | None = None,
+    article_title: str | None = None,
+    source_id: str | None = None,
+    dimension: str | None = None,
 ) -> str:
     """
     Call OpenRouter API for LLM completion.
@@ -32,6 +40,11 @@ async def call_llm(
         temperature: Sampling temperature.
         max_tokens: Maximum response tokens.
         json_mode: If True, request JSON output format.
+        stage: Pipeline stage for tracking (policy, personnel, tech_frontier, etc.).
+        article_id: Article/URL hash for reference.
+        article_title: Article title for audit trail.
+        source_id: News source ID.
+        dimension: Data dimension.
 
     Returns:
         The assistant's response text.
@@ -44,6 +57,8 @@ async def call_llm(
         raise LLMError("OPENROUTER_API_KEY not configured")
 
     model = model or settings.OPENROUTER_MODEL
+    tracker = get_tracker()
+    start_time = time.time()
 
     messages: list[dict[str, str]] = []
     if system_prompt:
@@ -67,6 +82,8 @@ async def call_llm(
     }
 
     last_error: Exception | None = None
+    last_response: dict[str, Any] = {}
+
     for attempt in range(3):
         try:
             async with httpx.AsyncClient(timeout=60.0) as client:
@@ -77,11 +94,32 @@ async def call_llm(
                 )
                 resp.raise_for_status()
                 data = resp.json()
+                last_response = data
 
                 choice = data.get("choices", [{}])[0]
                 content = choice.get("message", {}).get("content", "")
                 if not content:
                     raise LLMError(f"Empty response from model {model}")
+
+                # Track successful API call
+                duration_ms = (time.time() - start_time) * 1000
+                usage = data.get("usage", {})
+                tracker.log_call(
+                    model=model,
+                    prompt=prompt,
+                    system_prompt=system_prompt,
+                    response_text=content,
+                    input_tokens=usage.get("prompt_tokens", 0),
+                    output_tokens=usage.get("completion_tokens", 0),
+                    stage=stage,
+                    article_id=article_id,
+                    article_title=article_title,
+                    source_id=source_id,
+                    dimension=dimension,
+                    duration_ms=duration_ms,
+                    success=True,
+                )
+
                 return content
 
         except httpx.HTTPStatusError as e:
@@ -92,7 +130,24 @@ async def call_llm(
                 logger.warning("Rate limited, waiting %ds...", wait)
                 await asyncio.sleep(wait)
                 continue
-            raise LLMError(f"HTTP {e.response.status_code}: {e.response.text}") from e
+            error_msg = f"HTTP {e.response.status_code}: {e.response.text}"
+            tracker.log_call(
+                model=model,
+                prompt=prompt,
+                system_prompt=system_prompt,
+                response_text="",
+                input_tokens=0,
+                output_tokens=0,
+                stage=stage,
+                article_id=article_id,
+                article_title=article_title,
+                source_id=source_id,
+                dimension=dimension,
+                duration_ms=(time.time() - start_time) * 1000,
+                success=False,
+                error_message=error_msg,
+            )
+            raise LLMError(error_msg) from e
 
         except httpx.RequestError as e:
             last_error = e
@@ -101,7 +156,24 @@ async def call_llm(
             await asyncio.sleep(1)
             continue
 
-    raise LLMError(f"Failed after 3 attempts: {last_error}")
+    error_msg = f"Failed after 3 attempts: {last_error}"
+    tracker.log_call(
+        model=model,
+        prompt=prompt,
+        system_prompt=system_prompt,
+        response_text="",
+        input_tokens=0,
+        output_tokens=0,
+        stage=stage,
+        article_id=article_id,
+        article_title=article_title,
+        source_id=source_id,
+        dimension=dimension,
+        duration_ms=(time.time() - start_time) * 1000,
+        success=False,
+        error_message=error_msg,
+    )
+    raise LLMError(error_msg)
 
 
 async def call_llm_json(
@@ -110,6 +182,12 @@ async def call_llm_json(
     model: str | None = None,
     temperature: float = 0.1,
     max_tokens: int = 4000,
+    *,
+    stage: str = "general",
+    article_id: str | None = None,
+    article_title: str | None = None,
+    source_id: str | None = None,
+    dimension: str | None = None,
 ) -> dict[str, Any] | list[Any]:
     """
     Call LLM and parse the response as JSON.
@@ -123,6 +201,11 @@ async def call_llm_json(
         temperature=temperature,
         max_tokens=max_tokens,
         json_mode=True,
+        stage=stage,
+        article_id=article_id,
+        article_title=article_title,
+        source_id=source_id,
+        dimension=dimension,
     )
 
     # Strip markdown code fences if present

@@ -185,6 +185,11 @@ async def enrich_changes_batch(
             system_prompt=SYSTEM_PROMPT,
             temperature=0.1,
             max_tokens=2000,
+            stage="personnel_enrichment",
+            article_id=article.get("url_hash"),
+            article_title=article.get("title"),
+            source_id=article.get("source_id"),
+            dimension=article.get("dimension"),
         )
     except LLMError as e:
         logger.warning("LLM failed for article %s: %s", article.get("title", "?")[:40], e)

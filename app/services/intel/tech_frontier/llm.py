@@ -74,7 +74,8 @@ async def enrich_topic(topic: dict) -> dict[str, Any] | None:
     try:
         result = await call_llm_json(
             system_prompt=TOPIC_SYSTEM_PROMPT,
-            user_message=user_msg[:CONTENT_TRUNCATE_LEN],
+            prompt=user_msg[:CONTENT_TRUNCATE_LEN],
+            stage="tech_frontier_topic",
         )
         return _validate_topic_enrichment(result, topic)
     except LLMError as e:
@@ -104,7 +105,8 @@ async def enrich_opportunity(opp: dict) -> dict[str, Any] | None:
     try:
         result = await call_llm_json(
             system_prompt=OPP_SYSTEM_PROMPT,
-            user_message=user_msg[:CONTENT_TRUNCATE_LEN],
+            prompt=user_msg[:CONTENT_TRUNCATE_LEN],
+            stage="tech_frontier_opportunity",
         )
         return _validate_opp_enrichment(result)
     except LLMError as e:
