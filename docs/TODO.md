@@ -1,6 +1,6 @@
 # 后续任务清单
 
-> 最后更新: 2026-02-27 (v25: Feed API 信源过滤 — 所有 feed 类 API 支持 4 参数信源筛选：source_id/source_ids/source_name/source_names，精确+模糊匹配，覆盖 policy/personnel/university/tech_frontier/articles 6 个端点)
+> 最后更新: 2026-03-01 (v25: Feed API 信源过滤 — 所有 feed 类 API 支持 4 参数信源筛选：source_id/source_ids/source_name/source_names，精确+模糊匹配，覆盖 policy/personnel/university/tech_frontier/articles 6 个端点; v35: faculty_crawler 增强 — heading_sections 正则匹配修复、LLM 字段提取集成 (enable_llm 配置)、5 个高校源 URL/选择器修复、3 个不可达源禁用)
 > 基于前端 (Dean-Agent) 需求反推的优先级排序
 
 ---

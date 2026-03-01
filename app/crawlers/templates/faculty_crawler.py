@@ -57,6 +57,7 @@ try:
     from app.crawlers.utils.faculty_llm_extractor import extract_faculty_fields_with_llm
     LLM_AVAILABLE = True
 except ImportError:
+    extract_faculty_fields_with_llm = None
     LLM_AVAILABLE = False
 
 logger = logging.getLogger(__name__)
@@ -206,13 +207,17 @@ class FacultyCrawler(BaseCrawler):
                 if photo_url := _extract_img_src(soup, photo_sel, base):
                     result["photo_url"] = photo_url
 
+            # Store full text for optional LLM enrichment
+            result["_full_text"] = soup.get_text()
+
             # heading_sections: {field: "heading text"} — find h2/h3/h4/p/div by text, extract next sibling
             # Useful for pages where sections are identified by heading text (common on Chinese academic sites)
+            # heading_text is treated as a regex pattern for robustness (handles "field1|field2|field3" alternations)
             if heading_sections := detail_selectors.get("heading_sections"):
                 for field, heading_text in heading_sections.items():
                     # Check heading tags, paragraph tags, and short divs (some sites use div for headings)
                     for tag in soup.find_all(["h2", "h3", "h4", "p", "div"]):
-                        if tag.get_text(strip=True) == heading_text:
+                        if _re.search(heading_text, tag.get_text(strip=True)):
                             # Look for content in next sibling or parent's next sibling
                             sibling = tag.find_next_sibling()
                             if sibling:
@@ -343,10 +348,12 @@ class FacultyCrawler(BaseCrawler):
                         research_areas = parse_research_areas(ra_text)
 
                 # --- Optional: fetch detail page ---
+                detail_full_text = ""
                 if detail_selectors and not profile_url.startswith(f"{url}#"):
                     if request_delay:
                         await asyncio.sleep(request_delay)
                     detail = await self._fetch_detail(profile_url, detail_selectors)
+                    detail_full_text = detail.pop("_full_text", "")  # extract for LLM use
                     if detail.get("name"):
                         name_text = detail["name"]
                     if detail.get("bio"):
@@ -360,6 +367,40 @@ class FacultyCrawler(BaseCrawler):
                     if detail.get("research_areas"):
                         research_areas = detail["research_areas"]
 
+                # --- Optional: LLM enrichment (on-demand when fields are missing) ---
+                academic_titles: list[str] = []
+                is_academician = False
+                phd_institution = ""
+                phd_year = ""
+                if LLM_AVAILABLE and self.config.get("enable_llm", False):
+                    # Only call LLM if key fields are missing after CSS parsing
+                    if not bio_text or not research_areas or not position_text:
+                        try:
+                            llm_result = await extract_faculty_fields_with_llm(
+                                raw_name=name_text,
+                                raw_bio=bio_text,
+                                raw_position=position_text,
+                                detail_html_text=detail_full_text,
+                            )
+                            # Fill missing fields only (don't overwrite good CSS results)
+                            if not name_text:
+                                name_text = llm_result.get("name", "")
+                            if not bio_text:
+                                bio_text = llm_result.get("bio", "")
+                            if not position_text:
+                                position_text = llm_result.get("position", "")
+                            if not research_areas:
+                                research_areas = llm_result.get("research_areas", [])
+                            if not email_text:
+                                email_text = llm_result.get("email", "")
+                            # Map LLM-only fields
+                            academic_titles = llm_result.get("academic_titles", [])
+                            is_academician = llm_result.get("is_academician", False)
+                            phd_institution = llm_result.get("phd_institution", "")
+                            phd_year = llm_result.get("phd_year", "")
+                        except Exception as e:
+                            logger.warning("LLM enrichment failed for %s: %s", name_text, e)
+
                 # --- Build ScholarRecord ---
                 record = ScholarRecord(
                     # 基本信息
@@ -372,7 +413,13 @@ class FacultyCrawler(BaseCrawler):
                     position=position_text,
                     # 研究
                     research_areas=research_areas,
+                    keywords=[],  # can be extracted from bio/research_areas in future
                     bio=bio_text,
+                    academic_titles=academic_titles,
+                    is_academician=is_academician,
+                    # 教育背景
+                    phd_institution=phd_institution,
+                    phd_year=phd_year,
                     # 联系方式
                     email=email_text,
                     # 主页链接

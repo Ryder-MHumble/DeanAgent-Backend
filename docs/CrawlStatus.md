@@ -1,6 +1,6 @@
 # 信源爬取状态总览
 
-> 最后更新: 2026-03-01 (v32 university_faculty URL 修复：通过 web search 和 Playwright 验证，修复 10 个禁用源的错误 URL（fudan/tsinghua/pku/sjtu/ustc 各源），启用全部已找到正确 URL 的源；3 个源仍需自定义 Parser（sjtu_ai/tsinghua_sigs/tsinghua_iaiig）待后续开发; v33 detail_selectors 补全：为 20 个高校师资源补全 heading_sections 和 label_prefix_sections，确保完整的信息提取配置; v34 sjtu_ai_faculty 恢复：开发 SJTUAIFacultyCrawler 自定义 Parser 直接调用 /api/teacher?time=xxx 端点，已启用源 34→35)
+> 最后更新: 2026-03-01 (v32 university_faculty URL 修复：通过 web search 和 Playwright 验证，修复 10 个禁用源的错误 URL（fudan/tsinghua/pku/sjtu/ustc 各源），启用全部已找到正确 URL 的源；3 个源仍需自定义 Parser（sjtu_ai/tsinghua_sigs/tsinghua_iaiig）待后续开发; v33 detail_selectors 补全：为 20 个高校师资源补全 heading_sections 和 label_prefix_sections，确保完整的信息提取配置; v34 sjtu_ai_faculty 恢复：开发 SJTUAIFacultyCrawler 自定义 Parser 直接调用 /api/teacher?time=xxx 端点，已启用源 34→35; v35 faculty_crawler 增强：修复 heading_sections 正则匹配、集成 LLM 字段提取、修复 5 个高校源 URL/选择器、禁用 3 个不可达源、enable_llm 配置 4 源)
 
 ---
 

@@ -496,27 +496,27 @@ sources:
   group: sjtu
   university: 上海交通大学
   department: 软件学院
-  # v32 修复：本地超时问题改用 static 模式，web search 找到正确 URL http://www.se.sjtu.edu.cn/
-  url: http://www.se.sjtu.edu.cn/szdw.html
+  # v32 修复：原 URL /szdw.html 返回 404，正确 URL 为 /Data/List/people
+  # 页面结构：div.tli 为教师卡片，div.teacher-txt 包含名字链接 + 4个 <p> (职称/电话/邮箱/办公地点)
+  # 所有 36 名教师静态渲染，可按 tab 过滤（正高级/副高级/中级）
+  url: http://www.se.sjtu.edu.cn/Data/List/people
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
   priority: 2
   is_enabled: true
+  enable_llm: false
   base_url: http://www.se.sjtu.edu.cn
   faculty_selectors:
-    list_item: ul li, div.faculty-item
-    name: a
-    link: a
+    list_item: div.tli
+    name: "div.teacher-txt a"
+    link: "div.teacher-txt a"
   detail_selectors:
-    bio: "div[class*='content'], div.article, div[class*='intro']"
-    email: "a[href^='mailto:']"
-    heading_sections:
-      bio: 个人简介
-      research_areas: 研究方向
+    bio: null
+    email: null
     label_prefix_sections:
-      email: "邮箱|Email|电子邮件"
-      research_areas: "研究方向|研究领域"
+      position: "职称："
+      email: "邮箱："
   tags:
   - faculty
   - sjtu
@@ -840,13 +840,15 @@ sources:
   group: ustc
   university: 中国科学技术大学
   department: 软件学院
-  # v32 修复：本地超时问题改用 static 模式，web search 找到官网 https://sse.ustc.edu.cn/
+  # v32 修复失败：官网 https://sse.ustc.edu.cn/ 首页无教师列表
+  # 软件学院官网导航栏无"师资队伍"子菜单，教师列表不公开
+  # 修复方案：确认是否有隐藏 URL 或需向院方咨询；暂时禁用
   url: https://sse.ustc.edu.cn/
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
   priority: 2
-  is_enabled: true
+  is_enabled: false
   base_url: https://sse.ustc.edu.cn
   faculty_selectors:
     list_item: ul li, div.faculty-item, div.teacher-card
@@ -1128,17 +1130,19 @@ sources:
   department: 丘成桐数学科学中心
   # v32 修复：URL 确认为 https://ymsc.tsinghua.edu.cn/sxxr/zxjs.htm 中心教师页
   # 教师规模：156 人（教师 86 人，博士后 70 人），含 2 位菲尔兹奖得主、4 位院士
+  # 页面结构修复：教师卡片为 <a href="../info/XXXX/YYYY.htm"> 包含 <h4>(名) + <p>(研究方向)
   url: https://ymsc.tsinghua.edu.cn/sxxr/zxjs.htm
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
   priority: 2
   is_enabled: true
+  enable_llm: true
   base_url: https://ymsc.tsinghua.edu.cn
   faculty_selectors:
-    # 页面结构：教师列表可能为表格或列表形式，尝试多种选择器
-    list_item: ul li, li.faculty, tr.teacher, div.faculty-item
-    name: a, td, span, h4
+    # 教师卡片为 <a href="../info/XXX/YYY.htm"> 直接链接
+    list_item: "a[href*='/info/']"
+    name: h4
     link: a
   detail_selectors:
     bio: "div[class*='content'], p, ul, td, div.article, div[class*='intro']"
@@ -1196,15 +1200,15 @@ sources:
   group: tsinghua
   university: 清华大学
   department: 深圳国际研究生院
-  # v32 修复：官网确认 https://www.sigs.tsinghua.edu.cn/
-  # 研究生院规模：5500+ 研究生，230+ 全职教师，计划扩至 400 人
-  # 页面结构：尝试 static 模式，如 AJAX 需自定义 Parser
-  url: https://www.sigs.tsinghua.edu.cn/
+  # v32 修复失败：官网 https://www.sigs.tsinghua.edu.cn/ 使用 AJAX+GSAP 动画渲染
+  # 页面结构：所有教师列表内容完全由前端 JS 驱动，静态 HTML 不含任何教师项
+  # 修复方案：需编写自定义 SIGSFacultyCrawler（分析 AJAX API endpoint），暂不支持
+  url: https://www.sigs.tsinghua.edu.cn/7644/list.htm
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
   priority: 2
-  is_enabled: true
+  is_enabled: false
   base_url: https://www.sigs.tsinghua.edu.cn
   faculty_selectors:
     list_item: ".list-item, div.faculty-item, li.faculty, ul li"
@@ -1230,15 +1234,15 @@ sources:
   group: tsinghua
   university: 清华大学
   department: 人工智能国际治理研究院
-  # v32 修复：确认官网 https://iaiig.tsinghua.edu.cn/
+  # v32 修复失败：官网 https://iaiig.tsinghua.edu.cn/ 连接失败 (ERR_CONNECTION_CLOSED)
   # 研究领域：AI 政策、伦理、治理；跨学科研究团队
-  # 本地 DNS 失败可能是网络问题，改用 static 模式，服务器应可访问
+  # 修复方案：确认服务器是否重新上线；暂时禁用
   url: https://iaiig.tsinghua.edu.cn/
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
   priority: 2
-  is_enabled: true
+  is_enabled: false
   base_url: https://iaiig.tsinghua.edu.cn
   faculty_selectors:
     list_item: ul li, div.faculty-item, div.researcher, li.faculty
@@ -1333,23 +1337,27 @@ sources:
   university: 北京大学
   department: 工学院
   # v32 修复：原 teaching/teacher/ 404；正确页面为 teching/all.html （注：coe.pku 网站有拼写错误 teching）
+  # 页面结构：所有教师为字母索引列表，<a href="/teaching/all_time/XXXXX.html"> 为教师个人页面链接
+  # 共 ~160+ 名教师，全部在单一列表页面展示（按首字母分组）
   url: https://www.coe.pku.edu.cn/teching/all.html
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
   priority: 2
   is_enabled: true
+  enable_llm: true
   base_url: https://www.coe.pku.edu.cn
   faculty_selectors:
-    list_item: ul li, div.faculty-item
-    name: a, h3, h4
+    # 教师链接格式为 <a href="/teaching/all_time/XXXXX.html">名字</a>
+    list_item: "a[href*='/teaching/all_time/']"
+    name: self  # entry is the <a> tag itself
     link: a
   detail_selectors:
-    bio: "div[class*='content'], div.article"
+    bio: "div[class*='content'], div.article, p"
     email: "a[href^='mailto:']"
     heading_sections:
-      bio: 个人简介
-      research_areas: 研究方向
+      bio: 个人简介|简历
+      research_areas: 研究方向|研究兴趣
     label_prefix_sections:
       email: "邮箱|Email|电子邮件"
       research_areas: "研究方向|研究领域"
@@ -1362,25 +1370,27 @@ sources:
   group: sjtu
   university: 上海交通大学
   department: 清源研究院
-  # v32 修复：找到正确 URL，官网首页有 12 名全职教师，列表可通过导航或 API 获取
-  # http://www.qingyuan.sjtu.edu.cn/ 首页可见，详细页面需分析
-  url: http://www.qingyuan.sjtu.edu.cn/
+  # v32 修复：正确 URL 为 /c/quanzhijiaoshi 完整教师列表页面
+  # 页面结构：教师卡片为 <a href="/a/XXX"> 直接链接，卡片内含 <h3>(名)，parent div.item01
+  # 共 10 名全职教师，分类：长聘教授(2) + 长聘副教授(5) + 助理教授(3)
+  url: http://www.qingyuan.sjtu.edu.cn/c/quanzhijiaoshi
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
   priority: 2
   is_enabled: true
+  enable_llm: true
   base_url: http://www.qingyuan.sjtu.edu.cn
   faculty_selectors:
-    list_item: div.faculty, .faculty-item, ul li
-    name: h3, h4, a, strong
+    list_item: "a[href^='/a/']"  # faculty card is the link itself
+    name: h3
     link: a
   detail_selectors:
-    bio: "div[class*='content'], div.article, p"
+    bio: "p, div[class*='content'], div.article"
     email: "a[href^='mailto:']"
     heading_sections:
-      bio: 个人简介
-      research_areas: 研究方向
+      bio: 个人简介|简历
+      research_areas: 研究方向|研究兴趣
     label_prefix_sections:
       email: "邮箱|Email|电子邮件"
       research_areas: "研究方向|研究领域"
@@ -1395,24 +1405,28 @@ sources:
   university: 中国科学技术大学
   department: 人工智能与数据科学学院
   # v32 修复：大数据学院已更名为人工智能与数据科学学院（2024年4月）
-  # web search 找到官网 https://saids.ustc.edu.cn/
-  url: https://saids.ustc.edu.cn/
+  # 官网师资页面：https://saids.ustc.edu.cn/szdw/list.htm
+  # 页面结构：li.list_item 为教师卡片，每个 li 内含一个 <a> 链接（名字 + 个人主页）
+  # 教授列表有分页：list.htm (14项/页) → list2.htm (续)，共 21 名教授
+  url: https://saids.ustc.edu.cn/szdw/list.htm
   crawl_method: faculty
   use_playwright: false
   schedule: weekly
   priority: 2
   is_enabled: true
+  enable_llm: true
+  max_pages: 2
   base_url: https://saids.ustc.edu.cn
   faculty_selectors:
-    list_item: ul li, div.faculty-item, div.teacher-card
-    name: a, h3, h4
+    list_item: "li.list_item"
+    name: a
     link: a
   detail_selectors:
-    bio: "div[class*='content'], div.article"
+    bio: "div[class*='content'], div.article, p"
     email: "a[href^='mailto:']"
     heading_sections:
-      bio: 个人简介
-      research_areas: 研究方向
+      bio: 个人简介|简历
+      research_areas: 研究方向|研究兴趣
     label_prefix_sections:
       email: "邮箱|Email|电子邮件"
       research_areas: "研究方向|研究领域"
