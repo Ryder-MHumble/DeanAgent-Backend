@@ -8,7 +8,6 @@ class PaperMeta(BaseModel):
     paper_id: str
     title: str
     url: str | None = None
-    abstract: str | None = None
     publication_date: str | None = None
     venue: str | None = None
     doi: str | None = None
@@ -56,6 +55,8 @@ class PipelineProgress(BaseModel):
     papers_fetched: int = 0
     abstracts_fetched: int = 0
     papers_analyzed: int = 0
+    total_batches: int = 0
+    current_batch: int = 0
 
 
 class PipelineRunState(BaseModel):
@@ -66,7 +67,8 @@ class PipelineRunState(BaseModel):
     error: str | None = None
     date_from: str | None = None
     school_filter: str | None = None
-    max_papers: int = 500
+    max_papers: int = 5000
+    batch_size: int = 200
 
 
 class PaperTransferResults(BaseModel):
@@ -75,6 +77,7 @@ class PaperTransferResults(BaseModel):
     total_papers_fetched: int
     total_papers_analyzed: int
     grade_counts: dict[str, int] = Field(description='e.g. {"A": 5, "B": 12, "C": 83}')
+    batch_count: int = Field(1, description="本次分析拆分的批次数")
     items: list[TransformationCard]
 
 
@@ -83,7 +86,8 @@ class RunRequest(BaseModel):
     school: str | None = Field(
         None, description="按学校名称模糊筛选（如 北京大学），为空则处理全部学生"
     )
-    max_papers: int = Field(500, description="最多处理论文数，控制 LLM 成本（默认 500）")
+    max_papers: int = Field(5000, description="最多处理论文数（默认 5000，通常覆盖全量）")
+    batch_size: int = Field(200, description="每批处理论文数，各批串行执行（默认 200）")
 
 
 class RunResponse(BaseModel):

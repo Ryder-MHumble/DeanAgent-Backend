@@ -52,7 +52,6 @@ def get_results(
             c
             for c in items
             if kw in c.paper.title.lower()
-            or (c.paper.abstract and kw in c.paper.abstract.lower())
             or (c.recommendation_reason and kw in c.recommendation_reason.lower())
         ]
 
@@ -70,7 +69,7 @@ async def trigger_run(req: RunRequest) -> RunResponse:
             status="already_running",
             message="Pipeline is already running. Poll GET /status for progress.",
         )
-    asyncio.create_task(run_pipeline(req.date_from, req.school, req.max_papers))
+    asyncio.create_task(run_pipeline(req.date_from, req.school, req.max_papers, req.batch_size))
     return RunResponse(
         status="started",
         message=(

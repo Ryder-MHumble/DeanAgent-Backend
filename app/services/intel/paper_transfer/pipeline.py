@@ -68,8 +68,13 @@ async def run_pipeline(
     date_from: str | None,
     school_filter: str | None,
     max_papers: int,
+    batch_size: int,
 ) -> None:
-    """Full pipeline: fetch → enrich → classify → save.
+    """Full pipeline: fetch → enrich → classify (batched serial) → save.
+
+    Papers are split into batches of `batch_size` and processed one batch at a time
+    to keep memory bounded and allow partial-result recovery. Each batch is saved to
+    batch_NNN.json; a merged results.json is written when all batches complete.
 
     Intended to be run as an asyncio background task via asyncio.create_task().
     """
@@ -90,6 +95,7 @@ async def run_pipeline(
         date_from=date_from,
         school_filter=school_filter,
         max_papers=max_papers,
+        batch_size=batch_size,
         progress=PipelineProgress(),
     )
     _save_state(state)
@@ -101,7 +107,7 @@ async def run_pipeline(
         _save_state(state)
         logger.info("Stage 1 done: %d students fetched", len(students))
 
-        # ── Stage 2: Fetch papers for every student (concurrent, max 10) ───────
+        # ── Stage 2: Fetch papers for every student (concurrent, max 10) ────
         fetch_semaphore = asyncio.Semaphore(10)
 
         async def _fetch_papers(student: dict) -> list[tuple[dict, dict]]:
@@ -128,7 +134,7 @@ async def run_pipeline(
             all_pairs = all_pairs[:max_papers]
             logger.info("Capped to %d pairs per max_papers limit", max_papers)
 
-        # ── Stage 3: Fetch arXiv abstracts (concurrently, max 10 in flight) ──
+        # ── Stage 3: Fetch arXiv abstracts (concurrent, max 10 in flight) ───
         abstract_semaphore = asyncio.Semaphore(10)
 
         async def _fetch_abstract(pair: tuple[dict, dict]) -> tuple[dict, dict]:
@@ -150,27 +156,20 @@ async def run_pipeline(
             "Stage 3 done: %d abstracts fetched", state.progress.abstracts_fetched
         )
 
-        # ── Stage 4: LLM classification + card generation ────────────────────
-        llm_semaphore = asyncio.Semaphore(5)
+        # ── Stage 4: LLM classification — batched serial ─────────────────────
+        # Papers are split into batches of `batch_size`. Each batch is processed
+        # concurrently within itself (semaphore=5), but batches run one at a time
+        # to keep the number of in-flight LLM calls bounded and allow per-batch saves.
 
-        async def _analyze(paper: dict, student: dict) -> TransformationCard:
-            rule_result = classify_paper_by_rules(
-                paper.get("title", ""), paper.get("abstract")
-            )
-            async with llm_semaphore:
-                llm_result = await enrich_paper(
-                    title=paper.get("title", ""),
-                    abstract=paper.get("abstract"),
-                    venue=paper.get("venue"),
-                    publication_date=paper.get("publication_date"),
-                )
+        def _build_card(
+            paper: dict, student: dict, llm_result: dict, rule_result: dict
+        ) -> TransformationCard:
             raw_contact = student.get("contact") or {}
             return TransformationCard(
                 paper=PaperMeta(
                     paper_id=paper.get("paper_id", ""),
                     title=paper.get("title", ""),
                     url=paper.get("url"),
-                    abstract=paper.get("abstract"),
                     publication_date=paper.get("publication_date"),
                     venue=paper.get("venue"),
                     doi=paper.get("doi"),
@@ -205,21 +204,89 @@ async def run_pipeline(
                 recommendation_reason=llm_result["recommendation_reason"],
             )
 
-        cards: list[TransformationCard] = list(
-            await asyncio.gather(*[_analyze(p, s) for p, s in enriched_pairs])
+        n_batches = max(1, (len(enriched_pairs) + batch_size - 1) // batch_size)
+        state.progress.total_batches = n_batches
+        _save_state(state)
+        logger.info(
+            "Stage 4 start: %d papers → %d batches of ~%d",
+            len(enriched_pairs), n_batches, batch_size,
         )
-        state.progress.papers_analyzed = len(cards)
-        logger.info("Stage 4 done: %d papers analyzed", len(cards))
 
-        # ── Stage 5: Aggregate and save ──────────────────────────────────────
+        llm_semaphore = asyncio.Semaphore(5)
+        all_cards: list[TransformationCard] = []
+
+        # Clean up any stale batch files from a previous run
+        for old in _RESULTS_DIR.glob("batch_*.json"):
+            old.unlink(missing_ok=True)
+
+        for batch_idx in range(n_batches):
+            batch_start = batch_idx * batch_size
+            batch_pairs = enriched_pairs[batch_start: batch_start + batch_size]
+
+            state.progress.current_batch = batch_idx + 1
+            _save_state(state)
+            logger.info(
+                "Batch %d/%d: analyzing %d papers",
+                batch_idx + 1, n_batches, len(batch_pairs),
+            )
+
+            async def _analyze(paper: dict, student: dict) -> TransformationCard:
+                rule_result = classify_paper_by_rules(
+                    paper.get("title", ""), paper.get("abstract")
+                )
+                async with llm_semaphore:
+                    llm_result = await enrich_paper(
+                        title=paper.get("title", ""),
+                        abstract=paper.get("abstract"),
+                        venue=paper.get("venue"),
+                        publication_date=paper.get("publication_date"),
+                    )
+                return _build_card(paper, student, llm_result, rule_result)
+
+            batch_cards: list[TransformationCard] = list(
+                await asyncio.gather(*[_analyze(p, s) for p, s in batch_pairs])
+            )
+            all_cards.extend(batch_cards)
+
+            # Save this batch's results
+            batch_file = _RESULTS_DIR / f"batch_{batch_idx + 1:03d}.json"
+            _RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+            batch_grade_counts: dict[str, int] = {"A": 0, "B": 0, "C": 0}
+            for c in batch_cards:
+                batch_grade_counts[c.grade] = batch_grade_counts.get(c.grade, 0) + 1
+            batch_result = PaperTransferResults(
+                generated_at=now_iso(),
+                total_students_processed=len(students),
+                total_papers_fetched=state.progress.papers_fetched,
+                total_papers_analyzed=len(batch_cards),
+                grade_counts=batch_grade_counts,
+                batch_count=1,
+                items=batch_cards,
+            )
+            tmp = batch_file.with_suffix(".tmp")
+            tmp.write_text(batch_result.model_dump_json(indent=2), encoding="utf-8")
+            tmp.replace(batch_file)
+
+            state.progress.papers_analyzed = len(all_cards)
+            _save_state(state)
+            logger.info(
+                "Batch %d/%d done: A=%d B=%d C=%d (total analyzed: %d)",
+                batch_idx + 1, n_batches,
+                batch_grade_counts["A"], batch_grade_counts["B"], batch_grade_counts["C"],
+                len(all_cards),
+            )
+
+        logger.info("Stage 4 done: all %d batches complete", n_batches)
+
+        # ── Stage 5: Merge all batches and save results.json ─────────────────
         grade_counts: dict[str, int] = {"A": 0, "B": 0, "C": 0}
-        for card in cards:
+        for card in all_cards:
             grade_counts[card.grade] = grade_counts.get(card.grade, 0) + 1
 
         # Sort: A → B → C, then by commercialization tier asc within grade
         _grade_order = {"A": 0, "B": 1, "C": 2}
         cards_sorted = sorted(
-            cards,
+            all_cards,
             key=lambda c: (_grade_order.get(c.grade, 3), c.commercialization_tier),
         )
 
@@ -227,8 +294,9 @@ async def run_pipeline(
             generated_at=now_iso(),
             total_students_processed=len(students),
             total_papers_fetched=state.progress.papers_fetched,
-            total_papers_analyzed=len(cards),
+            total_papers_analyzed=len(all_cards),
             grade_counts=grade_counts,
+            batch_count=n_batches,
             items=cards_sorted,
         )
 
@@ -241,10 +309,8 @@ async def run_pipeline(
         state.completed_at = now_iso()
         _save_state(state)
         logger.info(
-            "Pipeline completed: A=%d B=%d C=%d",
-            grade_counts["A"],
-            grade_counts["B"],
-            grade_counts["C"],
+            "Pipeline completed: %d batches, A=%d B=%d C=%d",
+            n_batches, grade_counts["A"], grade_counts["B"], grade_counts["C"],
         )
 
     except Exception as e:
