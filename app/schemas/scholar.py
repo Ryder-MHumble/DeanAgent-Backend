@@ -419,3 +419,51 @@ def parse_research_areas(raw: str) -> list[str]:
             seen.add(p)
             result.append(p)
     return result
+
+
+# ---------------------------------------------------------------------------
+# Helper: validate research areas — detect and remove navigation menu pollution
+# ---------------------------------------------------------------------------
+
+# Navigation/UI keywords that indicate the list is a nav menu, not research areas
+_NAV_KEYWORDS: frozenset[str] = frozenset([
+    "首页", "关于我们", "联系我们", "中心简介", "行政团队", "访问指南",
+    "数学学人", "人才培养", "学术活动", "科学研究", "招募英才",
+    "院系简介", "历史沿革", "组织机构", "行政管理", "基金会", "研究人员",
+    "新闻中心", "通知公告", "学术动态", "返回首页", "网站地图",
+    "English", "搜索", "登录", "注册",
+])
+
+_MAX_RESEARCH_AREAS = 15
+_MIN_AVG_CHARS = 3
+
+
+def validate_research_areas(areas: list[str]) -> list[str]:
+    """Validate research areas list for navigation menu pollution.
+
+    Returns the original list if it looks valid, or [] if it appears
+    to be a navigation menu accidentally captured as research areas.
+
+    Pollution detection rules (any one triggers rejection):
+    1. Count > _MAX_RESEARCH_AREAS (15)
+    2. Any item matches a known navigation keyword
+    3. Average item length < _MIN_AVG_CHARS (3 chars)
+    """
+    if not areas:
+        return areas
+
+    # Rule 1: too many items
+    if len(areas) > _MAX_RESEARCH_AREAS:
+        return []
+
+    # Rule 2: nav keyword present
+    for item in areas:
+        if item in _NAV_KEYWORDS:
+            return []
+
+    # Rule 3: average char length too short
+    avg_len = sum(len(a) for a in areas) / len(areas)
+    if avg_len < _MIN_AVG_CHARS:
+        return []
+
+    return areas

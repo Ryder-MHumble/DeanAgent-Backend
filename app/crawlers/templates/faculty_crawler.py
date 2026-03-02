@@ -50,6 +50,7 @@ from app.schemas.scholar import (
     ScholarRecord,
     compute_scholar_completeness,
     parse_research_areas,
+    validate_research_areas,
 )
 
 # Optional LLM enhancement (only imported if enabled)
@@ -366,6 +367,9 @@ class FacultyCrawler(BaseCrawler):
                         photo_url = detail["photo_url"]
                     if detail.get("research_areas"):
                         research_areas = detail["research_areas"]
+
+                # Validate research_areas — clear if it looks like a nav menu
+                research_areas = validate_research_areas(research_areas)
 
                 # --- Optional: LLM enrichment (on-demand when fields are missing) ---
                 academic_titles: list[str] = []
