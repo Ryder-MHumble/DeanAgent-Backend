@@ -84,9 +84,12 @@ async def call_llm(
     last_error: Exception | None = None
     last_response: dict[str, Any] = {}
 
+    # Use longer timeout for heavier models (e.g. gemini-2.5-pro)
+    timeout_secs = 180.0 if "pro" in (model or "").lower() else 60.0
+
     for attempt in range(3):
         try:
-            async with httpx.AsyncClient(timeout=60.0) as client:
+            async with httpx.AsyncClient(timeout=timeout_secs) as client:
                 resp = await client.post(
                     OPENROUTER_API_URL,
                     json=payload,

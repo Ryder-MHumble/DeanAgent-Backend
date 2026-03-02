@@ -32,6 +32,8 @@ class Settings(BaseSettings):
     # OpenRouter LLM
     OPENROUTER_API_KEY: str = ""
     OPENROUTER_MODEL: str = "google/gemini-2.0-flash-001"
+    # Dedicated model for daily briefing (stronger model for better narrative)
+    BRIEFING_LLM_MODEL: str = "google/gemini-2.5-pro"
 
     # Twitter API (twitterapi.io)
     TWITTER_API_KEY: str = ""

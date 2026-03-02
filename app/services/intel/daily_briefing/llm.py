@@ -8,6 +8,7 @@ from __future__ import annotations
 import logging
 from typing import Any
 
+from app.config import settings
 from app.services.llm_service import LLMError, call_llm_json
 
 logger = logging.getLogger(__name__)
@@ -124,11 +125,15 @@ async def generate_briefing_narrative(
         "每个维度段落中引用该维度最重要的3-5条文章。"
     )
 
+    briefing_model = settings.BRIEFING_LLM_MODEL
+    logger.info("Using model %s for daily briefing generation", briefing_model)
+
     raw = await call_llm_json(
         prompt=user_prompt,
         system_prompt=SYSTEM_PROMPT,
+        model=briefing_model,
         temperature=0.3,
-        max_tokens=4000,
+        max_tokens=8000,
         stage="daily_briefing_generation",
     )
 
