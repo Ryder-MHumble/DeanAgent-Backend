@@ -89,10 +89,21 @@ _RELATION_FIELDS = [
     "relation_updated_at",
 ]
 
+_ACHIEVEMENT_FIELDS = [
+    "representative_publications",
+    "patents",
+    "awards",
+]
+
 
 def _merge_annotation(item: dict[str, Any], ann: dict[str, Any]) -> dict[str, Any]:
     """Overlay user annotation onto a faculty item (in-place, returns item)."""
     for field in _RELATION_FIELDS:
+        if field in ann:
+            item[field] = ann[field]
+
+    # Achievement fields: user annotation completely replaces crawler data
+    for field in _ACHIEVEMENT_FIELDS:
         if field in ann:
             item[field] = ann[field]
 
@@ -487,4 +498,14 @@ def delete_faculty_update(
     if detail is None:
         return None
     annotation_store.delete_user_update(url_hash, update_idx)
+    return get_faculty_detail(url_hash)
+
+
+def update_faculty_achievements(url_hash: str, updates: dict[str, Any]) -> dict[str, Any] | None:
+    """Update academic achievement fields. Returns merged detail or None if faculty not found."""
+    # Verify faculty exists
+    detail = get_faculty_detail(url_hash)
+    if detail is None:
+        return None
+    annotation_store.update_achievements(url_hash, updates)
     return get_faculty_detail(url_hash)

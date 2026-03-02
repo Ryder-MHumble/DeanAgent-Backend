@@ -5,6 +5,8 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, Field  # noqa: F401
 
+from app.schemas.scholar import AwardRecord, PatentRecord, PublicationRecord
+
 # ---------------------------------------------------------------------------
 # List item (lightweight, for GET /faculty/)
 # ---------------------------------------------------------------------------
@@ -67,6 +69,42 @@ class DynamicUpdateOut(BaseModel):
     added_by: str = ""
 
 
+class PublicationRecordOut(BaseModel):
+    """Output version of PublicationRecord for API responses."""
+
+    title: str = ""
+    venue: str = ""
+    year: str = ""
+    authors: str = ""
+    url: str = ""
+    citation_count: int = -1
+    is_corresponding: bool = False
+    added_by: str = ""
+
+
+class PatentRecordOut(BaseModel):
+    """Output version of PatentRecord for API responses."""
+
+    title: str = ""
+    patent_no: str = ""
+    year: str = ""
+    inventors: str = ""
+    patent_type: str = ""
+    status: str = ""
+    added_by: str = ""
+
+
+class AwardRecordOut(BaseModel):
+    """Output version of AwardRecord for API responses."""
+
+    title: str = ""
+    year: str = ""
+    level: str = ""
+    grantor: str = ""
+    description: str = ""
+    added_by: str = ""
+
+
 # ---------------------------------------------------------------------------
 # Detail response (full ScholarRecord + user annotations merged)
 # ---------------------------------------------------------------------------
@@ -116,6 +154,10 @@ class FacultyDetailResponse(BaseModel):
     h_index: int
     citations_count: int
     metrics_updated_at: str
+    # Achievements [crawler + user-managed]
+    representative_publications: list[PublicationRecordOut]
+    patents: list[PatentRecordOut]
+    awards: list[AwardRecordOut]
     # Institute relations [user-managed]
     is_advisor_committee: bool
     is_adjunct_supervisor: bool
@@ -216,3 +258,20 @@ class UserUpdateCreate(BaseModel):
     source_url: str = Field(default="", description="来源链接（可选）")
     published_at: str = Field(default="", description="事件时间 YYYY-MM-DD 或 ISO8601（可选）")
     added_by: str = Field(description="录入人（用户名），系统自动补充为 'user:{added_by}'")
+
+
+class AchievementUpdate(BaseModel):
+    """PATCH /faculty/{url_hash}/achievements — update academic achievements."""
+
+    representative_publications: list[PublicationRecord] | None = Field(
+        default=None, description="代表性论文列表（传入则完全替换，None 不修改）"
+    )
+    patents: list[PatentRecord] | None = Field(
+        default=None, description="专利列表（传入则完全替换，None 不修改）"
+    )
+    awards: list[AwardRecord] | None = Field(
+        default=None, description="获奖/荣誉列表（传入则完全替换，None 不修改）"
+    )
+    updated_by: str = Field(
+        default="", description="操作人（用户名），系统自动补充为 'user:{updated_by}'"
+    )

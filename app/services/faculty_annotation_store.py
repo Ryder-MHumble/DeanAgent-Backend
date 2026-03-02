@@ -161,3 +161,38 @@ def delete_user_update(url_hash: str, update_idx: int) -> dict[str, Any] | None:
         ann["user_updates"] = user_updates
         _save(data)
     return ann
+
+
+def update_achievements(url_hash: str, updates: dict[str, Any]) -> dict[str, Any]:
+    """Update user-managed academic achievement fields (representative_publications,
+    patents, awards).
+
+    Each field is replaced entirely when provided (not merged). Fields not in *updates*
+    are left unchanged. Auto-sets achievements_updated_at to current UTC time.
+
+    Args:
+        url_hash: Faculty member's unique ID.
+        updates: Dict with keys 'representative_publications', 'patents', 'awards'
+                 (all optional). Each key's value, if provided, replaces the existing
+                 list entirely.
+
+    Returns:
+        Updated annotation dict.
+    """
+    with _lock:
+        data = _load()
+        ann = data.setdefault(url_hash, {})
+
+        _ACHIEVEMENT_FIELDS = {
+            "representative_publications",
+            "patents",
+            "awards",
+        }
+        for key, val in updates.items():
+            if key in _ACHIEVEMENT_FIELDS and val is not None:
+                ann[key] = val
+
+        ann["achievements_updated_by"] = f"user:{updates.get('updated_by', 'unknown')}"
+        ann["achievements_updated_at"] = datetime.now(timezone.utc).isoformat()
+        _save(data)
+    return ann

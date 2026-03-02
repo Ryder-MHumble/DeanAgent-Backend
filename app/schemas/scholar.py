@@ -39,7 +39,6 @@ import re as _re
 
 from pydantic import BaseModel, Field
 
-
 # ---------------------------------------------------------------------------
 # Sub-models
 # ---------------------------------------------------------------------------
@@ -52,6 +51,81 @@ class EducationRecord(BaseModel):
     institution: str = ""    # 毕业/研修院校
     year: str = ""           # 毕业年份（字符串支持 "2003–2007" 区间）
     major: str = ""          # 专业/研究方向
+
+
+class PublicationRecord(BaseModel):
+    """Single representative publication entry. [爬虫/用户]"""
+
+    title: str = ""
+    """论文标题"""
+
+    venue: str = ""
+    """期刊/会议名称，如 'NeurIPS 2024'"""
+
+    year: str = ""
+    """发表年份，如 '2024'"""
+
+    authors: str = ""
+    """作者列表（逗号分隔）"""
+
+    url: str = ""
+    """论文链接（DOI/arXiv/ACM 等）"""
+
+    citation_count: int = -1
+    """被引次数（-1 = 未知）"""
+
+    is_corresponding: bool = False
+    """是否通讯作者"""
+
+    added_by: str = "crawler"
+    """数据来源: 'crawler' | 'user:{username}'"""
+
+
+class PatentRecord(BaseModel):
+    """Single patent entry. [爬虫/用户]"""
+
+    title: str = ""
+    """专利名称"""
+
+    patent_no: str = ""
+    """专利号，如 'CN202310001234.X'"""
+
+    year: str = ""
+    """授权/申请年份"""
+
+    inventors: str = ""
+    """发明人列表（逗号分隔）"""
+
+    patent_type: str = ""
+    """专利类型: 'invention' | 'utility' | 'design' | ''"""
+
+    status: str = ""
+    """专利状态: 'granted' | 'pending' | ''"""
+
+    added_by: str = "crawler"
+    """数据来源: 'crawler' | 'user:{username}'"""
+
+
+class AwardRecord(BaseModel):
+    """Single award / honor entry. [爬虫/用户]"""
+
+    title: str = ""
+    """奖项名称，如 '国家科技进步二等奖'"""
+
+    year: str = ""
+    """获奖年份"""
+
+    level: str = ""
+    """级别: 'national' | 'provincial' | 'institutional' | 'international' | ''"""
+
+    grantor: str = ""
+    """颁奖机构/组织，如 '中华人民共和国国务院'"""
+
+    description: str = ""
+    """简要说明"""
+
+    added_by: str = "crawler"
+    """数据来源: 'crawler' | 'user:{username}'"""
 
 
 class DynamicUpdate(BaseModel):
@@ -201,6 +275,16 @@ class ScholarRecord(BaseModel):
 
     metrics_updated_at: str = ""
     """学术指标最后更新时间 ISO8601"""
+
+    # ===== 学术成就 [爬虫/用户] =====
+    representative_publications: list[PublicationRecord] = Field(default_factory=list)
+    """代表性论文列表（来源：个人主页/Google Scholar，或用户录入）"""
+
+    patents: list[PatentRecord] = Field(default_factory=list)
+    """专利列表（来源：个人主页/专利库，或用户录入）"""
+
+    awards: list[AwardRecord] = Field(default_factory=list)
+    """获奖/荣誉列表（来源：个人主页，或用户录入）"""
 
     # ===== 与两院关系 [用户] =====
     # 两院 = 中关村人工智能研究院（BIGAI）+ 北京中关村学院（ZGC Academy）

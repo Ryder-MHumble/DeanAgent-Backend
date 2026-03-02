@@ -14,6 +14,7 @@ from __future__ import annotations
 from fastapi import APIRouter, HTTPException, Query
 
 from app.schemas.faculty import (
+    AchievementUpdate,
     FacultyDetailResponse,
     FacultyListResponse,
     FacultySourcesResponse,
@@ -178,6 +179,25 @@ async def delete_update(url_hash: str, update_idx: int):
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
+    if result is None:
+        raise HTTPException(status_code=404, detail=f"Faculty '{url_hash}' not found")
+    return result
+
+
+@router.patch(
+    "/{url_hash}/achievements",
+    response_model=FacultyDetailResponse,
+    summary="更新学术成就",
+    description=(
+        "更新指定师资的学术成就字段（代表性论文、专利、获奖）。"
+        "每个字段传入后会完全替换（而非追加），传 null 或不传则保持不变。"
+        "这些字段由用户维护，但爬虫也可自动填充初始值。"
+        "achievements_updated_at 由服务端自动填写。"
+    ),
+)
+async def update_achievements(url_hash: str, body: AchievementUpdate):
+    updates = body.model_dump(exclude_none=True)
+    result = svc.update_faculty_achievements(url_hash, updates)
     if result is None:
         raise HTTPException(status_code=404, detail=f"Faculty '{url_hash}' not found")
     return result
