@@ -1,0 +1,256 @@
+"""Async pipeline: fetch students → papers → arXiv abstracts → LLM analysis → save."""
+from __future__ import annotations
+
+import asyncio
+import logging
+from datetime import date, timedelta
+from pathlib import Path
+
+from app.schemas.intel.paper_transfer import (
+    PaperMeta,
+    PaperTransferResults,
+    PipelineProgress,
+    PipelineRunState,
+    StudentContact,
+    StudentMeta,
+    TransformationCard,
+)
+from app.services.intel.paper_transfer.external_api import (
+    fetch_all_students,
+    fetch_arxiv_abstract,
+    fetch_student_papers,
+)
+from app.services.intel.paper_transfer.llm import enrich_paper
+from app.services.intel.paper_transfer.rules import classify_paper_by_rules
+
+logger = logging.getLogger(__name__)
+
+_RESULTS_DIR = Path("data/processed/paper_transfer")
+_STATE_FILE = _RESULTS_DIR / "run_state.json"
+_RESULTS_FILE = _RESULTS_DIR / "results.json"
+
+# In-process guard: only one pipeline run at a time
+_running = False
+
+
+def _save_state(state: PipelineRunState) -> None:
+    _RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    tmp = _STATE_FILE.with_suffix(".tmp")
+    tmp.write_text(state.model_dump_json(indent=2), encoding="utf-8")
+    tmp.replace(_STATE_FILE)
+
+
+def load_state() -> PipelineRunState:
+    if not _STATE_FILE.exists():
+        return PipelineRunState(status="idle")
+    try:
+        return PipelineRunState.model_validate_json(_STATE_FILE.read_text(encoding="utf-8"))
+    except Exception:
+        return PipelineRunState(status="idle")
+
+
+def load_results() -> PaperTransferResults | None:
+    if not _RESULTS_FILE.exists():
+        return None
+    try:
+        return PaperTransferResults.model_validate_json(
+            _RESULTS_FILE.read_text(encoding="utf-8")
+        )
+    except Exception:
+        return None
+
+
+def is_running() -> bool:
+    return _running
+
+
+async def run_pipeline(
+    date_from: str | None,
+    school_filter: str | None,
+    max_papers: int,
+) -> None:
+    """Full pipeline: fetch → enrich → classify → save.
+
+    Intended to be run as an asyncio background task via asyncio.create_task().
+    """
+    global _running
+    _running = True
+
+    from datetime import datetime, timezone
+
+    def now_iso() -> str:
+        return datetime.now(timezone.utc).isoformat()
+
+    if not date_from:
+        date_from = (date.today() - timedelta(days=180)).isoformat()
+
+    state = PipelineRunState(
+        status="running",
+        started_at=now_iso(),
+        date_from=date_from,
+        school_filter=school_filter,
+        max_papers=max_papers,
+        progress=PipelineProgress(),
+    )
+    _save_state(state)
+
+    try:
+        # ── Stage 1: Fetch students ──────────────────────────────────────────
+        students = await fetch_all_students(school_filter)
+        state.progress.students_fetched = len(students)
+        _save_state(state)
+        logger.info("Stage 1 done: %d students fetched", len(students))
+
+        # ── Stage 2: Fetch papers for every student (concurrent, max 10) ───────
+        fetch_semaphore = asyncio.Semaphore(10)
+
+        async def _fetch_papers(student: dict) -> list[tuple[dict, dict]]:
+            async with fetch_semaphore:
+                papers = await fetch_student_papers(student["student_id"], date_from)
+            return [(paper, student) for paper in papers]
+
+        results_per_student = await asyncio.gather(
+            *[_fetch_papers(s) for s in students]
+        )
+        all_pairs: list[tuple[dict, dict]] = [
+            pair for pairs in results_per_student for pair in pairs
+        ]
+
+        state.progress.papers_fetched = len(all_pairs)
+        _save_state(state)
+        logger.info("Stage 2 done: %d paper-student pairs fetched", len(all_pairs))
+
+        # Apply max_papers cap: keep newest papers first
+        if len(all_pairs) > max_papers:
+            all_pairs.sort(
+                key=lambda x: x[0].get("publication_date") or "", reverse=True
+            )
+            all_pairs = all_pairs[:max_papers]
+            logger.info("Capped to %d pairs per max_papers limit", max_papers)
+
+        # ── Stage 3: Fetch arXiv abstracts (concurrently, max 10 in flight) ──
+        abstract_semaphore = asyncio.Semaphore(10)
+
+        async def _fetch_abstract(pair: tuple[dict, dict]) -> tuple[dict, dict]:
+            paper, student = pair
+            if paper.get("arxiv_id") and not paper.get("abstract"):
+                async with abstract_semaphore:
+                    abstract = await fetch_arxiv_abstract(paper["arxiv_id"])
+                    paper = {**paper, "abstract": abstract}
+            return paper, student
+
+        enriched_pairs = list(
+            await asyncio.gather(*[_fetch_abstract(p) for p in all_pairs])
+        )
+        state.progress.abstracts_fetched = sum(
+            1 for p, _ in enriched_pairs if p.get("abstract")
+        )
+        _save_state(state)
+        logger.info(
+            "Stage 3 done: %d abstracts fetched", state.progress.abstracts_fetched
+        )
+
+        # ── Stage 4: LLM classification + card generation ────────────────────
+        llm_semaphore = asyncio.Semaphore(5)
+
+        async def _analyze(paper: dict, student: dict) -> TransformationCard:
+            rule_result = classify_paper_by_rules(
+                paper.get("title", ""), paper.get("abstract")
+            )
+            async with llm_semaphore:
+                llm_result = await enrich_paper(
+                    title=paper.get("title", ""),
+                    abstract=paper.get("abstract"),
+                    venue=paper.get("venue"),
+                    publication_date=paper.get("publication_date"),
+                )
+            raw_contact = student.get("contact") or {}
+            return TransformationCard(
+                paper=PaperMeta(
+                    paper_id=paper.get("paper_id", ""),
+                    title=paper.get("title", ""),
+                    url=paper.get("url"),
+                    abstract=paper.get("abstract"),
+                    publication_date=paper.get("publication_date"),
+                    venue=paper.get("venue"),
+                    doi=paper.get("doi"),
+                    arxiv_id=paper.get("arxiv_id"),
+                    student_name_list=paper.get("student_name_list") or [],
+                ),
+                student=StudentMeta(
+                    student_id=student.get("student_id", ""),
+                    name=student.get("name", ""),
+                    name_cn=student.get("name_cn", ""),
+                    name_en=student.get("name_en", ""),
+                    school=student.get("school", ""),
+                    school_cn=student.get("school_cn", ""),
+                    contact=StudentContact(
+                        email=raw_contact.get("email"),
+                        phone=raw_contact.get("phone"),
+                        wechat=raw_contact.get("wechat"),
+                    ),
+                ),
+                grade=llm_result["grade"],
+                grade_reason=llm_result["grade_reason"],
+                content_type=llm_result.get("content_type") or rule_result["content_type"],
+                commercialization_tier=(
+                    llm_result.get("commercialization_tier")
+                    or rule_result["commercialization_tier"]
+                ),
+                matched_signals=rule_result["matched_signals"],
+                tech_summary=llm_result["tech_summary"],
+                transformation_directions=llm_result["transformation_directions"],
+                maturity_level=llm_result["maturity_level"],
+                negotiation_angle=llm_result["negotiation_angle"],
+                recommendation_reason=llm_result["recommendation_reason"],
+            )
+
+        cards: list[TransformationCard] = list(
+            await asyncio.gather(*[_analyze(p, s) for p, s in enriched_pairs])
+        )
+        state.progress.papers_analyzed = len(cards)
+        logger.info("Stage 4 done: %d papers analyzed", len(cards))
+
+        # ── Stage 5: Aggregate and save ──────────────────────────────────────
+        grade_counts: dict[str, int] = {"A": 0, "B": 0, "C": 0}
+        for card in cards:
+            grade_counts[card.grade] = grade_counts.get(card.grade, 0) + 1
+
+        # Sort: A → B → C, then by commercialization tier asc within grade
+        _grade_order = {"A": 0, "B": 1, "C": 2}
+        cards_sorted = sorted(
+            cards,
+            key=lambda c: (_grade_order.get(c.grade, 3), c.commercialization_tier),
+        )
+
+        results = PaperTransferResults(
+            generated_at=now_iso(),
+            total_students_processed=len(students),
+            total_papers_fetched=state.progress.papers_fetched,
+            total_papers_analyzed=len(cards),
+            grade_counts=grade_counts,
+            items=cards_sorted,
+        )
+
+        _RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+        tmp = _RESULTS_FILE.with_suffix(".tmp")
+        tmp.write_text(results.model_dump_json(indent=2), encoding="utf-8")
+        tmp.replace(_RESULTS_FILE)
+
+        state.status = "completed"
+        state.completed_at = now_iso()
+        _save_state(state)
+        logger.info(
+            "Pipeline completed: A=%d B=%d C=%d",
+            grade_counts["A"],
+            grade_counts["B"],
+            grade_counts["C"],
+        )
+
+    except Exception as e:
+        logger.exception("Pipeline failed: %s", e)
+        state.status = "failed"
+        state.error = str(e)
+        _save_state(state)
+    finally:
+        _running = False

@@ -167,6 +167,7 @@ class FacultyDetailResponse(BaseModel):
     is_advisor_committee: bool
     is_adjunct_supervisor: bool
     supervised_students: list[str]
+    supervised_students_count: int = 0
     joint_research_projects: list[str]
     joint_management_roles: list[str]
     academic_exchange_records: list[str]

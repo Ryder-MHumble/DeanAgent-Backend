@@ -19,6 +19,7 @@ from typing import Any
 from app.crawlers.utils.json_storage import DATA_DIR, LATEST_FILENAME
 from app.scheduler.manager import load_all_source_configs
 from app.services import faculty_annotation_store as annotation_store
+from app.services import supervised_student_store as student_store
 from app.services.intel.shared import parse_source_filter
 from app.services.source_state import get_all_source_states
 
@@ -367,7 +368,9 @@ def get_faculty_detail(url_hash: str) -> dict[str, Any] | None:
     items = _load_all_with_annotations()
     for item in items:
         if item.get("url_hash", "") == url_hash:
-            return _to_detail(item)
+            detail = _to_detail(item)
+            detail["supervised_students_count"] = student_store.count_students(url_hash)
+            return detail
     return None
 
 

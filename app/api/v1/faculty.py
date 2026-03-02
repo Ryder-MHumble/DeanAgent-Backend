@@ -1,15 +1,20 @@
 """Faculty API — /api/v1/faculty/
 
 Endpoints:
-  GET  /faculty/                         师资列表（分页 + 多维度筛选）
-  GET  /faculty/stats                    统计数据
-  GET  /faculty/sources                  信源列表
-  GET  /faculty/{url_hash}               单条师资详情
-  PATCH /faculty/{url_hash}/basic        更新基础信息（直接修改原始 JSON）
-  PATCH /faculty/{url_hash}/relation     更新「与两院关系」字段（用户管理）
-  POST  /faculty/{url_hash}/updates      新增用户备注动态
-  DELETE /faculty/{url_hash}/updates/{update_idx}  删除用户备注动态
-  PATCH /faculty/{url_hash}/achievements 更新学术成就（论文、专利、奖项）
+  GET  /faculty/                                       师资列表（分页 + 多维度筛选）
+  GET  /faculty/stats                                  统计数据
+  GET  /faculty/sources                                信源列表
+  GET  /faculty/{url_hash}                             单条师资详情
+  PATCH /faculty/{url_hash}/basic                      更新基础信息（直接修改原始 JSON）
+  PATCH /faculty/{url_hash}/relation                   更新「与两院关系」字段（用户管理）
+  POST  /faculty/{url_hash}/updates                    新增用户备注动态
+  DELETE /faculty/{url_hash}/updates/{update_idx}      删除用户备注动态
+  PATCH /faculty/{url_hash}/achievements               更新学术成就（论文、专利、奖项）
+  GET  /faculty/{url_hash}/students                    查询指导学生列表
+  POST /faculty/{url_hash}/students                    新增指导学生
+  GET  /faculty/{url_hash}/students/{student_id}       查询单名学生详情
+  PATCH /faculty/{url_hash}/students/{student_id}      更新学生信息
+  DELETE /faculty/{url_hash}/students/{student_id}     删除学生记录
 """
 from __future__ import annotations
 
@@ -25,7 +30,14 @@ from app.schemas.faculty import (
     InstituteRelationUpdate,
     UserUpdateCreate,
 )
+from app.schemas.supervised_student import (
+    SupervisedStudentCreate,
+    SupervisedStudentListResponse,
+    SupervisedStudentResponse,
+    SupervisedStudentUpdate,
+)
 from app.services import faculty_service as svc
+from app.services import supervised_student_store as student_store
 
 router = APIRouter()
 
@@ -225,3 +237,91 @@ async def update_achievements(url_hash: str, body: AchievementUpdate):
     if result is None:
         raise HTTPException(status_code=404, detail=f"Faculty '{url_hash}' not found")
     return result
+
+
+# ---------------------------------------------------------------------------
+# Supervised students CRUD
+# ---------------------------------------------------------------------------
+
+
+def _assert_faculty_exists(url_hash: str) -> None:
+    """Raise 404 if the faculty member does not exist."""
+    if svc.get_faculty_detail(url_hash) is None:
+        raise HTTPException(status_code=404, detail=f"Faculty '{url_hash}' not found")
+
+
+@router.get(
+    "/{url_hash}/students",
+    response_model=SupervisedStudentListResponse,
+    summary="查询指导学生列表",
+    description="返回指定导师下的所有指导学生记录（联合培养学生）。",
+)
+async def list_students(url_hash: str):
+    _assert_faculty_exists(url_hash)
+    students = student_store.list_students(url_hash)
+    return SupervisedStudentListResponse(
+        total=len(students),
+        faculty_url_hash=url_hash,
+        items=students,
+    )
+
+
+@router.post(
+    "/{url_hash}/students",
+    response_model=SupervisedStudentResponse,
+    summary="新增指导学生",
+    description=(
+        "为指定导师新增一名指导学生记录。"
+        "id / created_at / updated_at 由服务端自动生成，added_by 自动补充为 'user:{added_by}'。"
+    ),
+    status_code=201,
+)
+async def add_student(url_hash: str, body: SupervisedStudentCreate):
+    _assert_faculty_exists(url_hash)
+    record = student_store.add_student(url_hash, body.model_dump())
+    return record
+
+
+@router.get(
+    "/{url_hash}/students/{student_id}",
+    response_model=SupervisedStudentResponse,
+    summary="查询单名学生详情",
+    description="根据学生记录 ID 获取单名指导学生的完整信息。",
+)
+async def get_student(url_hash: str, student_id: str):
+    _assert_faculty_exists(url_hash)
+    record = student_store.get_student(url_hash, student_id)
+    if record is None:
+        raise HTTPException(status_code=404, detail=f"Student '{student_id}' not found")
+    return record
+
+
+@router.patch(
+    "/{url_hash}/students/{student_id}",
+    response_model=SupervisedStudentResponse,
+    summary="更新学生信息",
+    description=(
+        "部分更新指定学生记录。所有字段均可选，传 null 或不传则保持不变。"
+        "updated_at 由服务端自动更新。"
+    ),
+)
+async def update_student(url_hash: str, student_id: str, body: SupervisedStudentUpdate):
+    _assert_faculty_exists(url_hash)
+    updates = body.model_dump(exclude_none=True)
+    record = student_store.update_student(url_hash, student_id, updates)
+    if record is None:
+        raise HTTPException(status_code=404, detail=f"Student '{student_id}' not found")
+    return record
+
+
+@router.delete(
+    "/{url_hash}/students/{student_id}",
+    summary="删除学生记录",
+    description="删除指定导师下的一条学生记录。",
+    status_code=204,
+)
+async def delete_student(url_hash: str, student_id: str):
+    _assert_faculty_exists(url_hash)
+    deleted = student_store.delete_student(url_hash, student_id)
+    if not deleted:
+        raise HTTPException(status_code=404, detail=f"Student '{student_id}' not found")
