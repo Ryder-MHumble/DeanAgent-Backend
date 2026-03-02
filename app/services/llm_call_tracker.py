@@ -4,7 +4,6 @@ from __future__ import annotations
 import json
 import logging
 from datetime import datetime, timezone
-from pathlib import Path
 from typing import Any
 
 from app.config import BASE_DIR
@@ -24,6 +23,10 @@ PRICING_MAP = {
     "google/gemini-2.5-pro": {
         "input": 1.25,
         "output": 5.0,
+    },
+    "google/gemini-3-flash-preview": {
+        "input": 0.075,
+        "output": 0.30,
     },
     "openai/gpt-4o": {
         "input": 2.5,
