@@ -628,7 +628,7 @@ cmd_crawl() {
     local dimension="${1:-}"
     local concurrency="${2:-4}"
 
-    if [[ -z "$dimension" ]]; then
+    if [[ -z "$dimension" ]] || [[ "$dimension" == "all" ]]; then
         printf " ${C}⟳${NC}  Running crawler for all dimensions...\n"
         cd "$PROJECT_DIR"
         python3 scripts/run_all_crawl.py --concurrency "$concurrency"
