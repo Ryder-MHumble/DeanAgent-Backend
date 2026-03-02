@@ -5,9 +5,11 @@ Endpoints:
   GET  /faculty/stats                    统计数据
   GET  /faculty/sources                  信源列表
   GET  /faculty/{url_hash}               单条师资详情
+  PATCH /faculty/{url_hash}/basic        更新基础信息（直接修改原始 JSON）
   PATCH /faculty/{url_hash}/relation     更新「与两院关系」字段（用户管理）
   POST  /faculty/{url_hash}/updates      新增用户备注动态
   DELETE /faculty/{url_hash}/updates/{update_idx}  删除用户备注动态
+  PATCH /faculty/{url_hash}/achievements 更新学术成就（论文、专利、奖项）
 """
 from __future__ import annotations
 
@@ -15,6 +17,7 @@ from fastapi import APIRouter, HTTPException, Query
 
 from app.schemas.faculty import (
     AchievementUpdate,
+    FacultyBasicUpdate,
     FacultyDetailResponse,
     FacultyListResponse,
     FacultySourcesResponse,
@@ -125,6 +128,27 @@ async def get_faculty(url_hash: str):
 # ---------------------------------------------------------------------------
 # Write endpoints (user-managed fields only)
 # ---------------------------------------------------------------------------
+
+
+@router.patch(
+    "/{url_hash}/basic",
+    response_model=FacultyDetailResponse,
+    summary="更新基础信息",
+    description=(
+        "更新指定师资的基础信息字段（名称、职称、简介、联系方式、学术链接、教育经历等）。"
+        "直接修改原始 JSON 文件（data/raw/university_faculty/.../latest.json）。"
+        "所有字段均可选，仅传入需要修改的字段；传 null 或不传则保持不变。"
+        "列表字段（research_areas/keywords/academic_titles/education 等）"
+        "传入 [] 表示清空，传入非空列表则完全替换。"
+        "返回更新后的完整 faculty detail（包含 annotations 合并结果）。"
+    ),
+)
+async def update_basic(url_hash: str, body: FacultyBasicUpdate):
+    updates = body.model_dump(exclude_none=True)
+    result = svc.update_faculty_basic(url_hash, updates)
+    if result is None:
+        raise HTTPException(status_code=404, detail=f"Faculty '{url_hash}' not found")
+    return result
 
 
 @router.patch(

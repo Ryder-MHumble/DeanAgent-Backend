@@ -349,6 +349,13 @@ class ScholarRecord(BaseModel):
     data_completeness: int = 0
     """爬虫数据完整度 0–100（仅评估可爬取字段，不含用户维护字段）"""
 
+    # ===== 用户修改审计 [用户] =====
+    _user_modified_at: str | None = None
+    """用户手动修改基础信息的最后时间 ISO8601（无则 None）"""
+
+    _user_modified_by: str | None = None
+    """用户手动修改的记录人（username 或备注）"""
+
 
 # ---------------------------------------------------------------------------
 # Helper: compute data completeness score (crawled fields only)

@@ -5,7 +5,12 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, Field  # noqa: F401
 
-from app.schemas.scholar import AwardRecord, PatentRecord, PublicationRecord
+from app.schemas.scholar import (
+    AwardRecord,
+    EducationRecord,
+    PatentRecord,
+    PublicationRecord,
+)
 
 # ---------------------------------------------------------------------------
 # List item (lightweight, for GET /faculty/)
@@ -275,3 +280,52 @@ class AchievementUpdate(BaseModel):
     updated_by: str = Field(
         default="", description="操作人（用户名），系统自动补充为 'user:{updated_by}'"
     )
+
+
+class FacultyBasicUpdate(BaseModel):
+    """PATCH /faculty/{url_hash}/basic — update basic faculty information.
+
+    All fields are optional. None means "do not modify" (not clear/empty).
+    Pass empty list [] to clear a list field; pass non-empty list to replace entirely.
+    Directly modifies the raw JSON file (data/raw/university_faculty/.../latest.json).
+    """
+
+    # 基本信息
+    name: str | None = Field(default=None, description="中文姓名")
+    name_en: str | None = Field(default=None, description="英文姓名")
+    gender: str | None = Field(default=None, description="性别: 'male' | 'female' | ''")
+    photo_url: str | None = Field(default=None, description="照片 URL")
+    profile_url: str | None = Field(default=None, description="个人主页 URL")
+
+    # 机构
+    university: str | None = Field(default=None, description="所属大学")
+    department: str | None = Field(default=None, description="所属院系")
+
+    # 职称
+    position: str | None = Field(default=None, description="职称")
+    academic_titles: list[str] | None = Field(default=None, description="学术头衔列表")
+    is_academician: bool | None = Field(default=None, description="是否院士")
+
+    # 研究方向
+    research_areas: list[str] | None = Field(default=None, description="研究方向列表")
+    keywords: list[str] | None = Field(default=None, description="关键词列表")
+    bio: str | None = Field(default=None, description="中文个人简介")
+    bio_en: str | None = Field(default=None, description="英文个人简介")
+
+    # 联系方式
+    email: str | None = Field(default=None, description="邮箱地址")
+    phone: str | None = Field(default=None, description="电话号码")
+    office: str | None = Field(default=None, description="办公室地址")
+
+    # 学术链接
+    lab_url: str | None = Field(default=None, description="实验室/课题组主页 URL")
+    google_scholar_url: str | None = Field(default=None, description="Google Scholar 主页")
+    dblp_url: str | None = Field(default=None, description="DBLP 作者主页")
+    orcid: str | None = Field(default=None, description="ORCID ID")
+
+    # 教育经历
+    phd_institution: str | None = Field(default=None, description="博士毕业院校")
+    phd_year: str | None = Field(default=None, description="博士毕业年份")
+    education: list[EducationRecord] | None = Field(default=None, description="完整教育经历列表")
+
+    updated_by: str = Field(default="user", description="修改人标识（默认 'user'）")

@@ -12,6 +12,8 @@ import json
 import logging
 import math
 from collections import Counter
+from datetime import UTC, datetime
+from pathlib import Path
 from typing import Any
 
 from app.crawlers.utils.json_storage import DATA_DIR, LATEST_FILENAME
@@ -511,4 +513,82 @@ def update_faculty_achievements(url_hash: str, updates: dict[str, Any]) -> dict[
     if detail is None:
         return None
     annotation_store.update_achievements(url_hash, updates)
+    return get_faculty_detail(url_hash)
+
+
+# ---------------------------------------------------------------------------
+# Raw JSON modification helpers
+# ---------------------------------------------------------------------------
+
+
+def _find_raw_file_by_hash(url_hash: str) -> tuple[Path, int] | None:
+    """Locate the raw JSON file and item index for a given url_hash.
+
+    Returns (file_path, item_index) or None if not found.
+    """
+    for path in _iter_faculty_jsons():
+        try:
+            with open(path, encoding="utf-8") as f:
+                data = json.load(f)
+        except (json.JSONDecodeError, OSError):
+            continue
+
+        items = data.get("items", [])
+        for idx, item in enumerate(items):
+            if item.get("url_hash") == url_hash:
+                return path, idx
+    return None
+
+
+def update_faculty_basic(url_hash: str, updates: dict[str, Any]) -> dict[str, Any] | None:
+    """Update basic faculty information by modifying raw JSON file directly.
+
+    Locates the faculty record by url_hash, applies field updates to the
+    'extra' (ScholarRecord) section, and writes back atomically.
+
+    Returns the updated full detail (merged with annotations) or None if not found.
+    """
+    result = _find_raw_file_by_hash(url_hash)
+    if result is None:
+        return None
+
+    file_path, item_idx = result
+
+    # Load the raw JSON
+    with open(file_path, encoding="utf-8") as f:
+        data = json.load(f)
+
+    item = data["items"][item_idx]
+    scholar = item.get("extra") or {}
+
+    # Apply updates: only non-None fields
+    update_dict = {k: v for k, v in updates.items() if v is not None}
+    for key, value in update_dict.items():
+        if key == "updated_by":
+            # Skip this metadata field, handle separately
+            continue
+
+        if isinstance(value, list):
+            # For list fields, convert Pydantic models to dicts if needed
+            scholar[key] = [
+                v.model_dump() if hasattr(v, "model_dump") else v
+                for v in value
+            ]
+        else:
+            scholar[key] = value
+
+    # Write audit metadata
+    scholar["_user_modified_at"] = datetime.now(UTC).isoformat()
+    scholar["_user_modified_by"] = updates.get("updated_by", "user")
+
+    item["extra"] = scholar
+    data["items"][item_idx] = item
+
+    # Atomic write: write to temp file, then replace
+    tmp_path = file_path.with_suffix(".tmp")
+    with open(tmp_path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    tmp_path.replace(file_path)
+
+    # Return the full detail (merged with annotations)
     return get_faculty_detail(url_hash)
