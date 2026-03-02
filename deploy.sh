@@ -613,19 +613,172 @@ cmd_logs() {
     fi
 }
 
+cmd_crawl() {
+    show_banner
+
+    printf "\n ${BOLD}${C}◆ Data Crawling${NC}\n"
+    _hr
+    printf "\n"
+
+    if ! ensure_venv; then
+        fail "No virtual environment. Run: ./deploy.sh init"
+        return 1
+    fi
+
+    local dimension="${1:-}"
+    local concurrency="${2:-4}"
+
+    if [[ -z "$dimension" ]]; then
+        printf " ${C}⟳${NC}  Running crawler for all dimensions...\n"
+        cd "$PROJECT_DIR"
+        python3 scripts/run_all_crawl.py --concurrency "$concurrency"
+    else
+        printf " ${C}⟳${NC}  Running crawler for dimension: ${BOLD}%s${NC}\n" "$dimension"
+        cd "$PROJECT_DIR"
+        python3 scripts/run_all_crawl.py --dimension "$dimension" --concurrency "$concurrency"
+    fi
+
+    printf "\n"
+    if [[ $? -eq 0 ]]; then
+        ok "Crawl completed successfully"
+    else
+        fail "Crawl failed — check logs"
+        return 1
+    fi
+}
+
+cmd_crawl_single() {
+    show_banner
+
+    printf "\n ${BOLD}${C}◆ Single Source Crawl${NC}\n"
+    _hr
+    printf "\n"
+
+    if ! ensure_venv; then
+        fail "No virtual environment. Run: ./deploy.sh init"
+        return 1
+    fi
+
+    local source_id="${1:-}"
+    if [[ -z "$source_id" ]]; then
+        fail "Source ID required. Usage: ./deploy.sh crawl-single <source_id>"
+        return 1
+    fi
+
+    printf " ${C}⟳${NC}  Running crawler for source: ${BOLD}%s${NC}\n" "$source_id"
+    cd "$PROJECT_DIR"
+    python3 scripts/run_single_crawl.py --source "$source_id"
+
+    printf "\n"
+    if [[ $? -eq 0 ]]; then
+        ok "Crawl completed successfully"
+    else
+        fail "Crawl failed — check logs"
+        return 1
+    fi
+}
+
+cmd_api_usage() {
+    show_banner
+
+    printf "\n ${BOLD}${C}◆ LLM API Usage${NC}\n"
+    _hr
+    printf "\n"
+
+    if ! ensure_venv; then
+        fail "No virtual environment. Run: ./deploy.sh init"
+        return 1
+    fi
+
+    local stats_file="$PROJECT_DIR/data/state/llm_api_stats.json"
+
+    if [[ ! -f "$stats_file" ]]; then
+        warn "No API usage stats found yet"
+        dim "   Stats will be recorded in: $stats_file"
+        printf "\n"
+        return 0
+    fi
+
+    printf " ${BOLD}API Usage Statistics${NC}\n"
+    _hr
+
+    cd "$PROJECT_DIR"
+    python3 << 'PYEOF'
+import json
+from pathlib import Path
+from collections import defaultdict
+
+stats_file = Path("data/state/llm_api_stats.json")
+if not stats_file.exists():
+    print(" ⊘  No stats file found")
+else:
+    try:
+        with open(stats_file, encoding="utf-8") as f:
+            data = json.load(f)
+
+        if not data:
+            print(" ⊘  No stats recorded yet")
+        else:
+            # Summary by provider
+            by_provider = defaultdict(lambda: {"calls": 0, "tokens": 0, "cost": 0})
+            total_cost = 0
+            total_calls = 0
+
+            for entry in data.get("calls", []):
+                provider = entry.get("provider", "unknown")
+                calls = by_provider[provider]
+                calls["calls"] += 1
+                calls["tokens"] += entry.get("total_tokens", 0)
+                calls["cost"] += entry.get("cost_usd", 0)
+                total_cost += entry.get("cost_usd", 0)
+                total_calls += 1
+
+            # Print summary
+            print(f"\n   Total Calls:     {total_calls}")
+            print(f"   Total Cost:      ${total_cost:.4f} USD\n")
+
+            print("   By Provider:")
+            for provider in sorted(by_provider.keys()):
+                stats = by_provider[provider]
+                print(f"   • {provider:<20} {stats['calls']:>4} calls | {stats['tokens']:>8} tokens | ${stats['cost']:>8.4f}")
+
+            # Recent calls
+            recent = sorted(data.get("calls", []), key=lambda x: x.get("timestamp", ""), reverse=True)[:5]
+            if recent:
+                print("\n   Recent Calls (Last 5):")
+                for call in recent:
+                    ts = call.get("timestamp", "?")[:10]
+                    model = call.get("model", "?")
+                    cost = call.get("cost_usd", 0)
+                    print(f"   • {ts} | {model:<25} | ${cost:>8.4f}")
+
+            print()
+    except json.JSONDecodeError:
+        print(" ✗  Invalid JSON in stats file")
+    except Exception as e:
+        print(f" ✗  Error reading stats: {e}")
+
+PYEOF
+
+    printf "\n"
+}
+
 cmd_help() {
     show_banner
     printf " ${BOLD}Usage${NC}  ./deploy.sh ${D}[command] [options]${NC}\n\n"
 
     printf " ${BOLD}Commands${NC}\n\n"
-    printf "   ${G}deploy${NC}     Full deploy: pull → venv → deps → start  ${D}(default)${NC}\n"
-    printf "   ${G}init${NC}       Initialize environment only\n"
-    printf "   ${G}start${NC}      Start service\n"
-    printf "   ${G}stop${NC}       Stop service\n"
-    printf "   ${G}restart${NC}    Restart service\n"
-    printf "   ${G}status${NC}     Show dashboard\n"
-    printf "   ${G}logs${NC}       View logs ${D}(-f to follow)${NC}\n"
-    printf "   ${G}help${NC}       This message\n"
+    printf "   ${G}deploy${NC}        Full deploy: pull → venv → deps → start  ${D}(default)${NC}\n"
+    printf "   ${G}init${NC}          Initialize environment only\n"
+    printf "   ${G}start${NC}         Start service\n"
+    printf "   ${G}stop${NC}          Stop service\n"
+    printf "   ${G}restart${NC}       Restart service\n"
+    printf "   ${G}status${NC}        Show dashboard\n"
+    printf "   ${G}logs${NC}          View logs ${D}(-f to follow)${NC}\n"
+    printf "   ${G}crawl${NC}         Run data crawler {{all|dimension_name}} {{concurrency}}\n"
+    printf "   ${G}crawl-single${NC}  Run single source crawler {{source_id}}\n"
+    printf "   ${G}api-usage${NC}     View LLM API usage statistics\n"
+    printf "   ${G}help${NC}          This message\n"
 
     printf "\n ${BOLD}Options${NC}\n\n"
     printf "   --port N          Listen port ${D}(default: %s)${NC}\n" "$PORT"
@@ -638,6 +791,10 @@ cmd_help() {
     printf "   ${D}\$${NC} ./deploy.sh              ${D}# one-command deploy${NC}\n"
     printf "   ${D}\$${NC} ./deploy.sh logs -f       ${D}# follow logs${NC}\n"
     printf "   ${D}\$${NC} ./deploy.sh status         ${D}# view dashboard${NC}\n"
+    printf "   ${D}\$${NC} ./deploy.sh crawl all      ${D}# crawl all dimensions${NC}\n"
+    printf "   ${D}\$${NC} ./deploy.sh crawl university_faculty 2  {{D}# crawl faculty with concurrency 2${NC}\n"
+    printf "   ${D}\$${NC} ./deploy.sh crawl-single tsinghua_cs_faculty  {{D}# crawl single source${NC}\n"
+    printf "   ${D}\$${NC} ./deploy.sh api-usage      {{D}# view API usage stats${NC}\n"
     printf "\n"
 }
 
@@ -645,6 +802,8 @@ cmd_help() {
 COMMAND="${1:-deploy}"
 shift 2>/dev/null || true
 
+# Separate positional args from flags for crawl commands
+declare -a POSITIONAL_ARGS=()
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --port)       PORT="$2"; shift 2 ;;
@@ -652,7 +811,8 @@ while [[ $# -gt 0 ]]; do
         --tail)       TAIL_LINES="$2"; shift 2 ;;
         --follow|-f)  FOLLOW=true; shift ;;
         --production) PRODUCTION=true; shift ;;
-        *) fail "Unknown option: $1"; cmd_help; exit 1 ;;
+        -*)           fail "Unknown option: $1"; cmd_help; exit 1 ;;
+        *)            POSITIONAL_ARGS+=("$1"); shift ;;
     esac
 done
 
@@ -664,6 +824,9 @@ case "$COMMAND" in
     restart)        cmd_restart ;;
     status)         cmd_status ;;
     logs)           cmd_logs ;;
+    crawl)          cmd_crawl "${POSITIONAL_ARGS[0]:-}" "${POSITIONAL_ARGS[1]:-4}" ;;
+    crawl-single)   cmd_crawl_single "${POSITIONAL_ARGS[0]:-}" ;;
+    api-usage)      cmd_api_usage ;;
     help|--help|-h) cmd_help ;;
     *)              fail "Unknown: $COMMAND"; cmd_help; exit 1 ;;
 esac
