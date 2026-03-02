@@ -21,6 +21,10 @@ PRICING_MAP = {
         "input": 0.075,
         "output": 0.30,
     },
+    "google/gemini-2.5-pro": {
+        "input": 1.25,
+        "output": 5.0,
+    },
     "openai/gpt-4o": {
         "input": 2.5,
         "output": 10.0,
