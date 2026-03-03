@@ -144,7 +144,7 @@ class TsinghuaCsFacultyCrawler(BaseCrawler):
                 main_content = soup.find("div", class_="main")
 
             if main_content:
-                # 提取完整文本
+                # 提取完整文本作为 bio
                 full_text = main_content.get_text(separator="\n", strip=True)
                 details["bio"] = _re.sub(r"\n\s*\n", "\n", full_text)
 
@@ -153,15 +153,67 @@ class TsinghuaCsFacultyCrawler(BaseCrawler):
                 if email:
                     details["email"] = email
 
-                # 提取职位（常见模式）
-                position_match = _re.search(r"(教授|副教授|助理教授|讲师|助教|研究员|副研究员)", full_text)
+                # 提取职位（从 "职称：" 后面）
+                position_match = _re.search(r"职称[：:]\s*([^\n]+)", full_text)
                 if position_match:
-                    details["position"] = position_match.group(1)
+                    details["position"] = position_match.group(1).strip()
 
-                # 提取研究方向
-                research_match = _re.search(r"研究方向[：:]\s*([^\n]+)", full_text)
+                # 提取研究方向（从 "研究领域：" 后面）
+                research_match = _re.search(r"研究领域[：:]\s*([^\n]+)", full_text)
                 if research_match:
                     details["research_areas"] = research_match.group(1).strip()
+
+                # 按 h4 标题分段提取信息
+                for h4 in main_content.find_all("h4"):
+                    # 获取该 h4 后面的所有 p 标签，直到下一个 h4
+                    paragraphs = []
+                    current = h4.find_next_sibling()
+                    while current and current.name != "h4":
+                        if current.name == "p":
+                            para_text = current.get_text(strip=True)
+                            if para_text:
+                                paragraphs.append(para_text)
+                        current = current.find_next_sibling()
+
+                    # 第一个段落通常是标题，用它来确定分类
+                    if not paragraphs:
+                        continue
+                    section_title = paragraphs[0]
+                    data_paragraphs = paragraphs[1:]  # 跳过标题段落
+
+                    # 根据标题类型处理
+                    if "教育" in section_title:
+                        for para in data_paragraphs:
+                            # 匹配 "学位 (专业), 学校, 国家, 年份" 的模式
+                            match = _re.match(r"([^,，]+)\s*\(([^)）]*)\)\s*,\s*([^,，]+)\s*,\s*([^,，]+)\s*,\s*(\d{4})", para)
+                            if match:
+                                details["education"].append({
+                                    "year": match.group(5),
+                                    "degree": match.group(1).strip(),
+                                    "institution": match.group(3).strip(),
+                                    "major": match.group(2).strip(),
+                                })
+
+                    elif "奖励" in section_title or "荣誉" in section_title:
+                        for para in data_paragraphs:
+                            # 匹配 "奖项名称 (年份)" 或 "奖项名称 (年份)"
+                            year_match = _re.search(r"\((\d{4})\)", para)
+                            year = year_match.group(1) if year_match else ""
+                            details["honors"].append({
+                                "year": year,
+                                "content": para,
+                            })
+
+                    elif "学术成果" in section_title or "论文" in section_title:
+                        for para in data_paragraphs:
+                            if para.startswith("["):
+                                # 匹配 "[1] 论文标题..."
+                                match = _re.match(r"\[(\d+)\]\s*(.+)", para)
+                                if match:
+                                    details["publications"].append({
+                                        "number": match.group(1),
+                                        "content": match.group(2),
+                                    })
 
             return details
 
@@ -301,6 +353,60 @@ class TsinghuaCsFacultyCrawler(BaseCrawler):
 
             record.data_completeness = compute_scholar_completeness(record)
 
+            # Convert ScholarRecord to dict for JSON serialization
+            record_dict = {
+                "name": record.name,
+                "name_en": record.name_en,
+                "gender": record.gender,
+                "photo_url": record.photo_url,
+                "university": record.university,
+                "department": record.department,
+                "secondary_departments": record.secondary_departments,
+                "position": record.position,
+                "academic_titles": record.academic_titles,
+                "is_academician": record.is_academician,
+                "research_areas": record.research_areas,
+                "keywords": record.keywords,
+                "bio": record.bio,
+                "bio_en": record.bio_en,
+                "email": record.email,
+                "phone": record.phone,
+                "office": record.office,
+                "profile_url": record.profile_url,
+                "lab_url": record.lab_url,
+                "google_scholar_url": record.google_scholar_url,
+                "dblp_url": record.dblp_url,
+                "orcid": record.orcid,
+                "phd_institution": record.phd_institution,
+                "phd_year": record.phd_year,
+                "education": [edu.__dict__ for edu in record.education],
+                "publications_count": record.publications_count,
+                "h_index": record.h_index,
+                "citations_count": record.citations_count,
+                "metrics_updated_at": record.metrics_updated_at,
+                "representative_publications": [pub.__dict__ for pub in record.representative_publications],
+                "patents": record.patents,
+                "awards": [award.__dict__ for award in record.awards],
+                "is_advisor_committee": record.is_advisor_committee,
+                "is_adjunct_supervisor": record.is_adjunct_supervisor,
+                "supervised_students": record.supervised_students,
+                "joint_research_projects": record.joint_research_projects,
+                "joint_management_roles": record.joint_management_roles,
+                "academic_exchange_records": record.academic_exchange_records,
+                "is_potential_recruit": record.is_potential_recruit,
+                "institute_relation_notes": record.institute_relation_notes,
+                "relation_updated_by": record.relation_updated_by,
+                "relation_updated_at": record.relation_updated_at,
+                "recent_updates": record.recent_updates,
+                "source_id": record.source_id,
+                "source_url": record.source_url,
+                "crawled_at": record.crawled_at,
+                "first_seen_at": record.first_seen_at,
+                "last_seen_at": record.last_seen_at,
+                "is_active": record.is_active,
+                "data_completeness": record.data_completeness,
+            }
+
             items.append(
                 CrawledItem(
                     title=record.name,
@@ -312,7 +418,7 @@ class TsinghuaCsFacultyCrawler(BaseCrawler):
                     source_id=source_id,
                     dimension=self.config.get("dimension"),
                     tags=self.config.get("tags", []),
-                    extra=record.model_dump() if hasattr(record, 'model_dump') else record.__dict__,
+                    extra=record_dict,
                 )
             )
 
