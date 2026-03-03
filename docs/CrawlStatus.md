@@ -1,6 +1,6 @@
 # 信源爬取状态总览
 
-> 最后更新: 2026-03-01 (v32 university_faculty URL 修复：通过 web search 和 Playwright 验证，修复 10 个禁用源的错误 URL（fudan/tsinghua/pku/sjtu/ustc 各源），启用全部已找到正确 URL 的源；3 个源仍需自定义 Parser（sjtu_ai/tsinghua_sigs/tsinghua_iaiig）待后续开发; v33 detail_selectors 补全：为 20 个高校师资源补全 heading_sections 和 label_prefix_sections，确保完整的信息提取配置; v34 sjtu_ai_faculty 恢复：开发 SJTUAIFacultyCrawler 自定义 Parser 直接调用 /api/teacher?time=xxx 端点，已启用源 34→35; v35 faculty_crawler 增强：修复 heading_sections 正则匹配、集成 LLM 字段提取、修复 5 个高校源 URL/选择器、禁用 3 个不可达源、enable_llm 配置 4 源)
+> 最后更新: 2026-03-02 (v36 文档修正：修正 university_faculty 禁用源详情表（与正文已启用状态同步）；补充指导学生 CRUD、学术成就 PATCH API 已完成说明)
 
 ---
 
@@ -123,8 +123,8 @@ python scripts/process_tech_frontier.py --dry-run
 | talent (对人才) | 7+1† | 4+1† | ✅ 51条 | 86% | `sources/talent.yaml` + twitter |
 | sentiment (对学院舆情) | 1† | 1† | ✅ 20条 | 100% | twitter 跨维度 |
 | events (对日程) | 6 | 4 | ✅ 221条 | 0% (会议列表) | `sources/events.yaml` |
-| university_faculty (高校师资) | 47 | 34 | ✅ 2027位教师 | N/A (师资无正文) | `sources/university_faculty.yaml` |
-| **合计** | **181** | **138** | **2800条+** | **74%** | **138 个数据文件** |
+| university_faculty (高校师资) | 47 | 44 | ✅ 2200+位教师 | N/A (师资无正文) | `sources/university_faculty.yaml` |
+| **合计** | **181** | **148** | **3000条+** | **74%** | **148 个数据文件** |
 
 > † `sources/twitter.yaml` 的 7 个源按 `dimension` 字段分配到 4 个维度：technology 4源、industry 1源、talent 1源、sentiment 1源。
 >
@@ -496,10 +496,12 @@ uvicorn app.main:app --reload
 
 | 总源数 | 已启用 | 已禁用 | 覆盖学校 | 总教师数 | 平均完整度 |
 |--------|--------|--------|---------|---------|-----------|
-| 47 | 39 | 8 | 清华/北大/中科院/上交/复旦/南大/中科大/浙大/人大 | 2200+ | 54.8% |
+| 47 | 44 | 3 | 清华/北大/中科院/上交/复旦/南大/中科大/浙大/人大 | 2200+ | 54.8% |
 
 **数据说明：**
 - v35 修复：+6源（tsinghua_ymsc/sjtu_se/sjtu_qingyuan/ustc_ds/pku_coe/pku_eecs_sz），-2源禁用（tsinghua_iaiig/ustc_se）
+- v34 修复：sjtu_ai_faculty 自定义 Parser 已启用
+- 当前禁用源（3个）：tsinghua_sigs（AJAX+GsapAnimate 前端渲染）、tsinghua_iaiig（ERR_CONNECTION_CLOSED）、ustc_se（官网无公开教师列表页）
 - 完整度评分基于 ScholarRecord schema（0-100分）
 - 评分权重：name(20), bio(15), research_areas(15), position(10), email(10), profile_url(10), photo(5), 其他(15)
 - 典型分数：列表页 ~25-30，含详情页 ~50-70，LLM富化（enable_llm）~70-85
@@ -508,13 +510,13 @@ uvicorn app.main:app --reload
 
 | 学校组 | 源数 | 已启用 | 教师数 | 平均完整度 | 说明 |
 |--------|------|--------|--------|-----------|------|
-| **tsinghua** | 13 | 10 | 683 | 55.3% | 清华各院系，v31 SE修复(5→41)，3个禁用(ymsc/sigs/iaiig) |
-| **pku** | 9 | 7 | 275 | 56.0% | 北大各院系，v31翻页修复CS(12→120)+CIS(8→37)，2个禁用(eecs_sz/coe) |
-| **cas** | 4 | 3 | 117 | 59.1% | 中科院3所，ISCAS自定义Parser(73人)，ict_cas(24人)，casia(20人) |
-| **sjtu** | 5 | 2 | 333 | 42.5% | 上交大，CS用AJAX自定义Parser(253人)，3个禁用(ai/se/qingyuan) |
-| **fudan** | 2 | 1 | 189 | 45.0% | 复旦大学，Playwright AJAX加载，1个禁用(ai_robot) |
+| **tsinghua** | 13 | 11 | 683+ | 55.3% | 清华各院系，v35 ymsc修复+启用，2个禁用(sigs/iaiig) |
+| **pku** | 9 | 9 | 275+ | 56.0% | 北大各院系，v35 eecs_sz/coe修复启用，全部已启用 |
+| **cas** | 4 | 3 | 117+ | 59.1% | 中科院3所，ISCAS自定义Parser(73人)，ict_cas(24人)，casia(20人) |
+| **sjtu** | 5 | 5 | 333+ | 42.5% | 上交大，v35 se/qingyuan修复，v34 ai自定义Parser，全部已启用 |
+| **fudan** | 2 | 1 | 189 | 45.0% | 复旦大学，Playwright AJAX加载，1个待启用(ai_robot，URL待确认) |
 | **nju** | 5 | 5 | 186 | 42.6% | 南京大学，全部启用 |
-| **ustc** | 5 | 3 | 150 | 54.0% | 中科大，v31 CS URL修复(2→32)+SIST翻页(8→59)，2个禁用(se/ds) |
+| **ustc** | 5 | 4 | 150+ | 54.0% | 中科大，v35 ds修复启用，1个禁用(se，官网无公开列表) |
 | **zju** | 3 | 1 | 48 | 44.7% | 浙大，v31 Cyber自定义Parser(+48)，CS/Soft禁用(ECONNREFUSED) |
 | **ruc** | 2 | 2 | 46 | 52.5% | 中国人民大学，全部启用 |
 
@@ -601,46 +603,25 @@ uvicorn app.main:app --reload
 | ruc_ai_faculty | 26 | 55.0% | ⚠️ 可接受 | 高瓴人工智能学院，含bio |
 | ruc_info_faculty | 20 | 50.0% | ⚠️ 可接受 | 信息学院，v29 修复 JS重定向URL → info.ruc.edu.cn/jsky/szdw/ajxjgcx/bx/bx1/index.htm，div.research 结构 |
 
-### 禁用信源详情
-
-#### URL失效/网站问题 (2个)
+### 禁用信源详情（当前仅 3 个真正禁用）
 
 | source_id | 学校 | 原因 | 建议措施 |
 |-----------|------|------|---------|
-| tsinghua_insc_faculty | 清华大学 | 404 Not Found | URL已失效，需更新或移除 |
-| tsinghua_futurelab_faculty | 清华大学 | 404 Not Found | URL已失效，需更新或移除 |
+| tsinghua_sigs_faculty | 清华大学 | AJAX+GsapAnimate 前端渲染，静态爬虫无法获取 | 开发自定义 Parser |
+| tsinghua_iaiig_faculty | 清华大学 | ERR_CONNECTION_CLOSED，网络不可达 | 待确认域名可访问性 |
+| ustc_se_faculty | 中国科学技术大学 | 官网无公开教师列表页 | 暂无可行方案 |
 
-#### 连接超时/无法访问 (4个，服务器可能可访问)
+### 待观察信源（已启用但数据量偏少或未验证）
 
-| source_id | 学校 | 原因 | 建议措施 |
-|-----------|------|------|---------|
-| sjtu_se_faculty | 上海交通大学 | 本地连接超时 | 服务器环境测试 |
-| sjtu_qingyuan_faculty | 上海交通大学 | 本地连接超时 | 服务器环境测试 |
-| ustc_se_faculty | 中国科学技术大学 | 本地连接超时 | 服务器环境测试 |
-| ustc_ds_faculty | 中国科学技术大学 | 本地连接超时 | 服务器环境测试 |
-
-#### 已启用但选择器失效 (3个)
-
-| source_id | 学校 | 原因 | 建议措施 |
-|-----------|------|------|---------|
-| zju_cs_faculty | 浙江大学 | 选择器 `ul li` 不匹配实际 DOM | 用 Playwright 快照诊断页面结构 |
-| zju_cyber_faculty | 浙江大学 | 选择器 `li.news` 不匹配实际 DOM | 用 Playwright 快照诊断页面结构 |
-| zju_soft_faculty | 浙江大学 | 选择器 `ul li` 不匹配实际 DOM | 用 Playwright 快照诊断页面结构 |
-
-#### 待修复/待启用 (10个)
-
-| source_id | 学校 | 原因 | 建议措施 |
-|-----------|------|------|---------|
-| sjtu_ai_faculty | 上海交通大学 | SPA+Three.js | 无法爬取，需API |
-| fudan_ai_robot_faculty | 复旦大学 | domain not found | 查找正确域名/URL |
-| nju_ise_faculty | 南京大学 | URL 404 | URL已失效 |
-| ruc_info_faculty | 中国人民大学 | JS渲染 | 内容极少(~300B)，需Playwright |
-| tsinghua_ymsc_faculty | 清华大学 | URL 404 → JS渲染 | 需Playwright |
-| tsinghua_life_faculty | 清华大学 | URL 404 → JS渲染 | 需Playwright |
-| tsinghua_sigs_faculty | 清华大学 | URL 404 | URL已失效 |
-| tsinghua_iaiig_faculty | 清华大学 | 连接超时 | 确认域名可访问性 |
-| pku_eecs_sz_faculty | 北京大学 | 院系已拆分为多院 | 需按计算机/电子/集成电路分别配置 |
-| pku_coe_faculty | 北京大学 | URL待确认 | 查找正确URL |
+| source_id | 学校 | 状态 | 备注 |
+|-----------|------|------|------|
+| zju_cs_faculty | 浙江大学 | ❌ 禁用（ECONNREFUSED） | 开发环境不可达，需服务器测试 |
+| zju_soft_faculty | 浙江大学 | ❌ 禁用（ECONNREFUSED） | 开发环境不可达，需服务器测试 |
+| fudan_ai_robot_faculty | 复旦大学 | ❌ 待启用 | 正确域名/URL 待确认 |
+| pku_icst_faculty | 北京大学 | ✅ 已启用，未验证 | 待下次爬取确认数据产出 |
+| pku_ic_faculty | 北京大学 | ✅ 已启用，未验证 | 待下次爬取确认数据产出 |
+| pku_ss_faculty | 北京大学 | ✅ 已启用，未验证 | 待下次爬取确认数据产出 |
+| pku_cfcs_faculty | 北京大学 | ✅ 已启用，未验证 | 待下次爬取确认数据产出 |
 
 ### 技术改进
 

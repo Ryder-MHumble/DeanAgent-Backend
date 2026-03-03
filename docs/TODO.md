@@ -1,6 +1,6 @@
 # 后续任务清单
 
-> 最后更新: 2026-03-01 (v25: Feed API 信源过滤 — 所有 feed 类 API 支持 4 参数信源筛选：source_id/source_ids/source_name/source_names，精确+模糊匹配，覆盖 policy/personnel/university/tech_frontier/articles 6 个端点; v35: faculty_crawler 增强 — heading_sections 正则匹配修复、LLM 字段提取集成 (enable_llm 配置)、5 个高校源 URL/选择器修复、3 个不可达源禁用)
+> 最后更新: 2026-03-02 (v36: faculty API 功能补全 — 指导学生 CRUD（5 个端点）、学术成就 PATCH、ScholarRecord 新增 representative_publications/patents/awards 三个成就字段；文档修正 university_faculty 禁用源统计（44/47 启用）)
 > 基于前端 (Dean-Agent) 需求反推的优先级排序
 
 ---
@@ -8,9 +8,9 @@
 ## P0: 基础架构（已完成）
 
 - [x] 项目骨架 (FastAPI + SQLAlchemy async + PostgreSQL + APScheduler 3.x)
-- [x] 5 种模板爬虫 + 8 个自定义 Parser（全部注册）
-- [x] 9 个维度 YAML 信源配置（134 源，109 启用；v19 新增 5 中国 AI 大厂）
-- [x] v1 REST API 22 端点 (articles/sources/dimensions/health + intel/policy 3 + intel/personnel 5)
+- [x] 5 种模板爬虫 + 11 个自定义 Parser（全部注册）
+- [x] 10 个维度 YAML 信源配置（181 源，148 启用；university_faculty 44/47 启用）
+- [x] v1 REST API 27 端点 (articles/sources/dimensions/health + intel/policy 3 + intel/personnel 5 + faculty 13)
 - [x] 调度系统 + 去重 + JSON 本地输出（data/raw/ 88 个 latest.json，覆盖模式 + is_new 标记）
 - [x] Twitter 服务 + LLM 服务（OpenRouter）实现
 - [x] 前端数据支撑状态文档 (crawl_status README)
@@ -52,7 +52,9 @@
 - [ ] ArXiv affiliation 变更检测 — 人才回流信号
 - [ ] IT桔子/企查查 — 更全面投融资数据
 - [ ] 补充高校 HR/组织部页面 (15 所, snapshot 模式)
-- [x] 补充 AI 院系官网 (8 个) — v22: 新建 university_faculty 维度，FacultyCrawler 模板；v23: 扩充至 35 个信源；v24: 再补充 17 个，共 52 个信源，覆盖清华 17 个单位/北大 9 个/中科院 3 所/交大 4 个/复旦 2 个/南大 5 个/中科大 5 个/浙大 3 个/人大 2 个，URL 已从各高校官网验证，选择器待逐一测试启用
+- [x] 补充 AI 院系官网 — v22→v35: 新建 university_faculty 维度，FacultyCrawler 模板；共 47 个信源，44 个已启用（2200+位教师），覆盖清华/北大/中科院/上交/复旦/南大/中科大/浙大/人大；11 个自定义 Parser 含 sjtu_cs/sjtu_ai/iscas/zju_cyber 等
+- [x] faculty API 13 端点 — 师资列表/详情/统计/信源、基础信息/关系字段/动态备注/学术成就 PATCH、指导学生 CRUD（5 端点）
+- [x] ScholarRecord 学术成就字段 — representative_publications / patents / awards，爬虫+用户双来源
 - [ ] IEEE Fellow / ACM Fellow 年度公告源（awards.acm.org / ieee.org 为静态年度页面，非持续更新源）
 - [ ] 微信公众号方案（搜狗微信搜索 / 公号后台）
 - [x] ~~v16 信源拓展~~ — 新增 17 源 + 恢复 3 源：technology +6 RSS/ArXiv +2 恢复 (OpenAI/Anthropic blog)、national_policy +2 (网信办/市监总局)、beijing_policy +2 新 +1 恢复 (经信局/知产局/发改委)、events +2 (CCF/CAAI)、industry +2 (创业邦/信通院)、personnel +1 (中科院)、universities +2 (CESI/信工所)

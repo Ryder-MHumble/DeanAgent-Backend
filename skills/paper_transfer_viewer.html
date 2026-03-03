@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>论文产业转化分析 · ZGCAI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    [x-cloak] { display: none !important; }
+    body { font-family: 'Inter', -apple-system, sans-serif; }
+
+    /* Grade border colors */
+    .border-grade-A { border-left-color: #059669; }
+    .border-grade-B { border-left-color: #2563eb; }
+    .border-grade-C { border-left-color: #94a3b8; }
+
+    /* Smooth expand */
+    .expandable { transition: max-height 0.25s ease, opacity 0.2s ease; overflow: hidden; }
+    .expandable.collapsed { max-height: 0; opacity: 0; }
+    .expandable.expanded { max-height: 2000px; opacity: 1; }
+
+    /* Skeleton shimmer */
+    @keyframes shimmer {
+      0% { background-position: -400px 0; }
+      100% { background-position: 400px 0; }
+    }
+    .skeleton {
+      background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+      background-size: 400px 100%;
+      animation: shimmer 1.4s infinite;
+      border-radius: 6px;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #f8fafc; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 antialiased" x-data="app()" x-init="init()">
+
+  <!-- ── Top Navigation ──────────────────────────────────────────────── -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 gap-4">
+
+        <!-- Logo & Title -->
+        <div class="flex items-center gap-3 shrink-0">
+          <div class="w-8 h-8 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center">
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"/>
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-sm font-semibold text-slate-900 leading-none">论文产业转化分析</h1>
+            <p class="text-xs text-slate-400 mt-0.5">中关村人工智能研究院</p>
+          </div>
+        </div>
+
+        <!-- Search -->
+        <div class="flex-1 max-w-md">
+          <div class="relative">
+            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            </svg>
+            <input
+              type="text"
+              placeholder="搜索论文标题、推荐理由..."
+              x-model.debounce.400ms="filters.keyword"
+              @input="applyFilters()"
+              class="w-full pl-9 pr-4 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 transition-all placeholder-slate-400"
+            />
+            <button x-show="filters.keyword" @click="filters.keyword=''; applyFilters()" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Refresh -->
+        <button @click="loadResults()" :disabled="loading" class="flex items-center gap-1.5 text-sm text-slate-500 hover:text-emerald-600 transition-colors disabled:opacity-40 shrink-0">
+          <svg class="w-4 h-4" :class="loading ? 'animate-spin' : ''" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+          <span x-text="loading ? '加载中…' : '刷新'"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Stats Bar + Filters ─────────────────────────────────────────── -->
+  <div class="bg-white border-b border-slate-100">
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center gap-4">
+
+      <!-- Stats chips -->
+      <template x-if="meta">
+        <div class="flex items-center gap-2 text-xs text-slate-500 shrink-0">
+          <span class="font-medium text-slate-700" x-text="`共 ${meta.total_papers_analyzed} 篇`"></span>
+          <span class="text-slate-300">|</span>
+          <span class="inline-flex items-center gap-1">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span x-text="`A 档 ${meta.grade_counts.A || 0}`"></span>
+          </span>
+          <span class="inline-flex items-center gap-1">
+            <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+            <span x-text="`B 档 ${meta.grade_counts.B || 0}`"></span>
+          </span>
+          <span class="inline-flex items-center gap-1">
+            <span class="w-2 h-2 rounded-full bg-slate-300"></span>
+            <span x-text="`C 档 ${meta.grade_counts.C || 0}`"></span>
+          </span>
+          <span class="text-slate-300">|</span>
+          <span x-text="`${meta.batch_count} 批次`"></span>
+        </div>
+      </template>
+
+      <!-- Spacer -->
+      <div class="flex-1"></div>
+
+      <!-- Grade filter -->
+      <div class="flex items-center gap-1 bg-slate-100 rounded-lg p-1">
+        <template x-for="g in ['全部','A','B','C']">
+          <button
+            :class="filters.grade === g ? gradeActiveClass(g) : 'text-slate-500 hover:text-slate-700 hover:bg-white'"
+            @click="filters.grade = g; applyFilters()"
+            class="px-3 py-1 rounded-md text-xs font-medium transition-all"
+            x-text="g === '全部' ? '全部' : g + ' 档'"
+          ></button>
+        </template>
+      </div>
+
+      <!-- School filter -->
+      <div class="relative">
+        <select x-model="filters.school" @change="applyFilters()" class="text-xs border border-slate-200 rounded-lg px-3 py-1.5 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 appearance-none pr-7 cursor-pointer">
+          <option value="">全部学校</option>
+          <template x-for="school in schools">
+            <option :value="school" x-text="school"></option>
+          </template>
+        </select>
+        <svg class="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 text-slate-400 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+      </div>
+
+      <!-- Sort -->
+      <div class="relative">
+        <select x-model="sortBy" @change="applyFilters()" class="text-xs border border-slate-200 rounded-lg px-3 py-1.5 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-400 appearance-none pr-7 cursor-pointer">
+          <option value="grade">按档位排序</option>
+          <option value="date">按日期排序</option>
+          <option value="tier">按梯队排序</option>
+        </select>
+        <svg class="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 text-slate-400 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+      </div>
+
+      <!-- Showing count -->
+      <span x-show="!loading && filteredItems.length > 0" class="text-xs text-slate-400" x-text="`显示 ${Math.min(pageSize * page, filteredItems.length)} / ${filteredItems.length} 条`"></span>
+    </div>
+  </div>
+
+  <!-- ── Main Content ────────────────────────────────────────────────── -->
+  <main class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+    <!-- Error state -->
+    <div x-show="error" x-cloak class="mb-6 bg-red-50 border border-red-200 rounded-xl p-5 flex gap-3">
+      <svg class="w-5 h-5 text-red-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+      <div>
+        <p class="text-sm font-medium text-red-700">加载失败</p>
+        <p class="text-xs text-red-500 mt-1" x-text="error"></p>
+        <button @click="loadResults()" class="mt-2 text-xs text-red-600 underline hover:no-underline">重试</button>
+      </div>
+    </div>
+
+    <!-- Loading skeleton -->
+    <div x-show="loading" class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+      <template x-for="i in 9">
+        <div class="bg-white rounded-xl border border-slate-200 p-5 space-y-3">
+          <div class="skeleton h-4 w-3/4"></div>
+          <div class="skeleton h-3 w-1/2"></div>
+          <div class="skeleton h-3 w-full"></div>
+          <div class="skeleton h-3 w-5/6"></div>
+          <div class="flex gap-2 mt-2">
+            <div class="skeleton h-5 w-12 rounded-full"></div>
+            <div class="skeleton h-5 w-16 rounded-full"></div>
+          </div>
+        </div>
+      </template>
+    </div>
+
+    <!-- Empty state -->
+    <div x-show="!loading && !error && filteredItems.length === 0" x-cloak class="text-center py-24">
+      <svg class="w-12 h-12 text-slate-300 mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m6.75 12l-3-3m0 0l-3 3m3-3v6m-1.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/>
+      </svg>
+      <p class="text-slate-500 font-medium">暂无匹配结果</p>
+      <p class="text-sm text-slate-400 mt-1">尝试调整筛选条件，或等待 Pipeline 分析完成</p>
+      <button @click="clearFilters()" class="mt-4 text-sm text-emerald-600 hover:underline">清除筛选条件</button>
+    </div>
+
+    <!-- Card grid -->
+    <div x-show="!loading && filteredItems.length > 0" x-cloak class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+      <template x-for="(item, idx) in pagedItems" :key="item.paper.paper_id + item.student.student_id">
+        <article
+          class="bg-white rounded-xl border border-l-4 border-slate-200 shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col"
+          :class="`border-grade-${item.grade}`"
+        >
+          <!-- Card Header -->
+          <div class="p-5 pb-3">
+            <div class="flex items-start justify-between gap-3 mb-3">
+              <!-- Grade badge -->
+              <div class="flex items-center gap-2 shrink-0">
+                <span
+                  class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-sm font-bold shadow-sm"
+                  :class="{
+                    'bg-emerald-100 text-emerald-700 ring-1 ring-emerald-200': item.grade === 'A',
+                    'bg-blue-100 text-blue-700 ring-1 ring-blue-200': item.grade === 'B',
+                    'bg-slate-100 text-slate-500 ring-1 ring-slate-200': item.grade === 'C'
+                  }"
+                  x-text="item.grade"
+                ></span>
+                <div class="flex flex-col gap-1">
+                  <span class="text-xs font-medium" :class="{'text-emerald-600': item.grade==='A','text-blue-600': item.grade==='B','text-slate-400': item.grade==='C'}"
+                    x-text="{'A':'主动跟进','B':'保持关注','C':'暂不处理'}[item.grade]"
+                  ></span>
+                  <div class="flex gap-1">
+                    <!-- Content type -->
+                    <span class="text-xs px-1.5 py-0.5 rounded bg-slate-100 text-slate-500 font-medium"
+                      x-text="{'applied':'应用型','theoretical':'理论型','mixed':'混合型'}[item.content_type] || item.content_type"
+                    ></span>
+                    <!-- Tier -->
+                    <span class="text-xs px-1.5 py-0.5 rounded font-medium"
+                      :class="{
+                        'bg-amber-100 text-amber-700': item.commercialization_tier === 1,
+                        'bg-purple-100 text-purple-700': item.commercialization_tier === 2,
+                        'bg-slate-100 text-slate-500': item.commercialization_tier === 3
+                      }"
+                      x-text="`T${item.commercialization_tier}`"
+                    ></span>
+                    <!-- Maturity -->
+                    <template x-if="item.maturity_level">
+                      <span class="text-xs px-1.5 py-0.5 rounded font-medium"
+                        :class="{
+                          'bg-green-100 text-green-700': item.maturity_level === '接近可用',
+                          'bg-orange-100 text-orange-700': item.maturity_level === '需要工程化',
+                          'bg-rose-100 text-rose-700': item.maturity_level === '还在早期'
+                        }"
+                        x-text="item.maturity_level"
+                      ></span>
+                    </template>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Title -->
+            <h2 class="text-sm font-semibold text-slate-800 leading-snug line-clamp-3 mb-2">
+              <a x-show="item.paper.url" :href="item.paper.url" target="_blank" rel="noopener"
+                 class="hover:text-emerald-700 hover:underline transition-colors"
+                 x-text="item.paper.title"></a>
+              <span x-show="!item.paper.url" x-text="item.paper.title"></span>
+            </h2>
+
+            <!-- Meta info -->
+            <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-400">
+              <span x-show="item.paper.publication_date" x-text="item.paper.publication_date?.substring(0,10)"></span>
+              <span x-show="item.paper.venue" class="truncate max-w-[140px]" x-text="item.paper.venue"></span>
+              <span x-show="item.paper.arxiv_id" class="text-blue-400">arXiv</span>
+            </div>
+          </div>
+
+          <!-- Tech summary -->
+          <template x-if="item.tech_summary">
+            <div class="mx-5 mb-3 px-3 py-2.5 bg-slate-50 rounded-lg border border-slate-100">
+              <p class="text-xs text-slate-600 leading-relaxed" x-text="item.tech_summary"></p>
+            </div>
+          </template>
+
+          <!-- Grade reason (always shown) -->
+          <div class="px-5 mb-3">
+            <p class="text-xs text-slate-500 leading-relaxed line-clamp-2" x-text="item.grade_reason"></p>
+          </div>
+
+          <!-- Student info -->
+          <div class="px-5 mb-3 flex items-center gap-2">
+            <div class="w-6 h-6 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center shrink-0">
+              <svg class="w-3 h-3 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <div class="flex items-center gap-1.5">
+                <span class="text-xs font-medium text-slate-700" x-text="item.student.name_cn || item.student.name"></span>
+                <span class="text-xs text-slate-400" x-text="item.student.school_cn || item.student.school"></span>
+              </div>
+              <div class="flex items-center gap-2 mt-0.5">
+                <template x-if="item.student.contact?.email">
+                  <a :href="`mailto:${item.student.contact.email}`" class="text-xs text-blue-500 hover:underline truncate max-w-[140px]" x-text="item.student.contact.email"></a>
+                </template>
+                <template x-if="item.student.contact?.phone">
+                  <span class="text-xs text-slate-400" x-text="item.student.contact.phone"></span>
+                </template>
+              </div>
+            </div>
+          </div>
+
+          <!-- Co-authors -->
+          <template x-if="item.paper.student_name_list?.length > 1">
+            <div class="px-5 mb-3">
+              <div class="flex flex-wrap gap-1">
+                <span class="text-xs text-slate-400">合作者：</span>
+                <template x-for="name in item.paper.student_name_list.filter(n => n !== (item.student.name_cn || item.student.name))">
+                  <span class="text-xs bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded" x-text="name"></span>
+                </template>
+              </div>
+            </div>
+          </template>
+
+          <!-- Expandable details (A/B only) -->
+          <template x-if="item.grade !== 'C'">
+            <div class="border-t border-slate-100 mt-auto">
+              <button
+                @click="item._expanded = !item._expanded"
+                class="w-full flex items-center justify-between px-5 py-2.5 text-xs text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors"
+              >
+                <span x-text="item._expanded ? '收起详情' : '查看转化分析'"></span>
+                <svg class="w-3.5 h-3.5 transition-transform duration-200" :class="item._expanded ? 'rotate-180' : ''" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
+                </svg>
+              </button>
+              <div x-show="item._expanded" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" class="px-5 pb-4 space-y-3">
+
+                <!-- Transformation directions -->
+                <template x-if="item.transformation_directions?.length">
+                  <div>
+                    <p class="text-xs font-semibold text-slate-600 mb-2 flex items-center gap-1.5">
+                      <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+                      产业转化方向
+                    </p>
+                    <ul class="space-y-1.5">
+                      <template x-for="(dir, i) in item.transformation_directions">
+                        <li class="flex gap-2">
+                          <span class="shrink-0 w-4 h-4 rounded-full bg-emerald-100 text-emerald-600 text-xs flex items-center justify-center font-bold" x-text="i+1"></span>
+                          <span class="text-xs text-slate-600 leading-relaxed" x-text="dir"></span>
+                        </li>
+                      </template>
+                    </ul>
+                  </div>
+                </template>
+
+                <!-- Negotiation angle -->
+                <template x-if="item.negotiation_angle">
+                  <div class="bg-amber-50 border border-amber-100 rounded-lg p-3">
+                    <p class="text-xs font-semibold text-amber-700 mb-1 flex items-center gap-1">
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg>
+                      接触切入角度
+                    </p>
+                    <p class="text-xs text-amber-800 leading-relaxed" x-text="item.negotiation_angle"></p>
+                  </div>
+                </template>
+
+                <!-- Recommendation reason -->
+                <template x-if="item.recommendation_reason">
+                  <div>
+                    <p class="text-xs font-semibold text-slate-600 mb-1 flex items-center gap-1">
+                      <svg class="w-3.5 h-3.5 text-blue-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
+                      综合推荐理由
+                    </p>
+                    <p class="text-xs text-slate-600 leading-relaxed" x-text="item.recommendation_reason"></p>
+                  </div>
+                </template>
+
+                <!-- Matched signals -->
+                <template x-if="item.matched_signals?.length">
+                  <div class="flex flex-wrap gap-1 pt-1">
+                    <template x-for="signal in item.matched_signals.slice(0, 8)">
+                      <span class="text-xs bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full" x-text="signal"></span>
+                    </template>
+                  </div>
+                </template>
+              </div>
+            </div>
+          </template>
+
+          <!-- C grade: just matched signals -->
+          <template x-if="item.grade === 'C' && item.matched_signals?.length">
+            <div class="border-t border-slate-100 px-5 py-3 flex flex-wrap gap-1 mt-auto">
+              <template x-for="signal in item.matched_signals.slice(0, 6)">
+                <span class="text-xs bg-slate-100 text-slate-400 px-2 py-0.5 rounded-full" x-text="signal"></span>
+              </template>
+            </div>
+          </template>
+        </article>
+      </template>
+    </div>
+
+    <!-- Load more -->
+    <div x-show="!loading && filteredItems.length > pageSize * page" class="mt-8 flex justify-center">
+      <button @click="page++" class="px-6 py-2.5 bg-white border border-slate-200 text-sm text-slate-600 rounded-lg hover:bg-slate-50 hover:border-slate-300 transition-all shadow-sm">
+        加载更多
+        <span class="text-slate-400" x-text="`（还有 ${filteredItems.length - pageSize * page} 条）`"></span>
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <div class="mt-12 text-center text-xs text-slate-300 pb-6">
+      <span x-show="meta" x-text="`数据更新于 ${meta?.generated_at?.substring(0,19).replace('T',' ')} UTC`"></span>
+    </div>
+  </main>
+
+  <script>
+    const API_BASE = 'http://localhost:8001/api/v1/intel/paper-transfer'
+
+    function app() {
+      return {
+        // State
+        loading: true,
+        error: null,
+        allItems: [],
+        filteredItems: [],
+        meta: null,
+        schools: [],
+        page: 1,
+        pageSize: 30,
+        sortBy: 'grade',
+
+        filters: {
+          grade: '全部',
+          school: '',
+          keyword: '',
+        },
+
+        get pagedItems() {
+          return this.filteredItems.slice(0, this.pageSize * this.page)
+        },
+
+        async init() {
+          await this.loadResults()
+        },
+
+        async loadResults() {
+          this.loading = true
+          this.error = null
+          try {
+            const res = await fetch(`${API_BASE}/results`)
+            if (res.status === 404) {
+              this.error = 'Pipeline 尚未运行或正在运行中，请稍后刷新'
+              this.loading = false
+              return
+            }
+            if (!res.ok) throw new Error(`HTTP ${res.status}`)
+            const data = await res.json()
+
+            // Add _expanded state to each item
+            this.allItems = (data.items || []).map(it => ({ ...it, _expanded: false }))
+            this.meta = {
+              generated_at: data.generated_at,
+              total_papers_analyzed: data.total_papers_analyzed,
+              total_papers_fetched: data.total_papers_fetched,
+              total_students_processed: data.total_students_processed,
+              grade_counts: data.grade_counts,
+              batch_count: data.batch_count,
+            }
+
+            // Extract unique schools
+            const schoolSet = new Set(this.allItems.map(it => it.student.school_cn).filter(Boolean))
+            this.schools = [...schoolSet].sort()
+
+            this.applyFilters()
+          } catch (e) {
+            this.error = e.message || '请求失败，请确认服务已启动'
+          } finally {
+            this.loading = false
+          }
+        },
+
+        applyFilters() {
+          this.page = 1
+          let items = [...this.allItems]
+
+          if (this.filters.grade !== '全部') {
+            items = items.filter(it => it.grade === this.filters.grade)
+          }
+          if (this.filters.school) {
+            const sf = this.filters.school.toLowerCase()
+            items = items.filter(it => (it.student.school_cn || '').toLowerCase().includes(sf))
+          }
+          if (this.filters.keyword) {
+            const kw = this.filters.keyword.toLowerCase()
+            items = items.filter(it =>
+              it.paper.title.toLowerCase().includes(kw) ||
+              (it.recommendation_reason || '').toLowerCase().includes(kw) ||
+              (it.tech_summary || '').toLowerCase().includes(kw) ||
+              (it.student.name_cn || '').includes(this.filters.keyword)
+            )
+          }
+
+          // Sort
+          const gradeOrder = { A: 0, B: 1, C: 2 }
+          if (this.sortBy === 'grade') {
+            items.sort((a, b) =>
+              gradeOrder[a.grade] - gradeOrder[b.grade] ||
+              a.commercialization_tier - b.commercialization_tier
+            )
+          } else if (this.sortBy === 'date') {
+            items.sort((a, b) => (b.paper.publication_date || '').localeCompare(a.paper.publication_date || ''))
+          } else if (this.sortBy === 'tier') {
+            items.sort((a, b) =>
+              a.commercialization_tier - b.commercialization_tier ||
+              gradeOrder[a.grade] - gradeOrder[b.grade]
+            )
+          }
+
+          this.filteredItems = items
+        },
+
+        clearFilters() {
+          this.filters = { grade: '全部', school: '', keyword: '' }
+          this.applyFilters()
+        },
+
+        gradeActiveClass(g) {
+          if (g === '全部') return 'bg-white text-slate-700 shadow-sm'
+          if (g === 'A') return 'bg-white text-emerald-700 shadow-sm'
+          if (g === 'B') return 'bg-white text-blue-700 shadow-sm'
+          if (g === 'C') return 'bg-white text-slate-600 shadow-sm'
+          return 'bg-white text-slate-700 shadow-sm'
+        },
+      }
+    }
+  </script>
+</body>
+</html>
