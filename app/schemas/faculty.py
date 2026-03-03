@@ -1,7 +1,7 @@
 """Pydantic schemas for the Faculty API (/api/v1/faculty/)."""
 from __future__ import annotations
 
-from typing import Any, Literal
+from typing import Any
 
 from pydantic import BaseModel, Field  # noqa: F401
 
@@ -166,11 +166,11 @@ class FacultyDetailResponse(BaseModel):
     # Institute relations [user-managed]
     is_advisor_committee: bool
     is_adjunct_supervisor: bool
-    supervised_students: list[str]
+    supervised_students: list[Any]
     supervised_students_count: int = 0
-    joint_research_projects: list[str]
-    joint_management_roles: list[str]
-    academic_exchange_records: list[str]
+    joint_research_projects: list[Any]
+    joint_management_roles: list[Any]
+    academic_exchange_records: list[Any]
     is_potential_recruit: bool
     institute_relation_notes: str
     relation_updated_by: str
@@ -240,13 +240,13 @@ class InstituteRelationUpdate(BaseModel):
 
     is_advisor_committee: bool | None = Field(default=None, description="顾问委员会成员")
     is_adjunct_supervisor: bool | None = Field(default=None, description="兼职导师")
-    supervised_students: list[str] | None = Field(default=None, description="指导学生列表")
+    supervised_students: list[Any] | None = Field(default=None, description="指导学生列表（字符串或对象均可）")
     joint_research_projects: list[str] | None = Field(default=None, description="联合科研项目列表")
-    joint_management_roles: list[str] | None = Field(
-        default=None, description="在两院联合管理职务列表"
+    joint_management_roles: list[Any] | None = Field(
+        default=None, description="在两院联合管理职务列表（字符串或对象均可）"
     )
-    academic_exchange_records: list[str] | None = Field(
-        default=None, description="学术交流活动记录列表"
+    academic_exchange_records: list[Any] | None = Field(
+        default=None, description="学术交流活动记录列表（字符串或对象均可）"
     )
     is_potential_recruit: bool | None = Field(default=None, description="潜在招募对象")
     institute_relation_notes: str | None = Field(default=None, description="补充备注（自由文本）")
@@ -256,9 +256,7 @@ class InstituteRelationUpdate(BaseModel):
 class UserUpdateCreate(BaseModel):
     """POST /faculty/{url_hash}/updates — add a user-authored dynamic update."""
 
-    update_type: Literal[
-        "major_project", "talent_title", "position_change", "award", "publication", "other"
-    ] = Field(description="动态类型")
+    update_type: str = Field(description="动态类型（任意字符串，如 general/major_project/award 等）")
     title: str = Field(description="标题/摘要")
     content: str = Field(default="", description="详细内容")
     source_url: str = Field(default="", description="来源链接（可选）")

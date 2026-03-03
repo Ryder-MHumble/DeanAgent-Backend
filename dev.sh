@@ -1,7 +1,8 @@
 #!/bin/bash
 # 本地开发快速启停脚本
 
-PORT=8001
+PORT=8002          # 本地开发端口，与线上 8001 隔离，不会干扰 SSH 隧道
+HOST=127.0.0.1    # 仅绑定本地回环，不对外暴露
 APP="app.main:app"
 VENV=".venv/bin/activate"
 
@@ -47,10 +48,12 @@ case "${1:-start}" in
     else
       echo -e "  ${Y}未找到 .venv，使用系统 Python${NC}"
     fi
-    echo -e "  ${G}▶  服务地址  http://127.0.0.1:${PORT}${NC}"
-    echo -e "  ${D}   API 文档  http://127.0.0.1:${PORT}/docs${NC}"
+    echo -e "  ${G}▶  服务地址  http://${HOST}:${PORT}${NC}"
+    echo -e "  ${D}   API 文档  http://${HOST}:${PORT}/docs${NC}"
     echo
-    uvicorn $APP --reload --port $PORT
+    STARTUP_CRAWL_ENABLED=false \
+    ENABLE_LLM_ENRICHMENT=false \
+    uvicorn $APP --reload --host $HOST --port $PORT
     ;;
   stop)
     pids=$(lsof -ti :$PORT 2>/dev/null)
