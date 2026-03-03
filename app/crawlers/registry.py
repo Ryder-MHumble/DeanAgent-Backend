@@ -32,6 +32,9 @@ _CUSTOM_MAP: dict[str, str] = {
     "sjtu_ai_faculty": "app.crawlers.parsers.sjtu_ai_faculty.SJTUAIFacultyCrawler",
     "iscas_faculty": "app.crawlers.parsers.iscas_faculty.ISCASFacultyCrawler",
     "zju_cyber_faculty": "app.crawlers.parsers.zju_cyber_faculty.ZJUCyberFacultyCrawler",
+    "ymsc_faculty": "app.crawlers.parsers.ymsc_faculty.YMSCFacultyCrawler",
+    "llm_faculty": "app.crawlers.parsers.llm_faculty.LLMFacultyCrawler",
+    "tsinghua_cs_faculty": "app.crawlers.parsers.tsinghua_cs_faculty.TsinghuaCsFacultyCrawler",
 }
 
 

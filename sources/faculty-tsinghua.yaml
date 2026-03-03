@@ -278,31 +278,30 @@ sources:
   university: 清华大学
   department: 丘成桐数学科学中心
   url: https://ymsc.tsinghua.edu.cn/sxxr/zxjs.htm
-  crawl_method: faculty
-  use_playwright: false
+  crawler_class: ymsc_faculty
   schedule: weekly
   priority: 2
   is_enabled: true
-  enable_llm: true
-  base_url: https://ymsc.tsinghua.edu.cn
-  faculty_selectors:
-    list_item: a[href*='/info/']
-    name: h4
-    link: a
-  detail_selectors:
-    bio: div[class*='content'], p, ul, td, div.article, div[class*='intro']
-    email: a[href^='mailto:']
-    research_areas: div[class*='research'], div[class*='area'], li, ul
-    heading_sections:
-      bio: 个人简介|简历|自我介绍
-      research_areas: 研究方向|研究领域|研究兴趣|科研方向
-    label_prefix_sections:
-      email: 邮箱|Email|电子邮件
-      research_areas: 研究方向|研究领域
+  request_delay: 0.5
   tags:
   - faculty
   - tsinghua
   - math
+- id: tsinghua_cs_faculty
+  name: 清华大学计算机系-师资
+  group: tsinghua
+  university: 清华大学
+  department: 计算机科学与技术系
+  url: https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm
+  crawler_class: tsinghua_cs_faculty
+  schedule: weekly
+  priority: 2
+  is_enabled: true
+  request_delay: 0.5
+  tags:
+  - faculty
+  - tsinghua
+  - cs
 - id: tsinghua_life_faculty
   name: 清华大学生命科学学院-师资
   group: tsinghua
