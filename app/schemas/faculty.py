@@ -221,6 +221,9 @@ class FacultyStatsResponse(BaseModel):
     by_university: list[dict[str, Any]] = Field(
         description="按高校统计 [{university, count}]"
     )
+    by_department: list[dict[str, Any]] = Field(
+        description="按院系统计 [{university, department, count}]"
+    )
     by_position: list[dict[str, Any]] = Field(
         description="按职称统计 [{position, count}]"
     )

@@ -108,12 +108,17 @@ def get_faculty_stats() -> dict[str, Any]:
     adjunct_supervisors = sum(1 for i in items if i.get("is_adjunct_supervisor", False))
 
     uni_counter: Counter = Counter()
+    dept_counter: Counter = Counter()
     pos_counter: Counter = Counter()
     completeness_buckets = {"<30": 0, "30-60": 0, "60-80": 0, ">80": 0}
 
     for item in items:
         uni = item.get("university", "") or "未知"
         uni_counter[uni] += 1
+
+        dept = item.get("department", "") or "未知"
+        dept_key = (uni, dept)
+        dept_counter[dept_key] += 1
 
         pos = item.get("position", "") or "未知"
         pos_counter[pos] += 1
@@ -132,6 +137,10 @@ def get_faculty_stats() -> dict[str, Any]:
         {"university": u, "count": c}
         for u, c in uni_counter.most_common(15)
     ]
+    by_department = [
+        {"university": u, "department": d, "count": c}
+        for (u, d), c in dept_counter.most_common(30)
+    ]
     by_position = [
         {"position": p, "count": c}
         for p, c in pos_counter.most_common(10)
@@ -147,6 +156,7 @@ def get_faculty_stats() -> dict[str, Any]:
         "advisor_committee": advisor_committee,
         "adjunct_supervisors": adjunct_supervisors,
         "by_university": by_university,
+        "by_department": by_department,
         "by_position": by_position,
         "completeness_buckets": completeness_buckets,
         "sources_count": sources_count,
