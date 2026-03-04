@@ -146,6 +146,17 @@ class FacultyAnnotationStore(BaseJSONStore):
             self._save(data)
         return ann
 
+    def delete_all_for_faculty(self, url_hash: str) -> None:
+        """Delete all annotations for a faculty member (called when faculty is deleted).
+
+        Thread-safe with locking.
+        """
+        with self._lock:
+            data = self._load()
+            if url_hash in data:
+                del data[url_hash]
+                self._save(data)
+
 
 # ---------------------------------------------------------------------------
 # Module-level singleton
@@ -182,3 +193,7 @@ def delete_user_update(url_hash: str, update_idx: int) -> dict[str, Any] | None:
 
 def update_achievements(url_hash: str, updates: dict[str, Any]) -> dict[str, Any]:
     return _store.update_achievements(url_hash, updates)
+
+
+def delete_all_for_faculty(url_hash: str) -> None:
+    return _store.delete_all_for_faculty(url_hash)

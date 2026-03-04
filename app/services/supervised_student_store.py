@@ -142,6 +142,17 @@ class SupervisedStudentStore(BaseJSONStore):
             data = self._load()
         return len(data.get(faculty_url_hash, []))
 
+    def delete_all_students(self, faculty_url_hash: str) -> None:
+        """Delete all student records for a faculty member (called when faculty is deleted).
+
+        Thread-safe with locking.
+        """
+        with self._lock:
+            data = self._load()
+            if faculty_url_hash in data:
+                del data[faculty_url_hash]
+                self._save(data)
+
 
 # ---------------------------------------------------------------------------
 # Module-level singleton
@@ -181,3 +192,7 @@ def delete_student(faculty_url_hash: str, student_id: str) -> bool:
 
 def count_students(faculty_url_hash: str) -> int:
     return _store.count_students(faculty_url_hash)
+
+
+def delete_all_students(faculty_url_hash: str) -> None:
+    return _store.delete_all_students(faculty_url_hash)

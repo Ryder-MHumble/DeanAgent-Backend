@@ -301,26 +301,54 @@ def delete_faculty(url_hash: str) -> bool:
     """Delete a faculty record by removing it from the raw JSON file.
 
     Returns True if deleted successfully, False if not found.
+    Includes clean-up of related data (annotations, supervised students).
+
+    Thread-safe: handles concurrent delete requests gracefully.
     """
-    result = _find_raw_file_by_hash(url_hash)
-    if result is None:
+    try:
+        result = _find_raw_file_by_hash(url_hash)
+        if result is None:
+            return False
+
+        file_path, item_idx = result
+
+        # Read file once
+        with open(file_path, encoding="utf-8") as f:
+            data = json.load(f)
+
+        # Verify the item still exists at this index (handles concurrent deletes)
+        if item_idx >= len(data.get("items", [])):
+            return False
+
+        if data["items"][item_idx].get("url_hash") != url_hash:
+            # Index mismatch - re-search to find correct index (race condition check)
+            for idx, item in enumerate(data.get("items", [])):
+                if item.get("url_hash") == url_hash:
+                    item_idx = idx
+                    break
+            else:
+                return False
+
+        # Remove the item from the items array
+        data["items"].pop(item_idx)
+
+        # Update item_count
+        data["item_count"] = len(data["items"])
+
+        # Atomic write: write to temp file, then replace
+        tmp_path = file_path.with_suffix(".tmp")
+        with open(tmp_path, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+        tmp_path.replace(file_path)
+
+        # Clean up related data (annotations and supervised students)
+        annotation_store.delete_all_for_faculty(url_hash)
+        student_store.delete_all_students(url_hash)
+
+        return True
+    except Exception as exc:
+        # Log the exception and return False to prevent 500 errors
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.error("Error deleting faculty %s: %s", url_hash, exc, exc_info=True)
         return False
-
-    file_path, item_idx = result
-
-    with open(file_path, encoding="utf-8") as f:
-        data = json.load(f)
-
-    # Remove the item from the items array
-    data["items"].pop(item_idx)
-
-    # Update item_count
-    data["item_count"] = len(data["items"])
-
-    # Atomic write: write to temp file, then replace
-    tmp_path = file_path.with_suffix(".tmp")
-    with open(tmp_path, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-    tmp_path.replace(file_path)
-
-    return True
