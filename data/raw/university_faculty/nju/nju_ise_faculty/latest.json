@@ -3,8 +3,8 @@
   "dimension": "university_faculty",
   "group": "nju",
   "source_name": "南京大学智能软件与工程学院-师资",
-  "crawled_at": "2026-03-03T03:42:41.340580+00:00",
-  "previous_crawled_at": "2026-03-01T09:12:16.133492+00:00",
+  "crawled_at": "2026-03-03T12:27:03.099857+00:00",
+  "previous_crawled_at": "2026-03-03T11:19:59.663217+00:00",
   "item_count": 15,
   "new_item_count": 0,
   "items": [
@@ -36,7 +36,11 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "无线网络和通信",
+          "通信-计算-感知的融合",
+          "AI技术赋能网络和通信"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -50,7 +54,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学博士",
+            "institution": "英国伦敦大学学院UCL电子与电气工程系",
+            "year": "",
+            "major": ""
+          },
+          {
+            "degree": "本硕",
+            "institution": "吉林大学计算机科学系",
+            "year": "",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -71,11 +88,11 @@
         "recent_updates": [],
         "source_id": "nju_ise_faculty",
         "source_url": "https://ise.nju.edu.cn/szll/zjzjs.htm",
-        "crawled_at": "2026-03-03T03:42:22Z",
+        "crawled_at": "2026-03-03T12:24:17Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:22Z",
+        "last_seen_at": "2026-03-03T12:24:17Z",
         "is_active": true,
-        "data_completeness": 40
+        "data_completeness": 55
       },
       "is_new": false
     },
@@ -112,7 +129,7 @@
         "bio": "",
         "bio_en": "",
         "email": "gswu@nju.edu.cn",
-        "phone": "",
+        "phone": "89680998/89680710",
         "office": "",
         "profile_url": "https://ise.nju.edu.cn/szll/zjzjs/wugangshan.htm",
         "lab_url": "",
@@ -142,9 +159,9 @@
         "recent_updates": [],
         "source_id": "nju_ise_faculty",
         "source_url": "https://ise.nju.edu.cn/szll/zjzjs.htm",
-        "crawled_at": "2026-03-03T03:42:22Z",
+        "crawled_at": "2026-03-03T12:24:17Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:22Z",
+        "last_seen_at": "2026-03-03T12:24:17Z",
         "is_active": true,
         "data_completeness": 40
       },
@@ -178,12 +195,16 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "软件工程",
+          "可信软件",
+          "形式化方法"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "lxd@nju.edu.cn",
-        "phone": "",
+        "phone": "025 89683671",
         "office": "",
         "profile_url": "https://ise.nju.edu.cn/szll/zjzjs/lixuandong.htm",
         "lab_url": "",
@@ -213,11 +234,11 @@
         "recent_updates": [],
         "source_id": "nju_ise_faculty",
         "source_url": "https://ise.nju.edu.cn/szll/zjzjs.htm",
-        "crawled_at": "2026-03-03T03:42:22Z",
+        "crawled_at": "2026-03-03T12:24:17Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:22Z",
+        "last_seen_at": "2026-03-03T12:24:17Z",
         "is_active": true,
-        "data_completeness": 40
+        "data_completeness": 55
       },
       "is_new": false
     },
@@ -286,9 +307,9 @@
         "recent_updates": [],
         "source_id": "nju_ise_faculty",
         "source_url": "https://ise.nju.edu.cn/szll/zjzjs.htm",
-        "crawled_at": "2026-03-03T03:42:22Z",
+        "crawled_at": "2026-03-03T12:24:17Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:22Z",
+        "last_seen_at": "2026-03-03T12:24:17Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -338,7 +359,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "电子科技大学",
+            "year": "2015",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -359,9 +387,9 @@
         "recent_updates": [],
         "source_id": "nju_ise_faculty",
         "source_url": "https://ise.nju.edu.cn/szll/zjzjs.htm",
-        "crawled_at": "2026-03-03T03:42:22Z",
+        "crawled_at": "2026-03-03T12:24:17Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:22Z",
+        "last_seen_at": "2026-03-03T12:24:17Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -430,9 +458,9 @@
         "recent_updates": [],
         "source_id": "nju_ise_faculty",
         "source_url": "https://ise.nju.edu.cn/szll/zjzjs.htm",
-        "crawled_at": "2026-03-03T03:42:22Z",
+        "crawled_at": "2026-03-03T12:24:17Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:22Z",
+        "last_seen_at": "2026-03-03T12:24:17Z",
         "is_active": true,
         "data_completeness": 40
       },
@@ -501,9 +529,9 @@
         "recent_updates": [],
         "source_id": "nju_ise_faculty",
         "source_url": "https://ise.nju.edu.cn/szll/zjzjs.htm",
-        "crawled_at": "2026-03-03T03:42:22Z",
+        "crawled_at": "2026-03-03T12:24:17Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:22Z",
+        "last_seen_at": "2026-03-03T12:24:17Z",
         "is_active": true,
         "data_completeness": 40
       },
@@ -553,7 +581,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "南京大学",
+            "year": "2017",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -574,9 +609,9 @@
         "recent_updates": [],
         "source_id": "nju_ise_faculty",
         "source_url": "https://ise.nju.edu.cn/szll/zjzjs.htm",
-        "crawled_at": "2026-03-03T03:42:22Z",
+        "crawled_at": "2026-03-03T12:24:17Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:22Z",
+        "last_seen_at": "2026-03-03T12:24:17Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -626,7 +661,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "南京大学",
+            "year": "2018",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -647,9 +689,9 @@
         "recent_updates": [],
         "source_id": "nju_ise_faculty",
         "source_url": "https://ise.nju.edu.cn/szll/zjzjs.htm",
-        "crawled_at": "2026-03-03T03:42:22Z",
+        "crawled_at": "2026-03-03T12:24:17Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:22Z",
+        "last_seen_at": "2026-03-03T12:24:17Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -699,7 +741,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "厦门大学",
+            "year": "",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "英国南安普顿大学",
+            "year": "",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -720,9 +775,9 @@
         "recent_updates": [],
         "source_id": "nju_ise_faculty",
         "source_url": "https://ise.nju.edu.cn/szll/zjzjs.htm",
-        "crawled_at": "2026-03-03T03:42:22Z",
+        "crawled_at": "2026-03-03T12:24:17Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:22Z",
+        "last_seen_at": "2026-03-03T12:24:17Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -756,7 +811,11 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "数据中心网络",
+          "网络传输协议",
+          "机器学习系统"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -770,7 +829,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "清华大学计算机系",
+            "year": "2022",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -791,11 +857,11 @@
         "recent_updates": [],
         "source_id": "nju_ise_faculty",
         "source_url": "https://ise.nju.edu.cn/szll/zjzjs.htm",
-        "crawled_at": "2026-03-03T03:42:22Z",
+        "crawled_at": "2026-03-03T12:24:17Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:22Z",
+        "last_seen_at": "2026-03-03T12:24:17Z",
         "is_active": true,
-        "data_completeness": 40
+        "data_completeness": 55
       },
       "is_new": false
     },
@@ -843,7 +909,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "南京大学计算机科学与技术学院",
+            "year": "2018-2024",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -864,9 +937,9 @@
         "recent_updates": [],
         "source_id": "nju_ise_faculty",
         "source_url": "https://ise.nju.edu.cn/szll/zjzjs.htm",
-        "crawled_at": "2026-03-03T03:42:22Z",
+        "crawled_at": "2026-03-03T12:24:17Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:22Z",
+        "last_seen_at": "2026-03-03T12:24:17Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -900,7 +973,11 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "AI赋能网络和通信",
+          "通信和感知一体化网络",
+          "智能反射面"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -914,7 +991,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "电子科技大学信息与通信工程学院",
+            "year": "2024",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -935,11 +1019,11 @@
         "recent_updates": [],
         "source_id": "nju_ise_faculty",
         "source_url": "https://ise.nju.edu.cn/szll/zjzjs.htm",
-        "crawled_at": "2026-03-03T03:42:22Z",
+        "crawled_at": "2026-03-03T12:24:17Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:22Z",
+        "last_seen_at": "2026-03-03T12:24:17Z",
         "is_active": true,
-        "data_completeness": 40
+        "data_completeness": 55
       },
       "is_new": false
     },
@@ -971,7 +1055,11 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "AI赋能的智慧通信网络",
+          "数据与能量一体化网络",
+          "无线通信网络资源调度管理"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -985,7 +1073,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "电子科技大学信息与通信工程学院",
+            "year": "2024",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1006,11 +1101,11 @@
         "recent_updates": [],
         "source_id": "nju_ise_faculty",
         "source_url": "https://ise.nju.edu.cn/szll/zjzjs.htm",
-        "crawled_at": "2026-03-03T03:42:22Z",
+        "crawled_at": "2026-03-03T12:24:17Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:22Z",
+        "last_seen_at": "2026-03-03T12:24:17Z",
         "is_active": true,
-        "data_completeness": 40
+        "data_completeness": 55
       },
       "is_new": false
     },
@@ -1058,7 +1153,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "电子科技大学信息与通信工程学院",
+            "year": "2026",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1079,9 +1181,9 @@
         "recent_updates": [],
         "source_id": "nju_ise_faculty",
         "source_url": "https://ise.nju.edu.cn/szll/zjzjs.htm",
-        "crawled_at": "2026-03-03T03:42:22Z",
+        "crawled_at": "2026-03-03T12:24:17Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:22Z",
+        "last_seen_at": "2026-03-03T12:24:17Z",
         "is_active": true,
         "data_completeness": 55
       },

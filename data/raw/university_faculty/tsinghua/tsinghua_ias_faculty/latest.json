@@ -3,9 +3,9 @@
   "dimension": "university_faculty",
   "group": "tsinghua",
   "source_name": "清华大学高等研究院-师资",
-  "crawled_at": "2026-03-03T03:51:20.734415+00:00",
-  "previous_crawled_at": "2026-03-01T09:20:14.520034+00:00",
-  "item_count": 29,
+  "crawled_at": "2026-03-03T14:09:53.592980+00:00",
+  "previous_crawled_at": "2026-03-03T03:51:20.734415+00:00",
+  "item_count": 26,
   "new_item_count": 0,
   "items": [
     {
@@ -35,12 +35,17 @@
         "position": "教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "理论与计算天体物理",
+          "原行星盘与行星形成",
+          "等离子体天体物理",
+          "计算天体物理"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "xbai(at)tsinghua.edu.cn",
-        "phone": "",
+        "phone": "010-62789981",
         "office": "",
         "profile_url": "https://www.ias.tsinghua.edu.cn/info/1016/1234.htm",
         "lab_url": "",
@@ -49,7 +54,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "Ph.D.",
+            "institution": "普林斯顿大学",
+            "year": "2007-2012",
+            "major": "天体物理科学"
+          },
+          {
+            "degree": "B.S.",
+            "institution": "清华大学",
+            "year": "2003-2007",
+            "major": "基础科学班"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -70,11 +88,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
+        "crawled_at": "2026-03-03T14:01:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
+        "last_seen_at": "2026-03-03T14:01:03Z",
         "is_active": true,
-        "data_completeness": 50
+        "data_completeness": 65
       },
       "is_new": false
     },
@@ -98,14 +116,24 @@
         "name": "Bartek Czech",
         "name_en": "",
         "gender": "",
-        "photo_url": "https://www.ias.tsinghua.edu.cn/__local/8/B9/79/725AF7C2998DD00D40571D18275_C3BB7E45_21161.jpg?e=.jpg",
+        "photo_url": "",
         "university": "清华大学",
         "department": "高等研究院",
         "secondary_departments": [],
         "position": "教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "时空与引力不是基本的而是涌现(emergent)的概念",
+          "量子信息学如何能够产生一个有时空与引力的异性描述",
+          "用量子信息学来诠释在AdS/CFT里应用的概念",
+          "bit threads",
+          "tensor networks",
+          "differential entropy",
+          "modular Berry connection",
+          "AdS的结构",
+          "Susskind的复杂性猜想（circuit complexity）"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -119,7 +147,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "物理博士",
+            "institution": "宾夕法尼亚大学",
+            "year": "2009",
+            "major": "Statistical Effects in Large N Supersymmetric Gauge Theories"
+          },
+          {
+            "degree": "中国文学历史",
+            "institution": "复旦大学国际文化交流学院",
+            "year": "2002-2003",
+            "major": ""
+          },
+          {
+            "degree": "化学与数学magna cum laude学士",
+            "institution": "哈佛大学",
+            "year": "2002",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -140,13 +187,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
+        "crawled_at": "2026-03-03T14:01:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
+        "last_seen_at": "2026-03-03T14:01:03Z",
         "is_active": true,
-        "data_completeness": 50,
-        "_user_modified_at": "2026-03-03T06:20:01.156050+00:00",
-        "_user_modified_by": "user"
+        "data_completeness": 65
       },
       "is_new": false
     },
@@ -177,7 +222,10 @@
         "position": "研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "量子场论的非微扰现象",
+          "凝聚态理论"
+        ],
         "keywords": [],
         "bio": "个人简介我主要研究 ：1）量子场论的非微扰现象，尤其是以范畴学语言来自然地梳理、解决传统上难以解决的非微扰问题；2）凝聚态理论——既包括形式理论和输运理论的发展，也包括基于具体实验的唯象问题。",
         "bio_en": "",
@@ -191,7 +239,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "University of Chicago",
+            "year": "2011-2016",
+            "major": "物理"
+          },
+          {
+            "degree": "学士",
+            "institution": "University of Michigan at Ann Arbor",
+            "year": "2008-2011",
+            "major": "物理，数学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -212,11 +273,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
+        "crawled_at": "2026-03-03T14:01:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
+        "last_seen_at": "2026-03-03T14:01:03Z",
         "is_active": true,
-        "data_completeness": 65
+        "data_completeness": 80
       },
       "is_new": false
     },
@@ -286,9 +347,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
+        "crawled_at": "2026-03-03T14:01:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
+        "last_seen_at": "2026-03-03T14:01:03Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -340,7 +401,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "Ph.D.",
+            "institution": "University of California, Davis",
+            "year": "2014",
+            "major": "Computer Science"
+          },
+          {
+            "degree": "Bachelor's",
+            "institution": "University of Hong Kong",
+            "year": "2010",
+            "major": "Electrical and Electronic Engineering"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -361,9 +435,103 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
+        "crawled_at": "2026-03-03T14:01:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
+        "last_seen_at": "2026-03-03T14:01:03Z",
+        "is_active": true,
+        "data_completeness": 80
+      },
+      "is_new": false
+    },
+    {
+      "title": "段文晖",
+      "url": "https://www.phys.tsinghua.edu.cn/info/1096/4452.htm",
+      "url_hash": "27b065c3a8b111a0cb964f5e78574294d3f97aae29d6a43125a939938da3f76b",
+      "published_at": null,
+      "author": null,
+      "content": "友情链接清华大学清华新闻办公系统清华校友宣传资料下载清华物理系公共平台联系地址传真：010-62781604电话：010-62782711Email: wlx@tsinghua.edu.cn版权所有 © 清华大学     京ICP备15006448号 京公网安备 110402430053 号",
+      "content_html": null,
+      "content_hash": "3f35d04bc53e6a5963ba3e68af8fb40a82f4985dd1b82357c70e703aff494556",
+      "source_id": "tsinghua_ias_faculty",
+      "dimension": "university_faculty",
+      "tags": [
+        "faculty",
+        "tsinghua",
+        "science"
+      ],
+      "extra": {
+        "name": "段文晖",
+        "name_en": "",
+        "gender": "",
+        "photo_url": "",
+        "university": "清华大学",
+        "department": "高等研究院",
+        "secondary_departments": [],
+        "position": "教授、院长",
+        "academic_titles": [],
+        "is_academician": false,
+        "research_areas": [
+          "凝聚态物质的电子结构",
+          "低维材料量子特性的理论研究",
+          "纳米材料及器件电子和输运性质的研究",
+          "新型铁电材料的计算模拟"
+        ],
+        "keywords": [],
+        "bio": "友情链接清华大学清华新闻办公系统清华校友宣传资料下载清华物理系公共平台联系地址传真：010-62781604电话：010-62782711Email: wlx@tsinghua.edu.cn版权所有 © 清华大学     京ICP备15006448号 京公网安备 110402430053 号",
+        "bio_en": "",
+        "email": "duanw@tsinghua.edu.cn",
+        "phone": "010-62785577",
+        "office": "",
+        "profile_url": "https://www.phys.tsinghua.edu.cn/info/1096/4452.htm",
+        "lab_url": "",
+        "google_scholar_url": "",
+        "dblp_url": "",
+        "orcid": "",
+        "phd_institution": "",
+        "phd_year": "",
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "清华大学物理系",
+            "year": "1986",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "清华大学物理系",
+            "year": "1988-1992",
+            "major": "凝聚态物理专业"
+          },
+          {
+            "degree": "博士",
+            "institution": "清华大学物理系",
+            "year": "1988-1992",
+            "major": "凝聚态物理专业"
+          }
+        ],
+        "publications_count": -1,
+        "h_index": -1,
+        "citations_count": -1,
+        "metrics_updated_at": "",
+        "representative_publications": [],
+        "patents": [],
+        "awards": [],
+        "is_advisor_committee": false,
+        "is_adjunct_supervisor": false,
+        "supervised_students": [],
+        "joint_research_projects": [],
+        "joint_management_roles": [],
+        "academic_exchange_records": [],
+        "is_potential_recruit": false,
+        "institute_relation_notes": "",
+        "relation_updated_by": "",
+        "relation_updated_at": "",
+        "recent_updates": [],
+        "source_id": "tsinghua_ias_faculty",
+        "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
+        "crawled_at": "2026-03-03T14:01:03Z",
+        "first_seen_at": "",
+        "last_seen_at": "2026-03-03T14:01:03Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -396,7 +564,9 @@
         "position": "副研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "加速器物理"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -410,7 +580,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士学位",
+            "institution": "清华大学",
+            "year": "2022",
+            "major": "Theoretical and Experimental Studies on Steady-state Microbunching"
+          },
+          {
+            "degree": "学士学位",
+            "institution": "清华大学",
+            "year": "2015",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -431,81 +614,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
+        "crawled_at": "2026-03-03T14:01:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
+        "last_seen_at": "2026-03-03T14:01:03Z",
         "is_active": true,
-        "data_completeness": 50
-      },
-      "is_new": false
-    },
-    {
-      "title": "顾秉林",
-      "url": "https://www.ias.tsinghua.edu.cn/info/1016/1207.htm",
-      "url_hash": "e30cf9c0e557751f4fabc6700d202f60c9acd7d3e05052f19dcd0dc82acd0688",
-      "published_at": null,
-      "author": null,
-      "content": null,
-      "content_html": null,
-      "content_hash": null,
-      "source_id": "tsinghua_ias_faculty",
-      "dimension": "university_faculty",
-      "tags": [
-        "faculty",
-        "tsinghua",
-        "science"
-      ],
-      "extra": {
-        "name": "顾秉林",
-        "name_en": "",
-        "gender": "",
-        "photo_url": "",
-        "university": "清华大学",
-        "department": "高等研究院",
-        "secondary_departments": [],
-        "position": "教授，院长",
-        "academic_titles": [],
-        "is_academician": false,
-        "research_areas": [],
-        "keywords": [],
-        "bio": "",
-        "bio_en": "",
-        "email": "gubl(AT)tsinghua.edu.cn",
-        "phone": "",
-        "office": "",
-        "profile_url": "https://www.ias.tsinghua.edu.cn/info/1016/1207.htm",
-        "lab_url": "",
-        "google_scholar_url": "",
-        "dblp_url": "",
-        "orcid": "",
-        "phd_institution": "",
-        "phd_year": "",
-        "education": [],
-        "publications_count": -1,
-        "h_index": -1,
-        "citations_count": -1,
-        "metrics_updated_at": "",
-        "representative_publications": [],
-        "patents": [],
-        "awards": [],
-        "is_advisor_committee": false,
-        "is_adjunct_supervisor": false,
-        "supervised_students": [],
-        "joint_research_projects": [],
-        "joint_management_roles": [],
-        "academic_exchange_records": [],
-        "is_potential_recruit": false,
-        "institute_relation_notes": "",
-        "relation_updated_by": "",
-        "relation_updated_at": "",
-        "recent_updates": [],
-        "source_id": "tsinghua_ias_faculty",
-        "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
-        "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
-        "is_active": true,
-        "data_completeness": 50
+        "data_completeness": 65
       },
       "is_new": false
     },
@@ -536,12 +649,18 @@
         "position": "研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "量子多体物理",
+          "量子纠缠在凝聚态物理和量子计算中的关键作用",
+          "量子模拟与计算",
+          "量子开放体系的普适行为",
+          "量子多体中的纠缠与混沌"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "guyingfei(AT)tsinghua.edu.cn",
-        "phone": "",
+        "phone": "010-62797389",
         "office": "",
         "profile_url": "https://www.ias.tsinghua.edu.cn/info/1016/1763.htm",
         "lab_url": "",
@@ -550,7 +669,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "BS",
+            "institution": "清华大学基础科学班",
+            "year": "2008-2012",
+            "major": ""
+          },
+          {
+            "degree": "PhD",
+            "institution": "斯坦福大学物理系",
+            "year": "2012-2017",
+            "major": "(导师：祁晓亮)"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -571,11 +703,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
+        "crawled_at": "2026-03-03T14:01:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
+        "last_seen_at": "2026-03-03T14:01:03Z",
         "is_active": true,
-        "data_completeness": 50
+        "data_completeness": 65
       },
       "is_new": false
     },
@@ -625,7 +757,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "Undergraduate",
+            "institution": "ETH Zurich",
+            "year": "2005-2009",
+            "major": "Mathematics"
+          },
+          {
+            "degree": "PhD",
+            "institution": "ETH Zurich",
+            "year": "2009-2010",
+            "major": "Mathematics"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -646,9 +791,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
+        "crawled_at": "2026-03-03T14:01:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
+        "last_seen_at": "2026-03-03T14:01:03Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -721,9 +866,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
+        "crawled_at": "2026-03-03T14:01:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
+        "last_seen_at": "2026-03-03T14:01:03Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -777,7 +922,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "Bachelor",
+            "institution": "WHU",
+            "year": "2009",
+            "major": ""
+          },
+          {
+            "degree": "Master",
+            "institution": "UoB",
+            "year": "2016",
+            "major": ""
+          },
+          {
+            "degree": "PhD",
+            "institution": "UoB",
+            "year": "2018",
+            "major": "Computer Science"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -798,81 +962,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
+        "crawled_at": "2026-03-03T14:01:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
+        "last_seen_at": "2026-03-03T14:01:03Z",
         "is_active": true,
         "data_completeness": 80
-      },
-      "is_new": false
-    },
-    {
-      "title": "聂华桐",
-      "url": "https://www.ias.tsinghua.edu.cn/info/1016/1219.htm",
-      "url_hash": "71d18b83f8121d9ddd164c605f19424856fec74f1660582149c52c17493c3d34",
-      "published_at": null,
-      "author": null,
-      "content": null,
-      "content_html": null,
-      "content_hash": null,
-      "source_id": "tsinghua_ias_faculty",
-      "dimension": "university_faculty",
-      "tags": [
-        "faculty",
-        "tsinghua",
-        "science"
-      ],
-      "extra": {
-        "name": "聂华桐",
-        "name_en": "",
-        "gender": "",
-        "photo_url": "",
-        "university": "清华大学",
-        "department": "高等研究院",
-        "secondary_departments": [],
-        "position": "教授",
-        "academic_titles": [],
-        "is_academician": false,
-        "research_areas": [],
-        "keywords": [],
-        "bio": "",
-        "bio_en": "",
-        "email": "nieh(AT)tsinghua.edu.cn",
-        "phone": "",
-        "office": "",
-        "profile_url": "https://www.ias.tsinghua.edu.cn/info/1016/1219.htm",
-        "lab_url": "",
-        "google_scholar_url": "",
-        "dblp_url": "",
-        "orcid": "",
-        "phd_institution": "",
-        "phd_year": "",
-        "education": [],
-        "publications_count": -1,
-        "h_index": -1,
-        "citations_count": -1,
-        "metrics_updated_at": "",
-        "representative_publications": [],
-        "patents": [],
-        "awards": [],
-        "is_advisor_committee": false,
-        "is_adjunct_supervisor": false,
-        "supervised_students": [],
-        "joint_research_projects": [],
-        "joint_management_roles": [],
-        "academic_exchange_records": [],
-        "is_potential_recruit": false,
-        "institute_relation_notes": "",
-        "relation_updated_by": "",
-        "relation_updated_at": "",
-        "recent_updates": [],
-        "source_id": "tsinghua_ias_faculty",
-        "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
-        "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
-        "is_active": true,
-        "data_completeness": 50
       },
       "is_new": false
     },
@@ -903,7 +997,11 @@
         "position": "副研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "对称密码自动化分析",
+          "对称密码体制设计",
+          "对称密码量子安全性分析"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -917,7 +1015,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "",
+            "institution": "清华大学计算机科学与技术系",
+            "year": "2010-2014",
+            "major": "计算机科学与技术专业"
+          },
+          {
+            "degree": "",
+            "institution": "清华大学高等研究院",
+            "year": "2014-2019",
+            "major": "数学专业"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -938,11 +1049,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
+        "crawled_at": "2026-03-03T14:01:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
+        "last_seen_at": "2026-03-03T14:01:03Z",
         "is_active": true,
-        "data_completeness": 50
+        "data_completeness": 65
       },
       "is_new": false
     },
@@ -991,7 +1102,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "中国科学院，数学与系统科学研究院",
+            "year": "2010-2015",
+            "major": ""
+          },
+          {
+            "degree": "学士",
+            "institution": "南开大学，数学试点班",
+            "year": "2004-2008",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1012,9 +1136,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
+        "crawled_at": "2026-03-03T14:01:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
+        "last_seen_at": "2026-03-03T14:01:03Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -1047,7 +1171,14 @@
         "position": "教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "密码理论",
+          "数学问题研究",
+          "密码分析",
+          "密码设计",
+          "抗量子计算机攻击的公钥密码研究",
+          "格密码研究"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -1061,7 +1192,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "山东大学",
+            "year": "1987",
+            "major": "数学系"
+          },
+          {
+            "degree": "硕士",
+            "institution": "山东大学",
+            "year": "1990",
+            "major": "数学系"
+          },
+          {
+            "degree": "博士",
+            "institution": "山东大学",
+            "year": "1993",
+            "major": "数学系"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1082,11 +1232,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
+        "crawled_at": "2026-03-03T14:01:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
+        "last_seen_at": "2026-03-03T14:01:03Z",
         "is_active": true,
-        "data_completeness": 50
+        "data_completeness": 65
       },
       "is_new": false
     },
@@ -1117,7 +1267,12 @@
         "position": "教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "凝聚态物理",
+          "拓扑物态与拓扑现象",
+          "关联量子物态",
+          "非厄米物理"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -1131,7 +1286,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士学位",
+            "institution": "中国科学技术大学",
+            "year": "2011",
+            "major": "近代物理系"
+          },
+          {
+            "degree": "学士学位",
+            "institution": "中国科学技术大学",
+            "year": "2005",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1152,11 +1320,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
+        "crawled_at": "2026-03-03T14:01:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
+        "last_seen_at": "2026-03-03T14:01:03Z",
         "is_active": true,
-        "data_completeness": 50
+        "data_completeness": 65
       },
       "is_new": false
     },
@@ -1187,7 +1355,9 @@
         "position": "教授，副院长",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "理论凝聚态物理"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -1201,7 +1371,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "中国科技大学",
+            "year": "1982",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "中国科技大学",
+            "year": "1987",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1222,11 +1405,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
+        "crawled_at": "2026-03-03T14:01:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
+        "last_seen_at": "2026-03-03T14:01:03Z",
         "is_active": true,
-        "data_completeness": 50
+        "data_completeness": 65
       },
       "is_new": false
     },
@@ -1257,7 +1440,16 @@
         "position": "研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "量子引力与AdS/CFT",
+          "量子混沌与黑洞和时空虫洞的联系",
+          "利用时空虫洞来理解黑洞信息悖论以及黑洞火墙悖论",
+          "利用量子混沌效应来理解黑洞内部结构",
+          "超对称黑洞",
+          "de Sitter 时空",
+          "JT引力/SYK模型对偶",
+          "可穿越虫洞与量子多体传输"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -1271,7 +1463,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士学位",
+            "institution": "美国普林斯顿大学物理系",
+            "year": "2014-2019",
+            "major": ""
+          },
+          {
+            "degree": "学士学位",
+            "institution": "中国科学技术大学近代物理系",
+            "year": "2010-2014",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1292,11 +1497,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
+        "crawled_at": "2026-03-03T14:01:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
+        "last_seen_at": "2026-03-03T14:01:03Z",
         "is_active": true,
-        "data_completeness": 50
+        "data_completeness": 65
       },
       "is_new": false
     },
@@ -1327,12 +1532,21 @@
         "position": "教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "非常规超导体",
+          "强关联量子体系",
+          "高温超导",
+          "量子自旋液体",
+          "新奇量子相变",
+          "费米符号问题",
+          "量子信息",
+          "量子计算"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "yaohong(AT)tsinghua.edu.cn",
-        "phone": "",
+        "phone": "010-62789978",
         "office": "",
         "profile_url": "https://www.ias.tsinghua.edu.cn/info/1016/1215.htm",
         "lab_url": "",
@@ -1341,7 +1555,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "Ph.D.",
+            "institution": "斯坦福大学",
+            "year": "2009",
+            "major": "Theoretical studies of strongly correlated electronic systems"
+          },
+          {
+            "degree": "M.A.",
+            "institution": "约翰霍普金斯大学",
+            "year": "2004",
+            "major": ""
+          },
+          {
+            "degree": "B.S.",
+            "institution": "南京大学",
+            "year": "2001",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1362,11 +1595,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
+        "crawled_at": "2026-03-03T14:01:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
+        "last_seen_at": "2026-03-03T14:01:03Z",
         "is_active": true,
-        "data_completeness": 50
+        "data_completeness": 65
       },
       "is_new": false
     },
@@ -1437,9 +1670,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
+        "crawled_at": "2026-03-03T14:01:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
+        "last_seen_at": "2026-03-03T14:01:03Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -1472,7 +1705,11 @@
         "position": "教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "量子物质的非平衡动力学理论",
+          "基于原子阵列的量子计算",
+          "冷原子体系的量子多体物理"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -1486,7 +1723,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "清华大学物理系基础科学班",
+            "year": "1998-2002",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "清华大学高等研究中心",
+            "year": "2005",
+            "major": "物理学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1507,79 +1757,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
+        "crawled_at": "2026-03-03T14:01:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
-        "is_active": true,
-        "data_completeness": 50
-      },
-      "is_new": false
-    },
-    {
-      "title": "段文晖",
-      "url": "https://www.phys.tsinghua.edu.cn/info/1096/4452.htm",
-      "url_hash": "27b065c3a8b111a0cb964f5e78574294d3f97aae29d6a43125a939938da3f76b",
-      "published_at": null,
-      "author": null,
-      "content": "友情链接清华大学清华新闻办公系统清华校友宣传资料下载清华物理系公共平台联系地址传真：010-62781604电话：010-62782711Email: wlx@tsinghua.edu.cn版权所有 © 清华大学     京ICP备15006448号 京公网安备 110402430053 号",
-      "content_html": null,
-      "content_hash": "3f35d04bc53e6a5963ba3e68af8fb40a82f4985dd1b82357c70e703aff494556",
-      "source_id": "tsinghua_ias_faculty",
-      "dimension": "university_faculty",
-      "tags": [
-        "faculty",
-        "tsinghua",
-        "science"
-      ],
-      "extra": {
-        "name": "段文晖",
-        "name_en": "",
-        "gender": "",
-        "photo_url": "",
-        "university": "清华大学",
-        "department": "高等研究院",
-        "secondary_departments": [],
-        "position": "兼职教授",
-        "academic_titles": [],
-        "is_academician": false,
-        "research_areas": [],
-        "keywords": [],
-        "bio": "友情链接清华大学清华新闻办公系统清华校友宣传资料下载清华物理系公共平台联系地址传真：010-62781604电话：010-62782711Email: wlx@tsinghua.edu.cn版权所有 © 清华大学     京ICP备15006448号 京公网安备 110402430053 号",
-        "bio_en": "",
-        "email": "duanw@tsinghua.edu.cn",
-        "phone": "",
-        "office": "",
-        "profile_url": "https://www.phys.tsinghua.edu.cn/info/1096/4452.htm",
-        "lab_url": "",
-        "google_scholar_url": "",
-        "dblp_url": "",
-        "orcid": "",
-        "phd_institution": "",
-        "phd_year": "",
-        "education": [],
-        "publications_count": -1,
-        "h_index": -1,
-        "citations_count": -1,
-        "metrics_updated_at": "",
-        "representative_publications": [],
-        "patents": [],
-        "awards": [],
-        "is_advisor_committee": false,
-        "is_adjunct_supervisor": false,
-        "supervised_students": [],
-        "joint_research_projects": [],
-        "joint_management_roles": [],
-        "academic_exchange_records": [],
-        "is_potential_recruit": false,
-        "institute_relation_notes": "",
-        "relation_updated_by": "",
-        "relation_updated_at": "",
-        "recent_updates": [],
-        "source_id": "tsinghua_ias_faculty",
-        "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
-        "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
+        "last_seen_at": "2026-03-03T14:01:03Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1649,9 +1829,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
+        "crawled_at": "2026-03-03T14:01:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
+        "last_seen_at": "2026-03-03T14:01:03Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -1719,9 +1899,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
+        "crawled_at": "2026-03-03T14:01:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
+        "last_seen_at": "2026-03-03T14:01:03Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1754,7 +1934,11 @@
         "position": "兼职副教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "AI + Physics",
+          "量子多体物理",
+          "量子信息与计算"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -1768,7 +1952,32 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "理学士",
+            "institution": "香港大学",
+            "year": "2012-2016",
+            "major": "物理和数学"
+          },
+          {
+            "degree": "物理学硕士",
+            "institution": "伊利诺伊大学香槟分校",
+            "year": "2016-2018",
+            "major": ""
+          },
+          {
+            "degree": "数学硕士",
+            "institution": "伊利诺伊大学香槟分校",
+            "year": "2018-2021",
+            "major": ""
+          },
+          {
+            "degree": "物理学博士",
+            "institution": "伊利诺伊大学香槟分校",
+            "year": "2016-2021",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1789,11 +1998,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
+        "crawled_at": "2026-03-03T14:01:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
+        "last_seen_at": "2026-03-03T14:01:03Z",
         "is_active": true,
-        "data_completeness": 50
+        "data_completeness": 65
       },
       "is_new": false
     },
@@ -1859,9 +2068,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
+        "crawled_at": "2026-03-03T14:01:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
+        "last_seen_at": "2026-03-03T14:01:03Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1894,7 +2103,13 @@
         "position": "兼职教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "算法分析",
+          "计算复杂性",
+          "通讯复杂性",
+          "密码协议",
+          "量子计算"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -1908,7 +2123,32 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士学位",
+            "institution": "台湾大学",
+            "year": "1967",
+            "major": "物理学"
+          },
+          {
+            "degree": "硕士学位",
+            "institution": "哈佛大学",
+            "year": "1969",
+            "major": "物理学"
+          },
+          {
+            "degree": "博士学位",
+            "institution": "哈佛大学",
+            "year": "1972",
+            "major": "物理学"
+          },
+          {
+            "degree": "博士学位",
+            "institution": "伊利诺伊大学",
+            "year": "1975",
+            "major": "计算机科学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1929,81 +2169,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
+        "crawled_at": "2026-03-03T14:01:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
+        "last_seen_at": "2026-03-03T14:01:03Z",
         "is_active": true,
-        "data_completeness": 50
-      },
-      "is_new": false
-    },
-    {
-      "title": "赵午",
-      "url": "https://www.ias.tsinghua.edu.cn/info/1016/1872.htm",
-      "url_hash": "7feba1818c55f435038b77b13b6d2055988c5fcd468dfd2b7d29c5ec509c24c3",
-      "published_at": null,
-      "author": null,
-      "content": null,
-      "content_html": null,
-      "content_hash": null,
-      "source_id": "tsinghua_ias_faculty",
-      "dimension": "university_faculty",
-      "tags": [
-        "faculty",
-        "tsinghua",
-        "science"
-      ],
-      "extra": {
-        "name": "赵午",
-        "name_en": "",
-        "gender": "",
-        "photo_url": "",
-        "university": "清华大学",
-        "department": "高等研究院",
-        "secondary_departments": [],
-        "position": "访问教授",
-        "academic_titles": [],
-        "is_academician": false,
-        "research_areas": [],
-        "keywords": [],
-        "bio": "",
-        "bio_en": "",
-        "email": "chaoalexander5(AT)gmail.com",
-        "phone": "",
-        "office": "",
-        "profile_url": "https://www.ias.tsinghua.edu.cn/info/1016/1872.htm",
-        "lab_url": "",
-        "google_scholar_url": "",
-        "dblp_url": "",
-        "orcid": "",
-        "phd_institution": "",
-        "phd_year": "",
-        "education": [],
-        "publications_count": -1,
-        "h_index": -1,
-        "citations_count": -1,
-        "metrics_updated_at": "",
-        "representative_publications": [],
-        "patents": [],
-        "awards": [],
-        "is_advisor_committee": false,
-        "is_adjunct_supervisor": false,
-        "supervised_students": [],
-        "joint_research_projects": [],
-        "joint_management_roles": [],
-        "academic_exchange_records": [],
-        "is_potential_recruit": false,
-        "institute_relation_notes": "",
-        "relation_updated_by": "",
-        "relation_updated_at": "",
-        "recent_updates": [],
-        "source_id": "tsinghua_ias_faculty",
-        "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
-        "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
-        "is_active": true,
-        "data_completeness": 50
+        "data_completeness": 65
       },
       "is_new": false
     },
@@ -2034,12 +2204,16 @@
         "position": "兼职教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "受限小量子系统物理各种低维量子结构(包括量子点、纳米团簇、纳米管)的电子结构、声子模及电声子相互作用的特性各种低维量子结构的光学特性(含Raman散射)、激子效应和器件应用介观系统输运",
+          "半导体自旋电子学",
+          "半导体中超快过程的多体理论半导体中动力学量子干涉及其可控性量子点中的晶格弛豫及其动力学过程半导体超晶格布洛赫震荡强THz激光下辐照半导体物理非平衡载流子弛豫与输运相位相干、退相干与多体效应"
+        ],
         "keywords": [],
         "bio": "友情链接清华大学清华新闻办公系统清华校友宣传资料下载清华物理系公共平台联系地址传真：010-62781604电话：010-62782711Email: wlx@tsinghua.edu.cn版权所有 © 清华大学     京ICP备15006448号 京公网安备 110402430053 号",
         "bio_en": "",
         "email": "bfz@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "010-62787784",
         "office": "",
         "profile_url": "https://www.phys.tsinghua.edu.cn/info/1101/4243.htm",
         "lab_url": "",
@@ -2048,7 +2222,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "清华大学工程物理系",
+            "year": "1970",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "清华大学",
+            "year": "1981",
+            "major": "固体物理学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2069,11 +2256,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T03:50:25Z",
+        "crawled_at": "2026-03-03T14:01:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:25Z",
+        "last_seen_at": "2026-03-03T14:01:03Z",
         "is_active": true,
-        "data_completeness": 65
+        "data_completeness": 80
       },
       "is_new": false
     }

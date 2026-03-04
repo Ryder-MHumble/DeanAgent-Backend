@@ -3,8 +3,8 @@
   "dimension": "university_faculty",
   "group": "pku",
   "source_name": "北京大学前沿计算研究中心-教学科研人员",
-  "crawled_at": "2026-03-03T03:44:08.632026+00:00",
-  "previous_crawled_at": "2026-03-01T09:13:38.430143+00:00",
+  "crawled_at": "2026-03-03T12:39:21.548285+00:00",
+  "previous_crawled_at": "2026-03-03T03:44:08.632026+00:00",
   "item_count": 36,
   "new_item_count": 0,
   "items": [
@@ -46,7 +46,7 @@
         "bio": "简介高文，男，1956年出生，中国工程院院士，北京大学博雅讲席教授、博导、信息科学技术学院院长，中国计算机学会理事长，新一代人工智能产业技术创新战略联盟理事长，全国专业标准化技术委员会副主任，数字音视频编解码技术标准(AVS)工作组组长。1988年获哈尔滨工业大学计算机应用博士学位，1991年获日本东京大学电子学博士学位。他曾在美国卡内基 梅隆大学(CMU)机器人研究所﹑美国麻省理工学院(MIT)人工智能实验室等做过访问科学家。他1992年入选进入国家863智能计算机主题专家组，担任智能计算机接口领域的责任专家，1996年至2000年任专家组组长。他1998年至1999年曾担任中科院计算所所长，2000年至2004年担任中科院研究生院常务副院长，其间2000年至2003年兼任中国科技大学副校长。他2013年3月至2018年2月担任国家自然科学基金委员会副主任。2018年3月31日新任鹏城实验室（深圳网络空间科学与技术广东省实验室）主任。高文教授曾担任第十届、十一届、十二届全国政协委员，国务院学科评议组计算机学科成员，计算机学报主编。先后兼任IEEE T-CSVT、IEEE T-AMD、SPIC、JVCIR、IEEE FIP等期刊的编委。他曾担任IEEE ICME 2007（IEEE多媒体领域旗舰会议）、ACM MM 2009（ACM多媒体领域旗舰会议）、 IEEE ISCAS 2013(IEEE电路与系统协会旗舰会议)大会主席等。他主要研究领域为人工智能，长期从事计算机视觉、模式识别与图像处理、多媒体数据压缩、多模式接口以及虚拟现实等的研究。在面向对象视频编码、可伸缩视频编码、人脸与手语模式识别、AVS视频编解码国家标准等方面做出重要贡献。主持973（首席）、863、国家自然科学基金创新群体等国家级项目二十余项。已出版著作6部，在ACM Computing Surveys、IEEE T-PAMI、IEEE T-IP、IEEE T-CSVT等本领域国际顶级期刊上发表论文（含指导学生论文）两百余篇。他获得国家技术发明二等奖1次（2006）、获得国家科技进步二等奖5次（2000、2002、2003、2005、2012）、获得国家自然科学二等奖1次（2015）。2008年底他因在视频编码方面的技术贡献，当选IEEE Fellow；2010年因“音视频编解码理论、标准及应用的突出成就”被授予中国计算机学会王选奖；2013年底因“对视频技术的贡献，及对计算在中国发展的领导力”而当选ACM Fellow。",
         "bio_en": "",
         "email": "",
-        "phone": "",
+        "phone": "+86 (0)10 6275-8116",
         "office": "",
         "profile_url": "https://cfcs.pku.edu.cn/people/directors/wengao/index.htm",
         "lab_url": "",
@@ -55,7 +55,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "哈尔滨工业大学",
+            "year": "1988",
+            "major": "计算机应用"
+          },
+          {
+            "degree": "博士",
+            "institution": "日本东京大学",
+            "year": "1991",
+            "major": "电子学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -76,9 +89,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -128,7 +141,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "美国西雅图大学",
+            "year": "1961",
+            "major": "电子工程"
+          },
+          {
+            "degree": "硕士",
+            "institution": "美国斯坦福大学",
+            "year": "1962",
+            "major": "电子工程"
+          },
+          {
+            "degree": "博士",
+            "institution": "美国斯坦福大学",
+            "year": "1964",
+            "major": "电子工程"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -149,9 +181,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -204,7 +236,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "山东大学",
+            "year": "2011",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "清华大学",
+            "year": "2014",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "约翰· 霍普金斯大学",
+            "year": "2019",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -225,9 +276,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -278,7 +329,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "中国科学技术大学",
+            "year": "2014",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "纽约州立大学",
+            "year": "2016",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "北京大学",
+            "year": "2021",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -299,9 +369,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -345,7 +415,7 @@
         "bio": "简介邓小铁教授，现任北京大学前沿计算研究中心讲席教授、CSIAM 区块链专委会主任，兼北京大学人工智能研究院多智能体中心主任。1982年于清华大学获得学士学位，1984年于中国科学院获得硕士学位，1989年于斯坦福大学获得博士学位。1984-1985年，任中国科学院系统科学研究所助理研究员；1991-1999年任加拿大约克大学计算机科学与工程系助理教授、副教授；1997-2012年任香港城市大学计算机科学与工程系副教授、教授、讲席教授，同时，于2010年-2012年兼任英国利物浦大学计算机科学与工程系讲席教授；2012-2017年任上海交通大学计算机科学与工程系讲席教授；2017年12月入职北京大学，任计算机学院前沿计算研究中心讲席教授。他的主要科研方向为算法博弈论、区块链、互联网经济、在线算法及并行计算。2008年，他因在算法博弈论领域的贡献当选 ACM Fellow；2019年，因在不完全信息计算和交互环境计算领域的贡献当选 IEEE fellow；2020年当选欧洲科学院外籍院士；2021年当选中国工业与应用数学学会会士（CSIAM Fellow）；2021年被任命为博弈论学会（GTS）理事；2021年被聘为中国运筹学会博弈论分会荣誉理事；2021年获得中国计算机学会“智能体与多智能体系统研究成就奖”；2022年获得 ACM 计算经济学的“时间检验奖”（Test of Time Award）。邓小铁教授近期的科研重心主要在均衡计算、多智能体博弈、互联网经济和区块链中的博弈论研究，具体包括数据驱动博弈下的机器学习方法、认知理论、对手建模、学习算法、拍卖、广告、机制设计等。作为项目负责人，他曾承担几十项加拿大、香港、英国及国家基金委科研项目，并担任多种国际期刊编委。邓小铁担任多个国际学术会议主席，并发起由亚欧美三大洲循环举办的国际互联网经济学术会议（The Conference on Web and Internet Economics，WINE）和国际理论计算机联合大会（International Joint Conference on Theoretical Computer Science，IJTCS）。曾获得 IEEE 理论计算机学术会议 FOCS 最佳论文奖；其成果“关于图与组合优化的若干经典问题的研究”获2015年度高等学校科学研究优秀成果奖（自然科学）二等奖。应用方面曾获得多项专利，曾担任主要互联网公司机制设计顾问。",
         "bio_en": "",
         "email": "",
-        "phone": "",
+        "phone": "+86 (0)10 6276-9219",
         "office": "",
         "profile_url": "https://cfcs.pku.edu.cn/people/faculty/xiaotiedeng/index.htm",
         "lab_url": "",
@@ -354,7 +424,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学",
+            "year": "1982",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "中国科学院",
+            "year": "1984",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "斯坦福大学",
+            "year": "1989",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -375,9 +464,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -420,7 +509,7 @@
         "bio": "简介董豪，北京大学计算机学院前沿计算研究中心长聘副教授，科技创新2030国家重大项目负责人（首席科学家），入选国家级高层次青年人才计划，上纬启元首席科学家。研究方向聚焦于具身智能、大模型、强化学习、计算机视觉以及相应的开源系统。核心目标是探索并构建兼具成本效益与通用性的机器人系统。研究工作获得2024年IROS最佳应用论文提名奖、2024年字节跳动优秀导师奖、2025年中国具身智能大会（CEAI）杰出青年研究者论文奖提名，2025年英特尔中国优秀研究奖，以及2025年世界人工智能大会（WAIC）青年优秀论文奖提名等一众国内外奖项。担任国际CVPR、NeurIPS及AAAI的领域主席或高级程序委员会委员；同时担任ICRA及Machine Intelligence Research（MIR）的副主编，并曾获MIR杰出副主编奖。",
         "bio_en": "",
         "email": "",
-        "phone": "",
+        "phone": "+86 (0)10 6275-6561",
         "office": "",
         "profile_url": "https://cfcs.pku.edu.cn/people/faculty/haodong/index.htm",
         "lab_url": "",
@@ -450,9 +539,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -493,7 +582,7 @@
         "bio": "简介黄铁军，博士，北京大学信息科学技术学院教授，计算机科学技术系系主任，数字媒体研究所所长，数字视频编解码技术国家工程实验室副主任，国家杰出青年科学 基金获得者，教育部“长江学者”特聘教授。主要研究方向为视觉信息处理（图像识别与视频编码）和类脑计算，累计主持国家级科研项目十多项，发表（含合作）学术论文200多篇，作为主要起草人制定国家标准、ISO/IEC标准 和IEEE标准十数项，申请发明专利八十多项，两次荣获国家科学技术进步二等奖，四次荣获省部级一等奖，并获“中国科协求是杰出青年成果转化奖”和 IEEE计算机学会Computing Now Award。兼任国家数字音视频编解码技术标准工作组(AVS)秘书长（2002~）、中国电子学会理事（2006~）ISO/IEC运动图像专家组 （MPEG）中国代表团团长（2010~）等。",
         "bio_en": "",
         "email": "",
-        "phone": "",
+        "phone": "+86 (0)10 6275-6541",
         "office": "",
         "profile_url": "https://cfcs.pku.edu.cn/people/faculty/tiejunhuang/index.htm",
         "lab_url": "",
@@ -523,9 +612,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -569,7 +658,7 @@
         "bio": "简介姜少峰博士，现任北京大学前沿计算研究中心助理教授，博士生导师，北京大学博雅青年学者，于2021年6月正式加入中心。他于2017年在香港大学取得博士学位，曾在以色列魏茨曼科学研究学院（Weizmann Institute of Science）进行为期三年的博士后研究，并曾在芬兰阿尔托大学（Aalto University）任助理教授。他博士在读期间获微软亚洲研究院PhD Fellowship提名奖，博士后研究获魏茨曼杰出博士后研究成果奖。他的研究方向为理论计算机科学，近期侧重于大数据算法及其在机器学习中的应用，并已经在包括FOCS，SICOMP，SODA，ICML，NeurIPS等的主流国际期刊和会议上发表论文多篇。姜少峰博士现致力于理论计算机科学、数据科学理论基础等方面的教学和科研，并与国际知名机构积极展开合作，积极推进相关方向的人才培养和科研产出，提升中心的国际影响力。",
         "bio_en": "",
         "email": "",
-        "phone": "",
+        "phone": "+86 (0)10 6275-0349",
         "office": "",
         "profile_url": "https://cfcs.pku.edu.cn/people/faculty/shaofengjiang/index.htm",
         "lab_url": "",
@@ -578,7 +667,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "香港大学",
+            "year": "2017",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -599,9 +695,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -642,7 +738,7 @@
         "bio": "简介孔雨晴博士，现任北京大学前沿计算研究中心长聘副教授，博士生导师，北京大学博雅青年学者，于2018年9月正式加入中心。她于2013年和2018年分别在中国科学技术大学、密歇根大学安娜堡分校获学士、博士学位。研究兴趣在计算经济学领域，包含同伴预测，预测市场，机制设计以及机器学习等。孔雨晴博士的多篇论文发表于WINE, ITCS, EC, SODA, AAAI, NeurIPS, ICLR等理论计算机领域的顶级会议中。",
         "bio_en": "",
         "email": "",
-        "phone": "",
+        "phone": "+86 (0)10 6276-8209",
         "office": "",
         "profile_url": "https://cfcs.pku.edu.cn/people/faculty/yuqingkong/index.htm",
         "lab_url": "",
@@ -651,7 +747,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "中国科学技术大学",
+            "year": "2013",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "密歇根大学安娜堡分校",
+            "year": "2018",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -672,9 +781,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -719,7 +828,7 @@
         "bio": "简介李彤阳，现任北京大学前沿计算研究中心助理教授，博士生导师，北京大学博雅青年学者，国家自然科学基金面上项目、重大研究计划培育项目负责人。他于2015年在清华大学交叉信息研究院（姚班）和数学科学系分别获得工学士学位和理学士学位，2020年在美国马里兰大学获得博士学位，之后在美国麻省理工学院从事博士后研究工作，于2021年7月加入北京大学前沿计算研究中心并工作至今。他的科研围绕量子计算、人工智能、理论计算机的交叉领域展开，研究成果已在Nature Physics、Nature Communications、Journal of the ACM、Physical Review Letters、IEEE Transactions on Information Theory、STOC、ICML、NeurIPS、ICLR 等期刊、会议发表论文四十余篇；9次在国际量子信息方向的权威会议 QIP 上作报告；担任量子科学领域期刊 Quantum的期刊编辑，AQIS 2025会议共同主席，AQIS 2021, TQC 2022, QCTIP 2022, QIP 2023, ICLR 2024, QCTIP 2024, TQC 2024, NeurIPS 2024, ICLR 2025, NeurIPS 2025, ICLR 2026, QIP 2026, ICML 2026, TQC 2026会议的程务委员会成员/领域主席，以及相关领域多家顶级期刊和会议的审稿人。",
         "bio_en": "",
         "email": "",
-        "phone": "",
+        "phone": "01062766141",
         "office": "",
         "profile_url": "https://cfcs.pku.edu.cn/people/faculty/tongyangli/index.htm",
         "lab_url": "",
@@ -728,7 +837,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学士",
+            "institution": "清华大学交叉信息研究院（姚班）",
+            "year": "2015",
+            "major": ""
+          },
+          {
+            "degree": "理学士",
+            "institution": "清华大学数学科学系",
+            "year": "2015",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "美国马里兰大学",
+            "year": "2020",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -749,9 +877,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -792,7 +920,7 @@
         "bio": "简介刘天任博士，现任北京大学前沿计算研究中心助理教授，博士生导师，北京大学博雅青年学者，于2022年2月正式加入中心。他于2014年在清华大学交叉信息研究院（姚班）获学士学位，分别于2016年、2019年在麻省理工学院获硕士、博士学位。之后在华盛顿大学进行博士后研究。刘天任博士的研究领域为密码学。他的现有工作都围绕信息论密码学展开，同时涉及多方安全计算、格密码学、分块密码、复杂性等。他的代表性工作是关于秘密分享的系列成果。秘密分享是信息论密码学中的一个基本问题。他的研究成果推翻了领域内长久以来的猜想，解决了一个超过30年的开放问题，开启了一个研究方向。在密码学领域，已发表会议论文9篇，包括密码学顶级会议（Crypto 和 Eurocrypt）4篇，理论计算机科学顶级会议（STOC）1篇，另有1篇单作者论文获得密码学一流会议TCC的最佳学生论文奖。未来他希望能进一步拓展到量子计算、后量子密码学、安全机器学习等领域。",
         "bio_en": "",
         "email": "",
-        "phone": "",
+        "phone": "+86 (0)10 6275-0405",
         "office": "",
         "profile_url": "https://cfcs.pku.edu.cn/people/faculty/tianrenliu/index.htm",
         "lab_url": "",
@@ -801,7 +929,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学交叉信息研究院（姚班）",
+            "year": "2014",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "麻省理工学院",
+            "year": "2016",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "麻省理工学院",
+            "year": "2019",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -822,9 +969,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -867,7 +1014,7 @@
         "bio": "简介王鹤博士是北京大学前沿计算研究中心（CFCS）的助理教授和博士生导师。他创立并领导了北大具身感知与交互实验室（EPIC Lab，主页：https://hughw19.github.io），研究目标是通过发展具身技能及具身多模态大模型推进通用具身智能。他同时是北大-银河通用具身智能联合实验室主任，北京智源人工智能研究院具身智能研究中心主任。他已在计算机视觉、机器人学和人工智能的顶级会议和期刊（CVPR/ICCV/ECCV/TRO/RAL/ICRA/NeurIPS/ICLR/AAAI等）上发表五十余篇工作，其论文获得ICCV2023最佳论文候选，ICRA2023最佳操纵论文候选，2022年世界人工智能大会青年优秀论文（WAICYOP）奖，Eurographics 2019最佳论文提名奖。他担任了CVPR2022和WACV2022的领域主席，Image and Vision Computing的副主编和诸多顶会的审稿人、程序委员。在加入北京大学之前，他于2021年从斯坦福大学获得博士学位，师从美国三院院士Leonidas. J Guibas教授，于2014年从清华大学获得学士学位。",
         "bio_en": "",
         "email": "",
-        "phone": "",
+        "phone": "+86 (0)10 6276-1084",
         "office": "",
         "profile_url": "https://cfcs.pku.edu.cn/people/faculty/hewang/index.htm",
         "lab_url": "",
@@ -876,7 +1023,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "斯坦福大学",
+            "year": "2021",
+            "major": ""
+          },
+          {
+            "degree": "学士",
+            "institution": "清华大学",
+            "year": "2014",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -897,9 +1057,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -950,7 +1110,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学交叉信息研究院",
+            "year": "2017",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "卡内基梅隆大学",
+            "year": "2022",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -971,9 +1144,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1017,7 +1190,7 @@
         "bio": "Bio-SketchYizhou Wang, Endowed Boya Professor, Vice Director of CFCS at Peking University, NSFC Distinguished Young Scholars. He received his Bachelor's degree in Electrical Engineering from Tsinghua University in 1996, and his Ph.D. in Computer Science from University of California at Los Angeles (UCLA) in 2005. He joined Xerox Palo Alto Research Center (Xerox PARC) as a research staff from 2005 to 2007. Dr. Wang has published over 200 papers and obtained a number of best paper awards. His research interests include computational vision, cognitive computing,  medical image analysis, and computational arts.",
         "bio_en": "",
         "email": "",
-        "phone": "",
+        "phone": "+86 (0)10 6276-0759",
         "office": "",
         "profile_url": "https://cfcs.pku.edu.cn/people/faculty/yizhouwang/index.htm",
         "lab_url": "",
@@ -1026,7 +1199,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "Bachelor's degree",
+            "institution": "Tsinghua University",
+            "year": "1996",
+            "major": "Electrical Engineering"
+          },
+          {
+            "degree": "Ph.D.",
+            "institution": "University of California at Los Angeles (UCLA)",
+            "year": "2005",
+            "major": "Computer Science"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1047,9 +1233,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1092,7 +1278,7 @@
         "bio": "简介袁骁博士，现任北京大学前沿计算研究中心助理教授，博士生导师，北京大学博雅青年学者，于2020年11月正式加入中心。他于2012年和2016年分别在北京大学和清华大学获学士、博士学位，之后于2017年、2017-2019年、2019-2020年分别在中国科学技术大学、牛津大学、斯坦福大学进行博士后研究。研究兴趣包括量子计算、量子信息、量子资源理论等。截至2024年1月，袁骁博士在物理领域顶级国际会议及期刊发表论文87篇。加入中心后，袁骁博士创立量子模拟和量子信息实验室，该实验室的研究方向包括量子模拟算法设计、量子机器学习、量子基础理论等。",
         "bio_en": "",
         "email": "",
-        "phone": "",
+        "phone": "+86 (0)10 6275-0804",
         "office": "",
         "profile_url": "https://cfcs.pku.edu.cn/people/faculty/xiaoyuan/index.htm",
         "lab_url": "",
@@ -1101,7 +1287,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "北京大学",
+            "year": "2012",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "清华大学",
+            "year": "2016",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1122,9 +1321,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1196,13 +1395,11 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
-        "data_completeness": 85,
-        "_user_modified_at": "2026-03-03T06:25:47.938558+00:00",
-        "_user_modified_by": "user"
+        "data_completeness": 85
       },
       "is_new": false
     },
@@ -1246,7 +1443,7 @@
         "bio": "简介曼纽尔·布卢姆（Manuel Blum）教授是密码系统和程序检验先驱，计算复杂性理论的主要奠基人之一。现任美国卡耐基梅隆大学Bruce Nelson讲席教授，2020年被聘为北京大学访问讲席教授。他是美国工程院院士、科学院院士、艺术与科学院院士。Manuel Blum教授的研究兴趣包括计算机、物理、逻辑、复杂性理论、算法、保密协议和机器学习等等，他在计算机科学方面的兴趣尤为突出。1995年，Blum教授在美国加州学伯克利分校的事业非常辉煌，并于同年在那里以奠定了计算复杂性理论的基础和在密码术及程序校验方面的贡献而获得计算机领域中的最高奖项：图灵奖。",
         "bio_en": "",
         "email": "nlc@cs.cmu.edu",
-        "phone": "",
+        "phone": "412 596-4063",
         "office": "",
         "profile_url": "https://cfcs.pku.edu.cn/people/visiting_chair_professors/manuelblum/index.htm",
         "lab_url": "",
@@ -1276,9 +1473,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -1352,9 +1549,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -1398,7 +1595,7 @@
         "bio": "简介陈静是石溪大学计算机科学系的助理教授，兼任经济系的助理教授，同时也是博弈论中心的成员。在加入石溪分校之前，她是普林斯顿高等研究院数学学院的博士后研究员。2012年，她在麻省理工学院获得计算机科学博士学位，在中国清华大学获得计算机科学硕士和学士学位。她的主要研究兴趣是计算博弈论、机制设计、拍卖、市场和医疗。她还对算法和计算复杂度感兴趣。",
         "bio_en": "",
         "email": "jingchen@cs.stonybrook.edu",
-        "phone": "",
+        "phone": "631-632-1827",
         "office": "",
         "profile_url": "https://cfcs.pku.edu.cn/people/visiting_faculty/jingchen/index.htm",
         "lab_url": "",
@@ -1407,7 +1604,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "麻省理工学院",
+            "year": "2012",
+            "major": "计算机科学"
+          },
+          {
+            "degree": "硕士",
+            "institution": "清华大学",
+            "year": "",
+            "major": "计算机科学"
+          },
+          {
+            "degree": "学士",
+            "institution": "清华大学",
+            "year": "",
+            "major": "计算机科学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1428,9 +1644,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -1482,7 +1698,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "北京大学",
+            "year": "2018",
+            "major": ""
+          },
+          {
+            "degree": "学士",
+            "institution": "北京大学",
+            "year": "2012",
+            "major": "计算机科学与经济学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1503,9 +1732,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1549,7 +1778,7 @@
         "bio": "简介祝烨博士现任澳大利亚迪肯大学信息技术学院计算机科学高级讲师，博士生导师，兼任数据智能研究中心研究生项目主任。他于2017年获得澳大利亚莫纳什大学颁发的人工智能博士学位，并获得Mollie Holman Medal年度最佳博士论文奖。祝博士于2017年7月加入迪肯大学，担任复杂系统数据分析博士后研究员，并于2019年2月晋升为讲师，2022年5月晋升为高级讲师。祝博士是IEEE高级会员和ACM会员，还荣获迪肯大学\"新锐研究者奖\"、\"卓越教学奖\"及\"领导力表彰奖\"等荣誉。祝博士主要研究方向为异常检测、聚类分析、模式识别及其在工业场景中的应用。他承担了多项澳大利亚国家级科研项目和企业课题，研究内容覆盖产品质检、新能源效率优化、航空电池健康管理以及天然气井智能监测等多个关键工业领域，为智能制造技术的产业化应用提供了坚实的技术支撑。他在SIGKDD、VLDB、ICML、IJCAI、AAAI、AIJ、VLDBJ、ISJ、TKDE、PRJ、JAIR、MLJ等国内外顶级会议和期刊发表论文90余篇。他同时也担任多个国际会议的程序委员会联合主席。此外，他受邀在KDD22，IJCAI23, PAKDD23，ECML23和WACV24等著名计算机科学会议上主办了异常检测领域的专题研讨会。",
         "bio_en": "",
         "email": "",
-        "phone": "",
+        "phone": "+61 3 924 68039",
         "office": "",
         "profile_url": "https://cfcs.pku.edu.cn/people/visiting_faculty/yezhu/index.htm",
         "lab_url": "",
@@ -1558,7 +1787,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "澳大利亚莫纳什大学",
+            "year": "2017",
+            "major": "人工智能"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1579,9 +1815,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1632,7 +1868,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "理学博士",
+            "institution": "山东大学",
+            "year": "2021",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1653,9 +1896,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1706,7 +1949,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学博士",
+            "institution": "电子科技大学",
+            "year": "2021",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1727,9 +1977,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1782,7 +2032,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "香港科技大学",
+            "year": "2021",
+            "major": "工业工程与物流管理"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1803,9 +2060,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1857,7 +2114,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "清华大学",
+            "year": "2022",
+            "major": "物理系"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1878,9 +2142,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1932,7 +2196,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "理学博士",
+            "institution": "中国科学院物理研究所",
+            "year": "2025",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1953,9 +2224,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2006,7 +2277,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "中国科学院计算技术研究所",
+            "year": "2021",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2027,9 +2305,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2081,7 +2359,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "巴黎理工学院",
+            "year": "2023",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2102,9 +2387,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2156,7 +2441,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "理学博士",
+            "institution": "中国科学院物理研究所",
+            "year": "2024",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2177,9 +2469,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2230,7 +2522,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "理学博士",
+            "institution": "山东大学",
+            "year": "2024",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2251,9 +2550,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2304,7 +2603,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "香港城市大学",
+            "year": "2021",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2325,9 +2631,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2379,7 +2685,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "理学博士",
+            "institution": "武汉大学",
+            "year": "2022",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2400,9 +2713,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2471,9 +2784,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 35
       },
@@ -2542,9 +2855,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 35
       },
@@ -2613,9 +2926,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 35
       },
@@ -2684,9 +2997,9 @@
         "recent_updates": [],
         "source_id": "pku_cfcs_faculty",
         "source_url": "https://cfcs.pku.edu.cn/people/faculty/index.htm",
-        "crawled_at": "2026-03-03T03:43:32Z",
+        "crawled_at": "2026-03-03T12:34:14Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:43:32Z",
+        "last_seen_at": "2026-03-03T12:34:14Z",
         "is_active": true,
         "data_completeness": 35
       },

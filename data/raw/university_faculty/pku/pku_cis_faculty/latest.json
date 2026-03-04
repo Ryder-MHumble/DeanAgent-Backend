@@ -3,8 +3,8 @@
   "dimension": "university_faculty",
   "group": "pku",
   "source_name": "北京大学智能学院-专职教师",
-  "crawled_at": "2026-03-03T03:43:26.542600+00:00",
-  "previous_crawled_at": "2026-03-01T09:12:58.373474+00:00",
+  "crawled_at": "2026-03-03T12:32:47.837397+00:00",
+  "previous_crawled_at": "2026-03-03T11:23:09.110186+00:00",
   "item_count": 37,
   "new_item_count": 0,
   "items": [
@@ -35,12 +35,14 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "计算机图形与可视化"
+        ],
         "keywords": [],
         "bio": "地址：北京市海淀区颐和园路5号（62755617）   反馈意见：its@pku.edu.cnCopyright 版权所有©北京大学智能学院 All Rrights Reserved.",
         "bio_en": "",
         "email": "baoquan@pku.edu.cn",
-        "phone": "",
+        "phone": "86-10-62759672",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2268.htm",
         "lab_url": "",
@@ -70,11 +72,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -105,12 +107,17 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "听觉信息处理",
+          "言语识别的听觉加工机制",
+          "言语可懂度及言语质量的评价方法",
+          "助听器及人工耳蜗的信号处理策略"
+        ],
         "keywords": [],
         "bio": "陈婧职称：研究员研究所：信息科学中心研究领域：听觉信息处理办公电话：86-10-62756824电子邮件：janechenjing@pku.edu.cn课题组网页：https://chenjing-pku.github.io/教育背景陈婧于2009年获北京大学智能科学系信号与信息处理专业博士学位，导师为迟惠生教授和吴玺宏教授。2009年到2012年，她在英国剑桥大学从事博士后研究，合作导师为Brian Moore教授。期间，曾任英国皇家学会及英国皇家工程学会联合授予的牛顿国际学者，以及剑桥大学沃弗森学院（Wolfson College）Research Fellow。她于2013年加入北京大学智能科学系，任百人计划研究员。主要研究领域言语识别的听觉加工机制言语可懂度及言语质量的评价方法助听器及人工耳蜗的信号处理策略代表性学术论著1. Chen, J., Huang, Q., Wu, X.H. (2016) “Frequency importance function of the speech intelligibility index for Mandarin Chinese”, Speech Communication 83，94-1032. Song, T., Qu, T.S., Wu, X.H., Chen, J., (2016) “An artificial neural network model for predicting sound direction in different acoustic environments”, Proceedings of The 22th International Congress of Acoustics 367：1-10 (corresponding author)3. Xing, Y., Fu, Z., Wu, X.H., Chen, J., (2016) “Evaluation of Apple iOS-based Automated Audiometry”, Proceedings of The 22th International Congress of Acoustics 114：1-10 (corresponding author)4. He,W.X., Ding, X.Y., Zhang, R.X., Chen, J., Zhang, D.X., Wu, X.H. (2014) \"Electrically-evoked frequency-following response (EFFR) in the auditory brainstem of guinea pigs\", PLOS ONE, 2014, 9(9), e106719 (corresponding author)5. Chen, J., Baer, T., and Moore, B. C. J. (2013) “Effect of spectral change enhancement for the hearing impaired using parameter values with a genetic algorithm,” Journal of Acoustic Society of America, 133(5), 2910-2920. (corresponding author)6. Chen, J., Moore, B. C. J. (2013) “Effect of individually tailored spectral change enhancement on speech intelligibility and quality for hearing-impaired listeners”, in Proceedings of ICASSP 2013, Vancouver, Canada, May 2013.7. Chen, J., Baer, T., and Moore, B. C. J. (2012) “Effect of enhancement of spectral changes on speech intelligibility for the hearing impaired,” Journal of Acoustic Society of America, 131(4), 2987-2998. (corresponding author)8. Chen, J., Li, H.H., Li, L., Moore, B.C.J., Wu, X-H. (2012), “Informational masking of speech produced by speech-like sounds without linguistic content,” Journal of Acoustic Society of America, 131(4), 2914-2926.9. Chen, J., Baer, T., and Moore, B. C. J. (2010), “Effects of enhancement of spectral changes on speech quality and subjective speech intelligibility,” in Proceedings of INTERSPEECH 2010, pp. 1640-1643, Tokyo, Japan, October 2010.10. Chen, J., Wu, X.H., Li, L., Chi, H.S. (2009), “Simulated phase-locking stimulation: an improved speech processing strategy for cochlear implant,” ORL: Journal for Oto-Rhino-Laryngology and its Related Specialties, 71, 221-227.主要科研项目在研主持两项国家自然科学基金面上项目、一项英国皇家工程学院国际交流项目，两项横向研究课题。作为项目主持完成的科研项目包括985建设课题、英国皇家学会牛顿国际学者基金、英国防聋研究基金等。作为主要参与人完成的科研项目包括卫生部行业基金课题、国家自然科学基金重点项目等。",
         "bio_en": "",
         "email": "janechenjing@pku.edu.cn",
-        "phone": "",
+        "phone": "86-10-62756824",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2249.htm",
         "lab_url": "",
@@ -119,7 +126,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "北京大学",
+            "year": "2009",
+            "major": "信号与信息处理"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -140,11 +154,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -175,7 +189,12 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "机器感知",
+          "听感知机理及其建模",
+          "信号与信息处理",
+          "语音信号处理"
+        ],
         "keywords": [],
         "bio": "迟惠生教授1958年9月入北京大学物理系与无线电电子学系，1964年7月毕业后留校工作，历任教研室主任，无线电电子学系副主任，信息科学中心副主任、主任，视觉与听觉信息处理国家重点实验室副主任、主任，北京大学校长助理、副校长、常务副校长。担任多个知名学术刊物编委：如《电子学报》、《Chinese Journal of Electronics》、《Frontiers of Electrical and Electronic Engineering in  China》、《智能系统学报》、《中国言语听力康复科学杂志》等。主要研究领域机器感知、听感知机理及其建模、信号与信息处理、语音信号处理等。研究经历及主要成就1964至1965年，从事噪声中提取微弱信号的研究。自1972年起，领导北京大学码分多址卫星通信体制研究组，从事我国331工程中扩频体制的研究，为我国卫星通信的发展作出了贡献。和研究组一起先后于80年代初获得了国防工办重大技术改造一等奖，国防工办与电子部科技成果二等奖。1974年起，领导了北京大学数字微波通信中数字基群终端和二次群的研究组，为我国脉码调制数字电话的发展做出了贡献。1976年，承担北京市86-89局光缆通信研究任务，领导北京大学的研究组完成了基群与二次群终端。该项目于80年代初获得北京市重大科技成果一等奖，是我国第一个投入使用的光纤通信系统。1980年至1982年，受国家派遣赴加拿大Sherbrooke大学通信研究中心从事访问研究，参加了美国NASA与加拿大通信部关于移动卫星通信的可行性研究，从事系统性能的计算机仿真，向加拿大通信部提供了三部最终研究报告。1983年至1990年，先后从事智能VSAT终端以及TDM/CDMA  VSAT卫星通信网的研究工作，该项目分别获得国家教委科技成果二等奖（主要参加者）以及国防科工委、电子部的表彰奖励。1986年参与视觉与听觉信息处理国家重点实验室的筹建，并于90年获国家计委、中科院、国家教委颁发的先进个人奖。1987年至1990年承担了科学基金重大项目中一个子项《人工神经网络说话人识别方法研究》。1993年至1997年承担了国家攀登项目《人工神经网络理论与应用》中关于听觉模型等子项目的研究，在人工神经网络的理论方法、听觉计算模型以及说话人识别的应用等方面，注意开展跨学科的研究，取得了一些创新的成果，于1999年获得教育部科技进步一等奖 。1994年及1995年先后两次获国际神经网络学会颁发的“神经网络领导奖” （Neural  Network Leadership Award）。先后三次在世界神经网络大会及理事会上作特邀报告，介绍中国在神经网络领域的研究成就。1997年参加中国教育和科研计算机网CERNET示范工程工作，是获国家教委科技进步一等奖的集体成员之一。1998年至2000年，领导了国家九五攻关项目《国家空间信息基础设施关键技术研究》，于2000年获得国家教育部科技成果二等奖，并被评为当年中国高等学校十大科技进展之一。2002年联合中国聋儿康复研究中心，在国内率先成立一个融教学、科研、康复于一体的言语听觉研究中心，领导听觉认知的生理心理、人工听觉以及听觉康复理论等方面的研究教学工作。2005年作为第一署名人，获“国家级教学成果奖”一等奖。目前承担国家自然科学基金项目(2005年-2008年)及973项目(2005年-2010年)等课题若干项。近年来，先后发表学术论文90余篇，出版专（译）著数8部，申请国家发明及实用新型专利9项，培养博士硕士研究生60余名。联系方式：E-mail:",
         "bio_en": "",
@@ -189,7 +208,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "",
+            "institution": "北京大学物理系与无线电电子学系",
+            "year": "1958-1964",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -210,11 +236,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -245,7 +271,11 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "计算机图形学",
+          "物理仿真",
+          "机器学习"
+        ],
         "keywords": [],
         "bio": "楚梦渝职称：助理教授研究领域：计算机图形学，物理仿真，机器学习电子邮件：mchu@pku.edu.cn",
         "bio_en": "",
@@ -280,11 +310,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -315,12 +345,15 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "计算机视觉",
+          "多模态数据融合与心理学应用"
+        ],
         "keywords": [],
         "bio": "崔锦实职称：副教授研究所：信息科学中心研究领域：计算机视觉，多模态数据融合与心理学应用办公电话：86-10-62759076电子邮件：cjs@cis.pku.edu.cn",
         "bio_en": "",
         "email": "cjs@cis.pku.edu.cn",
-        "phone": "",
+        "phone": "86-10-62759076",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2261.htm",
         "lab_url": "",
@@ -350,11 +383,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -385,12 +418,16 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "机器学习与深度学习",
+          "自然语言处理",
+          "大数据挖掘"
+        ],
         "keywords": [],
         "bio": "邓志鸿职称：教授研究所：信息科学中心研究领域：机器学习与深度学习、自然语言处理、大数据挖掘办公电话：86-10-6275 5592电子邮件：zhdeng@pku.edu.cn个人主页：http://www.cis.pku.edu.cn/szdw/zxjs/dzh.htm教育背景2000年9月至2003年7月，北京大学计算机科学技术系计算机软件与理论，获理学博士学位；1997年9－2000年7月，北京大学计算机科学技术系计算机软件与理论，获理学硕士学位；1990年9月－1994年7月，浙江大学应用数学系应用数学专业，获理学学士学位。研究领域目前从事深度学习与自然语言处理、机器学习、大数据分析与挖掘等方面的研究工作。代表性学术论著1. Liangchen Wei Zhi-Hong Deng. A Variational Autoencoding Approach for Inducing Cross-lingual Word Embeddings. In IJCAI 2017, pages: 4165-4171.2. Zhi-Hong Deng, Xiaoran Xu. A Novel Probabilistic Clustering Model for Heterogeneous Networks. Machine Learning, 104(1):1-24, 2016.3. Zhi-Hong Deng, Hongliang Yu, and Yunlun Yang. Identifying Sentiment Words Using an Optimization Model with L1 Regularization. AAAI 2016, Pages: 115-121.4. He Liu, Hongliang Yu, Zhi-Hong Deng. Multi-Document Summarization Based On Two-Level Sparse Representation Model. AAAI 2015, Pages: 196-202.5. Hongliang Yu, Zhi-Hong Deng, Yunlun Yang, and Tao Xiong. A Joint Optimization Model for Image Summarization Based on Image Content and Tags. In AAAI 2014: 215-221.6. Zhi-Hong Deng, Kun-Hu Luo, Hong-Liang Yu. A Study of Supervised Term Weighting Scheme for Sentiment Analysis. Expert Systems with Applications, 41(7): 3506–3513, 2014.7. Deng ZhiHong, Wang ZhongHui，and Jiang JiaJian. A New Algorithm for Fast Mining Frequent Itemsets Using N-Lists. SCIENCE CHINA Information Sciences, 55 (9): 2008-2030, 2012.8. 邓志鸿, 唐世渭, 张 铭, 杨冬青, 陈 捷. Ontology研究综述。《北京大学学报》（自然科学）, 2002年38卷5期: 730-738.主要科研项目1. 国家863项目“面向基础教育的类人智能知识理解与推理关键技术”（2015年1月－2017年12月）2. 国家自然科学基金面上项目“面向大规模XML文档集的关键词检索系统关键技术研究”（2012年1月－2015年12月）3. 国家教育部CALIS项目（三期）“基于学术文献信息网络的科研资源分析、挖掘与服务系统”4. 国家自然科学基金重大专项“网格标准基础研究”（2009年1月－2012年6月）5. 国家863项目“高性能XML关键词检索系统及其关键技术的研究”（2009年1月－2010年12月）主要学术任职AAAI 2016-2017, IJCAI 2015, ACM SAC 2009-2013, DEXA 2009-2017, DATA ANALYTICS 2015-2017, NLPCC 2014-2015 等国际会议程序委员会委员",
         "bio_en": "",
         "email": "zhdeng@pku.edu.cn",
-        "phone": "",
+        "phone": "86-10-6275 5592",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2257.htm",
         "lab_url": "",
@@ -399,7 +436,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "理学博士学位",
+            "institution": "北京大学计算机科学技术系",
+            "year": "2000-2003",
+            "major": "计算机软件与理论"
+          },
+          {
+            "degree": "理学硕士学位",
+            "institution": "北京大学计算机科学技术系",
+            "year": "1997-2000",
+            "major": "计算机软件与理论"
+          },
+          {
+            "degree": "理学学士学位",
+            "institution": "浙江大学应用数学系",
+            "year": "1990-1994",
+            "major": "应用数学专业"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -420,11 +476,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -455,7 +511,11 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "深度学习理论",
+          "优化算法",
+          "因果学习"
+        ],
         "keywords": [],
         "bio": "职称：助理教授、研究员所在院系：智能学院、人工智能研究院研究领域：深度学习理论、优化算法、因果学习电子邮件：fangcong@pku.edu.cn个人主页：https://congfang-ml.github.io/方聪是北京大学助理教授兼研究员，博士生导师，北京大学博雅青年学者，长期从事深度学习理论与优化的研究。方聪于2019年在北京大学获得博士学位（师从林宙辰教授），并先后在普林斯顿大学和宾夕法尼亚大学进行博士后研究。关于深度学习理论成果发表论文30余篇、专著4本，谷歌学术引用2300余次，代表性论文包括国际顶尖期刊Proc. National Academy of Sciences (PNAS)、机器学习理论顶级会议 Conf.Learning Theory (COLT)、IEEE 旗舰刊物 Proc. IEEE(PIEEE)、统计学顶级期刊 Annuals of Statistics(AoS)，与若干机器学习顶级期刊与会议 JMLR、T.PAMI、T.IT、ICML、NeurIPS等。主持国家级项目包括一项面上与一项基金委重大研究计划培育项目。深度因果学习研究荣获得美国统计协会（ASA）学生论文奖，所在团队在神经网络结构设计与优化算法方面的贡献荣获2023年度CAAI吴文俊人工智能自然科学奖一等奖（排名第二）、“祖冲之奖”－人工智能前沿创新奖年度突出成果奖（排名第三）。担任机器学习顶级会议ICML 2022/2025、NeurIPS 2022-2025领域主席、ACM T. Probabilistic Machine Learning 和北大学报编委。",
         "bio_en": "",
@@ -469,7 +529,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "北京大学",
+            "year": "2019",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -490,11 +557,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -525,12 +592,16 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "模式识别与机器学习",
+          "图像处理",
+          "生物特征识别"
+        ],
         "keywords": [],
         "bio": "封举富职称：教授研究所：信息科学中心研究领域：模式识别与机器学习，图像处理，生物特征识别办公电话：86-10-6275 8814电子邮件：fjf@cis.pku.edu.cn模式识别与机器学习，图像处理，生物特征识别",
         "bio_en": "",
         "email": "fjf@cis.pku.edu.cn",
-        "phone": "",
+        "phone": "86-10-6275 8814",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2240.htm",
         "lab_url": "",
@@ -560,11 +631,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -602,7 +673,7 @@
         "bio": "地址：北京市海淀区颐和园路5号（62755617）   反馈意见：its@pku.edu.cnCopyright 版权所有©北京大学智能学院 All Rrights Reserved.",
         "bio_en": "",
         "email": "dihe@pku.edu.cn",
-        "phone": "",
+        "phone": "62755617",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2269.htm",
         "lab_url": "",
@@ -632,9 +703,9 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -667,7 +738,11 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "机器学习",
+          "神经-符号结合",
+          "强化学习"
+        ],
         "keywords": [],
         "bio": "职称：助理教授所在院系：人工智能研究院研究领域：机器学习、神经-符号结合、强化学习办公电话：电子邮件：yitaol@pku.edu.cn个人主页：北京大学助理教授，博士生导师。2016年本科毕业于美国富兰克林马歇尔学院，2021年于美国加利福尼亚大学洛杉矶分校获得博士学位。致力于提出具有可解释语义并同时支持学习和推理的统一模型表达。在人工智能顶会上发表过多篇备受认可的文章，曾荣获多智能体和强化学习顶会AAMAS 2016最佳论文提名，ICML 2019旗下RL for Real Life研讨会最佳论文，Neurips 2017旗下LLD研讨会次佳论文。常年担任AAAI、Neurips、ICML、IJCAI、JMLR等的SPC和审稿人。闲暇时光喜欢踢球、远足、滑雪。",
         "bio_en": "",
@@ -681,7 +756,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "美国富兰克林马歇尔学院",
+            "year": "2016",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "美国加利福尼亚大学洛杉矶分校",
+            "year": "2021",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -702,11 +790,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -737,12 +825,14 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "大数据管理与挖掘"
+        ],
         "keywords": [],
         "bio": "李红燕职称：教授研究所：信息科学中心研究领域：大数据管理与挖掘办公电话：86-10-6275 4911电子邮件：lihy@cis.pku.edu.cn1999获西北工业大学计算机科学与工程系计算机软件与理论专业工学博士学位后，到北京大学信息科学中心进行博士后研究工作，2001年留校任教至今。现为北京大学信息科学技术学院智能科学系教授，博士生导师。长期从事数据管理与数据挖掘方向的研究工作，现任中国计算机学会数据库专委会委员、中国通信学会云计算与SaaS专委会委员。在ACM SIGMOD、AAAI、WISE等学术会议和学术期刊发表论文百余篇，出版学术专著、教材和译著各一部，获国家发明专利七项。主持并完成多项国家自然科学基金项目。注重理论研究与实际应用的紧密结合，在大数据管理和挖掘方向的相关成果应用于中国移动通信、Singapore National Healthcare Group等重要应用领域。指导学生获得第二届“IBM杯”高校校园创新设计大赛二等奖、第一届中国大数据技术创新与创业大赛二等奖、“中国好创意”全国青年大数据创新大赛一等奖、第18届PhysioNet比赛一等奖。",
         "bio_en": "",
         "email": "lihy@cis.pku.edu.cn",
-        "phone": "",
+        "phone": "86-10-6275 4911",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2242.htm",
         "lab_url": "",
@@ -751,7 +841,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学博士",
+            "institution": "西北工业大学",
+            "year": "1999",
+            "major": "计算机软件与理论"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -772,11 +869,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -807,12 +904,15 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "机器学习",
+          "人工智能"
+        ],
         "keywords": [],
         "bio": "林通职称：副研究员研究所：信息科学中心研究领域：机器学习/人工智能办公电话：86-10-62755097电子邮件：lintong@pku.edu.cn个人主页：http://www.cis.pku.edu.cn/jzyg/szdw/lt.htm教育背景2001年获北京大学理学博士学位。主要研究领域机器学习理论与算法，在监督学习、流形学习、半监督学习、智慧医疗等方面开展了研究。代表性学术论著发表国际学术论文40余篇，包括PAMI、JMLR、NeurIPS、ICML等国际期刊和国际会议。主要科研项目先后主持国家自然基金项目4项，参与国家973项目2项。已获国家发明专利授权6项。",
         "bio_en": "",
         "email": "lintong@pku.edu.cn",
-        "phone": "",
+        "phone": "86-10-62755097",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2244.htm",
         "lab_url": "",
@@ -821,7 +921,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "理学博士",
+            "institution": "北京大学",
+            "year": "2001",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -842,11 +949,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -877,12 +984,18 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "机器学习",
+          "模式识别",
+          "计算机视觉",
+          "图像处理",
+          "数值优化"
+        ],
         "keywords": [],
         "bio": "林宙辰职称：教授研究所：信息科学中心研究领域：机器学习，模式识别，计算机视觉，图像处理，数值优化办公电话：86-10-6275 3313电子邮件：zlin@pku.edu.cn个人主页：http://www.cis.pku.edu.cn/szdw/zxjs/lzc.htm教育背景1997年9月至2000年7月，在北京大学数学学院读博士，2000年7月获理学博士学位1995年9月至1997年8月，在香港理工大学应用数学系读硕士，1998年11月获哲学硕士学位1993年9月至1995年8月，在北京大学数学系读硕士，1996年7月获理学硕士学位1989年9月至1993年7月，在南开大学读本科，1993年7月获理学学士学位主要研究领域机器学习、模式识别、计算机视觉、图像处理、数值优化主要获奖成果1. 获国家自然科学杰出青年基金资助（2016）2. MS COCO竞赛全景分割项目季军（2018）3. ImageNet大规模视觉识别竞赛（ILSVRC）场景分类项目冠军（2015）4. 获Okawa基金会资助（2016）5. Microsoft SPOT Award (2007)主要学术任职1. 中国图象图形学学会机器视觉专委会，主任2. 中国自动化学会模式识别与机器智能专委会，副主任3. 中国计算机学会计算机视觉专委会，常务委员4. IEEE Trans. Pattern Analysis and Machine Intelligence编委（2014年9月起，CCF A类杂志）5. International J. Computer Vision编委（2013年2月起，CCF A类杂志，国内第一个编委）6. 曾任CVPR 2014/2016/2019/2020、ICCV 2015、NIPS 2015/2018/2019、AAAI 2019/2020、IJCAI 2020领域主席7. 国际模式识别学会会士（IAPR Fellow）（2016年12月起）8. 电气与电子工程师协会会士（IEEE Fellow）（2018年起）",
         "bio_en": "",
         "email": "zlin@pku.edu.cn",
-        "phone": "",
+        "phone": "86-10-6275 3313",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2245.htm",
         "lab_url": "",
@@ -891,7 +1004,32 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "北京大学数学学院",
+            "year": "1997-2000",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "香港理工大学应用数学系",
+            "year": "1995-1997",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "北京大学数学系",
+            "year": "1993-1995",
+            "major": ""
+          },
+          {
+            "degree": "学士",
+            "institution": "南开大学",
+            "year": "1989-1993",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -912,11 +1050,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -947,7 +1085,14 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "计算机图形学",
+          "数字人建模与动画",
+          "物理仿真与运动控制",
+          "优化控制",
+          "机器学习",
+          "增强学习"
+        ],
         "keywords": [],
         "bio": "职称：助理教授所在院系：智能学院研究领域：计算机图形学、数字人建模与动画、物理仿真与运动控制办公电话：电子邮件：libin.liu@pku.edu.cn个人主页：http://libliu.info/刘利斌，2009于清华大学获得数理基础科学专业学士学位，2014年在清华大学获得计算机科学与技术专业博士学位，后曾于加拿大不列颠哥伦比亚大学（The University of British Columbia）及美国迪士尼研究院（Disney Research）进行博士后研究，以及美国硅谷创业公司DeepMotion Inc.担任首席科学家，2020年全职回国加入北京大学。主要方向是计算机图形学，特别是数字人建模与动画、物理仿真、运动控制以及相关的优化控制、机器学习、增强学习等领域。他曾多次担任图形学领域重要国际会议如SIGGRAPH (North America/Asia)、PacificGraphics、SCA等的论文程序委员，以及图形学领域多数主要会议和期刊的审稿人。",
         "bio_en": "",
@@ -961,7 +1106,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学",
+            "year": "2009",
+            "major": "数理基础科学"
+          },
+          {
+            "degree": "博士",
+            "institution": "清华大学",
+            "year": "2014",
+            "major": "计算机科学与技术"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -982,11 +1140,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -1017,12 +1175,19 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人工智能",
+          "机器学习",
+          "语音语言信息处理",
+          "智能信息处理",
+          "机器人学",
+          "仿人机器人"
+        ],
         "keywords": [],
         "bio": "罗定生职称：副教授研究所：信息科学中心研究领域：人工智能、机器学习、语音语言信息处理、智能信息处理、机器人学、仿人机器人等办公电话：86-10-62752502电子邮件：dsluo@pku.edu.cn个人主页：http://scholar.pku.edu.cn/dsluo罗定生，北京大学副教授，博士，北京大学智能科学系副系主任。1997年获西北师范大学计算机科学系学士学位，2000年获兰州大学数学系计算数学专业硕士学位，2003年在北京大学视觉与听觉信息处理国家重点实验室、信息科学中心信号与信息处理专业获博士学位，并于同年就职于北京大学，从事教学科研工作至今。所在单位北京大学信息学院智能科学系、机器感知与智能教育部重点实验室。现负责机器学习与智能仿人机器人课题组。曾于2006年11月至2007年1月，在香港中文大学从事访问研究。主要研究领域：涉身人工智能、机器学习、语音语言信息处理、智能信息处理、机器人学、仿人机器人等。近年来，先后承担包括973课题、NSFC项目等的国家级、省部级及其他科研项目二十余项；获国家授权发明专利4项，获国家软件著作权1项；在IEEE T CDS、PLOS ONE、IJARS、IEEE IROS、Humanoids、IEEE ICDL、ACL、COLING、EMNLP、IEEE ICMLA、ECML等国际期刊会议上发表学术论文80余篇。2002年，获第十二届全国神经计算学术大会“最佳论文奖”（Best Paper Award）； 2008年与2016年，两次获北京大学“优秀教学奖”；2013年，获第23届人工智能国际联合大会(IJCAI-2013)“机器人技能国际竞赛(IJCAI-13 Robot Competition)”一等奖（First Prize Award）；2015年与2016年，两次获IEEE ICIA国际学术会议“最佳论文提名奖”（Best Paper Finalist Award）；2016年，获北京大学“教学优秀奖”等；2017年，获湖北省科技进步二等奖；2019年，获“2019共融机器人挑战赛”（NSFC工程与材料科学部联合主办)青年创意组“最佳青年风采奖”；2019年，获世界机器人大会(WRC2019)“最佳论文提名奖”（Best Paper Finalist Award）等。现为IEEE会员、AAAI会员，中国人工智能学会(CAAI)高级会员，IEEE-RAS仿人机器人技术委员会委员(Technical Committee on Humanoid Robotics)，IEEE-IES运动控制技术委员会委员(Technical Committee on Motion Control)。担任《中国听力语言康复科学杂志》常务编委，以及多个国际国内学术期刊会议的论文审稿人。多次担任国际学术会议分会主席及程序委员会委员，应邀担任智能科学国际会议(ICIS 2018)大会秘书长(Secretary General)、Ubiquitous Robots 2020国际会议编委(Associate Editor)、CoRL 2020国际会议领域主席(Area Chair)，并受推荐将于2021年担任“IEEE发展机器人学国际会议(IEEE ICDL 2021)”大会主席(General Chair)。承担主要科研项目(Projects Funded)：国家自然科学基金重大项目：韵律模型的构建及在言语识别中的应用（11590773），445.6万，主要参加者，2016.01-2020.12.国家社科基金重大项目：基于多学科视域的认知研究（12&ZD119），80万，主要参加者，2012.10-2017.10.北京市基础教育阶段创新人才培养系列项目：基于IMU人体姿态检测的机器人手臂控制、基于多传感器智能垃圾分类机器人研究、交响乐音乐会智能录制机器人研究，10万，项目负责人，2013.01-2016.12.北京大学“医-信”交叉研究种子基金项目：人体步态触地信息分析、生物力学建模及其在机器人类人行为中的应用(2014-MI-10)，10万，项目负责人，2014.06-2015.12.国家自然科学基金创新研究群体科学基金项目：高逼真度视听系统的理论与方法（61121002），300万，主要参加者，2012.01-2014.12.国家基金重点项目：多人多方对话中的语音分离、内容分析与理解（90920302），280万，合作单位负责人，2010.1-2013.12.国家科技重大专项：基于框计算的新一代搜索引擎与浏览器（2011ZX01042-001-001），200万，主要参加者，2010.1-2012.12.国家973项目课题：双色网络的数学建模与数学、物理学、生物学（2009CB825404），40万，课题负责人，2009.1-2011.12.微软亚洲研究院高校研究项目：Research on Acoustic Modeling for ASR，10万，项目负责人，2010.10-2011.10.国家自然科学基金项目：语音识别中多层语言知识建模及全局解码算法研究（60605016），25万，项目负责人，2007.1-2009.12.国家863项目(目标导向)：智能中文搜索引擎技术研究及平台构建（2006AA01Z196），335万，主要参加者，2006.12-2009.12.国家973项目课题：数学机械化在生物特征识别中的应用（2004CB318005），200万，主要参加者，2005.1-2009.12.国家自然科学基金重点项目：基于感知学习和语言认知的智能计算模型（60435010），170万，合作单位第二参加者，2005.01-2008.12.北京大学工程研究院项目，网络环境下的计算理论与计算复杂性研究，50万，主要参加者，2005.1-2007.12.国家863项目：移动互联环境下的身份识别：限定文本的说话人确认技术研究及其在金融领域中的应用（2001AA114181），80万，主要参加者，2001.01-2003.12.国家自然科学基金面上项目：基于统计学习的多专家模型的研究及在机器知觉中的应用（60075017），17万，主要参加者，2000.1-2003.12.近年发表主要论文(Publications)：Huang H.S., Qiu J.W., Liu T.L., Yu Y.Y., Guo Q.W., Luo D.S., Ao Y.F., “Similarity of Center of Pressure Progression during Walking and Jogging of Anterior Cruciate Ligament Deficient Patients”, PLOS ONE, pp.1-16, DOI:10.1371/journal.pone.0169421, January 10, 2017.Luo D.S., Hu F., Zhang T., Deng Y.A., Nie M.X. and Wu X.H., “Human-Inspired Internal Models for Robot Arm Motions”, 2017 IEEE/RSJ International Conference on Intelligent Robots and Systems(IROS), Vancouver, BC, Canada, Sep. 24-28, 2017.Zhang T., Hu F., Deng Y.A., Zhai J.H., Wu X.H., Luo D.S., “A Hierarchical Inverse Model Based on Proprioception and DNN for Robot Reaching”, 2017 IEEE 43rd Annual Conference of the IEEE Industrial Electronics Society (IECON), Oct.29-Nov.1, 2017.Wei Y.Y., Liu T.L., Deng Y.A., Wu X.H., Luo D.S., “Learning to Chase a Ball Efficiently and Smoothly for a Wheeled Robot”, 2017 IEEE 24th International Conference on Mechatronics and Machine Vision in Practice, Nov. 21-23, 2017.Tang K.W., Hu F., Liu W.T., Deng Y.A., Wu X.H., Luo D.S., “Corner Detection Based Real-Time Workpiece Recognition for Robot Manipulation”, 2017 IEEE 24th International Conference on Robotics and Biomimetics, Dec. 5-8, 2017.Wu X.F., Liu. T.L., Deng Y.A., Wu X.H., Luo D.S., “Developing Robot Drumming Skill with Listening-Playing Loop”, Advances in Swarm Intelligence, ICSI 2017, Part II, LNCS 10386, pp. 559-566, DOI: 10.1007/978-3-319-61833-3-59, 2017.",
         "bio_en": "",
         "email": "dsluo@pku.edu.cn",
-        "phone": "",
+        "phone": "86-10-62752502",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2259.htm",
         "lab_url": "",
@@ -1031,7 +1196,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "西北师范大学",
+            "year": "1997",
+            "major": "计算机科学"
+          },
+          {
+            "degree": "硕士",
+            "institution": "兰州大学",
+            "year": "2000",
+            "major": "计算数学"
+          },
+          {
+            "degree": "博士",
+            "institution": "北京大学",
+            "year": "2003",
+            "major": "信号与信息处理"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1052,11 +1236,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -1094,7 +1278,7 @@
         "bio": "地址：北京市海淀区颐和园路5号（62755617）   反馈意见：its@pku.edu.cnCopyright 版权所有©北京大学智能学院 All Rrights Reserved.",
         "bio_en": "",
         "email": "maxiujun@pku.edu.cn",
-        "phone": "",
+        "phone": "86-10-62757085",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2250.htm",
         "lab_url": "",
@@ -1103,7 +1287,50 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "",
+            "institution": "北京大学智能学院",
+            "year": "2022/8",
+            "major": "研究员"
+          },
+          {
+            "degree": "",
+            "institution": "北京大学信息科学技术学院",
+            "year": "2009/7-2022/8",
+            "major": "智能科学系，副教授"
+          },
+          {
+            "degree": "",
+            "institution": "德国柏林自由大学",
+            "year": "2005/9-2006/9",
+            "major": "数学与计算机科学系，访问学者"
+          },
+          {
+            "degree": "",
+            "institution": "北京大学信息科学技术学院",
+            "year": "2002/7-2009/7",
+            "major": "智能科学系，讲师"
+          },
+          {
+            "degree": "博士",
+            "institution": "北京大学",
+            "year": "1999/09-2002/06",
+            "major": "遥感与地理信息系统研究所"
+          },
+          {
+            "degree": "硕士",
+            "institution": "北京师范大学",
+            "year": "1996/09-1999/06",
+            "major": "资源环境系"
+          },
+          {
+            "degree": "学士",
+            "institution": "山东师范大学",
+            "year": "1992/09-1996/06",
+            "major": "地理系"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1124,9 +1351,9 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1159,12 +1386,18 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "数据挖掘",
+          "数据库",
+          "面向大规模实时监测中时空数据的分析和挖掘",
+          "面向多维数据的分析和挖掘",
+          "基于生物网络的挖掘"
+        ],
         "keywords": [],
         "bio": "马秀莉职称：讲师研究所：信息科学中心研究领域：数据挖掘办公电话：86-10-62754911电子邮件：xlma@pku.edu.cn教育背景2003 北京大学计算机科学技术系 博士主要研究领域数据库、数据挖掘、面向大规模实时监测中时空数据的分析和挖掘、面向多维数据的分析和挖掘、基于生物网络的挖掘代表性学术论著Xiuli Ma, Guangyu Zhou, Jingbo Shang, Jingjing Wang, Jian Peng, Jiawei Han. Detection of Complexes in Biological Networks through Diversified Dense Subgraphs Mining. Journal of Computational Biology, Vol.24, No.9, pp.923-941, 2017.Xiuli Ma, Guangyu Zhou, Jingjing Wang, Jian Peng, Jiawei Han. Complexes Detection in Biological Networks via Diversified Dense Subgraphs Mining. Proceedings of the 20th Annual Conference on Research in Computational Molecular Biology (RECOMB 2016), pp.270-272, Santa Monica, CA, USA, April 17-21, 2016.C. Zhang, Y. Zheng, X. Ma, J. Han, \"Assembler: Efficient Discovery of Spatial Coevolving Patterns in Massive Geosensory Data\", in Proc. of 2015 ACM SIGKDD Int. Conf. on Knowledge Discovery and Data Mining (KDD'15), pp.1415-1424, Sydney, Australia, Aug. 2015.Xiuli Ma, Hongmei Xiao, Shuiyuan Xie, Qiong Li, Qiong Luo, Chunhua Tian. Continuous, Online Monitoring and Analysis in Large Water Distribution Networks. In 27th IEEE International Conference on Data Engineering (ICDE 2011), pp.1332-1335, Hannover, April 11-16, 2011.Xiuli Ma, Haifeng Hu, Shuangfeng Li, Honemei Xiao, Qiong Luo, Dongqing Yang, Shiwei Tang. DHC: Distributed, Hierarchical Clustering in Sensor Networks. Journal of Computer Science and Technology, 26(4): 643-662, July 2011.主要科研项目基于概要模式的大规模持续实时监测与分析的理论与方法研究国家自然科学基金项目，负责人， 2012.1~2014.12蛋白质交互网络中基于密集子图挖掘的蛋白复合体检测的理论与方法研究北京大学医学-信息科学联合研究基金项目，负责人， 2016.8~2017.12Monitoring, analysis and outbreak detection in large water distribution network (大规模供水网络中监测、分析和爆发检测研究)IBM 共享大学研究项目(Shared University Research，SUR), 负责人, 2009.9~2010.9面向多维数据的自动导航和知识发现的理论与方法研究国家自然科学基金项目，技术负责人，2005.1~2007.12主要学术任职以下学术期刊和学术会议的评审人：IEEE Trans. On Knowledge and Data EngineeringJournal of Computer Science and TechnologyJournal of SoftwareSIGMOD 2016KDD 2015EDBT 2015SDM 2015ADMA 2011 – 2014ICEBE 2010FSKD 2008 - 2010",
         "bio_en": "",
         "email": "xlma@pku.edu.cn",
-        "phone": "",
+        "phone": "86-10-62754911",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2239.htm",
         "lab_url": "",
@@ -1173,7 +1406,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "北京大学",
+            "year": "2003",
+            "major": "计算机科学技术系"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1194,11 +1434,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -1229,12 +1469,16 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "三维形状分析",
+          "医学图像配准",
+          "颅面重建"
+        ],
         "keywords": [],
         "bio": "裴玉茹职称：副教授研究所：信息科学中心研究领域：三维形状分析，医学图像配准，颅面重建办公电话：86-10-62756657电子邮件：peiyuru@cis.pku.edu.cn教育背景工学学士 (计算机科学与技术), 中南大学, 中国, 2000;工学硕士 (计算机科学与技术), 浙江大学, 中国, 2003;工学博士 (计算机科学与技术), 北京大学, 中国, 2006;主要研究领域三维形状分析，医学图像配准，颅面重建代表性学术论著1.Yuru Pei, Yunai Yi, Gengyu Ma, Tae-Kyun Kim, Yuke Guo, Tianmin Xu, and Hongbin Zha, Spatially Consistent Supervoxel Correspondences of Cone-Beam Computed Tomography Images, IEEE Transactions on Medical Imaging, 2018.2. Yungeng Zhang, Yuru Pei*, Gengyu Ma, Yuke Guo, Tianmin Xu, and Hongbin Zha, Consistent Correspondence of Cone-Beam CT Images using Volume Functional Maps, Medical Image Computing and Computer Assisted Intervention (MICCAI), 2018.3. Yuru Pei, Yunai Yi, Gengyu Ma, Yuke Guo, Gui Chen, Tianmin Xu, Hongbin Zha, Mixed Metric Random Forest for Dense Correspondence of Cone-Beam Computed Tomography Images, Medical Image Computing and Computer Assisted Intervention (MICCAI), 2017.4. Yuru Pei, Gengyu Ma, Gui Chen, Xiaoyun Zhang, Tianmin Xu, Hongbin Zha, Superimposition of Cone-Beam Computed Tomography Images by Joint Embedding, IEEE Transactions on Biomedical Engineering, 2017.5. Yuru Pei, Xingsheng Ai, Hongbin Zha, Tianmin Xu, and Gengyu Ma, 3D Exemplar-Based Random Walks for Tooth Segmentation from Cone-Beam Computed Tomography Images, Medical Physics, 43.9 (2016): 5040-5050.6. Yuru Pei, T.-K. Kim, Hongbin Zha, Unsupervised Random Forest Manifold Alignment for Lipreading, Proc. IEEE International Conference on Computer Vision (ICCV), 2013.7. Yuru Pei, Fengchun Huang, Fuhao Shi, and Hongbin Zha, Unsupervised Image Matching based on Manifold Alignment, IEEE Transactions on Pattern Analysis and Machine Intelligence (PAMI), VOL. 34, NO. 8, pp. 1658-1664, 2012.8. Yuru Pei, Fuhao Shi, Hua Chen, Jia Wei, Hong Zha, Ruoping Jiang, and Tianmin Xu, Personalized Tooth Shape Estimation from Radiograph and Cast, IEEE Transactions on Biomedical Engineering, vol. 59, NO. 9, pp. 2400 – 2411, 2012.9. Yuru Pei, Hongbin Zha, \"Transferring of Speech Movements from Video to 3D Face Space,\" IEEE Transactions on Visualization and Computer Graphics (TVCG), vol. 13, no. 1, pp. 58-69, Jan/Feb, 2007.讲授课程计算方法(00130280)高级计算机图形学（04814560）应用数值分析（04804016）主要科研项目自然科学基金面上项目，61876008，面向三维图像配准与属性迁移的无监督聚类森林测度学习方法研究自然科学基金面上项目，61272342，属性迁移学习及其在面部几何与行为数据分析中的应用自然科学基金青年基金，60803067，基于多模态数据的语音相关面部形变机理研究主要获奖成果基于CT数据的中国人三维颅面复原系统，公安部科技进步二等奖，2011。基于CT数据的中国人三维颅面复原系统的研究，广州市科技进步三等奖，2009。",
         "bio_en": "",
         "email": "peiyuru@cis.pku.edu.cn",
-        "phone": "",
+        "phone": "86-10-62756657",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2238.htm",
         "lab_url": "",
@@ -1243,7 +1487,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学学士",
+            "institution": "中南大学",
+            "year": "2000",
+            "major": "计算机科学与技术"
+          },
+          {
+            "degree": "工学硕士",
+            "institution": "浙江大学",
+            "year": "2003",
+            "major": "计算机科学与技术"
+          },
+          {
+            "degree": "工学博士",
+            "institution": "北京大学",
+            "year": "2006",
+            "major": "计算机科学与技术"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1264,11 +1527,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -1299,12 +1562,16 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "音频编码",
+          "空间听觉",
+          "声源定位与增强"
+        ],
         "keywords": [],
         "bio": "曲天书职称：副教授研究所：信息科学中心研究领域：音频编码，空间听觉，声源定位与增强办公电话：86-10-62756824电子邮件：qutianshu@pku.edu.cn教育背景1993年毕业于吉林工业大学自动化系，获学士学位；1999年毕业于吉林工业大学通信与信息系统专业，获硕士学位；2002年毕业于吉林大学通信与信息系统专业，获博士学位。2002年 —2004年在北京大学做博士后研究工作，2004年至今在北京大学信息科学技术学院智能科学系承担教学科研工作，现任副教授。2011.3至2012.3在密西根州立大学作访问学者一年。主要研究领域主要致力于音频信号处理领域的研究，包括音频编码，空间听觉，声源定位与增强。主要获奖成果在国内外著名会议及期刊发表论文30余篇，获得国家发明专利10余项。主要学术任职担任AVS音频组联合组长及IEEE，ASA，AES会员。",
         "bio_en": "",
         "email": "qutianshu@pku.edu.cn",
-        "phone": "",
+        "phone": "86-10-62756824",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2241.htm",
         "lab_url": "",
@@ -1313,7 +1580,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士学位",
+            "institution": "吉林工业大学自动化系",
+            "year": "1993",
+            "major": ""
+          },
+          {
+            "degree": "硕士学位",
+            "institution": "吉林工业大学通信与信息系统专业",
+            "year": "1999",
+            "major": ""
+          },
+          {
+            "degree": "博士学位",
+            "institution": "吉林大学通信与信息系统专业",
+            "year": "2002",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1334,11 +1620,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -1369,12 +1655,16 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "价值观建模与测量",
+          "智能体建模与应用",
+          "图机器学习"
+        ],
         "keywords": [],
         "bio": "地址：北京市海淀区颐和园路5号（62755617）   反馈意见：its@pku.edu.cnCopyright 版权所有©北京大学智能学院 All Rrights Reserved.",
         "bio_en": "",
         "email": "gjsong@pku.edu.cn",
-        "phone": "",
+        "phone": "86-10-62754785",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2256.htm",
         "lab_url": "",
@@ -1404,11 +1694,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -1439,12 +1729,20 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "计算智能",
+          "神经网络",
+          "群智能算法",
+          "机器学习",
+          "人工免疫算法",
+          "计算机安全",
+          "数据挖掘与知识发现"
+        ],
         "keywords": [],
         "bio": "谭营职称：教授研究所：信息科学中心研究领域：计算智能，神经网络，群智能算法，机器学习，人工免疫算法，计算机安全，数据挖掘与知识发现办公电话：86-10-6276 7611电子邮件：ytan@pku.edu.cn个人主页：http://www.cis.pku.edu.cn/szdw/zxjs/ty.htm计算智能，神经网络，群智能算法，机器学习，人工免疫算法，计算机安全，数据挖掘与知识发现",
         "bio_en": "",
         "email": "ytan@pku.edu.cn",
-        "phone": "",
+        "phone": "86-10-6276 7611",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2263.htm",
         "lab_url": "",
@@ -1474,11 +1772,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -1509,12 +1807,17 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "数据挖掘与知识发现",
+          "智能媒体分析",
+          "隐私保护",
+          "数字图书馆"
+        ],
         "keywords": [],
         "bio": "童云海职称：教授研究所：信息科学中心研究领域：数据挖掘与知识发现，智能媒体分析，隐私保护，数字图书馆办公电话：86-10-62756920电子邮件：yhtong@pku.edu.cn",
         "bio_en": "",
         "email": "yhtong@pku.edu.cn",
-        "phone": "",
+        "phone": "86-10-62756920",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2252.htm",
         "lab_url": "",
@@ -1544,11 +1847,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -1579,7 +1882,12 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "机器学习",
+          "机器学习基础理论",
+          "隐私算法的设计与分析",
+          "医疗影像诊断算法与系统的开发"
+        ],
         "keywords": [],
         "bio": "王立威职称：教授研究所：信息科学中心研究领域：机器学习电子邮件：wanglw@cis.pku.edu.cn个人主页： http://www.liweiwang-pku.com/教育背景王立威，1999年获清华大学学士学位，2002年获清华大学硕士学位，2005年获北京大学博士学位。现为北京大学信息科学技术学院教授。主要研究领域长期从事机器学习研究。目前主要致力于机器学习基础理论，隐私算法的设计与分析，以及医疗影像诊断算法与系统的开发。主要获奖情况王立威教授在NeurIPS, ICML, TPAMI等国际顶级期刊和会议上发表论文150余篇。关于深度学习优化理论工作曾入选ICML19十大最具影响力论文。担任权威期刊TPAMI编委，长期担任NeurIPS, ICML, ICLR等机器学习顶级会议领域主席/高级领域主席。入选AI’s 10 to Watch，该奖项每两年颁发一次，在全世界范围授予10位人工智能领域杰出青年学者，王立威教授是首位获得该奖项的亚洲学者。获得首届国家自然科学基金优秀青年基金。带领团队获得首届天池AI医疗大赛冠军。",
         "bio_en": "",
@@ -1593,7 +1901,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学",
+            "year": "1999",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "清华大学",
+            "year": "2002",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "北京大学",
+            "year": "2005",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1614,11 +1941,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -1649,12 +1976,18 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "机器学习",
+          "深度学习",
+          "对抗学习",
+          "图学习",
+          "弱监督学习"
+        ],
         "keywords": [],
         "bio": "王奕森职称：研究员/助理教授，博士生导师研究所：信息科学中心研究领域：机器学习电话：86-10-62755097电子邮件：yisen.wang@pku.edu.cn个人主页：https://yisenwang.github.io/教育背景2018年博士毕业于清华大学计算机系主要研究领域机器学习，深度学习，对抗学习，图学习，弱监督学习代表性学术论著1.Dongxian Wu, Shu-Tao Xia,Yisen Wang#; “Adversarial Weight Perturbation Helps Robust Generalization”, Neural Information Processing Systems (NeurIPS 2020)2.Yisen Wang*, Xingjun Ma*, James Bailey, Jinfeng Yi, Bowen Zhou, Quanquan Gu; “On the Convergence and Robustness of Adversarial Training”, International Conference on Machine Learning (ICML 2019)3.Yisen Wang*, Difan Zou*, Jinfeng Yi, James Bailey, Xingjun Ma, Quanquan Gu; “Improving Adversarial Robustness Requires Revisiting Misclassified Examples”, International Conference on Learning Representations (ICLR 2020)4.Dongxian Wu,Yisen Wang#, Shu-Tao Xia, James Bailey, Xingjun Ma; “Skip Connections Matter: On the Transferability of Adversarial Examples Generated with ResNets”, International Conference on Learning Representations (ICLR 2020)5.Xingjun Ma*, Hanxun Huang*,Yisen Wang#, Simone Romano, Sarah Erfani, James Bailey; “Normalized Loss Functions for Deep Learning with Noisy Labels”, International Conference on Machine Learning (ICML 2020)6.Yisen Wang*, Xingjun Ma*, Zaiyi Chen, Yuan Luo, Jinfeng Yi, James Bailey; “Symmetric Cross Entropy for Robust Learning with Noisy Labels”, International Conference on Computer Vision (ICCV 2019)7.Yisen Wang, Weiyang Liu, Xingjun Ma, James Bailey, Hongyuan Zha, Le Song, Shu-Tao Xia; “Iterative Learning with Open-set Noisy Labels”, IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR 2018)",
         "bio_en": "",
         "email": "yisen.wang@pku.edu.cn",
-        "phone": "",
+        "phone": "86-10-62755097",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2264.htm",
         "lab_url": "",
@@ -1663,7 +1996,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "清华大学计算机系",
+            "year": "2018",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1684,11 +2024,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -1719,12 +2059,18 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "听感知计算模型",
+          "心理声学",
+          "语音识别",
+          "语音合成",
+          "人机交互"
+        ],
         "keywords": [],
         "bio": "吴玺宏职称：教授研究所：信息科学中心研究领域：听感知计算模型，心理声学，语音识别，语音合成，人机交互办公电话：86-10-6275 9989电子邮件：wxh@cis.pku.edu.cn教育背景吴玺宏，北京大学教授，博士生导师，教育部“新世纪优秀人才”。现任北京大学言语听觉研究中心主任、机器感知与智能教育部重点实验室副主任、信息科学中心副主任等。1995年于北京大学无线电电子学系获理学博士学位。1995年至1997年在北京大学计算机科学与技术系从事博士后研究，博士后出站后留校工作至今。先后多次前往奥地利、德国、加拿大、韩国、美国、澳大利亚等国及香港地区进行学术访问及讲学。主要科研项目先后主持国家级、省部级项目30余项，包括国家973课题、国家863项目、国家自然科学基金重大/重点项目、国家科技攻关项目、教育部“新世纪优秀人才”计划项目、北京市自然科学基金项目、教育部中央财政专项等；作为主要参加者承担国家级、省部级科研项目10余项，包括国家973项目、国家自然科学基金重点/面上项目、国家社科基金重大项目、北京大学建设世界一流大学计划项目等，累计承担经费逾千万元。获国家授权发明专利11项。先后在国内外重要期刊会议上发表学术论文200余篇，其中多篇论文发表在本领域国际权威期刊及顶级会议上，如Hearing Res.、JASA、Ear & Hearing、IEEE T ASLP、Interspeech、ICASSP等，并多次应邀作国际学术会议特邀报告。主要获奖成果于2005年获教育部“新世纪优秀人才”计划奖励；2007年获中国船舶工业集团公司“科学技术进步奖”；2009年获日本大川研究助成奖(The Okawa Research Grant)；2014年获ISCSLP国际会议最佳论文奖(Best Paper Award)；2016年获IEEE ICIA国际会议最佳论文提名奖(Best Paper Finalist Award)。先后10余次获美国国家技术标准局(NIST)及其它国际权威组织举办的国际学术评测第一名。主要学术任职现为IEEE Senior Member, 中国电子学会高级会员。担任中国听力康复专业委员会副主任，中国康复工程与辅助技术专业委员会副主任，中国声学学会言语听觉音乐分会委员，全国声学标准化技术委员会委员，全国安全防范报警系统标准化技术委员会--人体生物特征识别应用分技术委员会委员，国家药检总局医疗器械审评专家等。担任国际期刊《Neural Networks》、《Neurocomputing》编委、国内期刊《中国言语听力康复科学杂志》常务编委、《电子学报》、《自动化学报》、《数据采集与处理》编委等。先后多次担任国际、国内学术会议的程序/组织委员会主席等。主要主持科研项目国家重大基础研究计划项目(973)课题(2013CB329304):中文言语语义结构体系构建及言语深度理解，课题负责人，2013.01-2017.12.国家自然科学基金重大项目(11590773)：韵律模型的构建及在言语识别中的应用，课题负责人，2016.01-2020.12.国家社科基金重大项目:《格萨尔》说唱语音的自动识别与格萨尔学的创新发展，课题负责人，2015.10-2020.10.国家社科基金重大项目(12&ZD119):基于多学科视域的认知研究,课题负责人,2012.10-2017.10.国家基金重大计划培育项目(91120001): 行车环境听觉模型及声音处理关键技术研究，项目负责人，2012.01-2014.12国家科技支撑计划(201202001)：国产人工耳蜗技术、植入及言语康复的优化研究，课题负责人，2011.12-2014.12国家自然科学基金重点项目(60305030)，汉语与英语听感知差异机理及应用研究，项目负责人，2006.01-2009.12国家自然科学基金国际合作项目(中日) (60811140086）：泛在语音通信中的智能语音接口技术研究，项目负责人，2008.4-2010.12国家高技术研发计划(863)项目 (2006AA01Z196)，智能中文搜索引擎技术研究及平台构建，项目负责人，2006.12-2008.12.教育部“新世纪优秀人才”计划项目，汉语英语可懂度差异研究，项目负责人，2005.01－2008.12国家广播电影电视总局，语音字幕自动生成技术的应用研究，项目负责人，2006.10-2007.10.国家广播电影电视总局，音视频节目的语音内容检索技术的应用研究，项目负责人，2006.10-2007.10.科技部国家科技攻关计划--奥运科技专项子课题，基于网络的对话旅游资源查询系统，2003.01－2004.12.北京信息资源管理中心研究项目，数字奥运行动规划：数字残奥会的特殊需求，项目负责人，2002.01－2002.12.国家高技术研发计划(863)项目 (2001AA114181)，移动互联环境下的身份识别：限定文本的说话人确认技术研究及其在金融领域中的应用，项目负责人，2001.01-2003.12.主要参加科研项目国家自然科学基金创新研究群体项目(61421062): 高逼真度视听系统的理论与方法，2015.01-2017.12国家自然科学基金创新研究群体项目(61121002): 高逼真度视听系统的理论与方法，2012.01-2014.12国家科技支撑计划项目(2012BAI12B01)，项目名称：耳科疾病组织修复和功能重建，2012.01-2015.12.国家自然科学基金重点项目：多人多方对话中的语音分离、内容分析与理解，2010.1-2013.12国家重大基础研究计划项目(973)课题：音频场景分析(2004CB318105), 2007.1-2009.12国家高技术研发计划(863)项目(2006AA010103):多语言语音识别关键技术研究与应用产品开发，2006.12-2008.12.国家自然科学基金重点项目(60435010)，基于感知学习和语言认知的智能计算模型，2005.01-2008.12.国家自然科学基金项目(60172055)，基于段特征分布及听觉机理的抗噪音语音识别方法研究，2002.01－2004.12教育部“现代远程教育工程”中央财政专项 ,现代远程教育关键技术与支撑服务系统天地网结合项目: 个性化课件的研究与制作系统,2002.01-2003.12北京市自然科学基金项目(4002012)，语音导航的GIS/GPS系统研究及其在PDA上的应用，2001.01－2003.12北京大学建设世界一流大学计划(985)项目，中港智能联合研究中心建设：智能语音信息系统研究，1998.01-2003.12国家自然科学基金重点项目(69635020):听觉计算模型及其在说话人识别中的应用，1997.01-2000.12",
         "bio_en": "",
         "email": "wxh@cis.pku.edu.cn",
-        "phone": "",
+        "phone": "86-10-6275 9989",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2253.htm",
         "lab_url": "",
@@ -1733,7 +2079,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "理学博士",
+            "institution": "北京大学无线电电子学系",
+            "year": "1995",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1754,11 +2107,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -1789,12 +2142,17 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "图像与视频编码",
+          "图像检索",
+          "视频处理",
+          "多媒体系统"
+        ],
         "keywords": [],
         "bio": "许超职称：教授研究所：信息科学中心研究领域：图像与视频编码，图像检索，视频处理，多媒体系统办公电话：86-10-6275 7094电子邮件：xuchao@cis.pku.edu.cn教育背景1988年于清华大学获得光学仪器专业学士学位。1991年于中国科技大学获得光学专业硕士学位。1997年于中国科学院电子学所获得图像处理专业博士学位。在1991年至1994年期间, 于中国科技大学北京研究生院任助教。1997年至今，在北京大学信息科学技术学院信息科学中心任教，2005年起聘为教授至今。主要研究领域图象、视频处理和理解，及多媒体技术。至今已经发表论文150余篇，其中CCF-A类论文近50篇，ESI高被引论文7篇。主要科研项目包括图像分类研究、图像检索研究、图像压缩研究等，讲授课程包括“数字视频处理”、“图像理解”、“计算机视觉”。主要科研项目至今指导的博士生毕业7人，其中5人获得信息学院学术十杰奖，其中罗勇博士获得CCF优秀博士论文奖，耿博和徐畅博士获得北京大学优秀博士论文奖，耿博博士毕业后在微软总部工作两年后，回国创业。徐畅博士毕业后即获得悉尼大学的正式教职。主要获奖成果曾经获得中国科学院科技进步二等奖，曾宪梓优秀教学奖，通用电气奖，柯达奖等多个奖项。主持研究的小波图像压缩系统曾被评为国家863项目重点成果， 211工程标志性成果，应用于航天领域的高速摄像系统和电影院线的数字电影播放系统。近年来在图像理解方面的多视角、多标签学习等成果被评为国家973项目重点成果。主要学术任职许超教授是中国高科技产业化研究会智能信息处理产业化分会委员，国家自然科学基金、航空航天基金、科技部项目评审专家，国家科技奖励评审专家，国际IEEE、ACM、AAAI等学会会员。",
         "bio_en": "",
         "email": "xuchao@cis.pku.edu.cn",
-        "phone": "",
+        "phone": "86-10-6275 7094",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2251.htm",
         "lab_url": "",
@@ -1803,7 +2161,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学",
+            "year": "1988",
+            "major": "光学仪器专业"
+          },
+          {
+            "degree": "硕士",
+            "institution": "中国科技大学",
+            "year": "1991",
+            "major": "光学专业"
+          },
+          {
+            "degree": "博士",
+            "institution": "中国科学院电子学所",
+            "year": "1997",
+            "major": "图像处理专业"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1824,11 +2201,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -1859,7 +2236,12 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "强化学习",
+          "多智能体系统",
+          "博弈论",
+          "多智能体强化学习"
+        ],
         "keywords": [],
         "bio": "职称：助理教授所在院系：人工智能研究院研究领域：强化学习，多智能体系统，博弈论，多智能体强化学习办公电话：电子邮件：yaodong.yang@pku.edu.cn个人主页：www.yangyaodong.com杨耀东博士，北京大学人工智能研究院助理教授（博导），伦敦国王大学客座助理教授。重点关注博弈智能与决策技术，科研领域包括强化学习、博弈论和多智能体系统。他本科毕业于中国科学技术大学，并在伦敦帝国理工大学获得硕士、伦敦大学学院获得博士学位（论文获唯一提名AAAI/ACM SIGAI 优博奖）。回国前他于伦敦国王大学信息学院任助理教授并入选英国内政部杰出人才计划。他发表AI顶会论文 70 余篇（以第一/通讯作者发表NeurIPS/ICML/ICLR 20余篇以及AIJ、NSR、JAAMAS、TMLR期刊等），谷歌引用两千余次。曾获机器人学习会议CoRL’20 最佳系统论文奖、多智能体顶会AAMAS’21 最具前瞻性论文奖、世界人工智能大会（WAIC 2022）云帆奖璀璨明星、ACM SIGAI China新星奖、华为伦敦研究院最佳技术突破奖。",
         "bio_en": "",
@@ -1873,7 +2255,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "中国科学技术大学",
+            "year": "",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "伦敦帝国理工大学",
+            "year": "",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "伦敦大学学院",
+            "year": "",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1894,11 +2295,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -1936,7 +2337,7 @@
         "bio": "英向华职称：教授研究所：信息科学中心研究领域：计算机视觉、虚拟现实、计算成像学办公电话：010-62759076电子邮件：xhying@cis.pku.edu.cn教育背景2004年于中国科学院自动化研究所获模式识别与智能系统专业工学博士学位。主要研究领域目前主要研究方向为计算机视觉、模式识别、机器学习等。在计算机视觉基本理论和方法上开展了大量长期深入研究工作，特别是在三维重建与摄像机标定、多视点几何、场景特征检测与不变量表示、基于凸优化的高维数据拟合等方面具有较好工作。主要获奖项目近十余年来在IEEE Trans. on Pattern Analysis and Machine Intelligence和International Journal of Computer Vision等顶级国际期刊，以及ICCV、CVPR、ECCV等顶级国际会议上发表第一作者学术论文30余篇。其中以第一作者身份在PAMI上发表论文4篇。申请发明专利7项，其中获授权发明专利4项。主要学术任职参加过多个国际会议的组织工作：IEEE Conference on Computer Vision and Pattern Recognition (CVPR 2011、2012、2013、2014、2015、2016) 程序委员会委员。International Conference on Computer Vision (ICCV2011、2015) 程序委员会委员。IEEE International Conference on Information and Automation (2010、2011、2012、2013、2014、2015) 程序委员会委员。IEEE International Conference on Mechatronics and Automation (ICMA 2011、2012、2013、2014、2015) 程序委员会委员。《计算机科学与应用》期刊编委。北京人工智能学会理事。",
         "bio_en": "",
         "email": "xhying@cis.pku.edu.cn",
-        "phone": "",
+        "phone": "010-62759076",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2272.htm",
         "lab_url": "",
@@ -1945,7 +2346,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学博士",
+            "institution": "中国科学院自动化研究所",
+            "year": "2004",
+            "major": "模式识别与智能系统"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1966,9 +2374,9 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2001,12 +2409,18 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "科学可视化",
+          "信息可视化",
+          "可视分析",
+          "人机交互",
+          "计算机图形学"
+        ],
         "keywords": [],
         "bio": "袁晓如职称：研究员研究所：信息科学中心研究领域：科学可视化，信息可视化，可视分析，人机交互，计算机图形学办公电话：86-10-6276 7658电子邮件：xiaoru.yuan@pku.edu.cnhttp://vis.pku.edu.cn/wiki/科学可视化，信息可视化，可视分析，人机交互，计算机图形学",
         "bio_en": "",
         "email": "xiaoru.yuan@pku.edu.cn",
-        "phone": "",
+        "phone": "86-10-6276 7658",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2270.htm",
         "lab_url": "",
@@ -2036,11 +2450,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -2071,12 +2485,17 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "计算机视觉和图形学",
+          "三维场景建模",
+          "基于图像或交互的建模和渲染",
+          "自动图像分割"
+        ],
         "keywords": [],
         "bio": "曾钢职称：研究员研究所：信息科学中心研究领域：计算机视觉和图形学，三维场景建模，基于图像或交互的建模和渲染，自动图像分割办公电话：86-10-6275 7069电子邮件：gang.zeng@pku.edu.cn2001年本科毕业于北京大学数学科学学院，2006年在香港科技大学计算机科学与技术系获博士学位，之后在苏黎世联邦理工学院从事助理研究员工作，2008 年底入选北京大学“青年优秀人才”，长期专注于计算机视觉和图形学研究，特别是基于图像的场景解析和几何建模。在CVPR、ICCV、IJCV、PAMI、SIGGRAPH、TOG等计算机视觉和图形学领域重要国际期刊及会议发表论文50余篇，据Google Scholar统计他引2000余次。作为负责人承担了国家重点研发计划项目课题、和多项国家自然科学基金项目。曾获得2011年MPR国际研讨会最佳海报奖、2016年ImageNet大规模视觉识别挑战赛（ILSVRC）场景解析（Scene Parsing）比赛的第四名、2017年中国计算机视觉大会（CCCV）最佳论文奖。曾担任国际学术期刊Neurocomputing编委，国际学术会议 ACPR 2011、CAD/Graphics 2013、IWRCV 2015领域主席，中国图像图形学学会机器视觉专业委员会秘书长和常务委员、国家能源核电工程建设技术研发(实验)中心数字化核电工程虚拟仿真实验室与协作平台专家组成员、北京大学-微软统计与信息技术实验室助理主任等职务。",
         "bio_en": "",
         "email": "gang.zeng@pku.edu.cn",
-        "phone": "",
+        "phone": "86-10-6275 7069",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2254.htm",
         "lab_url": "",
@@ -2085,7 +2504,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "北京大学数学科学学院",
+            "year": "2001",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "香港科技大学计算机科学与技术系",
+            "year": "2006",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2106,11 +2538,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -2141,12 +2573,15 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "智能科学技术",
+          "计算机视觉"
+        ],
         "keywords": [],
         "bio": "查红彬职称：教授研究所：信息科学中心研究领域：智能科学技术、计算机视觉办公电话：86-10-6275 5793电子邮件：zha@cis.pku.edu.cn查红彬，1990 年获日本九州大学博士。同年任日本九州工业大学助教。1991 年任九州大学副教授，现为北京大学信息科学技术学院教授，机器感知与智能教育部重点实验室主任，教育部长江学者奖励计划特聘教授。长期从事智能科学技术、计算机视觉的研究。在三维视觉计算、环境几何建模、三维物体识别、三维人脸动画和动态目标跟踪等方面取得了进展。先后提出了基于模型的物体识别、三维建模与形状分析、三维动态目标跟踪等新方法，在将图像处理与分析理论应用到智能机器感知系统方面取得了一系列成果。同时，还在高维数据的表达与特征抽取、物体匹配的距离学习等方面有了一定的突破。另外，还将部分研究成果应用到公安刑侦、医疗与文化遗产的应用中，特别是主持的数字龙门石窟项目得到了国内外同行的高度重视，被中央电视台等多种主流媒体宣传。出版学术期刊及国际会议论文300 多篇，其中包括IEEE Trans. PAMI，Int. J. Computer Vision, IEEE Trans. VCG, IEEE Trans. RA, IEEE Trans. SMC, Pattern Recognition 等国际期刊以及 ICCV, ECCV, CVPR, CHI, ICML, AAAI, ICRA 等国际学术会议论文60余篇。并主持编辑出版Lecture Notes in Computer Science 五部。获99 年度IEEE SMC Society Franklin V. Taylor Award，国家技术发明二等奖（2011，排名第二）、教育部技术发明一等奖（2010，排名第二），公安部科技进步二等奖（2011，排名第六），以及国际会议Euromed 2010 的Best Paper Awards。教育部创新团队“机器感知理论及应用”团队学术带头人（2009）。曾任或现任国家自然科学基金委信息科学部第六届专家咨询委员会委员（2011-）、教育部科技委信息学部委员（2004-）、IEEE 北京分会的执委并兼任该分会的技术委员会主席（2006-2007）、中国图象图形学会副理事长（2006-2011）。担任国际学术期刊Advanced Robotics 顾问委员会委员、IPSJ Transactions on Computer Vision and Applications 共同主编，IEEE Trans. SMC 三维图像处理与建模专辑客座编委、IEICE Trans. Information and Systems 多分辨率解析专辑编委、The Visual Computer 专辑编委，《计算机辅助设计与图形学学报》副主编（2006-2010），并担任国际学术会议ACCV’10，3DIMPVT’11，CVM’12大会主席，GMP’04 组织委员会主席， VSMM’06, IEEE ROBIO’06, ACCV’07,ACCV’09，VSMM’10，IEEE ICMA’11 , IEEE MFI’14, ACCV’16等程序委员会主席或共同主席，ICCV’11, ACCV’15领域主席,IEEE/RSJ IROS’13的PC Editor。应邀在日本图像识别和理解领域的最大规模学术年会MIRU’06 做大会特邀报告，在ACM VRCIA’06 做大会Tutorial 报告，在ICCAS-SICE’09, ISRR’09，VRSJ’09，CAA’11，DMDCM’11，HSI’11 , OSA 2015 Imaging Systems and Applications , ACM IMCOM’16等做大会特邀报告。",
         "bio_en": "",
         "email": "zha@cis.pku.edu.cn",
-        "phone": "",
+        "phone": "86-10-6275 5793",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2247.htm",
         "lab_url": "",
@@ -2155,7 +2590,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "日本九州大学",
+            "year": "1990",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2176,11 +2618,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -2227,7 +2669,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "上海交通大学",
+            "year": "2015",
+            "major": "IEEE试点班"
+          },
+          {
+            "degree": "博士",
+            "institution": "美国华盛顿大学（圣路易斯）",
+            "year": "2019",
+            "major": "计算机科学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2248,9 +2703,9 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2283,12 +2738,17 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "信息检索",
+          "数据挖掘",
+          "大数据分析",
+          "网络科学"
+        ],
         "keywords": [],
         "bio": "张岩职称：教授研究所：信息科学中心研究领域：信息检索，数据挖掘办公电话：86-10-6275 5592电子邮件：zhy@cis.pku.edu.cn个人主页：http://www.cis.pku.edu.cn/szdw/zxjs/zy.htm主要研究领域信息检索，数据挖掘，大数据分析，网络科学代表性学术论著Tianshu Lyu, Yuan Zhang and Yan Zhang. Enhancing the Network Embedding Quality with Structural Similarity. CIKM 2017, Singapore. November 6-10, 2017Yuan Zhang, Tianshu Lyu and Yan Zhang. Hierarchical Community-Level Information Diffusion Modeling in Social Networks. SIGIR 2017, Tokyo, Japan. August 7-11, 2017Tianshu Lyu, Lidong Bing, Zhao Zhang, and Yan Zhang. Efficient and Scalable Detection of Overlapping Communities in Big Networks. ICDM 2016, Barcelona, Spain. December 12-15, 2016Lidong Bing, Shan Jiang, Wai Lam, Yan Zhang, Shoaib Jameel. Adaptive Concept Resolution for Document Representation and Its Applications in Text Mining. Knowledge-Based Systems, 74:1-13, January 2015Shi Zhao and Yan Zhang. Tailor Knowledge Graph for Query Understanding: Linking Intent Topics by Propagation. EMNLP 2014, Doha, Qatar. October 25-29, 2014Shize Xu, Shanshan Wang, and Yan Zhang. Summarizing Complex Events: a Cross-modal Solution of Storylines Extraction and Reconstruction. EMNLP 2013, Seattle, USA. October 18–21, 2013Rui Yan, Congrui Huang, Jie Tang, Yan Zhang, and Xiaoming Li. To Better Stand on the Shoulder of Giants. JCDL 2012, Washington, DC, USA, June 10-14, 2012 (Nominated as best student paper)Shan Jiang, Lidong Bing, Bai Sun, Yan Zhang, and Wai Lam. Ontology Enhancement and Concept Granularity Learning: Keeping Yourself Current and Adaptive. KDD 2011, San Diego, USA. August 21-24, 2011Rui Yan, Xiaojun Wan, Jahna Otterbacher, Liang Kong, Xiaoming Li, and Yan Zhang. Evolutionary Timeline Summarization: a Balanced Optimization Framework via Iterative Substitution. ACM SIGIR 2011, Beijing,China. July 24-28, 2011Zhifeng Chen, Yan Zhang, Yuanyuan Zhou, Heidi Scott, Berni Schiefer: Empirical Evaluation of Multi-level Buffer Cache Collaboration for Storage Systems. SIGMETRICS 2005, Banff, Canada. June 06-10, 2005蒋卓轩,张岩,李晓明. 基于MOOC数据的学习行为分析与预测. 《计算机研究与发展》2015年第3期 （入选“第二届中国科协优秀科技论文”）主要科研项目国家自然科学基金重点项目“面向课程的大规模在线教育资源组织与持续优化的理论与方法”（负责人），2016/01-2020/12973课题“网络大数据模式发现与效应分析方法研究”（课题执行负责人），2014/01-2018/12国家自然科学基金项目“大型语义辞典的自动生成及在文本分析中的应用”（负责人），2014/01-2017/12国家自然科学基金项目“基于Web的热点事件检索和分析系统相关技术研究”（负责人），2011-2013主要学术服务CCF数据库专委会委员NSFC、MOE-RCOE项目评议人《数据挖掘与知识发现》编委",
         "bio_en": "",
         "email": "zhy@cis.pku.edu.cn",
-        "phone": "",
+        "phone": "86-10-6275 5592",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2243.htm",
         "lab_url": "",
@@ -2318,11 +2778,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -2353,12 +2813,21 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "机器感知",
+          "智能车",
+          "自动驾驶",
+          "自主移动机器人",
+          "智能车与移动机器人",
+          "智能交通",
+          "环境感知",
+          "驾驶行为理解"
+        ],
         "keywords": [],
         "bio": "赵卉菁职称：教授研究所：信息科学中心研究领域：机器感知，智能车，自动驾驶，自主移动机器人办公电话：86-10-6275 7458电子邮件：zhaohj@cis.pku.edu.cn个人主页：http://www.poss.pku.edu.cn/教育背景1996.10—1999.09： 东京大学工学系研究科社会基础专业、博士课程、获博士学位1994.10—1996.09： 东京大学工学系研究科土木工程专业、硕士课程、获硕士学位1987.09—1991.07： 北京大学计算机科学系软件专业、本科、学术学位主要研究领域智能车与移动机器人、智能交通、环境感知、驾驶行为理解代表性学术论著1.Biao Gao, Xijun Zhao, Huijing Zhao, An Active and Contrastive Learning Framework for Fine-Grained Off-Road Semantic Segmentation, IEEE Trans. on Intelligent Transportation Systems (T-ITS), 24(1), 564-579, 2023.2.Zhezhang Ding, Donghao Xu , Chenfeng Tu, Huijing Zhao , Mathieu Moze, François Aioun, and Franck Guillemard, Driver Identification Through Heterogeneity Modeling in Car-Following Sequences, IEEE Trans. on Intelligent Transportation Systems (T-ITS), 23(10), 17143-17156, 2022.3.Zeyu Zhu, Huijing Zhao, A Survey of Deep RL and IL for Autonomous Driving Policy Learning, IEEE Trans. on Intelligent Transportation Systems (T-ITS), 23(9), 14043-14065, 2022.4.Biao Gao, Yancheng Pan, Chengkun Li, Sibo Geng, Huijing Zhao, Are We Hungry for 3D LiDAR Data for Semantic Segmentation? A Survey of Datasets and Methods, IEEE Trans. on Intelligent Transportation Systems (T-ITS), 23(7), 6063-6081, 2022.5.Xiaoliang Ju, Donghao Xu, Huijing Zhao, Scene-Aware Error Modeling of LiDAR/Visual Odometry for Fusion-Based Vehicle Localization, IEEE Trans. on Intelligent Transportation Systems (T-ITS), 23(7), 6480-6494, 2022.主要科研项目1. 国家自然科学基金联合基金重点项目（项目负责人），面向移动机器人长期自主机动的环境理解、建模和定位关键技术研究，U22A2061，2023.1-2026.12.2. 国家自然科学基金面上项目（项目负责人），路面车辆行为分析与情境理解，61573027，2016.1-2019.12.3. 国家自然科学基金与法国国家科研署合作研究项目（项目负责人），基于多模态信息融合的智能车感知技术的跨国界研究，61161130528, 2012.1-2014.12.4. 国家自然科学基金面上项目（项目负责人），面向室外复杂动态场景的三维同时定位定向与地图创建的研究，60975061，2010.1-2012.12.5. 国家自然科学基金重大研究计划重点项目（课题负责人），无人驾驶车辆智能行为综合测试环境设计与测评体系研究，90920304，2010.1-2012.12.6. 法国标致雪铁龙PCA-PKU开放实验室项目（项目负责人），基于多模态传感器环境感知的驾驶行为建模与理解研究，2012.11-2019.12.主要获奖成果1. First Prize at Valeo Innovation Challenge 2015. (Project title “Visual - based On-road Vehicle Detection and Tracking through Online Road Structure Understanding”, Team FalconView leaded by Yongkun Fang)2.The Okawa Fundation Research Grant，Semantic Mapping of Dynamic Environment, 2011.3.3.Most Influential Paper Over The Decade Award, by IAPR Conference on Machine Vision and Application, 2009. (Zhao, H., Shibasaki, R., Reconstruction Textured Urban 3D Model by Fusing Ground-Based Laser Range Image and CCD Image, IAPR Workshop on Machine Vision Application, 1998)主要学术任职1. Co-chair of IEEE RAS Technical Committee AGV-ITS 2021～至今2. Associate Editor of IEEE Trans. on Intelligent Vehicle 2016～至今3. Senior Editor of IROS 2023～20254. Associate Editor of IROS、IV、ITSC",
         "bio_en": "",
         "email": "zhaohj@cis.pku.edu.cn",
-        "phone": "",
+        "phone": "86-10-6275 7458",
         "office": "",
         "profile_url": "http://www.cis.pku.edu.cn/info/1362/2246.htm",
         "lab_url": "",
@@ -2367,7 +2836,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "东京大学",
+            "year": "1996-1999",
+            "major": "社会基础专业"
+          },
+          {
+            "degree": "硕士",
+            "institution": "东京大学",
+            "year": "1994-1996",
+            "major": "土木工程专业"
+          },
+          {
+            "degree": "本科",
+            "institution": "北京大学",
+            "year": "1987-1991",
+            "major": "计算机科学系软件专业"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2388,11 +2876,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -2439,7 +2927,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "美国威斯康星大学-麦迪逊分校",
+            "year": "",
+            "major": "计算机科学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2460,9 +2955,9 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2495,7 +2990,13 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "计算机视觉",
+          "统计建模与计算",
+          "认知科学",
+          "机器学习",
+          "自主机器人"
+        ],
         "keywords": [],
         "bio": "朱松纯职称：讲席教授所在院系：智能学院研究领域：计算机视觉、统计建模与计算、认知科学、机器学习、自主机器人等办公电话：电子邮件：s.c.zhu@pku.edu.cn个人主页：www.ai.pku.edu.cn/sczhu朱松纯教授是人工智能领域全球著名的学者，主要研究包括通用人工智能基础、计算机视觉、统计建模与计算、认知科学、机器学习、自主机器人等。曾任美国加州大学洛杉矶分校（UCLA）统计学系与计算机系教授，UCLA计算机视觉、认知、学习与自主机器人中心（Center for Vision, Cognition, Learning and Autonomy，VCLA）主任。自2021年12月起，任北京大学智能学院院长。教育和工作经历1986-1991年，中国科学技术大学，计算机专业，学士学位；1992-1996年，美国哈佛大学，计算机专业，硕士、博士学位。1996-1997年，美国布朗大学，应用数学专业，博士后。1997-1998年，美国斯坦福大学，计算机系人工智能实验室，讲师。1998-2002年，美国俄亥俄州立大学，计算机系与认知科学中心，助理教授。2002-2006年，美国洛杉矶加州大学，统计系与计算机系，副教授 (终身教职)。2006-2020年， 美国洛杉矶加州大学，统计系与计算机系，正教授。2020年至今，北京通用人工智能研究院，院长2020年至今，北京大学人工智能研究院，院长2021年至今，北京大学智能学院，院长学术研究朱松纯教授已在国际顶级期刊和会议上发表论文300余篇，其研究成果集中在以下四个时期和领域：一、视觉的统计建模与计算理论 —— 为马尔的视觉理论建立统一的数理模型二、实现图像与场景的解译（parsing）计算框架 —— 扩展了模式识别创始人傅京孙先生的句法模式识别理论三、提出人工智能的“暗物质” —— 研究视觉与认知的物理与社会常识四、探索迈向通用人工智能的新的研究路径 ——“小数据、大任务”范式有关朱教授的研究成果，请参考其个人学术主页奖励和荣誉· 2017年，计算建模奖 (Computational Modeling Prize)，国际认知科学学会 (Cognitive Science Society)· 2013年，赫尔姆霍茨奖 (Helmholtz Test-of-Time Award)，第14届国际计算机视觉大会颁发· 2008年，第二届J.K.Aggarwal 奖，国际模式识别协会(6)· 2007年，马尔奖荣誉提名，第11届国际计算机视觉大会· 2003年，马尔奖，第九届国际计算机视觉大会(7)· 2001年，Sloan fellow， Sloan基金· 2001年，青年教授奖励基金 (Career Award)，美国国家科学基金委员会· 2001年，杰出青年科学家奖 (ONR Young Investigator Award)，美国海军研究所颁发· 1999年，马尔奖 (Marr Prize) 荣誉提名, 第7届国际计算机视觉大会颁发",
         "bio_en": "",
@@ -2509,7 +3010,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士学位",
+            "institution": "中国科学技术大学",
+            "year": "1986-1991",
+            "major": "计算机专业"
+          },
+          {
+            "degree": "硕士、博士学位",
+            "institution": "美国哈佛大学",
+            "year": "1992-1996",
+            "major": "计算机专业"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2530,11 +3044,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -2565,7 +3079,17 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "视觉推理",
+          "认知模型",
+          "计算机视觉",
+          "统计模型与学习",
+          "认知机器人",
+          "可解释性AI",
+          "物理模拟",
+          "虚拟现实",
+          "增强现实"
+        ],
         "keywords": [],
         "bio": "朱毅鑫职称：助理教授所在院系：人工智能研究院、智能科学系研究领域：视觉推理、认知模型；计算机视觉、统计模型与学习；认知机器人、可解释性AI；物理模拟、虚拟现实、增强现实。电子邮件：yixin.zhu@pku.edu.cn个人主页：https://yzhu.io助理教授、博士生导师。美国加州大学洛杉矶分校（UCLA）统计系博士，师从朱松纯教授。研究旨在通过将高阶常识（功能性、可供性、物理性和因果关系）与原始感官输入（像素及触觉信号）相结合来构建交互式人工智能，以增强对物体、场景、形状、数字和智能体的丰富表征和抽象推理。曾担任CVPR 2019组委会成员，CVPR 2021领域主席。如有意申请课题组研究生，请邮件发送CV（英文）、Statement of Purpose（4 - 6页，英文）及成绩单，并简述计划进行的研究课题。",
         "bio_en": "",
@@ -2600,11 +3124,11 @@
         "recent_updates": [],
         "source_id": "pku_cis_faculty",
         "source_url": "http://www.cis.pku.edu.cn/szdw/zzjs.htm",
-        "crawled_at": "2026-03-03T03:42:41Z",
+        "crawled_at": "2026-03-03T12:27:03Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:41Z",
+        "last_seen_at": "2026-03-03T12:27:03Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     }

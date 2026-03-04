@@ -3,8 +3,8 @@
   "dimension": "university_faculty",
   "group": "tsinghua",
   "source_name": "清华大学软件学院-师资队伍",
-  "crawled_at": "2026-03-03T03:50:12.507886+00:00",
-  "previous_crawled_at": "2026-03-01T09:19:23.075905+00:00",
+  "crawled_at": "2026-03-03T13:56:42.507811+00:00",
+  "previous_crawled_at": "2026-03-03T03:50:12.507886+00:00",
   "item_count": 41,
   "new_item_count": 0,
   "items": [
@@ -35,12 +35,16 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "计算机图形学",
+          "计算机辅助设计",
+          "软件工程与系统"
+        ],
         "keywords": [],
         "bio": "孙家广，1946年生于江苏镇江，男，汉族，软件及应用领域专家。中共党员。1970年毕业于清华大学自控系。曾任国务院学位委员会委员，国家自然科学基金委副主任，教育部软件工程教指委主任，清华信息科学与技术国家实验室（筹） 主任，清华大学信息学院院长，清华大学软件学院院长，第十二届全国人大代表、教科文卫委员会委员。现任清华大学软件学院教授，国家企业信息化应用支撑软件工程技术研究中心主任，大数据系统软件国家工程研究中心主任。",
         "bio_en": "",
         "email": "",
-        "phone": "",
+        "phone": "62773900 / 62773279",
         "office": "",
         "profile_url": "https://www.thss.tsinghua.edu.cn/faculty/sunjiaguang.htm",
         "lab_url": "",
@@ -49,7 +53,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "",
+            "institution": "清华大学自控系",
+            "year": "1970",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -70,11 +81,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 45
+        "data_completeness": 60
       },
       "is_new": false
     },
@@ -105,12 +116,17 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "可信软件系统",
+          "信息模型构造",
+          "数字化标准",
+          "数字化建筑"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "guming@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "010-62773900",
         "office": "",
         "profile_url": "https://www.thss.tsinghua.edu.cn/faculty/guming.htm",
         "lab_url": "",
@@ -119,7 +135,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "硕士",
+            "institution": "中国科学院研究生院",
+            "year": "1984-1987",
+            "major": "计算机软件专业"
+          },
+          {
+            "degree": "学士",
+            "institution": "国防科技大学计算机系",
+            "year": "1980-1984",
+            "major": "计算机软件专业"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -140,11 +169,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 40
+        "data_completeness": 55
       },
       "is_new": false
     },
@@ -175,12 +204,22 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "数字系统测试与设计",
+          "可测试性设计",
+          "可测试性分析",
+          "低成本测试",
+          "自测试",
+          "测试码产生",
+          "容错计算",
+          "并行/分布式计算",
+          "计算机网络通讯"
+        ],
         "keywords": [],
         "bio": "1987及1990年毕业于重庆大学获计算机科学学士学位及硕士学位。",
         "bio_en": "",
         "email": "dxiang@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "010-62795434",
         "office": "",
         "profile_url": "https://www.thss.tsinghua.edu.cn/faculty/xiangdong.htm",
         "lab_url": "",
@@ -189,7 +228,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "重庆大学",
+            "year": "1987",
+            "major": "计算机科学"
+          },
+          {
+            "degree": "硕士",
+            "institution": "重庆大学",
+            "year": "1990",
+            "major": "计算机科学"
+          },
+          {
+            "degree": "博士",
+            "institution": "中国科学院计算技术研究所",
+            "year": "1993",
+            "major": "计算机工程"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -210,11 +268,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -245,12 +303,29 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "网络安全异常检测与攻击溯源",
+          "数据感知、处理、分析全生命流程的网络安全防御体系",
+          "实体行为特征建模",
+          "分布外数据分析",
+          "基于深度学习的新型攻击检测算法",
+          "多层级日志统一建模",
+          "多主机、全系统溯源图",
+          "溯源图压缩、表示与建模",
+          "攻击入口点分析",
+          "链路还原",
+          "信息系统安全",
+          "工业网络及控制",
+          "企业信息化",
+          "人工智能",
+          "智能制造",
+          "知识自动化"
+        ],
         "keywords": [],
         "bio": "2001/09–2004/12， 江苏大学， 机械电子工程， 博士",
         "bio_en": "",
         "email": "zxb@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "13693558208",
         "office": "",
         "profile_url": "https://www.thss.tsinghua.edu.cn/faculty/zhaoxibin.htm",
         "lab_url": "",
@@ -259,7 +334,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "江苏大学",
+            "year": "2001-2004",
+            "major": "机械电子工程"
+          },
+          {
+            "degree": "硕士",
+            "institution": "江苏大学",
+            "year": "1997-2000",
+            "major": "计算机科学与技术"
+          },
+          {
+            "degree": "学士",
+            "institution": "江苏大学",
+            "year": "1990-1994",
+            "major": "计算机科学与技术"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -280,11 +374,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -315,12 +409,15 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "工业大数据：针对工业装备的状态监控、故障检测和剩余寿命预测方法",
+          "类脑计算：整合深度神经网络和贝叶斯推理的预测式学习方法和集成电路设计"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "dengyd@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "13701116023",
         "office": "",
         "profile_url": "https://www.thss.tsinghua.edu.cn/faculty/dengyangdong.htm",
         "lab_url": "",
@@ -329,7 +426,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学电子工程系",
+            "year": "1990-1995",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "清华大学电子工程系",
+            "year": "1995-1998",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "卡内基梅隆大学电子与计算机工程系",
+            "year": "1998-2006",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -350,11 +466,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 40
+        "data_completeness": 55
       },
       "is_new": false
     },
@@ -385,12 +501,17 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "形式化方法",
+          "程序分析与验证",
+          "模型检验",
+          "自动推理"
+        ],
         "keywords": [],
         "bio": "2002.09－2008.01，清华大学计算机系，工学博士学位",
         "bio_en": "",
         "email": "",
-        "phone": "",
+        "phone": "+86-10-62773278",
         "office": "",
         "profile_url": "https://www.thss.tsinghua.edu.cn/faculty/hefei.htm",
         "lab_url": "",
@@ -399,7 +520,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学博士学位",
+            "institution": "清华大学计算机系",
+            "year": "2002-2008",
+            "major": ""
+          },
+          {
+            "degree": "工学学士学位",
+            "institution": "国防科技大学计算机学院",
+            "year": "1998-2002",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -420,11 +554,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 45
+        "data_completeness": 60
       },
       "is_new": false
     },
@@ -455,7 +589,11 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "面向领域的建模和分析",
+          "工程领域模型规范检查",
+          "数据和知识工程"
+        ],
         "keywords": [],
         "bio": "2004.9 – 2010.1  博士，清华大学计算机科学与技术系2001.9 – 2004.7  硕士，吉林大学计算机科学与技术系1997.9 – 2001.7  学士，吉林大学计算机科学与技术系",
         "bio_en": "",
@@ -469,7 +607,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "清华大学计算机科学与技术系",
+            "year": "2004-2010",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "吉林大学计算机科学与技术系",
+            "year": "2001-2004",
+            "major": ""
+          },
+          {
+            "degree": "学士",
+            "institution": "吉林大学计算机科学与技术系",
+            "year": "1997-2001",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -490,11 +647,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -525,12 +682,19 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "网络安全",
+          "信息系统安全",
+          "工业网络",
+          "实时系统",
+          "形式化方法",
+          "可信软件"
+        ],
         "keywords": [],
         "bio": "研究领域:网络安全、信息系统安全、工业网络、实时系统、形式化方法、可信软件",
         "bio_en": "",
         "email": "wanhai@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "010-6279 7017",
         "office": "",
         "profile_url": "https://www.thss.tsinghua.edu.cn/faculty/wanhai.htm",
         "lab_url": "",
@@ -539,7 +703,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士学位",
+            "institution": "国防科技大学",
+            "year": "1999-2003",
+            "major": ""
+          },
+          {
+            "degree": "博士学位",
+            "institution": "清华大学",
+            "year": "2003-2011",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -560,11 +737,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -595,12 +772,17 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "代码静态分析",
+          "软件工程",
+          "形式化方法",
+          "软件测试"
+        ],
         "keywords": [],
         "bio": "2007.7-2014.1     工学博士，清华大学计算机科学与技术系，计算机科学与技术专业",
         "bio_en": "",
         "email": "mzhou@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "010-62773275",
         "office": "",
         "profile_url": "https://www.thss.tsinghua.edu.cn/faculty/zhoumin.htm",
         "lab_url": "",
@@ -609,7 +791,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学博士",
+            "institution": "清华大学计算机科学与技术系",
+            "year": "2007.7-2014.1",
+            "major": "计算机科学与技术专业"
+          },
+          {
+            "degree": "理学学士",
+            "institution": "清华大学数学科学系",
+            "year": "2003.8-2007.7",
+            "major": "数学与应用数学专业"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -630,11 +825,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -665,7 +860,11 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "立体视觉",
+          "复杂网络",
+          "医学图像处理"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -679,7 +878,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "哈尔滨工业大学电子信息技术研究院",
+            "year": "2001-2005",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "清华大学软件学院",
+            "year": "2005-2008",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "清华大学自动化系",
+            "year": "2008-2012",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -700,11 +918,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 40
+        "data_completeness": 55
       },
       "is_new": false
     },
@@ -735,7 +953,10 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "信息物理融合系统",
+          "软件系统安全"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -749,7 +970,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "清华大学",
+            "year": "2010.09-2015.01",
+            "major": "计算机科学与技术"
+          },
+          {
+            "degree": "学士",
+            "institution": "北京邮电大学",
+            "year": "2006.09-2010.07",
+            "major": "软件工程"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -770,11 +1004,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 40
+        "data_completeness": 55
       },
       "is_new": false
     },
@@ -805,7 +1039,10 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "系统安全",
+          "AI安全"
+        ],
         "keywords": [],
         "bio": "2020.09-2024.10，香港科技大学，计算机科学与工程，博士",
         "bio_en": "",
@@ -819,7 +1056,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "香港科技大学",
+            "year": "2020.09-2024.10",
+            "major": "计算机科学与工程"
+          },
+          {
+            "degree": "学士",
+            "institution": "复旦大学",
+            "year": "2016.09-2020.06",
+            "major": "计算机科学与技术"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -840,11 +1090,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -875,7 +1125,10 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "智能化软件工程",
+          "可信人工智能"
+        ],
         "keywords": [],
         "bio": "2016年9月至2021年7月，北京大学计算机软件与理论专业，博士",
         "bio_en": "",
@@ -889,7 +1142,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "北京大学",
+            "year": "2016-2021",
+            "major": "计算机软件与理论"
+          },
+          {
+            "degree": "学士",
+            "institution": "北京大学",
+            "year": "2013-2016",
+            "major": "经济学"
+          },
+          {
+            "degree": "学士",
+            "institution": "北京大学",
+            "year": "2012-2016",
+            "major": "计算机科学与技术"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -910,11 +1182,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -945,12 +1217,17 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "大数据技术",
+          "数据安全与隐私保护技术",
+          "网络攻击智能发现技术",
+          "过程安全管理方法"
+        ],
         "keywords": [],
         "bio": "1983--1987　西北工业大学飞行器制造工程系本科",
         "bio_en": "",
         "email": "yexj@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "010-62795439",
         "office": "",
         "profile_url": "https://www.thss.tsinghua.edu.cn/faculty/yexiaojun.htm",
         "lab_url": "",
@@ -959,7 +1236,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "西北工业大学",
+            "year": "1983--1987",
+            "major": "飞行器制造工程系"
+          },
+          {
+            "degree": "研究生",
+            "institution": "西北工业大学",
+            "year": "1987--1989",
+            "major": "飞行器制造工程系"
+          },
+          {
+            "degree": "博士",
+            "institution": "法国里昂应用科学院",
+            "year": "1989--1994",
+            "major": "计算机工程系"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -980,11 +1276,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1015,12 +1311,14 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "工业软件与大数据领域"
+        ],
         "keywords": [],
         "bio": "1986年，进入北京大学计算机科学技术系学习，1990年获学士学位。",
         "bio_en": "",
         "email": "jimwang@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "86-10-62781776",
         "office": "",
         "profile_url": "https://www.thss.tsinghua.edu.cn/faculty/wangjianmin.htm",
         "lab_url": "",
@@ -1029,7 +1327,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "北京大学",
+            "year": "1986-1990",
+            "major": "计算机科学技术系"
+          },
+          {
+            "degree": "博士",
+            "institution": "清华大学",
+            "year": "1990-1995",
+            "major": "计算机科学与技术系"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1050,11 +1361,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1085,12 +1396,17 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "需求工程",
+          "信息系统工程",
+          "医疗数据分析",
+          "智能应用研发"
+        ],
         "keywords": [],
         "bio": "1989.9-1993.7 吉林大学 计算机系(计算机及应用) 学士",
         "bio_en": "",
         "email": "linliu@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86（10）62773284",
         "office": "",
         "profile_url": "https://www.thss.tsinghua.edu.cn/faculty/liulin.htm",
         "lab_url": "",
@@ -1099,7 +1415,38 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "吉林大学",
+            "year": "1989-1993",
+            "major": "计算机及应用"
+          },
+          {
+            "degree": "硕士",
+            "institution": "吉林大学",
+            "year": "1993-1996",
+            "major": "计算机组织与系统结构"
+          },
+          {
+            "degree": "博士",
+            "institution": "中科院数学研究所",
+            "year": "1996-1999",
+            "major": "计算机软件"
+          },
+          {
+            "degree": "博士后",
+            "institution": "加拿大多伦多大学",
+            "year": "1999-2001",
+            "major": "信息学院"
+          },
+          {
+            "degree": "博士后",
+            "institution": "加拿大多伦多大学",
+            "year": "2002-2004",
+            "major": "计算机系"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1120,11 +1467,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1155,12 +1502,14 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "数据库理论与系统"
+        ],
         "keywords": [],
         "bio": "中国计算机学会数据库专业委员会委员",
         "bio_en": "",
         "email": "chaokun@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "86-10-6279-5393",
         "office": "",
         "profile_url": "https://www.thss.tsinghua.edu.cn/faculty/wangchaokun.htm",
         "lab_url": "",
@@ -1169,7 +1518,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学博士",
+            "institution": "哈尔滨工业大学",
+            "year": "2005",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1190,11 +1546,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1225,7 +1581,11 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "深度学习模型设计优化",
+          "多媒体内容理解",
+          "工业视觉"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -1239,7 +1599,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "西安电子科技大学",
+            "year": "2004",
+            "major": ""
+          },
+          {
+            "degree": "学士",
+            "institution": "西安电子科技大学",
+            "year": "1999",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1260,11 +1633,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 40
+        "data_completeness": 55
       },
       "is_new": false
     },
@@ -1295,12 +1668,16 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "流程挖掘",
+          "大数据处理与分析",
+          "自然语言处理"
+        ],
         "keywords": [],
         "bio": "个人简介：河北唐山人，清华大学软件学院长聘副教授，博士生导师。在ACL、AAAI、SIGIR、SIGKDD、ASE、EMNLP、COLING、NAACL、BPM、CAiSE、SDM、CIKM、IEEE TSC、DMKD、DKE等发表论文170余篇，谷歌学术引用4300余次。主持国家重点研发计划课题2项、主持国家自然科学基金2项、参与国家NSFC/973/863计划子课题十余项、国家核高基重大专项课题1项。获国家发明专利、软件著作权十余项，获业务流程管理领域国际顶级会议BPM 2015最佳学生论文奖（亚洲首次，中国唯一）、CBPM 2017/2018/2020/2021最佳(学生)论文奖。流程挖掘论文已被收入国际教材和学术专著，流程管理领域译著3部。现任国际会议ACL、AAAI、EMNLP、CAiSE、ICSOC、BPM程序委员会委员，中国业务流程管理大会CBPM指导委员会执行主席、IEEE流程挖掘工作组XES标准化小组委员（中国唯一），曾任BPM程序委员会资深委员。主导研发交互式大数据处理与分析平台FloK和流程挖掘工具THUMiner，研究成果已在中国移动、华为、中国气象局、天远科技、中车四方所、辽宁瑞华等企业获得成功应用。",
         "bio_en": "",
         "email": "wenlj@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "010-62783610",
         "office": "",
         "profile_url": "https://www.thss.tsinghua.edu.cn/faculty/wenlijie.htm",
         "lab_url": "",
@@ -1309,7 +1686,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学计算机科学与技术系",
+            "year": "1996-2000",
+            "major": ""
+          },
+          {
+            "degree": "硕士、博士",
+            "institution": "清华大学计算机科学与技术系",
+            "year": "2000-2007",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1330,11 +1720,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1365,7 +1755,12 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "时间序列数据库",
+          "数据质量",
+          "数据集成",
+          "数据挖掘"
+        ],
         "keywords": [],
         "bio": "姓名: 宋韶旭",
         "bio_en": "",
@@ -1400,11 +1795,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1435,12 +1830,18 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "制造业信息化",
+          "业务过程智能",
+          "工业大数据分析",
+          "产品生命周期管理",
+          "复杂装备服务保障"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "csliuyb@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "010-62781776",
         "office": "",
         "profile_url": "https://www.thss.tsinghua.edu.cn/faculty/liuyingbo.htm",
         "lab_url": "",
@@ -1449,7 +1850,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士学位",
+            "institution": "清华大学",
+            "year": "2001~2008",
+            "major": ""
+          },
+          {
+            "degree": "学士学位",
+            "institution": "国防科技大学",
+            "year": "1997~2001",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1470,11 +1884,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 40
+        "data_completeness": 55
       },
       "is_new": false
     },
@@ -1505,7 +1919,11 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "工作流",
+          "业务过程管理",
+          "大数据"
+        ],
         "keywords": [],
         "bio": "2008.9—2013.1，清华大学计算机系，博士",
         "bio_en": "",
@@ -1519,7 +1937,32 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "清华大学计算机系",
+            "year": "2008.9—2013.1",
+            "major": ""
+          },
+          {
+            "degree": "访学",
+            "institution": "昆士兰科技大学BPM组",
+            "year": "2009.12—2010.12",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "清华大学软件学院",
+            "year": "2005.9—2008.7",
+            "major": ""
+          },
+          {
+            "degree": "学士",
+            "institution": "内蒙古科技大学信息工程学院",
+            "year": "1998.9—2002.7",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1540,11 +1983,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1575,7 +2018,11 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "机器学习",
+          "大数据分析",
+          "人工智能大模型"
+        ],
         "keywords": [],
         "bio": "2008年9月至2014年7月，清华大学计算机系，博士",
         "bio_en": "",
@@ -1589,7 +2036,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "清华大学计算机系",
+            "year": "2008-2014",
+            "major": ""
+          },
+          {
+            "degree": "学士",
+            "institution": "清华大学电机系",
+            "year": "2004-2008",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1610,11 +2070,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1645,7 +2105,10 @@
         "position": "副研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "大数据存储系统",
+          "时间序列数据管理"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -1659,7 +2122,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "清华大学",
+            "year": "2012-2017",
+            "major": "软件工程"
+          },
+          {
+            "degree": "学士",
+            "institution": "重庆大学",
+            "year": "2008-2012",
+            "major": "计算机科学与技术"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1680,11 +2156,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 50
+        "data_completeness": 65
       },
       "is_new": false
     },
@@ -1715,7 +2191,11 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "几何建模",
+          "计算机图形学",
+          "3D AIGC"
+        ],
         "keywords": [],
         "bio": "***2026***",
         "bio_en": "",
@@ -1729,7 +2209,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "国防科技大学 计算机学院",
+            "year": "2011-2014",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "国防科技大学 计算机学院",
+            "year": "2008-2010",
+            "major": ""
+          },
+          {
+            "degree": "学士",
+            "institution": "南京航空航天大学 信息科学与技术学院",
+            "year": "2004-2008",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1750,11 +2249,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1785,7 +2284,11 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人工智能工程化",
+          "工业智能应用",
+          "机器学习软件工程"
+        ],
         "keywords": [],
         "bio": "2015年9月至2020年1月，清华大学软件学院，博士",
         "bio_en": "",
@@ -1799,7 +2302,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "清华大学软件学院",
+            "year": "2015-2020",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "大连理工大学软件学院",
+            "year": "2010-2012",
+            "major": ""
+          },
+          {
+            "degree": "学士",
+            "institution": "大连理工大学软件学院",
+            "year": "2006-2010",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1820,11 +2342,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1855,7 +2377,15 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "复杂装备数智化系统",
+          "工业数据智能软件系统",
+          "边缘人工智能",
+          "融合机理智能学习的最优化控制",
+          "工业AI智能体",
+          "多智能体群智协同控制",
+          "Agentic AI"
+        ],
         "keywords": [],
         "bio": "2018年9月至2022年6月，重庆大学机械工程，博士",
         "bio_en": "",
@@ -1869,7 +2399,32 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "重庆大学",
+            "year": "2018-2022",
+            "major": "机械工程"
+          },
+          {
+            "degree": "联合培养博士",
+            "institution": "新加坡国立大学",
+            "year": "2021-2022",
+            "major": "计算机科学"
+          },
+          {
+            "degree": "硕士",
+            "institution": "重庆大学",
+            "year": "2015-2018",
+            "major": "机械工程"
+          },
+          {
+            "degree": "学士",
+            "institution": "重庆大学",
+            "year": "2011-2015",
+            "major": "机械电子工程"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1890,11 +2445,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1925,12 +2480,18 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "计算机辅助设计",
+          "计算机辅助几何设计",
+          "计算机图形学",
+          "计算机动画",
+          "软件工程"
+        ],
         "keywords": [],
         "bio": "1991.9-1996.7 清华大学计算机系, 攻读学士学位",
         "bio_en": "",
         "email": "",
-        "phone": "",
+        "phone": "62795458",
         "office": "",
         "profile_url": "https://www.thss.tsinghua.edu.cn/faculty/yongjunhai.htm",
         "lab_url": "",
@@ -1939,7 +2500,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学计算机系",
+            "year": "1991-1996",
+            "major": "计算机"
+          },
+          {
+            "degree": "辅修",
+            "institution": "清华大学",
+            "year": "1991-1996",
+            "major": "应用数学"
+          },
+          {
+            "degree": "博士",
+            "institution": "清华大学计算机系",
+            "year": "1996-2000",
+            "major": "计算机"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1960,11 +2540,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 45
+        "data_completeness": 60
       },
       "is_new": false
     },
@@ -1995,12 +2575,15 @@
         "position": "副研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "计算机图形学",
+          "计算机辅助几何设计"
+        ],
         "keywords": [],
         "bio": "姓名：张慧",
         "bio_en": "",
         "email": "huizhang@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "62795456",
         "office": "",
         "profile_url": "https://www.thss.tsinghua.edu.cn/faculty/zhanghui.htm",
         "lab_url": "",
@@ -2009,7 +2592,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "清华大学计算机系",
+            "year": "1997.9-2003.1",
+            "major": "计算机软件与理论专业"
+          },
+          {
+            "degree": "学士",
+            "institution": "清华大学计算机系",
+            "year": "1992.9-1997.7",
+            "major": "计算机科学与技术专业"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2030,11 +2626,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 65
+        "data_completeness": 80
       },
       "is_new": false
     },
@@ -2065,7 +2661,9 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "计算机图形学"
+        ],
         "keywords": [],
         "bio": "1999—2004，清华大学计算机系，博士学位",
         "bio_en": "",
@@ -2079,7 +2677,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士学位",
+            "institution": "清华大学计算机系",
+            "year": "1999—2004",
+            "major": ""
+          },
+          {
+            "degree": "工学学士学位",
+            "institution": "清华大学计算机系",
+            "year": "1996—1999",
+            "major": ""
+          },
+          {
+            "degree": "理学学士学位",
+            "institution": "清华大学化学系",
+            "year": "1994—1999",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2100,11 +2717,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 45
+        "data_completeness": 60
       },
       "is_new": false
     },
@@ -2135,12 +2752,17 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "图像视频处理",
+          "智能诊疗",
+          "计算机视觉",
+          "数据可视化与可视分析"
+        ],
         "keywords": [],
         "bio": "图像视频处理",
         "bio_en": "",
         "email": "chenlee@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "010-62795442",
         "office": "",
         "profile_url": "https://www.thss.tsinghua.edu.cn/faculty/chenli.htm",
         "lab_url": "",
@@ -2149,7 +2771,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "理学博士",
+            "institution": "浙江大学应用数学系",
+            "year": "1993-1996",
+            "major": "计算机图形学研究方向"
+          },
+          {
+            "degree": "工学硕士",
+            "institution": "西北工业大学飞行器制造工程系",
+            "year": "1991-1993",
+            "major": "航空宇航制造工程专业"
+          },
+          {
+            "degree": "工学学士",
+            "institution": "西北工业大学计算机系",
+            "year": "1987-1991",
+            "major": "计算机软件专业"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2170,11 +2811,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -2205,12 +2846,25 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "三维计算机视觉",
+          "形状分析",
+          "三维模型深度学习",
+          "点云理解",
+          "信息检索",
+          "跨模态检索",
+          "语义检索",
+          "智能建筑",
+          "建筑信息模型(BIM)",
+          "数字几何处理",
+          "计算机图形学",
+          "计算机辅助设计"
+        ],
         "keywords": [],
         "bio": "2000-2006  清华大学计算机科学与技术系  博士学位",
         "bio_en": "",
         "email": "liuyushen@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86-10-62795455",
         "office": "",
         "profile_url": "https://www.thss.tsinghua.edu.cn/faculty/liuyushen.htm",
         "lab_url": "",
@@ -2219,7 +2873,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士学位",
+            "institution": "清华大学计算机科学与技术系",
+            "year": "2000-2006",
+            "major": ""
+          },
+          {
+            "degree": "学士学位",
+            "institution": "吉林大学数学系",
+            "year": "1996-2000",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2240,11 +2907,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -2275,7 +2942,11 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "可解释人工智能",
+          "大数据可视分析",
+          "文本挖掘"
+        ],
         "keywords": [],
         "bio": "1998.09-2002.04   博士    清华大学计算机系             专业：计算机图形学",
         "bio_en": "",
@@ -2289,7 +2960,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "清华大学计算机系",
+            "year": "1998-2002",
+            "major": "计算机图形学"
+          },
+          {
+            "degree": "硕士",
+            "institution": "哈尔滨工业大学数学系",
+            "year": "1996-1998",
+            "major": "计算数学"
+          },
+          {
+            "degree": "学士",
+            "institution": "哈尔滨工业大学数学系",
+            "year": "1992-1996",
+            "major": "计算数学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2310,11 +3000,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -2345,7 +3035,12 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "计算机视觉与图形学",
+          "三维重建",
+          "运动捕捉",
+          "人脸建模与动画生成"
+        ],
         "keywords": [],
         "bio": "2007年7月，获清华大学理学学士学位；",
         "bio_en": "",
@@ -2359,7 +3054,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "理学学士",
+            "institution": "清华大学",
+            "year": "2007",
+            "major": ""
+          },
+          {
+            "degree": "工学博士",
+            "institution": "清华大学",
+            "year": "2012",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2380,11 +3088,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -2415,12 +3123,16 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "几何建模与处理",
+          "3D视觉",
+          "几何深度学习"
+        ],
         "keywords": [],
         "bio": "博士，计算机科学，香港大学，2009-2015",
         "bio_en": "",
         "email": "haopan@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "010-62773900",
         "office": "",
         "profile_url": "https://www.thss.tsinghua.edu.cn/faculty/ph.htm",
         "lab_url": "",
@@ -2429,7 +3141,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "香港大学",
+            "year": "2009-2015",
+            "major": "计算机科学"
+          },
+          {
+            "degree": "学士",
+            "institution": "山东大学",
+            "year": "2005-2009",
+            "major": "软件工程"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2450,11 +3175,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -2485,7 +3210,11 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "物联网",
+          "工业互联网",
+          "智能计算系统"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -2499,7 +3228,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学计算机系",
+            "year": "2006",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "香港科技大学计算机系",
+            "year": "2010",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2520,11 +3262,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 40
+        "data_completeness": 55
       },
       "is_new": false
     },
@@ -2555,12 +3297,17 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "智能物联网",
+          "工业互联网",
+          "无线网络与通信",
+          "移动和普适计算"
+        ],
         "keywords": [],
         "bio": "姓名:何源",
         "bio_en": "",
         "email": "heyuan@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "010-62773900",
         "office": "",
         "profile_url": "https://www.thss.tsinghua.edu.cn/faculty/heyuan.htm",
         "lab_url": "",
@@ -2590,11 +3337,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -2625,7 +3372,10 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "物联网",
+          "无源感知网络"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -2639,7 +3389,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学学士",
+            "institution": "中国科学技术大学",
+            "year": "2007",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "香港科技大学",
+            "year": "2011",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2660,11 +3423,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 40
+        "data_completeness": 55
       },
       "is_new": false
     },
@@ -2695,7 +3458,12 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "移动网络",
+          "操作系统",
+          "云计算",
+          "虚拟化"
+        ],
         "keywords": [],
         "bio": "姓名: 李振华",
         "bio_en": "",
@@ -2709,7 +3477,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士学位",
+            "institution": "北京大学计算机系",
+            "year": "2013",
+            "major": ""
+          },
+          {
+            "degree": "硕士学位",
+            "institution": "南京大学计算机系",
+            "year": "2008",
+            "major": ""
+          },
+          {
+            "degree": "学士学位",
+            "institution": "南京大学计算机系",
+            "year": "2005",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2730,11 +3517,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -2765,7 +3552,11 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "无线传感器网络",
+          "RFID",
+          "移动计算"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -2779,7 +3570,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学",
+            "year": "2005-2009",
+            "major": "计算机科学与技术系"
+          },
+          {
+            "degree": "博士",
+            "institution": "香港科技大学",
+            "year": "2009-2013",
+            "major": "计算机科学与工程系"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2800,11 +3604,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 30
+        "data_completeness": 45
       },
       "is_new": false
     },
@@ -2835,7 +3639,12 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "隐私保护",
+          "安全计算",
+          "区块链",
+          "RFID"
+        ],
         "keywords": [],
         "bio": "2004年9月-2008年7月 清华大学软件学院，学士2008年9月-2014年7月 清华大学计算机科学与技术系，博士",
         "bio_en": "",
@@ -2849,7 +3658,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学软件学院",
+            "year": "2004-2008",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "清华大学计算机科学与技术系",
+            "year": "2008-2014",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2870,11 +3692,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_se_faculty",
         "source_url": "https://www.thss.tsinghua.edu.cn/szdw/jsml.htm",
-        "crawled_at": "2026-03-03T03:49:23Z",
+        "crawled_at": "2026-03-03T13:47:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:49:23Z",
+        "last_seen_at": "2026-03-03T13:47:08Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     }

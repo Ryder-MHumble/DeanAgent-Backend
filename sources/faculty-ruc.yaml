@@ -28,6 +28,13 @@ sources:
   - faculty
   - ruc
   - cs
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education
 - id: ruc_ai_faculty
   name: 中国人民大学高瓴人工智能学院-教师队伍
   group: ruc
@@ -55,3 +62,10 @@ sources:
   - faculty
   - ruc
   - ai
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education

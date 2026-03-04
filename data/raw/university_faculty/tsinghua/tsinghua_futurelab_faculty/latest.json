@@ -3,8 +3,8 @@
   "dimension": "university_faculty",
   "group": "tsinghua",
   "source_name": "清华大学未来实验室-研究人员",
-  "crawled_at": "2026-03-03T03:51:25.388650+00:00",
-  "previous_crawled_at": "2026-03-01T09:20:52.824273+00:00",
+  "crawled_at": "2026-03-03T14:16:52.986130+00:00",
+  "previous_crawled_at": "2026-03-03T03:51:25.388650+00:00",
   "item_count": 35,
   "new_item_count": 0,
   "items": [
@@ -52,7 +52,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "理学学士",
+            "institution": "吉林大学数学系",
+            "year": "",
+            "major": ""
+          },
+          {
+            "degree": "工学博士",
+            "institution": "中国科学院计算技术研究所",
+            "year": "",
+            "major": "计算机图形学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -73,9 +86,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -109,7 +122,15 @@
         "position": "清华大学未来实验室副主任",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "材料设计",
+          "复合材料",
+          "绿色陶瓷",
+          "纳米复合材料",
+          "多功能表面复合涂层",
+          "轻量化纤维增强复合材料",
+          "数字化制造"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -123,7 +144,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学学士",
+            "institution": "清华大学",
+            "year": "1985",
+            "major": "化学与化学工程系无机非金属材料专业"
+          },
+          {
+            "degree": "工学博士",
+            "institution": "清华大学",
+            "year": "1994",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -144,11 +178,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -180,12 +214,16 @@
         "position": "首席研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人机交互",
+          "纳米材料",
+          "集群机器人"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "jihong95@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86 10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/rjwrhjqqyts/yjy/Jeung_Jihong.htm",
         "lab_url": "",
@@ -215,11 +253,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -251,12 +289,16 @@
         "position": "首席研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "类型空间创新",
+          "数字人文",
+          "空间媒体装置"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "tangkeyang@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86 10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/gzyysyjzx/yjy/tky.htm",
         "lab_url": "",
@@ -265,7 +307,50 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "哈佛大学",
+            "year": "",
+            "major": "设计学"
+          },
+          {
+            "degree": "学士",
+            "institution": "",
+            "year": "",
+            "major": "工程"
+          },
+          {
+            "degree": "学士",
+            "institution": "",
+            "year": "",
+            "major": "文学"
+          },
+          {
+            "degree": "学士",
+            "institution": "",
+            "year": "",
+            "major": "艺术史"
+          },
+          {
+            "degree": "硕士",
+            "institution": "",
+            "year": "",
+            "major": "工程"
+          },
+          {
+            "degree": "硕士",
+            "institution": "",
+            "year": "",
+            "major": "文学"
+          },
+          {
+            "degree": "硕士",
+            "institution": "",
+            "year": "",
+            "major": "艺术史"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -286,11 +371,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -322,7 +407,14 @@
         "position": "研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "电子陶瓷",
+          "高温电化学",
+          "固体氧化物燃料电池",
+          "电解池",
+          "固态离子学",
+          "薄膜材料"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -336,7 +428,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "清华大学材料科学与工程系",
+            "year": "",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "麻省理工学院材料科学与工程系",
+            "year": "",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -357,11 +462,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -393,12 +498,17 @@
         "position": "助理研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人机交互设计",
+          "触觉认知与交互设计",
+          "触觉情感设计",
+          "实体交互设计"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "jiaoyang7@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "86 10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/rjwrhjqqyts/yjy/jy.htm",
         "lab_url": "",
@@ -407,7 +517,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "北京邮电大学",
+            "year": "2009",
+            "major": "电子信息科学与技术"
+          },
+          {
+            "degree": "硕士",
+            "institution": "英国南安普顿",
+            "year": "2010",
+            "major": "无线通信"
+          },
+          {
+            "degree": "博士",
+            "institution": "清华大学",
+            "year": "2017",
+            "major": "设计学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -428,11 +557,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -465,12 +594,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "自然人机交互",
-          "情感计算",
-          "文化遗产数字化"
+          "新闻动态学术活动科学研究研究队伍加入我们关于我们联系我们futurelab@mail.tsinghua.edu.cn+86 10-62785127北京市海淀区双清综合楼A座关注我们微信公众号"
         ],
         "keywords": [],
-        "bio": "付心仪博士于2018年在清华大学美术学院获设计学博士学位，2012年于清华大学计算机科学技术系获学士学位。她曾是清华大学美术学院博士后(2018-2022)，现任清华大学未来实验室副研究员。她的主要研究方向是人居环境下的多模态感知、计算与交互，重点关注如何基于多通道传感对人的行为与心理进行感知与建模，构建以人为中心的智能系统，提升人与机器协作的效率和质量，促进机器对人类认知的理解。团队工作涵盖了从感知人类行为与情感心理状态（Human Activity Recognition, Affective Computing），到支持智能家居(Smart Home)、具身智能(Embodiment)、虚拟现实(VR/AR)、数字文旅(Digital Culture Heritage) 等领域的应用。\n\n付心仪博士是CCF高级会员、CSIG高级会员、CCF普适计算专业委员会执行委员、CCF人机交互专业委员会执行委员、CSIG情感计算与理解专业委员会会员、ICACHI世界华人华侨人机交互协会理事、北京市科协学科交叉与设计创新决策咨询专家团队青年研究员，担任ACM CHI/ IEEE ISMAR /Siggraph Asia /ICHEC 等国际会议的组织委员会委员或程序委员会委员（Organizing Committee or Program Committee)、CCF-A期刊（计算机辅助设计与图形学学报）特刊编委、SCI期刊（Frontiers in Computer Science）专题副主编、以及领域内多个重要期刊和会议审稿人。她带领团队在人机交互、人工智能领域会议和期刊上发表论文40余篇，申请发明专利20余项，成果获人机交互顶会IMWUT/Ubicomp（CCF-A类）最佳海报奖（Best Poster Award，前2.9%）、世界华人华侨人机交互协会（ICACHI）特别贡献奖等。研究成果被CCTV等媒体报道，其中CCTV-9《未来中国时》栏目将团队智能家居成果作为“十四五”规划影响下中国未来家居智能发展的典型案例进行了报道，形成了广泛的社会影响。",
+        "bio": "",
         "bio_en": "",
         "email": "fuxy@mail.tsinghua.edu.cn",
         "phone": "",
@@ -482,7 +609,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学计算机科学技术系",
+            "year": "2012",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "清华大学美术学院",
+            "year": "2018",
+            "major": "设计学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -503,13 +643,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 70,
-        "_user_modified_at": "2026-03-03T06:29:15.421524+00:00",
-        "_user_modified_by": "user"
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -541,12 +679,16 @@
         "position": "副研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人机交互",
+          "纳米材料",
+          "集群机器人"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "qiang_tian@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86 10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/whcysjyjzx/yjy/hq.htm",
         "lab_url": "",
@@ -555,7 +697,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "北京电影学院",
+            "year": "2006",
+            "major": "动画专业"
+          },
+          {
+            "degree": "硕士",
+            "institution": "法国蒙彼利埃第三大学",
+            "year": "2011",
+            "major": "电影、戏剧及音乐研究"
+          },
+          {
+            "degree": "博士",
+            "institution": "法国蒙彼利埃第三大学",
+            "year": "2017",
+            "major": "电影与试听研究"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -576,11 +737,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -612,12 +773,15 @@
         "position": "助理研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "嗅觉计算与界面设计",
+          "实体交互"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "luq@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/rjwrhjqqyts/yjy/lq.htm",
         "lab_url": "",
@@ -626,7 +790,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "清华大学",
+            "year": "2010-2014",
+            "major": "电子工程系"
+          },
+          {
+            "degree": "硕士",
+            "institution": "清华大学",
+            "year": "2014-2017",
+            "major": "信息艺术设计交叉学科"
+          },
+          {
+            "degree": "博士",
+            "institution": "清华大学",
+            "year": "2017-2020",
+            "major": "设计学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -647,11 +830,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -683,12 +866,16 @@
         "position": "助理研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "化学",
+          "嗅觉交互",
+          "多感知融合与交互"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "yangjiawei@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86 10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/rjwrhjqqyts/yjy/yjw.htm",
         "lab_url": "",
@@ -697,7 +884,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "清华大学化学系",
+            "year": "2017",
+            "major": "催化化学"
+          },
+          {
+            "degree": "学士",
+            "institution": "中国矿业大学（北京）化学与环境工程学院",
+            "year": "2009",
+            "major": "应用化学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -718,11 +918,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -754,12 +954,16 @@
         "position": "助理研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人机交互",
+          "纳米材料",
+          "集群机器人"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "qianchenxia@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86 10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/rjwrhjqqyts/yjy/xqc.htm",
         "lab_url": "",
@@ -768,7 +972,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "北京航空航天",
+            "year": "",
+            "major": "计算机应用技术"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -789,11 +1000,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -825,12 +1036,17 @@
         "position": "双聘教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "信息与交互设计",
+          "智能信息服务设计",
+          "大数据可视化与应用设计",
+          "智能材料创新应用创新设计"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "futurelab@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86 10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/whcysjyjzx/yjy/wq.htm",
         "lab_url": "",
@@ -860,11 +1076,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -896,12 +1112,22 @@
         "position": "卓越访问教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人机交互",
+          "纳米材料",
+          "集群机器人",
+          "创新设计",
+          "智能系统设计",
+          "以人为本的人工智能设计",
+          "交互设计",
+          "体验设计",
+          "工业设计"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "futurelab@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86 10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/qt/yjy/wj.htm",
         "lab_url": "",
@@ -910,7 +1136,32 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "建筑学博士",
+            "institution": "东京艺术大学",
+            "year": "",
+            "major": ""
+          },
+          {
+            "degree": "交互设计硕士",
+            "institution": "多摩艺术大学",
+            "year": "",
+            "major": ""
+          },
+          {
+            "degree": "计算机工程（模拟技术）硕士",
+            "institution": "皇家墨尔本理工学院",
+            "year": "",
+            "major": ""
+          },
+          {
+            "degree": "工业设计本科学士",
+            "institution": "清华大学美术学院",
+            "year": "",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -931,11 +1182,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -967,7 +1218,10 @@
         "position": "终身学习实验室研究主管",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "社会认知的终身发展",
+          "社会性情感智能"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -981,7 +1235,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "美国爱荷华大学",
+            "year": "2009-2015",
+            "major": "心理学系"
+          },
+          {
+            "degree": "理学学士",
+            "institution": "北京大学",
+            "year": "2005-2009",
+            "major": "心理学专业"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1002,11 +1269,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1038,7 +1305,13 @@
         "position": "客座研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人机交互",
+          "机器人交互",
+          "界面设计",
+          "个性化制造",
+          "人工智能支持创意设计"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -1052,7 +1325,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "理学学士",
+            "institution": "清华大学",
+            "year": "2005",
+            "major": "物理"
+          },
+          {
+            "degree": "工学硕士",
+            "institution": "清华大学",
+            "year": "2008",
+            "major": "电子科学与技术"
+          },
+          {
+            "degree": "工学博士",
+            "institution": "东京大学",
+            "year": "2011",
+            "major": "电子信息系统"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1073,11 +1365,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1109,7 +1401,11 @@
         "position": "客座研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人机交互",
+          "纳米材料",
+          "集群机器人"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -1123,7 +1419,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "中央美术学院设计学院",
+            "year": "2006",
+            "major": "数码媒体"
+          },
+          {
+            "degree": "硕士",
+            "institution": "美国罗德岛设计学院",
+            "year": "2009",
+            "major": "数字艺术"
+          },
+          {
+            "degree": "博士",
+            "institution": "清华大学美术学院",
+            "year": "2020",
+            "major": "信息艺术设计"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1144,11 +1459,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1180,12 +1495,14 @@
         "position": "科研助理",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "气体传感器制备"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "futurelab@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86 10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/rjwrhjqqyts/yjzl/ly.htm",
         "lab_url": "",
@@ -1215,11 +1532,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1251,12 +1568,17 @@
         "position": "科研助理",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "智能家居",
+          "文化遗产",
+          "人工智能",
+          "用户体验设计"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "yueyan_liu@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86 10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/rjwrhjqqyts/yjzl/lyy.htm",
         "lab_url": "",
@@ -1286,11 +1608,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1322,12 +1644,16 @@
         "position": "研究助理",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "教育科技",
+          "创新学习",
+          "玩的教学法"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "futurelab@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "86 10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/zsxxsys/yjzl/lwj.htm",
         "lab_url": "",
@@ -1336,7 +1662,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "美国蒙特霍利约克学院(Mount Holyoke College)",
+            "year": "2022",
+            "major": "心理主修与国际关系辅修"
+          },
+          {
+            "degree": "硕士",
+            "institution": "美国哈佛大学(Harvard University)",
+            "year": "2023",
+            "major": "学习设计、科技与创新"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1357,11 +1696,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1393,12 +1732,16 @@
         "position": "科研助理",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人机交互",
+          "纳米材料",
+          "集群机器人"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "liupeng789@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86 10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/wlclysjyjzx/yjzl/lp.htm",
         "lab_url": "",
@@ -1407,7 +1750,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "",
+            "institution": "工商大学",
+            "year": "",
+            "major": "材料加工工程"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1428,11 +1778,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1471,7 +1821,7 @@
         "bio": "",
         "bio_en": "",
         "email": "futurelab@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/zsxxsys/yjzl/xyt.htm",
         "lab_url": "",
@@ -1480,7 +1830,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "硕士",
+            "institution": "哈佛大学",
+            "year": "2022",
+            "major": "教育科技和学习体验设计"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1501,9 +1858,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -1537,12 +1894,15 @@
         "position": "研究专员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "创新学习体验",
+          "创新学习玩具"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "futurelab@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "86 10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/zsxxsys/yjzl/kxz.htm",
         "lab_url": "",
@@ -1551,7 +1911,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "理学、经济学双学士学位",
+            "institution": "北京大学",
+            "year": "",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1572,11 +1939,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1608,12 +1975,15 @@
         "position": "科研助理",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "文化创意设计",
+          "个性化美学修复"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "futurelab@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "86 10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/whcysjyjzx/yjzl/zjy.htm",
         "lab_url": "",
@@ -1622,7 +1992,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "湖南中医药大学",
+            "year": "",
+            "major": "口腔医学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1643,11 +2020,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1686,7 +2063,7 @@
         "bio": "",
         "bio_en": "",
         "email": "ruizhang@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86 10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/rjwrhjqqyts/yjzl/zr.htm",
         "lab_url": "",
@@ -1695,7 +2072,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "硕士",
+            "institution": "北京航空航天大学",
+            "year": "",
+            "major": "设计学"
+          },
+          {
+            "degree": "本科",
+            "institution": "",
+            "year": "",
+            "major": "物理学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1716,9 +2106,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -1752,12 +2142,15 @@
         "position": "研究助理",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "碳纤维复合材料",
+          "生物材料"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "dd-99_daoyidd@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "86 10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/wlclysjyjzx/yjzl/lj.htm",
         "lab_url": "",
@@ -1766,7 +2159,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "研究生",
+            "institution": "天津科技大学",
+            "year": "2013-2016",
+            "major": "材料加工工程"
+          },
+          {
+            "degree": "本科",
+            "institution": "山东理工大学",
+            "year": "2007-2011",
+            "major": "材料科学与工程"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1787,11 +2193,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1823,12 +2229,16 @@
         "position": "科研助理",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "用户体验设计",
+          "触觉认知与交互设计",
+          "服务设计"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "xiaocx@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86 10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/rjwrhjqqyts/yjzl/xcx.htm",
         "lab_url": "",
@@ -1858,11 +2268,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1894,12 +2304,16 @@
         "position": "研究助理",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "材料设计",
+          "生物质材料",
+          "贵金属提取"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "futurelab@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "86 10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/wlclysjyjzx/yjzl/xmy.htm",
         "lab_url": "",
@@ -1908,7 +2322,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "北京化工大学材料科学与工程学院",
+            "year": "2018-2022",
+            "major": "材料科学与工程"
+          },
+          {
+            "degree": "硕士",
+            "institution": "四川大学高分子研究所",
+            "year": "2022-2025",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1929,11 +2356,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1972,7 +2399,7 @@
         "bio": "",
         "bio_en": "",
         "email": "futurelab@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86 10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/rjwrhjqqyts/yjzl/gt.htm",
         "lab_url": "",
@@ -2002,9 +2429,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -2038,7 +2465,13 @@
         "position": "科研助理",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人机交互",
+          "具身智能",
+          "智能家居",
+          "情感计算",
+          "机器学习"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -2052,7 +2485,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "硕士",
+            "institution": "南加州大学",
+            "year": "",
+            "major": "化学工程与计算机科学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2073,11 +2513,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -2109,12 +2549,16 @@
         "position": "科研助理",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人机交互",
+          "纳米材料",
+          "集群机器人"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "futurelab@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86 10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/rjwrhjqqyts/yjzl/myy.htm",
         "lab_url": "",
@@ -2123,7 +2567,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "大学本科",
+            "institution": "",
+            "year": "",
+            "major": "电气与应用电子技术专业、计算机科学与技术专业"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2144,11 +2595,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -2185,7 +2636,7 @@
         "bio": "",
         "bio_en": "",
         "email": "futurelab@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86 10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/zsxxsys/xzry/ssy.htm",
         "lab_url": "",
@@ -2194,7 +2645,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工商管理硕士",
+            "institution": "英国阿伯丁大学",
+            "year": "2013",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2215,9 +2673,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2256,7 +2714,7 @@
         "bio": "",
         "bio_en": "",
         "email": "zhangyimeng@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86 10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/zsxxsys/xzry/zym.htm",
         "lab_url": "",
@@ -2265,7 +2723,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "公共管理硕士",
+            "institution": "哈佛大学",
+            "year": "",
+            "major": ""
+          },
+          {
+            "degree": "工商管理硕士",
+            "institution": "香港中文大学",
+            "year": "",
+            "major": ""
+          },
+          {
+            "degree": "理学学士",
+            "institution": "北京大学",
+            "year": "",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2286,9 +2763,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2327,7 +2804,7 @@
         "bio": "",
         "bio_en": "",
         "email": "rongqiwang@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86 10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/qt/xzry/wrq.htm",
         "lab_url": "",
@@ -2357,9 +2834,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2398,7 +2875,7 @@
         "bio": "",
         "bio_en": "",
         "email": "futurelab@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86 10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/qt/xzry/zjd.htm",
         "lab_url": "",
@@ -2428,9 +2905,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2469,7 +2946,7 @@
         "bio": "",
         "bio_en": "",
         "email": "gaoyuhan@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86 10-62785127",
         "office": "",
         "profile_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg/qt/xzry/gyh.htm",
         "lab_url": "",
@@ -2478,7 +2955,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "会计学硕士",
+            "institution": "福特汉姆大学",
+            "year": "",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2499,9 +2983,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_futurelab_faculty",
         "source_url": "https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm",
-        "crawled_at": "2026-03-03T03:50:43Z",
+        "crawled_at": "2026-03-03T14:09:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:50:43Z",
+        "last_seen_at": "2026-03-03T14:09:53Z",
         "is_active": true,
         "data_completeness": 55
       },

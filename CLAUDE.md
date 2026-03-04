@@ -68,6 +68,13 @@
 → `app/crawlers/parsers/{name}.py`
 → 路由映射在 `app/crawlers/registry.py` 的 `_CUSTOM_MAP`
 
+**LLM Faculty Crawler 问题：**
+→ `app/crawlers/parsers/llm_faculty.py`（基于 LLM 的自适应学者信息爬取器）
+→ 检查 `.env` 中的 `OPENROUTER_API_KEY`（或其他 LLM provider 的 API key）
+→ YAML 配置：`crawler_class: llm_faculty`, `llm_provider`, `llm_model`, `max_list_tokens`, `max_detail_tokens`
+→ 成本追踪：日志中会输出 API 调用次数、token 使用量、预估成本
+→ 推荐模型：`deepseek/deepseek-chat`（性价比最高，$0.27/M input, $1.10/M output）
+
 **Playwright 页面加载失败 / 超时：**
 → `app/crawlers/templates/dynamic_crawler.py`（爬虫逻辑）
 → `app/crawlers/utils/playwright_pool.py`（浏览器池）
@@ -154,6 +161,7 @@ crawler_class: hunyuan_api      → app/crawlers/parsers/hunyuan_api.py
 crawler_class: sjtu_cs_faculty   → app/crawlers/parsers/sjtu_cs_faculty.py
 crawler_class: iscas_faculty     → app/crawlers/parsers/iscas_faculty.py
 crawler_class: zju_cyber_faculty → app/crawlers/parsers/zju_cyber_faculty.py
+crawler_class: llm_faculty       → app/crawlers/parsers/llm_faculty.py (LLM 驱动的自适应爬虫)
 ```
 
 **维度 → YAML 文件**：
@@ -245,6 +253,68 @@ data/processed/daily_briefing/      → 每日简报输出 (briefing.json)
 3. 在 sources/*.yaml 中配置 crawler_class: "{name}"
 4. 验证：python scripts/run_single_crawl.py --source <id>
 5. 更新 docs/CrawlStatus.md + docs/TODO.md
+```
+
+### 使用 LLM Faculty Crawler（自适应学者信息爬取）
+```
+LLM Faculty Crawler 是基于 LLM 的自适应爬虫，无需手写 CSS 选择器，自动适配不同网站结构。
+
+优势：
+- 无需手写选择器，自动提取学者信息
+- 自动适配不同网站结构（列表页 + 详情页）
+- 使用便宜的国产模型（Deepseek V3），成本低至 $0.01-0.02/学者
+- 数据完整度高（平均 70-80%）
+
+配置步骤：
+1. 在 .env 中配置 LLM API key：
+   OPENROUTER_API_KEY=sk-or-v1-xxx  # 推荐使用 OpenRouter
+   # 或者使用其他 provider：
+   # SILICONFLOW_API_KEY=xxx
+   # DASHSCOPE_API_KEY=xxx
+
+2. 在 sources/*.yaml 中添加信源配置：
+   - id: my_university_faculty
+     name: XX大学XX学院-师资
+     group: university_name
+     university: XX大学
+     department: XX学院
+     url: https://example.edu.cn/faculty/list.htm
+     crawler_class: llm_faculty           # 使用 LLM 爬虫
+     llm_provider: openrouter             # openrouter | siliconflow | dashscope
+     llm_model: deepseek/deepseek-chat    # 推荐 deepseek-chat（性价比最高）
+     max_list_tokens: 4000                # 列表页最大输出 token
+     max_detail_tokens: 8000              # 详情页最大输出 token
+     schedule: weekly
+     priority: 2
+     is_enabled: true
+     request_delay: 1.5                   # API 请求延迟（秒）
+     tags:
+     - faculty
+     - university_name
+
+3. 测试爬取：
+   python scripts/run_single_crawl.py --source my_university_faculty
+
+4. 查看成本统计：
+   日志中会输出：
+   - API 调用次数
+   - 输入/输出 token 数量
+   - 预估成本（美元）
+
+成本对比（每个学者）：
+- Claude 3.5 Sonnet: ~$0.10-0.15
+- Deepseek V3: ~$0.01-0.02（便宜 10 倍）
+- Qwen 2.5 72B: ~$0.015-0.025
+
+推荐模型：
+- deepseek/deepseek-chat（最便宜，$0.27/M input, $1.10/M output）
+- qwen/qwen-2.5-72b-instruct（稍贵，$0.35/M input, $1.40/M output）
+
+注意事项：
+- 首次运行会较慢（需要提取所有学者详情）
+- 后续运行会快很多（只提取新增学者）
+- 建议 request_delay 设置为 1-2 秒，避免 API 限流
+- 如果某个学者详情页提取失败，会自动跳过并记录日志
 ```
 
 ### 修改爬虫模板逻辑

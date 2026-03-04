@@ -91,6 +91,11 @@ class LLMFacultyCrawler(BaseCrawler):
         self.max_list_tokens = config.get("max_list_tokens", 4000)
         self.max_detail_tokens = config.get("max_detail_tokens", 8000)
 
+        # Cost tracking
+        self.total_input_tokens = 0
+        self.total_output_tokens = 0
+        self.api_calls = 0
+
         # API key 根据 provider 选择
         if self.llm_provider == "openrouter":
             self.llm_api_key = os.getenv("OPENROUTER_API_KEY")
@@ -165,6 +170,18 @@ class LLMFacultyCrawler(BaseCrawler):
                     response.raise_for_status()
                     result = response.json()
                     resp_content = result["choices"][0]["message"]["content"]
+
+                    # Track token usage
+                    usage = result.get("usage", {})
+                    input_tokens = usage.get("prompt_tokens", 0)
+                    output_tokens = usage.get("completion_tokens", 0)
+                    self.total_input_tokens += input_tokens
+                    self.total_output_tokens += output_tokens
+                    self.api_calls += 1
+                    logger.debug(
+                        "LLMFacultyCrawler: API call #%d - input: %d, output: %d tokens",
+                        self.api_calls, input_tokens, output_tokens
+                    )
 
                     # 清理可能的 markdown 代码块
                     resp_content = resp_content.strip()
@@ -452,9 +469,21 @@ class LLMFacultyCrawler(BaseCrawler):
                 )
             )
 
+        # Calculate cost estimate
+        cost_per_m_input = 0.27 if "deepseek" in self.llm_model.lower() else 0.35
+        cost_per_m_output = 1.10 if "deepseek" in self.llm_model.lower() else 1.40
+        estimated_cost = (
+            self.total_input_tokens / 1_000_000 * cost_per_m_input +
+            self.total_output_tokens / 1_000_000 * cost_per_m_output
+        )
+
         logger.info(
             "LLMFacultyCrawler: extracted %d scholars with avg completeness %.1f%%",
             len(items),
             sum(item.extra["data_completeness"] for item in items) / len(items) if items else 0,
+        )
+        logger.info(
+            "LLMFacultyCrawler: API stats - calls: %d, input tokens: %d, output tokens: %d, estimated cost: $%.4f",
+            self.api_calls, self.total_input_tokens, self.total_output_tokens, estimated_cost
         )
         return items

@@ -32,6 +32,13 @@ sources:
   - faculty
   - ustc
   - cs
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education
 - id: ustc_sist_faculty
   name: 中国科学技术大学信息科学技术学院-师资
   group: ustc
@@ -64,6 +71,13 @@ sources:
   - ustc
   - cs
   - ai
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education
 - id: ustc_se_faculty
   name: 中国科学技术大学软件学院-师资
   group: ustc
@@ -125,6 +139,13 @@ sources:
   - ustc
   - data
   - ai
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education
 - id: ustc_cyber_faculty
   name: 中国科学技术大学网安学院-师资
   group: ustc
@@ -154,3 +175,10 @@ sources:
   - faculty
   - ustc
   - cybersecurity
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education

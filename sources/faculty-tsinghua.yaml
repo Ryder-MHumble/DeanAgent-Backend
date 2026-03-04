@@ -30,35 +30,13 @@ sources:
   - faculty
   - tsinghua
   - ai
-- id: tsinghua_cs_faculty
-  name: 清华大学计算机系-教师
-  group: tsinghua
-  university: 清华大学
-  department: 计算机科学与技术系
-  url: https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm
-  crawl_method: faculty
-  use_playwright: false
-  schedule: weekly
-  priority: 2
-  is_enabled: true
-  base_url: https://www.cs.tsinghua.edu.cn
-  faculty_selectors:
-    list_item: dd li
-    name: h2
-    link: h2 a
-    photo: div.pic img
-    email: div.text p:nth-of-type(3)
-  detail_selectors:
-    heading_sections:
-      bio: 教育背景
-      research_areas: 研究领域
-    label_prefix_sections:
-      email: 邮箱|Email|电子邮件
-      research_areas: 研究方向|研究领域
-  tags:
-  - faculty
-  - tsinghua
-  - cs
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education
 - id: tsinghua_iiis_faculty
   name: 清华大学交叉信息研究院-教师
   group: tsinghua
@@ -90,6 +68,13 @@ sources:
   - tsinghua
   - cs
   - ai
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education
 - id: tsinghua_se_faculty
   name: 清华大学软件学院-师资队伍
   group: tsinghua
@@ -120,6 +105,13 @@ sources:
   - faculty
   - tsinghua
   - se
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education
 - id: tsinghua_ee_faculty
   name: 清华大学电子工程系-教师
   group: tsinghua
@@ -151,6 +143,13 @@ sources:
   - faculty
   - tsinghua
   - ee
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education
 - id: tsinghua_au_faculty
   name: 清华大学自动化系-教师
   group: tsinghua
@@ -182,6 +181,13 @@ sources:
   - tsinghua
   - au
   - ai
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education
 - id: tsinghua_insc_faculty
   name: 清华大学网络研究院-师资
   group: tsinghua
@@ -208,6 +214,13 @@ sources:
   - faculty
   - tsinghua
   - network
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education
 - id: tsinghua_ias_faculty
   name: 清华大学高等研究院-师资
   group: tsinghua
@@ -241,6 +254,13 @@ sources:
   - faculty
   - tsinghua
   - science
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education
 - id: tsinghua_futurelab_faculty
   name: 清华大学未来实验室-研究人员
   group: tsinghua
@@ -272,6 +292,13 @@ sources:
   - tsinghua
   - ai
   - design
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education
 - id: tsinghua_ymsc_faculty
   name: 清华大学丘成桐数学科学中心-师资
   group: tsinghua
@@ -293,11 +320,39 @@ sources:
   university: 清华大学
   department: 计算机科学与技术系
   url: https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm
-  crawler_class: tsinghua_cs_faculty
+  crawl_method: faculty
+  use_playwright: false
   schedule: weekly
   priority: 2
   is_enabled: true
-  request_delay: 0.5
+  base_url: https://www.cs.tsinghua.edu.cn/
+  faculty_selectors:
+    list_item: dl dd ul li
+    name: h2 a
+    link: h2 a
+    position: .text p:nth-of-type(1)
+    phone: .text p:nth-of-type(2)
+    email: .text p:nth-of-type(3)
+    photo: .pic img
+  detail_selectors:
+    bio: div.v_news_content
+    email: a[href^='mailto:']
+    heading_sections:
+      bio: 研究概况|研究领域
+      education: 教育背景
+      work_experience: 学术兼职
+    label_prefix_sections:
+      position: 职称：
+      email: 邮箱：
+      phone: 电话：
+      research_areas: 研究领域
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education
   tags:
   - faculty
   - tsinghua
@@ -334,6 +389,13 @@ sources:
   - tsinghua
   - life
   - bio
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education
 - id: tsinghua_sigs_faculty
   name: 清华大学深圳国际研究生院-师资队伍
   group: tsinghua

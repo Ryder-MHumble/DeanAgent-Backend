@@ -3,8 +3,8 @@
   "dimension": "university_faculty",
   "group": "cas_ict",
   "source_name": "中科院计算技术研究所-研究员",
-  "crawled_at": "2026-03-03T03:42:18.831541+00:00",
-  "previous_crawled_at": "2026-03-01T09:11:51.768454+00:00",
+  "crawled_at": "2026-03-03T11:58:15.651719+00:00",
+  "previous_crawled_at": "2026-03-03T11:33:08.854761+00:00",
   "item_count": 24,
   "new_item_count": 0,
   "items": [
@@ -47,7 +47,7 @@
         "bio": "安学军  正高级工程师研究方向：所属部门：高通量计算机研究中心导师类别：博导计算机系统结构联系方式：axj@ncic.ac.cn 电话：62601011 手机：13693128967个人网页：",
         "bio_en": "",
         "email": "axj@ncic.ac.cn",
-        "phone": "",
+        "phone": "62601011",
         "office": "",
         "profile_url": "http://www.ict.ac.cn/sourcedb/cn/jssrck/200909/t20090917_2496581.html",
         "lab_url": "",
@@ -56,7 +56,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "中科院计算所",
+            "year": "2000-2003",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "内蒙古大学电子系",
+            "year": "1992-1995",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -77,9 +90,9 @@
         "recent_updates": [],
         "source_id": "ict_cas_faculty",
         "source_url": "http://www.ict.ac.cn/yjdw/yjy2020/",
-        "crawled_at": "2026-03-03T03:41:50Z",
+        "crawled_at": "2026-03-03T11:50:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:41:50Z",
+        "last_seen_at": "2026-03-03T11:50:28Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -131,7 +144,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "浙江大学",
+            "year": "2006-2010",
+            "major": "计算机科学与技术"
+          },
+          {
+            "degree": "博士",
+            "institution": "中国科学院计算技术研究所",
+            "year": "2010-2015",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -152,9 +178,9 @@
         "recent_updates": [],
         "source_id": "ict_cas_faculty",
         "source_url": "http://www.ict.ac.cn/yjdw/yjy2020/",
-        "crawled_at": "2026-03-03T03:41:50Z",
+        "crawled_at": "2026-03-03T11:50:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:41:50Z",
+        "last_seen_at": "2026-03-03T11:50:28Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -188,7 +214,12 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "计算机系统结构",
+          "数据中心体系结构",
+          "处理器芯片敏捷设计",
+          "开源芯片生态"
+        ],
         "keywords": [],
         "bio": "包云岗  研究员研究方向：所属部门：先进计算机系统研究中心、处理器芯片重点实验室导师类别：博导计算机系统结构联系方式：个人网页：http://acs.ict.ac.cn/baoyg/",
         "bio_en": "",
@@ -202,7 +233,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "理学学士",
+            "institution": "南京大学计算机科学与技术系",
+            "year": "1999-2003",
+            "major": ""
+          },
+          {
+            "degree": "工学博士",
+            "institution": "中科院计算所",
+            "year": "2003-2008",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -223,11 +267,11 @@
         "recent_updates": [],
         "source_id": "ict_cas_faculty",
         "source_url": "http://www.ict.ac.cn/yjdw/yjy2020/",
-        "crawled_at": "2026-03-03T03:41:50Z",
+        "crawled_at": "2026-03-03T11:50:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:41:50Z",
+        "last_seen_at": "2026-03-03T11:50:28Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -259,7 +303,12 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "多模态大模型",
+          "世界模型",
+          "时序数据智能分析",
+          "智能网络"
+        ],
         "keywords": [],
         "bio": "毕经平  研究员研究方向：所属部门：装备智能系统研究中心导师类别：博导计算机系统结构联系方式：jpingbi@ict.ac.cn个人网页：",
         "bio_en": "",
@@ -294,11 +343,11 @@
         "recent_updates": [],
         "source_id": "ict_cas_faculty",
         "source_url": "http://www.ict.ac.cn/yjdw/yjy2020/",
-        "crawled_at": "2026-03-03T03:41:50Z",
+        "crawled_at": "2026-03-03T11:50:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:41:50Z",
+        "last_seen_at": "2026-03-03T11:50:28Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -352,7 +401,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "山东大学",
+            "year": "1990-1994",
+            "major": "计算机系"
+          },
+          {
+            "degree": "硕士",
+            "institution": "中科院计算所",
+            "year": "1994-1997",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "中科院计算所",
+            "year": "1997-2001",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -373,9 +441,9 @@
         "recent_updates": [],
         "source_id": "ict_cas_faculty",
         "source_url": "http://www.ict.ac.cn/yjdw/yjy2020/",
-        "crawled_at": "2026-03-03T03:41:50Z",
+        "crawled_at": "2026-03-03T11:50:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:41:50Z",
+        "last_seen_at": "2026-03-03T11:50:28Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -409,7 +477,11 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人工智能安全",
+          "虚假伪造信息检测",
+          "多媒体技术"
+        ],
         "keywords": [],
         "bio": "曹娟  研究员研究方向：所属部门：前瞻研究实验室导师类别：博导计算机应用技术联系方式：caojuan@ict.ac.cn个人网页：http://mcg.ict.ac.cn/people/caojuan.html",
         "bio_en": "",
@@ -423,7 +495,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "",
+            "institution": "美国哥伦比亚大学",
+            "year": "2010-2011",
+            "major": "电子系"
+          },
+          {
+            "degree": "",
+            "institution": "香港城市大学",
+            "year": "2009",
+            "major": "计算机系"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -444,11 +529,11 @@
         "recent_updates": [],
         "source_id": "ict_cas_faculty",
         "source_url": "http://www.ict.ac.cn/yjdw/yjy2020/",
-        "crawled_at": "2026-03-03T03:41:50Z",
+        "crawled_at": "2026-03-03T11:50:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:41:50Z",
+        "last_seen_at": "2026-03-03T11:50:28Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -500,7 +585,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士生",
+            "institution": "香港科技大学",
+            "year": "2001-2006",
+            "major": "计算机系"
+          },
+          {
+            "degree": "硕士生",
+            "institution": "天津大学",
+            "year": "1998-2001",
+            "major": "计算机系"
+          },
+          {
+            "degree": "本科生",
+            "institution": "河北工业大学",
+            "year": "1994-1998",
+            "major": "计算机系"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -521,9 +625,9 @@
         "recent_updates": [],
         "source_id": "ict_cas_faculty",
         "source_url": "http://www.ict.ac.cn/yjdw/yjy2020/",
-        "crawled_at": "2026-03-03T03:41:50Z",
+        "crawled_at": "2026-03-03T11:50:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:41:50Z",
+        "last_seen_at": "2026-03-03T11:50:28Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -575,7 +679,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "中国科学技术大学电子工程与信息科学系",
+            "year": "1989-1994",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "中国科学院计算技术研究所",
+            "year": "1994-1997",
+            "major": "计算机体系结构"
+          },
+          {
+            "degree": "博士",
+            "institution": "中国科学院计算技术研究所",
+            "year": "1997-2000",
+            "major": "计算机体系结构"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -596,9 +719,9 @@
         "recent_updates": [],
         "source_id": "ict_cas_faculty",
         "source_url": "http://www.ict.ac.cn/yjdw/yjy2020/",
-        "crawled_at": "2026-03-03T03:41:50Z",
+        "crawled_at": "2026-03-03T11:50:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:41:50Z",
+        "last_seen_at": "2026-03-03T11:50:28Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -632,7 +755,10 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "数据库系统",
+          "大数据处理"
+        ],
         "keywords": [],
         "bio": "陈世敏  研究员研究方向：所属部门：先进计算机系统研究中心导师类别：博导计算机系统结构联系方式：chensm@ict.ac.cn个人网页：https://www.shimin-chen.com",
         "bio_en": "",
@@ -646,7 +772,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学计算机系",
+            "year": "",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "清华大学计算机系",
+            "year": "",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "Carnegie Mellon University",
+            "year": "",
+            "major": "计算机科学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -667,11 +812,11 @@
         "recent_updates": [],
         "source_id": "ict_cas_faculty",
         "source_url": "http://www.ict.ac.cn/yjdw/yjy2020/",
-        "crawled_at": "2026-03-03T03:41:50Z",
+        "crawled_at": "2026-03-03T11:50:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:41:50Z",
+        "last_seen_at": "2026-03-03T11:50:28Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -703,7 +848,12 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "机器学习基本理论与方法",
+          "深度学习机理",
+          "分布式优化",
+          "安全可信应用"
+        ],
         "keywords": [],
         "bio": "陈薇  研究员研究方向：所属部门：智能算法安全重点实验室导师类别：博导计算机软件与理论联系方式：chenwei2022@ict.ac.cn个人网页：https://weichen-cas.github.io/",
         "bio_en": "",
@@ -717,7 +867,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "山东大学",
+            "year": "2002-2006",
+            "major": "数学与系统科学学院"
+          },
+          {
+            "degree": "博士",
+            "institution": "中国科学院数学与系统科学研究院",
+            "year": "2006-2011",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -738,11 +901,11 @@
         "recent_updates": [],
         "source_id": "ict_cas_faculty",
         "source_url": "http://www.ict.ac.cn/yjdw/yjy2020/",
-        "crawled_at": "2026-03-03T03:41:50Z",
+        "crawled_at": "2026-03-03T11:50:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:41:50Z",
+        "last_seen_at": "2026-03-03T11:50:28Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -774,12 +937,17 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "计算机视觉",
+          "模式识别",
+          "多媒体技术",
+          "多模态交互"
+        ],
         "keywords": [],
         "bio": "陈熙霖  研究员研究方向：所属部门：智能信息处理重点实验室导师类别：博导计算机应用技术联系方式：xlchen@ict.ac.cn个人网页：https://vipl.ict.ac.cn/people/~xlchen",
         "bio_en": "",
         "email": "xlchen@ict.ac.cn",
-        "phone": "",
+        "phone": "86-10-62601166",
         "office": "",
         "profile_url": "http://www.ict.ac.cn/sourcedb/cn/jssrck/200909/t20090917_2496595.html",
         "lab_url": "",
@@ -809,11 +977,11 @@
         "recent_updates": [],
         "source_id": "ict_cas_faculty",
         "source_url": "http://www.ict.ac.cn/yjdw/yjy2020/",
-        "crawled_at": "2026-03-03T03:41:50Z",
+        "crawled_at": "2026-03-03T11:50:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:41:50Z",
+        "last_seen_at": "2026-03-03T11:50:28Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -850,7 +1018,7 @@
         "bio": "陈晓明  研究员研究方向：所属部门：智能计算机研究中心、处理器芯片重点实验室导师类别：博导计算机系统结构联系方式：chenxiaoming@ict.ac.cn个人网页：https://people.ucas.edu.cn/~chenxm",
         "bio_en": "",
         "email": "chenxiaoming@ict.ac.cn",
-        "phone": "",
+        "phone": "86-10-62601166",
         "office": "",
         "profile_url": "http://www.ict.ac.cn/sourcedb/cn/jssrck/201803/t20180309_4971403.html",
         "lab_url": "",
@@ -859,7 +1027,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学",
+            "year": "2005-2009",
+            "major": "电子工程系"
+          },
+          {
+            "degree": "博士",
+            "institution": "清华大学",
+            "year": "2009-2014",
+            "major": "电子工程系"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -880,9 +1061,9 @@
         "recent_updates": [],
         "source_id": "ict_cas_faculty",
         "source_url": "http://www.ict.ac.cn/yjdw/yjy2020/",
-        "crawled_at": "2026-03-03T03:41:50Z",
+        "crawled_at": "2026-03-03T11:50:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:41:50Z",
+        "last_seen_at": "2026-03-03T11:50:28Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -916,7 +1097,10 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人工智能",
+          "普适计算"
+        ],
         "keywords": [],
         "bio": "陈益强  研究员研究方向：所属部门：泛在计算系统研究中心导师类别：博导计算机应用技术联系方式：yqchen@ict.ac.cn个人网页：http://people.ucas.ac.cn/~yqchen",
         "bio_en": "",
@@ -930,7 +1114,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "中国科学院计算技术研究所",
+            "year": "2003",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -951,11 +1142,11 @@
         "recent_updates": [],
         "source_id": "ict_cas_faculty",
         "source_url": "http://www.ict.ac.cn/yjdw/yjy2020/",
-        "crawled_at": "2026-03-03T03:41:50Z",
+        "crawled_at": "2026-03-03T11:50:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:41:50Z",
+        "last_seen_at": "2026-03-03T11:50:28Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -1007,7 +1198,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "中国科大少年班",
+            "year": "1997-2002",
+            "major": ""
+          },
+          {
+            "degree": "硕士/博士",
+            "institution": "中科院计算所",
+            "year": "2002-2007",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1028,9 +1232,9 @@
         "recent_updates": [],
         "source_id": "ict_cas_faculty",
         "source_url": "http://www.ict.ac.cn/yjdw/yjy2020/",
-        "crawled_at": "2026-03-03T03:41:50Z",
+        "crawled_at": "2026-03-03T11:50:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:41:50Z",
+        "last_seen_at": "2026-03-03T11:50:28Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1099,9 +1303,9 @@
         "recent_updates": [],
         "source_id": "ict_cas_faculty",
         "source_url": "http://www.ict.ac.cn/yjdw/yjy2020/",
-        "crawled_at": "2026-03-03T03:41:50Z",
+        "crawled_at": "2026-03-03T11:50:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:41:50Z",
+        "last_seen_at": "2026-03-03T11:50:28Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -1153,7 +1357,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科生",
+            "institution": "吉林大学",
+            "year": "2002-2006",
+            "major": "计算机科学与技术学院"
+          },
+          {
+            "degree": "工学博士",
+            "institution": "中国科学院大学",
+            "year": "2006-2013",
+            "major": "计算机学院"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1174,9 +1391,9 @@
         "recent_updates": [],
         "source_id": "ict_cas_faculty",
         "source_url": "http://www.ict.ac.cn/yjdw/yjy2020/",
-        "crawled_at": "2026-03-03T03:41:50Z",
+        "crawled_at": "2026-03-03T11:50:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:41:50Z",
+        "last_seen_at": "2026-03-03T11:50:28Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1227,7 +1444,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科生",
+            "institution": "清华大学",
+            "year": "1997-2001",
+            "major": "计算机科学与技术系"
+          },
+          {
+            "degree": "硕士生",
+            "institution": "清华大学",
+            "year": "2001-2004",
+            "major": "计算机科学与技术系"
+          },
+          {
+            "degree": "博士生",
+            "institution": "中科院计算所",
+            "year": "2006-2011",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1248,9 +1484,9 @@
         "recent_updates": [],
         "source_id": "ict_cas_faculty",
         "source_url": "http://www.ict.ac.cn/yjdw/yjy2020/",
-        "crawled_at": "2026-03-03T03:41:50Z",
+        "crawled_at": "2026-03-03T11:50:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:41:50Z",
+        "last_seen_at": "2026-03-03T11:50:28Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1284,7 +1520,11 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "计算机视觉",
+          "视频图像分析与处理",
+          "计算机视觉在智能农业中的应用"
+        ],
         "keywords": [],
         "bio": "代锋  研究员研究方向：所属部门：前瞻研究实验室导师类别：博导计算机应用技术联系方式：fdai@ict.ac.cn个人网页：",
         "bio_en": "",
@@ -1298,7 +1538,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "中国科学院计算技术研究所",
+            "year": "2002-2008",
+            "major": "计算机应用技术"
+          },
+          {
+            "degree": "本科",
+            "institution": "清华大学",
+            "year": "1998-2002",
+            "major": "计算机科学与技术"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1319,11 +1572,11 @@
         "recent_updates": [],
         "source_id": "ict_cas_faculty",
         "source_url": "http://www.ict.ac.cn/yjdw/yjy2020/",
-        "crawled_at": "2026-03-03T03:41:50Z",
+        "crawled_at": "2026-03-03T11:50:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:41:50Z",
+        "last_seen_at": "2026-03-03T11:50:28Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 75
       },
       "is_new": false
     },
@@ -1372,7 +1625,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士生",
+            "institution": "中科院计算所",
+            "year": "2011-2016",
+            "major": ""
+          },
+          {
+            "degree": "本科生",
+            "institution": "清华大学",
+            "year": "2007-2011",
+            "major": "电子工程系"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1393,9 +1659,9 @@
         "recent_updates": [],
         "source_id": "ict_cas_faculty",
         "source_url": "http://www.ict.ac.cn/yjdw/yjy2020/",
-        "crawled_at": "2026-03-03T03:41:50Z",
+        "crawled_at": "2026-03-03T11:50:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:41:50Z",
+        "last_seen_at": "2026-03-03T11:50:28Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1450,7 +1716,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科生",
+            "institution": "中国地质大学（武汉）",
+            "year": "1990-1996",
+            "major": "矿产系"
+          },
+          {
+            "degree": "硕士、博士生",
+            "institution": "中国地质大学（武汉）",
+            "year": "1993-1999",
+            "major": "资源学院"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1471,9 +1750,9 @@
         "recent_updates": [],
         "source_id": "ict_cas_faculty",
         "source_url": "http://www.ict.ac.cn/yjdw/yjy2020/",
-        "crawled_at": "2026-03-03T03:41:50Z",
+        "crawled_at": "2026-03-03T11:50:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:41:50Z",
+        "last_seen_at": "2026-03-03T11:50:28Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1521,7 +1800,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学学士",
+            "institution": "天津大学",
+            "year": "1992",
+            "major": ""
+          },
+          {
+            "degree": "理学硕士",
+            "institution": "北京大学",
+            "year": "1996",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "中国科学院计算技术研究所",
+            "year": "1999",
+            "major": "计算机体系结构"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1542,9 +1840,9 @@
         "recent_updates": [],
         "source_id": "ict_cas_faculty",
         "source_url": "http://www.ict.ac.cn/yjdw/yjy2020/",
-        "crawled_at": "2026-03-03T03:41:50Z",
+        "crawled_at": "2026-03-03T11:50:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:41:50Z",
+        "last_seen_at": "2026-03-03T11:50:28Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -1613,9 +1911,9 @@
         "recent_updates": [],
         "source_id": "ict_cas_faculty",
         "source_url": "http://www.ict.ac.cn/yjdw/yjy2020/",
-        "crawled_at": "2026-03-03T03:41:50Z",
+        "crawled_at": "2026-03-03T11:50:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:41:50Z",
+        "last_seen_at": "2026-03-03T11:50:28Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -1669,7 +1967,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "理学学士",
+            "institution": "四川大学",
+            "year": "2005-2009",
+            "major": "数学学院"
+          },
+          {
+            "degree": "工学博士",
+            "institution": "清华大学",
+            "year": "2009-2014",
+            "major": "计算机科学与技术系"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1690,9 +2001,9 @@
         "recent_updates": [],
         "source_id": "ict_cas_faculty",
         "source_url": "http://www.ict.ac.cn/yjdw/yjy2020/",
-        "crawled_at": "2026-03-03T03:41:50Z",
+        "crawled_at": "2026-03-03T11:50:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:41:50Z",
+        "last_seen_at": "2026-03-03T11:50:28Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1737,7 +2048,7 @@
         "bio": "关洪涛  正高级工程师研究方向：所属部门：网络技术研究中心导师类别：博导计算机系统结构联系方式：guanhongtao@ict.ac.cn个人网页：",
         "bio_en": "",
         "email": "guanhongtao@ict.ac.cn",
-        "phone": "",
+        "phone": "86-10-62601166",
         "office": "",
         "profile_url": "http://www.ict.ac.cn/sourcedb/cn/jssrck/201708/t20170814_4847019.html",
         "lab_url": "",
@@ -1746,7 +2057,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "硕博连读",
+            "institution": "清华大学计算机科学与技术系",
+            "year": "2003-2010",
+            "major": ""
+          },
+          {
+            "degree": "本科",
+            "institution": "清华大学计算机科学与技术系",
+            "year": "1999-2003",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1767,9 +2091,9 @@
         "recent_updates": [],
         "source_id": "ict_cas_faculty",
         "source_url": "http://www.ict.ac.cn/yjdw/yjy2020/",
-        "crawled_at": "2026-03-03T03:41:50Z",
+        "crawled_at": "2026-03-03T11:50:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:41:50Z",
+        "last_seen_at": "2026-03-03T11:50:28Z",
         "is_active": true,
         "data_completeness": 75
       },

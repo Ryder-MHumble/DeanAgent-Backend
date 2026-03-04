@@ -3,8 +3,8 @@
   "dimension": "university_faculty",
   "group": "ustc",
   "source_name": "中国科学技术大学信息科学技术学院-师资",
-  "crawled_at": "2026-03-03T03:53:34.148371+00:00",
-  "previous_crawled_at": "2026-03-01T09:22:15.850403+00:00",
+  "crawled_at": "2026-03-03T15:12:06.482034+00:00",
+  "previous_crawled_at": "2026-03-03T03:53:34.148371+00:00",
   "item_count": 59,
   "new_item_count": 0,
   "items": [
@@ -43,7 +43,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2017/0807/c2648a190587/page.htm",
         "lab_url": "",
@@ -52,7 +52,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "大连理工大学",
+            "year": "1991-1995",
+            "major": ""
+          },
+          {
+            "degree": "硕士研究生",
+            "institution": "大连理工大学",
+            "year": "1995-1998",
+            "major": ""
+          },
+          {
+            "degree": "博士研究生",
+            "institution": "天津大学",
+            "year": "1999-2002",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -73,9 +92,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -119,7 +138,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2018/0929/c2648a340670/page.htm",
         "lab_url": "",
@@ -149,9 +168,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -193,7 +212,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2025/0704/c2648a690186/page.htm",
         "lab_url": "",
@@ -223,9 +242,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -267,7 +286,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2025/0704/c2648a690185/page.htm",
         "lab_url": "",
@@ -276,7 +295,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "澳大利亚新南威尔士大学",
+            "year": "",
+            "major": "人工智能"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -297,9 +323,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -341,7 +367,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2025/0704/c2648a690184/page.htm",
         "lab_url": "",
@@ -350,7 +376,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "中国科学技术大学",
+            "year": "2018",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -371,9 +404,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -414,7 +447,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2025/0704/c2648a690180/page.htm",
         "lab_url": "",
@@ -423,7 +456,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "南洋理工大学",
+            "year": "2020",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -444,9 +484,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -487,7 +527,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2025/0704/c2648a690178/page.htm",
         "lab_url": "",
@@ -496,7 +536,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "中国科学技术大学",
+            "year": "",
+            "major": "信号与信息处理"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -517,9 +564,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -560,7 +607,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2025/0704/c2648a690174/page.htm",
         "lab_url": "",
@@ -569,7 +616,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "中国科学技术大学",
+            "year": "",
+            "major": "物理电子学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -590,9 +644,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -633,7 +687,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "86055163601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2025/0704/c2648a690173/page.htm",
         "lab_url": "",
@@ -642,7 +696,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "新加坡国立大学",
+            "year": "2023",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -663,9 +724,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -707,7 +768,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2025/0704/c2648a690172/page.htm",
         "lab_url": "",
@@ -716,7 +777,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "中国科学技术大学计算机科学技术系",
+            "year": "",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "中国科学技术大学计算机科学技术系",
+            "year": "",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "美国圣母大学",
+            "year": "",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -737,9 +817,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -781,7 +861,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2025/0704/c2648a690160/page.htm",
         "lab_url": "",
@@ -811,9 +891,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -854,7 +934,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2013/0510/c2648a19424/page.htm",
         "lab_url": "",
@@ -863,7 +943,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士学位",
+            "institution": "合肥工业大学电气工程系",
+            "year": "1988-1992",
+            "major": ""
+          },
+          {
+            "degree": "硕士学位",
+            "institution": "中科院等离子体物理研究所",
+            "year": "1992-1995",
+            "major": ""
+          },
+          {
+            "degree": "博士学位",
+            "institution": "中国科技大学",
+            "year": "1998-2001",
+            "major": "信号与信息处理"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -884,9 +983,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -927,7 +1026,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2011/0311/c2648a19247/page.htm",
         "lab_url": "",
@@ -936,7 +1035,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "中国科学技术大学",
+            "year": "",
+            "major": "信号与信息处理"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -957,9 +1063,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1005,7 +1111,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2024/0613/c2648a643777/page.htm",
         "lab_url": "",
@@ -1014,7 +1120,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "山东大学",
+            "year": "2005-2009",
+            "major": ""
+          },
+          {
+            "degree": "硕博连读",
+            "institution": "中科院计算所",
+            "year": "2009-2015",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1035,9 +1154,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1079,7 +1198,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2010/0825/c2648a20133/page.htm",
         "lab_url": "",
@@ -1088,7 +1207,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学学士",
+            "institution": "清华大学无线电系（现电子工程系）",
+            "year": "1980-1985",
+            "major": ""
+          },
+          {
+            "degree": "工学硕士",
+            "institution": "中国科学技术大学无线电系（现电子工程与信息科学系）",
+            "year": "1985-1988",
+            "major": ""
+          },
+          {
+            "degree": "工学博士",
+            "institution": "中国科学技术大学电子工程与信息科学系",
+            "year": "1999-2004",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1109,9 +1247,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1154,7 +1292,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2019/0402/c2648a377500/page.htm",
         "lab_url": "",
@@ -1184,9 +1322,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1221,14 +1359,15 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "单光子探测芯片中光子响应机制与信号处理方法",
-          "新型PET系统设计与成像方法研究"
+          "Nicola D’AscenzoProfessor",
+          "Doctoral SupervisorProfessor",
+          "Department of Electronic Engineering and I..."
         ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2023/0519/c2648a602711/page.htm",
         "lab_url": "",
@@ -1258,13 +1397,11 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
-        "data_completeness": 55,
-        "_user_modified_at": "2026-03-03T06:30:03.618366+00:00",
-        "_user_modified_by": "user"
+        "data_completeness": 55
       },
       "is_new": false
     },
@@ -1304,7 +1441,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2017/0807/c2648a190431/page.htm",
         "lab_url": "",
@@ -1334,9 +1471,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1377,7 +1514,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2023/0315/c2648a595176/page.htm",
         "lab_url": "",
@@ -1407,9 +1544,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1450,7 +1587,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2012/0306/c2648a19378/page.htm",
         "lab_url": "",
@@ -1459,7 +1596,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "中国科学技术大学",
+            "year": "2001～2005",
+            "major": "电子信息工程"
+          },
+          {
+            "degree": "博士",
+            "institution": "中国科学技术大学",
+            "year": "2005～2010",
+            "major": "信号与信息处理"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1480,9 +1630,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1523,7 +1673,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "0551-63603634",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2010/0825/c2648a19508/page.htm",
         "lab_url": "",
@@ -1532,7 +1682,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "中国科学技术大学少年班系00班",
+            "year": "1996-2000",
+            "major": "电子工程"
+          },
+          {
+            "degree": "博士",
+            "institution": "中国科学技术大学电子工程与信息科学系",
+            "year": "2000-2005",
+            "major": "通信与信息系统"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1553,9 +1716,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1596,7 +1759,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "86055163601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2022/0328/c2648a550457/page.htm",
         "lab_url": "",
@@ -1605,7 +1768,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学博士",
+            "institution": "合肥工业大学",
+            "year": "2017",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1626,9 +1796,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1671,7 +1841,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "86055163601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2022/1114/c2648a580265/page.htm",
         "lab_url": "",
@@ -1680,7 +1850,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "武汉大学",
+            "year": "2009",
+            "major": "数学基地班"
+          },
+          {
+            "degree": "硕士",
+            "institution": "南开大学",
+            "year": "2012",
+            "major": "应用数学系"
+          },
+          {
+            "degree": "博士",
+            "institution": "美国特拉华大学",
+            "year": "2017",
+            "major": "电气与计算机工程系"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1701,9 +1890,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1745,7 +1934,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2011/0311/c2648a19248/page.htm",
         "lab_url": "",
@@ -1754,7 +1943,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "中国科学技术大学",
+            "year": "1999-2003",
+            "major": "电子与信息工程"
+          },
+          {
+            "degree": "博士",
+            "institution": "中国科学技术大学-微软亚洲研究院",
+            "year": "2003-2008",
+            "major": "电路与系统"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1775,9 +1977,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1821,7 +2023,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2022/0926/c2648a571218/page.htm",
         "lab_url": "",
@@ -1830,7 +2032,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "哈尔滨工业大学",
+            "year": "1997",
+            "major": "计算机科学与工程"
+          },
+          {
+            "degree": "硕士",
+            "institution": "哈尔滨工业大学",
+            "year": "1999",
+            "major": "计算机科学与工程"
+          },
+          {
+            "degree": "博士",
+            "institution": "哈尔滨工业大学",
+            "year": "2003",
+            "major": "计算机科学与工程"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1851,9 +2072,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1895,7 +2116,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2022/0607/c2648a557568/page.htm",
         "lab_url": "",
@@ -1904,7 +2125,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学博士",
+            "institution": "中国科学技术大学计算机科学技术系",
+            "year": "2001.9 – 2006.6",
+            "major": "人工智能"
+          },
+          {
+            "degree": "工学学士",
+            "institution": "中国科学技术大学少年班系",
+            "year": "1997.9 – 2001.7",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1925,9 +2159,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1969,7 +2203,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2022/0330/c2648a550672/page.htm",
         "lab_url": "",
@@ -1999,9 +2233,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2043,7 +2277,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2021/0423/c2648a481661/page.htm",
         "lab_url": "",
@@ -2073,9 +2307,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2117,7 +2351,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2021/0423/c2648a481660/page.htm",
         "lab_url": "",
@@ -2147,9 +2381,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2192,7 +2426,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2020/0720/c2648a439187/page.htm",
         "lab_url": "",
@@ -2201,7 +2435,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "中国科学技术大学",
+            "year": "2009",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "加拿大不列颠哥伦比亚大学",
+            "year": "2014",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2222,9 +2469,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2266,7 +2513,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2014/0225/c2648a374889/page.htm",
         "lab_url": "",
@@ -2275,7 +2522,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "武汉大学",
+            "year": "2002-2006",
+            "major": "电子信息工程"
+          },
+          {
+            "degree": "博士",
+            "institution": "中国科学技术大学",
+            "year": "2006-2011",
+            "major": "信号与信息处理"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2296,9 +2556,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2339,7 +2599,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2017/0213/c2648a171532/page.htm",
         "lab_url": "",
@@ -2348,7 +2608,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "中国科学技术大学， 微软亚洲研究院",
+            "year": "2006/09~2011/06",
+            "major": ""
+          },
+          {
+            "degree": "学士",
+            "institution": "中国科学技术大学， 电子科学与技术系",
+            "year": "2002/09~2006/06",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2369,9 +2642,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2412,7 +2685,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2018/0929/c2648a340668/page.htm",
         "lab_url": "",
@@ -2442,9 +2715,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2486,7 +2759,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2017/0807/c2648a190580/page.htm",
         "lab_url": "",
@@ -2516,9 +2789,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2566,7 +2839,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2017/0807/c2648a190447/page.htm",
         "lab_url": "",
@@ -2575,7 +2848,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "中国科学技术大学",
+            "year": "1983",
+            "major": "自动化系"
+          },
+          {
+            "degree": "硕士",
+            "institution": "美国南加州大学",
+            "year": "1986",
+            "major": "电子工程系"
+          },
+          {
+            "degree": "博士",
+            "institution": "美国伊利诺大学香槟分校",
+            "year": "1992",
+            "major": "电子与计算机工程系"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2596,9 +2888,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2639,7 +2931,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2017/0807/c2648a190436/page.htm",
         "lab_url": "",
@@ -2669,9 +2961,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2713,7 +3005,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2016/0920/c2648a19447/page.htm",
         "lab_url": "",
@@ -2722,7 +3014,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "上海交通大学",
+            "year": "2005",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "清华大学",
+            "year": "2008",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "美国哥伦比亚大学",
+            "year": "2012",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2743,9 +3054,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2787,7 +3098,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "86055163601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2016/0711/c2648a19460/page.htm",
         "lab_url": "",
@@ -2796,7 +3107,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "中国科学技术大学",
+            "year": "1999-2003",
+            "major": "信息安全"
+          },
+          {
+            "degree": "博士",
+            "institution": "中国科学技术大学",
+            "year": "2003-2007",
+            "major": "通信与信息系统"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2817,9 +3141,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2860,7 +3184,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2015/0721/c2648a19419/page.htm",
         "lab_url": "",
@@ -2869,7 +3193,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "中国科学技术大学",
+            "year": "2000-2004",
+            "major": "电子信息工程"
+          },
+          {
+            "degree": "博士",
+            "institution": "中国科学技术大学",
+            "year": "2004-2009",
+            "major": "信号与信息处理"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2890,9 +3227,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2934,7 +3271,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2015/0721/c2648a19423/page.htm",
         "lab_url": "",
@@ -2943,7 +3280,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学学士",
+            "institution": "中国科学技术大学",
+            "year": "1996-2001",
+            "major": "通信工程"
+          },
+          {
+            "degree": "硕士",
+            "institution": "美国加州大学戴维斯分校",
+            "year": "2001-2003",
+            "major": "电子与计算机工程"
+          },
+          {
+            "degree": "博士",
+            "institution": "美国加州大学戴维斯分校",
+            "year": "2003-2007",
+            "major": "电子与计算机工程"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2964,9 +3320,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3008,7 +3364,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2017/0807/c2648a190437/page.htm",
         "lab_url": "",
@@ -3017,7 +3373,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士学位",
+            "institution": "解放军信息工程大学",
+            "year": "1995-1999",
+            "major": "应用数学"
+          },
+          {
+            "degree": "博士学位",
+            "institution": "解放军信息工程大学",
+            "year": "1999-2005",
+            "major": "密码学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3038,9 +3407,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3082,7 +3451,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2015/0501/c2648a19636/page.htm",
         "lab_url": "",
@@ -3112,9 +3481,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3156,7 +3525,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2014/1101/c2648a20100/page.htm",
         "lab_url": "",
@@ -3165,7 +3534,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学学士",
+            "institution": "空军工程大学导弹学院",
+            "year": "1980-1984",
+            "major": "信号处理"
+          },
+          {
+            "degree": "工学硕士",
+            "institution": "中国科学技术大学电子工程与信息科学系",
+            "year": "1988-1991",
+            "major": "通信与电子系统"
+          },
+          {
+            "degree": "工学博士",
+            "institution": "中国科学技术大学电子工程与信息科学系",
+            "year": "1995-1998",
+            "major": "通信与信息系统"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3186,9 +3574,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3230,7 +3618,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2014/0709/c2648a19466/page.htm",
         "lab_url": "",
@@ -3239,7 +3627,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "中国科技大学无线电电子学系",
+            "year": "1988",
+            "major": "无线电电子学"
+          },
+          {
+            "degree": "硕士",
+            "institution": "西安电子科技大学",
+            "year": "",
+            "major": "电磁场与微波技术"
+          },
+          {
+            "degree": "博士",
+            "institution": "西安电子科技大学",
+            "year": "",
+            "major": "电磁场与微波技术"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3260,9 +3667,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3303,7 +3710,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2014/0504/c2648a19381/page.htm",
         "lab_url": "",
@@ -3312,7 +3719,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学电子工程系",
+            "year": "1998",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "清华大学电子工程系",
+            "year": "2003",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3333,9 +3753,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3378,7 +3798,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2014/0423/c2648a20109/page.htm",
         "lab_url": "",
@@ -3387,7 +3807,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "哈尔滨工业大学",
+            "year": "1996-1999",
+            "major": "计算机科学与技术系"
+          },
+          {
+            "degree": "硕士",
+            "institution": "哈尔滨工业大学",
+            "year": "1994-1996",
+            "major": "计算机科学与技术系"
+          },
+          {
+            "degree": "学士",
+            "institution": "西安电子科技大学",
+            "year": "1988-1992",
+            "major": "电子工程系"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3408,9 +3847,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3452,7 +3891,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2013/0929/c2648a19471/page.htm",
         "lab_url": "",
@@ -3461,7 +3900,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学",
+            "year": "1989",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "清华大学",
+            "year": "1991",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "美国史蒂文斯理工学院",
+            "year": "1999",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3482,9 +3940,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3526,7 +3984,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2013/0515/c2648a19494/page.htm",
         "lab_url": "",
@@ -3535,7 +3993,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学自动化系",
+            "year": "",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "University of Notre Dame电机工程系",
+            "year": "",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "University of Notre Dame电机工程系",
+            "year": "",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3556,9 +4033,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3601,7 +4078,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2012/1218/c2648a19500/page.htm",
         "lab_url": "",
@@ -3610,7 +4087,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "理学学士",
+            "institution": "中国科学技术大学电子科学与技术系",
+            "year": "2000-2004",
+            "major": ""
+          },
+          {
+            "degree": "工学博士",
+            "institution": "中国科学技术大学—微软亚洲研究院",
+            "year": "2004-2009",
+            "major": "电路与系统专业"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3631,9 +4121,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3674,7 +4164,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2010/0825/c2648a19495/page.htm",
         "lab_url": "",
@@ -3683,7 +4173,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学学士",
+            "institution": "西安电子科技大学",
+            "year": "1989-1993",
+            "major": "检测技术与仪器"
+          },
+          {
+            "degree": "工学硕士",
+            "institution": "西安电子科技大学",
+            "year": "1993-1996",
+            "major": "电路与系统"
+          },
+          {
+            "degree": "工学博士",
+            "institution": "中国科学技术大学",
+            "year": "1996-2000",
+            "major": "信息与通信工程"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3704,9 +4213,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3749,7 +4258,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2010/0825/c2648a19498/page.htm",
         "lab_url": "",
@@ -3758,7 +4267,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "中国科学技术大学物理系",
+            "year": "1981-1986",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "中国科学技术大学物理系",
+            "year": "1986-1989",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "东京大学大学院工学系研究科电子工学专攻",
+            "year": "1999-2002",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3779,9 +4307,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3823,7 +4351,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2010/0825/c2648a19486/page.htm",
         "lab_url": "",
@@ -3832,7 +4360,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学学士",
+            "institution": "南京邮电大学通信工程系",
+            "year": "1983-1987",
+            "major": ""
+          },
+          {
+            "degree": "工学硕士",
+            "institution": "清华大学电子工程系",
+            "year": "1989-1992",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "中国科学技术大学信息与通信工程专业",
+            "year": "1998-2004",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3853,9 +4400,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3897,7 +4444,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2010/0825/c2648a19483/page.htm",
         "lab_url": "",
@@ -3906,7 +4453,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学学士",
+            "institution": "中国科学技术大学",
+            "year": "1982",
+            "major": ""
+          },
+          {
+            "degree": "工学硕士",
+            "institution": "中国科学技术大学",
+            "year": "1984",
+            "major": ""
+          },
+          {
+            "degree": "工学博士",
+            "institution": "德国汉堡-哈尔堡工业大学",
+            "year": "1993",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3927,9 +4493,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3970,7 +4536,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "0551-63600573",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2010/0825/c2648a19474/page.htm",
         "lab_url": "",
@@ -3979,7 +4545,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "北京航空航天大学",
+            "year": "1989",
+            "major": "电子工程"
+          },
+          {
+            "degree": "硕士",
+            "institution": "中国科学技术大学",
+            "year": "1993",
+            "major": "电子工程与信息科学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -4000,9 +4579,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -4044,7 +4623,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2010/0825/c2648a20136/page.htm",
         "lab_url": "",
@@ -4053,7 +4632,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "硕士",
+            "institution": "中国科学技术大学",
+            "year": "1994-1997",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "中国科学技术大学",
+            "year": "1997-1999",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -4074,9 +4666,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -4119,7 +4711,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2010/0825/c2648a21007/page.htm",
         "lab_url": "",
@@ -4128,7 +4720,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士学位",
+            "institution": "中国科学技术大学",
+            "year": "1997/09～2000/10",
+            "major": "电子工程与信息科学系"
+          },
+          {
+            "degree": "硕士学位",
+            "institution": "中国科学技术大学",
+            "year": "1994/09～1997/07",
+            "major": "电子工程与信息科学系"
+          },
+          {
+            "degree": "学士学位",
+            "institution": "中国科学技术大学",
+            "year": "1987/09～1992/07",
+            "major": "电子工程与信息科学系"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -4149,9 +4760,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -4192,7 +4803,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2010/0825/c2648a20139/page.htm",
         "lab_url": "",
@@ -4201,7 +4812,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学学士",
+            "institution": "中国科学技术大学无线电电子学系",
+            "year": "1978-1983",
+            "major": ""
+          },
+          {
+            "degree": "工学硕士",
+            "institution": "中国科学技术大学电子工程系",
+            "year": "1983-1986",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -4222,9 +4846,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -4266,7 +4890,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2010/0825/c2648a20101/page.htm",
         "lab_url": "",
@@ -4275,7 +4899,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学学士",
+            "institution": "西安电子科技大学电子工程系",
+            "year": "1983",
+            "major": "电子工程专业"
+          },
+          {
+            "degree": "工学硕士",
+            "institution": "合肥工业大学计算机与电子工程系",
+            "year": "1986",
+            "major": "信号与系统专业"
+          },
+          {
+            "degree": "工学博士",
+            "institution": "中国科学技术大学电子工程与信息科学系",
+            "year": "1997",
+            "major": "信号与信息处理专业"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -4296,9 +4939,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -4340,7 +4983,7 @@
         "bio": "",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
-        "phone": "",
+        "phone": "+86 0551-63601307",
         "office": "",
         "profile_url": "http://eeis.ustc.edu.cn/2010/0707/c2648a19430/page.htm",
         "lab_url": "",
@@ -4349,7 +4992,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "理学学士",
+            "institution": "合肥工业大学物理系",
+            "year": "1985-1989",
+            "major": ""
+          },
+          {
+            "degree": "理学硕士",
+            "institution": "合肥工业大学物理系",
+            "year": "1989-1989",
+            "major": ""
+          },
+          {
+            "degree": "工学博士",
+            "institution": "南京航空航天大学飞行器系",
+            "year": "1992-1995",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -4370,9 +5032,9 @@
         "recent_updates": [],
         "source_id": "ustc_sist_faculty",
         "source_url": "http://eeis.ustc.edu.cn/2648/list.htm",
-        "crawled_at": "2026-03-03T03:52:06Z",
+        "crawled_at": "2026-03-03T14:56:50Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:52:06Z",
+        "last_seen_at": "2026-03-03T14:56:50Z",
         "is_active": true,
         "data_completeness": 55
       },

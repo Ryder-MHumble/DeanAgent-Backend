@@ -3,8 +3,8 @@
   "dimension": "university_faculty",
   "group": "sjtu",
   "source_name": "上海交通大学网络空间安全学院-师资",
-  "crawled_at": "2026-03-03T03:48:41.018764+00:00",
-  "previous_crawled_at": "2026-03-01T09:18:37.581257+00:00",
+  "crawled_at": "2026-03-03T13:47:08.320003+00:00",
+  "previous_crawled_at": "2026-03-03T03:48:41.018764+00:00",
   "item_count": 80,
   "new_item_count": 0,
   "items": [
@@ -35,7 +35,13 @@
         "position": "职称：院长、讲席教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "密码理论与算法",
+          "密码工程与应用",
+          "软件与系统安全",
+          "区块链与金融安全",
+          "智能安全"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -49,7 +55,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "西安电子科技大学",
+            "year": "1992",
+            "major": "应用数学"
+          },
+          {
+            "degree": "硕士",
+            "institution": "西安电子科技大学",
+            "year": "1995",
+            "major": "密码学"
+          },
+          {
+            "degree": "博士",
+            "institution": "西安电子科技大学",
+            "year": "1998",
+            "major": "密码学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -70,11 +95,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -105,7 +130,11 @@
         "position": "职称：讲席教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "编码",
+          "密码",
+          "代数数论"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -119,7 +148,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "中国科学技术大学",
+            "year": "1990",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -140,11 +176,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -180,7 +216,7 @@
         "bio": "",
         "bio_en": "",
         "email": "lijh888@sjtu.edu.cn",
-        "phone": "",
+        "phone": "021-62932899",
         "office": "",
         "profile_url": "https://infosec.sjtu.edu.cn/DirectoryDetail.aspx?id=133",
         "lab_url": "",
@@ -210,9 +246,9 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -280,9 +316,9 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -315,12 +351,19 @@
         "position": "职称：党总支书记、特聘教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "物联网",
+          "5G工业互联网",
+          "云计算/数据中心网络",
+          "泛在操作系统",
+          "区块链",
+          "人工智能和大数据"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "linghe.kong@sjtu.edu.cn",
-        "phone": "",
+        "phone": "021-34208292",
         "office": "",
         "profile_url": "https://infosec.sjtu.edu.cn/DirectoryDetail.aspx?id=188",
         "lab_url": "",
@@ -329,7 +372,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "上海交通大学",
+            "year": "2013",
+            "major": "计算机"
+          },
+          {
+            "degree": "硕士",
+            "institution": "法国国立电信研究院",
+            "year": "2007",
+            "major": "通信"
+          },
+          {
+            "degree": "学士",
+            "institution": "西安电子科技大学",
+            "year": "2005",
+            "major": "自动化"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -350,11 +412,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -385,7 +447,9 @@
         "position": "职称：特聘教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人工智能与认知安全"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -420,11 +484,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -455,12 +519,14 @@
         "position": "职称：长聘教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "数字媒体内容安全"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "xhjiang@sjtu.edu.cn",
-        "phone": "",
+        "phone": "021-34205415",
         "office": "",
         "profile_url": "https://infosec.sjtu.edu.cn/DirectoryDetail.aspx?id=157",
         "lab_url": "",
@@ -469,7 +535,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学博士",
+            "institution": "浙江大学信电系",
+            "year": "2003",
+            "major": "电子科学与技术"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -490,11 +563,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -525,7 +598,11 @@
         "position": "职称：长聘教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "网络空间资源安全管理",
+          "人工智能与机器学习",
+          "信号与信息处理"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -539,7 +616,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "北京邮电大学",
+            "year": "1996/09 - 1999/07",
+            "major": "电路与系统"
+          },
+          {
+            "degree": "硕士",
+            "institution": "吉林工业大学",
+            "year": "1993/09 - 1996/04",
+            "major": "通信与信息系统"
+          },
+          {
+            "degree": "学士",
+            "institution": "吉林工业大学",
+            "year": "1989/09 - 1993/07",
+            "major": "电子工程"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -560,11 +656,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -630,9 +726,9 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -665,12 +761,16 @@
         "position": "职称：长聘教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "密码分析/密码工程",
+          "人工智能安全",
+          "大数据隐私保护"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "qiuwd@sjtu.edu.cn",
-        "phone": "",
+        "phone": "021-34205020",
         "office": "",
         "profile_url": "https://infosec.sjtu.edu.cn/DirectoryDetail.aspx?id=189",
         "lab_url": "",
@@ -700,11 +800,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -735,12 +835,16 @@
         "position": "职称：博士，长聘教授（二级），博士生导师",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "网络空间内容治理",
+          "大数据与人工智能安全",
+          "基于大模型的社会计算"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "panli@sjtu.edu.cn",
-        "phone": "",
+        "phone": "021-34205415",
         "office": "",
         "profile_url": "https://infosec.sjtu.edu.cn/DirectoryDetail.aspx?id=176",
         "lab_url": "",
@@ -749,7 +853,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "上海交通大学",
+            "year": "2002",
+            "major": "通信与信息系统"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -770,11 +881,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -805,7 +916,10 @@
         "position": "职称：长聘教轨副教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "密码学",
+          "信息安全"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -840,11 +954,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -875,7 +989,11 @@
         "position": "职称：长聘教轨副教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "区块链共识协议",
+          "智能合约",
+          "分布式存储系统"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -889,7 +1007,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "法国巴黎高等电信学院",
+            "year": "",
+            "major": "计算机与网络"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -910,11 +1035,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -945,7 +1070,11 @@
         "position": "职称：副院长，长聘教轨副教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "密码学",
+          "数据安全",
+          "隐私保护技术"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -980,11 +1109,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1015,7 +1144,11 @@
         "position": "职称：长聘教轨副教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "5G/6G通信物理层安全",
+          "机器学习数据安全及应用",
+          "信息论香农理论基础研究"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -1029,7 +1162,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "东南大学",
+            "year": "2011",
+            "major": "通信工程"
+          },
+          {
+            "degree": "硕士",
+            "institution": "McMaster University",
+            "year": "2013",
+            "major": "电子工程"
+          },
+          {
+            "degree": "博士",
+            "institution": "Texas A&M University",
+            "year": "2017",
+            "major": "电子工程"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1050,11 +1202,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1085,7 +1237,11 @@
         "position": "职称：长聘教轨副教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "密码算法设计与分析",
+          "密码学与隐私保护",
+          "代数编码及其应用"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -1099,7 +1255,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "法国巴黎第八大学",
+            "year": "2015",
+            "major": "应用数学"
+          },
+          {
+            "degree": "博士",
+            "institution": "西南交通大学",
+            "year": "2015",
+            "major": "信息安全"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1120,11 +1289,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1190,9 +1359,9 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1225,7 +1394,9 @@
         "position": "职称：长聘教轨副教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人工智能与认知安全"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -1260,11 +1431,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1295,7 +1466,9 @@
         "position": "职称：长聘教轨副教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人工智能与认知安全"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -1330,11 +1503,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1365,7 +1538,9 @@
         "position": "职称：院长助理，长聘教轨副教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人工智能安全与隐私"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -1379,7 +1554,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "墨尔本大学",
+            "year": "2018",
+            "major": "计算机科学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1400,11 +1582,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1435,7 +1617,13 @@
         "position": "职称：副院长，长聘教轨副教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "安全多方计算",
+          "秘密分享",
+          "代数编码",
+          "局部可修复码",
+          "列表译码"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -1449,7 +1637,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "数学学士",
+            "institution": "复旦大学数学科学学院",
+            "year": "2008",
+            "major": "数学"
+          },
+          {
+            "degree": "计算机软件与理论博士",
+            "institution": "复旦大学计算机学院",
+            "year": "2013",
+            "major": "计算机软件与理论"
+          },
+          {
+            "degree": "数学博士",
+            "institution": "新加坡南洋理工大学",
+            "year": "2017",
+            "major": "数学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1470,11 +1677,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1505,7 +1712,11 @@
         "position": "职称：长聘教轨助理教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "网络与系统安全",
+          "人工智能",
+          "软件工程"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -1519,7 +1730,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "上海交通大学信息安全工程学院",
+            "year": "2010",
+            "major": "信息安全"
+          },
+          {
+            "degree": "硕士",
+            "institution": "上海交通大学信息安全工程学院",
+            "year": "2012",
+            "major": "信息安全"
+          },
+          {
+            "degree": "博士",
+            "institution": "美国南加州大学",
+            "year": "2018",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1540,11 +1770,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1575,7 +1805,11 @@
         "position": "职称：长聘教轨助理教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "自然语言处理",
+          "预训练语言模型",
+          "自主智能体及其安全"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -1610,11 +1844,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1645,7 +1879,10 @@
         "position": "职称：长聘教轨助理教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "后量子密码",
+          "格密码"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -1680,11 +1917,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1715,7 +1952,9 @@
         "position": "职称：长聘教轨助理教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "对称密码学"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -1729,7 +1968,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "理学学士",
+            "institution": "山东大学数学学院",
+            "year": "2016",
+            "major": ""
+          },
+          {
+            "degree": "密码学博士",
+            "institution": "新加坡南洋理工大学",
+            "year": "2020",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1750,11 +2002,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1785,12 +2037,17 @@
         "position": "职称：教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "网络安全",
+          "区块链技术及应用",
+          "轻量级密码技术及应用",
+          "物联网安全等"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "chengl@sjtu.edu.cn",
-        "phone": "",
+        "phone": "021-34206216",
         "office": "",
         "profile_url": "https://infosec.sjtu.edu.cn/DirectoryDetail.aspx?id=33",
         "lab_url": "",
@@ -1799,7 +2056,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士学位",
+            "institution": "北京大学数学系",
+            "year": "",
+            "major": ""
+          },
+          {
+            "degree": "硕士学位",
+            "institution": "中科院应用数学所",
+            "year": "",
+            "major": ""
+          },
+          {
+            "degree": "博士学位",
+            "institution": "法国圣艾蒂安大学",
+            "year": "",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1820,11 +2096,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1855,12 +2131,17 @@
         "position": "职称：教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "B5G/6G移动通信系统安全",
+          "低轨卫星网络与Sat5G融合网络安全",
+          "工业互联网及边缘计算安全",
+          "高通量无线区块链系统及应用"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "cqhua@sjtu.edu.cn",
-        "phone": "",
+        "phone": "021-34204881",
         "office": "",
         "profile_url": "https://infosec.sjtu.edu.cn/DirectoryDetail.aspx?id=1",
         "lab_url": "",
@@ -1869,7 +2150,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "中国科学技术大学",
+            "year": "2000",
+            "major": "电子工程学系"
+          },
+          {
+            "degree": "硕士",
+            "institution": "香港中文大学",
+            "year": "2002",
+            "major": "讯息工程学系"
+          },
+          {
+            "degree": "博士",
+            "institution": "香港中文大学",
+            "year": "2006",
+            "major": "讯息工程学系"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1890,11 +2190,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1925,12 +2225,18 @@
         "position": "职称：教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "加密算法",
+          "hash函数",
+          "DNA密码",
+          "白盒密码",
+          "区块链"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "laix@sjtu.edu.cn",
-        "phone": "",
+        "phone": "+86-21-3420-5440",
         "office": "",
         "profile_url": "https://infosec.sjtu.edu.cn/DirectoryDetail.aspx?id=85",
         "lab_url": "",
@@ -1939,7 +2245,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "西北电讯工程学院",
+            "year": "1982",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "",
+            "year": "1984",
+            "major": "应用数学"
+          },
+          {
+            "degree": "博士",
+            "institution": "瑞士苏黎世高工",
+            "year": "1992",
+            "major": "技术科学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1960,11 +2285,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -1995,7 +2320,12 @@
         "position": "职称：教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人工智能安全",
+          "内容安全",
+          "自然语言处理",
+          "恶意代码防范"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -2009,7 +2339,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "上海交通大学",
+            "year": "2003",
+            "major": "计算机"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2030,11 +2367,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -2065,7 +2402,11 @@
         "position": "职称：副院长、教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人工智能与安全",
+          "多媒体内容安全",
+          "生物特征识别"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -2079,7 +2420,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "上海交通大学通信工程系",
+            "year": "2001",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "香港城市大学电脑工程与资讯科技系",
+            "year": "2004",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2100,11 +2454,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -2170,9 +2524,9 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2210,7 +2564,7 @@
         "bio": "",
         "bio_en": "",
         "email": "zxue@sjtu.edu.cn",
-        "phone": "",
+        "phone": "021-34205982",
         "office": "",
         "profile_url": "https://infosec.sjtu.edu.cn/DirectoryDetail.aspx?id=35",
         "lab_url": "",
@@ -2219,7 +2573,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "上海交通大学",
+            "year": "1992",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "上海交通大学",
+            "year": "2001",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2240,9 +2607,9 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2275,7 +2642,20 @@
         "position": "职称：教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "媒体内容安全技术",
+          "数字视频被动取证技术",
+          "AI生成对抗数据的取证技术",
+          "数字视频水印技术",
+          "视频视频隐写及隐写分析技术",
+          "视频内容智能分析技术",
+          "机器学习与深度学习技术",
+          "媒体内容安全分析技术",
+          "数字媒体取证被动检测技术",
+          "深度对抗鲁棒检测技术",
+          "数字视频隐写及隐写分析技术",
+          "AI模型安全分析"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -2289,7 +2669,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学硕士学位",
+            "institution": "吉林工业大学",
+            "year": "1997-2000",
+            "major": "机械电子工程专业"
+          },
+          {
+            "degree": "工学博士学位",
+            "institution": "吉林大学",
+            "year": "2000-2003",
+            "major": "通信与信息系统专业"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2310,11 +2703,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -2345,12 +2738,17 @@
         "position": "职称：研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "5G移动通信安全",
+          "车联网安全",
+          "物联网安全",
+          "卫星网络安全"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "wuyue@sjtu.edu.cn",
-        "phone": "",
+        "phone": "021-34204881",
         "office": "",
         "profile_url": "https://infosec.sjtu.edu.cn/DirectoryDetail.aspx?id=155",
         "lab_url": "",
@@ -2359,7 +2757,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "浙江大学信电系",
+            "year": "",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "东南大学无线电系",
+            "year": "",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "东南大学无线电系",
+            "year": "",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2380,11 +2797,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -2415,7 +2832,12 @@
         "position": "职称：高级工程师",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "软件与系统安全",
+          "物联网安全",
+          "区块链安全",
+          "人工智能安全"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -2450,11 +2872,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -2520,9 +2942,9 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2555,7 +2977,11 @@
         "position": "职称：副教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "区块链与数字货币",
+          "共识协议",
+          "数据隐私计算"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -2569,7 +2995,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学博士",
+            "institution": "上海交通大学电子信息与电气工程学院",
+            "year": "",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2590,11 +3023,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -2625,7 +3058,12 @@
         "position": "职称：副研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "视频行为分析",
+          "多媒体安全",
+          "图象处理与模式识别",
+          "人工智能"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -2639,7 +3077,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "上海交通大学",
+            "year": "2003",
+            "major": "图像处理与模式识别"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2660,11 +3105,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -2695,7 +3140,10 @@
         "position": "职称：副教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "机器学习与人工智能算法应用",
+          "基于FPGA的信号处理和应用技术"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -2709,7 +3157,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "北京航空学院（现更名为：北京航空航天大学）",
+            "year": "1983",
+            "major": "计算机科学与工程系"
+          },
+          {
+            "degree": "硕士",
+            "institution": "西北工业大学",
+            "year": "1992",
+            "major": "电子工程系，通信与电子系统专业"
+          },
+          {
+            "degree": "博士",
+            "institution": "西安交通大学",
+            "year": "1999",
+            "major": "生物医学工程研究所，生物医学工程专业"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2730,11 +3197,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -2765,7 +3232,10 @@
         "position": "职称：副教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人工智能",
+          "隐私保护计算"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -2779,7 +3249,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "上海交通大学",
+            "year": "2003",
+            "major": "计算机应用技术"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2800,11 +3277,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -2835,12 +3312,18 @@
         "position": "职称：副教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "物联网安全",
+          "工业互联网安全",
+          "RFID安全",
+          "大数据分析",
+          "安全和隐私保护"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "lsli@sjtu.edu.cn",
-        "phone": "",
+        "phone": "021-34204881",
         "office": "",
         "profile_url": "https://infosec.sjtu.edu.cn/DirectoryDetail.aspx?id=21",
         "lab_url": "",
@@ -2849,7 +3332,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "西北工业大学电子系",
+            "year": "",
+            "major": ""
+          },
+          {
+            "degree": "博士后",
+            "institution": "上海交通大学电子工程系",
+            "year": "",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2870,11 +3366,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -2905,7 +3401,10 @@
         "position": "职称：副教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "分布式存储",
+          "云计算"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -2919,7 +3418,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "西北师范大学",
+            "year": "1989-1993",
+            "major": "物理学"
+          },
+          {
+            "degree": "硕士",
+            "institution": "电子科技大学",
+            "year": "1996-1999",
+            "major": "通信与信息系统"
+          },
+          {
+            "degree": "博士",
+            "institution": "上海交通大学",
+            "year": "1999-2003",
+            "major": "计算机科学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2940,11 +3458,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -3010,9 +3528,9 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3045,7 +3563,11 @@
         "position": "职称：院长助理，高级实验师",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "移动安全",
+          "数据安全",
+          "社会网络"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -3059,7 +3581,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "",
+            "institution": "上海交通大学",
+            "year": "1995",
+            "major": ""
+          },
+          {
+            "degree": "理学博士",
+            "institution": "复旦大学",
+            "year": "2006",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3080,11 +3615,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -3115,7 +3650,12 @@
         "position": "职称：副研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "多媒体内容安全",
+          "异常行为识别",
+          "步态识别",
+          "视频攻防技术"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -3129,7 +3669,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学博士",
+            "institution": "上海交通大学",
+            "year": "2013.09 - 2019.03",
+            "major": "网络空间安全学院"
+          },
+          {
+            "degree": "工学学士",
+            "institution": "上海交通大学",
+            "year": "2009.09 - 2013.07",
+            "major": "信息安全工程学院"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3150,11 +3703,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -3185,12 +3738,16 @@
         "position": "职称：高级工程师",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "网络入侵检测",
+          "车联网安全",
+          "移动应用安全"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "yaolh@sjtu.edu.cn",
-        "phone": "",
+        "phone": "021-34205415",
         "office": "",
         "profile_url": "https://infosec.sjtu.edu.cn/DirectoryDetail.aspx?id=146",
         "lab_url": "",
@@ -3220,11 +3777,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -3255,7 +3812,11 @@
         "position": "职称：副研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人工智能安全",
+          "无线网络安全",
+          "软件与系统安全"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -3290,11 +3851,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -3325,12 +3886,15 @@
         "position": "职称：副研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "网络安全协议的分析与设计",
+          "多媒体内容安全技术"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "axzhang@sjtu.edu.cn",
-        "phone": "",
+        "phone": "021-34206665",
         "office": "",
         "profile_url": "https://infosec.sjtu.edu.cn/DirectoryDetail.aspx?id=148",
         "lab_url": "",
@@ -3360,11 +3924,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -3395,7 +3959,10 @@
         "position": "职称：高级工程师",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "网络攻击检测与追踪溯源",
+          "软件与系统安全"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -3409,7 +3976,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "上海交通大学",
+            "year": "2005",
+            "major": "计算机系统结构"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3430,11 +4004,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -3465,7 +4039,9 @@
         "position": "职称：副教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人工智能与认知安全"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -3500,11 +4076,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -3535,7 +4111,13 @@
         "position": "职称：党总支副书记，高级工程师",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "信息内容安全",
+          "移动应用和Android安全",
+          "移动APP合规性检测",
+          "个人信息保护与隐私检测",
+          "网络安全管理"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -3570,11 +4152,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -3605,7 +4187,11 @@
         "position": "职称：助理研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "内容安全",
+          "自然语言处理",
+          "机器翻译"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -3619,7 +4205,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学博士",
+            "institution": "上海交通大学",
+            "year": "2023",
+            "major": "计算机科学与技术"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3640,11 +4233,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -3675,7 +4268,11 @@
         "position": "职称：助理研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人工智能模型的安全与隐私保护",
+          "深度学习应用的安全性评估",
+          "云场景下人工智能模型的完整性攻防"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -3689,7 +4286,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "华中科技大学",
+            "year": "2024",
+            "major": "网络空间安全"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3710,11 +4314,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -3745,7 +4349,10 @@
         "position": "职称：助理研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "云计算",
+          "未来网络安全"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -3759,7 +4366,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "中国科学技术大学",
+            "year": "2018",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3780,11 +4394,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -3815,7 +4429,11 @@
         "position": "职称：助理研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "软件供应链安全",
+          "移动与IoT安全",
+          "人工智能安全"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -3829,7 +4447,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "山东大学网络空间安全学院",
+            "year": "",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3850,11 +4475,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -3885,7 +4510,12 @@
         "position": "职称：助理研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "相似代码检测",
+          "补丁代码分析",
+          "恶意软件分析",
+          "漏洞挖掘"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -3899,7 +4529,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学学士",
+            "institution": "华南理工大学",
+            "year": "2013",
+            "major": ""
+          },
+          {
+            "degree": "工学博士",
+            "institution": "上海交通大学",
+            "year": "2019",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3920,11 +4563,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -3955,7 +4598,12 @@
         "position": "职称：助理研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "区块链",
+          "物联网",
+          "数据安全",
+          "可信计算"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -3969,7 +4617,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "上海交通大学",
+            "year": "2018.9-2024.6",
+            "major": "计算机技术"
+          },
+          {
+            "degree": "本科",
+            "institution": "电子科技大学",
+            "year": "2014.9-2018.6",
+            "major": "计算机科学与技术"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3990,11 +4651,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -4025,7 +4686,12 @@
         "position": "职称：助理研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人工智能安全及应用",
+          "低质数据挖掘与学习",
+          "遥感影像智能解译",
+          "对抗性机器学习"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -4060,11 +4726,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -4095,7 +4761,13 @@
         "position": "职称：助理研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "数论和代数几何在密码学中的应用",
+          "椭圆曲线密码",
+          "离散对数问题",
+          "基于同源的后量子密码",
+          "同源密码的安全性分析以及算法实现"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -4109,7 +4781,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "中国科学技术大学数学科学学院",
+            "year": "",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -4130,11 +4809,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -4165,7 +4844,10 @@
         "position": "职称：讲师",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "大数据分析",
+          "大数据分析与应用"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -4200,11 +4882,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -4235,12 +4917,15 @@
         "position": "职称：助理研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "入侵检测",
+          "可扩展数据分析"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "研究兴趣：入侵检测、可扩展数据分析",
-        "phone": "",
+        "phone": "1051065502",
         "office": "",
         "profile_url": "https://infosec.sjtu.edu.cn/DirectoryDetail.aspx?id=117",
         "lab_url": "",
@@ -4249,7 +4934,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "上海交通大学与澳大利亚悉尼科技大学",
+            "year": "2019",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -4270,11 +4962,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -4305,7 +4997,10 @@
         "position": "职称：工程师",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "密码工程",
+          "网络协议安全"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -4340,11 +5035,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -4375,7 +5070,9 @@
         "position": "职称：讲师",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "数据合规与数据安全"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -4410,11 +5107,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -4445,7 +5142,11 @@
         "position": "职称：工程师",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "网络攻防",
+          "系统安全",
+          "勒索病毒防护"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -4480,11 +5181,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -4515,7 +5216,11 @@
         "position": "职称：讲师",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "信息过滤",
+          "文本可视化",
+          "自然语言理解"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -4550,11 +5255,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -4585,7 +5290,11 @@
         "position": "职称：助理研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "隐私保护",
+          "AI安全",
+          "数据流通共享安全"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -4599,7 +5308,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "上海交通大学",
+            "year": "2022",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -4620,11 +5336,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -4655,7 +5371,11 @@
         "position": "职称：助理研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "后量子密码",
+          "属性加密",
+          "函数加密"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -4669,7 +5389,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "理学博士",
+            "institution": "北京大学数学科学学院",
+            "year": "2013",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -4690,11 +5417,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -4725,7 +5452,11 @@
         "position": "职称：讲师",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人工智能与安全",
+          "隐私保护",
+          "信息安全风险评估"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -4760,11 +5491,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -4795,7 +5526,11 @@
         "position": "职称：工程师",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "网络攻防技术",
+          "系统安全机制",
+          "恶意代码检测"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -4830,11 +5565,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -4865,7 +5600,10 @@
         "position": "职称：助理研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "后量子密码学",
+          "隐私保护协议"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -4879,7 +5617,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "理学学士",
+            "institution": "厦门大学数学科学学院",
+            "year": "2014",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "新加坡南洋理工大学",
+            "year": "2019",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -4900,11 +5651,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -4935,7 +5686,11 @@
         "position": "职称：助理研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "媒体信息安全",
+          "AIGC内容安全",
+          "人工智能"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -4970,11 +5725,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -5005,7 +5760,11 @@
         "position": "职称：助理研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "密码系统侧信道分析与防护",
+          "密码算法快速与安全实现",
+          "密码工程"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -5019,7 +5778,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学博士",
+            "institution": "上海交通大学",
+            "year": "2022",
+            "major": "计算机科学与技术"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -5040,11 +5806,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -5075,7 +5841,9 @@
         "position": "职称：助理研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人工智能与认知安全"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -5110,11 +5878,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -5145,7 +5913,9 @@
         "position": "职称：助理研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "信息安全与密码学"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -5180,11 +5950,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -5215,7 +5985,9 @@
         "position": "职称：助理研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "信息安全与密码学"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -5250,11 +6022,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -5285,7 +6057,11 @@
         "position": "职称：助理研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "分布式存储编码技术",
+          "再生码",
+          "局部修复码"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -5299,7 +6075,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "中科院数学与系统科学研究院",
+            "year": "",
+            "major": "分布式存储中的再生码研究"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -5320,11 +6103,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -5390,9 +6173,9 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -5439,7 +6222,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "国防科技大学",
+            "year": "1983",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "国防科技大学",
+            "year": "1986",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "国防科技大学",
+            "year": "1993",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -5460,9 +6262,9 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -5495,7 +6297,11 @@
         "position": "职称：国际电气与电子工程师协会会士（IEEE Fellow）",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "无线传感器网络（物联网）",
+          "移动通信系统",
+          "雾计算与网络技术"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -5530,11 +6336,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -5565,7 +6371,14 @@
         "position": "职称：教授级高工",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "密码基础理论与设计",
+          "电子商务安全",
+          "电子政务安全",
+          "区块链",
+          "网络可信身份管理",
+          "物联网网安全"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -5600,11 +6413,11 @@
         "recent_updates": [],
         "source_id": "sjtu_infosec_faculty",
         "source_url": "https://infosec.sjtu.edu.cn/Directory.aspx",
-        "crawled_at": "2026-03-03T03:46:55Z",
+        "crawled_at": "2026-03-03T13:31:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:46:55Z",
+        "last_seen_at": "2026-03-03T13:31:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     }

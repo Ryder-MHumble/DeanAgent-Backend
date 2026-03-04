@@ -3,8 +3,8 @@
   "dimension": "university_faculty",
   "group": "nju",
   "source_name": "南京大学智能科学与技术学院-师资",
-  "crawled_at": "2026-03-03T03:42:36.805966+00:00",
-  "previous_crawled_at": "2026-03-01T09:12:09.632850+00:00",
+  "crawled_at": "2026-03-03T12:25:52.204568+00:00",
+  "previous_crawled_at": "2026-03-03T11:19:41.103799+00:00",
   "item_count": 14,
   "new_item_count": 0,
   "items": [
@@ -35,12 +35,17 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "图像处理",
+          "计算机视觉",
+          "模式识别",
+          "人工智能"
+        ],
         "keywords": [],
         "bio": "谭铁牛，男，汉族，湖南茶陵人，南京大学党委书记，工学博士，中国科学院院士、英国皇家工程院外籍院士、发展中国家科学院(TWAS)院士、巴西科学院外籍院士。1984年获西安交通大学学士学位，1986年和1989年分别获英国帝国理工学院硕士与博士学位。1989-1997年在英国雷丁大学工作，1998年回国工作，历任中国科学院自动化所模式识别国家重点实验室主任、自动化所所长、中科院副秘书长、中科院副院长、中央人民政府驻香港特别行政区联络办公室副主任。主要从事图像处理、计算机视觉和模式识别等人工智能领域的研究。出版编著和专著10余部，在主要的国内外学术期刊和国际学术会议上发表论文600多篇，获得授权发明专利100多项。曾获国家自然科学二等奖、国家技术发明二等奖和国家科技进步二等奖各1项，2022年获国际模式识别领域最高奖—傅京孙奖。先后担任多个国内外学术刊物的主编或编委，包括《自动化学报》（主编）, IEEE Transactions on Pattern Analysis and Machine Intelligence, Pattern Recognition, Pattern Recognition Letters和Machine Intelligence Research（主编）。曾担任中国图像图形学学会、中国计算机学会、中国自动化学会和中国人工智能学会等多个国家一级学会的理事长或副理事长以及国际模式识别学会(IAPR)第一副主席、IEEE生物识别理事会(IEEE Biometrics Council)主席等。先后当选中共十六大、十七大、十八大和十九大党代表。现任第十四届全国政协常委。",
         "bio_en": "",
         "email": "",
-        "phone": "",
+        "phone": "0512-68768090",
         "office": "",
         "profile_url": "https://is.nju.edu.cn/d1/61/c57127a643425/page.htm",
         "lab_url": "",
@@ -49,7 +54,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "西安交通大学",
+            "year": "1984",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "英国帝国理工学院",
+            "year": "1986",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "英国帝国理工学院",
+            "year": "1989",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -70,11 +94,11 @@
         "recent_updates": [],
         "source_id": "nju_is_faculty",
         "source_url": "https://is.nju.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T03:42:18Z",
+        "crawled_at": "2026-03-03T12:22:10Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:18Z",
+        "last_seen_at": "2026-03-03T12:22:10Z",
         "is_active": true,
-        "data_completeness": 45
+        "data_completeness": 60
       },
       "is_new": false
     },
@@ -105,12 +129,19 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人工智能",
+          "机器学习",
+          "多智能体系统",
+          "大数据",
+          "图像和视频分析",
+          "人工智能艺术创作"
+        ],
         "keywords": [],
         "bio": "高阳教授、博导，中国人工智能学会会士。目前任南京大学智能科学与技术学院书记兼执行院长、南京大学-中移动联合研究院院长、南京大学健康医疗大数据国家研究院常务副院长、陆海安全决策教育部重点实验室副主任、江苏省军事人工智能技术军民融合创新平台负责人。2009年入选江苏省“333高层次人才培养工程”第二批中青年科学技术带头人，2010年入选教育部新世纪优秀人才支持计划，所领导的南京大学人工智能推理与学习团队入选2019年度江苏省高等学校优秀科技创新团队，2022年入选江苏省军民融合领军人才和天池特聘教授计划。1997年开始从事人工智能、机器学习、多智能体系统、大数据、图像和视频分析、人工智能艺术创作等领域的学术研究。作为第一负责人主持国家自然科学基金重大项目课题一项、重点项目一项，军民共性技术联合基金项目一项，装备预研教育部联合基金项目一项，面上项目三项，青年项目一项；主持科技部国际合作专项一项，江苏省自然科学基金重点项目(江苏省973项目)一项，科技部科技创新2030—“新一代人工智能”重大项目课题一项等。获江苏省科学技术奖二等奖一次、中国人工智能学会吴文俊自然科学奖二等奖一次、军队医疗成果奖二等、三等各一项，获中国计算机学会多智能体系统专业学组研究成就奖。",
         "bio_en": "",
         "email": "",
-        "phone": "",
+        "phone": "0512-68768090 0512-68768091",
         "office": "",
         "profile_url": "https://is.nju.edu.cn/d6/00/c57127a644608/page.htm",
         "lab_url": "",
@@ -140,11 +171,11 @@
         "recent_updates": [],
         "source_id": "nju_is_faculty",
         "source_url": "https://is.nju.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T03:42:18Z",
+        "crawled_at": "2026-03-03T12:22:10Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:18Z",
+        "last_seen_at": "2026-03-03T12:22:10Z",
         "is_active": true,
-        "data_completeness": 45
+        "data_completeness": 60
       },
       "is_new": false
     },
@@ -175,7 +206,11 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "计算机视觉",
+          "模式识别",
+          "医学图像计算"
+        ],
         "keywords": [],
         "bio": "单彩峰，教授、博导，国家级领军人才。现任南京大学智能科学与技术学院副院长，南京大学-中国移动联合研究院副院长。2001年获中国科学技术大学学士，2004年获中国科学院自动化研究所硕士，2007年获英国伦敦大学博士。之后在荷兰飞利浦研究院工作十余年，担任资深科学家和团队负责人，并兼任荷兰埃因霍温理工大学研究员。主要从事计算机视觉、模式识别、医学图像计算等方面的研究，先后承担多个欧盟Horizon 2020计划项目、国家自然科学基金原创探索项目、工信部揭榜挂帅项目等。发表论文170多篇（引用1万余次）、授权各国专利100多项（其中美国欧洲日本专利60余项）。荣获飞利浦公司发明奖，入选全球前2%顶尖科学家、飞利浦公司“High Potential”人才等。先后担任10余个国际期刊的编委或客座编委（包括多个IEEE汇刊）。联系方式:cfshan@nju.edu.cn个人主页:https://caifeng-shan.github.io/",
         "bio_en": "",
@@ -189,7 +224,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "中国科学技术大学",
+            "year": "2001",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "中国科学院自动化研究所",
+            "year": "2004",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "英国伦敦大学",
+            "year": "2007",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -210,11 +264,11 @@
         "recent_updates": [],
         "source_id": "nju_is_faculty",
         "source_url": "https://is.nju.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T03:42:18Z",
+        "crawled_at": "2026-03-03T12:22:10Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:18Z",
+        "last_seen_at": "2026-03-03T12:22:10Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -252,7 +306,7 @@
         "bio": "南京大学智能科学与技术学院教授，博导。主要研究方向为机器学习理论与算法、图像分析、AI+气象等。在人工智能领域顶级期刊（包括JMLR. IEEE-TPAMI, IEEE-TIT等）和会议（包括NeurIPS, ICML, ICLR, COLT等）上发表论文100余篇。主持承担了国家自然科学基金优秀青年基金、联合基金、科技部重点研发计划课题等项目；入选江苏省高校优秀科技创新团队和江苏省双创人才。研究成果获得江苏省科学技术一等奖、教育部高等学校科学研究优秀成果二等奖等科研奖励。长期担任ICML、NeurIPS等人工智能顶级国际会议的领域主席。个人主页：https://sites.google.com/site/xtyuan1980/",
         "bio_en": "",
         "email": "",
-        "phone": "",
+        "phone": "0512-68768090",
         "office": "",
         "profile_url": "https://is.nju.edu.cn/d1/7a/c57127a643450/page.htm",
         "lab_url": "",
@@ -282,9 +336,9 @@
         "recent_updates": [],
         "source_id": "nju_is_faculty",
         "source_url": "https://is.nju.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T03:42:18Z",
+        "crawled_at": "2026-03-03T12:22:10Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:18Z",
+        "last_seen_at": "2026-03-03T12:22:10Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -333,7 +387,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "香港理工大学计算机系",
+            "year": "2012",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -354,9 +415,9 @@
         "recent_updates": [],
         "source_id": "nju_is_faculty",
         "source_url": "https://is.nju.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T03:42:18Z",
+        "crawled_at": "2026-03-03T12:22:10Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:18Z",
+        "last_seen_at": "2026-03-03T12:22:10Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -389,12 +450,15 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "计算机图形学渲染方向",
+          "三维视觉方向"
+        ],
         "keywords": [],
         "bio": "王贝贝，南京大学智能科学与技术学院教授、博导。计算机图形学渲染方向与三维视觉方向。曾参与Disney Infinity研发，提出实时亮片渲染方法。提出SpongeCake材质模型，应用在多个引擎中。发表CCF A类期刊会议论文（ACM TOG, SIGGRAPH(Asia), TVCG, CVPR) 20余篇，入选ACM TOG亮点文章（图片）三次。担任第36届EGSR程序委员会共同主席，担任SIGGRAPH 2025 sorting委员会委员，担任SIGGRAPH 2023-2024、EG等会议程序委员会委员。个人主页：https://wangningbei.github.io/寄语：做有意义的科研。",
         "bio_en": "",
         "email": "",
-        "phone": "",
+        "phone": "0512-68768090 0512-68768091",
         "office": "",
         "profile_url": "https://is.nju.edu.cn/e7/5e/c57127a649054/page.htm",
         "lab_url": "",
@@ -424,11 +488,11 @@
         "recent_updates": [],
         "source_id": "nju_is_faculty",
         "source_url": "https://is.nju.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T03:42:18Z",
+        "crawled_at": "2026-03-03T12:22:10Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:18Z",
+        "last_seen_at": "2026-03-03T12:22:10Z",
         "is_active": true,
-        "data_completeness": 45
+        "data_completeness": 60
       },
       "is_new": false
     },
@@ -459,12 +523,17 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "自然语言处理",
+          "文本挖掘",
+          "情感计算",
+          "大模型应用"
+        ],
         "keywords": [],
         "bio": "夏睿，南京大学智能科学与技术学院教授、博导。2011年获得中国科学院自动化研究所博士学位。研究领域为自然语言处理、文本挖掘、情感计算、大模型应用。主持4项国家自然科学基金、江苏省杰青、优青等项目，在领域顶级会议和期刊发表论文90余篇，出版中英文学术专著各1部。获得自然语言处理顶级会议ACL2019杰出论文奖（一作）、ACL2023杰出论文奖（通讯）、教育部自然科学奖二等奖（排一）、中国中文信息学会青年创新奖一等奖、江苏省计算机学会青年科技奖等荣誉。个人主页：https://rxiacn.github.io/",
         "bio_en": "",
         "email": "",
-        "phone": "",
+        "phone": "0512-68768090",
         "office": "",
         "profile_url": "https://is.nju.edu.cn/28/c9/c57127a796873/page.htm",
         "lab_url": "",
@@ -473,7 +542,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "中国科学院自动化研究所",
+            "year": "2011",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -494,11 +570,11 @@
         "recent_updates": [],
         "source_id": "nju_is_faculty",
         "source_url": "https://is.nju.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T03:42:18Z",
+        "crawled_at": "2026-03-03T12:22:10Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:18Z",
+        "last_seen_at": "2026-03-03T12:22:10Z",
         "is_active": true,
-        "data_completeness": 45
+        "data_completeness": 60
       },
       "is_new": false
     },
@@ -536,7 +612,7 @@
         "bio": "南京大学智能科学与技术学院副教授，博士生导师。主要研究方向为3D视觉和机器学习，其中包括三维人脸重建，神经渲染，生成模型和三维场景感知等。2019年在意大利特伦托大学多媒体与人类理解小组（MHUG）访问。曾任腾讯优图实验室（高级）研究员。2021年获得CCF（中国计算机协会）优秀博士论文提名。在国际顶级会议和期刊如CVPR，ICCV，ECCV，AAAI，TPAMI等发表论文20余篇。相关成果在华为、腾讯等相关业务中落地转化。长期担任CVPR，ICCV，ECCV，AAAI，TNNLS，TPAMI等会议和期刊审稿人。个人主页：https://jessezhang92.github.io/2024年有硕士、博士招生名额若干。对机器学习、人工智能感兴趣，有编程基础和自驱力强的同学录，可通过邮箱联系我，请附上个人简历、成绩单及自我介绍。",
         "bio_en": "",
         "email": "",
-        "phone": "",
+        "phone": "0512-68768090",
         "office": "",
         "profile_url": "https://is.nju.edu.cn/d1/83/c57127a643459/page.htm",
         "lab_url": "",
@@ -566,9 +642,9 @@
         "recent_updates": [],
         "source_id": "nju_is_faculty",
         "source_url": "https://is.nju.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T03:42:18Z",
+        "crawled_at": "2026-03-03T12:22:10Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:18Z",
+        "last_seen_at": "2026-03-03T12:22:10Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -608,7 +684,7 @@
         "bio": "易子立现为南京大学智能科学与技术学院副教授，姑苏青年教授，博士生导师，同时隶属于视觉计算与智能感知研究中心。他的主要研究方向包括高质量视觉内容生成、多模态大模型、智能体、世界模型等。他已在CVPR、ICCV、TIP、AAAI、ACM MM等视觉或多媒体顶级会议与期刊上发表论文四十余篇，谷歌学术统计引用总数达3000余次（截至2024年4月）。他长期在国际顶级会议和期刊如CVPR，ICCV，AAAI，IJCV，IJCAI、SIGGRAPH、SIGGRAPH ASIA、TOG、TIP、ACM MM等担任审稿人或评审委员会成员。*工作经历*他曾在加拿大奥瞳科技公司（首席专家，2017-2018）、华为加拿大公司（高级研究员，2018-2020）、北京字节跳动公司（资深算法专家，2020-2022）、小红书科技有限公司（高级技术专家，2022-2023）从事AI算法研发工作，先后主持或参与二十余个AI算法项目的研发与落地，项目成功部署到华为Matebook、华为昇腾AI芯片、华为手机、抖音、Tik Tok、剪映等产品中，申请和授权美国/中国/国际专利近30项。*教育经历*易子立本科毕业于南京大学匡亚明学院理科强化班（2007-2011，物理学），硕士毕业于中国科学院高能物理研究所（2011-2014，核技术及应用，导师为朱科军），博士毕业于加拿大纽芬兰纪念大学（2014-2018，计算机科学，导师为Minglun Gong）。硕士就读期间曾访问中国科学院自动化研究所（2013-2014，导师为黄凯奇），博士就读期间在加拿大西蒙弗雷泽大学访问（2016-2018，导师为Hao Zhang）。博士期间的主要研究方向为生成式对抗神经网络和图像智能编辑，博士论文《From rule-based to learning-based image-conditional image generation》获得纽芬兰纪念大学“pass with distinction”特殊荣誉。*课题组招聘*课题组长期招收博士研究生、硕士研究生、研究助理、实习生和博士后。欢迎具备以下特质的同学加入：动手实践能力强、具有自主钻研精神、对新技术充满热情、富有创新思维、具有创业想法。有意者可直接加微信咨询。*合作*易子立课题组将与国内头部的AIGC研究机构和企业保持密切的合作关系。同时也欢迎从事AIGC+X的研究人员或产业界人士联系他，建立合作关系。邮箱:yi@nju.edu.cn微信：v_yizili (也可以扫上面的二维码)英文主页:https://zili-yi.github.io/",
         "bio_en": "",
         "email": "yi@nju.edu.cn",
-        "phone": "",
+        "phone": "0512-68768090",
         "office": "",
         "profile_url": "https://is.nju.edu.cn/d1/76/c57127a643446/page.htm",
         "lab_url": "",
@@ -617,7 +693,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "南京大学匡亚明学院理科强化班",
+            "year": "2007-2011",
+            "major": "物理学"
+          },
+          {
+            "degree": "硕士",
+            "institution": "中国科学院高能物理研究所",
+            "year": "2011-2014",
+            "major": "核技术及应用"
+          },
+          {
+            "degree": "博士",
+            "institution": "加拿大纽芬兰纪念大学",
+            "year": "2014-2018",
+            "major": "计算机科学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -638,9 +733,9 @@
         "recent_updates": [],
         "source_id": "nju_is_faculty",
         "source_url": "https://is.nju.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T03:42:18Z",
+        "crawled_at": "2026-03-03T12:22:10Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:18Z",
+        "last_seen_at": "2026-03-03T12:22:10Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -680,7 +775,7 @@
         "bio": "邰颖，南京大学智能科学与技术学院副教授，博导。南京大学紫金学者。曾任腾讯优图实验室专家研究员(T12，原T4-1)及研究组长，带领团队研发前沿视觉技术在腾讯会议虚拟背景、腾讯云数智人驱动、腾讯云AI人脸融合、QQ特效滤镜等多个产品中应用落地并创造一定的经济价值。2012与2017年于南京理工大学分别获得学士和博士学位，2016年前往美国密歇根州立大学担任访问学者。主要研究方向为生成式计算机视觉技术，包括多模态文本到图像/视频生成、以人为中心的内容编辑与生成、高保真图像/视频修复、以及高性能内容生成等。目前已发表国际顶级会议/期刊论文70余篇，谷歌学术被引用逾11,000次（截至2024年7月），其中一作与通讯论文被引用逾6000次；单篇一作论文最高被引用逾2,400次；22篇论文被引过百次。授权专利41项(国际专利17项、香港专利11项、中国专利13项)。研究成果获得2021年江苏省科学技术一等奖（第四完成人），2018年度中国图象图形学会优秀博士论文提名奖。带领团队获得NTIRE2020&2021三项超分赛道全球竞赛冠军。此外担任ECCV2022，WACV2025&2024&2023，FG2023会议的领域主席，以及ImageandVision Computing期刊副主编，2020~2022连续3年入选斯坦福大学评选的年度全球Top2%科学家。目前主持1项横向课题（150万/年），2项纵向课题。课题组与中国移动、字节、腾讯、阿里、vivo、liblib等国内外知名企业/创业公司均有科研合作。欢迎对生成式人工智能技术感兴趣的同学报考我的研究生！欢迎对科研助理、专职科研、博士后岗位感兴趣的同学联系我！联系方式：yingtai@nju.edu.cn个人主页：https://tyshiwo.github.io/寄语：仰望星空，脚踏实地",
         "bio_en": "",
         "email": "yingtai@nju.edu.cn",
-        "phone": "",
+        "phone": "0512-68768090",
         "office": "",
         "profile_url": "https://is.nju.edu.cn/d1/5d/c57127a643421/page.htm",
         "lab_url": "",
@@ -689,7 +784,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "南京理工大学",
+            "year": "2012",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "南京理工大学",
+            "year": "2017",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -710,9 +818,9 @@
         "recent_updates": [],
         "source_id": "nju_is_faculty",
         "source_url": "https://is.nju.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T03:42:18Z",
+        "crawled_at": "2026-03-03T12:22:10Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:18Z",
+        "last_seen_at": "2026-03-03T12:22:10Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -745,12 +853,16 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "生成式大模型",
+          "图像视频复原与增强",
+          "计算成像"
+        ],
         "keywords": [],
         "bio": "张凯，南京大学苏州校区智能科学与技术学院副教授，博士生导师。2019年9月在哈尔滨工业大学获得博士学位，期间在香港理工大学交流三年，并于2020年1月至2024年2月在瑞士苏黎世联邦理工大学计算机视觉实验室从事博士后研究。2024年3月加入南京大学，专注于图像视频复原与增强等底层视觉问题的研究，论文谷歌学术引用超过37,000次，单篇最高引用超过9,000次，8篇论文引用超过1,000次。代表性工作包括DnCNN（收录于Matlab）、FFDNet（获2024年IEEE信号处理学会最佳论文奖）、SRMD、IRCNN、USRNet、DPIR、SwinIR、BSRGAN、SCUNet以及ConverseNet等。作为参与人，获得了2020年黑龙江省自然科学一等奖，2022年重庆市自然科学二等奖，以及2024年中国电子学会自然科学一等奖。目前主持包括优秀青年科学基金（海外）在内的3项纵向科研项目。欢迎对生成式大模型、图像视频复原与增强、计算成像等方向感兴趣的同学加入课题组！联系邮箱：kaizhang@nju.edu.cn个人主页：https://cszn.github.io/Github主页：https://github.com/cszn",
         "bio_en": "",
         "email": "kaizhang@nju.edu.cn",
-        "phone": "",
+        "phone": "0512-68768090",
         "office": "",
         "profile_url": "https://is.nju.edu.cn/3c/b8/c57127a670904/page.htm",
         "lab_url": "",
@@ -759,7 +871,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "哈尔滨工业大学",
+            "year": "2019",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -780,11 +899,11 @@
         "recent_updates": [],
         "source_id": "nju_is_faculty",
         "source_url": "https://is.nju.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T03:42:18Z",
+        "crawled_at": "2026-03-03T12:22:10Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:18Z",
+        "last_seen_at": "2026-03-03T12:22:10Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -815,12 +934,18 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "机器学习",
+          "模式识别",
+          "表征学习",
+          "自监督学习",
+          "弱监督学习"
+        ],
         "keywords": [],
         "bio": "陈硕，南京大学智科院副教授、博士生导师、姑苏青年教授，入选国家级高层次青年人才、市级领军人才，主要从事机器学习与模式识别研究，尤其是表征学习、自监督学习、弱监督学习方面的算法理论与应用研究。2020年博士毕业于南京理工大学，博士期间于美国匹兹堡大学公派留学联培，2020年至2025年期间历任日本理化学研究所（日本唯一综合科学研究机构）博士后研究员、研究科学家、客座科学家。已在IEEE TPAMI/TIP/TNNLS等业内顶级期刊，以及ICML/NeuIPS/ICLR等国际顶级会议上发表论文60余篇，谷歌学术累积引用4000余次，两项一作成果被收录于Springer教材书本，曾获中国电子学会优秀博士论文奖、江苏省优秀博士论文奖、吴文俊人工智能科学技术奖优秀博士论文提名、中国第二届模糊图像处理大赛初赛第一名/总决赛第二名、中国软件专业人才设计与开发大赛省区一等奖、日本文部科学省理研梅峰奖等学术或竞赛奖励。受邀20余次担任NeurIPS/ICML/ICLR/CVPR/AAAI等多个国际顶级会议的领域主席（Area Chair）或高级领域主席（Senior Area Chair），长期担任Neural Network（中科院/JCR一区SCI、CCF-B类）等国际知名期刊的编委（Action Editor）。已主持国家自然科学基金项目2项、江苏省自然科学基金项目2项。每年有硕士、博士招生名额若干。欢迎对机器学习、人工智能感兴趣，有编程基础和自驱力强的同学通过邮箱联系我，请在邮件中附上具有论文发表（以CCF-A或中科院一区IEEE/ACM Trans为佳）与竞赛获奖情况的个人简历。个人主页：https://shuochenya.github.io/",
         "bio_en": "",
         "email": "",
-        "phone": "",
+        "phone": "0512-68768090",
         "office": "",
         "profile_url": "https://is.nju.edu.cn/16/80/c57127a726656/page.htm",
         "lab_url": "",
@@ -829,7 +954,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "南京理工大学",
+            "year": "2020",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -850,11 +982,11 @@
         "recent_updates": [],
         "source_id": "nju_is_faculty",
         "source_url": "https://is.nju.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T03:42:18Z",
+        "crawled_at": "2026-03-03T12:22:10Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:18Z",
+        "last_seen_at": "2026-03-03T12:22:10Z",
         "is_active": true,
-        "data_completeness": 45
+        "data_completeness": 60
       },
       "is_new": false
     },
@@ -892,7 +1024,7 @@
         "bio": "戴望州，南京大学苏州校区智能科学与技术学院准聘副教授，博导，获国家级人才计划（青年）项目资助。2019年在南京大学取得博士学位。2019年4月-2022年7月在伦敦帝国理工学院从事博士后研究工作，2022年8月加入南京大学苏州校区。研究方向为人工智能与机器学习，目前研究兴趣是数据与知识双驱动的机器学习，代表性工作为融合逻辑推理与机器学习的反绎学习框架及算法。在人工智能与机器学习领域共发表学术论文20余篇，包括国际顶级国际会议NeurIPS、IJCAI、AAAI、ILP和期刊《Machine Learning》等。担任第4届国际学习与推理联合会（IJCLR）程序主席，曾获IBM博士生英才计划奖，长期担任TKDE、JMLR、TKDD、IJCAI、AAAI、ICML、NeurIPS、ICLR等顶级国际期刊和会议审稿人与资深程序委员。目前主持国家自然科学基金青年项目1项，江苏省前沿引领技术基础研究重大项目子课题1项。个人主页：https://daiwz.net.",
         "bio_en": "",
         "email": "",
-        "phone": "",
+        "phone": "0512-68768090",
         "office": "",
         "profile_url": "https://is.nju.edu.cn/df/bd/c57127a647101/page.htm",
         "lab_url": "",
@@ -901,7 +1033,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "南京大学",
+            "year": "2019",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -922,9 +1061,9 @@
         "recent_updates": [],
         "source_id": "nju_is_faculty",
         "source_url": "https://is.nju.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T03:42:18Z",
+        "crawled_at": "2026-03-03T12:22:10Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:18Z",
+        "last_seen_at": "2026-03-03T12:22:10Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -994,9 +1133,9 @@
         "recent_updates": [],
         "source_id": "nju_is_faculty",
         "source_url": "https://is.nju.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T03:42:18Z",
+        "crawled_at": "2026-03-03T12:22:10Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:42:18Z",
+        "last_seen_at": "2026-03-03T12:22:10Z",
         "is_active": true,
         "data_completeness": 70
       },

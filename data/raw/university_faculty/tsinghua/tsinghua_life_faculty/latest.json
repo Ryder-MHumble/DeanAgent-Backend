@@ -3,8 +3,8 @@
   "dimension": "university_faculty",
   "group": "tsinghua",
   "source_name": "清华大学生命科学学院-师资",
-  "crawled_at": "2026-03-03T03:52:48.461809+00:00",
-  "previous_crawled_at": "2026-03-01T09:21:44.238539+00:00",
+  "crawled_at": "2026-03-03T14:56:50.640415+00:00",
+  "previous_crawled_at": "2026-03-03T03:52:48.461809+00:00",
   "item_count": 122,
   "new_item_count": 0,
   "items": [
@@ -53,7 +53,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "山东师范大学生命科学院",
+            "year": "2001-2005",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "中科院上海生化细胞所",
+            "year": "2005-2011",
+            "major": "生物化学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -74,9 +87,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -127,7 +140,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "西南农业大学",
+            "year": "1979-1983",
+            "major": ""
+          },
+          {
+            "degree": "博士研究生",
+            "institution": "英国诺丁汉大学",
+            "year": "1987-1990",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -148,9 +174,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -201,7 +227,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "河北师范大学",
+            "year": "1986",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "中科院水生所",
+            "year": "1989",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "德国弗莱堡大学",
+            "year": "1996",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -222,9 +267,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -275,7 +320,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "四川大学生物工程系",
+            "year": "1988-1992",
+            "major": "遗传学专业"
+          },
+          {
+            "degree": "博士",
+            "institution": "中科院上海细胞所",
+            "year": "1995-2000",
+            "major": "发育生物学专业"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -296,9 +354,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -349,7 +407,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士学位",
+            "institution": "四川大学",
+            "year": "1987-1991",
+            "major": ""
+          },
+          {
+            "degree": "硕士学位",
+            "institution": "四川大学",
+            "year": "1991-1994",
+            "major": ""
+          },
+          {
+            "degree": "博士学位",
+            "institution": "德国海德堡大学",
+            "year": "1996-2001",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -370,9 +447,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -423,7 +500,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "南京大学生物化学系",
+            "year": "1989-1993",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "美国纽约大学医学院",
+            "year": "1998-2004",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -444,9 +534,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -497,7 +587,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "四川大学",
+            "year": "1990-1994",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "云南大学",
+            "year": "1994-1997",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "北京大学",
+            "year": "1997-2000",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -518,9 +627,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -571,7 +680,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "大同大学",
+            "year": "2005-2010",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "军事医学科学院",
+            "year": "2010-2016",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -592,9 +714,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -645,7 +767,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "安徽大学生物技术系",
+            "year": "1999-2003",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "中国科学技术大学分子细胞生物学系",
+            "year": "2003-2008",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -666,9 +801,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -719,7 +854,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "中国农业大学生物学院",
+            "year": "1997 – 2001",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "清华大学生物科学与技术系",
+            "year": "2001 – 2005",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -740,9 +888,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -793,7 +941,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "兰州大学化学系物理化学专业",
+            "year": "1981-1985",
+            "major": "物理化学专业"
+          },
+          {
+            "degree": "博士",
+            "institution": "美国加州大学伯克利分校分子与细胞生物学系",
+            "year": "1989-1993",
+            "major": "生物化学专业"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -814,9 +975,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -867,7 +1028,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "西北农林科技大学",
+            "year": "2006-2010",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "中科院上海生物化学与细胞生物学研究所",
+            "year": "2010-2015",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -888,9 +1062,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -941,7 +1115,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "曲阜师范大学生命科学学院",
+            "year": "1997-2001",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "中科院上海生物化学与细胞生物学研究所",
+            "year": "2001-2007",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -962,9 +1149,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1015,7 +1202,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "北京大学化学与分子工程学院",
+            "year": "1999-2003",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "北京大学化学与分子工程学院",
+            "year": "2003-2008",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1036,9 +1236,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1089,7 +1289,32 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "南开大学",
+            "year": "1994-1998",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "北京大学",
+            "year": "1998-2001",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "纽约大学",
+            "year": "2001-2003",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "康奈尔大学",
+            "year": "2003-2008",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1110,9 +1335,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1163,7 +1388,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "武汉大学应用物理系",
+            "year": "2002-2006",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "斯图加特大学物理系",
+            "year": "2006-2008",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "哥廷根大学生物物理系",
+            "year": "2009-2012",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1184,9 +1428,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1237,7 +1481,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "北京大学",
+            "year": "1996-2000",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "香港科技大学",
+            "year": "2000-2002",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "德克萨斯大学西南医学中心",
+            "year": "2002-2009",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1258,9 +1521,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1311,7 +1574,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "北京科技大学",
+            "year": "1998-2002",
+            "major": "材料物理系"
+          },
+          {
+            "degree": "硕士",
+            "institution": "北京科技大学",
+            "year": "2002-2005",
+            "major": "材料物理与化学系"
+          },
+          {
+            "degree": "博士",
+            "institution": "中科院物理研究所",
+            "year": "2005-2009",
+            "major": "凝聚态物理"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1332,9 +1614,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1385,7 +1667,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "上海交通大学",
+            "year": "1999-2003",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "上海交通大学",
+            "year": "2003-2007",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1406,9 +1701,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1459,7 +1754,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "四川大学",
+            "year": "2007-2011",
+            "major": "生命科学学院"
+          },
+          {
+            "degree": "博士",
+            "institution": "清华大学",
+            "year": "2011-2016",
+            "major": "生命科学学院"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1480,9 +1788,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1524,7 +1832,7 @@
         "bio": "史航 博士助理教授1992-1996年  清华大学应用物理系  学士1997-2003年  美国麻省大学艾姆赫斯特分校、美国冷泉港实验室 博士2004-2006年  美国国家医学院 博士后2006-2017年  美国洛克菲勒大学 高级研究助理2017年-至今   清华大学生命科学学院 助理教授●  研究兴趣、领域：实验室主要侧重于结构生物学和其他实验方法相结合，在分子角度揭示细胞内RNA的产生，代谢，功能和相关的调控机制，并以此为基础开发以RNA为载体的生物学和医学工具。我们还致力于开展结构细胞生物学的研究，利用多种结构生物学方法对细胞内的细胞器(例如纤毛)的生成和功能的分子机理进行解释。●  代表性论文：1. Shao W，Yang J, He M, Yu X-Y, Lee C H, Yang Z, Joyner A L, Anderson K V, Zhang J, Tsou M-F B, Shi H* & Shi S-H.(2020) Centrosome anchoring regulates progenitor properties and cortical formation.Nature 580, 106–112.2. Qi Hao, Boyue Zhang, Kangning Yuan, Hangshi* and Gunter Blobel .(2018) Electron microscopy of Chaetomium pom152 shows the assembly of ten-bead string.Cell Discovery 4, Article number :56 .3.   Li, X., Wang, J., Coutavas, E., Shi. H., Hao, Q., and Blobel, G. (2016) Structure of Niemann-Pick disease protein 1. Proc. Natl. Acad. Sci. U. S. A, 113, 8212-8217.4.  Singh, N., Blobel, G. Shi,H. *(2015) Hooking She3p onto She2p for myosin-mediated cytoplasmic mRNA  transport. Proc.Natl.Acad.Sci.U.S.A,112, 142-147.5. Shi,H.*, Singh, N., Esselborn, F. and Blobel, G. (2014) Structure of a myosin•adaptor complex and pairing by cargo. Proc. Natl.Acad.Sci.U.S.A,111, 1082-1090.●  荣誉、奖励及参加学术团体的情况：中国生物物理学会分子生物物理分会理事●  联系方式：电话：+86-10-62773562传真：+86-10-62773562邮箱：hangshi@tsinghua.edu.cn网页：http://hshi-lab.life.tsinghua.edu.cn/#/home",
         "bio_en": "",
         "email": "hangshi@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86-10-62773562",
         "office": "",
         "profile_url": "https://life.tsinghua.edu.cn/info/1033/1277.htm",
         "lab_url": "",
@@ -1533,7 +1841,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学应用物理系",
+            "year": "1992-1996",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "美国麻省大学艾姆赫斯特分校、美国冷泉港实验室",
+            "year": "1997-2003",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1554,9 +1875,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1607,7 +1928,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学精密仪器系",
+            "year": "1964-1970",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "清华大学工程物理系",
+            "year": "1978-1981",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "德国慕尼黑工业大学生物物理所",
+            "year": "1985-1988",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1628,9 +1968,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1681,7 +2021,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学生物科学与技术系",
+            "year": "1992-1996",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "清华大学生物科学与技术系",
+            "year": "1996-2001",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1702,9 +2055,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1755,7 +2108,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "中国科学技术大学",
+            "year": "2001",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "中国科学院物理研究所",
+            "year": "2005",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1776,9 +2142,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1829,7 +2195,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "复旦大学",
+            "year": "1990-1995",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "中国科学院生物物理研究所",
+            "year": "1995-2000",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1850,9 +2229,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1903,7 +2282,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学现代应用物理系",
+            "year": "1993-1997",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "清华大学生物科学与技术系",
+            "year": "2000-2003",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "美国普渡大学化学系",
+            "year": "2004-2009",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1924,9 +2322,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1977,7 +2375,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学",
+            "year": "2005-2009",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "清华大学",
+            "year": "2009-2015",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1998,9 +2409,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2051,7 +2462,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学学士学位",
+            "institution": "清华大学精仪系",
+            "year": "1992-1997",
+            "major": ""
+          },
+          {
+            "degree": "理学硕士、博士学位",
+            "institution": "清华大学生物系",
+            "year": "1997-2001",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2072,9 +2496,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2125,7 +2549,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "吉林大学",
+            "year": "1995－1999",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "中国协和医科大学",
+            "year": "1999－2003",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2146,9 +2583,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2199,7 +2636,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "华南理工大学",
+            "year": "1981-1985",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "奥地利格拉茨工业大学",
+            "year": "1986-1989",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2220,9 +2670,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2273,7 +2723,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "武汉大学",
+            "year": "1985",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "武汉大学",
+            "year": "1988",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "Pennsylvania State University",
+            "year": "1996",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2294,9 +2763,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2347,7 +2816,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学生物科学与技术系",
+            "year": "1993-1997",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "清华大学生物科学与技术系",
+            "year": "1997-2000",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "约翰霍普金斯大学分子生物物理学",
+            "year": "2000-2006",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2368,9 +2856,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2421,7 +2909,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "中国科学技术大学",
+            "year": "2010",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "芝加哥大学",
+            "year": "2015",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2442,9 +2943,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2495,7 +2996,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "浙江大学",
+            "year": "2002-2006",
+            "major": "光电信息工程学系"
+          },
+          {
+            "degree": "博士",
+            "institution": "香港科技大学",
+            "year": "2006-2011",
+            "major": "电子与计算机工程学系"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2516,9 +3030,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2569,7 +3083,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "中国科学技术大学 生命科学学院",
+            "year": "1998-2003",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "罗切斯特大学",
+            "year": "2003-2008",
+            "major": "生物物理学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2590,9 +3117,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2643,7 +3170,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "北京大学化学与分子工程学院",
+            "year": "2008",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "斯坦福大学生物工程系",
+            "year": "2014",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2664,9 +3204,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2717,7 +3257,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "中国农业大学",
+            "year": "2000-2004",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "清华大学",
+            "year": "2004-2007",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "加州大学戴维斯分校",
+            "year": "2007-2013",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2738,9 +3297,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2791,7 +3350,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "山东大学",
+            "year": "2010-2014",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "清华大学",
+            "year": "2014-2019",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2812,9 +3384,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2865,7 +3437,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学生",
+            "institution": "清华大学化学与化学工程系",
+            "year": "1973-1977",
+            "major": ""
+          },
+          {
+            "degree": "理学博士",
+            "institution": "中国科学院生物物理研究所",
+            "year": "1982-1988",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2886,9 +3471,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2939,7 +3524,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "北京大学生命科学学院",
+            "year": "1998-2002",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "香港科技大学化学工程系",
+            "year": "2004-2009",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2960,9 +3558,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -3013,7 +3611,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士学位",
+            "institution": "清华大学生物科学与技术系",
+            "year": "1991-1996",
+            "major": ""
+          },
+          {
+            "degree": "博士学位",
+            "institution": "清华大学生物科学与技术系",
+            "year": "1996-2001",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3034,9 +3645,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -3087,7 +3698,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "北京大学生命科学学院",
+            "year": "1999-2003",
+            "major": "生物科学"
+          },
+          {
+            "degree": "博士",
+            "institution": "美国加州大学洛杉矶分校",
+            "year": "2003-2008",
+            "major": "分子生物学"
+          },
+          {
+            "degree": "硕士",
+            "institution": "美国加州大学洛杉矶分校",
+            "year": "2006-2008",
+            "major": "统计学"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3108,9 +3738,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -3161,7 +3791,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学",
+            "year": "1999-2003",
+            "major": "化学工程系"
+          },
+          {
+            "degree": "博士",
+            "institution": "美国密歇根州立大学",
+            "year": "2003-2009",
+            "major": "化学工程系/生物化学及分子生物学系"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3182,9 +3825,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -3235,7 +3878,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "中国科学技术大学少年班",
+            "year": "1996-2000",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "中国科学技术大学计算机学院",
+            "year": "2000-2006",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "哥伦比亚大学生物化学和分子生物物理",
+            "year": "2006-2011",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3256,9 +3918,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -3309,7 +3971,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学",
+            "year": "2005",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "美国爱因斯坦医学院",
+            "year": "2012",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3330,9 +4005,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -3383,7 +4058,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "吉林大学",
+            "year": "2003-2008",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "中国科学院神经科学研究所",
+            "year": "2008-2014",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3404,9 +4092,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -3457,7 +4145,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "江南大学",
+            "year": "2005-2009",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "马凯特大学",
+            "year": "2009-2014",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3478,9 +4179,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -3531,7 +4232,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "南开大学",
+            "year": "2001-2005",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "南开大学",
+            "year": "2005-2008",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "爱丁堡大学",
+            "year": "2008-2013",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3552,9 +4272,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -3605,7 +4325,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "理学学士、硕士学位",
+            "institution": "中国农业大学生物学院",
+            "year": "1994-2001",
+            "major": ""
+          },
+          {
+            "degree": "细胞和发育生物学博士学位",
+            "institution": "美国加利福尼亚州大学戴维斯分校",
+            "year": "2001-2006",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3626,9 +4359,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -3679,7 +4412,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学生物科学与技术系",
+            "year": "1991-1996",
+            "major": ""
+          },
+          {
+            "degree": "遗传学博士",
+            "institution": "美国冷泉港实验室&纽约州立大学石溪分校",
+            "year": "1996-2001",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3700,9 +4446,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -3753,7 +4499,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "南京大学生物科学与技术系",
+            "year": "1999",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "南京大学生物科学与技术系",
+            "year": "2001",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "美国宾夕法尼亚州立大学",
+            "year": "2007",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3774,9 +4539,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -3827,7 +4592,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "山东大学生命科学学院",
+            "year": "2000-2004",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "中国科学院神经科学研究所",
+            "year": "2004-2010",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3848,9 +4626,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -3901,7 +4679,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学",
+            "year": "2003-2007",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "清华大学",
+            "year": "2007-2009",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "美国西北大学",
+            "year": "2009-2014",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3922,9 +4719,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -3966,7 +4763,7 @@
         "bio": "欢迎关注清华生命学院公众号人才招聘教师招聘博士后招聘其他招聘会议室预定清华大学清华新闻清华-IDG/麦戈文脑科学研究院清华大学医学院清华合成与系统生物学中心清华大学药学院清华大学生物医学测试中心膜生物学国家重点实验室清华大学蛋白质研究技术中心蛋白质科学教育部重点实验室清华大学实验动物中心生物信息学教育部重点实验室现代生命科学实验教学中心生命科学联合中心清华大学标本馆北京生物结构前沿研究中心清华学堂生命科学实验班电话：+86-10-62788604地址：北京市海淀区清华大学生命学院电子邮箱：admin-life@tsinghua.edu.cn总浏览数：版权所有©清华大学生命科学学院",
         "bio_en": "",
         "email": "zhongyithu@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86-10-62788604",
         "office": "",
         "profile_url": "https://life.tsinghua.edu.cn/info/1035/2478.htm",
         "lab_url": "",
@@ -3975,7 +4772,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学工程物理系",
+            "year": "1978-1982",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "清华大学生物科学与技术系",
+            "year": "1982-1985",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "美国爱荷华大学生物科学系",
+            "year": "1985-1991",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3996,9 +4812,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -4049,7 +4865,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "南京大学",
+            "year": "2008-2012",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "浙江大学",
+            "year": "2012-2017",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -4070,9 +4899,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -4123,7 +4952,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学",
+            "year": "2012—2016",
+            "major": "航空航天学院"
+          },
+          {
+            "degree": "学士",
+            "institution": "清华大学",
+            "year": "2013—2016",
+            "major": "应用数学系"
+          },
+          {
+            "degree": "博士",
+            "institution": "清华大学",
+            "year": "2016—2022",
+            "major": "自动化系"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -4144,9 +4992,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -4197,7 +5045,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "北京大学生命科学学院",
+            "year": "1999 – 2003",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "北京大学生命科学学院",
+            "year": "2003 – 2008",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -4218,9 +5079,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -4271,7 +5132,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "理学学士",
+            "institution": "西北农林科技大学",
+            "year": "2005-2009",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "北京协和医学院 & 北京生命科学研究所",
+            "year": "2009-2015",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -4292,9 +5166,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -4345,7 +5219,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "原浙江农业大学",
+            "year": "1992-1996",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "中国农业大学",
+            "year": "1996-2001",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -4366,9 +5253,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -4410,7 +5297,7 @@
         "bio": "欢迎关注清华生命学院公众号人才招聘教师招聘博士后招聘其他招聘会议室预定清华大学清华新闻清华-IDG/麦戈文脑科学研究院清华大学医学院清华合成与系统生物学中心清华大学药学院清华大学生物医学测试中心膜生物学国家重点实验室清华大学蛋白质研究技术中心蛋白质科学教育部重点实验室清华大学实验动物中心生物信息学教育部重点实验室现代生命科学实验教学中心生命科学联合中心清华大学标本馆北京生物结构前沿研究中心清华学堂生命科学实验班电话：+86-10-62788604地址：北京市海淀区清华大学生命学院电子邮箱：admin-life@tsinghua.edu.cn总浏览数：版权所有©清华大学生命科学学院",
         "bio_en": "",
         "email": "liu-d@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86-10-62788604",
         "office": "",
         "profile_url": "https://life.tsinghua.edu.cn/info/1036/1311.htm",
         "lab_url": "",
@@ -4419,7 +5306,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "华东师范大学",
+            "year": "1984",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "中国科学技术大学",
+            "year": "1987",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "美国普渡大学",
+            "year": "1994",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -4440,9 +5346,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -4493,7 +5399,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "天津南开大学",
+            "year": "1984-1988",
+            "major": "生物化学专业"
+          },
+          {
+            "degree": "硕士",
+            "institution": "北京中国科学院微生物学研究所",
+            "year": "1990-1992",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "中国科学院微生物学研究所与英国苏格兰作物研究所",
+            "year": "1994-1997",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -4514,9 +5439,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -4567,7 +5492,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "本科",
+            "institution": "南京农业大学",
+            "year": "1991-1995",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "原浙江农业大学",
+            "year": "1995-1998",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "浙江大学",
+            "year": "1998-2001",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -4588,9 +5532,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -4641,7 +5585,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "中国农业大学",
+            "year": "2003 – 2007",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "清华大学",
+            "year": "2007 – 2012",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -4662,9 +5619,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -4715,7 +5672,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "华中农业大学",
+            "year": "2000-2004",
+            "major": "生科院"
+          },
+          {
+            "degree": "博士",
+            "institution": "华中农业大学",
+            "year": "2004-2009",
+            "major": "生科院"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -4736,9 +5706,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -4789,7 +5759,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "中国海洋大学",
+            "year": "2007-2011",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "清华大学",
+            "year": "2011-2016",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -4810,9 +5793,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -4863,7 +5846,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "Ph.D.和MSc",
+            "institution": "中国农科院研究生院",
+            "year": "1984-1990",
+            "major": ""
+          },
+          {
+            "degree": "BSc.",
+            "institution": "湖南农学院",
+            "year": "1979-1983",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -4884,9 +5880,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -4928,7 +5924,7 @@
         "bio": "陈功 博士讲师2010-2014年 武汉大学生命科学学院，学士2015-2020年 北京师范大学生命科学学院，博士2020-2022年 清华大学生命科学学院，博士后2022年8月-现在 清华大学生命科学学院，讲师●  研究兴趣、领域：1. 鸟类的鸣声和羽饰在物种间和物种内的分化现象、分化的可能原因以及分化所起到的作用2. 鸟类鸣声的语法特征及其演化，以及鸟类鸣声与人类音乐的相似之处●  开设的课程：1. 《普通生物学》2. 《生态学》●  代表性论文：1. Zhao, K.,Chen, G., Liu, Y., Møller, A. P., and Zhang, Y. (2022). Population size assessment of Adélie penguin (Pygoscelis adeliae) chicks based on vocal activity rate index.Global Ecology and Conservation.38, e02263.2.Chen, G., Xia, C., and Zhang, Y. (2020). Individual identification of birds with complex songs: the case of green-backed flycatchers Ficedula elisae.Behavioural Processes.173, 104063.3.Chen, G., Xia, C., Dong, L., Lyu, N., and Zhang, Y. (2019). Delayed plumage maturation in green-backed flycatchers (Ficedula elisae): an evidence of female mimicry.Ethology. 125(1), 64-72.●  荣誉、奖励及参加学术团体的情况：1. 2020年清华大学-北京大学生命科学联合中心优秀博士后基金2. 中国第36次南极科学考察队考察队员3. 中国青年鸟类学家研讨会暨第14届翠鸟论坛学术报告金翠鸟奖●  联系方式：邮箱: chengong@mail.tsinghua.edu.cn通信地址：清华大学生物学馆",
         "bio_en": "",
         "email": "chengong@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86-10-62788604",
         "office": "",
         "profile_url": "https://life.tsinghua.edu.cn/info/1026/4093.htm",
         "lab_url": "",
@@ -4937,7 +5933,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "武汉大学生命科学学院",
+            "year": "2010-2014",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "北京师范大学生命科学学院",
+            "year": "2015-2020",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -4958,9 +5967,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -5002,7 +6011,7 @@
         "bio": "欢迎关注清华生命学院公众号人才招聘教师招聘博士后招聘其他招聘会议室预定清华大学清华新闻清华-IDG/麦戈文脑科学研究院清华大学医学院清华合成与系统生物学中心清华大学药学院清华大学生物医学测试中心膜生物学国家重点实验室清华大学蛋白质研究技术中心蛋白质科学教育部重点实验室清华大学实验动物中心生物信息学教育部重点实验室现代生命科学实验教学中心生命科学联合中心清华大学标本馆北京生物结构前沿研究中心清华学堂生命科学实验班电话：+86-10-62788604地址：北京市海淀区清华大学生命学院电子邮箱：admin-life@tsinghua.edu.cn总浏览数：版权所有©清华大学生命科学学院",
         "bio_en": "",
         "email": "chenjc@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86-10-62788604",
         "office": "",
         "profile_url": "https://life.tsinghua.edu.cn/info/1026/1319.htm",
         "lab_url": "",
@@ -5011,7 +6020,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学",
+            "year": "1987-1992",
+            "major": "生物科学与技术系"
+          },
+          {
+            "degree": "硕士",
+            "institution": "清华大学",
+            "year": "1992-1995",
+            "major": "生物科学与技术系"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -5032,9 +6054,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -5085,7 +6107,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "武汉大学",
+            "year": "1988",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "美国卡内基-梅隆大学",
+            "year": "1995",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -5106,9 +6141,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -5159,7 +6194,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学",
+            "year": "2010-2014",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "加利福尼亚大学圣地亚哥校区",
+            "year": "2014-2020",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -5180,9 +6228,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -5224,7 +6272,7 @@
         "bio": "杨扬 博士副教授1996-2000年   厦门大学生物系                     学  士2001-2008年   美国圣约翰大学生物系          博  士2008-2009年   美国纽约州立大学石溪分校   博士后2010-2012年   美国爱因斯坦医学院              博士后2012年－至今  清华大学生命科学学院          讲师、副教授●  开设的课程：《现代生物学导论》、《生命科学简史》、《分子生物学 英文》。●  代表性论文/著作/教材：1.《现代生物学导论》2022 机械工业出版社 ISBN：978-7-111-71275-62.《在线教学战疫记录》——清华大学在线教学指导专家组成员教学案例汇编 2021 清华大学出版社 ISBN：97873025804473. Jing Qian, Meiying Du, Yang Yang, Ying Qiu. 2024 Promoting educational equity and facilitating effective use of high-quality resources: An empirical study on improving massive open online courses completions. Engineering Education Review 2024; 2(1):37-434. Yang Yang & Ying Qiu. 2019. Teaching History of Science in General Education Classrooms. 2019 International Conference on Advanced Education and Management ICAEM2019 P788 ISBN: 978-1-60595-635-05. 杨扬 钱静 2019 如何在大课堂通识课中帮助提高学生的学习效率：雨课堂使用的探索 《清华大学教育研究增刊》ISSN：1001-45196. Yang Y, Luban J, Diaz-Griffero F.The fate of HIV-1 capsid: a biochemical assay for HIV-1 uncoating.Methods Mol Biol.2014, 1087:29-36.●  荣誉、奖励及参加学术团体的情况：2021年 郑昌学优秀教学奖2020年 在线教学指导专家组2020年 清华大学年度教学优秀奖2020年 《现代生物学导论》MOOC 国家级一流本科课程2020年 《生命科学简史》清华大学首批通识荣誉课程●  联系方式：E-mail: yyxiamen@mail.tsinghua.edu.cn",
         "bio_en": "",
         "email": "yyxiamen@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "+86-10-62788604",
         "office": "",
         "profile_url": "https://life.tsinghua.edu.cn/info/1026/1314.htm",
         "lab_url": "",
@@ -5233,7 +6281,20 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "厦门大学生物系",
+            "year": "1996-2000",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "美国圣约翰大学生物系",
+            "year": "2001-2008",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -5254,9 +6315,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -5325,9 +6386,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -5396,9 +6457,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -5467,9 +6528,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -5538,9 +6599,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -5609,9 +6670,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -5680,9 +6741,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -5751,9 +6812,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -5822,9 +6883,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -5893,9 +6954,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -5964,9 +7025,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -6035,9 +7096,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -6106,9 +7167,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -6177,9 +7238,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -6248,9 +7309,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -6319,9 +7380,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -6390,9 +7451,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -6461,9 +7522,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -6532,9 +7593,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -6603,9 +7664,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -6674,9 +7735,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -6745,9 +7806,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -6816,9 +7877,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -6887,9 +7948,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -6958,9 +8019,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -7029,9 +8090,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -7100,9 +8161,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -7171,9 +8232,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -7242,9 +8303,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -7313,9 +8374,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -7384,9 +8445,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -7455,9 +8516,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -7526,9 +8587,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -7597,9 +8658,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -7668,9 +8729,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -7739,9 +8800,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -7810,9 +8871,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -7881,9 +8942,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -7952,9 +9013,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -8023,9 +9084,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -8094,9 +9155,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -8165,9 +9226,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -8236,9 +9297,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -8307,9 +9368,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -8378,9 +9439,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -8449,9 +9510,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -8520,9 +9581,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -8591,9 +9652,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -8662,9 +9723,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -8733,9 +9794,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -8804,9 +9865,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -8875,9 +9936,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_life_faculty",
         "source_url": "https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm",
-        "crawled_at": "2026-03-03T03:51:25Z",
+        "crawled_at": "2026-03-03T14:16:52Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T03:51:25Z",
+        "last_seen_at": "2026-03-03T14:16:52Z",
         "is_active": true,
         "data_completeness": 20
       },

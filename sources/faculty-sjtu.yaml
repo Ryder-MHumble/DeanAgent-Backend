@@ -83,6 +83,13 @@ sources:
   - faculty
   - sjtu
   - se
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education
 - id: sjtu_infosec_faculty
   name: 上海交通大学网络空间安全学院-师资
   group: sjtu
@@ -111,6 +118,13 @@ sources:
   - faculty
   - sjtu
   - cybersecurity
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education
 - id: sjtu_qingyuan_faculty
   name: 上海交通大学清源研究院-研究员
   group: sjtu
@@ -142,3 +156,10 @@ sources:
   - sjtu
   - ai
   - research
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education

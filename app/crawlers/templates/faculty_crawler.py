@@ -371,41 +371,133 @@ class FacultyCrawler(BaseCrawler):
                 # Validate research_areas — clear if it looks like a nav menu
                 research_areas = validate_research_areas(research_areas)
 
-                # --- Optional: LLM enrichment (on-demand when fields are missing) ---
+                # --- Optional: LLM data cleaning (extract mixed/unstructured fields) ---
+                phone_text = ""
+                education_records: list[dict] = []
+                work_experience_records: list[dict] = []
+                award_records: list[dict] = []
+                publication_records: list[dict] = []
                 academic_titles: list[str] = []
                 is_academician = False
                 phd_institution = ""
                 phd_year = ""
-                if LLM_AVAILABLE and self.config.get("enable_llm", False):
-                    # Only call LLM if key fields are missing after CSS parsing
-                    if not bio_text or not research_areas or not position_text:
-                        try:
-                            llm_result = await extract_faculty_fields_with_llm(
-                                raw_name=name_text,
-                                raw_bio=bio_text,
-                                raw_position=position_text,
-                                detail_html_text=detail_full_text,
-                            )
-                            # Fill missing fields only (don't overwrite good CSS results)
+
+                # LLM extraction: two modes
+                # 1. llm_extraction=true + llm_fields: extract specific fields using LLM
+                # 2. enable_llm=true: legacy mode, fill missing fields only
+                if LLM_AVAILABLE and (self.config.get("llm_extraction") or self.config.get("enable_llm")):
+                    llm_fields_to_extract = self.config.get("llm_fields", [])
+                    llm_provider = self.config.get("llm_provider", "openrouter")
+                    llm_model = self.config.get("llm_model", "deepseek/deepseek-chat")
+
+                    try:
+                        llm_result = await extract_faculty_fields_with_llm(
+                            raw_name=name_text,
+                            raw_bio=bio_text,
+                            raw_position=position_text,
+                            detail_html_text=detail_full_text,
+                            fields_to_extract=llm_fields_to_extract if llm_fields_to_extract else None,
+                            llm_provider=llm_provider,
+                            llm_model=llm_model,
+                        )
+
+                        # Extract phone
+                        if "phone" in (llm_fields_to_extract or []):
+                            phone_text = llm_result.get("phone", "")
+
+                        # Extract research areas
+                        if "research_areas" in (llm_fields_to_extract or []):
+                            llm_ra = llm_result.get("research_areas", [])
+                            if llm_ra and not research_areas:
+                                research_areas = llm_ra if isinstance(llm_ra, list) else parse_research_areas(str(llm_ra))
+
+                        # Extract education
+                        if "education" in (llm_fields_to_extract or []):
+                            for edu in llm_result.get("education", []):
+                                if isinstance(edu, dict):
+                                    education_records.append(edu)
+
+                        # Extract work experience
+                        if "work_experience" in (llm_fields_to_extract or []):
+                            for work in llm_result.get("work_experience", []):
+                                if isinstance(work, dict):
+                                    work_experience_records.append(work)
+
+                        # Extract awards
+                        if "awards" in (llm_fields_to_extract or []):
+                            for award in llm_result.get("awards", []):
+                                if isinstance(award, dict):
+                                    award_records.append(award)
+
+                        # Extract publications
+                        if "publications" in (llm_fields_to_extract or []):
+                            for pub in llm_result.get("publications", []):
+                                if isinstance(pub, dict):
+                                    publication_records.append(pub)
+
+                        # Legacy mode: fill missing fields
+                        if self.config.get("enable_llm") and not self.config.get("llm_extraction"):
                             if not name_text:
                                 name_text = llm_result.get("name", "")
                             if not bio_text:
                                 bio_text = llm_result.get("bio", "")
                             if not position_text:
                                 position_text = llm_result.get("position", "")
-                            if not research_areas:
-                                research_areas = llm_result.get("research_areas", [])
                             if not email_text:
                                 email_text = llm_result.get("email", "")
-                            # Map LLM-only fields
                             academic_titles = llm_result.get("academic_titles", [])
                             is_academician = llm_result.get("is_academician", False)
                             phd_institution = llm_result.get("phd_institution", "")
                             phd_year = llm_result.get("phd_year", "")
-                        except Exception as e:
-                            logger.warning("LLM enrichment failed for %s: %s", name_text, e)
+
+                        logger.debug("LLM extraction completed for %s", name_text)
+                    except Exception as e:
+                        logger.warning("LLM extraction failed for %s: %s", name_text, e)
 
                 # --- Build ScholarRecord ---
+                # Convert education records from LLM extraction
+                from app.schemas.scholar import EducationRecord, AwardRecord, PublicationRecord
+                education_list = []
+                for edu in education_records:
+                    education_list.append(
+                        EducationRecord(
+                            degree=edu.get("degree", ""),
+                            institution=edu.get("institution", ""),
+                            year=edu.get("year", ""),
+                            major=edu.get("major", ""),
+                        )
+                    )
+
+                # Convert award records from LLM extraction
+                award_list = []
+                for award in award_records:
+                    award_list.append(
+                        AwardRecord(
+                            title=award.get("title", ""),
+                            year=award.get("year", ""),
+                            level=award.get("level", ""),
+                            grantor=award.get("grantor", ""),
+                            description=award.get("description", ""),
+                            added_by="crawler",
+                        )
+                    )
+
+                # Convert publication records from LLM extraction
+                pub_list = []
+                for pub in publication_records:
+                    pub_list.append(
+                        PublicationRecord(
+                            title=pub.get("title", ""),
+                            venue=pub.get("venue", ""),
+                            year=pub.get("year", ""),
+                            authors=pub.get("authors", ""),
+                            url=pub.get("url", ""),
+                            citation_count=-1,
+                            is_corresponding=False,
+                            added_by="crawler",
+                        )
+                    )
+
                 record = ScholarRecord(
                     # 基本信息
                     name=name_text,
@@ -424,8 +516,14 @@ class FacultyCrawler(BaseCrawler):
                     # 教育背景
                     phd_institution=phd_institution,
                     phd_year=phd_year,
+                    education=education_list,
                     # 联系方式
                     email=email_text,
+                    phone=phone_text,
+                    # 代表性论文
+                    representative_publications=pub_list,
+                    # 奖励
+                    awards=award_list,
                     # 主页链接
                     profile_url=profile_url,
                     # 元信息

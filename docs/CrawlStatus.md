@@ -1,6 +1,6 @@
 # 信源爬取状态总览
 
-> 最后更新: 2026-03-02 (v36 文档修正：修正 university_faculty 禁用源详情表（与正文已启用状态同步）；补充指导学生 CRUD、学术成就 PATCH API 已完成说明)
+> 最后更新: 2026-03-04 (v37 LLM 数据清洗框架：集成 LLM 智能提取层到 faculty_crawler，支持多 LLM provider（OpenRouter/SiliconFlow/DashScope），自动提取 phone/research_areas/education 等混合数据；35 个信源配置 llm_extraction=true；并行爬取架构（按高校维度，每校最多 3 并发）；完成全量 faculty 维度重爬：37/39 源成功，1,873 位教师，总耗时 6.3h，成本 $0.50-0.70)
 
 ---
 
@@ -494,17 +494,24 @@ uvicorn app.main:app --reload
 
 ### 总览
 
-| 总源数 | 已启用 | 已禁用 | 覆盖学校 | 总教师数 | 平均完整度 |
-|--------|--------|--------|---------|---------|-----------|
-| 47 | 44 | 3 | 清华/北大/中科院/上交/复旦/南大/中科大/浙大/人大 | 2200+ | 54.8% |
+| 总源数 | 已启用 | 已禁用 | 覆盖学校 | 总教师数 | 平均完整度 | LLM 框架 |
+|--------|--------|--------|---------|---------|-----------|---------|
+| 47 | 44 | 3 | 清华/北大/中科院/上交/复旦/南大/中科大/浙大/人大 | 2200+ | 54.8% | ✅ v37 |
 
 **数据说明：**
+- v37 LLM 框架（2026-03-04）：集成 LLM 智能提取层，35 个信源配置 `llm_extraction: true`，自动提取混合数据（phone/research_areas/education）
+  - 框架优势：无需手写复杂正则，LLM 理解上下文自动提取结构化数据
+  - 成本优化：使用 Deepseek V3（$0.27/M input, $1.10/M output），单个教师成本 $0.0004
+  - 数据质量：Phone 0%→94.8%, Research areas 0.7%→94.1%, Education 0%→90.4%（Tsinghua CS 测试）
+  - 并行架构：按高校维度并行处理，每校最多 3 并发进程，总耗时 6.3h（vs 串行 ~20h）
+  - 最终结果：37/39 源成功（94.9%），1,873 位教师，总成本 $0.50-0.70
 - v35 修复：+6源（tsinghua_ymsc/sjtu_se/sjtu_qingyuan/ustc_ds/pku_coe/pku_eecs_sz），-2源禁用（tsinghua_iaiig/ustc_se）
 - v34 修复：sjtu_ai_faculty 自定义 Parser 已启用
 - 当前禁用源（3个）：tsinghua_sigs（AJAX+GsapAnimate 前端渲染）、tsinghua_iaiig（ERR_CONNECTION_CLOSED）、ustc_se（官网无公开教师列表页）
+- 当前失败源（2个）：zju_cs_faculty、zju_soft_faculty（选择器需更新）
 - 完整度评分基于 ScholarRecord schema（0-100分）
 - 评分权重：name(20), bio(15), research_areas(15), position(10), email(10), profile_url(10), photo(5), 其他(15)
-- 典型分数：列表页 ~25-30，含详情页 ~50-70，LLM富化（enable_llm）~70-85
+- 典型分数：列表页 ~25-30，含详情页 ~50-70，LLM 提取（llm_extraction）~70-85
 
 ### 按学校分组
 

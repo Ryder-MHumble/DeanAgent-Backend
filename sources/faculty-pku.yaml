@@ -30,6 +30,13 @@ sources:
     heading_sections:
       bio: 个人简介
       research_areas: 研究方向
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education
 - id: pku_cis_faculty
   name: 北京大学智能学院-专职教师
   group: pku
@@ -59,6 +66,13 @@ sources:
     heading_sections:
       bio: 个人简介
       research_areas: 研究方向
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education
 - id: pku_icst_faculty
   name: 北京大学王选计算机研究所-学术团队
   group: pku
@@ -92,6 +106,13 @@ sources:
   - faculty
   - pku
   - cs
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education
 - id: pku_ic_faculty
   name: 北京大学集成电路学院-专职教师
   group: pku
@@ -120,6 +141,13 @@ sources:
   - faculty
   - pku
   - ic
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education
 - id: pku_ss_faculty
   name: 北京大学软件与微电子学院-师资团队
   group: pku
@@ -145,6 +173,13 @@ sources:
   - faculty
   - pku
   - se
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education
 - id: pku_cfcs_faculty
   name: 北京大学前沿计算研究中心-教学科研人员
   group: pku
@@ -171,6 +206,13 @@ sources:
   - pku
   - cs
   - ai
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education
 - id: pku_math_faculty
   name: 北京大学数学学院-师资
   group: pku
@@ -204,6 +246,13 @@ sources:
   - faculty
   - pku
   - math
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education
 - id: pku_eecs_sz_faculty
   name: 北京大学信息工程学院（深圳）-师资
   group: pku
@@ -234,6 +283,13 @@ sources:
   - pku
   - cs
   - shenzhen
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education
 - id: pku_coe_faculty
   name: 北京大学工学院-师资
   group: pku
@@ -264,3 +320,10 @@ sources:
   - faculty
   - pku
   - engineering
+  llm_extraction: true
+  llm_provider: openrouter
+  llm_model: deepseek/deepseek-chat
+  llm_fields:
+  - phone
+  - research_areas
+  - education

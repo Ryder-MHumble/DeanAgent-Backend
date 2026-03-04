@@ -1,6 +1,6 @@
 # 后续任务清单
 
-> 最后更新: 2026-03-02 (v36: faculty API 功能补全 — 指导学生 CRUD（5 个端点）、学术成就 PATCH、ScholarRecord 新增 representative_publications/patents/awards 三个成就字段；文档修正 university_faculty 禁用源统计（44/47 启用）)
+> 最后更新: 2026-03-04 (v37: LLM 数据清洗框架完成 — 集成 LLM 智能提取层到 faculty_crawler，35 个信源配置 llm_extraction=true，并行爬取架构（按高校维度，每校最多 3 并发），完成全量 faculty 维度重爬：37/39 源成功，1,873 位教师，总耗时 6.3h，成本 $0.50-0.70；Zhejiang 2 源选择器需更新)
 > 基于前端 (Dean-Agent) 需求反推的优先级排序
 
 ---
@@ -51,8 +51,8 @@
 - [ ] Semantic Scholar API 扩展 — 支持 KOL 追踪 (hIndex, 论文数)
 - [ ] ArXiv affiliation 变更检测 — 人才回流信号
 - [ ] IT桔子/企查查 — 更全面投融资数据
-- [ ] 补充高校 HR/组织部页面 (15 所, snapshot 模式)
-- [x] 补充 AI 院系官网 — v22→v35: 新建 university_faculty 维度，FacultyCrawler 模板；共 47 个信源，44 个已启用（2200+位教师），覆盖清华/北大/中科院/上交/复旦/南大/中科大/浙大/人大；11 个自定义 Parser 含 sjtu_cs/sjtu_ai/iscas/zju_cyber 等
+- [x] 补充高校 HR/组织部页面 (15 所, snapshot 模式)
+- [x] 补充 AI 院系官网 — v22→v37: 新建 university_faculty 维度，FacultyCrawler 模板；共 47 个信源，44 个已启用（2200+位教师），覆盖清华/北大/中科院/上交/复旦/南大/中科大/浙大/人大；11 个自定义 Parser 含 sjtu_cs/sjtu_ai/iscas/zju_cyber 等；v37 集成 LLM 智能提取层（35 源配置 llm_extraction=true），并行爬取架构，完成全量重爬（37/39 源成功，1,873 位教师）
 - [x] faculty API 13 端点 — 师资列表/详情/统计/信源、基础信息/关系字段/动态备注/学术成就 PATCH、指导学生 CRUD（5 端点）
 - [x] ScholarRecord 学术成就字段 — representative_publications / patents / awards，爬虫+用户双来源
 - [ ] IEEE Fellow / ACM Fellow 年度公告源（awards.acm.org / ieee.org 为静态年度页面，非持续更新源）
