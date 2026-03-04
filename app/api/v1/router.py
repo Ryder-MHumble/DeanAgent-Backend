@@ -1,6 +1,17 @@
 from fastapi import APIRouter
 
-from app.api.v1 import articles, dimensions, faculty, health, llm_tracking, sentiment, sources
+from app.api.v1 import (
+    aminer,
+    articles,
+    dimensions,
+    events,
+    health,
+    institutions,
+    llm_tracking,
+    scholars,
+    sentiment,
+    sources,
+)
 from app.api.v1.intel.router import intel_router
 
 v1_router = APIRouter(prefix="/api/v1")
@@ -12,4 +23,7 @@ v1_router.include_router(dimensions.router, prefix="/dimensions", tags=["dimensi
 v1_router.include_router(intel_router, prefix="/intel", tags=["intel"])
 v1_router.include_router(sentiment.router, prefix="/sentiment", tags=["sentiment"])
 v1_router.include_router(llm_tracking.router)
-v1_router.include_router(faculty.router, prefix="/faculty", tags=["faculty"])
+v1_router.include_router(scholars.router, prefix="/scholars", tags=["scholars"])
+v1_router.include_router(institutions.router, prefix="/institutions", tags=["institutions"])
+v1_router.include_router(events.router, prefix="/events", tags=["events"])
+v1_router.include_router(aminer.router, prefix="/aminer", tags=["aminer"])

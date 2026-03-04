@@ -89,7 +89,7 @@ async def main():
     # Filter for enabled faculty sources
     faculty_sources = [
         src for src in all_sources
-        if src.get("dimension") == "university_faculty"
+        if src.get("dimension") == "scholars"
         and src.get("is_enabled", False)
     ]
 

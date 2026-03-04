@@ -33,7 +33,7 @@ CREATED_AT = datetime.now(timezone.utc).isoformat()
 def _build_name_map() -> dict[str, str]:
     """Return {faculty_name: url_hash} from all university_faculty raw JSON files."""
     name_map: dict[str, str] = {}
-    faculty_dir = DATA_DIR / "raw" / "university_faculty"
+    faculty_dir = DATA_DIR / "raw" / "scholars"
     if not faculty_dir.exists():
         print(f"[WARN] Faculty dir not found: {faculty_dir}", file=sys.stderr)
         return name_map

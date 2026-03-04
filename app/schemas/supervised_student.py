@@ -1,4 +1,4 @@
-"""Pydantic schemas for supervised students (/api/v1/faculty/{url_hash}/students).
+"""Pydantic schemas for supervised students (/api/v1/scholars/{url_hash}/students).
 
 These represent students in joint training programs, where the student's home
 university is the original university (e.g. Peking University), and the advisor
@@ -31,7 +31,7 @@ class SupervisedStudentBase(BaseModel):
 
 
 class SupervisedStudentCreate(SupervisedStudentBase):
-    """Request body for POST /faculty/{url_hash}/students."""
+    """Request body for POST /scholars/{url_hash}/students."""
 
     added_by: str = Field(
         default="",
@@ -40,7 +40,7 @@ class SupervisedStudentCreate(SupervisedStudentBase):
 
 
 class SupervisedStudentUpdate(BaseModel):
-    """Request body for PATCH /faculty/{url_hash}/students/{student_id}.
+    """Request body for PATCH /scholars/{url_hash}/students/{student_id}.
 
     All fields are optional — None means "do not modify".
     """

@@ -1,23 +1,16 @@
-"""Pydantic schemas for the Faculty API (/api/v1/faculty/)."""
+"""Pydantic schemas for the Scholar API (/api/v1/scholars/)."""
 from __future__ import annotations
 
 from typing import Any
 
-from pydantic import BaseModel, Field  # noqa: F401
-
-from app.schemas.scholar import (
-    AwardRecord,
-    EducationRecord,
-    PatentRecord,
-    PublicationRecord,
-)
+from pydantic import BaseModel, Field
 
 # ---------------------------------------------------------------------------
 # List item (lightweight, for GET /faculty/)
 # ---------------------------------------------------------------------------
 
 
-class FacultyListItem(BaseModel):
+class ScholarListItem(BaseModel):
     """Single row in the faculty list — key fields only."""
 
     url_hash: str = Field(description="师资唯一 ID (url_hash of profile_url)")
@@ -42,80 +35,22 @@ class FacultyListItem(BaseModel):
     crawled_at: str = Field(default="", description="最后爬取时间 ISO8601")
 
 
-class FacultyListResponse(BaseModel):
+class ScholarListResponse(BaseModel):
     """Response for GET /faculty/."""
 
     total: int = Field(description="符合条件的总师资数")
     page: int = Field(description="当前页码")
     page_size: int = Field(description="每页条数")
     total_pages: int = Field(description="总页数")
-    items: list[FacultyListItem]
+    items: list[ScholarListItem]
 
 
 # ---------------------------------------------------------------------------
-# Education / DynamicUpdate sub-models (mirrors scholar.py for API output)
+# Detail response (full FacultyRecord + user annotations merged)
 # ---------------------------------------------------------------------------
 
 
-class EducationRecordOut(BaseModel):
-    degree: str = ""
-    institution: str = ""
-    year: str = ""
-    major: str = ""
-
-
-class DynamicUpdateOut(BaseModel):
-    update_type: str = ""
-    title: str = ""
-    content: str = ""
-    source_url: str = ""
-    published_at: str = ""
-    crawled_at: str = ""
-    added_by: str = ""
-
-
-class PublicationRecordOut(BaseModel):
-    """Output version of PublicationRecord for API responses."""
-
-    title: str = ""
-    venue: str = ""
-    year: str = ""
-    authors: str = ""
-    url: str = ""
-    citation_count: int = -1
-    is_corresponding: bool = False
-    added_by: str = ""
-
-
-class PatentRecordOut(BaseModel):
-    """Output version of PatentRecord for API responses."""
-
-    title: str = ""
-    patent_no: str = ""
-    year: str = ""
-    inventors: str = ""
-    patent_type: str = ""
-    status: str = ""
-    added_by: str = ""
-
-
-class AwardRecordOut(BaseModel):
-    """Output version of AwardRecord for API responses."""
-
-    title: str = ""
-    year: str = ""
-    level: str = ""
-    grantor: str = ""
-    description: str = ""
-    added_by: str = ""
-
-
-# ---------------------------------------------------------------------------
-# Detail response (full ScholarRecord + user annotations merged)
-# ---------------------------------------------------------------------------
-
-
-class FacultyDetailResponse(BaseModel):
+class ScholarDetailResponse(BaseModel):
     """Full faculty record: crawled fields + user annotations merged."""
 
     # Identity
@@ -153,16 +88,16 @@ class FacultyDetailResponse(BaseModel):
     # Education
     phd_institution: str
     phd_year: str
-    education: list[EducationRecordOut]
+    education: list[dict[str, Any]]
     # Metrics
     publications_count: int
     h_index: int
     citations_count: int
     metrics_updated_at: str
     # Achievements [crawler + user-managed]
-    representative_publications: list[PublicationRecordOut]
-    patents: list[PatentRecordOut]
-    awards: list[AwardRecordOut]
+    representative_publications: list[dict[str, Any]]
+    patents: list[dict[str, Any]]
+    awards: list[dict[str, Any]]
     # Institute relations [user-managed]
     is_advisor_committee: bool
     is_adjunct_supervisor: bool
@@ -176,7 +111,7 @@ class FacultyDetailResponse(BaseModel):
     relation_updated_by: str
     relation_updated_at: str
     # Dynamic updates (crawler + user)
-    recent_updates: list[DynamicUpdateOut]
+    recent_updates: list[dict[str, Any]]
     # Meta
     source_url: str
     crawled_at: str
@@ -191,7 +126,7 @@ class FacultyDetailResponse(BaseModel):
 # ---------------------------------------------------------------------------
 
 
-class FacultySourceItem(BaseModel):
+class ScholarSourceItem(BaseModel):
     id: str
     name: str
     group: str
@@ -202,9 +137,9 @@ class FacultySourceItem(BaseModel):
     last_crawl_at: str | None
 
 
-class FacultySourcesResponse(BaseModel):
+class ScholarSourcesResponse(BaseModel):
     total: int
-    items: list[FacultySourceItem]
+    items: list[ScholarSourceItem]
 
 
 # ---------------------------------------------------------------------------
@@ -212,7 +147,7 @@ class FacultySourcesResponse(BaseModel):
 # ---------------------------------------------------------------------------
 
 
-class FacultyStatsResponse(BaseModel):
+class ScholarStatsResponse(BaseModel):
     total: int = Field(description="总师资数")
     academicians: int = Field(description="院士数")
     potential_recruits: int = Field(description="潜在招募对象数")
@@ -239,7 +174,7 @@ class FacultyStatsResponse(BaseModel):
 
 
 class InstituteRelationUpdate(BaseModel):
-    """PATCH /faculty/{url_hash}/relation — all fields optional."""
+    """PATCH /scholars/{url_hash}/relation — all fields optional."""
 
     is_advisor_committee: bool | None = Field(default=None, description="顾问委员会成员")
     is_adjunct_supervisor: bool | None = Field(default=None, description="兼职导师")
@@ -257,7 +192,7 @@ class InstituteRelationUpdate(BaseModel):
 
 
 class UserUpdateCreate(BaseModel):
-    """POST /faculty/{url_hash}/updates — add a user-authored dynamic update."""
+    """POST /scholars/{url_hash}/updates — add a user-authored dynamic update."""
 
     update_type: str = Field(description="动态类型（任意字符串，如 general/major_project/award 等）")
     title: str = Field(description="标题/摘要")
@@ -268,15 +203,15 @@ class UserUpdateCreate(BaseModel):
 
 
 class AchievementUpdate(BaseModel):
-    """PATCH /faculty/{url_hash}/achievements — update academic achievements."""
+    """PATCH /scholars/{url_hash}/achievements — update academic achievements."""
 
-    representative_publications: list[PublicationRecord] | None = Field(
+    representative_publications: list[dict[str, Any]] | None = Field(
         default=None, description="代表性论文列表（传入则完全替换，None 不修改）"
     )
-    patents: list[PatentRecord] | None = Field(
+    patents: list[dict[str, Any]] | None = Field(
         default=None, description="专利列表（传入则完全替换，None 不修改）"
     )
-    awards: list[AwardRecord] | None = Field(
+    awards: list[dict[str, Any]] | None = Field(
         default=None, description="获奖/荣誉列表（传入则完全替换，None 不修改）"
     )
     updated_by: str = Field(
@@ -284,12 +219,12 @@ class AchievementUpdate(BaseModel):
     )
 
 
-class FacultyBasicUpdate(BaseModel):
-    """PATCH /faculty/{url_hash}/basic — update basic faculty information.
+class ScholarBasicUpdate(BaseModel):
+    """PATCH /scholars/{url_hash}/basic — update basic faculty information.
 
     All fields are optional. None means "do not modify" (not clear/empty).
     Pass empty list [] to clear a list field; pass non-empty list to replace entirely.
-    Directly modifies the raw JSON file (data/raw/university_faculty/.../latest.json).
+    Directly modifies the raw JSON file (data/raw/scholars/.../latest.json).
     """
 
     # 基本信息
@@ -328,6 +263,6 @@ class FacultyBasicUpdate(BaseModel):
     # 教育经历
     phd_institution: str | None = Field(default=None, description="博士毕业院校")
     phd_year: str | None = Field(default=None, description="博士毕业年份")
-    education: list[EducationRecord] | None = Field(default=None, description="完整教育经历列表")
+    education: list[dict[str, Any]] | None = Field(default=None, description="完整教育经历列表")
 
     updated_by: str = Field(default="user", description="修改人标识（默认 'user'）")

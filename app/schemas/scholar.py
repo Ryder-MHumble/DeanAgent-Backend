@@ -8,7 +8,7 @@ Field design principles:
   extract extra field → insert into scholars table directly
 
 Data source labels (in field docstrings):
-  [爬虫]    Populated by FacultyCrawler automatically
+  [爬虫]    Populated by ScholarCrawler automatically
   [富化]    Populated by LLM enrichment or external API (Google Scholar/DBLP)
   [用户]    Manually maintained by internal staff — never overwritten by crawler
 
@@ -173,7 +173,7 @@ class DynamicUpdate(BaseModel):
 class ScholarRecord(BaseModel):
     """Unified schema for a university faculty / researcher record.
 
-    Stored as CrawledItem.extra (model_dump()) by FacultyCrawler.
+    Stored as CrawledItem.extra (model_dump()) by ScholarCrawler.
     Designed for forward-compatibility with a relational scholars table.
 
     Two sections require special handling:

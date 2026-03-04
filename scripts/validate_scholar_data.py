@@ -20,7 +20,7 @@ def validate_source(source_id: str) -> bool:
         True if validation passes (avg completeness >= 60), False otherwise
     """
     # Find the latest.json file for this source
-    data_root = Path(__file__).resolve().parent.parent / "data" / "raw" / "university_faculty"
+    data_root = Path(__file__).resolve().parent.parent / "data" / "raw" / "scholars"
 
     # Search all subdirectories for matching source_id
     json_files = list(data_root.rglob(f"{source_id}/latest.json"))

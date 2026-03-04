@@ -39,6 +39,9 @@ class Settings(BaseSettings):
     TWITTER_API_KEY: str = ""
     TWITTER_API_PROXY: str = ""  # e.g. http://127.0.0.1:7890
 
+    # AMiner API
+    AMINER_API_KEY: str = ""
+
     # Pipeline schedule (UTC)
     PIPELINE_CRON_HOUR: int = 6
     PIPELINE_CRON_MINUTE: int = 0

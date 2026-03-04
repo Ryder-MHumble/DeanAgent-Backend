@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Enrich faculty data using LLM to extract and refine fields.
 
-This script reads raw faculty data from data/raw/university_faculty/,
+This script reads raw faculty data from data/raw/scholars/,
 uses LLM to intelligently extract and map fields, and saves enriched
-data to data/processed/university_faculty/.
+data to data/processed/scholars/.
 
 Usage:
     python scripts/enrich_faculty_data.py                    # Process all sources
@@ -22,7 +22,7 @@ from typing import Any
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from app.crawlers.utils.faculty_llm_extractor import extract_faculty_fields_with_llm
+from app.crawlers.utils.scholar_llm_extractor import extract_faculty_fields_with_llm
 from app.schemas.scholar import ScholarRecord, compute_scholar_completeness
 
 logging.basicConfig(
@@ -112,7 +112,7 @@ async def enrich_source(source_id: str, dry_run: bool = False, force: bool = Fal
         Dict with processing stats
     """
     # Find raw data file
-    raw_dir = Path("data/raw/university_faculty")
+    raw_dir = Path("data/scholars")
     raw_files = list(raw_dir.rglob(f"{source_id}/latest.json"))
 
     if not raw_files:
@@ -185,7 +185,7 @@ async def main():
         print(f"\nResult: {result}")
     else:
         # Process all sources
-        raw_dir = Path("data/raw/university_faculty")
+        raw_dir = Path("data/scholars")
         source_dirs = [d for d in raw_dir.rglob("*/latest.json")]
 
         print(f"\nFound {len(source_dirs)} faculty sources to process\n")
