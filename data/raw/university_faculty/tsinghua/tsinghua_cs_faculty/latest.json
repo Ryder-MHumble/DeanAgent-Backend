@@ -3,10 +3,10 @@
   "dimension": "university_faculty",
   "group": "tsinghua",
   "source_name": "清华大学计算机系-师资",
-  "crawled_at": "2026-03-03T14:38:23.303179+00:00",
-  "previous_crawled_at": "2026-03-03T10:49:07.089959+00:00",
-  "item_count": 135,
-  "new_item_count": 0,
+  "crawled_at": "2026-03-04T07:16:12.500009+00:00",
+  "previous_crawled_at": "2026-03-03T14:38:23.303179+00:00",
+  "item_count": 136,
+  "new_item_count": 1,
   "items": [
     {
       "title": "蔡懿慈",
@@ -38,7 +38,12 @@
         "research_areas": [
           "集成电路计算机辅助设计软件",
           "算法及软件系统",
-          "微电子与计算机交叉领域中的IC设计优化算法与大规模数值计算分析"
+          "IC设计优化算法与大规模数值计算分析",
+          "EDA",
+          "IC设计中的互连线时延和噪声分析优化",
+          "大规模IC供电网络并行分析",
+          "低功耗物理设计优化",
+          "纳米工艺下面向可制造性（DFM）设计优化"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
@@ -93,9 +98,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -186,9 +191,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -224,7 +229,8 @@
         "research_areas": [
           "情境感知的数据管理与服务",
           "数据挖掘与仓库",
-          "分布式面向对象数据库管理系统"
+          "分布式面向对象数据库管理系统",
+          "智能空间情境感知的数据安全管理与服务"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
@@ -273,9 +279,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -367,9 +373,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -459,9 +465,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -542,9 +548,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -622,9 +628,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -660,7 +666,11 @@
         "research_areas": [
           "知识图谱",
           "大模型",
-          "人工智能"
+          "人工智能",
+          "知识工程",
+          "知识表示",
+          "知识获取",
+          "知识服务"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
@@ -715,9 +725,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -802,9 +812,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -895,9 +905,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -989,9 +999,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -1028,13 +1038,20 @@
           "数据挖掘",
           "机器学习",
           "人工智能",
-          "网络科学"
+          "网络科学",
+          "图机器学习",
+          "预训练模型",
+          "社交网络",
+          "图神经网络预训练",
+          "异构图表示学习",
+          "网络嵌入理论",
+          "快速算法"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "yuxiaod@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1112/5837.htm",
         "lab_url": "",
@@ -1071,9 +1088,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -1125,15 +1142,15 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "工学学士",
-            "institution": "北京邮电大学",
-            "year": "2006-2010",
-            "major": "计算机科学与技术"
-          },
-          {
             "degree": "工学博士",
             "institution": "清华大学",
             "year": "2010-2016",
+            "major": "计算机科学与技术"
+          },
+          {
+            "degree": "工学学士",
+            "institution": "北京邮电大学",
+            "year": "2006-2010",
             "major": "计算机科学与技术"
           }
         ],
@@ -1157,9 +1174,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -1201,7 +1218,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "jnwang@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1112/6905.htm",
         "lab_url": "",
@@ -1244,9 +1261,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -1324,9 +1341,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -1367,7 +1384,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "jpan@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1113/6640.htm",
         "lab_url": "",
@@ -1416,9 +1433,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -1461,7 +1478,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "jchencs@mail.tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1107/5688.htm",
         "lab_url": "",
@@ -1510,9 +1527,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -1547,13 +1564,16 @@
         "is_academician": false,
         "research_areas": [
           "存储系统",
-          "分布式系统"
+          "分布式系统",
+          "计算系统虚拟化",
+          "大规模分布式数据处理",
+          "自然语言信息处理"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "chenkang@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1107/3939.htm",
         "lab_url": "",
@@ -1596,9 +1616,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -1633,13 +1653,16 @@
         "is_academician": false,
         "research_areas": [
           "并行处理",
-          "编程系统"
+          "编程系统",
+          "高性能计算编程模型和编译系统",
+          "图计算系统",
+          "大数据处理系统"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "cwg@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1107/3513.htm",
         "lab_url": "",
@@ -1682,9 +1705,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -1727,7 +1750,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "lzl73@mail.tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1107/3511.htm",
         "lab_url": "",
@@ -1770,9 +1793,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -1863,9 +1886,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -1909,7 +1932,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "shujw@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1107/3510.htm",
         "lab_url": "",
@@ -1958,9 +1981,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -1995,7 +2018,10 @@
         "is_academician": false,
         "research_areas": [
           "计算机体系结构",
-          "处理器安全"
+          "处理器安全",
+          "分布式计算与存储",
+          "智能加速与应用",
+          "安全硬件与安全系统"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
@@ -2050,9 +2076,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -2143,9 +2169,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -2178,15 +2204,12 @@
         "position": "教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [
-          "大规模科学计算",
-          "量化不确定性分析"
-        ],
+        "research_areas": [],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "xuewei@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1107/5272.htm",
         "lab_url": "",
@@ -2195,26 +2218,7 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [
-          {
-            "degree": "工学学士",
-            "institution": "清华大学",
-            "year": "1998",
-            "major": "电机工程与应用电子技术系"
-          },
-          {
-            "degree": "工学学士",
-            "institution": "清华大学",
-            "year": "1998",
-            "major": "环境科学与工程系"
-          },
-          {
-            "degree": "工学博士",
-            "institution": "清华大学",
-            "year": "2003",
-            "major": "电机工程与应用电子技术系"
-          }
-        ],
+        "education": [],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -2235,11 +2239,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
-        "data_completeness": 85
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -2327,9 +2331,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -2365,13 +2369,14 @@
         "research_areas": [
           "并行计算",
           "编程语言与编译器",
-          "性能评测"
+          "性能评测",
+          "编程模型"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "zhaijidong@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1107/5621.htm",
         "lab_url": "",
@@ -2414,9 +2419,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -2500,9 +2505,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -2574,9 +2579,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -2661,9 +2666,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -2750,9 +2755,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -2794,7 +2799,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "judapeng@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1108/3942.htm",
         "lab_url": "",
@@ -2831,9 +2836,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -2874,7 +2879,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "luyouyou@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1108/3941.htm",
         "lab_url": "",
@@ -2917,9 +2922,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -3009,9 +3014,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -3102,9 +3107,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -3139,13 +3144,17 @@
         "is_academician": false,
         "research_areas": [
           "数据挖掘",
-          "机器学习"
+          "机器学习",
+          "人工智能模型的不确定性",
+          "地球系统模式发展中的关键人工智能技术",
+          "人工智能与数值预报的深度融合",
+          "时空数据的高效索引及访问技术"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "yingz@tsinghua.edu.cn",
-        "phone": "627835058006",
+        "phone": "62783505-8006",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1108/3514.htm",
         "lab_url": "",
@@ -3188,9 +3197,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -3232,7 +3241,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "han-xu@mail.tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1114/6422.htm",
         "lab_url": "",
@@ -3275,9 +3284,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -3312,13 +3321,14 @@
         "is_academician": false,
         "research_areas": [
           "并行计算",
-          "性能工具"
+          "性能工具",
+          "大规模并行应用性能分析与优化"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "jinyuyang@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1114/6843.htm",
         "lab_url": "",
@@ -3361,9 +3371,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -3447,9 +3457,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -3489,7 +3499,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "zhang_mingxing@mail.tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1114/5332.htm",
         "lab_url": "",
@@ -3532,9 +3542,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -3576,7 +3586,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "zhaowenlai@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1114/3943.htm",
         "lab_url": "",
@@ -3619,9 +3629,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -3663,7 +3673,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "shanyd@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1257/6372.htm",
         "lab_url": "",
@@ -3706,9 +3716,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -3749,7 +3759,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "wanghaojie@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1257/5770.htm",
         "lab_url": "",
@@ -3792,9 +3802,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -3828,7 +3838,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "机器学习方法及应用，包括互联网数据、生物信息宏基因组学数据、医疗电子病历数据分析",
+          "机器学习方法及应用",
+          "互联网数据、生物信息宏基因组学数据、医疗电子病历数据分析",
           "高性能计算平台的测试服务"
         ],
         "keywords": [],
@@ -3884,9 +3895,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -3954,9 +3965,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -4026,9 +4037,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -4117,9 +4128,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -4210,9 +4221,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -4247,7 +4258,8 @@
         "is_academician": false,
         "research_areas": [
           "情感计算",
-          "人机语言交互"
+          "人机语言交互",
+          "人机语音交互"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
@@ -4266,13 +4278,13 @@
           {
             "degree": "工学学士",
             "institution": "清华大学计算机科学与技术系",
-            "year": "1999.09-2003.07",
+            "year": "1999-2003",
             "major": ""
           },
           {
             "degree": "工学博士",
             "institution": "清华大学计算机科学与技术系",
-            "year": "2003.09-2008.07",
+            "year": "2003-2008",
             "major": ""
           }
         ],
@@ -4296,9 +4308,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -4391,9 +4403,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -4429,7 +4441,11 @@
         "research_areas": [
           "人机交互",
           "普适计算",
-          "多媒体"
+          "多媒体",
+          "用户行为建模",
+          "手机智能交互技术",
+          "大屏幕显示与交互装置",
+          "VR/AR头盔交互"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
@@ -4484,9 +4500,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -4573,9 +4589,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -4629,15 +4645,15 @@
         "education": [
           {
             "degree": "工学理学双学士",
-            "institution": "西安交通大学计算机科学与技术系/数学与应用数学系",
+            "institution": "西安交通大学",
             "year": "2003-2007",
-            "major": ""
+            "major": "计算机科学与技术系/数学与应用数学系"
           },
           {
             "degree": "工学博士",
-            "institution": "清华大学计算机科学与技术系",
+            "institution": "清华大学",
             "year": "2007-2012",
-            "major": ""
+            "major": "计算机科学与技术系"
           }
         ],
         "publications_count": -1,
@@ -4660,9 +4676,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -4697,7 +4713,11 @@
         "is_academician": false,
         "research_areas": [
           "计算机图形学与虚拟现实",
-          "图像/视频处理"
+          "图像/视频处理",
+          "生成式人工智能",
+          "三维内容生成",
+          "三维场景合成",
+          "VR交互"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
@@ -4752,9 +4772,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -4845,9 +4865,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -4937,9 +4957,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -4973,7 +4993,11 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "人工智能与大数据分析理论方法和关键技术"
+          "人工智能",
+          "大数据分析理论方法和关键技术",
+          "因果统计",
+          "机器学习",
+          "因果启发的稳定学习理论方法体系"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
@@ -4990,15 +5014,15 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "学士学位",
-            "institution": "北京科技大学",
-            "year": "2001-2005",
-            "major": "计算机科学与技术专业"
-          },
-          {
             "degree": "博士学位",
             "institution": "清华大学",
             "year": "2005-2010",
+            "major": "计算机科学与技术专业"
+          },
+          {
+            "degree": "学士学位",
+            "institution": "北京科技大学",
+            "year": "2001-2005",
             "major": "计算机科学与技术专业"
           }
         ],
@@ -5022,9 +5046,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -5078,13 +5102,13 @@
           {
             "degree": "工学博士",
             "institution": "清华大学",
-            "year": "2011.9-2016.7",
+            "year": "2011-2016",
             "major": "计算机科学与技术"
           },
           {
             "degree": "工学学士",
             "institution": "清华大学",
-            "year": "2007.9-2011.7",
+            "year": "2007-2011",
             "major": "计算机科学与技术"
           }
         ],
@@ -5108,9 +5132,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -5147,7 +5171,13 @@
           "物联网",
           "边缘计算",
           "边缘智能",
-          "隐私计算"
+          "隐私计算",
+          "无线感知",
+          "超表面通信增强",
+          "端侧智能计算加速",
+          "协作智能",
+          "分布式智能",
+          "边缘智能安全与隐私保护"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
@@ -5202,9 +5232,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -5289,9 +5319,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -5327,13 +5357,14 @@
         "research_areas": [
           "多媒体智能",
           "媒体大数据分析",
-          "机器学习"
+          "机器学习",
+          "媒体大数据"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "xin_wang@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1117/5849.htm",
         "lab_url": "",
@@ -5382,9 +5413,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -5437,13 +5468,13 @@
         "education": [
           {
             "degree": "工学学士",
-            "institution": "北京邮电大学 计算机科学与技术学院",
+            "institution": "北京邮电大学",
             "year": "2007-2011",
             "major": "计算机科学与技术"
           },
           {
             "degree": "工学博士",
-            "institution": "清华大学 计算机科学与技术系",
+            "institution": "清华大学",
             "year": "2011-2016",
             "major": "计算机科学与技术"
           }
@@ -5468,9 +5499,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -5513,7 +5544,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "xukun@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1117/3540.htm",
         "lab_url": "",
@@ -5556,9 +5587,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -5599,7 +5630,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "chunyu@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1117/3539.htm",
         "lab_url": "",
@@ -5629,9 +5660,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -5673,7 +5704,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "yuanmeng@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1118/5694.htm",
         "lab_url": "",
@@ -5716,9 +5747,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -5760,7 +5791,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "quncexu@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1118/6617.htm",
         "lab_url": "",
@@ -5803,9 +5834,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -5846,7 +5877,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "swn@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1258/5771.htm",
         "lab_url": "",
@@ -5859,13 +5890,13 @@
           {
             "degree": "工学博士",
             "institution": "清华大学",
-            "year": "2016-2021",
+            "year": "2016.9-2021.7",
             "major": "计算机科学与技术"
           },
           {
             "degree": "工学学士",
             "institution": "清华大学",
-            "year": "2012-2016",
+            "year": "2012.9-2016.7",
             "major": "计算机科学与技术"
           }
         ],
@@ -5889,9 +5920,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -5932,7 +5963,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "wuyueyue@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1258/5772.htm",
         "lab_url": "",
@@ -5969,13 +6000,95 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
       "is_new": false
+    },
+    {
+      "title": "杨烁今",
+      "url": "https://www.cs.tsinghua.edu.cn/info/1258/7050.htm",
+      "url_hash": "e05a8e2f0f4c5910d9d8a6a9683de854165cf594aee4a283c99cd6230e78be07",
+      "published_at": null,
+      "author": null,
+      "content": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
+      "content_html": null,
+      "content_hash": "6d935055f210eecc8b321e3fe882c42022a7cd8d4eb18d9e1ae671342321e09e",
+      "source_id": "tsinghua_cs_faculty",
+      "dimension": "university_faculty",
+      "tags": [
+        "faculty",
+        "tsinghua",
+        "cs"
+      ],
+      "extra": {
+        "name": "杨烁今",
+        "name_en": "",
+        "gender": "",
+        "photo_url": "https://www.cs.tsinghua.edu.cn/__local/4/D7/85/C6D3205356BEA4F1FAC54F6AC6F_27C025F2_1481F.jpg",
+        "university": "清华大学",
+        "department": "计算机科学与技术系",
+        "secondary_departments": [],
+        "position": "助理研究员",
+        "academic_titles": [],
+        "is_academician": false,
+        "research_areas": [
+          "人工智能",
+          "持续学习",
+          "计算机图形学",
+          "遥感图像处理"
+        ],
+        "keywords": [],
+        "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
+        "bio_en": "",
+        "email": "yangshuojin@tsinghua.edu.cn",
+        "phone": "",
+        "office": "",
+        "profile_url": "https://www.cs.tsinghua.edu.cn/info/1258/7050.htm",
+        "lab_url": "",
+        "google_scholar_url": "",
+        "dblp_url": "",
+        "orcid": "",
+        "phd_institution": "",
+        "phd_year": "",
+        "education": [
+          {
+            "degree": "工学博士",
+            "institution": "澳门科技大学",
+            "year": "2023",
+            "major": "人工智能"
+          }
+        ],
+        "publications_count": -1,
+        "h_index": -1,
+        "citations_count": -1,
+        "metrics_updated_at": "",
+        "representative_publications": [],
+        "patents": [],
+        "awards": [],
+        "is_advisor_committee": false,
+        "is_adjunct_supervisor": false,
+        "supervised_students": [],
+        "joint_research_projects": [],
+        "joint_management_roles": [],
+        "academic_exchange_records": [],
+        "is_potential_recruit": false,
+        "institute_relation_notes": "",
+        "relation_updated_by": "",
+        "relation_updated_at": "",
+        "recent_updates": [],
+        "source_id": "tsinghua_cs_faculty",
+        "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
+        "crawled_at": "2026-03-04T07:05:21Z",
+        "first_seen_at": "",
+        "last_seen_at": "2026-03-04T07:05:21Z",
+        "is_active": true,
+        "data_completeness": 85
+      },
+      "is_new": true
     },
     {
       "title": "陈挺",
@@ -6007,9 +6120,13 @@
         "research_areas": [
           "大数据高效算法设计",
           "机器学习",
-          "人类基因组、转录组和蛋白组的高通量大数据分析和功能预测",
+          "人类基因组高通量大数据分析",
+          "转录组高通量大数据分析",
+          "蛋白组高通量大数据分析",
+          "功能预测",
           "生物调控系统的数学模型",
-          "蛋白质组学以及质谱仪数据处理",
+          "蛋白质组学",
+          "质谱仪数据处理",
           "高通量基因组测序数据处理",
           "宏基因组数据处理",
           "复杂疾病的遗传学研究",
@@ -6033,11 +6150,11 @@
             "degree": "学士",
             "institution": "清华大学",
             "year": "1993",
-            "major": "计算机科学"
+            "major": "计算机系"
           },
           {
             "degree": "博士",
-            "institution": "美国纽约州立大学石溪分校",
+            "institution": "纽约州立大学石溪分校",
             "year": "1997",
             "major": "计算机科学"
           }
@@ -6062,9 +6179,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -6102,9 +6219,9 @@
           "计算神经科学",
           "无人驾驶汽车",
           "先进机器人",
-          "虚拟现实（1998－2001）",
-          "无线传感器网络（2001－2009）",
-          "计算生物学（2002－2010）"
+          "虚拟现实",
+          "无线传感器网络",
+          "计算生物学"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
@@ -6153,9 +6270,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -6197,7 +6314,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "yuan_feng@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1121/6034.htm",
         "lab_url": "",
@@ -6209,15 +6326,15 @@
         "education": [
           {
             "degree": "本科",
-            "institution": "清华大学应用数学系",
+            "institution": "清华大学",
             "year": "1999",
-            "major": ""
+            "major": "应用数学系"
           },
           {
             "degree": "博士",
-            "institution": "清华大学计算机科学与技术系",
+            "institution": "清华大学",
             "year": "2004",
-            "major": ""
+            "major": "计算机科学与技术系"
           }
         ],
         "publications_count": -1,
@@ -6240,9 +6357,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -6277,14 +6394,23 @@
         "is_academician": false,
         "research_areas": [
           "人工智能",
-          "机器学习理论与方法，包括深度学习，强化学习等",
-          "自然语言处理技术与方法，如语言理解、语言生成、语言匹配与推理，具体应用包括自动问答、阅读理解、对话系统、情感分析等"
+          "机器学习理论与方法",
+          "深度学习",
+          "强化学习",
+          "自然语言处理技术与方法",
+          "语言理解",
+          "语言生成",
+          "语言匹配与推理",
+          "自动问答",
+          "阅读理解",
+          "对话系统",
+          "情感分析"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "aihuang@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1121/5620.htm",
         "lab_url": "",
@@ -6327,9 +6453,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -6364,16 +6490,13 @@
         "is_academician": false,
         "research_areas": [
           "量子计算",
-          "计算理论",
-          "量子密码学",
-          "量子信息",
-          "量子软件"
+          "计算理论"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "jizhengfeng@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1121/4990.htm",
         "lab_url": "",
@@ -6416,9 +6539,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -6458,7 +6581,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "hpliu@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1121/5096.htm",
         "lab_url": "",
@@ -6507,9 +6630,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -6550,7 +6673,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "liuyang2011@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "77701",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1121/3575.htm",
         "lab_url": "",
@@ -6587,9 +6710,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -6674,9 +6797,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -6760,9 +6883,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -6797,7 +6920,9 @@
         "is_academician": false,
         "research_areas": [
           "智能信息处理",
-          "信息检索"
+          "信息检索",
+          "Web信息挖掘",
+          "基于网络用户行为分析的语义挖掘"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
@@ -6852,9 +6977,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -6888,7 +7013,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "智能控制, 机器人与飞行器的导航与控制",
+          "智能控制",
+          "机器人与飞行器的导航与控制",
           "网络控制系统",
           "人工认知系统的信息感知和处理"
         ],
@@ -6945,9 +7071,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -7040,9 +7166,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -7084,7 +7210,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "yingmsh@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1121/3553.htm",
         "lab_url": "",
@@ -7121,9 +7247,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -7162,7 +7288,13 @@
           "机器学习",
           "模式识别",
           "知识工程",
-          "机器人"
+          "机器人",
+          "问题求解的商空间理论",
+          "粒计算",
+          "统计启发式搜索",
+          "路径规划的拓扑降维法",
+          "基于关系矩阵的时间规划",
+          "多粒度信息融合"
         ],
         "keywords": [],
         "bio": "姓名：张钹职称：教授电话：62773875邮箱：dcszb@tsinghua.edu.cn简介：张钹，清华大学计算机系教授，中科院院士。1958年毕业于清华大学自动控制系，同年留校任教至今。1980年2月-1982年2月，美国伊利诺斯大学访问学者。2011年汉堡大学授予自然科学荣誉博士。曾任校学位委员会副主任，现任微软亚洲研究院技术顾问。他参与人工智能、人工神经网络、机器学习等理论研究，以及这些理论应用于模式识别、知识工程与机器人等技术研究。在这些领域，他已发表200多篇学术论文和5篇（或章节）专著（中英文版）。他的专著获得国家教委高等学校出版社颁发的优秀学术专著特等奖。他的科研成果分别获得ICL欧洲人工智能奖、国家自然科学三等奖、国家科技进步三等奖、国家教委科技进步一、二等奖、电子工业部科技进步一等奖以及国防科工委科技进步一等奖等奖励。此外，他参与创建智能技术与系统国家重点实验室，于1990-1996年担任该实验室主任。1987-1994年任国家“863”高技术计划智能机器人主题专家组专家。在过去30多年中，他提出问题求解的商空间理论，在商空间数学模型的基础上，提出了多粒度空间之间相互转换、综合与推理的方法。提出问题分层求解的计算复杂性分析以及降低复杂性的方法。该理论与相应的新算法已经应用于不同领域，如统计启发式搜索、路径规划的拓扑降维法、基于关系矩阵的时间规划以及多粒度信息融合等，这些新算法均能显著降低计算复杂性。该理论现已成为粒计算的主要分支之一。在人工神经网络上，他提出基于规划和基于点集覆盖的学习算法。这些自顶向下的结构学习方法比传统的自底向上的搜索方法在许多方面具有显著优越性。",
@@ -7183,6 +7315,12 @@
             "institution": "清华大学",
             "year": "1958",
             "major": "自动控制系"
+          },
+          {
+            "degree": "自然科学荣誉博士",
+            "institution": "汉堡大学",
+            "year": "2011",
+            "major": ""
           }
         ],
         "publications_count": -1,
@@ -7205,9 +7343,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -7293,9 +7431,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -7338,7 +7476,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "dcszj@mail.tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1121/3551.htm",
         "lab_url": "",
@@ -7381,9 +7519,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -7425,7 +7563,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "aiqy@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1122/6641.htm",
         "lab_url": "",
@@ -7468,9 +7606,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -7512,7 +7650,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "j",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1122/5622.htm",
         "lab_url": "",
@@ -7555,9 +7693,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -7600,7 +7738,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "chenjianxin@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1122/6619.htm",
         "lab_url": "",
@@ -7643,9 +7781,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -7678,12 +7816,15 @@
         "position": "副教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "人工神经网络",
+          "计算神经科学"
+        ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "xlhu@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "62799932",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1122/3569.htm",
         "lab_url": "",
@@ -7692,7 +7833,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "香港中文大学",
+            "year": "2004-2007",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "武汉理工大学",
+            "year": "2001-2004",
+            "major": ""
+          },
+          {
+            "degree": "本科",
+            "institution": "武汉理工大学",
+            "year": "1997-2001",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -7713,11 +7873,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
-        "data_completeness": 70
+        "data_completeness": 85
       },
       "is_new": false
     },
@@ -7798,9 +7958,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -7842,7 +8002,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "suhangss@mail.tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1122/3946.htm",
         "lab_url": "",
@@ -7891,9 +8051,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -7935,7 +8095,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "hw-ai@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1122/5712.htm",
         "lab_url": "",
@@ -7984,9 +8144,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -8021,7 +8181,10 @@
         "is_academician": false,
         "research_areas": [
           "多模态智能信息处理",
-          "智能优化"
+          "智能优化",
+          "共融机器人智能控制",
+          "智能优化调度",
+          "人机自然交互"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
@@ -8076,9 +8239,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -8113,7 +8276,9 @@
         "is_academician": false,
         "research_areas": [
           "自然语言理解",
-          "语料库语言学"
+          "语料库语言学",
+          "计算语言学",
+          "机器学习"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
@@ -8133,13 +8298,13 @@
             "degree": "工学学士",
             "institution": "清华大学计算机科学与技术系",
             "year": "1985-1990",
-            "major": ""
+            "major": "本科"
           },
           {
             "degree": "理学硕士和博士",
             "institution": "北京大学计算机科学与技术系",
             "year": "1990-1996",
-            "major": ""
+            "major": "硕士和博士"
           }
         ],
         "publications_count": -1,
@@ -8162,9 +8327,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -8249,9 +8414,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -8342,9 +8507,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -8386,7 +8551,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "tolidan@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1126/3948.htm",
         "lab_url": "",
@@ -8429,9 +8594,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -8502,6 +8667,12 @@
             "institution": "西北工业大学",
             "year": "1993",
             "major": "计算机系信息系统工程"
+          },
+          {
+            "degree": "博士后",
+            "institution": "北京邮电大学",
+            "year": "1993-1995",
+            "major": "程控交换与通信网国家重点实验室"
           }
         ],
         "publications_count": -1,
@@ -8524,9 +8695,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -8617,9 +8788,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -8712,9 +8883,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -8757,7 +8928,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "wjl@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1126/3584.htm",
         "lab_url": "",
@@ -8806,9 +8977,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -8842,13 +9013,14 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "密码理论与区块链技术"
+          "密码理论",
+          "区块链技术"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "xiaoyunwang@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1126/3583.htm",
         "lab_url": "",
@@ -8878,9 +9050,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -8973,9 +9145,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -9018,7 +9190,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "xuke@tsinghua.edu.cn",
-        "phone": "010 62603056",
+        "phone": "+86 10 62603056",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1126/3581.htm",
         "lab_url": "",
@@ -9067,9 +9239,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -9154,9 +9326,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -9199,7 +9371,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "yang@cernet.edu.cn",
-        "phone": "01062782467",
+        "phone": "+86 10 62783492",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1126/3579.htm",
         "lab_url": "",
@@ -9248,9 +9420,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -9342,9 +9514,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -9436,9 +9608,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -9473,7 +9645,8 @@
         "is_academician": false,
         "research_areas": [
           "高速互联网体系结构",
-          "交换与路由, 高速网络设备"
+          "交换与路由",
+          "高速网络设备"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
@@ -9528,9 +9701,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -9571,7 +9744,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "fhn@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1127/3600.htm",
         "lab_url": "",
@@ -9585,19 +9758,19 @@
             "degree": "工学学士",
             "institution": "解放军南京通信工程学院",
             "year": "1988-1992",
-            "major": "计算机及指挥自动化专业"
+            "major": "计算机及指挥自动化"
           },
           {
             "degree": "军事学硕士",
             "institution": "解放军南京通信工程学院",
             "year": "1992-1996",
-            "major": "军事通信学专业"
+            "major": "军事通信学"
           },
           {
             "degree": "工学博士",
-            "institution": "清华大学",
+            "institution": "清华大学计算机科学与技术系",
             "year": "1999-2005",
-            "major": "计算机科学与技术系"
+            "major": ""
           }
         ],
         "publications_count": -1,
@@ -9620,9 +9793,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -9664,7 +9837,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "qli01@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1127/3598.htm",
         "lab_url": "",
@@ -9701,9 +9874,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -9744,7 +9917,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "peidan@tsinghua.edu.cn",
-        "phone": "01062783690",
+        "phone": "010-62783690",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1127/3597.htm",
         "lab_url": "",
@@ -9793,9 +9966,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -9885,9 +10058,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -9932,7 +10105,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "jessiewang@tsinghua.edu.cn",
-        "phone": "010-62603212",
+        "phone": "+86 10 62603212",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1127/3594.htm",
         "lab_url": "",
@@ -9981,9 +10154,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -10069,9 +10242,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -10162,9 +10335,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -10255,9 +10428,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -10310,13 +10483,13 @@
           {
             "degree": "学士",
             "institution": "山东大学数学院",
-            "year": "1998-2002",
+            "year": "1998.09-2002.07",
             "major": "计算数学"
           },
           {
             "degree": "博士",
             "institution": "山东大学数学院",
-            "year": "2002-2007",
+            "year": "2002.09-2007.07",
             "major": "信息安全"
           }
         ],
@@ -10340,9 +10513,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -10410,9 +10583,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -10454,7 +10627,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "xiexiaohui@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1128/5716.htm",
         "lab_url": "",
@@ -10497,9 +10670,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -10541,7 +10714,7 @@
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "deng@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1131/5100.htm",
         "lab_url": "",
@@ -10584,9 +10757,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -10664,9 +10837,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -10750,9 +10923,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -10837,9 +11010,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -10892,19 +11065,19 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "工学博士",
+            "degree": "工学博士学位",
             "institution": "清华大学计算机系",
             "year": "2002",
             "major": ""
           },
           {
-            "degree": "工学硕士",
+            "degree": "工学硕士学位",
             "institution": "清华大学计算机系",
             "year": "1997",
             "major": ""
           },
           {
-            "degree": "工学学士",
+            "degree": "工学学士学位",
             "institution": "厦门大学计算机系",
             "year": "1995",
             "major": ""
@@ -10930,9 +11103,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -10966,13 +11139,14 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "数据可视化"
+          "数据可视化",
+          "线上学习行为数据的可视化分析"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "lx@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "80731",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1132/3614.htm",
         "lab_url": "",
@@ -11002,9 +11176,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -11038,13 +11212,14 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "计算机系统结构，多核处理器片上网络"
+          "计算机系统结构",
+          "多核处理器片上网络"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
         "bio_en": "",
         "email": "qiaolin@tsinghua.edu.cn",
-        "phone": "010-62782467",
+        "phone": "80973",
         "office": "",
         "profile_url": "https://www.cs.tsinghua.edu.cn/info/1132/3613.htm",
         "lab_url": "",
@@ -11081,9 +11256,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -11137,13 +11312,13 @@
             "degree": "工学学士",
             "institution": "清华大学",
             "year": "2004-2008",
-            "major": "计算机科学与技术专业"
+            "major": "计算机科学与技术"
           },
           {
             "degree": "工学博士",
             "institution": "清华大学",
             "year": "2008-2015",
-            "major": "计算机科学与技术专业"
+            "major": "计算机科学与技术"
           }
         ],
         "publications_count": -1,
@@ -11166,9 +11341,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -11236,9 +11411,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -11276,7 +11451,8 @@
           "交换网络理论",
           "高速计算机网络核心设备",
           "网络安全",
-          "计算机实验教学体系和教学方法"
+          "计算机实验教学体系",
+          "教学方法"
         ],
         "keywords": [],
         "bio": "清华大学学堂在线地址：北京市海淀区双清路30号清华大学    100084综合办公室电话：010-62782467Copyright  2010~2024 清华大学 All Rights Reserved.",
@@ -11331,9 +11507,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -11401,9 +11577,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -11471,9 +11647,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -11557,9 +11733,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -11627,9 +11803,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -11697,9 +11873,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -11767,9 +11943,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_cs_faculty",
         "source_url": "https://www.cs.tsinghua.edu.cn/szzk/jzgml.htm",
-        "crawled_at": "2026-03-03T14:09:59Z",
+        "crawled_at": "2026-03-04T07:05:21Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:09:59Z",
+        "last_seen_at": "2026-03-04T07:05:21Z",
         "is_active": true,
         "data_completeness": 70
       },

@@ -441,8 +441,27 @@ _NAV_KEYWORDS: frozenset[str] = frozenset([
     "English", "搜索", "登录", "注册",
 ])
 
+# Footer/copyright keywords that indicate page footer content
+_FOOTER_KEYWORDS: tuple[str, ...] = (
+    "CopyRight", "版权所有", "All Rights Reserved",
+    "备案号", "ICP备", "京ICP",
+)
+
+# Address/contact patterns (compiled regex)
+_ADDRESS_PATTERN = _re.compile(
+    r"邮政编码|邮编[：:]\s*\d{6}|通信地址[：:]|Copyright\s*©|"
+    r"版权所有\s*©",
+    _re.IGNORECASE,
+)
+
+# Work experience pattern: year range like "2018年10月 — 今" or "2010-2020"
+_WORK_EXP_PATTERN = _re.compile(
+    r"\d{4}\s*年?\s*\d{0,2}\s*月?\s*[—\-–~至]\s*(?:今|至今|现在|\d{4})"
+)
+
 _MAX_RESEARCH_AREAS = 15
 _MIN_AVG_CHARS = 3
+_MAX_SINGLE_ITEM_LEN = 100
 
 
 def validate_research_areas(areas: list[str]) -> list[str]:
@@ -452,9 +471,13 @@ def validate_research_areas(areas: list[str]) -> list[str]:
     to be a navigation menu accidentally captured as research areas.
 
     Pollution detection rules (any one triggers rejection):
-    1. Count > _MAX_RESEARCH_AREAS (15)
+    1. Count > 15
     2. Any item matches a known navigation keyword
-    3. Average item length < _MIN_AVG_CHARS (3 chars)
+    3. Average item length < 3 chars
+    4. Any item contains footer/copyright keywords
+    5. Any item matches address/contact patterns
+    6. Any single item > 100 chars (likely garbage, not a research area)
+    7. >50% of items match work experience year-range patterns
     """
     if not areas:
         return areas
@@ -473,4 +496,91 @@ def validate_research_areas(areas: list[str]) -> list[str]:
     if avg_len < _MIN_AVG_CHARS:
         return []
 
+    # Rule 4: footer/copyright keyword in any item
+    for item in areas:
+        for kw in _FOOTER_KEYWORDS:
+            if kw.lower() in item.lower():
+                return []
+
+    # Rule 5: address/contact pattern in any item
+    for item in areas:
+        if _ADDRESS_PATTERN.search(item):
+            return []
+
+    # Rule 6: single item too long — a real research area is rarely >100 chars
+    for item in areas:
+        if len(item) > _MAX_SINGLE_ITEM_LEN:
+            return []
+
+    # Rule 7: work experience pattern (year-range like "2018年—今")
+    # Any item matching is a strong signal of contamination
+    for item in areas:
+        if _WORK_EXP_PATTERN.search(item):
+            return []
+
     return areas
+
+
+# ---------------------------------------------------------------------------
+# Helper: validate scholar name — filter out navigation/menu items
+# ---------------------------------------------------------------------------
+
+# Blacklist of common non-person-name strings captured from nav/menu/footer
+_NAME_BLACKLIST: frozenset[str] = frozenset(
+    _NAV_KEYWORDS | {
+        # Portal/mail links
+        "北大邮箱", "深研院邮箱", "校友", "网上办公", "南燕门户", "捐赠",
+        # Website section names
+        "本院概况", "学院导航", "招生培养", "师资队伍", "走进南燕",
+        "人才招聘", "信息公开", "数据统计", "校历",
+        # Generic college/department/university names mistaken as people
+        "信息工程学院", "化学生物学与生物技术学院", "环境与能源学院",
+        "城市规划与设计学院", "新材料学院", "汇丰商学院", "国际法学院",
+        "人文社会科学学院", "化学与环境工程学院", "生命科学学院",
+        "计算机学院", "电子工程学院", "机械工程学院",
+        "北京大学", "清华大学", "复旦大学", "上海交通大学",
+        "浙江大学", "南京大学", "中国科学技术大学", "中国人民大学",
+    }
+)
+
+# Pattern for non-name strings
+_NON_NAME_PATTERN = _re.compile(
+    r"^https?://|"           # URL
+    r"^www\.|"               # URL without scheme
+    r"@|"                    # Email
+    r"[©®™]|"               # Copyright/trademark symbols
+    r"\d{5,}|"              # 5+ consecutive digits (phone/postal)
+    r"[（(]\d{3,}[)）]",     # Area code pattern
+    _re.IGNORECASE,
+)
+
+
+def validate_scholar_name(name: str) -> bool:
+    """Return True if *name* looks like a real person's name.
+
+    Rejects known navigation keywords, blacklisted website section names,
+    strings with URL/email/copyright patterns, and length outliers.
+    """
+    if not name or not name.strip():
+        return False
+
+    name = name.strip()
+
+    # Rule 1: blacklist exact match
+    if name in _NAME_BLACKLIST:
+        return False
+
+    # Rule 2: length constraints
+    if len(name) < 2:
+        return False
+    has_cjk = any("\u4e00" <= c <= "\u9fff" for c in name)
+    if has_cjk and len(name) > 20:
+        return False
+    if len(name) > 60:
+        return False
+
+    # Rule 3: non-name patterns (URL, email, copyright, digits)
+    if _NON_NAME_PATTERN.search(name):
+        return False
+
+    return True

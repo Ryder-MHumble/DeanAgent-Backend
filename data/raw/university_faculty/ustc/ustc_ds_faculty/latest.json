@@ -3,8 +3,8 @@
   "dimension": "university_faculty",
   "group": "ustc",
   "source_name": "中国科学技术大学大数据学院-师资",
-  "crawled_at": "2026-03-03T15:03:29.149350+00:00",
-  "previous_crawled_at": "2026-03-03T03:54:50.179723+00:00",
+  "crawled_at": "2026-03-04T07:11:52.668091+00:00",
+  "previous_crawled_at": "2026-03-03T15:03:29.149350+00:00",
   "item_count": 21,
   "new_item_count": 0,
   "items": [
@@ -38,7 +38,11 @@
         "is_academician": false,
         "research_areas": [
           "计算数学",
-          "应用数学及其在力学、物理、化学和工程等领域中的应用"
+          "应用数学",
+          "力学",
+          "物理",
+          "化学",
+          "工程"
         ],
         "keywords": [],
         "bio": "鄂维南发布时间：2026-01-30浏览次数：14292鄂维南鄂维南，数学家，中国科学院院士，北京大学、普林斯顿大学教授、北京大数据研究院院长。1982年毕业于中国科技大学数学系；1985年获中国科学院计算中心硕士学位；1989年获美国加州大学洛杉矶分校博士学位；2011年当选为中国科学院院士；2014年创办大数据建模分析公司普林科技，并担任首席科学家；2015年8月成立的北京大数据研究院任院长。研究方向：主要从事计算数学、应用数学及其在力学、物理、化学和工程等领域中的应用等方面的研究。",
@@ -55,10 +59,10 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "学士",
+            "degree": "",
             "institution": "中国科技大学",
             "year": "1982",
-            "major": "数学"
+            "major": "数学系"
           },
           {
             "degree": "硕士",
@@ -93,9 +97,9 @@
         "recent_updates": [],
         "source_id": "ustc_ds_faculty",
         "source_url": "https://saids.ustc.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:10:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:10:08Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -151,13 +155,13 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "本科",
+            "degree": "本科学位",
             "institution": "中国科学技术大学",
             "year": "1997",
             "major": "计算机科学与技术"
           },
           {
-            "degree": "博士",
+            "degree": "博士学位",
             "institution": "美国宾州州立大学",
             "year": "2002",
             "major": "计算机科学与工程"
@@ -183,9 +187,9 @@
         "recent_updates": [],
         "source_id": "ustc_ds_faculty",
         "source_url": "https://saids.ustc.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:10:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:10:08Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -271,9 +275,9 @@
         "recent_updates": [],
         "source_id": "ustc_ds_faculty",
         "source_url": "https://saids.ustc.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:10:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:10:08Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -310,7 +314,7 @@
         "research_areas": [
           "large-scale data mining",
           "trustworthy and secure AI & System",
-          "machine learning techniques",
+          "machine learning techniques and real applications",
           "graph mining & learning",
           "ML privacy",
           "foundation models",
@@ -364,9 +368,9 @@
         "recent_updates": [],
         "source_id": "ustc_ds_faculty",
         "source_url": "https://saids.ustc.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:10:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:10:08Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -447,9 +451,9 @@
         "recent_updates": [],
         "source_id": "ustc_ds_faculty",
         "source_url": "https://saids.ustc.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:10:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:10:08Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -505,16 +509,16 @@
         "phd_year": "",
         "education": [
           {
+            "degree": "理学博士学位",
+            "institution": "北京大学",
+            "year": "2021",
+            "major": "凝聚态物理"
+          },
+          {
             "degree": "本科",
             "institution": "东南大学",
             "year": "",
             "major": ""
-          },
-          {
-            "degree": "理学博士",
-            "institution": "北京大学",
-            "year": "2021",
-            "major": "凝聚态物理"
           }
         ],
         "publications_count": -1,
@@ -537,9 +541,9 @@
         "recent_updates": [],
         "source_id": "ustc_ds_faculty",
         "source_url": "https://saids.ustc.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:10:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:10:08Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -612,9 +616,9 @@
         "recent_updates": [],
         "source_id": "ustc_ds_faculty",
         "source_url": "https://saids.ustc.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:10:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:10:08Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -667,7 +671,7 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "博士",
+            "degree": "博士学位",
             "institution": "中国科学技术大学",
             "year": "2013",
             "major": "计算机应用技术"
@@ -693,9 +697,9 @@
         "recent_updates": [],
         "source_id": "ustc_ds_faculty",
         "source_url": "https://saids.ustc.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:10:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:10:08Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -733,7 +737,9 @@
           "网络计算算法与系统",
           "边缘计算",
           "AI+Edge",
-          "人工智能系统与网络"
+          "人工智能系统与网络",
+          "云边端协同计算",
+          "边缘侧模型部署优化"
         ],
         "keywords": [],
         "bio": "谈海生发布时间：2024-05-30浏览次数：8483谈海生E-mail：hstan@ustc.edu.cn个人主页：http://staff.ustc.edu.cn/~hstan/主要研究方向：网络计算算法与系统；边缘计算； AI+Edge；人工智能系统与网络谈海生，特任教授，博士生导师。本科毕业于中国科学技术大学(获郭沫若奖学金)，博士毕业于香港大学计算机科学系。主要研究方向为网络计算算法设计与系统实现、边缘计算、AI+Edge、人工智能系统与网络。近年致力于云边端协同计算、边缘侧模型部署优化相关算法研究及系统实现，相关论文发表在IEEE/ACM ToN, IEEE JSAC, IEEE TPDS, NSDI，INFOCOM, EuroSys等国际顶级期刊和会议，出版边缘计算相关专著1本。获得重要学术会议最佳论文奖5次。入选国家高层次人才(青年)特殊支持计划。IEEE 高级会员，CCF物联网专委会、分布式计算与系统专委会执行委员。十篇代表性论著：Chengquan Feng, Li Zhang, Yuanchi Liu, Jiahang Xu, Chengruidong Zhang, Zhiyuang Wang, Ting Cao, Mao Yang, and Haisheng Tan. LitePred: Transferable and Scalable Latency Prediction for Hardware-Aware Neural Architecture Search. The 21st USENIX Symposium on Networked Systems Design and Implementation (NSDI '24).Guopeng Li, Haisheng Tan, Xuan Zhang, Chi Zhang, Ruiting Zhou, Zhenhua Han, and Guoliang Chen. Online Container Caching with Late-Warm for IoT Data Processing. IEEE International Conference on Data Engineering (ICDE 2024), 13-17 May 2024, Utrecht, Netherlands.Haisheng Tan, Guopeng Li, Ziyu Shen, Zihe Wang, Zhenhua Han, Mingjun Xiao, Xiang-Yang Li, Guoliang Chen, Edge-Centric Pricing Mechanisms with Selfish Heterogeneous Users, Journal of Computer Science and Technology (JCST), 2024 [国内期刊]Yiding Wang, Kai Chen, Haisheng Tan, Kun Guo. Tabi: An Efficient Multi-Level Inference System for Large Language Models. ACM Eurosys 2023Chi Zhang, Haisheng Tan, Haoqiang Huang, Zhenhua Han, Shaofeng Jiang, Guopeng Li, and Xiang.-Yang. Li. Online Approximation Scheme for Scheduling Heterogeneous Utility Jobs in Edge Computing. IEEE/ACM Transactions on Networking (IEEE/ACM ToN) Volume: 31, Issue: 1, Page(s): 352 – 365, February 2023Zhenhua Han, Haisheng Tan, Shaofeng Jiang, Wanli Cao, Xiaoming Fu, Lan Zhang, and Francis Lau，SPIN: BSP Job Scheduling with Placement-Sensitive Execution，IEEE/ACM Transactions on Networking (IEEE/ACM ToN),  Volume: 29, Issue: 5, pp. 2267 – 2280, Oct. 2021Haisheng Tan, Shaofeng H.-C. Jiang, Zhenhua Han, and Mingxia Li.  Asymptotically Optimal Online Caching on Multiple Caches with Relaying and Bypassing. IEEE/ACM Transactions on Networking (IEEE/ACM ToN), Volume: 29, Issue: 4, pp. 1841-1852, Aug. 2021Haisheng Tan, Chi Zhang, Chao Xu, Yupeng Li, Zhenhua Han, Xiang-Yang Li . Regularization-Based Coflow Scheduling in Optical Circuit Switches. IEEE/ACM Transactions on Networking (IEEE/ACM ToN), VOL. 29, NO. 3, pp. 1280-1293, JUNE 2021Haisheng Tan, Shaofeng Jiang, Yupeng Li, Xiang-Yang Li, Chenzi Zhang, Zhenhua Han and Francis Lau,“Joint Online Coflow Routing and Scheduling in Data Center Networks, IEEE/ACM Transactions on Networking (IEEE/ACM ToN),Vol. 27, No.5, pp. 1771-1786, Aug. 2019Haisheng Tan, Shaofeng Jiang, Zhenhua Han, Liuyan Liu, Kai Han, and Qinglin Zhao. Camul: Online Caching on Multiple Caches with Relaying and Bypassing, IEEE International Conference on Computer Communications (IEEE INFOCOM’19), Paris, France, 2019.04.29-2019.05.02",
@@ -757,9 +763,9 @@
           },
           {
             "degree": "博士",
-            "institution": "香港大学计算机科学系",
+            "institution": "香港大学",
             "year": "",
-            "major": ""
+            "major": "计算机科学系"
           }
         ],
         "publications_count": -1,
@@ -782,9 +788,9 @@
         "recent_updates": [],
         "source_id": "ustc_ds_faculty",
         "source_url": "https://saids.ustc.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:10:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:10:08Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -821,7 +827,10 @@
         "research_areas": [
           "通用人工智能与大模型",
           "个性化大模型与社交科学智能",
-          "可信人工智能"
+          "可信人工智能",
+          "信息检索与推荐",
+          "数据挖掘",
+          "机器学习"
         ],
         "keywords": [],
         "bio": "吴剑灿发布时间：2025-10-13浏览次数：10邮 件：wjc1994@ustc.edu.cn所属单位：人工智能与数据科学学院个人主页：https://wujcan.github.io/主要研究方向：通用人工智能与大模型，个性化大模型与社交科学智能，可信人工智能等。吴剑灿，预聘副教授，2017年获得中国科学技术大学电子信息工程专业本科学位，2022年获得中国科学技术大学信息与通信工程专业博士学位。常年致力于信息检索与推荐、数据挖掘、机器学习等大数据与人工智能领域前沿研究，在CCF A类会议和期刊发表论文30余篇，如NeurIPS、ICML、ICLR、SIGIR、WWW、KDD、ACM TOIS等。根据谷歌学术网统计，截至2025年10月，文章总引用次数超过3400次，单篇引用超过1600次。多篇论文是会议最高引或入选最具影响力论文榜单（如SIGIR 2024, WWW 2023, KDD 2022, SIGIR 2021等）和最佳论文最终候选（如SIGIR 2024等）。已授权国家发明专利10余项。主持国自然青年科学基金（C类）和校企合作项目多项。招生信息：需学生具备：1. 对科研具备热情和决心2. 较强的编程能力3. 机器学习基础知识和实践经验4. 较好的数学基础（线性代数、概率论与统计等）5. 较好的英语水平（六级500分以上或其他对等成绩）6. 较好的沟通能力近几年代表论著：[1] Jiancan Wu, Xiang Wang, Fuli Feng, Xiangnan He, Liang Chen, Jianxun Lian, and Xing Xie. Self-supervised Graph Learning for Recommendation. In SIGIR 2021[2] Jiancan Wu, Yi Yang, Yuchun Qian, Yongduo Sui, Xiang Wang, and Xiangnan He. GIF: A General Graph Unlearning Strategy via Influence Function. In WWW 2023.[3] Zhengyi Yang, Jiancan Wu, Zhicai Wang, Xiang Wang, Yancheng Yuan, and Xiangnan He. Generate What You Prefer: Reshaping Sequential Recommendation via Guided Diffusion. In NeurIPS 2023.[4] Jiancan Wu, Xiang Wang, Xingyu Gao, Jiawei Chen, Hongcheng Fu, and Tianyu Qiu. On the Effectiveness of Sampled Softmax Loss for Item Recommendation. In TOIS 2024[5] Yuyue Zhao, Jiancan Wu, Xiang Wang, Wei Tang, Dingxian Wang, and Maarten de Rijke. Let Me Do It For You: Towards LLM Empowered Recommendation via Tool Learning. In SIGIR 2024.[6] Xiaoyu Kong, Jiancan Wu, An Zhang, Leheng Sheng, Hui Lin, Xiang Wang, and Xiangnan He. Customizing Language Models with Instance-wise LoRA for Sequential Recommendation. In NeurIPS 2024.[7] Junkang Wu, Yuexiang Xie, Zhengyi Yang, Jiancan Wu, Jinyang Gao, Bolin Ding, Xiang Wang, and Xiangnan He. β-DPO: Direct Preference Optimization with Dynamic β. In NeurIPS 2024.[8] Wenyu Mao, Jiancan Wu, Weijian Chen, Chongming Gao, Xiang Wang, and Xiangnan He. Reinforced Prompt Personalization for Recommendation with Large Language Models. In TOIS 2025.[9] Chenlu Ding, Jiancan Wu, Yancheng Yuan, Jinda Lu, Kai Zhang, Alex Su, Xiang Wang, and Xiangnan He. Unified Parameter-Efficient Unlearning for LLMs. In ICLR 2025.[10] Junkang Wu, Yuexiang Xie, Zhengyi Yang, Jiancan Wu, Jiawei Chen, Jinyang Gao, Bolin Ding, Xiang Wang, and Xiangnan He. Towards Robust Alignment of Language Models: Distributionally Robustifying Direct Preference Optimization. In ICLR 2025.",
@@ -838,13 +847,13 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "本科",
+            "degree": "本科学位",
             "institution": "中国科学技术大学",
             "year": "2017",
             "major": "电子信息工程"
           },
           {
-            "degree": "博士",
+            "degree": "博士学位",
             "institution": "中国科学技术大学",
             "year": "2022",
             "major": "信息与通信工程"
@@ -870,9 +879,9 @@
         "recent_updates": [],
         "source_id": "ustc_ds_faculty",
         "source_url": "https://saids.ustc.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:10:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:10:08Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -958,9 +967,9 @@
         "recent_updates": [],
         "source_id": "ustc_ds_faculty",
         "source_url": "https://saids.ustc.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:10:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:10:08Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -997,7 +1006,8 @@
         "research_areas": [
           "数字健康",
           "人工智能",
-          "数据科学"
+          "数据科学",
+          "机器学习在数字健康、智慧城市等领域的应用"
         ],
         "keywords": [],
         "bio": "王江涛发布时间：2024-07-23浏览次数：4356王江涛邮箱： wangjiangtao@ustc.edu.cn所属单位：人工智能与数据科学学院联系地址：中科大苏州高等研究院唯真楼407（中科大合肥高新校区学科一号楼A412）个人主页：建设中主要研究方向：数字健康、人工智能、数据科学现阶段的研究兴趣主要在人工智能和机器学习在数字健康、智慧城市等领域的应用。特别关注：利用健康领域的先验知识和观察，对通用领域的深度学习模型进行优化，从而解决健康大数据存在稀疏、含偏差、多样化等挑战。2015年获得北京大学计算机专业博士学位，并获北京大学优秀毕业生。2015年至2019年在北京大学担任博士后、助理研究员，获自然科学基金面上项目、自然科学基金青年项目，以及博士后基金一等资助。2019年至2024年期间在英国多所大学分别担任助理教授、副教授职位，期间获英国工程和自然科学研究委员会优秀青年基金。2022年入选国家青年人才项目。在相关国际期刊及会议发表文章100余篇，包括多个CCF A类期刊及会议。获奖及荣誉：2021年 英国工程和自然科学研究委员会优秀青年基金2022年 国家级青年人才项目教授课程：建设中",
@@ -1040,9 +1050,9 @@
         "recent_updates": [],
         "source_id": "ustc_ds_faculty",
         "source_url": "https://saids.ustc.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:10:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:10:08Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -1131,9 +1141,9 @@
         "recent_updates": [],
         "source_id": "ustc_ds_faculty",
         "source_url": "https://saids.ustc.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:10:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:10:08Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -1220,9 +1230,9 @@
         "recent_updates": [],
         "source_id": "ustc_ds_faculty",
         "source_url": "https://saids.ustc.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:10:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:10:08Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -1295,9 +1305,9 @@
         "recent_updates": [],
         "source_id": "ustc_ds_faculty",
         "source_url": "https://saids.ustc.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:10:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:10:08Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -1335,7 +1345,10 @@
           "三维视觉",
           "空间智能",
           "机器人",
-          "无人驾驶"
+          "无人驾驶",
+          "三维视觉与点云理解",
+          "多模态感知与空间智能",
+          "自动驾驶与机器人"
         ],
         "keywords": [],
         "bio": "夏彦发布时间：2025-05-26浏览次数：70夏彦Email：yan.xia@ustc.edu.cn研究方向：三维视觉、空间智能、机器人、无人驾驶个人主页：https://yan-xia.github.io/个人简介：夏彦，预聘副教授，德国慕尼黑工业大学客座研究员。曾就职为德国国家人工智能中心（慕尼黑）研究科学家和德国慕尼黑工业大学Daniel Cremers教授（德国科研最高奖莱布尼茨奖获得者)领导的计算机视觉与人工智能组高级研究员，牛津大学视觉几何实验室（VGG）访问学者。博士毕业于慕尼黑工业大学，期间在牛津大学VGG实验室联合培养。研究成果发表于CVPR、ICCV、ECCV和ISPRS JPRS等国际顶级会议和期刊；并落地应用于自动驾驶龙头企业与工业场景。主要论著：( † indicates corresponding author, * indicates equal contribution)[1] Yunshuang Yuan, Yan Xia†, Daniel Cremers, Monika Sester. SparseAlign: A Fully Sparse Framework for Cooperative Object Detection. CVPR 2025.[2] Gengyuan Zhang, Mang Ling Ada Fok, Jialu Ma, Yan Xia†, Daniel Cremers, Philip Torr, Volker Tresp, Jindong Gu. Localizing Events in Videos with Multimodal Queries. CVPR 2025.[3] Yan Xia*†, Letian Shi*, Zifeng Ding, João F. Henriques, Daniel Cremers. Text2Loc: 3D Point Cloud Localization from Natural Language. CVPR 2024.[4] Yan Xia*†, Mariia Gladkova*, Rui Wang, Qianyun Li, Uwe Stilla, João F. Henriques, Daniel Cremers. CASSPR: Cross Attention Single Scan Place Recognition. ICCV 2023.[5] Yan Xia, Yusheng Xu, Shuang Li, Rui Wang, Juan Du, Daniel Cremers, Uwe Stilla. SOE-net: A self-attention and orientation encoding network for point cloud based place recognition. CVPR 2021.岗位开放：本课题组常年招收硕士生、博士生、博士后及科研助理/本科实习生，研究方向包括但不限于：三维视觉与点云理解，多模态感知与空间智能，自动驾驶与机器人。课题组与慕尼黑工业大学，牛津大学等国内外顶尖研究团队保持紧密合作，表现优秀者将推荐赴德国慕尼黑工大，英国牛津大学和剑桥大学等高校联合培养或短期交流或者国内外知名企业实习和就业。欢迎对科研充满热情、希望在CVPR、ICCV、ECCV等国际顶级会议和期刊发表论文的同学加入！希望你具备以下条件之一或多项：1. 具有良好的数学基础和优秀的课程成绩；2. 具备扎实的编程能力（Python或C++），动手能力强；3. 熟悉主流深度学习框架，如PyTorch或TensorFlow；4. 有极强的自驱力，能够主动开展科研工作 （这一点最重要）；5. 有科研经历、论文发表或竞赛项目经验者优先。请有意向的同学将个人简历（含GPA）、成绩单、代表性项目或论文材料发送至邮箱：yan.xia@ustc.edu.cn，邮件标题请注明“应聘实习/硕士/博士/博士后+姓名+学校”。",
@@ -1378,9 +1391,9 @@
         "recent_updates": [],
         "source_id": "ustc_ds_faculty",
         "source_url": "https://saids.ustc.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:10:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:10:08Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -1460,9 +1473,9 @@
         "recent_updates": [],
         "source_id": "ustc_ds_faculty",
         "source_url": "https://saids.ustc.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:10:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:10:08Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -1544,9 +1557,9 @@
         "recent_updates": [],
         "source_id": "ustc_ds_faculty",
         "source_url": "https://saids.ustc.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:10:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:10:08Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -1589,7 +1602,9 @@
           "大模型驱动的智能体",
           "可信人工智能",
           "智慧校园",
-          "个性化场景"
+          "大模型安全",
+          "个性化场景",
+          "下一代通用人工智能模型的关键能力与性质研究"
         ],
         "keywords": [],
         "bio": "张岸发布时间：2025-10-30浏览次数：10邮 件：an_zhang@ustc.edu.cn所属单位：人工智能与数据科学学院个人主页：https://anzhang314.github.io/实验室主页：https://alphalab-ustc.github.io/index.html主要研究方向：生成式人工智能，大模型智能体，个性化大模型，大模型安全等。张岸，特任教授，2016年获得东南大学数学院本科学位，2021年获得新加坡国立大学统计和数据科学学院博士学位，2021年到2024年在新加坡国立大学计算机科学学院担任研究员，2022-2023年担任新加坡SEA AI Lab双聘研究员，2025年回到中国科学技术大学任教，担任特任教授，博导。主要研究领域为生成模型、大模型驱动的智能体、可信人工智能，特别关注于智慧校园、大模型安全、以及个性化场景，致力于下一代通用人工智能模型的关键能力与性质研究。相关工作在NeurIPS、ICLR、ICML、WWW、KDD、SIGIR、TOIS、TPAMI等顶级国际会议和期刊发表录用长文30余篇，其中超过3篇论文入选了最高引和最具影响力榜单，根据谷歌学术网统计，截止2025年10月，引用三千余次，H-Index指数为25，荣获2025年 Web领域女性新星奖（Rising Stars of Women in Web Award）。教授课程：1. 生成式人工智能概述2. 人工智能与机器学习基础近两年代表论著：Generative Recommendation:Xiaoyu Kong, Leheng Sheng, Junfei Tan, Yuxin Chen, Jiancan Wu, An Zhang, Xiang Wang, Xiangnan He. MiniOneRec: An Open-Source Framework for Scaling Generative Recommendation. Arxiv 2025.Guoqing Hu, An Zhang*, Shuchang Liu, Wenyu Mao, Jiancan Wu, Xun Yang, Xiang Li, Lantao Hu, Han Li, Kun Gai, Xiang Wang. Fading to Grow: Growing Preference Ratios via Preference Fading Discrete Diffusion for Recommendation. NeurIPS 2025.Yingzhi He, Xiaohao Liu, An Zhang*, Yunshan Ma, Tat-Seng Chua. LLM2Rec: Large Language Models Are Powerful Embedding Models for Sequential Recommendation. KDD 2025.Guoqing Hu, An Zhang*, Shuo Liu, Zhibo Cai, Xun Yang, Xiang Wang. AlphaFuse: Learn ID Embeddings for Sequential Recommendation in Null Space of Language Embeddings. SIGIR 2025.Leheng Sheng, An Zhang*, Yi Zhang, Yuxin Chen, Xiang Wang, Tat-Seng Chua. Language Representations Can be What Recommenders Need: Findings and Potentials. ICLR 2025.Shuo Liu, An Zhang*, Guoqing Hu, Hong Qian, Tat Seng Chua. Preference diffusion for recommendation. ICLR 2025.Yuxin Chen, Junfei Tan, An Zhang*, Zhengyi Yang, Leheng Sheng, Enzhi Zhang, Xiang Wang, Tat-Seng Chua. On Softmax Direct Preference Optimization for Recommendation. NeurIPS 2024.An Zhang, Yuxin Chen, Leheng Sheng, Xiang Wang, Tat-Seng Chua. On Generative Agents in Recommendation. SIGIR 2024.LLM Reasoning/Agentic:Leheng Sheng, An Zhang*, Zijian Wu, Weixiang Zhao, Changshuo Shen, Yi Zhang, Xiang Wang, Tat-Seng Chua. On Reasoning Strength Planning in Large Reasoning Models. NeurIPS 2025.Yaorui Shi, Sihang Li, Chang Wu, Zhiyuan Liu, Junfeng Fang, Hengxing Cai, An Zhang, Xiang Wang. Search and Refine During Think: Facilitating Knowledge Refinement for Improved Retrieval-Augmented Reasoning. NeurIPS 2025.Yuxin Chen, Yiran Zhao, Yang Zhang, An Zhang, Kenji Kawaguchi, Shafiq Joty, Junnan Li, Tat-Seng Chua, Michael Qizhe Shieh, Wenxuan Zhang. The Emergence of Abstract Thought in Large Language Models Beyond Any Language. NeurIPS 2025.Jingnan Zheng, Han Wang, An Zhang*, Tai D. Nguyen, Jun Sun, Tat-Seng Chua. ALI-Agent: Assessing LLMs' Alignment with Human Values via Agent-based Evaluation. NeurIPS 2024.LLM Safety:Jingnan Zheng, Xiangtian Ji, Yijun Lu, Chenhang Cui, Weixiang Zhao, Gelei Deng, Zhenkai Liang, An Zhang*, Tat-Seng Chua. RSafe: Incentivizing proactive reasoning to build robust and adaptive LLM safeguards. NeurIPS 2025.Chenhang Cui, Gelei Deng, An Zhang*, Jingnan Zheng, Yicong Li, Lianli Gao, Tianwei Zhang, Tat-Seng Chua. Safe + Safe = Unsafe? Exploring How Safe Images Can Be Exploited to JailbreakLarge Vision-Language Models. NeurIPS 2025.Chenhang Cui, An Zhang*, Yiyang Zhou, Zhaorun Chen, Gelei Deng, Huaxiu Yao, Tat-Seng Chua. Fine-Grained Verifiers: Preference Modeling as Next-token Prediction in Vision-Language Alignment. ICLR 2025.Jingnan Zheng, Jiahao Liu, An Zhang*, Jun Zeng, Ziqi Yang, Zhenkai Liang, Tat-Seng Chua. MaskDroid: Robust Android malware detection with masked graph representations. ASE 2024.",
@@ -1606,13 +1621,13 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "本科",
+            "degree": "本科学位",
             "institution": "东南大学数学院",
             "year": "2016",
             "major": ""
           },
           {
-            "degree": "博士",
+            "degree": "博士学位",
             "institution": "新加坡国立大学统计和数据科学学院",
             "year": "2021",
             "major": ""
@@ -1638,9 +1653,9 @@
         "recent_updates": [],
         "source_id": "ustc_ds_faculty",
         "source_url": "https://saids.ustc.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:10:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:10:08Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -1676,7 +1691,9 @@
         "is_academician": false,
         "research_areas": [
           "材料表界面理论计算",
-          "人工智能赋能的材料科学研究"
+          "人工智能赋能的材料科学研究",
+          "AI For Materials Science",
+          "原子层次物质表界面量子精度的大尺度模拟计算"
         ],
         "keywords": [],
         "bio": "钟志诚发布时间：2024-05-30浏览次数：6208钟志诚E-mail：zczhong@ustc.edu.cn钟志诚，教授，博士生导师。本科毕业于上海交通大学少年班，硕士毕业于北京大学，在荷兰特文特大学获得博士学位。2017 年通过海外高层次人才引进计划，加入中国科学院宁波材料所，任研究员。2024 年起加入中国科学技术大学人工智能与数据科学学院，任长聘正教授。长期从事材料表界面理论计算研究，与多个国际知名的实验小组建立并且保持良好的合作，成功解释了多个实验观测的反常现象，多项理论预测得到了实验的证实。近年来积极探索推动人工智能赋能的材料科学研究新范式（AI For Materials Science）：将前沿 AI 技术、传统凝聚态理论与材料计算相结合，在原子层次实现物质表界面量子精度的大尺度模拟计算。共发表学术论文 110 余篇，包括 Science 1 篇, Nat. Phys./Mater./Catal./Comm. 5 篇，PRX/Lett. 10 篇，PRB/Appl./Mater. 41篇，Adv. Mater. 11 篇，Acta Mater. 2 篇等。团队主页：https://ai4s.work/近5年内发表的代表性论著 :(1) RiHe;HuaWang;FenglinDeng;YuxiangGao;BingwenZhang;YubaiShi; Run-WeiLi;ZhichengZhong;SwitchingTwo-Dimensional Sliding  Ferroelectrics by Mechanical Bending , Physical Review Letters , 2025, 134(7):076101(本人标注:共同通讯作者)(2) YuxiangGao;FenglinDeng;RiHe;ZhichengZhong; Spontaneous curvature in twodimensional van der Waals heterostructures，Nature Communications,2025, 16(1):717(本人标注:唯一通讯作者)(3) RenjiBian;RiHe;ErPan;ZefenLi;GuimingCao;PengMeng;JiangangChen; QingLiu;ZhichengZhong;WenwuLi;FucaiLiu;Developing fatigue-resistant ferroelectrics using interlayer slidings witching,Science, 2024, 385(6704): 57-62 (本人标注:共同通讯作者)(4) RiHe;HaoweiXu;PeijunYang;KaiChang;HuaWang;ZhichengZhong; Ferroelastic TwinWall-Mediated Ferroelectriclike Behavior and Bulk Photovoltaic Effect in SrTiO3, Physical Review Letters , 2024, 132(17): 176801(本人标注:共同通讯作者) (5)RiHe;BingwenZhang;HuaWang;LeiLi;PingTang;GerritBauer;Zhicheng Zhong; Ultrafast switching dynamics of the ferroelectric order in stacking-engineered ferroelectrics, Acta Materialia,2024,262:119416(本人标注:唯一通讯作者）近5年内发表的其他论著(1) Wei,Xia;Bo,Bai;Xuejiao,Chen;Yichen,Yang;Yang,Zhang; Jian,Yuan; Qiang, Li;Kunya,Yang;Xiangqi, Liu;Yang, Shi;Haiyang,Ma;Huali,Yang; Mingquan,He;Lei,Li;Chuanying,Xi;Li,Pi;Xiaodong,Lv;Xia,Wang;Xuerong, Liu;Shiyan,Li;Xiaodong,Zhou; Jianpeng,Liu;Yulin,Chen; Jian,Shen;Dawei, Shen; Zhicheng, Zhong;Wenbo,Wang; Yanfeng, Guo ; Giant DomainWall Anomalous Hall Effect in a Layered Antiferromagnet EuAl2Si2, PHYSICAL REVIEW LETTERS,2024,133(21):216602(本人标注:共同通讯作者)(2) Xuejian Qin; Hongyu Wu; Guoyong Shi; Chao Zhang; Peiheng Jiang; Zhicheng Zhong; Zeropoint quantum diffusion of protons in the hydrogen-rich superconductor LaH10 from first principles, Physical Review B, 2023, 108(6): 064102(本人标注: 唯一通讯作者)(3) Yulin Gan; Fazhi Yang; Lingyuan Kong; Xuejiao Chen; Hao Xu; Jin Zhao; Gang Li; Yuchen Zhao; Lei Yan; Zhicheng Zhong; Yunzhong Chen; Hong Ding ; Light-induced giant Rashba spin-orbit coupling at superconducting KTaO3 (110) heterointerfaces, Advanced Materials, 2023, 35(25): 2300582 (本人标注: 共同通讯作者)(4) Yong Zhang; Fucong Fei; Ruxin Liu; Tongshuai Zhu; Bo Chen; Tianyu Qiu; Zewen Zuo;Wenchao Tang; Xiaoxiang Xi; Xiaoshan Wu; Di Wu; Zhicheng Zhong; Fengqi Song; Rong Zhang; Xuefeng Wang ; Enhanced Superconductivity and Upper Critical Field in Ta-Doped Weyl Semimetal Td-MoTe2, Advanced Materials, 2023, 35: 2207841 (本人标注: 共同通讯作者)(5) Ruxin, Liu; Liang, Si; Wei, Niu; Xu, Zhang; Zhongqiang, Chen; Changzheng, Zhu; Wenzhuo, Zhuang; Yongda, Chen; Liqi, Zhou; Chunchen, Zhang; Peng, Wang; Fengqi, Song; Lin, Tang; Yongbing, Xu; Zhicheng, Zhong; Rong, Zhang; Xuefeng, Wang ; Light-Induced Mott-Insulator-to-Metal Phase Transition in Ultrathin Intermediate-Spin Ferromagnetic Perovskite Ruthenates, Advanced Materials, 2023, 0(0): 2211612( 本人标注: 共同通讯作者 )(6) Hongyu Wu; Ri He; Yi Lu; Zhicheng Zhong; Large-scale atomistic simulation of quantum effects in SrTiO3 from first principles, Physical Review B, 2022, 106(22): 224102(本人标注: 唯一通讯作者)(7) Ri, He; Hongyu, Wu; Yi, Lu; Zhicheng, Zhong; Origin of negative thermal expansion and pressure-induced amorphization in zirconium tungstate from a machine-learning potential, Physical Review B, 2022, 106(17): 174101(本人标注: 唯一通讯作者)(8) Ri, He; Hongyu, Wu; Shi, Liu; Houfang, Liu; Zhicheng, Zhong; Ferroelectric structural transition in hafnium oxide induced by charged oxygen vacancies, Physical Review B, 2021, 104(18): L180102 (本人标注: 唯一通讯作者)(9) Weinan, Lin; Liang, Liu; Qing, Liu; Lei, Li; Xinyu, Shu; Changjian, Li; Qidong, Xie; Peiheng, Jiang; Xuan, Zheng; Rui, Guo; Zhishiuh, Lim; Shengwei, Zeng; Guowei, Zhou; Han, Wang; Jing, Zhou; Ping, Yang; Ariando; Stephen J., Pennycook; Xiaohong, Xu; Zhicheng, Zhong; Zhiming, Wang; Jingsheng, Chen ; Electric Field Control of the Magnetic Weyl Fermion in an Epitaxial SrRuO3 (111) Thin Film, Advanced Materials, 2021,33(36):2101316(本人标注: 共同通讯作者)(10) LiangSi;WenXiao; JosefKaufmann; JanM.Tomczak;Yi Lu; Zhicheng Zhong; KarstenHeld; TopotacticHydrogen inNickelate Superconductors and AkinInfinite-LayerOxidesABO2, Physical Review Letters, 2020, 124(16):166402 (本人标注:共同通讯作者)5年以外的代表性论著(1) Peiheng Jiang,; Liang Si; Zhaoliang Liao; Zhicheng Zhong; Electronic structureofrare-earthinfinite-layerRNiO2(R=La,Nd),Physical Review B, 2019, 100,201106(本人标注:唯一通讯作者)(2) ChangshengSong;WenXiao;LeiLi;YiLu;PeihengJiang;ChaorongLi;Aixi Chen; Zhicheng Zhong; Tunable band gap and enhanced ferromagnetism by surface adsorption in monolayer Cr2Ge2Te6, Physical Review B,2019,99,214435(本人标注:唯一通讯作者)(3) Peiheng Jiang; CongWang; DachuanChen; ZhichengZhong; ZheYuan; Zhongyi Lu; Wei Ji; Stacking tunable interlayermagnetismin bilayer CrI3, Physical Review B,2019,99,144401(本人标注:唯一通讯作者)(4) WeinanLin;LeiLi;FatihDogan;ChangjianLi;Rote,HeleneRote;Xiaojiang Yu;BangminZhang;YangyangLi;WenSiangLew;ShijieWang,;WilfridPrellier; Stephen J Pennycook; Jingsheng Chen; Zhicheng Zhong; Aurelien Manchon;Tom Wu; Interface-based tuning of Rashbaspin-orbit interaction in asymmetric oxide heterostructures with 3d electrons, Nature Communications,2019,10,3052(本人标注:共同通讯作者)(5) PeihengJiang;LeiLi;ZhaoliangLiao;Y.X.Zhao;ZhichengZhong;Spin Direction-Controlled Electronic Band Structure in Two-Dimensional Ferromagnetic CrI3,Nano Letters,2018,18,3844 (本人标注:唯一通讯作者)",
@@ -1693,8 +1710,8 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "本科",
-            "institution": "上海交通大学少年班",
+            "degree": "博士",
+            "institution": "荷兰特文特大学",
             "year": "",
             "major": ""
           },
@@ -1705,8 +1722,8 @@
             "major": ""
           },
           {
-            "degree": "博士",
-            "institution": "荷兰特文特大学",
+            "degree": "本科",
+            "institution": "上海交通大学少年班",
             "year": "",
             "major": ""
           }
@@ -1731,9 +1748,9 @@
         "recent_updates": [],
         "source_id": "ustc_ds_faculty",
         "source_url": "https://saids.ustc.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:10:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:10:08Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -1791,13 +1808,13 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "本科",
+            "degree": "本科学位",
             "institution": "中国科学技术大学",
             "year": "2011",
             "major": "信息安全"
           },
           {
-            "degree": "博士",
+            "degree": "博士学位",
             "institution": "中国科学技术大学-微软亚洲研究院",
             "year": "2016",
             "major": "电子科学与技术"
@@ -1823,9 +1840,9 @@
         "recent_updates": [],
         "source_id": "ustc_ds_faculty",
         "source_url": "https://saids.ustc.edu.cn/szdw/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:10:08Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:10:08Z",
         "is_active": true,
         "data_completeness": 70
       },

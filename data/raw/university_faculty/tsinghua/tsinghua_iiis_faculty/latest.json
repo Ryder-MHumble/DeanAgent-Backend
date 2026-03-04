@@ -3,8 +3,8 @@
   "dimension": "university_faculty",
   "group": "tsinghua",
   "source_name": "清华大学交叉信息研究院-教师",
-  "crawled_at": "2026-03-03T14:01:03.107173+00:00",
-  "previous_crawled_at": "2026-03-03T03:50:17.235867+00:00",
+  "crawled_at": "2026-03-04T07:04:07.765167+00:00",
+  "previous_crawled_at": "2026-03-03T14:01:03.107173+00:00",
   "item_count": 76,
   "new_item_count": 0,
   "items": [
@@ -58,16 +58,16 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "博士学位",
+            "degree": "物理学博士学位",
             "institution": "哈佛大学",
             "year": "1972",
-            "major": "物理学"
+            "major": ""
           },
           {
-            "degree": "博士学位",
+            "degree": "计算机科学博士学位",
             "institution": "伊利诺伊大学",
             "year": "1975",
-            "major": "计算机科学"
+            "major": ""
           }
         ],
         "publications_count": -1,
@@ -90,9 +90,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -179,9 +179,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -193,9 +193,9 @@
       "url_hash": "3ae69f60a0b3f255dafb853aaa59b07c991b8b9f45e3e6e612e47ef58e982455",
       "published_at": null,
       "author": null,
-      "content": "决策智能，随机建模与分析，强化学习，在线学习，网络优化",
+      "content": "决策智能，强化学习，大模型，机器学习，随机网络优化",
       "content_html": null,
-      "content_hash": "5e5bb7c831720bee03f055296440817ed917031face04bafba328ac489bfc4fe",
+      "content_hash": "2d4af8e4c02f445e252f49b9ec24526a300a35db0c75a7d506490500ea2a43fb",
       "source_id": "tsinghua_iiis_faculty",
       "dimension": "university_faculty",
       "tags": [
@@ -217,13 +217,13 @@
         "is_academician": false,
         "research_areas": [
           "决策智能",
-          "随机建模与分析",
           "强化学习",
-          "在线学习",
-          "网络优化"
+          "大模型",
+          "机器学习",
+          "随机网络优化"
         ],
         "keywords": [],
-        "bio": "决策智能，随机建模与分析，强化学习，在线学习，网络优化",
+        "bio": "决策智能，强化学习，大模型，机器学习，随机网络优化",
         "bio_en": "",
         "email": "",
         "phone": "",
@@ -237,20 +237,20 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "B.E",
-            "institution": "Sun Yat-sen University",
+            "degree": "Ph.D.",
+            "institution": "University of Southern California",
             "year": "",
             "major": "EE"
           },
           {
-            "degree": "M.S",
+            "degree": "M.S.",
             "institution": "Columbia University",
             "year": "",
             "major": "EE"
           },
           {
-            "degree": "Ph.D",
-            "institution": "University of Southern California",
+            "degree": "B.E.",
+            "institution": "Sun Yat-sen University",
             "year": "",
             "major": "EE"
           }
@@ -275,9 +275,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -313,8 +313,18 @@
         "is_academician": false,
         "research_areas": [
           "Theoretical Computer Science",
+          "Approximation Algorithms",
+          "Computational Geometry",
+          "Stochastic Combinatorial Optimization",
           "Machine Learning",
-          "Financial Technology"
+          "Learning Theory",
+          "Machine Learning for Tabular/Time series/Spatial-temporal data",
+          "Large generative models",
+          "ML and Finance",
+          "机器学习与量化投资",
+          "Large-scale Data Management and Analytics",
+          "Databases",
+          "Crowdsourcing"
         ],
         "keywords": [],
         "bio": "理论计算机科学，机器学习理论，金融科技",
@@ -350,9 +360,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -387,10 +397,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "quantum key distribution",
-          "quantum random number generation",
-          "(semi) self-testing / device-independent quantum information processing",
-          "multip"
+          "量子信息科学",
+          "量子密钥分发",
+          "量子随机数生成",
+          "(半)自测试/设备无关量子信息处理"
         ],
         "keywords": [],
         "bio": "量子信息科学",
@@ -408,13 +418,13 @@
         "education": [
           {
             "degree": "Ph.D.",
-            "institution": "University of Toronto",
+            "institution": "University of Toronto, Canada",
             "year": "2008",
             "major": "Physics"
           },
           {
             "degree": "B.Sc.",
-            "institution": "Peking University",
+            "institution": "Peking University, China",
             "year": "2003",
             "major": "Physics"
           }
@@ -439,9 +449,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -476,6 +486,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "基于超导的量子信息处理",
           "Feedback",
           "Entanglement",
           "Error correction"
@@ -533,9 +544,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -574,7 +585,14 @@
           "数据中心网络",
           "金融科技",
           "人工智能安全",
-          "人工智能+医疗"
+          "人工智能+医疗",
+          "distributed system design",
+          "big data",
+          "financial technology",
+          "privacy-preserving computation",
+          "data center networking",
+          "large scale system for machine learning and data mining",
+          "big data applications"
         ],
         "keywords": [],
         "bio": "分布式系统，数据中心网络，金融科技，人工智能安全，人工智能+医疗",
@@ -617,9 +635,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -654,6 +672,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "量子人工智能",
+          "量子信息与计算",
+          "拓扑相物质",
+          "量子非平衡态系统",
           "Quantum Machine Learning & Artificial Intelligence",
           "Quantum Information, Computation, and Simulation",
           "Topological Phases of Matter, AMO Physics",
@@ -674,22 +696,22 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "Ph.D.",
+            "degree": "Ph.D. in Physics",
             "institution": "University of Michigan",
             "year": "2010-2015",
-            "major": "Physics"
+            "major": ""
           },
           {
-            "degree": "M. Sc.",
+            "degree": "M. Sc. in Theoretical Physics",
             "institution": "Chern Institute of Mathematics, Nankai University",
             "year": "2007-2010",
-            "major": "Theoretical Physics"
+            "major": ""
           },
           {
-            "degree": "B. S.",
+            "degree": "B. S. in Physics and Mathematics",
             "institution": "Nankai University",
             "year": "2003-2007",
-            "major": "Physics and Mathematics"
+            "major": ""
           }
         ],
         "publications_count": -1,
@@ -712,9 +734,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -770,15 +792,15 @@
         "education": [
           {
             "degree": "本科",
-            "institution": "清华大学计算机科学与技术系",
+            "institution": "清华大学",
             "year": "2002-2006",
-            "major": ""
+            "major": "计算机科学与技术系"
           },
           {
             "degree": "博士",
-            "institution": "密歇根大学计算机系",
+            "institution": "密歇根大学",
             "year": "2006-2011",
-            "major": ""
+            "major": "计算机系"
           },
           {
             "degree": "博士后研究员",
@@ -807,9 +829,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -844,9 +866,16 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "计算机系统结构",
           "新型存储架构",
           "专用计算系统",
-          "硬件系统安全"
+          "硬件系统安全",
+          "efficient memory architectures",
+          "scalable data processing",
+          "hardware system security",
+          "data-intensive applications",
+          "artificial intelligence",
+          "big data analytics"
         ],
         "keywords": [],
         "bio": "计算机系统结构（新型存储架构、专用计算系统、硬件系统安全）",
@@ -901,9 +930,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -944,7 +973,10 @@
           "brain-spired AI algorithm design",
           "computer vision for self-driving",
           "compact model design",
-          "computer architecture and microelectronics"
+          "computer architecture",
+          "microelectronics",
+          "implanted medical and neural devices",
+          "chip level system solutions for self-driving systems"
         ],
         "keywords": [],
         "bio": "AI+Chiplet、AI算法设计",
@@ -987,9 +1019,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -1044,15 +1076,15 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "本科",
-            "institution": "兰州大学",
-            "year": "2001-2005",
-            "major": ""
-          },
-          {
             "degree": "博士",
             "institution": "中科院物理研究所",
             "year": "2008-2013",
+            "major": ""
+          },
+          {
+            "degree": "",
+            "institution": "兰州大学",
+            "year": "2001-2005",
             "major": ""
           }
         ],
@@ -1076,9 +1108,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -1164,9 +1196,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -1221,15 +1253,15 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "Bachelor",
-            "institution": "Tsinghua University",
-            "year": "2015",
-            "major": ""
-          },
-          {
             "degree": "Ph.D.",
             "institution": "University of California, Berkeley",
             "year": "2020",
+            "major": ""
+          },
+          {
+            "degree": "Bachelor",
+            "institution": "Tsinghua University",
+            "year": "2015",
             "major": ""
           }
         ],
@@ -1253,9 +1285,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -1290,7 +1322,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "cryptography"
+          "密码学",
+          "复杂性理论"
         ],
         "keywords": [],
         "bio": "密码学",
@@ -1339,9 +1372,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -1376,9 +1409,11 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "computer graphics",
-          "artificial intelligence",
-          "robotics"
+          "计算机图形学",
+          "机器学习",
+          "机器人学",
+          "计算设计",
+          "人工智能"
         ],
         "keywords": [],
         "bio": "计算机图形学，机器学习，机器人学",
@@ -1395,10 +1430,10 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "Bachelor's",
-            "institution": "Tsinghua University",
+            "degree": "Ph.D.",
+            "institution": "MIT",
             "year": "",
-            "major": "Computer Software"
+            "major": "Computer Science"
           },
           {
             "degree": "Master's",
@@ -1407,10 +1442,10 @@
             "major": "Computer Science"
           },
           {
-            "degree": "Ph.D.",
-            "institution": "MIT",
+            "degree": "Bachelor's",
+            "institution": "Tsinghua University",
             "year": "",
-            "major": "Computer Science"
+            "major": "Computer Software"
           }
         ],
         "publications_count": -1,
@@ -1433,9 +1468,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -1474,7 +1509,12 @@
           "区块链系统",
           "平台设计",
           "网络经济学",
-          "群体智能"
+          "群体智能",
+          "game theory",
+          "mechanism design",
+          "learning and decision making",
+          "algorithms",
+          "collaborative learning"
         ],
         "keywords": [],
         "bio": "博弈机制设计，区块链系统，平台设计，网络经济学，群体智能",
@@ -1523,9 +1563,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1561,7 +1601,8 @@
         "is_academician": false,
         "research_areas": [
           "计算机视觉",
-          "强化学习"
+          "强化学习",
+          "机器人"
         ],
         "keywords": [],
         "bio": "计算机视觉，强化学习",
@@ -1610,9 +1651,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -1648,7 +1689,11 @@
         "is_academician": false,
         "research_areas": [
           "离子量子计算",
-          "金刚石色心量子信息应用"
+          "金刚石色心量子信息应用",
+          "量子信息处理的物理实现",
+          "囚禁离子量子计算",
+          "金刚石色心量子模拟",
+          "金刚石色心量子传感"
         ],
         "keywords": [],
         "bio": "离子量子计算；金刚石色心量子信息应用。",
@@ -1665,16 +1710,16 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "B.S.",
-            "institution": "Tsinghua University",
-            "year": "2009-2013",
-            "major": "Physics"
-          },
-          {
-            "degree": "Ph.D.",
+            "degree": "Ph.D. in Physics",
             "institution": "Tsinghua University",
             "year": "2013-2018",
-            "major": "Physics"
+            "major": ""
+          },
+          {
+            "degree": "B.S. in Physics",
+            "institution": "Tsinghua University",
+            "year": "2009-2013",
+            "major": ""
           }
         ],
         "publications_count": -1,
@@ -1697,9 +1742,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -1734,9 +1779,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "AI safety",
-          "AI-driven simulation",
-          "gaming"
+          "AI安全",
+          "AI模拟",
+          "AI游戏"
         ],
         "keywords": [],
         "bio": "AI安全，AI模拟，AI游戏",
@@ -1753,7 +1798,25 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "bachelor and master",
+            "degree": "Postdoc",
+            "institution": "University of Washington",
+            "year": "2024",
+            "major": ""
+          },
+          {
+            "degree": "PhD",
+            "institution": "MIT",
+            "year": "",
+            "major": ""
+          },
+          {
+            "degree": "Bachelor",
+            "institution": "Shanghai Jiao Tong University",
+            "year": "",
+            "major": ""
+          },
+          {
+            "degree": "Master",
             "institution": "Shanghai Jiao Tong University",
             "year": "",
             "major": ""
@@ -1779,9 +1842,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1818,7 +1881,9 @@
         "research_areas": [
           "机器学习理论",
           "AI安全与对齐",
-          "优化"
+          "优化",
+          "深度学习",
+          "大模型"
         ],
         "keywords": [],
         "bio": "机器学习理论，AI安全与对齐，优化",
@@ -1867,9 +1932,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -1924,13 +1989,13 @@
           {
             "degree": "博士",
             "institution": "清华大学交叉信息研究院",
-            "year": "2012 - 2018",
+            "year": "2012-2018",
             "major": ""
           },
           {
             "degree": "本科",
             "institution": "清华大学交叉信息研究院（姚班）",
-            "year": "2008 - 2012",
+            "year": "2008-2012",
             "major": ""
           }
         ],
@@ -1954,9 +2019,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -1991,6 +2056,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "密码学",
           "theoretic cryptography",
           "efficient multi-party computation"
         ],
@@ -2011,14 +2077,14 @@
           {
             "degree": "Ph.D. of Computer Science",
             "institution": "Carnegie Mellon University, School of Computer Science",
-            "year": "2017 - 2022",
+            "year": "2017-2022",
             "major": ""
           },
           {
-            "degree": "Bachelor of Engineering, Computer Science",
+            "degree": "Bachelor of Engineering",
             "institution": "Tsinghua University, IIIS",
-            "year": "2013 - 2017",
-            "major": ""
+            "year": "2013-2017",
+            "major": "Computer Science"
           }
         ],
         "publications_count": -1,
@@ -2041,9 +2107,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -2117,9 +2183,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -2154,12 +2220,13 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "大语言模型强化学习",
-          "推理模型",
-          "多智能体强化学习",
           "大规模强化学习",
+          "智能体模型与推理模型",
+          "多智能体强化学习",
           "人机交互",
-          "机器学习系统"
+          "机器学习系统",
+          "大语言模型强化学习",
+          "推理模型"
         ],
         "keywords": [],
         "bio": "大规模强化学习，智能体模型与推理模型，多智能体强化学习，人机交互，机器学习系统",
@@ -2195,9 +2262,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -2232,7 +2299,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "quantum computing",
+          "量子计算的物理实现",
+          "量子信息",
+          "Theoretical research on quantum computing & its physical implementation",
           "quantum information",
           "quantum machine learning"
         ],
@@ -2251,16 +2320,16 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "Ph.D.",
+            "degree": "Ph.D. in Physics",
             "institution": "University of Michigan",
             "year": "2015-2019",
-            "major": "Physics"
+            "major": ""
           },
           {
-            "degree": "B.S.",
+            "degree": "B.S. in Physics",
             "institution": "Tsinghua University",
             "year": "2011-2015",
-            "major": "Physics"
+            "major": ""
           }
         ],
         "publications_count": -1,
@@ -2283,9 +2352,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -2359,9 +2428,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -2399,7 +2468,15 @@
           "机器学习",
           "机器人学",
           "人机交互",
-          "人工智能安全"
+          "人工智能安全",
+          "generalizable robot learning",
+          "trustworthy embodied AI",
+          "in-context robot learning",
+          "distributionally robust reinforcement learning",
+          "robot tool use",
+          "large-scale simulation benchmarks",
+          "data generation",
+          "preference-aligned reinforcement learning"
         ],
         "keywords": [],
         "bio": "机器学习，机器人学，人机交互，人工智能安全",
@@ -2415,12 +2492,6 @@
         "phd_institution": "",
         "phd_year": "",
         "education": [
-          {
-            "degree": "Postdoc",
-            "institution": "Stanford University",
-            "year": "2025",
-            "major": "Computer Science"
-          },
           {
             "degree": "PhD",
             "institution": "Carnegie Mellon University",
@@ -2454,9 +2525,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -2495,7 +2566,10 @@
           "三维深度学习",
           "机器人感知",
           "计算机图形学",
-          "几何处理"
+          "几何处理",
+          "3D perception",
+          "human-robot interaction",
+          "embodied AI"
         ],
         "keywords": [],
         "bio": "三维计算机视觉，三维深度学习，机器人感知，计算机图形学，几何处理",
@@ -2518,7 +2592,7 @@
             "major": ""
           },
           {
-            "degree": "Bachelor",
+            "degree": "bachelor's degree",
             "institution": "Tsinghua University",
             "year": "",
             "major": "Electronic Engineering"
@@ -2544,9 +2618,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -2627,9 +2701,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -2668,7 +2742,11 @@
           "机器学习理论",
           "强化学习",
           "动力系统",
-          "异常检测"
+          "异常检测",
+          "优化算法",
+          "神经网络训练",
+          "算法复杂性分析",
+          "人工智能应用"
         ],
         "keywords": [],
         "bio": "优化，机器学习理论， 强化学习， 动力系统， 异常检测",
@@ -2685,7 +2763,7 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "PhD",
+            "degree": "博士",
             "institution": "麻省理工学院",
             "year": "2022",
             "major": "计算机科学"
@@ -2717,9 +2795,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -2757,7 +2835,10 @@
           "计算机视觉",
           "多模态机器学习",
           "自动驾驶",
-          "机器人学习"
+          "机器人学习",
+          "multi-modal machine learning",
+          "autonomous driving",
+          "robot learning"
         ],
         "keywords": [],
         "bio": "计算机视觉，多模态机器学习，自动驾驶，机器人学习",
@@ -2774,15 +2855,15 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "B.S.",
-            "institution": "Zhejiang University",
-            "year": "2013",
-            "major": ""
-          },
-          {
             "degree": "Ph.D.",
             "institution": "MIT",
             "year": "2019",
+            "major": ""
+          },
+          {
+            "degree": "B.S.",
+            "institution": "Zhejiang University",
+            "year": "2013",
             "major": ""
           }
         ],
@@ -2806,9 +2887,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -2845,7 +2926,12 @@
         "research_areas": [
           "计算经济学",
           "人工智能",
-          "数据估值"
+          "数据估值",
+          "data valuation",
+          "data markets",
+          "information elicitation",
+          "information aggregation",
+          "information design"
         ],
         "keywords": [],
         "bio": "计算经济学，人工智能，数据估值",
@@ -2888,9 +2974,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -2925,6 +3011,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "超导量子计算",
           "superconducting qubit",
           "mesoscopic investigation of transport phenomena in quantum systems for quantum computing"
         ],
@@ -2969,9 +3056,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -3027,7 +3114,7 @@
         "education": [
           {
             "degree": "Ph.D.",
-            "institution": "Shanghai Institute of Optics and Fine Mechanics, Chinese Academy of Sciences",
+            "institution": "Shanghai Institute of Optics and fine Mechanics, Chinese Academy of Sciences",
             "year": "2005-2010",
             "major": "Atomic and Molecular Physics"
           },
@@ -3058,9 +3145,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -3095,6 +3182,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "超导量子计算",
           "量子信息"
         ],
         "keywords": [],
@@ -3144,9 +3232,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -3181,7 +3269,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "quantum memory based on trapped ions and cryogenic systems for large-scale quantum computation"
+          "quantum memory based on trapped ions",
+          "cryogenic systems for large-scale quantum computation"
         ],
         "keywords": [],
         "bio": "",
@@ -3200,19 +3289,19 @@
           {
             "degree": "Ph. D Student",
             "institution": "Peking University",
-            "year": "2008.9-2013.7",
+            "year": "2008-2013",
             "major": ""
           },
           {
             "degree": "Visiting Student",
             "institution": "École Polytechnique Fédérale de Lausanne,EPFL",
-            "year": "2011.3-2011.9",
+            "year": "2011-2011",
             "major": ""
           },
           {
             "degree": "Undergraduate Student",
             "institution": "Tianjin University",
-            "year": "2004.9-2008.7",
+            "year": "2004-2008",
             "major": ""
           }
         ],
@@ -3236,9 +3325,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -3275,7 +3364,10 @@
         "research_areas": [
           "超导量子信息处理",
           "微波量子光学",
-          "量子器件"
+          "量子器件",
+          "superconducting quantum information processing",
+          "microwave quantum optics",
+          "development of quantum devices"
         ],
         "keywords": [],
         "bio": "超导量子信息处理，微波量子光学和量子器件",
@@ -3318,9 +3410,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -3355,7 +3447,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "离子阱量子网络"
+          "离子阱量子网络",
+          "quantum network with trapped ion system"
         ],
         "keywords": [],
         "bio": "离子阱量子网络",
@@ -3404,9 +3497,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -3442,7 +3535,9 @@
         "is_academician": false,
         "research_areas": [
           "离子阱量子计算与量子模拟",
-          "离子阱芯片研发"
+          "离子阱芯片研发",
+          "ion trap chip development",
+          "trapped-ion quantum information processing"
         ],
         "keywords": [],
         "bio": "离子阱量子计算与量子模拟，离子阱芯片研发",
@@ -3485,9 +3580,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -3565,9 +3660,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -3603,7 +3698,8 @@
         "is_academician": false,
         "research_areas": [
           "离子阱量子计算控制系统",
-          "量子精密测量"
+          "量子精密测量",
+          "电子学技术"
         ],
         "keywords": [],
         "bio": "离子阱量子计算控制系统、量子精密测量等相关的电子学技术",
@@ -3652,9 +3748,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -3688,10 +3784,7 @@
         "position": "助理研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [
-          "超导量子信息处理",
-          "混合量子系统"
-        ],
+        "research_areas": [],
         "keywords": [],
         "bio": "超导量子信息处理，混合量子系统",
         "bio_en": "",
@@ -3705,20 +3798,7 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [
-          {
-            "degree": "Ph. D. in Physics",
-            "institution": "Tsinghua University (THU)",
-            "year": "2014 – 2020",
-            "major": ""
-          },
-          {
-            "degree": "Bachelor in Physics",
-            "institution": "Beijing Normal University (BNU)",
-            "year": "2010 – 2014",
-            "major": ""
-          }
-        ],
+        "education": [],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3739,11 +3819,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
-        "data_completeness": 85
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -3776,6 +3856,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "计算几何",
+          "组合算法",
           "energy-efficient computing",
           "computational geometry",
           "sensor and wireless networks"
@@ -3821,9 +3903,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 85
       },
@@ -3892,9 +3974,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3963,9 +4045,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -4034,9 +4116,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -4109,9 +4191,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -4153,7 +4235,7 @@
         "bio": "量子网络与量子纠缠",
         "bio_en": "",
         "email": "iiis@mail.tsinghua.edu.cn",
-        "phone": "010-62781693",
+        "phone": "",
         "office": "",
         "profile_url": "https://iiis.tsinghua.edu.cn/rydw/bsh/fenglu.htm",
         "lab_url": "",
@@ -4183,9 +4265,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -4237,15 +4319,15 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "Bachelor in Physics",
+            "degree": "Bachelor",
             "institution": "Peking University",
-            "year": "2016.09 – 2020.07",
+            "year": "2016-2020",
             "major": "Physics"
           },
           {
-            "degree": "PhD in Physics",
+            "degree": "PhD",
             "institution": "Tsinghua University",
-            "year": "2020.09 – 2025.07",
+            "year": "2020-2025",
             "major": "Physics"
           }
         ],
@@ -4269,9 +4351,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -4340,9 +4422,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 45
       },
@@ -4396,7 +4478,7 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "本科",
+            "degree": "学士",
             "institution": "中国科学技术大学少年班学院",
             "year": "2020",
             "major": "应用物理学"
@@ -4428,9 +4510,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -4465,13 +4547,14 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "金刚石色心量子模拟与量子传感"
+          "金刚石色心量子模拟",
+          "量子传感"
         ],
         "keywords": [],
         "bio": "金刚石色心量子模拟与量子传感",
         "bio_en": "",
         "email": "iiis@mail.tsinghua.edu.cn",
-        "phone": "010-62781693",
+        "phone": "",
         "office": "",
         "profile_url": "https://iiis.tsinghua.edu.cn/rydw/bsh/luyalan.htm",
         "lab_url": "",
@@ -4501,9 +4584,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -4539,7 +4622,8 @@
         "is_academician": false,
         "research_areas": [
           "强化学习",
-          "多智能体系统"
+          "多智能体系统",
+          "机器人大模型"
         ],
         "keywords": [],
         "bio": "强化学习，多智能体系统",
@@ -4575,9 +4659,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -4618,7 +4702,7 @@
         "bio": "超导量子信息处理",
         "bio_en": "",
         "email": "iiis@mail.tsinghua.edu.cn",
-        "phone": "010-62781693",
+        "phone": "",
         "office": "",
         "profile_url": "https://iiis.tsinghua.edu.cn/rydw/bsh/panxiaoxuan.htm",
         "lab_url": "",
@@ -4648,9 +4732,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -4693,7 +4777,7 @@
         "bio": "量子人工智能，拓扑量子计算，张量网络方法",
         "bio_en": "",
         "email": "iiis@mail.tsinghua.edu.cn",
-        "phone": "010-62781693",
+        "phone": "",
         "office": "",
         "profile_url": "https://iiis.tsinghua.edu.cn/rydw/bsh/sunzhengzhi.htm",
         "lab_url": "",
@@ -4723,9 +4807,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -4794,9 +4878,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 45
       },
@@ -4885,9 +4969,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -4928,7 +5012,7 @@
         "bio": "量子物理",
         "bio_en": "",
         "email": "iiis@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "010-62781693",
         "office": "",
         "profile_url": "https://iiis.tsinghua.edu.cn/rydw/bsh/yangyanbin.htm",
         "lab_url": "",
@@ -4958,9 +5042,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -5029,9 +5113,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 45
       },
@@ -5100,9 +5184,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -5171,9 +5255,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -5242,9 +5326,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -5313,9 +5397,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -5384,9 +5468,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -5455,9 +5539,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -5526,9 +5610,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -5597,9 +5681,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -5668,9 +5752,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -5739,9 +5823,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -5810,9 +5894,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -5881,9 +5965,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -5952,9 +6036,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -6023,9 +6107,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -6059,12 +6143,14 @@
         "position": "量子信息研发",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "量子信息研发"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "iiis@mail.tsinghua.edu.cn",
-        "phone": "",
+        "phone": "010-62781693",
         "office": "",
         "profile_url": "https://iiis.tsinghua.edu.cn/rydw/syy/wanghaiyan.htm",
         "lab_url": "",
@@ -6094,11 +6180,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -6165,9 +6251,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_iiis_faculty",
         "source_url": "https://iiis.tsinghua.edu.cn/rydw.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:59:02Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:59:02Z",
         "is_active": true,
         "data_completeness": 55
       },

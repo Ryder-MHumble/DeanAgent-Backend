@@ -3,8 +3,8 @@
   "dimension": "university_faculty",
   "group": "pku",
   "source_name": "北京大学软件与微电子学院-师资团队",
-  "crawled_at": "2026-03-03T12:34:14.475843+00:00",
-  "previous_crawled_at": "2026-03-03T03:43:32.369933+00:00",
+  "crawled_at": "2026-03-04T06:52:05.139733+00:00",
+  "previous_crawled_at": "2026-03-03T12:34:14.475843+00:00",
   "item_count": 15,
   "new_item_count": 0,
   "items": [
@@ -70,9 +70,9 @@
         "recent_updates": [],
         "source_id": "pku_ss_faculty",
         "source_url": "https://ss.pku.edu.cn/sztd/xssbsz/index.htm",
-        "crawled_at": "2026-03-03T12:32:47Z",
+        "crawled_at": "2026-03-04T06:51:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:32:47Z",
+        "last_seen_at": "2026-03-04T06:51:28Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -140,9 +140,9 @@
         "recent_updates": [],
         "source_id": "pku_ss_faculty",
         "source_url": "https://ss.pku.edu.cn/sztd/xssbsz/index.htm",
-        "crawled_at": "2026-03-03T12:32:47Z",
+        "crawled_at": "2026-03-04T06:51:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:32:47Z",
+        "last_seen_at": "2026-03-04T06:51:28Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -210,9 +210,9 @@
         "recent_updates": [],
         "source_id": "pku_ss_faculty",
         "source_url": "https://ss.pku.edu.cn/sztd/xssbsz/index.htm",
-        "crawled_at": "2026-03-03T12:32:47Z",
+        "crawled_at": "2026-03-04T06:51:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:32:47Z",
+        "last_seen_at": "2026-03-04T06:51:28Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -284,9 +284,9 @@
         "recent_updates": [],
         "source_id": "pku_ss_faculty",
         "source_url": "https://ss.pku.edu.cn/sztd/xssbsz/index.htm",
-        "crawled_at": "2026-03-03T12:32:47Z",
+        "crawled_at": "2026-03-04T06:51:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:32:47Z",
+        "last_seen_at": "2026-03-04T06:51:28Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -354,9 +354,9 @@
         "recent_updates": [],
         "source_id": "pku_ss_faculty",
         "source_url": "https://ss.pku.edu.cn/sztd/xssbsz/index.htm",
-        "crawled_at": "2026-03-03T12:32:47Z",
+        "crawled_at": "2026-03-04T06:51:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:32:47Z",
+        "last_seen_at": "2026-03-04T06:51:28Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -424,9 +424,9 @@
         "recent_updates": [],
         "source_id": "pku_ss_faculty",
         "source_url": "https://ss.pku.edu.cn/sztd/xssbsz/index.htm",
-        "crawled_at": "2026-03-03T12:32:47Z",
+        "crawled_at": "2026-03-04T06:51:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:32:47Z",
+        "last_seen_at": "2026-03-04T06:51:28Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -500,9 +500,9 @@
         "recent_updates": [],
         "source_id": "pku_ss_faculty",
         "source_url": "https://ss.pku.edu.cn/sztd/xssbsz/index.htm",
-        "crawled_at": "2026-03-03T12:32:47Z",
+        "crawled_at": "2026-03-04T06:51:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:32:47Z",
+        "last_seen_at": "2026-03-04T06:51:28Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -563,7 +563,7 @@
             "degree": "博士",
             "institution": "中国科学院软件研究所",
             "year": "",
-            "major": "信息安全方向"
+            "major": "信息安全"
           }
         ],
         "publications_count": -1,
@@ -586,9 +586,9 @@
         "recent_updates": [],
         "source_id": "pku_ss_faculty",
         "source_url": "https://ss.pku.edu.cn/sztd/xssbsz/index.htm",
-        "crawled_at": "2026-03-03T12:32:47Z",
+        "crawled_at": "2026-03-04T06:51:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:32:47Z",
+        "last_seen_at": "2026-03-04T06:51:28Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -643,9 +643,9 @@
         "education": [
           {
             "degree": "本科",
-            "institution": "浙江大学计算机系",
+            "institution": "浙江大学",
             "year": "1990",
-            "major": ""
+            "major": "计算机系"
           },
           {
             "degree": "工学硕士",
@@ -680,9 +680,9 @@
         "recent_updates": [],
         "source_id": "pku_ss_faculty",
         "source_url": "https://ss.pku.edu.cn/sztd/xssbsz/index.htm",
-        "crawled_at": "2026-03-03T12:32:47Z",
+        "crawled_at": "2026-03-04T06:51:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:32:47Z",
+        "last_seen_at": "2026-03-04T06:51:28Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -750,9 +750,9 @@
         "recent_updates": [],
         "source_id": "pku_ss_faculty",
         "source_url": "https://ss.pku.edu.cn/sztd/xssbsz/index.htm",
-        "crawled_at": "2026-03-03T12:32:47Z",
+        "crawled_at": "2026-03-04T06:51:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:32:47Z",
+        "last_seen_at": "2026-03-04T06:51:28Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -820,9 +820,9 @@
         "recent_updates": [],
         "source_id": "pku_ss_faculty",
         "source_url": "https://ss.pku.edu.cn/sztd/xssbsz/index.htm",
-        "crawled_at": "2026-03-03T12:32:47Z",
+        "crawled_at": "2026-03-04T06:51:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:32:47Z",
+        "last_seen_at": "2026-03-04T06:51:28Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -890,9 +890,9 @@
         "recent_updates": [],
         "source_id": "pku_ss_faculty",
         "source_url": "https://ss.pku.edu.cn/sztd/xssbsz/index.htm",
-        "crawled_at": "2026-03-03T12:32:47Z",
+        "crawled_at": "2026-03-04T06:51:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:32:47Z",
+        "last_seen_at": "2026-03-04T06:51:28Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -960,9 +960,9 @@
         "recent_updates": [],
         "source_id": "pku_ss_faculty",
         "source_url": "https://ss.pku.edu.cn/sztd/xssbsz/index.htm",
-        "crawled_at": "2026-03-03T12:32:47Z",
+        "crawled_at": "2026-03-04T06:51:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:32:47Z",
+        "last_seen_at": "2026-03-04T06:51:28Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -1030,9 +1030,9 @@
         "recent_updates": [],
         "source_id": "pku_ss_faculty",
         "source_url": "https://ss.pku.edu.cn/sztd/xssbsz/index.htm",
-        "crawled_at": "2026-03-03T12:32:47Z",
+        "crawled_at": "2026-03-04T06:51:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:32:47Z",
+        "last_seen_at": "2026-03-04T06:51:28Z",
         "is_active": true,
         "data_completeness": 20
       },
@@ -1100,9 +1100,9 @@
         "recent_updates": [],
         "source_id": "pku_ss_faculty",
         "source_url": "https://ss.pku.edu.cn/sztd/xssbsz/index.htm",
-        "crawled_at": "2026-03-03T12:32:47Z",
+        "crawled_at": "2026-03-04T06:51:28Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:32:47Z",
+        "last_seen_at": "2026-03-04T06:51:28Z",
         "is_active": true,
         "data_completeness": 20
       },

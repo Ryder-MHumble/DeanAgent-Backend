@@ -3,8 +3,8 @@
   "dimension": "university_faculty",
   "group": "tsinghua",
   "source_name": "清华大学智能产业研究院-研究团队",
-  "crawled_at": "2026-03-03T13:55:02.331828+00:00",
-  "previous_crawled_at": "2026-03-03T03:48:07.953862+00:00",
+  "crawled_at": "2026-03-04T07:00:53.521316+00:00",
+  "previous_crawled_at": "2026-03-03T13:55:02.331828+00:00",
   "item_count": 37,
   "new_item_count": 0,
   "items": [
@@ -36,11 +36,15 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "智慧物联",
-          "智慧交通",
-          "智慧医疗",
-          "大数据智能",
-          "智能机器人"
+          "数字视频",
+          "人工智能",
+          "图像视频压缩",
+          "传输技术",
+          "高清电视",
+          "互联网视频",
+          "多媒体检索",
+          "移动视频",
+          "图像数据库"
         ],
         "keywords": [],
         "bio": "清华大学 讲席教授",
@@ -76,9 +80,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -114,7 +118,7 @@
         "research_areas": [
           "人工智能在科学领域的交叉融合",
           "人工智能科学",
-          "生成式人工智能",
+          "用于生物学、化学、能源和材料的生成式人工智能",
           "可扩展的科学基础大模型"
         ],
         "keywords": [],
@@ -135,19 +139,19 @@
             "degree": "工学学士",
             "institution": "台湾清华大学",
             "year": "1990",
-            "major": "电气工程"
+            "major": "电气工程系"
           },
           {
             "degree": "工学硕士",
-            "institution": "美国加州大学圣芭芭拉分校",
+            "institution": "美国加州大学圣芭芭拉分校（UCSB）",
             "year": "1994",
-            "major": "电气和计算机工程"
+            "major": "电气和计算机工程系"
           },
           {
             "degree": "工学博士",
-            "institution": "美国加州大学圣芭芭拉分校",
+            "institution": "美国加州大学圣芭芭拉分校（UCSB）",
             "year": "1997",
-            "major": "电气和计算机工程"
+            "major": "电气和计算机工程系"
           }
         ],
         "publications_count": -1,
@@ -170,9 +174,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -206,9 +210,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "人工智能",
           "自然语言处理",
-          "智慧医疗"
+          "智慧医疗",
+          "科学智能",
+          "人工智能"
         ],
         "keywords": [],
         "bio": "刘洋，清华大学智能产业研究院（AIR）院长、人工智能医院联席执行院长、计算机系万国数据教授。研究方向为自然语言处理、智慧医疗和科学智能，承担国家自然科学基金委杰出青年项目、科技创新2030“新一代人工智能”重大项目等重要科研项目。主要学术兼职包括中国人工智能学会组织工作委员会主任、中国中文信息学会计算语言学专业委员会主任等。",
@@ -257,9 +262,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -294,7 +299,10 @@
         "is_academician": false,
         "research_areas": [
           "大数据",
-          "知识图谱相关技术（包括实体信息挖掘、关系抽取技术、和实体名消歧技术）",
+          "知识图谱相关技术",
+          "实体信息挖掘",
+          "关系抽取技术",
+          "实体名消歧技术",
           "对象级别的信息搜索技术",
           "语音语义一体化理解"
         ],
@@ -351,9 +359,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -445,9 +453,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -532,9 +540,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -619,9 +627,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -656,9 +664,9 @@
         "is_academician": false,
         "research_areas": [
           "边缘人工智能",
-          "基础模型算法",
           "神经网络推理系统",
-          "新型神经网络加速器"
+          "新型神经网络加速器",
+          "基础模型算法"
         ],
         "keywords": [],
         "bio": "曹婷，清华大学人工智能产业研究院（AIR）研究员/教授。研究方向包括边缘人工智能、神经网络推理系统、新型神经网络加速器以及基础模型算法等。研究成果已发表在ISCA、ASPLOS、MobiCom、MobiSys、NSDI、OSDI、PLDI、EuroSys、SC、PPoPP等计算机系统国际顶会，以及ICCV、ACL、KDD等人工智能领域国际顶会。",
@@ -673,7 +681,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "澳大利亚国立大学",
+            "year": "",
+            "major": "高能效软硬件协同设计"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -694,9 +709,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -782,9 +797,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -840,15 +855,15 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "学士",
-            "institution": "清华大学计算机科学与技术系",
-            "year": "2005-2009",
+            "degree": "博士",
+            "institution": "清华大学",
+            "year": "2009-2015",
             "major": "计算机科学与技术"
           },
           {
-            "degree": "博士",
-            "institution": "清华大学计算机科学与技术系",
-            "year": "2009-2015",
+            "degree": "学士",
+            "institution": "清华大学",
+            "year": "2005-2009",
             "major": "计算机科学与技术"
           }
         ],
@@ -872,9 +887,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -909,7 +924,7 @@
         "is_academician": false,
         "research_areas": [
           "大规模语言模型",
-          "科学发现"
+          "科学发现中的应用"
         ],
         "keywords": [],
         "bio": "周浩，清华大学智能产业研究院副研究员。他的主要研究方向是大规模语言模型，及其在科学发现中的应用。他曾任字节跳动研究科学家和副总监，领导搭建了字节跳动的文本生成中台和AI辅助药物设计两个方向的研发团队。他长期担任ICML、NeurIPS，ICLR，ACL等人工智能顶级会议的领域主席，在人工智能顶级国际会议上发表论文100余篇。曾获人工智能学会优博，CCF-NLPCC 青年新锐科学家，ACL 2021 最佳论文奖（通讯作者）和北京市科技新...",
@@ -927,15 +942,15 @@
         "education": [
           {
             "degree": "博士",
-            "institution": "南京大学计算机科学与技术系",
+            "institution": "南京大学",
             "year": "2012 - 2017",
-            "major": ""
+            "major": "计算机科学与技术系"
           },
           {
             "degree": "学士",
-            "institution": "南京师范大学计算机科学与技术学院",
+            "institution": "南京师范大学",
             "year": "2008 - 2012",
-            "major": ""
+            "major": "计算机科学与技术学院"
           }
         ],
         "publications_count": -1,
@@ -958,9 +973,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1052,9 +1067,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1088,6 +1103,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "基于离线深度强化学习的数据驱动复杂系统控制优化",
+          "智能交通系统",
+          "复杂网络",
           "离线强化学习",
           "数据驱动交通系统建模",
           "复杂系统决策优化"
@@ -1151,9 +1169,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1207,13 +1225,13 @@
           {
             "degree": "博士",
             "institution": "清华大学计算机系",
-            "year": "2014年-2019年",
+            "year": "2014-2019",
             "major": ""
           },
           {
             "degree": "学士",
             "institution": "清华大学计算机系",
-            "year": "2010年-2014年",
+            "year": "2010-2014",
             "major": ""
           }
         ],
@@ -1237,9 +1255,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1292,12 +1310,6 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "学士",
-            "institution": "北京大学信息科学技术学院",
-            "year": "2010-2014",
-            "major": ""
-          },
-          {
             "degree": "博士",
             "institution": "北京大学计算机科学与技术系",
             "year": "2014-2019",
@@ -1307,6 +1319,12 @@
             "degree": "访问博士生",
             "institution": "卡内基梅隆大学",
             "year": "2016-2017",
+            "major": ""
+          },
+          {
+            "degree": "学士",
+            "institution": "北京大学信息科学技术学院",
+            "year": "2010-2014",
             "major": ""
           }
         ],
@@ -1330,9 +1348,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1366,6 +1384,13 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "生成模型在数据压缩、自动驾驶和具身智能等领域的应用",
+          "目标检测",
+          "模型压缩",
+          "数据压缩",
+          "人工智能",
+          "计算流体力学",
+          "公共安全",
           "数据压缩",
           "自动驾驶",
           "具身智能中的生成模型"
@@ -1423,9 +1448,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1480,13 +1505,13 @@
         "education": [
           {
             "degree": "博士",
-            "institution": "清华大学未来实验室",
+            "institution": "清华大学 未来实验室",
             "year": "2013-2018",
             "major": "人机交互"
           },
           {
             "degree": "学士",
-            "institution": "清华大学软件学院",
+            "institution": "清华大学 软件学院",
             "year": "2008-2013",
             "major": "计算机软件"
           }
@@ -1511,9 +1536,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1548,7 +1573,7 @@
         "is_academician": false,
         "research_areas": [
           "几何与认知层面的场景理解",
-          "机器人应用"
+          "机器人"
         ],
         "keywords": [],
         "bio": "赵昊，清华大学电子工程系学士/博士，曾任英特尔中国研究院研究员和北京大学联合博士后。赵昊博士专注于几何与认知层面的场景理解及其在机器人中的应用，于计算机视觉与机器人国际期刊和会议(CVPR,ICCV,ECCV,IJCV,CVIU,ISPRS,T-IP,T-MM,NeurIPS,ICLR,RA-L,ICRA,IROS)上发表近30篇论文。赵昊博士是清华大学最大的机器人社团“天空工场”的创始人和负责人之一，曾参与孵化10余家高新技术创业公司。赵昊博士曾获得LSUN, Holistic3D, LID等多项学术竞赛冠军。",
@@ -1566,15 +1591,15 @@
         "education": [
           {
             "degree": "学士",
-            "institution": "清华大学电子工程系",
+            "institution": "清华大学",
             "year": "",
-            "major": ""
+            "major": "电子工程系"
           },
           {
             "degree": "博士",
-            "institution": "清华大学电子工程系",
+            "institution": "清华大学",
             "year": "",
-            "major": ""
+            "major": "电子工程系"
           }
         ],
         "publications_count": -1,
@@ -1597,9 +1622,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1671,9 +1696,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1765,9 +1790,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1805,7 +1830,10 @@
           "联邦学习",
           "隐私计算",
           "多智能体系统",
-          "统计力学"
+          "统计力学",
+          "医疗健康",
+          "自动驾驶",
+          "智慧制造"
         ],
         "keywords": [],
         "bio": "刘洋，2021-2025曾任清华大学智能产业研究院副研究员/副教授。2007年获得清华大学化学工程本科学位，2012年获得美国普林斯顿大学化学工程博士学位。2018年加入深圳前海微众银行股份有限公司，任资深研究员、AI部门联邦学习研究团队负责人，此前她曾先后就职于美国空气产品公司（Air Products）、美国Dataminr Inc.公司从事研究工作。她拥有20余项国际国内授权专利，超过100件专利申请，并在《Nature》，AAAI，IJCAI，USENIX，ACM TIST等知名学术期刊发表科研成果，总引用数超过3000。她是《联邦学习》和《Federated Learning》的主要作者之一。 她目前担任ACM TIST期刊副主编，曾担任IEEE Intelligent Systems， IEEE BigData等期刊客座编辑，在ICML、Neurips等多个会议组织专题研讨会。曾获深圳金融科技专项奖一等奖，AAAI人工智能创新奖等多个奖项。",
@@ -1854,9 +1882,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1907,6 +1935,12 @@
         "phd_year": "",
         "education": [
           {
+            "degree": "博士",
+            "institution": "美国密西根大学",
+            "year": "",
+            "major": "电子工程系"
+          },
+          {
             "degree": "本科",
             "institution": "清华大学",
             "year": "",
@@ -1915,12 +1949,6 @@
           {
             "degree": "硕士",
             "institution": "清华大学",
-            "year": "",
-            "major": "电子工程系"
-          },
-          {
-            "degree": "博士",
-            "institution": "美国密西根大学",
             "year": "",
             "major": "电子工程系"
           }
@@ -1945,9 +1973,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2036,9 +2064,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2074,7 +2102,8 @@
         "research_areas": [
           "多媒体计算",
           "人工智能",
-          "视频和影像内容分析"
+          "视频内容分析",
+          "影像内容分析"
         ],
         "keywords": [],
         "bio": "张宏江博士，美国国家工程院外籍院士、国际著名的多媒体计算领域的专家、开拓者和意见领袖，在多媒体计算和人工智能领域尤其是在视频和影像内容分析等研究方面具有开拓性贡献。",
@@ -2091,16 +2120,16 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "电子学学位",
+            "degree": "电子学",
             "institution": "郑州大学",
             "year": "",
             "major": ""
           },
           {
-            "degree": "电子工程博士学位",
+            "degree": "博士",
             "institution": "丹麦科技大学",
             "year": "",
-            "major": ""
+            "major": "电子工程"
           }
         ],
         "publications_count": -1,
@@ -2123,9 +2152,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2204,9 +2233,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2240,9 +2269,11 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "人工智能和机器学习",
+          "人工智能",
+          "机器学习",
           "优化算法",
-          "计算生物学"
+          "计算生物学",
+          "蛋白质结构预测"
         ],
         "keywords": [],
         "bio": "许锦波教授，清华大学卓越访问教授、美国芝加哥丰田计算技术研究所教授、《Bioinformatics》编委。他毕业于中国科学技术大学计算机系，中国科学院计算技术研究所和加拿大滑铁卢大学，是美国麻省理工学院数学系和人工智能实验室博士后。",
@@ -2260,9 +2291,9 @@
         "education": [
           {
             "degree": "",
-            "institution": "中国科学技术大学计算机系",
+            "institution": "中国科学技术大学",
             "year": "",
-            "major": "计算机"
+            "major": "计算机系"
           },
           {
             "degree": "",
@@ -2297,9 +2328,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2392,9 +2423,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -2462,9 +2493,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 25
       },
@@ -2532,9 +2563,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 25
       },
@@ -2602,9 +2633,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 25
       },
@@ -2672,9 +2703,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 25
       },
@@ -2742,9 +2773,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 25
       },
@@ -2812,9 +2843,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 25
       },
@@ -2882,9 +2913,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 25
       },
@@ -2952,9 +2983,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 25
       },
@@ -3022,9 +3053,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 25
       },
@@ -3092,9 +3123,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_air_faculty",
         "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
-        "crawled_at": "2026-03-03T13:47:08Z",
+        "crawled_at": "2026-03-04T06:58:29Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:47:08Z",
+        "last_seen_at": "2026-03-04T06:58:29Z",
         "is_active": true,
         "data_completeness": 25
       },

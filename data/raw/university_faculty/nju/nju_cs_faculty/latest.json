@@ -3,8 +3,8 @@
   "dimension": "university_faculty",
   "group": "nju",
   "source_name": "南京大学计算机系-师资队伍",
-  "crawled_at": "2026-03-03T12:27:01.256007+00:00",
-  "previous_crawled_at": "2026-03-03T11:17:14.361461+00:00",
+  "crawled_at": "2026-03-04T06:49:43.634379+00:00",
+  "previous_crawled_at": "2026-03-03T12:27:01.256007+00:00",
   "item_count": 65,
   "new_item_count": 0,
   "items": [
@@ -36,8 +36,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "常用链接南京大学计算机软件新技术国家重点实验室计算机科学技术与软件工程国家级...南京大学软件学院计算机基础教学部南京大学教务处版权所有©南京大学计算机学院江苏省南京市栖霞区仙林大道163号 计算机科学技术楼邮编：210023 电话",
-          "传真：86-025-89683126"
+          "软件自动化",
+          "面向对象语言与环境",
+          "并行程序的形式化方法"
         ],
         "keywords": [],
         "bio": "吕建教授，博士生导师，计算机软件新技术国家重点实验室主任。1960年3月生，1982年毕业于南京大学计算机系，1988年获博士学位，1993年－1994年在英国曼彻斯特大学计算机系作为访问学者。1995年在联合国大学澳门国际软件研究所从事研究工作。现任南京大学计算机科学与技术系副主任，计算机软件研究所副所长，中国计算机学会理事和江苏省计算机学会理事。研究方向包括软件自动化、面向对象语言与环境和并行程序的形式化方法。曾参加国家重点项目11项。获国家教委科技进步一等奖二次，国家教委科技进步二等奖一次，获江苏省科技进步二等奖一次，光华科技三等奖一次，完成论文40余篇。发表在《JournalofSystemsandSoftware》、《AnnualsofSoftwareEngIneerIng》、《ACMSIgplanNotIces》、《ACMSoftwareEngineerIngNotes》、《中国科学》等刊物上。合著专著《软件自动化》获国家教委学术著作优秀奖和优秀教材一等奖。1990年被授予“做出突出贡献的中国博士学位获得者”称号。1993年获霍英东青年教师奖。1994年进入“国家教委跨世纪优秀人才计划”。1995年获江苏省青年科技奖。1995年获“国家杰出青年科学基金”资助。1996年获首届江苏省青年科学家奖(提名奖)；1996年获中国青年科技奖。",
@@ -54,7 +55,7 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "学士",
+            "degree": "",
             "institution": "南京大学计算机系",
             "year": "1982",
             "major": ""
@@ -86,9 +87,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -124,7 +125,8 @@
         "research_areas": [
           "图像处理",
           "计算机视觉",
-          "模式识别"
+          "模式识别",
+          "人工智能"
         ],
         "keywords": [],
         "bio": "",
@@ -179,9 +181,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -215,14 +217,15 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "仙林校区南京市栖霞区仙林大道163号(86)-25-89683186(86)-25-83302728（fax）210023鼓楼校区南京市鼓楼区汉口路22号(86)-25-83593186(86)-25-83302728（fax）210093浦口校区南京市浦口区学府路8号(86)-25-58646684210089苏州校区苏州市太湖大道1520号(86)-25-89681766(86)-512-68768001215163Copyright © Nanjing University All Rights Reserved",
-          "苏ICP备10085945号webmaster@nju.edu.cn"
+          "人工智能",
+          "机器学习",
+          "数据挖掘"
         ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "webmaster@nju.edu.cn",
-        "phone": "86-25-89683186",
+        "phone": "(86)-25-89683186",
         "office": "",
         "profile_url": "https://www.nju.edu.cn/info/1040/372961.htm",
         "lab_url": "",
@@ -231,7 +234,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "",
+            "year": "",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -252,9 +262,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -325,9 +335,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -361,8 +371,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "常用链接南京大学计算机软件新技术国家重点实验室计算机科学技术与软件工程国家级...南京大学软件学院计算机基础教学部南京大学教务处版权所有©南京大学计算机学院江苏省南京市栖霞区仙林大道163号 计算机科学技术楼邮编：210023 电话",
-          "传真：86-025-89683126"
+          "数理逻辑",
+          "量子计算机"
         ],
         "keywords": [],
         "bio": "宋方敏，1961年11月出生，1982年2月本科毕业于南京大学，1982年获理学学士学，1985年获理学硕士学位1988年获理学博士学位。1993年和1994年在瑞士ETH和瑞典CTH从事博士后研究工作。目前研究方向是数理逻辑和量子计算机。主持和参加多项国家自然科学基金项目、863项目和中法先进研究计划（PRA），发表论文40余篇。曾获\"江苏省优秀科技工作者\"称号，国家教委科技进步三等奖和教育部提名国家科学技术奖（二等）。",
@@ -386,13 +396,13 @@
           },
           {
             "degree": "理学硕士",
-            "institution": "南京大学",
+            "institution": "",
             "year": "1985",
             "major": ""
           },
           {
             "degree": "理学博士",
-            "institution": "南京大学",
+            "institution": "",
             "year": "1988",
             "major": ""
           }
@@ -417,9 +427,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -453,8 +463,13 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "常用链接南京大学计算机软件新技术国家重点实验室计算机科学技术与软件工程国家级...南京大学软件学院计算机基础教学部南京大学教务处版权所有©南京大学计算机学院江苏省南京市栖霞区仙林大道163号 计算机科学技术楼邮编：210023 电话",
-          "传真：86-025-89683126"
+          "分布式网络与数据处理",
+          "未来网络系统与协议",
+          "物联网与传感网",
+          "新型计算机体系结构",
+          "数据中心核心技术",
+          "数据分析与处理",
+          "AI模型与边缘智能"
         ],
         "keywords": [],
         "bio": "电话：83686500个人主页：http://cs.nju.edu.cn/gchen电子邮件：gchen@nju.edu.cn",
@@ -474,13 +489,13 @@
             "degree": "学士",
             "institution": "南京大学",
             "year": "1984",
-            "major": "计算机软件专业"
+            "major": "计算机软件"
           },
           {
             "degree": "硕士",
             "institution": "东南大学",
             "year": "1987",
-            "major": "计算机应用专业"
+            "major": "计算机应用"
           },
           {
             "degree": "博士",
@@ -509,9 +524,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -545,8 +560,11 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "常用链接南京大学计算机软件新技术国家重点实验室计算机科学技术与软件工程国家级...南京大学软件学院计算机基础教学部南京大学教务处版权所有©南京大学计算机学院江苏省南京市栖霞区仙林大道163号 计算机科学技术楼邮编：210023 电话",
-          "传真：86-025-89683126"
+          "自然语言处理",
+          "软件工程",
+          "机器翻译",
+          "汉语语言处理",
+          "程序设计语言"
         ],
         "keywords": [],
         "bio": "陈家骏，教授、博士生导师。南京大学计算机系自然语言处理实验室主任，中国中文信息学会理事。毕业于南京大学计算机软件专业，获学士、硕士和博士学位。从20世纪80年代就开始从事自然语言处理和软件工程领域的研究与系统开发工作，研究方向包括机器翻译、汉语语言处理以及程序设计语言等。承担过国家863高技术、国家自然科学基金、国家社科基金以及教育部博士点基金等项目的研究工作；获得过国家七•五科技攻关重大成果奖、教育部科技进步二等奖等科研奖励；发表学术论文180余篇，其中包括领域顶级会议和期刊（ACL、EMNLP、NAACL、TALLIP、TACL、AAAI、IJCAI等）论文50余篇。获南京大学2019年度赵世良讲座教授荣誉。主持了《程序设计》江苏省精品课程（2008年）建设，编写的教材（《程序设计教程－－用C++语言编程》，机械工业出版社）获得2009年度国家精品教材和国家十一五规划教材以及2015和2019年度江苏省重点教材建设。",
@@ -601,9 +619,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -675,9 +693,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -756,9 +774,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -829,9 +847,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 45
       },
@@ -865,14 +883,14 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "常用链接南京大学计算机软件新技术国家重点实验室计算机科学技术与软件工程国家级...南京大学软件学院计算机基础教学部南京大学教务处版权所有©南京大学计算机学院江苏省南京市栖霞区仙林大道163号 计算机科学技术楼邮编：210023 电话",
-          "传真：86-025-89683126"
+          "分布式计算",
+          "普适计算"
         ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "sanglu@nju.edu.cn",
-        "phone": "",
+        "phone": "89686757",
         "office": "",
         "profile_url": "https://cs.nju.edu.cn/58/1e/c2639a153630/page.htm",
         "lab_url": "",
@@ -881,7 +899,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "南京大学计算机科学与技术系",
+            "year": "1992",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "南京大学计算机科学与技术系",
+            "year": "1995",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "南京大学计算机科学与技术系",
+            "year": "1997",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -902,9 +939,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -959,12 +996,6 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "博士",
-            "institution": "",
-            "year": "",
-            "major": ""
-          },
-          {
             "degree": "",
             "institution": "台湾交通大学",
             "year": "",
@@ -991,9 +1022,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -1050,19 +1081,19 @@
             "degree": "学士",
             "institution": "清华大学",
             "year": "",
-            "major": "计算机系"
+            "major": ""
           },
           {
             "degree": "硕士",
-            "institution": "南京大学",
+            "institution": "南京大学计算机系",
             "year": "",
-            "major": "计算机系"
+            "major": ""
           },
           {
             "degree": "博士",
-            "institution": "南京大学",
+            "institution": "南京大学计算机系",
             "year": "",
-            "major": "计算机系"
+            "major": ""
           }
         ],
         "publications_count": -1,
@@ -1085,9 +1116,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -1158,9 +1189,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1253,9 +1284,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -1290,7 +1321,10 @@
         "is_academician": false,
         "research_areas": [
           "程序设计语言",
-          "软件工程（软件方法论、软件分析、度量与测试）",
+          "软件工程",
+          "软件方法论",
+          "软件分析",
+          "度量与测试",
           "Web技术"
         ],
         "keywords": [],
@@ -1352,9 +1386,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -1388,8 +1422,19 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "常用链接南京大学计算机软件新技术国家重点实验室计算机科学技术与软件工程国家级...南京大学软件学院计算机基础教学部南京大学教务处版权所有©南京大学计算机学院江苏省南京市栖霞区仙林大道163号 计算机科学技术楼邮编：210023 电话",
-          "传真：86-025-89683126"
+          "智能机器人",
+          "人-机-环境共融机器人基础理论与关键技术",
+          "人工智能",
+          "非结构环境下的自主导航",
+          "动态环境下的即时定位和地图构建（SLAM）",
+          "同构环境下的智能避障",
+          "双臂协作机器人",
+          "机器人操作系统（ROS，Robot Operating System）",
+          "机器人多模态融合感知技术",
+          "RFID识别与感知技术",
+          "计算机视觉",
+          "无线感知技术",
+          "多模态信息融合"
         ],
         "keywords": [],
         "bio": "一、现在职位：南京大学计算机科学与技术系、计算机软件新技术国家重点实验室（南京大学）教授、博士研究生导师，南京大学智能机器人研究院院长。二、研究方向：智能机器人。三、研究内容1、智能机器人：人-机-环境共融机器人基础理论与关键技术，包括人工智能、非结构环境下的自主导航、动态环境下的即时定位与地图构建（SLAM）、同构环境下的智能避障、双臂协作机器人及机器人操作系统（ROS，Robot Operating System）等；2、机器人多模态融合感知技术：包括RFID识别与感知技术、计算机视觉、无线感知技术及多模态信息融合等四、“智能物资盘点机器人”入选“2022世界智能制造十大科技进展”。https://mp.weixin.qq.com/s/gtxWcxZuiwnJfbkMGirVrw五、招生信息：课题组常年招收本科生、硕士研究生、博士研究生、博士后研究人员进组，欢迎同学们踊跃报名！六、具体要求：满足南京大学招生条件即可。七、课题组招聘启示：",
@@ -1425,9 +1470,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -1461,8 +1506,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "常用链接南京大学计算机软件新技术国家重点实验室计算机科学技术与软件工程国家级...南京大学软件学院计算机基础教学部南京大学教务处版权所有©南京大学计算机学院江苏省南京市栖霞区仙林大道163号 计算机科学技术楼邮编：210023 电话",
-          "传真：86-025-89683126"
+          "软件Agent技术",
+          "软件中间件技术",
+          "网构软件方法学",
+          "普适计算技术"
         ],
         "keywords": [],
         "bio": "陶先平，男，博士，1970年生，九三学社南大社委。南京大学计算机科学与技术系教授、博士生导师、南京大学计算机科学与技术系副主任。兼任中国计算机学会系统软件专业委员会秘书长、中国计算机学会教育工委副主任。主要研究方向为软件Agent技术、软件中间件技术、网构软件方法学、普适计算技术等。  工作期间，主持或参与了国家自然科学基金重点及面上项目、973项目、863项目（含目标导向类和探索导向类项目）、国家八五、九五、十五攻关项目、国家发改委高新技术产业化项目、江苏省自然科学基金重点及一般项目、江苏省高技术等项目等二十余项，均圆满完成了相关任务并获得好评。在国内外重要刊物及一流国际会议论文集上发表论文60余篇，相关成果被国内外研究者多次引用。  2004年获得教育部提名国家科技奖自然科学一等奖（第二完成人），2006年获国家科技进步二等奖（第三完成人）。2010年获教育部技术发明奖一等奖（第三完成人）。获得国家发明专利一项，申请国家发明专利6项，软件著作权4项。",
@@ -1498,9 +1545,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -1538,7 +1585,8 @@
           "机器学习",
           "多智能体系统",
           "大数据",
-          "图像和视频分析"
+          "图像分析",
+          "视频分析"
         ],
         "keywords": [],
         "bio": "",
@@ -1574,9 +1622,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1655,9 +1703,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -1691,6 +1739,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "计算机软件技术",
           "网构软件",
           "自适应软件系统",
           "软件在线演化"
@@ -1711,21 +1760,21 @@
         "education": [
           {
             "degree": "学士",
-            "institution": "南京大学计算机科学与技术系",
-            "year": "1993-1997",
-            "major": ""
+            "institution": "南京大学",
+            "year": "1997",
+            "major": "计算机科学与技术系"
           },
           {
             "degree": "硕士",
-            "institution": "南京大学计算机科学与技术系",
-            "year": "1997-2000",
-            "major": ""
+            "institution": "南京大学",
+            "year": "2000",
+            "major": "计算机科学与技术系"
           },
           {
             "degree": "博士",
-            "institution": "南京大学计算机科学与技术系",
-            "year": "2000-2003",
-            "major": ""
+            "institution": "南京大学",
+            "year": "2003",
+            "major": "计算机科学与技术系"
           }
         ],
         "publications_count": -1,
@@ -1748,9 +1797,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1820,9 +1869,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -1856,8 +1905,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "常用链接南京大学计算机软件新技术国家重点实验室计算机科学技术与软件工程国家级...南京大学软件学院计算机基础教学部南京大学教务处版权所有©南京大学计算机学院江苏省南京市栖霞区仙林大道163号 计算机科学技术楼邮编：210023 电话",
-          "传真：86-025-89683126"
+          "三维计算机视觉",
+          "智能图形学",
+          "人工智能"
         ],
         "keywords": [],
         "bio": "",
@@ -1900,9 +1950,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1936,6 +1986,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "分布式计算与系统",
           "云计算与边缘计算",
           "边缘智能与分布式机器学习",
           "新型存储体系结构"
@@ -1974,9 +2025,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2038,20 +2089,20 @@
         "education": [
           {
             "degree": "学士",
-            "institution": "南京大学计算机科学与技术系",
-            "year": "1979-1983",
+            "institution": "南京大学",
+            "year": "1983",
             "major": "计算机"
           },
           {
             "degree": "硕士",
-            "institution": "南京大学计算机科学与技术系",
-            "year": "1983-1986",
+            "institution": "南京大学",
+            "year": "1986",
             "major": ""
           },
           {
             "degree": "博士",
-            "institution": "南京大学计算机科学与技术系",
-            "year": "1994-1997",
+            "institution": "南京大学",
+            "year": "1997",
             "major": "计算机应用"
           }
         ],
@@ -2075,9 +2126,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -2131,9 +2182,9 @@
         "education": [
           {
             "degree": "工学硕士",
-            "institution": "南京大学计算机系",
+            "institution": "南京大学",
             "year": "1987",
-            "major": ""
+            "major": "计算机系"
           }
         ],
         "publications_count": -1,
@@ -2156,9 +2207,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -2226,9 +2277,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 30
       },
@@ -2262,14 +2313,15 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "常用链接南京大学计算机软件新技术国家重点实验室计算机科学技术与软件工程国家级...南京大学软件学院计算机基础教学部南京大学教务处版权所有©南京大学计算机学院江苏省南京市栖霞区仙林大道163号 计算机科学技术楼邮编：210023 电话",
-          "传真：86-025-89683126"
+          "万维网科学(Web Science)",
+          "语义万维网（Semantic Web）",
+          "计算机软件方法与技术"
         ],
         "keywords": [],
         "bio": "瞿裕忠教授，博士生导师。1965年9月出生，1985年7月毕业于复旦大学数学系，1988年7月获复旦大学数学专业硕士学位，1995年4月获南京大学计算机软件专业博士学位。1999年上半年作为访问学者在美国北卡州大开展合作研究。在来南京大学工作之前，在东南大学工作了15年。现任中国计算机学会系统软件专业委员会委员和软件工程专业委员会委员。主要研究方向包括万维网科学(Web Science)、语义万维网（Semantic Web）、计算机软件方法与技术。多次担任国际语义万维网会议(ISWC)、欧洲语义万维网会议或扩展语义万维网会议(ESWC)、以及亚洲语义万维网会议(ASWC)等会议的程序委员，担任过中国语义万维网研讨会(CSWS2009)联合主席。先后承担包括国家自然科学基金项目、国家973计划课题、江苏省基础研究计划重点项目和国家863课题在内的科研项目近十项，发表学术论文50余篇，在国际万维网大会、语义万维网会议和万维网科学会议上有多篇论文发表。曾获多种奖励，包括2004年教育部 “新世纪优秀人才”称号、2008年江苏省“六大人才高峰”称号和2007年度江苏省科技进步二等奖。",
         "bio_en": "",
         "email": "yzqu@nju.edu.cn",
-        "phone": "",
+        "phone": "86-025-89683126",
         "office": "",
         "profile_url": "https://cs.nju.edu.cn/58/0a/c2639a153610/page.htm",
         "lab_url": "",
@@ -2280,22 +2332,22 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "学士",
+            "degree": "本科",
             "institution": "复旦大学",
             "year": "1985",
-            "major": "数学"
+            "major": "数学系"
           },
           {
             "degree": "硕士",
             "institution": "复旦大学",
             "year": "1988",
-            "major": "数学"
+            "major": "数学专业"
           },
           {
             "degree": "博士",
             "institution": "南京大学",
             "year": "1995",
-            "major": "计算机软件"
+            "major": "计算机软件专业"
           }
         ],
         "publications_count": -1,
@@ -2318,9 +2370,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -2354,8 +2406,13 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "常用链接南京大学计算机软件新技术国家重点实验室计算机科学技术与软件工程国家级...南京大学软件学院计算机基础教学部南京大学教务处版权所有©南京大学计算机学院江苏省南京市栖霞区仙林大道163号 计算机科学技术楼邮编：210023 电话",
-          "传真：86-025-89683126"
+          "软件测试与软件质量保证",
+          "智能计算及其应用",
+          "智能与学习软件设计与测试",
+          "软硬件故障大数据挖掘与应用",
+          "容错与可靠性",
+          "软件形式化方法与应用",
+          "应用驱动的大数据系统设计与测试"
         ],
         "keywords": [],
         "bio": "聂长海，教授，博士生导师。1、主要教学科研经历：多次主讲过计算机操作系统、模糊数学、离散数学、软件工程、编译原理、数据结构、算法设计与分析、网络编程、软件测试和软件质量保证等十多门课程，在清华大学出版社出版教材《软件测试的概念与方法》。已在ACM Computing Survey、ACM Transaction On Software Engineering and Methodology (TOSEM) 、Information and Software Technology (IST)、《计算机学报》和《软件学报》等国内外一级学报和重要的会议上发表文章70多篇。获得过多项软件著作权和国家发明专利，主持完成过多项国家自然科学基金项目，参与的项目多次获得省部级科研奖，在科学出版社出版专著《组合测试》。2 、研究方向：软件测试与软件质量保证；智能计算及其应用；智能与学习软件设计与测试；软硬件故障大数据挖掘与应用；容错与可靠性；软件形式化方法与应用；应用驱动的大数据系统设计与测试3、当前科研项目：1）组合测试与软件测试技术的组合应用研究；2）大数据系统可视化与测试；3）健康大数据系统的设计、实现与测试；4）云计算平台与大数据系统安全性和可靠性理论与方法4、招生信息：课题组常年招收本科生、硕士研究生、博士研究生、博士后研究人员进组，欢迎同学们踊跃报名！同时欢迎具有博士学位的国内外有意加盟南京大学的优秀学者加盟我们的课题组！课题组主页：gist.nju.edu.cn个人主页：http://gist.nju.edu.cn/~changhai/",
@@ -2391,9 +2448,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -2461,9 +2518,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 40
       },
@@ -2499,7 +2556,8 @@
         "research_areas": [
           "自主智能与群体智能",
           "复杂网络分析",
-          "大数据分析及智能系统"
+          "大数据分析",
+          "智能系统"
         ],
         "keywords": [],
         "bio": "附南京大学IIP研究组介绍：位于南京大学仙林校区计算机科学技术楼325、526，隶属于计算机软件新技术国家重点实验室和南京大学计算机科学与技术系。研究组秉承理论与应用相结合的工作思路，积极探索计算机科学与人工智能的若干前沿方向；结合行业应用推进相关的应用研究，并在此基础上为典型应用领域提供智能化解决方案。附南京大学（中德）HPI研究院介绍：南京大学（中德）HPI研究院（HPI Research School at Nanjing University，简称南大HPI或HPI_NJU）成立于2011年11月17日，成立于2011年11月17日，主旨是围绕“海量数据分析与知识发现”（2011-2016）和“大数据关键技术及行业应用”（2016-2021）展开中德双边的博士生培养、协作科研等全方位的合作。南京大学HPI研究院的德方合作伙伴是哈索-普拉特纳信息技术系统工程研究院（Hasso Plattner Institute for IT-Systems Engineering, HPI，http://www.hpi.uni-potsdam.de），HPI由SAP创始人哈索-普拉特纳教授（Prof. Dr. h. c. Hasso Plattner）创办于1998年，是德国第一所由私人独立出资、公私合作管理的大学教学研究机构。",
@@ -2535,9 +2593,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -2570,7 +2628,14 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "大规模复杂基础软件的可信保障",
+          "智能化程序分析与测试",
+          "软件与系统安全",
+          "模型驱动的测试与验证",
+          "基于静态分析的安全缺陷检测",
+          "基于深度学习的缺陷预测"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -2605,11 +2670,11 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
-        "data_completeness": 40
+        "data_completeness": 55
       },
       "is_new": false
     },
@@ -2679,9 +2744,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -2715,8 +2780,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "常用链接南京大学计算机软件新技术国家重点实验室计算机科学技术与软件工程国家级...南京大学软件学院计算机基础教学部南京大学教务处版权所有©南京大学计算机学院江苏省南京市栖霞区仙林大道163号 计算机科学技术楼邮编：210023 电话",
-          "传真：86-025-89683126"
+          "模式识别",
+          "计算机视觉"
         ],
         "keywords": [],
         "bio": "",
@@ -2752,9 +2817,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2845,9 +2910,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -2882,6 +2947,7 @@
         "is_academician": false,
         "research_areas": [
           "理论计算机科学",
+          "数据科学的计算理论基础",
           "随机算法",
           "计算采样理论",
           "计算相变",
@@ -2904,15 +2970,15 @@
         "education": [
           {
             "degree": "本科",
-            "institution": "南京大学计算机科学与技术系",
+            "institution": "南京大学",
             "year": "2003",
-            "major": ""
+            "major": "计算机科学与技术系"
           },
           {
             "degree": "博士",
-            "institution": "耶鲁大学计算机科学系",
+            "institution": "耶鲁大学",
             "year": "2009",
-            "major": ""
+            "major": "计算机科学系"
           }
         ],
         "publications_count": -1,
@@ -2935,9 +3001,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3005,9 +3071,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 30
       },
@@ -3062,15 +3128,15 @@
         "education": [
           {
             "degree": "本科",
-            "institution": "上海交通大学ACM试点班",
+            "institution": "上海交通大学",
             "year": "2010",
-            "major": ""
+            "major": "ACM试点班"
           },
           {
             "degree": "硕士",
-            "institution": "上海交通大学ACM试点班",
+            "institution": "上海交通大学",
             "year": "2013",
-            "major": ""
+            "major": "ACM试点班"
           },
           {
             "degree": "博士",
@@ -3099,9 +3165,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3174,9 +3240,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3244,9 +3310,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 40
       },
@@ -3280,9 +3346,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "数据与智能安全",
           "安全专业领域代理式AI",
-          "移动端隐私计算",
-          "AI安全"
+          "移动端隐私计算与AI安全"
         ],
         "keywords": [],
         "bio": "",
@@ -3318,9 +3384,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3375,16 +3441,16 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "理学学士",
-            "institution": "南京大学计算机科学与技术系",
+            "degree": "理学学士学位",
+            "institution": "南京大学",
             "year": "",
-            "major": ""
+            "major": "计算机科学与技术系"
           },
           {
-            "degree": "工学博士",
-            "institution": "南京大学计算机科学与技术系",
+            "degree": "工学博士学位",
+            "institution": "南京大学",
             "year": "",
-            "major": ""
+            "major": "计算机科学与技术系"
           }
         ],
         "publications_count": -1,
@@ -3407,9 +3473,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3477,9 +3543,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 40
       },
@@ -3547,9 +3613,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 40
       },
@@ -3583,8 +3649,11 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "常用链接南京大学计算机软件新技术国家重点实验室计算机科学技术与软件工程国家级...南京大学软件学院计算机基础教学部南京大学教务处版权所有©南京大学计算机学院江苏省南京市栖霞区仙林大道163号 计算机科学技术楼邮编：210023 电话",
-          "传真：86-025-89683126"
+          "人工智能",
+          "机器学习",
+          "大数据",
+          "哈希学习",
+          "分布式机器学习"
         ],
         "keywords": [],
         "bio": "李武军，博士，教授，博导。研究方向为人工智能、机器学习与大数据。2003年毕业于南京大学计算机科学与技术系，获理学学士学位；2006年毕业于南京大学计算机科学与技术系，获工学硕士学位；2010年毕业于香港科技大学计算机科学与工程系，获工学博士学位。2010年9月至2013年12月于上海交通大学计算机科学与工程系从事教学与科研工作，任讲师和副教授。2014年1月加入南京大学计算机科学与技术系，入选南京大学登峰人才支持计划（B层次）。2021年获得AI 2000人工智能全球最具影响力学者奖。近年来，在大数据机器学习领域（包括哈希学习和分布式机器学习等方向）开展了系统地深入研究，取得了一系列创新成果，并将其应用于互联网、医疗、安防、网络安全和油气勘探等领域。在AAAI/CVPR/ICML/IJCAI/MICCAI/NIPS/TIP/TKDE/《科学通报》等国内外知名会议和期刊上发表学术论文50余篇，获授权发明专利3项，申请发明专利20余项。论文被国内外同行广泛引用，引用者来自斯坦福、伯克利、剑桥大学等国际著名机构，包括中、美、英、加、欧等国/地的20余位科学院/工程院院士和80余位AAAI/ACM/IEEE Fellow。截至2021年3月，四篇论文（2篇AAAI，1篇IJCAI，1篇SIGIR）入选Paper Digest最具影响力论文（https://www.paperdigest.org/best-paper-digest/），一篇论文入选2019年领跑者5000（F5000）中国精品科技期刊高被引论文。研究成果被国际著名学者评价为“首个方法”、“先进水平”等。主持科研项目10余项，包括国家重点研发计划课题、国家自然科学基金以及腾讯、字节跳动、国家电网、中石油等企业的横向项目。参与了阿里巴巴云计算平台（“飞天”）的研发，并参与编写关于“飞天”的第一本专著《飞天开放平台编程指南–阿里云计算的实践》。研究成果应用于多家大型企业和国家重要部门。担任包括AAAI/CVPR/ICCV/ICML/IJCAI/NIPS/SIKDD等CCF-A类会议在内的国内外知名会议领域主席/高级程序委员/程序委员60余次，担任包括IEEE TIP/TKDE/TPAMI/AIJ/IJCV/JMLR/ACM TOIS等CCF-A类期刊在内的20余种国内外知名期刊审稿人。指导的学生获得华为天才少年、阿里星（每年阿里巴巴集团10名左右获得者）、百度奖学金（每年全球共10名获得者）和多次国内外竞赛的冠亚军等荣誉。更多信息请参见个人主页：http://cs.nju.edu.cn/lwj/。",
@@ -3639,9 +3708,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -3677,10 +3746,10 @@
         "research_areas": [
           "具身智能感知计算",
           "大小模型协同边缘智能",
-          "面向工业互联网的感算控分布式协同技术研究",
-          "基于毫米波/超声波/RFID的新型无线感知技术研究",
-          "基于具身智能的多模态感知协同融合技术研究",
-          "基于摩尔纹视觉的新型感知技术研究",
+          "面向工业互联网的感算控分布式协同技术",
+          "基于毫米波/超声波/RFID的新型无线感知技术",
+          "基于具身智能的多模态感知协同融合技术",
+          "基于摩尔纹视觉的新型感知技术",
           "面向工业互联网/智能电网/智慧医疗大模型的云边协同分布式系统研发"
         ],
         "keywords": [],
@@ -3717,9 +3786,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -3800,9 +3869,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3837,7 +3906,9 @@
         "is_academician": false,
         "research_areas": [
           "计算机网络",
-          "分布式领域"
+          "分布式领域",
+          "Networking Applications",
+          "Servicing Applications"
         ],
         "keywords": [],
         "bio": "田臣，南京大学教授，博士生导师，国家杰出青年基金获得者。主要从事计算机网络和分布式领域研究，以Networking Applications和Servicing Applications为理念，提出以应用为中心做网络研究。在SIGCOMM/FAST/NSDI/OSDI/EuroSys/SIGMOD等顶级会议和知名国际期刊上录用和发表学术论文70多篇，其中包括南京大学第1篇SIGCOMM和第1篇FAST等。迄今为止论文累计被引用5000余次，研究成果被顶级学术会议多次引用，曾多次担任国际学术会议的程序委员会成员和知名国际期刊的审稿人。",
@@ -3873,9 +3944,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -3943,9 +4014,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 30
       },
@@ -3979,8 +4050,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "常用链接南京大学计算机软件新技术国家重点实验室计算机科学技术与软件工程国家级...南京大学软件学院计算机基础教学部南京大学教务处版权所有©南京大学计算机学院江苏省南京市栖霞区仙林大道163号 计算机科学技术楼邮编：210023 电话",
-          "传真：86-025-89683126"
+          "高性能数据管理技术"
         ],
         "keywords": [],
         "bio": "",
@@ -4016,9 +4086,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -4052,8 +4122,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "常用链接南京大学计算机软件新技术国家重点实验室计算机科学技术与软件工程国家级...南京大学软件学院计算机基础教学部南京大学教务处版权所有©南京大学计算机学院江苏省南京市栖霞区仙林大道163号 计算机科学技术楼邮编：210023 电话",
-          "传真：86-025-89683126"
+          "无线智能感知",
+          "软件无线电",
+          "机器学习加速"
         ],
         "keywords": [],
         "bio": "南京大学计算机学院教授。1997年和2000年于南京大学电子科学与工程系分别获得理学学士和理学硕士学位，2008年9月于新加坡国立大学电机与电脑工程系获得博士学位。曾在微软亚洲研究院及中兴通讯从事过多年的无线网络研究与标准化工作。主要研究方向为无线智能感知、软件无线电、机器学习加速等，主持过多项国家自然基金项目及企业合作项目。在ACM Mobicom, ACM CCS,IEEE/ACM trans. Networking, IEEE trans. Mobile Computing等会议和期刊上发表过多篇论文，并获得过IMWUT Distinguished Paper Award及SECON Best Paper Award。2011年获江苏省双创人才奖。",
@@ -4071,21 +4142,21 @@
         "education": [
           {
             "degree": "理学学士",
-            "institution": "南京大学电子科学与工程系",
+            "institution": "南京大学",
             "year": "1997",
-            "major": ""
+            "major": "电子科学与工程系"
           },
           {
             "degree": "理学硕士",
-            "institution": "南京大学电子科学与工程系",
+            "institution": "南京大学",
             "year": "2000",
-            "major": ""
+            "major": "电子科学与工程系"
           },
           {
             "degree": "博士",
-            "institution": "新加坡国立大学电机与电脑工程系",
+            "institution": "新加坡国立大学",
             "year": "2008",
-            "major": ""
+            "major": "电机与电脑工程系"
           }
         ],
         "publications_count": -1,
@@ -4108,9 +4179,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -4182,9 +4253,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -4252,9 +4323,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 30
       },
@@ -4288,8 +4359,12 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "常用链接南京大学计算机软件新技术国家重点实验室计算机科学技术与软件工程国家级...南京大学软件学院计算机基础教学部南京大学教务处版权所有©南京大学计算机学院江苏省南京市栖霞区仙林大道163号 计算机科学技术楼邮编：210023 电话",
-          "传真：86-025-89683126"
+          "人工智能",
+          "数据库",
+          "医学领域的交叉",
+          "知识图谱",
+          "数据集成",
+          "数智技术赋能医疗创新"
         ],
         "keywords": [],
         "bio": "",
@@ -4338,9 +4413,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -4408,9 +4483,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 40
       },
@@ -4444,8 +4519,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "常用链接南京大学计算机软件新技术国家重点实验室计算机科学技术与软件工程国家级...南京大学软件学院计算机基础教学部南京大学教务处版权所有©南京大学计算机学院江苏省南京市栖霞区仙林大道163号 计算机科学技术楼邮编：210023 电话",
-          "传真：86-025-89683126"
+          "机器翻译",
+          "大语言模型",
+          "多语言大模型"
         ],
         "keywords": [],
         "bio": "黄书剑，博士，南京大学计算机学院教授，博士生导师。现任中国中文信息学会理事、大模型专家委员会委员、机器翻译和多语言处理专委会副主任；中国计算机学会高级会员、自然语言处理专委会执行委员；中国人工智能学会多语种只能信息处理专委会委员。主要研究方向包括机器翻译、大语言模型、多语言大模型等。在ACL、AAAI、IJCAI、Neurips、EMNLP、NAACL等自然语言处理和人工智能顶级国际会议发表论文50余篇，获EMNLP2024杰出论文奖、CCMT2019和CCMT2023最佳论文奖。2017年获江苏省自然科学基金优秀青年基金项目资助。2019年获中国中文信息学会杰出服务奖，2020年获中国计算机学会自然语言处理与中文计算奖-青年新锐奖，2022年获钱伟长中文信息处理奖-青年创新奖。联合指导博士生获中国人工智能学会优秀博士学位论文奖、中国中文信息学会优秀博士学位论文奖、江苏省人工智能学会优秀博士学位论文奖等荣誉。",
@@ -4481,9 +4557,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -4572,9 +4648,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -4608,8 +4684,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "常用链接南京大学计算机软件新技术国家重点实验室计算机科学技术与软件工程国家级...南京大学软件学院计算机基础教学部南京大学教务处版权所有©南京大学计算机学院江苏省南京市栖霞区仙林大道163号 计算机科学技术楼邮编：210023 电话",
-          "传真：86-025-89683126"
+          "量子通信复杂性与量子计算复杂性",
+          "量子信息论",
+          "量子通讯中抗噪问题与安全问题",
+          "量子分布式计算与量子网络"
         ],
         "keywords": [],
         "bio": "",
@@ -4652,9 +4730,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -4688,8 +4766,11 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "常用链接南京大学计算机软件新技术国家重点实验室计算机科学技术与软件工程国家级...南京大学软件学院计算机基础教学部南京大学教务处版权所有©南京大学计算机学院江苏省南京市栖霞区仙林大道163号 计算机科学技术楼邮编：210023 电话",
-          "传真：86-025-89683126"
+          "网络空间安全",
+          "安全多方计算",
+          "保护隐私的网络和通讯安全协议设计",
+          "基于博弈论的机制设计",
+          "后量子安全计算协议设计"
         ],
         "keywords": [],
         "bio": "",
@@ -4725,9 +4806,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -4761,8 +4842,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "常用链接南京大学计算机软件新技术国家重点实验室计算机科学技术与软件工程国家级...南京大学软件学院计算机基础教学部南京大学教务处版权所有©南京大学计算机学院江苏省南京市栖霞区仙林大道163号 计算机科学技术楼邮编：210023 电话",
-          "传真：86-025-89683126"
+          "物联网",
+          "边缘智能",
+          "移动计算",
+          "数据挖掘"
         ],
         "keywords": [],
         "bio": "",
@@ -4817,9 +4900,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -4853,14 +4936,14 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "常用链接南京大学计算机软件新技术国家重点实验室计算机科学技术与软件工程国家级...南京大学软件学院计算机基础教学部南京大学教务处版权所有©南京大学计算机学院江苏省南京市栖霞区仙林大道163号 计算机科学技术楼邮编：210023 电话",
-          "传真：86-025-89683126"
+          "程序设计语言",
+          "程序分析"
         ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "yueli@nju.edu.cn",
-        "phone": "",
+        "phone": "86-025-89683126",
         "office": "",
         "profile_url": "https://cs.nju.edu.cn/74/a2/c2639a423074/page.htm",
         "lab_url": "",
@@ -4897,9 +4980,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -4933,8 +5016,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "常用链接南京大学计算机软件新技术国家重点实验室计算机科学技术与软件工程国家级...南京大学软件学院计算机基础教学部南京大学教务处版权所有©南京大学计算机学院江苏省南京市栖霞区仙林大道163号 计算机科学技术楼邮编：210023 电话",
-          "传真：86-025-89683126"
+          "程序设计语言理论"
         ],
         "keywords": [],
         "bio": "",
@@ -4952,15 +5034,15 @@
         "education": [
           {
             "degree": "本科",
-            "institution": "中国科学技术大学少年班",
+            "institution": "中国科学技术大学",
             "year": "2009",
-            "major": ""
+            "major": "少年班"
           },
           {
             "degree": "博士",
-            "institution": "中国科学技术大学计算机学院",
+            "institution": "中国科学技术大学",
             "year": "2014",
-            "major": ""
+            "major": "计算机学院"
           }
         ],
         "publications_count": -1,
@@ -4983,9 +5065,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -5053,9 +5135,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 40
       },
@@ -5123,9 +5205,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 40
       },
@@ -5193,9 +5275,9 @@
         "recent_updates": [],
         "source_id": "nju_cs_faculty",
         "source_url": "https://cs.nju.edu.cn/2639/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 40
       },

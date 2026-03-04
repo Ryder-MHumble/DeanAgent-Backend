@@ -3,8 +3,8 @@
   "dimension": "university_faculty",
   "group": "pku",
   "source_name": "北京大学计算机学院-师资队伍",
-  "crawled_at": "2026-03-03T12:44:34.237732+00:00",
-  "previous_crawled_at": "2026-03-03T11:22:24.081937+00:00",
+  "crawled_at": "2026-03-04T06:56:03.769823+00:00",
+  "previous_crawled_at": "2026-03-03T12:44:34.237732+00:00",
   "item_count": 120,
   "new_item_count": 0,
   "items": [
@@ -36,11 +36,11 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "计算机网络",
           "无线网络",
           "移动计算",
           "社交网络",
-          "网络安全"
+          "网络安全",
+          "计算机网络"
         ],
         "keywords": [],
         "bio": "个人主页：net.pku.edu.cn/~bkg/主要研究方向无线网络、移动计算、社交网络、网络安全主要荣誉与获奖Best Paper Award of IEEE ICC 2015Best Paper Award of ICCSE 2017CCF-Intel Young Faculty Researcher Award 2014Peking University Teaching Excellence Award 2014Tsang Hin-chi Teaching Excellence Award in 2017主要科研项目国家自然科学基金，北京市自然科学基金，重点研发计划代表性学术论著IEEE JSAC, IEEE TMC, IEEE/ACM ToN, ACM MobiCom, IEEE INFOCOM, ACM CCS",
@@ -76,9 +76,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -114,7 +114,8 @@
         "research_areas": [
           "泛在操作系统",
           "工业物联网",
-          "具身智能操作系统"
+          "具身智能操作系统",
+          "系统软件"
         ],
         "keywords": [],
         "bio": "个人主页：https://caodg.github.io/caodg/主要研究方向泛在操作系统，工业物联网，具身智能操作系统科研/教育经历2005-，讲师/副教授/研究员，北京大学信息科学技术学院/计算机学院2001-2004，博士研究生，北京大学1998-2001，硕士研究生，北京邮电大学1994-1998，本科生，北京邮电大学",
@@ -169,9 +170,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -256,9 +257,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -292,13 +293,13 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "人工智能",
-          "多媒体",
           "AI平台与系统",
           "计算机视觉",
           "媒体处理",
           "对象检测",
           "运动对象分割",
+          "人工智能",
+          "多媒体",
           "智能计算系统",
           "图像处理",
           "模式识别"
@@ -344,9 +345,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -424,9 +425,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -463,7 +464,8 @@
           "虚拟现实",
           "虚拟地理环境",
           "基于影像的三维重建",
-          "生成式虚拟环境构建"
+          "生成式虚拟环境构建",
+          "图形与多媒体"
         ],
         "keywords": [],
         "bio": "主要研究方向主要从事虚拟现实，虚拟地理环境及相关研究，内容涉及基于影像的三维重建，生成式虚拟环境构建等。主持并参与多项国家自然科学基金、国家重点研发计划项目课题，以及中国科协、北京市科委、腾讯公司等企事业单位委托的横向科研项目。主要学术任职- 国际数字地球学会，中国国家委员会委员，虚拟地理环境专业委员会副主任委员；- 中国青少年科技教育工作者协会，人工智能普及专委会委员。主要教学课程- 本科生课程：《数据结构与算法》、《计算概论》、《人工智能与计算思维》、《离散数学》、《地球与人类文明》；- 慕课课程：《离散数学概论》、《人工智能与信息社会》、《地球与人类文明》、《数据结构与算法Python版》、《Python语言基础与应用》主要荣誉与获奖- 国家级教学成果二等奖（排名第四）；- 国家级一流本科课程3门；- 北京市高等教育教学成果二等奖；- 北京市高等学校教学名师奖；- 北京大学教学卓越奖；近期发表论文- 张晓媛，陈斌. 基于改进GAN的手绘特征草图虚拟地形生成方法[J]. 遥感学报，2024, 28（5）: 1232-1241.- 张赖和, 陈斌. 基于全景图像的虚拟野外场景构建方法[J]. 北京大学学报自然科学版, 2023, 59(2): 211-220.- 陈天翔, 陈斌. 一种基于全景视频的 6 自由度野外虚拟环境快速构建方法[J]. 图学学报, 2022, 43(5): 901-908.- 袁泽, 陈斌. 基于 INLA-SPDE 方法的区域污染物模拟与预测[J]. 图学学报, 2022, 43(1): 125-132.",
@@ -499,9 +501,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -591,9 +593,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -664,9 +666,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -736,9 +738,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -775,7 +777,8 @@
           "非结构化数据管理",
           "云计算",
           "非结构化数据提取集成",
-          "数据挖掘"
+          "数据挖掘",
+          "数据库与数据挖掘"
         ],
         "keywords": [],
         "bio": "个人主页：主要研究方向非结构化数据管理、云计算、非结构化数据提取集成和数据挖掘等方向科研/教育经历2009，博士，北京大学研究成果概况科研项目：作为课题负责人主持国家自然科学基金1项、省部级等项目6项。作为课题副组长参加1项国家“核高基”重大专项课题，另作为技术骨干参加1项十三五国家重点研发计划、1项国家“核高基”重大专项课题和1项十二五“863”课题。论文发表：在著名国际学术期刊（包括《Expert Systems With Applications》，SCI影响因子2.98）、国际学术会议（IJCAI、EMNLP等）、国家一级期刊等共计发表20余篇论文，授权国家发明专利3项，登记软件著作权3项。",
@@ -818,9 +821,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -856,7 +859,8 @@
         "research_areas": [
           "高能效移动边缘计算系统",
           "高性能分布式与大规模人工智能系统",
-          "新型移动人工智能应用"
+          "新型移动人工智能应用",
+          "移动智能计算系统"
         ],
         "keywords": [],
         "bio": "个人主页： https://if-lab-pku.github.io/主要研究方向高能效移动边缘计算系统高性能分布式与大规模人工智能系统新型移动人工智能应用主要科研项目高能效人工智能计算，研究针对人工智能软硬件的加速算法和计算体系结构优化，并实现电子设计自动化（EDA）的协同创新高性能分布式和大规模计算系统，研究和设计面向移动边缘终端的大规模人工智能部署和计算系统优化技术；新型移动智能应用，结合人工智能和高性能系统，探索多模态计算，泛用智能交互等新型交互智能应用。论文代表作[MLSys22][最佳论文奖] J. Mao, X. Chen, K. Nixon, C. Krieger, and Y. Chen. “MoDNN: Local Distributed Mobile Computing System for Deep Neural Network,” in Proceedings of the International Conference on Design Automation and Test in Europe, pp. 1396∼1401, 2017.[DAC21] Z. Xu, F. Yu, J. Xiong, and X. Chen. “Helios: Heterogeneity-Aware Federated Learning with Dynamically Balanced Collaboration,” in Proceedings of the Design Automation Conference, pp. 997∼1022, 2021.[KDD21] F. Yu, W. Zhang, Z. Qin, Z. Xu, D. Wang, C. Liu, Z. Tian, and X. Chen. “Fed2: Feature-Aligned Federated Learning,” in Proceedings of the ACM SigKDD Conference on Knowledge Discovery and Data Mining, pp. 2066∼2074, 2021.[DATE20][最佳论文提名] F. Yu, C. Liu, D. Wang, Y. Wang, and X. Chen. “AntiDOte: Attention- based Dynamic Optimization for Neural Network Runtime Efficiency,” in Proceedings of the International Conference on Design Automation and Test in Europe, pp. 951∼956, 2020.[DATE17][最佳论文奖] J. Mao, X. Chen, K. Nixon, C. Krieger, and Y. Chen. “MoDNN: Local Distributed Mobile Computing System for Deep Neural Network,” in Proceedings of the International Conference on Design Automation and Test in Europe, pp. 1396∼1401, 2017.",
@@ -892,9 +896,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -936,7 +940,7 @@
         "bio": "个人主页：操作系统，嵌入式软件，普适计算软件工程",
         "bio_en": "",
         "email": "",
-        "phone": "86-10-62757160",
+        "phone": "86-10-6275 7160",
         "office": "",
         "profile_url": "https://cs.pku.edu.cn/info/1062/1604.htm",
         "lab_url": "",
@@ -966,9 +970,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1040,9 +1044,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1121,9 +1125,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1195,9 +1199,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1252,9 +1256,9 @@
         "education": [
           {
             "degree": "博士",
-            "institution": "约翰霍普金斯大学计算机系",
-            "year": "",
-            "major": ""
+            "institution": "约翰霍普金斯大学",
+            "year": "2019",
+            "major": "计算机"
           },
           {
             "degree": "硕士",
@@ -1289,9 +1293,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1361,9 +1365,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1398,7 +1402,14 @@
         "is_academician": false,
         "research_areas": [
           "机器学习",
-          "数据挖掘"
+          "数据挖掘",
+          "预训练模型的泛化与适配的理论、技术与应用系统",
+          "算法博弈论",
+          "互联网和区块链经济学",
+          "多智能体及强化深度学习理论",
+          "数据信息的认识论刻画",
+          "均衡和动力学分析",
+          "计算复杂性和算法设计"
         ],
         "keywords": [],
         "bio": "个人主页： http://chuxu.online/初旭博士，现任北京大学前沿计算研究中心助理研究员，于2024年8月正式加入中心。他于2014年、2016年和2021 年分别在中国科学技术大学、纽约州立大学和北京大学获学士、硕士和博士学位，之后在清华大学计算机科学与技术系进行博士后研究。研究兴趣包括面向不同模态数据的预训练模型的泛化与适配的理论、技术与应用系统。截至2024年8月，初旭博士在机器学习和数据挖掘领域国内外顶级会议及期刊发表论文三十余篇。加入中心后，初旭博士进入算法博弈论实验室，该实验室的研究方向为算法博弈论、互联网和区块链经济学、多智能体及强化深度学习理论。科研兴趣聚焦在人和智能体在互联网、物联网和区块链交互环境下多方博弈的理论与方法论建立，包括数据信息的认识论刻画、均衡和动力学分析、计算复杂性和算法设计。",
@@ -1453,9 +1464,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1490,6 +1501,10 @@
         "is_academician": false,
         "research_areas": [
           "AI系统",
+          "大模型训练推理",
+          "AI应用",
+          "数据库系统",
+          "大数据管理和分析",
           "数据库",
           "大数据"
         ],
@@ -1527,9 +1542,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1566,7 +1581,13 @@
           "大数据算法",
           "算法博弈论",
           "互联网经济学",
-          "在线算法"
+          "在线算法",
+          "并行计算",
+          "均衡和机制设计",
+          "互联网广告系统",
+          "云计算定价及资源分配",
+          "社交网络行为分析及推荐系统",
+          "交通及物流网络算法"
         ],
         "keywords": [],
         "bio": "个人主页：邓小铁，1982年于清华大学获得学士学位，1984年于中国科学院获得硕士学位，1989年于斯坦福大学获得博士学位。1984-1985年，任中国科学院系统科学研究所助理研究员；1991-1999年任加拿大约克大学计算机科学与工程系助理教授、副教授；1997-2012年任香港城市大学计算机科学与工程系副教授、教授、讲席教授，同时，于2010年-2012年兼任英国利物浦大学计算机科学与工程系讲席教授；2012-2017年任上海交通大学计算机科学与工程系讲席教授；2017年12月入职北京大学，任计算机学院前沿计算研究中心讲席教授。邓小铁教授的主要科研方向为算法及博弈论、互联网经济、在线算法，及并行计算。2008年，他因在博弈论算法的贡献获选ACM Fellow。邓小铁教授近期的研究兴趣包括算法博弈论研究、均衡和机制设计、互联网广告系统、云计算定价及资源分配、社交网络行为分析及推荐系统，以及交通及物流网络算法。作为项目负责人，他曾承担十几项加拿大、香港、英国，及国家基金委科研项目，并担任多种国际期刊编委。他曾担任多个国际学术会议主席，并发起网络经济学国际三大洲（亚洲欧洲美洲）循环举办的全球性会议互联网及网络经济学术会议The Conference on Web and Internet Economics (WINE)。他在算法博弈论方面及网络搜索的研究成果，被国际同行广泛引用，发表论文200余篇，被引用数千次；多次做国际学术会议特邀报告；曾获得IEEE理论计算机学术会议FOCS的最佳论文奖；其成果“关于图与组合优化的若⼲经典问题的研究”获2015年度⾼等学校科学研究优秀成果奖 （⾃然科学）二等奖（排名第⼆）。应用方面获得多项美国专利及国家专利，曾担任主要互联网公司机制设计顾问。",
@@ -1621,9 +1642,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1698,9 +1719,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1771,9 +1792,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1810,7 +1831,9 @@
           "计算机图形学",
           "实时渲染",
           "虚拟现实",
-          "视景仿真"
+          "视景仿真",
+          "大规模自然场景的实时渲染",
+          "虚拟仿真技术"
         ],
         "keywords": [],
         "bio": "个人主页：http://www.graphics.pku.edu.cn/members/gaimeng主要研究方向盖孟主要研究大规模自然场景的实时渲染和虚拟仿真技术，作为核心骨干参与了多项国家863、973项目。参与实验室自主研发的虚拟仿真平台ViWo的架构设计、核心渲染算法研究和工程化应用。基于ViWo研发的飞行模拟视景系统，在航空领域已获得良好应用。",
@@ -1846,9 +1869,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1882,8 +1905,13 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "AI和数据管理结合",
+          "图数据管理",
+          "深度分析",
           "图数据分析和学习",
-          "AI+DB"
+          "AI+DB",
+          "基于AI的结构化数据管理",
+          "面向AI的数据管理"
         ],
         "keywords": [],
         "bio": "北京大学计算机学院，教授，博导，1997/2000获山东大学计算机系学士/硕士学位，2003年获北京大学信息学院博士学位。研究方向为AI和数据管理结合、图数据管理和深度分析等，近期承担了国家科技重大专项、国家自然科学基金、深圳基础研究课题等一批国家级和省部级科研项目，以及与阿里、华为、中兴、电信等企业在内的一批产学合作研究项目。在数据管理领域会议和期刊上发表论文60余篇，获阿里巴巴高校合作优秀奖，CCF科技进步杰出奖，开发了ICS-GNN、LOGER、APrompt4EM等模型和方法，发表VLDB、ICDE、AAAI、IJCAI、WWW、KDD等研究论文，2024研究组囊括KDD CRAG比赛全部三个赛道第一名，2025年研究组蝉联KDD RAG-MM比赛冠军。相关技术在阿里巴巴公司、华为商用系统中实际应用。主要研究方向基于AI的结构化数据管理：通过大模型、强化学习等方法，探索面向不同领域中的结构化数据生成和管理方法，例如，数据库中查询执行计划、批查询调度计划、图中社区发现、芯片领域中的布局、面向字符串的基数估计等面向AI的数据管理：探索提升AI模型的数据管理方法，包括数据模式理解、向量检索效率提升、RAG等招收博士研究生责任心，动手能力强，科研敏感度高，积极主动科研课题课题组和华为、中兴、字节等企业有长期的合作近期部分论文YiRui Zhan, Wen Nie, Jun Gao. SSCard: Substring Cardinality Estimation using Suffix Tree-Guided Learned FM-Index. In Proc of SIGMOD 2026.Tianyi Chen, Jun Gao, Yaofeng Tu, Yang Lin, Mo Xu, Yinjun Han. Divo: Learning a Stable and Effective Query Optimizer with a Diverse Workload. In Proc of SIGMOD 2026Yikuan Xia, Jiazun Chen, Sujian Li, Jun Gao. Realistic Training Data Generation and Rule Enhanced Decoding in LLM for NameGuess. In Proc of EMNLP 2025 Main.Suifeng_Zhao, Zhuoran Jin, Sujian Li, Jun Gao. FinRAGBench-V: A Benchmark for Multimodal RAG with Visual Citation in the Financial Domain. In Proc of EMNLP 2025 Main.Yikuan Xia; Jiazun Chen; Xinchi Li; Jun Gao. DeepNM: Incremental Graph Matching Based on Sinkhorn Similarity. TKDE 2025Ji Deng, Zhao Li, Ji Zhang, Jun Gao. EGPlace: An Efficient Macro Placement Method via Evolutionary Search with Greedy Repositioning Guided Mutation. In Proc of ICML 2025Jiazun Chen; Yikuan Xia; Jun Gao; Zhao Li; Hongyang Chen. CommunityDF: A Guided Denoising Diffusion Approach for Community Search. In Proc of ICDE 2025Chenhao Xu; Chunyu Chen; Jinglin Peng; Jiannan Wang; Jun Gao. BQSched: A Non-Intrusive Scheduler for Batch Concurrent Queries via Reinforcement Learning. In Proc of ICDE 2025Hao Miao; Zida Liu; Jun Gao. BSG4Bot:Efficient Bot Detection Based on Biased Heterogeneous Subgraphs. In Proc of ICDE 2025Ermu Qiu; Jun Gao; Yaofeng Tu; Jingru Yang. LIFTus: An Adaptive Multi-Aspect Column Representation Learning for Table Union Search. In Proc of ICDE 2025Yikuan Xia, Jiazun Chen, Yirui Zhan, Suifeng Zhao, Weipeng Jiang, Chaorui Zhang, Wei Han, Bo Bai, Jun Gao: DB3 Team's Solution For Meta KDD Cup' 25. CoRR abs/2509.09681 (2025)Suchen Liu, Jun Gao, Yinjun Han, Yanglin. MoEPlan: A Lazy Learned Query-Selection Optimizer via Mixture of Optimizer Experts. DASFAA 2025Xiaoru Qu, Yifan Wang, Zhao Li, Jun Gao: Graph-Enhanced Prompt Learning for Personalized Review Generation. Data Sci. Eng. 9(3): 309-324 (2024)Tianyi Chen, Jun Gao, Yaofeng Tu, Mo Xu: GLO: Towards Generalized Learned Query Optimization. ICDE 2024: 4843-4855Yikuan Xia, Jiazun Chen, Jun Gao: Winning Solution For Meta KDD Cup' 24. CoRR abs/2410.00005 (2024)Tianyi Chen, Jun Gao, Hedui Chen, Yaofen Tu. LOGER: A Learned Optimizer towards Generating Efficient and Robust Query Execution Plans. In Proc of VLDB 2023Jianzun Chen, Yikuan Xia, Jun Gao. CommunityAF: An Example-based Community Search Method via Autoregressive Flow. In Proc of VLDB 2023Jialin Wang, Xiaoru Qu, Jinze Bai, Zhao Li, Ji Zhang, Jun Gao: SAGES: Scalable Attributed Graph Embedding With Sampling for Unsupervised Learning. IEEE Trans. Knowl. Data Eng. 35(5): 5216-5229 (2023)Hao Miao, Jiazun Chen, Yang Lin, Mo Xu, Yinjun Han, Jun Gao: JG2Time: A Learned Time Estimator for Join Operators Based on Heterogeneous Join-Graphs. DASFAA (1) 2023: 132-147Jiazun Chen, Jun Gao, Bin Cui: ICS-GNN+: lightweight interactive community search via graph neural network. VLDB J. 32(2): 447-467 (2023)Li Zheng, Zhao Li, Jun Gao, Zhenpeng Li, Jia Wu, Chuan Zhou: Domain Adaptation for Anomaly Detection on Heterogeneous Graphs in E-Commerce. ECIR (2) 2023: 304-318Zhao Li, Junshuai Song, Zehong Hu, Zhen Wang, Jun Gao: Constrained Dual-Level Bandit for Personalized Impression Regulation in Online Ranking Systems. ACM Trans. Knowl. Discov. Data 16(2): 23:1-23:23 (2022)Wentao Zhang, Zeang Sheng, Ziqi Yin, Yuezihan Jiang, Yikuan Xia, Jun Gao, Zhi Yang, Bin Cui: Model Degradation Hinders Deep Graph Neural Networks. KDD 2022: 2493-2503Jiazun Chen, Jun Gao: VICS-GNN: A Visual Interactive System for Community Search via Graph Neural Network. ICDE 2022: 3150-3153Junshuai Song, Xiaoru Qu, Zehong Hu, Zhao Li, Jun Gao, Ji Zhang: A subgraph-based knowledge reasoning method for collective fraud detection in E-commerce. Neurocomputing 461: 587-597 (2021)Jun Gao, Jiazun Chen, Zhao Li, and Ji Zhang. ICS-GNN: Lightweight Interactive Community Search via Graph Neural Network. PVLDB, 14(6):1006 - 1018, 2021.Yikuan Xia, Jun Gao, Bin Cui: iMap: Incremental Node Mapping between Large Graphs Using GNN. CIKM 2021: 2191-2200Li Zheng, Jun Gao, Zhao Li, Ji Zhang: AdaBoosting Clusters on Graph Neural Networks. ICDM 2021: 1523-1528Jinze Bai, Jialin Wang, Zhao Li, Donghui Ding, Ji Zhang, Jun Gao. ATJ-Net: Auto-Table-Join Network for Automatic Learning on Relational Databases. In Proc. of WWW 2021Xiaoru Qu, Zhao Li, Jialin Wang, Zhipeng Zhang, Pengcheng Zou, Junxiao Jiang, Jiaming Huang, Rong Xiao, Ji Zhang, Jun Gao*: Category-aware Graph Neural Networks for Improving E-commerce Review Helpfulness Prediction. In Proc. of CIKM, 2020, Pages 2693-2700.Jinze Bai, Jialin Wang, Zhao Li, Donghui Ding, Jiaming Huang, Pengrui Hui, Jun Gao, Ji Zhang, and Zujie Ren. Recommendation on Heterogeneous Information Network with Type-sensitive Sampling. In Proc. of DASFAA, 2020, Pages 673-684. CCF BJunshuai Song, Zhao Li, Zehong Hu, Yucheng Wu, Zhenpeng Li, Jian Li and Jun Gao. PoisonRec: An Adaptive Data Poisoning Framework for Attacking Black-box Recommender Systems. In Proc of ICDE 2020主讲课程数据库概念，本科生实验班数据库原理与技术 研究生课程部分毕业学生(第一工作单位）周畅：阿里巴巴(阿里星)，曾是阿里通义千问的核心人员白金泽：阿里巴巴(阿里星)，曾是阿里通义千问的核心人员宋军帅：腾讯郑力：腾讯王佳麟：腾讯屈笑如：快手苗浩：强军计划目前在读研究生陈嘉尊(21)：博士生，社交网络图社区分析, LLM4DB. VLDB21，ICDE 23, VLDB23, VLDBJ23, ICDE25，KDD RAG 24/25比赛第一名夏逸宽(21)：博士生，实体映射和集成, DB4LLM. CIKM21，TKDE 25, EMNLP 25, KDD RAG 24/25比赛第一名陈天异(22)：博士生，学习型查询优化器, 强化学习 VLDB 23，ICDE24, SIGMOD 26邱而沐(22)：博士生，数据模式理解, 向量检索优化 ICDE25刘溯晨(23)：博士生，数据Agent. DASFAA25许辰昊(23)：博士生，学习型查询调度器, 强化学习ICDE25邓极(24)：博士生，学习型组合优化, 数据Agent. ICML 2025詹宜瑞(24)：博士生，基数估计，RAG, SIGMOD 26刘子达(25)：博士生，结构化数据生成赵穗丰(25)：博士生，多模态推理, EMNLP 25",
@@ -1938,9 +1966,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2010,9 +2038,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2048,7 +2076,18 @@
         "research_areas": [
           "操作系统",
           "移动计算",
-          "软件安全"
+          "软件安全",
+          "新型操作系统的设计",
+          "操作系统性能优化",
+          "机器人操作系统",
+          "移动计算系统与应用的分析与优化",
+          "性能分析与优化",
+          "能耗分析与优化",
+          "隐私分析与保护",
+          "操作系统和移动应用等的安全分析与防护",
+          "可信计算技术",
+          "细粒度访问控制",
+          "旁路(side-channel)攻击与防护"
         ],
         "keywords": [],
         "bio": "个人主页：http://sei.pku.edu.cn/~yaoguo主要研究方向操作系统：新型操作系统的设计、操作系统性能优化、机器人操作系统等；移动计算：移动计算系统与应用的分析与优化，包括性能分析与优化、能耗分析与优化、隐私分析与保护等；软件安全：操作系统和移动应用等的安全分析与防护，包括可信计算技术、细粒度访问控制、旁路(side-channel)攻击与防护等。科研/教育经历2003-2007，博士，美国麻省大学1997-2000，硕士，北京大学1992-1997，学士，北京大学主要荣誉与获奖l 2017年9月：北京大学教学成果特等奖l 2016年9月：A类会议UbiComp 2016优秀论文奖（Honorable Mention Award）l 2016年 教育部高等学校科学技术进步一等奖（软件定义的云管理关键技术及系统，排名7/10）l 2015年 全国软件与应用学术会议软件原型竞赛二等奖l 2011-2012年度北京大学教学优秀奖l 2012年 北京大学优秀班主任主要科研项目l 国家重点研发计划课题，2017YFB1001904，“应用驱动的智能无人集群系统软件开发方法与工具”，2017-2021，负责人。l 国家自然科学基金面上项目，“面向移动设备的细粒度访问控制机制”，2018-2022，负责人。l 华为横向课题，“移动应用非功能属性开发测试方法”，2015-2019，主持人。l 国家自然科学基金青年科学基金项目，61103026，“面向移动计算的自适应能耗优化技术研究”，2011/01-2014/12，主持人。l 国家863计划，2011AA01A202，“以支撑电子商务为主的网络操作系统”，2011/5-2013/12，北京大学子课题负责人。l 国家863计划，2008AA01Z133，“基于体系结构的低功耗模拟开发环境”，2008/5-2010/12，主持人。l 国家863重点课题，2015AA01A203，“云端和终端资源自适应协同与调度平台”， 2015.01-2017.12，课题骨干。l 国家自然科学基金重点项目，61033006，“面向服务的软件理论、方法及其应用”，2011/01-2014/12，课题骨干。l 国家科技重大专项，2009ZX01039-001-001，“支持新型网络应用模式的网络化操作系统”，2009/01-2011/12，课题骨干。l 国家863计划，2007AA010304，“面向嵌入式软件的生产线”，2007/12-2010/12，课题骨干。主要学术任职l 中国计算机学会系统软件专委会委员l 大理大学数学与计算机学院教学指导委员会委员l 中国计算机学会高级会员l ACM和IEEE会员Selected Publications[1] Haoyu Wang, Yuanchun Li, Yao Guo, Yuvraj Agarwal, Jason Hong, \"Understanding the Purpose of Permission Use in Mobile Apps\",ACM Transactions on Information Systems (TOIS), 2017.[2] Yuanchun Li, Fanglin Chen, Toby Jia-jun Li, Yao Guo, Gang Huang, Matthew Fredrikson, Yuvraj Agarwal, Jason Hong, \"PrivacyStreams: Enabling Transparency in Personal Data Processing for Mobile Apps\",UbiComp 2017.[3] Yuanchun Li, Baoxiong Jia, Yao Guo, Xiangqun Chen, \"Minging User Reviews for Mobile App Comparison\",UbiComp 2017.[4] Haoyu Wang, Zhe Liu, Yao Guo, Xiangqun Chen, Miao Zhang, Guoai Xu and Jason Hong, \"An Explorative Study of the Mobile App Ecosystem from App Developers' Perspective\", In Proceedings of the 26th International Conference on World Wide Web (WWW 2017), Perth, Australia, Apr 2017, pp 163-172.[5] Chengke Wang, Yao Guo, Peng Shen and Xiangqun Chen, \"E-Spector: Online energy inspection for Android applications\", 2017 IEEE/ACM International Symposium on Low Power Electronics and Design (ISLPED), Taipei, Taiwan, 2017.[6] Yuanchun Li,Yao Guo, Xiangqun Chen, \"PERUIM: Understanding Mobile Application Privacy With Permission-UI Mapping\", In Proceedings of the 2016 ACM International Joint Conference on Pervasive and Ubiquitous Computing (UbiComp '16), pp.682-693.[7] Haoyu Wang, Jason I. Hong, Yao Guo, \"Using Text Mining to Infer the Purpose of Permission Use in Mobile Apps\", The 2015 ACM International Joint Conference on Pervasive and Ubiquitous Computing (UbiComp 2015), Osaka, Japan.[8] Haoyu Wang, Mengxin Liu, Yao Guo, Xiangqun Chen, \"Similarity-based Web Browser Optimization\", in Proceedings of the 23rd International World Wide Web Conference(WWW 2014), Seoul, Korea, April 2014, pp 575-584.[9] Yao Guo, Pritish Narayanan, Mahmoud Bennaser, Saurabh Chheda, and Csaba Andras Moritz, \"Energy Efficient Hardware Data Prefetching\",IEEE Transactions on Very Large Scale Integration Systems, Vol 19 No 2, pp. 250-263, Feb 2011.[10]Guangdong Bai, Liang Gu, Tao Feng, Yao Guo, Xiangqun Chen, \"Context-Aware Usage Control for Android\", In 6th International ICST Conference on Security and Privacy in Communication Networks (SecureCOMM 10), p 326-343, Singapore, September 7-9, 2010.",
@@ -2103,9 +2142,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2189,9 +2228,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2261,9 +2300,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2334,9 +2373,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2373,7 +2412,17 @@
           "程序设计语言",
           "函数式语言",
           "程序演算",
-          "软件工程"
+          "软件工程",
+          "程序语言设计",
+          "结构化函数式程序设计",
+          "程序的自动综合和优化",
+          "并行程序设计",
+          "双向变换语言的设计和实现",
+          "软件的演化和维护",
+          "自动并行化的应用",
+          "双向变换的语言设计",
+          "模型驱动的软件开发",
+          "软件求精过程的形式化"
         ],
         "keywords": [],
         "bio": "个人主页：http://sei.pku.edu.cn/~hu胡振江，北京大学讲席教授。分别于1988年和1991年在上海交通大学计算机科学与工程系获得学士和硕士学位，1996年在日本东京大学信息工学专业获博士学位。曾担任东京大学情报理工学研究科助理教授和副教授(1997-2008)，日本国立信息学研究所教授/系主任(2008-2019),东京大学情报理工学研究科教授(2018-2019),是海外杰出青年科学基金获得者。胡振江教授长期从事程序设计语言和软件科学与工程的研究，在程序语言设计、结构化函数式程序设计、程序的自动综合和优化、并行程序设计、双向变换语言的设计和实现、以及软件的演化和维护等方面做出了很多开创性工作并取得了突出的研究成果，曾获全日本最佳博士论文奖，日本软件科学会基础研究成就奖，被评为21世纪先驱科学家（日本科学技术振兴机构），日本工学会会士（2016），ACM杰出科学家（2016），欧洲科学院院士（2019），IEEE会士（2020），日本工程院院士（2020）。近年来，胡振江教授将研究重点放在程序演算及其在自动并行化的应用、双向变换的语言设计、模型驱动的软件开发，以及软件求精过程的形式化上，取得了一系列突破，在POPL, PLDI, ICFP等程序语言的顶级国际会议以及ICSE，FSE等软件工程的顶级国际会议上发表众多成果。胡振江教授担任（或曾经担任）美国计算机协会ACM函数程序设计国际会议（ICFP）指导委员会委员主席，日本软件科学会理事，国际信息处理联盟IFIP TC 2 (Software: Theory and Practice)日本分会代表，IFIP WG 2.1委员，亚洲软件基础学会(AAFS)指导委员会主席，NII湘南国际系列研讨会学术委员会主席，以及IEEE Transactions on Software Engineering, Science of Computer Programming，国家科学评论，中国科学等学术杂志的编委。",
@@ -2393,19 +2442,19 @@
             "degree": "学士",
             "institution": "上海交通大学",
             "year": "1988",
-            "major": "计算机科学与工程"
+            "major": "计算机科学与工程系"
           },
           {
             "degree": "硕士",
             "institution": "上海交通大学",
             "year": "1991",
-            "major": "计算机科学与工程"
+            "major": "计算机科学与工程系"
           },
           {
             "degree": "博士",
-            "institution": "东京大学",
+            "institution": "日本东京大学",
             "year": "1996",
-            "major": "信息工学"
+            "major": "信息工学专业"
           }
         ],
         "publications_count": -1,
@@ -2428,9 +2477,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2470,7 +2519,7 @@
         "bio": "个人主页：http://sei.pku.edu.cn/~huanggang主要研究方向系统软件与自适应科研/教育经历2000-2003，博士，北京大学1997-2000，硕士，西北工业大学1993-1997，学士，西北工业大学主要荣誉与获奖2007年 国家技术发明二等奖（个人排名第三）2012年 国家自然科学二等奖（排名第二）2015年 高等学校科技进步一等奖（排名第一）多次国际会议最佳/优秀论文等荣誉研究成果概况黄罡，博士，教授，博导，湖南株洲人，国家杰出青年科学基金、国家优秀青年科学基金、中国青年科技奖、中国计算机学会青年科学家奖、教育部新世纪优秀人才、全国优秀博士学位论文获得者。长期从事系统软件领域的教学和科研工作，在中美自然科学基金联合研究、国家自然科学基金、863、核高基、欧盟第七框架等项目支持下，针对自适应软件的可变性、可达性和可用性问题，从复杂性建模与控制的视角，提出一套基础化、系统化、普适化的基于运行时体系结构的自适应软件模型与方法，在自适应软件计算反射原理、运行时模型驱动方法、自适应系统的软件定义方法等方面取得突破，研制的技术与系统在企业计算、云计算和大数据领域得到广泛应用。现任电子学会青年科学家俱乐部轮值主席、电子学会青年科学家云计算与大数据专委主任、中国计算机学会专委工委和青工委委员、IEEE商业信息化与系统技术委员会执行委员、ISO/JTC云计算国际标准专家组成员、中国新一代IT产业推进联盟技术委员会主任。曾任ACM/IFIP/USENIX Middleware大会指导委员会委员、以及Middleware、COMPSAC、SOSE等国际会议程序委员会主席或大会主席、Java国际标准专家组成员。",
         "bio_en": "",
         "email": "",
-        "phone": "86-10-62757670转16",
+        "phone": "86-10-6275 7670转16",
         "office": "",
         "profile_url": "https://cs.pku.edu.cn/info/1067/1624.htm",
         "lab_url": "",
@@ -2519,9 +2568,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2555,6 +2604,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "网络数据处理与分析",
+          "软件定义网络",
+          "网络功能虚拟化",
+          "高性能系统",
           "计算机网络",
           "分布式系统"
         ],
@@ -2605,9 +2658,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2641,7 +2694,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "图像识别与视频编码"
+          "图像识别",
+          "视频编码"
         ],
         "keywords": [],
         "bio": "黄铁军",
@@ -2677,9 +2731,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2734,19 +2788,19 @@
           {
             "degree": "工学学士",
             "institution": "大庆石油学院（现东北石油大学）计算机系",
-            "year": "1995-1999",
+            "year": "1995.9-1999.7",
             "major": "计算机软件"
           },
           {
             "degree": "工学硕士",
             "institution": "大庆石油学院（现东北石油大学）计算机系",
-            "year": "1999-2002",
+            "year": "1999.9-2002.7",
             "major": "计算机应用"
           },
           {
             "degree": "工学博士",
             "institution": "中国科学院计算技术研究所",
-            "year": "2002-2008",
+            "year": "2002.9-2008.7",
             "major": "计算机应用"
           }
         ],
@@ -2770,9 +2824,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2809,7 +2863,9 @@
           "理论计算机科学",
           "大数据上的算法",
           "近似算法",
-          "在线算法"
+          "在线算法",
+          "大数据算法及其在机器学习中的应用",
+          "数据科学理论基础"
         ],
         "keywords": [],
         "bio": "个人主页：https://shaofengjiang.cn简介姜少峰博士，现任北京大学前沿计算研究中心助理教授，博士生导师，北京大学博雅青年学者，于2021年6月正式加入中心。他于2017年在香港大学取得博士学位，曾在以色列魏茨曼科学研究学院（Weizmann Institute of Science）进行为期三年的博士后研究，并曾在芬兰阿尔托大学（Aalto University）任助理教授。他博士在读期间获微软亚洲研究院PhD Fellowship提名奖，博士后研究获魏茨曼杰出博士后研究成果奖。他的研究方向为理论计算机科学，近期侧重于大数据算法及其在机器学习中的应用，并已经在包括FOCS，SICOMP，SODA，ICML，NeurIPS等的主流国际期刊和会议上发表论文多篇。姜少峰博士现致力于理论计算机科学、数据科学理论基础等方面的教学和科研，并与国际知名机构积极展开合作，积极推进相关方向的人才培养和科研产出，提升中心的国际影响力。发表论著Journal Papers■A Unified PTAS for Prize Collecting TSP and Steiner Tree Problem in Doubling Metrics.T-H. Hubert Chan, Haotian Jiang, Shaofeng H.-C. Jiang.TALG 2020.■OnDisc: Online Latency-Sensitive Job Dispatching and Scheduling in Heterogeneous Edge-Clouds. Zhenhua Han, Haisheng Tan, Xiang-Yang Li, Shaofeng H.-C. Jiang, Yupeng Li, Francis C.M. Lau.ToN 2019.■Joint Online Coflow Routing and Scheduling in Data Center Networks. Haisheng Tan, Shaofeng H.-C. Jiang, Yupeng Li, Xiang-Yang Li, Chenzi Zhang, Zhenhua Han, Francis C.M. Lau.ToN 2019.■A PTAS for the Steiner Forest Problem in Doubling Metrics. T-H. Hubert Chan, Shuguang Hu, Shaofeng H.-C. Jiang.SICOMP 2018.■Online Submodular Maximization with Free Disposal. T.-H. Hubert Chan, Zhiyi Huang, Shaofeng H.-C. Jiang, Ning Kang, Zhihao Gavin Tang.TALG 2018.■Reducing Curse of Dimensionality: Improved PTAS for TSP (with Neighborhoods) in Doubling Metrics. T-H. Hubert Chan, Shaofeng H.-C. Jiang.TALG 2018.Conference Papers■Coresets for Clustering in Excluded-minor Graphs and Beyond. Vladimir Braverman, Shaofeng H.-C. Jiang, Robert Krauthgamer, Xuan Wu.SODA 2021.■Coresets for Clustering in Graphs of Bounded Treewidth. Daniel Baker, Vladimir Braverman, Lingxiao Huang, Shaofeng H.-C. Jiang, Robert Krauthgamer, Xuan Wu.ICML 2020.■Scheduling Placement-Sensitive BSP Jobs with Inaccurate Execution Time Estimation. Zhenhua Han, Haisheng Tan, Shaofeng H.-C. Jiang, Xiaoming Fu, Wanli Cao, Francis C.M. Lau.INFOCOM 2020.■Online Dispatching and Scheduling of Jobs with Heterogeneous Utilities in Edge Computing. Chi Zhang, Haisheng Tan, Haoqiang Huang, Zhenhua Han, Shaofeng H.-C. Jiang, Nikolaos Freris, XiangYang Li.Mobihoc 2020.■Coresets for Clustering with Fairness Constraints. Lingxiao Huang, Shaofeng H.-C. Jiang, Nisheeth Vishnoi.NeurIPS 2019.■Coresets for Ordered Weighted Clustering. Vladimir Braverman, Shaofeng H.-C. Jiang, Robert Krauthgamer, Xuan Wu.ICML 2019.■Camul: Online Caching on Multiple Caches with Relaying and Bypassing. Haisheng Tan, Shaofeng H.-C. Jiang, Zhenhua Han, Liuyan Liu, Kai Han, Qinglin Zhao.INFOCOM 2019.■epsilon-Coresets for Clustering (with Outliers) in Doubling Metrics. Lingxiao Huang, Shaofeng H.-C. Jiang, Jian Li, Xuan Wu.FOCS 2018.■A Unified PTAS for Prize Collecting TSP and Steiner Tree Problem in Doubling Metrics. T-H. Hubert Chan, Haotian Jiang, Shaofeng H.-C. Jiang.ESA 2018.■Online Submodular Maximization Problem with Vector Packing Constraint. T-H. Hubert Chan, Shaofeng H.-C. Jiang, Zhihao Gavin Tang, Xiaowei Wu.ESA 2017.■Online Submodular Maximization with Free Disposal: Randomization Beats 1/4 for Partition Matroids. T-H. Hubert Chan, Zhiyi Huang, Shaofeng H.-C. Jiang, Ning Kang, Zhihao Gavin Tang.SODA 2017.■A PTAS for the Steiner Forest Problem in Doubling Metrics. T-H. Hubert Chan, Shuguang Hu, Shaofeng H.-C. Jiang.FOCS 2016.■Efficient Online Coflow Routing and Scheduling. Yupeng Li, Shaofeng H.-C. Jiang, Haisheng Tan, Chenzi Zhang, Guihai Chen, Jipeng Zhou, Francis C.M. Lau.Mobihoc 2016.■Reducing Curse of Dimensionality: Improved PTAS for TSP (with Neighborhoods) in Doubling Metrics. T-H. Hubert Chan, Shaofeng H.-C. Jiang.SODA 2016.■Revealing Optimal Thresholds for Generalized Secretary Problem via Continuous LP: Impacts on Online K-Item Auction and Bipartite K-Matching with Random Arrival Order. T-H. Hubert Chan, Fei Chen, Shaofeng H.-C. Jiang.SODA 2015.",
@@ -2852,9 +2908,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2889,7 +2945,14 @@
         "is_academician": false,
         "research_areas": [
           "计算机视觉",
-          "图像视频处理"
+          "图像视频处理",
+          "物体跟踪",
+          "识别",
+          "检测",
+          "形状分析",
+          "动作识别",
+          "视觉注意",
+          "图像视频的质量评价"
         ],
         "keywords": [],
         "bio": "个人主页：http://www.idm.pku.edu.cn/staff/jiangtingting/教育工作背景2001年毕业于中国科学技术大学，获计算机专业学士学位2007年毕业于美国杜克大学计算机系，获博士学位2007年至2009年，在法国INRIA研究所从事博士后研究2010年1月开始任教北京大学主要研究工作（1）计算机视觉，包括物体跟踪、识别、检测、形状分析、动作识别、视觉注意等；（2）图像视频的质量评价。主要学术成果近几年在主要国际学术期刊和会议上共发表论文30多篇。并且受邀参加计算机视觉主要会议CVPR、ICCV和ECCV以及IEEE Pattern Analysis and Machine Intelligence (TPAMI) 、IEEE Transactions on Image Processing(TIP) 、IEEE Transactions on Circuits and Systems for Video Technology (TCSVT) 、IEEE Transactions on Multimedia (TMM)等期刊的审稿。目前参与了多项国家自然科学基金委员会研究项目和科技部的一项973课题。",
@@ -2906,16 +2969,16 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "学士学位",
+            "degree": "学士",
             "institution": "中国科学技术大学",
             "year": "2001",
-            "major": "计算机专业"
+            "major": "计算机"
           },
           {
-            "degree": "博士学位",
+            "degree": "博士",
             "institution": "美国杜克大学",
             "year": "2007",
-            "major": "计算机系"
+            "major": "计算机"
           }
         ],
         "publications_count": -1,
@@ -2938,9 +3001,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2975,10 +3038,10 @@
         "is_academician": false,
         "research_areas": [
           "软件工程方法学",
-          "智能软件",
-          "软件形式化方法",
           "自适应软件",
-          "多agent系统"
+          "多agent系统",
+          "软件形式化方法",
+          "智能软件"
         ],
         "keywords": [],
         "bio": "个人主页：www.sei.pku.edu.cn/~jwp主要研究方向软件工程方法学、自适应软件、多agent系统、软件形式化方法科研/教育经历2000.8-2002.9，博士后，加拿大维多利亚大学1997.9-2000.7，博士，中国科学院软件研究所1994.9-1997.7，硕士，华东理工大学1987.9-1991.7，学士，华东理工大学主要科研项目1. 国家“973”计划项目子课题：持续演进的自适应网购软件模型、方法及服务质量保障，2015.1-2019.82. 国家“863”计划项目：基于自主构件的自适应网构软件的自动化集成技术，2009.1-2010.123. 国家自然科学基金：基于自主构件的开放分布式自适应软件系统的开发方法，2011.1-2013.124. 国家自然科学基金：基于自主构件协同的软件自动化集成技术，2008.1-2010.125. 国家自然科学基金：基于组织的Agent开发理论和方法及其在基于构件的软件工程中的运用，2004.1-2006.12Selected Publications1. Wenpin Jiao, Yanchun Sun. Self-adaptation of multi-agent systems in dynamic environments based on experience exchanges, Journal of Systems and Software, Volume 122, December 2016, Pages 165–179.2. Wenpin Jiao, Yanchun Sun. Supporting Adaptation of Decentralized Software based on Application Scenarios, Journal of Systems and Software, Volume 86, Issue 7, July 2013, Pages 1891–1906.3. Wenpin Jiao. Using Autonomous Components to Improve Runtime Qualities of Software. IET Software, Vol.5, Issue 1, pages 1-20, February 2011.4. Wenpin Jiao, Yunchun Sun, Hong Mei, Automated Assembly of Internet-Scale Software Systems Involving Autonomous Agents, Journal of Systems and Software, 83(2010) pp.1838-1850.5. Wenpin Jiao. Multiagent Cooperation via Reasoning about the Behavior of Others. Computational Intelligence. Volume 26 Issue 1, Pages 57 - 83, February 2010.",
@@ -2995,27 +3058,15 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "学士",
-            "institution": "华东理工大学",
-            "year": "1987-1991",
-            "major": ""
-          },
-          {
             "degree": "硕士",
             "institution": "华东理工大学",
             "year": "1994-1997",
             "major": ""
           },
           {
-            "degree": "博士",
-            "institution": "中国科学院软件研究所",
-            "year": "1997-2000",
-            "major": ""
-          },
-          {
-            "degree": "博士后",
-            "institution": "加拿大维多利亚大学",
-            "year": "2000-2002",
+            "degree": "学士",
+            "institution": "华东理工大学",
+            "year": "1987-1991",
             "major": ""
           }
         ],
@@ -3039,9 +3090,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -3075,19 +3126,19 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "系统软件",
-          "操作系统",
-          "计算机网络",
           "云计算系统软件",
           "机器学习操作系统",
           "软件定义数据中心",
-          "可编程网络"
+          "可编程网络",
+          "系统软件",
+          "操作系统",
+          "计算机网络"
         ],
         "keywords": [],
         "bio": "个人主页：https://xinjin.github.io主要研究方向云计算系统软件，机器学习操作系统，软件定义数据中心，可编程网络",
         "bio_en": "",
         "email": "",
-        "phone": "861062758707",
+        "phone": "86-10-6275 8707",
         "office": "",
         "profile_url": "https://cs.pku.edu.cn/info/1069/1635.htm",
         "lab_url": "",
@@ -3117,9 +3168,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -3160,7 +3211,7 @@
         "bio": "个人主页：需求工程，知识工程",
         "bio_en": "",
         "email": "",
-        "phone": "86-10-62765977",
+        "phone": "86-10-6276 5977",
         "office": "",
         "profile_url": "https://cs.pku.edu.cn/info/1069/1631.htm",
         "lab_url": "",
@@ -3190,9 +3241,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -3226,11 +3277,12 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "经济和理论计算",
+          "计算经济学",
           "同伴预测",
           "预测市场",
           "机制设计",
-          "机器学习"
+          "机器学习",
+          "经济和理论计算"
         ],
         "keywords": [],
         "bio": "个人主页：https://cfcs.pku.edu.cn/yuqkong/孔雨晴，北京大学前沿计算研究中心长聘副教授，2018年博士毕业于密歇根大学安娜堡分校计算机系，2013年本科毕业于中国科学技术大学数学系。她的研究兴趣在计算经济学领域，包含同伴预测，预测市场，机制设计以及机器学习。她的论文发表于WINE, ITCS, EC, SODA, AAAI, NeurIPS, ICLR等会议中。",
@@ -3279,9 +3331,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -3316,6 +3368,12 @@
         "is_academician": false,
         "research_areas": [
           "程序分析",
+          "系统安全",
+          "动态分析",
+          "静态分析",
+          "机器学习",
+          "系统日志分析",
+          "符号执行",
           "系统监控"
         ],
         "keywords": [],
@@ -3365,9 +3423,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -3439,9 +3497,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -3475,10 +3533,11 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "计算机图形图像",
+          "计算机图形学",
           "虚拟/增强现实技术",
           "实时真实感渲染",
-          "虚拟仿真技术"
+          "虚拟仿真技术",
+          "计算机图形图像"
         ],
         "keywords": [],
         "bio": "个人主页：http://www.graphics.pku.edu.cn/members/lisheng/index.htm主要研究方向计算机图形学、虚拟/增强现实技术、实时真实感渲染、虚拟仿真技术研究成果概况主持了十余项自然科学基金、国家重点研发项目课题、国防专项和多项企业横向项目，并作为北大方面负责人或者核心骨干参与了多项国家863、973、自然科学基金重点项目和国家支撑计划项目。在包含ACM TOG，CGF等国际国内著名学术刊物和会议上共发表相关学术论文70余篇，申请/授权国际国内发明专利40余项。担任了中国计算机学会虚拟现实与可视化专委会委员，计算机辅助设计与图形学专委会委员，《图学学报》编委。",
@@ -3514,9 +3573,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -3588,9 +3647,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -3629,7 +3688,10 @@
           "量子优化算法",
           "量子复杂性理论",
           "量子模拟",
-          "量子游走"
+          "量子游走",
+          "量子计算",
+          "人工智能",
+          "理论计算机"
         ],
         "keywords": [],
         "bio": "个人主页：https://www.tongyangli.com/简介李彤阳，现任北京大学前沿计算研究中心助理教授，博士生导师，北京大学博雅青年学者，国家自然科学基金面上项目、重大研究计划培育项目负责人。他于2015年在清华大学交叉信息研究院（姚班）和数学科学系分别获得工学士学位和理学士学位，2020年在美国马里兰大学获得博士学位，之后在美国麻省理工学院从事博士后研究工作，于2021年7月加入北京大学前沿计算研究中心并工作至今。他的科研围绕量子计算、人工智能、理论计算机的交叉领域展开，研究成果已在Nature Physics、Nature Communications、Journal of the ACM、Physical Review Letters、IEEE Transactions on Information Theory、STOC、ICML、NeurIPS、ICLR 等期刊、会议发表论文四十余篇；9次在国际量子信息方向的权威会议 QIP 上作报告；担任量子科学领域期刊 Quantum的期刊编辑，AQIS 2025会议共同主席，AQIS 2021, TQC 2022, QCTIP 2022, QIP 2023, ICLR 2024, QCTIP 2024, TQC 2024, NeurIPS 2024, ICLR 2025, NeurIPS 2025, ICLR 2026, QIP 2026, ICML 2026, TQC 2026会议的程务委员会成员/领域主席，以及相关领域多家顶级期刊和会议的审稿人。发表论著■ (by contribution) Han Zhong*, Jiachen Hu*, Yecheng Xue, Tongyang Li, and Liwei Wang. Provably Efficient Exploration in Quantum Reinforcement Learning with Logarithmic Worst-Case Regret. Accepted by the 41st International Conference on Machine Learning (ICML 2024).■ (by contribution) Yexin Zhang*, Chenyi Zhang*, Cong Fang, Liwei Wang, and Tongyang Li. Quantum Algorithms and Lower Bounds for Finite-Sum Optimization. Accepted by the 41st International Conference on Machine Learning (ICML 2024).■ (by contribution) Xinzhao Wang, Shengyu Zhang, and Tongyang Li. A Quantum Algorithm Framework for Discrete Probability Distributions with Applications to Rényi Entropy Estimation. To appear in IEEE Transactions on Information Theory, 2024.■ Jiachen Hu, Tongyang Li, Xinzhao Wang, Yecheng Xue, Chenyi Zhang, and Han Zhong. Quantum Non-Identical Mean Estimation: Efficient Algorithms and Fundamental Limits. Accepted by the 19th Conference on the Theory of Quantum Computation, Communication and Cryptography (TQC 2024).■ Wenhao He, Tongyang Li, Xiantao Li, Zecheng Li, Chunhao Wang, and Ke Wang. Efficient Optimal Control of Open Quantum Systems. Accepted by the 19th Conference on the Theory of Quantum Computation, Communication and Cryptography (TQC 2024).■ (by contribution) Zhiding Liang*, Zhixin Song*, Jinglei Cheng*, Hang Ren*, Tianyi Hao*, Rui Yang*, Yiyu Shi, and Tongyang Li. SpacePulse: Combining Parameterized Pulses and Contextual Subspace for More Practical VQE. Accepted by the 61st Design Automation Conference (DAC 2024).■ (by contribution) Hao Wang*, Chenyi Zhang*, and Tongyang Li. Near-Optimal Quantum Algorithm for Minimizing the Maximal Loss. Accepted by the 12th International Conference on Learning Representations (ICLR 2024).■ Minbo Gao, Zhengfeng Ji, Tongyang Li, and Qisheng Wang, Logarithmic-Regret Quantum Learning Algorithms for Zero-Sum Games. Accepted by the 37th Conference on Neural Information Processing Systems (NeurIPS 2023).■ (by contribution) Yizhou Liu, Weijie J. Su, and Tongyang Li, On Quantum Speedups for Nonconvex Optimization via Quantum Tunneling Walks. Quantum, 7:1030, 2023.■ (by contribution) Yecheng Xue*, Xiaoyu Chen*, Tongyang Li, and Shaofeng H.-C. Jiang, Near-Optimal Quantum Coreset Construction Algorithms for Clustering. Accepted by the 40th International Conference on Machine Learning (ICML 2023).■ (by contribution) Chenyi Zhang and Tongyang Li, Quantum Lower Bounds for Finding Stationary Points of Nonconvex Functions. Accepted by the 40th International Conference on Machine Learning (ICML 2023).■ (by contribution) Yan Zhu, Ge Bai, Yuexuan Wang, Tongyang Li, and Giulio Chiribella, Quantum autoencoders for communication-efficient quantum cloud computing. Quantum Machine Intelligence, Vol. 5, No. 27, 2023.■ Shouvanik Chakrabarti, Andrew M. Childs, Shih-Han Hung, Tongyang Li, Chunhao Wang, and Xiaodi Wu, Quantum algorithm for estimating volumes of convex bodies. ACM Transactions on Quantum Computing Vol. 4, No. 3, 1-60, 2023; also a single-track contributed talk at the 23rd Annual Conference on Quantum Information Processing (QIP 2020; 17 among 283 submissions).■ (by contribution) Qi Zhao, You Zhou, Alexander F. Shaw, Tongyang Li, and Andrew M. Childs, Hamiltonian simulation with random inputs. Physical Review Letters, Vol. 129, 270502, 2022; also a contributed talk at the 25th Conference on Quantum Information Processing (QIP 2022).■ (by contribution) Zongqi Wan, Zhijie Zhang, Tongyang Li, Jialin Zhang, and Xiaoming Sun, Quantum Multi-Armed Bandits and Stochastic Linear Bandits Enjoy Logarithmic Regrets. Proceedings of the 37th AAAI Conference on Artificial Intelligence (AAAI 2023), Vol. 37, No. 8, 10087-10094, 2023.■ (by contribution) Xiao-Ming Zhang, Tongyang Li, and Xiao Yuan, Quantum State Preparation with Optimal Circuit Depth: Implementations and Applications. Physical Review Letters, Vol. 129, 230504, 2022.■ Nai-Hui Chia, András Gilyén, Tongyang Li, Han-Hsuan Lin, Ewin Tang, and Chunhao Wang, Sampling-based sublinear low-rank matrix arithmetic framework for dequantizing quantum machine learning, Journal of the ACM, Vol. 69, No. 5, 1-72, 2022. Previous conference version published in the Proceedings of the 52nd Annual ACM Symposium on Theory of Computing (STOC 2020), 387–400, 2020; also a contributed talk at the 23rd Annual Conference on Quantum Information Processing (QIP 2020).■ Andrew M. Childs, Jiaqi Leng, Tongyang Li, Jin-Peng Liu, and Chenyi Zhang, Quantum simulation of real-space dynamics. Quantum, 6:860, 2022.■ Andrew M. Childs, Tongyang Li, Jin-Peng Liu, Chunhao Wang, and Ruizhe Zhang, Quantum Algorithms for Sampling Log-Concave Distributions and Estimating Normalizing Constants. Proceedings of the 36th Conference on Neural Information Processing Systems (NeurIPS 2022), 23205-23217, 2022; also a contributed talk at the 26th Conference on Quantum Information Processing (QIP 2023).■ Tongyang Li and Ruizhe Zhang, Quantum Speedups of Optimizing Approximately Convex Functions with Applications to Logarithmic Regret Stochastic Convex Bandits. Proceedings of the 36th Conference on Neural Information Processing Systems (NeurIPS 2022), 3152-3164, 2022.■ (by contribution) Chenyi Zhang and Tongyang Li, Escape saddle points by a simple gradient-descent based algorithm. Proceedings of the 35th Conference on Neural Information Processing Systems (NeurIPS 2021), 8545-8556, 2021.■ (by contribution) Chenyi Zhang*, Jiaqi Leng*, and Tongyang Li, Quantum algorithms for escaping from saddle points. Quantum, 5:529, 2021.■ Andrew M. Childs, Shih-Han Hung, and Tongyang Li, Quantum query complexity with matrix-vector products. To appear in the 48th International Colloquium on Automata, Languages, and Programming (ICALP 2021). arXiv:2102.11349■ Troy Lee, Tongyang Li, Miklos Santha, and Shengyu Zhang, On the cut dimension of a graph. To appear in the 2021 Computational Complexity Conference (CCC 2021). arXiv:2011.05085■ (by contribution) Tongyang Li∗, Chunhao Wang∗, Shouvanik Chakrabarti, and Xiaodi Wu, Sublinear classical and quantum algorithms for general matrix games. To appear in the 35th AAAI Conference on Artificial Intelligence (AAAI 2021). arXiv:2012.06519■ (by contribution) Daochen Wang∗, Xuchen You∗, Tongyang Li, and Andrew M. Childs, Quantum exploration algorithms for multi-armed bandits. To appear in the 35th AAAI Conference on Artificial Intelligence (AAAI 2021); also a contributed talk at the 4th Annual Conference on Quantum Techniques in Machine Learning (QTML 2020). arXiv:2007.07049■ Nai-Hui Chia, Tongyang Li, Han-Hsuan Lin, and Chunhao Wang, Quantum-inspired sublinear algorithm for solving low-rank semidefinite programming. Proceedings of the 45th International Symposium on Mathematical Foundations of Computer Science (MFCS 2020), Vol. 170, 23:1–23:15, Leibniz International Proceedings in Informatics, 2020. arXiv:1901.03254■ Nai-Hui Chia, András Gilyén, Tongyang Li, Han-Hsuan Lin, Ewin Tang, and Chunhao Wang, Sampling-based sublinear low-rank matrix arithmetic framework for dequantizing quantum machine learning. Proceedings of the 52nd Annual ACM Symposium on Theory of Computing (STOC 2020), 387–400, 2020; also a contributed talk at the 23rd Annual Conference on Quantum Information Processing (QIP 2020). arXiv:1910.06151■ András Gilyén and Tongyang Li, Distributional property testing in a quantum world. Proceedings of the 11th Annual Conference on Innovations in Theoretical Computer Science (ITCS 2020), Vol. 151, 25:1–25:19, Leibniz International Proceedings in Informatics, 2020. arXiv:1902.00814■ (by contribution) Shouvanik Chakrabarti∗, Yiming Huang∗, Tongyang Li, Soheil Feizi, and Xiaodi Wu, Quantum Wasserstein generative adversarial networks. Proceedings of the 33rd Annual Conference on Neural Information Processing Systems (NeurIPS 2019), 6778–6789, 2019. arXiv:1911.00111■ (by contribution) Tongyang Li, Shouvanik Chakrabarti, and Xiaodi Wu, Sublinear quantum algorithms for training linear and kernel-based classifiers. Proceedings of the 36th International Conference on Machine Learning (ICML 2019), 3815–3824, 2019. arXiv:1904.02276■ Shouvanik Chakrabarti, Andrew M. Childs, Tongyang Li, and Xiaodi Wu, Quantum algorithms and lower bounds for convex optimization, Quantum, 4:221, 2020; also a contributed talk at the 22nd Annual Conference on Quantum Information Processing (QIP 2019). arXiv:1809.01731■ Tongyang Li and Xiaodi Wu, Quantum query complexity of entropy estimation. IEEE Transactions on Information Theory Vol. 65, no. 5, 2899–2921, 2019. arXiv:1710.06025■ Fernando G.S.L. Brandão, Amir Kalev, Tongyang Li, Cedric Y.-Y. Lin, Krysta M. Svore, and Xiaodi Wu, Quantum SDP Solvers: Large Speed-ups, Optimality, and Applications to Quantum Learning. Proceedings of the 46th International Colloquium on Automata, Languages and Programming (ICALP 2019), Vol. 132, 27:1–27:14, Leibniz International Proceedings in Informatics, 2019; also a contributed talk at the 22nd Annual Conference on Quantum Information Processing (QIP 2019). arXiv:1710.02581■ Andrew M. Childs and Tongyang Li, Efficient simulation of sparse Markovian quantum dynamics. Quantum Information & Computation 17 (2017), no. 11-12, 901–947,arXiv:1611.05543■ (by contribution) Tongyang Li, Lei Song, Yongcai Wang, and Haisheng Tan, On Target Counting by Sequential Snapshots of Binary Proximity Sensors. In Proceedings of the 12th European Conference on Wireless Sensor Networks (EWSN 2015), pp. 19-34.",
@@ -3684,9 +3746,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -3757,9 +3819,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -3829,9 +3891,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -3865,6 +3927,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "软件定义网络",
+          "机器学习系统",
+          "微服务架构",
+          "可信网络管理",
           "计算机网络",
           "分布式系统"
         ],
@@ -3902,9 +3968,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -3943,7 +4009,11 @@
           "多方安全计算",
           "格密码学",
           "分块密码",
-          "复杂性"
+          "复杂性",
+          "秘密分享",
+          "量子计算",
+          "后量子密码学",
+          "安全机器学习"
         ],
         "keywords": [],
         "bio": "个人主页：https://liutianren.com/简介刘天任博士，现任北京大学前沿计算研究中心助理教授，博士生导师，于2022年2月正式加入中心。他于2014年在清华大学交叉信息研究院（姚班）获学士学位，分别于2016年、2019年在麻省理工学院获硕士、博士学位。之后在华盛顿大学进行博士后研究。刘天任博士的研究领域为密码学。他的现有工作都围绕信息论密码学展开，同时涉及多方安全计算、格密码学、分块密码、复杂性等。他的代表性工作是关于秘密分享的系列成果。秘密分享是信息论密码学中的一个基本问题。他的研究成果推翻了领域内长久以来的猜想，解决了一个超过30年的开放问题，开启了一个研究方向。在密码学领域，已发表会议论文9篇，包括密码学顶级会议（Crypto 和 Eurocrypt）4篇，理论计算机科学顶级会议（STOC）1篇，另有1篇单作者论文获得密码学一流会议TCC的最佳学生论文奖。未来他希望能进一步拓展到量子计算、后量子密码学、安全机器学习等领域。发表论著■Tianren Liu, Stefano Tessaro, Vinod Vaikuntanathan, The t-wise Independence of Substitution-Permutation Networks. CRYPTO 2021.■ Huijia Lin,Tianren Liu, Hoeteck Wee, Information-Theoretic 2-Round MPC without Round Collapsing: Adaptive Security, and More. TCC 2020.■ Marshall Ball, Justin Holmgren, Yuval Ishai,Tianren Liu, Tal Malkin, On the Complexity of Decomposable Randomized Encodings, or: How Friendly Can a Garbling-Friendly PRF be? ITCS 2020.■ Leonard Assouline,Tianren Liu, Multi-Party PSM, Revisited: Improved Communication and Unbalanced Communication. TCC 2021.■ Melissa Chase, Yevgeniy Dodis, Yuval Ishai, Daniel Kraschewski,Tianren Liu, Rafail Ostrovsky, Vinod Vaikuntanathan, Reusable Non-Interactive Secure Computation. CRYPTO 2019.■Tianren Liu, Vinod Vaikuntanathan, Breaking the Circuit-Size Barrier in Secret Sharing. STOC 2018.■Tianren Liu, Vinod Vaikuntanathan, Hoeteck Wee, Towards Breaking the Exponential Barrier for General Secret Sharing. EUROCRYPT 2018.■Tianren Liu, Vinod Vaikuntanathan, Hoeteck Wee, Conditional Disclosure of Secrets via Non-linear Reconstruction. CRYPTO 2017.■Tianren Liu, On Basing Search SIVP on NP-Hardness. TCC 2018. [Best Student Paper]■Tianren Liu, Vinod Vaikuntanathan, On Basing Private Information Retrieval on NP-Hardness. TCC 2016-A.■ Yevgeniy Dodis,Tianren Liu, Martijn Stam, John P. Steinberger, Indifferentiability of Confusion-Diffusion Networks. EUROCRYPT 2016.■ Yan Xu, Yining Wang,Tianren Liu, Junichi Tsujii, Eric Chang, An end-to-end system to identify temporal relation in discharge summaries: 2012 i2b2 challenge. JAMIA 2013.■ Yan Xu, Yining Wang,Tianren Liu, Jiahua Liu, Yubo Fan, Yi Qian, Junichi Tsujii, Eric Chang , Joint segmentation and named entity recognition using dual decomposition in Chinese discharge summaries. JAMIA 2013.",
@@ -3998,9 +4068,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -4070,9 +4140,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -4142,9 +4212,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -4212,9 +4282,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 35
       },
@@ -4250,7 +4320,9 @@
         "research_areas": [
           "计算语言学",
           "中文信息处理",
-          "语言知识工程"
+          "语言知识工程",
+          "词义理论与计算资源研发",
+          "汉字、词的形式、意义系统"
         ],
         "keywords": [],
         "bio": "主要研究方向计算语言学、中文信息处理、语言知识工程，致力于面向信息处理（以及面向人文领域）的词义理论与计算资源研发工作，目前的兴趣点在汉字、词的形式、意义系统方面（具体见《中文信息学报》等论著，也欢迎确有兴趣且有专长的同学参与课题工作或读研，该跨学科研发工作不限于计算机专业，也欢迎语言学、逻辑、信息管理等具备编程能力的其它专业同学）。科研/教育经历2003年获博士学位留校任教，现为北京大学信息学院副教授。主要荣誉与获奖2005年 全国优秀博士学位论文奖2007年 教育部科技进步奖一等奖（5/9）2010年 中国电子学会电子信息科学技术奖一等奖（5/10）2011年 国家科技进步奖二等奖 （4/10）研究成果概况刘扬，男，2003年获博士学位留校任教，现为北京大学计算机学院副教授。个人研究方向为计算语言学、中文信息处理、语言知识工程，致力于面向信息处理（以及面向人文领域）的词义理论与计算资源研发工作，目前的兴趣点在汉字、词的形式、意义系统方面（具体见《中文信息学报》等论著，也欢迎确有兴趣且有专长的同学参与课题工作或读研，该跨学科研发工作不限于计算机专业，也欢迎语言学、逻辑、信息管理等具备编程能力的其它专业同学）。主持国家社科基金、国家自然基金、全国优博专项等项目，作为技术骨干参与国家863、973、社科重大等项目。相关研发成果交付应用，在国内外多次转让使用权，曾获“全国优秀博士学位论文奖（2005）”、“教育部科技进步奖一等奖（2007，5/9）”、“中国电子学会电子信息科学技术奖一等奖（2010，5/10）”及“国家科技进步奖二等奖（2011，4/10）”等奖励。",
@@ -4267,8 +4339,8 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "博士",
-            "institution": "北京大学",
+            "degree": "博士学位",
+            "institution": "",
             "year": "2003",
             "major": ""
           }
@@ -4293,9 +4365,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -4329,9 +4401,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "物联网",
-          "移动计算",
           "智慧城市",
+          "移动计算",
+          "物联网",
+          "群智感知",
           "工业互联网"
         ],
         "keywords": [],
@@ -4368,9 +4441,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -4442,9 +4515,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -4514,9 +4587,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -4574,16 +4647,16 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "学士",
-            "institution": "北京大学",
-            "year": "2001-2005",
-            "major": "计算机科学技术系"
-          },
-          {
             "degree": "博士",
             "institution": "洛杉矶加州大学",
             "year": "2005-2011",
-            "major": "计算机科学系"
+            "major": ""
+          },
+          {
+            "degree": "学士",
+            "institution": "北京大学",
+            "year": "2001-2005",
+            "major": ""
           }
         ],
         "publications_count": -1,
@@ -4606,9 +4679,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -4679,9 +4752,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -4759,9 +4832,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -4840,9 +4913,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -4879,7 +4952,8 @@
           "自然语言处理",
           "大语言模型",
           "大模型推理",
-          "大模型机理可解释性"
+          "大模型机理可解释性",
+          "机器学习"
         ],
         "keywords": [],
         "bio": "个人主页：https://liangmingpan.bio/主要研究方向自然语言处理、大语言模型、大模型推理、大模型机理可解释性个人简介潘亮铭，北京大学计算机学院助理教授，计算语言学教育部重点实验室、北京大学计算语言学研究所研究员、博士生导师（“博雅青年学者”）、国家级青年人才计划获得者。2022年博士毕业于新加坡国立大学，之后先后担任美国加州大学圣塔芭芭拉分校博士后研究员、美国亚利桑那大学信息科学学院助理教授。主要研究方向包括自然语言处理、机器学习、大语言模型等，在国际顶级会议和期刊发表论文60余篇， 包括ACL、EMNLP、NAACL、TACL、COLING、NeurIPS、ICML、AAAI、ACM MM、WWW等。论文曾获ACL 2025 SAC Highlights Award 、NeurIPS 2024 Workshop最佳论文奖、IJCNLP-AACL 2023 Area Chair Award。科研/教育经历2025.09-今，助理教授，北京大学2024.08-2025.08，助理教授，亚利桑那大学（美国）2022.12-2024.08，博士后，加州大学圣塔芭芭拉分校（美国）2018-2022，博士，新加坡国立大学2014-2017，硕士，清华大学2010-2014，学士，北京航空航天大学代表性学术论著[1]Liangming Pan, Michael Saxon, Wenda Xu, Deepak Nathani, Xinyi Wang, and William Yang Wang. Automatically Correcting Large Language Models: Surveying the Landscape of Diverse Automated Correction Strategies. Transactions of the Association for Computational Linguistics (TACL), 2024.[2] Xiaobao Wu,Liangming Pan, Yuxi Xie, Ruiwen Zhou, Shuai Zhao, Yubo Ma, Mingzhe Du, Rui Mao, Anh Tuan Luu, and William Yang Wang. AntiLeak-Bench: Preventing Data Contamination by Automatically Constructing Benchmarks with Updated Real-World Knowledge. ACL 2025.(SAC Highlights Award)[3] Xinyuan Lu,Liangming Pan*, Yubo Ma, Preslav Nakov, and Min-Yen Kan. TART: An Open-Source Tool-Augmented Framework for Explainable Table-based Reasoning. TRL Workshop @ NeurIPS 2024.(Best Paper Runner-up)[4]Liangming Pan, Alon Albalak, Xinyi Wang, William Yang Wang. Logic-LM: Empowering Large Language Models with Symbolic Solvers for Faithful Logical Reasoning. Findings of the 2023 Conference on Empirical Methods in Natural Language Processing. EMNLP 2023.[5]Liangming Pan, Xiaobao Wu, Xinyuan Lu, Anh Tuan Luu, William Yang Wang, Min-Yen Kan, Preslav Nakov. Fact-Checking Complex Claims with Program-Guided Reasoning. ACL 2023.[6]Liangming Pan, Wenhu Chen, Min-Yen Kan, William Yang. Attacking Open-domain Question Answering by Injecting Misinformation. AACL-IJCNLP 2023(Area Chair Award)[7]Liangming Pan, Wenhu Chen, Wenhan Xiong, Min-Yen Kan, William Yang Wang. Zero-shot Fact Verification by Claim Generation. ACL 2021.[8]Liangming Pan, Wenhu Chen, Wenhan Xiong, Min-Yen Kan, William Yang Wang. Unsupervised Multi-hop Question Answering by Question Generation. NAACL 2021.[9]Liangming Pan, Yuxi Xie, Yansong Feng, Min-Yen Kan, Tat-Seng Chua. Semantic Graphs for Deep Question Generation. ACL 2020.[10]Liangming Pan, Jingjing Chen, Jianlong Wu, Shaoteng Liu, Chong-Wah Ngo, Min-Yen Kan, Yu-Gang Jiang, Tat-Seng Chua. Multi-modal Cooking Workflow Construction for Food Recipes. ACM MM 2020.[11]Liangming Pan, Jingjing Chen, Shaoteng Liu, Chong-Wah Ngo, Min-Yen Kan, Tat-Seng Chua. A Hybrid Approach for Detecting Prerequisite Relations in Multi-modal Food Recipes. IEEE Transactions on Multimedia. 2020 Dec 9.[12]Liangming Pan, Chengjiang Li, Juanzi Li, and Jie Tang. Prerequisite Relation Learning for Concepts in MOOCs. ACL 2017.",
@@ -4896,9 +4970,9 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "学士",
-            "institution": "北京航空航天大学",
-            "year": "2010-2014",
+            "degree": "博士",
+            "institution": "新加坡国立大学",
+            "year": "2018-2022",
             "major": ""
           },
           {
@@ -4908,9 +4982,9 @@
             "major": ""
           },
           {
-            "degree": "博士",
-            "institution": "新加坡国立大学",
-            "year": "2018-2022",
+            "degree": "学士",
+            "institution": "北京航空航天大学",
+            "year": "2010-2014",
             "major": ""
           }
         ],
@@ -4934,9 +5008,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -4990,7 +5064,7 @@
           {
             "degree": "博士",
             "institution": "日本东京大学",
-            "year": "2010-2013",
+            "year": "2010.10-2013.09",
             "major": ""
           }
         ],
@@ -5014,9 +5088,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -5088,9 +5162,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -5161,9 +5235,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -5199,7 +5273,9 @@
         "research_areas": [
           "自然语言处理",
           "机器学习",
-          "深度学习"
+          "深度学习",
+          "结构化自然语言处理",
+          "结构化学习"
         ],
         "keywords": [],
         "bio": "个人主页：http://xusun.org/主要研究方向自然语言处理，机器学习，深度学习科研/教育经历2012-今，研究员、博士生导师，北京大学2010-2012，先后在日本东京大学、美国康奈尔大学、香港理工大学担任研究职位2007-2010，博士，东京大学2004-2007，硕士，北京大学2000-2004，学士，华中科技大学研究成果概况曾在微软公司美国雷蒙德研究院实习。研究方向为自然语言处理、机器学习、深度学习，特别是结构化自然语言处理和结构化学习。曾担任EMNLP、IJCNLP等国际学术会议的领域主席；ACL, IJCAI, AAAI, COLING, EMNLP, NAACL等国际学术会议的程序委员会成员；IEEE TPAMI, Comput. Linguist.等期刊的审稿人。",
@@ -5216,9 +5292,9 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "学士",
-            "institution": "华中科技大学",
-            "year": "2000-2004",
+            "degree": "博士",
+            "institution": "东京大学",
+            "year": "2007-2010",
             "major": ""
           },
           {
@@ -5228,9 +5304,9 @@
             "major": ""
           },
           {
-            "degree": "博士",
-            "institution": "东京大学",
-            "year": "2007-2010",
+            "degree": "学士",
+            "institution": "华中科技大学",
+            "year": "2000-2004",
             "major": ""
           }
         ],
@@ -5254,9 +5330,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -5336,9 +5412,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -5375,7 +5451,8 @@
           "具身智能",
           "生成式AI",
           "LLM",
-          "计算机视觉"
+          "计算机视觉",
+          "人工智能"
         ],
         "keywords": [],
         "bio": "个人主页：https://ha0tang.github.io/主要研究方向具身智能、生成式AI、LLM、计算机视觉个人简介唐浩，北京大学计算机学院助理教授，国家级海外高水平人才计划入选者。在此之前，他曾在美国卡耐基梅隆大学（CMU）机器人研究所（Robotics Institute）和瑞士苏黎世联邦理工学院（ETH Zurich）计算机视觉实验室（CVL）担任博士后研究员。他分别于2021年和2016年在意大利特伦托大学和北京大学获得博士和硕士学位。在攻读博士学位期间，他曾在英国牛津大学和阿联酋的IIAI研究院进行学术访问和实习，积累了跨国界的学术经验。他在国际顶级会议和期刊上发表了100多篇论文，包括CVPR、ECCV、ICCV、NeurIPS、ICLR、ICML、ACM MM、AAAI、IJCAI、TPAMI、IJCV和TIP等。其研究工作获得了多项荣誉，包括ACM MM 2018最佳论文提名奖（提名率仅为4/757）。Selected Publications[1] Hao Tang, Ling Shao, Nicu Sebe, Luc Van Gool. Graph Transformer GANs with Graph Masked Modeling for Architectural Layout Generation. IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2024[2] Hao Tang, Guolei Sun, Nicu Sebe, Luc Van Gool. Edge Guided GANs with Multi-Scale Contrastive Learning for Semantic Image Synthesis. IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2023[3] Hao Tang, Philip HS Torr, Nicu Sebe. Multi-Channel Attention Selection GANs for Guided Image-to-Image Translation.  IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2022[4] Hao Tang, Ling Shao, Philip HS Torr, Nicu Sebe. Local and Global GANs with Semantic-Aware Upsampling for Image Generation. IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2022[5] Hao Tang, Ling Shao, Philip HS Torr, Nicu Sebe. Bipartite Graph Reasoning GANs for Person Pose and Facial Image Synthesis. Springer International Journal of Computer Vision (IJCV), 2022[6] Hao Tang, Zhenyu Zhang, Humphrey Shi, Bo Li, Ling Shao, Nicu Sebe, Radu Timofte, Luc Van Gool. Graph Transformer GANs for Graph-Constrained House Generation. In CVPR 2023, Vancouver, Canada[7] Hao Tang, Xiaojuan Qi, Guolei Sun, Dan Xu, Nicu Sebe, Radu Timofte, Luc Van Gool. Edge Guided GANs with Contrastive Learning for Semantic Image Synthesis. In ICLR 2023, Kigali, Rwanda[8] Hao Tang, Dan Xu, Yan Yan, Philip H.S. Torr, Nicu Sebe. Local Class-Specific and Global Image-Level Generative Adversarial Networks for Semantic-Guided Scene Generation. In CVPR 2020, Seattle, USA[9] Hao Tang, Dan Xu, Nicu Sebe, Yanzhi Wang, Jason J. Corso, Yan Yan. Multi-Channel Attention Selection GAN with Cascaded Semantic Guidance for Cross-View Image Translation. In CVPR 2019, Long Beach, USA[10] Hao Tang, Song Bai, Li Zhang, Philip H.S. Torr, Nicu Sebe. XingGAN for Person Image Generation. In ECCV 2020, Glasgow, UK[11] Zeyu Zhang, Akide Liu, Ian Reid, Richard Hartley, Bohan Zhuang, Hao Tang. Motion Mamba: Efficient and Long Sequence Motion Generation with Hierarchical and Bidirectional Selective SSM. In ECCV 2024, Milan, Italy[12] Zichong Meng, Changdi Yang, Jun Liu, Hao Tang,  Pu Zhao,  Yanzhi Wang. InstructGIE: Towards Generalizable Image Editing. In ECCV 2024, Milan, Italy[13]  Wencan Cheng, Hao Tang, Luc Van Gool, Jong Hwan Ko. HandDiff: 3D Hand Pose Estimation with Diffusion on Image-Point Cloud. In CVPR 2024, Seattle, USA[14] Gengyu Zhang, Hao Tang, Yan Yan. Versatile Navigation under Partial Observability via Value-guided Diffusion Policy. In CVPR 2024, Seattle, USA[15]  Pan Xie, Qipeng Zhang, Peng Taiying, Hao Tang, Yao Du, Zexian Li. G2P-DDM: Generating Sign Pose Sequence from Gloss Sequence with Discrete Diffusion Model. In AAAI 2024, Vancouver, Canada[16] Peiyan Dong, Zhenglun Kong, Xin Meng, Pinrui Yu, Yifan Gong, Geng Yuan, Hao Tang, Yanzhi Wang. HotBEV: Hardware-oriented Transformer-based Multi-View 3D Detector for BEV Perception. In NeurIPS 2023, New Orleans, USA[17] Haoyu Chen, Hao Tang, Radu Timofte, Luc Van Gool, Guoying Zhao. LART: Neural Correspondence Learning with Latent Regularization Transformer for 3D Motion Transfer. In NeurIPS 2023, New Orleans, USA[18] Jianbing Wu, Hong Liu, Yuxin Su, Wei Shi, Hao Tang. Learning Concordant Attention via Target-aware Alignment for Visible-Infrared Person Re-identification. In ICCV 2023, Paris, France[19] Peiyan Dong, Zhenglun Kong, Xin Meng, Peng Zhang, Hao Tang, Yanzhi Wang, Chih-Hsien Chou. SpeedDETR: Speed-aware Transformers for End-to-end Object Detection. In ICML 2023, Hawaii, USA[20] Ming Tao, Hao Tang, Fei Wu, Xiaoyuan Jing, Bingkun Bao, Changsheng Xu. DF-GAN: A Simple and Effective Baseline for Text-to-Image Synthesis. In CVPR 2022, New Orleans, USA",
@@ -5424,9 +5501,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -5496,9 +5573,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -5541,7 +5618,7 @@
         "bio": "个人主页：www.pkuml.org教育背景北京大学教授，博士生导师。2005年于中国科学院计算技术研究所获工学博士学位。曾任中科院计算所助理研究员、美国明尼苏达大学访问教授。主要研究方向视频大数据分析处理、机器学习与类脑计算。主要科研项目及获奖成果累计主持国家重点研发计划项目、国家自然基金重点项目、863计划课题、北京市科技计划重大项目等国家与省部级项目20余项，发表学术论文150余篇，获欧洲信号处理学会JIVP期刊2015年度唯一最佳论文奖，拥有美/中国发明专利40项。基于在图像视频分析与处理领域的研究成果，获2010年国家科技进步二等奖（第6）、2017年国家技术发明二等奖（第2）、2015年中国电子学会技术发明一等奖（第1）、2009年教育部科技进步一等奖（第3）以及2016年中国专利优秀奖（第1）。主要学术任职目前，担任国际期刊IJMDEM的共同主编，任国际期刊IEEE TMM和Access编委，曾任IEEE ICME 2015、IEEE BigMM 2015、IEEE ISM 2015和IEEE MIPR 2018程序委员会共同主席，并任ACM MM 2009等十余个国际会议组委会成员，以及IEEE CVPR、ACM KDD、AAAI、ECCV等顶级国际会议程序委员会委员。他是中国工程院“人工智能2.0”规划专家委员会专家、北京市类脑计算专家组专家和全国研究生智慧城市技术与创意大赛专家委员会秘书长。他是IEEE、中国计算机和中国电子学会高级会员，ACM会员。",
         "bio_en": "",
         "email": "",
-        "phone": "86-10-62755965",
+        "phone": "86-10-6275 5965",
         "office": "",
         "profile_url": "https://cs.pku.edu.cn/info/1082/1696.htm",
         "lab_url": "",
@@ -5578,9 +5655,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -5650,9 +5727,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -5723,9 +5800,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -5797,9 +5874,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -5839,7 +5916,10 @@
           "类型理论",
           "程序合成",
           "并发编程",
-          "贝叶斯推断"
+          "贝叶斯推断",
+          "通用概率编程的数学理论和领域特定工具链",
+          "资源安全的编程语言的设计与实现",
+          "软件系统中随机性和不确定性的定量分析和验证"
         ],
         "keywords": [],
         "bio": "个人主页：https://stonebuddha.github.io/主要研究方向王迪的研究领域主要包括程序设计语言、形式化验证、概率编程，他的研究兴趣也涉及类型理论、程序合成、并发编程、贝叶斯推断等。他目前的主要研究方向为：（1）通用概率编程的数学理论和领域特定工具链，（2）资源安全的编程语言的设计与实现，（3）软件系统中随机性和不确定性的定量分析和验证。科研/教育经历2017-2022，博士，美国卡内基梅隆大学2013-2017，学士，北京大学Selected Publications1. Di Wang, Jan Hoffmann, and Thomas Reps. Sound Probabilistic Inference via Guide Types. PLDI 2021: Proceedings of the 42nd ACM SIGPLAN International Conference on Programming Language Design and Implementation. June 2021.2. Di Wang, Jan Hoffmann, and Thomas Reps. Central Moment Analysis for Cost Accumulators in Probabilistic Programs. PLDI 2021: Proceedings of the 42nd ACM SIGPLAN International Conference on Programming Language Design and Implementation. June 2021.3. Di Wang, David M. Kahn, and Jan Hoffmann. Raising Expectations: Automating Expected Cost Analysis with Types. Proceedings of the ACM on Programming Languages, Volume 4, Issue ICFP. August 2020.4. Tristan Knoth, Di Wang, Nadia Polikarpova, and Jan Hoffmann. Resource-Guided Program Synthesis. PLDI 2019: Proceedings of the 40th ACM SIGPLAN Conference on Programming Language Design and Implementation. June 2019.5. Di Wang and Jan Hoffmann. Type-Guided Worst-Case Input Generation. Proceedings of the ACM on Programming Languages, Volume 3, Issue POPL. January 2019.6. Di Wang, Jan Hoffmann, and Thomas Reps. PMAF: An Algebraic Framework for Static Analysis of Probabilistic Programs. PLDI 2018: Proceedings of the 39th ACM SIGPLAN Conference on Programming Language Design and Implementation. June 2018.",
@@ -5888,9 +5968,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -5933,7 +6013,7 @@
         "bio": "个人主页：主要研究方向计算机理论，研究方向包括程序逻辑、程序语义，计算机系统的描述与验证科研/教育经历1993.7，博士，北京师范大学主要荣誉与获奖教育部高等学校科学技术奖励自然科学奖一等奖一项（排名第二）北京大学杨-王院士奖研究成果概况已在包括JPDC、ICALP、CSL、TCS、中国科学等国内外重要学术杂志上发表论文70余篇，教材或译著7部。主持自然科学基金3项，主持或参加国家重点基础研究发展规划（973计划）项目子项目3项, 主持863计划一项，教育部高等学校科学技术奖励自然科学奖一等奖一项（排名第二）和北京大学杨-王院士奖，获日本大川研究基金研究助成奖。任中国人工智能学会常务理事，中国人工智能学会离散智能专委会主任委员。Selected Publications[1]Yuxin Jing, Hanpin Wang,Yu Huang,Lei Zhang,Jiang Xu,Yongzhi Cao:A modeling language to describe massive data storage management in cyber-physical systems.J. Parallel Distrib. Comput. 103: 113-120 (2017)[2]Jiabao Lin, Hanpin Wang: The Complexity of Holant Problems over Boolean Domain with Non-Negative Weights.ICALP 2017: 29:1-29:14, (2017).",
         "bio_en": "",
         "email": "",
-        "phone": "86-10-62755818",
+        "phone": "86-10-6275 5818",
         "office": "",
         "profile_url": "https://cs.pku.edu.cn/info/1083/1700.htm",
         "lab_url": "",
@@ -5970,9 +6050,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -6014,7 +6094,7 @@
         "bio": "个人主页：https://hughw19.github.io/简介王鹤博士是北京大学前沿计算研究中心（CFCS）的助理教授和博士生导师。他创立并领导了北大具身感知与交互实验室(EPIC Lab，主页：https://hughw19.github.io)，研究目标是通过发展具身技能及具身多模态大模型推进通用具身智能。他同时是北大-银河通用具身智能联合实验室主任，北京智源人工智能研究院具身智能研究中心主任。他已在计算机视觉、机器人学和人工智能的顶级会议和期刊（CVPR/ICCV/ECCV/TRO/RAL/ICRA/NeurIPS/ICLR/AAAI等）上发表五十余篇工作，其论文获得ICCV2023最佳论文候选，ICRA2023最佳操纵论文候选，2022年世界人工智能大会青年优秀论文（WAICYOP）奖，Eurographics 2019最佳论文提名奖。他担任了CVPR2022和WACV2022的领域主席，Image and Vision Computing的副主编和诸多顶会的审稿人、程序委员。在加入北京大学之前，他于2021年从斯坦福大学获得博士学位，师从美国三院院士Leonidas. J Guibas教授，于2014年从清华大学获得学士学位。发表论著Selected Publications·*: equivalent contribution, †: corresponding authorPublished WorksUniDexGrasp++: Improving Dexterous Grasping   Policy Learning via Geometry-aware Curriculum and Iterative   Generalist-Specialist LearningWeikang Wan*, Haoran Geng*, Yun Liu, Zikang Shan, Yaodong Yang, Li Yi,He   Wang†ICCV 2023 (Oral & Best Paper Finalist, final reviews of all   strong accepts)arXiv/Project/bibtexGAPartNet:   Cross-Category Domain-Generalizable Object Perception and Manipulation via   Generalizable and Actionable PartsHaoran Geng*, Helin Xu*, Chengyang Zhao*, Chao Xu, Li Yi, Siyuan Huang,He   Wang†CVPR 2023 (Highlight, final reviews of all accepts)arXiv/Project/bibtex3D-Aware Object   Goal Navigation via Simultaneous Exploration and IdentificationJiazhao Zhang*, Liu Dai*, Fanpeng Meng, Qingnan Fan, Xuelin Chen, Kai   Xu,He Wang†CVPR 2023arXiv/Project/bibtexUniDexGrasp:   Universal Robotic Dexterous Grasping via Learning Diverse Proposal Generation   and Goal-Conditioned PolicyYinzhen Xu*, Weikang Wan*, Jialiang Zhang*, Haoran Liu*, Zikang Shan, Hao   Shen, Ruicheng Wang, Haoran Geng, Yijia Weng, Jiayi Chen, Tengyu Liu, Li   Yi,He Wang†CVPR 2023arXiv/Project/bibtexPartManip:   Learning Cross-Category Generalizable Part Manipulation Policy from Point   Cloud ObservationsHaoran Geng*, Ziming Li*, Yiran Geng, Jiayi Chen, Hao Dong,He Wang†CVPR 2023arXiv/Project/bibtexDelving into   Discrete Normalizing Flows on SO(3) Manifold for Probabilistic Rotation   ModelingYulin Liu*, Haoran Liu*, Yingda Yin*, Yang Wang, Baoquan Chen†,He   Wang†CVPR 2023arXiv/SO3NFDiGA: Distil to   Generalize and then Adapt for Domain Adaptive Semantic SegmentationFengyi Shen, Akhil Gurram, Ziyuan Liu,He Wang†, Alois   Knoll†CVPR 2023arXiv/bibtexAdaptive   Zone-aware Hierarchical Planner for Vision-Language NavigationChen Gao, Xingyu Peng, Mi Yan,He Wang, Lirong Yang, Haibing Ren,   Hongsheng Li, Si LiuCVPR 2023arXiv (soon)DexGraspNet: A   Large-Scale Robotic Dexterous Grasp Dataset for General Objects Based on   SimulationRuicheng Wang*, Jialiang Zhang*, Jiayi Chen, Yinzhen Xu, Puhao Li, Tengyu   Liu,He Wang†ICRA 2023 (Outstanding Manipulation Paper Award Finalist)arXiv/Project/bibtexGraspNeRF:   Multiview-based 6-DoF Grasp Detection for Transparent and Specular Objects   Using Generalizable NeRFQiyu Dai*, Yan Zhu*, Yiran Geng, Ciyu Ruan, Jiazhao Zhang,He Wang†ICRA 2023arXiv/Project/bibtexA Laplace-inspired   Distribution on SO(3) for Probabilistic Rotation EstimationYingda Yin, Yang Wang,He Wang†, Baoquan Chen†ICLR 2023 (notable top 25%)paper/bibtexSelf-Supervised   Category-Level Articulated Object Pose Estimation with Part-Level SE(3)   EquivarianceXueyi Liu, Ji Zhang, Ruizhen Hu, Haibin Huang,He Wang, Li YiICLR 2023paper/bibtexTracking and   Reconstructing Hand Object Interactions from Point Cloud Sequences in the   WildJiayi Chen*, Mi Yan*, Jiazhao Zhang, Yenzhen Xu, Xiaolong Li, Yijia Weng, Li   Yi, Shuran Song,He Wang†AAAI 2023 (Oral Presentation)arXiv/Project/bibtexASRO-DIO: Active   Subspace Random Optimization Based Depth Inertial OdometryJiazhao Zhang, Yijie Tang,He Wang, Kai XuIEEE Transactions on Robotics (T-RO)PaperDomain   Randomization-Enhanced Depth Simulation and Restoration for Perceiving and   Grasping Specular and Transparent ObjectsQiyu Dai*, Jiyao Zhang*, Qiwei Li, Tianhao Wu, Hao Dong, Ziyuan Liu, Ping   Tan,He Wang†ECCV 2022arXiv/Project/Code/bibtexLearning   Category-Level Generalizable Object Manipulation Policy via Generative Adversarial   Self-Imitation Learning from DemonstrationsHao Shen*, Weikang Wan*,He Wang†Robotics and Automation Letters (RA-L) and IROS 20221st   prize winnerofSAPIEN   ManiSkill Challenge 2021(no external annotation track)arXiv/Project/Code/bibtexFisherMatch:   Semi-Supervised Rotation Regression via Entropy-based FilteringYingda Yin, Yingcheng Cai,He Wang†, Baoquan   Chen†CVPR 2022 (Oral Presentation)arXiv/Project/Code/bibtexProjective Manifold   Gradient Layer for Deep Rotation RegressionJiayi Chen, Yingda Yin, Tolga Birdal, Baoquan Chen, Leonidas Guibas,He   Wang†CVPR 2022arXiv/Project/Code/bibtexADeLA: Automatic   Dense Labeling with Attention for Viewpoint Adaptation in Semantic   SegmentationYanchao Yang*, Hanxiang Ren*,He Wang, Bokui Shen, Qingnan Fan,   Youyi Zheng, C. Karen Liu, Leonidas J. GuibasCVPR 2022 (Oral Presentation)arXiv/bibtexHOI4D: A 4D   Egocentric Dataset for Category-Level Human-Object InteractionYunze Liu, Yun Liu, Che Jiang, Kangbo Lyu, Weikang Wan, Hao Shen, Boqiang   Liang, Zhoujie Fu,He Wang, Li YiCVPR 2022arXiv/bibtexMulti-Robot Active   Mapping via Neural Bipartite Graph MatchingKai Ye*, Siyan Dong*, Qingnan Fan,He Wang, Li Yi, Fei Xia, Jue   Wang, Baoquan ChenCVPR 2022arXiv/bibtexCodedVTR:   Codebook-based Sparse Voxel Transformer with Geometric GuidanceTianchen Zhao, Niansong Zhang, Xuefei Ning,He Wang, Li Yi, Yu   WangCVPR 2022arXiv/bibtexDomain Adaptation   on Point Clouds via Geometry-Aware ImplicitsYuefan Shen*, Yanchao Yang*, Mi Yan,He Wang, Youyi Zheng,   Leonidas J. GuibasCVPR 2022arXiv/bibtexLeveraging   SE(3) Equivariance for Self-supervised Category-Level Object Pose Estimation   from Point CloudsXiaolong Li, Yijia Weng, Li Yi, Leonidas J. Guibas, A. Lynn Abbott, Shuran   Song,He Wang†NeurIPS 21Paper/arXiv/Project/Code/bibtexCAPTRA:   CAtegory-level Pose Tracking for Rigid and Articulated Objects from Point   CloudsYijia Weng*,He Wang*†, Qiang Zhou, Yuzhe Qin, Yueqi Duan, Qingnan Fan, Baoquan   Chen, Hao Su, Leonidas J. GuibasICCV 2021 (Oral Presentation)arXiv/Project/Code/Video/bibtexSingle Image 3D   Shape Retrieval via Cross-Modal Instance and Category Contrastive LearningMingxian Lin, Jie Yang,He Wang, Yu-Kun Lai, Rongfei Jia,   Binqiang Zhao, Lin GaoICCV 2021Paper/Supp./bibtex3DIoUMatch:   Leveraging IoU Prediction for Semi-Supervised 3D Object DetectionHe Wang*, Yezhen Cong*, Or Litany, Yue Gao and Leonidas J. GuibasCVPR 2021Paper/Project/Code/Video/bibtexMultiBodySync:   Multi-Body Segmentation and Motion Estimation via 3D Scan SynchronizationJiahui Huang,He Wang, Tolga Birdal, Minkyuk Sung, Federica   Arrigoni, Shi-Min Hu, and Leonidas J. GuibasCVPR 2021 (Oral Presentation)Paper/Code/Video/bibtexRobust Neural   Routing Through Space Partitions for Camera Relocalization in Dynamic Indoor   EnvironmentsSiyan Dong*, Qingnan Fan*,He Wang, Ji Shi, Li Yi, Thomas   Funkhouser, Baoquan Chen, Leonidas J. GuibasCVPR 2021 (Oral Presentation)Paper/Code/bibtexRethinking   Sampling in 3D Point Cloud Generative Adversarial NetworksHe Wang*, Zetian Jiang*, Li Yi, Kaichun Mo, Hao Su, Leonidas J. GuibasCVPR 2021 Workshop onLearning to Generate 3D Shapes and ScenesPaper/Poster/Video/bibtexPT2PC: Learning to   Generate 3D Point Cloud Shapes from Part Tree ConditionsKaichun Mo,He Wang, Li Yi, Xinchen Yan and Leonidas J. GuibasECCV 2020Paper/Project/Code&Data/bibtexCurriculum DeepSDFYueqi Duan*, Haidong Zhu*,He Wang, Li Yi, Ram Nevatia, Leonidas   J. GuibasECCV 2020Paper/Code/bibtexCategory-level   Articulated Object Pose EstimationHe Wang*, Xiaolong Li*, Li Yi, Leonidas Guibas, A. Lynn Abbott, Shuran   SongCVPR 2020 (Oral Presentation)Paper/Project/Code&Data/bibtexSAPIEN: A   SimulAted Part-based Interactive ENvironmentFanbo Xiang, Yuzhe Qin, Kaichun Mo, Yikuan Xia, Hao Zhu, Fangchen Liu,   Minghua Liu, Hanxiao Jiang, Yifu Yuan,He Wang, Li Yi, Angel X.Chang, Leonidas J. Guibas and Hao SuCVPR 2020 (Oral Presentation)Paper/Project/Code&Data/Demo/bibtexNormalized Object Coordinate   Space for Category-Level 6D Object Pose and Size EstimationHe Wang, Srinath Sridhar, Jingwei Huang, Julien Valentin, Shuran Song,   Leonidas J. GuibasCVPR 2019 (Oral Presentation)Paper/Project/Code&Data/bibtexGSPN: Generative   Shape Proposal Network for 3D Instance Segmentation in Point CloudLi Yi, Wang Zhao,He Wang, Minhyuk Sung, Leonidas GuibasCVPR 2019Paper/Code/bibtexLearning a   Generative Model for Multi-Step Human-Object Interactions from VideosHe Wang*, Soeren Pirk*, Ersin Yumer, Vladimir Kim, Ozan Sener, Srinath   Sridhar, Leonidas J. GuibasEurographics 2019 (Best Paper Honorable Mention)Project/Paper/Code/Blog/Video",
         "bio_en": "",
         "email": "",
-        "phone": "86-10-62761084",
+        "phone": "86-10-6276 1084",
         "office": "",
         "profile_url": "https://cs.pku.edu.cn/info/1083/1707.htm",
         "lab_url": "",
@@ -6057,9 +6137,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -6093,7 +6173,11 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "自然语言处理"
+          "自然语言处理",
+          "人工智能",
+          "大规模语言知识获取和语义分析技术",
+          "自动问答和人机对话",
+          "观点挖掘"
         ],
         "keywords": [],
         "bio": "个人主页：主要研究方向主要从事自然语言处理、人工智能及相关的研究，内容涉及大规模语言知识获取和语义分析技术、自动问答和人机对话、观点挖掘等。研究成果概况在包括ACL，EMNLP，COLING，ICML，IJCAI，AAAI，SIGIR，KDD等国际会议和Computational Linguistics，TALIPS等期刊发表学术论文，共发表学术论文60多篇。承担过多项10余项国家项目，包括国家863项目“大规模中文语义信息处理技术与系统”（2012.1-2014.12）的首席专家，国家社科基金重大项目“面向网络文本的多视角语义分析方法、语言知识库及平台建设研究”（2013.1-2017.12）的首席专家。构建的语言资源库转让给多家企业或研究机构。目前为中文信息学会的常务理事。Selected Publications1) Xu Sun, Xuancheng Ren, Shuming Ma, Houfeng Wang. meProp: Sparsified Back Propagation for Accelerated Deep Learning with Reduced Overfitting，ICML20172) Yizhong Wang, Sujian Li, Houfeng Wang. A Two-Stage Parsing Method for Text-Level Discourse Analysis.ACL2017(outstanding paper)3) Qing Zhang, Houfeng WANG. Noise-Clustered Distant Supervision for Relation Extraction: A Nonparametric Bayesian Perspective.EMNLP20174) Dehong Ma, Sujian Li, Xiaodong Zhang, Houfeng Wang. Interactive Attention Networks for Aspect-Level Sentiment Classification.IJCAI20175) Xiaodong Zhang , Sujian Li, Lei Sha1, Houfeng Wang. Attentive Interactive Neural Networks for Answer Selection in Community Question Answering.AAAI20176) Rui Cai,Xiaodong Zhang and Houfeng Wang. Bidirectional Recurrent Convolutional Neural Network for Relation Classi?cation.ACL20167) Chen Shi, Shujie Liu, Shuo Ren, Shi Feng, Mu Li, Ming Zhou, Xu Sun, Houfeng Wang. Knowledge-Based Semantic Embedding for Machine Translation.ACL20168) Xiaodong Zhang, Houfeng Wang. A Joint Model of Intent Determination and Slot Filling for Spoken Language Understanding.IJCAI20169) Qing Zhang, Houfeng Wang. Collaborative Filtering with Generalized Laplacian Constraint via Over lapping Decomposition.IJCAI201610) Qing Zhang, Houfeng Wang.Not All Links Are Created Equal: An Adaptive Embedding Approach for Social Personalized Ranking. SIGIR2016",
@@ -6129,9 +6213,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -6186,15 +6270,15 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "学士",
-            "institution": "北京大学",
-            "year": "2005-2009",
-            "major": ""
-          },
-          {
             "degree": "硕士",
             "institution": "北京大学",
             "year": "2009-2012",
+            "major": ""
+          },
+          {
+            "degree": "学士",
+            "institution": "北京大学",
+            "year": "2005-2009",
             "major": ""
           },
           {
@@ -6224,9 +6308,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -6262,7 +6346,11 @@
         "research_areas": [
           "机器学习理论",
           "强化学习",
-          "深度学习"
+          "深度学习理论基础",
+          "设计有理论保证的强化学习算法",
+          "证明强化学习问题的采样复杂度下界",
+          "设计更高效、更鲁棒的强化学习系统",
+          "更合理的强化学习算法评估框架"
         ],
         "keywords": [],
         "bio": "个人主页：https://www.ruosongwang.com主要研究方向王若松的主要研究领域是机器学习理论，包括对强化学习和深度学习理论基础的研究。他目前的主要研究方向为：（1）设计有理论保证的强化学习算法，（2）证明强化学习问题的采样复杂度下界，（3）在理论研究的基础上，设计更高效、更鲁棒的强化学习系统和更合理的强化学习算法评估框架。Selected PublicationsR. Wang, D. P. Foster, and S. M. Kakade. What are the statistical limits of offline RL with linear function approximation? In ICLR, 2021.R. Wang, R. Salakhutdinov, and L. F. Yang. Reinforcement learning with general value function approximation: Provably efficient approach via bounded eluder dimension. In NeurIPS, 2020.R. Wang, S. S. Du, L. F. Yang, and S. M. Kakade. Is long horizon RL more difficult than short horizon RL? In NeurIPS, 2020.S. Arora, S. S. Du, W. Hu, Z. Li, R. Salakhutdinov, and R. Wang. On exact computation with an infinitely wide neural net. In NeurIPS, 2019.",
@@ -6298,9 +6386,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -6372,9 +6460,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -6427,15 +6515,15 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "学士",
-            "institution": "北京大学",
-            "year": "1995-1999",
-            "major": ""
-          },
-          {
             "degree": "博士",
             "institution": "北京大学",
             "year": "1999-2006",
+            "major": ""
+          },
+          {
+            "degree": "学士",
+            "institution": "北京大学",
+            "year": "1995-1999",
             "major": ""
           }
         ],
@@ -6459,9 +6547,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -6495,7 +6583,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "数据库与数据挖掘"
+          "大数据管理与智能分析",
+          "数据库",
+          "数据挖掘"
         ],
         "keywords": [],
         "bio": "个人主页：详细简历北京大学计算机学院教授，博士生导师，国家教育部“长江学者”特岗学者，北京大学计算社会科学研究中心主任。国家某部大数据科学家，国家统计专家咨询委委员，中国软件行业协会数据与智能委员会主任。主要从事大数据管理与智能分析等工作。在国际顶级学术会议和期刊等发表论文几十篇。获得2017年度“日本大川基金科技助成奖”。作为课题负责人3次承担国家重大专项课题，5次承担国家863计划课题。主持研制的大数据系统长期服务于中央和国家部委大数据辅助决策，以及中国运载火箭、移动通信、智能金融、智能医疗等重要应用领域。",
@@ -6531,9 +6621,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -6618,9 +6708,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -6692,9 +6782,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -6731,7 +6821,8 @@
           "计算机网络体系结构",
           "计算机网络管理",
           "分布式系统",
-          "机器学习系统"
+          "机器学习系统",
+          "计算机系统结构"
         ],
         "keywords": [],
         "bio": "个人主页：http://wenfei-wu.github.io/主要研究方向1、 计算机网络体系结构2、 计算机网络管理3、 分布式系统4、 机器学习系统主要科研项目1. 《网络多样化趋势下的网络功能单元敏捷开发技术的研究与实现》，国家自然科学基金青年项目618022252. 《智能媒体融合网络试验与示范》，科技部重点研发计划2018YFB1802202主要学术任职任以下会议技术委员会成员• IEEE International Conference on Network Protocols, 2021• ACM Asia-Pacific Workshop on Networking, 2021• IFIP/IEEE International Symposium on Integrated Network Management, 2021• ACM Special Interest Group on Data Communication, Poster Session, 2020• ACM Special Interest Group on Data Communication, Poster Session, 2019• ACM/IEEE Symposium on Architectures for Networking and Communications Systems, 2019• ACM/IEEE Symposium on Architectures for Networking and Communications Systems, 2018• IEEE ICNP Workshop on Hot Topics in Internet-of-Things, 2016Selected Publications[1] Bangwen Deng and Wenfei Wu*. “NFReducer: Redundant Logic Elimination for Network Functions with Runtime Configurations”. In: the 2021 IEEE International Conference on Computer Communications. INFOCOM ’21. 2021.[2] Yongchao He, Wenfei Wu*, Xuemin Wen, Haifeng Li, and Yongqiang Yang. “Scalable On-Switch Rate Limiters for the Cloud”. In: the 2021 IEEE International Conference on Computer Communications. INFOCOM ’21. 2021.[3] Hongyi Huang, Wenfei Wu*, Yongchao He, Bangwen Deng, Ying Zhang, Yongqiang Xiong, Guo Chen, Yong Cui, and Peng Cheng. “NFD: A Development Framework for Cross-Platform Network Functions”. In: the 2021 IEEE International Conference on Computer Communications. INFOCOM ’21. 2021.[4] ChonLam Lao, Yanfang Le, Kshiteej Mahajan, Yixi Chen, Wenfei Wu*, Aditya Akella, and Michael Swift. “ATP: In-Network Aggregation for Multi-Tenant Learning”. In: the 18th USENIX Symposium on Networked Systems Design and Implementation. NSDI ’21. 2021.[5] Ming Sun, Ya Su, Shenglin Zhang, Junliang Tang, Yuanpu Cao, Yuqing Liu, Wenfei Wu*, Dan Pei, Yongsu Zhang, and Xiaozhou Liu. “CTF: Anomaly Detection in High-Dimensional Time Series with Coarseto- Fine Model Transfer”. In: the 2021 IEEE International Conference on Computer Communications. INFOCOM ’21. 2021.[6] Bohan Zhao, Xiang Li, Boyu Tian, ZhiyuMei, and Wenfei Wu*. “DHS: Adaptive Memory Layout Organization of Sketch Slots for Fast and Accurate Data Stream Processing”. In: Proceedings of the 27th ACM SIGKDD International Conference on Knowledge Discovery amp; Data Mining. KDD ’21. 2021.[7] Wenfei Wu, Keqiang He, and Aditya Akella. “Perfsight: Performance diagnosis for software dataplanes”. In: Proceedings of the 2015 ACM Conference on Internet Measurement Conference. IMC ’15. 2015.[8] Wenfei Wu, Yizheng Chen, Ramakrishnan Durairajan, Dongchan Kim, Ashok Anand, and Aditya Akella. “Adaptive data transmission in the cloud”. In: 2013 IEEE/ACM 21st International Symposium on Quality of Service. IWQoS ’13. 2013.[9] Wenfei Wu, Guohui Wang, Aditya Akella, and Anees Shaikh. “Virtual network diagnosis as a service”. In: Proceedings of the 4th annual Symposium on Cloud Computing. SoCC ’13. 2013.",
@@ -6767,9 +6858,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -6803,6 +6894,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "机器学习中的数据管理问题",
+          "人工智能与数据库系统的融合",
+          "人工智能中的可解释性问题",
           "数据库",
           "数据科学",
           "人工智能"
@@ -6841,9 +6935,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -6877,10 +6971,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "自然语言处理",
           "基于大语言模型的语义理解与文本生成",
           "跨模态语义理解",
-          "AI+教育"
+          "AI+教育",
+          "自然语言处理"
         ],
         "keywords": [],
         "bio": "研究方向基于大语言模型的语义理解与文本生成；跨模态语义理解；AI+教育（http://www.chinese-pku.com）科研/教育经历2005 ~ —— 讲师/副教授，北京大学信息科学技术学院2003 ~ 2005， 博士后研究，北京大学2000 ~ 2003， 博士研究生，北京大学科研项目[1] 国家自然科学基金面上项目: 面向阅读理解的问题自动生成关键技术研究. 2021.01-2024.12. 主持.[2] 国家自然科学基金面上项目: 基于文档的智能问答的关键技术研究与资源建设. 2018.01-2021.12. 主持.[3] 国家自然科学基金面上项目: 基于汉语话题的句际关系自动分析研究. 2014.01-2017.12. 主持.[4] 国家自然科学基金青年项目: 基于词语独异性特征的大规模词义标注语料库自动构建研究. 2008.01--2010.12. 主持.[5] 国家社科基金后期资助项目: 面向语言信息处理的现代汉语并列结构研究. 2012.01-2013.06. 主持.[6] 国家社会科学基金青年项目: 面向网络文本的词语情感义自动标注研究. 2008.06--2010.12. 主持.[7] 国家社科基金重大项目: 面向网络文本的多视角语义分析方法、语言知识库及平台建设研究. 2013.01-2017.12，子课题负责人。[8] 国家863项目: 面向基础教育的类人智能知识理解与推理关键技术. 2015.01-2017.12，课题骨干。[9] 国家863项目：面向汉语语音合成的言语语义计算模型研究. 2007.07--2009.12，副组长。[10] 人民教育出版社合作项目: 中国儿童分级阅读文本标准研制，2020.09--2021.12，主持[11] 主持其他产学研合作项目7项，资源成果转让若干.科研获奖[1] 2011年，“综合型语言知识库”，国家科学技术进步二等奖.[2] 2020年，“多情景跨领域中文文本智能校对关键技术及应用”，北京市科学技术进步二等奖.Selected Publications（* Corresponding Author）[1] Sanwoo Lee, Kun Liang, Yunfang Wu*. Composable Cross-prompt Essay Scoring by Merging Models.EMNLP-2025.[2] Wang Cai, Hsiuyuan Huang, Zhixiang Wang, Yunfang Wu*. Beyond Demonstrations: Dynamic Vector Construction from Latent Representations.EMNLP-2025.[3] Zichen Wu, Hsiuyuan Huang, Yunfang Wu*. Beyond Spurious Signals: Debiasing Multimodal Large Language Models via Counterfactual Inference and Adaptive Expert Routing.Findings of EMNLP-2025.[4] Chenming Tang, Zhixiang Wang, Hao Sun,Yunfang Wu*. Large Language Models Might Not Care What You Are Saying: Prompt Format Beats Descriptions.Findings of EMNLP-2025.[5] Zhaoxi Zhang, Sanwoo Lee, Zhixiang Wang, Yunfang Wu*. 3DM: Distill, Dynamic Drop, and Merge for Debiasing Multi-modal Large Language Models.Findings of ACL-2025.[6] Sanwoo Lee, Jiahao Liu, Qifan Wang, Jingang Wang, Xunliang Cai, Yunfang Wu*. Dynamic Fisher-weighted Model Merging via Bayesian Optimization.NAACL-2025.[7] Chenming Tang, Zhixiang Wang, Yunfang Wu*. SCOI: Syntax-augmented Coverage-based In-context Example Selection for Machine Translation.EMNLP-2024.[8] Sanwoo Lee, Yida Cai, Desong Meng, Ziyang Wang, Yunfang Wu*. Unleashing Large Language Models' Proficiency in Zero-shot Essay Scoring.Findings of EMNLP-2024.[9] Fanyi Qu, Hao Sun, Yunfang Wu*. Unsupervised Distractor Generation via Large Language Model Distilling and Counterfactual Contrastive Decoding.Findings of ACL-2024.[10] Chenming Tang, Fanyi Qu, Yunfang Wu*. Ungrammatical-syntax-based In-context Example Selection for Grammatical Error Correction.NAACL-2024.[11] Ziyang Wang, Shanyu Li, HsiuYuan Huang, Yunfang Wu*. FPT: Feature Prompt Tuning for Few-shot Readability Assessment.NAACL-2024.[12] Ming Zhang, Ke Chang, Yunfang Wu*. Multi-modal Semantic Understanding with Contrastive Cross-modal Feature Alignment.COLING-2024.[13] Zichen Wu, HsiuYuan Huang, Fanyi Qu and Yunfang Wu*. Mixture-of-Prompt-Experts for Multi-modal Semantic Understanding.COLING-2024.[14] Chenming Tang, Xiuyu Wu, Yunfang Wu*. Are Pre-trained Language Models Useful for Model Ensemble in Chinese Grammatical Error Correction?ACL-2023.[15] Wenbiao Li, Wang Ziyang and Yunfang Wu*. A Unified Neural Network Model for Readability Assessment with Feature Projection and Length-Balanced Loss.EMNLP-2022.[16] Xiuyu Wu and Yunfang Wu*. From Spelling to Grammar: A New Framework for Chinese Grammatical Error Correction.Findings of EMNLP-2022.[17] Rui Sun, Xiuyu Wu and Yunfang Wu*.An Error-Guided Correction Model for Chinese Spelling Error Correction.Findings of EMNLP-2022.[18] Zichen Wu, Xin Jia, Fanyi Qu and Yunfang Wu*. Enhancing Pre-trained Models with Text Structure Knowledge for Question Generation.COLING-2022.[19]Ming Zhang,Shuai Dou,Ziyang Wang,Yunfang Wu*.Focus-Driven Contrastive Learniang for Medical Question Summarization.COLING-2022.[20] Xiuyu Wu, Jingsong Yu, Xu Sun and Yunfang Wu*. Position Offset Label Prediction for Grammatical Error Correction.COLING-2022.[21] Fanyi Qu, Xin Jia, Yunfang Wu*. Asking Questions Like Educational Experts: Automatically Generating Question-Answer Pairs on Real-World Examination Data.EMNLP-2021.[22] Xin Jia, Wenjie Zhou, Xu Sun, Yunfang Wu*. EQG-RACE: Examination-Type Question Generation.AAAI-2021.[23]Xin Jia,Wenjie Zhou,Xu Sun, Yunfang Wu*.How to Ask Good Questions? Try to Leverage Paraphrases.ACL-2020.[24] Xiaorui Zhou, Senlin Luo, Yunfang Wu*. 2020. Co-Attention Hierarchical Network: Generating Coherent Long Distractors for Reading Comprehension.AAAI-2020.",
@@ -6923,9 +7017,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -6977,22 +7071,22 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "Ph.D.",
+            "degree": "Ph.D. in Computer Science",
             "institution": "Cornell University",
             "year": "2001",
-            "major": "Computer Science"
+            "major": ""
           },
           {
-            "degree": "M.S.",
+            "degree": "M.S. in Computer Science",
             "institution": "Cornell University",
             "year": "1999",
-            "major": "Computer Science"
+            "major": ""
           },
           {
-            "degree": "B.S.",
-            "institution": "Peking University",
+            "degree": "B.S. in Computer Science",
+            "institution": "Peking University, P.R. China",
             "year": "1996",
-            "major": "Computer Science"
+            "major": ""
           }
         ],
         "publications_count": -1,
@@ -7015,9 +7109,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -7052,7 +7146,7 @@
         "is_academician": false,
         "research_areas": [
           "软件工程",
-          "计算机科学理论",
+          "计算机理论科学",
           "分布式系统"
         ],
         "keywords": [],
@@ -7096,9 +7190,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -7132,6 +7226,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "软件缺陷修复",
           "软件工程",
           "形式化方法",
           "人工智能"
@@ -7170,9 +7265,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -7245,9 +7340,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -7317,9 +7412,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -7390,9 +7485,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -7429,7 +7524,8 @@
           "程序设计语言",
           "软件工程",
           "程序分析",
-          "合成和修复"
+          "合成",
+          "修复"
         ],
         "keywords": [],
         "bio": "个人主页：http://sei.pku.edu.cn/~xiongyf04/熊英飞于2009年从日本东京大学获得博士学位，2009-2011年在加拿大滑铁卢大学工作，2012年加入北京大学，现任新体制长聘副教授、计算机学院院长助理、软件研究所副所长。熊英飞的研究兴趣是程序设计语言和软件工程，特别是程序分析、合成和修复。他提出了理论和方法降低程序编写和缺陷修复的代价。比如，基于差别的双向变换框架是最广泛使用的双向变换框架之一，ACS将程序修复技术在公共数据集上的正确率从此前不到40%提升到70%以上。他的工作获得MODELS最有影响论文奖，4次获得ACM SIGSOFT杰出论文奖。他的工作也被工业界采用，比如新一代Linux内核配置项目、燕云DaaS系统、华为公司等。他是SATE18的程序委员会联合主席，也在ICSE、FSE、ASE、ISSTA等会议担任PC，3次获得ICSE和FSE的杰出审稿人奖。他的研究受自然科学基金优秀青年基金、青年973等项目资助，他也获得NASAC青年软件创新奖、CCF-IEEE CS青年科学家奖等奖项。",
@@ -7472,9 +7568,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -7509,6 +7605,7 @@
         "is_academician": false,
         "research_areas": [
           "具身智能物联网",
+          "无线科学智能",
           "多模态感知赋能科学与工程智能"
         ],
         "keywords": [],
@@ -7526,7 +7623,7 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "博士",
+            "degree": "博士学位",
             "institution": "美国罗格斯大学",
             "year": "2014",
             "major": ""
@@ -7552,9 +7649,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -7627,9 +7724,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -7663,10 +7760,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "计算机网络",
-          "人工智能",
           "信息检索",
-          "计算金融"
+          "计算金融",
+          "计算机网络",
+          "人工智能"
         ],
         "keywords": [],
         "bio": "个人主页：http://net.pku.edu.cn/~yhf主要研究方向信息检索和计算金融科研/教育经历2006-2007，访问学者，美国UIUC2002，博士，北京大学主要荣誉与获奖2004年 北京市科技进步二等奖2016年 中国计算机学会科学技术二等奖研究成果概况北京大学计算机学院副教授。《计算概论》获得国家级精品课程。在科学研究方面，主持国家自然科学基金项目三项和一项863项目，参加两项973项目和一项核高基项目。出版学术专著《搜索引擎-原理、技术与系统》。发表60余篇研究论文，担任多个期刊的审稿人。",
@@ -7709,9 +7806,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -7751,7 +7848,7 @@
         "bio": "杨春",
         "bio_en": "",
         "email": "",
-        "phone": "86-10-62765828-809",
+        "phone": "86-10-62765828－809",
         "office": "",
         "profile_url": "https://cs.pku.edu.cn/info/1085/1727.htm",
         "lab_url": "",
@@ -7781,9 +7878,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -7816,12 +7913,15 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "系统软件",
+          "软件工程"
+        ],
         "keywords": [],
         "bio": "详细简历从事系统软件、软件工程、软件工业化生产技术和系统等方面的教学和研究工作。主持研制成功我国第一台百万次集成电路计算机多道运行操作系统和第一个全部用高级语言书写的操作系统；倡导和推动成立北京大学计算机科技系，1983-1999年担任系主任期间，将该系建成国内一流和国际知名的计算机科学技术研究和人才培养基地；在国内率先倡导软件工程研究，创办了国内第一个软件工程学科；开创了软件技术的基础研究领域；主持了历经多个五年计划的国家重点科技攻关项目——青鸟工程和国家863计划若干重点课题的研究；创建了软件工程国家工程研究中心；提出“人才培养与产业建设互动”的理念，创建了以新机制、新模式办学的示范性软件学院。多次获得各种荣誉称号和奖励，如：全国科学大会奖、国家科技进步二等奖、电子工业部科技进步特等奖、国家级教学成果奖一等奖等十六项国家及部委级的奖励、全国“三八”红旗手、首都“巾帼十杰”、全国高等学校先进科技工作者、国家“七五”、“八五”、“九五”国家重点科技攻关计划先进个人、“光华科技基金”一等奖、何梁何利科学与技术进步奖、中国计算机学会终身成就奖、北京大学蔡元培奖、国华杰出学者奖等。发表论文150余篇，编著10部，培养了百余名硕士、博士和博士后。",
         "bio_en": "",
         "email": "",
-        "phone": "",
+        "phone": "86-10-6275 1782",
         "office": "",
         "profile_url": "https://cs.pku.edu.cn/info/1085/2725.htm",
         "lab_url": "",
@@ -7851,11 +7951,11 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
-        "data_completeness": 50
+        "data_completeness": 65
       },
       "is_new": false
     },
@@ -7887,6 +7987,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "网络大数据",
+          "网络流量测量",
+          "Bloom filter",
+          "机器学习",
           "网络大数据关键技术",
           "高速数据流处理算法",
           "机器学习算法加速"
@@ -7932,9 +8036,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -7968,17 +8072,17 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "计算机系统",
-          "分布式系统",
           "深度学习模型的分布式并行",
           "计算优化",
-          "算法和系统设计"
+          "算法和系统设计",
+          "计算机系统",
+          "分布式系统"
         ],
         "keywords": [],
         "bio": "个人主页：https://yangzhihome.github.io/北京大学信计算机学院副研究员，博士生导师。主要研究方向为深度学习模型的分布式并行、计算优化、算法和系统设计。在 OSDI、ATC、SIGMOD、VLDB、KDD、NIPS、WWW、ICLR、ICML、SoCC、ICDCS等高水平国际学术会议上和ACM/IEEE Transactions发表论文50多篇，获得国际万维网大会WWW 2022最佳学生论文奖，入选国家高层次青年人才计划。获得过高校科学研究优秀成果奖、湖北省科技进步一等奖、中国电子学会科技进步一等奖、北京大学黄廷方/信和青年杰出学者奖、计算机系科研工作先进个人等。",
         "bio_en": "",
         "email": "",
-        "phone": "86-10-62756342",
+        "phone": "86-10-6275 6342",
         "office": "",
         "profile_url": "https://cs.pku.edu.cn/info/1085/1723.htm",
         "lab_url": "",
@@ -8008,9 +8112,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -8080,9 +8184,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -8116,9 +8220,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "并行处理",
-          "大规模科学工程计算和大规模图计算的性能优化技术",
-          "高性能计算教育实践技术"
+          "大规模科学工程计算的性能优化技术",
+          "大规模图计算的性能优化技术",
+          "高性能计算教育实践技术",
+          "并行处理"
         ],
         "keywords": [],
         "bio": "个人主页：详细简历主要研究大规模科学工程计算和大规模图计算的性能优化技术、高性能计算教育实践技术。近年参加的主要科研项目包括863课题“基于内存计算的并行处理系统研究与开发”和国家重点研发计划项目“基于国家高性能计算环境的教育实践平台”。",
@@ -8154,9 +8259,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -8192,13 +8297,15 @@
         "research_areas": [
           "量子计算",
           "量子信息",
-          "量子资源理论"
+          "量子资源理论",
+          "量子计算算法设计",
+          "量子模拟"
         ],
         "keywords": [],
         "bio": "个人主页：https://sites.google.com/view/xiaoyuan/简介袁骁博士，现任北京大学前沿计算研究中心助理教授，于2020年11月正式加入中心。他于2012年和2016年分别在北京大学和清华大学获学士、博士学位，之后于2017年、2017-2019年、2019-2020年分别在中国科学技术大学、牛津大学、斯坦福大学进行博士后研究。研究兴趣包括量子计算、量子信息、量子资源理论等。研究总结当前的主要研究方向包括量子计算算法设计、量子模拟、量子资源理论等。截至2021年9月，袁骁博士在物理领域顶级国际会议及期刊发表论文61篇，其中包括 1 篇在 Review of Modern Physics，8 篇在 Physical Review Letters，2 篇在 Physical Review X，3 篇在 Nature，1篇在Nature Communication，6 篇在 NPJ Quantum Information，1 篇在 Quantum，1 篇在 Chemical Science，1 篇在 Optica，1 篇在 IEEE Transactions on Information Theory，1篇在Science Bulletin，1篇在National Science Review，2 篇在 Advanced Quantum Technologies，17 篇在 Physical Review A，3篇在 Physical Review Applied，3 篇在 Physical Review Research， 10 篇 Arxiv 预印本，4 项专利和 2 篇会议。发表论著49 journal papers (including 1 in Review of Modern Physics, 7 in Physical Review Letters, 2 in Physical Review X, 2 in Nature, 5 in NPJ Quantum Information, 1 in Quantum, 1 in Chemical Science, 1 in Optica, 1 in IEEE Transactions on Information Theory, 1 in Advanced Quantum Technologies, and 17 in Physical Review A, 1 in Physical Review Applied, 2 in Physical Review Research) and 11 Arxiv preprints.Selected PublicationsXiao Yuan, A quantum-computing advantage for chemistry, Science 369 (6507), 1054-1055, 2020; (Perspective)Suguru Endo, Ying Li, Simon Benjamin,Xiao Yuan, Variational quantum simulation of general processes, Physical review letters 125, 010501, 2020;Sam McArdle, Suguru Endo, Alan Aspuru-Guzik, Simon C Benjamin,Xiao Yuan, Quantum computational chemistry, American Physical Society, Reviews of Modern Physics, 92 (1), 015003, 2020;Yunchao Liu,Xiao Yuan, Operational resource theory of quantum channels, American Physical Society, Physical Review Research 2 (1), 012035, 2020;Sam McArdle,Xiao Yuan, Simon Benjamin, Error-Mitigated Digital Quantum Simulation, American Physical Society, Physical review letters, 122 (18), 180501, 2019;Sam McArdle, Tyson Jones, Suguru Endo, Ying Li, Simon C Benjamin,Xiao Yuan, Variational ansatz-based quantum simulation of imaginary time evolution, Nature Publishing Group, npj Quantum Information, 5 (1), 1-6, 2019;Sam Mcardle, Alexander Mayorov, Xiao Shan, Simon Benjamin,Xiao Yuan, Digital quantum simulation of molecular vibrations, Royal Society of Chemistry, Chemical Science, 10(22): 5725-5735, 2019;Xiao Yuan, Suguru Endo, Qi Zhao, Ying Li, Simon C Benjamin, Theory of variational quantum simulation, Quantum, Quantum 3, 191, 2019;Tyson Jones, Suguru Endo, Sam McArdle,Xiao Yuan, Simon C Benjamin, Variational quantum algorithms for discovering Hamiltonian spectra, American Physical Society, Physical Review A 99 (6), 062304, 2019;Qi Zhao, Yunchao Liu,Xiao Yuan, Eric Chitambar, Andreas Winter, One-Shot Coherence Distillation: Towards Completing the Picture, IEEE, IEEE Transactions on Information Theory 65 (10), 6441-6453, 2019;Yang Liu,Xiao Yuan, Ming-Han Li, Weijun Zhang, Qi Zhao, Jiaqiang Zhong, Yuan Cao, Yu-Huai Li, Luo-Kan Chen, Hao Li, Tianyi Peng, Yu-Ao Chen, Cheng-Zhi Peng, Sheng-Cai Shi, Zhen Wang, Lixing You, Xiongfeng Ma, Jingyun Fan, Qiang Zhang, Jian-Wei Pan, High-Speed Device-Independent Quantum Random Number Generation without a Detection Loophole, American Physical Society, Physical Review Letters, 120 (1), 010503, 2018;Qi Zhao, Yunchao Liu,Xiao Yuan, Eric Chitambar, Xiongfeng Ma, One-Shot Coherence Dilution, American Physical Society, Physical Review Letters, 120 (7), 070403, 2018;Xiao Yuan, Hongyi Zhou, Mile Gu, Xiongfeng Ma, Unification of nonclassicality measures in interferometry, American Physical Society, Physical Review A 97 (1), 012331, 2018;Yang Liu, Qi Zhao, Ming-Han Li, Jian-Yu Guan, Yanbao Zhang, Bing Bai, Weijun Zhang, Wen-Zhao Liu, Cheng Wu,Xiao Yuan, Hao Li, WJ Munro, Zhen Wang, Lixing You, Jun Zhang, Xiongfeng Ma, Jingyun Fan, Qiang Zhang, Jian-Wei Pan, Device-independent quantum random-number generation, Nature Publishing Group, Nature 562 (7728), 548-551, 2018;BIG Bell Test Collaboration, Challenging local realism with human choices, Nature Publishing Group, Nature 557 (7704), 212, 2018;Xiao Yuan, Ge Bai, Tianyi Peng, Xiongfeng Ma, Quantum uncertainty relation using coherence, Physical Review A 96 (3), 032313, 2017;Xiongfeng Ma,Xiao Yuan, Zhu Cao, Bing Qi, Zhen Zhang, Quantum random number generation, Nature Publishing Group, npj Quantum Information 2 (1), 1-9, 2016;Zhu Cao, Hongyi Zhou,Xiao Yuan, Xiongfeng Ma, Source-independent quantum random number generation, American Physical Society, Physical Review X 6 (1), 011020, 2016;Xiao Yuan, Ke Liu, Yuan Xu, Weiting Wang, Yuwei Ma, Fang Zhang, Zhaopeng Yan, R Vijay, Luyan Sun, Xiongfeng Ma, Experimental quantum randomness processing using superconducting qubits, American Physical Society, Physical Review Letters 117 (1), 010502, 2016;Xiao Yuan, Syed M Assad, Jayne Thompson, Jing Yan Haw, Vlatko Vedral, Timothy C Ralph, Ping Koy Lam, Christian Weedbrook, Mile Gu, Replicating the benefits of Deutschian closed timelike curves without breaking causality, Nature Publishing Group, Npj Quantum Information 1 (1), 1-5, 2015;Xiao Yuan, Hongyi Zhou, Zhu Cao, Xiongfeng Ma, Intrinsic randomness as a measure of quantum coherence, American Physical Society, Physical Review A, 92 (2), 022124, 2015;Ping Xu,Xiao Yuan, Luo-Kan Chen, He Lu, Xing-Can Yao, Xiongfeng Ma, Yu-Ao Chen, Jian-Wei Pan, Implementation of a measurement-device-independent entanglement witness, American Physical Society, Physical review letters, 112 (14), 140506, 2014;实验室量子模拟和量子信息实验室由袁骁博士于2020年在北京大学创立。该实验室的研究方向包括量子模拟算法设计、量子基础理论和量子密码学。更多详情，请扫码关注微信公众号：",
         "bio_en": "",
         "email": "",
-        "phone": "86-10-62750804",
+        "phone": "86-10-6275 0804",
         "office": "",
         "profile_url": "https://cs.pku.edu.cn/info/1085/1726.htm",
         "lab_url": "",
@@ -8241,9 +8348,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -8279,7 +8386,8 @@
         "research_areas": [
           "信息物理融合系统设计",
           "程序验证",
-          "模态和时序逻辑"
+          "模态和时序逻辑",
+          "计算机软件与理论"
         ],
         "keywords": [],
         "bio": "个人主页：//lcs.ios.ac.cn/~znj/主要研究方向信息物理融合系统设计程序验证模态和时序逻辑主要科研项目（在研）1.  “安全攸关软件框架验证的数学方法与应用”项目，国家重点研发计划，科技部，项目负责人，2022.11-2027.10，1490万2. “面向嵌入式系统的软件IP知识建模与构造”项目，国家基金委重大项目，课题负责人，2022.1-2026.12，320万3. “东风微内核操作系统形式化验证”项目，航天科工四院重大型号项目，项目负责人，2021.10-2023.12,1750万4. “国际杰出团队”项目，中国科学院，项目负责人，2024.1-2026.12，300万主要学术任职中国计算机学会形式化方法专委会主任国际会议SETTA及MEMOCODE指导委员会成员国际杂志Journal of Automated Reasoning 、Formal Aspects of Computing,、Journal of Logical and Algebraic Methods in Programming 、Research Direction: Cyber-Physical Systems等编委，以及国内杂志《软件学报》、《电子学报》、《计算机研究与发展》、《信息安全学报》、《计算机科学》、《前瞻科技》等编委国际会议程序委员会委员，如CAV、RTSS、EMSOFT、HSCC、FM、TACAS、ICCPS、IFM等。Selected Publications[1] Chaochen Zhou and Naijun Zhan (2017): Introduction to Formal Semantics, Academic Press. (in Chinese)[2] Naijun Zhan, Shuling Wang and Hengjun Zhao (2016): Formal Verification of Simulink/Stateflow Diagrams, Springer-Verlag.[3] Bai Xue, Naijun Zhan and Martin Fränzle (2023): Reach-Avoid Analysis for Stochastic Differential Equations. IEEE Transactions on Automatic Control, 10.1109/TAC.2023.3332570, in press.[4] Hao Wu, Yu-Fang Chen, Zhilin Wu, Bican Xia and Naijun Zhan (2024): Decision Procedure for String Constraints with String-Integer Conversion and Flat Regular Constraints. Acta Informatica, 61(1): 23-52.[5] Bai Xue, Naijun Zhan, Martin Fränzle, Ji Wang, Wanwei Liu (2024): Reach-avoid Verification Based on Convex Optimization. IEEE Transactions on Automatic Control, 69(1): 598-605.[6] Shenghua Feng, Mingshuai Chen, Han Su, Benjamin Lucien Kaminski, Joost-Pieter Katoen, Naijun Zhan (2023). Lower Bounds for Possibly Divergent Probabilistic Programs. In Proc. ACM Program. Lang., (OOPSLA), 7: 696-726[7] Qiuye Wang, Mingshuai Chen, Bai Xue, Naijun Zhan, Joost-Pieter Katoen (2022): Encoding inductive invariants as barrier certificates synthesis via difference-of-convex programming. Information and Computation 289:104965 (full version of CAV 2021 paper)[8] X. Xu, B. Zhan, S. Wang, J.-P. Talpin and Naijun Zhan (2022): Semantics foundation for cyber-physical systems using higher-order UTP. ACM Transactions on Software Engineering and Methodology, 32(1), Article No. 9:1-48,https://doi.org/10.1145/3517192.[9] X. Xu, B. Zhan, S. Wang, X. Jin, J.-P. Talpin and Naijun Zhan (2021): Unified graphical co-modeling, analysis and verification of cyber-physical systems by combining AADL and Simulink/Stateflow. Theoretical Computer Science, 903:1-25.[10] Jie An, Bohua Zhan, Naijun Zhan and Miaomiao Zhang (2021): Learning Nondeterministic Real-Time Automata,  ACM Transaction on Embedded Computing Systems, Article 7:1-25, special issue of EMSOFT 2021, 20(5s) 99:1-99:26.[11] Xiangyu Jin, Jie An, Bohua Zhan, Naijun Zhan and Miaomiao Zhang (2021): Inferring Nonlinear Switched Dynamical Systems, Formal Aspects of Computing, 33(3): 385-406.[12] Bai Xue, Qiuye Wang, Naijun Zhan, Shijie Wang and Zhikun She (2021): Synthesizing robust domains of attraction for state-constrained perturbed polynomial systems. SIAM J. on Control and Optimization, 59(2): 1083-1108[13] Bai Xue and Naijun Zhan (2022): Robust Invariant Sets Computation for Discrete-Time Perturbed Nonlinear Systems. IEEE Transactions on Automatic Control, 67(2):1053-1060.[14] Bai Xue, Martin Fränzle, Naijun Zhan, Sergiy Bogomolov and Bican Xia (2020): Safety Verification for Random Ordinary Differential Equations. IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems,39(11):4090-4101. (Special issue of EMSOFT 2020)[15] Mingshuai Chen, Martin Fraenzle, Yangjia Li, Peter N. Mosaad and Naijun Zhan (2020): Indecision and delays are the parents of failure – Taming them algorithmically by synthesizing delay-resilient control. Acta Informatica, 58(5): 497-528.[16] Bai Xue, Qiuye Wang, Shenghua Feng and Naijun Zhan (2020): Over- and Under-Approximating Reach Sets for Perturbed Delay Differential Equations. IEEE Transactions on Automatic Control, 66(1): 283-290.[17] Gaogao Yan, Li Jiao, Shuling Wang, Lingtai Wang and Naijun Zhan (2020): Automatically generating SystemC code from HCSP formal mdoels. ACM Transactions on Software Engineering and Methodology, 29(1), Article 4:1-39. (Extended version of FM 2016 paper)[18] Bai Xue, Martin Fraenzle and Naijun Zhan (2020): Inner approximating reachable sets for polynomial systems with time-varying uncertainties. IEEE Transactions on Automatic Control, 65(4):1468-1483.[19] LingtaiWang, Naijun Zhan and Jie An (2018)：The opacity of real-time automata. IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems, 37(11): 2845-2856. (Special issue of EMSOFT 2018)[20] Ting Gan, Mingshuai Chen, Yangjia Li, Bican Xia and Naijun Zhan (2018): Reachability analysis for solvable dynamical systems. IEEE Transactions on Automatic Control, 63(7): 2003-2018.[21] Shuling Wang, Naijun Zhan and Lijun Zhang (2017): A compositional modelling and verification framework for stochastic hybrid systems. Formal Aspects of Computing, 29(4):751-775. (extended version of SETTA 2015 paper)[22] Shuling Wang, Flemming Nielson, Hanne Riis Nielson and Naijun Zhan (2017): Modelling and Verifying Communication Failure of Hybrid Systems in HCSP. Computer Journal, 60(8):1111-1130.[23] Liyun Dai, Ting Gan, Bican Xia and Naijun Zhan (2017): Barrier certificate revisited. Journal of Symbolic Computation, 80:62-86.[24] Bican Xia, Lu Yang, Naijun Zhan and Zhihai Zhang (2011): Symbolic decision procedure for termination. Formal Aspects of Computing, 23(2):171-190, 2011. DOI: 10.1007/s00165-009-0144-5.[25] Naijun Zhan and Mila Majster-Cederbaum (2010): On hierarchically developing reactive systems. Information and Computation, 208(9):997-1019.[26] Shuling Wang, Zekun Ji, Bohua Zhan, Xiong Xu, Qiang Gao, and Naijun Zhan (2024): Formally Verified C Code Generation from Hybrid Communicating Sequential Processe. Accepted by ICCPS 2024.[27] Qiuye Wang, Mingshuai Chen, Bai Xue, Naijun Zhan and Joost-Pieter Katoen (2021): Synthesizing Invariant Barrier Certificates via Difference-of-Convex Programming. In Proc. of CAV 2021, Lecture Notes in Computer Science 12759, pp.443-466.[28] Bohua Zhan, Bin Gu, Xiong Xu, Xiangyu Jin, Shuling Wang, Bai Xue, Xiaofeng Li, Yao Chen, Mengfei Yang and Naijun Zhan (2021): Modeling and Verification of Descent Guidance Control of Mars Lander. In Proc. of RTAS 2021 (a brief industry paper), pp.457-460.[29] Yunjun Bai, Ting Gan, Li Jiao, Bican Xia, Bai Xue and Naijun Zhan (2021): Switching Controller Synthesis for Time-delayed Hybrid Systems under Perturbation. In Proc. of HSCC 2021, pp. 3:1-3:11.[30] Bai Xue, Martin Fränzle, Naijun Zhan, Sergiy Bogomolov and Bican Xia (2020): Safety Verification for Random Ordinary Differential Equations. In Proc. of EMSOFT 2020, proceedings was appeared as special issue of IEEE TCAD.[31] Shenghua Feng, Mingshuai Chen, Sriram Sankaranarayanan, Bai Xue and Naijun Zhan (2020):Unbounded-time Safety Verification of Stochastic Differential Dynamics. In Proc. of CAV 2020, Lecture Notes in Computer Science 12224, pp.327-348.[32] Ting Gan, Bican Xia, Bai Xue, Naijun Zhan and Liyun Dai (2020): Non-linear Interpolant Generation. In Proc. of CAV 2020, Lecture Notes in Computer Science 12225, pp.415-438.[33] Jie An, Mingshuai Chen, Bohua Zhan, Naijun Zhan and Miaomiao Zhan (2020): Learning one-clock timed automata. In Proc. of TACAS 2020, Lecture Notes in Computer Science 12078, pp.444-462.[34] Shenghua Feng, Mingshuai Chen, Naijun Zhan, Martin Fränzle and Bai Xue (2019): Taming Delays in Dynamical Systems: Unbounded Verification of Delay Differential Equations. In Proc. of CAV 2019, Lecture Notes in Computer Science 11561, pp.650-669.[35] Junyi Liu, Bohua Zhan, Shuling Wang, Shenggang Ying, Tao Liu, Yangjia Li, Mingsheng Ying and Naijun Zhan (2019): Formal verification of quantum algorithms using quantum Hoare logic. In Proc. of CAV 2019, Lecture Notes in Computer Science 11562, pp.187-207.[36] Mingshuai Chen, Jian Wang, Jie An, Bohua Zhan, Deepak Kapur and Naijun Zhan (2019): NIL: Learning Nonlinear Interpolants. In Proc. of CADE 2019, , Lecture Notes in Computer Science 11716, pp.178-196.[37] Bai Xue, Qiuye Wang, Naijun Zhan and Martin Fraenzle (2019): Robust Invariant Sets Generation for State-Constrained Perturbed Polynomial Systems. In Proc. of HSCC 2019, pp. 128-137.[38] Lingtai Wang, Naijun Zhan and Jie An (2018): The opacity of real-time automata. In Proc. of EMSOFT 2018. (Also to appear in the special issue of IEEE TCAD for EMSOFT 2018)[39] Mingshuai Chen, Martin Fraenzle, Yangjia Li, Peter N. Mosaad and Naijun Zhan (2018): What’s to come is still unsure: Synthesizing synthesizers resilient to delayed reaction. In ATVA 2018, Lecture Notes in Computer Science 11138, pp.56-74. (distinguished paper awards)[40] Yijun Feng, Joost-Pieter Katoen, Haokun Li, Bican Xia and Naijun Zhan (2018): Monitoring CTMCs by multi-clock timed automata. In Proc. of CAV 2018, Lecture Notes in Computer Science 10981, pp. 507-526.[41] Jie An, Naijun Zhan, Xiaoshan Li, Miaomiao Zhang and Wang Yi (2018): Model-checking continuous-time bounded extended linear duration invariants. In Proc. of HSCC 2018, pp.81-90.[42] Bai Xue, Martin Fraenzle and Naijun Zhan (2018): Under-Approximating Reach Sets for Polynomial Continuous Systems. In Proc. of HSCC 2018, pp.51-60.[43] Gaogao Yan and Li Jiao and Yangjia Li and Shuling Wang and Naijun Zhan (2016): Approximate bisimulation and discretization of Hybrid CSP, in Proc. of FM 2016, Lecture Notes in Computer Science 9995, pp.702-720.[44] Mingshuai Chen and Martin Fraenzle and Yangjia Li and Peter N. Mosaad and Naijun Zhan (2016): Validated simulation-based verification of delayed differential dynamics, in Proc. of FM 2016, Lecture Notes in Computer Science 9995, pp.137-154.[45] Ting Gan, Liyun Dai, Bican Xia, Naijun Zhan, Deepak Kapur and Mingshuai Chen (2016): Interpolant synthesis for quadratic polynomial inequalities and combination with EUF, in Proc. of IJCAR 2016, Lecture Notes in Computer Science 9706, pp.195-212.[46] Liang Zou, Martin Fraenzle, Naijun Zhan and Peter Nazier Mosaad (2015): Automatic stability and safety verification for delay differential equations, in Proc. of CAV 2015, Lecture Notes in Computer Science 9364, pp.338-355.[47] Jiang Liu, Naijun Zhan, Hengjun Zhao and Liang Zou (2015): Abstraction of elementary hybrid systems by variable transformation, in Proc. of FM 2015, Lecture Notes in Computer Science 9109, pp.360-377.[48] Naijun Zhan and Liang Zou (2014): Formal verification of Simulink/Stateflow diagrams, in Proc. of ESWEEK 2014 (abstract Hengjun Zhao, Mengfei Yang, Naijun Zhan, Bin Gu, Liang Zou and Yao Chen (2014): Formal verification of a descent guidance control program of a lunar lander, in Proc. of FM 2014, Lecture Notes in Computer Science 8442, pp.733-748.[49] Liang Zou, Naijun Zhan, Shuling Wang, Martin Fraenzle and Shengchao Qin (2013): Verifying Simulink diagrams via a Hybrid Hoare Logic prover, in Proc. of EMSOFT 2013, pp.1-10.[50] Liyun Dai, Bican Xia and Naijun Zhan (2013): Generating non-linear interpolants by semi-definite programming, in Proc. of CAV 2013, Lecture Notes in Computer Science 8044, pp.364-380.[51] Quan Zu, Miaomiao Zhang, Jiaqi Zhu and Naijun Zhan (2013): Bounded model-checking of discrete Duration Calculus, in Proc. of HSCC 2013, pp.213-222.[52] Hengjun Zhao, Naijun Zhan, Deepak Kapur, and Kim G. Larsen (2012): A “hybrid” approach for synthesizing optimal controllers of hybrid systems: A Case study of the oil pump industrial example, in Proc. of FM 2012, Lecture Notes in Computer Science 7436, pp.471-485, 2012.[53] Computing semi-algebraic invariants for polynomial dynamical systems, in Proc. of EMSOFT 2011, pp.97-106, ACM Press.",
@@ -8315,9 +8423,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -8354,7 +8462,8 @@
           "DNA存储与计算",
           "生物信息",
           "DNA测序",
-          "纳微制造"
+          "纳微制造",
+          "计算机理论"
         ],
         "keywords": [],
         "bio": "课题组主页：http://dna-storage.cn主要研究方向：DNA存储与计算、生物信息、DNA测序和纳微制造等研究成果概况：张成，北京大学计算机学院，教授，博士生导师。以第一或通讯作者身份，在Nature，Nature Communications，Science Advances，JACS，Angew. Chem. Int. Ed.，IEEE TNB，中国科学，科学通报等期刊发表论文。作为负责人承担国家省部级科研项目十余项，主持：国家青年科学基金项目（A类）、国家重点研发计划专项项目、军委信息装备专项、国家重点研发计划“政府间”国际合作专项、教育部联合基金、国家自然科学基金项目和北京市国际重点专项等。先后获教育部自然科学奖一等奖/二等奖；入选中科院创新交叉团队，及中国智能计算科技创新人物。担任中国计算机，自动化，人工智能等多个学会的生物信息专委会委员。代表性论文：（*通讯作者）1.Cheng Zhang*，Ranfeng Wu, Fajia Sun, Yisheng Lin, Yuan Liang, Jiongjiong Teng, Na Liu, Qi Ouyang*, Long Qian*, Hao Yan*. Parallel molecular data storage by printing epigenetic bits on DNA.Nature, 634, 824-832, 2024.2. Yongpeng Zhang, Bozhao Li, Xuan Liu, Xuedong Zheng, Shi Liu, Guangjun Nie, Jing Yang*, Yonggang Ke*, Suping Li*,Cheng Zhang*. DNA Computing Function Switching by Programming Base Stacking Interactions with Minimal Molecular Architecture Changes.Nature Communications, 2025.3. Liang Yuan, Qie Yunkai, Jing Yang, Wu Ranfeng, Cui Shuang, Zhao Yuliang, Greg J. Anderson, Guangjun Nie, Suping Li*,Cheng Zhang*. Programming conformational cooperativity to regulate allosteric protein-oligonucleotide signal transduction.Nature Communications, 2023.4.Cheng Zhang*, Xueying Ma, Xuedong Zheng, Yonggang Ke, Kuiting Chen, Dongsheng Liu, Zuhong Lu, Jing Yang*, Hao Yan*, Programmable Allosteric DNA Regulations for Molecular Networks and Nanomachines.Science advances, 2022.5. Jing Yang, Yuan Liang, Xiang Li, Yongpeng Zhang, Long Qian*, Yonggang Ke*,Cheng Zhang*, Spatially Programmable Enzymatic Nanorobot Arm to Modulate Anisotropic Gold Nanoparticle Assembly.Angewandte Chemie International Edition, 2023.6.Cheng Zhang*, Zhiyu Wang, Yan Liu, Jing Yang, Xinxin Zhang, Linqiang Pan, Yonggang Ke*, Hao Yan*. Nicking Assisted Reactant Recycle to Implement Entropy-Driven DNA Circuit.J. Am. Chem. Soc., 2019.7. Ranfeng Wu, Yongpeng Zhang, Jiongjiong Teng, Qiang Zhang*,Cheng Zhang*. Molecular Circuit-Controlled Nanoparticle Folders for Programmable DNA Information Access.ACS nano, 2025.8. Zhang Yongpeng, Chen Yiming, Liu Xuan, Ling Qian, Wu Ranfeng, Yang Jing*,Cheng Zhang*, Programmable Primer Switching for Regulating Enzymatic DNA Circuits.ACS nano, 2024.9. Ranfeng Wu, Yiming Chen, Yongpeng Zhang, Rongming Liu, Qiang Zhang*,Cheng Zhang*, Catalytic Gold Nanoparticle Assembly Programmed by DNAzyme Circuits.Small, 2024.10. Jing Yang, Juan Wang, Xuan Liu, Yiming Chen, Yuan Liang, Qi Wang, Shuoxing Jiang*,Cheng Zhang*. Translocation of Proteins through Solid-State Nanopores Using DNA Polyhedral Carriers.Small, 2023.",
@@ -8390,9 +8499,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -8432,7 +8541,7 @@
         "bio": "个人主页：普适计算",
         "bio_en": "",
         "email": "",
-        "phone": "86-10-62751792",
+        "phone": "86-10-6275 1792",
         "office": "",
         "profile_url": "https://cs.pku.edu.cn/info/1086/1728.htm",
         "lab_url": "",
@@ -8462,9 +8571,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -8536,9 +8645,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -8572,7 +8681,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "存储系统和专用处理器"
+          "存储系统",
+          "专用处理器",
+          "计算机体系结构",
+          "高性能存储系统"
         ],
         "keywords": [],
         "bio": "个人主页：https://jiezhang-camel.github.io/主要研究方向存储系统和专用处理器的研究和设计。致力于从计算机体系结构层面出发，解决大数据和人工智能时代对于高性能存储系统的需求，突破冯诺依曼体系结构下数据迁移的瓶颈以及内存墙的限制。负责和参与的项目得到了美国能源部、美国自然科学基金、韩国自然科学基金、三星电子、海力士、德州仪器和西部数据的资助。在国际计算机会议上发表30余篇论文，包括：计算机体系结构顶级会议ISCA（CCF-A，两篇），HPCA（CCF-A，三篇），MICRO（CCF-A，两篇）；系统结构顶级会议OSDI （CCF-A）, Eurosys （CCF-B）；并行计算顶级会议 PACT （CCF-B）；计算机存储顶级会议FAST（CCF-A）；以及EDA顶级会议DAC（CCF-A）。主要学术任职在多个CCF-A类期刊和会议上担任审稿人，包括：· IEEE Transactions on Computer （CCF-A）· ACM Transactions on Storage （CCF-A）· ACM Transactions on Computer Systems （CCF-A）· IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems （CCF-A）· IEEE Transactions on Parallel and Distributed Systems （CCF-A）· ACM Transactions on Architecture and Code Optimization（CCF-B）· IEEE Computer Architecture LettersSelected PublicationsOhm-GPU: Integrating New Optical Network and Heterogeneous Memory into GPU Multi-Processors (MICRO) 2021Revamping Storage Class Memory With Hardware Automated Memory-Over-Storage Solution (ISCA) 2021ZnG: Architecting GPU Multi-Processors with New Flash for Scalable Data Analysis (ISCA) 2020Scalable Parallel Flash Firmware for Many-core Architectures (FAST) 2020DRAM-less: Hardware Acceleration of Data Processing with New Memory (HPCA) 2020FlashGPU: Placing New Flash Next to GPU Cores (DAC) 2019FUSE: Fusing STT-MRAM into GPUs to Alleviate Off-Chip Memory Access Overheads (HPCA) 2019FlashShare: Punching Through Server Storage Stack from Kernel to Firmware for Ultra-Low Latency SSDs (OSDI) 2018Amber: Enabling Precise Full-System Simulation with Detailed Modeling of All SSD Resources (MICRO) 2018FlashAbacus: A Self-governing Flash-based Accelerator for Low-power Systems (Eurosys) 2018DUANG: Fast and Lightweight Page Migration in Asymmetric Memory Systems (HPCA) 2016NVMMU: A Non-Volatile Memory Management Unit for Heterogeneous GPU-SSD Architectures (PACT) 2015",
@@ -8608,9 +8720,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -8650,7 +8762,7 @@
         "bio": "个人主页：软件工程",
         "bio_en": "",
         "email": "",
-        "phone": "86-10-62751794",
+        "phone": "86-10-6275 1794",
         "office": "",
         "profile_url": "https://cs.pku.edu.cn/info/1086/1729.htm",
         "lab_url": "",
@@ -8680,9 +8792,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -8719,7 +8831,9 @@
           "文本挖掘",
           "知识图谱",
           "图神经网络",
-          "计算机教育研究"
+          "计算机教育研究",
+          "图机器学习",
+          "教育大数据"
         ],
         "keywords": [],
         "bio": "个人主页：https://pkudlib.github.io/教育/科研经历张铭，北京大学计算机学院教授，博士生导师，教育部计算机课程教指委委员；ACM China常务理事，中国ACM教育专委会主席，ACM/IEEE IT2017信息技术课程指南执委，ACM/IEEE CC2020计算机学科规范领导小组成员，2013-2021任ACM全球教育指导委员会唯一的中国理事。自1984年考入北京大学，分别获得学士、硕士和博士学位。研究方向为招文本挖掘、图机器学习、教育大数据等，目前主持国家自然科学基金面上项目以及头部公司合作项目，进行前沿探索，解决实际问题并且重视科研成果的转化落地。合作发表科研学术论文300多篇（NeurIPS ICLR、ICML、KDD、WWW、ACL、AAAI、IJCAI等A类会议和TKDE、TOIS和Information Fusion等顶级期刊），获得机器学习顶级会议ICML 2014最佳论文奖、网络信息处理顶级会议WWW 2016最佳论文提名、数据挖掘顶级会议ICDM 2022最佳论文提名。连续入选“全球2000位最具影响力AI学者”，主要贡献为信息检索与推荐领域。发表了SIGCSE、L@S等教学研究论文，出版学术专著1部，获软件著作权8项，获发明专利6项。主编多部教材，其中《数据结构与算法》获北京市精品教材奖并得到国家“十二五”规划教材支持。带领北大《数据结构与算法》团队，获评国家级和北京市级精品课程（2008）、国家级精品资源共享课程（2016）、首批国家级一流本科课程（线上和线上线下混合式，两门一流本科课程，2020），都排名第一位。2021年荣获CCF杰出教育奖。张铭老师谷歌学术主页：https://scholar.google.com/citations?user=LbzoQBsAAAAJ主持在研项目1. 2023.11 – 2026.12,  多层次教育知识图谱构建、检索与推理，国家重点研发计划课题（社会治理与智慧社会科技支撑）2. 2023.1 – 2026.12，预训练图表示学习辅助的药物发现研究，国家自然科学基金3. 2023.10 – 2028.10，北大-安克具身智能联合实验室（任实验室主任），安克创新4. 2024.9 – 2025.9，低信噪比时序数据的可扩展流式计算表征学习（三期），正仁量化教学情况本科生课程 – 数据结构与算法，统计分析与商务智能，科技创新实践研究生课程 - 统计分析与商务智能，科技创新与创业主要荣誉和获奖2002年 北京大学2001-2002学年教学优秀奖2008年 “数据结构与算法”获得国家级和北京市级精品课程（排名一）2011年 《数据结构与算法》获得北京市优秀教材奖（排名一）2013年 北京大学“杨芙清-王阳元院士教师奖”优秀奖2014年 机器学习领域顶会ICML最佳论文奖2017年“普惠中拔尖”，获北京市高等教育教学成果一等奖（排名三）2020年“数据结构与算法”（线上）被评为国家级一流本科课程（排名一）2020年“数据结构与算法”（线上线下混合式）国家级一流本科课程（排名一）2021年 CCF杰出教育奖2022年 北京大学2022年度曾宪梓优秀教学奖文体类获奖2018、2022年 北京大学优秀工会积极分子2015、2017-2020年 北京大学信息学院”Lab杯”蝉联团体冠军2018-2019年 北京大学教职工乒乓球赛女团蝉联冠军2019年 北京大学“国球联赛”单打第五名（男女一起比赛，男生每局让4分）2021年 全国高校“教授杯”乒乓球赛女双季军2021年 北京大学“国球联赛”女单季军2021、2023年 北京大学“国球联赛”团体冠军2023年 全国高校“教授杯”乒乓球赛女单亚军、女双亚军2023年 北京大学女子花式篮球团体季军2024年北京市教育系统教职工乒乓球比赛高校组女子第五名2024年 全国高校“教授杯”乒乓球赛女单季军学术交流与清华大学、浙江大学、华东师范大学、美国华盛顿大学、美国华盛顿圣路易斯大学、美国加州大学洛杉矶分校、美国南加州大学、加拿大蒙特利尔大学、香港科技大学等学术机构有良好的合作关系。代表著作1.Junwei Yang, Hanwen Xu, Srbuhi Mirzoyan, Tong Chen, Zixuan Liu, Zequn Liu, Wei Ju, Luchen Liu, Zhiping Xiao, Ming Zhang, Sheng Wang. Poisoning medical knowledge using large language models. Nature Machine Intelligence, 2024(6), 1156–1168. Nature NMI子刊2.Bin Feng, Zequn Liu, Nanlan Huang, Zhiping Xiao, Haomiao Zhang, Srbuhi Mirzoyan, Hanwen Xu, Jiaran Hao, Yinghui Xu, Ming Zhang, Sheng Wang. A bioactivity foundation model using pairwise meta-learning. Nature Machine Intelligence, 2024(6), 962–974. Nature NMI子刊3. Yifang Qin, Hongjun Wu, Wei Ju, Xiao Luo, Ming Zhang: A Diffusion model for POI recommendation. ACM Transactions on Information Systems 2024, 42 (2), 54:1-544. Zequn Liu, Wei Zhang, Yingce Xia, Lijun Wu, Shufang Xie, Tao Qin, Ming Zhang, Tie-Yan Liu: MolXPT: Wrapping Molecules with Text for Generative Pre-training. ACL (2) 2023: 1606-16165. Wei Ju, Yifang Qin, Ziyue Qiao, Xiao Luo, Yifan Wang, Yanjie Fu, Ming Zhang: Kernel-based Substructure Exploration for Next POI Recommendation. ICDM 2022最佳论文提名6. Jianhao Shen, Yichun Yin, Lin Li, Lifeng Shang, Xin Jiang, Ming Zhang, Qun Liu: Generate & Rank: A Multi-task Framework for Math Word Problems. EMNLP (Findings) 2021: 2269-2279 (被OpenAI团队Training verifiers to solve math word problems一文三处引用)7. A Clear, A Parrish, J Impagliazzo, P Wang, P Ciancarini, E Cuadros-Vargas, S Frezza, J Gal-Ezer, A Pears, S Takada, H Topi, G van der Veer, A Vichare, L Waguespack, M Zhang: Computing curricula 2020 (CC2020) paradigms for global computing education. ACM/IEEE8. Yifan Wang, Suyao Tang, Yuntong Lei, Weiping Song, Sheng Wang, Ming Zhang: DisenHAN: Disentangled Heterogeneous Graph Attention Network for Recommendation. CIKM 2020: 1605-16149. Chence Shi, Minkai Xu, Zhaocheng Zhu, Weinan Zhang, Ming Zhang, Jian Tang: GraphAF: a Flow-based Autoregressive Model for Molecular Graph Generation. ICLR 202010. Chence Shi, Minkai Xu, Hongyu Guo, Ming Zhang, Jian Tang: A Graph to Graphs Framework for Retrosynthesis Prediction. ICML 2020: 8818-882711. Ming Zhang, Jile Zhu, Zhuo Wang, Yunfan Chen: Providing personalized learning guidance in MOOCs by multi-source data analysis. World Wide Web 22(3): 1189-1219 (2019).12. Ming Zhang, Bo Yang, Steve Cooper, Andrew Luxton-Reilly: Proceedings of the ACM Conference on Global Computing Education, CompEd 2019, Chengdu, Sichuan, China, May 17-19, 2019. ACM 2019, ISBN 978-1-4503-6259-713. Weiping Song, Chence Shi, Zhiping Xiao, Zhijian Duan, Yewen Xu, Ming Zhang, Jian Tang: AutoInt: Automatic Feature Interaction Learning via Self-Attentive Neural Networks. CIKM 2019: 1161-1170.14. Weiping Song, Zhiping Xiao, Yifan Wang, Laurent Charlin, Ming Zhang, Jian Tang: Session-Based Social Recommendation via Dynamic Graph Attention Networks. WSDM 2019: 555-56315. Yiping Song, Cheng-Te Li, Jian-Yun Nie, Ming Zhang, Dongyan Zhao, Rui Yan: An Ensemble of Retrieval-Based and Generation-Based Human-Computer Conversation Systems. IJCAI 2018: 4382-438816. Meng Qu, Jian Tang, Jingbo Shang, Xiang Ren, Ming Zhang, Jiawei Han: An Attention-based Collaboration Framework for Multi-View Network Representation Learning. CIKM 2017: 1767-177617. Chenguang Wang, Yangqiu Song, Haoran Li, Ming Zhang, Jiawei Han: Text Classification with Heterogeneous Information Network Kernels. AAAI 2016: 2130-213618. Yichun Yin, Furu Wei, Li Dong, Kaimeng Xu, MingZhang, Ming Zhou: Unsupervised Word and Dependency Path Embeddings for Aspect Term Extraction. IJCAI 2016: 2979-298519. Xiang Li, Lili Mou, Rui Yan, Ming Zhang. StalemateBreaker: A Proactive Content-Introducing Approach to Automatic Human-Computer Conversation. IJCAI 2016: 2845-2851. （被英国《每日邮报》报道）20. Jian Tang, Jingzhou Liu, Ming Zhang, Qiaozhu Mei: Visualizing Large-scale and High-dimensional Data. WWW 2016: 287-297. 最佳论文提名21. Jian Tang, Meng Qu, Mingzhe Wang, Ming Zhang, Jun Yan, Qiaozhu Mei: LINE: Large-scale Information Network Embedding. WWW 2015: 1067-1077. WWW’2015 被引最多的论文（截止2024年11月，被引6500多次）22. Chenguang Wang, Yangqiu Song, Ahmed El-Kishky, Dan Roth, Ming Zhang, Jiawei Han: Incorporating World Knowledge to Document Clustering via Heterogeneous Information Networks. KDD 2015: 1215-122423. Ming Zhang, Jile Zhu, Yanzhen Zou, Hongfei Yan, Dan Hao, Chuxiong Liu: Educational Evaluation in the PKU SPOC Course \"Data Structures and Algorithms\". In Proc. of ACM Conference on Learning at Scale 2015: 237-24024. Jian Tang, Zhaoshi Meng, XuanLong Nguyen, Qiaozhu Mei, Ming Zhang. Understanding the Limiting Factors of Topic Modeling via Posterior Contraction Analysis. ICML 2014: 190-198. Best Paper最佳论文奖25. Tao Sun, Ming Zhang, and Qiaozhu Mei. Unexpected Relevance: An Empirical Study of Serendipity in Retweets. In The 7th International AAAI Conference on Weblogs and Social Media, 2013.26. Xiaolong Wang, Furu Wei, Xiaohua Liu, Ming Zhou and Ming Zhang. Graph-based Sentiment Classification for Hashtags in Twitter. CIKM 2011, Glasgow, UK. PP1031-1040.27. Haoyuan Li, Yi Wang, Dong Zhang, Ming Zhang and Edward Chang. PFP: Parallel FP-Growth for Query Recommendation. In ACM Recommender Systems 2008. Pages 107-114. PFP has been made part of Apache Mahout (http://mahout.apache.org/users/misc/parallel-frequent-pattern-mining.html).28. 张铭，银平，邓志鸿，杨冬青，“SVM+BiHMM：基于统计方法的元数据自动抽取混合模型”。《软件学报》.19(2).358-368，2008年2月29. 邓志鸿，唐世渭，张铭，杨冬青，陈捷。“Ontology研究综述”。《北京大学学报》（自然科学），2002年9月，第38卷5期：730-73830. Ming Zhang, Virginia Mary Lo: Undergraduate computer science education in China. SIGCSE 2010, pp. 396-400. A referred paper by the course \"Images of Computing\" delivered by Dr. Carol Frieze,http://www.cs.cmu.edu/~cfrieze/courses/31. 张铭，耿国华，陈卫卫，胡学刚. 数据结构与算法课程教学实施方案[J]。中国大学教学，2011（3）：PP56-60.32. 张铭，赵海燕，王腾蛟，宋国杰，《数据结构与算法实验教程》，高等教育出版社，2011年1月。普通高等教育“十一五”国家级规划教材。33. 张铭、王腾蛟、赵海燕，《数据结构与算法》，高等教育出版社，2008年 6月。普通高等教育“十一五”国家级规划教材34. 张铭、赵海燕、王腾蛟，《数据结构与算法－－学习指导与习题解析》，高等教育出版社，2005年 10月。普通高等教育“十五”国家级规划教材配套参考书35. 李晓明、陈平、张铭、朱敏悦。“关于计算机人才需求的调研报告”。《计算机教育》，2004年8月，PP11-18",
@@ -8774,9 +8888,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -8810,7 +8924,14 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "多媒体内容分析与检索",
+          "人工智能",
+          "媒体计算",
+          "行人重识别",
+          "物体细粒度识别",
+          "海量视觉检索",
+          "识别",
+          "多媒体内容分析",
+          "检索",
           "计算机视觉",
           "模式识别"
         ],
@@ -8829,7 +8950,7 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "博士",
+            "degree": "博士学位",
             "institution": "中国科学院计算技术研究所",
             "year": "2012",
             "major": ""
@@ -8855,9 +8976,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -8943,9 +9064,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -9016,9 +9137,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -9054,7 +9175,15 @@
         "research_areas": [
           "程序设计语言",
           "软件工程",
-          "高可靠人工智能"
+          "高可靠人工智能",
+          "程序分析与机器学习的交叉领域",
+          "机器学习技术提高程序分析的可用性",
+          "概率与逻辑相结合的程序分析",
+          "自适应性程序分析",
+          "基于用户反馈的程序分析",
+          "针对机器学习系统的程序分析和语言",
+          "机器学习系统的公平性",
+          "可解释性问题"
         ],
         "keywords": [],
         "bio": "个人主页：https://xinpl.github.io/主要研究方向张昕的主要研究方向为程序设计语言与软件工程，其研究重点在于程序分析与机器学习的交叉领域。一方面，他利用机器学习技术提高程序分析的可用性，提出了概率与逻辑相结合的程序分析、自适应性程序分析、基于用户反馈的程序分析等；另一方面，他开发了针对机器学习系统的程序分析和语言，在机器学习系统的公平性、可解释性问题上都有所创新。教育与工作经历2017-2020，博士后，美国麻省理工学院2011-2017，博士，美国佐治亚理工学院2007-2011，学士，上海交通大学所获奖项FSE 2015杰出论文奖PLDI 2014杰出论文奖Selected Publications1. Osbert Bastani, Xin Zhang, Armando Solar-Lezama. Verifying Fairness Properties via Concentration. ACM Conference on Object-Oriented Programming, Systems, Languages, and Applications (OOPSLA), 2019.2. Xin Zhang, Armando Solar-Lezama, Rishabh Singh. Interpreting Neural Network Judgments via Minimal, Stable, and Symbolic Corrections. Conference on Neural Information Processing Systems (NeurIPS), 2018.3. Xin Zhang, Ravi Mangal, Mayur Naik, and Aditya Nori. Query-Guided Maximum Satisfiability. ACM Symposium on Principles of Programming Languages (POPL), 2016.4. Ravi Mangal, Xin Zhang, Mayur Naik, and Aditya Nori. A User-Guided Approach to Program Analysis. ACM Symposium on Foundations of Software Engineering (FSE), 2015. Distinguished Paper Award.5. Xin Zhang, Ravi Mangal, Radu Grigore, Mayur Naik, Hongseok Yang. On Abstraction Refinement for Program Analyses in Datalog. ACM Conference on Programming Language Design and Implementation (PLDI), 2014. Distinguished Paper Award.6. Xin Zhang, Ravi Mangal, Mayur Naik, Hongseok Yang. Hybrid Top-down and Bottom-up Interprocedural Analysis. ACM Conference on Programming Language Design and Implementation (PLDI), 2014.7. Xin Zhang, Mayur Naik, Hongseok Yang. Finding Optimum Abstractions in Parametric Dataflow Analysis. ACM Conference on Programming Language Design and Implementation (PLDI), 2013.",
@@ -9071,15 +9200,15 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "学士",
-            "institution": "上海交通大学",
-            "year": "2007-2011",
-            "major": ""
-          },
-          {
             "degree": "博士",
             "institution": "美国佐治亚理工学院",
             "year": "2011-2017",
+            "major": ""
+          },
+          {
+            "degree": "学士",
+            "institution": "上海交通大学",
+            "year": "2007-2011",
             "major": ""
           }
         ],
@@ -9103,9 +9232,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -9179,9 +9308,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -9215,8 +9344,11 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "软件工程",
+          "软件复用",
           "需求工程",
-          "软件复用"
+          "模型变换",
+          "程序设计语言"
         ],
         "keywords": [],
         "bio": "个人主页：http://sei.pku.edu.cn/~zhhy主要研究方向软件工程、软件复用、需求工程、模型变换、程序设计语言等科研/教育经历2003，博士，东京大学1988-1991，硕士，北京大学1984-1988，学士，北京大学主要荣誉与获奖国家科学技术进步奖二等奖教育部高等学校科学研究优秀成果奖科技进步一等奖北京市科学技术奖技术发明二等奖北京大学 曾宪梓优秀教学奖北京大学 教学成果一等奖研究成果概况先后主持科技创新2030—“新一代人工智能”重大项目课题、国家高技术研究发展计划（863计划）项目、国家自然科学基金项目、北京市自然科学基金项目、校企合作等多个项目，并作为骨干先后参加了国家“八五”、“九五”重点科技攻关项目、国家973计划、国家自然科学基金重点和重大项目、自然科学基金国际(地区)合作与交流项目、国家自然科学基金创新群体、国家其他部委课题和国际合作课题在内的多项课题研究工作。在国内外学术期刊和学术会议上发表相关论文百余篇，出版学术著作1部，获国家发明专利十余项。学术团体ACM、IEEE、CCF的资深会员，积极组织和参加国内外学术交流。长期在国内国际重要学术会议/研讨会任职。与国内外合作研究者联合组织了多届模型双向变换方面国际研讨会(2007-2012)、亚太高级软件工程研讨会AWASE(2011-2016)、全国需求工程研讨会(2011-2012)；承担多个国际会议的组织工作，包括RE2016 Financial & Registration Chair、MODELs17 Publicity Co-Chairs、SEAMS20 Publicity Co-Chairs、IEEE World Congress on Services Registration Co-chairs (2019-2020)、Poster Model 2021 co-chairs、RE 2022 Student Volunteer Co-Chairs等。长期担任多个国际会议的程序委员会委员，比如，REFS(2008-2010)，IWECS(2011)，ICMT (2012-2020)，MODELSWARD(2013-2026)，APRES(2014-2016), RE Workshop Selection Committee (2015-2017)；ECMFA(2022-2026), STAF(2024, 2026), RE(2024, 2025)等。担任多个期刊（Transactions on Services Computing，Software and System Modeling，软件学报、中国科学等）的审稿人。",
@@ -9271,9 +9403,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -9347,9 +9479,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -9383,11 +9515,14 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "计算机系统",
           "操作系统",
           "存储系统",
+          "软硬件协同设计",
+          "形式验证",
+          "机器学习",
           "体系结构",
-          "形式化验证",
-          "机器学习"
+          "形式化验证"
         ],
         "keywords": [],
         "bio": "个人主页：https://zhou-diyu.github.io/主要研究方向主要研究方向为计算机系统，其中，对操作系统、存储系统、软硬件协同设计、形式验证和机器学习等方向尤为感兴趣。Selected PublicationsTaming Hot Bloat Under Virtualization with HugeScopeChuandong Li, Sai Sha, Yangqing Zeng, Xiran Yang, Yingwei Luo, Xiaolin Wang, Zhenlin Wang, and Diyu Zhou2024 USENIX Annual Technical Conference (ATC ‘24)Enabling High-Performance and Secure Userspace NVM File Systems with the Trio ArchitectureDiyu Zhou, Vojtech Aschenbrenner, Tao Lyu, Jian Zhang, Sudarsun Kannan, and Sanidhya Kashyap29th ACM Symposium on Operating Systems Principles (SOSP ‘23)Best Paper Award!Odinfs: Scaling PM Performance with Opportunistic DelegationDiyu Zhou, Yuchen Qian, Vishal Gupta, Zhifei Yang, Changwoo Min, and Sanidhya Kashyap16th USENIX Symposium on Operating Systems Design and Implementation (OSDI ‘22)RRC: Responsive Replicated ContainersDiyu Zhou and Yuval Tamir2022 USENIX Annual Technical Conference (ATC ‘22)PUSh: Data Race Detection Based on Hardware-Supported Prevention of Unintended SharingDiyu Zhou and Yuval TamirACM/IEEE 52nd Annual Symposium on Microarchitecture (MICRO ‘19)",
@@ -9423,9 +9558,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -9497,9 +9632,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -9555,7 +9690,7 @@
             "degree": "博士",
             "institution": "北京大学",
             "year": "2004-2010",
-            "major": "计算机软件与理论"
+            "major": ""
           },
           {
             "degree": "硕士",
@@ -9584,9 +9719,9 @@
         "recent_updates": [],
         "source_id": "pku_cs_faculty",
         "source_url": "https://cs.pku.edu.cn/szdw/jyxl/amz/ALL.htm",
-        "crawled_at": "2026-03-03T12:27:03Z",
+        "crawled_at": "2026-03-04T06:48:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:27:03Z",
+        "last_seen_at": "2026-03-04T06:48:24Z",
         "is_active": true,
         "data_completeness": 65
       },

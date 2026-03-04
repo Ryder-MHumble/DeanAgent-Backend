@@ -3,8 +3,8 @@
   "dimension": "university_faculty",
   "group": "tsinghua",
   "source_name": "清华大学高等研究院-师资",
-  "crawled_at": "2026-03-03T14:09:53.592980+00:00",
-  "previous_crawled_at": "2026-03-03T03:51:20.734415+00:00",
+  "crawled_at": "2026-03-04T07:06:24.339956+00:00",
+  "previous_crawled_at": "2026-03-03T14:09:53.592980+00:00",
   "item_count": 26,
   "new_item_count": 0,
   "items": [
@@ -88,9 +88,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -124,15 +124,14 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "时空与引力不是基本的而是涌现(emergent)的概念",
-          "量子信息学如何能够产生一个有时空与引力的异性描述",
-          "用量子信息学来诠释在AdS/CFT里应用的概念",
+          "时空与引力",
+          "量子信息学",
+          "AdS/CFT对偶",
           "bit threads",
           "tensor networks",
           "differential entropy",
           "modular Berry connection",
-          "AdS的结构",
-          "Susskind的复杂性猜想（circuit complexity）"
+          "复杂性猜想"
         ],
         "keywords": [],
         "bio": "",
@@ -152,19 +151,19 @@
             "degree": "物理博士",
             "institution": "宾夕法尼亚大学",
             "year": "2009",
-            "major": "Statistical Effects in Large N Supersymmetric Gauge Theories"
+            "major": "物理"
           },
           {
-            "degree": "中国文学历史",
+            "degree": "",
             "institution": "复旦大学国际文化交流学院",
             "year": "2002-2003",
-            "major": ""
+            "major": "中国文学历史"
           },
           {
-            "degree": "化学与数学magna cum laude学士",
+            "degree": "化学与数学学士",
             "institution": "哈佛大学",
             "year": "2002",
-            "major": ""
+            "major": "化学与数学"
           }
         ],
         "publications_count": -1,
@@ -187,9 +186,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -224,7 +223,10 @@
         "is_academician": false,
         "research_areas": [
           "量子场论的非微扰现象",
-          "凝聚态理论"
+          "凝聚态理论",
+          "形式理论",
+          "输运理论",
+          "唯象问题"
         ],
         "keywords": [],
         "bio": "个人简介我主要研究 ：1）量子场论的非微扰现象，尤其是以范畴学语言来自然地梳理、解决传统上难以解决的非微扰问题；2）凝聚态理论——既包括形式理论和输运理论的发展，也包括基于具体实验的唯象问题。",
@@ -273,9 +275,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -347,9 +349,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -409,7 +411,7 @@
             "major": "Computer Science"
           },
           {
-            "degree": "Bachelor's",
+            "degree": "bachelor's degree",
             "institution": "University of Hong Kong",
             "year": "2010",
             "major": "Electrical and Electronic Engineering"
@@ -435,9 +437,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -499,14 +501,14 @@
           {
             "degree": "硕士",
             "institution": "清华大学物理系",
-            "year": "1988-1992",
-            "major": "凝聚态物理专业"
+            "year": "1988",
+            "major": "凝聚态物理"
           },
           {
             "degree": "博士",
             "institution": "清华大学物理系",
-            "year": "1988-1992",
-            "major": "凝聚态物理专业"
+            "year": "1992",
+            "major": "凝聚态物理"
           }
         ],
         "publications_count": -1,
@@ -529,9 +531,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -585,7 +587,7 @@
             "degree": "博士学位",
             "institution": "清华大学",
             "year": "2022",
-            "major": "Theoretical and Experimental Studies on Steady-state Microbunching"
+            "major": ""
           },
           {
             "degree": "学士学位",
@@ -614,9 +616,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -653,7 +655,9 @@
           "量子多体物理",
           "量子纠缠在凝聚态物理和量子计算中的关键作用",
           "量子模拟与计算",
+          "原子阵列平台中的多体物理和量子纠错问题",
           "量子开放体系的普适行为",
+          "密度矩阵中的量子反常与拓扑性质",
           "量子多体中的纠缠与混沌"
         ],
         "keywords": [],
@@ -671,16 +675,16 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "BS",
-            "institution": "清华大学基础科学班",
-            "year": "2008-2012",
-            "major": ""
+            "degree": "PhD",
+            "institution": "斯坦福大学",
+            "year": "2012-2017",
+            "major": "物理系"
           },
           {
-            "degree": "PhD",
-            "institution": "斯坦福大学物理系",
-            "year": "2012-2017",
-            "major": "(导师：祁晓亮)"
+            "degree": "BS",
+            "institution": "清华大学",
+            "year": "2008-2012",
+            "major": "基础科学班"
           }
         ],
         "publications_count": -1,
@@ -703,9 +707,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -735,7 +739,7 @@
         "university": "清华大学",
         "department": "高等研究院",
         "secondary_departments": [],
-        "position": "副研究员",
+        "position": "研究员",
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
@@ -759,15 +763,15 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "Undergraduate",
-            "institution": "ETH Zurich",
-            "year": "2005-2009",
-            "major": "Mathematics"
-          },
-          {
             "degree": "PhD",
             "institution": "ETH Zurich",
             "year": "2009-2010",
+            "major": "Mathematics"
+          },
+          {
+            "degree": "Undergraduate studies",
+            "institution": "ETH Zurich",
+            "year": "2005-2009",
             "major": "Mathematics"
           }
         ],
@@ -791,9 +795,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -866,9 +870,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -924,22 +928,22 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "Bachelor",
-            "institution": "WHU",
-            "year": "2009",
-            "major": ""
+            "degree": "Ph.D.",
+            "institution": "University of Birmingham",
+            "year": "2022",
+            "major": "Computer Science"
           },
           {
             "degree": "Master",
-            "institution": "UoB",
+            "institution": "University of Birmingham",
             "year": "2016",
             "major": ""
           },
           {
-            "degree": "PhD",
-            "institution": "UoB",
-            "year": "2018",
-            "major": "Computer Science"
+            "degree": "Bachelor",
+            "institution": "WHU",
+            "year": "2009",
+            "major": ""
           }
         ],
         "publications_count": -1,
@@ -962,9 +966,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -1020,13 +1024,13 @@
             "degree": "",
             "institution": "清华大学计算机科学与技术系",
             "year": "2010-2014",
-            "major": "计算机科学与技术专业"
+            "major": "计算机科学与技术"
           },
           {
             "degree": "",
             "institution": "清华大学高等研究院",
             "year": "2014-2019",
-            "major": "数学专业"
+            "major": "数学"
           }
         ],
         "publications_count": -1,
@@ -1049,9 +1053,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1111,9 +1115,9 @@
           },
           {
             "degree": "学士",
-            "institution": "南开大学，数学试点班",
+            "institution": "南开大学",
             "year": "2004-2008",
-            "major": ""
+            "major": "数学试点班"
           }
         ],
         "publications_count": -1,
@@ -1136,9 +1140,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -1173,11 +1177,17 @@
         "is_academician": false,
         "research_areas": [
           "密码理论",
-          "数学问题研究",
-          "密码分析",
-          "密码设计",
+          "密码哈希函数的碰撞攻击理论",
+          "模差分比特分析法",
+          "带密钥的密码算法分析",
+          "哈希函数设计",
           "抗量子计算机攻击的公钥密码研究",
-          "格密码研究"
+          "格密码研究",
+          "格最短向量求解",
+          "高维格的随机化归约框架",
+          "整数格的自同构问题与同构问题",
+          "最短向量问题",
+          "最短特征向量问题"
         ],
         "keywords": [],
         "bio": "",
@@ -1194,19 +1204,19 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "学士",
+            "degree": "学士学位",
             "institution": "山东大学",
             "year": "1987",
             "major": "数学系"
           },
           {
-            "degree": "硕士",
+            "degree": "硕士学位",
             "institution": "山东大学",
             "year": "1990",
             "major": "数学系"
           },
           {
-            "degree": "博士",
+            "degree": "博士学位",
             "institution": "山东大学",
             "year": "1993",
             "major": "数学系"
@@ -1232,9 +1242,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1320,9 +1330,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1405,9 +1415,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1443,8 +1453,9 @@
         "research_areas": [
           "量子引力与AdS/CFT",
           "量子混沌与黑洞和时空虫洞的联系",
-          "利用时空虫洞来理解黑洞信息悖论以及黑洞火墙悖论",
-          "利用量子混沌效应来理解黑洞内部结构",
+          "黑洞信息悖论",
+          "黑洞火墙悖论",
+          "黑洞内部结构",
           "超对称黑洞",
           "de Sitter 时空",
           "JT引力/SYK模型对偶",
@@ -1497,9 +1508,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1533,10 +1544,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "非常规超导体",
-          "强关联量子体系",
-          "高温超导",
-          "量子自旋液体",
+          "非常规超导体及强关联量子体系中的理论问题",
+          "高温超导及量子自旋液体等关联量子物态的微观理论",
           "新奇量子相变",
           "费米符号问题",
           "量子信息",
@@ -1560,7 +1569,7 @@
             "degree": "Ph.D.",
             "institution": "斯坦福大学",
             "year": "2009",
-            "major": "Theoretical studies of strongly correlated electronic systems"
+            "major": ""
           },
           {
             "degree": "M.A.",
@@ -1595,9 +1604,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1670,9 +1679,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -1706,6 +1715,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "冷原子和凝聚态等系统中量子物质的研究",
           "量子物质的非平衡动力学理论",
           "基于原子阵列的量子计算",
           "冷原子体系的量子多体物理"
@@ -1725,16 +1735,16 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "本科",
-            "institution": "清华大学物理系基础科学班",
-            "year": "1998-2002",
+            "degree": "物理学博士",
+            "institution": "清华大学高等研究中心",
+            "year": "2005",
             "major": ""
           },
           {
-            "degree": "博士",
-            "institution": "清华大学高等研究中心",
-            "year": "2005",
-            "major": "物理学"
+            "degree": "本科",
+            "institution": "清华大学物理系",
+            "year": "2002",
+            "major": "基础科学班"
           }
         ],
         "publications_count": -1,
@@ -1757,9 +1767,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1829,9 +1839,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -1864,7 +1874,19 @@
         "position": "访问教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "Dark Energy Spectroscopic Instrument",
+          "exoplanet atmospheres",
+          "galaxy formation",
+          "Fast Radio Bursts (FRB)",
+          "telescope technology",
+          "new research methods",
+          "computational astrophysics",
+          "planets",
+          "stars",
+          "galaxies",
+          "cosmology"
+        ],
         "keywords": [],
         "bio": "UC Santa Cruz researchers hold crucial roles in “Dark Energy Spectroscopic Instrument” collaboration",
         "bio_en": "",
@@ -1899,11 +1921,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
-        "data_completeness": 65
+        "data_completeness": 80
       },
       "is_new": false
     },
@@ -1998,9 +2020,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2033,7 +2055,28 @@
         "position": "兼职教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "Artificial intelligence",
+          "Audio & acoustics",
+          "Computer vision",
+          "Graphics & multimedia",
+          "Human-computer interaction",
+          "Human language technologies",
+          "Search & information retrieval",
+          "Data platforms and analytics",
+          "Hardware & devices",
+          "Programming languages & software engineering",
+          "Quantum computing",
+          "Security, privacy & cryptography",
+          "Systems & networking",
+          "Algorithms",
+          "Mathematics",
+          "Ecology & environment",
+          "Economics",
+          "Medical, health & genomics",
+          "Social sciences",
+          "Technology for emerging markets"
+        ],
         "keywords": [],
         "bio": "Emeritus Researcher",
         "bio_en": "",
@@ -2068,11 +2111,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
-        "data_completeness": 65
+        "data_completeness": 80
       },
       "is_new": false
     },
@@ -2108,7 +2151,19 @@
           "计算复杂性",
           "通讯复杂性",
           "密码协议",
-          "量子计算"
+          "量子计算",
+          "计算理论",
+          "密码学",
+          "量子计算",
+          "通讯复杂性理论",
+          "量子通信复杂性",
+          "分布式量子计算模式",
+          "分布式量子算法",
+          "量子通讯协议安全性",
+          "伪随机数生成",
+          "线路复杂性",
+          "计算几何",
+          "数据结构"
         ],
         "keywords": [],
         "bio": "",
@@ -2125,25 +2180,25 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "学士学位",
+            "degree": "物理学学士学位",
             "institution": "台湾大学",
             "year": "1967",
             "major": "物理学"
           },
           {
-            "degree": "硕士学位",
+            "degree": "物理学硕士学位",
             "institution": "哈佛大学",
             "year": "1969",
             "major": "物理学"
           },
           {
-            "degree": "博士学位",
+            "degree": "物理学博士学位",
             "institution": "哈佛大学",
             "year": "1972",
             "major": "物理学"
           },
           {
-            "degree": "博士学位",
+            "degree": "计算机科学博士学位",
             "institution": "伊利诺伊大学",
             "year": "1975",
             "major": "计算机科学"
@@ -2169,9 +2224,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2205,9 +2260,19 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "受限小量子系统物理各种低维量子结构(包括量子点、纳米团簇、纳米管)的电子结构、声子模及电声子相互作用的特性各种低维量子结构的光学特性(含Raman散射)、激子效应和器件应用介观系统输运",
+          "凝聚态物理理论研究",
+          "受限小量子系统物理",
+          "各种低维量子结构(包括量子点、纳米团簇、纳米管)的电子结构、声子模及电声子相互作用的特性",
+          "各种低维量子结构的光学特性(含Raman散射)、激子效应和器件应用",
+          "介观系统输运",
           "半导体自旋电子学",
-          "半导体中超快过程的多体理论半导体中动力学量子干涉及其可控性量子点中的晶格弛豫及其动力学过程半导体超晶格布洛赫震荡强THz激光下辐照半导体物理非平衡载流子弛豫与输运相位相干、退相干与多体效应"
+          "半导体中超快过程的多体理论",
+          "半导体中动力学量子干涉及其可控性",
+          "量子点中的晶格弛豫及其动力学过程",
+          "半导体超晶格布洛赫震荡",
+          "强THz激光下辐照半导体物理",
+          "非平衡载流子弛豫与输运",
+          "相位相干、退相干与多体效应"
         ],
         "keywords": [],
         "bio": "友情链接清华大学清华新闻办公系统清华校友宣传资料下载清华物理系公共平台联系地址传真：010-62781604电话：010-62782711Email: wlx@tsinghua.edu.cn版权所有 © 清华大学     京ICP备15006448号 京公网安备 110402430053 号",
@@ -2225,9 +2290,9 @@
         "education": [
           {
             "degree": "本科",
-            "institution": "清华大学工程物理系",
+            "institution": "清华大学",
             "year": "1970",
-            "major": ""
+            "major": "工程物理系"
           },
           {
             "degree": "硕士",
@@ -2256,9 +2321,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_ias_faculty",
         "source_url": "https://www.ias.tsinghua.edu.cn/yjry/jy.htm",
-        "crawled_at": "2026-03-03T14:01:03Z",
+        "crawled_at": "2026-03-04T07:03:34Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:01:03Z",
+        "last_seen_at": "2026-03-04T07:03:34Z",
         "is_active": true,
         "data_completeness": 80
       },

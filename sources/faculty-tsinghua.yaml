@@ -32,7 +32,7 @@ sources:
   - ai
   llm_extraction: true
   llm_provider: openrouter
-  llm_model: deepseek/deepseek-chat
+  llm_model: google/gemini-2.5-flash
   llm_fields:
   - phone
   - research_areas
@@ -70,7 +70,7 @@ sources:
   - ai
   llm_extraction: true
   llm_provider: openrouter
-  llm_model: deepseek/deepseek-chat
+  llm_model: google/gemini-2.5-flash
   llm_fields:
   - phone
   - research_areas
@@ -107,7 +107,7 @@ sources:
   - se
   llm_extraction: true
   llm_provider: openrouter
-  llm_model: deepseek/deepseek-chat
+  llm_model: google/gemini-2.5-flash
   llm_fields:
   - phone
   - research_areas
@@ -145,7 +145,7 @@ sources:
   - ee
   llm_extraction: true
   llm_provider: openrouter
-  llm_model: deepseek/deepseek-chat
+  llm_model: google/gemini-2.5-flash
   llm_fields:
   - phone
   - research_areas
@@ -183,7 +183,7 @@ sources:
   - ai
   llm_extraction: true
   llm_provider: openrouter
-  llm_model: deepseek/deepseek-chat
+  llm_model: google/gemini-2.5-flash
   llm_fields:
   - phone
   - research_areas
@@ -216,7 +216,7 @@ sources:
   - network
   llm_extraction: true
   llm_provider: openrouter
-  llm_model: deepseek/deepseek-chat
+  llm_model: google/gemini-2.5-flash
   llm_fields:
   - phone
   - research_areas
@@ -256,7 +256,7 @@ sources:
   - science
   llm_extraction: true
   llm_provider: openrouter
-  llm_model: deepseek/deepseek-chat
+  llm_model: google/gemini-2.5-flash
   llm_fields:
   - phone
   - research_areas
@@ -294,7 +294,7 @@ sources:
   - design
   llm_extraction: true
   llm_provider: openrouter
-  llm_model: deepseek/deepseek-chat
+  llm_model: google/gemini-2.5-flash
   llm_fields:
   - phone
   - research_areas
@@ -348,7 +348,7 @@ sources:
       research_areas: 研究领域
   llm_extraction: true
   llm_provider: openrouter
-  llm_model: deepseek/deepseek-chat
+  llm_model: google/gemini-2.5-flash
   llm_fields:
   - phone
   - research_areas
@@ -391,7 +391,7 @@ sources:
   - bio
   llm_extraction: true
   llm_provider: openrouter
-  llm_model: deepseek/deepseek-chat
+  llm_model: google/gemini-2.5-flash
   llm_fields:
   - phone
   - research_areas

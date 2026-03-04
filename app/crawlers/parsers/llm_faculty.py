@@ -2,20 +2,14 @@
 
 核心思路：
 1. 使用 httpx 直接获取 HTML，通过正则清洗无用内容（script/style/nav等）
-2. 使用便宜的国产 LLM（Deepseek/Qwen）从清洗后的 HTML 提取结构化数据
+2. 使用 LLM 从清洗后的 HTML 提取结构化数据
 3. 严格控制输入输出 token 数量，降低成本
 4. 无需手写 CSS 选择器，自动适配不同网站结构
-
-成本优化：
-- 使用 Deepseek V3 ($0.27/M input, $1.10/M output) 或 Qwen 2.5 72B ($0.35/M)
-- HTML 清洗：移除 script/style/nav/footer，保留主要内容区域
-- 输出限制：使用 max_tokens 控制输出长度
-- 预估成本：每个学者 ~$0.01-0.02（vs Claude $0.10-0.15）
 
 配置示例（YAML）：
   crawler_class: llm_faculty
   llm_provider: openrouter    # openrouter | siliconflow | dashscope
-  llm_model: deepseek/deepseek-chat  # 推荐 deepseek-chat 或 qwen/qwen-2.5-72b-instruct
+  llm_model: google/gemini-2.5-flash  # 推荐 gemini-2.5-flash（快速且便宜）
   max_list_tokens: 4000       # 列表页最大 token 数
   max_detail_tokens: 8000     # 详情页最大 token 数
 """
@@ -39,13 +33,31 @@ from app.schemas.scholar import (
     ScholarRecord,
     compute_scholar_completeness,
     parse_research_areas,
+    validate_research_areas,
+    validate_scholar_name,
 )
 
 logger = logging.getLogger(__name__)
 
+# Regex to extract position/title from bio text
+_POSITION_RE = re.compile(
+    r"(教授|副教授|助理教授|讲师|研究员|副研究员|"
+    r"助理研究员|博士生导师|硕士生导师|"
+    r"正高级工程师|高级工程师|工程师)"
+)
+
 
 def _now_iso() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def _extract_position_from_text(text: str) -> str:
+    """Try to extract position/title from the first 100 chars of bio text."""
+    if not text:
+        return ""
+    head = text[:100]
+    match = _POSITION_RE.search(head)
+    return match.group(1) if match else ""
 
 
 def _clean_html(html: str, max_length: int = 50000) -> str:
@@ -53,9 +65,11 @@ def _clean_html(html: str, max_length: int = 50000) -> str:
 
     清洗策略：
     1. 移除 script, style, nav, footer, header 等无用标签
-    2. 移除注释
-    3. 压缩空白字符
-    4. 截断过长内容
+    2. 移除 class/id 名含 footer/copyright 的 div
+    3. 移除注释
+    4. 压缩空白字符
+    5. 移除常见页脚文本模式
+    6. 截断过长内容
     """
     soup = BeautifulSoup(html, "lxml")
 
@@ -63,8 +77,22 @@ def _clean_html(html: str, max_length: int = 50000) -> str:
     for tag in soup(["script", "style", "nav", "footer", "header", "aside", "iframe", "noscript"]):
         tag.decompose()
 
+    # 移除 class/id 名含 footer/copyright 等的 div
+    # Note: decompose() clears __dict__ on child tags, so we must
+    # skip tags that were already decomposed as children of a prior match.
+    for tag in list(soup.find_all(["div", "section", "span"])):
+        if getattr(tag, "decomposed", False) or tag.attrs is None:
+            continue
+        classes = " ".join(tag.get("class") or [])
+        tag_id = tag.get("id") or ""
+        combined = f"{classes} {tag_id}".lower()
+        if any(kw in combined for kw in ("footer", "copyright", "bottom-bar", "site-info")):
+            tag.decompose()
+
     # 移除注释
-    for comment in soup.find_all(string=lambda text: isinstance(text, str) and text.strip().startswith("<!--")):
+    for comment in soup.find_all(
+        string=lambda text: isinstance(text, str) and text.strip().startswith("<!--")
+    ):
         comment.extract()
 
     # 获取文本内容
@@ -74,6 +102,14 @@ def _clean_html(html: str, max_length: int = 50000) -> str:
     text = re.sub(r"\n\s*\n+", "\n\n", text)
     text = re.sub(r" +", " ", text)
 
+    # 移除常见页脚文本模式
+    text = re.sub(
+        r"(?:CopyRight|Copyright|版权所有).*?(?:All Rights Reserved|保留所有权利)[。.]*",
+        "",
+        text,
+        flags=re.DOTALL | re.IGNORECASE,
+    )
+
     # 截断过长内容
     if len(text) > max_length:
         text = text[:max_length] + "\n...(内容过长，已截断)"
@@ -81,13 +117,42 @@ def _clean_html(html: str, max_length: int = 50000) -> str:
     return text
 
 
+def _repair_json(text: str) -> str:
+    """Attempt to repair common LLM JSON output issues.
+
+    Handles: trailing commas, truncated arrays/objects (unclosed brackets).
+    """
+    # Remove trailing commas before } or ]
+    text = re.sub(r",\s*([}\]])", r"\1", text)
+
+    # If truncated (unclosed brackets), try to close them
+    open_braces = text.count("{") - text.count("}")
+    open_brackets = text.count("[") - text.count("]")
+    if open_braces > 0 or open_brackets > 0:
+        # Find last complete JSON object/array item
+        # Try to truncate at the last complete item
+        last_brace = text.rfind("}")
+        last_bracket = text.rfind("]")
+        last_complete = max(last_brace, last_bracket)
+        if last_complete > 0:
+            text = text[:last_complete + 1]
+            # Re-count and close
+            open_braces = text.count("{") - text.count("}")
+            open_brackets = text.count("[") - text.count("]")
+        # Remove trailing commas again after truncation
+        text = re.sub(r",\s*$", "", text)
+        text += "]" * open_brackets + "}" * open_braces
+
+    return text
+
+
 class LLMFacultyCrawler(BaseCrawler):
-    """基于 LLM 的自适应学者信息爬取器（成本优化版）"""
+    """基于 LLM 的自适应学者信息爬取器"""
 
     def __init__(self, config: dict):
         super().__init__(config)
         self.llm_provider = config.get("llm_provider", "openrouter")
-        self.llm_model = config.get("llm_model", "deepseek/deepseek-chat")
+        self.llm_model = config.get("llm_model", "google/gemini-2.5-flash")
         self.max_list_tokens = config.get("max_list_tokens", 4000)
         self.max_detail_tokens = config.get("max_detail_tokens", 8000)
 
@@ -119,7 +184,10 @@ class LLMFacultyCrawler(BaseCrawler):
                 timeout=httpx.Timeout(30.0, connect=10.0),
                 follow_redirects=True,
                 headers={
-                    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+                    "User-Agent": (
+                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
+                        " AppleWebKit/537.36"
+                    ),
                 },
             ) as client:
                 response = await client.get(url)
@@ -131,7 +199,10 @@ class LLMFacultyCrawler(BaseCrawler):
 
                 # 清洗 HTML
                 cleaned = _clean_html(html, max_length)
-                logger.debug("LLMFacultyCrawler: fetched and cleaned %d chars from %s", len(cleaned), url)
+                logger.debug(
+                    "LLMFacultyCrawler: cleaned %d chars from %s",
+                    len(cleaned), url,
+                )
                 return cleaned
         except httpx.TimeoutException as e:
             logger.error("LLMFacultyCrawler: timeout fetching %s: %s", url, e)
@@ -140,11 +211,14 @@ class LLMFacultyCrawler(BaseCrawler):
             logger.error("LLMFacultyCrawler: HTTP error fetching %s: %s", url, e)
             raise
 
-    async def _llm_extract(self, prompt: str, content: str, max_tokens: int = 2000, retry_count: int = 3) -> dict:
+    async def _llm_extract(
+        self, prompt: str, content: str,
+        max_tokens: int = 2000, retry_count: int = 3,
+    ) -> dict:
         """使用 LLM 从清洗后的内容中提取结构化数据，带重试机制"""
         for attempt in range(retry_count):
             try:
-                async with httpx.AsyncClient(timeout=httpx.Timeout(60.0, connect=10.0)) as client:
+                async with httpx.AsyncClient(timeout=httpx.Timeout(120.0, connect=10.0)) as client:
                     response = await client.post(
                         self.llm_api_url,
                         headers={
@@ -156,7 +230,11 @@ class LLMFacultyCrawler(BaseCrawler):
                             "messages": [
                                 {
                                     "role": "system",
-                                    "content": "你是一个数据提取助手。从学术网页中提取结构化信息，只返回有效的 JSON，不要包含任何解释或 markdown 格式。",
+                                    "content": (
+                                        "你是一个数据提取助手。"
+                                        "从学术网页中提取结构化信息，"
+                                        "只返回有效的 JSON，不要包含任何解释或 markdown 格式。"
+                                    ),
                                 },
                                 {
                                     "role": "user",
@@ -193,19 +271,28 @@ class LLMFacultyCrawler(BaseCrawler):
                         resp_content = resp_content[:-3]
                     resp_content = resp_content.strip()
 
-                    return json.loads(resp_content)
+                    return json.loads(_repair_json(resp_content))
             except (json.JSONDecodeError, KeyError) as e:
-                logger.warning("LLMFacultyCrawler: JSON parse error on attempt %d/%d: %s", attempt + 1, retry_count, e)
+                logger.warning(
+                    "LLMFacultyCrawler: JSON parse error attempt %d/%d: %s",
+                    attempt + 1, retry_count, e,
+                )
                 if attempt == retry_count - 1:
                     raise
                 await asyncio.sleep(2 ** attempt)  # Exponential backoff
             except httpx.TimeoutException as e:
-                logger.warning("LLMFacultyCrawler: timeout on attempt %d/%d: %s", attempt + 1, retry_count, e)
+                logger.warning(
+                    "LLMFacultyCrawler: timeout attempt %d/%d: %s",
+                    attempt + 1, retry_count, e,
+                )
                 if attempt == retry_count - 1:
                     raise
                 await asyncio.sleep(2 ** attempt)
             except httpx.HTTPError as e:
-                logger.warning("LLMFacultyCrawler: HTTP error on attempt %d/%d: %s", attempt + 1, retry_count, e)
+                logger.warning(
+                    "LLMFacultyCrawler: HTTP error attempt %d/%d: %s",
+                    attempt + 1, retry_count, e,
+                )
                 if attempt == retry_count - 1:
                     raise
                 await asyncio.sleep(2 ** attempt)
@@ -216,7 +303,9 @@ class LLMFacultyCrawler(BaseCrawler):
         try:
             content = await self._fetch_and_clean(list_url, max_length=30000)
         except Exception as e:
-            logger.error("LLMFacultyCrawler: failed to fetch list page: %s", e)
+            logger.error(
+                "LLMFacultyCrawler: failed to fetch list page: %s", e, exc_info=True,
+            )
             return []
 
         prompt = """从这个页面提取所有教师/学者信息。
@@ -239,8 +328,10 @@ class LLMFacultyCrawler(BaseCrawler):
   }
 ]
 
-只包含有有效个人主页链接的学者。如果没找到学者，返回空数组 []。
-注意：profile_url 必须是完整的 URL，不能是相对路径。"""
+重要规则：
+1. 只包含有有效个人主页链接的真实学者/教师，不要包含导航链接、网站栏目名称
+2. profile_url 必须是完整的 URL，不能是相对路径
+3. 如果没找到学者，返回空数组 []"""
 
         try:
             scholars = await self._llm_extract(prompt, content, max_tokens=self.max_list_tokens)
@@ -265,14 +356,14 @@ class LLMFacultyCrawler(BaseCrawler):
 {{
   "name": "学者姓名",
   "name_en": "英文姓名（如果有）",
-  "position": "职称（教授/副教授/助理教授/研究员等）",
+  "position": "职称（教授/副教授/研究员/讲师等），必须提取",
   "email": "邮箱地址",
   "phone": "电话号码",
   "office": "办公室地址",
   "homepage": "个人主页 URL",
   "photo_url": "照片 URL（如果有）",
-  "research_areas": "研究方向（逗号分隔的字符串）",
-  "bio": "完整的个人简介文本（页面上的所有内容）",
+  "research_areas": "研究方向关键词，逗号分隔，不含页脚/导航",
+  "bio": "学术简介叙述文字，不含教育/工作经历列表",
   "education": [
     {{"year": "2010-2014", "degree": "博士", "institution": "清华大学", "major": "计算机科学"}}
   ],
@@ -283,17 +374,27 @@ class LLMFacultyCrawler(BaseCrawler):
     {{"year": "2020", "title": "国家自然科学奖二等奖"}}
   ],
   "publications": [
-    {{"title": "论文标题", "venue": "会议/期刊", "year": "2023"}}
+    {{"title": "论文标题", "venue": "会议/期刊", "year": "2023", "authors": "作者列表（如有）"}}
   ]
 }}
 
-尽可能提取所有信息。对于 education/work_experience/awards/publications，提取所有能找到的条目。"""
+重要规则：
+1. position（职称）必须填写，从页面中提取（教授、副教授、研究员、讲师等）
+2. bio 只放叙述性简介文字，不要放结构化数据（教育/工作经历请用对应字段）
+3. research_areas 只放研究领域关键词，不要放导航链接、版权信息或联系方式
+4. 不要把页面底部的版权声明、地址、电话等页脚信息放入任何字段
+5. education 和 work_experience 要分开提取，不要混入 bio
+6. publications 尽可能提取代表性论文（标题、期刊/会议、年份）
+7. awards 提取所有能找到的奖项/荣誉"""
 
             details = await self._llm_extract(prompt, content, max_tokens=self.max_detail_tokens)
             return details
 
         except Exception as e:
-            logger.warning("LLMFacultyCrawler: failed to extract details from %s: %s", profile_url, e)
+            logger.warning(
+                "LLMFacultyCrawler: failed to extract details from %s: %s",
+                profile_url, e,
+            )
             return {"name": name_hint, "error": str(e)}
 
     async def fetch_and_parse(self) -> list[CrawledItem]:
@@ -314,7 +415,10 @@ class LLMFacultyCrawler(BaseCrawler):
             logger.warning("LLMFacultyCrawler: no scholars found")
             return []
 
-        logger.info("LLMFacultyCrawler: found %d scholars, starting detail extraction", len(scholars))
+        logger.info(
+            "LLMFacultyCrawler: found %d scholars, starting detail extraction",
+            len(scholars),
+        )
 
         # Step 2: Extract details for each scholar
         items: list[CrawledItem] = []
@@ -331,6 +435,11 @@ class LLMFacultyCrawler(BaseCrawler):
                 logger.debug("LLMFacultyCrawler: skipping scholar with missing url or name")
                 continue
 
+            # Validate name is a real person, not a nav/menu item
+            if not validate_scholar_name(name):
+                logger.debug("LLMFacultyCrawler: skipping non-scholar name %r", name)
+                continue
+
             logger.info("LLMFacultyCrawler: [%d/%d] processing %s", i + 1, len(scholars), name)
 
             try:
@@ -338,7 +447,10 @@ class LLMFacultyCrawler(BaseCrawler):
                 details = await self._extract_scholar_details(profile_url, name)
 
                 if "error" in details:
-                    logger.warning("LLMFacultyCrawler: skipping %s due to error: %s", name, details.get("error"))
+                    logger.warning(
+                        "LLMFacultyCrawler: skipping %s due to error: %s",
+                        name, details.get("error"),
+                    )
                     continue
             except Exception as e:
                 logger.error("LLMFacultyCrawler: exception processing %s: %s", name, e)
@@ -389,16 +501,23 @@ class LLMFacultyCrawler(BaseCrawler):
                     )
                 )
 
-            # Parse work experience (store as text in bio for now)
-            work_exp_text = ""
-            for work in merged.get("work_experience", []):
-                work_exp_text += f"{work.get('year', '')}: {work.get('position', '')} @ {work.get('institution', '')}\n"
+            # Parse research areas + validate
+            # LLM may return a string or a list
+            ra_raw = merged.get("research_areas", "")
+            if isinstance(ra_raw, list):
+                research_areas = [str(x).strip() for x in ra_raw if x]
+            elif ra_raw:
+                research_areas = parse_research_areas(ra_raw)
+            else:
+                research_areas = []
+            research_areas = validate_research_areas(research_areas)
 
-            # Parse research areas
-            research_areas_str = merged.get("research_areas", "")
-            research_areas = parse_research_areas(research_areas_str) if research_areas_str else []
+            # Post-process: extract position from bio if LLM left it empty
+            position = merged.get("position", "")
+            if not position:
+                position = _extract_position_from_text(merged.get("bio", ""))
 
-            # Build ScholarRecord
+            # Build ScholarRecord — bio is clean narrative only, no work_experience appended
             record = ScholarRecord(
                 name=merged.get("name", name),
                 name_en=merged.get("name_en", ""),
@@ -407,12 +526,12 @@ class LLMFacultyCrawler(BaseCrawler):
                 university=university,
                 department=department,
                 secondary_departments=[],
-                position=merged.get("position", ""),
+                position=position,
                 academic_titles=[],
                 is_academician=False,
                 research_areas=research_areas,
                 keywords=[],
-                bio=merged.get("bio", "") + "\n\n" + work_exp_text,
+                bio=merged.get("bio", "").strip(),
                 bio_en="",
                 email=merged.get("email", ""),
                 phone=merged.get("phone", ""),
@@ -470,11 +589,11 @@ class LLMFacultyCrawler(BaseCrawler):
             )
 
         # Calculate cost estimate
-        cost_per_m_input = 0.27 if "deepseek" in self.llm_model.lower() else 0.35
-        cost_per_m_output = 1.10 if "deepseek" in self.llm_model.lower() else 1.40
+        cost_per_m_input = 0.27 if "deepseek" in self.llm_model.lower() else 1.25
+        cost_per_m_output = 1.10 if "deepseek" in self.llm_model.lower() else 5.0
         estimated_cost = (
-            self.total_input_tokens / 1_000_000 * cost_per_m_input +
-            self.total_output_tokens / 1_000_000 * cost_per_m_output
+            self.total_input_tokens / 1_000_000 * cost_per_m_input
+            + self.total_output_tokens / 1_000_000 * cost_per_m_output
         )
 
         logger.info(
@@ -483,7 +602,9 @@ class LLMFacultyCrawler(BaseCrawler):
             sum(item.extra["data_completeness"] for item in items) / len(items) if items else 0,
         )
         logger.info(
-            "LLMFacultyCrawler: API stats - calls: %d, input tokens: %d, output tokens: %d, estimated cost: $%.4f",
-            self.api_calls, self.total_input_tokens, self.total_output_tokens, estimated_cost
+            "LLMFacultyCrawler: API stats - calls: %d, "
+            "input: %d, output: %d tokens, cost: $%.4f",
+            self.api_calls, self.total_input_tokens,
+            self.total_output_tokens, estimated_cost,
         )
         return items

@@ -3,8 +3,8 @@
   "dimension": "university_faculty",
   "group": "pku",
   "source_name": "北京大学集成电路学院-专职教师",
-  "crawled_at": "2026-03-03T12:36:59.958499+00:00",
-  "previous_crawled_at": "2026-03-03T03:43:44.249930+00:00",
+  "crawled_at": "2026-03-04T06:52:11.828957+00:00",
+  "previous_crawled_at": "2026-03-03T12:36:59.958499+00:00",
   "item_count": 27,
   "new_item_count": 0,
   "items": [
@@ -93,9 +93,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -153,15 +153,15 @@
             "major": "微电子学与固体电子学"
           },
           {
-            "degree": "硕士",
-            "institution": "北京师范大学",
-            "year": "2003",
-            "major": ""
-          },
-          {
             "degree": "学士",
             "institution": "北京师范大学",
             "year": "2000",
+            "major": ""
+          },
+          {
+            "degree": "硕士",
+            "institution": "北京师范大学",
+            "year": "2003",
             "major": ""
           }
         ],
@@ -185,9 +185,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -286,9 +286,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -377,9 +377,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -458,9 +458,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -545,9 +545,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -631,9 +631,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -725,9 +725,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -778,19 +778,19 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "理学博士学位",
+            "degree": "理学博士",
             "institution": "北京大学",
             "year": "2003",
             "major": "微电子与固体电子学"
           },
           {
-            "degree": "硕士学位",
+            "degree": "硕士",
             "institution": "北京师范大学",
             "year": "2000",
             "major": "半导体科学与技术"
           },
           {
-            "degree": "学士学位",
+            "degree": "学士",
             "institution": "北京师范大学",
             "year": "1997",
             "major": "材料物理"
@@ -816,9 +816,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -908,9 +908,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -963,22 +963,22 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "博士",
+            "degree": "博士学位",
             "institution": "加州大学圣塔芭芭拉分校",
             "year": "2017-2022",
-            "major": "电子计算机工程"
+            "major": "电子计算机工程专业"
           },
           {
-            "degree": "硕士",
+            "degree": "硕士专业",
             "institution": "南加州大学",
             "year": "2015-2017",
-            "major": "电子工程"
+            "major": "电子工程专业"
           },
           {
-            "degree": "学士",
+            "degree": "学士学位",
             "institution": "北京邮电大学",
             "year": "2011-2015",
-            "major": "电子信息工程及管理"
+            "major": "电子信息工程及管理专业"
           }
         ],
         "publications_count": -1,
@@ -1001,9 +1001,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1054,19 +1054,19 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "学士学位",
+            "degree": "学士",
             "institution": "山东大学",
             "year": "1990-1994",
             "major": "半导体物理与器件"
           },
           {
-            "degree": "硕士学位",
+            "degree": "硕士",
             "institution": "山东大学",
             "year": "1996-1999",
             "major": "电力系统及其自动化"
           },
           {
-            "degree": "博士学位",
+            "degree": "博士",
             "institution": "中国科学院微电子研究所",
             "year": "1999-2002",
             "major": "微电子学与固体电子学"
@@ -1092,9 +1092,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1179,9 +1179,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1270,9 +1270,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -1315,7 +1315,7 @@
         "bio": "教育背景本科毕业于西安电子科技大学，硕士/博士毕业于北京大学。",
         "bio_en": "",
         "email": "wangzongwei@pku.edu.cn",
-        "phone": "86-10-62755607",
+        "phone": "+86-10-62755607",
         "office": "",
         "profile_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/wzw/index.htm",
         "lab_url": "",
@@ -1358,9 +1358,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1416,13 +1416,13 @@
           {
             "degree": "博士学位",
             "institution": "斯坦福大学",
-            "year": "2012 – 2017",
+            "year": "2012-2017",
             "major": "材料科学与工程"
           },
           {
             "degree": "学士学位",
             "institution": "北京大学",
-            "year": "2008 – 2012",
+            "year": "2008-2012",
             "major": "物理学"
           }
         ],
@@ -1446,9 +1446,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1538,9 +1538,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1574,7 +1574,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "地址：北京市海淀区颐和园路5号 微纳电子大厦邮编：100871电话：010-62751787版权所有©北京大学集成电路学院公众号北大校友会公众号"
+          "宽禁带半导体电子器件"
         ],
         "keywords": [],
         "bio": "教育背景2002.9~2007.7北京大学物理系博士半导体光电子学1998.9~2002.7南京大学强化部学士物理专业",
@@ -1623,9 +1623,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1715,9 +1715,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1775,9 +1775,9 @@
           },
           {
             "degree": "博士",
-            "institution": "普渡大学电子与计算机工程系",
+            "institution": "普渡大学",
             "year": "2009",
-            "major": ""
+            "major": "电子与计算机工程系"
           }
         ],
         "publications_count": -1,
@@ -1800,9 +1800,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1888,9 +1888,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -1944,13 +1944,13 @@
             "degree": "本科",
             "institution": "北京化工大学",
             "year": "1996",
-            "major": "高分子材料专业"
+            "major": "高分子材料"
           },
           {
             "degree": "硕士",
             "institution": "北京化工大学",
             "year": "1999",
-            "major": "应用化学专业"
+            "major": "应用化学"
           }
         ],
         "publications_count": -1,
@@ -1973,9 +1973,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2029,13 +2029,13 @@
           {
             "degree": "本科",
             "institution": "华中科技大学",
-            "year": "2011-2015",
+            "year": "2011.09-2015.06",
             "major": "电子科技与技术"
           },
           {
             "degree": "博士",
             "institution": "华中科技大学",
-            "year": "2015-2020",
+            "year": "2015.09-2020.06",
             "major": "微电子与固体电子学"
           }
         ],
@@ -2059,9 +2059,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2146,9 +2146,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2226,9 +2226,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2311,9 +2311,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -2367,14 +2367,14 @@
         "education": [
           {
             "degree": "博士",
-            "institution": "北京大学信息科学与技术学院",
-            "year": "2014-2019",
+            "institution": "北京大学",
+            "year": "2014.09-2019.07",
             "major": "微电子学与固体电子学专业"
           },
           {
             "degree": "本科",
-            "institution": "南京航空航天大学材料科学与工程学院",
-            "year": "2009-2013",
+            "institution": "南京航空航天大学",
+            "year": "2009.09-2013.06",
             "major": "材料科学与技术专业"
           }
         ],
@@ -2398,9 +2398,9 @@
         "recent_updates": [],
         "source_id": "pku_ic_faculty",
         "source_url": "https://ic.pku.edu.cn/szdw/zzjs/jcwndzx1/index.htm",
-        "crawled_at": "2026-03-03T12:31:29Z",
+        "crawled_at": "2026-03-04T06:50:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:31:29Z",
+        "last_seen_at": "2026-03-04T06:50:24Z",
         "is_active": true,
         "data_completeness": 75
       },

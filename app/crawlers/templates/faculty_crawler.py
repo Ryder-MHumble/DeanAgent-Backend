@@ -51,6 +51,7 @@ from app.schemas.scholar import (
     compute_scholar_completeness,
     parse_research_areas,
     validate_research_areas,
+    validate_scholar_name,
 )
 
 # Optional LLM enhancement (only imported if enabled)
@@ -312,6 +313,13 @@ class FacultyCrawler(BaseCrawler):
                 name_text = _clean_name(name_text)
                 if not name_text:
                     continue
+                # Validate name is a real person, not a nav/menu item
+                if not validate_scholar_name(name_text):
+                    logger.debug(
+                        "FacultyCrawler[%s]: skipping non-scholar name %r",
+                        self.source_id, name_text,
+                    )
+                    continue
 
                 # --- Profile URL ---
                 profile_url = ""
@@ -461,10 +469,10 @@ class FacultyCrawler(BaseCrawler):
                 for edu in education_records:
                     education_list.append(
                         EducationRecord(
-                            degree=edu.get("degree", ""),
-                            institution=edu.get("institution", ""),
-                            year=edu.get("year", ""),
-                            major=edu.get("major", ""),
+                            degree=edu.get("degree") or "",
+                            institution=edu.get("institution") or "",
+                            year=edu.get("year") or "",
+                            major=edu.get("major") or "",
                         )
                     )
 
@@ -473,11 +481,11 @@ class FacultyCrawler(BaseCrawler):
                 for award in award_records:
                     award_list.append(
                         AwardRecord(
-                            title=award.get("title", ""),
-                            year=award.get("year", ""),
-                            level=award.get("level", ""),
-                            grantor=award.get("grantor", ""),
-                            description=award.get("description", ""),
+                            title=award.get("title") or "",
+                            year=award.get("year") or "",
+                            level=award.get("level") or "",
+                            grantor=award.get("grantor") or "",
+                            description=award.get("description") or "",
                             added_by="crawler",
                         )
                     )
@@ -487,11 +495,11 @@ class FacultyCrawler(BaseCrawler):
                 for pub in publication_records:
                     pub_list.append(
                         PublicationRecord(
-                            title=pub.get("title", ""),
-                            venue=pub.get("venue", ""),
-                            year=pub.get("year", ""),
-                            authors=pub.get("authors", ""),
-                            url=pub.get("url", ""),
+                            title=pub.get("title") or "",
+                            venue=pub.get("venue") or "",
+                            year=pub.get("year") or "",
+                            authors=pub.get("authors") or "",
+                            url=pub.get("url") or "",
                             citation_count=-1,
                             is_corresponding=False,
                             added_by="crawler",

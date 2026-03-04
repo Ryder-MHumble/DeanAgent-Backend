@@ -30,7 +30,7 @@ sources:
     research_areas: div.fl.w100.swwls_ryxl_mod1 p
   llm_extraction: true
   llm_provider: openrouter
-  llm_model: deepseek/deepseek-chat
+  llm_model: google/gemini-2.5-flash
   llm_fields:
   - phone
   - research_areas
@@ -68,7 +68,7 @@ sources:
   - ai
   llm_extraction: true
   llm_provider: openrouter
-  llm_model: deepseek/deepseek-chat
+  llm_model: google/gemini-2.5-flash
   llm_fields:
   - phone
   - research_areas

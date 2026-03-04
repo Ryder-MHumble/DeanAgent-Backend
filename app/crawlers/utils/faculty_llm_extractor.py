@@ -27,7 +27,7 @@ async def extract_faculty_fields_with_llm(
     detail_html_text: str = "",
     fields_to_extract: list[str] | None = None,
     llm_provider: str = "openrouter",
-    llm_model: str = "deepseek/deepseek-chat",
+    llm_model: str = "google/gemini-2.5-flash",
     max_tokens: int = 2000,
 ) -> dict:
     """Extract faculty fields from raw text using LLM."""
@@ -75,7 +75,11 @@ async def extract_faculty_fields_with_llm(
                     "messages": [
                         {
                             "role": "system",
-                            "content": "你是一个数据提取助手。从学术网页中提取结构化信息，只返回有效的 JSON，不要包含任何解释或 markdown 格式。",
+                            "content": (
+                                "你是一个数据提取助手。"
+                                "从学术网页中提取结构化信息，"
+                                "只返回有效的 JSON，不要包含任何解释或 markdown 格式。"
+                            ),
                         },
                         {
                             "role": "user",
@@ -178,5 +182,8 @@ def _build_extraction_prompt(
 2. 对于字符串字段，如果没有找到，返回空字符串 ""
 3. 只提取明确的信息，不要推测或编造
 4. 日期格式统一为 "YYYY" 或 "YYYY-YYYY"
+5. research_areas 只放研究方向关键词，不要放导航链接、版权信息、联系方式或工作经历
+6. 不要将工作经历（含年份范围如"2018年—今"）放入 research_areas
+7. 不要将页脚信息（含地址、邮编、CopyRight等）放入任何字段
 """
     return prompt

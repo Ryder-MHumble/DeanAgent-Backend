@@ -3,9 +3,9 @@
   "dimension": "university_faculty",
   "group": "nju",
   "source_name": "南京大学人工智能学院-师资队伍",
-  "crawled_at": "2026-03-03T12:22:09.991993+00:00",
-  "previous_crawled_at": "2026-03-03T11:18:10.767692+00:00",
-  "item_count": 36,
+  "crawled_at": "2026-03-04T06:47:58.744278+00:00",
+  "previous_crawled_at": "2026-03-03T12:22:09.991993+00:00",
+  "item_count": 34,
   "new_item_count": 0,
   "items": [
     {
@@ -35,7 +35,25 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "Ensemble learning",
+          "Evolutionary learning",
+          "Weakly supervised learning",
+          "semi-supervised learning",
+          "active learning",
+          "multi-instance learning",
+          "crowdsourcing learning",
+          "learning with noisy labels",
+          "Multi-label learning",
+          "Imbalanced learning",
+          "cost-sensitive learning",
+          "class-imbalance learning",
+          "Learning theory",
+          "Face recognition",
+          "Open-environment machine learning",
+          "Machine learning + logic reasoning",
+          "Learnware"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -70,11 +88,11 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
-        "data_completeness": 30
+        "data_completeness": 45
       },
       "is_new": false
     },
@@ -106,6 +124,11 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "computer vision",
+          "multimedia retrieval",
+          "intelligent web information processing",
+          "digital museum",
+          "large-scale seismic data processing",
           "multimedia content analysis and retrieval"
         ],
         "keywords": [],
@@ -142,81 +165,11 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 45
-      },
-      "is_new": false
-    },
-    {
-      "title": "Stephen H. Muggleton (教授)",
-      "url": "https://ai.nju.edu.cn/smuggleton/",
-      "url_hash": "f8b3c0d6e9fada61ecde69608c0774f27b89b534295ebd1225896e515030afd6",
-      "published_at": null,
-      "author": null,
-      "content": null,
-      "content_html": null,
-      "content_hash": null,
-      "source_id": "nju_ai_faculty",
-      "dimension": "university_faculty",
-      "tags": [
-        "faculty",
-        "nju",
-        "ai"
-      ],
-      "extra": {
-        "name": "Stephen H. Muggleton (教授)",
-        "name_en": "",
-        "gender": "",
-        "photo_url": "",
-        "university": "南京大学",
-        "department": "人工智能学院",
-        "secondary_departments": [],
-        "position": "",
-        "academic_titles": [],
-        "is_academician": false,
-        "research_areas": [],
-        "keywords": [],
-        "bio": "",
-        "bio_en": "",
-        "email": "s.muggleton@gmail.com",
-        "phone": "",
-        "office": "",
-        "profile_url": "https://ai.nju.edu.cn/smuggleton/",
-        "lab_url": "",
-        "google_scholar_url": "",
-        "dblp_url": "",
-        "orcid": "",
-        "phd_institution": "",
-        "phd_year": "",
-        "education": [],
-        "publications_count": -1,
-        "h_index": -1,
-        "citations_count": -1,
-        "metrics_updated_at": "",
-        "representative_publications": [],
-        "patents": [],
-        "awards": [],
-        "is_advisor_committee": false,
-        "is_adjunct_supervisor": false,
-        "supervised_students": [],
-        "joint_research_projects": [],
-        "joint_management_roles": [],
-        "academic_exchange_records": [],
-        "is_potential_recruit": false,
-        "institute_relation_notes": "",
-        "relation_updated_by": "",
-        "relation_updated_at": "",
-        "recent_updates": [],
-        "source_id": "nju_ai_faculty",
-        "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
-        "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
-        "is_active": true,
-        "data_completeness": 40
       },
       "is_new": false
     },
@@ -268,7 +221,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "PhD",
+            "institution": "University of Sydney, Australia",
+            "year": "",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -289,9 +249,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 45
       },
@@ -375,9 +335,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 45
       },
@@ -428,16 +388,16 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "M.Sc.",
-            "institution": "Nankai University",
-            "year": "2009",
-            "major": "Combinatorics"
-          },
-          {
             "degree": "Ph.D.",
             "institution": "Nanjing University",
             "year": "2014",
             "major": ""
+          },
+          {
+            "degree": "M.Sc.",
+            "institution": "Nankai University",
+            "year": "2009",
+            "major": "Center for Combinatorics"
           }
         ],
         "publications_count": -1,
@@ -460,9 +420,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 45
       },
@@ -496,7 +456,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "Machine learning and data mining"
+          "Machine learning",
+          "data mining"
         ],
         "keywords": [],
         "bio": "",
@@ -539,9 +500,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 45
       },
@@ -595,15 +556,15 @@
         "education": [
           {
             "degree": "B. Sc.",
-            "institution": "Nanjing University, China",
+            "institution": "Nanjing University",
             "year": "2003",
-            "major": "Computer Science"
+            "major": "computer science"
           },
           {
             "degree": "Ph. D.",
-            "institution": "Nanjing University, China",
-            "year": "2008",
-            "major": "Computer Science"
+            "institution": "Nanjing University",
+            "year": "2208",
+            "major": "computer science"
           }
         ],
         "publications_count": -1,
@@ -626,9 +587,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 45
       },
@@ -667,7 +628,8 @@
           "Semi-supervised learning",
           "Weakly supervised learning",
           "Statistical learning",
-          "Optimization"
+          "Optimization",
+          "Applications on image, text, graph, video data"
         ],
         "keywords": [],
         "bio": "",
@@ -703,9 +665,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 45
       },
@@ -739,7 +701,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "地址：江苏省南京市栖霞区仙林大道163号邮编：210023电话：(86)-25-89680690  传真：(86)-25-89680690Copyright © 南京大学人工智能学院 版权所有人工智能学院"
+          "人工智能",
+          "演化计算",
+          "机器学习"
         ],
         "keywords": [],
         "bio": "钱超，南京大学人工智能学院教授、博导、国家优青、CCF-IEEE CS青年科学家、科技创新2030“新一代人工智能”重大项目（青年科学家）。分别于2009年和2015年获南京大学计算机系学士和博士学位，毕业后加入中国科学技术大学计算机学院担任副研究员，2019年回到母校人工智能学院工作。研究方向为人工智能、演化计算、机器学习。出版中英文专著《Evolutionary Learning: Advances in Theories and Algorithms》，并以第一/通讯作者在人工智能/理论方面的国际一流期刊和会议（AIJ、ECJ、TEvC、Algorithmica、TCS、AAAI、IJCAI、ICML、NeurIPS、ICLR）上发表60余篇论文，其中一作27篇。获演化计算领域旗舰会议ACM GECCO’11最佳理论论文奖、IDEAL’16最佳论文奖，指导学生获IEEE CEC’21最佳学生论文奖提名。部分成果成功应用于自然科学基础问题（如土壤微生物源碳预测），以共同第一作者发表于美国国家科学院院刊PNAS；应用于芯片布局，获第21届ACM SIGEVO Humies (Human Competitive Results) Bronze Award、芯片设计自动化领域顶级国际会议DATE’25最佳论文奖提名。部分成果已在华为落地应用，成功应用于华为工厂排产、无线网络优化、芯片寄存器寻优等任务，获2次华为“难题揭榜”火花奖，并担任中石化-南京大学数据联合实验室主任。担任IEEE计算智能学会Theoretical Foundations of Bio-inspired Computation工作组主席、Evolutionary Learning工作组创始主席、IEEE演化计算技术委员会委员、中国人工智能学会青工委副秘书长。担任人工智能/演化计算权威国际期刊Artificial Intelligence、Evolutionary Computation、IEEE Transactions on Evolutionary Computation副编/编委、IEEE计算智能学会旗舰杂志IEEE Computational Intelligence Magazine副编、Theoretical Computer Science客座编辑、Memetic Computing编委、国内权威期刊Science China Information Sciences、Journal of Computer Science and Technology和Frontiers of Computer Science青年副编。受邀在国际人工智能联合大会IJCAI’22做Early Career Spotlight报告，并将担任第22届亚太人工智能国际会议PRICAI’25程序委员会主席。博士论文获中国人工智能学会优秀博士论文奖，并入选中国科协青年人才托举工程（2016），获国家优秀青年科学基金（2020）、CCF-IEEE CS青年科学家奖（2023），主持科技创新2030“新一代人工智能”重大项目（青年科学家）。指导学生获国家自然科学基金本科生和博士生项目，执教《启发式搜索与演化算法》被研究生选为“我心目中的好课程”，获南京大学青年五四奖章（2022）、南京大学“师德先进”青年教师奖（2023）。主页：http://www.lamda.nju.edu.cn/qianc/招收硕士和博士生，同时非常欢迎对我的研究方向感兴趣、想做一些科研工作的本科生与我联系。",
@@ -757,15 +721,15 @@
         "education": [
           {
             "degree": "学士",
-            "institution": "南京大学计算机系",
+            "institution": "南京大学",
             "year": "2009",
-            "major": ""
+            "major": "计算机系"
           },
           {
             "degree": "博士",
-            "institution": "南京大学计算机系",
+            "institution": "南京大学",
             "year": "2015",
-            "major": ""
+            "major": "计算机系"
           }
         ],
         "publications_count": -1,
@@ -788,9 +752,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -862,9 +826,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 45
       },
@@ -955,9 +919,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 45
       },
@@ -1006,21 +970,21 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "Ph.D.",
+            "degree": "Ph. D.",
             "institution": "Georgia Institute of Technology",
             "year": "2009",
-            "major": "College of Computing"
-          },
-          {
-            "degree": "M.S.",
-            "institution": "Nanjing University",
-            "year": "2002",
             "major": ""
           },
           {
             "degree": "B.S.",
             "institution": "Nanjing University",
             "year": "1999",
+            "major": ""
+          },
+          {
+            "degree": "M.S.",
+            "institution": "Nanjing University",
+            "year": "2002",
             "major": ""
           }
         ],
@@ -1044,9 +1008,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 30
       },
@@ -1114,9 +1078,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 30
       },
@@ -1184,9 +1148,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 30
       },
@@ -1252,7 +1216,7 @@
           {
             "degree": "Visiting Student",
             "institution": "Michigan State University",
-            "year": "2011",
+            "year": "2011-2011",
             "major": ""
           }
         ],
@@ -1276,9 +1240,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 45
       },
@@ -1312,9 +1276,18 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "Reinforcement Learning (RL), including deep RL, transfer RL, data-driven RL, visual RL, safe RL, and RL for large models",
-          "Multi-agent systems, e.g., multi-agent RL, multi-agent communication, and multi-agent coordination",
-          "Probabilistic p"
+          "Reinforcement Learning (RL)",
+          "deep RL",
+          "transfer RL",
+          "data-driven RL",
+          "visual RL",
+          "safe RL",
+          "RL for large models",
+          "Multi-agent systems",
+          "multi-agent RL",
+          "multi-agent communication",
+          "multi-agent coordination",
+          "Probabilistic planning"
         ],
         "keywords": [],
         "bio": "",
@@ -1363,9 +1336,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1402,7 +1375,10 @@
           "automated Planning",
           "machine Learning",
           "multi-Agent systems",
-          "Natural language processing"
+          "Natural language processing",
+          "符号规划推理理论",
+          "数据与知识双驱动的智能决策模型",
+          "应用驱动的新型人工智能理论"
         ],
         "keywords": [],
         "bio": "Welcome to Hankz Hankui Zhuo's HomepageBiography:Hankz Hankui Zhuo is a full Professor of School of Artificial Intelligence at Nanjing University (NJU) in China. Before joining NJU, he was a faculty member at Sun Yat-sen University (SYSU) from 2009 to 2024. He received B.Sc. and Ph.D. from SYSU in 2004 and 2009, respectively. He was a Ph.D. Student jointly trained by SYSU and Hong Kong University of Science and Technology (HKUST) from 2007 to 2009. He was a Postdoc at Arizona State University (ASU) from 2012 to 2013, a Visiting Scholar at HKUST from 2013 to 2014, and Visisting Scholar at ASU in 2015. He was elected as an Executive Council member of ICAPS (International Conference on Automated Planning and Scheduling) between 2021 and 2027. He served as a Conference co-Chair of ICAPS in 2021. He was elected as an AAAI Senior Member in 2020 (only 12 senior members were elected in 2020). His research interests span automatedPlanning, machineLearning, multi-Agent systems,Natural language processing, and their related innovative applications (denoted by X). This blend of disciplines forms the core of what he calls XPLAN.Contact:hankz@nju [dot] edu [dot] cn Or WeChat ID \"Hankz-Zhuo\"智能规划与决策实验室：本实验室着重研究（1）符号规划推理理论、（2）数据与知识双驱动的智能决策模型、（3）应用驱动的新型人工智能理论。本实验室Open Positions:Postdoc., PhD., MSc., Self-motivated undergraduatesOffice:南京大学仙林校区邵逸夫楼A509Office Hours (meeting with students):9:30 am - 11:30 am and 2:00 pm - 4:00 pm, Thursday",
@@ -1419,15 +1395,15 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "B.Sc.",
-            "institution": "Sun Yat-sen University (SYSU)",
-            "year": "2004",
-            "major": ""
-          },
-          {
             "degree": "Ph.D.",
             "institution": "Sun Yat-sen University (SYSU)",
             "year": "2009",
+            "major": ""
+          },
+          {
+            "degree": "B.Sc.",
+            "institution": "Sun Yat-sen University (SYSU)",
+            "year": "2004",
             "major": ""
           }
         ],
@@ -1451,9 +1427,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -1488,6 +1464,11 @@
         "is_academician": false,
         "research_areas": [
           "data mining",
+          "tagging",
+          "text clustering",
+          "image annotation",
+          "text labeling",
+          "conversational AI",
           "LLM alignment (PPO, DPO)",
           "multi-modal foundation models",
           "LLM-based agents",
@@ -1546,9 +1527,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1598,7 +1579,14 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "PhD",
+            "institution": "Nanjing University",
+            "year": "",
+            "major": ""
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -1619,9 +1607,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -1693,9 +1681,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1776,101 +1764,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
-        "is_active": true,
-        "data_completeness": 55
-      },
-      "is_new": false
-    },
-    {
-      "title": "Henry W.J. Reeve（长聘副教授）",
-      "url": "https://henryreeve.netlify.app",
-      "url_hash": "cbe7282d6a18cfbf801b71c9d19e1f34e9ae4c8203d206919922028631cef45f",
-      "published_at": null,
-      "author": null,
-      "content": null,
-      "content_html": null,
-      "content_hash": null,
-      "source_id": "nju_ai_faculty",
-      "dimension": "university_faculty",
-      "tags": [
-        "faculty",
-        "nju",
-        "ai"
-      ],
-      "extra": {
-        "name": "Henry W.J. Reeve（长聘副教授）",
-        "name_en": "",
-        "gender": "",
-        "photo_url": "",
-        "university": "南京大学",
-        "department": "人工智能学院",
-        "secondary_departments": [],
-        "position": "",
-        "academic_titles": [],
-        "is_academician": false,
-        "research_areas": [
-          "Statistics",
-          "Machine Learning",
-          "transfer learning",
-          "subgroup discovery",
-          "compressive learning",
-          "classification with label noise",
-          "structured prediction",
-          "multi-armed bandits"
-        ],
-        "keywords": [],
-        "bio": "",
-        "bio_en": "",
-        "email": "henrywjreeve@icloud.com",
-        "phone": "",
-        "office": "",
-        "profile_url": "https://henryreeve.netlify.app",
-        "lab_url": "",
-        "google_scholar_url": "",
-        "dblp_url": "",
-        "orcid": "",
-        "phd_institution": "",
-        "phd_year": "",
-        "education": [
-          {
-            "degree": "PhD",
-            "institution": "University of Manchester",
-            "year": "",
-            "major": "Computer Science"
-          },
-          {
-            "degree": "PhD",
-            "institution": "University of Bristol",
-            "year": "",
-            "major": "Pure Mathematics"
-          }
-        ],
-        "publications_count": -1,
-        "h_index": -1,
-        "citations_count": -1,
-        "metrics_updated_at": "",
-        "representative_publications": [],
-        "patents": [],
-        "awards": [],
-        "is_advisor_committee": false,
-        "is_adjunct_supervisor": false,
-        "supervised_students": [],
-        "joint_research_projects": [],
-        "joint_management_roles": [],
-        "academic_exchange_records": [],
-        "is_potential_recruit": false,
-        "institute_relation_notes": "",
-        "relation_updated_by": "",
-        "relation_updated_at": "",
-        "recent_updates": [],
-        "source_id": "nju_ai_faculty",
-        "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
-        "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1907,7 +1803,13 @@
           "Artificial Intelligence",
           "Knowledge Representation",
           "Cognitive Robotics",
-          "Program Verification"
+          "Program Verification",
+          "actions and causality",
+          "knowledge and belief",
+          "probability",
+          "planning",
+          "synthesis",
+          "verification"
         ],
         "keywords": [],
         "bio": "",
@@ -1924,16 +1826,16 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "Bachelor",
-            "institution": "Central South University",
-            "year": "2015",
-            "major": "Software Engineering"
-          },
-          {
             "degree": "Master",
             "institution": "Nanjing University",
             "year": "2018",
             "major": "Computer Science"
+          },
+          {
+            "degree": "Bachelor",
+            "institution": "Central South University",
+            "year": "2015",
+            "major": "Software Engineering"
           }
         ],
         "publications_count": -1,
@@ -1956,9 +1858,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 45
       },
@@ -1991,7 +1893,11 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "learning principles of biological neurons",
+          "fundamental elements of intelligence",
+          "next-generation learning systems"
+        ],
         "keywords": [],
         "bio": "Yuhang SongAssociate Professor (Pre-Tenure) @ School of Artificial Intelligence, Nanjing University | (Ex) CTO & Co-founder @ Fractile | (Ex) J.P. Morgan AI Research Fellow | PhD @ Oxford University",
         "bio_en": "",
@@ -2033,11 +1939,11 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
-        "data_completeness": 45
+        "data_completeness": 60
       },
       "is_new": false
     },
@@ -2100,7 +2006,7 @@
           {
             "degree": "Ph.D.",
             "institution": "Nanjing University",
-            "year": "2015-2019",
+            "year": "2019",
             "major": "machine learning"
           }
         ],
@@ -2124,9 +2030,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2160,9 +2066,17 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "Online Learning, bandits, online games",
-          "Optimization (LLM optimization, stochastic optimization, etc)",
-          "Reinforcement learning, reasoing, agent, and related applications"
+          "Machine Learning",
+          "Artificial Intelligence",
+          "Online Learning",
+          "Bandits",
+          "Online Games",
+          "Optimization",
+          "LLM optimization",
+          "Stochastic Optimization",
+          "Reinforcement Learning",
+          "Reasoning",
+          "Agent"
         ],
         "keywords": [],
         "bio": "",
@@ -2205,9 +2119,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 45
       },
@@ -2275,9 +2189,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 30
       },
@@ -2311,9 +2225,15 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "Efficiency and scalability of AI systems",
-          "Structural representation frameworks",
-          "Efficient generative frameworks for Embodied AI and Scientific Discovery"
+          "AI systems efficiency and scalability",
+          "Efficient structural representation",
+          "Efficient generative frameworks for Embodied AI",
+          "Efficient generative frameworks for Scientific Discovery",
+          "ModernGNN",
+          "Neural Compression",
+          "Graph Transformers",
+          "Molecular property prediction",
+          "Scholarly impact profiling"
         ],
         "keywords": [],
         "bio": "",
@@ -2356,9 +2276,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2437,9 +2357,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 45
       },
@@ -2520,9 +2440,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 45
       },
@@ -2560,7 +2480,7 @@
         "bio": "",
         "bio_en": "",
         "email": "",
-        "phone": "",
+        "phone": "(86)-25-89680690",
         "office": "",
         "profile_url": "https://ai.nju.edu.cn/39/76/c18540a670070/page.htm",
         "lab_url": "",
@@ -2590,9 +2510,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 30
       },
@@ -2633,7 +2553,7 @@
           "Multi-agent Large Decision Model",
           "Multi-agent sim2real",
           "Human-AI Interaction and Coordination",
-          "Large Language Model and It's Application"
+          "Large Languag Model and It's Application"
         ],
         "keywords": [],
         "bio": "",
@@ -2650,10 +2570,10 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "Ph.D",
+            "degree": "Ph.D.",
             "institution": "Nanjing University",
             "year": "2023",
-            "major": "Department of Computer Science and Technology"
+            "major": "Computer Science and Technology"
           }
         ],
         "publications_count": -1,
@@ -2676,9 +2596,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 45
       },
@@ -2734,19 +2654,13 @@
             "degree": "Ph.D.",
             "institution": "Nanjing University",
             "year": "2017-2024",
-            "major": "School of Computer Science"
-          },
-          {
-            "degree": "Visiting student",
-            "institution": "National Tsing Hua University",
-            "year": "2016",
-            "major": "Taiwan"
+            "major": "Computer Science"
           },
           {
             "degree": "B.Sc.",
             "institution": "University of Science and Technology of China",
             "year": "2013-2017",
-            "major": "School of the Gifted Young"
+            "major": ""
           }
         ],
         "publications_count": -1,
@@ -2769,9 +2683,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2850,9 +2764,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2905,16 +2819,16 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "B.Sc.",
-            "institution": "Northwestern Polytechnical University",
-            "year": "2015-2019",
-            "major": "Mathematics and Applied Mathematics"
-          },
-          {
             "degree": "Ph.D.",
             "institution": "Nanjing University",
             "year": "2019-2025",
             "major": "Computer Science"
+          },
+          {
+            "degree": "B.Sc.",
+            "institution": "Northwestern Polytechnical University",
+            "year": "2015-2019",
+            "major": "Mathematics and Applied Mathematics"
           }
         ],
         "publications_count": -1,
@@ -2937,9 +2851,9 @@
         "recent_updates": [],
         "source_id": "nju_ai_faculty",
         "source_url": "https://ai.nju.edu.cn/18540/list.htm",
-        "crawled_at": "2026-03-03T12:16:35Z",
+        "crawled_at": "2026-03-04T06:45:31Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:16:35Z",
+        "last_seen_at": "2026-03-04T06:45:31Z",
         "is_active": true,
         "data_completeness": 55
       },

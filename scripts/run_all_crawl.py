@@ -11,6 +11,9 @@ import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+from dotenv import load_dotenv
+load_dotenv()
+
 # Only configure logging when run as a script (not imported by pipeline)
 if __name__ == "__main__":
     logging.basicConfig(

@@ -3,8 +3,8 @@
   "dimension": "university_faculty",
   "group": "ustc",
   "source_name": "中国科学技术大学网安学院-师资",
-  "crawled_at": "2026-03-03T15:08:43.336252+00:00",
-  "previous_crawled_at": "2026-03-03T03:54:24.261478+00:00",
+  "crawled_at": "2026-03-04T07:14:44.636744+00:00",
+  "previous_crawled_at": "2026-03-03T15:08:43.336252+00:00",
   "item_count": 59,
   "new_item_count": 0,
   "items": [
@@ -36,7 +36,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "网络信息安全",
+          "大数据安全"
         ],
         "keywords": [],
         "bio": "",
@@ -72,9 +73,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -108,7 +109,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "网络信息体系"
         ],
         "keywords": [],
         "bio": "",
@@ -144,9 +145,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -180,7 +181,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "量子信息理论",
+          "量子光学",
+          "冷原子物理"
         ],
         "keywords": [],
         "bio": "",
@@ -216,9 +219,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -252,7 +255,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "量子信息",
+          "量子光学",
+          "信息安全"
         ],
         "keywords": [],
         "bio": "",
@@ -288,9 +293,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -324,7 +329,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "自旋磁共振",
+          "量子计算",
+          "量子精密测量"
         ],
         "keywords": [],
         "bio": "",
@@ -360,9 +367,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -396,7 +403,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "视频处理与多媒体通信",
+          "信息检索",
+          "媒体内容安全"
         ],
         "keywords": [],
         "bio": "",
@@ -432,9 +441,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -468,7 +477,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "多媒体安全",
+          "云安全"
         ],
         "keywords": [],
         "bio": "",
@@ -504,9 +514,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -540,7 +550,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "多媒体处理",
+          "无线感知与安全",
+          "人工智能"
         ],
         "keywords": [],
         "bio": "",
@@ -576,9 +588,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -612,7 +624,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "数据智能感知"
         ],
         "keywords": [],
         "bio": "",
@@ -648,9 +660,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -684,7 +696,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "大数据处理算法及其网络安全领域的应用"
         ],
         "keywords": [],
         "bio": "",
@@ -720,9 +732,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -756,7 +768,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "硬件与集成电路安全"
         ],
         "keywords": [],
         "bio": "",
@@ -792,9 +804,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -828,7 +840,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "下一代网络与网络安全"
         ],
         "keywords": [],
         "bio": "",
@@ -864,9 +876,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -899,9 +911,7 @@
         "position": "教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
-        ],
+        "research_areas": [],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -936,11 +946,11 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
-        "data_completeness": 65
+        "data_completeness": 50
       },
       "is_new": false
     },
@@ -972,7 +982,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "密码应用",
+          "网络安全",
+          "系统安全"
         ],
         "keywords": [],
         "bio": "",
@@ -1008,9 +1020,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1044,7 +1056,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "计算机视觉",
+          "自然语言处理",
+          "人工智能"
         ],
         "keywords": [],
         "bio": "",
@@ -1080,9 +1094,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1116,7 +1130,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "密码学理论与应用"
         ],
         "keywords": [],
         "bio": "",
@@ -1152,9 +1166,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1188,7 +1202,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "密码应用",
+          "网络与系统安全"
         ],
         "keywords": [],
         "bio": "",
@@ -1224,9 +1239,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1260,7 +1275,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "校园网络",
+          "信息安全",
+          "安徽省教育和科研计算机网"
         ],
         "keywords": [],
         "bio": "",
@@ -1296,9 +1313,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1331,9 +1348,7 @@
         "position": "教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
-        ],
+        "research_areas": [],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -1368,11 +1383,11 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
-        "data_completeness": 65
+        "data_completeness": 50
       },
       "is_new": false
     },
@@ -1404,7 +1419,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "网络信息挖掘",
+          "复杂系统与高阶网络",
+          "网络社会计算",
+          "脑科学与人工智能"
         ],
         "keywords": [],
         "bio": "",
@@ -1440,9 +1458,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1476,7 +1494,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "宽带无线移动通信",
+          "盲自适应信号处理的基础理论及其应用",
+          "非线性和非高斯信号处理"
         ],
         "keywords": [],
         "bio": "",
@@ -1512,9 +1532,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1548,7 +1568,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "下一代网络与网络安全"
         ],
         "keywords": [],
         "bio": "",
@@ -1584,9 +1604,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1620,7 +1640,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "多媒体内容安全",
+          "医学影像智能分析"
         ],
         "keywords": [],
         "bio": "",
@@ -1656,9 +1677,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1692,7 +1713,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "数据安全",
+          "隐私计算",
+          "区块链"
         ],
         "keywords": [],
         "bio": "",
@@ -1728,9 +1751,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1798,9 +1821,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 50
       },
@@ -1834,7 +1857,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "图文多模态理解",
+          "视觉感知与理解",
+          "生成内容检测"
         ],
         "keywords": [],
         "bio": "",
@@ -1870,9 +1895,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1905,9 +1930,7 @@
         "position": "特任副研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
-        ],
+        "research_areas": [],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -1942,11 +1965,11 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
-        "data_completeness": 65
+        "data_completeness": 50
       },
       "is_new": false
     },
@@ -2012,9 +2035,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 50
       },
@@ -2048,7 +2071,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "软件与系统安全"
         ],
         "keywords": [],
         "bio": "",
@@ -2084,9 +2107,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2119,9 +2142,7 @@
         "position": "特任副研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
-        ],
+        "research_areas": [],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -2156,11 +2177,11 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
-        "data_completeness": 65
+        "data_completeness": 50
       },
       "is_new": false
     },
@@ -2191,9 +2212,7 @@
         "position": "博士后研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
-        ],
+        "research_areas": [],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -2228,11 +2247,11 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
-        "data_completeness": 65
+        "data_completeness": 50
       },
       "is_new": false
     },
@@ -2264,7 +2283,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "媒体内容安全与认证"
         ],
         "keywords": [],
         "bio": "",
@@ -2300,9 +2319,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2336,7 +2355,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "人工智能安全",
+          "计算机视觉",
+          "物联网",
+          "多媒体信息处理"
         ],
         "keywords": [],
         "bio": "",
@@ -2372,9 +2394,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2408,7 +2430,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "网络安全",
+          "机器学习中的安全与隐私保护",
+          "区块链技术"
         ],
         "keywords": [],
         "bio": "",
@@ -2444,9 +2468,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2480,7 +2504,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "计算机视觉",
+          "知识图谱",
+          "机器博弈"
         ],
         "keywords": [],
         "bio": "",
@@ -2516,9 +2542,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2552,7 +2578,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "计算机视觉",
+          "人工智能安全"
         ],
         "keywords": [],
         "bio": "",
@@ -2588,9 +2615,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2623,9 +2650,7 @@
         "position": "副教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
-        ],
+        "research_areas": [],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -2660,11 +2685,11 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
-        "data_completeness": 65
+        "data_completeness": 50
       },
       "is_new": false
     },
@@ -2696,7 +2721,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "人工智能安全",
+          "深度伪造与检测"
         ],
         "keywords": [],
         "bio": "",
@@ -2732,9 +2758,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2767,9 +2793,7 @@
         "position": "特任副研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
-        ],
+        "research_areas": [],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -2804,11 +2828,11 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
-        "data_completeness": 65
+        "data_completeness": 50
       },
       "is_new": false
     },
@@ -2840,7 +2864,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "网络安全制度制定",
+          "网络安全等级保护工作",
+          "网络安全事件响应与处置"
         ],
         "keywords": [],
         "bio": "",
@@ -2876,9 +2902,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -2946,9 +2972,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 50
       },
@@ -2981,9 +3007,7 @@
         "position": "特任副研究员",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
-        ],
+        "research_areas": [],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -3018,11 +3042,11 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 40
       },
       "is_new": false
     },
@@ -3053,9 +3077,7 @@
         "position": "外聘博导",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
-        ],
+        "research_areas": [],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -3090,11 +3112,11 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 40
       },
       "is_new": false
     },
@@ -3126,7 +3148,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "网络安全与应用安全"
         ],
         "keywords": [],
         "bio": "",
@@ -3162,9 +3184,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3198,7 +3220,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "网络安全与应用安全",
+          "计算机系统安全"
         ],
         "keywords": [],
         "bio": "",
@@ -3234,9 +3257,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -3270,7 +3293,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "网络安全与应用安全"
         ],
         "keywords": [],
         "bio": "",
@@ -3306,9 +3329,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -3342,7 +3365,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "网络安全与应用安全"
         ],
         "keywords": [],
         "bio": "",
@@ -3378,9 +3401,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -3414,7 +3437,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "网络安全与应用安全"
         ],
         "keywords": [],
         "bio": "",
@@ -3450,9 +3473,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -3486,7 +3509,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "网络安全",
+          "应用安全"
         ],
         "keywords": [],
         "bio": "",
@@ -3522,9 +3546,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -3558,7 +3582,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "网络安全",
+          "应用安全"
         ],
         "keywords": [],
         "bio": "",
@@ -3594,9 +3619,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -3630,7 +3655,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "密码学",
+          "网络安全与应用安全"
         ],
         "keywords": [],
         "bio": "",
@@ -3666,9 +3692,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3702,7 +3728,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "密码学"
         ],
         "keywords": [],
         "bio": "",
@@ -3738,9 +3764,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3774,7 +3800,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "算法几何",
+          "计算机网络"
         ],
         "keywords": [],
         "bio": "",
@@ -3810,9 +3837,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -3846,7 +3873,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "网络安全与应用安全"
         ],
         "keywords": [],
         "bio": "",
@@ -3882,9 +3909,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3918,7 +3945,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "网络安全与应用安全"
         ],
         "keywords": [],
         "bio": "",
@@ -3954,9 +3981,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3990,7 +4017,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "网络安全与应用安全"
         ],
         "keywords": [],
         "bio": "",
@@ -4026,9 +4053,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -4062,7 +4089,11 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "密码设计",
+          "密码分析",
+          "区块链",
+          "隐私保护",
+          "密码设备"
         ],
         "keywords": [],
         "bio": "",
@@ -4098,9 +4129,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -4134,7 +4165,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "网络安全与应用安全"
         ],
         "keywords": [],
         "bio": "",
@@ -4170,9 +4201,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -4206,7 +4237,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "版权所有：Copyright © 2010-2020 中国科学技术大学网络空间安全学院"
+          "网络安全与应用安全"
         ],
         "keywords": [],
         "bio": "",
@@ -4242,9 +4273,9 @@
         "recent_updates": [],
         "source_id": "ustc_cyber_faculty",
         "source_url": "https://cybersec.ustc.edu.cn/szdw_23805/list.htm",
-        "crawled_at": "2026-03-03T15:03:29Z",
+        "crawled_at": "2026-03-04T07:10:53Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T15:03:29Z",
+        "last_seen_at": "2026-03-04T07:10:53Z",
         "is_active": true,
         "data_completeness": 65
       },

@@ -3,8 +3,8 @@
   "dimension": "university_faculty",
   "group": "tsinghua",
   "source_name": "清华大学自动化系-教师",
-  "crawled_at": "2026-03-03T13:57:59.844440+00:00",
-  "previous_crawled_at": "2026-03-03T03:50:25.190954+00:00",
+  "crawled_at": "2026-03-04T07:02:13.082598+00:00",
+  "previous_crawled_at": "2026-03-03T13:57:59.844440+00:00",
   "item_count": 7,
   "new_item_count": 0,
   "items": [
@@ -37,13 +37,15 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "动态系统故障诊断、容错控制与运行安全性评估理论等"
+          "动态系统故障诊断",
+          "容错控制",
+          "运行安全性评估理论"
         ],
         "keywords": [],
         "bio": "教育背景1981-1990， 获上海交通大学学士、硕士、博士学位工作履历曾任北京理工大学副研究员（1993-1994）德国杜伊斯堡大学洪堡学者（1994-1996）耶鲁大学访问学者（1991-1992）学术兼职IFAC 技术过程故障诊断与安全性技术委员会委员中国自动化学会副理事长技术过程故障诊断与安全性专业委员会主任等研究领域动态系统故障诊断、容错控制与运行安全性评估理论等。研究概况已主持国家973课题, 863项目, 国家自然科学基金重大、重点、重大国际合作项目等国家和省部级科研项目20余项。奖励与荣誉CAA/IET/IEEE Fellow。 曾获第六届中国青年科技奖、全国优秀博士后奖、国家杰出青年科学基金、教育部长江学者特聘教授、国家“万人计划”领军人才、山东省泰山学者优势特色学科人才团队领军人才、全国优秀科技工作者等称号，并曾任国家自然科学基金会优秀创新群体负责人。已获国家自然科学二等奖2项、国家科技进步二等奖1项、国家级优秀教学成果二等奖1项。学术成果出版学术专著7部，发表IEEE 汇刊和 Automatica 论文80余篇。",
         "bio_en": "",
         "email": "zdh@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "(010)62789010",
         "office": "",
         "profile_url": "https://www.au.tsinghua.edu.cn/info/1077/3123.htm",
         "lab_url": "",
@@ -80,9 +82,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_au_faculty",
         "source_url": "https://www.au.tsinghua.edu.cn/szdw/jsdw1/ayjscz/kzyjcyjs.htm",
-        "crawled_at": "2026-03-03T13:56:42Z",
+        "crawled_at": "2026-03-04T07:01:43Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:56:42Z",
+        "last_seen_at": "2026-03-04T07:01:43Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -117,7 +119,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "复杂动态系统故障诊断、建模与控制（以流程工业和轨道交通等行业为应用背景，研究基于模型、数据和机器学习的复杂动态系统建模、故障诊断、及优化控制）"
+          "复杂动态系统故障诊断、建模与控制"
         ],
         "keywords": [],
         "bio": "教育背景1987年9月-1992年7月 清华大学自动化系学习，获学士学位1992年9月-1996年7月 清华大学自动化系学习，获工学博士学位工作履历1996年7月-1998年7月 清华大学自动化系，讲师1998年7月-2007年12月 清华大学自动化系，副教授2007年12月-至今 清华大学自动化系，教授学术兼职中国自动化学会技术过程的故障诊断与安全性专业委员会 副主任中国自动化学会过程控制专业委员会 委员研究领域复杂动态系统故障诊断、建模与控制（以流程工业和轨道交通等行业为应用背景，研究基于模型、数据和机器学习的复杂动态系统建模、故障诊断、及优化控制）研究概况[1]新型高效能城市轨道交通系统建模与综合智能优化，国家高速列车青岛技术创新中心横向项目，参加，2020.3- 2023.3[2] 基于工业互联网平台的流程行业生产线数字孪生系统，工信部项目，参加，2019.1-2021.12[3] 基于混合增强智能的大型高炉故障诊断与自愈控制基础理论与关键技术， 国家自然科学基金重点项目，参加，2020.1-2024.12[4] 高速列车自动驾驶关键技术，北京全路通通信信号研究设计院有限公司横向项目， 2018.7-2020.6，负责人[5] 大型高炉非正常工况诊断与安全运行方法及实现技术，国家自然科学基金重大项目课题，负责人，2013.1~2017.12[6] 复杂条件下的网络化控制系统故障检测技术，国家自然科学基金面上项目，负责人，2010.1~2012.12[7] 基于混沌理论的故障检测方法研究，国家自然科学基金面上项目，负责人，2006.1~2008.12[8] 网络环境下的基于鲁棒观测器的故障诊断方法研究，国家自然科学基金面上项目，负责人，2003.1~2005.12[9] 基于信息融合的输气管道远程实时泄漏监测技术，国家863计划，负责人，2006.12~2008.12[10] 流程工业典型设备的故障诊断与预测维护系统，国家863计划，负责人，2002.9~2004.8[11] 基于数据的软测量方法的研究，国家863计划，负责人，1999.3~2000.12[12] 复杂系统控制与信息处理中的若干关键问题研究与应用，参加，国家自然科学基金创新群体，2008.1~2013.12奖励与荣誉[1] 2012年获国家自然科学奖二等奖(第二完成人)[2] 1994年获第7届全国过程控制会议首届张钟俊优秀论文奖一等奖（第一获奖人）学术成果代表性文章[1] Bo Zhou， Hao Ye， Haifeng Zhang， Mingliang Li， A New Qualitative Trend Analysis Algorithm Based on Global Polynomial Fit ，AICHE Journal， 63(8), pp3374~3383, 2017[2] Bo Zhou, Hao Ye, Haifeng Zhang, Mingliang LI, Process monitoring of iron-making process in a blast furnace with PCA based methods. Control Engineering Practice, 47, pp1-14, 2016[3] Bo Zhou, Hao Ye, A study of polynomial fit-based methods for qualitative trend analysis. Journal of Process Control, 37, pp21-33, 2016[4] Hao Wu, Wei Wang, Hao Ye, Zidong Wang, State estimation for Markovian jump linear systems with bounded disturbances. Automatica (Regular paper), 49(11), pp3292–3303, 2013[5] Hao Wu, Wei Wang, Hao Ye, Model reduction based set-membership filtering with linear state equality constraints. IEEE Transactions on Aerospace and Electronic Systems, 49( 2), pp 1391-1399, 2013[6] Yiming Wan, Hao Ye, Data-driven diagnosis of sensor precision degradation in the presence of control, Journal of Process Control, 22(1), pp 26-40, 2012[7] Yongqiang Wang, Hao Ye, S.X. Ding, Guizeng Wang, Donghua Zhou, Residual generation and evaluation of networked control systems subject to random packet dropout ，Automatica, 45(10), pp2427-2434, 2009[8] Yue Cheng, Hao Ye, Yongqiang Wang, Donghua Zhou, Unbiased minimum-variance state estimation for linear systems with unknown input ，Automatica, 45(2), pp 485-491, 2009[9] Yongqiang Wang, Steven X. Ding, Hao Ye, Guizeng Wang，A new fault detection scheme for networked control systems subject to uncertain time-varying delay，IEEE Transactions on Signal Processing(长文), 56(10), pp 5258-5268, 2008[10] Maiying Zhong, Hao Ye, Steven X Ding, Guizeng Wang，Observer-based fast rate fault detection for a class of multirate sampled-data systems，IEEE Transactions on Automatic Control, 52(3), pp 520-525, 2007[11] Huajing Fang, Hao Ye, Maiying Zhong，Fault diagnosis of networked control systems，Annual Reviews in Control, 31(1), pp 55-68, 2007[12] Hao Ye, Guizeng Wang, Steven X Ding，A New parity space approach for fault detection based on stationary wavelet transform，IEEE Transactions on Automatic Control, 49(2), pp 281-287,2004[13] Hao Ye, Steven X Ding, Guizeng Wang，Integrated design of fault detection systems in time-frequency domain，IEEE Transactions on Automatic Control, 47(2), pp 384-390, 2002专利[1] 葛传虎, 叶昊, 王桂增，自适应阈值检漏结合多尺度快速时延搜索的泄漏定位方法，2012/5/16, 中国, ZL 2007 1 0177619.X.[2] 葛传虎, 叶昊, 王桂增，基于压力和声波信息融合的泄漏检测定位方法，2009/10/21, 中国, ZL200710177617.0.",
@@ -166,9 +168,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_au_faculty",
         "source_url": "https://www.au.tsinghua.edu.cn/szdw/jsdw1/ayjscz/kzyjcyjs.htm",
-        "crawled_at": "2026-03-03T13:56:42Z",
+        "crawled_at": "2026-03-04T07:01:43Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:56:42Z",
+        "last_seen_at": "2026-03-04T07:01:43Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -221,13 +223,13 @@
             "degree": "学士学位",
             "institution": "清华大学自动化系",
             "year": "1990-1995",
-            "major": "过程控制专业"
+            "major": "过程控制"
           },
           {
             "degree": "博士学位",
             "institution": "清华大学自动化系",
             "year": "1995-1999",
-            "major": "控制理论与控制工程专业"
+            "major": "控制理论与控制工程"
           }
         ],
         "publications_count": -1,
@@ -250,9 +252,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_au_faculty",
         "source_url": "https://www.au.tsinghua.edu.cn/szdw/jsdw1/ayjscz/kzyjcyjs.htm",
-        "crawled_at": "2026-03-03T13:56:42Z",
+        "crawled_at": "2026-03-04T07:01:43Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:56:42Z",
+        "last_seen_at": "2026-03-04T07:01:43Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -323,9 +325,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_au_faculty",
         "source_url": "https://www.au.tsinghua.edu.cn/szdw/jsdw1/ayjscz/kzyjcyjs.htm",
-        "crawled_at": "2026-03-03T13:56:42Z",
+        "crawled_at": "2026-03-04T07:01:43Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:56:42Z",
+        "last_seen_at": "2026-03-04T07:01:43Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -375,13 +377,13 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "学士学位",
+            "degree": "学士",
             "institution": "北京理工大学",
             "year": "2000-2004",
             "major": "电子工程系"
           },
           {
-            "degree": "博士学位",
+            "degree": "博士",
             "institution": "清华大学",
             "year": "2004-2010",
             "major": "自动化系"
@@ -407,9 +409,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_au_faculty",
         "source_url": "https://www.au.tsinghua.edu.cn/szdw/jsdw1/ayjscz/kzyjcyjs.htm",
-        "crawled_at": "2026-03-03T13:56:42Z",
+        "crawled_at": "2026-03-04T07:01:43Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:56:42Z",
+        "last_seen_at": "2026-03-04T07:01:43Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -463,19 +465,19 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "工学学士",
+            "degree": "工学学士学位",
             "institution": "东北大学",
             "year": "1989-1993",
             "major": "自动控制系"
           },
           {
-            "degree": "工学硕士",
+            "degree": "工学硕士学位",
             "institution": "东北大学",
             "year": "1993-1996",
             "major": "自动控制系"
           },
           {
-            "degree": "工学博士",
+            "degree": "工学博士学位",
             "institution": "清华大学",
             "year": "1996-2000",
             "major": "自动化系"
@@ -501,9 +503,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_au_faculty",
         "source_url": "https://www.au.tsinghua.edu.cn/szdw/jsdw1/ayjscz/kzyjcyjs.htm",
-        "crawled_at": "2026-03-03T13:56:42Z",
+        "crawled_at": "2026-03-04T07:01:43Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:56:42Z",
+        "last_seen_at": "2026-03-04T07:01:43Z",
         "is_active": true,
         "data_completeness": 75
       },
@@ -560,13 +562,13 @@
             "degree": "工学博士学位",
             "institution": "清华大学自动化系",
             "year": "2011-2016",
-            "major": "控制科学与工程专业"
+            "major": "控制科学与工程"
           },
           {
             "degree": "工学学士学位",
             "institution": "清华大学自动化系",
             "year": "2007-2011",
-            "major": "自动化系专业"
+            "major": ""
           }
         ],
         "publications_count": -1,
@@ -589,9 +591,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_au_faculty",
         "source_url": "https://www.au.tsinghua.edu.cn/szdw/jsdw1/ayjscz/kzyjcyjs.htm",
-        "crawled_at": "2026-03-03T13:56:42Z",
+        "crawled_at": "2026-03-04T07:01:43Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:56:42Z",
+        "last_seen_at": "2026-03-04T07:01:43Z",
         "is_active": true,
         "data_completeness": 75
       },

@@ -34,7 +34,7 @@ sources:
   - cs
   llm_extraction: true
   llm_provider: openrouter
-  llm_model: deepseek/deepseek-chat
+  llm_model: google/gemini-2.5-flash
   llm_fields:
   - phone
   - research_areas
@@ -73,7 +73,7 @@ sources:
   - ai
   llm_extraction: true
   llm_provider: openrouter
-  llm_model: deepseek/deepseek-chat
+  llm_model: google/gemini-2.5-flash
   llm_fields:
   - phone
   - research_areas
@@ -141,7 +141,7 @@ sources:
   - ai
   llm_extraction: true
   llm_provider: openrouter
-  llm_model: deepseek/deepseek-chat
+  llm_model: google/gemini-2.5-flash
   llm_fields:
   - phone
   - research_areas
@@ -177,7 +177,7 @@ sources:
   - cybersecurity
   llm_extraction: true
   llm_provider: openrouter
-  llm_model: deepseek/deepseek-chat
+  llm_model: google/gemini-2.5-flash
   llm_fields:
   - phone
   - research_areas

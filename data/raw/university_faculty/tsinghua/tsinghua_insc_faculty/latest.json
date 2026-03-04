@@ -3,8 +3,8 @@
   "dimension": "university_faculty",
   "group": "tsinghua",
   "source_name": "清华大学网络研究院-师资",
-  "crawled_at": "2026-03-03T14:09:59.521948+00:00",
-  "previous_crawled_at": "2026-03-03T03:51:25.344674+00:00",
+  "crawled_at": "2026-03-04T07:06:05.711578+00:00",
+  "previous_crawled_at": "2026-03-03T14:09:59.521948+00:00",
   "item_count": 53,
   "new_item_count": 0,
   "items": [
@@ -36,11 +36,11 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "计算机网络",
+          "互联网",
+          "计算机网络体系结构",
+          "协议测试",
+          "形式化技术"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -95,9 +95,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -131,11 +131,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "统计信号处理",
+          "多媒体通信",
+          "计算机网络"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -190,9 +188,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -226,17 +224,16 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "互联网体系结构",
+          "网络空间测绘",
+          "网络空间治理",
+          "位置计算"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
         "bio_en": "",
         "email": "wjl@tsinghua.edu.cn",
-        "phone": "",
+        "phone": "010-62603012",
         "office": "",
         "profile_url": "https://www.insc.tsinghua.edu.cn/info/1157/2449.htm",
         "lab_url": "",
@@ -245,7 +242,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "工学学士",
+            "institution": "哈尔滨工业大学",
+            "year": "1994",
+            "major": "计算机软件"
+          },
+          {
+            "degree": "工学硕士",
+            "institution": "哈尔滨工业大学",
+            "year": "1996",
+            "major": "计算机系统结构"
+          },
+          {
+            "degree": "工学博士",
+            "institution": "清华大学",
+            "year": "2000",
+            "major": "计算机系统结构"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -266,9 +282,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -302,11 +318,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "未来互联网体系结构",
+          "互联网路由",
+          "高性能路由器",
+          "虚拟网络"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -355,9 +370,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -391,17 +406,17 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "互联网络运行与管理",
+          "网络测量与网络空间安全",
+          "网络空间测绘与态势感知",
+          "云计算、虚拟化及资源管理调度",
+          "IPv6及新一代互联网体系结构"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
         "bio_en": "",
         "email": "yang@cernet.edu.cn",
-        "phone": "010-62603012",
+        "phone": "+86 10 62783492",
         "office": "",
         "profile_url": "https://www.insc.tsinghua.edu.cn/info/1157/2854.htm",
         "lab_url": "",
@@ -450,9 +465,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -486,17 +501,18 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "网络安全",
+          "网络测量",
+          "入侵检测",
+          "漏洞挖掘",
+          "物联网安全",
+          "互联网治理"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
         "bio_en": "",
         "email": "duanhx@tsinghua.edu.cn",
-        "phone": "010-62603220",
+        "phone": "+86-10-62603220",
         "office": "",
         "profile_url": "https://www.insc.tsinghua.edu.cn/info/1157/2848.htm",
         "lab_url": "",
@@ -545,9 +561,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -581,11 +597,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "计算机网络",
+          "优化算法",
+          "网络编码",
+          "网络安全"
         ],
         "keywords": [],
         "bio": "",
@@ -640,9 +655,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -676,17 +691,16 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "互联网体系结构",
+          "互联网测量和数据分析",
+          "重叠网或广域网资源调度和性能优化",
+          "互联网路由和互联网经济分析"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
         "bio_en": "",
         "email": "jessiewang@tsinghua.edu.cn",
-        "phone": "010-62603212",
+        "phone": "+86 10 62603212",
         "office": "",
         "profile_url": "https://www.insc.tsinghua.edu.cn/info/1157/2852.htm",
         "lab_url": "",
@@ -735,9 +749,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -771,17 +785,16 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "网络空间态势感知",
+          "网络测量测绘",
+          "网络验证与测试",
+          "网络安全"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
         "bio_en": "",
         "email": "wzl@cernet.edu.cn",
-        "phone": "010-62603273",
+        "phone": "+86 10 62603273",
         "office": "",
         "profile_url": "https://www.insc.tsinghua.edu.cn/info/1157/2853.htm",
         "lab_url": "",
@@ -824,9 +837,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -860,11 +873,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "软件与系统安全",
+          "人工智能安全",
+          "数据安全与隐私"
         ],
         "keywords": [],
         "bio": "",
@@ -913,9 +924,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -949,11 +960,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "互联网和网络安全",
+          "人工智能驱动的网络安全与人工智能安全"
         ],
         "keywords": [],
         "bio": "",
@@ -996,9 +1004,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1032,17 +1040,20 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "可信计算",
+          "安全和可靠系统",
+          "分布式系统",
+          "云计算",
+          "系统建模",
+          "系统测量和评估",
+          "大数据分析",
+          "机器学习"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
         "bio_en": "",
         "email": "longwang@tsinghua.edu.cn",
-        "phone": "010-62603270",
+        "phone": "+86-10-62603270",
         "office": "",
         "profile_url": "https://www.insc.tsinghua.edu.cn/info/1157/2457.htm",
         "lab_url": "",
@@ -1091,9 +1102,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -1143,13 +1154,13 @@
         "education": [
           {
             "degree": "工学博士",
-            "institution": "伊利诺伊大学香槟分校（University of Illinois at Urbana-Champaign）",
-            "year": "",
+            "institution": "伊利诺伊大学香槟分校",
+            "year": "2017",
             "major": "计算机科学"
           },
           {
             "degree": "工学学士",
-            "institution": "上海交通大学（SJTU）",
+            "institution": "上海交通大学",
             "year": "",
             "major": "电子信息与电子工程"
           }
@@ -1174,9 +1185,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 50
       },
@@ -1210,11 +1221,11 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "天地一体化互联网",
+          "卫星互联网",
+          "无线与移动网络",
+          "智能边缘计算",
+          "网络安全"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -1263,9 +1274,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -1299,11 +1310,14 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "对称密码分析和设计",
+          "比特分析法",
+          "量子分析法",
+          "密码分析自动化",
+          "人工智能与安全分析",
+          "分组密码",
+          "哈希函数",
+          "认证加密"
         ],
         "keywords": [],
         "bio": "",
@@ -1352,9 +1366,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -1387,13 +1401,7 @@
         "position": "副教授",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
-        ],
+        "research_areas": [],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
         "bio_en": "",
@@ -1441,11 +1449,11 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
-        "data_completeness": 80
+        "data_completeness": 65
       },
       "is_new": false
     },
@@ -1477,11 +1485,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "机器学习安全",
+          "大语言模型安全",
+          "边缘计算系统与安全"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -1536,9 +1542,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -1572,11 +1578,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "网络应用安全",
+          "可用隐私与可用安全",
+          "人工智能安全"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -1625,9 +1629,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -1661,11 +1665,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "网络可观测性",
+          "互联网路由",
+          "网络资源调度"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -1714,9 +1716,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -1750,11 +1752,13 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "对称密码分析和设计",
+          "密码杂凑函数",
+          "分组密码",
+          "认证加密",
+          "密码基本元件",
+          "密码学自动化工具",
+          "机器学习与密码学"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -1803,9 +1807,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -1839,11 +1843,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "天地一体化互联网体系结构",
+          "网络空间安全",
+          "无线网络与移动计算",
+          "流媒体技术"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -1862,20 +1865,20 @@
           {
             "degree": "博士",
             "institution": "清华大学",
-            "year": "2013.9-2018.7",
+            "year": "2013-2018",
             "major": "计算机科学与技术系"
           },
           {
             "degree": "联合培养博士",
             "institution": "Purdue University",
-            "year": "2016.9-2017.10",
+            "year": "2016-2017",
             "major": "Electrical and Computer Engineering"
           },
           {
             "degree": "学士",
             "institution": "电子科技大学",
-            "year": "2009.9-2013.7",
-            "major": "计算机科学与工程学院，信息安全"
+            "year": "2009-2013",
+            "major": "信息安全"
           }
         ],
         "publications_count": -1,
@@ -1898,9 +1901,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -1934,11 +1937,11 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "网络传输",
+          "视频实时传输",
+          "互联网视频实时传输",
+          "网络传输协议",
+          "传输安全"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -1957,13 +1960,13 @@
           {
             "degree": "工学博士",
             "institution": "清华大学",
-            "year": "2014.9-2019.7",
+            "year": "2014-2019",
             "major": "计算机科学与技术"
           },
           {
             "degree": "工学学士",
             "institution": "北京邮电大学",
-            "year": "2010.9-2014.7",
+            "year": "2010-2014",
             "major": "计算机科学与技术"
           }
         ],
@@ -1987,9 +1990,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -2044,19 +2047,19 @@
           {
             "degree": "工学博士",
             "institution": "清华大学",
-            "year": "2015.09-2020.10",
+            "year": "2015-2020",
             "major": ""
           },
           {
             "degree": "高级访问学者",
             "institution": "加州大学伯克利分校",
-            "year": "2018.01-2019.01",
+            "year": "2018-2019",
             "major": ""
           },
           {
             "degree": "工学学士",
             "institution": "西安电子科技大学",
-            "year": "2011.09-2015.07",
+            "year": "2011-2015",
             "major": ""
           }
         ],
@@ -2080,9 +2083,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -2116,17 +2119,15 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "互联网体系结构",
+          "下一代互联网",
+          "网络安全"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
         "bio_en": "",
         "email": "liuying@cernet.edu.cn",
-        "phone": "010-62603328",
+        "phone": "+86-10-62603328",
         "office": "",
         "profile_url": "https://www.insc.tsinghua.edu.cn/info/1157/2456.htm",
         "lab_url": "",
@@ -2175,9 +2176,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -2211,17 +2212,16 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "无线移动网络",
+          "天地一体化信息网络",
+          "卫星互联网",
+          "下一代互联网应用及安全"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
         "bio_en": "",
         "email": "lihewu@cernet.edu.cn",
-        "phone": "010-62772375",
+        "phone": "+86-10-62772375",
         "office": "",
         "profile_url": "https://www.insc.tsinghua.edu.cn/info/1157/2451.htm",
         "lab_url": "",
@@ -2264,9 +2264,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -2300,11 +2300,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "互联网安全威胁监测和响应",
+          "多种类型恶意代码的采集、分析、检测与防御技术",
+          "软件漏洞分析，检测与缓解",
+          "工控与物联网安全"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -2353,9 +2352,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -2389,17 +2388,15 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "天地融合互联网",
+          "无线与移动网络",
+          "网络安全"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
         "bio_en": "",
         "email": "wuqian@cernet.edu.cn",
-        "phone": "010-62603307",
+        "phone": "+86-10-62603307",
         "office": "",
         "profile_url": "https://www.insc.tsinghua.edu.cn/info/1157/2452.htm",
         "lab_url": "",
@@ -2442,9 +2439,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -2478,17 +2475,16 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "网络安全与应急响应",
+          "安全计划与灾难恢复",
+          "网络空间测量与测绘",
+          "入侵检测与反垃圾邮件"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
         "bio_en": "",
         "email": "sundonghong@tsinghua.edu.cn",
-        "phone": "010-62603222",
+        "phone": "+86-10-62603222",
         "office": "",
         "profile_url": "https://www.insc.tsinghua.edu.cn/info/1157/4065.htm",
         "lab_url": "",
@@ -2531,9 +2527,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -2567,17 +2563,14 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "网络测绘",
+          "异常检测"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
         "bio_en": "",
         "email": "acq@tsinghua.edu.cn",
-        "phone": "010-62603012",
+        "phone": "+86-10-62603113",
         "office": "",
         "profile_url": "https://www.insc.tsinghua.edu.cn/info/1157/2473.htm",
         "lab_url": "",
@@ -2620,9 +2613,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -2656,11 +2649,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "IPv6协议",
+          "网络异常检测",
+          "根因分析"
         ],
         "keywords": [],
         "bio": "",
@@ -2715,9 +2706,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2751,11 +2742,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "互联网体系结构",
+          "无线与移动网络技术",
+          "网络管理和服务质量控制"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -2804,9 +2793,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -2840,11 +2829,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "互联网资源管理",
+          "互联网基础设施服务及安全"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -2893,9 +2879,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -2929,11 +2915,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "下一代互联网体系结构及安全",
+          "真实IP源地址验证体系结构和关键技术",
+          "网络测量"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -2976,9 +2960,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -3012,11 +2996,11 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "物联网与智慧城市",
+          "网络试验环境构建",
+          "LLM在网络及安全领域应用",
+          "AI大模型集群计算",
+          "网络视频通信"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -3071,9 +3055,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -3107,17 +3091,17 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "网络体系结构",
+          "路由协议",
+          "网络测量",
+          "网络优化",
+          "网络安全"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
         "bio_en": "",
         "email": "shixg@cernet.edu.cn",
-        "phone": "010-62603272",
+        "phone": "+86-10-62603272",
         "office": "",
         "profile_url": "https://www.insc.tsinghua.edu.cn/info/1157/3996.htm",
         "lab_url": "",
@@ -3166,9 +3150,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -3202,17 +3186,15 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "对称密码分析与设计：包括分组密码、哈希函数、消息认证码、认证加密等",
+          "基于对称的后量子密码",
+          "密码技术应用"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
         "bio_en": "",
         "email": "ktjia@tsinghua.edu.cn",
-        "phone": "010-62788631",
+        "phone": "+86-10-62788631",
         "office": "",
         "profile_url": "https://www.insc.tsinghua.edu.cn/info/1157/2471.htm",
         "lab_url": "",
@@ -3255,9 +3237,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -3291,11 +3273,11 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "网络测量",
+          "态势感知",
+          "物联网安全",
+          "流量分类",
+          "匿名通信系统与暗网"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -3344,9 +3326,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -3380,17 +3362,15 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "网络安全测量",
+          "网络异常检测",
+          "协议漏洞挖掘"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
         "bio_en": "",
         "email": "zhangjia@cernet.edu.cn",
-        "phone": "010-62781789",
+        "phone": "+86-10-62781789",
         "office": "",
         "profile_url": "https://www.insc.tsinghua.edu.cn/info/1157/2460.htm",
         "lab_url": "",
@@ -3433,9 +3413,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -3469,11 +3449,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "网络体系结构",
+          "路由与转发",
+          "网络测量",
+          "网络安全"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -3528,9 +3507,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -3564,11 +3543,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "天地一体化网络",
+          "网络安全认证",
+          "网络孪生"
         ],
         "keywords": [],
         "bio": "",
@@ -3623,9 +3600,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 65
       },
@@ -3659,11 +3636,11 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "互联网体系结构",
+          "网络测量",
+          "网络安全",
+          "网络空间测绘",
+          "可编程网络"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -3712,9 +3689,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -3748,11 +3725,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "网络测量分析",
+          "网络空间测绘",
+          "网络空间安全态势感知"
         ],
         "keywords": [],
         "bio": "",
@@ -3801,9 +3776,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3837,17 +3812,16 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "网络空间安全",
+          "网络形式化验证与测试",
+          "网络测量测绘",
+          "网络空间态势感知"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
         "bio_en": "",
         "email": "liyahui@tsinghua.edu.cn",
-        "phone": "010-62603272",
+        "phone": "+86--10-62603272",
         "office": "",
         "profile_url": "https://www.insc.tsinghua.edu.cn/info/1157/3380.htm",
         "lab_url": "",
@@ -3890,9 +3864,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -3926,11 +3900,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "网络安全",
+          "网络流量分析",
+          "路由安全",
+          "网络威胁发现"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -3979,9 +3952,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -4015,11 +3988,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "密码数学理论",
+          "密码分析与设计",
+          "后量子密码",
+          "区块链等密码应用技术"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -4074,9 +4046,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -4110,17 +4082,14 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "数据驱动网络（基于机器学习）",
+          "低时延网络及应用（如VR/AR、视频直播和游戏等）"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
         "bio_en": "",
         "email": "cuiyong@tsinghua.edu.cn",
-        "phone": "010-62603012",
+        "phone": "62603059",
         "office": "",
         "profile_url": "https://www.insc.tsinghua.edu.cn/info/1157/2469.htm",
         "lab_url": "",
@@ -4163,9 +4132,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -4199,11 +4168,11 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "网络流量管理与控制",
+          "数据中心网络与主机网络",
+          "工业互联网与物联网",
+          "网络与网络化系统",
+          "系统性能评价与优化"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -4258,9 +4227,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -4294,11 +4263,11 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "新一代互联网体系结构",
+          "互联网路由, 高性能路由器",
+          "P2P与Overlay网络",
+          "物联网",
+          "网络虚拟化和优化"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -4353,9 +4322,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -4389,11 +4358,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "计算机体系结构",
+          "计算机网络",
+          "互联网体系结构",
+          "协议测试"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -4448,9 +4416,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -4484,11 +4452,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "高速互联网体系结构",
+          "交换与路由",
+          "高速网络设备"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -4543,9 +4509,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -4579,11 +4545,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "数据中心网络",
+          "网络智能",
+          "可信任互联网"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -4632,9 +4596,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -4668,11 +4632,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "智能运维（AIOps）",
+          "时间序列智能（Time Series Intelligence）"
         ],
         "keywords": [],
         "bio": "友情链接清华大学/信息化技术中心/计算机科学与技术系/电子工程系/高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号",
@@ -4727,9 +4688,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 80
       },
@@ -4763,11 +4724,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "友情链接清华大学",
-          "信息化技术中心",
-          "计算机科学与技术系",
-          "电子工程系",
-          "高等研究院地址：北京市海淀区双清路30号清华大学  100084电话：010-62603012Copyright © 2017-2020 网络科学与网络空间研究院 All Rights Reserved.微信公众号"
+          "Network Data Security",
+          "Emotional Cognitive Computing of Web Text"
         ],
         "keywords": [],
         "bio": "",
@@ -4822,9 +4780,9 @@
         "recent_updates": [],
         "source_id": "tsinghua_insc_faculty",
         "source_url": "https://www.insc.tsinghua.edu.cn/szdw_/jsml.htm",
-        "crawled_at": "2026-03-03T13:57:59Z",
+        "crawled_at": "2026-03-04T07:02:13Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:57:59Z",
+        "last_seen_at": "2026-03-04T07:02:13Z",
         "is_active": true,
         "data_completeness": 65
       },

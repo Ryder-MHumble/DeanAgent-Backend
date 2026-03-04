@@ -3,8 +3,8 @@
   "dimension": "university_faculty",
   "group": "pku",
   "source_name": "北京大学工学院-师资",
-  "crawled_at": "2026-03-03T13:24:03.370813+00:00",
-  "previous_crawled_at": "2026-03-03T03:56:19.910458+00:00",
+  "crawled_at": "2026-03-04T07:05:21.267257+00:00",
+  "previous_crawled_at": "2026-03-03T13:24:03.370813+00:00",
   "item_count": 134,
   "new_item_count": 0,
   "items": [
@@ -14,7 +14,7 @@
       "url_hash": "bbb3f9d709023e1f81498840ebb362b2eb3e4e8b357980de4441413913b75ade",
       "published_at": null,
       "author": null,
-      "content": "1. Tong Bo*,\r\nJames C McWilliams, Marcelo Chamecki. Oceanic mixing and waves in the presence\r\nof a suspended canopy. Journal of Fluid Mechanics. 2025.",
+      "content": "1. Tong Bo*,\nJames C McWilliams, Marcelo Chamecki. Oceanic mixing and waves in the presence\nof a suspended canopy. Journal of Fluid Mechanics. 2025.",
       "content_html": null,
       "content_hash": "a1304a02d0fd381fb36a831e4bd2a4edb2e9af609247f78fadfa896ae810c061",
       "source_id": "pku_coe_faculty",
@@ -41,10 +41,10 @@
           "物理海洋学",
           "湍流",
           "复杂地形",
-          "水生植被等"
+          "水生植被"
         ],
         "keywords": [],
-        "bio": "1. Tong Bo*,\r\nJames C McWilliams, Marcelo Chamecki. Oceanic mixing and waves in the presence\r\nof a suspended canopy. Journal of Fluid Mechanics. 2025.",
+        "bio": "1. Tong Bo*,\nJames C McWilliams, Marcelo Chamecki. Oceanic mixing and waves in the presence\nof a suspended canopy. Journal of Fluid Mechanics. 2025.",
         "bio_en": "",
         "email": "tong.bo@pku.edu.cn",
         "phone": "",
@@ -61,7 +61,7 @@
             "degree": "博士",
             "institution": "麻省理工学院",
             "year": "2018-2023",
-            "major": "土木、环境与海洋工程（MIT-WHOI Joint Program）"
+            "major": "土木、环境与海洋工程"
           },
           {
             "degree": "学士",
@@ -90,9 +90,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -183,9 +183,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -258,13 +258,13 @@
             "degree": "工学学士",
             "institution": "上海交通大学",
             "year": "2008-2012",
-            "major": "热能工程"
+            "major": "机械与动力工程学院 | 热能工程"
           },
           {
             "degree": "文学学士",
             "institution": "上海交通大学",
             "year": "2008-2012",
-            "major": "广告学"
+            "major": "媒体与设计学院 | 广告学"
           }
         ],
         "publications_count": -1,
@@ -287,9 +287,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -383,9 +383,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -419,7 +419,6 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "力学",
           "固体力学",
           "流体力学",
           "湍流",
@@ -432,7 +431,9 @@
           "工业工程",
           "机器人",
           "航空",
-          "航天"
+          "航天",
+          "基于导波的无损检测方法",
+          "复合材料强度"
         ],
         "keywords": [],
         "bio": "",
@@ -481,9 +482,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -571,9 +572,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -627,19 +628,19 @@
           {
             "degree": "理学学士",
             "institution": "北京大学力学系",
-            "year": "1978-1982",
+            "year": "1978.10-1982.7",
             "major": ""
           },
           {
             "degree": "理学硕士",
             "institution": "北京大学力学系",
-            "year": "1982-1984",
+            "year": "1982.9-1984.11",
             "major": ""
           },
           {
             "degree": "工程博士",
             "institution": "德国达姆斯塔特工业大学",
-            "year": "1988-1993",
+            "year": "1988.4-1993.1",
             "major": ""
           }
         ],
@@ -663,9 +664,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -724,21 +725,21 @@
         "education": [
           {
             "degree": "博士学位",
-            "institution": "北京大学力学系",
+            "institution": "北京大学",
             "year": "1987",
-            "major": ""
+            "major": "力学系"
           },
           {
             "degree": "硕士学位",
-            "institution": "北京大学力学系",
+            "institution": "北京大学",
             "year": "1984",
-            "major": ""
+            "major": "力学系"
           },
           {
             "degree": "理学学士",
-            "institution": "浙江大学力学系",
+            "institution": "浙江大学",
             "year": "1981",
-            "major": ""
+            "major": "力学系"
           }
         ],
         "publications_count": -1,
@@ -761,9 +762,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -846,9 +847,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -942,9 +943,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -979,7 +980,13 @@
         "is_academician": false,
         "research_areas": [
           "计算力学",
-          "固体力学"
+          "固体力学",
+          "边界元法",
+          "有限元法",
+          "无网格法",
+          "复合材料有效性能",
+          "细观力学",
+          "界面效应"
         ],
         "keywords": [],
         "bio": "",
@@ -996,22 +1003,22 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "学士学位",
-            "institution": "山东工业大学",
-            "year": "1991-1995",
-            "major": "土木工程系, 辅修计算机工程系计算机及应用专业"
+            "degree": "博士学位",
+            "institution": "清华大学工程力学系",
+            "year": "1998-2001",
+            "major": "固体力学"
           },
           {
             "degree": "硕士学位",
             "institution": "山东工业大学",
             "year": "1995-1998",
-            "major": "固体力学专业"
+            "major": "固体力学"
           },
           {
-            "degree": "博士学位",
-            "institution": "清华大学工程力学系",
-            "year": "1998-2001",
-            "major": "固体力学专业"
+            "degree": "学士学位",
+            "institution": "山东工业大学土木工程系",
+            "year": "1991-1995",
+            "major": "土木工程, 计算机及应用"
           }
         ],
         "publications_count": -1,
@@ -1034,9 +1041,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1128,9 +1135,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1164,6 +1171,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "面向空天推进和清洁能源系统中燃烧应用的热流体、多物理过程基础研究",
           "湍流燃烧",
           "热声不稳定性",
           "低氧无焰MILD燃烧",
@@ -1225,9 +1233,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1262,7 +1270,21 @@
         "is_academician": false,
         "research_areas": [
           "航空航天信息工程",
-          "地理信息工程"
+          "地理信息工程",
+          "空间信息的组织理论与方法",
+          "全球空间信息的共享组织",
+          "存储组织与服务组织",
+          "空间信息分类",
+          "空间信息编码",
+          "存储资源分配",
+          "空间信息索引",
+          "结构化表达及应用服务体系创建",
+          "基于地球剖分理论的空间信息组织框架",
+          "空间信息分块标准",
+          "编码模型",
+          "存储模型",
+          "计算与分发模型",
+          "表达模型"
         ],
         "keywords": [],
         "bio": "",
@@ -1280,21 +1302,21 @@
         "education": [
           {
             "degree": "学士",
-            "institution": "南京大学地球科学系",
+            "institution": "南京大学",
             "year": "1978-1982",
-            "major": ""
+            "major": "地球科学系"
           },
           {
             "degree": "硕士",
-            "institution": "南京大学地球科学系",
+            "institution": "南京大学",
             "year": "1982-1985",
-            "major": ""
+            "major": "地球科学系"
           },
           {
             "degree": "博士",
-            "institution": "北京大学城市与环境学系",
+            "institution": "北京大学",
             "year": "1985-1989",
-            "major": ""
+            "major": "城市与环境学系"
           }
         ],
         "publications_count": -1,
@@ -1317,9 +1339,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1374,21 +1396,21 @@
         "education": [
           {
             "degree": "工学博士",
-            "institution": "清华大学工程力学系",
+            "institution": "清华大学",
             "year": "1993",
-            "major": ""
+            "major": "工程力学系"
           },
           {
             "degree": "理学硕士",
-            "institution": "哈尔滨工业大学应用数学系",
+            "institution": "哈尔滨工业大学",
             "year": "1989",
-            "major": ""
+            "major": "应用数学系"
           },
           {
             "degree": "理学学士",
-            "institution": "河南大学数学系",
+            "institution": "河南大学",
             "year": "1984",
-            "major": ""
+            "major": "数学系"
           }
         ],
         "publications_count": -1,
@@ -1411,9 +1433,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1505,9 +1527,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -1519,7 +1541,7 @@
       "url_hash": "5f8a9b9d9600840c175283e8c761263224f6d35c0e65b4e4f90c9b992f8655f5",
       "published_at": null,
       "author": null,
-      "content": "注：“*”\r\n代表通讯作者",
+      "content": "注：“*”\n代表通讯作者",
       "content_html": null,
       "content_hash": "e10427842b896082a6d809284263390ce19c4f00f738c2f6aa208026b16d2e6d",
       "source_id": "pku_coe_faculty",
@@ -1541,15 +1563,19 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "地下环境（即复杂裂隙多孔介质）演化的研究",
+          "地下环境演化",
+          "复杂裂隙多孔介质",
+          "几何结构、渗流、溶质扩散与地球化学反应的相互作用与反馈机制",
           "裂隙演变及其对多孔介质中渗流、地球化学反应、力学过程及性质的影响",
           "矿物沉淀反应机理及对裂隙多孔介质物化性质的影响",
           "多相流与（生物）地球化学反应的动态耦合",
           "多物理场的尺度升级",
-          "二氧化碳地质封存、页岩开采、矿化封存等系统的技术经济评估"
+          "二氧化碳地质封存",
+          "页岩开采",
+          "矿化封存"
         ],
         "keywords": [],
-        "bio": "注：“*”\r\n代表通讯作者",
+        "bio": "注：“*”\n代表通讯作者",
         "bio_en": "",
         "email": "hangdeng@pku.edu.cn",
         "phone": "",
@@ -1565,13 +1591,13 @@
           {
             "degree": "博士",
             "institution": "普林斯顿大学",
-            "year": "2009/09–2015/06",
+            "year": "2009-2015",
             "major": "环境工程系"
           },
           {
             "degree": "学士",
             "institution": "北京大学",
-            "year": "2005/09–2009/07",
+            "year": "2005-2009",
             "major": "环境学院，中国经济研究中心（双学位）"
           }
         ],
@@ -1595,9 +1621,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -1654,21 +1680,21 @@
         "education": [
           {
             "degree": "学士",
-            "institution": "西安交通大学建筑工程系",
+            "institution": "西安交通大学",
             "year": "1985-1989",
-            "major": ""
+            "major": "建筑工程系"
           },
           {
             "degree": "硕士",
-            "institution": "西安建筑科技大学建筑工程系",
+            "institution": "西安建筑科技大学",
             "year": "1989-1992",
-            "major": ""
+            "major": "建筑工程系"
           },
           {
             "degree": "博士",
-            "institution": "同济大学土木工程学院",
+            "institution": "同济大学",
             "year": "1992-1995",
-            "major": ""
+            "major": "土木工程学院"
           }
         ],
         "publications_count": -1,
@@ -1691,9 +1717,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1727,7 +1753,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "数智（数值与智能融合）计算力学理论",
+          "数智（数值与智能融合）计算力学理论、方法与应用",
           "数值仿真算法和工业软件开发",
           "数据驱动/人工智能算法、软件和应用",
           "装备不确定性和可靠性分析优化",
@@ -1748,27 +1774,27 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "博士",
+            "degree": "硕博",
             "institution": "湖南大学，汽车车身先进设计制造国家重点实验室",
-            "year": "2011-2018",
+            "year": "2011 – 2018",
             "major": "力学/机械工程"
           },
           {
-            "degree": "联合培养博士",
+            "degree": "博士",
             "institution": "美国明尼苏达大学，美国国防高性能计算中心",
-            "year": "2016-2018",
+            "year": "2016 – 2018",
             "major": ""
           },
           {
-            "degree": "联合培养硕士",
+            "degree": "硕士",
             "institution": "北京大学，北京市虚拟仿真与可视化工程技术研究中心",
-            "year": "2012-2014",
+            "year": "2012 – 2014",
             "major": ""
           },
           {
-            "degree": "学士",
+            "degree": "工学学士",
             "institution": "湖南大学",
-            "year": "2007-2011",
+            "year": "2007 – 2011",
             "major": "车辆工程"
           }
         ],
@@ -1792,9 +1818,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -1828,7 +1854,6 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "力学",
           "固体力学",
           "流体力学",
           "湍流",
@@ -1841,7 +1866,9 @@
           "工业工程",
           "机器人",
           "航空",
-          "航天"
+          "航天",
+          "界面力学",
+          "流固耦合力学"
         ],
         "keywords": [],
         "bio": "1. Li Xiying, Zhang Jiaming*, Duan Huiling*; Enhanced sensitivity and versatile detection: dual-sized microsphere-type pressure sensors for soft robotics and wearable electronics; ACS Applied Materials & Interfaces; 2025, 17(7): 11268-11277.2. Sun Bing, Xing Yue, Lv Pengyu, Zhou Jin, Liu Chunqi, Duan Huiling*, Liang Xiubing*; Concurrent optimization of continuous carbon fiber-reinforced composites with multi-scale components considering the manufacturing constraint; Composites Science and Technology; 2025, 259: 110942.3. Zhao Feng, Liu Wenbin, Zhang Yin*, Duan Huiling*; The hierarchical energy landscape of edge dislocation glide in refractory high-entropy alloys; Journal of the Mechanics and Physics of Solids; 2024, 193: 105887.4. Liu Xiaochao, You Chenxi, Cao Yanlin, Xu Baorui, Yang Yantao, Li Hongyuan, Lv Pengyu, Sun Chao, Duan Huiling*; Friction drag reduction of Taylor–Couette flow over air-filled microgrooves; Journal of Fluid Mechanics; 2024, 999: A63.5. Wen Zhixuan, Lv Pengyu, Feng Fan*, Duan Huiling*; A generalized geometric mechanics theory for multi-curve-fold origami: vertex constrained universal configurations; Journal of the Mechanics and Physics of Solids; 2024, 192: 105829.6. Chen Ce, Wu Liujun, Fu Jiaqi, Xin Chenyang, Liu Wenbin, Duan Huiling*; A micromechanical scheme with nonlinear concentration functions by physics-guided neural network; Journal of the Mechanics and Physics of Solids; 2024, 188: 105681.7. Zhao Feng, Liu Wenbin, Yi Xin, Zhang Yin*, Duan Huiling*; Multiscale modeling of dislocation-mediated plasticity of refractory high entropy alloys; Journal of the Mechanics and Physics of Solids; 2024, 187: 105640.8. Sui Haonan, Liu Wenbin, Zhang Yin, Duan Huiling*; Multi-scale spallation model for single-crystal ductile metals incorporating microscopic mechanism of void nucleation; Journal of the Mechanics and Physics of Solids; 2024, 183: 105520.9. Ji Songsong, Li Hongyuan, Du Zengzhi, Lv Pengyu, Duan Huiling*; Influence of interfacial coupled flow on slip boundary over a microstructured surface; Physical Review Fluids; 2023, 8(5): 054003.10. Zhao Feng, Liu Wenbin, Sui Haonan, Fu Jiaqi, Cheng Yangyang, Zhang Jingyu, Duan Huiling*; Model for deformation-induced martensitic transformation in irradiated materials; Proceedings of the Royal Society A: Mathematical, Physical and Engineering Science; 2023, 479(2272): 20220633.11.Xu Baorui, Li Hongyuan, Liu Xiaochao, Xiang Yaolei, Lv Pengyu, Tan Xiangkui, Zhao Yaomin, Sun Chao, Duan Huiling*; Effect of micro-grooves on drag reduction in Taylor-Couette flow; Physics of Fluids; 2023, 35(4): 043608.12.Liu Wenbin, Cheng Yangyang, Sui Haonan, Fu Jiaqi, Duan Huiling*; Microstructure-based intergranular fatigue crack nucleation model: Dislocation transmission versus grain boundary cracking; Journal of the Mechanics and Physics of Solids; 2023, 173: 105233.13.Zhang Jingyu, Ding Shurong, Duan Huiling*; Modeling of irradiation growth of Zr single crystals with diffusion anisotropy; Journal of Nuclear Materials; 2023, 577: 154295.14.Chen Guoqing, Li Hongyuan, Lv Pengyu, Duan Huiling*; An improved multiphase lattice Boltzmann flux solver with phase interface compression for incompressible multiphase flows; Physics of Fluids; 2023, 35(1): 013310.15.Cao Yufan, Wang Xiangyu, Yuan Huijing, Duan Huiling, Sun Zhili, Li Hongyuan*, Lv Pengyu*; Correlation-based algorithms for accurate PIV measurement near the slip boundary; Measurement Science and Technology; 2023, 34(1): 015302.16.Du Zengzhi, Li Hongyuan, Cao Yufan, Wan Xia, Xiang Yaolei, Lv Pengyu, Huiling Duan*; Control of flow separation using biomimetic shark scales with fixed tilt angles; Experiments in Fluids; 2022, 63(10): 158.17.Sui Haonan, Yu Long, Liu Wenbin, Liu Ying, Duan Huiling*; Model of void nucleation on grain boundaries in dynamic failure of ductile metals incorporating interface incompatibility; Journal of the Mechanics and Physics of Solids; 2022, 168: 105032.18.Li Qi, Liu Weixuan, Yang Canhui, Rao Ping, Lv Pengyu, Duan Huiling, Hong Wei*; Kirigami-inspired adhesion with high directional asymmetry; Journal of the Mechanics and Physics of Solids; 2022, 169: 105053.19.Li Xiying, Wang Shuang, Lu Lu, Lv Pengyu, Duan Huiling*; A micromechanical model for phase-change composites; Proceedings of the Royal Society A: Mathematical, Physical and Engineering Sciences; 2022, 478(2261): 20220054.20.Duan Huiling*, Wang Jianxiang, Huang Zhuping; Micromechanics of composites with interface effects; Acta Mechanica Sinica; 2022, 38(4): 1-20.21.Lu Lu, Dang Xiangxin, Feng Fan, Lv Pengyu, Duan Huiling*; Conical kresling origami and its applications to curvature and energy programming; Proceedings of the Royal Society A: Mathematical, Physical and Engineering Sciences; 2022, 478(2257), 20210712.22.Liu Wenbin, Chen Lirong, Yu Long, Fu Jiaqi, Duan Huiling*; Continuum modeling of dislocation channels in irradiated metals based on stochastic crystal plasticity; International Journal of Plasticity; 2022, 151: 103211.23.Li Hongyuan, Cao Yufan, Wang Xiangyu, Wan Xia, Xiang Yaolei, Yuan Huijing, Lv Pengyu, Duan Huiling*; Accurate PIV measurement on slip boundary using single-pixel algorithm; Measurement Science and Technology; 2022, 33(5): 055302.24.Liu Wenbin, Yu Long, Liu Ying, Sui Haonan, Fan Haidong, Duan Huiling*; Dislocation pile-up polarization model for mechanical properties of polycrystalline metals based on grain boundary resistance variability; Journal of the Mechanics and Physics of Solids; 2022, 160: 104793.25.Dang Xiangxin, Feng Fan, Duan Huiling, Wang Jianxiang*; A theorem on the compatibility of spherical kirigami tessellations; Physical Review Letters; 2021, 128(3): 035501.26.Zhang Yuan, Tan Xiangkui, Li Xiying, Lv Pengyu, Huang Tianyun, Yang Jianying, Duan Huiling*; 3D propulsions of rod‐shaped micropropellers; Advanced Intelligent Systems; 2021, 3(11): 2100083.27.Ji Suchun, Li Xiying, Chen Qianying, Lv Pengyu, Duan Huiling*; Enhanced locomotion of shape morphing microrobots by surface coating; Advanced Intelligent Systems; 2021, 3(7): 2000270.28.Dang Xiangxin, Feng Fan, Duan Huiling, Wang Jianxiang*; Theorem for the design of deployable kirigami tessellations with different topologies; Physical Review E; 2021, 104(5): 055006.29.Chen Qianying, Huang Tianyun, Lv Pengyu, Huang Jianyong, Duan Huiling*; Programmable self-locking micromachines with tunable couplings; Advanced Intelligent Systems; 2021, 3(10): 2000232.30.Wang Gang, Li Xiying, Tan Xiangkui, Ji Songsong, Huang Jianyong, Duan Huiling, Lv Pengyu*; Motion enhancement of spherical surface walkers with microstructures; Advanced Intelligent Systems; 2021, 3(6): 2000226.31.Liu Wenbin, Liu Ying, Sui Haonan, Chen Lirong, Yu Long, Yi Xin, Duan Huiling*; Dislocation-grain boundary interaction in metallic materials: Competition between dislocation transmission and dislocation source activation; Journal of the Mechanics and Physics of Solids; 2020, 145: 104158.32.Liu Hao, Zhou Hao, Kang Wei*, Zhang Ping, Duan Huiling, Zhang Weiyan, He Xiantu; Dynamics of bond breaking and formation in polyethylene near shock front; Physical Review E; 2020, 102(2): 023207.33. Li Hongyuan, Li Zexiang, Tan Xiangkui, Wang Xiangyu, Huang Shenglin, Xiang Yaolei, Lv Pengyu*, Duan Huiling*; Three-dimensional backflow at liquid-gas interface induced by surfactant; Journal of Fluid Mechanics; 2020, 899(25): A8.34. Liu Wenbin, Liu Ying, Cheng Yangyang, Chen Lirong, Yi Xin, Duan Huiling*; Unified model for size-dependent to size-independent transition in yield strength of crystalline metallic materials; Physical Review Letters; 2020, 124(23): 235501.35. Huang Tianyun, Huang Hengwei, Jin DongDong, Chen Qianying, Huang Jianyong, Zhang Li, Duan Huiling*; Four-dimensional micro-building blocks; Science Advances; 2020, 6(3): eaav8219.36.Xiang Yaolei, Huang Shenglin, Huang Tianyun, Dong Ao, Cao Di, Li Hongyuan, Xue Yahui, Lv Pengyu, Duan Huiling*; Superrepellency of underwater hierarchical structures on Salvinia leaf; Proceedings of the National Academy of Sciences of the United States of America; 2020, 117(5): 2282-2287.37.Chen Lirong, Liu Wenbin, Yu Long, Cheng Yangyang, Ren Ke, Sui Haonan, Yi Xin*, Duan Huiling*; Probabilistic and constitutive models for ductile-to-brittle transition in steels: A competition between cleavage and ductile fracture; Journal of the Mechanics and Physics of Solids; 2020, 135: 103809.38. Chen Qianying, Lv Pengyu, Huang Tianyun, Huang Jianyong*, Duan Huiling*; Encoding smart micro-joints for micro-crawlers with enhanced locomotion; Advanced Intelligent Systems; 2020, 2(3): 1900128.39. Jin DongDong#, Chen Qianying#, Huang Tianyun*, Huang Jianyong, Zhang Li, Duan Huiling; Four-dimensional direct laser writing of reconfigurable compound micromachines; Materials Today; 2020, 32: 19-25.40.Li Hongyuan, Ji SongSong, Tan Xiangkui, Li Zexiang, Xiang Yaolei, Lv Pengyu*, Duan Huiling*; Effect of reynolds number on drag reduction in turbulent boundary layer flow over liquid-gas interface; Physics of Fluids; 2020, 32(12): 122111.41.Li Zexiang, Ji Songsong, Duan Huiling, Lan Shilong, Zhang Jinbai, Lv Pengyu*; Coupling effect of wall slip and spanwise oscillation on drag reduction in turbulent channel flow; Physical Review Fluids; 2020, 5(12): 124601.42.Liu Huan, Zhang Quan, Zhang Kai*, Hu Gengkai, Duan Huiling*; Designing 3D digital metamaterial for elastic waves: from elastic wave polarizer to vibration control; Advanced Science; 2019, 6(16): 1900401.43.Liu Wenbin, Chen Lirong, Cheng Yangyang, Yu Long, Yi Xin, Gao Huajian, Duan Huiling*; Model of nanoindentation size effect incorporating the role of elastic deformation; Journal of the Mechanics and Physics of Solids; 2019, 126: 245-255.44.Li Xiying, Zhang Jiaming*, Yi Xin*, Huang Zhongyi, Lv Pengyu, Duan Huiling; Multimaterial microfluidic 3D printing of textured composites with liquid inclusions; Advanced Science; 2019, 6(3): 1800730.45.Cheng Yangyang, Yu Long, Chen Lirong, Liu Wenbin, Yi Xin*, Duan Huiling*; Failure of fracture toughness criterion at small scales; Physical Review Materials; 2019, 3(11): 113602.46.Chen Lirong, Xiao Xiazi, Yu Long, Chu Haijian, Duan Huiling*; Texture evolution and mechanical behaviour of irradiated face-centred cubic metals; Proceedings of the Royal Society A: Mathematical, Physical and Engineering Sciences; 2018, 474(2210): 20170604.47.Guo Xiao, Liu Huan, Zhang Kai, Duan Huiling*; Dispersion relations of elastic waves in two-dimensional tessellated piezoelectric phononic crystals; Applied Mathematical Modelling; 2018, 56: 65-82.48.Lv Pengyu, Xiang Yaolei, Xue Yahui, Lin Hao, Duan Huiling*; Morphological bubble evolution induced by air diffusion on submerged hydrophobic structures; Physics of Fluids; 2017, 29(3): 032001.49.Liu Hao, Zhang Yin, Kang Wei*, Zhang Ping, Duan Huiling, He Xiantu*; Molecular dynamics simulation of strong shock waves propagating in dense deuterium, taking into consideration effects of excited electrons; Physical Review E; 2017, 95(2): 023201.50.Xiang Yaolei, Huang Shenglin, Lv Pengyu, Xue Yahui, Su Qiang, Duan Huiling*; Ultimate stable underwater superhydrophobic state; Physical Review Letters; 2017, 119(13): 134501.51.Xue Yahui, Lv Pengyu, Lin Hao, Duan Huiling*; Underwater superhydrophobicity: stability, design and regulation, and applications; Applied Mechanics Reviews; 2016, 68(3): 030803.52.Xiang Yaolei, Xue Yahui, Lv Pengyu, Li Dandan, Duan Huiling*; Influence of fluid flow on the stability and wetting transition of submerged superhydrophobic surfaces; Soft Matter; 2016, 12(18): 4241-4246.53.Xiao Xiazi, Song Dingkun, Xue Jianming, Chu Haijian*, Duan Huiling*; A self-consistent plasticity theory for modeling the thermo-mechanical properties of irradiated FCC metallic polycrystals; Journal of the Mechanics and Physics of Solids; 2015, 78: 1-16.54.Terentyev Dmitry*, Xiao Xiazi, Dubinko Andrii., Alexander Bakaev, Duan Huiling*; Dislocation-mediated strain hardening in tungsten: Thermo-mechanical plasticity theory and experimental validation; Journal of the Mechanics and Physics of Solids; 2015, 85: 1-15.55.Xue Yahui, Yang Yanbing, Sun Hui, Li Xiying, Wu Shiting, Cao Anyuan*, Duan Huiling*; A switchable and compressible carbon nanotube sponge electrocapillary imbiber; Advanced Materials; 2015, 27(44): 7241-7246.56.Xue Yahui, Lv Pengyu, Liu Ying, Shi Yipeng, Lin Hao*, Duan Huiling*; Morphology of gas cavities on patterned hydrophobic surfaces under reduced pressure; Physics of Fluids; 2015, 27(9): 092003.57.Song Dingkun, Xiao Xiazi, Xue Jianming, Chu Haijian, Duan Huiling*; Mechanical properties of irradiated multi-phase polycrystalline BCC materials; Acta Mechanica Sinica; 2015, 31(2): 191-204.58.Xiao Xiazi, Song Dingkun, Chu Haijian, Xue Jianming, Duan Huiling*; Mechanical properties for irradiated face-centred cubic nanocrystalline metals; Proceedings of the Royal Society A: Mathematical, Physical and Engineering Sciences; 2015, 471(2177): 20140832.59.Lv Pengyu, Xue Yahui, Shi Yipeng, Lin Hao*, Duan Huiling*; Metastable states and wetting transition of submerged superhydrophobic structures; Physical Review Letters; 2014, 112(19): 196101.60.Xue Yahui, Markmann Jurgen, Duan Huiling*, Weissmüller Jorg, Huber Patrick*; Switchable imbibition in nanoporous gold; Nature Communications; 2014, 5(1): 4237.61.Liu Yingjie, Lv Pengyu, Ma Jun, Bai Ruobing, Duan Huiling*; Stress fields in hollow core-shell spherical electrodes of lithium ion batteries; Proceedings of the Royal Society A: Mathematical, Physical and Engineering Sciences; 2014, 470(2172): 20140299.62.Xue Yahui, Yuan Huijing, Su Weidong, Shi Yipeng*, Duan Huiling*; Enhanced load-carrying capacity of hairy surfaces floating on water; Proceedings of the Royal Society A: Mathematical, Physical and Engineering Sciences; 2014, 470(2165): 20130832.63.Lanza Mario, Bayerl Albin, Gao Teng, Porti Marc, Nafria Montserrat, Jing Guangyin, Zhang Yanfeng, Liu Zhongfan, Duan Huiling*; Graphene-coated atomic force microscope tips for reliable nanoscale electrical characterization; Advanced Materials; 2013, 25(10): 1440-1444.64.Xue Yahui, Chu Shigan, Lv Pengyu, Duan Huiling*; Importance of hierarchical structures in wetting stability on submersed superhydrophobic surfaces; Langmuir; 2012, 28(25): 9440-9450.65.Wang Yan, Jörg Weissmüller*, Duan Huiling*; Mechanics of corrugated surfaces; Journal of the Mechanics and Physics of Solids; 2010, 58(10): 1552-1566.66.Zhang Kai, Duan Huiling, Karihaloo Bhushan Lal*, Wang Jianxiang; Hierarchical, multilayered cell walls reinforced by recycled silk cocoons enhance the structural integrity of honeybee combs; Proceedings of the National Academy of Sciences of the United States of America; 2010, 107(21): 9502-9506.67.Duan Huiling*, Xue Yahui, Yi Xin; Vibration of cantilevers with rough surfaces; Acta Mechanica Solida Sinica; 2009, 22(6): 550-554.68.Yi Xin, Duan Huiling*; Surface stress induced by interactions of adsorbates and its effect on deformation and frequency of microcantilever sensors; Journal of the Mechanics and Physics of Solids; 2009, 57(8): 1254-1266.69.Wang Yan, Weissmüller Jorg, Duan Huiling*; Tuning and monitoring of quantum dot growth by an in situ cantilever; Physical Review B; 2009, 79(4): 045401.70.Duan Huiling*, Weissmüller Jorg, Wang Yan; Instabilities of core-shell heterostructured cylinders due to diffusions and epitaxy: spheroidization and blossom of nanowires; Journal of the Mechanics and Physics of Solids; 2008, 56(5): 1831-1851.71.Weissmuller Jorg*, Duan Huiling*; Cantilever bending with rough surfaces; Physical Review Letters; 2008, 101(14): 146102.72.Duan Huiling, Wang Jianxiang, Karihaloo Bhushan Lal*; Theory of elasticity at the nanoscale; Advances in Applied Mechanics; 2008, 42: 1-68.73.Duan Huiling, Yi Xin, Huang Zhuping, Wang Jianxiang*; A unified scheme for prediction of effective moduli of multiphase composites with interface effects. part I: theoretical framework; Mechanics of Materials; 2007, 39(1): 81-93.74.Duan Huiling, Yi Xin, Huang Zhuping, Wang Jianxiang*; A unified scheme for prediction of effective moduli of multiphase composites with interface effects: part II-application and scaling laws; Mechanics of Materials; 2007, 39(1): 94-103.75.Duan Huiling, Karihaloo Bhushan Lal*; Thermo-elastic properties of heterogeneous materials with imperfect interfaces: Generalized Levin's formula and Hill's connections; Journal of the Mechanics and Physics of Solids; 2007, 55(5): 1036-1052.76.Duan Huiling, Karihaloo Bhushan Lal*; Effective thermal conductivities of heterogeneous media containing multiple imperfectly bonded inclusions; Physical Review B; 2007, 75(6): 064206.77.Duan Huiling, Karihaloo Bhushan Lal*, Wang Jianxiang, Yi Xin; Compatible composition profiles and critical sizes of alloyed quantum dots; Physical Review B; 2006, 74(19): 195328.78.Duan Huiling, Yang Jiao, Yi Xin, Huang Zhuping, Wang Jianxiang*; Solutions of inhomogeneity problems with graded shells and application to core-shell nanoparticles and composites; Journal of the Mechanics and Physics of Solids; 2006, 54(7): 1401-1425.79.Duan Huiling, Karihaloo Bhushan Lal*, Wang Jianxiang, Yi Xin; Effective conductivities of heterogeneous media containing multiple inclusions with various spatial distributions; Physical Review B; 2006, 73(17): 174203.80.Wang Jianxiang, Duan Huiling, Huang Zhuping, Karihaloo Bhushan Lal*; A scaling law for properties of nano-structured materials; Proceedings of the Royal Society A: Mathematical, Physical and Engineering Sciences; 2006, 462(2069): 1355-1363.81.Wang Jianxiang*, Duan Huiling, Yi Xin; Bounds on effective conductivities of heterogeneous media with graded constituents; Physical Review B; 2006, 73(10): 104208.82.Jing Guangyin, Duan Huiling, Sun X. M., Zhang Z. S., Xu J., Li Y. D., Wang Jianxiang, Yu Dapeng*; Surface effects on elastic properties of silver nanowires: Contact atomic-force microscopy; Physical Review B; 2006, 73(23): 235409.83.Duan Huiling, Wang Jianxiang*, Huang Zhuping, Zhong Yiling; Stress fields of a spheroidal inhomogeneity with an interphase in an infinite medium under remote loadings; Proceedings of the Royal Society A: Mathematical, Physical and Engineering Sciences; 2005, 461(2056): 1055-1080.84.Duan Huiling, Wang Jianxiang*, Huang Zhuping, Karihaloo Bhushan Lal; Size-dependent effective elastic constants of solids containing nano-inhomogeneities with interface stress; Journal of The Mechanics and Physics of Solids; 2005, 53(7): 1574-1596.85.Duan Huiling, Wang Jianxiang, Huang Zhuping, Karihaloo Bhushan Lal*; Eshelby formalism for nano-inhomogeneities; Proceedings of the Royal Society A: Mathematical, Physical and Engineering Sciences; 2005, 461(2062): 3335-3353.86.Duan Huiling, Wang Jianxiang*, Huang Zhuping, Luo Zhenyu; Stress concentration tensors of inhomogeneities with interface effects; Mechanics of Materials; 2005, 37(7): 723-736.",
@@ -1877,9 +1904,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -1940,21 +1967,21 @@
           },
           {
             "degree": "本科",
-            "institution": "内蒙古师范大学数学系",
+            "institution": "内蒙古师范大学",
             "year": "1990-1994",
-            "major": ""
+            "major": "数学系"
           },
           {
             "degree": "硕士",
-            "institution": "内蒙古大学数学系",
+            "institution": "内蒙古大学",
             "year": "1994-1997",
-            "major": ""
+            "major": "数学系"
           },
           {
             "degree": "博士",
-            "institution": "北京大学力学与工程科学系",
+            "institution": "北京大学",
             "year": "1997-2000",
-            "major": ""
+            "major": "力学与工程科学系"
           }
         ],
         "publications_count": -1,
@@ -1977,9 +2004,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2033,10 +2060,10 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "博士",
-            "institution": "清华大学工程力学系",
+            "degree": "博士学位",
+            "institution": "清华大学",
             "year": "1987",
-            "major": ""
+            "major": "工程力学系"
           }
         ],
         "publications_count": -1,
@@ -2059,9 +2086,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2149,9 +2176,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -2186,7 +2213,14 @@
         "is_academician": false,
         "research_areas": [
           "微/纳米尺度热质输运",
-          "生物流体力学和生物传热传质"
+          "生物流体力学和生物传热传质",
+          "微/纳系统中的热现象",
+          "微/纳尺度质能传输",
+          "微/纳米材料、结构和器件的热辐射特性",
+          "生物传热传质有关的非牛顿流体力学",
+          "流动稳定性",
+          "计算流体力学",
+          "微流体"
         ],
         "keywords": [],
         "bio": "",
@@ -2204,21 +2238,21 @@
         "education": [
           {
             "degree": "Ph.D.",
-            "institution": "美国佐治亚理工学院机械工程系",
+            "institution": "美国佐治亚理工学院",
             "year": "2004",
-            "major": ""
+            "major": "机械工程系"
           },
           {
             "degree": "M.S.",
-            "institution": "北京大学力学与工程科学系",
+            "institution": "北京大学",
             "year": "2000",
-            "major": ""
+            "major": "力学与工程科学系"
           },
           {
             "degree": "B.S.",
-            "institution": "中国科学技术大学力学和机械工程系",
+            "institution": "中国科学技术大学",
             "year": "1997",
-            "major": ""
+            "major": "力学和机械工程系"
           }
         ],
         "publications_count": -1,
@@ -2241,9 +2275,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2278,8 +2312,12 @@
         "is_academician": false,
         "research_areas": [
           "机器人系统的任务与运动规划",
-          "复杂协作任务下的多自主体系统的分布式混合控制",
-          "机器臂的技能学习与规划"
+          "多自主体系统的分布式混合控制",
+          "机器臂的技能学习与规划",
+          "连续动态控制",
+          "离散任务规划",
+          "数据驱动的学习方法",
+          "基于模型的规划算法"
         ],
         "keywords": [],
         "bio": "",
@@ -2311,7 +2349,7 @@
             "degree": "学士",
             "institution": "北京交通大学",
             "year": "2006-2010",
-            "major": "电子工程信息学院，自动化专业"
+            "major": "自动化专业"
           }
         ],
         "publications_count": -1,
@@ -2334,9 +2372,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2430,9 +2468,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2468,8 +2506,8 @@
         "research_areas": [
           "国家重大任务",
           "核聚变与等离子体物理",
-          "理论物理专业研究",
-          "惯性约束聚变研究",
+          "理论物理",
+          "惯性约束聚变",
           "高能量密度物理",
           "非平衡统计物理",
           "激光与等离子体相互作用",
@@ -2492,9 +2530,9 @@
         "education": [
           {
             "degree": "",
-            "institution": "浙江大学物理系",
+            "institution": "浙江大学",
             "year": "1962",
-            "major": "理论物理专业"
+            "major": "理论物理"
           }
         ],
         "publications_count": -1,
@@ -2517,9 +2555,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2553,18 +2591,27 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "固体力学",
+          "流体力学",
+          "湍流",
+          "一般力学",
+          "工程计算",
+          "有限元",
+          "能源",
+          "资源",
+          "先进制造",
+          "工业工程",
+          "机器人",
+          "航空",
+          "航天",
           "固体本构",
           "波动力学",
           "噪音和振动控制",
-          "智能材料",
-          "结构无损检测",
+          "智能材料及结构无损检测",
           "弹性超材料的动态行为",
           "智能超材料",
           "波动控制",
-          "低频减振降噪",
-          "航空结构",
-          "海洋工程",
-          "医疗声学"
+          "低频减振降噪"
         ],
         "keywords": [],
         "bio": "",
@@ -2581,10 +2628,10 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "",
-            "institution": "中山大学",
-            "year": "",
-            "major": ""
+            "degree": "博士",
+            "institution": "加拿大阿尔伯塔大学",
+            "year": "2003",
+            "major": "力学工程"
           },
           {
             "degree": "",
@@ -2593,10 +2640,10 @@
             "major": ""
           },
           {
-            "degree": "博士",
-            "institution": "加拿大阿尔伯塔大学",
-            "year": "2003",
-            "major": "力学工程"
+            "degree": "",
+            "institution": "中山大学",
+            "year": "",
+            "major": ""
           }
         ],
         "publications_count": -1,
@@ -2619,9 +2666,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2704,9 +2751,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2740,20 +2787,19 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "力学",
-          "固体力学",
-          "流体力学",
-          "湍流",
-          "一般力学",
-          "工程计算",
-          "有限元",
-          "能源",
-          "资源",
-          "先进制造",
-          "工业工程",
-          "机器人",
-          "航空",
-          "航天"
+          "系统稳定性与控制理论",
+          "多维系统衰减时间",
+          "单输入系统极点配置",
+          "二次型最优控制",
+          "参数不确定性鲁棒控制",
+          "多项式系统族稳定性",
+          "多项式稳定性理论",
+          "鲁棒控制",
+          "控制器与对象同时摄动问题",
+          "积分二次约束问题",
+          "模型降阶问题",
+          "非线性系统总体性质",
+          "稳定性理论"
         ],
         "keywords": [],
         "bio": "",
@@ -2771,15 +2817,21 @@
         "education": [
           {
             "degree": "",
-            "institution": "北京大学数学力学系",
-            "year": "1957",
+            "institution": "扬州中学",
+            "year": "1953",
             "major": ""
           },
           {
             "degree": "",
-            "institution": "北京大学数学力学系",
+            "institution": "北京大学",
+            "year": "1957",
+            "major": "数学力学系"
+          },
+          {
+            "degree": "研究生",
+            "institution": "北京大学",
             "year": "1961",
-            "major": ""
+            "major": "数学力学系"
           }
         ],
         "publications_count": -1,
@@ -2802,9 +2854,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -2838,10 +2890,21 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "人工智能大模型技术的研发和应用",
-          "大模型核心算法研发",
-          "行业大模型应用",
-          "具身智能"
+          "人工智能大模型技术",
+          "大模型核心算法",
+          "行业大模型",
+          "具身智能",
+          "大小模型协同",
+          "多模态融合",
+          "合成数据训练",
+          "推理加速",
+          "知识融合",
+          "能源领域大模型开发",
+          "行业数据构建",
+          "异构数据融合",
+          "行业模型训练框架",
+          "具身多模态大模型",
+          "感知-认知-执行一体化端到端的具身机器人大脑系统"
         ],
         "keywords": [],
         "bio": "发表的文章共计85篇，包括14篇国际期刊和71篇国际会议论文；Google Scholar论文引用量3900+，h-index 31；获得专利授权14项，专利公布35项。",
@@ -2858,19 +2921,19 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "哲学博士学位",
+            "degree": "哲学博士",
             "institution": "英国爱丁堡大学",
             "year": "2005-2010",
             "major": "人工智能"
           },
           {
-            "degree": "理学硕士学位",
+            "degree": "理学硕士",
             "institution": "北京大学信息科学技术学院",
             "year": "2002-2005",
             "major": "信号与信息处理"
           },
           {
-            "degree": "工学学士学位",
+            "degree": "工学学士",
             "institution": "华北电力大学自动化系",
             "year": "1998-2002",
             "major": "自动控制"
@@ -2896,9 +2959,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -2933,8 +2996,18 @@
         "is_academician": false,
         "research_areas": [
           "微机器智能化技术",
+          "软体/连续体微纳米机器人",
+          "多模态/模块化可重构微机器",
+          "微尺度组装与编辑技术",
+          "柔性微电子集成微机器",
+          "微机器的群集控制与群集智能",
           "先进微纳制造技术",
-          "面向精准医疗的跨尺度微纳米机器人系统集成及驱控技术"
+          "智能可打印材料",
+          "微纳4D打印技术",
+          "面向精准医疗的跨尺度微纳米机器人系统集成及驱控技术",
+          "智能感知与驱控技术",
+          "多物理场微纳米机器人驱控平台建造",
+          "微机器人靶向递送技术"
         ],
         "keywords": [],
         "bio": "",
@@ -2989,9 +3062,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3062,9 +3135,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3097,22 +3170,7 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [
-          "力学",
-          "固体力学",
-          "流体力学",
-          "湍流",
-          "一般力学",
-          "工程计算",
-          "有限元",
-          "能源",
-          "资源",
-          "先进制造",
-          "工业工程",
-          "机器人",
-          "航空",
-          "航天"
-        ],
+        "research_areas": [],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -3166,11 +3224,11 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 40
       },
       "is_new": false
     },
@@ -3223,21 +3281,21 @@
         "education": [
           {
             "degree": "学士、硕士",
-            "institution": "北京师范大学物理系",
+            "institution": "北京师范大学",
             "year": "1994-2001",
-            "major": ""
+            "major": "物理系"
           },
           {
             "degree": "",
-            "institution": "俄亥俄州肯特州立大学液晶所",
+            "institution": "俄亥俄州肯特州立大学液晶所（美国）",
             "year": "2001-2002",
             "major": ""
           },
           {
             "degree": "博士",
-            "institution": "佐治亚理工学院物理系",
+            "institution": "佐治亚理工学院",
             "year": "2002-2008",
-            "major": ""
+            "major": "物理系"
           }
         ],
         "publications_count": -1,
@@ -3260,9 +3318,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3295,22 +3353,7 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [
-          "力学",
-          "固体力学",
-          "流体力学",
-          "湍流",
-          "一般力学",
-          "工程计算",
-          "有限元",
-          "能源",
-          "资源",
-          "先进制造",
-          "工业工程",
-          "机器人",
-          "航空",
-          "航天"
-        ],
+        "research_areas": [],
         "keywords": [],
         "bio": "1.   A NSGA-II-based calibration algorithm for underwater binocular vision measurement system.IEEE Transactionson Instrumentation and Measurement",
         "bio_en": "",
@@ -3358,11 +3401,11 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
-        "data_completeness": 70
+        "data_completeness": 55
       },
       "is_new": false
     },
@@ -3372,7 +3415,7 @@
       "url_hash": "8dc6fbc6590574dfc6dc8801bfdc237b2d7d3438589f51080dc5501a3d32f438",
       "published_at": null,
       "author": null,
-      "content": "H.\r\nWang, X. Li, M. Phipps, B. Li*, Numerical and Experimental Study of Hot\r\nPressing Technique for Resin-based Friction Composites,Composite Part A: Applied Science and Manufacturing, Vol\r\n153:106737, 2022.",
+      "content": "H.\nWang, X. Li, M. Phipps, B. Li*, Numerical and Experimental Study of Hot\nPressing Technique for Resin-based Friction Composites,Composite Part A: Applied Science and Manufacturing, Vol\n153:106737, 2022.",
       "content_html": null,
       "content_hash": "41992504fd827b9fe5439da9842bb668349012c6e569eada1aa27876f08939f6",
       "source_id": "pku_coe_faculty",
@@ -3402,7 +3445,7 @@
           "生物医疗"
         ],
         "keywords": [],
-        "bio": "H.\r\nWang, X. Li, M. Phipps, B. Li*, Numerical and Experimental Study of Hot\r\nPressing Technique for Resin-based Friction Composites,Composite Part A: Applied Science and Manufacturing, Vol\r\n153:106737, 2022.",
+        "bio": "H.\nWang, X. Li, M. Phipps, B. Li*, Numerical and Experimental Study of Hot\nPressing Technique for Resin-based Friction Composites,Composite Part A: Applied Science and Manufacturing, Vol\n153:106737, 2022.",
         "bio_en": "",
         "email": "bo.li@pku.edu.cn",
         "phone": "",
@@ -3454,9 +3497,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -3543,9 +3586,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3580,7 +3623,13 @@
         "is_academician": false,
         "research_areas": [
           "流体力学",
-          "实验流体力学"
+          "实验流体力学",
+          "高超音速激波和湍流边界层干扰",
+          "转捩和湍流",
+          "边界层转捩",
+          "可压缩流动",
+          "不可压缩流动",
+          "壁湍流"
         ],
         "keywords": [],
         "bio": "",
@@ -3597,19 +3646,19 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "学士学位",
+            "degree": "学士",
             "institution": "南京航空航天大学",
             "year": "1984",
             "major": ""
           },
           {
-            "degree": "硕士学位",
+            "degree": "硕士",
             "institution": "中国科学院力学研究所",
             "year": "1990",
             "major": ""
           },
           {
-            "degree": "博士学位",
+            "degree": "博士",
             "institution": "北京航空航天大学",
             "year": "1995",
             "major": ""
@@ -3635,9 +3684,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3720,9 +3769,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -3756,15 +3805,15 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "波动力学与成像基础研究",
-          "活性软物质波动力学",
+          "生物力学成像",
+          "波动力学",
           "显微剪切波成像",
-          "显微光学相干层析弹性成像",
-          "布里渊显微成像",
-          "超声弹性成像",
           "超声3D打印",
           "超声传感",
-          "超声脑调控"
+          "超声脑调控",
+          "活性软物质波动力学",
+          "全场波测量与反演",
+          "动态力学表征"
         ],
         "keywords": [],
         "bio": "（†共同一作，*通讯作者）：",
@@ -3783,13 +3832,13 @@
           {
             "degree": "博士",
             "institution": "清华大学",
-            "year": "2014/09-2019/07",
+            "year": "2014-2019",
             "major": "航天航空学院"
           },
           {
             "degree": "学士",
             "institution": "清华大学",
-            "year": "2010/09-2014/07",
+            "year": "2010-2014",
             "major": "航天航空学院"
           }
         ],
@@ -3813,9 +3862,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -3827,7 +3876,7 @@
       "url_hash": "fccc62c49070f0199c8f7b68614b7d43bf0810d4dc80b3096751ae5f3c6fb469",
       "published_at": null,
       "author": null,
-      "content": "[1]Hongyuan Li; Zexiang Li; Xiangkui Tan; Xiangyu Wang; Shenglin\r\nHuang; Yaolei Xiang; Pengyu Lv*; Huiling Duan*; Three-dimensional backflow at\r\nliquid-gas interface induced by surfactant,Journal\r\nof Fluid Mechanics, 2020, 899: A8. (第一作者)",
+      "content": "[1]Hongyuan Li; Zexiang Li; Xiangkui Tan; Xiangyu Wang; Shenglin\nHuang; Yaolei Xiang; Pengyu Lv*; Huiling Duan*; Three-dimensional backflow at\nliquid-gas interface induced by surfactant,Journal\nof Fluid Mechanics, 2020, 899: A8. (第一作者)",
       "content_html": null,
       "content_hash": "56e5e42bedb4853769e814e610c7cae452f3a7c30178882133c607679a84f081",
       "source_id": "pku_coe_faculty",
@@ -3848,9 +3897,13 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "跨介质流固耦合力学理论（界面力学理论、超疏水表面减阻机理、复杂界面流动等）",
+          "PIV流场精准测量技术（2D2C-PIV、3D3C-PIV、水槽及水洞测量技术等）",
+          "水-空跨介质海洋装备研制（跨介质降载增稳机理、跨介质航行器及其数字孪生智能系统）"
+        ],
         "keywords": [],
-        "bio": "[1]Hongyuan Li; Zexiang Li; Xiangkui Tan; Xiangyu Wang; Shenglin\r\nHuang; Yaolei Xiang; Pengyu Lv*; Huiling Duan*; Three-dimensional backflow at\r\nliquid-gas interface induced by surfactant,Journal\r\nof Fluid Mechanics, 2020, 899: A8. (第一作者)",
+        "bio": "[1]Hongyuan Li; Zexiang Li; Xiangkui Tan; Xiangyu Wang; Shenglin\nHuang; Yaolei Xiang; Pengyu Lv*; Huiling Duan*; Three-dimensional backflow at\nliquid-gas interface induced by surfactant,Journal\nof Fluid Mechanics, 2020, 899: A8. (第一作者)",
         "bio_en": "",
         "email": "lihongyuan@pku.edu.cn",
         "phone": "",
@@ -3862,7 +3915,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "北京大学",
+            "year": "2016-2020",
+            "major": "工学院"
+          },
+          {
+            "degree": "硕士",
+            "institution": "哈尔滨工业大学",
+            "year": "2013-2015",
+            "major": "海洋工程学院"
+          },
+          {
+            "degree": "本科",
+            "institution": "大连海洋大学",
+            "year": "2009-2013",
+            "major": "船舶与海洋工程学院"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -3883,11 +3955,11 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 70
       },
       "is_new": false
     },
@@ -3920,7 +3992,10 @@
         "is_academician": false,
         "research_areas": [
           "CO2捕集、利用与封存（CCUS）",
-          "CO2捕集和资源化利用（CCU）技术",
+          "CO2捕集和资源化利用（CCU）",
+          "化学吸收剂体系的热/动力学",
+          "模型构建和流程优化",
+          "低能耗、低成本CO2捕集和利用及其耦合技术",
           "基于CO2反应热原位回收利用的“超低能耗”CO2捕集技术",
           "化学法直接空气CO2捕集 “负排放”技术(DAC)",
           "基于CO2循环利用的废旧锂电池金属回收技术",
@@ -3944,19 +4019,19 @@
         "education": [
           {
             "degree": "博士",
-            "institution": "澳大利亚科廷科技大学，澳大利亚联邦科学与工业研究组织",
+            "institution": "澳大利亚科廷科技大学，澳大利亚联邦科学与工业研究组织，美国德克萨斯大学奥斯汀分校",
             "year": "2013.2 – 2016.5",
             "major": "化学工程"
           },
           {
             "degree": "硕士",
-            "institution": "中南大学",
+            "institution": "中南大学，冶金与环境学院",
             "year": "2009.9 – 2012.5",
             "major": "环境工程"
           },
           {
             "degree": "学士",
-            "institution": "中南大学",
+            "institution": "中南大学，冶金与环境学院",
             "year": "2005.9 – 2009.6",
             "major": "环境工程"
           }
@@ -3981,9 +4056,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -4030,7 +4105,9 @@
           "工业工程",
           "机器人",
           "航空",
-          "航天"
+          "航天",
+          "先进CMOS集成",
+          "纳米电子学"
         ],
         "keywords": [],
         "bio": "迄今已在SCI期刊发表论文180余篇，H-指数37.",
@@ -4085,9 +4162,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -4122,7 +4199,10 @@
         "is_academician": false,
         "research_areas": [
           "计算力学",
-          "计算物理学"
+          "计算物理学",
+          "颗粒随机填充(堆积)",
+          "有限元网格生成及动网格技术",
+          "神经网络有限元分析"
         ],
         "keywords": [],
         "bio": "",
@@ -4140,27 +4220,21 @@
         "education": [
           {
             "degree": "工学学士",
-            "institution": "南京航空航天大学飞机系",
+            "institution": "南京航空航天大学",
             "year": "1990",
-            "major": ""
+            "major": "飞机系"
           },
           {
             "degree": "工学硕士",
-            "institution": "南京航空航天大学飞行器系",
+            "institution": "南京航空航天大学",
             "year": "1993",
-            "major": ""
+            "major": "飞行器系"
           },
           {
             "degree": "工学博士",
-            "institution": "南京航空航天大学飞行器系",
+            "institution": "南京航空航天大学",
             "year": "1996",
-            "major": ""
-          },
-          {
-            "degree": "博士后",
-            "institution": "北京大学力学与工程科学系",
-            "year": "1996-1998",
-            "major": ""
+            "major": "飞行器系"
           }
         ],
         "publications_count": -1,
@@ -4183,9 +4257,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -4264,9 +4338,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -4358,9 +4432,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -4414,7 +4488,7 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "双学士",
+            "degree": "双学士学位",
             "institution": "卡内基－梅伦大学",
             "year": "",
             "major": "电机工程与经济学"
@@ -4458,9 +4532,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -4514,15 +4588,15 @@
         "education": [
           {
             "degree": "本科，硕士",
-            "institution": "莫斯科大学数学力学系",
+            "institution": "莫斯科大学",
             "year": "1991-1996",
-            "major": ""
+            "major": "数学力学系"
           },
           {
             "degree": "博士",
-            "institution": "莫斯科大学数学力学系",
+            "institution": "莫斯科大学",
             "year": "1996-1999",
-            "major": ""
+            "major": "数学力学系"
           }
         ],
         "publications_count": -1,
@@ -4545,9 +4619,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -4559,7 +4633,7 @@
       "url_hash": "bc75f451d9554c1ee34ac2f00af1b3b650258f8f49fc3fbfb9919f986c1af8d8",
       "published_at": null,
       "author": null,
-      "content": "1.    \r\nS. Zhang,\r\nY. Lv,Z. Li*, An operator-theoretic approach to robust event-triggered control\r\nof network systems with frequency-domain uncertainties,IEEE Transactions on Automatic Control,accepted for publication, 2022.  (regular\r\npaper)",
+      "content": "1.    \nS. Zhang,\nY. Lv,Z. Li*, An operator-theoretic approach to robust event-triggered control\nof network systems with frequency-domain uncertainties,IEEE Transactions on Automatic Control,accepted for publication, 2022.  (regular\npaper)",
       "content_html": null,
       "content_hash": "67a315b5ec7b47a0e6db9ee371df9d1055d92206e6c4672187ae19f3a3249a4e",
       "source_id": "pku_coe_faculty",
@@ -4588,7 +4662,7 @@
           "多机器人运动规划"
         ],
         "keywords": [],
-        "bio": "1.    \r\nS. Zhang,\r\nY. Lv,Z. Li*, An operator-theoretic approach to robust event-triggered control\r\nof network systems with frequency-domain uncertainties,IEEE Transactions on Automatic Control,accepted for publication, 2022.  (regular\r\npaper)",
+        "bio": "1.    \nS. Zhang,\nY. Lv,Z. Li*, An operator-theoretic approach to robust event-triggered control\nof network systems with frequency-domain uncertainties,IEEE Transactions on Automatic Control,accepted for publication, 2022.  (regular\npaper)",
         "bio_en": "",
         "email": "zhongkli@pku.edu.cn",
         "phone": "",
@@ -4604,13 +4678,13 @@
           {
             "degree": "博士",
             "institution": "北京大学工学院力学与空天技术系",
-            "year": "2005.9--2010.7",
+            "year": "2005-2010",
             "major": ""
           },
           {
             "degree": "学士",
             "institution": "国防科技大学航天与材料工程学院",
-            "year": "2001.9--2005.7",
+            "year": "2001-2005",
             "major": ""
           }
         ],
@@ -4634,9 +4708,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -4648,7 +4722,7 @@
       "url_hash": "f436035f7c1be997ce88d80d1c754789a464e851d1a52cd8a78195e99365ad71",
       "published_at": null,
       "author": null,
-      "content": "1.Jianlin Yi, Zheng Li*, Mehrdad\r\nNegahban, Rongyu Xia, Jueyong Zhu. Asymmetric viscoelastic metamaterials for\r\nbroad bandgap design and unidirectional zero reflection.Mechanical Systems and Signal Processing, 162 (2022) 108101",
+      "content": "1.Jianlin Yi, Zheng Li*, Mehrdad\nNegahban, Rongyu Xia, Jueyong Zhu. Asymmetric viscoelastic metamaterials for\nbroad bandgap design and unidirectional zero reflection.Mechanical Systems and Signal Processing, 162 (2022) 108101",
       "content_html": null,
       "content_hash": "5b343118f97d3d85efe56bd9dc453b53509749270512b4a2cf1fc0b7f1140e7b",
       "source_id": "pku_coe_faculty",
@@ -4675,7 +4749,7 @@
           "智能传感器：基于压电/压电半导体的导波调控传感器的研究"
         ],
         "keywords": [],
-        "bio": "1.Jianlin Yi, Zheng Li*, Mehrdad\r\nNegahban, Rongyu Xia, Jueyong Zhu. Asymmetric viscoelastic metamaterials for\r\nbroad bandgap design and unidirectional zero reflection.Mechanical Systems and Signal Processing, 162 (2022) 108101",
+        "bio": "1.Jianlin Yi, Zheng Li*, Mehrdad\nNegahban, Rongyu Xia, Jueyong Zhu. Asymmetric viscoelastic metamaterials for\nbroad bandgap design and unidirectional zero reflection.Mechanical Systems and Signal Processing, 162 (2022) 108101",
         "bio_en": "",
         "email": "lizheng@pku.edu.cn",
         "phone": "",
@@ -4689,19 +4763,19 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "理学学士",
+            "degree": "理学学士学位",
             "institution": "北京大学力学系",
             "year": "1986",
             "major": ""
           },
           {
-            "degree": "理学硕士",
+            "degree": "理学硕士学位",
             "institution": "北京大学力学系",
             "year": "1989",
             "major": ""
           },
           {
-            "degree": "理学博士",
+            "degree": "理学博士学位",
             "institution": "北京大学力学系",
             "year": "1993",
             "major": ""
@@ -4727,9 +4801,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -4767,7 +4841,14 @@
           "刚体动力学中的奇异性问题",
           "变结构与多体系统动力学",
           "复杂系统动力学",
-          "航天工程应用：空间大型伸展绳系结构；月壤动力学分析；空间飞行器着陆稳定性分析；空间飞行器对接技术; 空间飞行器间隙问题"
+          "航天工程应用：空间大型伸展绳系结构",
+          "月壤动力学分析",
+          "空间飞行器着陆稳定性分析",
+          "空间飞行器对接技术",
+          "空间飞行器间隙问题",
+          "复杂系统有序行为的内部驱动机制",
+          "含单边约束（接触/碰撞与摩擦）航天动力学系统理论分析与算法研究",
+          "刚体动力学中的奇异性问题（高维Painlev疑难问题，非完整约束对应的奇异性问题）"
         ],
         "keywords": [],
         "bio": "",
@@ -4800,12 +4881,6 @@
             "institution": "天津大学",
             "year": "1997",
             "major": ""
-          },
-          {
-            "degree": "博士后",
-            "institution": "北京大学力学系",
-            "year": "1998-2000",
-            "major": ""
           }
         ],
         "publications_count": -1,
@@ -4828,9 +4903,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -4864,20 +4939,11 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "力学",
-          "固体力学",
-          "流体力学",
-          "湍流",
-          "一般力学",
-          "工程计算",
-          "有限元",
-          "能源",
-          "资源",
-          "先进制造",
-          "工业工程",
-          "机器人",
-          "航空",
-          "航天"
+          "智能机器人对移动目标进行搜索和追踪的运动规划",
+          "无人车的安全路径规划",
+          "多机器人系统的分布式估计、学习和运动规划",
+          "机器人集群的运动规划",
+          "基于人意图推理的、用于人机合作的机器人自主决策"
         ],
         "keywords": [],
         "bio": "",
@@ -4915,13 +4981,7 @@
             "degree": "学士",
             "institution": "北京大学",
             "year": "2007-2011",
-            "major": "信息科学技术学院"
-          },
-          {
-            "degree": "双学位",
-            "institution": "北京大学",
-            "year": "2007-2011",
-            "major": "数学科学学院"
+            "major": "信息科学技术学院；数学科学学院"
           }
         ],
         "publications_count": -1,
@@ -4944,9 +5004,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -4999,7 +5059,19 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "学士，硕士和博士学位",
+            "degree": "学士",
+            "institution": "北京航空航天大学",
+            "year": "1981.9-1991.10",
+            "major": "航空制造工程系"
+          },
+          {
+            "degree": "硕士",
+            "institution": "北京航空航天大学",
+            "year": "1981.9-1991.10",
+            "major": "航空制造工程系"
+          },
+          {
+            "degree": "博士",
             "institution": "北京航空航天大学",
             "year": "1981.9-1991.10",
             "major": "航空制造工程系"
@@ -5025,9 +5097,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -5064,6 +5136,8 @@
           "柔性智能结构与软体机器",
           "软体机器人",
           "折叠与可展结构",
+          "折纸结构",
+          "张拉整体结构",
           "具有人工微结构的超材料",
           "结构优化与人工智能设计",
           "结构可靠性分析"
@@ -5127,9 +5201,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -5198,7 +5272,7 @@
             "degree": "博士",
             "institution": "新加坡国立大学",
             "year": "2003",
-            "major": "机械工程"
+            "major": "机械工程系"
           }
         ],
         "publications_count": -1,
@@ -5221,9 +5295,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -5256,7 +5330,22 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "力学",
+          "固体力学",
+          "流体力学",
+          "湍流",
+          "一般力学",
+          "工程计算",
+          "有限元",
+          "能源",
+          "资源",
+          "先进制造",
+          "工业工程",
+          "机器人",
+          "航空",
+          "航天"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -5291,11 +5380,11 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
-        "data_completeness": 40
+        "data_completeness": 55
       },
       "is_new": false
     },
@@ -5329,25 +5418,19 @@
         "research_areas": [
           "医学人工智能",
           "智能人机交互",
+          "生物医学领域深度学习算法",
+          "成像系统",
           "病理快速诊断",
           "癌症早筛",
-          "深度学习算法",
-          "成像系统",
-          "生物医学成像技术",
-          "智能诊断算法",
-          "设备技术研发",
-          "产品转化",
-          "临床病理扰动的物理建模",
-          "智能诊断鲁棒性算法研发",
-          "多模态智能病理辅助诊断系统",
-          "医生标注和辅助诊断系统",
-          "用户体验研究",
-          "交互工具研发",
+          "科技成果产业转化",
+          "需求驱动的科技创新",
+          "产业转化",
+          "临床病理扰动的物理建模及智能诊断鲁棒性算法研发",
+          "多模态智能病理辅助诊断系统的研发和临床转化",
+          "医生标注和辅助诊断系统的用户体验研究和交互工具研发",
           "超分辨率荧光显微影像分析",
-          "社交媒体大数据分析",
-          "用户建模",
-          "基于小波的视频通信",
-          "多媒体压缩"
+          "社交媒体大数据分析与用户建模",
+          "基于小波的视频通信与多媒体压缩"
         ],
         "keywords": [],
         "bio": "",
@@ -5364,7 +5447,7 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "博士学位",
+            "degree": "博士",
             "institution": "中国科学技术大学电子系",
             "year": "1998-2003",
             "major": "信息与通信工程"
@@ -5373,10 +5456,10 @@
             "degree": "博士联培",
             "institution": "微软亚洲研究院",
             "year": "1999-2003",
-            "major": "微软学者"
+            "major": ""
           },
           {
-            "degree": "学士学位",
+            "degree": "学士",
             "institution": "中国科学技术大学少年班",
             "year": "1994-1998",
             "major": "电子工程"
@@ -5402,9 +5485,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -5438,8 +5521,13 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "经典声学（如声学超材料）",
-          "航空与能源领域中的气动声学问题（湍流发声，如飞机发动机的喷流噪声、风机尾缘噪声等）"
+          "波动物理",
+          "经典声学",
+          "声学超材料",
+          "气动声学",
+          "湍流发声",
+          "飞机发动机喷流噪声",
+          "风机尾缘噪声"
         ],
         "keywords": [],
         "bio": "",
@@ -5458,19 +5546,19 @@
           {
             "degree": "博士",
             "institution": "剑桥大学工程系流体学部",
-            "year": "2014.10 – 2018.03",
+            "year": "2014-2018",
             "major": ""
           },
           {
             "degree": "硕士",
             "institution": "剑桥大学工程系流体学部",
-            "year": "2013.09 – 2014.09",
+            "year": "2013-2014",
             "major": ""
           },
           {
             "degree": "学士",
             "institution": "南京大学",
-            "year": "2008.09 – 2012.07",
+            "year": "2008-2012",
             "major": "声学（物理声学）"
           }
         ],
@@ -5494,9 +5582,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -5531,7 +5619,7 @@
         "is_academician": false,
         "research_areas": [
           "流固界面多尺度力学",
-          "先进结构设计与制造研究",
+          "先进结构设计与制造",
           "流固界面稳定性演化规律及流动减阻机理",
           "跨介质自由液面演化规律及降载增稳",
           "气泡生长形貌演化机理及应用",
@@ -5586,9 +5674,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -5621,22 +5709,7 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [
-          "力学",
-          "固体力学",
-          "流体力学",
-          "湍流",
-          "一般力学",
-          "工程计算",
-          "有限元",
-          "能源",
-          "资源",
-          "先进制造",
-          "工业工程",
-          "机器人",
-          "航空",
-          "航天"
-        ],
+        "research_areas": [],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -5690,11 +5763,11 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 40
       },
       "is_new": false
     },
@@ -5746,13 +5819,13 @@
         "education": [
           {
             "degree": "博士",
-            "institution": "剑桥大学",
+            "institution": "剑桥大学 (University of Cambridge)",
             "year": "2017",
             "major": "应用数学"
           },
           {
             "degree": "学士",
-            "institution": "北京大学",
+            "institution": "北京大学 (Peking University)",
             "year": "2011",
             "major": "理论和应用力学"
           }
@@ -5777,9 +5850,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -5865,9 +5938,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -5903,7 +5976,14 @@
         "research_areas": [
           "多智能体系统",
           "网络化分布式系统",
-          "社会网络动力学与博弈"
+          "社会网络动力学与博弈",
+          "线性/非线性系统",
+          "图论",
+          "矩阵分析",
+          "随机过程",
+          "动态规划",
+          "数据挖掘",
+          "数值模拟"
         ],
         "keywords": [],
         "bio": "",
@@ -5952,9 +6032,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -6009,19 +6089,19 @@
         "education": [
           {
             "degree": "学士学位",
-            "institution": "华中科技大学(原:华中工学院)",
+            "institution": "华中科技大学(原:华中工学院)动力系",
             "year": "1979-1983",
             "major": "热动"
           },
           {
             "degree": "硕士学位",
-            "institution": "华中科技大学",
+            "institution": "华中科技大学动力系",
             "year": "1983-1986",
             "major": "热动"
           },
           {
             "degree": "博士学位",
-            "institution": "澳洲Newcastle大学",
+            "institution": "澳洲Newcastle大学机械工程系",
             "year": "1991-1994",
             "major": "流体力学"
           }
@@ -6046,9 +6126,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -6101,13 +6181,13 @@
         "education": [
           {
             "degree": "博士",
-            "institution": "清华大学工程力学系",
+            "institution": "清华大学",
             "year": "2002-2007",
             "major": "固体力学"
           },
           {
             "degree": "学士",
-            "institution": "清华大学工程力学系",
+            "institution": "清华大学",
             "year": "1998-2002",
             "major": "固体力学"
           }
@@ -6132,9 +6212,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -6146,7 +6226,7 @@
       "url_hash": "eedaef1fd40c98151c095073c95632584bb033773b4e425d4d0b29fadb7c2abc",
       "published_at": null,
       "author": null,
-      "content": "† equal\r\ncontribution, * corresponding author",
+      "content": "† equal\ncontribution, * corresponding author",
       "content_html": null,
       "content_hash": "a62bb64f1c6c9ad9ea58f4765db217bf85c0ad45f5ed1d9c85a626045fa14d68",
       "source_id": "pku_coe_faculty",
@@ -6172,10 +6252,13 @@
           "界面热调控",
           "新型热管理技术",
           "先进热管理材料",
-          "热现象和其他物理/化学过程的相互影响机制"
+          "热现象和其他物理/化学过程的相互影响机制",
+          "节能减排",
+          "能源资源高效利用和回收",
+          "大气碳回收"
         ],
         "keywords": [],
-        "bio": "† equal\r\ncontribution, * corresponding author",
+        "bio": "† equal\ncontribution, * corresponding author",
         "bio_en": "",
         "email": "yucan.peng@pku.edu.cn",
         "phone": "",
@@ -6192,7 +6275,7 @@
             "degree": "博士",
             "institution": "斯坦福大学",
             "year": "2015-2020",
-            "major": "材料科学与工程"
+            "major": "材料科学与工程系"
           },
           {
             "degree": "学士",
@@ -6221,9 +6304,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -6261,7 +6344,9 @@
           "海量时空数据组织方法",
           "时空数据存储引擎",
           "分布式时空计算方法",
-          "时空智能计算技术"
+          "时空智能计算技术",
+          "基于地球剖分的剖分存储模型",
+          "基于剖分编码的时空数据索引技术"
         ],
         "keywords": [],
         "bio": "一、期刊论文",
@@ -6280,19 +6365,19 @@
           {
             "degree": "工学博士",
             "institution": "成都理工大学地球科学学院",
-            "year": "2000/09-2003/06",
+            "year": "2000-2003",
             "major": "地球探测信息专业"
           },
           {
             "degree": "工学硕士",
             "institution": "成都理工大学地球科学学院",
-            "year": "1997/09-2000/06",
+            "year": "1997-2000",
             "major": "地图制图学与地理信息工程专业"
           },
           {
             "degree": "工学学士",
             "institution": "电子科技大学计算机学院",
-            "year": "1993/09-1996/06",
+            "year": "1993-1996",
             "major": ""
           }
         ],
@@ -6316,9 +6401,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -6415,9 +6500,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -6509,9 +6594,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -6545,9 +6630,12 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "复杂系统建模、多智能体协作",
-          "医工交叉、医疗及康复机器人",
-          "工业AI、面向复杂应用场景的具身智能系统"
+          "复杂系统建模",
+          "多智能体协作",
+          "医工交叉",
+          "医疗及康复机器人",
+          "工业AI",
+          "面向复杂应用场景的具身智能系统"
         ],
         "keywords": [],
         "bio": "",
@@ -6566,13 +6654,13 @@
           {
             "degree": "博士",
             "institution": "北京大学工学院",
-            "year": "2002.09-2007.07",
+            "year": "2002-2007",
             "major": "一般力学与力学基础"
           },
           {
             "degree": "学士",
             "institution": "湖南大学电信学院",
-            "year": "1998.09-2002.07",
+            "year": "1998-2002",
             "major": "测控技术专业"
           }
         ],
@@ -6596,9 +6684,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -6632,7 +6720,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "流体力学"
+          "流体力学",
+          "湍流",
+          "数学模型"
         ],
         "keywords": [],
         "bio": "",
@@ -6681,9 +6771,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -6717,9 +6807,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "生命体系",
-          "复杂系统",
-          "生物医学工程中流动现象的数值模拟研究",
+          "生命体系、复杂系统、生物医学工程中流动现象的数值模拟研究",
           "红细胞流动",
           "活性物质集体行为",
           "微生物运动",
@@ -6780,9 +6868,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -6842,15 +6930,21 @@
             "major": ""
           },
           {
-            "degree": "硕士",
+            "degree": "硕士研究生",
             "institution": "复旦大学应用力学系",
             "year": "1993-1996",
             "major": ""
           },
           {
-            "degree": "博士",
+            "degree": "博士研究生",
             "institution": "复旦大学数学研究所",
             "year": "1996-1999",
+            "major": ""
+          },
+          {
+            "degree": "应用数学博士",
+            "institution": "复旦大学数学研究所",
+            "year": "2001",
             "major": "应用数学"
           }
         ],
@@ -6874,9 +6968,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -6927,17 +7021,17 @@
           "传热",
           "储热",
           "泵热",
-          "热能转化的极限效率",
+          "热能转化",
           "光子",
           "声子",
           "电子",
           "离子",
           "磁振子",
-          "低维",
-          "纳米",
-          "相变",
-          "准晶",
-          "拓扑",
+          "低维材料",
+          "纳米材料",
+          "相变材料",
+          "准晶材料",
+          "拓扑材料",
           "软材料"
         ],
         "keywords": [],
@@ -6993,9 +7087,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -7007,7 +7101,7 @@
       "url_hash": "2e03330df84895afde4e4b131ca8dffc6f1c3ad4d8804b906a8a45367d39e8c0",
       "published_at": null,
       "author": null,
-      "content": "1. Xueyan Zhai, Kaiwen\r\nChen & Baofang Song*, Linear instability of channel flow with\r\nmicrogroove-type anisotropic superhydrophobic walls, Phys. Rev. Fluids, 8,023901 (2023)",
+      "content": "1. Xueyan Zhai, Kaiwen\nChen & Baofang Song*, Linear instability of channel flow with\nmicrogroove-type anisotropic superhydrophobic walls, Phys. Rev. Fluids, 8,023901 (2023)",
       "content_html": null,
       "content_hash": "85b39a930cb9000acc2a95b05f082c35654da05b31ba57330397b239732348ca",
       "source_id": "pku_coe_faculty",
@@ -7029,10 +7123,11 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "流动稳定性、转捩和湍流的直接数值模拟"
+          "流动稳定性",
+          "转捩和湍流的直接数值模拟"
         ],
         "keywords": [],
-        "bio": "1. Xueyan Zhai, Kaiwen\r\nChen & Baofang Song*, Linear instability of channel flow with\r\nmicrogroove-type anisotropic superhydrophobic walls, Phys. Rev. Fluids, 8,023901 (2023)",
+        "bio": "1. Xueyan Zhai, Kaiwen\nChen & Baofang Song*, Linear instability of channel flow with\nmicrogroove-type anisotropic superhydrophobic walls, Phys. Rev. Fluids, 8,023901 (2023)",
         "bio_en": "",
         "email": "baofang.song@pku.edu.cn",
         "phone": "",
@@ -7048,19 +7143,19 @@
           {
             "degree": "博士",
             "institution": "哥廷根大学物理系",
-            "year": "2010.10-2014.10",
+            "year": "2010-2014",
             "major": "流体力学"
           },
           {
             "degree": "硕士",
             "institution": "西北工业大学流体力学系",
-            "year": "2007.09-2010.04",
+            "year": "2007-2010",
             "major": "计算流体力学"
           },
           {
             "degree": "本科",
             "institution": "西北工业大学航空学院",
-            "year": "2003.09-2007.07",
+            "year": "2003-2007",
             "major": "飞行器设计与工程"
           }
         ],
@@ -7084,9 +7179,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -7137,19 +7232,19 @@
           {
             "degree": "博士",
             "institution": "清华大学工业工程系",
-            "year": "09.2004 - 07.2010",
+            "year": "2004-2010",
             "major": ""
           },
           {
             "degree": "联合培养博士",
             "institution": "美国佐治亚理工工业与系统工程学院",
-            "year": "09.2007 - 09.2008",
+            "year": "2007-2008",
             "major": ""
           },
           {
             "degree": "学士",
             "institution": "北京大学数学科学学院",
-            "year": "09.2000 - 07.2004",
+            "year": "2000-2004",
             "major": ""
           }
         ],
@@ -7173,9 +7268,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 40
       },
@@ -7209,8 +7304,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "湍流与复杂系统的标度现象和统计",
-          "唯象理论",
+          "湍流与复杂系统的标度现象和统计、唯象理论",
           "涡动力学",
           "流体力学",
           "非线性动力学"
@@ -7268,9 +7362,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -7308,10 +7402,12 @@
           "人类皮肤的超分辨率感知",
           "神经信号传递机制",
           "鸟类的惯性和姿势本体感知",
-          "触觉传感器",
+          "先进的触觉传感器",
           "机器学习算法",
           "可穿戴体感设备",
-          "触觉感知理论"
+          "触觉感知理论",
+          "信息论",
+          "传感器设计"
         ],
         "keywords": [],
         "bio": "",
@@ -7372,9 +7468,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -7386,7 +7482,7 @@
       "url_hash": "9b437218e0fb890fbbb5cfdeda37d7250562595f9eaa908c0974be6079d42d9d",
       "published_at": null,
       "author": null,
-      "content": "[1]M. Sun（第一作者）, T. Zhang, Y. Wang, G. Strbac and C. Kang, \"Using Bayesian\r\nDeep Learning to Capture Uncertainty for Residential Net Load\r\nForecasting,\" inIEEE Transactions\r\non Power Systems. vol. 35, no. 1, pp. 188-201, Jan. 2020.",
+      "content": "[1]M. Sun（第一作者）, T. Zhang, Y. Wang, G. Strbac and C. Kang, \"Using Bayesian\nDeep Learning to Capture Uncertainty for Residential Net Load\nForecasting,\" inIEEE Transactions\non Power Systems. vol. 35, no. 1, pp. 188-201, Jan. 2020.",
       "content_html": null,
       "content_hash": "60ea0da110d30864cedfee85474afe27290e99ebce5ce9880396d3fe911a231b",
       "source_id": "pku_coe_faculty",
@@ -7413,7 +7509,7 @@
           "新型电力系统信息物理安全"
         ],
         "keywords": [],
-        "bio": "[1]M. Sun（第一作者）, T. Zhang, Y. Wang, G. Strbac and C. Kang, \"Using Bayesian\r\nDeep Learning to Capture Uncertainty for Residential Net Load\r\nForecasting,\" inIEEE Transactions\r\non Power Systems. vol. 35, no. 1, pp. 188-201, Jan. 2020.",
+        "bio": "[1]M. Sun（第一作者）, T. Zhang, Y. Wang, G. Strbac and C. Kang, \"Using Bayesian\nDeep Learning to Capture Uncertainty for Residential Net Load\nForecasting,\" inIEEE Transactions\non Power Systems. vol. 35, no. 1, pp. 188-201, Jan. 2020.",
         "bio_en": "",
         "email": "smy@pku.edu.cn",
         "phone": "",
@@ -7465,9 +7561,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -7521,16 +7617,10 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "",
-            "institution": "香港科技大学土木与结构工程系",
-            "year": "1994-1996",
-            "major": "大型建筑结构的分析与优化设计"
-          },
-          {
-            "degree": "",
-            "institution": "美国AKRON大学土木系",
-            "year": "1999-2000",
-            "major": "深基础计算分析"
+            "degree": "博士",
+            "institution": "北京大学",
+            "year": "",
+            "major": "力学系"
           }
         ],
         "publications_count": -1,
@@ -7553,9 +7643,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -7609,21 +7699,21 @@
         "education": [
           {
             "degree": "理学学士",
-            "institution": "北京大学力学与工程科学系",
+            "institution": "北京大学",
             "year": "1992-1996",
-            "major": ""
+            "major": "力学与工程科学系"
           },
           {
             "degree": "理学硕士",
-            "institution": "北京大学力学与工程科学系",
+            "institution": "北京大学",
             "year": "1996-1999",
-            "major": ""
+            "major": "力学与工程科学系"
           },
           {
             "degree": "理学博士",
-            "institution": "北京大学力学与工程科学系",
+            "institution": "北京大学",
             "year": "1999-2002",
-            "major": ""
+            "major": "力学与工程科学系"
           }
         ],
         "publications_count": -1,
@@ -7646,9 +7736,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -7741,9 +7831,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -7778,7 +7868,12 @@
         "is_academician": false,
         "research_areas": [
           "生物力学",
-          "非牛顿流体力学"
+          "非牛顿流体力学",
+          "血液流变学",
+          "细胞内钙信号传导",
+          "分数阶反常扩散",
+          "粘弹性流体力学",
+          "多孔介质内的热流"
         ],
         "keywords": [],
         "bio": "",
@@ -7798,18 +7893,6 @@
             "degree": "博士",
             "institution": "山东大学",
             "year": "1997",
-            "major": ""
-          },
-          {
-            "degree": "博士后",
-            "institution": "北京大学",
-            "year": "1997-1999",
-            "major": ""
-          },
-          {
-            "degree": "博士后",
-            "institution": "日本九州大学",
-            "year": "2002-2004",
             "major": ""
           }
         ],
@@ -7833,9 +7916,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -7869,6 +7952,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "计算力学",
+          "应用数学",
           "多尺度算法",
           "数值均匀化",
           "非线性波的理论与计算"
@@ -7932,9 +8017,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -7946,7 +8031,7 @@
       "url_hash": "1cdba94f61f97745327616e63b7bdd4e497d08f2fd2211ad83b22d35ef0cb617",
       "published_at": null,
       "author": null,
-      "content": "[1] Yujie Tang, Zhaolin Ren and Na Li.\r\n“Zeroth-order feedback optimization for cooperative multi-agent systems,” to\r\nappear in Automatica.",
+      "content": "[1] Yujie Tang, Zhaolin Ren and Na Li.\n“Zeroth-order feedback optimization for cooperative multi-agent systems,” to\nappear in Automatica.",
       "content_html": null,
       "content_hash": "21d357ef16e35bf8e16ec938cfb3116250d04cd6dcc2b779e9adeac2a23fade7",
       "source_id": "pku_coe_faculty",
@@ -7973,7 +8058,7 @@
           "电力系统优化"
         ],
         "keywords": [],
-        "bio": "[1] Yujie Tang, Zhaolin Ren and Na Li.\r\n“Zeroth-order feedback optimization for cooperative multi-agent systems,” to\r\nappear in Automatica.",
+        "bio": "[1] Yujie Tang, Zhaolin Ren and Na Li.\n“Zeroth-order feedback optimization for cooperative multi-agent systems,” to\nappear in Automatica.",
         "bio_en": "",
         "email": "yujietang@pku.edu.cn",
         "phone": "",
@@ -8019,9 +8104,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -8075,21 +8160,21 @@
         "education": [
           {
             "degree": "学士",
-            "institution": "山东工业大学动力系",
+            "institution": "山东工业大学",
             "year": "1992",
-            "major": ""
+            "major": "动力系"
           },
           {
             "degree": "硕士",
-            "institution": "天津大学热能系",
+            "institution": "天津大学",
             "year": "1995",
-            "major": ""
+            "major": "热能系"
           },
           {
             "degree": "博士",
-            "institution": "北京大学力学系",
+            "institution": "北京大学",
             "year": "1999",
-            "major": ""
+            "major": "力学系"
           }
         ],
         "publications_count": -1,
@@ -8112,9 +8197,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -8197,9 +8282,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -8288,9 +8373,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -8324,20 +8409,15 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "力学",
-          "固体力学",
-          "流体力学",
-          "湍流",
-          "一般力学",
-          "工程计算",
-          "有限元",
-          "能源",
-          "资源",
-          "先进制造",
-          "工业工程",
-          "机器人",
-          "航空",
-          "航天"
+          "太空制造与组装",
+          "资源原位回收与利用",
+          "先进推进技术",
+          "化学蒸汽沉积金属薄膜制备与缺陷控制",
+          "吸气式固体推进剂",
+          "含能材料增材制造",
+          "微观燃烧诊断",
+          "含能材料可控燃烧",
+          "纳米复合含能材料的微观构筑与组装"
         ],
         "keywords": [],
         "bio": "",
@@ -8354,15 +8434,21 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "博士",
+            "degree": "力学博士",
             "institution": "南京理工大学",
-            "year": "2015.6",
-            "major": "安全工程系"
+            "year": "2015",
+            "major": "安全工程系（爆炸力学方向）"
+          },
+          {
+            "degree": "CSC联合培养博士生",
+            "institution": "马里兰大学帕克分校",
+            "year": "2015",
+            "major": "机械工程系"
           },
           {
             "degree": "学士",
             "institution": "南京理工大学",
-            "year": "2010.6",
+            "year": "2010",
             "major": "安全工程系"
           }
         ],
@@ -8386,9 +8472,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -8474,9 +8560,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -8567,9 +8653,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -8603,10 +8689,22 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "计算流体力学：不可压缩流、可压缩流、超声速流、高超声速流",
-          "计算方法：谱方法、有限谱法、高精度计算法",
-          "化学反应流：燃烧、爆轰",
-          "推进与动力：均匀吸气压燃发动机、脉冲爆轰发动机、连续旋转爆轰发动机"
+          "计算流体力学",
+          "不可压缩流",
+          "可压缩流",
+          "超声速流",
+          "高超声速流",
+          "计算方法",
+          "谱方法",
+          "有限谱法",
+          "高精度计算法",
+          "化学反应流",
+          "燃烧",
+          "爆轰",
+          "推进与动力",
+          "均匀吸气压燃发动机",
+          "脉冲爆轰发动机",
+          "连续旋转爆轰发动机"
         ],
         "keywords": [],
         "bio": "",
@@ -8624,19 +8722,19 @@
         "education": [
           {
             "degree": "工学学士",
-            "institution": "日本名古屋大学工学院航空航天系",
+            "institution": "名古屋大学工学院航空航天系",
             "year": "1984",
             "major": ""
           },
           {
             "degree": "工学硕士",
-            "institution": "日本名古屋大学工学院航空航天系",
+            "institution": "名古屋大学工学院航空航天系",
             "year": "1986",
             "major": ""
           },
           {
             "degree": "工学博士",
-            "institution": "日本名古屋大学工学院航空航天系",
+            "institution": "名古屋大学工学院航空航天系",
             "year": "1991",
             "major": ""
           }
@@ -8661,9 +8759,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -8696,7 +8794,22 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "力学",
+          "固体力学",
+          "流体力学",
+          "湍流",
+          "一般力学",
+          "工程计算",
+          "有限元",
+          "能源",
+          "资源",
+          "先进制造",
+          "工业工程",
+          "机器人",
+          "航空",
+          "航天"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -8731,11 +8844,11 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
-        "data_completeness": 40
+        "data_completeness": 55
       },
       "is_new": false
     },
@@ -8787,27 +8900,9 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "博士",
+            "degree": "博士学位",
             "institution": "北京大学",
             "year": "1992",
-            "major": ""
-          },
-          {
-            "degree": "博士后",
-            "institution": "加拿大多伦多大学",
-            "year": "1993",
-            "major": ""
-          },
-          {
-            "degree": "研究员",
-            "institution": "德国宇航中心",
-            "year": "1995-1997",
-            "major": ""
-          },
-          {
-            "degree": "访问教授",
-            "institution": "加拿大阿尔伯塔大学",
-            "year": "2007",
             "major": ""
           }
         ],
@@ -8831,9 +8926,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -8917,9 +9012,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -8955,7 +9050,10 @@
         "research_areas": [
           "高温气体的精密激光测量方法",
           "燃烧学",
-          "空气动力学的实验研究"
+          "空气动力学的实验研究",
+          "高灵敏度激光传感器",
+          "多物理量场精密激光光谱学测量方法",
+          "气体反应以及动力学过程"
         ],
         "keywords": [],
         "bio": "",
@@ -9016,9 +9114,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -9110,9 +9208,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -9146,9 +9244,7 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "control of nonlinear dynamical systems",
-          "fluid flows",
-          "flight control",
+          "control of nonlinear dynamical systems with applications to fluid flows and flight control",
           "modeling and analysis of highway traffic",
           "modeling of hybrid control systems"
         ],
@@ -9168,15 +9264,15 @@
         "education": [
           {
             "degree": "B.S.",
-            "institution": "Department of Mechanics, Peking University",
+            "institution": "Peking University",
             "year": "",
-            "major": ""
+            "major": "Mechanics"
           },
           {
             "degree": "M.S.",
-            "institution": "Department of Mechanics, Peking University",
+            "institution": "Peking University",
             "year": "",
-            "major": ""
+            "major": "Mechanics"
           },
           {
             "degree": "Ph.D.",
@@ -9205,9 +9301,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -9261,9 +9357,9 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "本科",
-            "institution": "中国科学技术大学",
-            "year": "1998-2003",
+            "degree": "博士",
+            "institution": "美国哥伦比亚大学",
+            "year": "2004-2009",
             "major": ""
           },
           {
@@ -9273,9 +9369,9 @@
             "major": ""
           },
           {
-            "degree": "博士",
-            "institution": "美国哥伦比亚大学",
-            "year": "2004-2009",
+            "degree": "本科",
+            "institution": "中国科学技术大学",
+            "year": "1998-2003",
             "major": ""
           }
         ],
@@ -9299,9 +9395,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -9365,22 +9461,22 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "博士学位",
+            "degree": "博士",
             "institution": "清华大学工程力学系",
             "year": "1989-1992",
             "major": "固体力学"
           },
           {
-            "degree": "硕士学位",
+            "degree": "硕士",
             "institution": "中国矿业大学北京研究生部",
             "year": "1984-1986",
             "major": "工程力学"
           },
           {
-            "degree": "学士学位",
+            "degree": "学士",
             "institution": "西安科技大学",
             "year": "1978-1982",
-            "major": "力学"
+            "major": "力学师资班力学"
           }
         ],
         "publications_count": -1,
@@ -9403,9 +9499,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -9417,7 +9513,7 @@
       "url_hash": "e1d4bd3711f40f50486a6642f2295044cd391ed2e90c9148d6ede5354b249d47",
       "published_at": null,
       "author": null,
-      "content": "1.      Zhang Haixiang, Andre\r\nMilzarek,Wen Zaiwen*, Yin Wotao; On the geometric analysis of a\r\nquartic-quadratic optimization problem under a spherical constraint,\r\nMathematical Programming, accepted, 2021",
+      "content": "1.      Zhang Haixiang, Andre\nMilzarek,Wen Zaiwen*, Yin Wotao; On the geometric analysis of a\nquartic-quadratic optimization problem under a spherical constraint,\nMathematical Programming, accepted, 2021",
       "content_html": null,
       "content_hash": "e95ed1f63c712ae65400859e7ce7497bfb4bade3138f50f43aa9bb68f2dc4e8f",
       "source_id": "pku_coe_faculty",
@@ -9440,7 +9536,7 @@
         "is_academician": false,
         "research_areas": [],
         "keywords": [],
-        "bio": "1.      Zhang Haixiang, Andre\r\nMilzarek,Wen Zaiwen*, Yin Wotao; On the geometric analysis of a\r\nquartic-quadratic optimization problem under a spherical constraint,\r\nMathematical Programming, accepted, 2021",
+        "bio": "1.      Zhang Haixiang, Andre\nMilzarek,Wen Zaiwen*, Yin Wotao; On the geometric analysis of a\nquartic-quadratic optimization problem under a spherical constraint,\nMathematical Programming, accepted, 2021",
         "bio_en": "",
         "email": "wenzw@pku.edu.cn",
         "phone": "",
@@ -9456,19 +9552,19 @@
           {
             "degree": "博士",
             "institution": "美国哥伦比亚大学",
-            "year": "2004.09 – 2009.09",
+            "year": "2004-2009",
             "major": "工业工程与运筹学"
           },
           {
             "degree": "硕士",
             "institution": "中国科学院数学与系统科学研究院",
-            "year": "2001.09 – 2004.07",
+            "year": "2001-2004",
             "major": "计算数学"
           },
           {
             "degree": "学士",
             "institution": "上海交通大学",
-            "year": "1997.09 – 2001.07",
+            "year": "1997-2001",
             "major": "数学"
           }
         ],
@@ -9492,9 +9588,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -9550,25 +9646,25 @@
         "education": [
           {
             "degree": "博士",
-            "institution": "威斯康星大学麦迪逊分校",
+            "institution": "威斯康星大学麦迪逊分校，美国",
             "year": "2011-2015",
-            "major": "工业与系统工程"
+            "major": "工业与系统工程系"
           },
           {
             "degree": "硕士",
-            "institution": "威斯康星大学麦迪逊分校",
+            "institution": "威斯康星大学麦迪逊分校，美国",
             "year": "2011-2015",
-            "major": "统计"
+            "major": "统计系"
           },
           {
             "degree": "硕士",
-            "institution": "普渡大学",
+            "institution": "普渡大学，西拉法叶，美国",
             "year": "2009-2011",
-            "major": "机械工程"
+            "major": "机械工程学院"
           },
           {
             "degree": "学士",
-            "institution": "清华大学",
+            "institution": "清华大学，北京，中国",
             "year": "2005-2009",
             "major": "机械工程及自动化"
           }
@@ -9593,9 +9689,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -9688,9 +9784,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -9724,20 +9820,17 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "力学",
-          "固体力学",
-          "流体力学",
-          "湍流",
-          "一般力学",
-          "工程计算",
-          "有限元",
-          "能源",
-          "资源",
-          "先进制造",
-          "工业工程",
-          "机器人",
-          "航空",
-          "航天"
+          "湍流的数值研究",
+          "均匀各向同性湍流",
+          "壁湍流的大规模直接数值模拟",
+          "大涡模拟",
+          "均匀各向同性湍流的尺度理论",
+          "惯性区动力学机理",
+          "二维湍流中能量反级串",
+          "拟涡能正级串",
+          "湍流中重要物理量的Lagrangian动力学行为",
+          "可压缩湍流的建模与数值模拟",
+          "工业、工程相关的复杂流动的数值研究"
         ],
         "keywords": [],
         "bio": "",
@@ -9756,25 +9849,25 @@
           {
             "degree": "博士",
             "institution": "约翰霍普金斯大学",
-            "year": "03/01-08/08",
+            "year": "2001-2008",
             "major": "机械工程"
           },
           {
             "degree": "硕士",
             "institution": "南加州大学",
-            "year": "01/08-02/12",
+            "year": "2001-2002",
             "major": "航空工程"
           },
           {
             "degree": "硕士",
             "institution": "天津大学",
-            "year": "98/09-01/06",
+            "year": "1998-2001",
             "major": "流体力学"
           },
           {
             "degree": "学士",
             "institution": "天津大学",
-            "year": "94/09-98/07",
+            "year": "1994-1998",
             "major": "工程力学"
           }
         ],
@@ -9798,9 +9891,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -9854,22 +9947,22 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "应用数学、电子与计算机技术双学位",
+            "degree": "双学位",
             "institution": "清华大学应用数学系",
             "year": "1991-1996",
-            "major": ""
+            "major": "应用数学、电子与计算机技术"
           },
           {
-            "degree": "控制理论与控制工程 硕士学位",
+            "degree": "硕士学位",
             "institution": "清华大学自动化系",
             "year": "1996-1998",
-            "major": ""
+            "major": "控制理论与控制工程"
           },
           {
-            "degree": "控制理论与控制工程 博士学位",
+            "degree": "博士学位",
             "institution": "清华大学自动化系",
             "year": "1998-2001",
-            "major": ""
+            "major": "控制理论与控制工程"
           }
         ],
         "publications_count": -1,
@@ -9892,9 +9985,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -9983,9 +10076,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -10019,7 +10112,11 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
+          "微纳米力学",
+          "生物医学工程",
           "细胞力学",
+          "生物医学微纳米技术",
+          "软材料的微纳米力学测试",
           "生物微纳米技术"
         ],
         "keywords": [],
@@ -10038,13 +10135,13 @@
         "education": [
           {
             "degree": "学士",
-            "institution": "北京大学力学系",
+            "institution": "北京大学",
             "year": "1995",
-            "major": ""
+            "major": "力学系"
           },
           {
             "degree": "博士",
-            "institution": "北京大学力学系",
+            "institution": "北京大学",
             "year": "2000",
             "major": "固体力学"
           }
@@ -10069,9 +10166,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -10105,7 +10202,12 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "能源资源开发场景和工程热物理场景中的渗流（多孔介质内的流体流动）现象及其背后的物理机制"
+          "渗流（多孔介质内的流体流动）现象",
+          "工程热物理场景",
+          "微纳尺度孔隙结构中的流动",
+          "二氧化碳地质封存",
+          "地外水资源原位开发利用",
+          "油气田开采"
         ],
         "keywords": [],
         "bio": "",
@@ -10160,9 +10262,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -10198,11 +10300,15 @@
         "research_areas": [
           "现代控制理论",
           "飞行力学",
-          "飞行器导航",
-          "控制与制导",
+          "飞行器导航、控制与制导",
           "复杂高速机动运动的先进控制技术",
           "近空间高速飞行动力学与控制的关键科学问题",
-          "卫星轨道机动控制技术"
+          "卫星轨道机动控制技术",
+          "动力学与控制理论",
+          "高超声速飞行关键科学问题",
+          "集群与分布式协同控制",
+          "机动飞行控制",
+          "态势分析与动态博弈"
         ],
         "keywords": [],
         "bio": "",
@@ -10232,9 +10338,9 @@
           },
           {
             "degree": "博士后",
-            "institution": "清华大学计算机系",
+            "institution": "清华大学",
             "year": "",
-            "major": ""
+            "major": "计算机系"
           }
         ],
         "publications_count": -1,
@@ -10257,9 +10363,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -10297,7 +10403,12 @@
           "可持续能源技术应用",
           "力-热耦合能量输运微观机理表征与调控",
           "三维集成芯片力-热协同优化设计",
-          "声子应变工程启发的热功能材料与器件"
+          "声子应变工程启发的热功能材料与器件",
+          "微纳尺度传热",
+          "芯片散热",
+          "功能性热器件",
+          "高温热能存储",
+          "量子计算中声子噪音消除"
         ],
         "keywords": [],
         "bio": "Google Scholar (https://scholar.google.com/citations?user=KC1i33YAAAAJ&hl=en)",
@@ -10315,7 +10426,7 @@
         "education": [
           {
             "degree": "博士",
-            "institution": "范德堡大学",
+            "institution": "范德堡大学（Vanderbilt University）",
             "year": "2014-2019",
             "major": "机械工程"
           },
@@ -10327,7 +10438,7 @@
           },
           {
             "degree": "暑期研究",
-            "institution": "加州大学洛杉矶分校",
+            "institution": "加州大学洛杉矶分校（UCLA）",
             "year": "2013.7-2013.9",
             "major": "机械与航天工程"
           }
@@ -10352,9 +10463,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -10388,20 +10499,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "力学",
-          "固体力学",
-          "流体力学",
-          "湍流",
-          "一般力学",
-          "工程计算",
-          "有限元",
-          "能源",
-          "资源",
-          "先进制造",
-          "工业工程",
-          "机器人",
-          "航空",
-          "航天"
+          "热功能材料",
+          "电子芯片热输运与热管理",
+          "储能",
+          "低品位热能回收利用"
         ],
         "keywords": [],
         "bio": "Xiaobo Yin*, Ronggui Yang*, Gang Tan, Shanhui Fan, Terrestrial Radiative Cooling: Using the Cold Universe as a Renewable and Sustainable Energy Source, Science, 370(6518), 786-791, 2020.",
@@ -10462,9 +10563,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -10548,9 +10649,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -10629,9 +10730,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -10722,9 +10823,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -10816,9 +10917,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -10830,7 +10931,7 @@
       "url_hash": "edff4cc81e7878450e3241e17d5272b4096714e898de908c04698a12f91fd5a2",
       "published_at": null,
       "author": null,
-      "content": "[1] R. K. Bansal, P. You, D. F. Gayme,\r\nand E. Mallada. “A Market Mechanism for Truthful Bidding with Energy Storage”.\r\nPower Systems Computation Conference (PSCC), Porto, Portugal, 2022",
+      "content": "[1] R. K. Bansal, P. You, D. F. Gayme,\nand E. Mallada. “A Market Mechanism for Truthful Bidding with Energy Storage”.\nPower Systems Computation Conference (PSCC), Porto, Portugal, 2022",
       "content_html": null,
       "content_hash": "602f65a8b943d224aadcd9b6cc3bca03ffa53497c9658b4b40805e45d64e7e7f",
       "source_id": "pku_coe_faculty",
@@ -10859,7 +10960,7 @@
           "智能电网"
         ],
         "keywords": [],
-        "bio": "[1] R. K. Bansal, P. You, D. F. Gayme,\r\nand E. Mallada. “A Market Mechanism for Truthful Bidding with Energy Storage”.\r\nPower Systems Computation Conference (PSCC), Porto, Portugal, 2022",
+        "bio": "[1] R. K. Bansal, P. You, D. F. Gayme,\nand E. Mallada. “A Market Mechanism for Truthful Bidding with Energy Storage”.\nPower Systems Computation Conference (PSCC), Porto, Portugal, 2022",
         "bio_en": "",
         "email": "pcyou@pku.edu.cn",
         "phone": "",
@@ -10875,13 +10976,13 @@
           {
             "degree": "博士",
             "institution": "浙江大学",
-            "year": "2013-2018",
+            "year": "2013.09-2018.06",
             "major": "控制科学与工程学院"
           },
           {
             "degree": "学士",
             "institution": "浙江大学",
-            "year": "2009-2013",
+            "year": "2009.09-2013.06",
             "major": "电气工程学院"
           }
         ],
@@ -10905,9 +11006,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -10999,9 +11100,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -11013,7 +11114,7 @@
       "url_hash": "2843e5755c73df84adb8ebb800f0346a5e9fbf622a37e7f2312732649980f64e",
       "published_at": null,
       "author": null,
-      "content": "[1]Yuan X, Gao X, Yang J, Shen X, Li Z, You S, Wang Z,\r\nDong S*. The large piezoelectricity and high power density of a 3D-printed\r\nmultilayer copolymer in a rugby ball-structured mechanical energy harvester[J].\r\nEnergy & Environmental Science, 2020, 13 (1): 152-161. (Cover paper)",
+      "content": "[1]Yuan X, Gao X, Yang J, Shen X, Li Z, You S, Wang Z,\nDong S*. The large piezoelectricity and high power density of a 3D-printed\nmultilayer copolymer in a rugby ball-structured mechanical energy harvester[J].\nEnergy & Environmental Science, 2020, 13 (1): 152-161. (Cover paper)",
       "content_html": null,
       "content_hash": "2d0ac1fe49dc1ee0403a1036d14a0685feb55e6eebedbcf973a7f43ddfeb77f6",
       "source_id": "pku_coe_faculty",
@@ -11036,7 +11137,7 @@
         "is_academician": false,
         "research_areas": [],
         "keywords": [],
-        "bio": "[1]Yuan X, Gao X, Yang J, Shen X, Li Z, You S, Wang Z,\r\nDong S*. The large piezoelectricity and high power density of a 3D-printed\r\nmultilayer copolymer in a rugby ball-structured mechanical energy harvester[J].\r\nEnergy & Environmental Science, 2020, 13 (1): 152-161. (Cover paper)",
+        "bio": "[1]Yuan X, Gao X, Yang J, Shen X, Li Z, You S, Wang Z,\nDong S*. The large piezoelectricity and high power density of a 3D-printed\nmultilayer copolymer in a rugby ball-structured mechanical energy harvester[J].\nEnergy & Environmental Science, 2020, 13 (1): 152-161. (Cover paper)",
         "bio_en": "",
         "email": "yuanxiaoting@pku.edu.cn",
         "phone": "010-62757496",
@@ -11050,15 +11151,15 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "",
-            "institution": "天津工业大学 纺织科学与工程学院",
-            "year": "2013-2017",
-            "major": "学士"
-          },
-          {
             "degree": "博士",
             "institution": "北京大学 材料科学与工程学院",
             "year": "2017-2022",
+            "major": ""
+          },
+          {
+            "degree": "学士",
+            "institution": "天津工业大学 纺织科学与工程学院",
+            "year": "2013-2017",
             "major": ""
           }
         ],
@@ -11082,9 +11183,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -11117,22 +11218,7 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [
-          "力学",
-          "固体力学",
-          "流体力学",
-          "湍流",
-          "一般力学",
-          "工程计算",
-          "有限元",
-          "能源",
-          "资源",
-          "先进制造",
-          "工业工程",
-          "机器人",
-          "航空",
-          "航天"
-        ],
+        "research_areas": [],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -11186,11 +11272,11 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 40
       },
       "is_new": false
     },
@@ -11297,9 +11383,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -11392,9 +11478,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -11406,7 +11492,7 @@
       "url_hash": "215bf58885bc3d46a701d618b3792c370addeb3c5aa1219bab9a71c25733953b",
       "published_at": null,
       "author": null,
-      "content": "[1] Enhanced Acoustic Droplet Vaporization through\r\nthe Active Magnetic Accumulation of Drug-Loaded Magnetic Particle-Encapsulated\r\nNanodroplets (MPE-NDs) in Cancer Therapy, Nano Letters, 2022，doi.org/10.1021/acs.nanolett.2c02580",
+      "content": "[1] Enhanced Acoustic Droplet Vaporization through\nthe Active Magnetic Accumulation of Drug-Loaded Magnetic Particle-Encapsulated\nNanodroplets (MPE-NDs) in Cancer Therapy, Nano Letters, 2022，doi.org/10.1021/acs.nanolett.2c02580",
       "content_html": null,
       "content_hash": "7b0d5108197daa9d09dbda905bf8f78b08d8905d108eb8987bd077c644ec75c4",
       "source_id": "pku_coe_faculty",
@@ -11428,12 +11514,12 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "医学成像新技术 (Advanced Meidical Imaging)",
-          "生物医学信号与图像分析 (BioMedical Signals & Image Analysis)",
-          "等离子体医学 (Plasma Medicine)"
+          "医学成像新技术",
+          "生物医学信号与图像分析",
+          "等离子体医学"
         ],
         "keywords": [],
-        "bio": "[1] Enhanced Acoustic Droplet Vaporization through\r\nthe Active Magnetic Accumulation of Drug-Loaded Magnetic Particle-Encapsulated\r\nNanodroplets (MPE-NDs) in Cancer Therapy, Nano Letters, 2022，doi.org/10.1021/acs.nanolett.2c02580",
+        "bio": "[1] Enhanced Acoustic Droplet Vaporization through\nthe Active Magnetic Accumulation of Drug-Loaded Magnetic Particle-Encapsulated\nNanodroplets (MPE-NDs) in Cancer Therapy, Nano Letters, 2022，doi.org/10.1021/acs.nanolett.2c02580",
         "bio_en": "",
         "email": "office@coe.pku.edu.cn",
         "phone": "",
@@ -11485,9 +11571,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -11583,9 +11669,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -11638,16 +11724,16 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "硕士",
+            "degree": "历史学硕士",
             "institution": "北京大学考古文博学院",
             "year": "2008-2011",
-            "major": "历史学"
+            "major": ""
           },
           {
-            "degree": "学士",
+            "degree": "历史学学士",
             "institution": "北京大学考古文博学院",
             "year": "2003-2007",
-            "major": "历史学"
+            "major": ""
           }
         ],
         "publications_count": -1,
@@ -11670,9 +11756,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -11707,9 +11793,7 @@
         "is_academician": false,
         "research_areas": [
           "工业大数据治理与融合",
-          "智能制造系统监测与诊断",
-          "产品质量管理",
-          "生产设备运维优化",
+          "智能制造系统监测与诊断、产品质量管理、生产设备运维优化",
           "智慧医疗与健康管理"
         ],
         "keywords": [],
@@ -11765,9 +11849,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -11801,17 +11885,12 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "工程热物理及与之相关的各种学术工程领域",
-          "Thermal engineering and heat transfer in various academic & Engineering fields",
+          "工程热物理",
           "超/近临界流体动力学及传热",
           "微纳米粒子相变传热",
           "新型功能型流体材料",
-          "可再生式热能源的生产",
-          "传输",
-          "储存",
-          "转换和利用",
-          "建筑",
-          "工业过程中的冷热能高效利用"
+          "可再生式热能源的生产、传输、储存、转换和利用",
+          "建筑、工业过程中的冷热能高效利用"
         ],
         "keywords": [],
         "bio": "",
@@ -11828,10 +11907,10 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "博士研究生/博士学位",
+            "degree": "博士",
             "institution": "清华大学",
             "year": "1998.03-2002.03",
-            "major": "工程热物理专业"
+            "major": "工程热物理"
           }
         ],
         "publications_count": -1,
@@ -11854,9 +11933,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -11892,7 +11971,20 @@
         "research_areas": [
           "弹塑性力学",
           "微纳米力学",
-          "多尺度力学"
+          "多尺度力学",
+          "分子动力学模拟",
+          "过渡态势垒分析",
+          "晶体塑性有限元",
+          "先进金属材料",
+          "强度",
+          "塑性",
+          "断裂韧性",
+          "强度与韧性设计",
+          "疲劳性能",
+          "纳米材料",
+          "高熵合金",
+          "增材制造合金",
+          "梯度结构材料"
         ],
         "keywords": [],
         "bio": "（#共同一作，*通讯作者）：",
@@ -11941,9 +12033,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -11976,7 +12068,12 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [],
+        "research_areas": [
+          "非平衡态理论和实验解决燃烧与相关能量转化的问题",
+          "超临界燃烧",
+          "等离子体催化与助燃",
+          "电池热失控机制与诊断"
+        ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
@@ -11990,7 +12087,26 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [],
+        "education": [
+          {
+            "degree": "博士",
+            "institution": "普林斯顿大学",
+            "year": "2013-2019",
+            "major": "机械与航空航天工程系"
+          },
+          {
+            "degree": "硕士",
+            "institution": "哥伦比亚大学",
+            "year": "2012-2013",
+            "major": "地球与环境工程系"
+          },
+          {
+            "degree": "学士",
+            "institution": "东南大学",
+            "year": "2008-2012",
+            "major": "热能与动力工程"
+          }
+        ],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -12011,11 +12127,11 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
-        "data_completeness": 40
+        "data_completeness": 55
       },
       "is_new": false
     },
@@ -12099,9 +12215,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -12191,9 +12307,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },
@@ -12231,7 +12347,8 @@
           "机器人学",
           "柔顺机构",
           "微纳机器人",
-          "DNA折纸及生物医学应用"
+          "DNA折纸",
+          "生物医学应用"
         ],
         "keywords": [],
         "bio": "（*通讯作者）：",
@@ -12286,9 +12403,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -12356,9 +12473,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 40
       },
@@ -12424,19 +12541,19 @@
           {
             "degree": "博士",
             "institution": "美国约翰斯·霍普金斯大学",
-            "year": "2018.08",
+            "year": "2018",
             "major": "机械工程"
           },
           {
             "degree": "硕士",
             "institution": "美国范德比尔特大学",
-            "year": "2014.06",
+            "year": "2014",
             "major": "机械工程"
           },
           {
             "degree": "学士",
             "institution": "中国科学技术大学",
-            "year": "2012.07",
+            "year": "2012",
             "major": "热能与动力工程"
           }
         ],
@@ -12460,9 +12577,9 @@
         "recent_updates": [],
         "source_id": "pku_coe_faculty",
         "source_url": "https://www.coe.pku.edu.cn/teching/all.html",
-        "crawled_at": "2026-03-03T12:41:49Z",
+        "crawled_at": "2026-03-04T06:53:45Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T12:41:49Z",
+        "last_seen_at": "2026-03-04T06:53:45Z",
         "is_active": true,
         "data_completeness": 55
       },

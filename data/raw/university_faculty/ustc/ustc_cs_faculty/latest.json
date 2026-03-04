@@ -3,8 +3,8 @@
   "dimension": "university_faculty",
   "group": "ustc",
   "source_name": "中国科学技术大学计算机学院-教授",
-  "crawled_at": "2026-03-03T15:05:00.922270+00:00",
-  "previous_crawled_at": "2026-03-03T03:52:06.322596+00:00",
+  "crawled_at": "2026-03-04T07:10:08.026026+00:00",
+  "previous_crawled_at": "2026-03-04T05:52:35.844020+00:00",
   "item_count": 32,
   "new_item_count": 0,
   "items": [
@@ -36,13 +36,18 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "智能织物",
+          "嵌入式系统",
+          "普适/可穿戴计算",
+          "新型传感器",
+          "数据挖掘",
+          "智慧医疗"
         ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "caixiaohui@ustc.edu.cn",
-        "phone": "055163600524",
+        "phone": "(0551)63600524",
         "office": "",
         "profile_url": "http://cs.ustc.edu.cn/2020/0827/c23235a460074/page.htm",
         "lab_url": "",
@@ -85,9 +90,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -120,14 +125,12 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
-        ],
+        "research_areas": [],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "han@ustc.edu.cn",
-        "phone": "0551-63603583",
+        "phone": "",
         "office": "",
         "profile_url": "http://cs.ustc.edu.cn/2020/0426/c23235a460072/page.htm",
         "lab_url": "",
@@ -136,14 +139,7 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [
-          {
-            "degree": "博士",
-            "institution": "中国科学技术大学",
-            "year": "2000",
-            "major": "计算机专业"
-          }
-        ],
+        "education": [],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -164,11 +160,11 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
-        "data_completeness": 60
+        "data_completeness": 45
       },
       "is_new": false
     },
@@ -200,13 +196,17 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "机器学习",
+          "数据挖掘",
+          "社会网络",
+          "个性化推荐系统",
+          "智能教育"
         ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "cheneh@ustc.edu.cn",
-        "phone": "055163601558",
+        "phone": "(0551)63601558",
         "office": "",
         "profile_url": "http://cs.ustc.edu.cn/2020/0806/c23235a460077/page.htm",
         "lab_url": "",
@@ -236,9 +236,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -272,7 +272,11 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "机器学习",
+          "数据挖掘",
+          "计算智能",
+          "地下管网探测与数据融合",
+          "演化计算"
         ],
         "keywords": [],
         "bio": "",
@@ -321,9 +325,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -357,13 +361,14 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "智能体形式化建模",
+          "多机器人系统关键技术"
         ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "xpchen@ustc.edu.cn",
-        "phone": "055163606724",
+        "phone": "(0551)63606724",
         "office": "",
         "profile_url": "http://cs.ustc.edu.cn/2020/0828/c23235a460075/page.htm",
         "lab_url": "",
@@ -393,9 +398,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -429,13 +434,16 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "并行算法和并行处理",
+          "并行体系结构",
+          "并行和分布式计算中的通信问题研究",
+          "IP层多播技术的研究"
         ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "gunj@ustc.edu.cn",
-        "phone": "055163603404",
+        "phone": "(0551)63603404",
         "office": "",
         "profile_url": "http://cs.ustc.edu.cn/2020/0828/c23235a460079/page.htm",
         "lab_url": "",
@@ -478,9 +486,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -514,13 +522,15 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "高性能网络系统",
+          "算法与系统性能优化",
+          "计算机网络"
         ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "bhua@ustc.edu.cn",
-        "phone": "055163607043",
+        "phone": "(0551)63607043",
         "office": "",
         "profile_url": "http://cs.ustc.edu.cn/2020/0426/c23235a460080/page.htm",
         "lab_url": "",
@@ -531,19 +541,19 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "学士",
+            "degree": "学士学位",
             "institution": "中国科学技术大学",
             "year": "1990",
             "major": ""
           },
           {
-            "degree": "硕士",
+            "degree": "硕士学位",
             "institution": "北京大学",
             "year": "1993",
             "major": ""
           },
           {
-            "degree": "博士",
+            "degree": "博士学位",
             "institution": "中国科学技术大学",
             "year": "2005",
             "major": ""
@@ -569,9 +579,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -605,13 +615,15 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "网络（无线传感网、物联网、车联网）",
+          "信息安全(信息隐藏、安全多方计算、量子信息安全)",
+          "大数据与云计算（大数据分析挖掘、大数据隐私保护、云安全）"
         ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "lshuang@ustc.edu.cn",
-        "phone": "0512 87161305, 0512 87161118",
+        "phone": "(0512) 87161305 ，(0512) 87161118",
         "office": "",
         "profile_url": "http://cs.ustc.edu.cn/2020/0828/c23235a460081/page.htm",
         "lab_url": "",
@@ -641,9 +653,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -677,7 +689,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "数据挖掘与知识发现",
+          "机器学习方法及其应用"
         ],
         "keywords": [],
         "bio": "",
@@ -694,10 +707,10 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "博士",
+            "degree": "博士学位",
             "institution": "中国科学技术大学",
             "year": "2013",
-            "major": "计算机应用技术专业"
+            "major": "计算机应用技术"
           }
         ],
         "publications_count": -1,
@@ -720,9 +733,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -756,7 +769,15 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "算法设计与分析",
+          "计算几何",
+          "大数据",
+          "机器学习",
+          "物联网",
+          "大数据优化算法",
+          "人工智能",
+          "芯片设计",
+          "生物医学"
         ],
         "keywords": [],
         "bio": "",
@@ -774,15 +795,15 @@
         "education": [
           {
             "degree": "本科",
-            "institution": "中山大学数学系",
+            "institution": "中山大学",
             "year": "2009",
-            "major": ""
+            "major": "数学系"
           },
           {
             "degree": "博士",
-            "institution": "美国纽约州立大学布法罗分校计算机科学与工程系",
+            "institution": "美国纽约州立大学布法罗分校",
             "year": "2015",
-            "major": ""
+            "major": "计算机科学与工程系"
           }
         ],
         "publications_count": -1,
@@ -805,9 +826,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -841,7 +862,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "无源物联网",
+          "智能感知",
+          "绿色计算"
         ],
         "keywords": [],
         "bio": "",
@@ -877,9 +900,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -913,7 +936,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "大模型检索增强",
+          "大模型智能体",
+          "科学智能"
         ],
         "keywords": [],
         "bio": "",
@@ -949,9 +974,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -985,13 +1010,15 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "组合软件技术",
+          "大型网络系统",
+          "分布式算法"
         ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "lj@ustc.edu.cn",
-        "phone": "055163602475",
+        "phone": "(0551)63602475",
         "office": "",
         "profile_url": "http://cs.ustc.edu.cn/2020/0828/c23235a460094/page.htm",
         "lab_url": "",
@@ -1002,10 +1029,10 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "学士",
+            "degree": "博士",
             "institution": "中国科技大学",
-            "year": "1987",
-            "major": "计算机系"
+            "year": "1993",
+            "major": "计算机软件"
           },
           {
             "degree": "硕士",
@@ -1014,10 +1041,10 @@
             "major": "计算机软件"
           },
           {
-            "degree": "博士",
+            "degree": "学士",
             "institution": "中国科技大学",
-            "year": "1993",
-            "major": "计算机软件"
+            "year": "1987",
+            "major": "计算机系"
           }
         ],
         "publications_count": -1,
@@ -1040,9 +1067,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -1076,13 +1103,17 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "存储系统（key-value系统、文件系统、大规模内存系统）",
+          "并行与分布式系统",
+          "云计算",
+          "Serverless",
+          "智能计算系统的存储与I/O支持"
         ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "ykli@ustc.edu.cn",
-        "phone": "055163603412",
+        "phone": "(0551)63603412",
         "office": "",
         "profile_url": "http://cs.ustc.edu.cn/2020/0906/c23235a627367/page.htm",
         "lab_url": "",
@@ -1093,14 +1124,14 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "本科",
-            "institution": "中国科学技术大学",
+            "degree": "博士",
+            "institution": "香港中文大学",
             "year": "",
             "major": ""
           },
           {
-            "degree": "博士",
-            "institution": "香港中文大学",
+            "degree": "本科",
+            "institution": "中国科学技术大学",
             "year": "",
             "major": ""
           }
@@ -1125,9 +1156,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -1161,13 +1192,15 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "嵌入式实时系统",
+          "低功耗系统",
+          "智能计算机系统"
         ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "llxx@ustc.edu.cn",
-        "phone": "055163601556",
+        "phone": "(0551)63601556",
         "office": "",
         "profile_url": "http://cs.ustc.edu.cn/2020/0828/c23235a460095/page.htm",
         "lab_url": "",
@@ -1210,9 +1243,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -1246,7 +1279,16 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "无线网络",
+          "移动计算",
+          "智能物联网",
+          "安全隐私",
+          "数据共享与交易",
+          "大数据计算/网络经济学",
+          "边缘计算",
+          "数据共享计算",
+          "物联网安全",
+          "数据安全隐私"
         ],
         "keywords": [],
         "bio": "",
@@ -1263,13 +1305,19 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "学士",
+            "degree": "双学士学位",
             "institution": "清华大学",
             "year": "1995",
             "major": "计算机科学和工商管理"
           },
           {
-            "degree": "硕士、博士",
+            "degree": "硕士",
+            "institution": "美国伊利诺伊大学厄巴纳-香槟分校",
+            "year": "1999-2001",
+            "major": ""
+          },
+          {
+            "degree": "博士",
             "institution": "美国伊利诺伊大学厄巴纳-香槟分校",
             "year": "1999-2001",
             "major": ""
@@ -1295,9 +1343,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -1331,13 +1379,14 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "高性能计算与算法优化",
+          "大数据处理与应用"
         ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "gzsun@ustc.edu.cn",
-        "phone": "055163602443",
+        "phone": "(0551)63602443",
         "office": "",
         "profile_url": "http://cs.ustc.edu.cn/2020/0906/c23235a460129/page.htm",
         "lab_url": "",
@@ -1367,9 +1416,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -1403,7 +1452,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "模式识别",
+          "情感计算",
+          "计算机视觉",
+          "多媒体技术"
         ],
         "keywords": [],
         "bio": "",
@@ -1446,9 +1498,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -1482,7 +1534,12 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "数据挖掘",
+          "开放机器学习",
+          "AI for Science",
+          "物联网与城市计算",
+          "人工智能与物质科学交叉应用",
+          "人工智能与半导体材料交叉应用"
         ],
         "keywords": [],
         "bio": "",
@@ -1508,7 +1565,7 @@
             "degree": "博士",
             "institution": "中国科学技术大学",
             "year": "2007",
-            "major": "计算机应用专业"
+            "major": "计算机应用"
           }
         ],
         "publications_count": -1,
@@ -1531,9 +1588,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -1567,7 +1624,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "智能计算机体系结构",
+          "深度学习处理器",
+          "FPGA应用加速"
         ],
         "keywords": [],
         "bio": "",
@@ -1616,9 +1675,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -1652,7 +1711,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "移动智能计算（群智感知、联邦学习、边缘计算、社交网络、智能交通）",
+          "区块链技术及应用",
+          "大数据管理与隐私保护"
         ],
         "keywords": [],
         "bio": "",
@@ -1669,7 +1730,7 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "本科双学士",
+            "degree": "双学士",
             "institution": "中国科学技术大学",
             "year": "1999",
             "major": "计算机科学技术"
@@ -1701,9 +1762,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -1737,13 +1798,15 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "计算机网络与信息安全",
+          "移动计算与移动网络",
+          "分布式处理"
         ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "yxiong@ustc.edu.cn",
-        "phone": "63600689",
+        "phone": "(0551)63600689",
         "office": "",
         "profile_url": "http://cs.ustc.edu.cn/2020/0828/c23235a460082/page.htm",
         "lab_url": "",
@@ -1767,9 +1830,9 @@
           },
           {
             "degree": "博士",
-            "institution": "科大计算机系",
+            "institution": "科大",
             "year": "1990",
-            "major": ""
+            "major": "计算机系"
           }
         ],
         "publications_count": -1,
@@ -1792,9 +1855,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -1828,7 +1891,8 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "机器学习(Machine Learning)",
+          "数据挖掘(Data Mining)"
         ],
         "keywords": [],
         "bio": "",
@@ -1845,16 +1909,16 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "博士",
-            "institution": "加拿大滑铁卢大学(University of Waterloo)",
-            "year": "2007",
-            "major": "计算机科学"
-          },
-          {
             "degree": "学士",
             "institution": "中国科学技术大学",
             "year": "2002",
-            "major": "计算机科学与技术"
+            "major": "计算机科学与技术系"
+          },
+          {
+            "degree": "博士",
+            "institution": "加拿大滑铁卢大学(University of Waterloo)",
+            "year": "2007",
+            "major": "计算机学院"
           }
         ],
         "publications_count": -1,
@@ -1877,9 +1941,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -1913,13 +1977,15 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "存储系统",
+          "数据处理",
+          "高性能计算"
         ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "ylxu@ustc.edu.cn",
-        "phone": "055163601013",
+        "phone": "(0551)63601013",
         "office": "",
         "profile_url": "http://cs.ustc.edu.cn/2020/0828/c23235a460084/page.htm",
         "lab_url": "",
@@ -1968,9 +2034,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -2004,7 +2070,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "云计算/软件定义网络",
+          "智能网络/边缘计算",
+          "物联网/计算机网络"
         ],
         "keywords": [],
         "bio": "",
@@ -2027,10 +2095,10 @@
             "major": "计算机软件与理论"
           },
           {
-            "degree": "硕士",
+            "degree": "学士",
             "institution": "中国科学技术大学",
             "year": "2002",
-            "major": ""
+            "major": "计算机科学技术"
           }
         ],
         "publications_count": -1,
@@ -2053,9 +2121,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -2089,7 +2157,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "大数据挖掘算法及应用",
+          "并行编程模型及性能优化",
+          "多核并行编程模型及性能优化",
+          "大规模程序和生物序列分析算法"
         ],
         "keywords": [],
         "bio": "",
@@ -2107,7 +2178,7 @@
         "education": [
           {
             "degree": "博士",
-            "institution": "中国科学技术大学",
+            "institution": "中国科学技术大学计算机系",
             "year": "2002",
             "major": "计算机软件与理论"
           }
@@ -2132,9 +2203,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -2168,7 +2239,9 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "智能软件",
+          "具身智能仿真与安全",
+          "可信大模型"
         ],
         "keywords": [],
         "bio": "",
@@ -2185,8 +2258,8 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "本科",
-            "institution": "中国科学技术大学",
+            "degree": "博士",
+            "institution": "宾夕法尼亚大学",
             "year": "",
             "major": ""
           },
@@ -2197,8 +2270,8 @@
             "major": ""
           },
           {
-            "degree": "博士",
-            "institution": "宾夕法尼亚大学",
+            "degree": "本科",
+            "institution": "中国科学技术大学",
             "year": "",
             "major": ""
           }
@@ -2223,9 +2296,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -2259,13 +2332,16 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "无线网络(车载网络、物联网络、数字孪生网络、智能互连等)",
+          "大数据安全(数据融合、隐私增强、区块链)等",
+          "目标(文本、图像、视频)识别与理解",
+          "图理解与图神经网络等"
         ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "xinming@ustc.edu.cn",
-        "phone": "055163602446",
+        "phone": "(0551)63602446",
         "office": "",
         "profile_url": "http://cs.ustc.edu.cn/2020/0827/c23235a460089/page.htm",
         "lab_url": "",
@@ -2290,7 +2366,7 @@
           {
             "degree": "工学博士",
             "institution": "中国科学技术大学",
-            "year": "2001.12",
+            "year": "2001",
             "major": "计算机网络与网络计算"
           }
         ],
@@ -2314,9 +2390,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -2350,13 +2426,16 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "异构多核体系结构",
+          "可重构系统",
+          "面向特定应用的硬件加速系统",
+          "嵌入式系统设计"
         ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "xhzhou@ustc.edu.cn",
-        "phone": "055163606864, 63492149",
+        "phone": "(0551)63606864, 63492149",
         "office": "",
         "profile_url": "http://cs.ustc.edu.cn/2020/0827/c23235a460092/page.htm",
         "lab_url": "",
@@ -2405,9 +2484,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -2441,7 +2520,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "面向智能无人系统的智能感知",
+          "端边云协同的信息物理融合系统（CPS）",
+          "无人系统实时中间件和操作系统",
+          "车路云原生系统设计"
         ],
         "keywords": [],
         "bio": "",
@@ -2465,7 +2547,7 @@
           },
           {
             "degree": "博士",
-            "institution": "美国宾州州立大学（Penn State University）",
+            "institution": "宾州州立大学（Penn State University）",
             "year": "2002",
             "major": "计算机科学与工程"
           }
@@ -2490,9 +2572,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -2526,7 +2608,10 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "跨域智能计算",
+          "模型推理优化",
+          "AI隐私安全",
+          "数据共享交易"
         ],
         "keywords": [],
         "bio": "",
@@ -2575,9 +2660,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },
@@ -2611,13 +2696,16 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "安徽省合肥市黄山路中国科学技术大学西区电三楼通信地址：安徽省合肥市４号信箱 计算机科学与技术学院 邮政编码：230027CopyRight  2009-2022 中国科学技术大学计算机科学与技术学院 All Rights Reserved."
+          "新兴编程系统与优化",
+          "智能无人系统与优化",
+          "软件与大数据分析",
+          "无人系统基础软件"
         ],
         "keywords": [],
         "bio": "",
         "bio_en": "",
         "email": "yuzhang@ustc.edu.cn",
-        "phone": "055163603804",
+        "phone": "(0551)63603804",
         "office": "",
         "profile_url": "http://cs.ustc.edu.cn/2020/0905/c23235a460147/page.htm",
         "lab_url": "",
@@ -2654,9 +2742,9 @@
         "recent_updates": [],
         "source_id": "ustc_cs_faculty",
         "source_url": "http://cs.ustc.edu.cn/js_23235/list.htm",
-        "crawled_at": "2026-03-03T14:56:50Z",
+        "crawled_at": "2026-03-04T07:06:24Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T14:56:50Z",
+        "last_seen_at": "2026-03-04T07:06:24Z",
         "is_active": true,
         "data_completeness": 60
       },

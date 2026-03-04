@@ -3,8 +3,8 @@
   "dimension": "university_faculty",
   "group": "sjtu",
   "source_name": "上海交通大学清源研究院-研究员",
-  "crawled_at": "2026-03-03T13:34:43.460916+00:00",
-  "previous_crawled_at": "2026-03-01T09:17:27.939309+00:00",
+  "crawled_at": "2026-03-04T06:59:02.691195+00:00",
+  "previous_crawled_at": "2026-03-03T13:34:43.460916+00:00",
   "item_count": 10,
   "new_item_count": 0,
   "items": [
@@ -14,7 +14,7 @@
       "url_hash": "b79bd121d7e55314b980430e7074ad5972648c9ac1906f2d45ae7f8711e719de",
       "published_at": null,
       "author": null,
-      "content": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\r\n物联网、人工智能、大数据等技术的兴起，\r\n人工智能专业人才的需求不断提高",
+      "content": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\n物联网、人工智能、大数据等技术的兴起，\n人工智能专业人才的需求不断提高",
       "content_html": null,
       "content_hash": "310f4f120f55098650b3d60d1b96b0c8d3c92e680d61f0c8d9876185b09ebcc6",
       "source_id": "sjtu_qingyuan_faculty",
@@ -43,7 +43,7 @@
           "机器学习系统"
         ],
         "keywords": [],
-        "bio": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\r\n物联网、人工智能、大数据等技术的兴起，\r\n人工智能专业人才的需求不断提高",
+        "bio": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\n物联网、人工智能、大数据等技术的兴起，\n人工智能专业人才的需求不断提高",
         "bio_en": "",
         "email": "xuningyi@sjtu.edu.cn",
         "phone": "021 – 34204113",
@@ -95,9 +95,9 @@
         "recent_updates": [],
         "source_id": "sjtu_qingyuan_faculty",
         "source_url": "http://www.qingyuan.sjtu.edu.cn/c/quanzhijiaoshi",
-        "crawled_at": "2026-03-03T13:31:02Z",
+        "crawled_at": "2026-03-04T06:56:12Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:31:02Z",
+        "last_seen_at": "2026-03-04T06:56:12Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -109,9 +109,9 @@
       "url_hash": "06573417dae0813cf097380e1d3b5e9ad9fd900a17dedf1a19c0f452267907db",
       "published_at": null,
       "author": null,
-      "content": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\r\n物联网、人工智能、大数据等技术的兴起，\r\n人工智能专业人才的需求不断提高",
+      "content": null,
       "content_html": null,
-      "content_hash": "310f4f120f55098650b3d60d1b96b0c8d3c92e680d61f0c8d9876185b09ebcc6",
+      "content_hash": null,
       "source_id": "sjtu_qingyuan_faculty",
       "dimension": "university_faculty",
       "tags": [
@@ -133,10 +133,10 @@
         "is_academician": false,
         "research_areas": [],
         "keywords": [],
-        "bio": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\r\n物联网、人工智能、大数据等技术的兴起，\r\n人工智能专业人才的需求不断提高",
+        "bio": "",
         "bio_en": "",
-        "email": "zhangshaoting@sensetime.com",
-        "phone": "021 – 34204113",
+        "email": "",
+        "phone": "",
         "office": "",
         "profile_url": "http://www.qingyuan.sjtu.edu.cn/a/zhang-shao-ting.html",
         "lab_url": "",
@@ -166,11 +166,11 @@
         "recent_updates": [],
         "source_id": "sjtu_qingyuan_faculty",
         "source_url": "http://www.qingyuan.sjtu.edu.cn/c/quanzhijiaoshi",
-        "crawled_at": "2026-03-03T13:31:02Z",
+        "crawled_at": "2026-03-04T06:56:12Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:31:02Z",
+        "last_seen_at": "2026-03-04T06:56:12Z",
         "is_active": true,
-        "data_completeness": 55
+        "data_completeness": 30
       },
       "is_new": false
     },
@@ -180,7 +180,7 @@
       "url_hash": "a5a08ee89fabddad7cc5b5e0125734c1137270841a3d129ecae8173e55521466",
       "published_at": null,
       "author": null,
-      "content": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\r\n物联网、人工智能、大数据等技术的兴起，\r\n人工智能专业人才的需求不断提高",
+      "content": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\n物联网、人工智能、大数据等技术的兴起，\n人工智能专业人才的需求不断提高",
       "content_html": null,
       "content_hash": "310f4f120f55098650b3d60d1b96b0c8d3c92e680d61f0c8d9876185b09ebcc6",
       "source_id": "sjtu_qingyuan_faculty",
@@ -203,10 +203,11 @@
         "academic_titles": [],
         "is_academician": false,
         "research_areas": [
-          "微纳仿生与智能感知"
+          "微纳仿生",
+          "智能感知"
         ],
         "keywords": [],
-        "bio": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\r\n物联网、人工智能、大数据等技术的兴起，\r\n人工智能专业人才的需求不断提高",
+        "bio": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\n物联网、人工智能、大数据等技术的兴起，\n人工智能专业人才的需求不断提高",
         "bio_en": "",
         "email": "leilei.gu@sjtu.edu.cn",
         "phone": "021 – 34204113",
@@ -233,8 +234,95 @@
           },
           {
             "degree": "博士",
-            "institution": "香港科技大学电子与计算机工程系",
+            "institution": "香港科技大学",
             "year": "2016",
+            "major": "电子与计算机工程"
+          }
+        ],
+        "publications_count": -1,
+        "h_index": -1,
+        "citations_count": -1,
+        "metrics_updated_at": "",
+        "representative_publications": [],
+        "patents": [],
+        "awards": [],
+        "is_advisor_committee": false,
+        "is_adjunct_supervisor": false,
+        "supervised_students": [],
+        "joint_research_projects": [],
+        "joint_management_roles": [],
+        "academic_exchange_records": [],
+        "is_potential_recruit": false,
+        "institute_relation_notes": "",
+        "relation_updated_by": "",
+        "relation_updated_at": "",
+        "recent_updates": [],
+        "source_id": "sjtu_qingyuan_faculty",
+        "source_url": "http://www.qingyuan.sjtu.edu.cn/c/quanzhijiaoshi",
+        "crawled_at": "2026-03-04T06:56:12Z",
+        "first_seen_at": "",
+        "last_seen_at": "2026-03-04T06:56:12Z",
+        "is_active": true,
+        "data_completeness": 70
+      },
+      "is_new": false
+    },
+    {
+      "title": "黄维然",
+      "url": "http://www.qingyuan.sjtu.edu.cn/a/huang-wei-ran.html",
+      "url_hash": "3b171785c470f4768f9ba67c8e8a91eca831d1cb4645d835e522aa7e696bab44",
+      "published_at": null,
+      "author": null,
+      "content": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\n物联网、人工智能、大数据等技术的兴起，\n人工智能专业人才的需求不断提高",
+      "content_html": null,
+      "content_hash": "310f4f120f55098650b3d60d1b96b0c8d3c92e680d61f0c8d9876185b09ebcc6",
+      "source_id": "sjtu_qingyuan_faculty",
+      "dimension": "university_faculty",
+      "tags": [
+        "faculty",
+        "sjtu",
+        "ai",
+        "research"
+      ],
+      "extra": {
+        "name": "黄维然",
+        "name_en": "",
+        "gender": "",
+        "photo_url": "",
+        "university": "上海交通大学",
+        "department": "清源研究院",
+        "secondary_departments": [],
+        "position": "",
+        "academic_titles": [],
+        "is_academician": false,
+        "research_areas": [
+          "大模型的高效微调",
+          "持续学习"
+        ],
+        "keywords": [],
+        "bio": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\n物联网、人工智能、大数据等技术的兴起，\n人工智能专业人才的需求不断提高",
+        "bio_en": "",
+        "email": "weiran.huang@sjtu.edu.cn",
+        "phone": "021 – 34204113",
+        "office": "",
+        "profile_url": "http://www.qingyuan.sjtu.edu.cn/a/huang-wei-ran.html",
+        "lab_url": "",
+        "google_scholar_url": "",
+        "dblp_url": "",
+        "orcid": "",
+        "phd_institution": "",
+        "phd_year": "",
+        "education": [
+          {
+            "degree": "学士",
+            "institution": "清华大学",
+            "year": "",
+            "major": ""
+          },
+          {
+            "degree": "博士",
+            "institution": "清华大学",
+            "year": "",
             "major": ""
           }
         ],
@@ -258,82 +346,11 @@
         "recent_updates": [],
         "source_id": "sjtu_qingyuan_faculty",
         "source_url": "http://www.qingyuan.sjtu.edu.cn/c/quanzhijiaoshi",
-        "crawled_at": "2026-03-03T13:31:02Z",
+        "crawled_at": "2026-03-04T06:56:12Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:31:02Z",
+        "last_seen_at": "2026-03-04T06:56:12Z",
         "is_active": true,
         "data_completeness": 70
-      },
-      "is_new": false
-    },
-    {
-      "title": "黄维然",
-      "url": "http://www.qingyuan.sjtu.edu.cn/a/huang-wei-ran.html",
-      "url_hash": "3b171785c470f4768f9ba67c8e8a91eca831d1cb4645d835e522aa7e696bab44",
-      "published_at": null,
-      "author": null,
-      "content": null,
-      "content_html": null,
-      "content_hash": null,
-      "source_id": "sjtu_qingyuan_faculty",
-      "dimension": "university_faculty",
-      "tags": [
-        "faculty",
-        "sjtu",
-        "ai",
-        "research"
-      ],
-      "extra": {
-        "name": "黄维然",
-        "name_en": "",
-        "gender": "",
-        "photo_url": "",
-        "university": "上海交通大学",
-        "department": "清源研究院",
-        "secondary_departments": [],
-        "position": "",
-        "academic_titles": [],
-        "is_academician": false,
-        "research_areas": [],
-        "keywords": [],
-        "bio": "",
-        "bio_en": "",
-        "email": "",
-        "phone": "",
-        "office": "",
-        "profile_url": "http://www.qingyuan.sjtu.edu.cn/a/huang-wei-ran.html",
-        "lab_url": "",
-        "google_scholar_url": "",
-        "dblp_url": "",
-        "orcid": "",
-        "phd_institution": "",
-        "phd_year": "",
-        "education": [],
-        "publications_count": -1,
-        "h_index": -1,
-        "citations_count": -1,
-        "metrics_updated_at": "",
-        "representative_publications": [],
-        "patents": [],
-        "awards": [],
-        "is_advisor_committee": false,
-        "is_adjunct_supervisor": false,
-        "supervised_students": [],
-        "joint_research_projects": [],
-        "joint_management_roles": [],
-        "academic_exchange_records": [],
-        "is_potential_recruit": false,
-        "institute_relation_notes": "",
-        "relation_updated_by": "",
-        "relation_updated_at": "",
-        "recent_updates": [],
-        "source_id": "sjtu_qingyuan_faculty",
-        "source_url": "http://www.qingyuan.sjtu.edu.cn/c/quanzhijiaoshi",
-        "crawled_at": "2026-03-03T13:31:02Z",
-        "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:31:02Z",
-        "is_active": true,
-        "data_completeness": 30
       },
       "is_new": false
     },
@@ -343,7 +360,7 @@
       "url_hash": "ad8734214f4347fa6b445bf50b7428708ed06030481486875ba0646a858d42e1",
       "published_at": null,
       "author": null,
-      "content": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\r\n物联网、人工智能、大数据等技术的兴起，\r\n人工智能专业人才的需求不断提高",
+      "content": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\n物联网、人工智能、大数据等技术的兴起，\n人工智能专业人才的需求不断提高",
       "content_html": null,
       "content_hash": "310f4f120f55098650b3d60d1b96b0c8d3c92e680d61f0c8d9876185b09ebcc6",
       "source_id": "sjtu_qingyuan_faculty",
@@ -372,7 +389,7 @@
           "深度学习方法 (AI for Science)"
         ],
         "keywords": [],
-        "bio": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\r\n物联网、人工智能、大数据等技术的兴起，\r\n人工智能专业人才的需求不断提高",
+        "bio": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\n物联网、人工智能、大数据等技术的兴起，\n人工智能专业人才的需求不断提高",
         "bio_en": "",
         "email": "zhongyuli@sjtu.edu.cn",
         "phone": "021 – 34204113",
@@ -386,8 +403,8 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "本科",
-            "institution": "西安交通大学",
+            "degree": "博士",
+            "institution": "北卡罗来纳大学夏洛特分校",
             "year": "",
             "major": ""
           },
@@ -398,8 +415,8 @@
             "major": ""
           },
           {
-            "degree": "博士",
-            "institution": "北卡罗来纳大学夏洛特分校",
+            "degree": "本科",
+            "institution": "西安交通大学",
             "year": "",
             "major": ""
           }
@@ -424,9 +441,9 @@
         "recent_updates": [],
         "source_id": "sjtu_qingyuan_faculty",
         "source_url": "http://www.qingyuan.sjtu.edu.cn/c/quanzhijiaoshi",
-        "crawled_at": "2026-03-03T13:31:02Z",
+        "crawled_at": "2026-03-04T06:56:12Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:31:02Z",
+        "last_seen_at": "2026-03-04T06:56:12Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -438,7 +455,7 @@
       "url_hash": "6a46ce47101a3ae440139b27cb865643263348eb78da25507906d7109e20e0aa",
       "published_at": null,
       "author": null,
-      "content": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\r\n物联网、人工智能、大数据等技术的兴起，\r\n人工智能专业人才的需求不断提高",
+      "content": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\n物联网、人工智能、大数据等技术的兴起，\n人工智能专业人才的需求不断提高",
       "content_html": null,
       "content_hash": "310f4f120f55098650b3d60d1b96b0c8d3c92e680d61f0c8d9876185b09ebcc6",
       "source_id": "sjtu_qingyuan_faculty",
@@ -463,10 +480,12 @@
         "research_areas": [
           "自然语言的预训",
           "生成",
-          "评估"
+          "评估",
+          "自然语言处理",
+          "人工智能"
         ],
         "keywords": [],
-        "bio": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\r\n物联网、人工智能、大数据等技术的兴起，\r\n人工智能专业人才的需求不断提高",
+        "bio": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\n物联网、人工智能、大数据等技术的兴起，\n人工智能专业人才的需求不断提高",
         "bio_en": "",
         "email": "pengfei@sjtu.edu.cn",
         "phone": "021 – 34204113",
@@ -499,9 +518,9 @@
         "recent_updates": [],
         "source_id": "sjtu_qingyuan_faculty",
         "source_url": "http://www.qingyuan.sjtu.edu.cn/c/quanzhijiaoshi",
-        "crawled_at": "2026-03-03T13:31:02Z",
+        "crawled_at": "2026-03-04T06:56:12Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:31:02Z",
+        "last_seen_at": "2026-03-04T06:56:12Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -513,9 +532,9 @@
       "url_hash": "2fa87ea91006d2bb9e33b47f67e24e6c7e3d0fbd30471ed68a18ebee5875e9f5",
       "published_at": null,
       "author": null,
-      "content": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\r\n物联网、人工智能、大数据等技术的兴起，\r\n人工智能专业人才的需求不断提高",
+      "content": null,
       "content_html": null,
-      "content_hash": "310f4f120f55098650b3d60d1b96b0c8d3c92e680d61f0c8d9876185b09ebcc6",
+      "content_hash": null,
       "source_id": "sjtu_qingyuan_faculty",
       "dimension": "university_faculty",
       "tags": [
@@ -535,16 +554,12 @@
         "position": "",
         "academic_titles": [],
         "is_academician": false,
-        "research_areas": [
-          "医学图像",
-          "文本分析",
-          "多模态决策"
-        ],
+        "research_areas": [],
         "keywords": [],
-        "bio": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\r\n物联网、人工智能、大数据等技术的兴起，\r\n人工智能专业人才的需求不断提高",
+        "bio": "",
         "bio_en": "",
-        "email": "qingyuan@sjtu.edu.cn",
-        "phone": "021 – 34204113",
+        "email": "",
+        "phone": "",
         "office": "",
         "profile_url": "http://www.qingyuan.sjtu.edu.cn/a/zhang-xiao-fan-1.html",
         "lab_url": "",
@@ -553,20 +568,7 @@
         "orcid": "",
         "phd_institution": "",
         "phd_year": "",
-        "education": [
-          {
-            "degree": "学士",
-            "institution": "北京航空航天大学",
-            "year": "",
-            "major": ""
-          },
-          {
-            "degree": "博士",
-            "institution": "美国北卡罗莱纳大学夏洛特分校",
-            "year": "",
-            "major": ""
-          }
-        ],
+        "education": [],
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
@@ -587,11 +589,11 @@
         "recent_updates": [],
         "source_id": "sjtu_qingyuan_faculty",
         "source_url": "http://www.qingyuan.sjtu.edu.cn/c/quanzhijiaoshi",
-        "crawled_at": "2026-03-03T13:31:02Z",
+        "crawled_at": "2026-03-04T06:56:12Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:31:02Z",
+        "last_seen_at": "2026-03-04T06:56:12Z",
         "is_active": true,
-        "data_completeness": 70
+        "data_completeness": 30
       },
       "is_new": false
     },
@@ -601,7 +603,7 @@
       "url_hash": "343b94a05aa91ab5c241d28320beba1865b54860e5a6e5f79c6017378ec4cad9",
       "published_at": null,
       "author": null,
-      "content": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\r\n物联网、人工智能、大数据等技术的兴起，\r\n人工智能专业人才的需求不断提高",
+      "content": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\n物联网、人工智能、大数据等技术的兴起，\n人工智能专业人才的需求不断提高",
       "content_html": null,
       "content_hash": "310f4f120f55098650b3d60d1b96b0c8d3c92e680d61f0c8d9876185b09ebcc6",
       "source_id": "sjtu_qingyuan_faculty",
@@ -626,14 +628,17 @@
         "research_areas": [
           "概率建模",
           "深度学习",
-          "Bayesian inference",
-          "kernel methods",
-          "generative models",
-          "machine learning",
-          "statistical methodology"
+          "贝叶斯推理",
+          "核方法",
+          "生成模型",
+          "数据高效学习",
+          "不确定性量化",
+          "对抗防御",
+          "自动化机器学习",
+          "MLSys"
         ],
         "keywords": [],
-        "bio": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\r\n物联网、人工智能、大数据等技术的兴起，\r\n人工智能专业人才的需求不断提高",
+        "bio": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\n物联网、人工智能、大数据等技术的兴起，\n人工智能专业人才的需求不断提高",
         "bio_en": "",
         "email": "zhijied@sjtu.edu.cn",
         "phone": "021 – 34204113",
@@ -647,16 +652,16 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "B.S.",
-            "institution": "Department of Computer Science and Technology, Tsinghua University",
-            "year": "2017",
-            "major": ""
+            "degree": "博士",
+            "institution": "清华大学",
+            "year": "2022",
+            "major": "计算机科学与技术"
           },
           {
-            "degree": "Ph.D.",
-            "institution": "Department of Computer Science and Technology, Tsinghua University",
-            "year": "2022",
-            "major": ""
+            "degree": "学士",
+            "institution": "清华大学",
+            "year": "2017",
+            "major": "计算机科学与技术"
           }
         ],
         "publications_count": -1,
@@ -679,9 +684,9 @@
         "recent_updates": [],
         "source_id": "sjtu_qingyuan_faculty",
         "source_url": "http://www.qingyuan.sjtu.edu.cn/c/quanzhijiaoshi",
-        "crawled_at": "2026-03-03T13:31:02Z",
+        "crawled_at": "2026-03-04T06:56:12Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:31:02Z",
+        "last_seen_at": "2026-03-04T06:56:12Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -693,7 +698,7 @@
       "url_hash": "372ed8edfbd7e694eaaaf91460e4e366d907293f31f205e40aaf7a9a6f3e7f61",
       "published_at": null,
       "author": null,
-      "content": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\r\n物联网、人工智能、大数据等技术的兴起，\r\n人工智能专业人才的需求不断提高",
+      "content": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\n物联网、人工智能、大数据等技术的兴起，\n人工智能专业人才的需求不断提高",
       "content_html": null,
       "content_hash": "310f4f120f55098650b3d60d1b96b0c8d3c92e680d61f0c8d9876185b09ebcc6",
       "source_id": "sjtu_qingyuan_faculty",
@@ -720,7 +725,7 @@
           "多模态大语言模型（Multimodal Large Language Models）"
         ],
         "keywords": [],
-        "bio": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\r\n物联网、人工智能、大数据等技术的兴起，\r\n人工智能专业人才的需求不断提高",
+        "bio": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\n物联网、人工智能、大数据等技术的兴起，\n人工智能专业人才的需求不断提高",
         "bio_en": "",
         "email": "dequanwang@sjtu.edu.cn",
         "phone": "021 – 34204113",
@@ -734,14 +739,14 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "本科",
-            "institution": "复旦大学",
+            "degree": "博士",
+            "institution": "加州大学伯克利分校",
             "year": "",
             "major": ""
           },
           {
-            "degree": "博士",
-            "institution": "加州大学伯克利分校",
+            "degree": "本科",
+            "institution": "复旦大学",
             "year": "",
             "major": ""
           }
@@ -766,9 +771,9 @@
         "recent_updates": [],
         "source_id": "sjtu_qingyuan_faculty",
         "source_url": "http://www.qingyuan.sjtu.edu.cn/c/quanzhijiaoshi",
-        "crawled_at": "2026-03-03T13:31:02Z",
+        "crawled_at": "2026-03-04T06:56:12Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:31:02Z",
+        "last_seen_at": "2026-03-04T06:56:12Z",
         "is_active": true,
         "data_completeness": 70
       },
@@ -780,7 +785,7 @@
       "url_hash": "2cb9da5b6578ab7e445afc7f67d1bb4a2a84b79065433b0a446bbf90f456050e",
       "published_at": null,
       "author": null,
-      "content": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\r\n物联网、人工智能、大数据等技术的兴起，\r\n人工智能专业人才的需求不断提高",
+      "content": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\n物联网、人工智能、大数据等技术的兴起，\n人工智能专业人才的需求不断提高",
       "content_html": null,
       "content_hash": "310f4f120f55098650b3d60d1b96b0c8d3c92e680d61f0c8d9876185b09ebcc6",
       "source_id": "sjtu_qingyuan_faculty",
@@ -807,7 +812,7 @@
           "可信赖模型"
         ],
         "keywords": [],
-        "bio": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\r\n物联网、人工智能、大数据等技术的兴起，\r\n人工智能专业人才的需求不断提高",
+        "bio": "随着计算机科学与技术在人们生活中的应用不断深入，尤其是云计算、\n物联网、人工智能、大数据等技术的兴起，\n人工智能专业人才的需求不断提高",
         "bio_en": "",
         "email": "c.sis@sjtu.edu.cn",
         "phone": "021 – 34204113",
@@ -821,16 +826,16 @@
         "phd_year": "",
         "education": [
           {
-            "degree": "本科",
-            "institution": "上海交通大学",
-            "year": "",
-            "major": "ACM班"
-          },
-          {
             "degree": "博士",
             "institution": "上海交通大学",
             "year": "",
             "major": ""
+          },
+          {
+            "degree": "本科",
+            "institution": "上海交通大学",
+            "year": "",
+            "major": "ACM班"
           }
         ],
         "publications_count": -1,
@@ -853,9 +858,9 @@
         "recent_updates": [],
         "source_id": "sjtu_qingyuan_faculty",
         "source_url": "http://www.qingyuan.sjtu.edu.cn/c/quanzhijiaoshi",
-        "crawled_at": "2026-03-03T13:31:02Z",
+        "crawled_at": "2026-03-04T06:56:12Z",
         "first_seen_at": "",
-        "last_seen_at": "2026-03-03T13:31:02Z",
+        "last_seen_at": "2026-03-04T06:56:12Z",
         "is_active": true,
         "data_completeness": 70
       },
