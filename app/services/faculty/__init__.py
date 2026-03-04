@@ -295,3 +295,32 @@ def update_faculty_basic(url_hash: str, updates: dict[str, Any]) -> dict[str, An
     tmp_path.replace(file_path)
 
     return get_faculty_detail(url_hash)
+
+
+def delete_faculty(url_hash: str) -> bool:
+    """Delete a faculty record by removing it from the raw JSON file.
+
+    Returns True if deleted successfully, False if not found.
+    """
+    result = _find_raw_file_by_hash(url_hash)
+    if result is None:
+        return False
+
+    file_path, item_idx = result
+
+    with open(file_path, encoding="utf-8") as f:
+        data = json.load(f)
+
+    # Remove the item from the items array
+    data["items"].pop(item_idx)
+
+    # Update item_count
+    data["item_count"] = len(data["items"])
+
+    # Atomic write: write to temp file, then replace
+    tmp_path = file_path.with_suffix(".tmp")
+    with open(tmp_path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    tmp_path.replace(file_path)
+
+    return True

@@ -199,6 +199,18 @@ async def add_update(url_hash: str, body: UserUpdateCreate):
 
 
 @router.delete(
+    "/{url_hash}",
+    summary="删除学者记录",
+    description="删除指定的学者记录及其所有关联数据。",
+    status_code=204,
+)
+async def delete_faculty(url_hash: str):
+    deleted = svc.delete_faculty(url_hash)
+    if not deleted:
+        raise HTTPException(status_code=404, detail=f"Faculty '{url_hash}' not found")
+
+
+@router.delete(
     "/{url_hash}/updates/{update_idx}",
     response_model=FacultyDetailResponse,
     summary="删除用户备注动态",
