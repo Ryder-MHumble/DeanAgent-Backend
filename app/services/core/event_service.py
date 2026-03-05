@@ -1,9 +1,13 @@
-"""Event service — CRUD operations for events data."""
+"""Event service — CRUD operations for events data.
+
+Events are stored inside institutions.json under the top-level "events" key,
+keeping all scholar-related data in a single file.
+"""
 from __future__ import annotations
 
 import json
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -14,22 +18,30 @@ from app.schemas.event import (
     EventStatsResponse,
 )
 
-EVENTS_FILE = Path("data/scholars/events.json")
+INSTITUTIONS_FILE = Path("data/scholars/institutions.json")
 
 
-def _load_events() -> dict[str, Any]:
-    """Load events data from JSON file."""
-    if not EVENTS_FILE.exists():
-        return {"total": 0, "last_updated": None, "events": []}
+def _load_events() -> list[dict[str, Any]]:
+    """Load events list from institutions.json."""
+    if not INSTITUTIONS_FILE.exists():
+        return []
+    with open(INSTITUTIONS_FILE, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    return data.get("events", [])
 
-    with open(EVENTS_FILE, "r", encoding="utf-8") as f:
-        return json.load(f)
 
+def _save_events(events: list[dict[str, Any]]) -> None:
+    """Save events list back into institutions.json under the 'events' key."""
+    if INSTITUTIONS_FILE.exists():
+        with open(INSTITUTIONS_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    else:
+        data = {"last_updated": "", "universities": []}
 
-def _save_events(data: dict[str, Any]) -> None:
-    """Save events data to JSON file."""
-    data["last_updated"] = datetime.now().isoformat()
-    with open(EVENTS_FILE, "w", encoding="utf-8") as f:
+    data["events"] = events
+    data["last_updated"] = datetime.now(timezone.utc).isoformat()
+
+    with open(INSTITUTIONS_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 
@@ -44,8 +56,7 @@ def get_event_list(
     page_size: int = 20,
 ) -> EventListResponse:
     """Get paginated list of events with filtering."""
-    data = _load_events()
-    events = data.get("events", [])
+    events = _load_events()
 
     # Apply filters
     filtered = events
@@ -119,8 +130,7 @@ def get_event_list(
 
 def get_event_detail(event_id: str) -> EventDetailResponse | None:
     """Get detailed information for a single event."""
-    data = _load_events()
-    events = data.get("events", [])
+    events = _load_events()
 
     for evt in events:
         if evt.get("id") == event_id:
@@ -131,10 +141,8 @@ def get_event_detail(event_id: str) -> EventDetailResponse | None:
 
 def get_event_stats() -> EventStatsResponse:
     """Get statistics for all events."""
-    data = _load_events()
-    events = data.get("events", [])
+    events = _load_events()
 
-    # Basic counts
     total = len(events)
 
     # By type
@@ -170,8 +178,7 @@ def get_event_stats() -> EventStatsResponse:
 
 def create_event(evt_data: dict[str, Any]) -> EventDetailResponse:
     """Create a new event."""
-    data = _load_events()
-    events = data.get("events", [])
+    events = _load_events()
 
     # Generate UUID
     evt_data["id"] = str(uuid.uuid4())
@@ -182,34 +189,23 @@ def create_event(evt_data: dict[str, Any]) -> EventDetailResponse:
     evt_data["updated_at"] = now
 
     events.append(evt_data)
-    data["events"] = events
-    data["total"] = len(events)
-
-    _save_events(data)
+    _save_events(events)
 
     return EventDetailResponse(**evt_data)
 
 
 def update_event(event_id: str, updates: dict[str, Any]) -> EventDetailResponse | None:
     """Update an existing event."""
-    data = _load_events()
-    events = data.get("events", [])
+    events = _load_events()
 
     for i, evt in enumerate(events):
         if evt.get("id") == event_id:
-            # Apply updates
             for key, value in updates.items():
-                if key != "id":  # Don't allow ID changes
+                if key != "id":
                     evt[key] = value
-
-            # Update timestamp
             evt["updated_at"] = datetime.now().isoformat()
-
             events[i] = evt
-            data["events"] = events
-
-            _save_events(data)
-
+            _save_events(events)
             return EventDetailResponse(**evt)
 
     return None
@@ -217,16 +213,13 @@ def update_event(event_id: str, updates: dict[str, Any]) -> EventDetailResponse 
 
 def delete_event(event_id: str) -> bool:
     """Delete an event."""
-    data = _load_events()
-    events = data.get("events", [])
+    events = _load_events()
 
     original_count = len(events)
     events = [e for e in events if e.get("id") != event_id]
 
     if len(events) < original_count:
-        data["events"] = events
-        data["total"] = len(events)
-        _save_events(data)
+        _save_events(events)
         return True
 
     return False
@@ -234,8 +227,7 @@ def delete_event(event_id: str) -> bool:
 
 def add_scholar_to_event(event_id: str, scholar_id: str) -> EventDetailResponse | None:
     """Add a scholar association to an event."""
-    data = _load_events()
-    events = data.get("events", [])
+    events = _load_events()
 
     for i, evt in enumerate(events):
         if evt.get("id") == event_id:
@@ -244,11 +236,8 @@ def add_scholar_to_event(event_id: str, scholar_id: str) -> EventDetailResponse 
                 scholar_ids.append(scholar_id)
                 evt["scholar_ids"] = scholar_ids
                 evt["updated_at"] = datetime.now().isoformat()
-
                 events[i] = evt
-                data["events"] = events
-                _save_events(data)
-
+                _save_events(events)
             return EventDetailResponse(**evt)
 
     return None
@@ -256,8 +245,7 @@ def add_scholar_to_event(event_id: str, scholar_id: str) -> EventDetailResponse 
 
 def remove_scholar_from_event(event_id: str, scholar_id: str) -> EventDetailResponse | None:
     """Remove a scholar association from an event."""
-    data = _load_events()
-    events = data.get("events", [])
+    events = _load_events()
 
     for i, evt in enumerate(events):
         if evt.get("id") == event_id:
@@ -266,11 +254,8 @@ def remove_scholar_from_event(event_id: str, scholar_id: str) -> EventDetailResp
                 scholar_ids.remove(scholar_id)
                 evt["scholar_ids"] = scholar_ids
                 evt["updated_at"] = datetime.now().isoformat()
-
                 events[i] = evt
-                data["events"] = events
-                _save_events(data)
-
+                _save_events(events)
             return EventDetailResponse(**evt)
 
     return None
@@ -278,8 +263,7 @@ def remove_scholar_from_event(event_id: str, scholar_id: str) -> EventDetailResp
 
 def get_event_scholars(event_id: str) -> list[str] | None:
     """Get list of scholar IDs associated with an event."""
-    data = _load_events()
-    events = data.get("events", [])
+    events = _load_events()
 
     for evt in events:
         if evt.get("id") == event_id:

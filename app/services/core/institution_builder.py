@@ -70,6 +70,7 @@ def build_institutions_data() -> dict[str, Any]:
     """
     # Load existing institutions.json if it exists
     existing_data = {}
+    existing_events: list = []
     institutions_file = Path("data/scholars/institutions.json")
     if institutions_file.exists():
         try:
@@ -78,6 +79,8 @@ def build_institutions_data() -> dict[str, Any]:
                 # Build lookup by university name
                 for uni in existing_json.get("universities", []):
                     existing_data[uni["name"]] = uni
+                # Preserve events data
+                existing_events = existing_json.get("events", [])
         except (json.JSONDecodeError, OSError):
             pass
 
@@ -176,10 +179,14 @@ def build_institutions_data() -> dict[str, Any]:
         if uni_name not in universities_by_name:
             universities.append(uni_data)
 
-    return {
+    result: dict[str, Any] = {
         "last_updated": datetime.now(UTC).isoformat(),
         "universities": sorted(universities, key=lambda u: u["name"]),
     }
+    # Preserve events so that rebuild_institutions.py doesn't wipe event data
+    if existing_events:
+        result["events"] = existing_events
+    return result
 
 
 def save_institutions_data(data: dict[str, Any] | None = None) -> Path:
