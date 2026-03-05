@@ -149,16 +149,40 @@ class InstitutionStatsResponse(BaseModel):
 # ---------------------------------------------------------------------------
 
 
+class DepartmentCreateInput(BaseModel):
+    """院系创建输入（用于批量创建或嵌套创建）"""
+
+    id: str = Field(description="院系唯一 ID（全局唯一）")
+    name: str = Field(description="院系名称")
+    org_name: str | None = Field(default=None, description="AMiner 标准化机构名（院系级别）")
+
+
 class InstitutionCreate(BaseModel):
-    """POST /institutions/ — 创建新机构记录（支持 Excel 批量导入全量字段）"""
+    """POST /institutions/ — 创建新机构记录（支持三种场景）
+
+    场景 1: 仅创建高校
+        - type='university', 不传 departments 或传空列表
+
+    场景 2: 仅创建院系（高校已存在）
+        - type='department', 必填 parent_id
+
+    场景 3: 创建高校 + 院系（一次性创建）
+        - type='university', 传 departments 列表
+    """
 
     # ---- 必填 ----
     id: str = Field(description="机构唯一 ID（高校/院系缩写，全局唯一）")
     name: str = Field(description="机构名称")
     type: str = Field(description="机构类型：university | department")
 
-    # ---- 院系专用 ----
+    # ---- 院系专用（场景 2）----
     parent_id: str | None = Field(default=None, description="父高校 ID（type=department 时必填）")
+
+    # ---- 高校 + 院系批量创建（场景 3）----
+    departments: list[DepartmentCreateInput] | None = Field(
+        default=None,
+        description="院系列表（type=university 时可选，支持一次性创建高校+院系）"
+    )
 
     # ---- AMiner 标准化名（可选，不填则创建后自动从 AMiner 查询写入）----
     org_name: str | None = Field(default=None, description="AMiner 标准化机构英文名，留空则自动从 AMiner 获取")

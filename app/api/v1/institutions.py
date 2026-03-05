@@ -67,10 +67,19 @@ async def get_institution(institution_id: str):
     response_model=InstitutionDetailResponse,
     summary="创建机构",
     description=(
-        "创建新的机构记录（高校或院系），支持 Excel 批量导入的全量字段。"
-        "\n\n**创建高校（type=university）必填：** `id`, `name`"
-        "\n**创建院系（type=department）必填：** `id`, `name`, `parent_id`"
-        "\n\n**重复检测：** 若 `id` 已存在，返回 409 Conflict。"
+        "创建新的机构记录（高校或院系），支持三种场景："
+        "\n\n**场景 1: 仅创建高校**"
+        "\n- 必填：`id`, `name`, `type='university'`"
+        "\n- 可选：所有高校字段（category, priority, student_count_24 等）"
+        "\n- 不传 `departments` 或传空列表"
+        "\n\n**场景 2: 仅创建院系（高校已存在）**"
+        "\n- 必填：`id`, `name`, `type='department'`, `parent_id`"
+        "\n- `parent_id` 必须是已存在的高校 ID"
+        "\n\n**场景 3: 创建高校 + 院系（一次性创建）**"
+        "\n- 必填：`id`, `name`, `type='university'`, `departments=[{id, name}, ...]`"
+        "\n- 可选：所有高校字段"
+        "\n- `departments` 列表中每个院系需提供 `id` 和 `name`"
+        "\n\n**重复检测：** 若 `id` 已存在，返回 409 Conflict。院系 ID 必须全局唯一。"
         "\n\n**AMiner org_name 自动填充：** 若未传 `org_name`，"
         "创建完成后会自动调用 AMiner 机构接口查询并写入标准化英文名。"
         "查询失败不影响创建结果，`org_name` 保持为 null。"

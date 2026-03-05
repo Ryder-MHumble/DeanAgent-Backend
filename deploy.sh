@@ -241,7 +241,7 @@ _start_service() {
     cd "$PROJECT_DIR"
     nohup "$VENV_DIR/bin/python" -m uvicorn app.main:app \
         --host 0.0.0.0 --port "$PORT" --workers "$WORKERS" \
-        "${extra_args[@]}" >> "$LOG_FILE" 2>&1 &
+        ${extra_args[@]+"${extra_args[@]}"} >> "$LOG_FILE" 2>&1 &
 
     echo $! > "$PID_FILE"
     sleep 2

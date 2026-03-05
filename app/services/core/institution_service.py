@@ -343,7 +343,11 @@ def get_institution_stats() -> InstitutionStatsResponse:
 
 
 def create_institution(inst_data: dict[str, Any]) -> InstitutionDetailResponse:
-    """创建新机构（高校或院系），支持全量字段写入。
+    """创建新机构（高校或院系），支持三种场景：
+
+    场景 1: 仅创建高校（type='university', departments=None 或 []）
+    场景 2: 仅创建院系（type='department', parent_id 必填）
+    场景 3: 创建高校 + 院系（type='university', departments=[...] 非空）
 
     Raises:
         InstitutionAlreadyExistsError: 机构 ID 已存在。
@@ -392,13 +396,47 @@ def create_institution(inst_data: dict[str, Any]) -> InstitutionDetailResponse:
             "cooperation_focus": inst_data.get("cooperation_focus") or [],
             "departments": [],
         }
+
+        # 场景 3: 同时创建院系（如果提供了 departments 列表）
+        departments_input = inst_data.get("departments")
+        if departments_input:
+            # 检查院系 ID 重复
+            dept_ids = [d.get("id") for d in departments_input]
+            if len(dept_ids) != len(set(dept_ids)):
+                raise ValueError("院系 ID 列表中存在重复")
+
+            # 检查院系 ID 是否与其他高校的院系冲突
+            for dept_input in departments_input:
+                dept_id = dept_input.get("id")
+                if not dept_id:
+                    raise ValueError("院系 ID 不能为空")
+
+                # 检查全局院系 ID 冲突
+                for existing_univ in universities:
+                    for existing_dept in existing_univ.get("departments", []):
+                        if existing_dept["id"] == dept_id:
+                            raise InstitutionAlreadyExistsError(
+                                f"院系 '{dept_id}'（{dept_input.get('name', '')}）已存在于高校 "
+                                f"'{existing_univ['id']}' 中，请使用不同的 ID"
+                            )
+
+                # 创建院系
+                new_dept: dict[str, Any] = {
+                    "id": dept_id,
+                    "name": dept_input.get("name", ""),
+                    "org_name": dept_input.get("org_name"),
+                    "scholar_count": 0,
+                    "sources": [],
+                }
+                new_univ["departments"].append(new_dept)
+
         universities.append(new_univ)
         data["universities"] = universities
         _save_institutions(data)
 
         return _build_university_detail(new_univ)
 
-    else:  # department
+    else:  # department (场景 2)
         parent_id = inst_data.get("parent_id")
         if not parent_id:
             raise ValueError("创建院系时 parent_id（所属高校 ID）为必填项")
@@ -413,11 +451,20 @@ def create_institution(inst_data: dict[str, Any]) -> InstitutionDetailResponse:
         if not parent_univ:
             raise ValueError(f"父高校 '{parent_id}' 不存在")
 
-        # 重复检测 → 409
+        # 重复检测 → 409（检查该高校下的院系）
         if any(d["id"] == inst_id for d in parent_univ.get("departments", [])):
             raise InstitutionAlreadyExistsError(
                 f"院系 '{inst_id}'（{inst_data['name']}）已存在于高校 '{parent_id}' 中，请勿重复创建"
             )
+
+        # 检查全局院系 ID 冲突（院系 ID 必须全局唯一）
+        for univ in universities:
+            for dept in univ.get("departments", []):
+                if dept["id"] == inst_id:
+                    raise InstitutionAlreadyExistsError(
+                        f"院系 '{inst_id}'（{inst_data['name']}）已存在于高校 '{univ['id']}' 中，"
+                        "院系 ID 必须全局唯一"
+                    )
 
         # 创建院系
         new_dept: dict[str, Any] = {

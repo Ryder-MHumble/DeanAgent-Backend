@@ -4,7 +4,9 @@ Endpoints:
   GET  /scholars/                                       学者列表（分页 + 多维度筛选）
   GET  /scholars/stats                                  统计数据
   GET  /scholars/sources                                信源列表
+  POST /scholars/                                       手动创建学者
   GET  /scholars/{url_hash}                             单条学者详情
+  DELETE /scholars/{url_hash}                           删除学者记录
   PATCH /scholars/{url_hash}/basic                      更新基础信息（直接修改原始 JSON）
   PATCH /scholars/{url_hash}/relation                   更新「与两院关系」字段（用户管理）
   POST  /faculty/{url_hash}/updates                    新增用户备注动态
@@ -23,6 +25,7 @@ from fastapi import APIRouter, HTTPException, Query
 from app.schemas.scholar import (
     AchievementUpdate,
     ScholarBasicUpdate,
+    ScholarCreateRequest,
     ScholarDetailResponse,
     ScholarListResponse,
     ScholarStatsResponse,
@@ -111,6 +114,34 @@ async def list_scholars(
 )
 async def get_stats():
     return svc.get_scholar_stats()
+
+
+@router.post(
+    "/",
+    response_model=ScholarDetailResponse,
+    summary="手动创建学者",
+    description=(
+        "手动创建一条新的学者记录。只有 name 是必填字段，其他字段均可选。"
+        "自动检测重复（同名 + 同机构 + 同联系方式），重复时返回 409 Conflict。"
+        "成功创建后返回完整的学者详情（包含自动生成的 url_hash）。"
+    ),
+    status_code=201,
+)
+async def create_scholar(body: ScholarCreateRequest):
+    from app.services.scholar._create import create_scholar as create_scholar_svc
+
+    detail, error = create_scholar_svc(body.model_dump())
+
+    if error.startswith("duplicate:"):
+        existing_hash = error.split(":", 1)[1]
+        raise HTTPException(
+            status_code=409,
+            detail=f"Scholar already exists with url_hash: {existing_hash}",
+        )
+    if error:
+        raise HTTPException(status_code=400, detail=error)
+
+    return detail
 
 
 @router.get(

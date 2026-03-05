@@ -818,3 +818,79 @@ class AchievementUpdate(BaseModel):
     representative_publications: list[PublicationRecord] | None = None
     patents: list[PatentRecord] | None = None
     awards: list[AwardRecord] | None = None
+
+
+# ---------------------------------------------------------------------------
+# Scholar creation schemas
+# ---------------------------------------------------------------------------
+
+
+class ScholarCreateRequest(BaseModel):
+    """Request body for manually creating a new scholar record.
+
+    Only `name` is required. All other fields are optional — pass only what
+    you have; missing fields default to the same empty values used by the
+    crawler ('' / [] / -1).
+    """
+
+    # 基本信息
+    name: str = Field(..., min_length=1, description="姓名（必填）")
+    name_en: str = ""
+    gender: str = ""
+    photo_url: str = ""
+
+    # 机构归属
+    university: str = ""
+    department: str = ""
+    secondary_departments: list[str] = Field(default_factory=list)
+
+    # 职称荣誉
+    position: str = ""
+    academic_titles: list[str] = Field(default_factory=list)
+    is_academician: bool = False
+
+    # 研究方向
+    research_areas: list[str] = Field(default_factory=list)
+    keywords: list[str] = Field(default_factory=list)
+    bio: str = ""
+    bio_en: str = ""
+
+    # 联系方式
+    email: str = ""
+    phone: str = ""
+    office: str = ""
+
+    # 主页与链接
+    profile_url: str = ""
+    lab_url: str = ""
+    google_scholar_url: str = ""
+    dblp_url: str = ""
+    orcid: str = ""
+
+    # 教育经历
+    phd_institution: str = ""
+    phd_year: str = ""
+    education: list[EducationRecord] = Field(default_factory=list)
+
+    # 审计字段
+    added_by: str = Field(default="user", description="操作人，用于审计")
+
+
+class ScholarImportResultItem(BaseModel):
+    """Single row result from Excel import."""
+
+    row: int = Field(..., description="Excel 行号（从 1 开始，不含表头）")
+    status: str = Field(..., description="'success' | 'skipped' | 'failed'")
+    name: str = ""
+    url_hash: str = Field(default="", description="成功/跳过时的 url_hash")
+    reason: str = Field(default="", description="跳过或失败的原因")
+
+
+class ScholarImportResult(BaseModel):
+    """Summary result of an Excel bulk import."""
+
+    total: int = Field(..., description="总行数（不含表头）")
+    success: int = 0
+    skipped: int = Field(default=0, description="重复跳过数")
+    failed: int = 0
+    items: list[ScholarImportResultItem] = Field(default_factory=list)

@@ -24,6 +24,7 @@ from app.services.scholar._data import (
 )
 from app.services.scholar._filters import _apply_filters
 from app.services.scholar._transformers import _to_detail, _to_list_item
+from app.services.scholar._create import create_scholar, import_scholars_excel
 from app.services.intel.source_filter import parse_source_filter
 from app.services.stores.source_state import get_all_source_states
 

@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-05T08:53:52.277369+00:00",
+  "last_updated": "2026-03-05T10:12:51.882228+00:00",
   "universities": [
     {
       "id": "sjtu",
@@ -7,7 +7,7 @@
       "org_name": "Shanghai Jiao Tong University",
       "scholar_count": 379,
       "category": "京外C9",
-      "priority": null,
+      "priority": "A",
       "student_count_24": 16,
       "student_count_25": 4,
       "student_count_total": 20,
@@ -119,7 +119,15 @@
           ],
           "org_name": "上海交通大学软件学院"
         }
-      ]
+      ],
+      "key_departments": [],
+      "joint_labs": [],
+      "training_cooperation": [],
+      "academic_cooperation": [],
+      "talent_dual_appointment": [],
+      "recruitment_events": [],
+      "visit_exchanges": [],
+      "cooperation_focus": []
     },
     {
       "id": "seu",
@@ -390,13 +398,7 @@
           ],
           "org_name": "Zhōngguó Kēxuéyuàn Ruǎnjiàn Yánjiūsuǒ"
         }
-      ]
-    },
-    {
-      "id": "ucas",
-      "name": "中国科学院大学",
-      "org_name": "University of the Chinese Academy of Sciences",
-      "scholar_count": 0,
+      ],
       "category": "京内高校",
       "priority": null,
       "student_count_24": 31,
@@ -498,8 +500,7 @@
         "马志明院士任学院科技教育委员会副主任",
         "20250102：刘铁岩院长、刘成林副院长、刘滨副院长、李勇主任及商容部长在中国科学院大学怀柔校区参加北京加中关村学院-中国科学院大学人工智能领域拔尖创新人才培养研讨会，中国科学院大学董纪昌、金德鹏、林晓三位副校长全程参会。",
         "优质生源输送\n教学+科研合作"
-      ],
-      "departments": []
+      ]
     },
     {
       "id": "sysu",
@@ -3695,6 +3696,32 @@
       "id": "e03f4589-0eee-4731-a01f-87412a3ec529",
       "created_at": "2026-03-05T16:53:52.273770",
       "updated_at": "2026-03-05T16:53:52.273770"
+    },
+    {
+      "event_type": "",
+      "series_number": "",
+      "speaker_name": "",
+      "speaker_organization": "",
+      "speaker_position": "",
+      "speaker_bio": "",
+      "speaker_photo_url": "",
+      "title": "",
+      "abstract": "",
+      "event_date": "",
+      "duration": 1.0,
+      "location": "",
+      "scholar_ids": [
+        ""
+      ],
+      "publicity": "",
+      "needs_email_invitation": true,
+      "certificate_number": "",
+      "created_by": "曹丽娜",
+      "audit_status": "",
+      "id": "dcdd8fb1-983f-47e2-8c43-fe09424f13fc",
+      "created_at": "2026-03-05T17:38:02.008652",
+      "updated_at": "2026-03-05T17:38:47.883228",
+      "updated_by": "user"
     }
   ]
 }
