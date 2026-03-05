@@ -11,7 +11,7 @@ sources:
   use_playwright: false
   schedule: weekly
   priority: 2
-  is_enabled: true
+  is_enabled: false
   base_url: http://info.ruc.edu.cn
   faculty_selectors:
     list_item: div.research
@@ -45,7 +45,7 @@ sources:
   use_playwright: false
   schedule: weekly
   priority: 2
-  is_enabled: true
+  is_enabled: false
   base_url: http://ai.ruc.edu.cn
   faculty_selectors:
     list_item: div.tutor

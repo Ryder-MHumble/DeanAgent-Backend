@@ -1,6 +1,6 @@
 {
   "source_id": "ustc_sist_faculty",
-  "dimension": "university_faculty",
+  "dimension": "scholars",
   "group": "ustc",
   "source_name": "中国科学技术大学信息科学技术学院-师资",
   "crawled_at": "2026-03-04T07:11:40.111632+00:00",
@@ -3701,20 +3701,22 @@
       ],
       "extra": {
         "name": "陈志波",
-        "name_en": "",
+        "name_en": "Zhibo Chen",
         "gender": "",
         "photo_url": "",
         "university": "中国科学技术大学",
         "department": "信息科学技术学院（电子工程与信息科学系）",
         "secondary_departments": [],
-        "position": "",
-        "academic_titles": [],
+        "position": "教授",
+        "academic_titles": [
+          "IEEE FELLOW"
+        ],
         "is_academician": false,
         "research_areas": [
           "视频处理与多媒体技术"
         ],
         "keywords": [],
-        "bio": "",
+        "bio": "His research interests focus on investigating artificial intelligence technique for advanced visual signal procesing and coding, as well as in other interdisciplinary research fields. He has over 160 journal and conference publications (e.g. IEEE TPAMI, TIP, TCSVT, CVPR, AAAI, ACM-MM, IJCAI, ICME, ISCAS, ICIP, etc.), over 50 granted US/EU patent applications, some of his standard proposals have been adopted in MPEG/VCEG on video coding and ITU-T P.1202 on video quality assessment. His contribution of UMH Fast ME algorithm has been adopted by H.264 standard reference model, largely cited and widely used in real applications.",
         "bio_en": "",
         "email": "mwave@ustc.edu.cn",
         "phone": "0551-63601307",
@@ -3743,7 +3745,7 @@
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
-        "metrics_updated_at": "",
+        "metrics_updated_at": "2026-03-05T07:45:13.549975+00:00",
         "representative_publications": [],
         "patents": [],
         "awards": [],

@@ -14,7 +14,7 @@ from app.schemas.event import (
     EventStatsResponse,
 )
 
-EVENTS_FILE = Path("data/events.json")
+EVENTS_FILE = Path("data/scholars/events.json")
 
 
 def _load_events() -> dict[str, Any]:

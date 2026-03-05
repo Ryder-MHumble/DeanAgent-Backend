@@ -11,9 +11,9 @@ import re
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
-DATA_DIR = Path(__file__).resolve().parent.parent / "data" / "raw"
+DATA_DIR = Path(__file__).resolve().parent.parent.parent / "data" / "raw"
 DATE_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}\.json$")
 LATEST_FILENAME = "latest.json"
 

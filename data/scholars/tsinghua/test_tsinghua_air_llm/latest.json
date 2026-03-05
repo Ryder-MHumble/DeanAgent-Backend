@@ -1,6 +1,6 @@
 {
   "source_id": "test_tsinghua_air_llm",
-  "dimension": "university_faculty",
+  "dimension": "scholars",
   "group": "tsinghua",
   "source_name": "清华大学智能产业研究院-研究团队（LLM测试）",
   "crawled_at": "2026-03-03T09:25:38.050619+00:00",

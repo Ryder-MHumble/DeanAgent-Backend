@@ -41,7 +41,7 @@ async def main() -> None:
     if args.dry_run:
         # Dry-run: just show stats
         from app.services.intel.university.rules import classify_article
-        from app.services.json_reader import get_articles
+        from app.services.stores.json_reader import get_articles
 
         articles = get_articles("universities")
         seen: set[str] = set()

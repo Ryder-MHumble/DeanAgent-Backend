@@ -1,6 +1,6 @@
 {
   "source_id": "pku_cis_faculty",
-  "dimension": "university_faculty",
+  "dimension": "scholars",
   "group": "pku",
   "source_name": "北京大学智能学院-专职教师",
   "crawled_at": "2026-03-04T06:51:28.100805+00:00",
@@ -2232,7 +2232,7 @@
       ],
       "extra": {
         "name": "杨耀东",
-        "name_en": "",
+        "name_en": "Yaodong Yang",
         "gender": "",
         "photo_url": "http://www.cis.pku.edu.cn/virtual_attach_file.vsb?afc=5MzrC2ozWfL8rRnQl-PoRNinln7oRVqVL47bUNLbnzr2M8l0gihFp2hmCIa0n1hRMYy8UYyZMmW7L7r7MzV2oR7iLzNsM8UbozUinNVfnNWFMRn2nRn2LmQFUmlYLYbaptveo4Oe_tbZ_IbT6YhXptQ0gY84gY84gtA8pUpcc&oid=1887772040&e=.png",
         "university": "北京大学",
@@ -2283,7 +2283,7 @@
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
-        "metrics_updated_at": "",
+        "metrics_updated_at": "2026-03-05T07:45:28.446760+00:00",
         "representative_publications": [],
         "patents": [],
         "awards": [],

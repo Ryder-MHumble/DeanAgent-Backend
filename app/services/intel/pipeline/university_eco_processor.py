@@ -22,7 +22,7 @@ from app.config import BASE_DIR
 from app.services.intel.pipeline.base import HashTracker, save_output_json
 from app.services.intel.shared import article_date
 from app.services.intel.university.rules import classify_article
-from app.services.json_reader import get_articles
+from app.services.stores.json_reader import get_articles
 
 logger = logging.getLogger(__name__)
 

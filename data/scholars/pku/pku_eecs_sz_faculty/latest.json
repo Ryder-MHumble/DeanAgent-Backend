@@ -1,6 +1,6 @@
 {
   "source_id": "pku_eecs_sz_faculty",
-  "dimension": "university_faculty",
+  "dimension": "scholars",
   "group": "pku",
   "source_name": "北京大学信息工程学院（深圳）-师资",
   "crawled_at": "2026-03-04T05:44:56.184337+00:00",

@@ -11,7 +11,7 @@ sources:
   crawler_class: sjtu_ai_scholar
   schedule: weekly
   priority: 3
-  is_enabled: true
+  is_enabled: false
   base_url: https://ai.sjtu.edu.cn
   faculty_selectors:
     list_item: .teacher-item, .faculty-item
@@ -40,7 +40,7 @@ sources:
   crawler_class: sjtu_cs_scholar
   schedule: weekly
   priority: 2
-  is_enabled: true
+  is_enabled: false
   request_delay: 1.0
   detail_selectors:
     bio: div[class*='content'] p, div[class*='article'] p
@@ -66,7 +66,7 @@ sources:
   use_playwright: false
   schedule: weekly
   priority: 2
-  is_enabled: true
+  is_enabled: false
   enable_llm: false
   base_url: http://www.se.sjtu.edu.cn
   faculty_selectors:
@@ -100,7 +100,7 @@ sources:
   use_playwright: false
   schedule: weekly
   priority: 2
-  is_enabled: true
+  is_enabled: false
   base_url: https://infosec.sjtu.edu.cn
   faculty_selectors:
     list_item: div.Faculty li
@@ -135,7 +135,7 @@ sources:
   use_playwright: false
   schedule: weekly
   priority: 2
-  is_enabled: true
+  is_enabled: false
   enable_llm: true
   base_url: http://www.qingyuan.sjtu.edu.cn
   faculty_selectors:

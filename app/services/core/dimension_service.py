@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from app.services.json_reader import get_dimension_stats
+from app.services.stores.json_reader import get_dimension_stats
 
 DIMENSION_NAMES = {
     "national_policy": "对国家",

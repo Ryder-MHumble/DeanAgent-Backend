@@ -1,6 +1,6 @@
 # 后续任务清单
 
-> 最后更新: 2026-03-04 (v37: LLM 数据清洗框架完成 — 集成 LLM 智能提取层到 faculty_crawler，35 个信源配置 llm_extraction=true，并行爬取架构（按高校维度，每校最多 3 并发），完成全量 faculty 维度重爬：37/39 源成功，1,873 位教师，总耗时 6.3h，成本 $0.50-0.70；Zhejiang 2 源选择器需更新)
+> 最后更新: 2026-03-05 (v38: 新增「项目库」模块 — 6 个 CRUD 端点 /api/v1/projects/，10 条 mock 数据含真实学者关联；同步更新 CLAUDE.md 架构文档)
 > 基于前端 (Dean-Agent) 需求反推的优先级排序
 
 ---
@@ -11,6 +11,7 @@
 - [x] 5 种模板爬虫 + 11 个自定义 Parser（全部注册）
 - [x] 10 个维度 YAML 信源配置（181 源，148 启用；university_faculty 44/47 启用）
 - [x] v1 REST API 27 端点 (articles/sources/dimensions/health + intel/policy 3 + intel/personnel 5 + faculty 13)
+- [x] 项目库 API 6 端点 (GET /projects/ + /projects/stats + /projects/{id} + POST + PATCH + DELETE)，JSON 本地存储 data/projects.json，10 条 mock 数据
 - [x] 调度系统 + 去重 + JSON 本地输出（data/raw/ 88 个 latest.json，覆盖模式 + is_new 标记）
 - [x] Twitter 服务 + LLM 服务（OpenRouter）实现
 - [x] 前端数据支撑状态文档 (crawl_status README)

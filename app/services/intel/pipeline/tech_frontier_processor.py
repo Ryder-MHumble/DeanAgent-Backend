@@ -31,7 +31,7 @@ from app.services.intel.tech_frontier.rules import (
     is_kol_source,
     split_by_period,
 )
-from app.services.json_reader import get_articles
+from app.services.stores.json_reader import get_articles
 
 logger = logging.getLogger(__name__)
 

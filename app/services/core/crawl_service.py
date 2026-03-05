@@ -4,9 +4,9 @@ from typing import Any
 
 from app.scheduler.manager import load_all_source_configs
 from app.schemas.crawl_log import CrawlHealthResponse
-from app.services.crawl_log_store import get_crawl_logs as _get_logs
-from app.services.crawl_log_store import get_recent_log_stats
-from app.services.source_state import get_all_source_states
+from app.services.stores.crawl_log_store import get_crawl_logs as _get_logs
+from app.services.stores.crawl_log_store import get_recent_log_stats
+from app.services.stores.source_state import get_all_source_states
 
 
 async def get_crawl_logs(

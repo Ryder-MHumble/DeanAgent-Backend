@@ -1,10 +1,10 @@
 """Scholar API — /api/v1/scholars/
 
 Endpoints:
-  GET  /scholars/                                       师资列表（分页 + 多维度筛选）
+  GET  /scholars/                                       学者列表（分页 + 多维度筛选）
   GET  /scholars/stats                                  统计数据
   GET  /scholars/sources                                信源列表
-  GET  /scholars/{url_hash}                             单条师资详情
+  GET  /scholars/{url_hash}                             单条学者详情
   PATCH /scholars/{url_hash}/basic                      更新基础信息（直接修改原始 JSON）
   PATCH /scholars/{url_hash}/relation                   更新「与两院关系」字段（用户管理）
   POST  /faculty/{url_hash}/updates                    新增用户备注动态
@@ -25,7 +25,6 @@ from app.schemas.scholar import (
     ScholarBasicUpdate,
     ScholarDetailResponse,
     ScholarListResponse,
-    ScholarSourcesResponse,
     ScholarStatsResponse,
     InstituteRelationUpdate,
     UserUpdateCreate,
@@ -37,7 +36,7 @@ from app.schemas.supervised_student import (
     SupervisedStudentUpdate,
 )
 from app.services import scholar_service as svc
-from app.services import supervised_student_store as student_store
+from app.services.stores import supervised_student_store as student_store
 
 router = APIRouter()
 
@@ -50,9 +49,9 @@ router = APIRouter()
 @router.get(
     "/",
     response_model=ScholarListResponse,
-    summary="师资列表",
+    summary="学者列表",
     description=(
-        "获取 university_faculty 维度下的师资列表，支持按高校、院系、职称、"
+        "获取 scholars 维度下的学者列表，支持按高校、院系、职称、"
         "学术称号、关键词、数据完整度及信源过滤，按姓名升序排列。"
     ),
 )
@@ -66,7 +65,7 @@ async def list_scholars(
     is_academician: bool | None = Query(None, description="仅显示院士"),
     is_potential_recruit: bool | None = Query(None, description="仅显示潜在招募对象"),
     is_advisor_committee: bool | None = Query(None, description="仅显示顾问委员会成员"),
-    has_email: bool | None = Query(None, description="仅显示有邮箱联系方式的师资"),
+    has_email: bool | None = Query(None, description="仅显示有邮箱联系方式的学者"),
     min_completeness: int | None = Query(
         None, ge=0, le=100, description="数据完整度下限（0–100）"
     ),
@@ -107,28 +106,18 @@ async def list_scholars(
 @router.get(
     "/stats",
     response_model=ScholarStatsResponse,
-    summary="师资统计",
-    description="返回师资库总览统计：总数、院士数、潜在招募数、按高校/职称分布、完整度分布。",
+    summary="学者统计",
+    description="返回学者库总览统计：总数、院士数、潜在招募数、按高校/职称分布、完整度分布。",
 )
 async def get_stats():
     return svc.get_scholar_stats()
 
 
 @router.get(
-    "/sources",
-    response_model=ScholarSourcesResponse,
-    summary="师资信源列表",
-    description="返回所有 university_faculty 维度的信源，含爬取状态和条目数。",
-)
-async def get_sources():
-    return svc.get_scholar_sources()
-
-
-@router.get(
     "/{url_hash}",
     response_model=ScholarDetailResponse,
-    summary="师资详情",
-    description="根据 url_hash 获取单条师资完整数据（爬虫字段 + 用户标注合并）。",
+    summary="学者详情",
+    description="根据 url_hash 获取单条学者完整数据（爬虫字段 + 用户标注合并）。",
 )
 async def get_faculty(url_hash: str):
     result = svc.get_scholar_detail(url_hash)
@@ -147,7 +136,7 @@ async def get_faculty(url_hash: str):
     response_model=ScholarDetailResponse,
     summary="更新基础信息",
     description=(
-        "更新指定师资的基础信息字段（名称、职称、简介、联系方式、学术链接、教育经历等）。"
+        "更新指定学者的基础信息字段（名称、职称、简介、联系方式、学术链接、教育经历等）。"
         "直接修改原始 JSON 文件（data/raw/scholars/.../latest.json）。"
         "所有字段均可选，仅传入需要修改的字段；传 null 或不传则保持不变。"
         "列表字段（research_areas/keywords/academic_titles/education 等）"
@@ -168,7 +157,7 @@ async def update_basic(url_hash: str, body: ScholarBasicUpdate):
     response_model=ScholarDetailResponse,
     summary="更新与两院关系",
     description=(
-        "更新指定师资的「与两院关系」字段（顾问委员会、兼职导师、潜在招募等）。"
+        "更新指定学者的「与两院关系」字段（顾问委员会、兼职导师、潜在招募等）。"
         "所有字段均可选，仅传入需要修改的字段。relation_updated_at 由服务端自动填写。"
         "这些字段永不被爬虫覆盖。"
     ),
@@ -186,7 +175,7 @@ async def update_relation(url_hash: str, body: InstituteRelationUpdate):
     response_model=ScholarDetailResponse,
     summary="新增用户备注动态",
     description=(
-        "为指定师资新增一条用户录入的动态备注（获奖/项目立项/任职履新等）。"
+        "为指定学者新增一条用户录入的动态备注（获奖/项目立项/任职履新等）。"
         "added_by 自动转换为 'user:{added_by}'，created_at 由服务端自动填写。"
     ),
     status_code=201,
@@ -215,7 +204,7 @@ async def delete_scholar(url_hash: str):
     response_model=ScholarDetailResponse,
     summary="删除用户备注动态",
     description=(
-        "删除指定师资的用户备注动态（按 user_updates 列表中的索引）。"
+        "删除指定学者的用户备注动态（按 user_updates 列表中的索引）。"
         "只能删除 added_by 以 'user:' 开头的条目；尝试删除爬虫动态将返回 403。"
     ),
 )
@@ -237,7 +226,7 @@ async def delete_update(url_hash: str, update_idx: int):
     response_model=ScholarDetailResponse,
     summary="更新学术成就",
     description=(
-        "更新指定师资的学术成就字段（代表性论文、专利、获奖）。"
+        "更新指定学者的学术成就字段（代表性论文、专利、获奖）。"
         "每个字段传入后会完全替换（而非追加），传 null 或不传则保持不变。"
         "这些字段由用户维护，但爬虫也可自动填充初始值。"
         "achievements_updated_at 由服务端自动填写。"

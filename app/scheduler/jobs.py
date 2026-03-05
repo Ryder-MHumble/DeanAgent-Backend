@@ -7,8 +7,8 @@ from typing import Any
 from app.crawlers.base import CrawlStatus
 from app.crawlers.registry import CrawlerRegistry
 from app.crawlers.utils.json_storage import save_crawl_result_json
-from app.services.crawl_log_store import append_crawl_log
-from app.services.source_state import update_source_state
+from app.services.stores.crawl_log_store import append_crawl_log
+from app.services.stores.source_state import update_source_state
 
 logger = logging.getLogger(__name__)
 

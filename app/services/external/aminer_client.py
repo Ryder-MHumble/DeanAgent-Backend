@@ -61,6 +61,31 @@ class AMinerClient:
             response.raise_for_status()
             return response.json()
 
+    async def search_organizations(self, name: str, size: int = 3) -> dict:
+        """Search organizations by name on AMiner to obtain standardized org_name.
+
+        Args:
+            name: Institution name (Chinese preferred)
+            size: Max results to return
+
+        Returns:
+            AMiner API response dict
+
+        Raises:
+            httpx.HTTPStatusError: If API call fails
+        """
+        url = f"{BASE_URL}/org/search"
+        params = {"name": name, "size": size}
+
+        async with httpx.AsyncClient(timeout=15.0) as client:
+            response = await client.get(
+                url,
+                params=params,
+                headers=self._get_headers(),
+            )
+            response.raise_for_status()
+            return response.json()
+
     async def get_scholar_detail(self, aminer_id: str) -> dict:
         """Get scholar detailed information by AMiner ID.
 

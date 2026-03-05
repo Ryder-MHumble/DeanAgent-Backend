@@ -33,7 +33,7 @@ from typing import Any
 from uuid import uuid4
 
 from app.config import BASE_DIR
-from app.services.base_store import BaseJSONStore
+from app.services.stores.base_store import BaseJSONStore
 
 logger = logging.getLogger(__name__)
 

@@ -13,7 +13,7 @@ sources:
   wait_timeout: 20000
   schedule: weekly
   priority: 3
-  is_enabled: true
+  is_enabled: false
   base_url: https://www.cs.zju.edu.cn
   faculty_selectors:
     list_item: ul li
@@ -44,7 +44,7 @@ sources:
   crawler_class: zju_cyber_scholar
   schedule: weekly
   priority: 3
-  is_enabled: true
+  is_enabled: false
   base_url: https://icsr.zju.edu.cn
   tags:
   - faculty
@@ -62,7 +62,7 @@ sources:
   wait_timeout: 20000
   schedule: weekly
   priority: 3
-  is_enabled: true
+  is_enabled: false
   base_url: https://www.zjuse.zju.edu.cn
   faculty_selectors:
     list_item: ul li

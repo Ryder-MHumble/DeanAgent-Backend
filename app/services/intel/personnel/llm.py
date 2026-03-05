@@ -10,7 +10,7 @@ from typing import Any
 
 from app.services.intel.shared import clamp_value as _clamp
 from app.services.intel.shared import str_or_none as _str_or_none
-from app.services.llm_service import LLMError, call_llm_json
+from app.services.llm.llm_service import LLMError, call_llm_json
 
 logger = logging.getLogger(__name__)
 

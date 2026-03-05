@@ -29,7 +29,7 @@ from datetime import datetime, timezone
 from typing import Any
 
 from app.config import BASE_DIR
-from app.services.base_store import BaseJSONStore
+from app.services.stores.base_store import BaseJSONStore
 
 logger = logging.getLogger(__name__)
 
@@ -37,7 +37,7 @@ ANNOTATIONS_FILE = BASE_DIR / "data" / "state" / "scholar_annotations.json"
 
 _RELATION_FIELDS: frozenset[str] = frozenset({
     "is_advisor_committee",
-    "is_adjunct_supervisor",
+    "adjunct_supervisor",
     "supervised_students",
     "joint_research_projects",
     "joint_management_roles",

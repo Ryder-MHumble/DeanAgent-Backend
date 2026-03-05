@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from app.crawlers.utils.json_storage import DATA_DIR, LATEST_FILENAME
-from app.services import scholar_annotation_store as annotation_store
+from app.services.stores import scholar_annotation_store as annotation_store
 
 logger = logging.getLogger(__name__)
 
@@ -15,7 +15,7 @@ FACULTY_DIMENSION = "scholars"
 
 _RELATION_FIELDS = [
     "is_advisor_committee",
-    "is_adjunct_supervisor",
+    "adjunct_supervisor",
     "supervised_students",
     "joint_research_projects",
     "joint_management_roles",
@@ -34,11 +34,12 @@ _ACHIEVEMENT_FIELDS = [
 
 
 def _iter_faculty_jsons():
-    """Yield paths to all latest.json files under data/raw/scholars/."""
-    raw_dir = DATA_DIR / FACULTY_DIMENSION
-    if not raw_dir.exists():
+    """Yield paths to all latest.json files under data/scholars/."""
+    # Scholars data is stored directly in data/scholars/, not data/raw/scholars/
+    scholars_dir = Path("data/scholars")
+    if not scholars_dir.exists():
         return
-    for path in raw_dir.rglob(LATEST_FILENAME):
+    for path in scholars_dir.rglob(LATEST_FILENAME):
         yield path
 
 

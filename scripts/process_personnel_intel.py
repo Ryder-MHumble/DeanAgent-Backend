@@ -28,7 +28,7 @@ from app.services.intel.personnel.llm import (  # noqa: E402
     enrich_changes_batch,
 )
 from app.services.intel.personnel.rules import change_id, enrich_by_rules  # noqa: E402
-from app.services.json_reader import get_articles  # noqa: E402
+from app.services.stores.json_reader import get_articles  # noqa: E402
 
 logging.basicConfig(
     level=logging.INFO,

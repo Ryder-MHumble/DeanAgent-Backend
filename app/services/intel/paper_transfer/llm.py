@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import logging
 
-from app.services.llm_service import LLMError, call_llm_json
+from app.services.llm.llm_service import LLMError, call_llm_json
 
 logger = logging.getLogger(__name__)
 

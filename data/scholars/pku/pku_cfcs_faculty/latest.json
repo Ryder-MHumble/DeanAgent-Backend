@@ -1,6 +1,6 @@
 {
   "source_id": "pku_cfcs_faculty",
-  "dimension": "university_faculty",
+  "dimension": "scholars",
   "group": "pku",
   "source_name": "北京大学前沿计算研究中心-教学科研人员",
   "crawled_at": "2026-03-04T06:54:29.709554+00:00",
@@ -996,7 +996,7 @@
       ],
       "extra": {
         "name": "王鹤",
-        "name_en": "",
+        "name_en": "He Wang",
         "gender": "",
         "photo_url": "https://cfcs.pku.edu.cn/images/content/2021-07/20210729090517433185.png",
         "university": "北京大学",
@@ -1040,7 +1040,7 @@
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
-        "metrics_updated_at": "",
+        "metrics_updated_at": "2026-03-05T07:45:38.118070+00:00",
         "representative_publications": [],
         "patents": [],
         "awards": [],

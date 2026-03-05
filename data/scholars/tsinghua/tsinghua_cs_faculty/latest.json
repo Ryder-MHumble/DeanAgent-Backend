@@ -1,6 +1,6 @@
 {
   "source_id": "tsinghua_cs_faculty",
-  "dimension": "university_faculty",
+  "dimension": "scholars",
   "group": "tsinghua",
   "source_name": "清华大学计算机系-师资",
   "crawled_at": "2026-03-04T07:16:12.500009+00:00",
@@ -6823,7 +6823,7 @@
       ],
       "extra": {
         "name": "刘知远",
-        "name_en": "",
+        "name_en": "Zhiyuan Liu",
         "gender": "",
         "photo_url": "https://www.cs.tsinghua.edu.cn/__local/A/47/A3/8EF1B8F4A12580B046E111B554B_CC5956A7_1784E.jpg",
         "university": "清华大学",
@@ -6866,7 +6866,7 @@
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
-        "metrics_updated_at": "",
+        "metrics_updated_at": "2026-03-05T07:45:33.812744+00:00",
         "representative_publications": [],
         "patents": [],
         "awards": [],

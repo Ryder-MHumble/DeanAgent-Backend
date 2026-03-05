@@ -13,7 +13,7 @@ from app.services.intel.shared import (
 from app.services.intel.shared import (
     parse_date_str as _parse_date_str,
 )
-from app.services.llm_service import LLMError, call_llm_json
+from app.services.llm.llm_service import LLMError, call_llm_json
 
 logger = logging.getLogger(__name__)
 

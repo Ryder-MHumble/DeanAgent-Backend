@@ -22,7 +22,7 @@ from app.services.intel.personnel.rules import (
     extract_changes,
 )
 from app.services.intel.shared import article_date, parse_source_filter
-from app.services.json_reader import get_articles
+from app.services.stores.json_reader import get_articles
 
 logger = logging.getLogger(__name__)
 

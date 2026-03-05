@@ -13,7 +13,7 @@ import time
 from pathlib import Path
 
 # Add project root to path
-sys.path.insert(0, str(Path(__file__).parent.parent))
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from app.crawlers.registry import CrawlerRegistry
 from app.scheduler.manager import load_all_source_configs

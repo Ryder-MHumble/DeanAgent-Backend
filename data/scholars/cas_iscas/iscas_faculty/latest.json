@@ -1,6 +1,6 @@
 {
   "source_id": "iscas_faculty",
-  "dimension": "university_faculty",
+  "dimension": "scholars",
   "group": "cas_iscas",
   "source_name": "中科院软件研究所-研究员",
   "crawled_at": "2026-03-01T08:31:22.334576+00:00",

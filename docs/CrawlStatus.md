@@ -1,6 +1,6 @@
 # 信源爬取状态总览
 
-> 最后更新: 2026-03-04 (v37 LLM 数据清洗框架：集成 LLM 智能提取层到 faculty_crawler，支持多 LLM provider（OpenRouter/SiliconFlow/DashScope），自动提取 phone/research_areas/education 等混合数据；35 个信源配置 llm_extraction=true；并行爬取架构（按高校维度，每校最多 3 并发）；完成全量 faculty 维度重爬：37/39 源成功，1,873 位教师，总耗时 6.3h，成本 $0.50-0.70)
+> 最后更新: 2026-03-05 (v38: 新增项目库模块 — /api/v1/projects/ 6 端点，data/projects.json 本地存储，10 条 mock 数据；v37 LLM 数据清洗框架：集成 LLM 智能提取层到 faculty_crawler，支持多 LLM provider（OpenRouter/SiliconFlow/DashScope），自动提取 phone/research_areas/education 等混合数据；35 个信源配置 llm_extraction=true；并行爬取架构（按高校维度，每校最多 3 并发）；完成全量 faculty 维度重爬：37/39 源成功，1,873 位教师，总耗时 6.3h，成本 $0.50-0.70)
 
 ---
 

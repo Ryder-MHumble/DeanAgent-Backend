@@ -11,7 +11,7 @@ from app.config import BASE_DIR
 from app.schemas.article import ArticleSearchParams, ArticleUpdate
 from app.schemas.common import PaginatedResponse
 from app.services.intel.shared import parse_source_filter
-from app.services.json_reader import get_all_articles
+from app.services.stores.json_reader import get_all_articles
 
 logger = logging.getLogger(__name__)
 

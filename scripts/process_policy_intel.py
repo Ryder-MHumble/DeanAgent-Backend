@@ -29,8 +29,8 @@ from app.services.intel.policy.llm import (  # noqa: E402
     enrich_article_lite,
 )
 from app.services.intel.policy.rules import enrich_by_rules  # noqa: E402
-from app.services.json_reader import get_articles  # noqa: E402
-from app.services.llm_service import LLMError  # noqa: E402
+from app.services.stores.json_reader import get_articles  # noqa: E402
+from app.services.llm.llm_service import LLMError  # noqa: E402
 
 logging.basicConfig(
     level=logging.INFO,

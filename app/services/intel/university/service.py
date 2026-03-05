@@ -11,8 +11,8 @@ from app.config import BASE_DIR
 from app.crawlers.utils.json_storage import DATA_DIR as RAW_DATA_DIR
 from app.crawlers.utils.json_storage import LATEST_FILENAME
 from app.services.intel.shared import parse_source_filter
-from app.services.json_reader import get_articles
-from app.services.source_state import get_all_source_states
+from app.services.stores.json_reader import get_articles
+from app.services.stores.source_state import get_all_source_states
 
 logger = logging.getLogger(__name__)
 

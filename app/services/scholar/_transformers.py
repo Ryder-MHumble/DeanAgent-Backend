@@ -3,6 +3,26 @@ from __future__ import annotations
 
 from typing import Any
 
+_EMPTY_ADJUNCT: dict[str, str] = {
+    "status": "", "type": "", "agreement_type": "", "agreement_period": "", "recommender": "",
+}
+
+
+def _coerce_adjunct_supervisor(raw: Any) -> dict[str, str]:
+    """Normalize adjunct_supervisor field, handling legacy bool values."""
+    if isinstance(raw, dict):
+        return {
+            "status": raw.get("status", ""),
+            "type": raw.get("type", ""),
+            "agreement_type": raw.get("agreement_type", ""),
+            "agreement_period": raw.get("agreement_period", ""),
+            "recommender": raw.get("recommender", ""),
+        }
+    if isinstance(raw, bool):
+        # Legacy data: True → status="已签署", False → empty
+        return {**_EMPTY_ADJUNCT, "status": "已签署"} if raw else dict(_EMPTY_ADJUNCT)
+    return dict(_EMPTY_ADJUNCT)
+
 
 def _to_list_item(item: dict[str, Any]) -> dict[str, Any]:
     return {
@@ -23,7 +43,7 @@ def _to_list_item(item: dict[str, Any]) -> dict[str, Any]:
         "data_completeness": item.get("data_completeness") or 0,
         "is_potential_recruit": bool(item.get("is_potential_recruit", False)),
         "is_advisor_committee": bool(item.get("is_advisor_committee", False)),
-        "is_adjunct_supervisor": bool(item.get("is_adjunct_supervisor", False)),
+        "adjunct_supervisor": _coerce_adjunct_supervisor(item.get("adjunct_supervisor") or item.get("is_adjunct_supervisor")),
         "crawled_at": item.get("crawled_at", ""),
     }
 
@@ -66,7 +86,7 @@ def _to_detail(item: dict[str, Any]) -> dict[str, Any]:
         "patents": item.get("patents") or [],
         "awards": item.get("awards") or [],
         "is_advisor_committee": bool(item.get("is_advisor_committee", False)),
-        "is_adjunct_supervisor": bool(item.get("is_adjunct_supervisor", False)),
+        "adjunct_supervisor": _coerce_adjunct_supervisor(item.get("adjunct_supervisor") or item.get("is_adjunct_supervisor")),
         "supervised_students": item.get("supervised_students") or [],
         "joint_research_projects": item.get("joint_research_projects") or [],
         "joint_management_roles": item.get("joint_management_roles") or [],

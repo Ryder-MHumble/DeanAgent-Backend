@@ -22,10 +22,18 @@ def build_source_dir(dimension: str, group: str | None, source_id: str) -> Path:
 
     Convention: data/raw/{dimension}/{group}/{source_id}/
     or data/raw/{dimension}/{source_id}/ if group is None.
+
+    Special case: scholars dimension stores in data/scholars/ instead of data/raw/scholars/
     """
+    # Special handling for scholars dimension (stored directly in data/scholars/)
+    if dimension == "scholars":
+        base_dir = BASE_DIR / "data" / "scholars"
+    else:
+        base_dir = DATA_DIR / dimension
+
     if group:
-        return DATA_DIR / dimension / group / source_id
-    return DATA_DIR / dimension / source_id
+        return base_dir / group / source_id
+    return base_dir / source_id
 
 
 def _serialize_item(item: Any, *, is_new: bool) -> dict[str, Any]:

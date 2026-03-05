@@ -1,6 +1,6 @@
 {
   "source_id": "ustc_cyber_faculty",
-  "dimension": "university_faculty",
+  "dimension": "scholars",
   "group": "ustc",
   "source_name": "中国科学技术大学网安学院-师资",
   "crawled_at": "2026-03-04T07:14:44.636744+00:00",
@@ -2711,7 +2711,7 @@
       ],
       "extra": {
         "name": "周文柏",
-        "name_en": "",
+        "name_en": "Wenbo Zhou",
         "gender": "",
         "photo_url": "",
         "university": "中国科学技术大学",
@@ -2725,10 +2725,10 @@
           "深度伪造与检测"
         ],
         "keywords": [],
-        "bio": "",
+        "bio": "Awards and Honors<br>“Outstanding Youth Award of Mozi” of USTC<br>2nd Prize of Kaggle Deepfake Detection Challenge (DFDC)<br>1st Prize in defence track of IJCAI-19 Alibaba Adversarial AI Challenge<br>2nd Prize in non-target attack track of 2018 Competition on Adversarial Attacks and Defences (CAAD)<br>2021 International Workshop on Safety & Security of Deep Learning, \"Best Paper Award\", 2021.<br>2018 ACM Workshop on Information Hiding and Multimedia Security, \"Best Student Paper Award\", 2018.<br>Outstanding Graduate of University of Science and Technology of China, 2019<br>Excellent Graduates of Anhui Province Ordinary Colleges and Universities, 2019<br>Cyber Security Scholarship of China Internet Development Foundation Cyber Security Special Fund, 2017<br>Bronze Prize of the 3rd \"Internet +\" National College Student Innovation and Entrepreneurship Competition, 2017<br>Outstanding Party Member of University of Science and Technology of China, 2016<br>National Scholarship, 2012<br>Outstanding Student Cadre of Jiangsu Province, 2012<br>Outstanding Student Cadre of Jiangsu Province, 2012<br>Annual Special Award of NUAA, 2012&2013",
         "bio_en": "",
         "email": "welbeckz@ustc.edu.cn",
-        "phone": "",
+        "phone": "15556529269",
         "office": "",
         "profile_url": "https://cybersec.ustc.edu.cn/2021/0612/c25039a512717/page.htm",
         "lab_url": "",
@@ -2741,7 +2741,7 @@
         "publications_count": -1,
         "h_index": -1,
         "citations_count": -1,
-        "metrics_updated_at": "",
+        "metrics_updated_at": "2026-03-05T07:45:19.039627+00:00",
         "representative_publications": [],
         "patents": [],
         "awards": [],

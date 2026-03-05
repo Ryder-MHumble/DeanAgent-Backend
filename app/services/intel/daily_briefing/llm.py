@@ -9,7 +9,7 @@ import logging
 from typing import Any
 
 from app.config import settings
-from app.services.llm_service import LLMError, call_llm_json
+from app.services.llm.llm_service import LLMError, call_llm_json
 
 logger = logging.getLogger(__name__)
 

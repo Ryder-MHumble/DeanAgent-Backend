@@ -14,18 +14,18 @@ from datetime import UTC, datetime
 from typing import Any
 
 from app.scheduler.manager import load_all_source_configs
-from app.services import scholar_annotation_store as annotation_store
-from app.services import supervised_student_store as student_store
-from app.services.faculty._data import (
+from app.services.stores import scholar_annotation_store as annotation_store
+from app.services.stores import supervised_student_store as student_store
+from app.services.scholar._data import (
     FACULTY_DIMENSION,
     _find_raw_file_by_hash,
     _iter_faculty_jsons,
     _load_all_with_annotations,
 )
-from app.services.faculty._filters import _apply_filters
-from app.services.faculty._transformers import _to_detail, _to_list_item
+from app.services.scholar._filters import _apply_filters
+from app.services.scholar._transformers import _to_detail, _to_list_item
 from app.services.intel.source_filter import parse_source_filter
-from app.services.source_state import get_all_source_states
+from app.services.stores.source_state import get_all_source_states
 
 # ---------------------------------------------------------------------------
 # Read operations
@@ -105,7 +105,10 @@ def get_scholar_stats() -> dict[str, Any]:
     academicians = sum(1 for i in items if i.get("is_academician", False))
     potential_recruits = sum(1 for i in items if i.get("is_potential_recruit", False))
     advisor_committee = sum(1 for i in items if i.get("is_advisor_committee", False))
-    adjunct_supervisors = sum(1 for i in items if i.get("is_adjunct_supervisor", False))
+    adjunct_supervisors = sum(
+        1 for i in items
+        if (i.get("adjunct_supervisor") or {}).get("status") or i.get("is_adjunct_supervisor", False)
+    )
 
     uni_counter: Counter = Counter()
     dept_counter: Counter = Counter()
@@ -161,47 +164,6 @@ def get_scholar_stats() -> dict[str, Any]:
         "completeness_buckets": completeness_buckets,
         "sources_count": sources_count,
     }
-
-
-def get_scholar_sources() -> dict[str, Any]:
-    """Return list of university_faculty sources with crawl status and item count."""
-    configs = load_all_source_configs()
-    states = get_all_source_states()
-
-    faculty_configs = [c for c in configs if c.get("dimension") == FACULTY_DIMENSION]
-
-    # Count items per source from raw files
-    item_counts: dict[str, int] = {}
-    for path in _iter_faculty_jsons():
-        try:
-            with open(path, encoding="utf-8") as f:
-                payload = json.load(f)
-            sid = payload.get("source_id", path.parent.name)
-            item_counts[sid] = payload.get("item_count", len(payload.get("items", [])))
-        except (json.JSONDecodeError, OSError):
-            pass
-
-    items = []
-    for cfg in faculty_configs:
-        sid = cfg.get("id", "")
-        state = states.get(sid, {})
-        override = state.get("is_enabled_override")
-        is_enabled = override if override is not None else cfg.get("is_enabled", True)
-
-        items.append({
-            "id": sid,
-            "name": cfg.get("name", sid),
-            "group": cfg.get("group", ""),
-            "university": cfg.get("university", ""),
-            "department": cfg.get("department", ""),
-            "is_enabled": is_enabled,
-            "item_count": item_counts.get(sid, 0),
-            "last_crawl_at": state.get("last_crawl_at"),
-        })
-
-    items.sort(key=lambda s: (s["university"], s["name"]))
-
-    return {"total": len(items), "items": items}
 
 
 # ---------------------------------------------------------------------------

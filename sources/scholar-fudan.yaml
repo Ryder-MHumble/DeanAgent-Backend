@@ -13,7 +13,7 @@ sources:
   wait_timeout: 20000
   schedule: weekly
   priority: 2
-  is_enabled: true
+  is_enabled: false
   base_url: https://ai.fudan.edu.cn
   faculty_selectors:
     list_item: li.news
@@ -52,7 +52,7 @@ sources:
   use_playwright: false
   schedule: weekly
   priority: 2
-  is_enabled: true
+  is_enabled: false
   base_url: https://ciram.fudan.edu.cn
   faculty_selectors:
     list_item: div.teacher-item

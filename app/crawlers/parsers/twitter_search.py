@@ -22,7 +22,7 @@ from typing import Any
 
 from app.crawlers.base import BaseCrawler, CrawledItem
 from app.crawlers.utils.dedup import compute_content_hash
-from app.services.twitter_service import twitter_client
+from app.services.external.twitter_service import twitter_client
 
 logger = logging.getLogger(__name__)
 

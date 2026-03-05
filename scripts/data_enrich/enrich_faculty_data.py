@@ -20,7 +20,7 @@ from pathlib import Path
 from typing import Any
 
 # Add project root to path
-sys.path.insert(0, str(Path(__file__).parent.parent))
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from app.crawlers.utils.scholar_llm_extractor import extract_faculty_fields_with_llm
 from app.schemas.scholar import ScholarRecord, compute_scholar_completeness

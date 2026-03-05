@@ -1,25 +1,28 @@
 """Institution API — /api/v1/institutions/
 
+统一的机构接口（高校 + 院系）
+
 Endpoints:
-  GET    /institutions/           机构列表（分页 + 筛选）
-  GET    /institutions/stats      统计数据
-  GET    /institutions/{id}       机构详情
-  POST   /institutions/           创建机构
+  GET    /institutions/{id}       机构详情（高校或院系）
+  POST   /institutions/           创建机构（高校或院系）
   PATCH  /institutions/{id}       更新机构
   DELETE /institutions/{id}       删除机构
 """
 from __future__ import annotations
 
-from fastapi import APIRouter, HTTPException, Query
+import logging
+
+from fastapi import APIRouter, HTTPException
 
 from app.schemas.institution import (
     InstitutionCreate,
     InstitutionDetailResponse,
-    InstitutionListResponse,
-    InstitutionStatsResponse,
     InstitutionUpdate,
 )
 from app.services import institution_service as svc
+from app.services.core.institution_service import InstitutionAlreadyExistsError
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
@@ -30,42 +33,20 @@ router = APIRouter()
 
 
 @router.get(
-    "/",
-    response_model=InstitutionListResponse,
-    summary="机构列表",
-    description="获取机构列表，支持按分类、优先级、关键词筛选，按优先级和名称排序。",
-)
-async def list_institutions(
-    category: str | None = Query(None, description="分类筛选（精确匹配）"),
-    priority: str | None = Query(None, description="优先级筛选（P0/P1/P2/P3）"),
-    keyword: str | None = Query(None, description="关键词搜索（名称/院系）"),
-    page: int = Query(1, ge=1, description="页码"),
-    page_size: int = Query(20, ge=1, le=200, description="每页条数"),
-):
-    return svc.get_institution_list(
-        category=category,
-        priority=priority,
-        keyword=keyword,
-        page=page,
-        page_size=page_size,
-    )
-
-
-@router.get(
-    "/stats",
-    response_model=InstitutionStatsResponse,
-    summary="机构统计",
-    description="返回机构总览统计：总数、示范校数、按分类/优先级/合作重点分布、学生导师总数。",
-)
-async def get_stats():
-    return svc.get_institution_stats()
-
-
-@router.get(
     "/{institution_id}",
     response_model=InstitutionDetailResponse,
     summary="机构详情",
-    description="根据机构 ID 获取完整机构信息（基本信息、人员、合作、交流记录）。",
+    description=(
+        "根据机构 ID 获取完整机构信息。"
+        "\n\n**高校详情包含：**"
+        "\n- 基本信息（分类、优先级、学生数、导师数）"
+        "\n- 人员信息（驻院领导、委员会、校领导、重要学者）"
+        "\n- 合作信息（联合实验室、培养合作、学术合作、人才双聘）"
+        "\n- 院系列表"
+        "\n\n**院系详情包含：**"
+        "\n- 基本信息（名称、学者数）"
+        "\n- 信源列表（source_id, source_name, scholar_count, is_enabled）"
+    ),
 )
 async def get_institution(institution_id: str):
     result = svc.get_institution_detail(institution_id)
@@ -85,21 +66,73 @@ async def get_institution(institution_id: str):
     "/",
     response_model=InstitutionDetailResponse,
     summary="创建机构",
-    description="创建新的机构记录。ID 必须唯一，不能与现有机构重复。",
+    description=(
+        "创建新的机构记录（高校或院系），支持 Excel 批量导入的全量字段。"
+        "\n\n**创建高校（type=university）必填：** `id`, `name`"
+        "\n**创建院系（type=department）必填：** `id`, `name`, `parent_id`"
+        "\n\n**重复检测：** 若 `id` 已存在，返回 409 Conflict。"
+        "\n\n**AMiner org_name 自动填充：** 若未传 `org_name`，"
+        "创建完成后会自动调用 AMiner 机构接口查询并写入标准化英文名。"
+        "查询失败不影响创建结果，`org_name` 保持为 null。"
+    ),
     status_code=201,
 )
 async def create_institution(body: InstitutionCreate):
+    inst_data = body.model_dump()
     try:
-        return svc.create_institution(body.model_dump())
+        result = svc.create_institution(inst_data)
+    except InstitutionAlreadyExistsError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+    # 若 org_name 未传入，自动从 AMiner 查询并写回
+    if not inst_data.get("org_name"):
+        try:
+            from app.services.external.aminer_client import get_aminer_client
+
+            client = get_aminer_client()
+            aminer_resp = await client.search_organizations(body.name)
+            orgs = aminer_resp.get("data", [])
+            if orgs:
+                fetched_org_name = orgs[0].get("name_en") or orgs[0].get("name")
+                if fetched_org_name:
+                    updated = svc.update_institution(result.id, {"org_name": fetched_org_name})
+                    if updated:
+                        result = updated
+                        logger.info(
+                            "AMiner org_name auto-filled for '%s': %s",
+                            result.id,
+                            fetched_org_name,
+                        )
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(
+                "AMiner org_name lookup failed for '%s' (%s): %s",
+                body.name,
+                body.id,
+                exc,
+            )
+
+    return result
 
 
 @router.patch(
     "/{institution_id}",
     response_model=InstitutionDetailResponse,
     summary="更新机构",
-    description="更新指定机构的信息。所有字段均可选，仅传入需要修改的字段。",
+    description=(
+        "更新指定机构的信息。所有字段均可选，仅传入需要修改的字段。"
+        "\n\n**高校可更新字段：**"
+        "\n- 基本信息：name, category, priority"
+        "\n- 学生导师：student_count_24, student_count_25, mentor_count"
+        "\n- 人员信息：resident_leaders, degree_committee, teaching_committee, "
+        "university_leaders, notable_scholars"
+        "\n- 合作信息：key_departments, joint_labs, training_cooperation, "
+        "academic_cooperation, talent_dual_appointment, recruitment_events, "
+        "visit_exchanges, cooperation_focus"
+        "\n\n**院系可更新字段：**"
+        "\n- name"
+    ),
 )
 async def update_institution(institution_id: str, body: InstitutionUpdate):
     updates = body.model_dump(exclude_none=True)
@@ -114,7 +147,12 @@ async def update_institution(institution_id: str, body: InstitutionUpdate):
 @router.delete(
     "/{institution_id}",
     summary="删除机构",
-    description="删除指定的机构记录。",
+    description=(
+        "删除指定的机构记录。"
+        "\n\n**注意：**"
+        "\n- 删除高校会同时删除其下所有院系"
+        "\n- 删除院系不影响父高校"
+    ),
     status_code=204,
 )
 async def delete_institution(institution_id: str):

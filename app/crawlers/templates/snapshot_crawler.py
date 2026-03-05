@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 
 from app.crawlers.base import BaseCrawler, CrawledItem, CrawlResult, CrawlStatus
 from app.crawlers.utils.http_client import fetch_page
-from app.services.snapshot_store import get_last_snapshot, save_snapshot
+from app.services.stores.snapshot_store import get_last_snapshot, save_snapshot
 
 logger = logging.getLogger(__name__)
 

@@ -4,7 +4,7 @@ Field design principles:
 - Missing data → "" (str) / [] (list) / -1 (int metric, -1 = unknown) — never null
 - All field names use snake_case for direct database column mapping
 - `extra` in CrawledItem stores model_dump() of this schema
-- On DB migration: SELECT from university_faculty dimension's latest.json,
+- On DB migration: SELECT from scholars dimension's latest.json,
   extract extra field → insert into scholars table directly
 
 Data source labels (in field docstrings):
@@ -126,6 +126,25 @@ class AwardRecord(BaseModel):
 
     added_by: str = "crawler"
     """数据来源: 'crawler' | 'user:{username}'"""
+
+
+class AdjunctSupervisorInfo(BaseModel):
+    """兼职导师协议详情，替代原 is_adjunct_supervisor: bool。[用户 - 人力部]"""
+
+    status: str = ""
+    """协议状态: '已签署' | '流程中' | ''（空表示非兼职导师）"""
+
+    type: str = ""
+    """导师类型: '教学研究型' | '研究型' | '教学型' | ''"""
+
+    agreement_type: str = ""
+    """协议类型，如 '双方协议，知识产权共有' | '三方协议，知识产权独有'"""
+
+    agreement_period: str = ""
+    """协议有效期，如 '2025.3.1-2028.2.28'"""
+
+    recommender: str = ""
+    """推荐主体，如 '培养部' | '科研部'"""
 
 
 class DynamicUpdate(BaseModel):
@@ -293,8 +312,8 @@ class ScholarRecord(BaseModel):
     is_advisor_committee: bool = False
     """顾问委员（顾问委员会成员）[用户 - 综办/培养部/科研部]"""
 
-    is_adjunct_supervisor: bool = False
-    """兼职导师（与两院签订兼职导师协议）[用户 - 人力部]"""
+    adjunct_supervisor: AdjunctSupervisorInfo = Field(default_factory=AdjunctSupervisorInfo)
+    """兼职导师协议详情（空 status 表示非兼职导师）[用户 - 人力部]"""
 
     supervised_students: list[str] = Field(default_factory=list)
     """指导学生列表（学生姓名或 ID）[用户 - 培养部]"""
@@ -584,3 +603,218 @@ def validate_scholar_name(name: str) -> bool:
         return False
 
     return True
+
+
+# ---------------------------------------------------------------------------
+# API Response Schemas
+# ---------------------------------------------------------------------------
+
+
+class ScholarListItem(BaseModel):
+    """Single scholar item in list response."""
+
+    url_hash: str = ""
+    name: str = ""
+    name_en: str = ""
+    photo_url: str = ""
+    university: str = ""
+    department: str = ""
+    position: str = ""
+    academic_titles: list[str] = Field(default_factory=list)
+    is_academician: bool = False
+    research_areas: list[str] = Field(default_factory=list)
+    email: str = ""
+    profile_url: str = ""
+    source_id: str = ""
+    group: str = ""
+    data_completeness: int = 0
+    is_potential_recruit: bool = False
+    is_advisor_committee: bool = False
+    adjunct_supervisor: AdjunctSupervisorInfo = Field(default_factory=AdjunctSupervisorInfo)
+    crawled_at: str = ""
+
+
+class ScholarListResponse(BaseModel):
+    """Paginated list of scholars."""
+
+    total: int
+    page: int
+    page_size: int
+    total_pages: int
+    items: list[ScholarListItem] = Field(default_factory=list)
+
+
+class ScholarDetailResponse(BaseModel):
+    """Full scholar detail with all fields."""
+
+    url_hash: str = ""
+    source_id: str = ""
+    group: str = ""
+    name: str = ""
+    name_en: str = ""
+    gender: str = ""
+    photo_url: str = ""
+    university: str = ""
+    department: str = ""
+    secondary_departments: list[str] = Field(default_factory=list)
+    position: str = ""
+    academic_titles: list[str] = Field(default_factory=list)
+    is_academician: bool = False
+    research_areas: list[str] = Field(default_factory=list)
+    keywords: list[str] = Field(default_factory=list)
+    bio: str = ""
+    bio_en: str = ""
+    email: str = ""
+    phone: str = ""
+    office: str = ""
+    profile_url: str = ""
+    lab_url: str = ""
+    google_scholar_url: str = ""
+    dblp_url: str = ""
+    orcid: str = ""
+    phd_institution: str = ""
+    phd_year: str = ""
+    education: list[EducationRecord] = Field(default_factory=list)
+    publications_count: int = -1
+    h_index: int = -1
+    citations_count: int = -1
+    metrics_updated_at: str = ""
+    representative_publications: list[PublicationRecord] = Field(default_factory=list)
+    patents: list[PatentRecord] = Field(default_factory=list)
+    awards: list[AwardRecord] = Field(default_factory=list)
+    is_advisor_committee: bool = False
+    adjunct_supervisor: AdjunctSupervisorInfo = Field(default_factory=AdjunctSupervisorInfo)
+    supervised_students: list[str] = Field(default_factory=list)
+    joint_research_projects: list[str] = Field(default_factory=list)
+    joint_management_roles: list[str] = Field(default_factory=list)
+    academic_exchange_records: list[str] = Field(default_factory=list)
+    is_potential_recruit: bool = False
+    institute_relation_notes: str = ""
+    relation_updated_by: str = ""
+    relation_updated_at: str = ""
+    recent_updates: list[DynamicUpdate] = Field(default_factory=list)
+    source_url: str = ""
+    crawled_at: str = ""
+    first_seen_at: str = ""
+    last_seen_at: str = ""
+    is_active: bool = True
+    data_completeness: int = 0
+    supervised_students_count: int = 0
+
+
+class UniversityCount(BaseModel):
+    """University count in stats."""
+
+    university: str
+    count: int
+
+
+class DepartmentCount(BaseModel):
+    """Department count in stats."""
+
+    university: str
+    department: str
+    count: int
+
+
+class PositionCount(BaseModel):
+    """Position count in stats."""
+
+    position: str
+    count: int
+
+
+class ScholarStatsResponse(BaseModel):
+    """Scholar statistics response."""
+
+    total: int
+    academicians: int
+    potential_recruits: int
+    advisor_committee: int
+    adjunct_supervisors: int
+    by_university: list[UniversityCount] = Field(default_factory=list)
+    by_department: list[DepartmentCount] = Field(default_factory=list)
+    by_position: list[PositionCount] = Field(default_factory=list)
+    completeness_buckets: dict[str, int] = Field(default_factory=dict)
+    sources_count: int
+
+
+class ScholarSourceItem(BaseModel):
+    """Single source in sources list."""
+
+    id: str
+    name: str
+    group: str = ""
+    university: str = ""
+    department: str = ""
+    is_enabled: bool
+    item_count: int
+    last_crawl_at: str | None = None
+
+
+class ScholarSourcesResponse(BaseModel):
+    """Scholar sources list response."""
+
+    total: int
+    items: list[ScholarSourceItem] = Field(default_factory=list)
+
+
+class ScholarBasicUpdate(BaseModel):
+    """Request body for updating basic scholar information."""
+
+    name: str | None = None
+    name_en: str | None = None
+    gender: str | None = None
+    photo_url: str | None = None
+    position: str | None = None
+    academic_titles: list[str] | None = None
+    research_areas: list[str] | None = None
+    keywords: list[str] | None = None
+    bio: str | None = None
+    bio_en: str | None = None
+    email: str | None = None
+    phone: str | None = None
+    office: str | None = None
+    profile_url: str | None = None
+    lab_url: str | None = None
+    google_scholar_url: str | None = None
+    dblp_url: str | None = None
+    orcid: str | None = None
+    phd_institution: str | None = None
+    phd_year: str | None = None
+    education: list[EducationRecord] | None = None
+    secondary_departments: list[str] | None = None
+    updated_by: str | None = None
+
+
+class InstituteRelationUpdate(BaseModel):
+    """Request body for updating institute relation fields."""
+
+    is_advisor_committee: bool | None = None
+    adjunct_supervisor: AdjunctSupervisorInfo | None = None
+    supervised_students: list[str] | None = None
+    joint_research_projects: list[str] | None = None
+    joint_management_roles: list[str] | None = None
+    academic_exchange_records: list[str] | None = None
+    is_potential_recruit: bool | None = None
+    institute_relation_notes: str | None = None
+    relation_updated_by: str | None = None
+
+
+class UserUpdateCreate(BaseModel):
+    """Request body for creating a user-authored dynamic update."""
+
+    update_type: str
+    title: str
+    content: str = ""
+    source_url: str = ""
+    published_at: str = ""
+    added_by: str = "user"
+
+
+class AchievementUpdate(BaseModel):
+    """Request body for updating academic achievements."""
+
+    representative_publications: list[PublicationRecord] | None = None
+    patents: list[PatentRecord] | None = None
+    awards: list[AwardRecord] | None = None

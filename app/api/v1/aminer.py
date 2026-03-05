@@ -18,7 +18,7 @@ from app.schemas.aminer import (
     ScholarSearchResponse,
 )
 from app.services import institution_service
-from app.services.aminer_client import get_aminer_client
+from app.services.external.aminer_client import get_aminer_client
 
 router = APIRouter()
 

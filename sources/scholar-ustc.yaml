@@ -11,7 +11,7 @@ sources:
   use_playwright: false
   schedule: weekly
   priority: 2
-  is_enabled: true
+  is_enabled: false
   base_url: http://cs.ustc.edu.cn
   max_pages: 2
   faculty_selectors:
@@ -49,7 +49,7 @@ sources:
   use_playwright: false
   schedule: weekly
   priority: 2
-  is_enabled: true
+  is_enabled: false
   base_url: http://eeis.ustc.edu.cn
   max_pages: 8
   next_page_text: 下一页
@@ -117,7 +117,7 @@ sources:
   use_playwright: false
   schedule: weekly
   priority: 2
-  is_enabled: true
+  is_enabled: false
   enable_llm: true
   max_pages: 2
   base_url: https://saids.ustc.edu.cn
@@ -157,7 +157,7 @@ sources:
   verify_ssl: false
   schedule: weekly
   priority: 3
-  is_enabled: true
+  is_enabled: false
   base_url: https://cybersec.ustc.edu.cn
   faculty_selectors:
     list_item: div.teacher dl.cle dd.fl

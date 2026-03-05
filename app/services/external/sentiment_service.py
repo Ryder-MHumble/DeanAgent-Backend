@@ -13,7 +13,7 @@ from app.schemas.sentiment import (
     SentimentFeedResponse,
     SentimentOverview,
 )
-from app.services.supabase_client import get_supabase
+from app.services.external.supabase_client import get_supabase
 
 logger = logging.getLogger(__name__)
 

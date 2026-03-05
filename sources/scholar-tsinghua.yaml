@@ -11,7 +11,7 @@ sources:
   use_playwright: false
   schedule: weekly
   priority: 2
-  is_enabled: true
+  is_enabled: false
   base_url: https://air.tsinghua.edu.cn
   faculty_selectors:
     list_item: ul li
@@ -47,7 +47,7 @@ sources:
   use_playwright: false
   schedule: weekly
   priority: 2
-  is_enabled: true
+  is_enabled: false
   base_url: https://iiis.tsinghua.edu.cn/
   faculty_selectors:
     list_item: ul.ls16 li
@@ -85,7 +85,7 @@ sources:
   use_playwright: false
   schedule: weekly
   priority: 2
-  is_enabled: true
+  is_enabled: false
   base_url: https://www.thss.tsinghua.edu.cn/
   faculty_selectors:
     list_item: div.name-container
@@ -124,7 +124,7 @@ sources:
   wait_timeout: 15000
   schedule: weekly
   priority: 2
-  is_enabled: true
+  is_enabled: false
   base_url: https://www.ee.tsinghua.edu.cn/
   faculty_selectors:
     list_item: .line .t ul a
@@ -160,7 +160,7 @@ sources:
   use_playwright: false
   schedule: weekly
   priority: 2
-  is_enabled: true
+  is_enabled: false
   base_url: https://www.au.tsinghua.edu.cn/
   faculty_selectors:
     list_item: ul.list13 li
@@ -198,7 +198,7 @@ sources:
   use_playwright: false
   schedule: weekly
   priority: 3
-  is_enabled: true
+  is_enabled: false
   base_url: https://www.insc.tsinghua.edu.cn/szdw_/
   faculty_selectors:
     list_item: div.article-txt a[href*='/info/']
@@ -231,7 +231,7 @@ sources:
   use_playwright: false
   schedule: weekly
   priority: 3
-  is_enabled: true
+  is_enabled: false
   base_url: https://www.ias.tsinghua.edu.cn
   faculty_selectors:
     list_item: table tr
@@ -271,7 +271,7 @@ sources:
   use_playwright: false
   schedule: weekly
   priority: 3
-  is_enabled: true
+  is_enabled: false
   base_url: https://thfl.tsinghua.edu.cn/yjdw/jzg/zxjg.htm
   faculty_selectors:
     list_item: ul.teacher li
@@ -308,7 +308,7 @@ sources:
   crawler_class: ymsc_scholar
   schedule: weekly
   priority: 2
-  is_enabled: true
+  is_enabled: false
   request_delay: 0.5
   tags:
   - faculty
@@ -324,7 +324,7 @@ sources:
   use_playwright: false
   schedule: weekly
   priority: 2
-  is_enabled: true
+  is_enabled: false
   base_url: https://www.cs.tsinghua.edu.cn/
   faculty_selectors:
     list_item: dl dd ul li
@@ -367,7 +367,7 @@ sources:
   use_playwright: false
   schedule: weekly
   priority: 3
-  is_enabled: true
+  is_enabled: false
   base_url: https://life.tsinghua.edu.cn/szdw/jzyg1/All1/All.htm
   faculty_selectors:
     list_item: div.pepolelist li

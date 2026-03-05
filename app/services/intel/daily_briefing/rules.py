@@ -12,7 +12,7 @@ from datetime import date, timedelta
 from typing import Any
 
 from app.services.intel.shared import load_intel_json
-from app.services.json_reader import get_all_articles
+from app.services.stores.json_reader import get_all_articles
 
 logger = logging.getLogger(__name__)
 

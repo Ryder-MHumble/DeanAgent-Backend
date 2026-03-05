@@ -15,7 +15,7 @@ except ImportError:
     import openpyxl
 
 
-def import_events_from_excel(excel_path: str, output_path: str = "data/events.json"):
+def import_events_from_excel(excel_path: str, output_path: str = "data/scholars/events.json"):
     """从讲座信息汇总 Excel 导入活动数据"""
     wb = openpyxl.load_workbook(excel_path)
     ws = wb.active

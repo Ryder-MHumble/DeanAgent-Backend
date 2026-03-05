@@ -1,6 +1,6 @@
 {
   "source_id": "pku_ic_faculty",
-  "dimension": "university_faculty",
+  "dimension": "scholars",
   "group": "pku",
   "source_name": "北京大学集成电路学院-专职教师",
   "crawled_at": "2026-03-04T06:52:11.828957+00:00",

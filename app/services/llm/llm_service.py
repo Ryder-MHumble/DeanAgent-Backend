@@ -9,7 +9,7 @@ from typing import Any
 import httpx
 
 from app.config import settings
-from app.services.llm_call_tracker import get_tracker
+from app.services.llm.llm_call_tracker import get_tracker
 
 logger = logging.getLogger(__name__)
 

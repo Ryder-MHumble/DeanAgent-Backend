@@ -154,7 +154,20 @@ async def lifespan(app: FastAPI):
         except Exception as e:
             logger.warning("Initial data check failed: %s", e)
 
-    # Step 4: Summary
+    # Step 4: Build scholar institutions data (only if missing)
+    try:
+        from pathlib import Path
+        institutions_file = Path("data/scholars/institutions.json")
+        if not institutions_file.exists():
+            from app.services.institution_builder import save_institutions_data
+            save_institutions_data()
+            logger.info("Scholar institutions data built (first time)")
+        else:
+            logger.info("Scholar institutions data already exists, skipping rebuild")
+    except Exception as e:
+        logger.warning("Failed to build scholar institutions data: %s", e)
+
+    # Step 5: Summary
     if startup_issues:
         logger.warning("Startup completed with issues: %s", list(startup_issues))
     else:

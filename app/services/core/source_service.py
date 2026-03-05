@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any
 
 from app.scheduler.manager import load_all_source_configs
-from app.services.source_state import (
+from app.services.stores.source_state import (
     get_all_source_states,
     set_enabled_override,
 )

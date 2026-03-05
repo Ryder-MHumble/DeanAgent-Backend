@@ -6,7 +6,7 @@ from typing import Any
 
 from fastapi import APIRouter, Query
 
-from app.services.llm_call_tracker import get_tracker
+from app.services.llm.llm_call_tracker import get_tracker
 
 router = APIRouter(prefix="/llm-tracking", tags=["llm-tracking"])
 
