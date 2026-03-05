@@ -39,7 +39,8 @@ logs/
 # Crawled data output
 data/
 !data/scholars/
-!data/scholars/institutions.json
+!data/institutions/
+!data/institutions/institutions.json
 
 # Git worktrees
 .worktrees/
