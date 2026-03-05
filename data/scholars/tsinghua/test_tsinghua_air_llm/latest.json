@@ -1,0 +1,439 @@
+{
+  "source_id": "test_tsinghua_air_llm",
+  "dimension": "university_faculty",
+  "group": "tsinghua",
+  "source_name": "清华大学智能产业研究院-研究团队（LLM测试）",
+  "crawled_at": "2026-03-03T09:25:38.050619+00:00",
+  "previous_crawled_at": "2026-03-03T09:23:22.559210+00:00",
+  "item_count": 2,
+  "new_item_count": 0,
+  "items": [
+    {
+      "title": "刘洋",
+      "url": "http://nlp.csai.tsinghua.edu.cn/~ly/index_cn.html",
+      "url_hash": "2fd1d24d3a55870fb6a1d9002ef1a9237dfa7b0369e73b0eabd4ea5832f945bc",
+      "published_at": null,
+      "author": null,
+      "content": "清华大学计算机科学与技术系万国数据教授、智能产业研究院院长、人工智能医院联席执行院长。研究方向为自然语言处理、智慧医疗和科学智能，承担国家自然科学基金委杰出青年项目、科技创新2030“新一代人工智能”重大项目等重要科研项目，获得国家科技进步二等奖1项、省部级与一级学会科技奖励5项、重要国际会议优秀论文奖4项。主要学术兼职包括中国人工智能学会组织工作委员会主任、中国中文信息学会计算语言学专业委员会主任等。\n\n",
+      "content_html": null,
+      "content_hash": null,
+      "source_id": "test_tsinghua_air_llm",
+      "dimension": "university_faculty",
+      "tags": [
+        "faculty",
+        "tsinghua",
+        "ai",
+        "llm_test"
+      ],
+      "extra": {
+        "name": "刘洋",
+        "name_en": "",
+        "gender": "",
+        "photo_url": "",
+        "university": "清华大学",
+        "department": "智能产业研究院",
+        "secondary_departments": [],
+        "position": "清华大学计算机科学与技术系万国数据教授",
+        "academic_titles": [],
+        "is_academician": false,
+        "research_areas": [
+          "自然语言处理",
+          "智慧医疗",
+          "科学智能",
+          "人工智能基础模型",
+          "自主智能体"
+        ],
+        "keywords": [],
+        "bio": "清华大学计算机科学与技术系万国数据教授、智能产业研究院院长、人工智能医院联席执行院长。研究方向为自然语言处理、智慧医疗和科学智能，承担国家自然科学基金委杰出青年项目、科技创新2030“新一代人工智能”重大项目等重要科研项目，获得国家科技进步二等奖1项、省部级与一级学会科技奖励5项、重要国际会议优秀论文奖4项。主要学术兼职包括中国人工智能学会组织工作委员会主任、中国中文信息学会计算语言学专业委员会主任等。\n\n",
+        "bio_en": "",
+        "email": "",
+        "phone": "",
+        "office": "",
+        "profile_url": "http://nlp.csai.tsinghua.edu.cn/~ly/index_cn.html",
+        "lab_url": "",
+        "google_scholar_url": "",
+        "dblp_url": "",
+        "orcid": "",
+        "phd_institution": "",
+        "phd_year": "",
+        "education": [],
+        "publications_count": -1,
+        "h_index": -1,
+        "citations_count": -1,
+        "metrics_updated_at": "",
+        "representative_publications": [
+          {
+            "title": "Scaffolding Coordinates to Promote Vision-Language Coordination in Large Multi-Modal Models",
+            "venue": "Proceedings of COLING 2025",
+            "year": "2025",
+            "authors": "",
+            "url": "",
+            "citation_count": -1,
+            "is_corresponding": false,
+            "added_by": "crawler"
+          },
+          {
+            "title": "Can Vision-Language Models Think from a First-Person Perspective?",
+            "venue": "Proceedings of CVPR 2024",
+            "year": "2024",
+            "authors": "",
+            "url": "",
+            "citation_count": -1,
+            "is_corresponding": false,
+            "added_by": "crawler"
+          },
+          {
+            "title": "OpenChat: Advancing Open-source Language Models with Mixed-Quality Data",
+            "venue": "Proceedings of ICLR 2024",
+            "year": "2024",
+            "authors": "",
+            "url": "",
+            "citation_count": -1,
+            "is_corresponding": false,
+            "added_by": "crawler"
+          },
+          {
+            "title": "Enhancing Multilingual Capabilities of Large Language Models through Self-Distillation from Resource-Rich Languages",
+            "venue": "Proceedings of ACL 2024",
+            "year": "2024",
+            "authors": "",
+            "url": "",
+            "citation_count": -1,
+            "is_corresponding": false,
+            "added_by": "crawler"
+          },
+          {
+            "title": "Position-Enhanced Visual Instruction Tuning for Multimodal Large Language Models",
+            "venue": "arXiv:2308.13437",
+            "year": "2023",
+            "authors": "",
+            "url": "",
+            "citation_count": -1,
+            "is_corresponding": false,
+            "added_by": "crawler"
+          },
+          {
+            "title": "Agent Hospital: A Simulacrum of Hospital with Evolvable Medical Agents",
+            "venue": "arXiv:2405.02957",
+            "year": "2024",
+            "authors": "",
+            "url": "",
+            "citation_count": -1,
+            "is_corresponding": false,
+            "added_by": "crawler"
+          },
+          {
+            "title": "ReAct Meets ActRe: When Language Agents Enjoy Training Data Autonomy",
+            "venue": "Proceedings of COLM 2024",
+            "year": "2024",
+            "authors": "",
+            "url": "",
+            "citation_count": -1,
+            "is_corresponding": false,
+            "added_by": "crawler"
+          },
+          {
+            "title": "Towards Unified Alignment Between Agents, Humans, and Environment",
+            "venue": "Proceedings of ICML 2024",
+            "year": "2024",
+            "authors": "",
+            "url": "",
+            "citation_count": -1,
+            "is_corresponding": false,
+            "added_by": "crawler"
+          },
+          {
+            "title": "A Dynamic LLM-Powered Agent Network for Task-Oriented Agent Collaboration",
+            "venue": "Proceedings of COLM 2024",
+            "year": "2024",
+            "authors": "",
+            "url": "",
+            "citation_count": -1,
+            "is_corresponding": false,
+            "added_by": "crawler"
+          },
+          {
+            "title": "Exploring Large Language Models for Communication Games: An Empirical Study on Werewolf",
+            "venue": "arXiv:2309.04658",
+            "year": "2023",
+            "authors": "",
+            "url": "",
+            "citation_count": -1,
+            "is_corresponding": false,
+            "added_by": "crawler"
+          },
+          {
+            "title": "Generalist Equivariant Transformer Towards 3D Molecular Interaction Learning",
+            "venue": "Proceedings of ICML 2024",
+            "year": "2024",
+            "authors": "",
+            "url": "",
+            "citation_count": -1,
+            "is_corresponding": false,
+            "added_by": "crawler"
+          },
+          {
+            "title": "Space Group Constrained Crystal Generation",
+            "venue": "Proceedings of ICLR 2024",
+            "year": "2024",
+            "authors": "",
+            "url": "",
+            "citation_count": -1,
+            "is_corresponding": false,
+            "added_by": "crawler"
+          },
+          {
+            "title": "Rigid Protein-Protein Docking via Equivariant Elliptic-Paraboloid Interface Prediction",
+            "venue": "Proceedings of ICLR 2024",
+            "year": "2024",
+            "authors": "",
+            "url": "",
+            "citation_count": -1,
+            "is_corresponding": false,
+            "added_by": "crawler"
+          },
+          {
+            "title": "Conditional Antibody Design as 3D Equivariant Graph Translation",
+            "venue": "Proceedings of ICLR 2023",
+            "year": "2023",
+            "authors": "",
+            "url": "",
+            "citation_count": -1,
+            "is_corresponding": false,
+            "added_by": "crawler"
+          },
+          {
+            "title": "Energy-Motivated Equivariant Pretraining for 3D Molecular Graphs",
+            "venue": "Proceedings of AAAI 2023",
+            "year": "2023",
+            "authors": "",
+            "url": "",
+            "citation_count": -1,
+            "is_corresponding": false,
+            "added_by": "crawler"
+          }
+        ],
+        "patents": [],
+        "awards": [
+          {
+            "title": "ACL 2023杰出论文奖（共同通讯作者）",
+            "year": "2023",
+            "level": "",
+            "grantor": "",
+            "description": "",
+            "added_by": "crawler"
+          },
+          {
+            "title": "ICLR 2023杰出论文奖提名（共同通讯作者）",
+            "year": "2023",
+            "level": "",
+            "grantor": "",
+            "description": "",
+            "added_by": "crawler"
+          },
+          {
+            "title": "国家教学成果二等奖（第十一完成人）",
+            "year": "2022",
+            "level": "",
+            "grantor": "",
+            "description": "",
+            "added_by": "crawler"
+          },
+          {
+            "title": "中国电子学会科学技术奖科技进步类二等奖（第二完成人）",
+            "year": "2021",
+            "level": "",
+            "grantor": "",
+            "description": "",
+            "added_by": "crawler"
+          },
+          {
+            "title": "中国中文信息学会钱伟长中文信息处理科学技术奖一等奖（第三完成人）",
+            "year": "2020",
+            "level": "",
+            "grantor": "",
+            "description": "",
+            "added_by": "crawler"
+          },
+          {
+            "title": "获得国家自然科学基金委杰出青年科学基金项目资助",
+            "year": "2019",
+            "level": "",
+            "grantor": "",
+            "description": "",
+            "added_by": "crawler"
+          },
+          {
+            "title": "ACL 2017杰出论文奖（通讯作者）",
+            "year": "2017",
+            "level": "",
+            "grantor": "",
+            "description": "",
+            "added_by": "crawler"
+          },
+          {
+            "title": "国家科技进步二等奖（第五完成人）",
+            "year": "2015",
+            "level": "",
+            "grantor": "",
+            "description": "",
+            "added_by": "crawler"
+          },
+          {
+            "title": "获得国家自然科学基金委优秀青年科学基金项目资助",
+            "year": "2015",
+            "level": "",
+            "grantor": "",
+            "description": "",
+            "added_by": "crawler"
+          },
+          {
+            "title": "中国中文信息学会钱伟长中文信息处理科学技术奖汉王青年创新奖一等奖（第一完成人）",
+            "year": "2014",
+            "level": "",
+            "grantor": "",
+            "description": "",
+            "added_by": "crawler"
+          },
+          {
+            "title": "中国电子学会科学技术奖科技进步类一等奖（第六完成人）",
+            "year": "2014",
+            "level": "",
+            "grantor": "",
+            "description": "",
+            "added_by": "crawler"
+          },
+          {
+            "title": "北京市科学技术奖二等奖（第三完成人）",
+            "year": "2009",
+            "level": "",
+            "grantor": "",
+            "description": "",
+            "added_by": "crawler"
+          },
+          {
+            "title": "COLING/ACL 2006优秀亚洲自然语言处理论文奖（第一作者）",
+            "year": "2006",
+            "level": "",
+            "grantor": "",
+            "description": "",
+            "added_by": "crawler"
+          }
+        ],
+        "is_advisor_committee": false,
+        "is_adjunct_supervisor": false,
+        "supervised_students": [],
+        "joint_research_projects": [],
+        "joint_management_roles": [],
+        "academic_exchange_records": [],
+        "is_potential_recruit": false,
+        "institute_relation_notes": "",
+        "relation_updated_by": "",
+        "relation_updated_at": "",
+        "recent_updates": [],
+        "source_id": "test_tsinghua_air_llm",
+        "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
+        "crawled_at": "2026-03-03T09:23:35Z",
+        "first_seen_at": "2026-03-03T09:23:35Z",
+        "last_seen_at": "2026-03-03T09:23:35Z",
+        "is_active": true,
+        "data_completeness": 70
+      },
+      "is_new": false
+    },
+    {
+      "title": "王岩",
+      "url": "https://yanwang202199.github.io",
+      "url_hash": "8b7cbfc7e780c9aa939e613537c579db03a2ae7a738cfa5097cf7693175ed8c3",
+      "published_at": null,
+      "author": null,
+      "content": "Dr. Yan Wang is an assistant professor at the Institute for AI Industry Research (AIR), Tsinghua University. Before joining AIR, he was a senior researcher and team leader at SenseTime, where he and his team focus on research and product development in the fields of object detection, model compression and data compression powered by AI.\n\n2022-now: Assistant Professor @ Institute for AI Industry Research (AIR), Tsinghua University\n2018-2021: Intern, Researcher, Senior Researcher and team leader @",
+      "content_html": null,
+      "content_hash": null,
+      "source_id": "test_tsinghua_air_llm",
+      "dimension": "university_faculty",
+      "tags": [
+        "faculty",
+        "tsinghua",
+        "ai",
+        "llm_test"
+      ],
+      "extra": {
+        "name": "王岩",
+        "name_en": "Yan Wang",
+        "gender": "",
+        "photo_url": "",
+        "university": "清华大学",
+        "department": "智能产业研究院",
+        "secondary_departments": [],
+        "position": "助理教授",
+        "academic_titles": [],
+        "is_academician": false,
+        "research_areas": [
+          "Generative model in data compression",
+          "autonomous driving",
+          "Embodied AI"
+        ],
+        "keywords": [],
+        "bio": "Dr. Yan Wang is an assistant professor at the Institute for AI Industry Research (AIR), Tsinghua University. Before joining AIR, he was a senior researcher and team leader at SenseTime, where he and his team focus on research and product development in the fields of object detection, model compression and data compression powered by AI.\n\n2022-now: Assistant Professor @ Institute for AI Industry Research (AIR), Tsinghua University\n2018-2021: Intern, Researcher, Senior Researcher and team leader @ SenseTime\n",
+        "bio_en": "",
+        "email": "wangyan202199@163.com",
+        "phone": "",
+        "office": "",
+        "profile_url": "https://yanwang202199.github.io",
+        "lab_url": "",
+        "google_scholar_url": "",
+        "dblp_url": "",
+        "orcid": "",
+        "phd_institution": "",
+        "phd_year": "",
+        "education": [
+          {
+            "degree": "PhD",
+            "institution": "Tsinghua University",
+            "year": "2014-2019",
+            "major": "Safety Science and Engineering"
+          },
+          {
+            "degree": "Visiting",
+            "institution": "Cornell University",
+            "year": "2017-2018",
+            "major": "Civil and Environmental Engineering"
+          },
+          {
+            "degree": "Bachelor",
+            "institution": "Tsinghua University",
+            "year": "2010-2014",
+            "major": "Engineering Physics"
+          }
+        ],
+        "publications_count": -1,
+        "h_index": -1,
+        "citations_count": -1,
+        "metrics_updated_at": "",
+        "representative_publications": [],
+        "patents": [],
+        "awards": [],
+        "is_advisor_committee": false,
+        "is_adjunct_supervisor": false,
+        "supervised_students": [],
+        "joint_research_projects": [],
+        "joint_management_roles": [],
+        "academic_exchange_records": [],
+        "is_potential_recruit": false,
+        "institute_relation_notes": "",
+        "relation_updated_by": "",
+        "relation_updated_at": "",
+        "recent_updates": [],
+        "source_id": "test_tsinghua_air_llm",
+        "source_url": "https://air.tsinghua.edu.cn/airtd/yjtd.htm",
+        "crawled_at": "2026-03-03T09:23:35Z",
+        "first_seen_at": "2026-03-03T09:23:35Z",
+        "last_seen_at": "2026-03-03T09:23:35Z",
+        "is_active": true,
+        "data_completeness": 80
+      },
+      "is_new": false
+    }
+  ]
+}
