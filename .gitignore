@@ -39,6 +39,7 @@ logs/
 # Crawled data output
 data/
 !data/scholars/
+!data/scholars/**
 !data/institutions/
 !data/institutions/institutions.json
 
