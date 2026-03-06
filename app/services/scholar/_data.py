@@ -1,4 +1,4 @@
-"""Raw data loading and annotation merging for faculty service."""
+"""Raw data loading and annotation merging for scholar service."""
 from __future__ import annotations
 
 import json
@@ -6,12 +6,11 @@ import logging
 from pathlib import Path
 from typing import Any
 
-from app.crawlers.utils.json_storage import DATA_DIR, LATEST_FILENAME
 from app.services.stores import scholar_annotation_store as annotation_store
 
 logger = logging.getLogger(__name__)
 
-FACULTY_DIMENSION = "scholars"
+SCHOLARS_FILE = Path("data/scholars/scholars.json")
 
 _RELATION_FIELDS = [
     "is_advisor_committee",
@@ -33,59 +32,27 @@ _ACHIEVEMENT_FIELDS = [
 ]
 
 
-def _iter_faculty_jsons():
-    """Yield paths to all latest.json files under data/scholars/."""
-    # Scholars data is stored directly in data/scholars/, not data/raw/scholars/
-    scholars_dir = Path("data/scholars")
-    if not scholars_dir.exists():
-        return
-    for path in scholars_dir.rglob(LATEST_FILENAME):
-        yield path
-
-
 def _load_all_raw() -> list[dict[str, Any]]:
-    """Load all faculty items from raw JSON files.
-
-    Returns a flat list of dicts, each being the CrawledItem dict with
-    url_hash at the top level and ScholarRecord fields from extra merged in.
-    """
-    items: list[dict[str, Any]] = []
-    for path in _iter_faculty_jsons():
-        try:
-            with open(path, encoding="utf-8") as f:
-                payload = json.load(f)
-        except (json.JSONDecodeError, OSError) as exc:
-            logger.warning("Skipping invalid faculty JSON %s: %s", path, exc)
-            continue
-
-        group = payload.get("group", "")
-        source_name = payload.get("source_name", "")
-        for item in payload.get("items", []):
-            url_hash = item.get("url_hash", "")
-            if not url_hash:
-                continue
-            extra: dict[str, Any] = item.get("extra") or {}
-            merged = {**extra}
-            merged["url_hash"] = url_hash
-            merged["group"] = (
-                extra.get("source_id", group).split("_")[0] if not group else group
-            )
-            merged["source_name"] = source_name
-            items.append(merged)
-    return items
+    """Load all scholar records from the unified scholars.json."""
+    if not SCHOLARS_FILE.exists():
+        return []
+    try:
+        with open(SCHOLARS_FILE, encoding="utf-8") as f:
+            data = json.load(f)
+    except (json.JSONDecodeError, OSError) as exc:
+        logger.warning("Failed to load scholars file: %s", exc)
+        return []
+    return data.get("scholars", [])
 
 
 def _merge_annotation(item: dict[str, Any], ann: dict[str, Any]) -> dict[str, Any]:
-    """Overlay user annotation onto a faculty item (in-place, returns item)."""
+    """Overlay user annotation onto a scholar item (in-place, returns item)."""
     for field in _RELATION_FIELDS:
         if field in ann:
             item[field] = ann[field]
-
-    # Achievement fields: user annotation completely replaces crawler data
     for field in _ACHIEVEMENT_FIELDS:
         if field in ann:
             item[field] = ann[field]
-
     user_updates = ann.get("user_updates", [])
     if user_updates:
         existing = list(item.get("recent_updates") or [])
@@ -94,16 +61,13 @@ def _merge_annotation(item: dict[str, Any], ann: dict[str, Any]) -> dict[str, An
 
 
 def _load_all_with_annotations() -> list[dict[str, Any]]:
-    """Load raw faculty data and merge user annotations."""
+    """Load scholar data and merge user annotations."""
     items = _load_all_raw()
     if not items:
         return items
-
-    # Load all annotations in one pass
-    all_annotations = annotation_store._load()  # internal helper, single read
+    all_annotations = annotation_store._load()
     if not all_annotations:
         return items
-
     for item in items:
         url_hash = item.get("url_hash", "")
         if url_hash in all_annotations:
@@ -112,19 +76,18 @@ def _load_all_with_annotations() -> list[dict[str, Any]]:
 
 
 def _find_raw_file_by_hash(url_hash: str) -> tuple[Path, int] | None:
-    """Locate the raw JSON file and item index for a given url_hash.
+    """Locate the scholar record index for a given url_hash.
 
-    Returns (file_path, item_index) or None if not found.
+    Returns (SCHOLARS_FILE, item_index) or None if not found.
     """
-    for path in _iter_faculty_jsons():
-        try:
-            with open(path, encoding="utf-8") as f:
-                data = json.load(f)
-        except (json.JSONDecodeError, OSError):
-            continue
-
-        items = data.get("items", [])
-        for idx, item in enumerate(items):
-            if item.get("url_hash") == url_hash:
-                return path, idx
+    if not SCHOLARS_FILE.exists():
+        return None
+    try:
+        with open(SCHOLARS_FILE, encoding="utf-8") as f:
+            data = json.load(f)
+    except (json.JSONDecodeError, OSError):
+        return None
+    for idx, scholar in enumerate(data.get("scholars", [])):
+        if scholar.get("url_hash") == url_hash:
+            return SCHOLARS_FILE, idx
     return None

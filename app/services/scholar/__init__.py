@@ -1,7 +1,7 @@
-"""Faculty service — public API for loading, filtering, and updating faculty data.
+"""Scholar service — public API for loading, filtering, and updating scholar data.
 
 Internal implementation is split across private sub-modules:
-  _data.py         — raw JSON loading and annotation merging
+  _data.py         — unified scholars.json loading and annotation merging
   _filters.py      — multi-field filtering helpers
   _transformers.py — response shape converters (_to_list_item, _to_detail)
 """
@@ -13,20 +13,17 @@ from collections import Counter
 from datetime import UTC, datetime
 from typing import Any
 
-from app.scheduler.manager import load_all_source_configs
 from app.services.stores import scholar_annotation_store as annotation_store
 from app.services.stores import supervised_student_store as student_store
 from app.services.scholar._data import (
-    FACULTY_DIMENSION,
+    SCHOLARS_FILE,
     _find_raw_file_by_hash,
-    _iter_faculty_jsons,
     _load_all_with_annotations,
 )
 from app.services.scholar._filters import _apply_filters
 from app.services.scholar._transformers import _to_detail, _to_list_item
-from app.services.scholar._create import create_scholar, import_scholars_excel
-from app.services.intel.source_filter import parse_source_filter
-from app.services.stores.source_state import get_all_source_states
+from app.services.scholar._create import create_scholar, import_scholars_excel  # noqa: F401
+
 
 # ---------------------------------------------------------------------------
 # Read operations
@@ -37,41 +34,29 @@ def get_scholar_list(
     *,
     university: str | None = None,
     department: str | None = None,
-    group: str | None = None,
     position: str | None = None,
     is_academician: bool | None = None,
     is_potential_recruit: bool | None = None,
     is_advisor_committee: bool | None = None,
     has_email: bool | None = None,
-    min_completeness: int | None = None,
     keyword: str | None = None,
-    source_id: str | None = None,
-    source_ids: str | None = None,
-    source_name: str | None = None,
-    source_names: str | None = None,
     page: int = 1,
     page_size: int = 20,
 ) -> dict[str, Any]:
     items = _load_all_with_annotations()
 
-    source_filter = parse_source_filter(source_id, source_ids, source_name, source_names)
-
     filtered = _apply_filters(
         items,
         university=university,
         department=department,
-        group=group,
         position=position,
         is_academician=is_academician,
         is_potential_recruit=is_potential_recruit,
         is_advisor_committee=is_advisor_committee,
         has_email=has_email,
-        min_completeness=min_completeness,
         keyword=keyword,
-        source_filter=source_filter,
     )
 
-    # Sort: by name for stable ordering
     filtered.sort(key=lambda i: i.get("name", ""))
 
     total = len(filtered)
@@ -89,7 +74,7 @@ def get_scholar_list(
 
 
 def get_scholar_detail(url_hash: str) -> dict[str, Any] | None:
-    """Return full faculty detail merged with annotations, or None if not found."""
+    """Return full scholar detail merged with annotations, or None if not found."""
     items = _load_all_with_annotations()
     for item in items:
         if item.get("url_hash", "") == url_hash:
@@ -108,50 +93,20 @@ def get_scholar_stats() -> dict[str, Any]:
     advisor_committee = sum(1 for i in items if i.get("is_advisor_committee", False))
     adjunct_supervisors = sum(
         1 for i in items
-        if (i.get("adjunct_supervisor") or {}).get("status") or i.get("is_adjunct_supervisor", False)
+        if (i.get("adjunct_supervisor") or {}).get("status")
     )
 
     uni_counter: Counter = Counter()
     dept_counter: Counter = Counter()
     pos_counter: Counter = Counter()
-    completeness_buckets = {"<30": 0, "30-60": 0, "60-80": 0, ">80": 0}
 
     for item in items:
         uni = item.get("university", "") or "未知"
         uni_counter[uni] += 1
-
         dept = item.get("department", "") or "未知"
-        dept_key = (uni, dept)
-        dept_counter[dept_key] += 1
-
+        dept_counter[(uni, dept)] += 1
         pos = item.get("position", "") or "未知"
         pos_counter[pos] += 1
-
-        score = item.get("data_completeness") or 0
-        if score < 30:
-            completeness_buckets["<30"] += 1
-        elif score < 60:
-            completeness_buckets["30-60"] += 1
-        elif score < 80:
-            completeness_buckets["60-80"] += 1
-        else:
-            completeness_buckets[">80"] += 1
-
-    by_university = [
-        {"university": u, "count": c}
-        for u, c in uni_counter.most_common(15)
-    ]
-    by_department = [
-        {"university": u, "department": d, "count": c}
-        for (u, d), c in dept_counter.most_common(30)
-    ]
-    by_position = [
-        {"position": p, "count": c}
-        for p, c in pos_counter.most_common(10)
-    ]
-
-    configs = load_all_source_configs()
-    sources_count = sum(1 for c in configs if c.get("dimension") == FACULTY_DIMENSION)
 
     return {
         "total": total,
@@ -159,11 +114,18 @@ def get_scholar_stats() -> dict[str, Any]:
         "potential_recruits": potential_recruits,
         "advisor_committee": advisor_committee,
         "adjunct_supervisors": adjunct_supervisors,
-        "by_university": by_university,
-        "by_department": by_department,
-        "by_position": by_position,
-        "completeness_buckets": completeness_buckets,
-        "sources_count": sources_count,
+        "by_university": [
+            {"university": u, "count": c}
+            for u, c in uni_counter.most_common(15)
+        ],
+        "by_department": [
+            {"university": u, "department": d, "count": c}
+            for (u, d), c in dept_counter.most_common(30)
+        ],
+        "by_position": [
+            {"position": p, "count": c}
+            for p, c in pos_counter.most_common(10)
+        ],
     }
 
 
@@ -173,7 +135,6 @@ def get_scholar_stats() -> dict[str, Any]:
 
 
 def update_scholar_relation(url_hash: str, updates: dict[str, Any]) -> dict[str, Any] | None:
-    """Update institute relation fields. Returns merged detail or None if faculty not found."""
     if get_scholar_detail(url_hash) is None:
         return None
     annotation_store.update_relation(url_hash, updates)
@@ -181,7 +142,6 @@ def update_scholar_relation(url_hash: str, updates: dict[str, Any]) -> dict[str,
 
 
 def add_scholar_update(url_hash: str, update: dict[str, Any]) -> dict[str, Any] | None:
-    """Add a user-authored dynamic update. Returns merged detail or None if not found."""
     if get_scholar_detail(url_hash) is None:
         return None
     annotation_store.add_user_update(url_hash, update)
@@ -189,10 +149,6 @@ def add_scholar_update(url_hash: str, update: dict[str, Any]) -> dict[str, Any] 
 
 
 def delete_scholar_update(url_hash: str, update_idx: int) -> dict[str, Any] | None:
-    """Delete a user dynamic update. Returns merged detail or None if not found.
-
-    Raises ValueError if index out of range; PermissionError if targeting crawler entry.
-    """
     if get_scholar_detail(url_hash) is None:
         return None
     annotation_store.delete_user_update(url_hash, update_idx)
@@ -200,7 +156,6 @@ def delete_scholar_update(url_hash: str, update_idx: int) -> dict[str, Any] | No
 
 
 def update_scholar_achievements(url_hash: str, updates: dict[str, Any]) -> dict[str, Any] | None:
-    """Update academic achievement fields. Returns merged detail or None if faculty not found."""
     if get_scholar_detail(url_hash) is None:
         return None
     annotation_store.update_achievements(url_hash, updates)
@@ -213,10 +168,7 @@ def update_scholar_achievements(url_hash: str, updates: dict[str, Any]) -> dict[
 
 
 def update_scholar_basic(url_hash: str, updates: dict[str, Any]) -> dict[str, Any] | None:
-    """Update basic faculty information by modifying raw JSON file directly.
-
-    Locates the faculty record by url_hash, applies field updates to the
-    'extra' (ScholarRecord) section, and writes back atomically.
+    """Update basic scholar information by modifying scholars.json directly.
 
     Returns the updated full detail (merged with annotations) or None if not found.
     """
@@ -229,14 +181,11 @@ def update_scholar_basic(url_hash: str, updates: dict[str, Any]) -> dict[str, An
     with open(file_path, encoding="utf-8") as f:
         data = json.load(f)
 
-    item = data["items"][item_idx]
-    scholar = item.get("extra") or {}
+    scholar = data["scholars"][item_idx]
 
-    update_dict = {k: v for k, v in updates.items() if v is not None}
-    for key, value in update_dict.items():
+    for key, value in updates.items():
         if key == "updated_by":
             continue
-
         if isinstance(value, list):
             scholar[key] = [
                 v.model_dump() if hasattr(v, "model_dump") else v
@@ -247,11 +196,8 @@ def update_scholar_basic(url_hash: str, updates: dict[str, Any]) -> dict[str, An
 
     scholar["_user_modified_at"] = datetime.now(UTC).isoformat()
     scholar["_user_modified_by"] = updates.get("updated_by", "user")
+    data["scholars"][item_idx] = scholar
 
-    item["extra"] = scholar
-    data["items"][item_idx] = item
-
-    # Atomic write: write to temp file, then replace
     tmp_path = file_path.with_suffix(".tmp")
     with open(tmp_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
@@ -261,13 +207,7 @@ def update_scholar_basic(url_hash: str, updates: dict[str, Any]) -> dict[str, An
 
 
 def delete_scholar(url_hash: str) -> bool:
-    """Delete a faculty record by removing it from the raw JSON file.
-
-    Returns True if deleted successfully, False if not found.
-    Includes clean-up of related data (annotations, supervised students).
-
-    Thread-safe: handles concurrent delete requests gracefully.
-    """
+    """Delete a scholar record from scholars.json."""
     try:
         result = _find_raw_file_by_hash(url_hash)
         if result is None:
@@ -275,43 +215,29 @@ def delete_scholar(url_hash: str) -> bool:
 
         file_path, item_idx = result
 
-        # Read file once
         with open(file_path, encoding="utf-8") as f:
             data = json.load(f)
 
-        # Verify the item still exists at this index (handles concurrent deletes)
-        if item_idx >= len(data.get("items", [])):
+        scholars = data.get("scholars", [])
+        if item_idx >= len(scholars) or scholars[item_idx].get("url_hash") != url_hash:
             return False
 
-        if data["items"][item_idx].get("url_hash") != url_hash:
-            # Index mismatch - re-search to find correct index (race condition check)
-            for idx, item in enumerate(data.get("items", [])):
-                if item.get("url_hash") == url_hash:
-                    item_idx = idx
-                    break
-            else:
-                return False
+        scholars.pop(item_idx)
+        data["scholars"] = scholars
+        data["last_updated"] = datetime.now(UTC).isoformat()
 
-        # Remove the item from the items array
-        data["items"].pop(item_idx)
-
-        # Update item_count
-        data["item_count"] = len(data["items"])
-
-        # Atomic write: write to temp file, then replace
         tmp_path = file_path.with_suffix(".tmp")
         with open(tmp_path, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
         tmp_path.replace(file_path)
 
-        # Clean up related data (annotations and supervised students)
         annotation_store.delete_all_for_faculty(url_hash)
         student_store.delete_all_students(url_hash)
-
         return True
+
     except Exception as exc:
-        # Log the exception and return False to prevent 500 errors
         import logging
-        logger = logging.getLogger(__name__)
-        logger.error("Error deleting faculty %s: %s", url_hash, exc, exc_info=True)
+        logging.getLogger(__name__).error(
+            "Error deleting scholar %s: %s", url_hash, exc, exc_info=True
+        )
         return False

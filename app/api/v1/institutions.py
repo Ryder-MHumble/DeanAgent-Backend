@@ -1,12 +1,13 @@
 """Institution API — /api/v1/institutions/
 
-统一的机构接口（高校 + 院系）
+统一的机构接口（高校 + 院系），支持自动 ID 生成和 AMiner 标准化名自动填充
 
 Endpoints:
-  GET    /institutions/{id}       机构详情（高校或院系）
-  POST   /institutions/           创建机构（高校或院系）
-  PATCH  /institutions/{id}       更新机构
-  DELETE /institutions/{id}       删除机构
+  GET    /institutions/aminer/search-org    搜索 AMiner 机构名（辅助创建）
+  GET    /institutions/{id}                 机构详情（高校或院系）
+  POST   /institutions/                     创建机构（ID 自动生成）
+  PATCH  /institutions/{id}                 更新机构
+  DELETE /institutions/{id}                 删除机构
 """
 from __future__ import annotations
 
@@ -25,6 +26,70 @@ from app.services.core.institution_service import InstitutionAlreadyExistsError
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
+
+
+# ---------------------------------------------------------------------------
+# Helper endpoints (must come before /{institution_id} to avoid catch-all)
+# ---------------------------------------------------------------------------
+
+
+@router.get(
+    "/aminer/search-org",
+    summary="搜索 AMiner 机构名",
+    description=(
+        "搜索 AMiner 数据库中的机构信息，获取标准化的英文机构名（org_name）。"
+        "\n\n此端点用于辅助机构创建：用户在创建高校或院系时，可先调用此接口查询"
+        "对应的 AMiner 标准化名称，然后在创建请求中传入 `org_name` 字段。"
+        "\n\n**Query Parameters:**"
+        "\n- `q` (required): 机构名称（中文或英文均可），如 '清华大学' 或 'Tsinghua'"
+        "\n- `size` (optional, default=5): 返回的结果数量，最多 10 个"
+        "\n\n**返回示例：**"
+        "\n```json"
+        "\n{"
+        "\n  \"query\": \"清华大学\","
+        "\n  \"total\": 3,"
+        "\n  \"items\": ["
+        "\n    {\"id\": \"...\", \"name\": \"清华大学\", \"name_en\": \"Tsinghua University\", \"country\": \"China\"},"
+        "\n    {\"id\": \"...\", \"name\": \"清华大学\", \"name_en\": \"Tsinghua Univ.\", \"country\": \"China\"}"
+        "\n  ]"
+        "\n}"
+        "\n```"
+    ),
+)
+async def search_aminer_organizations(q: str, size: int = 5):
+    """搜索 AMiner 机构名."""
+    if not q or not q.strip():
+        raise HTTPException(
+            status_code=400, detail="Query parameter 'q' is required and cannot be empty"
+        )
+
+    if size < 1 or size > 10:
+        size = min(max(size, 1), 10)
+
+    try:
+        from app.services.external.aminer_client import get_aminer_client
+
+        client = get_aminer_client()
+        resp = await client.search_organizations(q, size=size)
+
+        # Normalize response
+        items = resp.get("data", [])
+        return {
+            "query": q,
+            "total": len(items),
+            "items": items,
+        }
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=400,
+            detail=f"AMiner API configuration error: {exc}",
+        ) from exc
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("AMiner search failed for '%s': %s", q, exc)
+        raise HTTPException(
+            status_code=502,
+            detail=f"AMiner search failed: {exc}",
+        ) from exc
 
 
 # ---------------------------------------------------------------------------
@@ -65,24 +130,41 @@ async def get_institution(institution_id: str):
 @router.post(
     "/",
     response_model=InstitutionDetailResponse,
-    summary="创建机构",
+    summary="创建机构（支持简化模式）",
     description=(
-        "创建新的机构记录（高校或院系），支持三种场景："
-        "\n\n**场景 1: 仅创建高校**"
-        "\n- 必填：`id`, `name`, `type='university'`"
-        "\n- 可选：所有高校字段（category, priority, student_count_24 等）"
-        "\n- 不传 `departments` 或传空列表"
-        "\n\n**场景 2: 仅创建院系（高校已存在）**"
-        "\n- 必填：`id`, `name`, `type='department'`, `parent_id`"
-        "\n- `parent_id` 必须是已存在的高校 ID"
-        "\n\n**场景 3: 创建高校 + 院系（一次性创建）**"
-        "\n- 必填：`id`, `name`, `type='university'`, `departments=[{id, name}, ...]`"
-        "\n- 可选：所有高校字段"
-        "\n- `departments` 列表中每个院系需提供 `id` 和 `name`"
-        "\n\n**重复检测：** 若 `id` 已存在，返回 409 Conflict。院系 ID 必须全局唯一。"
-        "\n\n**AMiner org_name 自动填充：** 若未传 `org_name`，"
-        "创建完成后会自动调用 AMiner 机构接口查询并写入标准化英文名。"
-        "查询失败不影响创建结果，`org_name` 保持为 null。"
+        "创建新的机构记录（高校或院系）。**ID 不提供会自动生成**，让你专注于填写关键信息。"
+        "\n\n## 三种使用场景"
+        "\n\n### 场景 1: 新增高校（最简单）"
+        "\n```json"
+        "\n{\"name\": \"清华大学\", \"type\": \"university\"}"
+        "\n```"
+        "\nBody 最少字段：`name`, `type='university'`"
+        "\n- `id` 不提供会自动生成（如 'qinghua'）"
+        "\n- 可选：category, priority, student_count_24/25, 人员和合作信息等"
+        "\n\n### 场景 2: 新增院系（需选择高校）"
+        "\n```json"
+        "\n{\"name\": \"计算机科学与技术系\", \"type\": \"department\", \"parent_id\": \"qinghua\"}"
+        "\n```"
+        "\nBody 必填字段：`name`, `type='department'`, `parent_id`"
+        "\n- `id` 不提供会自动生成"
+        "\n- `parent_id` 必须是已存在的高校 ID（可先用 GET /institutions/ 查询）"
+        "\n\n### 场景 3: 一次性创建高校+多个院系"
+        "\n```json"
+        "\n{"
+        "\n  \"name\": \"北京大学\","
+        "\n  \"type\": \"university\","
+        "\n  \"departments\": ["
+        "\n    {\"name\": \"计算机学院\"},"
+        "\n    {\"name\": \"信息科学技术学院\"}"
+        "\n  ]"
+        "\n}"
+        "\n```"
+        "\n- 高校和所有院系的 ID 都会自动生成"
+        "\n\n## 功能特性"
+        "\n\n**自动生成 ID** — 从机构名称自动生成简洁易记的 ID（如 '清华' → 'qinghua'）"
+        "\n\n**AMiner 标准化名** — 创建后自动调用 AMiner 机构搜索接口填充 `org_name`，"
+        "获取标准化的英文机构名。查询失败不影响创建。"
+        "\n\n**冲突检测** — 若 ID 已存在，返回 409 Conflict。院系 ID 必须全局唯一。"
     ),
     status_code=201,
 )

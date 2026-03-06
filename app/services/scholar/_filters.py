@@ -1,4 +1,4 @@
-"""Filtering helpers for faculty queries."""
+"""Filtering helpers for scholar queries."""
 from __future__ import annotations
 
 from typing import Any
@@ -13,23 +13,14 @@ def _apply_filters(
     *,
     university: str | None,
     department: str | None,
-    group: str | None,
     position: str | None,
     is_academician: bool | None,
     is_potential_recruit: bool | None,
     is_advisor_committee: bool | None,
     has_email: bool | None,
-    min_completeness: int | None,
     keyword: str | None,
-    source_filter: set[str] | None,
 ) -> list[dict[str, Any]]:
     result = items
-
-    if source_filter is not None:
-        result = [i for i in result if i.get("source_id", "") in source_filter]
-
-    if group:
-        result = [i for i in result if i.get("group", "") == group]
 
     if university:
         result = [i for i in result if _match_fuzzy(i.get("university", ""), university)]
@@ -44,22 +35,13 @@ def _apply_filters(
         result = [i for i in result if bool(i.get("is_academician", False)) == is_academician]
 
     if is_potential_recruit is not None:
-        result = [
-            i for i in result
-            if bool(i.get("is_potential_recruit", False)) == is_potential_recruit
-        ]
+        result = [i for i in result if bool(i.get("is_potential_recruit", False)) == is_potential_recruit]
 
     if is_advisor_committee is not None:
-        result = [
-            i for i in result
-            if bool(i.get("is_advisor_committee", False)) == is_advisor_committee
-        ]
+        result = [i for i in result if bool(i.get("is_advisor_committee", False)) == is_advisor_committee]
 
     if has_email is not None:
         result = [i for i in result if bool(i.get("email", "")) == has_email]
-
-    if min_completeness is not None:
-        result = [i for i in result if (i.get("data_completeness") or 0) >= min_completeness]
 
     if keyword:
         kw = keyword.strip().lower()

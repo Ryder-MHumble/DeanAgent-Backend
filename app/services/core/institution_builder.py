@@ -46,6 +46,62 @@ def _count_scholars_in_source(source_id: str, group: str) -> int:
         return 0
 
 
+def _add_manual_scholar_counts(
+    universities_by_name: dict[str, dict[str, Any]],
+    yaml_source_ids: set[str],
+    existing_data: dict[str, dict[str, Any]],
+) -> None:
+    """Scan all scholar JSON files and add counts for non-YAML sources.
+
+    YAML sources are already counted via _count_scholars_in_source().
+    This step handles manual sources (manual_scholars, youth_forum_2025,
+    adjunct_supervisors, etc.) whose scholars have a `university` field
+    that should contribute to the university's scholar_count.
+    """
+    scholars_dir = Path("data/scholars")
+    if not scholars_dir.exists():
+        return
+
+    # Count scholars by university from all non-YAML sources
+    manual_uni_counts: dict[str, int] = defaultdict(int)
+
+    for path in scholars_dir.rglob("latest.json"):
+        try:
+            with open(path, encoding="utf-8") as f:
+                payload = json.load(f)
+        except (json.JSONDecodeError, OSError):
+            continue
+
+        source_id = payload.get("source_id", "")
+        # Skip sources already counted from YAML
+        if source_id in yaml_source_ids:
+            continue
+
+        for item in payload.get("items", []):
+            extra = item.get("extra") or {}
+            university = (extra.get("university") or "").strip()
+            if university:
+                manual_uni_counts[university] += 1
+
+    if not manual_uni_counts:
+        return
+
+    for uni_name, count in manual_uni_counts.items():
+        if uni_name in universities_by_name:
+            # University already exists (from YAML) — add to scholar_count
+            universities_by_name[uni_name]["scholar_count"] += count
+        elif uni_name in existing_data:
+            # University is in existing institutions.json but has no YAML sources.
+            # Convert departments list → dict so the caller's list() conversion works.
+            uni_data = existing_data[uni_name].copy()
+            uni_data["scholar_count"] = (uni_data.get("scholar_count") or 0) + count
+            existing_depts = uni_data.get("departments") or []
+            uni_data["departments"] = {
+                d["id"]: d for d in existing_depts if isinstance(d, dict) and "id" in d
+            }
+            universities_by_name[uni_name] = uni_data
+
+
 def build_institutions_data() -> dict[str, Any]:
     """Build institutions data from YAML configs + scholar counts.
 
@@ -167,6 +223,11 @@ def build_institutions_data() -> dict[str, Any]:
             }
 
             uni_data["scholar_count"] += dept_scholar_count
+
+    # Count scholars from non-YAML sources (manual imports, youth forum, etc.)
+    # These are loaded from data/scholars/**/*.json but have no YAML config.
+    yaml_source_ids = {cfg.get("id", "") for cfg in scholar_configs}
+    _add_manual_scholar_counts(universities_by_name, yaml_source_ids, existing_data)
 
     # Convert to list format
     universities = []

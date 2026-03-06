@@ -61,7 +61,6 @@ router = APIRouter()
 async def list_scholars(
     university: str | None = Query(None, description="高校名称（模糊匹配）"),
     department: str | None = Query(None, description="院系名称（模糊匹配）"),
-    group: str | None = Query(None, description="信源分组（精确匹配，如 sjtu/pku/cas）"),
     position: str | None = Query(
         None, description="职称（精确匹配，如 教授/副教授/研究员/助理教授）"
     ),
@@ -69,19 +68,8 @@ async def list_scholars(
     is_potential_recruit: bool | None = Query(None, description="仅显示潜在招募对象"),
     is_advisor_committee: bool | None = Query(None, description="仅显示顾问委员会成员"),
     has_email: bool | None = Query(None, description="仅显示有邮箱联系方式的学者"),
-    min_completeness: int | None = Query(
-        None, ge=0, le=100, description="数据完整度下限（0–100）"
-    ),
     keyword: str | None = Query(
         None, description="关键词搜索（姓名/英文名/bio/研究方向/关键词）"
-    ),
-    source_id: str | None = Query(None, description="按单个信源 ID 筛选（精确匹配）"),
-    source_ids: str | None = Query(
-        None, description="按多个信源 ID 筛选（逗号分隔，精确匹配）"
-    ),
-    source_name: str | None = Query(None, description="按单个信源名称筛选（模糊匹配）"),
-    source_names: str | None = Query(
-        None, description="按多个信源名称筛选（逗号分隔，模糊匹配）"
     ),
     page: int = Query(1, ge=1, description="页码"),
     page_size: int = Query(20, ge=1, le=200, description="每页条数"),
@@ -89,18 +77,12 @@ async def list_scholars(
     return svc.get_scholar_list(
         university=university,
         department=department,
-        group=group,
         position=position,
         is_academician=is_academician,
         is_potential_recruit=is_potential_recruit,
         is_advisor_committee=is_advisor_committee,
         has_email=has_email,
-        min_completeness=min_completeness,
         keyword=keyword,
-        source_id=source_id,
-        source_ids=source_ids,
-        source_name=source_name,
-        source_names=source_names,
         page=page,
         page_size=page_size,
     )

@@ -625,13 +625,9 @@ class ScholarListItem(BaseModel):
     research_areas: list[str] = Field(default_factory=list)
     email: str = ""
     profile_url: str = ""
-    source_id: str = ""
-    group: str = ""
-    data_completeness: int = 0
     is_potential_recruit: bool = False
     is_advisor_committee: bool = False
     adjunct_supervisor: AdjunctSupervisorInfo = Field(default_factory=AdjunctSupervisorInfo)
-    crawled_at: str = ""
 
 
 class ScholarListResponse(BaseModel):
@@ -648,8 +644,9 @@ class ScholarDetailResponse(BaseModel):
     """Full scholar detail with all fields."""
 
     url_hash: str = ""
-    source_id: str = ""
-    group: str = ""
+    url: str = ""
+    content: str = ""
+    tags: list[str] = Field(default_factory=list)
     name: str = ""
     name_en: str = ""
     gender: str = ""
@@ -693,12 +690,6 @@ class ScholarDetailResponse(BaseModel):
     relation_updated_by: str = ""
     relation_updated_at: str = ""
     recent_updates: list[DynamicUpdate] = Field(default_factory=list)
-    source_url: str = ""
-    crawled_at: str = ""
-    first_seen_at: str = ""
-    last_seen_at: str = ""
-    is_active: bool = True
-    data_completeness: int = 0
     supervised_students_count: int = 0
 
 
@@ -735,8 +726,6 @@ class ScholarStatsResponse(BaseModel):
     by_university: list[UniversityCount] = Field(default_factory=list)
     by_department: list[DepartmentCount] = Field(default_factory=list)
     by_position: list[PositionCount] = Field(default_factory=list)
-    completeness_buckets: dict[str, int] = Field(default_factory=dict)
-    sources_count: int
 
 
 class ScholarSourceItem(BaseModel):

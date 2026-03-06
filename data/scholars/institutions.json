@@ -1,11 +1,11 @@
 {
-  "last_updated": "2026-03-05T10:12:51.882228+00:00",
+  "last_updated": "2026-03-06T07:08:28.095509+00:00",
   "universities": [
     {
       "id": "sjtu",
       "name": "上海交通大学",
       "org_name": "Shanghai Jiao Tong University",
-      "scholar_count": 379,
+      "scholar_count": 382,
       "category": "京外C9",
       "priority": "A",
       "student_count_24": 16,
@@ -57,7 +57,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "Artificial Intelligence Institute, Shanghai Jiao Tong University"
+          "org_name": null
         },
         {
           "id": "sjtu_清源研究院",
@@ -72,7 +72,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "上海交通大学清源研究院"
+          "org_name": null
         },
         {
           "id": "sjtu_网络空间安全学院",
@@ -87,7 +87,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "上海交通大学网络空间安全学院"
+          "org_name": null
         },
         {
           "id": "sjtu_计算机科学与工程系",
@@ -102,7 +102,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "上海交通大学计算机科学与工程系"
+          "org_name": null
         },
         {
           "id": "sjtu_软件学院",
@@ -117,7 +117,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "上海交通大学软件学院"
+          "org_name": null
         }
       ],
       "key_departments": [],
@@ -203,7 +203,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "School of Information, Renmin University of China"
+          "org_name": null
         },
         {
           "id": "ruc_高瓴人工智能学院",
@@ -218,7 +218,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "gaoling school of artificial intelligence, renmin university of china"
+          "org_name": null
         }
       ]
     },
@@ -269,7 +269,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "中国科学技术大学人工智能与数据科学学院"
+          "org_name": null
         },
         {
           "id": "ustc_信息科学技术学院（电子工程与信息科学系）",
@@ -284,7 +284,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "中国科学技术大学信息科学技术学院电子工程与信息科学系"
+          "org_name": null
         },
         {
           "id": "ustc_网络空间安全学院",
@@ -299,7 +299,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "中国科学技术大学网络空间安全学院"
+          "org_name": null
         },
         {
           "id": "ustc_计算机学院",
@@ -314,7 +314,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "中国科学技术大学计算机学院"
+          "org_name": null
         },
         {
           "id": "ustc_软件学院",
@@ -329,7 +329,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "中国科学技术大学软件学院"
+          "org_name": null
         }
       ]
     },
@@ -337,7 +337,7 @@
       "id": "cas",
       "name": "中国科学院",
       "org_name": "Chinese Academy of Sciences",
-      "scholar_count": 222,
+      "scholar_count": 293,
       "departments": [
         {
           "id": "cas_自动化研究所",
@@ -352,7 +352,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "中国科学院自动化研究所"
+          "org_name": null
         },
         {
           "id": "cas_计算技术研究所",
@@ -367,7 +367,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "Institute of Computing Technology,Chinese Academy of Sciences"
+          "org_name": null
         },
         {
           "id": "cas_软件研究所",
@@ -396,7 +396,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "Zhōngguó Kēxuéyuàn Ruǎnjiàn Yánjiūsuǒ"
+          "org_name": null
         }
       ],
       "category": "京内高校",
@@ -506,7 +506,7 @@
       "id": "sysu",
       "name": "中山大学",
       "org_name": "Sun Yat-sen University",
-      "scholar_count": 0,
+      "scholar_count": 2,
       "category": "综合高校",
       "priority": null,
       "student_count_24": 5,
@@ -531,7 +531,7 @@
       "id": "pku",
       "name": "北京大学",
       "org_name": "Peking University",
-      "scholar_count": 410,
+      "scholar_count": 417,
       "category": "示范高校",
       "priority": null,
       "student_count_24": 21,
@@ -578,17 +578,17 @@
         {
           "id": "pku_信息工程学院（深圳）",
           "name": "信息工程学院（深圳）",
-          "scholar_count": 1,
+          "scholar_count": 0,
           "sources": [
             {
               "source_id": "pku_eecs_sz_faculty",
               "source_name": "北京大学信息工程学院（深圳）-师资",
-              "scholar_count": 1,
+              "scholar_count": 0,
               "is_enabled": false,
               "last_crawl_at": null
             }
           ],
-          "org_name": "北京大学信息工程学院（深圳）"
+          "org_name": null
         },
         {
           "id": "pku_前沿计算研究中心",
@@ -603,7 +603,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "北京大学前沿计算研究中心"
+          "org_name": null
         },
         {
           "id": "pku_工学院",
@@ -618,7 +618,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "北京大学工学院"
+          "org_name": null
         },
         {
           "id": "pku_数学学院",
@@ -633,7 +633,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "北京大学数学科学学院"
+          "org_name": null
         },
         {
           "id": "pku_智能学院",
@@ -648,7 +648,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "北京大学智能学院"
+          "org_name": null
         },
         {
           "id": "pku_王选计算机研究所",
@@ -663,7 +663,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "北京大学王选计算机研究所"
+          "org_name": null
         },
         {
           "id": "pku_计算机学院",
@@ -678,7 +678,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "北京大学计算机学院"
+          "org_name": null
         },
         {
           "id": "pku_软件与微电子学院",
@@ -693,7 +693,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "北京大学软件与微电子学院"
+          "org_name": null
         },
         {
           "id": "pku_集成电路学院",
@@ -708,7 +708,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "北京大学集成电路学院"
+          "org_name": null
         }
       ]
     },
@@ -716,7 +716,7 @@
       "id": "bnu",
       "name": "北京师范大学",
       "org_name": "Beijing Normal University",
-      "scholar_count": 0,
+      "scholar_count": 4,
       "category": "京内高校",
       "priority": null,
       "student_count_24": null,
@@ -756,7 +756,7 @@
       "id": "bit",
       "name": "北京理工大学",
       "org_name": "Beijing Institute of Technology",
-      "scholar_count": 0,
+      "scholar_count": 9,
       "category": "京内高校",
       "priority": null,
       "student_count_24": 32,
@@ -806,7 +806,7 @@
       "id": "buaa",
       "name": "北京航空航天大学",
       "org_name": "Beihang University",
-      "scholar_count": 0,
+      "scholar_count": 8,
       "category": "京内高校",
       "priority": null,
       "student_count_24": 31,
@@ -861,7 +861,7 @@
       "id": "bupt",
       "name": "北京邮电大学",
       "org_name": "Beijing University of Posts and Telecommunications",
-      "scholar_count": 0,
+      "scholar_count": 3,
       "category": "京内高校",
       "priority": null,
       "student_count_24": 7,
@@ -964,7 +964,7 @@
       "id": "nju",
       "name": "南京大学",
       "org_name": "Nanjing University",
-      "scholar_count": 184,
+      "scholar_count": 185,
       "category": "京外C9",
       "priority": null,
       "student_count_24": 3,
@@ -1004,7 +1004,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "School of Artificial Intelligence, Nanjing University"
+          "org_name": null
         },
         {
           "id": "nju_智能科学与技术学院",
@@ -1019,7 +1019,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "南京大学智能科学与技术学院"
+          "org_name": null
         },
         {
           "id": "nju_智能软件与工程学院",
@@ -1034,7 +1034,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "南京大学智能软件与工程学院"
+          "org_name": null
         },
         {
           "id": "nju_计算机科学与技术系",
@@ -1049,7 +1049,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "Department of Computer Science and Technology, Nanjing University"
+          "org_name": null
         },
         {
           "id": "nju_软件学院",
@@ -1064,7 +1064,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "software institute, nanjing university"
+          "org_name": null
         }
       ]
     },
@@ -1072,7 +1072,7 @@
       "id": "nku",
       "name": "南开大学",
       "org_name": "Nankai University",
-      "scholar_count": 0,
+      "scholar_count": 1,
       "category": "综合高校",
       "priority": null,
       "student_count_24": 7,
@@ -1105,7 +1105,7 @@
       "id": "南方科技",
       "name": "南方科技大学",
       "org_name": "Southern University of Science and Technology",
-      "scholar_count": 0,
+      "scholar_count": 4,
       "category": "工科强校",
       "priority": null,
       "student_count_24": 10,
@@ -1146,7 +1146,7 @@
       "id": "南洋理工",
       "name": "南洋理工大学",
       "org_name": "Nanyang Technological University",
-      "scholar_count": 0,
+      "scholar_count": 4,
       "category": null,
       "priority": null,
       "student_count_24": null,
@@ -1170,7 +1170,7 @@
       "id": "xmu",
       "name": "厦门大学",
       "org_name": "Xiamen University",
-      "scholar_count": 0,
+      "scholar_count": 2,
       "category": "综合高校",
       "priority": null,
       "student_count_24": 5,
@@ -1195,7 +1195,7 @@
       "id": "jlu",
       "name": "吉林大学",
       "org_name": "Jilin University",
-      "scholar_count": 0,
+      "scholar_count": 1,
       "category": "综合高校",
       "priority": null,
       "student_count_24": 9,
@@ -1257,7 +1257,7 @@
       "id": "hit",
       "name": "哈尔滨工业大学",
       "org_name": "Harbin Institute of Technology",
-      "scholar_count": 0,
+      "scholar_count": 2,
       "category": "京外C9",
       "priority": null,
       "student_count_24": 17,
@@ -1298,7 +1298,7 @@
       "id": "fudan",
       "name": "复旦大学",
       "org_name": "Fudan University",
-      "scholar_count": 189,
+      "scholar_count": 190,
       "category": "京外C9",
       "priority": null,
       "student_count_24": 9,
@@ -1347,7 +1347,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "复旦大学智能机器人与先进制造创新学院"
+          "org_name": null
         },
         {
           "id": "fudan_计算与智能创新学院",
@@ -1362,7 +1362,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "复旦大学计算与智能创新学院"
+          "org_name": null
         }
       ]
     },
@@ -1370,7 +1370,7 @@
       "id": "tju",
       "name": "天津大学",
       "org_name": "Tianjin University",
-      "scholar_count": 0,
+      "scholar_count": 1,
       "category": "综合高校",
       "priority": null,
       "student_count_24": null,
@@ -1465,7 +1465,7 @@
       "id": "新加坡国立",
       "name": "新加坡国立大学",
       "org_name": "National University of Singapore",
-      "scholar_count": 0,
+      "scholar_count": 3,
       "category": null,
       "priority": null,
       "student_count_24": null,
@@ -1490,7 +1490,7 @@
       "id": "whu",
       "name": "武汉大学",
       "org_name": "Wuhan University",
-      "scholar_count": 0,
+      "scholar_count": 6,
       "category": "综合高校",
       "priority": null,
       "student_count_24": 8,
@@ -1550,7 +1550,7 @@
       "id": "zju",
       "name": "浙江大学",
       "org_name": "Zhejiang University",
-      "scholar_count": 48,
+      "scholar_count": 52,
       "category": "京外C9",
       "priority": null,
       "student_count_24": 8,
@@ -1592,7 +1592,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "School of Cyber Science and Technology, Zhejiang University"
+          "org_name": null
         },
         {
           "id": "zju_计算机学院",
@@ -1607,7 +1607,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "浙江大学计算机学院"
+          "org_name": null
         },
         {
           "id": "zju_软件学院",
@@ -1622,7 +1622,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "浙江大学软件学院"
+          "org_name": null
         }
       ]
     },
@@ -1630,7 +1630,7 @@
       "id": "tsinghua",
       "name": "清华大学",
       "org_name": "Tsinghua University",
-      "scholar_count": 763,
+      "scholar_count": 769,
       "category": "示范高校",
       "priority": null,
       "student_count_24": 27,
@@ -1690,7 +1690,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "清华大学丘成桐数学科学中心"
+          "org_name": null
         },
         {
           "id": "tsinghua_交叉信息研究院",
@@ -1705,7 +1705,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "institute for interdisciplinary information sciences"
+          "org_name": null
         },
         {
           "id": "tsinghua_人工智能国际治理研究院",
@@ -1720,7 +1720,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "清华大学人工智能国际治理研究院"
+          "org_name": null
         },
         {
           "id": "tsinghua_智能产业研究院",
@@ -1735,7 +1735,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "Institute for AI Industry Research, Tsinghua University"
+          "org_name": null
         },
         {
           "id": "tsinghua_未来实验室",
@@ -1750,7 +1750,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "The Future Laboratory, Tsinghua University"
+          "org_name": null
         },
         {
           "id": "tsinghua_深圳国际研究生院",
@@ -1765,7 +1765,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "Tsinghua Shenzhen International Graduate School"
+          "org_name": null
         },
         {
           "id": "tsinghua_生命科学学院",
@@ -1780,7 +1780,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "清华大学生命科学学院"
+          "org_name": null
         },
         {
           "id": "tsinghua_电子工程系",
@@ -1795,7 +1795,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "清华大学电子工程系"
+          "org_name": null
         },
         {
           "id": "tsinghua_网络研究院",
@@ -1810,7 +1810,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "清华大学网络研究院"
+          "org_name": null
         },
         {
           "id": "tsinghua_自动化系",
@@ -1825,7 +1825,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "清华大学自动化系"
+          "org_name": null
         },
         {
           "id": "tsinghua_计算机科学与技术系",
@@ -1840,7 +1840,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "清华大学计算机科学与技术系"
+          "org_name": null
         },
         {
           "id": "tsinghua_软件学院",
@@ -1855,7 +1855,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "清华大学软件学院"
+          "org_name": null
         },
         {
           "id": "tsinghua_高等研究院",
@@ -1870,7 +1870,7 @@
               "last_crawl_at": null
             }
           ],
-          "org_name": "institute for advanced study, tsinghua university"
+          "org_name": null
         }
       ]
     },
@@ -1996,7 +1996,7 @@
       "id": "西湖",
       "name": "西湖大学",
       "org_name": "Westlake University",
-      "scholar_count": 0,
+      "scholar_count": 3,
       "category": "特色高校",
       "priority": null,
       "student_count_24": 2,
@@ -2049,7 +2049,7 @@
       "id": "香港城市",
       "name": "香港城市大学",
       "org_name": "City University of Hong Kong",
-      "scholar_count": 0,
+      "scholar_count": 2,
       "category": null,
       "priority": null,
       "student_count_24": null,
@@ -2076,7 +2076,7 @@
       "id": "香港",
       "name": "香港大学",
       "org_name": "University of Hong Kong",
-      "scholar_count": 0,
+      "scholar_count": 1,
       "category": null,
       "priority": null,
       "student_count_24": null,
@@ -2121,7 +2121,7 @@
       "id": "香港理工",
       "name": "香港理工大学",
       "org_name": "Hong Kong Polytechnic University",
-      "scholar_count": 0,
+      "scholar_count": 2,
       "category": null,
       "priority": null,
       "student_count_24": null,
@@ -2147,7 +2147,7 @@
       "id": "香港科技",
       "name": "香港科技大学",
       "org_name": "Hong Kong University of Science and Technology",
-      "scholar_count": 0,
+      "scholar_count": 2,
       "category": null,
       "priority": null,
       "student_count_24": null,

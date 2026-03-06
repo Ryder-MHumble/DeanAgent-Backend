@@ -1,4 +1,4 @@
-"""Response shape transformers — convert raw faculty dicts to API output shapes."""
+"""Response shape transformers — convert raw scholar dicts to API output shapes."""
 from __future__ import annotations
 
 from typing import Any
@@ -9,7 +9,7 @@ _EMPTY_ADJUNCT: dict[str, str] = {
 
 
 def _coerce_adjunct_supervisor(raw: Any) -> dict[str, str]:
-    """Normalize adjunct_supervisor field, handling legacy bool values."""
+    """Normalize adjunct_supervisor field."""
     if isinstance(raw, dict):
         return {
             "status": raw.get("status", ""),
@@ -18,9 +18,6 @@ def _coerce_adjunct_supervisor(raw: Any) -> dict[str, str]:
             "agreement_period": raw.get("agreement_period", ""),
             "recommender": raw.get("recommender", ""),
         }
-    if isinstance(raw, bool):
-        # Legacy data: True → status="已签署", False → empty
-        return {**_EMPTY_ADJUNCT, "status": "已签署"} if raw else dict(_EMPTY_ADJUNCT)
     return dict(_EMPTY_ADJUNCT)
 
 
@@ -38,21 +35,17 @@ def _to_list_item(item: dict[str, Any]) -> dict[str, Any]:
         "research_areas": item.get("research_areas") or [],
         "email": item.get("email", ""),
         "profile_url": item.get("profile_url", ""),
-        "source_id": item.get("source_id", ""),
-        "group": item.get("group", ""),
-        "data_completeness": item.get("data_completeness") or 0,
         "is_potential_recruit": bool(item.get("is_potential_recruit", False)),
         "is_advisor_committee": bool(item.get("is_advisor_committee", False)),
-        "adjunct_supervisor": _coerce_adjunct_supervisor(item.get("adjunct_supervisor") or item.get("is_adjunct_supervisor")),
-        "crawled_at": item.get("crawled_at", ""),
+        "adjunct_supervisor": _coerce_adjunct_supervisor(item.get("adjunct_supervisor")),
     }
 
 
 def _to_detail(item: dict[str, Any]) -> dict[str, Any]:
     return {
         "url_hash": item.get("url_hash", ""),
-        "source_id": item.get("source_id", ""),
-        "group": item.get("group", ""),
+        "url": item.get("url", ""),
+        "content": item.get("content", ""),
         "name": item.get("name", ""),
         "name_en": item.get("name_en", ""),
         "gender": item.get("gender", ""),
@@ -86,7 +79,7 @@ def _to_detail(item: dict[str, Any]) -> dict[str, Any]:
         "patents": item.get("patents") or [],
         "awards": item.get("awards") or [],
         "is_advisor_committee": bool(item.get("is_advisor_committee", False)),
-        "adjunct_supervisor": _coerce_adjunct_supervisor(item.get("adjunct_supervisor") or item.get("is_adjunct_supervisor")),
+        "adjunct_supervisor": _coerce_adjunct_supervisor(item.get("adjunct_supervisor")),
         "supervised_students": item.get("supervised_students") or [],
         "joint_research_projects": item.get("joint_research_projects") or [],
         "joint_management_roles": item.get("joint_management_roles") or [],
@@ -96,10 +89,5 @@ def _to_detail(item: dict[str, Any]) -> dict[str, Any]:
         "relation_updated_by": item.get("relation_updated_by", ""),
         "relation_updated_at": item.get("relation_updated_at", ""),
         "recent_updates": item.get("recent_updates") or [],
-        "source_url": item.get("source_url", ""),
-        "crawled_at": item.get("crawled_at", ""),
-        "first_seen_at": item.get("first_seen_at", ""),
-        "last_seen_at": item.get("last_seen_at", ""),
-        "is_active": bool(item.get("is_active", True)),
-        "data_completeness": item.get("data_completeness") or 0,
+        "tags": item.get("tags") or [],
     }
