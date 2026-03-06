@@ -19,7 +19,7 @@ from pathlib import Path
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from app.services.institution_builder import build_institutions_data, save_institutions_data
+from app.services.core.institution_builder import build_institutions_data, save_institutions_data
 
 
 def main():

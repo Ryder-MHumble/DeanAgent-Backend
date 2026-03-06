@@ -755,6 +755,8 @@ class ScholarBasicUpdate(BaseModel):
     name_en: str | None = None
     gender: str | None = None
     photo_url: str | None = None
+    university: str | None = None
+    department: str | None = None
     position: str | None = None
     academic_titles: list[str] | None = None
     research_areas: list[str] | None = None

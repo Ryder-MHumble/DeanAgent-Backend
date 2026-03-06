@@ -67,6 +67,7 @@ async def list_scholars(
     is_academician: bool | None = Query(None, description="仅显示院士"),
     is_potential_recruit: bool | None = Query(None, description="仅显示潜在招募对象"),
     is_advisor_committee: bool | None = Query(None, description="仅显示顾问委员会成员"),
+    is_adjunct_supervisor: bool | None = Query(None, description="仅显示兼职导师（adjunct_supervisor.status 非空）"),
     has_email: bool | None = Query(None, description="仅显示有邮箱联系方式的学者"),
     keyword: str | None = Query(
         None, description="关键词搜索（姓名/英文名/bio/研究方向/关键词）"
@@ -81,6 +82,7 @@ async def list_scholars(
         is_academician=is_academician,
         is_potential_recruit=is_potential_recruit,
         is_advisor_committee=is_advisor_committee,
+        is_adjunct_supervisor=is_adjunct_supervisor,
         has_email=has_email,
         keyword=keyword,
         page=page,
@@ -149,7 +151,7 @@ async def get_faculty(url_hash: str):
     response_model=ScholarDetailResponse,
     summary="更新基础信息",
     description=(
-        "更新指定学者的基础信息字段（名称、职称、简介、联系方式、学术链接、教育经历等）。"
+        "更新指定学者的基础信息字段（名称、机构、院系、职称、简介、联系方式、学术链接、教育经历等）。"
         "直接修改原始 JSON 文件（data/raw/scholars/.../latest.json）。"
         "所有字段均可选，仅传入需要修改的字段；传 null 或不传则保持不变。"
         "列表字段（research_areas/keywords/academic_titles/education 等）"

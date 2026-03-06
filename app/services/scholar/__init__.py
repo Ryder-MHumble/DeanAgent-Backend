@@ -38,6 +38,7 @@ def get_scholar_list(
     is_academician: bool | None = None,
     is_potential_recruit: bool | None = None,
     is_advisor_committee: bool | None = None,
+    is_adjunct_supervisor: bool | None = None,
     has_email: bool | None = None,
     keyword: str | None = None,
     page: int = 1,
@@ -53,6 +54,7 @@ def get_scholar_list(
         is_academician=is_academician,
         is_potential_recruit=is_potential_recruit,
         is_advisor_committee=is_advisor_committee,
+        is_adjunct_supervisor=is_adjunct_supervisor,
         has_email=has_email,
         keyword=keyword,
     )

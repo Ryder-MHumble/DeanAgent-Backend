@@ -1,4 +1,4 @@
-"""Institution data builder — generates institutions.json from YAML configs + scholar counts."""
+"""Institution data builder — generates institutions.json from scholars.json."""
 from __future__ import annotations
 
 import json
@@ -33,81 +33,30 @@ def _normalize_department_id(university_id: str, dept_name: str) -> str:
     return f"{university_id}_{dept_normalized}"
 
 
-def _count_scholars_in_source(source_id: str, group: str) -> int:
-    """Count scholars in a specific source by reading its latest.json."""
-    try:
-        raw_path = Path("data/scholars") / group / source_id / "latest.json"
-        if not raw_path.exists():
-            return 0
-        with open(raw_path, encoding="utf-8") as f:
-            data = json.load(f)
-        return data.get("item_count", len(data.get("items", [])))
-    except (json.JSONDecodeError, OSError, KeyError):
-        return 0
+def _load_scholars_from_unified_json() -> list[dict[str, Any]]:
+    """Load all scholars from data/scholars/scholars.json.
 
-
-def _add_manual_scholar_counts(
-    universities_by_name: dict[str, dict[str, Any]],
-    yaml_source_ids: set[str],
-    existing_data: dict[str, dict[str, Any]],
-) -> None:
-    """Scan all scholar JSON files and add counts for non-YAML sources.
-
-    YAML sources are already counted via _count_scholars_in_source().
-    This step handles manual sources (manual_scholars, youth_forum_2025,
-    adjunct_supervisors, etc.) whose scholars have a `university` field
-    that should contribute to the university's scholar_count.
+    Returns:
+        List of scholar dictionaries with university and department fields.
     """
-    scholars_dir = Path("data/scholars")
-    if not scholars_dir.exists():
-        return
+    scholars_file = Path("data/scholars/scholars.json")
+    if not scholars_file.exists():
+        return []
 
-    # Count scholars by university from all non-YAML sources
-    manual_uni_counts: dict[str, int] = defaultdict(int)
-
-    for path in scholars_dir.rglob("latest.json"):
-        try:
-            with open(path, encoding="utf-8") as f:
-                payload = json.load(f)
-        except (json.JSONDecodeError, OSError):
-            continue
-
-        source_id = payload.get("source_id", "")
-        # Skip sources already counted from YAML
-        if source_id in yaml_source_ids:
-            continue
-
-        for item in payload.get("items", []):
-            extra = item.get("extra") or {}
-            university = (extra.get("university") or "").strip()
-            if university:
-                manual_uni_counts[university] += 1
-
-    if not manual_uni_counts:
-        return
-
-    for uni_name, count in manual_uni_counts.items():
-        if uni_name in universities_by_name:
-            # University already exists (from YAML) — add to scholar_count
-            universities_by_name[uni_name]["scholar_count"] += count
-        elif uni_name in existing_data:
-            # University is in existing institutions.json but has no YAML sources.
-            # Convert departments list → dict so the caller's list() conversion works.
-            uni_data = existing_data[uni_name].copy()
-            uni_data["scholar_count"] = (uni_data.get("scholar_count") or 0) + count
-            existing_depts = uni_data.get("departments") or []
-            uni_data["departments"] = {
-                d["id"]: d for d in existing_depts if isinstance(d, dict) and "id" in d
-            }
-            universities_by_name[uni_name] = uni_data
+    try:
+        with open(scholars_file, encoding="utf-8") as f:
+            data = json.load(f)
+        return data.get("scholars", [])
+    except (json.JSONDecodeError, OSError):
+        return []
 
 
 def build_institutions_data() -> dict[str, Any]:
-    """Build institutions data from YAML configs + scholar counts.
+    """Build institutions data from scholars.json.
 
-    IMPORTANT: This function now MERGES with existing institutions.json data
-    instead of overwriting it. It only updates scholar_count and departments,
-    preserving all other fields (category, priority, student_count, etc.)
+    IMPORTANT: This function reads from data/scholars/scholars.json (unified scholar database)
+    and groups scholars by university and department. It merges with existing institutions.json
+    to preserve manually added fields (category, priority, student_count, etc.)
 
     Returns:
         Dictionary with structure:
@@ -140,29 +89,30 @@ def build_institutions_data() -> dict[str, Any]:
         except (json.JSONDecodeError, OSError):
             pass
 
-    configs = load_all_source_configs()
-    states = get_all_source_states()
+    # Load all scholars from unified JSON
+    scholars = _load_scholars_from_unified_json()
 
-    # Filter to scholar sources only
-    scholar_configs = [c for c in configs if c.get("dimension") == "scholars"]
+    # Group scholars by (university, department)
+    uni_dept_scholars: dict[tuple[str, str], list[dict]] = defaultdict(list)
 
-    # Group by (university, department)
-    uni_dept_map: dict[tuple[str, str], list[dict]] = defaultdict(list)
+    for scholar in scholars:
+        university = (scholar.get("university") or "").strip()
+        department = (scholar.get("department") or "").strip()
 
-    for cfg in scholar_configs:
-        university = cfg.get("university", "")
-        department = cfg.get("department", "")
-
-        if not university or not department:
+        if not university:
             continue
 
+        # Use "未分类" for scholars without department
+        if not department:
+            department = "未分类"
+
         key = (university, department)
-        uni_dept_map[key].append(cfg)
+        uni_dept_scholars[key].append(scholar)
 
     # Build universities structure
     universities_by_name: dict[str, dict[str, Any]] = {}
 
-    for (university_name, _), sources in sorted(uni_dept_map.items()):
+    for (university_name, dept_name), dept_scholars in sorted(uni_dept_scholars.items()):
         if university_name not in universities_by_name:
             # Start with existing data if available
             if university_name in existing_data:
@@ -179,55 +129,53 @@ def build_institutions_data() -> dict[str, Any]:
                 }
 
         uni_data = universities_by_name[university_name]
+        dept_id = _normalize_department_id(uni_data["id"], dept_name)
 
-        # Group sources by department
-        dept_map: dict[str, list[dict]] = defaultdict(list)
-        for src in sources:
-            dept = src.get("department", "")
-            dept_map[dept].append(src)
+        # Count scholars in this department
+        dept_scholar_count = len(dept_scholars)
 
-        # Build departments
-        for dept_name, dept_sources in sorted(dept_map.items()):
-            dept_id = _normalize_department_id(uni_data["id"], dept_name)
+        # Find source info from YAML configs (if available)
+        configs = load_all_source_configs()
+        states = get_all_source_states()
+        scholar_configs = [c for c in configs if c.get("dimension") == "scholars"]
 
-            dept_scholar_count = 0
-            source_items = []
-
-            for src in dept_sources:
-                source_id = src.get("id", "")
-                group = src.get("group", "")
+        source_items = []
+        for cfg in scholar_configs:
+            if cfg.get("university") == university_name and cfg.get("department") == dept_name:
+                source_id = cfg.get("id", "")
                 state = states.get(source_id, {})
 
                 # Determine if enabled
                 override = state.get("is_enabled_override")
-                is_enabled = override if override is not None else src.get("is_enabled", True)
-
-                # Count scholars
-                scholar_count = _count_scholars_in_source(source_id, group)
-                dept_scholar_count += scholar_count
+                is_enabled = override if override is not None else cfg.get("is_enabled", True)
 
                 source_items.append({
                     "source_id": source_id,
-                    "source_name": src.get("name", source_id),
-                    "scholar_count": scholar_count,
+                    "source_name": cfg.get("name", source_id),
+                    "scholar_count": dept_scholar_count,  # Use actual count from scholars.json
                     "is_enabled": is_enabled,
                     "last_crawl_at": state.get("last_crawl_at"),
                 })
 
-            uni_data["departments"][dept_id] = {
-                "id": dept_id,
-                "name": dept_name,
+        # If no YAML source found, create a placeholder
+        if not source_items:
+            source_items.append({
+                "source_id": f"manual_{uni_data['id']}_{dept_id}",
+                "source_name": f"{university_name}-{dept_name}",
                 "scholar_count": dept_scholar_count,
-                "sources": source_items,
-                "org_name": None,  # Will be filled by AMiner enrichment
-            }
+                "is_enabled": True,
+                "last_crawl_at": None,
+            })
 
-            uni_data["scholar_count"] += dept_scholar_count
+        uni_data["departments"][dept_id] = {
+            "id": dept_id,
+            "name": dept_name,
+            "scholar_count": dept_scholar_count,
+            "sources": source_items,
+            "org_name": None,  # Will be filled by AMiner enrichment
+        }
 
-    # Count scholars from non-YAML sources (manual imports, youth forum, etc.)
-    # These are loaded from data/scholars/**/*.json but have no YAML config.
-    yaml_source_ids = {cfg.get("id", "") for cfg in scholar_configs}
-    _add_manual_scholar_counts(universities_by_name, yaml_source_ids, existing_data)
+        uni_data["scholar_count"] += dept_scholar_count
 
     # Convert to list format
     universities = []
@@ -235,7 +183,7 @@ def build_institutions_data() -> dict[str, Any]:
         uni_data["departments"] = list(uni_data["departments"].values())
         universities.append(uni_data)
 
-    # Add universities from existing data that don't have scholar sources
+    # Add universities from existing data that don't have scholars
     for uni_name, uni_data in existing_data.items():
         if uni_name not in universities_by_name:
             universities.append(uni_data)

@@ -1,6 +1,159 @@
 {
-  "last_updated": "2026-03-06T07:08:28.095509+00:00",
+  "last_updated": "2026-03-06T09:22:05.675600+00:00",
   "universities": [
+    {
+      "id": "a*star",
+      "name": "A*STAR",
+      "org_name": null,
+      "scholar_count": 2,
+      "departments": [
+        {
+          "id": "a*star_centre_for_frontier_ai_research",
+          "name": "Centre for Frontier AI Research",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_a*star_a*star_centre_for_frontier_ai_research",
+              "source_name": "A*STAR-Centre for Frontier AI Research",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        },
+        {
+          "id": "a*star_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_a*star_a*star_未分类",
+              "source_name": "A*STAR-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "huawei_noah’s_ark_lab,_hong_kong",
+      "name": "Huawei Noah’s Ark Lab, Hong Kong",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "huawei_noah’s_ark_lab,_hong_kong_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_huawei_noah’s_ark_lab,_hong_kong_huawei_noah’s_ark_lab,_hong_kong_未分类",
+              "source_name": "Huawei Noah’s Ark Lab, Hong Kong-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "meta_ai",
+      "name": "Meta AI",
+      "org_name": null,
+      "scholar_count": 2,
+      "departments": [
+        {
+          "id": "meta_ai_未分类",
+          "name": "未分类",
+          "scholar_count": 2,
+          "sources": [
+            {
+              "source_id": "manual_meta_ai_meta_ai_未分类",
+              "source_name": "Meta AI-未分类",
+              "scholar_count": 2,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "stanford_university",
+      "name": "Stanford University",
+      "org_name": null,
+      "scholar_count": 3,
+      "departments": [
+        {
+          "id": "stanford_university_未分类",
+          "name": "未分类",
+          "scholar_count": 3,
+          "sources": [
+            {
+              "source_id": "manual_stanford_university_stanford_university_未分类",
+              "source_name": "Stanford University-未分类",
+              "scholar_count": 3,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "ucla",
+      "name": "UCLA",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "ucla_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_ucla_ucla_未分类",
+              "source_name": "UCLA-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "上海ai_lab",
+      "name": "上海AI Lab",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "上海ai_lab_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_上海ai_lab_上海ai_lab_未分类",
+              "source_name": "上海AI Lab-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
     {
       "id": "sjtu",
       "name": "上海交通大学",
@@ -45,15 +198,30 @@
       ],
       "departments": [
         {
-          "id": "sjtu_人工智能研究院",
-          "name": "人工智能研究院",
-          "scholar_count": 0,
+          "id": "sjtu_人工智能学院",
+          "name": "人工智能学院",
+          "scholar_count": 1,
           "sources": [
             {
-              "source_id": "sjtu_ai_faculty",
-              "source_name": "上海交通大学人工智能研究院-师资",
-              "scholar_count": 0,
-              "is_enabled": false,
+              "source_id": "manual_sjtu_sjtu_人工智能学院",
+              "source_name": "上海交通大学-人工智能学院",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        },
+        {
+          "id": "sjtu_未分类",
+          "name": "未分类",
+          "scholar_count": 2,
+          "sources": [
+            {
+              "source_id": "manual_sjtu_sjtu_未分类",
+              "source_name": "上海交通大学-未分类",
+              "scholar_count": 2,
+              "is_enabled": true,
               "last_crawl_at": null
             }
           ],
@@ -130,6 +298,29 @@
       "cooperation_focus": []
     },
     {
+      "id": "上海人工智能实验室",
+      "name": "上海人工智能实验室",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "上海人工智能实验室_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_上海人工智能实验室_上海人工智能实验室_未分类",
+              "source_name": "上海人工智能实验室-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
       "id": "seu",
       "name": "东南大学",
       "org_name": "Southeast University",
@@ -158,6 +349,29 @@
         "优质生源输送"
       ],
       "departments": []
+    },
+    {
+      "id": "中关村国家实验室",
+      "name": "中关村国家实验室",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "中关村国家实验室_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_中关村国家实验室_中关村国家实验室_未分类",
+              "source_name": "中关村国家实验室-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
     },
     {
       "id": "ruc",
@@ -215,6 +429,75 @@
               "source_name": "中国人民大学高瓴人工智能学院-教师队伍",
               "scholar_count": 26,
               "is_enabled": false,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "中国人民大学信息学院",
+      "name": "中国人民大学信息学院",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "中国人民大学信息学院_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_中国人民大学信息学院_中国人民大学信息学院_未分类",
+              "source_name": "中国人民大学信息学院-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "中国农业大学信息与电气工程学院",
+      "name": "中国农业大学信息与电气工程学院",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "中国农业大学信息与电气工程学院_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_中国农业大学信息与电气工程学院_中国农业大学信息与电气工程学院_未分类",
+              "source_name": "中国农业大学信息与电气工程学院-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "中国政法大学",
+      "name": "中国政法大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "中国政法大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_中国政法大学_中国政法大学_未分类",
+              "source_name": "中国政法大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
               "last_crawl_at": null
             }
           ],
@@ -315,21 +598,6 @@
             }
           ],
           "org_name": null
-        },
-        {
-          "id": "ustc_软件学院",
-          "name": "软件学院",
-          "scholar_count": 0,
-          "sources": [
-            {
-              "source_id": "ustc_se_faculty",
-              "source_name": "中国科学技术大学软件学院-师资",
-              "scholar_count": 0,
-              "is_enabled": false,
-              "last_crawl_at": null
-            }
-          ],
-          "org_name": null
         }
       ]
     },
@@ -372,26 +640,26 @@
         {
           "id": "cas_软件研究所",
           "name": "软件研究所",
-          "scholar_count": 178,
+          "scholar_count": 249,
           "sources": [
             {
               "source_id": "iscas_academician",
               "source_name": "中科院软件研究所-院士专家",
-              "scholar_count": 6,
+              "scholar_count": 249,
               "is_enabled": false,
               "last_crawl_at": null
             },
             {
               "source_id": "iscas_researcher",
               "source_name": "中科院软件研究所-研究员",
-              "scholar_count": 60,
+              "scholar_count": 249,
               "is_enabled": false,
               "last_crawl_at": null
             },
             {
               "source_id": "iscas_associate_researcher",
               "source_name": "中科院软件研究所-副研究员",
-              "scholar_count": 112,
+              "scholar_count": 249,
               "is_enabled": false,
               "last_crawl_at": null
             }
@@ -503,6 +771,164 @@
       ]
     },
     {
+      "id": "中国科学院大学",
+      "name": "中国科学院大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "中国科学院大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_中国科学院大学_中国科学院大学_未分类",
+              "source_name": "中国科学院大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "中国科学院大连化学物理研究所",
+      "name": "中国科学院大连化学物理研究所",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "中国科学院大连化学物理研究所_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_中国科学院大连化学物理研究所_中国科学院大连化学物理研究所_未分类",
+              "source_name": "中国科学院大连化学物理研究所-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "中国科学院数学与系统科学研究院",
+      "name": "中国科学院数学与系统科学研究院",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "中国科学院数学与系统科学研究院_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_中国科学院数学与系统科学研究院_中国科学院数学与系统科学研究院_未分类",
+              "source_name": "中国科学院数学与系统科学研究院-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "中国科学院自动化研究所",
+      "name": "中国科学院自动化研究所",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "中国科学院自动化研究所_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_中国科学院自动化研究所_中国科学院自动化研究所_未分类",
+              "source_name": "中国科学院自动化研究所-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "muc",
+      "name": "中央民族大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "category": null,
+      "priority": null,
+      "student_count_24": 0,
+      "student_count_25": 0,
+      "student_count_total": 0,
+      "mentor_count": 0,
+      "resident_leaders": [],
+      "degree_committee": [],
+      "teaching_committee": [],
+      "mentors": [],
+      "university_leaders": [],
+      "notable_scholars": [],
+      "key_departments": [],
+      "joint_labs": [],
+      "training_cooperation": [],
+      "academic_cooperation": [],
+      "talent_dual_appointment": [],
+      "recruitment_events": [],
+      "visit_exchanges": [],
+      "cooperation_focus": [],
+      "departments": [
+        {
+          "id": "muc_信息工程学院",
+          "name": "信息工程学院",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_muc_muc_信息工程学院",
+              "source_name": "中央民族大学-信息工程学院",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "中央财经大学",
+      "name": "中央财经大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "中央财经大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_中央财经大学_中央财经大学_未分类",
+              "source_name": "中央财经大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
       "id": "sysu",
       "name": "中山大学",
       "org_name": "Sun Yat-sen University",
@@ -525,7 +951,230 @@
         "化学",
         "20250612：郑书新副院长带队，线下20人；"
       ],
-      "departments": []
+      "departments": [
+        {
+          "id": "sysu_未分类",
+          "name": "未分类",
+          "scholar_count": 2,
+          "sources": [
+            {
+              "source_id": "manual_sysu_sysu_未分类",
+              "source_name": "中山大学-未分类",
+              "scholar_count": 2,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "中科院自动化所",
+      "name": "中科院自动化所",
+      "org_name": null,
+      "scholar_count": 13,
+      "departments": [
+        {
+          "id": "中科院自动化所_未分类",
+          "name": "未分类",
+          "scholar_count": 13,
+          "sources": [
+            {
+              "source_id": "manual_中科院自动化所_中科院自动化所_未分类",
+              "source_name": "中科院自动化所-未分类",
+              "scholar_count": 13,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "丰田欧洲研究中心",
+      "name": "丰田欧洲研究中心",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "丰田欧洲研究中心_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_丰田欧洲研究中心_丰田欧洲研究中心_未分类",
+              "source_name": "丰田欧洲研究中心-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "乌普萨拉大学",
+      "name": "乌普萨拉大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "乌普萨拉大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_乌普萨拉大学_乌普萨拉大学_未分类",
+              "source_name": "乌普萨拉大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "于默奥大学",
+      "name": "于默奥大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "于默奥大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_于默奥大学_于默奥大学_未分类",
+              "source_name": "于默奥大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "亚马逊日本",
+      "name": "亚马逊日本",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "亚马逊日本_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_亚马逊日本_亚马逊日本_未分类",
+              "source_name": "亚马逊日本-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "伦敦玛丽女王大学",
+      "name": "伦敦玛丽女王大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "伦敦玛丽女王大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_伦敦玛丽女王大学_伦敦玛丽女王大学_未分类",
+              "source_name": "伦敦玛丽女王大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "利物浦大学",
+      "name": "利物浦大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "利物浦大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_利物浦大学_利物浦大学_未分类",
+              "source_name": "利物浦大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "剑桥大学",
+      "name": "剑桥大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "剑桥大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_剑桥大学_剑桥大学_未分类",
+              "source_name": "剑桥大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "加州大学默塞德分校",
+      "name": "加州大学默塞德分校",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "加州大学默塞德分校_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_加州大学默塞德分校_加州大学默塞德分校_未分类",
+              "source_name": "加州大学默塞德分校-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
     },
     {
       "id": "pku",
@@ -575,21 +1224,6 @@
         "科研（联合实验室）"
       ],
       "departments": [
-        {
-          "id": "pku_信息工程学院（深圳）",
-          "name": "信息工程学院（深圳）",
-          "scholar_count": 0,
-          "sources": [
-            {
-              "source_id": "pku_eecs_sz_faculty",
-              "source_name": "北京大学信息工程学院（深圳）-师资",
-              "scholar_count": 0,
-              "is_enabled": false,
-              "last_crawl_at": null
-            }
-          ],
-          "org_name": null
-        },
         {
           "id": "pku_前沿计算研究中心",
           "name": "前沿计算研究中心",
@@ -645,6 +1279,21 @@
               "source_name": "北京大学智能学院-专职教师",
               "scholar_count": 37,
               "is_enabled": false,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        },
+        {
+          "id": "pku_未分类",
+          "name": "未分类",
+          "scholar_count": 8,
+          "sources": [
+            {
+              "source_id": "manual_pku_pku_未分类",
+              "source_name": "北京大学-未分类",
+              "scholar_count": 8,
+              "is_enabled": true,
               "last_crawl_at": null
             }
           ],
@@ -713,6 +1362,29 @@
       ]
     },
     {
+      "id": "北京天智航医疗科技股份有限公司",
+      "name": "北京天智航医疗科技股份有限公司",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "北京天智航医疗科技股份有限公司_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_北京天智航医疗科技股份有限公司_北京天智航医疗科技股份有限公司_未分类",
+              "source_name": "北京天智航医疗科技股份有限公司-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
       "id": "bnu",
       "name": "北京师范大学",
       "org_name": "Beijing Normal University",
@@ -750,7 +1422,92 @@
         "人工智能学院：院长黄华",
         "科研合作"
       ],
-      "departments": []
+      "departments": [
+        {
+          "id": "bnu_未分类",
+          "name": "未分类",
+          "scholar_count": 4,
+          "sources": [
+            {
+              "source_id": "manual_bnu_bnu_未分类",
+              "source_name": "北京师范大学-未分类",
+              "scholar_count": 4,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "北京数巅科技有限公司",
+      "name": "北京数巅科技有限公司",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "北京数巅科技有限公司_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_北京数巅科技有限公司_北京数巅科技有限公司_未分类",
+              "source_name": "北京数巅科技有限公司-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "北京智源人工智能研究院",
+      "name": "北京智源人工智能研究院",
+      "org_name": null,
+      "scholar_count": 2,
+      "departments": [
+        {
+          "id": "北京智源人工智能研究院_未分类",
+          "name": "未分类",
+          "scholar_count": 2,
+          "sources": [
+            {
+              "source_id": "manual_北京智源人工智能研究院_北京智源人工智能研究院_未分类",
+              "source_name": "北京智源人工智能研究院-未分类",
+              "scholar_count": 2,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "北京水木东方医用机器人技术创新中心有限公司",
+      "name": "北京水木东方医用机器人技术创新中心有限公司",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "北京水木东方医用机器人技术创新中心有限公司_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_北京水木东方医用机器人技术创新中心有限公司_北京水木东方医用机器人技术创新中心有限公司_未分类",
+              "source_name": "北京水木东方医用机器人技术创新中心有限公司-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
     },
     {
       "id": "bit",
@@ -800,7 +1557,46 @@
         "20250606：董彬副院长带队宣讲，线下60人，线上20人；",
         "优质生源输送"
       ],
-      "departments": []
+      "departments": [
+        {
+          "id": "bit_未分类",
+          "name": "未分类",
+          "scholar_count": 9,
+          "sources": [
+            {
+              "source_id": "manual_bit_bit_未分类",
+              "source_name": "北京理工大学-未分类",
+              "scholar_count": 9,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "北京理工大学自动化学院",
+      "name": "北京理工大学自动化学院",
+      "org_name": null,
+      "scholar_count": 2,
+      "departments": [
+        {
+          "id": "北京理工大学自动化学院_未分类",
+          "name": "未分类",
+          "scholar_count": 2,
+          "sources": [
+            {
+              "source_id": "manual_北京理工大学自动化学院_北京理工大学自动化学院_未分类",
+              "source_name": "北京理工大学自动化学院-未分类",
+              "scholar_count": 2,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
     },
     {
       "id": "buaa",
@@ -855,7 +1651,46 @@
         "20250607：董彬副院长带队，线下20人",
         "优质生源输送"
       ],
-      "departments": []
+      "departments": [
+        {
+          "id": "buaa_未分类",
+          "name": "未分类",
+          "scholar_count": 8,
+          "sources": [
+            {
+              "source_id": "manual_buaa_buaa_未分类",
+              "source_name": "北京航空航天大学-未分类",
+              "scholar_count": 8,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "北京航空航天大学计算机学院",
+      "name": "北京航空航天大学计算机学院",
+      "org_name": null,
+      "scholar_count": 2,
+      "departments": [
+        {
+          "id": "北京航空航天大学计算机学院_未分类",
+          "name": "未分类",
+          "scholar_count": 2,
+          "sources": [
+            {
+              "source_id": "manual_北京航空航天大学计算机学院_北京航空航天大学计算机学院_未分类",
+              "source_name": "北京航空航天大学计算机学院-未分类",
+              "scholar_count": 2,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
     },
     {
       "id": "bupt",
@@ -900,7 +1735,115 @@
         "20250611：任增霞副书记带队，线下30人",
         "优质生源输送"
       ],
-      "departments": []
+      "departments": [
+        {
+          "id": "bupt_未分类",
+          "name": "未分类",
+          "scholar_count": 3,
+          "sources": [
+            {
+              "source_id": "manual_bupt_bupt_未分类",
+              "source_name": "北京邮电大学-未分类",
+              "scholar_count": 3,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "北京银河通用机器人有限公司",
+      "name": "北京银河通用机器人有限公司",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "北京银河通用机器人有限公司_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_北京银河通用机器人有限公司_北京银河通用机器人有限公司_未分类",
+              "source_name": "北京银河通用机器人有限公司-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "北卡罗来纳大学教堂山分校",
+      "name": "北卡罗来纳大学教堂山分校",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "北卡罗来纳大学教堂山分校_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_北卡罗来纳大学教堂山分校_北卡罗来纳大学教堂山分校_未分类",
+              "source_name": "北卡罗来纳大学教堂山分校-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "匹兹堡大学",
+      "name": "匹兹堡大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "匹兹堡大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_匹兹堡大学_匹兹堡大学_未分类",
+              "source_name": "匹兹堡大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "医疗ai科技（无锡）",
+      "name": "医疗AI科技（无锡）",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "医疗ai科技（无锡）_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_医疗ai科技（无锡）_医疗ai科技（无锡）_未分类",
+              "source_name": "医疗AI科技（无锡）-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
     },
     {
       "id": "华东师范",
@@ -959,6 +1902,29 @@
         "20250615：李勇主任带队，线下10人；"
       ],
       "departments": []
+    },
+    {
+      "id": "华南师范大学",
+      "name": "华南师范大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "华南师范大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_华南师范大学_华南师范大学_未分类",
+              "source_name": "华南师范大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
     },
     {
       "id": "nju",
@@ -1037,6 +2003,21 @@
           "org_name": null
         },
         {
+          "id": "nju_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_nju_nju_未分类",
+              "source_name": "南京大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        },
+        {
           "id": "nju_计算机科学与技术系",
           "name": "计算机科学与技术系",
           "scholar_count": 65,
@@ -1099,7 +2080,69 @@
         "20250620：刘震秘书长带队，线下4人；",
         "优质生源输送"
       ],
-      "departments": []
+      "departments": [
+        {
+          "id": "nku_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_nku_nku_未分类",
+              "source_name": "南开大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "南开大学网络空间安全学院",
+      "name": "南开大学网络空间安全学院",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "南开大学网络空间安全学院_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_南开大学网络空间安全学院_南开大学网络空间安全学院_未分类",
+              "source_name": "南开大学网络空间安全学院-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "南开大学计算机学院",
+      "name": "南开大学计算机学院",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "南开大学计算机学院_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_南开大学计算机学院_南开大学计算机学院_未分类",
+              "source_name": "南开大学计算机学院-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
     },
     {
       "id": "南方科技",
@@ -1140,7 +2183,23 @@
         "20250611：邓岳副院长带队，线下30人；",
         "优质生源输送\n科研合作"
       ],
-      "departments": []
+      "departments": [
+        {
+          "id": "南方科技_未分类",
+          "name": "未分类",
+          "scholar_count": 4,
+          "sources": [
+            {
+              "source_id": "manual_南方科技_南方科技_未分类",
+              "source_name": "南方科技大学-未分类",
+              "scholar_count": 4,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
     },
     {
       "id": "南洋理工",
@@ -1164,7 +2223,46 @@
         "校长",
         "人工智能"
       ],
-      "departments": []
+      "departments": [
+        {
+          "id": "南洋理工_未分类",
+          "name": "未分类",
+          "scholar_count": 4,
+          "sources": [
+            {
+              "source_id": "manual_南洋理工_南洋理工_未分类",
+              "source_name": "南洋理工大学-未分类",
+              "scholar_count": 4,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "卡尔斯鲁厄理工学院",
+      "name": "卡尔斯鲁厄理工学院",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "卡尔斯鲁厄理工学院_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_卡尔斯鲁厄理工学院_卡尔斯鲁厄理工学院_未分类",
+              "source_name": "卡尔斯鲁厄理工学院-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
     },
     {
       "id": "xmu",
@@ -1189,7 +2287,46 @@
         "光电子材料",
         "20250616：培养部带队，线下60人；"
       ],
-      "departments": []
+      "departments": [
+        {
+          "id": "xmu_未分类",
+          "name": "未分类",
+          "scholar_count": 2,
+          "sources": [
+            {
+              "source_id": "manual_xmu_xmu_未分类",
+              "source_name": "厦门大学-未分类",
+              "scholar_count": 2,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "吉利中央研究院",
+      "name": "吉利中央研究院",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "吉利中央研究院_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_吉利中央研究院_吉利中央研究院_未分类",
+              "source_name": "吉利中央研究院-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
     },
     {
       "id": "jlu",
@@ -1218,7 +2355,23 @@
         "计算机学院：院长杨博",
         "20250620：培养部带队，线下30人；"
       ],
-      "departments": []
+      "departments": [
+        {
+          "id": "jlu_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_jlu_jlu_未分类",
+              "source_name": "吉林大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
     },
     {
       "id": "tongji",
@@ -1292,7 +2445,115 @@
         "20250714：哈工大人工智能院士班2024级学生参访北京中关村学院夏令营，高校合作主管蒋运韫、招生主管李晓妮接待；\n20250724：副院长秦涛，研究员夏应策参加院校联合举办的国际暑期夏令营并授课。",
         "优质生源输送\n科研合作"
       ],
-      "departments": []
+      "departments": [
+        {
+          "id": "hit_未分类",
+          "name": "未分类",
+          "scholar_count": 2,
+          "sources": [
+            {
+              "source_id": "manual_hit_hit_未分类",
+              "source_name": "哈尔滨工业大学-未分类",
+              "scholar_count": 2,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "哈尔滨工业大学（深圳）",
+      "name": "哈尔滨工业大学（深圳）",
+      "org_name": null,
+      "scholar_count": 2,
+      "departments": [
+        {
+          "id": "哈尔滨工业大学（深圳）_未分类",
+          "name": "未分类",
+          "scholar_count": 2,
+          "sources": [
+            {
+              "source_id": "manual_哈尔滨工业大学（深圳）_哈尔滨工业大学（深圳）_未分类",
+              "source_name": "哈尔滨工业大学（深圳）-未分类",
+              "scholar_count": 2,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "哈尔滨工程大学",
+      "name": "哈尔滨工程大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "哈尔滨工程大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_哈尔滨工程大学_哈尔滨工程大学_未分类",
+              "source_name": "哈尔滨工程大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "国防科技大学",
+      "name": "国防科技大学",
+      "org_name": null,
+      "scholar_count": 2,
+      "departments": [
+        {
+          "id": "国防科技大学_未分类",
+          "name": "未分类",
+          "scholar_count": 2,
+          "sources": [
+            {
+              "source_id": "manual_国防科技大学_国防科技大学_未分类",
+              "source_name": "国防科技大学-未分类",
+              "scholar_count": 2,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "图宾根大学",
+      "name": "图宾根大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "图宾根大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_图宾根大学_图宾根大学_未分类",
+              "source_name": "图宾根大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
     },
     {
       "id": "fudan",
@@ -1335,15 +2596,15 @@
       ],
       "departments": [
         {
-          "id": "fudan_智能机器人与先进制造创新学院",
-          "name": "智能机器人与先进制造创新学院",
-          "scholar_count": 0,
+          "id": "fudan_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
           "sources": [
             {
-              "source_id": "fudan_ai_robot_faculty",
-              "source_name": "复旦大学智能机器人与先进制造创新学院-师资",
-              "scholar_count": 0,
-              "is_enabled": false,
+              "source_id": "manual_fudan_fudan_未分类",
+              "source_name": "复旦大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
               "last_crawl_at": null
             }
           ],
@@ -1402,7 +2663,23 @@
         "20250606：刘成林副院长带队，线下50人，博导4人；",
         "优质生源输送"
       ],
-      "departments": []
+      "departments": [
+        {
+          "id": "tju_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_tju_tju_未分类",
+              "source_name": "天津大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
     },
     {
       "id": "宁波东方理工",
@@ -1462,6 +2739,167 @@
       "departments": []
     },
     {
+      "id": "山东建筑大学",
+      "name": "山东建筑大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "山东建筑大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_山东建筑大学_山东建筑大学_未分类",
+              "source_name": "山东建筑大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "山东第一医科大学附属肿瘤医院",
+      "name": "山东第一医科大学附属肿瘤医院",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "山东第一医科大学附属肿瘤医院_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_山东第一医科大学附属肿瘤医院_山东第一医科大学附属肿瘤医院_未分类",
+              "source_name": "山东第一医科大学附属肿瘤医院-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "巴斯夫集团",
+      "name": "巴斯夫集团",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "巴斯夫集团_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_巴斯夫集团_巴斯夫集团_未分类",
+              "source_name": "巴斯夫集团-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "帝国理工学院",
+      "name": "帝国理工学院",
+      "org_name": null,
+      "scholar_count": 2,
+      "departments": [
+        {
+          "id": "帝国理工学院_未分类",
+          "name": "未分类",
+          "scholar_count": 2,
+          "sources": [
+            {
+              "source_id": "manual_帝国理工学院_帝国理工学院_未分类",
+              "source_name": "帝国理工学院-未分类",
+              "scholar_count": 2,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "康奈尔大学",
+      "name": "康奈尔大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "康奈尔大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_康奈尔大学_康奈尔大学_未分类",
+              "source_name": "康奈尔大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "德蒙福特大学",
+      "name": "德蒙福特大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "德蒙福特大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_德蒙福特大学_德蒙福特大学_未分类",
+              "source_name": "德蒙福特大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "悉尼大学",
+      "name": "悉尼大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "悉尼大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_悉尼大学_悉尼大学_未分类",
+              "source_name": "悉尼大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
       "id": "新加坡国立",
       "name": "新加坡国立大学",
       "org_name": "National University of Singapore",
@@ -1484,7 +2922,161 @@
         "数学",
         "计算学院：副院长何丙胜"
       ],
-      "departments": []
+      "departments": [
+        {
+          "id": "新加坡国立_未分类",
+          "name": "未分类",
+          "scholar_count": 3,
+          "sources": [
+            {
+              "source_id": "manual_新加坡国立_新加坡国立_未分类",
+              "source_name": "新加坡国立大学-未分类",
+              "scholar_count": 3,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "新西兰坎特伯雷大学",
+      "name": "新西兰坎特伯雷大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "新西兰坎特伯雷大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_新西兰坎特伯雷大学_新西兰坎特伯雷大学_未分类",
+              "source_name": "新西兰坎特伯雷大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "早稻田大学",
+      "name": "早稻田大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "早稻田大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_早稻田大学_早稻田大学_未分类",
+              "source_name": "早稻田大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "昆士兰大学",
+      "name": "昆士兰大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "昆士兰大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_昆士兰大学_昆士兰大学_未分类",
+              "source_name": "昆士兰大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "昌平国家实验室",
+      "name": "昌平国家实验室",
+      "org_name": null,
+      "scholar_count": 2,
+      "departments": [
+        {
+          "id": "昌平国家实验室_未分类",
+          "name": "未分类",
+          "scholar_count": 2,
+          "sources": [
+            {
+              "source_id": "manual_昌平国家实验室_昌平国家实验室_未分类",
+              "source_name": "昌平国家实验室-未分类",
+              "scholar_count": 2,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "曼尼托巴大学",
+      "name": "曼尼托巴大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "曼尼托巴大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_曼尼托巴大学_曼尼托巴大学_未分类",
+              "source_name": "曼尼托巴大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "格罗宁根大学",
+      "name": "格罗宁根大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "格罗宁根大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_格罗宁根大学_格罗宁根大学_未分类",
+              "source_name": "格罗宁根大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
     },
     {
       "id": "whu",
@@ -1544,7 +3136,46 @@
         "20250416：武大人工智能学院副院长夏桂松、焦雨领来访学院，董彬副院长、商容部长等接待",
         "优质生源输送\n科研合作"
       ],
-      "departments": []
+      "departments": [
+        {
+          "id": "whu_未分类",
+          "name": "未分类",
+          "scholar_count": 6,
+          "sources": [
+            {
+              "source_id": "manual_whu_whu_未分类",
+              "source_name": "武汉大学-未分类",
+              "scholar_count": 6,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "比利时根特大学",
+      "name": "比利时根特大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "比利时根特大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_比利时根特大学_比利时根特大学_未分类",
+              "source_name": "比利时根特大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
     },
     {
       "id": "zju",
@@ -1580,6 +3211,21 @@
       ],
       "departments": [
         {
+          "id": "zju_未分类",
+          "name": "未分类",
+          "scholar_count": 4,
+          "sources": [
+            {
+              "source_id": "manual_zju_zju_未分类",
+              "source_name": "浙江大学-未分类",
+              "scholar_count": 4,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        },
+        {
           "id": "zju_网络空间安全学院",
           "name": "网络空间安全学院",
           "scholar_count": 48,
@@ -1593,32 +3239,71 @@
             }
           ],
           "org_name": null
-        },
+        }
+      ]
+    },
+    {
+      "id": "深圳医学科学院",
+      "name": "深圳医学科学院",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
         {
-          "id": "zju_计算机学院",
-          "name": "计算机学院",
-          "scholar_count": 0,
+          "id": "深圳医学科学院_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
           "sources": [
             {
-              "source_id": "zju_cs_faculty",
-              "source_name": "浙江大学计算机学院-师资",
-              "scholar_count": 0,
-              "is_enabled": false,
+              "source_id": "manual_深圳医学科学院_深圳医学科学院_未分类",
+              "source_name": "深圳医学科学院-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
               "last_crawl_at": null
             }
           ],
           "org_name": null
-        },
+        }
+      ]
+    },
+    {
+      "id": "深圳大学",
+      "name": "深圳大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
         {
-          "id": "zju_软件学院",
-          "name": "软件学院",
-          "scholar_count": 0,
+          "id": "深圳大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
           "sources": [
             {
-              "source_id": "zju_soft_faculty",
-              "source_name": "浙江大学软件学院-师资",
-              "scholar_count": 0,
-              "is_enabled": false,
+              "source_id": "manual_深圳大学_深圳大学_未分类",
+              "source_name": "深圳大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "深圳湾实验室",
+      "name": "深圳湾实验室",
+      "org_name": null,
+      "scholar_count": 2,
+      "departments": [
+        {
+          "id": "深圳湾实验室_未分类",
+          "name": "未分类",
+          "scholar_count": 2,
+          "sources": [
+            {
+              "source_id": "manual_深圳湾实验室_深圳湾实验室_未分类",
+              "source_name": "深圳湾实验室-未分类",
+              "scholar_count": 2,
+              "is_enabled": true,
               "last_crawl_at": null
             }
           ],
@@ -1630,7 +3315,7 @@
       "id": "tsinghua",
       "name": "清华大学",
       "org_name": "Tsinghua University",
-      "scholar_count": 769,
+      "scholar_count": 770,
       "category": "示范高校",
       "priority": null,
       "student_count_24": 27,
@@ -1708,14 +3393,14 @@
           "org_name": null
         },
         {
-          "id": "tsinghua_人工智能国际治理研究院",
-          "name": "人工智能国际治理研究院",
-          "scholar_count": 0,
+          "id": "tsinghua_智能产业研究院",
+          "name": "智能产业研究院",
+          "scholar_count": 39,
           "sources": [
             {
-              "source_id": "tsinghua_iaiig_faculty",
-              "source_name": "清华大学人工智能国际治理研究院-研究员",
-              "scholar_count": 0,
+              "source_id": "tsinghua_air_faculty",
+              "source_name": "清华大学智能产业研究院-研究团队",
+              "scholar_count": 39,
               "is_enabled": false,
               "last_crawl_at": null
             }
@@ -1723,15 +3408,15 @@
           "org_name": null
         },
         {
-          "id": "tsinghua_智能产业研究院",
-          "name": "智能产业研究院",
-          "scholar_count": 37,
+          "id": "tsinghua_未分类",
+          "name": "未分类",
+          "scholar_count": 3,
           "sources": [
             {
-              "source_id": "tsinghua_air_faculty",
-              "source_name": "清华大学智能产业研究院-研究团队",
-              "scholar_count": 37,
-              "is_enabled": false,
+              "source_id": "manual_tsinghua_tsinghua_未分类",
+              "source_name": "清华大学-未分类",
+              "scholar_count": 3,
+              "is_enabled": true,
               "last_crawl_at": null
             }
           ],
@@ -1755,12 +3440,12 @@
         {
           "id": "tsinghua_深圳国际研究生院",
           "name": "深圳国际研究生院",
-          "scholar_count": 0,
+          "scholar_count": 1,
           "sources": [
             {
               "source_id": "tsinghua_sigs_faculty",
               "source_name": "清华大学深圳国际研究生院-师资队伍",
-              "scholar_count": 0,
+              "scholar_count": 1,
               "is_enabled": false,
               "last_crawl_at": null
             }
@@ -1785,12 +3470,12 @@
         {
           "id": "tsinghua_电子工程系",
           "name": "电子工程系",
-          "scholar_count": 147,
+          "scholar_count": 148,
           "sources": [
             {
               "source_id": "tsinghua_ee_faculty",
               "source_name": "清华大学电子工程系-教师",
-              "scholar_count": 147,
+              "scholar_count": 148,
               "is_enabled": false,
               "last_crawl_at": null
             }
@@ -1875,6 +3560,167 @@
       ]
     },
     {
+      "id": "渥太华大学",
+      "name": "渥太华大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "渥太华大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_渥太华大学_渥太华大学_未分类",
+              "source_name": "渥太华大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "温州大学",
+      "name": "温州大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "温州大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_温州大学_温州大学_未分类",
+              "source_name": "温州大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "澳门城市大学",
+      "name": "澳门城市大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "澳门城市大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_澳门城市大学_澳门城市大学_未分类",
+              "source_name": "澳门城市大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "爱丁堡大学",
+      "name": "爱丁堡大学",
+      "org_name": null,
+      "scholar_count": 2,
+      "departments": [
+        {
+          "id": "爱丁堡大学_未分类",
+          "name": "未分类",
+          "scholar_count": 2,
+          "sources": [
+            {
+              "source_id": "manual_爱丁堡大学_爱丁堡大学_未分类",
+              "source_name": "爱丁堡大学-未分类",
+              "scholar_count": 2,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "牛津大学",
+      "name": "牛津大学",
+      "org_name": null,
+      "scholar_count": 2,
+      "departments": [
+        {
+          "id": "牛津大学_未分类",
+          "name": "未分类",
+          "scholar_count": 2,
+          "sources": [
+            {
+              "source_id": "manual_牛津大学_牛津大学_未分类",
+              "source_name": "牛津大学-未分类",
+              "scholar_count": 2,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "瑞典皇家理工学院",
+      "name": "瑞典皇家理工学院",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "瑞典皇家理工学院_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_瑞典皇家理工学院_瑞典皇家理工学院_未分类",
+              "source_name": "瑞典皇家理工学院-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "瑞士联邦材料科学与技术实验室",
+      "name": "瑞士联邦材料科学与技术实验室",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "瑞士联邦材料科学与技术实验室_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_瑞士联邦材料科学与技术实验室_瑞士联邦材料科学与技术实验室_未分类",
+              "source_name": "瑞士联邦材料科学与技术实验室-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
       "id": "uestc",
       "name": "电子科技大学",
       "org_name": "University of Electronic Science and Technology of China",
@@ -1905,6 +3751,190 @@
         "20250613：郑书新副院长带队，线下10人；"
       ],
       "departments": []
+    },
+    {
+      "id": "米兰理工大学",
+      "name": "米兰理工大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "米兰理工大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_米兰理工大学_米兰理工大学_未分类",
+              "source_name": "米兰理工大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "纽约大学",
+      "name": "纽约大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "纽约大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_纽约大学_纽约大学_未分类",
+              "source_name": "纽约大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "美国礼来公司",
+      "name": "美国礼来公司",
+      "org_name": null,
+      "scholar_count": 2,
+      "departments": [
+        {
+          "id": "美国礼来公司_未分类",
+          "name": "未分类",
+          "scholar_count": 2,
+          "sources": [
+            {
+              "source_id": "manual_美国礼来公司_美国礼来公司_未分类",
+              "source_name": "美国礼来公司-未分类",
+              "scholar_count": 2,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "美国麻省理工学院",
+      "name": "美国麻省理工学院",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "美国麻省理工学院_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_美国麻省理工学院_美国麻省理工学院_未分类",
+              "source_name": "美国麻省理工学院-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "耶鲁大学",
+      "name": "耶鲁大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "耶鲁大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_耶鲁大学_耶鲁大学_未分类",
+              "source_name": "耶鲁大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "苏黎世联邦理工学院",
+      "name": "苏黎世联邦理工学院",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "苏黎世联邦理工学院_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_苏黎世联邦理工学院_苏黎世联邦理工学院_未分类",
+              "source_name": "苏黎世联邦理工学院-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "范德比尔特大学",
+      "name": "范德比尔特大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "范德比尔特大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_范德比尔特大学_范德比尔特大学_未分类",
+              "source_name": "范德比尔特大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "莱顿大学",
+      "name": "莱顿大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "莱顿大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_莱顿大学_莱顿大学_未分类",
+              "source_name": "莱顿大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
     },
     {
       "id": "nwpu",
@@ -2016,7 +4046,184 @@
         "20250621：戴蓓洁副院长带队，线下20人；",
         "科研合作"
       ],
-      "departments": []
+      "departments": [
+        {
+          "id": "西湖_未分类",
+          "name": "未分类",
+          "scholar_count": 3,
+          "sources": [
+            {
+              "source_id": "manual_西湖_西湖_未分类",
+              "source_name": "西湖大学-未分类",
+              "scholar_count": 3,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "贝尔法斯特女王大学",
+      "name": "贝尔法斯特女王大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "贝尔法斯特女王大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_贝尔法斯特女王大学_贝尔法斯特女王大学_未分类",
+              "source_name": "贝尔法斯特女王大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "费德里科圣玛利亚理工大学",
+      "name": "费德里科圣玛利亚理工大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "费德里科圣玛利亚理工大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_费德里科圣玛利亚理工大学_费德里科圣玛利亚理工大学_未分类",
+              "source_name": "费德里科圣玛利亚理工大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "迪肯大学",
+      "name": "迪肯大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "迪肯大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_迪肯大学_迪肯大学_未分类",
+              "source_name": "迪肯大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "郑州师范学院",
+      "name": "郑州师范学院",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "郑州师范学院_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_郑州师范学院_郑州师范学院_未分类",
+              "source_name": "郑州师范学院-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "阿卜杜拉国王科技大学",
+      "name": "阿卜杜拉国王科技大学",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "阿卜杜拉国王科技大学_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_阿卜杜拉国王科技大学_阿卜杜拉国王科技大学_未分类",
+              "source_name": "阿卜杜拉国王科技大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "阿德莱德大学",
+      "name": "阿德莱德大学",
+      "org_name": null,
+      "scholar_count": 2,
+      "departments": [
+        {
+          "id": "阿德莱德大学_未分类",
+          "name": "未分类",
+          "scholar_count": 2,
+          "sources": [
+            {
+              "source_id": "manual_阿德莱德大学_阿德莱德大学_未分类",
+              "source_name": "阿德莱德大学-未分类",
+              "scholar_count": 2,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "阿里巴巴云飞天实验室",
+      "name": "阿里巴巴云飞天实验室",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "阿里巴巴云飞天实验室_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_阿里巴巴云飞天实验室_阿里巴巴云飞天实验室_未分类",
+              "source_name": "阿里巴巴云飞天实验室-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
     },
     {
       "id": "香港中文",
@@ -2070,7 +4277,23 @@
         "材料\n生物化学材料\n计算机",
         "计算学院：院长汪建平\n人工智能与科学研究院：候任院长马维英"
       ],
-      "departments": []
+      "departments": [
+        {
+          "id": "香港城市_未分类",
+          "name": "未分类",
+          "scholar_count": 2,
+          "sources": [
+            {
+              "source_id": "manual_香港城市_香港城市_未分类",
+              "source_name": "香港城市大学-未分类",
+              "scholar_count": 2,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
     },
     {
       "id": "香港",
@@ -2096,7 +4319,23 @@
         "材料\n环境",
         "计算与数据科学学院：院长马毅，助理教授赵恒爽"
       ],
-      "departments": []
+      "departments": [
+        {
+          "id": "香港_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_香港_香港_未分类",
+              "source_name": "香港大学-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
     },
     {
       "id": "香港浸会",
@@ -2141,7 +4380,23 @@
         "结构工程\n计算机系统",
         "计算机及数学科学学院：副院长杨红霞"
       ],
-      "departments": []
+      "departments": [
+        {
+          "id": "香港理工_未分类",
+          "name": "未分类",
+          "scholar_count": 2,
+          "sources": [
+            {
+              "source_id": "manual_香港理工_香港理工_未分类",
+              "source_name": "香港理工大学-未分类",
+              "scholar_count": 2,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
     },
     {
       "id": "香港科技",
@@ -2169,7 +4424,46 @@
         "人工智能\n生命科学\n人工智能\n智算系统",
         "计算机科学和工程学系：主任杨强\n统计系：教授姚远"
       ],
-      "departments": []
+      "departments": [
+        {
+          "id": "香港科技_未分类",
+          "name": "未分类",
+          "scholar_count": 2,
+          "sources": [
+            {
+              "source_id": "manual_香港科技_香港科技_未分类",
+              "source_name": "香港科技大学-未分类",
+              "scholar_count": 2,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
+    },
+    {
+      "id": "马来亚大学（qs_58)",
+      "name": "马来亚大学（QS 58)",
+      "org_name": null,
+      "scholar_count": 1,
+      "departments": [
+        {
+          "id": "马来亚大学（qs_58)_未分类",
+          "name": "未分类",
+          "scholar_count": 1,
+          "sources": [
+            {
+              "source_id": "manual_马来亚大学（qs_58)_马来亚大学（qs_58)_未分类",
+              "source_name": "马来亚大学（QS 58)-未分类",
+              "scholar_count": 1,
+              "is_enabled": true,
+              "last_crawl_at": null
+            }
+          ],
+          "org_name": null
+        }
+      ]
     }
   ],
   "events": [

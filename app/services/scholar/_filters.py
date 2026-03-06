@@ -17,6 +17,7 @@ def _apply_filters(
     is_academician: bool | None,
     is_potential_recruit: bool | None,
     is_advisor_committee: bool | None,
+    is_adjunct_supervisor: bool | None,
     has_email: bool | None,
     keyword: str | None,
 ) -> list[dict[str, Any]]:
@@ -39,6 +40,14 @@ def _apply_filters(
 
     if is_advisor_committee is not None:
         result = [i for i in result if bool(i.get("is_advisor_committee", False)) == is_advisor_committee]
+
+    if is_adjunct_supervisor is not None:
+        def _has_adjunct(item: dict[str, Any]) -> bool:
+            adj = item.get("adjunct_supervisor")
+            if isinstance(adj, dict):
+                return bool(adj.get("status", ""))
+            return False
+        result = [i for i in result if _has_adjunct(i) == is_adjunct_supervisor]
 
     if has_email is not None:
         result = [i for i in result if bool(i.get("email", "")) == has_email]

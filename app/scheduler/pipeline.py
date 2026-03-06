@@ -200,6 +200,31 @@ async def _stage_enrich_tech_frontier_llm() -> dict[str, Any]:
     return await process_tech_frontier_llm_enrichment()
 
 
+async def _stage_rebuild_institutions() -> dict[str, Any]:
+    """Stage 4d: Rebuild institutions.json from scholar data."""
+    import asyncio
+
+    from app.services.core.institution_builder import (
+        build_institutions_data,
+        save_institutions_data,
+    )
+
+    data = await asyncio.to_thread(build_institutions_data)
+    output_path = await asyncio.to_thread(save_institutions_data, data)
+
+    universities = data.get("universities", [])
+    total_universities = len(universities)
+    total_departments = sum(len(u.get("departments", [])) for u in universities)
+    total_scholars = sum(u.get("scholar_count", 0) for u in universities)
+
+    return {
+        "output_path": str(output_path),
+        "total_universities": total_universities,
+        "total_departments": total_departments,
+        "total_scholars": total_scholars,
+    }
+
+
 async def _stage_generate_index() -> dict[str, Any]:
     """Stage 5: Generate data/index.json for frontend."""
     import asyncio
@@ -252,7 +277,7 @@ def _skipped_stage(name: str, reason: str) -> StageResult:
 # ---------------------------------------------------------------------------
 
 async def execute_daily_pipeline() -> PipelineResult:
-    """Execute the full daily pipeline (9 stages).
+    """Execute the full daily pipeline (10 stages).
 
     Stage 1:  Crawl all enabled sources
     Stage 2:  Process policy intelligence (rules)
@@ -260,6 +285,7 @@ async def execute_daily_pipeline() -> PipelineResult:
     Stage 3b: Process university ecosystem (keyword classification)
     Stage 3c: Process tech frontier (topic classification + heat)
     Stage 4:  LLM enrichment — policy + personnel + tech_frontier (conditional)
+    Stage 4d: Rebuild institutions.json from scholar data
     Stage 5:  Generate data index
     Stage 6:  Generate AI daily briefing
 
@@ -335,6 +361,12 @@ async def execute_daily_pipeline() -> PipelineResult:
         pipeline.stages.append(
             _skipped_stage("enrich_tech_frontier_llm", reason),
         )
+
+    # Stage 4d: Rebuild institutions.json (always runs)
+    institutions_stage = await _run_stage(
+        "rebuild_institutions", _stage_rebuild_institutions,
+    )
+    pipeline.stages.append(institutions_stage)
 
     # Stage 5: Generate index (always runs)
     index_stage = await _run_stage("generate_index", _stage_generate_index)

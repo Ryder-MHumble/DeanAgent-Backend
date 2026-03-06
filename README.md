@@ -1,7 +1,6 @@
 # Information Crawler
 
-中关村人工智能研究院**信息监测系统**。自动爬取 134 个信源（109 启用，横跨 9 个维度），通过 v1 REST API（27 端点，含 intel 业务智能 13 端点）供前端查询，所有数据以本地 JSON 文件存储。
-82 个启用信源已配置 `detail_selectors` 或 RSS/API 自带正文，可自动获取文章正文。
+中关村人工智能研究院**数据智能平台**（OpenClaw）。自动爬取 **181 个信源**（138 启用，横跨 **9 个信息维度 + 学者知识库**），通过 v1 REST API（**65+ 端点**，含业务智能 27 端点、学者 14 端点）向 **Dean-Agent、ScholarDB-System、Athena、NanoBot** 提供统一数据服务。维护 **2,200+ 位学者**档案，覆盖 9 所顶尖高校。所有数据以本地 JSON 文件存储。
 
 **技术栈**：FastAPI · APScheduler 3.x · httpx · BeautifulSoup4 · Playwright · feedparser · 纯 JSON 存储（无数据库）
 
@@ -96,9 +95,22 @@ uvicorn app.main:app --reload
 
 ---
 
+## 消费端生态
+
+OpenClaw 作为数据中台，向 4 个院内应用提供数据服务：
+
+| 消费端 | 服务对象 | 核心数据集 |
+|--------|---------|----------|
+| **Dean-Agent** 院长智能体 | 院长办、院领导 | 政策情报 · 人事变动 · 科技前沿 · 每日简报 |
+| **ScholarDB-System** 学者知识库 | 科研管理办 | 学者档案 · 项目库 · 机构图谱 · 导学关系 |
+| **Athena** 战略情报引擎 | 战略发展部 | 全量文章检索 · 情报分析 · 舆情监测 |
+| **NanoBot** 钉钉智能助理 | 全院各部门 | 全量 API（MCP 协议封装，自然语言访问） |
+
+---
+
 ## 维度与信源
 
-### 9 个监测维度
+### 9 个信息监测维度
 
 | 维度 ID | 名称 | 源数 | 启用 | YAML 文件 |
 |---------|------|------|------|-----------|
@@ -107,12 +119,20 @@ uvicorn app.main:app --reload
 | `technology` | 技术动态 | 34 | 33 | `sources/technology.yaml` |
 | `talent` | 人才发展 | 7 | 4 | `sources/talent.yaml` |
 | `industry` | 产业趋势 | 10 | 6 | `sources/industry.yaml` |
-| `universities` | 高校动态 | 55 | 46 | `sources/universities.yaml` |
+| `universities` | 高校动态 | 55 | 46 | `sources/universities-*.yaml` |
 | `events` | 活动日程 | 6 | 4 | `sources/events.yaml` |
 | `personnel` | 人事变动 | 4 | 4 | `sources/personnel.yaml` |
-| twitter | 社交舆情 | 7 | 7 | `sources/twitter.yaml`† |
+| `twitter` | 社交舆情 | 7 | 7 | `sources/twitter.yaml`† |
 
 > † `sources/twitter.yaml` 的 7 个源按 `dimension` 字段跨维度分配：technology 4 源、industry 1 源、talent 1 源、sentiment 1 源。需配置 Twitter API key。
+
+### 学者知识库维度
+
+| 维度 | 名称 | 源数 | 覆盖高校 | YAML 文件 |
+|------|------|------|---------|-----------|
+| `scholars` | 高校师资 | 49 | 9 所（清华/北大/上交/中科院/浙大/南大/中科大/复旦/人大） | `sources/scholar-*.yaml` |
+
+完整信源清单见 [`docs/SourceOverview.md`](docs/SourceOverview.md)。
 
 ### 爬虫类型分布
 
@@ -513,13 +533,14 @@ python scripts/run_all_crawl.py --concurrency 5  # 仅爬取阶段
 
 **已完成**：
 
-- 4 种模板爬虫 + 8 个自定义 Parser
-- 134 信源配置（109 启用），82 源可获取正文
-- v1 API 27 端点（含 intel 业务智能 13 端点）
+- 6 种模板爬虫 + 16 个自定义 Parser（含 LLM 自适应学者爬虫）
+- 181 信源配置（138 启用），覆盖 9 个信息维度 + 学者知识库
+- v1 API **65+ 端点**（核心 14 + 业务智能 27 + 学者 14 + 项目/机构/活动/舆情/LLM追踪）
 - 9 阶段每日 Pipeline（爬取→处理→LLM→索引→简报）
 - 5 个业务智能模块：政策智能 · 人事情报 · 科技前沿 · 高校生态 · 每日简报
-- 纯 JSON 存储，无数据库依赖
-- 前后端已部署至线上服务器
+- 学者知识库：**2,200+ 位学者**档案，覆盖清华/北大/上交/中科院等 9 所高校
+- 4 个消费端：Dean-Agent · ScholarDB-System · Athena · NanoBot
+- 纯 JSON 存储，无数据库依赖；前后端已部署至线上服务器
 
 **待完成**：sentiment 维度扩展 · 部分禁用高校源修复 · 测试覆盖
 
@@ -531,8 +552,9 @@ python scripts/run_all_crawl.py --concurrency 5  # 仅爬取阶段
 
 | 文档 | 路径 | 内容 |
 |------|------|------|
-| 架构设计 | `docs/architecture.md` | 爬虫框架核心架构、数据流、Mermaid 图 |
+| 平台架构 | `docs/architecture.md` | 5 层平台架构、消费端接入、设计决策 |
+| 信源全景 | `docs/SourceOverview.md` | 181 个信源全量清单，按维度/类型/状态 |
+| 产品生态 | `docs/files/产品生态架构全景.md` | 领导汇报用，平台定位 + 价值地图 + 演进方向 |
 | 爬取状态 | `docs/CrawlStatus.md` | 各维度各源的爬取状态、数据量 |
 | 任务优先级 | `docs/TODO.md` | P0-P3 分级待办 |
-| 部署指南 | `docs/deployment.md` | 服务器需求、资源控制 |
-| 院长需求 | `docs/院长智能体.md` | 前端 Dean-Agent 功能需求 |
+| 院长需求 | `docs/files/院长智能体.md` | 前端 Dean-Agent 功能需求 |
