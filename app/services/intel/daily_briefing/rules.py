@@ -76,7 +76,7 @@ MAX_CONTENT_SNIPPET = 300
 # ---------------------------------------------------------------------------
 
 
-def collect_daily_articles(
+async def collect_daily_articles(
     target_date: date,
     lookback_days: int = 1,
 ) -> dict[str, Any]:
@@ -93,7 +93,7 @@ def collect_daily_articles(
     date_from = target_date - timedelta(days=lookback_days)
     date_to = target_date
 
-    all_articles = get_all_articles(date_from=date_from, date_to=date_to)
+    all_articles = await get_all_articles(date_from=date_from, date_to=date_to)
 
     articles_by_dim: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for article in all_articles:

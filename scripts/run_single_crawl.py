@@ -45,7 +45,7 @@ async def run_crawl(source_id: str):
         print(f"Error: {result.error_message}")
 
     # Save to JSON
-    json_path = save_crawl_result_json(result, config)
+    json_path = await save_crawl_result_json(result, config)
     if json_path:
         print(f"JSON saved to: {json_path}")
 

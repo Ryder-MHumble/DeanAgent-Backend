@@ -24,6 +24,8 @@ dependencies = [
     "scalar-fastapi>=1.0",
     "supabase>=2.0.0",
     "tqdm>=4.66",
+    "asyncpg>=0.29",
+    "python-dotenv>=1.0",
 ]
 
 [project.optional-dependencies]

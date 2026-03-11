@@ -88,7 +88,7 @@ async def generate_daily_briefing(target_date: date) -> dict[str, Any]:
     from app.services.intel.daily_briefing import llm, rules
 
     # Step 1: Collect articles
-    collected = rules.collect_daily_articles(target_date)
+    collected = await rules.collect_daily_articles(target_date)
     articles_by_dim = collected["articles_by_dimension"]
     total_count = collected["total_count"]
     dimension_counts = collected["dimension_counts"]
@@ -154,7 +154,7 @@ async def get_metric_cards_only(
     if target_date is None:
         target_date = date.today()
 
-    collected = rules.collect_daily_articles(target_date)
+    collected = await rules.collect_daily_articles(target_date)
     articles_by_dim = collected["articles_by_dimension"]
     metric_cards = rules.compute_metric_cards(articles_by_dim)
 

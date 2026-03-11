@@ -24,26 +24,26 @@ async def execute_crawl_job(source_config: dict[str, Any]) -> None:
         crawler = CrawlerRegistry.create_crawler(source_config)
     except Exception as e:
         logger.error("Failed to create crawler for %s: %s", source_id, e)
-        append_crawl_log(
+        await append_crawl_log(
             source_id=source_id,
             status=CrawlStatus.FAILED.value,
             error_message=f"Crawler creation failed: {e}",
             started_at=now,
             finished_at=now,
         )
-        update_source_state(source_id, last_crawl_at=now)
+        await update_source_state(source_id, last_crawl_at=now)
         return
 
     result = await crawler.run()
 
-    # Save to local JSON (always)
+    # Save to local JSON and upsert to DB
     try:
-        save_crawl_result_json(result, source_config)
+        await save_crawl_result_json(result, source_config)
     except Exception as e:
         logger.warning("Failed to save JSON for %s: %s", source_id, e)
 
     # Log the crawl result
-    append_crawl_log(
+    await append_crawl_log(
         source_id=source_id,
         status=result.status.value,
         items_total=result.items_total,
@@ -57,14 +57,14 @@ async def execute_crawl_job(source_config: dict[str, Any]) -> None:
     # Update source runtime state
     finished = result.finished_at or datetime.now(timezone.utc)
     if result.status in (CrawlStatus.SUCCESS, CrawlStatus.NO_NEW_CONTENT):
-        update_source_state(
+        await update_source_state(
             source_id,
             last_crawl_at=finished,
             last_success_at=finished,
             reset_failures=True,
         )
     else:
-        update_source_state(source_id, last_crawl_at=finished)
+        await update_source_state(source_id, last_crawl_at=finished)
 
     logger.info(
         "Crawl complete: %s | status=%s | new=%d/%d | duration=%.1fs",

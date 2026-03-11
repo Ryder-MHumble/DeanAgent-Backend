@@ -24,7 +24,7 @@ router = APIRouter()
     description="获取高校生态仪表盘数据：各分组文章数、今日新增、信源数。",
 )
 async def get_overview():
-    return uni_service.get_overview()
+    return await uni_service.get_overview()
 
 
 @router.get(
@@ -50,7 +50,7 @@ async def get_feed(
     page: int = Query(1, ge=1, description="页码"),
     page_size: int = Query(20, ge=1, le=200, description="每页条数"),
 ):
-    return uni_service.get_feed(
+    return await uni_service.get_feed(
         group=group,
         source_id=source_id,
         source_ids=source_ids,
@@ -72,7 +72,7 @@ async def get_feed(
     responses={404: {"description": "文章未找到"}},
 )
 async def get_article(url_hash: str):
-    result = uni_service.get_article_detail(url_hash)
+    result = await uni_service.get_article_detail(url_hash)
     if result is None:
         raise HTTPException(status_code=404, detail="Article not found")
     return result

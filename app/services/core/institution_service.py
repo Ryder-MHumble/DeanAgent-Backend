@@ -24,6 +24,11 @@ class InstitutionAlreadyExistsError(ValueError):
     """Raised when trying to create an institution that already exists."""
 
 
+def _get_client():
+    from app.db.client import get_client  # noqa: PLC0415
+    return get_client()
+
+
 def _load_institutions() -> dict[str, Any]:
     """Load institutions data from JSON file."""
     if not INSTITUTIONS_FILE.exists():
@@ -93,6 +98,56 @@ def get_institution_list(
     page_size: int = 20,
 ) -> InstitutionListResponse:
     """获取机构列表（高校+院系统一查询）."""
+    # Try DB first
+    try:
+        import asyncio  # noqa: PLC0415
+        client = _get_client()
+
+        async def _fetch():
+            q = client.table("institutions").select(
+                "id,name,type,category,priority,scholar_count,student_count_total,mentor_count,parent_id"
+            )
+            if type_filter:
+                q = q.eq("type", type_filter)
+            if category:
+                q = q.eq("category", category)
+            if priority:
+                q = q.eq("priority", priority)
+            if parent_id:
+                q = q.eq("parent_id", parent_id)
+            if keyword:
+                q = q.or_(f"name.ilike.%{keyword}%,id.ilike.%{keyword}%")
+            res = await q.execute()
+            return res.data or []
+
+        institutions = asyncio.get_event_loop().run_until_complete(_fetch())
+        priority_order = {"P0": 0, "P1": 1, "P2": 2, "P3": 3}
+        institutions.sort(key=lambda x: (
+            0 if x["type"] == "university" else 1,
+            priority_order.get(str(x.get("priority") or ""), 99),
+            x["name"],
+        ))
+        total = len(institutions)
+        total_pages = max(1, (total + page_size - 1) // page_size)
+        start = (page - 1) * page_size
+        items = [
+            InstitutionListItem(
+                id=i["id"], name=i["name"], type=i["type"],
+                category=i.get("category"), priority=str(i["priority"]) if i.get("priority") else None,
+                scholar_count=i.get("scholar_count", 0),
+                student_count_total=i.get("student_count_total"),
+                mentor_count=i.get("mentor_count"),
+                parent_id=i.get("parent_id"),
+            )
+            for i in institutions[start: start + page_size]
+        ]
+        return InstitutionListResponse(total=total, page=page, page_size=page_size,
+                                       total_pages=total_pages, items=items)
+    except RuntimeError:
+        pass
+    except Exception as exc:
+        import logging; logging.getLogger(__name__).warning("DB get_institution_list failed: %s", exc)
+
     data = _load_institutions()
     universities = data.get("universities", [])
 
@@ -165,6 +220,27 @@ def get_institution_list(
 
 def get_institution_detail(institution_id: str) -> InstitutionDetailResponse | None:
     """获取机构详情（高校或院系）."""
+    # Try DB first
+    try:
+        import asyncio  # noqa: PLC0415
+        client = _get_client()
+
+        async def _fetch():
+            res = await client.table("institutions").select("*").eq("id", institution_id).execute()
+            return res.data or []
+
+        rows = asyncio.get_event_loop().run_until_complete(_fetch())
+        if rows:
+            row = rows[0]
+            if row.get("type") == "university":
+                return _build_university_detail_from_db(row)
+            else:
+                return _build_department_detail_from_db(row)
+    except RuntimeError:
+        pass
+    except Exception as exc:
+        import logging; logging.getLogger(__name__).warning("DB get_institution_detail failed: %s", exc)
+
     data = _load_institutions()
     universities = data.get("universities", [])
 
@@ -298,8 +374,146 @@ def _build_department_detail(dept: dict, parent_id: str) -> InstitutionDetailRes
     )
 
 
+def _build_university_detail_from_db(row: dict) -> InstitutionDetailResponse:
+    """Build InstitutionDetailResponse from a DB institutions row (type=university)."""
+    # Parse ScholarInfo lists
+    def _parse_scholar_list(raw) -> list:
+        if not raw:
+            return []
+        result = []
+        for item in raw:
+            if isinstance(item, str):
+                result.append(ScholarInfo(name=item))
+            elif isinstance(item, dict):
+                result.append(ScholarInfo(**{k: v for k, v in item.items() if k in ("name", "url", "department")}))
+        return result
+
+    mentor_info = None
+    mentors_list = row.get("mentors") or []
+    if mentors_list:
+        m = mentors_list[0]
+        if isinstance(m, dict):
+            mentor_info = MentorInfo(
+                name=m.get("name"),
+                category=m.get("category"),
+                department=m.get("department"),
+            )
+
+    # Build departments list (fetch separately or use empty list)
+    departments: list[DepartmentInfo] = []
+
+    return InstitutionDetailResponse(
+        id=row["id"],
+        name=row["name"],
+        type="university",
+        org_name=row.get("org_name"),
+        category=row.get("category"),
+        priority=str(row["priority"]) if row.get("priority") is not None else None,
+        student_count_24=row.get("student_count_24"),
+        student_count_25=row.get("student_count_25"),
+        student_count_total=row.get("student_count_total"),
+        mentor_count=row.get("mentor_count"),
+        resident_leaders=row.get("resident_leaders") or [],
+        degree_committee=row.get("degree_committee") or [],
+        teaching_committee=row.get("teaching_committee") or [],
+        mentor_info=mentor_info,
+        university_leaders=_parse_scholar_list(row.get("university_leaders")),
+        notable_scholars=_parse_scholar_list(row.get("notable_scholars")),
+        key_departments=row.get("key_departments") or [],
+        joint_labs=row.get("joint_labs") or [],
+        training_cooperation=row.get("training_cooperation") or [],
+        academic_cooperation=row.get("academic_cooperation") or [],
+        talent_dual_appointment=row.get("talent_dual_appointment") or [],
+        recruitment_events=row.get("recruitment_events") or [],
+        visit_exchanges=row.get("visit_exchanges") or [],
+        cooperation_focus=row.get("cooperation_focus") or [],
+        parent_id=None,
+        departments=departments,
+        scholar_count=row.get("scholar_count", 0),
+        sources=[],
+        last_updated=None,
+    )
+
+
+def _build_department_detail_from_db(row: dict) -> InstitutionDetailResponse:
+    """Build InstitutionDetailResponse from a DB institutions row (type=department)."""
+    sources_raw = row.get("sources") or []
+    sources = []
+    for s in sources_raw:
+        if isinstance(s, dict):
+            try:
+                sources.append(DepartmentSource(**s))
+            except Exception:
+                pass
+
+    return InstitutionDetailResponse(
+        id=row["id"],
+        name=row["name"],
+        type="department",
+        category=None,
+        priority=None,
+        student_count_24=None,
+        student_count_25=None,
+        student_count_total=None,
+        mentor_count=None,
+        resident_leaders=[],
+        degree_committee=[],
+        teaching_committee=[],
+        mentor_info=None,
+        university_leaders=[],
+        notable_scholars=[],
+        key_departments=[],
+        joint_labs=[],
+        training_cooperation=[],
+        academic_cooperation=[],
+        talent_dual_appointment=[],
+        recruitment_events=[],
+        visit_exchanges=[],
+        cooperation_focus=[],
+        parent_id=row.get("parent_id"),
+        departments=[],
+        scholar_count=row.get("scholar_count", 0),
+        sources=sources,
+        last_updated=None,
+    )
+
+
 def get_institution_stats() -> InstitutionStatsResponse:
     """获取机构统计信息."""
+    try:
+        import asyncio  # noqa: PLC0415
+        client = _get_client()
+
+        async def _fetch():
+            res = await client.table("institutions").select(
+                "type,category,priority,scholar_count,student_count_total,mentor_count"
+            ).execute()
+            return res.data or []
+
+        rows = asyncio.get_event_loop().run_until_complete(_fetch())
+        unis = [r for r in rows if r.get("type") == "university"]
+        depts = [r for r in rows if r.get("type") == "department"]
+        by_category: dict[str, int] = {}
+        by_priority: dict[str, int] = {}
+        for r in unis:
+            cat = r.get("category") or "未分类"
+            by_category[cat] = by_category.get(cat, 0) + 1
+            pri = str(r.get("priority") or "未设置")
+            by_priority[pri] = by_priority.get(pri, 0) + 1
+        return InstitutionStatsResponse(
+            total_universities=len(unis),
+            total_departments=len(depts),
+            total_scholars=sum(r.get("scholar_count", 0) or 0 for r in unis),
+            by_category=[{"category": k, "count": v} for k, v in by_category.items()],
+            by_priority=[{"priority": k, "count": v} for k, v in by_priority.items()],
+            total_students=sum(r.get("student_count_total", 0) or 0 for r in unis),
+            total_mentors=sum(r.get("mentor_count", 0) or 0 for r in unis),
+        )
+    except RuntimeError:
+        pass
+    except Exception as exc:
+        import logging; logging.getLogger(__name__).warning("DB get_institution_stats failed: %s", exc)
+
     data = _load_institutions()
     universities = data.get("universities", [])
 

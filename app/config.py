@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     MAX_CONCURRENT_CRAWLS: int = 5
     DEFAULT_REQUEST_DELAY: float = 1.0
 
-    # Supabase (社媒舆情)
+    # Supabase (主库 — 数据仓库)
     SUPABASE_URL: str = ""
     SUPABASE_KEY: str = ""
 

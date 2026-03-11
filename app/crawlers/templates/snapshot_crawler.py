@@ -65,7 +65,7 @@ class SnapshotDiffCrawler(BaseCrawler):
             content_hash = hashlib.sha256(text.encode("utf-8")).hexdigest()
 
             # Get last snapshot from local JSON
-            last = get_last_snapshot(self.source_id)
+            last = await get_last_snapshot(self.source_id)
 
             if last and last.get("content_hash") == content_hash:
                 # No change
@@ -84,7 +84,7 @@ class SnapshotDiffCrawler(BaseCrawler):
                     diff_text = "\n".join(diff_lines)
 
                 # Store new snapshot
-                save_snapshot(self.source_id, content_hash, text, diff_text)
+                await save_snapshot(self.source_id, content_hash, text, diff_text)
 
                 # Create a CrawledItem for the change
                 title = f"[变更检测] {self.config.get('name', self.source_id)}"

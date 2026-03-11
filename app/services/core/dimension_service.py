@@ -18,7 +18,7 @@ DIMENSION_NAMES = {
 
 async def list_dimensions() -> list[dict]:
     """List all dimensions with article counts and last updated timestamps."""
-    stats = get_dimension_stats()
+    stats = await get_dimension_stats()
 
     dimensions = []
     found = set()

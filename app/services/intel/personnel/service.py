@@ -90,7 +90,7 @@ def _extract_title_info(title: str) -> tuple[str, str | None]:
     return short, dept
 
 
-def _compute_live_changes() -> list[dict[str, Any]]:
+async def _compute_live_changes() -> list[dict[str, Any]]:
     """Read raw personnel articles, apply rules, merge with cached LLM enrichments.
 
     For articles that don't produce specific appointment/dismissal records,
@@ -99,7 +99,7 @@ def _compute_live_changes() -> list[dict[str, Any]]:
     Returns a list of item dicts, sorted: action group first,
     then by relevance desc, then by date desc.
     """
-    articles = get_articles("personnel")
+    articles = await get_articles("personnel")
 
     # Deduplicate by url_hash
     seen_hashes: set[str] = set()
@@ -312,7 +312,7 @@ def get_personnel_stats() -> dict[str, Any]:
 # ---------------------------------------------------------------------------
 
 
-def get_enriched_feed(
+async def get_enriched_feed(
     group: str | None = None,
     importance: str | None = None,
     min_relevance: int | None = None,
@@ -325,7 +325,7 @@ def get_enriched_feed(
     offset: int = 0,
 ) -> dict[str, Any]:
     """Dynamically compute enriched feed from latest raw data + cached LLM enrichments."""
-    items = _compute_live_changes()
+    items = await _compute_live_changes()
 
     # 应用信源筛选（优先筛选，减少后续处理量）
     source_filter = parse_source_filter(source_id, source_ids, source_name, source_names)
@@ -363,9 +363,9 @@ def get_enriched_feed(
     }
 
 
-def get_enriched_stats() -> dict[str, Any]:
+async def get_enriched_stats() -> dict[str, Any]:
     """Get summary statistics from live enriched data."""
-    items = _compute_live_changes()
+    items = await _compute_live_changes()
 
     dept_counts: dict[str, int] = {}
     action_counts: dict[str, int] = {}

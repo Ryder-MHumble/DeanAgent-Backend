@@ -202,7 +202,7 @@ async def process_policy_pipeline(
     # Load raw articles from all relevant dimensions
     all_articles: list[dict] = []
     for dim in DIMENSIONS:
-        articles = get_articles(dim)
+        articles = await get_articles(dim)
         logger.info("  从 %s 加载 %d 篇文章", dim, len(articles))
         all_articles.extend(articles)
 

@@ -1,4 +1,4 @@
-"""Pydantic schemas for sentiment monitoring (social media data from Supabase)."""
+"""Pydantic schemas for sentiment monitoring (social media data from main DB)."""
 
 from __future__ import annotations
 
@@ -9,31 +9,43 @@ from pydantic import BaseModel, Field
 class SentimentContentItem(BaseModel):
     """A single social media content item for the feed."""
 
+    model_config = {"extra": "ignore"}
+
     id: int = Field(description="Database row ID")
-    platform: str = Field(description="Platform code: xhs / dy / bilibili / weibo")
+    platform: str = Field(description="Platform code: xhs / dy / bili / zhihu")
     content_id: str = Field(description="Platform-native content ID")
-    content_type: str = Field(description="Content type: video / normal / 0")
-    title: str = Field(description="Content title")
-    description: str = Field(default="", description="Content description / body text")
-    content_url: str = Field(description="Link to original content")
-    cover_url: str = Field(default="", description="Cover image URL")
-    nickname: str = Field(default="", description="Author nickname")
-    avatar: str = Field(default="", description="Author avatar URL")
-    ip_location: str = Field(default="", description="Author IP location")
+    content_type: str | None = Field(default=None, description="Content type: video / normal / 0")
+    title: str | None = Field(default=None, description="Content title")
+    description: str | None = Field(default=None, description="Content description / body text")
+    content_url: str | None = Field(default=None, description="Link to original content")
+    cover_url: str | None = Field(default=None, description="Cover image URL")
+
+    # Author fields (matching source DB column names)
+    user_id: str | None = Field(default=None, description="Platform user ID")
+    nickname: str | None = Field(default=None, description="Author nickname")
+    avatar: str | None = Field(default=None, description="Author avatar URL")
+    ip_location: str | None = Field(default=None, description="Author IP location")
+
+    # Engagement
     liked_count: int = Field(default=0, description="Like count")
     comment_count: int = Field(default=0, description="Comment count")
     share_count: int = Field(default=0, description="Share/forward count")
     collected_count: int = Field(default=0, description="Collection/bookmark count")
+
+    # Crawl metadata
     source_keyword: str | None = Field(default=None, description="Search keyword used")
-    publish_time: int | None = Field(
-        default=None,
-        description="Publish timestamp (xhs=ms, dy=seconds)",
-    )
-    created_at: str | None = Field(default=None, description="DB insert time (ISO)")
+    crawl_task_id: str | None = Field(default=None, description="Crawl task ID")
     platform_data: dict | None = Field(
         default=None,
         description="Platform-specific extra data (tags, video_url, images, etc.)",
     )
+
+    # Timestamps (BIGINT ms from source)
+    publish_time: int | None = Field(default=None, description="Publish timestamp (ms)")
+    add_ts: int | None = Field(default=None, description="Add timestamp (ms)")
+    last_modify_ts: int | None = Field(default=None, description="Last modify timestamp (ms)")
+    created_at: str | None = Field(default=None, description="DB insert time (ISO)")
+    updated_at: str | None = Field(default=None, description="DB update time (ISO)")
 
 
 # ── Comment ────────────────────────────────────────────────────────────
@@ -41,19 +53,28 @@ class SentimentContentItem(BaseModel):
 class SentimentComment(BaseModel):
     """A comment on a content item."""
 
+    model_config = {"extra": "ignore"}
+
     id: int
     platform: str
     comment_id: str
     content_id: str
-    parent_comment_id: str = Field(default="0", description="0 = top-level comment")
-    content: str = Field(description="Comment text")
-    nickname: str = Field(default="")
-    avatar: str = Field(default="")
-    ip_location: str = Field(default="")
+    parent_comment_id: str | None = Field(default=None, description="None or '0' = top-level")
+    content: str | None = Field(default=None, description="Comment text")
+    pictures: str | None = Field(default=None, description="Attached picture URLs")
+    user_id: str | None = Field(default=None)
+    nickname: str | None = Field(default=None)
+    avatar: str | None = Field(default=None)
+    ip_location: str | None = Field(default=None)
     like_count: int = Field(default=0)
+    dislike_count: int = Field(default=0)
     sub_comment_count: int = Field(default=0)
+    platform_data: dict | None = Field(default=None)
     publish_time: int | None = Field(default=None)
+    add_ts: int | None = Field(default=None)
+    last_modify_ts: int | None = Field(default=None)
     created_at: str | None = Field(default=None)
+    updated_at: str | None = Field(default=None)
 
 
 # ── Content detail (with comments) ────────────────────────────────────

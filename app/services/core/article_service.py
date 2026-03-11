@@ -18,6 +18,7 @@ logger = logging.getLogger(__name__)
 _ALLOWED_SORT_FIELDS = {"crawled_at", "published_at", "title", "importance"}
 
 # Article annotations (is_read, importance) stored in a simple JSON file
+# Used as fallback when DB is not available.
 ANNOTATIONS_FILE = BASE_DIR / "data" / "state" / "article_annotations.json"
 _annotations_lock = Lock()
 
@@ -41,10 +42,21 @@ def _save_annotations(data: dict[str, dict[str, Any]]) -> None:
 
 
 def _apply_annotations(item: dict[str, Any]) -> dict[str, Any]:
-    """Merge annotations (is_read, importance) into an article item."""
+    """Merge annotations (is_read, importance) into an article item.
+
+    If the item already has is_read/importance (from DB), these take precedence.
+    Falls back to the JSON annotations file.
+    """
+    # If item already has annotations from DB, trust them
+    if "is_read" in item and "importance" in item:
+        return item
+
     url_hash = item.get("url_hash", "")
     if not url_hash:
+        item.setdefault("is_read", False)
+        item.setdefault("importance", None)
         return item
+
     annotations = _load_annotations()
     ann = annotations.get(url_hash, {})
     if ann:
@@ -57,7 +69,7 @@ def _apply_annotations(item: dict[str, Any]) -> dict[str, Any]:
 
 
 def _to_brief(item: dict[str, Any]) -> dict[str, Any]:
-    """Convert a raw JSON article item to ArticleBrief-compatible dict."""
+    """Convert a raw article item to ArticleBrief-compatible dict."""
     item = _apply_annotations(item)
     return {
         "id": item.get("url_hash", ""),
@@ -75,7 +87,7 @@ def _to_brief(item: dict[str, Any]) -> dict[str, Any]:
 
 
 def _to_detail(item: dict[str, Any]) -> dict[str, Any]:
-    """Convert a raw JSON article item to ArticleDetail-compatible dict."""
+    """Convert a raw article item to ArticleDetail-compatible dict."""
     brief = _to_brief(item)
     brief["content"] = item.get("content")
     brief["content_html"] = item.get("content_html")
@@ -110,7 +122,7 @@ async def list_articles(params: ArticleSearchParams) -> PaginatedResponse:
     )
 
     # 如果有 source_filter，不传 source_id 给 get_all_articles，之后手动过滤
-    items = get_all_articles(
+    items = await get_all_articles(
         dimension=params.dimension,
         source_id=None if source_filter else params.source_id,
         keyword=params.keyword,
@@ -147,7 +159,23 @@ async def list_articles(params: ArticleSearchParams) -> PaginatedResponse:
 
 async def get_article(article_id: str) -> dict[str, Any] | None:
     """Get a single article by url_hash."""
-    items = get_all_articles()
+    # Try DB first for efficiency
+    try:
+        from app.db.client import get_client  # noqa: PLC0415
+
+        client = get_client()
+        res = await client.table("articles").select("*").eq("url_hash", article_id).execute()
+        if res.data:
+            row = res.data[0]
+            if "group_name" in row:
+                row["group"] = row.pop("group_name")
+            return _to_detail(row)
+    except RuntimeError:
+        pass
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("DB get_article failed: %s", exc)
+
+    items = await get_all_articles()
     for item in items:
         if item.get("url_hash") == article_id:
             return _to_detail(item)
@@ -155,23 +183,86 @@ async def get_article(article_id: str) -> dict[str, Any] | None:
 
 
 async def update_article(article_id: str, data: ArticleUpdate) -> dict[str, Any] | None:
-    """Update article annotations (is_read, importance)."""
+    """Update article annotations (is_read, importance).
+
+    Writes to the DB when available, and always keeps the JSON fallback in sync.
+    """
     values = data.model_dump(exclude_unset=True)
     if not values:
         return await get_article(article_id)
 
+    # Try to update in DB
+    db_updated = False
+    try:
+        from app.db.client import get_client  # noqa: PLC0415
+
+        client = get_client()
+        update_data = {k: v for k, v in values.items() if k in ("is_read", "importance")}
+        if update_data:
+            await client.table("articles").update(update_data).eq("url_hash", article_id).execute()
+            db_updated = True
+    except RuntimeError:
+        pass
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("DB update_article failed: %s", exc)
+
+    # Always keep JSON annotations in sync (serves as backup / offline fallback)
     with _annotations_lock:
         annotations = _load_annotations()
         ann = annotations.setdefault(article_id, {})
         ann.update(values)
         _save_annotations(annotations)
 
+    if db_updated:
+        logger.debug("Updated article %s in DB and annotations JSON", article_id)
+
     return await get_article(article_id)
 
 
 async def get_article_stats(group_by: str = "dimension") -> list[dict]:
     """Get article counts grouped by dimension, source, or day."""
-    items = get_all_articles()
+    # Try DB aggregation (via Python since REST API doesn't support GROUP BY directly)
+    try:
+        from app.db.client import get_client  # noqa: PLC0415
+
+        client = get_client()
+        if group_by == "source":
+            res = await client.table("articles").select("source_id").execute()
+            rows = res.data or []
+            counts: dict[str, int] = {}
+            for row in rows:
+                key = row.get("source_id", "unknown")
+                counts[key] = counts.get(key, 0) + 1
+            result = [{"group": k, "count": v} for k, v in counts.items()]
+            result.sort(key=lambda x: x["count"], reverse=True)
+            return result
+        elif group_by == "day":
+            res = await client.table("articles").select("crawled_at").execute()
+            rows = res.data or []
+            counts = {}
+            for row in rows:
+                key = (row.get("crawled_at") or "")[:10] or "unknown"
+                counts[key] = counts.get(key, 0) + 1
+            result = [{"group": k, "count": v} for k, v in counts.items()]
+            result.sort(key=lambda x: x["count"], reverse=True)
+            return result
+        else:
+            res = await client.table("articles").select("dimension").execute()
+            rows = res.data or []
+            counts = {}
+            for row in rows:
+                key = row.get("dimension", "unknown")
+                counts[key] = counts.get(key, 0) + 1
+            result = [{"group": k, "count": v} for k, v in counts.items()]
+            result.sort(key=lambda x: x["count"], reverse=True)
+            return result
+
+    except RuntimeError:
+        pass
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("DB get_article_stats failed, falling back: %s", exc)
+
+    items = await get_all_articles()
 
     counts: dict[str, int] = {}
     for item in items:

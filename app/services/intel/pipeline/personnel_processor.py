@@ -68,7 +68,7 @@ async def process_personnel_pipeline(
 
     Returns summary dict for the pipeline orchestrator.
     """
-    articles = get_articles(DIMENSION)
+    articles = await get_articles(DIMENSION)
     logger.info("Personnel pipeline: loaded %d articles", len(articles))
 
     # Deduplicate by url_hash
@@ -213,7 +213,7 @@ async def process_personnel_llm_enrichment(
         enrich_changes_batch,
     )
 
-    articles = get_articles(DIMENSION)
+    articles = await get_articles(DIMENSION)
 
     # Deduplicate
     seen: set[str] = set()

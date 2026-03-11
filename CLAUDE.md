@@ -2,7 +2,9 @@
 
 中关村人工智能研究院**数据智能平台**（OpenClaw）。181 信源（138 启用）× 9 个信息维度 + 学者知识库维度（49 源），6 种模板爬虫 + 16 个自定义 Parser，v1 API **65+ 端点**（核心 14 + 业务智能 27 + 学者 14 + 项目/机构/活动/舆情/LLM追踪）。
 82 个启用信源已配置 detail_selectors 或 RSS/API 自带正文，可自动获取文章正文（content 字段）。
-技术栈：FastAPI + Local JSON Storage + APScheduler 3.x + httpx + BS4 + Playwright。
+技术栈：FastAPI + Supabase (PostgreSQL) + APScheduler 3.x + httpx + BS4 + Playwright。
+
+**数据存储**：完全迁移到 Supabase 云数据库（2026-03-11），所有数据（文章、信源状态、爬取日志、舆情、学者等）均存储在数据库中，不再使用本地 JSON 文件。
 
 **消费端生态**：向 4 个院内应用提供统一数据服务
 
@@ -103,10 +105,19 @@
 **API 返回异常：**
 → `app/api/v1/{articles,sources,dimensions,health}.py`（核心端点）
 → `app/api/v1/intel/{policy,personnel,tech_frontier,university}.py`（业务智能端点）
+→ `app/api/v1/sentiment.py`（舆情监控端点：feed/overview/content detail）
 → `app/services/{article,source,crawl,dimension}_service.py`（核心业务逻辑）
 → `app/services/intel/{policy,personnel,tech_frontier,university}/service.py`（业务智能逻辑）
+→ `app/services/external/sentiment_service.py`（舆情服务，从主库 sentiment_* 表读取）
 → `app/services/intel/shared.py`（共享工具：parse_source_filter 信源筛选、keyword_score 等）
 → `app/schemas/`（请求/响应校验）
+
+**舆情 API 数据异常：**
+→ `app/api/v1/sentiment.py` + `app/services/external/sentiment_service.py`
+→ 数据来源：主库（yrawbjcyfafqmswnazmv）的 `sentiment_contents` / `sentiment_comments` / `sentiment_creators` 三张表
+→ 使用 `app/db/client.get_client()`（主库 AsyncClient），与其他模块共用同一连接
+→ 字段命名与原始社媒库完全一致：`liked_count`、`collected_count`、`nickname`、`user_id` 等
+→ 如需重新迁移数据：重建 `scripts/migrate/03_migrate_sentiment.py`（参考迁移架构：fetch_all → _clean_*_row → upsert_batches）
 
 **信源过滤不生效：**
 → `app/services/intel/shared.py` 的 `parse_source_filter()` 和 `resolve_source_ids_by_names()`
@@ -118,44 +129,85 @@
 → 支持的 API：policy/feed, personnel/feed, personnel/enriched-feed, university/feed, tech_frontier/signals, articles/
 → 测试：`pytest tests/test_source_filter.py -v`
 
-**JSON 文件没输出 / 路径不对：**
-→ `app/crawlers/utils/json_storage.py`
-→ 输出路径：`data/raw/{dimension}/{group}/{source_id}/latest.json`
-→ 特殊情况：`scholars` 维度输出到 `data/scholars/{group}/{source_id}/latest.json`
+**JSON 文件问题（已废弃）：**
+→ 2026-03-11 已完全迁移到 Supabase 数据库，不再使用本地 JSON 文件
+→ 所有数据（文章、信源状态、日志、学者、机构、项目、活动、Intel 处理结果）均存储在数据库
+→ 爬虫仍会写入 JSON 到 `app/crawlers/utils/json_storage.py`，但仅作为临时缓存，最终数据存入 DB
 
 **运行状态 / 爬取日志问题：**
-→ `app/services/source_state.py`（信源运行状态：`data/state/source_state.json`）
-→ `app/services/crawl_log_store.py`（爬取日志：`data/logs/{source_id}/crawl_logs.json`）
-→ `app/services/snapshot_store.py`（快照数据：`data/state/snapshots/{source_id}.json`）
+→ `app/services/stores/source_state.py`（信源运行状态：Supabase `source_states` 表）
+→ `app/services/stores/crawl_log_store.py`（爬取日志：Supabase `crawl_logs` 表）
+→ `app/services/stores/snapshot_store.py`（快照数据：Supabase `snapshots` 表）
 
 **HTTP 请求失败 / 限速 / UA 被封：**
 → `app/crawlers/utils/http_client.py`（重试、限速、UA 轮换）
 
 ## 数据存储结构
 
-所有数据存储在本地 JSON 文件中，无需数据库：
+**完全迁移到 Supabase 数据库（2026-03-11）**
+
+所有数据存储在 Supabase PostgreSQL 数据库中，不再使用本地 JSON 文件：
+
+### 主要数据表
+
+| 表名 | 主键 | 说明 | 记录数 |
+|-----|------|------|--------|
+| articles | url_hash (SHA-256) | 文章数据（所有维度） | 2220+ |
+| source_states | source_id | 信源运行状态 | 99 |
+| crawl_logs | id (自增) | 爬取执行日志 | 439+ |
+| snapshots | source_id | 页面快照数据 | 按需 |
+| sentiment_contents | id (自增) | 舆情内容 | 327 |
+| sentiment_comments | id (自增) | 舆情评论 | 9731 |
+| sentiment_creators | id (自增) | 舆情创作者 | 98 |
+| scholars | id | 学者数据 | 2686 |
+| institutions | id | 机构数据（高校+院系） | 按需 |
+| projects | id | 项目数据 | 按需 |
+| events | id | 学术活动数据 | 按需 |
+| intel_cache | module, filename | Intel 处理结果缓存 | 按需 |
+
+### 本地文件（仅保留）
 
 ```
 data/
-├── raw/{dimension}/{group?}/{source_id}/latest.json   # 爬取原始数据（大多数维度）
-├── scholars/{university_group}/{source_id}/latest.json # 学者采集原始数据（已废弃，仅用于爬虫输出）
-├── scholars/scholars.json                              # 统一学者库（所有学者的完整信息，2679 位学者）
-├── scholars/institutions.json                          # 机构图谱（Pipeline Stage 4d 从 scholars.json 自动重建）
-├── scholars/events.json                                # 学术活动数据
-├── scholars/projects.json                              # 项目库数据（/api/v1/projects/ 使用）
-├── scholars/manual/manual_scholars/latest.json         # 手动录入学者数据
-├── processed/
-│   ├── policy_intel/                                   # 政策智能处理输出
-│   ├── personnel_intel/                                # 人事情报处理输出
-│   ├── tech_frontier/                                  # 科技前沿处理输出
-│   ├── university_eco/                                 # 高校生态处理输出
-│   └── daily_briefing/                                 # 每日简报处理输出
 ├── state/
-│   ├── source_state.json           # 信源运行状态（last_crawl_at, failures, is_enabled_override）
-│   ├── article_annotations.json    # 文章标注（is_read, importance）
-│   └── snapshots/{source_id}.json  # 快照数据（替代原 DB snapshots 表）
-├── logs/{source_id}/crawl_logs.json # 爬取执行日志（每源最多 100 条）
-└── index.json                       # 前端索引（Pipeline Stage 5 生成）
+│   ├── article_annotations.json        # 文章标注（用户操作）
+│   ├── scholar_annotations.json        # 学者标注（用户操作）
+│   ├── faculty_annotations.json        # 教师标注（用户操作）
+│   └── supervised_students.json        # 指导学生数据（用户操作）
+├── institutions/                       # 机构相关静态文件
+├── reports/                            # 报告文件
+└── index.json                          # 前端索引（Pipeline 生成）
+```
+
+### 数据库连接
+
+- **配置**：`.env` 中的 `SUPABASE_URL` 和 `SUPABASE_KEY`
+- **客户端**：`app/db/client.py` 提供全局 AsyncClient
+- **初始化**：`app/main.py` 启动时调用 `init_client()`
+- **降级策略**：代码中保留 JSON 降级逻辑，但因文件不存在会自动失效
+
+### 迁移历史
+
+- **2026-03-10**：完成 articles、source_states、crawl_logs、snapshots、sentiment 迁移
+- **2026-03-11**：删除所有本地 JSON 数据文件，完全依赖数据库（释放 28.32 MB 空间）
+
+### 旧数据结构（已废弃）
+
+以下路径已不再使用，仅作历史参考：
+
+```
+data/raw/{dimension}/{group?}/{source_id}/latest.json   # 已删除
+data/scholars/scholars.json                              # 已删除
+data/scholars/institutions.json                          # 已删除
+data/scholars/projects.json                              # 已删除
+data/scholars/events.json                                # 已删除
+data/processed/policy_intel/                             # 已删除
+data/processed/personnel_intel/                          # 已删除
+data/processed/tech_frontier/                            # 已删除
+data/processed/university_eco/                           # 已删除
+data/processed/daily_briefing/                           # 已删除
+data/state/source_state.json                             # 已删除
+data/logs/{source_id}/crawl_logs.json                    # 已删除
 ```
 
 ## 文件路由规则

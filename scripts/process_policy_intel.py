@@ -352,7 +352,7 @@ async def main() -> None:
     dims = [args.dimension] if args.dimension else DIMENSIONS
     all_articles: list[dict] = []
     for dim in dims:
-        articles = get_articles(dim)
+        articles = await get_articles(dim)
         logger.info("Loaded %d articles from %s", len(articles), dim)
         all_articles.extend(articles)
 

@@ -37,7 +37,7 @@ def _merge_config_and_state(
 
 async def list_sources(dimension: str | None = None) -> list[dict[str, Any]]:
     configs = load_all_source_configs()
-    states = get_all_source_states()
+    states = await get_all_source_states()
 
     results = []
     for config in configs:
@@ -54,7 +54,7 @@ async def get_source(source_id: str) -> dict[str, Any] | None:
     config = next((c for c in configs if c["id"] == source_id), None)
     if config is None:
         return None
-    states = get_all_source_states()
+    states = await get_all_source_states()
     return _merge_config_and_state(config, states)
 
 
@@ -63,6 +63,6 @@ async def update_source(source_id: str, is_enabled: bool) -> dict[str, Any] | No
     config = next((c for c in configs if c["id"] == source_id), None)
     if config is None:
         return None
-    set_enabled_override(source_id, is_enabled)
-    states = get_all_source_states()
+    await set_enabled_override(source_id, is_enabled)
+    states = await get_all_source_states()
     return _merge_config_and_state(config, states)

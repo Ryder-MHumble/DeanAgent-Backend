@@ -69,26 +69,26 @@ FEED_MIN_SCORE = 20  # Minimum match_score for articles to appear in relatedNews
 # ---------------------------------------------------------------------------
 
 
-def _load_all_articles() -> list[dict]:
+async def _load_all_articles() -> list[dict]:
     """Load articles from all relevant dimensions and filter."""
     articles: list[dict] = []
 
     # 1. Technology dimension (all sources)
     for dim in PRIMARY_DIMENSIONS:
-        articles.extend(get_articles(dim))
+        articles.extend(await get_articles(dim))
 
     # 2. Twitter (only tech-related sources)
-    twitter_articles = get_articles(TWITTER_DIMENSION)
+    twitter_articles = await get_articles(TWITTER_DIMENSION)
     articles.extend(
         a for a in twitter_articles
         if a.get("source_id") in TWITTER_TECH_SOURCES
     )
 
     # 3. Industry dimension (all enabled sources)
-    articles.extend(get_articles(INDUSTRY_DIMENSION))
+    articles.extend(await get_articles(INDUSTRY_DIMENSION))
 
     # 4. Universities (only AI research institute sources)
-    uni_articles = get_articles(UNIVERSITY_DIMENSION)
+    uni_articles = await get_articles(UNIVERSITY_DIMENSION)
     articles.extend(
         a for a in uni_articles
         if a.get("source_id") in UNI_AI_INSTITUTE_SOURCES
@@ -251,7 +251,7 @@ async def process_tech_frontier_pipeline(
     Returns summary dict for the pipeline orchestrator.
     """
     # Load articles from all dimensions
-    all_articles = _load_all_articles()
+    all_articles = await _load_all_articles()
     logger.info("Tech frontier pipeline: loaded %d articles", len(all_articles))
 
     # Deduplicate

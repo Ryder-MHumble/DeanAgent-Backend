@@ -237,9 +237,9 @@ async def process_articles_llm(
 # Main
 # ---------------------------------------------------------------------------
 
-def main_rules_only(args: argparse.Namespace) -> None:
+async def main_rules_only(args: argparse.Namespace) -> None:
     """Original rule-based processing (no LLM)."""
-    articles = get_articles(DIMENSION)
+    articles = await get_articles(DIMENSION)
     logger.info("Loaded %d articles from %s", len(articles), DIMENSION)
 
     # Deduplicate
@@ -330,7 +330,7 @@ def main_rules_only(args: argparse.Namespace) -> None:
 
 async def main_with_enrich(args: argparse.Namespace) -> None:
     """Process with LLM enrichment: rules extraction → LLM analysis → enriched_feed.json."""
-    articles = get_articles(DIMENSION)
+    articles = await get_articles(DIMENSION)
     logger.info("Loaded %d articles from %s", len(articles), DIMENSION)
 
     # Deduplicate
@@ -453,7 +453,7 @@ async def main_with_enrich(args: argparse.Namespace) -> None:
     )
 
     # Also rebuild rules-only output for backward compat
-    main_rules_only(argparse.Namespace(force=True, dry_run=False))
+    await main_rules_only(argparse.Namespace(force=True, dry_run=False))
     logger.info("Done (with enrichment)!")
 
 
@@ -467,7 +467,7 @@ def main() -> None:
     if args.enrich:
         asyncio.run(main_with_enrich(args))
     else:
-        main_rules_only(args)
+        asyncio.run(main_rules_only(args))
 
 
 if __name__ == "__main__":

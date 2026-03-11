@@ -101,11 +101,11 @@ def _to_article_detail(item: dict[str, Any]) -> dict[str, Any]:
 # 1. Overview
 # ---------------------------------------------------------------------------
 
-def get_overview() -> dict[str, Any]:
+async def get_overview() -> dict[str, Any]:
     """Build dashboard overview for the universities dimension."""
     from app.scheduler.manager import load_all_source_configs
 
-    articles = get_articles(DIMENSION)
+    articles = await get_articles(DIMENSION)
     today = date.today()
 
     # Per-group aggregation
@@ -167,7 +167,7 @@ def get_overview() -> dict[str, Any]:
 # 2. Feed
 # ---------------------------------------------------------------------------
 
-def get_feed(
+async def get_feed(
     group: str | None = None,
     source_id: str | None = None,
     source_ids: str | None = None,
@@ -184,7 +184,7 @@ def get_feed(
     source_filter = parse_source_filter(source_id, source_ids, source_name, source_names)
 
     # 如果有 source_filter，不传 source_id 给 get_articles，之后手动过滤
-    articles = get_articles(
+    articles = await get_articles(
         DIMENSION,
         group=group,
         source_id=None if source_filter else source_id,
@@ -223,9 +223,9 @@ def get_feed(
 # 3. Article Detail
 # ---------------------------------------------------------------------------
 
-def get_article_detail(url_hash: str) -> dict[str, Any] | None:
+async def get_article_detail(url_hash: str) -> dict[str, Any] | None:
     """Get full article by url_hash. Returns None if not found."""
-    articles = get_articles(DIMENSION)
+    articles = await get_articles(DIMENSION)
     for item in articles:
         if item.get("url_hash") == url_hash:
             return _to_article_detail(item)

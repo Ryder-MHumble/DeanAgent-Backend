@@ -166,7 +166,7 @@ async def process_university_eco_pipeline(
 
     Returns summary dict for the pipeline orchestrator.
     """
-    articles = get_articles(DIMENSION)
+    articles = await get_articles(DIMENSION)
     logger.info("University eco pipeline: loaded %d articles", len(articles))
 
     # Deduplicate by url_hash

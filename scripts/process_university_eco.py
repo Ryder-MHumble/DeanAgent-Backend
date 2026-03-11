@@ -43,7 +43,7 @@ async def main() -> None:
         from app.services.intel.university.rules import classify_article
         from app.services.stores.json_reader import get_articles
 
-        articles = get_articles("universities")
+        articles = await get_articles("universities")
         seen: set[str] = set()
         unique = []
         for a in articles:

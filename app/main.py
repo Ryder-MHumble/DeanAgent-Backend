@@ -7,6 +7,7 @@ from scalar_fastapi import get_scalar_api_reference
 
 from app.api.v1.router import v1_router
 from app.config import BASE_DIR, settings
+from app.db.client import close_client, init_client
 from app.scheduler.manager import SchedulerManager
 
 logging.basicConfig(
@@ -131,6 +132,14 @@ async def lifespan(app: FastAPI):
     logger.info("  Information Crawler starting")
     logger.info("=" * 60)
 
+    # Step 0: Initialize Supabase client (optional — skipped if not configured)
+    try:
+        if settings.SUPABASE_URL and settings.SUPABASE_KEY:
+            await init_client(settings.SUPABASE_URL, settings.SUPABASE_KEY)
+            logger.info("Supabase client initialized")
+    except Exception as e:
+        logger.warning("Supabase client initialization failed: %s", e)
+
     # Step 1: Validate dependencies
     startup_issues = await _validate_startup()
 
@@ -176,6 +185,8 @@ async def lifespan(app: FastAPI):
     yield
 
     # Shutdown
+    await close_client()
+
     if scheduler:
         try:
             await scheduler.stop()

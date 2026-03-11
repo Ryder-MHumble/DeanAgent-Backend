@@ -1,12 +1,4 @@
-"""Project service — 项目库 CRUD 操作.
-
-数据存储：data/scholars/projects.json
-格式：
-{
-  "last_updated": "ISO8601",
-  "projects": [ { ...project fields... } ]
-}
-"""
+"""Project service — 项目库 CRUD 操作（Supabase SDK，JSON 降级）."""
 from __future__ import annotations
 
 import json
@@ -38,8 +30,12 @@ class ProjectAlreadyExistsError(ValueError):
 
 
 # ---------------------------------------------------------------------------
-# Internal I/O helpers
+# Helpers
 # ---------------------------------------------------------------------------
+
+def _get_client():
+    from app.db.client import get_client  # noqa: PLC0415
+    return get_client()
 
 
 def _load() -> dict[str, Any]:
@@ -57,7 +53,21 @@ def _save(data: dict[str, Any]) -> None:
 
 
 def _generate_id() -> str:
-    return uuid.uuid4().hex[:12]
+    return "proj_" + uuid.uuid4().hex[:8]
+
+
+def _row_to_dict(row: dict) -> dict:
+    """Normalize DB row (JSONB fields may be dicts or strings)."""
+    for f in ("related_scholars", "outputs", "cooperation_institutions"):
+        v = row.get(f)
+        if isinstance(v, str):
+            try:
+                row[f] = json.loads(v)
+            except Exception:
+                row[f] = []
+        elif v is None:
+            row[f] = []
+    return row
 
 
 def _to_list_item(p: dict) -> ProjectListItem:
@@ -72,22 +82,21 @@ def _to_list_item(p: dict) -> ProjectListItem:
         end_year=p.get("end_year"),
         status=p.get("status", "在研"),
         category=p.get("category"),
-        tags=p.get("tags", []),
+        tags=p.get("tags") or [],
     )
 
 
 def _to_detail(p: dict) -> ProjectDetailResponse:
-    from app.schemas.project import ProjectScholar, ProjectOutput
+    from app.schemas.project import ProjectScholar, ProjectOutput  # noqa: PLC0415
 
     scholars = [
         ProjectScholar(**s) if isinstance(s, dict) else s
-        for s in p.get("related_scholars", [])
+        for s in (p.get("related_scholars") or [])
     ]
     outputs = [
         ProjectOutput(**o) if isinstance(o, dict) else o
-        for o in p.get("outputs", [])
+        for o in (p.get("outputs") or [])
     ]
-
     return ProjectDetailResponse(
         id=p["id"],
         name=p["name"],
@@ -100,21 +109,20 @@ def _to_detail(p: dict) -> ProjectDetailResponse:
         start_year=p.get("start_year"),
         end_year=p.get("end_year"),
         description=p.get("description"),
-        keywords=p.get("keywords", []),
-        tags=p.get("tags", []),
+        keywords=p.get("keywords") or [],
+        tags=p.get("tags") or [],
         related_scholars=scholars,
-        cooperation_institutions=p.get("cooperation_institutions", []),
+        cooperation_institutions=p.get("cooperation_institutions") or [],
         outputs=outputs,
         created_at=p.get("created_at"),
         updated_at=p.get("updated_at"),
-        extra=p.get("extra", {}),
+        extra=p.get("extra") or {},
     )
 
 
 # ---------------------------------------------------------------------------
 # Read operations
 # ---------------------------------------------------------------------------
-
 
 def list_projects(
     *,
@@ -127,54 +135,88 @@ def list_projects(
     pi_name: str | None = None,
     tag: str | None = None,
 ) -> ProjectListResponse:
-    """列出项目（支持过滤和分页）."""
+    try:
+        import asyncio  # noqa: PLC0415
+        client = _get_client()
+
+        async def _fetch():
+            q = client.table("projects").select("*")
+            if status:
+                q = q.eq("status", status)
+            if category:
+                q = q.eq("category", category)
+            if funder:
+                q = q.ilike("funder", f"%{funder}%")
+            if pi_name:
+                q = q.ilike("pi_name", f"%{pi_name}%")
+            if keyword:
+                q = q.or_(f"name.ilike.%{keyword}%,description.ilike.%{keyword}%")
+            res = await q.execute()
+            return res.data or []
+
+        rows = asyncio.get_event_loop().run_until_complete(_fetch())
+        rows = [_row_to_dict(r) for r in rows]
+
+        # tag filter (array contains — done in Python for simplicity)
+        if tag:
+            rows = [r for r in rows if tag in (r.get("tags") or [])]
+
+        total = len(rows)
+        total_pages = max(1, (total + page_size - 1) // page_size)
+        start = (page - 1) * page_size
+        items = [_to_list_item(r) for r in rows[start: start + page_size]]
+        return ProjectListResponse(total=total, page=page, page_size=page_size,
+                                   total_pages=total_pages, items=items)
+    except RuntimeError:
+        pass
+    except Exception as exc:
+        import logging; logging.getLogger(__name__).warning("DB list_projects failed: %s", exc)
+
+    # JSON fallback
     data = _load()
     projects = data.get("projects", [])
-
-    # 过滤
     if status:
         projects = [p for p in projects if p.get("status") == status]
     if category:
         projects = [p for p in projects if p.get("category") == category]
     if funder:
-        funder_lower = funder.lower().replace(" ", "")
-        projects = [
-            p for p in projects
-            if funder_lower in (p.get("funder") or "").lower().replace(" ", "")
-        ]
+        funder_lower = funder.lower()
+        projects = [p for p in projects if funder_lower in (p.get("funder") or "").lower()]
     if pi_name:
-        pi_lower = pi_name.lower()
-        projects = [
-            p for p in projects
-            if pi_lower in p.get("pi_name", "").lower()
-        ]
+        projects = [p for p in projects if pi_name.lower() in p.get("pi_name", "").lower()]
     if tag:
         projects = [p for p in projects if tag in p.get("tags", [])]
     if keyword:
         kw = keyword.lower()
-        projects = [
-            p for p in projects
-            if kw in p.get("name", "").lower()
-            or kw in (p.get("description") or "").lower()
-            or any(kw in k.lower() for k in p.get("keywords", []))
-        ]
-
+        projects = [p for p in projects
+                    if kw in p.get("name", "").lower()
+                    or kw in (p.get("description") or "").lower()]
     total = len(projects)
     total_pages = max(1, (total + page_size - 1) // page_size)
     start = (page - 1) * page_size
-    items = [_to_list_item(p) for p in projects[start : start + page_size]]
-
-    return ProjectListResponse(
-        total=total,
-        page=page,
-        page_size=page_size,
-        total_pages=total_pages,
-        items=items,
-    )
+    items = [_to_list_item(p) for p in projects[start: start + page_size]]
+    return ProjectListResponse(total=total, page=page, page_size=page_size,
+                               total_pages=total_pages, items=items)
 
 
 def get_project(project_id: str) -> ProjectDetailResponse | None:
-    """根据 ID 获取项目详情."""
+    try:
+        import asyncio  # noqa: PLC0415
+        client = _get_client()
+
+        async def _fetch():
+            res = await client.table("projects").select("*").eq("id", project_id).execute()
+            return res.data
+
+        rows = asyncio.get_event_loop().run_until_complete(_fetch())
+        if rows:
+            return _to_detail(_row_to_dict(rows[0]))
+        return None
+    except RuntimeError:
+        pass
+    except Exception as exc:
+        import logging; logging.getLogger(__name__).warning("DB get_project failed: %s", exc)
+
     data = _load()
     for p in data.get("projects", []):
         if p["id"] == project_id:
@@ -183,40 +225,75 @@ def get_project(project_id: str) -> ProjectDetailResponse | None:
 
 
 def get_stats() -> ProjectStatsResponse:
-    """项目库统计."""
+    try:
+        import asyncio  # noqa: PLC0415
+        client = _get_client()
+
+        async def _fetch():
+            res = await client.table("projects").select(
+                "status,category,funder,funding_amount"
+            ).execute()
+            return res.data or []
+
+        rows = asyncio.get_event_loop().run_until_complete(_fetch())
+        by_status: dict[str, int] = defaultdict(int)
+        by_category: dict[str, int] = defaultdict(int)
+        by_funder_count: dict[str, int] = defaultdict(int)
+        by_funder_amount: dict[str, float] = defaultdict(float)
+        total_funding = 0.0
+        active_count = 0
+        for r in rows:
+            s = r.get("status", "未知")
+            by_status[s] += 1
+            if s == "在研":
+                active_count += 1
+            cat = r.get("category") or "未分类"
+            by_category[cat] += 1
+            funder = r.get("funder") or "未知"
+            by_funder_count[funder] += 1
+            amount = float(r.get("funding_amount") or 0)
+            by_funder_amount[funder] += amount
+            total_funding += amount
+        return ProjectStatsResponse(
+            total=len(rows),
+            by_status=[{"status": k, "count": v} for k, v in sorted(by_status.items())],
+            by_category=[{"category": k, "count": v} for k, v in sorted(by_category.items())],
+            by_funder=[{"funder": k, "count": by_funder_count[k],
+                        "total_amount": by_funder_amount[k]} for k in sorted(by_funder_count)],
+            total_funding=total_funding,
+            active_count=active_count,
+        )
+    except RuntimeError:
+        pass
+    except Exception as exc:
+        import logging; logging.getLogger(__name__).warning("DB get_stats failed: %s", exc)
+
     data = _load()
     projects = data.get("projects", [])
-
     by_status: dict[str, int] = defaultdict(int)
     by_category: dict[str, int] = defaultdict(int)
     by_funder_count: dict[str, int] = defaultdict(int)
     by_funder_amount: dict[str, float] = defaultdict(float)
     total_funding = 0.0
     active_count = 0
-
     for p in projects:
-        status = p.get("status", "未知")
-        by_status[status] += 1
-        if status == "在研":
+        s = p.get("status", "未知")
+        by_status[s] += 1
+        if s == "在研":
             active_count += 1
-
         cat = p.get("category") or "未分类"
         by_category[cat] += 1
-
         funder = p.get("funder") or "未知"
         by_funder_count[funder] += 1
-        amount = p.get("funding_amount") or 0.0
+        amount = float(p.get("funding_amount") or 0)
         by_funder_amount[funder] += amount
         total_funding += amount
-
     return ProjectStatsResponse(
         total=len(projects),
         by_status=[{"status": k, "count": v} for k, v in sorted(by_status.items())],
         by_category=[{"category": k, "count": v} for k, v in sorted(by_category.items())],
-        by_funder=[
-            {"funder": k, "count": by_funder_count[k], "total_amount": by_funder_amount[k]}
-            for k in sorted(by_funder_count.keys())
-        ],
+        by_funder=[{"funder": k, "count": by_funder_count[k],
+                    "total_amount": by_funder_amount[k]} for k in sorted(by_funder_count)],
         total_funding=total_funding,
         active_count=active_count,
     )
@@ -226,21 +303,25 @@ def get_stats() -> ProjectStatsResponse:
 # Write operations
 # ---------------------------------------------------------------------------
 
+def _serialize_for_db(p: dict) -> dict:
+    row = {k: v for k, v in p.items()
+           if k not in ("keywords", "extra")}  # not in schema
+    for f in ("related_scholars", "outputs", "cooperation_institutions"):
+        v = row.get(f)
+        if isinstance(v, list):
+            row[f] = [item.model_dump() if hasattr(item, "model_dump") else item for item in v]
+    return row
+
 
 def create_project(payload: dict[str, Any]) -> ProjectDetailResponse:
-    """创建项目，自动生成 ID 和时间戳."""
-    data = _load()
     now = datetime.now(timezone.utc).isoformat()
     project_id = _generate_id()
-
     new_project: dict[str, Any] = {
         "id": project_id,
         "created_at": now,
         "updated_at": now,
         **{k: v for k, v in payload.items() if v is not None},
     }
-
-    # 清洗嵌套对象（Pydantic model → dict）
     for list_field in ("related_scholars", "outputs"):
         if isinstance(new_project.get(list_field), list):
             new_project[list_field] = [
@@ -248,39 +329,88 @@ def create_project(payload: dict[str, Any]) -> ProjectDetailResponse:
                 for item in new_project[list_field]
             ]
 
+    # Write to DB
+    try:
+        import asyncio  # noqa: PLC0415
+        client = _get_client()
+        asyncio.get_event_loop().run_until_complete(
+            client.table("projects").insert(_serialize_for_db(new_project)).execute()
+        )
+    except RuntimeError:
+        pass
+    except Exception as exc:
+        import logging; logging.getLogger(__name__).warning("DB create_project failed: %s", exc)
+
+    # Always write JSON backup
+    data = _load()
     data.setdefault("projects", []).append(new_project)
     _save(data)
     return _to_detail(new_project)
 
 
 def update_project(project_id: str, updates: dict[str, Any]) -> ProjectDetailResponse | None:
-    """更新项目字段（仅更新传入的字段）."""
+    now = datetime.now(timezone.utc).isoformat()
+    clean_updates = {k: v for k, v in updates.items() if v is not None}
+    clean_updates["updated_at"] = now
+    for list_field in ("related_scholars", "outputs"):
+        if isinstance(clean_updates.get(list_field), list):
+            clean_updates[list_field] = [
+                item.model_dump() if hasattr(item, "model_dump") else item
+                for item in clean_updates[list_field]
+            ]
+
+    try:
+        import asyncio  # noqa: PLC0415
+        client = _get_client()
+        db_updates = {k: v for k, v in clean_updates.items() if k not in ("keywords", "extra")}
+        res = asyncio.get_event_loop().run_until_complete(
+            client.table("projects").update(db_updates).eq("id", project_id).execute()
+        )
+        if res.data:
+            updated = _row_to_dict(res.data[0])
+            # Merge back extra fields from JSON for response
+            data = _load()
+            for p in data.get("projects", []):
+                if p["id"] == project_id:
+                    p.update(clean_updates)
+                    _save(data)
+                    updated["keywords"] = p.get("keywords", [])
+                    updated["extra"] = p.get("extra", {})
+                    break
+            return _to_detail(updated)
+    except RuntimeError:
+        pass
+    except Exception as exc:
+        import logging; logging.getLogger(__name__).warning("DB update_project failed: %s", exc)
+
     data = _load()
     for p in data.get("projects", []):
         if p["id"] == project_id:
-            p.update({k: v for k, v in updates.items() if v is not None})
-            p["updated_at"] = datetime.now(timezone.utc).isoformat()
-
-            # 清洗嵌套对象
-            for list_field in ("related_scholars", "outputs"):
-                if isinstance(p.get(list_field), list):
-                    p[list_field] = [
-                        item.model_dump() if hasattr(item, "model_dump") else item
-                        for item in p[list_field]
-                    ]
-
+            p.update(clean_updates)
             _save(data)
             return _to_detail(p)
     return None
 
 
 def delete_project(project_id: str) -> bool:
-    """删除项目，返回 True 表示成功，False 表示未找到."""
+    deleted = False
+    try:
+        import asyncio  # noqa: PLC0415
+        client = _get_client()
+        res = asyncio.get_event_loop().run_until_complete(
+            client.table("projects").delete().eq("id", project_id).execute()
+        )
+        deleted = bool(res.data)
+    except RuntimeError:
+        pass
+    except Exception as exc:
+        import logging; logging.getLogger(__name__).warning("DB delete_project failed: %s", exc)
+
     data = _load()
     original = data.get("projects", [])
     filtered = [p for p in original if p["id"] != project_id]
-    if len(filtered) == len(original):
-        return False
-    data["projects"] = filtered
-    _save(data)
-    return True
+    if len(filtered) < len(original):
+        data["projects"] = filtered
+        _save(data)
+        return True
+    return deleted

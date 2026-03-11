@@ -29,11 +29,37 @@ _ACHIEVEMENT_FIELDS = [
     "representative_publications",
     "patents",
     "awards",
+    "h_index",
+    "citations_count",
+    "publications_count",
 ]
 
 
 def _load_all_raw() -> list[dict[str, Any]]:
-    """Load all scholar records from the unified scholars.json."""
+    """Load all scholar records — DB preferred, JSON fallback."""
+    try:
+        from app.db.client import get_client  # noqa: PLC0415
+        import asyncio  # noqa: PLC0415
+        client = get_client()
+
+        async def _fetch():
+            res = await client.table("scholars").select("*").execute()
+            return res.data or []
+
+        rows = asyncio.get_event_loop().run_until_complete(_fetch())
+        if rows:
+            # Normalize DB rows: map id → url_hash for compatibility
+            for r in rows:
+                if "url_hash" not in r:
+                    r["url_hash"] = r.get("id", "")
+                if "url" not in r:
+                    r["url"] = r.get("source_url", "")
+            return rows
+    except RuntimeError:
+        pass
+    except Exception as exc:
+        logger.warning("DB _load_all_raw failed, using JSON: %s", exc)
+
     if not SCHOLARS_FILE.exists():
         return []
     try:

@@ -114,7 +114,7 @@ async def get_enriched_feed(
     limit: int = Query(50, ge=1, le=200, description="返回条数上限"),
     offset: int = Query(0, ge=0, description="偏移量"),
 ):
-    return personnel_service.get_enriched_feed(
+    return await personnel_service.get_enriched_feed(
         group=group,
         importance=importance,
         min_relevance=min_relevance,
@@ -135,4 +135,4 @@ async def get_enriched_feed(
     description="获取 LLM 富化人事数据的汇总统计，包括按部门/类型分布和高相关性记录数。",
 )
 async def get_enriched_stats():
-    return personnel_service.get_enriched_stats()
+    return await personnel_service.get_enriched_stats()

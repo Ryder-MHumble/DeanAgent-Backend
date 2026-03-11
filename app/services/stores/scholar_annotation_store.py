@@ -51,6 +51,9 @@ _ACHIEVEMENT_FIELDS: frozenset[str] = frozenset({
     "representative_publications",
     "patents",
     "awards",
+    "h_index",
+    "citations_count",
+    "publications_count",
 })
 
 

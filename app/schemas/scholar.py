@@ -809,6 +809,9 @@ class AchievementUpdate(BaseModel):
     representative_publications: list[PublicationRecord] | None = None
     patents: list[PatentRecord] | None = None
     awards: list[AwardRecord] | None = None
+    h_index: int | None = None
+    citations_count: int | None = None
+    publications_count: int | None = None
 
 
 # ---------------------------------------------------------------------------

@@ -1,10 +1,11 @@
-"""Service layer for sentiment monitoring — reads social media data from Supabase."""
+"""Service layer for sentiment monitoring — reads social media data from main DB."""
 
 from __future__ import annotations
 
 import logging
 import math
 
+from app.db.client import get_client
 from app.schemas.sentiment import (
     PlatformStats,
     SentimentComment,
@@ -13,7 +14,6 @@ from app.schemas.sentiment import (
     SentimentFeedResponse,
     SentimentOverview,
 )
-from app.services.external.supabase_client import get_supabase
 
 logger = logging.getLogger(__name__)
 
@@ -41,9 +41,9 @@ async def get_feed(
     page_size: int = 20,
 ) -> SentimentFeedResponse:
     """Return a paginated feed of social media content."""
-    sb = get_supabase()
+    db = get_client()
 
-    query = sb.table("contents").select("*", count="exact")
+    query = db.table("sentiment_contents").select("*", count="exact")
 
     if platform:
         query = query.eq("platform", platform)
@@ -53,15 +53,13 @@ async def get_feed(
             f"nickname.ilike.%{keyword}%"
         )
 
-    # Sorting
     desc = sort_order == "desc"
     query = query.order(sort_by, desc=desc)
 
-    # Pagination
     offset = (page - 1) * page_size
     query = query.range(offset, offset + page_size - 1)
 
-    result = query.execute()
+    result = await query.execute()
     total = result.count or 0
     items = [SentimentContentItem(**row) for row in (result.data or [])]
 
@@ -78,11 +76,10 @@ async def get_feed(
 
 async def get_content_detail(content_id: str) -> SentimentContentDetail | None:
     """Return a single content item with its comments."""
-    sb = get_supabase()
+    db = get_client()
 
-    # Fetch content
-    content_result = (
-        sb.table("contents")
+    content_result = await (
+        db.table("sentiment_contents")
         .select("*")
         .eq("content_id", content_id)
         .limit(1)
@@ -93,9 +90,8 @@ async def get_content_detail(content_id: str) -> SentimentContentDetail | None:
 
     content_data = content_result.data[0]
 
-    # Fetch comments
-    comments_result = (
-        sb.table("comments")
+    comments_result = await (
+        db.table("sentiment_comments")
         .select("*")
         .eq("content_id", content_id)
         .order("publish_time", desc=False)
@@ -110,22 +106,19 @@ async def get_content_detail(content_id: str) -> SentimentContentDetail | None:
 
 async def get_overview() -> SentimentOverview:
     """Return dashboard overview statistics."""
-    sb = get_supabase()
+    db = get_client()
 
-    # Total contents
-    contents_result = (
-        sb.table("contents").select("*", count="exact").limit(0).execute()
+    contents_result = await (
+        db.table("sentiment_contents").select("*", count="exact").limit(0).execute()
     )
     total_contents = contents_result.count or 0
 
-    # Total comments
-    comments_result = (
-        sb.table("comments").select("*", count="exact").limit(0).execute()
+    comments_result = await (
+        db.table("sentiment_comments").select("*", count="exact").limit(0).execute()
     )
     total_comments = comments_result.count or 0
 
-    # Fetch all contents for aggregation (OK for small datasets <1000)
-    all_contents = sb.table("contents").select(
+    all_contents = await db.table("sentiment_contents").select(
         "id,platform,content_id,content_type,title,description,content_url,"
         "cover_url,nickname,avatar,ip_location,liked_count,comment_count,"
         "share_count,collected_count,source_keyword,publish_time,created_at,"
@@ -133,7 +126,6 @@ async def get_overview() -> SentimentOverview:
     ).execute()
     rows = all_contents.data or []
 
-    # Per-platform aggregation
     platform_map: dict[str, dict] = {}
     total_engagement = 0
     for row in rows:
@@ -172,7 +164,6 @@ async def get_overview() -> SentimentOverview:
         )
     ]
 
-    # Top 5 content by engagement
     rows_sorted = sorted(
         rows,
         key=lambda r: (
@@ -185,7 +176,6 @@ async def get_overview() -> SentimentOverview:
     )
     top_content = [SentimentContentItem(**r) for r in rows_sorted[:5]]
 
-    # Distinct keywords
     keywords = sorted({r["source_keyword"] for r in rows if r.get("source_keyword")})
 
     return SentimentOverview(

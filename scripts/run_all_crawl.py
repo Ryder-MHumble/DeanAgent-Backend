@@ -192,7 +192,7 @@ async def _crawl_single_source(config: dict, pbar=None) -> dict:
         )
 
         # 保存 JSON
-        json_path = save_crawl_result_json(result, config)
+        json_path = await save_crawl_result_json(result, config)
 
         status_str = result.status.value
 

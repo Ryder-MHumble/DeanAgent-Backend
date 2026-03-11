@@ -12,13 +12,13 @@ from app.services.stores.source_state import get_all_source_states
 async def get_crawl_logs(
     source_id: str | None = None, limit: int = 50
 ) -> list[dict[str, Any]]:
-    return _get_logs(source_id=source_id, limit=limit)
+    return await _get_logs(source_id=source_id, limit=limit)
 
 
 async def get_crawl_health() -> CrawlHealthResponse:
     """Aggregate crawl health statistics from YAML configs + source state + logs."""
     configs = load_all_source_configs()
-    states = get_all_source_states()
+    states = await get_all_source_states()
 
     total_sources = len(configs)
 
@@ -39,7 +39,7 @@ async def get_crawl_health() -> CrawlHealthResponse:
             else:
                 failing += 1
 
-    recent = get_recent_log_stats(hours=24)
+    recent = await get_recent_log_stats(hours=24)
 
     return CrawlHealthResponse(
         total_sources=total_sources,
