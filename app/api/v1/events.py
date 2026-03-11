@@ -49,7 +49,7 @@ async def list_events(
     page: int = Query(1, ge=1, description="页码"),
     page_size: int = Query(20, ge=1, le=200, description="每页条数"),
 ):
-    return svc.get_event_list(
+    return await svc.get_event_list(
         event_type=event_type,
         speaker_name=speaker_name,
         start_date=start_date,
@@ -68,7 +68,7 @@ async def list_events(
     description="返回活动总览统计：总数、按类型/月份分布、总讲者数、平均时长。",
 )
 async def get_stats():
-    return svc.get_event_stats()
+    return await svc.get_event_stats()
 
 
 @router.get(
@@ -78,7 +78,7 @@ async def get_stats():
     description="根据活动 ID 获取完整活动信息（讲者、时间、地点、关联学者等）。",
 )
 async def get_event(event_id: str):
-    result = svc.get_event_detail(event_id)
+    result = await svc.get_event_detail(event_id)
     if result is None:
         raise HTTPException(status_code=404, detail=f"Event '{event_id}' not found")
     return result
@@ -97,7 +97,7 @@ async def get_event(event_id: str):
     status_code=201,
 )
 async def create_event(body: EventCreate):
-    return svc.create_event(body.model_dump())
+    return await svc.create_event(body.model_dump())
 
 
 @router.patch(
@@ -108,7 +108,7 @@ async def create_event(body: EventCreate):
 )
 async def update_event(event_id: str, body: EventUpdate):
     updates = body.model_dump(exclude_none=True)
-    result = svc.update_event(event_id, updates)
+    result = await svc.update_event(event_id, updates)
     if result is None:
         raise HTTPException(status_code=404, detail=f"Event '{event_id}' not found")
     return result
@@ -121,7 +121,7 @@ async def update_event(event_id: str, body: EventUpdate):
     status_code=204,
 )
 async def delete_event(event_id: str):
-    deleted = svc.delete_event(event_id)
+    deleted = await svc.delete_event(event_id)
     if not deleted:
         raise HTTPException(status_code=404, detail=f"Event '{event_id}' not found")
 
@@ -138,7 +138,7 @@ async def delete_event(event_id: str):
     description="返回指定活动关联的所有学者 url_hash 列表。",
 )
 async def get_event_scholars(event_id: str):
-    result = svc.get_event_scholars(event_id)
+    result = await svc.get_event_scholars(event_id)
     if result is None:
         raise HTTPException(status_code=404, detail=f"Event '{event_id}' not found")
     return result
@@ -152,7 +152,7 @@ async def get_event_scholars(event_id: str):
     status_code=201,
 )
 async def add_scholar_to_event(event_id: str, body: ScholarAssociation):
-    result = svc.add_scholar_to_event(event_id, body.scholar_id)
+    result = await svc.add_scholar_to_event(event_id, body.scholar_id)
     if result is None:
         raise HTTPException(status_code=404, detail=f"Event '{event_id}' not found")
     return result
@@ -165,7 +165,7 @@ async def add_scholar_to_event(event_id: str, body: ScholarAssociation):
     description="移除指定活动与学者的关联关系。",
 )
 async def remove_scholar_from_event(event_id: str, scholar_id: str):
-    result = svc.remove_scholar_from_event(event_id, scholar_id)
+    result = await svc.remove_scholar_from_event(event_id, scholar_id)
     if result is None:
         raise HTTPException(status_code=404, detail=f"Event '{event_id}' not found")
     return result

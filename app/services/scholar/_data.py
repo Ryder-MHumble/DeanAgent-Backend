@@ -35,18 +35,14 @@ _ACHIEVEMENT_FIELDS = [
 ]
 
 
-def _load_all_raw() -> list[dict[str, Any]]:
-    """Load all scholar records — DB preferred, JSON fallback."""
+async def _load_all_raw_async() -> list[dict[str, Any]]:
+    """Load all scholar records from DB (async version)."""
     try:
         from app.db.client import get_client  # noqa: PLC0415
-        import asyncio  # noqa: PLC0415
         client = get_client()
+        res = await client.table("scholars").select("*").execute()
+        rows = res.data or []
 
-        async def _fetch():
-            res = await client.table("scholars").select("*").execute()
-            return res.data or []
-
-        rows = asyncio.get_event_loop().run_until_complete(_fetch())
         if rows:
             # Normalize DB rows: map id → url_hash for compatibility
             for r in rows:
@@ -55,8 +51,30 @@ def _load_all_raw() -> list[dict[str, Any]]:
                 if "url" not in r:
                     r["url"] = r.get("source_url", "")
             return rows
-    except RuntimeError:
-        pass
+    except Exception as exc:
+        logger.warning("DB _load_all_raw_async failed: %s", exc)
+
+    return []
+
+
+def _load_all_raw() -> list[dict[str, Any]]:
+    """Load all scholar records — DB preferred, JSON fallback.
+
+    Note: This sync version tries to use asyncio.run() which may fail
+    in some contexts. Prefer using _load_all_raw_async() in async contexts.
+    """
+    try:
+        import asyncio  # noqa: PLC0415
+        # Try to run async version
+        try:
+            return asyncio.run(_load_all_raw_async())
+        except RuntimeError:
+            # Already in event loop, try to get existing loop
+            loop = asyncio.get_event_loop()
+            if loop.is_running():
+                # Can't use run_until_complete in running loop
+                raise RuntimeError("Cannot call sync _load_all_raw from async context")
+            return loop.run_until_complete(_load_all_raw_async())
     except Exception as exc:
         logger.warning("DB _load_all_raw failed, using JSON: %s", exc)
 
@@ -84,6 +102,21 @@ def _merge_annotation(item: dict[str, Any], ann: dict[str, Any]) -> dict[str, An
         existing = list(item.get("recent_updates") or [])
         item["recent_updates"] = existing + user_updates
     return item
+
+
+async def _load_all_with_annotations_async() -> list[dict[str, Any]]:
+    """Load scholar data and merge user annotations (async version)."""
+    items = await _load_all_raw_async()
+    if not items:
+        return items
+    all_annotations = annotation_store._load()
+    if not all_annotations:
+        return items
+    for item in items:
+        url_hash = item.get("url_hash", "")
+        if url_hash in all_annotations:
+            _merge_annotation(item, all_annotations[url_hash])
+    return items
 
 
 def _load_all_with_annotations() -> list[dict[str, Any]]:

@@ -114,7 +114,7 @@ async def search_aminer_organizations(q: str, size: int = 5):
     ),
 )
 async def get_institution(institution_id: str):
-    result = svc.get_institution_detail(institution_id)
+    result = await svc.get_institution_detail(institution_id)
     if result is None:
         raise HTTPException(
             status_code=404, detail=f"Institution '{institution_id}' not found"
@@ -171,7 +171,7 @@ async def get_institution(institution_id: str):
 async def create_institution(body: InstitutionCreate):
     inst_data = body.model_dump()
     try:
-        result = svc.create_institution(inst_data)
+        result = await svc.create_institution(inst_data)
     except InstitutionAlreadyExistsError as exc:
         raise HTTPException(status_code=409, detail=str(exc)) from exc
     except ValueError as exc:
@@ -188,7 +188,7 @@ async def create_institution(body: InstitutionCreate):
             if orgs:
                 fetched_org_name = orgs[0].get("name_en") or orgs[0].get("name")
                 if fetched_org_name:
-                    updated = svc.update_institution(result.id, {"org_name": fetched_org_name})
+                    updated = await svc.update_institution(result.id, {"org_name": fetched_org_name})
                     if updated:
                         result = updated
                         logger.info(
@@ -227,7 +227,7 @@ async def create_institution(body: InstitutionCreate):
 )
 async def update_institution(institution_id: str, body: InstitutionUpdate):
     updates = body.model_dump(exclude_none=True)
-    result = svc.update_institution(institution_id, updates)
+    result = await svc.update_institution(institution_id, updates)
     if result is None:
         raise HTTPException(
             status_code=404, detail=f"Institution '{institution_id}' not found"
@@ -247,7 +247,7 @@ async def update_institution(institution_id: str, body: InstitutionUpdate):
     status_code=204,
 )
 async def delete_institution(institution_id: str):
-    deleted = svc.delete_institution(institution_id)
+    deleted = await svc.delete_institution(institution_id)
     if not deleted:
         raise HTTPException(
             status_code=404, detail=f"Institution '{institution_id}' not found"

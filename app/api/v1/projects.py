@@ -60,7 +60,7 @@ async def list_projects(
     tag: str | None = Query(default=None, description="标签（精确匹配）"),
     keyword: str | None = Query(default=None, description="全文关键词搜索"),
 ):
-    return svc.list_projects(
+    return await svc.list_projects(
         page=page,
         page_size=page_size,
         status=status,
@@ -79,7 +79,7 @@ async def list_projects(
     description="返回项目库的聚合统计信息：按状态、类别、资助机构分布，以及资助总金额和在研项目数。",
 )
 async def get_stats():
-    return svc.get_stats()
+    return await svc.get_stats()
 
 
 @router.get(
@@ -96,7 +96,7 @@ async def get_stats():
     ),
 )
 async def get_project(project_id: str):
-    result = svc.get_project(project_id)
+    result = await svc.get_project(project_id)
     if result is None:
         raise HTTPException(status_code=404, detail=f"Project '{project_id}' not found")
     return result
@@ -121,7 +121,7 @@ async def get_project(project_id: str):
     status_code=201,
 )
 async def create_project(body: ProjectCreate):
-    result = svc.create_project(body.model_dump())
+    result = await svc.create_project(body.model_dump())
     return result
 
 
@@ -133,7 +133,7 @@ async def create_project(body: ProjectCreate):
 )
 async def update_project(project_id: str, body: ProjectUpdate):
     updates = body.model_dump(exclude_none=True)
-    result = svc.update_project(project_id, updates)
+    result = await svc.update_project(project_id, updates)
     if result is None:
         raise HTTPException(status_code=404, detail=f"Project '{project_id}' not found")
     return result
@@ -146,6 +146,6 @@ async def update_project(project_id: str, body: ProjectUpdate):
     status_code=204,
 )
 async def delete_project(project_id: str):
-    deleted = svc.delete_project(project_id)
+    deleted = await svc.delete_project(project_id)
     if not deleted:
         raise HTTPException(status_code=404, detail=f"Project '{project_id}' not found")

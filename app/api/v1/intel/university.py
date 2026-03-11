@@ -87,7 +87,7 @@ async def get_article(url_hash: str):
 async def get_sources(
     group: str | None = Query(None, description="按分组过滤"),
 ):
-    return uni_service.get_sources(group=group)
+    return await uni_service.get_sources(group=group)
 
 
 @router.get(

@@ -19,6 +19,7 @@ from app.services.scholar._data import (
     SCHOLARS_FILE,
     _find_raw_file_by_hash,
     _load_all_with_annotations,
+    _load_all_with_annotations_async,
 )
 from app.services.scholar._filters import _apply_filters
 from app.services.scholar._transformers import _to_detail, _to_list_item
@@ -30,7 +31,7 @@ from app.services.scholar._create import create_scholar, import_scholars_excel  
 # ---------------------------------------------------------------------------
 
 
-def get_scholar_list(
+async def get_scholar_list(
     *,
     university: str | None = None,
     department: str | None = None,
@@ -44,7 +45,7 @@ def get_scholar_list(
     page: int = 1,
     page_size: int = 20,
 ) -> dict[str, Any]:
-    items = _load_all_with_annotations()
+    items = await _load_all_with_annotations_async()
 
     filtered = _apply_filters(
         items,
@@ -75,9 +76,9 @@ def get_scholar_list(
     }
 
 
-def get_scholar_detail(url_hash: str) -> dict[str, Any] | None:
+async def get_scholar_detail(url_hash: str) -> dict[str, Any] | None:
     """Return full scholar detail merged with annotations, or None if not found."""
-    items = _load_all_with_annotations()
+    items = await _load_all_with_annotations_async()
     for item in items:
         if item.get("url_hash", "") == url_hash:
             detail = _to_detail(item)
@@ -86,8 +87,8 @@ def get_scholar_detail(url_hash: str) -> dict[str, Any] | None:
     return None
 
 
-def get_scholar_stats() -> dict[str, Any]:
-    items = _load_all_with_annotations()
+async def get_scholar_stats() -> dict[str, Any]:
+    items = await _load_all_with_annotations_async()
 
     total = len(items)
     academicians = sum(1 for i in items if i.get("is_academician", False))
@@ -136,32 +137,32 @@ def get_scholar_stats() -> dict[str, Any]:
 # ---------------------------------------------------------------------------
 
 
-def update_scholar_relation(url_hash: str, updates: dict[str, Any]) -> dict[str, Any] | None:
-    if get_scholar_detail(url_hash) is None:
+async def update_scholar_relation(url_hash: str, updates: dict[str, Any]) -> dict[str, Any] | None:
+    if await get_scholar_detail(url_hash) is None:
         return None
     annotation_store.update_relation(url_hash, updates)
-    return get_scholar_detail(url_hash)
+    return await get_scholar_detail(url_hash)
 
 
-def add_scholar_update(url_hash: str, update: dict[str, Any]) -> dict[str, Any] | None:
-    if get_scholar_detail(url_hash) is None:
+async def add_scholar_update(url_hash: str, update: dict[str, Any]) -> dict[str, Any] | None:
+    if await get_scholar_detail(url_hash) is None:
         return None
     annotation_store.add_user_update(url_hash, update)
-    return get_scholar_detail(url_hash)
+    return await get_scholar_detail(url_hash)
 
 
-def delete_scholar_update(url_hash: str, update_idx: int) -> dict[str, Any] | None:
-    if get_scholar_detail(url_hash) is None:
+async def delete_scholar_update(url_hash: str, update_idx: int) -> dict[str, Any] | None:
+    if await get_scholar_detail(url_hash) is None:
         return None
     annotation_store.delete_user_update(url_hash, update_idx)
-    return get_scholar_detail(url_hash)
+    return await get_scholar_detail(url_hash)
 
 
-def update_scholar_achievements(url_hash: str, updates: dict[str, Any]) -> dict[str, Any] | None:
-    if get_scholar_detail(url_hash) is None:
+async def update_scholar_achievements(url_hash: str, updates: dict[str, Any]) -> dict[str, Any] | None:
+    if await get_scholar_detail(url_hash) is None:
         return None
     annotation_store.update_achievements(url_hash, updates)
-    return get_scholar_detail(url_hash)
+    return await get_scholar_detail(url_hash)
 
 
 # ---------------------------------------------------------------------------
@@ -169,7 +170,7 @@ def update_scholar_achievements(url_hash: str, updates: dict[str, Any]) -> dict[
 # ---------------------------------------------------------------------------
 
 
-def update_scholar_basic(url_hash: str, updates: dict[str, Any]) -> dict[str, Any] | None:
+async def update_scholar_basic(url_hash: str, updates: dict[str, Any]) -> dict[str, Any] | None:
     """Update basic scholar information by modifying scholars.json directly.
 
     Returns the updated full detail (merged with annotations) or None if not found.
@@ -205,7 +206,7 @@ def update_scholar_basic(url_hash: str, updates: dict[str, Any]) -> dict[str, An
         json.dump(data, f, ensure_ascii=False, indent=2)
     tmp_path.replace(file_path)
 
-    return get_scholar_detail(url_hash)
+    return await get_scholar_detail(url_hash)
 
 
 def delete_scholar(url_hash: str) -> bool:

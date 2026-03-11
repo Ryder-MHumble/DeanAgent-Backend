@@ -88,7 +88,7 @@ def _flatten_institutions(universities: list[dict]) -> list[dict]:
     return result
 
 
-def get_institution_list(
+async def get_institution_list(
     type_filter: str | None = None,  # 'university' | 'department'
     category: str | None = None,
     priority: str | None = None,
@@ -100,27 +100,23 @@ def get_institution_list(
     """获取机构列表（高校+院系统一查询）."""
     # Try DB first
     try:
-        import asyncio  # noqa: PLC0415
         client = _get_client()
+        q = client.table("institutions").select(
+            "id,name,type,category,priority,scholar_count,student_count_total,mentor_count,parent_id"
+        )
+        if type_filter:
+            q = q.eq("type", type_filter)
+        if category:
+            q = q.eq("category", category)
+        if priority:
+            q = q.eq("priority", priority)
+        if parent_id:
+            q = q.eq("parent_id", parent_id)
+        if keyword:
+            q = q.or_(f"name.ilike.%{keyword}%,id.ilike.%{keyword}%")
+        res = await q.execute()
+        institutions = res.data or []
 
-        async def _fetch():
-            q = client.table("institutions").select(
-                "id,name,type,category,priority,scholar_count,student_count_total,mentor_count,parent_id"
-            )
-            if type_filter:
-                q = q.eq("type", type_filter)
-            if category:
-                q = q.eq("category", category)
-            if priority:
-                q = q.eq("priority", priority)
-            if parent_id:
-                q = q.eq("parent_id", parent_id)
-            if keyword:
-                q = q.or_(f"name.ilike.%{keyword}%,id.ilike.%{keyword}%")
-            res = await q.execute()
-            return res.data or []
-
-        institutions = asyncio.get_event_loop().run_until_complete(_fetch())
         priority_order = {"P0": 0, "P1": 1, "P2": 2, "P3": 3}
         institutions.sort(key=lambda x: (
             0 if x["type"] == "university" else 1,
@@ -143,8 +139,6 @@ def get_institution_list(
         ]
         return InstitutionListResponse(total=total, page=page, page_size=page_size,
                                        total_pages=total_pages, items=items)
-    except RuntimeError:
-        pass
     except Exception as exc:
         import logging; logging.getLogger(__name__).warning("DB get_institution_list failed: %s", exc)
 
@@ -218,26 +212,20 @@ def get_institution_list(
     )
 
 
-def get_institution_detail(institution_id: str) -> InstitutionDetailResponse | None:
+async def get_institution_detail(institution_id: str) -> InstitutionDetailResponse | None:
     """获取机构详情（高校或院系）."""
     # Try DB first
     try:
-        import asyncio  # noqa: PLC0415
         client = _get_client()
+        res = await client.table("institutions").select("*").eq("id", institution_id).execute()
+        rows = res.data or []
 
-        async def _fetch():
-            res = await client.table("institutions").select("*").eq("id", institution_id).execute()
-            return res.data or []
-
-        rows = asyncio.get_event_loop().run_until_complete(_fetch())
         if rows:
             row = rows[0]
             if row.get("type") == "university":
                 return _build_university_detail_from_db(row)
             else:
                 return _build_department_detail_from_db(row)
-    except RuntimeError:
-        pass
     except Exception as exc:
         import logging; logging.getLogger(__name__).warning("DB get_institution_detail failed: %s", exc)
 
@@ -478,19 +466,15 @@ def _build_department_detail_from_db(row: dict) -> InstitutionDetailResponse:
     )
 
 
-def get_institution_stats() -> InstitutionStatsResponse:
+async def get_institution_stats() -> InstitutionStatsResponse:
     """获取机构统计信息."""
     try:
-        import asyncio  # noqa: PLC0415
         client = _get_client()
+        res = await client.table("institutions").select(
+            "type,category,priority,scholar_count,student_count_total,mentor_count"
+        ).execute()
+        rows = res.data or []
 
-        async def _fetch():
-            res = await client.table("institutions").select(
-                "type,category,priority,scholar_count,student_count_total,mentor_count"
-            ).execute()
-            return res.data or []
-
-        rows = asyncio.get_event_loop().run_until_complete(_fetch())
         unis = [r for r in rows if r.get("type") == "university"]
         depts = [r for r in rows if r.get("type") == "department"]
         by_category: dict[str, int] = {}
@@ -509,8 +493,6 @@ def get_institution_stats() -> InstitutionStatsResponse:
             total_students=sum(r.get("student_count_total", 0) or 0 for r in unis),
             total_mentors=sum(r.get("mentor_count", 0) or 0 for r in unis),
         )
-    except RuntimeError:
-        pass
     except Exception as exc:
         import logging; logging.getLogger(__name__).warning("DB get_institution_stats failed: %s", exc)
 
@@ -556,52 +538,33 @@ def get_institution_stats() -> InstitutionStatsResponse:
     )
 
 
-def create_institution(inst_data: dict[str, Any]) -> InstitutionDetailResponse:
-    """创建新机构（高校或院系），支持三种场景：
+async def create_institution(inst_data: dict[str, Any]) -> InstitutionDetailResponse:
+    """创建新机构（高校或院系），支持三种场景."""
+    from app.services.core.id_generator import generate_institution_id, is_valid_institution_id  # noqa: PLC0415
 
-    场景 1: 仅创建高校（type='university', departments=None 或 []）
-    场景 2: 仅创建院系（type='department', parent_id 必填）
-    场景 3: 创建高校 + 院系（type='university', departments=[...] 非空）
-
-    Args:
-        inst_data: Institution data dict with name, type, and optional id/parent_id/etc.
-                  If 'id' is not provided, it will be auto-generated from 'name'.
-
-    Raises:
-        InstitutionAlreadyExistsError: 机构 ID 已存在。
-        ValueError: 参数校验失败（如 department 缺少 parent_id）。
-    """
-    from app.services.core.id_generator import generate_institution_id, is_valid_institution_id
-
-    data = _load_institutions()
-    universities = data.get("universities", [])
-
+    client = _get_client()
     inst_type = inst_data.get("type", "university")
     inst_name = inst_data.get("name")
     if not inst_name:
         raise ValueError("Institution name is required")
 
-    # Auto-generate ID if not provided
     inst_id = inst_data.get("id")
     if not inst_id:
         inst_id = generate_institution_id(inst_name)
     elif not is_valid_institution_id(inst_id):
-        raise ValueError(f"Invalid institution ID format: '{inst_id}'. Must be alphanumeric, lowercase, 2-30 chars")
+        raise ValueError(f"Invalid institution ID format: '{inst_id}'.")
+
+    # 重复检测
+    check = await client.table("institutions").select("id").eq("id", inst_id).execute()
+    if check.data:
+        raise InstitutionAlreadyExistsError(f"机构 '{inst_id}'（{inst_name}）已存在")
 
     student_count_24 = inst_data.get("student_count_24") or 0
     student_count_25 = inst_data.get("student_count_25") or 0
 
     if inst_type == "university":
-        # 重复检测 → 409
-        if any(u["id"] == inst_id for u in universities):
-            raise InstitutionAlreadyExistsError(
-                f"高校 '{inst_id}'（{inst_data['name']}）已存在，请勿重复创建"
-            )
-
-        # 创建高校（扁平结构，与现有 JSON 保持一致）
-        new_univ: dict[str, Any] = {
-            "id": inst_id,
-            "name": inst_data["name"],
+        row: dict[str, Any] = {
+            "id": inst_id, "name": inst_name, "type": "university",
             "org_name": inst_data.get("org_name"),
             "scholar_count": 0,
             "category": inst_data.get("category"),
@@ -613,7 +576,6 @@ def create_institution(inst_data: dict[str, Any]) -> InstitutionDetailResponse:
             "resident_leaders": inst_data.get("resident_leaders") or [],
             "degree_committee": inst_data.get("degree_committee") or [],
             "teaching_committee": inst_data.get("teaching_committee") or [],
-            "mentors": [],
             "university_leaders": inst_data.get("university_leaders") or [],
             "notable_scholars": inst_data.get("notable_scholars") or [],
             "key_departments": inst_data.get("key_departments") or [],
@@ -624,184 +586,72 @@ def create_institution(inst_data: dict[str, Any]) -> InstitutionDetailResponse:
             "recruitment_events": inst_data.get("recruitment_events") or [],
             "visit_exchanges": inst_data.get("visit_exchanges") or [],
             "cooperation_focus": inst_data.get("cooperation_focus") or [],
-            "departments": [],
         }
+        res = await client.table("institutions").insert(row).execute()
+        created = res.data[0] if res.data else row
 
-        # 场景 3: 同时创建院系（如果提供了 departments 列表）
-        departments_input = inst_data.get("departments")
-        if departments_input:
-            # Auto-generate dept IDs if not provided
-            processed_depts = []
-            generated_ids_set = set()
-            for idx, dept_input in enumerate(departments_input, 1):
-                dept_name = dept_input.get("name")
-                if not dept_name:
-                    raise ValueError("Department name is required in departments list")
+        # 场景 3: 同时创建院系
+        departments_input = inst_data.get("departments") or []
+        for dept_input in departments_input:
+            dept_name = dept_input.get("name")
+            if not dept_name:
+                continue
+            dept_id = dept_input.get("id") or generate_institution_id(dept_name)
+            await client.table("institutions").insert({
+                "id": dept_id, "name": dept_name, "type": "department",
+                "parent_id": inst_id, "org_name": dept_input.get("org_name"), "scholar_count": 0,
+            }).execute()
 
-                dept_id = dept_input.get("id")
-                if not dept_id:
-                    # Generate base ID from dept name
-                    base_id = generate_institution_id(dept_name)
-                    # If collision with other generated IDs, append index
-                    if base_id in generated_ids_set:
-                        dept_id = f"{base_id}_{idx}"
-                    else:
-                        dept_id = base_id
-                elif not is_valid_institution_id(dept_id):
-                    raise ValueError(f"Invalid department ID format: '{dept_id}'")
+        return _build_university_detail_from_db(created)
 
-                generated_ids_set.add(dept_id)
-                processed_depts.append((dept_id, dept_name, dept_input.get("org_name")))
-
-            # 检查院系 ID 重复
-            dept_ids = [d[0] for d in processed_depts]
-            if len(dept_ids) != len(set(dept_ids)):
-                raise ValueError("院系 ID 列表中存在重复")
-
-            # 检查院系 ID 是否与其他高校的院系冲突，并创建院系
-            for dept_id, dept_name, dept_org_name in processed_depts:
-                # 检查全局院系 ID 冲突
-                for existing_univ in universities:
-                    for existing_dept in existing_univ.get("departments", []):
-                        if existing_dept["id"] == dept_id:
-                            raise InstitutionAlreadyExistsError(
-                                f"院系 '{dept_id}'（{dept_name}）已存在于高校 "
-                                f"'{existing_univ['id']}' 中，请使用不同的 ID"
-                            )
-
-                # 创建院系
-                new_dept: dict[str, Any] = {
-                    "id": dept_id,
-                    "name": dept_name,
-                    "org_name": dept_org_name,
-                    "scholar_count": 0,
-                    "sources": [],
-                }
-                new_univ["departments"].append(new_dept)
-
-        universities.append(new_univ)
-        data["universities"] = universities
-        _save_institutions(data)
-
-        return _build_university_detail(new_univ)
-
-    else:  # department (场景 2)
+    else:  # department
         parent_id = inst_data.get("parent_id")
         if not parent_id:
-            raise ValueError("创建院系时 parent_id（所属高校 ID）为必填项")
-
-        # 查找父高校
-        parent_univ = None
-        for univ in universities:
-            if univ["id"] == parent_id:
-                parent_univ = univ
-                break
-
-        if not parent_univ:
+            raise ValueError("创建院系时 parent_id 为必填项")
+        parent_check = await client.table("institutions").select("id").eq("id", parent_id).execute()
+        if not parent_check.data:
             raise ValueError(f"父高校 '{parent_id}' 不存在")
 
-        # 重复检测 → 409（检查该高校下的院系）
-        if any(d["id"] == inst_id for d in parent_univ.get("departments", [])):
-            raise InstitutionAlreadyExistsError(
-                f"院系 '{inst_id}'（{inst_name}）已存在于高校 '{parent_id}' 中，请勿重复创建"
-            )
-
-        # 检查全局院系 ID 冲突（院系 ID 必须全局唯一）
-        for univ in universities:
-            for dept in univ.get("departments", []):
-                if dept["id"] == inst_id:
-                    raise InstitutionAlreadyExistsError(
-                        f"院系 '{inst_id}'（{inst_name}）已存在于高校 '{univ['id']}' 中，"
-                        "院系 ID 必须全局唯一"
-                    )
-
-        # 创建院系
-        new_dept: dict[str, Any] = {
-            "id": inst_id,
-            "name": inst_name,
-            "org_name": inst_data.get("org_name"),
-            "scholar_count": 0,
-            "sources": [],
+        row = {
+            "id": inst_id, "name": inst_name, "type": "department",
+            "parent_id": parent_id, "org_name": inst_data.get("org_name"), "scholar_count": 0,
         }
-        parent_univ.setdefault("departments", []).append(new_dept)
-        _save_institutions(data)
+        res = await client.table("institutions").insert(row).execute()
+        created = res.data[0] if res.data else row
+        return _build_department_detail_from_db(created)
 
-        return _build_department_detail(new_dept, parent_id)
 
-
-def update_institution(
+async def update_institution(
     institution_id: str, updates: dict[str, Any]
 ) -> InstitutionDetailResponse | None:
-    """更新机构信息."""
-    data = _load_institutions()
-    universities = data.get("universities", [])
+    """更新机构信息（DB）."""
+    client = _get_client()
+    # 重新计算学生总数
+    if "student_count_24" in updates or "student_count_25" in updates:
+        # Get current values first
+        cur = await client.table("institutions").select(
+            "student_count_24,student_count_25"
+        ).eq("id", institution_id).execute()
+        if cur.data:
+            cur_row = cur.data[0]
+            sc24 = updates.get("student_count_24", cur_row.get("student_count_24") or 0) or 0
+            sc25 = updates.get("student_count_25", cur_row.get("student_count_25") or 0) or 0
+            updates["student_count_total"] = sc24 + sc25
 
-    # 查找并更新高校
-    for univ in universities:
-        if univ["id"] == institution_id:
-            # 扁平结构写入（与 JSON 存储格式一致）
-            flat_keys = [
-                "name", "org_name", "category", "priority",
-                "student_count_24", "student_count_25",
-                "mentor_count", "resident_leaders", "degree_committee",
-                "teaching_committee", "university_leaders", "notable_scholars",
-                "key_departments", "joint_labs", "training_cooperation",
-                "academic_cooperation", "talent_dual_appointment",
-                "recruitment_events", "visit_exchanges", "cooperation_focus",
-            ]
-            for key, value in updates.items():
-                if key in flat_keys:
-                    univ[key] = value
-
-            # 重新计算学生总数
-            if "student_count_24" in updates or "student_count_25" in updates:
-                univ["student_count_total"] = (
-                    univ.get("student_count_24") or 0
-                ) + (univ.get("student_count_25") or 0)
-
-            _save_institutions(data)
-            return _build_university_detail(univ)
-
-        # 查找并更新院系
-        for dept in univ.get("departments", []):
-            if dept["id"] == institution_id:
-                if "name" in updates:
-                    dept["name"] = updates["name"]
-
-                _save_institutions(data)
-                return _build_department_detail(dept, univ["id"])
-
-    return None
+    res = await client.table("institutions").update(updates).eq("id", institution_id).execute()
+    if not res.data:
+        return None
+    row = res.data[0]
+    if row.get("type") == "university":
+        return _build_university_detail_from_db(row)
+    return _build_department_detail_from_db(row)
 
 
-def delete_institution(institution_id: str) -> bool:
-    """删除机构."""
-    data = _load_institutions()
-    universities = data.get("universities", [])
-
-    # 删除高校
-    original_count = len(universities)
-    universities = [u for u in universities if u["id"] != institution_id]
-
-    if len(universities) < original_count:
-        data["universities"] = universities
-        _save_institutions(data)
-        return True
-
-    # 删除院系
-    for univ in universities:
-        depts = univ.get("departments", [])
-        original_dept_count = len(depts)
-        depts = [d for d in depts if d["id"] != institution_id]
-
-        if len(depts) < original_dept_count:
-            univ["departments"] = depts
-            # 重新计算高校学者总数
-            univ["scholar_count"] = sum(d.get("scholar_count", 0) for d in depts)
-            _save_institutions(data)
-            return True
-
-    return False
+async def delete_institution(institution_id: str) -> bool:
+    """删除机构（DB）."""
+    client = _get_client()
+    res = await client.table("institutions").delete().eq("id", institution_id).execute()
+    return bool(res.data)
 
 
 # ---------------------------------------------------------------------------
@@ -839,45 +689,58 @@ def search_institutions_for_aminer(name: str) -> list[dict]:
 # ---------------------------------------------------------------------------
 
 
-def get_scholar_institutions_list(
+async def _fetch_all_institutions_from_db() -> list[dict]:
+    """Fetch all rows from institutions table."""
+    client = _get_client()
+    res = await client.table("institutions").select("*").execute()
+    return res.data or []
+
+
+async def get_scholar_institutions_list(
     keyword: str | None = None,
     page: int = 1,
     page_size: int = 20,
 ) -> dict[str, Any]:
-    """Get paginated list of universities with departments and scholar counts.
-
-    Args:
-        keyword: Filter universities by name (case-insensitive substring match)
-        page: Page number (1-indexed)
-        page_size: Items per page
-
-    Returns:
-        {
-            "total": int,
-            "page": int,
-            "page_size": int,
-            "total_pages": int,
-            "items": [universities]
-        }
-    """
+    """Get paginated list of universities with departments (from DB)."""
     import math
 
-    data = _load_institutions()
-    universities = data.get("universities", [])
+    rows = await _fetch_all_institutions_from_db()
+    unis = {r["id"]: r for r in rows if r.get("type") == "university"}
+    depts = [r for r in rows if r.get("type") == "department"]
 
-    # Filter by keyword if provided
+    # Attach departments to their parent university
+    for d in depts:
+        pid = d.get("parent_id")
+        if pid and pid in unis:
+            unis[pid].setdefault("departments", []).append({
+                "id": d["id"],
+                "name": d["name"],
+                "scholar_count": d.get("scholar_count", 0),
+                "org_name": d.get("org_name"),
+            })
+
+    university_list = list(unis.values())
+
     if keyword:
-        keyword_lower = keyword.lower()
-        universities = [
-            u for u in universities
-            if keyword_lower in u.get("name", "").lower()
-            or keyword_lower in u.get("id", "").lower()
+        kw = keyword.lower()
+        university_list = [
+            u for u in university_list
+            if kw in u.get("name", "").lower() or kw in u.get("id", "").lower()
         ]
 
-    total = len(universities)
+    total = len(university_list)
     total_pages = math.ceil(total / page_size) if total > 0 else 1
     start = (page - 1) * page_size
-    page_items = universities[start : start + page_size]
+    page_items = [
+        {
+            "id": u["id"],
+            "name": u["name"],
+            "scholar_count": u.get("scholar_count", 0),
+            "departments": u.get("departments", []),
+            "org_name": u.get("org_name"),
+        }
+        for u in university_list[start: start + page_size]
+    ]
 
     return {
         "total": total,
@@ -888,73 +751,40 @@ def get_scholar_institutions_list(
     }
 
 
-def get_scholar_institution_detail(university_id: str) -> dict[str, Any] | None:
-    """Get single university with all departments and sources.
-
-    Args:
-        university_id: University ID (e.g., 'tsinghua')
-
-    Returns:
-        University object with departments, or None if not found
-    """
-    data = _load_institutions()
-    universities = data.get("universities", [])
-
-    for uni in universities:
-        if uni.get("id") == university_id:
-            return uni
-
-    return None
+async def get_scholar_institution_detail(university_id: str) -> dict[str, Any] | None:
+    """Get single university with all departments (from DB)."""
+    rows = await _fetch_all_institutions_from_db()
+    uni = next((r for r in rows if r["id"] == university_id and r.get("type") == "university"), None)
+    if not uni:
+        return None
+    depts = [
+        {"id": r["id"], "name": r["name"], "scholar_count": r.get("scholar_count", 0), "org_name": r.get("org_name")}
+        for r in rows if r.get("type") == "department" and r.get("parent_id") == university_id
+    ]
+    return {**uni, "departments": depts}
 
 
-def get_scholar_department_detail(
+async def get_scholar_department_detail(
     university_id: str,
     department_id: str,
 ) -> dict[str, Any] | None:
-    """Get single department with all sources.
-
-    Args:
-        university_id: University ID
-        department_id: Department ID
-
-    Returns:
-        Department object with sources, or None if not found
-    """
-    uni = get_scholar_institution_detail(university_id)
-    if not uni:
-        return None
-
-    for dept in uni.get("departments", []):
-        if dept.get("id") == department_id:
-            return dept
-
+    """Get single department (from DB)."""
+    client = _get_client()
+    res = await client.table("institutions").select("*").eq("id", department_id).execute()
+    rows = res.data or []
+    for r in rows:
+        if r.get("parent_id") == university_id:
+            return r
     return None
 
 
-def get_scholar_institutions_stats() -> dict[str, Any]:
-    """Get overall statistics about scholar institutions.
-
-    Returns:
-        {
-            "total_universities": int,
-            "total_departments": int,
-            "total_scholars": int,
-        }
-    """
-    data = _load_institutions()
-    universities = data.get("universities", [])
-
-    total_universities = len(universities)
-    total_departments = 0
-    total_scholars = 0
-
-    for uni in universities:
-        departments = uni.get("departments", [])
-        total_departments += len(departments)
-        total_scholars += uni.get("scholar_count", 0)
-
+async def get_scholar_institutions_stats() -> dict[str, Any]:
+    """Get overall statistics (from DB)."""
+    rows = await _fetch_all_institutions_from_db()
+    unis = [r for r in rows if r.get("type") == "university"]
+    depts = [r for r in rows if r.get("type") == "department"]
     return {
-        "total_universities": total_universities,
-        "total_departments": total_departments,
-        "total_scholars": total_scholars,
+        "total_universities": len(unis),
+        "total_departments": len(depts),
+        "total_scholars": sum(u.get("scholar_count", 0) or 0 for u in unis),
     }

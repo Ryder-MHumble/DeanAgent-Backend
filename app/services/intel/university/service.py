@@ -236,7 +236,7 @@ async def get_article_detail(url_hash: str) -> dict[str, Any] | None:
 # 4. Sources
 # ---------------------------------------------------------------------------
 
-def get_sources(group: str | None = None) -> dict[str, Any]:
+async def get_sources(group: str | None = None) -> dict[str, Any]:
     """List university sources with their latest crawl metadata."""
     from app.scheduler.manager import load_all_source_configs
 
@@ -246,7 +246,7 @@ def get_sources(group: str | None = None) -> dict[str, Any]:
     if group:
         uni_configs = [c for c in uni_configs if c.get("group") == group]
 
-    states = get_all_source_states()
+    states = await get_all_source_states()
 
     # Read per-source metadata from latest.json files
     source_meta: dict[str, dict[str, Any]] = {}

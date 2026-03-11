@@ -75,7 +75,7 @@ async def list_scholars(
     page: int = Query(1, ge=1, description="页码"),
     page_size: int = Query(20, ge=1, le=200, description="每页条数"),
 ):
-    return svc.get_scholar_list(
+    return await svc.get_scholar_list(
         university=university,
         department=department,
         position=position,
@@ -97,7 +97,7 @@ async def list_scholars(
     description="返回学者库总览统计：总数、院士数、潜在招募数、按高校/职称分布、完整度分布。",
 )
 async def get_stats():
-    return svc.get_scholar_stats()
+    return await svc.get_scholar_stats()
 
 
 @router.post(
@@ -135,7 +135,7 @@ async def create_scholar(body: ScholarCreateRequest):
     description="根据 url_hash 获取单条学者完整数据（爬虫字段 + 用户标注合并）。",
 )
 async def get_faculty(url_hash: str):
-    result = svc.get_scholar_detail(url_hash)
+    result = await svc.get_scholar_detail(url_hash)
     if result is None:
         raise HTTPException(status_code=404, detail=f"Faculty '{url_hash}' not found")
     return result
@@ -161,7 +161,7 @@ async def get_faculty(url_hash: str):
 )
 async def update_basic(url_hash: str, body: ScholarBasicUpdate):
     updates = body.model_dump(exclude_none=True)
-    result = svc.update_scholar_basic(url_hash, updates)
+    result = await svc.update_scholar_basic(url_hash, updates)
     if result is None:
         raise HTTPException(status_code=404, detail=f"Faculty '{url_hash}' not found")
     return result
@@ -179,7 +179,7 @@ async def update_basic(url_hash: str, body: ScholarBasicUpdate):
 )
 async def update_relation(url_hash: str, body: InstituteRelationUpdate):
     updates = body.model_dump(exclude_none=True)
-    result = svc.update_scholar_relation(url_hash, updates)
+    result = await svc.update_scholar_relation(url_hash, updates)
     if result is None:
         raise HTTPException(status_code=404, detail=f"Faculty '{url_hash}' not found")
     return result
@@ -196,7 +196,7 @@ async def update_relation(url_hash: str, body: InstituteRelationUpdate):
     status_code=201,
 )
 async def add_update(url_hash: str, body: UserUpdateCreate):
-    result = svc.add_scholar_update(url_hash, body.model_dump())
+    result = await svc.add_scholar_update(url_hash, body.model_dump())
     if result is None:
         raise HTTPException(status_code=404, detail=f"Faculty '{url_hash}' not found")
     return result
@@ -209,7 +209,7 @@ async def add_update(url_hash: str, body: UserUpdateCreate):
     status_code=204,
 )
 async def delete_scholar(url_hash: str):
-    deleted = svc.delete_scholar(url_hash)
+    deleted = await svc.delete_scholar(url_hash)
     if not deleted:
         raise HTTPException(status_code=404, detail=f"Faculty '{url_hash}' not found")
 
@@ -225,7 +225,7 @@ async def delete_scholar(url_hash: str):
 )
 async def delete_update(url_hash: str, update_idx: int):
     try:
-        result = svc.delete_scholar_update(url_hash, update_idx)
+        result = await svc.delete_scholar_update(url_hash, update_idx)
     except PermissionError as exc:
         raise HTTPException(status_code=403, detail=str(exc)) from exc
     except ValueError as exc:
@@ -249,7 +249,7 @@ async def delete_update(url_hash: str, update_idx: int):
 )
 async def update_achievements(url_hash: str, body: AchievementUpdate):
     updates = body.model_dump(exclude_none=True)
-    result = svc.update_scholar_achievements(url_hash, updates)
+    result = await svc.update_scholar_achievements(url_hash, updates)
     if result is None:
         raise HTTPException(status_code=404, detail=f"Faculty '{url_hash}' not found")
     return result
@@ -260,9 +260,9 @@ async def update_achievements(url_hash: str, body: AchievementUpdate):
 # ---------------------------------------------------------------------------
 
 
-def _assert_faculty_exists(url_hash: str) -> None:
+async def _assert_faculty_exists(url_hash: str) -> None:
     """Raise 404 if the faculty member does not exist."""
-    if svc.get_scholar_detail(url_hash) is None:
+    if await svc.get_scholar_detail(url_hash) is None:
         raise HTTPException(status_code=404, detail=f"Faculty '{url_hash}' not found")
 
 
@@ -273,7 +273,7 @@ def _assert_faculty_exists(url_hash: str) -> None:
     description="返回指定导师下的所有指导学生记录（联合培养学生）。",
 )
 async def list_students(url_hash: str):
-    _assert_faculty_exists(url_hash)
+    await _assert_faculty_exists(url_hash)
     students = student_store.list_students(url_hash)
     return SupervisedStudentListResponse(
         total=len(students),
@@ -293,7 +293,7 @@ async def list_students(url_hash: str):
     status_code=201,
 )
 async def add_student(url_hash: str, body: SupervisedStudentCreate):
-    _assert_faculty_exists(url_hash)
+    await _assert_faculty_exists(url_hash)
     record = student_store.add_student(url_hash, body.model_dump())
     return record
 
@@ -305,7 +305,7 @@ async def add_student(url_hash: str, body: SupervisedStudentCreate):
     description="根据学生记录 ID 获取单名指导学生的完整信息。",
 )
 async def get_student(url_hash: str, student_id: str):
-    _assert_faculty_exists(url_hash)
+    await _assert_faculty_exists(url_hash)
     record = student_store.get_student(url_hash, student_id)
     if record is None:
         raise HTTPException(status_code=404, detail=f"Student '{student_id}' not found")
@@ -322,7 +322,7 @@ async def get_student(url_hash: str, student_id: str):
     ),
 )
 async def update_student(url_hash: str, student_id: str, body: SupervisedStudentUpdate):
-    _assert_faculty_exists(url_hash)
+    await _assert_faculty_exists(url_hash)
     updates = body.model_dump(exclude_none=True)
     record = student_store.update_student(url_hash, student_id, updates)
     if record is None:
@@ -337,7 +337,7 @@ async def update_student(url_hash: str, student_id: str, body: SupervisedStudent
     status_code=204,
 )
 async def delete_student(url_hash: str, student_id: str):
-    _assert_faculty_exists(url_hash)
+    await _assert_faculty_exists(url_hash)
     deleted = student_store.delete_student(url_hash, student_id)
     if not deleted:
         raise HTTPException(status_code=404, detail=f"Student '{student_id}' not found")

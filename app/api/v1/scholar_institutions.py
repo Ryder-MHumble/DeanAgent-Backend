@@ -28,7 +28,7 @@ async def list_scholar_institutions(
     page: int = Query(1, ge=1, description="页码"),
     page_size: int = Query(20, ge=1, le=100, description="每页条数"),
 ):
-    return svc.get_scholar_institutions_list(
+    return await svc.get_scholar_institutions_list(
         keyword=keyword,
         page=page,
         page_size=page_size,
@@ -42,4 +42,4 @@ async def list_scholar_institutions(
     description="返回高校、院系、学者的总体统计信息。",
 )
 async def get_scholar_institutions_stats():
-    return svc.get_scholar_institutions_stats()
+    return await svc.get_scholar_institutions_stats()

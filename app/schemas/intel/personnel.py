@@ -17,9 +17,9 @@ class PersonnelChange(BaseModel):
     department: str | None = Field(
         default=None, description="所属部门/机构", examples=["科技部"]
     )
-    date: str = Field(description="任免日期", examples=["2024-01-15"])
-    source_article_id: str = Field(
-        description="来源文章 ID", examples=["art_20240115_001"]
+    date: str | None = Field(default=None, description="任免日期", examples=["2024-01-15"])
+    source_article_id: str | None = Field(
+        default=None, description="来源文章 ID", examples=["art_20240115_001"]
     )
 
 
@@ -30,13 +30,13 @@ class PersonnelFeedItem(BaseModel):
     title: str = Field(
         description="文章标题", examples=["科技部发布最新人事任免通知"]
     )
-    date: str = Field(description="发布日期", examples=["2024-01-15"])
-    source: str = Field(description="来源", examples=["中国政府网"])
-    importance: Literal["紧急", "重要", "关注", "一般"] = Field(
-        description="重要性级别"
+    date: str | None = Field(default=None, description="发布日期", examples=["2024-01-15"])
+    source: str | None = Field(default=None, description="来源", examples=["中国政府网"])
+    importance: Literal["紧急", "重要", "关注", "一般"] | None = Field(
+        default=None, description="重要性级别"
     )
-    matchScore: int = Field(
-        description="匹配度得分（0-100）", examples=[78]
+    matchScore: int | None = Field(
+        default=None, description="匹配度得分（0-100）", examples=[78]
     )
     changes: list[PersonnelChange] = Field(
         default=[], description="从该文章中提取的任免变动列表"
@@ -85,8 +85,8 @@ class PersonnelChangeEnriched(BaseModel):
     department: str | None = Field(
         default=None, description="所属部门/机构", examples=["科技部"]
     )
-    date: str = Field(description="日期", examples=["2024-01-15"])
-    source: str = Field(description="来源", examples=["中国政府网"])
+    date: str | None = Field(default=None, description="日期", examples=["2024-01-15"])
+    source: str | None = Field(default=None, description="来源", examples=["中国政府网"])
     sourceUrl: str | None = Field(
         default=None, description="原文链接"
     )
