@@ -233,3 +233,68 @@ async def remove_scholar_from_event(event_id: str, scholar_id: str) -> EventDeta
 async def get_event_scholars(event_id: str) -> list[str] | None:
     detail = await get_event_detail(event_id)
     return detail.scholar_ids if detail else None
+
+
+async def batch_create_events(
+    items: list[dict[str, Any]],
+    skip_duplicates: bool = True,
+) -> dict[str, Any]:
+    """Batch-create events.
+
+    Duplicate detection: same title + same event_date + same speaker_name.
+    Returns summary: {total, success, skipped, failed, items}.
+    """
+    client = _get_client()
+
+    # Pre-fetch existing events for dedup (title+date+speaker)
+    existing_res = await client.table("events").select(
+        "id,title,event_date,speaker_name"
+    ).execute()
+    existing_keys: set[tuple[str, str, str]] = set()
+    for r in (existing_res.data or []):
+        key = (
+            (r.get("title") or "").strip().lower(),
+            (str(_clean_date(r.get("event_date")) or "")).strip(),
+            (r.get("speaker_name") or "").strip().lower(),
+        )
+        existing_keys.add(key)
+
+    result: dict[str, Any] = {"total": len(items), "success": 0, "skipped": 0, "failed": 0,
+                               "items": []}
+
+    for idx, item in enumerate(items, start=1):
+        title = (item.get("title") or "").strip()
+        if not title:
+            result["failed"] += 1
+            result["items"].append({"row": idx, "status": "failed", "title": "",
+                                     "reason": "title is required"})
+            continue
+
+        key = (
+            title.lower(),
+            (str(_clean_date(item.get("event_date")) or "")).strip(),
+            (item.get("speaker_name") or "").strip().lower(),
+        )
+        if key in existing_keys:
+            if skip_duplicates:
+                result["skipped"] += 1
+                result["items"].append({"row": idx, "status": "skipped", "title": title,
+                                         "reason": "duplicate (same title+date+speaker)"})
+            else:
+                result["failed"] += 1
+                result["items"].append({"row": idx, "status": "failed", "title": title,
+                                         "reason": "duplicate"})
+            continue
+
+        try:
+            created = await create_event(item)
+            existing_keys.add(key)  # prevent duplicates within the same batch
+            result["success"] += 1
+            result["items"].append({"row": idx, "status": "success", "title": title,
+                                     "id": created.id})
+        except Exception as exc:
+            result["failed"] += 1
+            result["items"].append({"row": idx, "status": "failed", "title": title,
+                                     "reason": str(exc)})
+
+    return result

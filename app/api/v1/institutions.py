@@ -3,6 +3,8 @@
 统一的机构接口（高校 + 院系），支持自动 ID 生成和 AMiner 标准化名自动填充
 
 Endpoints:
+  GET    /institutions/                     机构列表（分页 + 多维过滤）
+  GET    /institutions/stats                统计数据（按分组/分类/优先级）
   GET    /institutions/aminer/search-org    搜索 AMiner 机构名（辅助创建）
   GET    /institutions/{id}                 机构详情（高校或院系）
   POST   /institutions/                     创建机构（ID 自动生成）
@@ -13,11 +15,13 @@ from __future__ import annotations
 
 import logging
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Query
 
 from app.schemas.institution import (
     InstitutionCreate,
     InstitutionDetailResponse,
+    InstitutionListResponse,
+    InstitutionStatsResponse,
     InstitutionUpdate,
 )
 from app.services import institution_service as svc
@@ -29,7 +33,59 @@ router = APIRouter()
 
 
 # ---------------------------------------------------------------------------
-# Helper endpoints (must come before /{institution_id} to avoid catch-all)
+# List & Stats endpoints (must come before /{institution_id} to avoid catch-all)
+# ---------------------------------------------------------------------------
+
+
+@router.get(
+    "/",
+    response_model=InstitutionListResponse,
+    summary="机构列表",
+    description=(
+        "获取机构列表（高校+院系），支持多维过滤和分页。"
+        "\n\n**分类体系：**"
+        "\n- `group`（顶层分组）：共建高校 / 兄弟院校 / 海外高校 / 其他高校 / 科研院所 / 行业学会"
+        "\n- `category`（细粒度分类）：示范性合作伙伴 / 京内高校 / 京外C9 / 综合强校 / 工科强校 / 特色高校 / "
+        "香港高校 / 亚太高校 / 欧美高校 / 其他地区高校 / 北京市属高校 / 特色专科学校 / 地方重点高校 / "
+        "科研院所-同行业 / 科研院所-交叉学科 / 科研院所-国家实验室 / 行业学会"
+        "\n\n**排序规则：**按分组顺序 → 优先级（P0>P1>P2>P3）→ 分类顺序 → 声望排名 → 名称"
+        "\n\n清华/北大等核心合作高校优先显示（P0），C9/京内高校次之（P1）。"
+    ),
+)
+async def list_institutions(
+    type: str | None = Query(default=None, description="机构类型：university | department | research_institute | academic_society"),
+    group: str | None = Query(default=None, description="顶层分组：共建高校 | 兄弟院校 | 海外高校 | 其他高校 | 科研院所 | 行业学会"),
+    category: str | None = Query(default=None, description="细粒度分类（如：示范性合作伙伴, 京内高校, 京外C9）"),
+    priority: str | None = Query(default=None, description="优先级：P0 | P1 | P2 | P3"),
+    parent_id: str | None = Query(default=None, description="父高校 ID（筛选某高校下的院系）"),
+    keyword: str | None = Query(default=None, description="关键词搜索（机构名称或 ID）"),
+    page: int = Query(default=1, ge=1, description="页码"),
+    page_size: int = Query(default=20, ge=1, le=200, description="每页条数"),
+):
+    return await svc.get_institution_list(
+        type_filter=type,
+        group=group,
+        category=category,
+        priority=priority,
+        parent_id=parent_id,
+        keyword=keyword,
+        page=page,
+        page_size=page_size,
+    )
+
+
+@router.get(
+    "/stats",
+    response_model=InstitutionStatsResponse,
+    summary="机构统计",
+    description="返回机构统计数据：总数、按分类/优先级分布、学生/导师总数。",
+)
+async def get_institution_stats():
+    return await svc.get_institution_stats()
+
+
+# ---------------------------------------------------------------------------
+# Helper endpoints
 # ---------------------------------------------------------------------------
 
 

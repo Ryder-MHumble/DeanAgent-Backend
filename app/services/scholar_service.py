@@ -8,6 +8,7 @@ All implementation now lives in app/services/faculty/:
 """
 from app.services.scholar import (  # noqa: F401
     add_scholar_update,
+    create_scholar,
     delete_scholar,
     delete_scholar_update,
     get_scholar_detail,

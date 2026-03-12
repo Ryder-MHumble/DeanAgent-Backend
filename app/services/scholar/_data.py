@@ -36,21 +36,39 @@ _ACHIEVEMENT_FIELDS = [
 
 
 async def _load_all_raw_async() -> list[dict[str, Any]]:
-    """Load all scholar records from DB (async version)."""
+    """Load all scholar records from DB (async version).
+
+    Uses paginated fetching to bypass Supabase's default 1000-row limit.
+    """
     try:
         from app.db.client import get_client  # noqa: PLC0415
         client = get_client()
-        res = await client.table("scholars").select("*").execute()
-        rows = res.data or []
 
-        if rows:
+        batch_size = 1000
+        all_rows: list[dict[str, Any]] = []
+        offset = 0
+
+        while True:
+            res = await (
+                client.table("scholars")
+                .select("*")
+                .range(offset, offset + batch_size - 1)
+                .execute()
+            )
+            batch = res.data or []
+            all_rows.extend(batch)
+            if len(batch) < batch_size:
+                break
+            offset += batch_size
+
+        if all_rows:
             # Normalize DB rows: map id → url_hash for compatibility
-            for r in rows:
+            for r in all_rows:
                 if "url_hash" not in r:
                     r["url_hash"] = r.get("id", "")
                 if "url" not in r:
                     r["url"] = r.get("source_url", "")
-            return rows
+            return all_rows
     except Exception as exc:
         logger.warning("DB _load_all_raw_async failed: %s", exc)
 

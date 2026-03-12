@@ -15,6 +15,7 @@ from __future__ import annotations
 import logging
 
 from fastapi import APIRouter, HTTPException, Query
+from pydantic import BaseModel
 
 from app.schemas.project import (
     ProjectCreate,
@@ -28,6 +29,11 @@ from app.services.core import project_service as svc
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
+
+
+class ProjectBatchRequest(BaseModel):
+    items: list[ProjectCreate]
+    skip_duplicates: bool = True
 
 
 # ---------------------------------------------------------------------------
@@ -123,6 +129,22 @@ async def get_project(project_id: str):
 async def create_project(body: ProjectCreate):
     result = await svc.create_project(body.model_dump())
     return result
+
+
+@router.post(
+    "/batch",
+    summary="批量创建项目",
+    description=(
+        "通过 JSON 列表批量创建项目。\n\n"
+        "**重复判定：** 相同项目名称 + 相同负责人（name + pi_name，大小写不敏感）视为重复，"
+        "skip_duplicates=true 时跳过，false 时报错。\n\n"
+        "**返回：** 每条记录的处理结果汇总。"
+    ),
+    status_code=200,
+)
+async def batch_create_projects(body: ProjectBatchRequest):
+    items = [item.model_dump() for item in body.items]
+    return await svc.batch_create_projects(items=items, skip_duplicates=body.skip_duplicates)
 
 
 @router.patch(

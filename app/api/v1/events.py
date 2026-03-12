@@ -14,6 +14,7 @@ Endpoints:
 from __future__ import annotations
 
 from fastapi import APIRouter, HTTPException, Query
+from pydantic import BaseModel
 
 from app.schemas.event import (
     EventCreate,
@@ -26,6 +27,11 @@ from app.schemas.event import (
 from app.services import event_service as svc
 
 router = APIRouter()
+
+
+class EventBatchRequest(BaseModel):
+    items: list[EventCreate]
+    skip_duplicates: bool = True
 
 
 # ---------------------------------------------------------------------------
@@ -98,6 +104,22 @@ async def get_event(event_id: str):
 )
 async def create_event(body: EventCreate):
     return await svc.create_event(body.model_dump())
+
+
+@router.post(
+    "/batch",
+    summary="批量创建活动",
+    description=(
+        "通过 JSON 列表批量创建活动。\n\n"
+        "**重复判定：** 相同标题 + 相同日期 + 相同讲者视为重复，"
+        "skip_duplicates=true 时跳过，false 时报错。\n\n"
+        "**返回：** 每条记录的处理结果汇总。"
+    ),
+    status_code=200,
+)
+async def batch_create_events(body: EventBatchRequest):
+    items = [item.model_dump() for item in body.items]
+    return await svc.batch_create_events(items=items, skip_duplicates=body.skip_duplicates)
 
 
 @router.patch(

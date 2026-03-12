@@ -246,3 +246,67 @@ async def delete_project(project_id: str) -> bool:
     client = _get_client()
     res = await client.table("projects").delete().eq("id", project_id).execute()
     return bool(res.data)
+
+
+async def batch_create_projects(
+    items: list[dict[str, Any]],
+    skip_duplicates: bool = True,
+) -> dict[str, Any]:
+    """Batch-create projects.
+
+    Duplicate detection: same name + same pi_name (case-insensitive).
+    Returns summary: {total, success, skipped, failed, items}.
+    """
+    client = _get_client()
+
+    # Pre-fetch existing (name, pi_name) pairs for dedup
+    existing_res = await client.table("projects").select("id,name,pi_name").execute()
+    existing_keys: set[tuple[str, str]] = {
+        (
+            (r.get("name") or "").strip().lower(),
+            (r.get("pi_name") or "").strip().lower(),
+        )
+        for r in (existing_res.data or [])
+    }
+
+    result: dict[str, Any] = {"total": len(items), "success": 0, "skipped": 0, "failed": 0,
+                               "items": []}
+
+    for idx, item in enumerate(items, start=1):
+        name = (item.get("name") or "").strip()
+        pi_name = (item.get("pi_name") or "").strip()
+        if not name:
+            result["failed"] += 1
+            result["items"].append({"row": idx, "status": "failed", "name": "",
+                                     "reason": "name is required"})
+            continue
+        if not pi_name:
+            result["failed"] += 1
+            result["items"].append({"row": idx, "status": "failed", "name": name,
+                                     "reason": "pi_name is required"})
+            continue
+
+        key = (name.lower(), pi_name.lower())
+        if key in existing_keys:
+            if skip_duplicates:
+                result["skipped"] += 1
+                result["items"].append({"row": idx, "status": "skipped", "name": name,
+                                         "reason": "duplicate (same name+pi_name)"})
+            else:
+                result["failed"] += 1
+                result["items"].append({"row": idx, "status": "failed", "name": name,
+                                         "reason": "duplicate"})
+            continue
+
+        try:
+            created = await create_project(item)
+            existing_keys.add(key)  # prevent within-batch duplicates
+            result["success"] += 1
+            result["items"].append({"row": idx, "status": "success", "name": name,
+                                     "id": created.id})
+        except Exception as exc:
+            result["failed"] += 1
+            result["items"].append({"row": idx, "status": "failed", "name": name,
+                                     "reason": str(exc)})
+
+    return result

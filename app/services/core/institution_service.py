@@ -7,17 +7,145 @@ from pathlib import Path
 from typing import Any
 
 from app.schemas.institution import (
+    DepartmentInfo,
+    DepartmentSource,
     InstitutionDetailResponse,
     InstitutionListItem,
     InstitutionListResponse,
     InstitutionStatsResponse,
-    ScholarInfo,
     MentorInfo,
-    DepartmentInfo,
-    DepartmentSource,
+    ScholarInfo,
 )
 
 INSTITUTIONS_FILE = Path("data/scholars/institutions.json")
+
+# ---------------------------------------------------------------------------
+# 分类体系：category → group 映射
+# ---------------------------------------------------------------------------
+
+# category（细粒度分类） → group（顶层分组）
+_CATEGORY_TO_GROUP: dict[str, str] = {
+    # 共建高校 ---------------------------------------------------------------
+    "示范性合作伙伴": "共建高校",
+    "京内高校": "共建高校",
+    "京外C9": "共建高校",
+    "综合强校": "共建高校",
+    "工科强校": "共建高校",
+    "特色高校": "共建高校",
+    # 兄弟院校 ---------------------------------------------------------------
+    "兄弟院校": "兄弟院校",
+    # 海外高校 ---------------------------------------------------------------
+    "香港高校": "海外高校",
+    "亚太高校": "海外高校",
+    "欧美高校": "海外高校",
+    "其他地区高校": "海外高校",
+    # 其他高校 ---------------------------------------------------------------
+    "特色专科学校": "其他高校",
+    "北京市属高校": "其他高校",
+    "地方重点高校": "其他高校",
+    "其他高校": "其他高校",
+    # 科研院所 ---------------------------------------------------------------
+    "科研院所-同行业": "科研院所",
+    "科研院所-交叉学科": "科研院所",
+    "科研院所-国家实验室": "科研院所",
+    # 行业学会 ---------------------------------------------------------------
+    "行业学会": "行业学会",
+}
+
+# 顶层分组显示顺序（数字越小越靠前）
+_GROUP_ORDER: dict[str, int] = {
+    "共建高校": 0,
+    "兄弟院校": 1,
+    "海外高校": 2,
+    "其他高校": 3,
+    "科研院所": 4,
+    "行业学会": 5,
+}
+
+# category 内部排序：同一 group 内的 category 显示顺序
+_CATEGORY_ORDER: dict[str, int] = {
+    # 共建高校
+    "示范性合作伙伴": 0,
+    "京内高校": 1,
+    "京外C9": 2,
+    "综合强校": 3,
+    "工科强校": 4,
+    "特色高校": 5,
+    # 海外高校
+    "香港高校": 0,
+    "亚太高校": 1,
+    "欧美高校": 2,
+    "其他地区高校": 3,
+    # 其他高校
+    "特色专科学校": 0,
+    "北京市属高校": 1,
+    "地方重点高校": 2,
+    "其他高校": 3,
+    # 科研院所
+    "科研院所-同行业": 0,
+    "科研院所-交叉学科": 1,
+    "科研院所-国家实验室": 2,
+}
+
+# P0 机构内部固定排序（ID → order）：清华 > 北大 > 其他
+_INSTITUTION_PRESTIGE_ORDER: dict[str, int] = {
+    # 示范性合作伙伴
+    "tsinghua": 0,
+    "pku": 1,
+    # 京外C9（复交浙南科在前）
+    "fudan": 10,
+    "sjtu": 11,
+    "zju": 12,
+    "nju": 13,
+    "ustc": 14,
+    "hit": 15,
+    "xjtu": 16,
+    # 京内高校
+    "cas": 20,
+    "buaa": 21,
+    "bit": 22,
+    "bupt": 23,
+    "bnu": 24,
+    "ruc": 25,
+    # 海外顶尖
+    "nus": 30,
+    "ntu_sg": 31,
+    "hku": 32,
+    "cuhk": 33,
+    "hkust": 34,
+}
+
+
+def _derive_group(category: str | None) -> str | None:
+    """从 category 派生顶层分组名称."""
+    if not category:
+        return None
+    return _CATEGORY_TO_GROUP.get(category)
+
+
+def _normalize_priority(raw) -> int:
+    """将 priority 归一化为整数（DB 存整数 0-3，或字符串 P0-P3）."""
+    if raw is None:
+        return 99
+    if isinstance(raw, int):
+        return raw
+    s = str(raw).strip().upper()
+    _map = {"P0": 0, "P1": 1, "P2": 2, "P3": 3}
+    return _map.get(s, 99)
+
+
+def _institution_sort_key(inst: dict) -> tuple:
+    """生成机构排序 key：分组顺序 → 优先级 → category 顺序 → 声望顺序 → 名称."""
+    cat = inst.get("category") or ""
+    group = _derive_group(cat) or "zzz"
+    return (
+        0 if inst.get("type") != "department" else 1,  # 高校先于院系
+        _GROUP_ORDER.get(group, 99),
+        _normalize_priority(inst.get("priority")),
+        _CATEGORY_ORDER.get(cat, 99),
+        _INSTITUTION_PRESTIGE_ORDER.get(inst.get("id", ""), 999),
+        inst.get("name", ""),
+    )
 
 
 class InstitutionAlreadyExistsError(ValueError):
@@ -89,7 +217,8 @@ def _flatten_institutions(universities: list[dict]) -> list[dict]:
 
 
 async def get_institution_list(
-    type_filter: str | None = None,  # 'university' | 'department'
+    type_filter: str | None = None,  # 'university' | 'department' | 'research_institute' | 'academic_society'
+    group: str | None = None,        # 顶层分组：共建高校/兄弟院校/海外高校/其他高校/科研院所/行业学会
     category: str | None = None,
     priority: str | None = None,
     parent_id: str | None = None,  # 筛选某高校下的院系
@@ -117,19 +246,23 @@ async def get_institution_list(
         res = await q.execute()
         institutions = res.data or []
 
-        priority_order = {"P0": 0, "P1": 1, "P2": 2, "P3": 3}
-        institutions.sort(key=lambda x: (
-            0 if x["type"] == "university" else 1,
-            priority_order.get(str(x.get("priority") or ""), 99),
-            x["name"],
-        ))
+        # group 过滤（客户端派生，因为 DB 没有 group 列）
+        if group:
+            institutions = [
+                i for i in institutions
+                if _derive_group(i.get("category")) == group
+            ]
+
+        institutions.sort(key=_institution_sort_key)
         total = len(institutions)
         total_pages = max(1, (total + page_size - 1) // page_size)
         start = (page - 1) * page_size
         items = [
             InstitutionListItem(
                 id=i["id"], name=i["name"], type=i["type"],
-                category=i.get("category"), priority=str(i["priority"]) if i.get("priority") else None,
+                group=_derive_group(i.get("category")),
+                category=i.get("category"),
+                priority=f"P{i['priority']}" if i.get("priority") is not None else None,
                 scholar_count=i.get("scholar_count", 0),
                 student_count_total=i.get("student_count_total"),
                 mentor_count=i.get("mentor_count"),
@@ -154,6 +287,9 @@ async def get_institution_list(
     if type_filter:
         filtered = [i for i in filtered if i["type"] == type_filter]
 
+    if group:
+        filtered = [i for i in filtered if _derive_group(i.get("category")) == group]
+
     if category:
         filtered = [i for i in filtered if i.get("category") == category]
 
@@ -170,19 +306,11 @@ async def get_institution_list(
             if kw in i["name"].lower() or kw in i["id"].lower()
         ]
 
-    # 排序：高校按优先级，院系按名称
-    priority_order = {"P0": 0, "P1": 1, "P2": 2, "P3": 3}
-    filtered.sort(
-        key=lambda x: (
-            0 if x["type"] == "university" else 1,
-            priority_order.get(x.get("priority", ""), 99),
-            x["name"]
-        )
-    )
+    filtered.sort(key=_institution_sort_key)
 
     # 分页
     total = len(filtered)
-    total_pages = (total + page_size - 1) // page_size
+    total_pages = max(1, (total + page_size - 1) // page_size)
     start = (page - 1) * page_size
     end = start + page_size
     items = filtered[start:end]
@@ -193,6 +321,7 @@ async def get_institution_list(
             id=inst["id"],
             name=inst["name"],
             type=inst["type"],
+            group=_derive_group(inst.get("category")),
             category=inst.get("category"),
             priority=inst.get("priority"),
             scholar_count=inst["scholar_count"],
@@ -298,6 +427,7 @@ def _build_university_detail(univ: dict, last_updated: str | None = None) -> Ins
         name=univ["name"],
         type="university",
         org_name=univ.get("org_name"),
+        group=_derive_group(univ.get("category")),
         category=univ.get("category"),
         priority=univ.get("priority"),
         student_count_24=univ.get("student_count_24"),
@@ -395,8 +525,9 @@ def _build_university_detail_from_db(row: dict) -> InstitutionDetailResponse:
         name=row["name"],
         type="university",
         org_name=row.get("org_name"),
+        group=_derive_group(row.get("category")),
         category=row.get("category"),
-        priority=str(row["priority"]) if row.get("priority") is not None else None,
+        priority=f"P{row['priority']}" if row.get("priority") is not None else None,
         student_count_24=row.get("student_count_24"),
         student_count_25=row.get("student_count_25"),
         student_count_total=row.get("student_count_total"),
@@ -482,7 +613,8 @@ async def get_institution_stats() -> InstitutionStatsResponse:
         for r in unis:
             cat = r.get("category") or "未分类"
             by_category[cat] = by_category.get(cat, 0) + 1
-            pri = str(r.get("priority") or "未设置")
+            raw_pri = r.get("priority")
+            pri = f"P{raw_pri}" if raw_pri is not None else "未设置"
             by_priority[pri] = by_priority.get(pri, 0) + 1
         return InstitutionStatsResponse(
             total_universities=len(unis),
@@ -540,7 +672,10 @@ async def get_institution_stats() -> InstitutionStatsResponse:
 
 async def create_institution(inst_data: dict[str, Any]) -> InstitutionDetailResponse:
     """创建新机构（高校或院系），支持三种场景."""
-    from app.services.core.id_generator import generate_institution_id, is_valid_institution_id  # noqa: PLC0415
+    from app.services.core.id_generator import (  # noqa: PLC0415
+        generate_institution_id,
+        is_valid_institution_id,
+    )
 
     client = _get_client()
     inst_type = inst_data.get("type", "university")

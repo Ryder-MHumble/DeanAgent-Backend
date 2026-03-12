@@ -58,8 +58,9 @@ class InstitutionListItem(BaseModel):
 
     id: str = Field(description="机构唯一 ID（通常为高校名称的拼音或缩写）")
     name: str = Field(description="机构名称（高校/院系）")
-    type: str = Field(description="机构类型（university/department）")
-    category: str | None = Field(default=None, description="分类（示范高校/京内高校等，仅 university）")
+    type: str = Field(description="机构类型（university/department/research_institute/academic_society）")
+    group: str | None = Field(default=None, description="顶层分组（共建高校/兄弟院校/海外高校/其他高校/科研院所/行业学会，仅 university 类）")
+    category: str | None = Field(default=None, description="细粒度分类（示范性合作伙伴/京内高校/京外C9/综合强校/工科强校/特色高校/兄弟院校/香港高校/亚太高校/欧美高校/其他地区高校/北京市属高校/特色专科学校/地方重点高校/其他高校/科研院所-同行业/科研院所-交叉学科/科研院所-国家实验室/行业学会等）")
     priority: str | None = Field(default=None, description="优先级（P0/P1/P2/P3，仅 university）")
     scholar_count: int = Field(default=0, description="学者数量")
     student_count_total: int | None = Field(default=None, description="学生总数（仅 university）")
@@ -88,11 +89,12 @@ class InstitutionDetailResponse(BaseModel):
     # 基本信息
     id: str = Field(description="机构唯一 ID")
     name: str = Field(description="机构名称")
-    type: str = Field(description="机构类型（university/department）")
+    type: str = Field(description="机构类型（university/department/research_institute/academic_society）")
     org_name: str | None = Field(default=None, description="AMiner 标准化机构名（高校级别）")
 
     # 高校特有字段（type=university 时有值）
-    category: str | None = Field(default=None, description="分类（示范高校/京内高校等）")
+    group: str | None = Field(default=None, description="顶层分组（共建高校/兄弟院校/海外高校/其他高校/科研院所/行业学会）")
+    category: str | None = Field(default=None, description="细粒度分类（示范性合作伙伴/京内高校/京外C9等）")
     priority: str | None = Field(default=None, description="优先级（P0/P1/P2/P3）")
     student_count_24: int | None = Field(default=None, description="24级学生人数")
     student_count_25: int | None = Field(default=None, description="25级学生人数")

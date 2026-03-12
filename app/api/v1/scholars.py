@@ -20,13 +20,15 @@ Endpoints:
 """
 from __future__ import annotations
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, File, HTTPException, Query, UploadFile
+from pydantic import BaseModel
 
 from app.schemas.scholar import (
     AchievementUpdate,
     ScholarBasicUpdate,
     ScholarCreateRequest,
     ScholarDetailResponse,
+    ScholarImportResult,
     ScholarListResponse,
     ScholarStatsResponse,
     InstituteRelationUpdate,
@@ -91,6 +93,15 @@ async def list_scholars(
 
 
 @router.get(
+    "/universities",
+    summary="高校及院系列表",
+    description="返回学者库中所有高校及其院系列表，用于前端自动补全。",
+)
+async def get_universities():
+    return await svc.get_universities_with_departments()
+
+
+@router.get(
     "/stats",
     response_model=ScholarStatsResponse,
     summary="学者统计",
@@ -112,9 +123,7 @@ async def get_stats():
     status_code=201,
 )
 async def create_scholar(body: ScholarCreateRequest):
-    from app.services.scholar._create import create_scholar as create_scholar_svc
-
-    detail, error = create_scholar_svc(body.model_dump())
+    detail, error = await svc.create_scholar(body.model_dump())
 
     if error.startswith("duplicate:"):
         existing_hash = error.split(":", 1)[1]
@@ -126,6 +135,64 @@ async def create_scholar(body: ScholarCreateRequest):
         raise HTTPException(status_code=400, detail=error)
 
     return detail
+
+
+class ScholarBatchRequest(BaseModel):
+    items: list[ScholarCreateRequest]
+    skip_duplicates: bool = True
+    added_by: str = "user"
+
+
+@router.post(
+    "/import",
+    response_model=ScholarImportResult,
+    summary="Excel/CSV 批量导入学者",
+    description=(
+        "上传 CSV 或 Excel (.xlsx) 文件，批量导入学者信息到 Supabase。\n\n"
+        "**CSV/Excel 列名（中英文均可）：**\n"
+        "姓名/name, 高校/university, 院系/department, 职称/position, 邮箱/email, "
+        "电话/phone, 个人主页/profile_url, 研究方向/research_areas(逗号分隔), "
+        "关键词/keywords(逗号分隔), 学术头衔/academic_titles(逗号分隔), "
+        "是否院士/is_academician(是/否), 简介/bio\n\n"
+        "**重复判定：** 同名 + 同机构（+ 联系方式相同），重复时默认跳过（skip_duplicates=true）。\n\n"
+        "**返回：** 每行的处理结果（success/skipped/failed），以及汇总统计。"
+    ),
+    status_code=200,
+)
+async def import_scholars_file(
+    file: UploadFile = File(..., description="CSV 或 .xlsx 文件"),
+    skip_duplicates: bool = Query(default=True, description="重复时跳过（true）或报错（false）"),
+    added_by: str = Query(default="user", description="操作人，用于审计"),
+):
+    content = await file.read()
+    result = await svc.import_scholars_async(
+        file_content=content,
+        filename=file.filename or "upload.csv",
+        skip_duplicates=skip_duplicates,
+        added_by=added_by,
+    )
+    return result
+
+
+@router.post(
+    "/batch",
+    response_model=ScholarImportResult,
+    summary="JSON 批量创建学者",
+    description=(
+        "通过 JSON 列表批量创建学者，每条记录使用与「手动创建学者」相同的字段。\n\n"
+        "**重复判定：** 同名 + 同机构（+ 联系方式相同），重复时默认跳过（skip_duplicates=true）。\n\n"
+        "**返回：** 每条记录的处理结果（success/skipped/failed），以及汇总统计。"
+    ),
+    status_code=200,
+)
+async def batch_create_scholars(body: ScholarBatchRequest):
+    items = [item.model_dump() for item in body.items]
+    result = await svc.batch_create_scholars(
+        items=items,
+        skip_duplicates=body.skip_duplicates,
+        added_by=body.added_by,
+    )
+    return result
 
 
 @router.get(
