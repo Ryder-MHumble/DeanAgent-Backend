@@ -62,6 +62,12 @@ _GROUP_ORDER: dict[str, int] = {
     "行业学会": 5,
 }
 
+# 顶层聚合分组 → 子分组映射（前端侧边栏使用）
+# 例如点击「高校」时，需要匹配其下所有子分组
+_PARENT_GROUP_MAP: dict[str, list[str]] = {
+    "高校": ["共建高校", "兄弟院校", "海外高校", "其他高校"],
+}
+
 # category 内部排序：同一 group 内的 category 显示顺序
 _CATEGORY_ORDER: dict[str, int] = {
     # 共建高校
@@ -121,6 +127,25 @@ def _derive_group(category: str | None) -> str | None:
     if not category:
         return None
     return _CATEGORY_TO_GROUP.get(category)
+
+
+def _match_group(derived_group: str | None, group_filter: str) -> bool:
+    """判断机构的派生分组是否匹配 group 筛选条件.
+
+    支持：
+    - 精确匹配子分组（如 group_filter='共建高校'）
+    - 聚合匹配顶层分组（如 group_filter='高校' 匹配 共建高校/兄弟院校/海外高校/其他高校）
+    """
+    if not derived_group:
+        return False
+    # 精确匹配
+    if derived_group == group_filter:
+        return True
+    # 聚合匹配（如 高校 → [共建高校, 兄弟院校, 海外高校, 其他高校]）
+    sub_groups = _PARENT_GROUP_MAP.get(group_filter)
+    if sub_groups and derived_group in sub_groups:
+        return True
+    return False
 
 
 def _normalize_priority(raw) -> int:
@@ -225,13 +250,15 @@ async def get_institution_list(
     keyword: str | None = None,
     page: int = 1,
     page_size: int = 20,
+    custom_field_key: str | None = None,
+    custom_field_value: str | None = None,
 ) -> InstitutionListResponse:
     """获取机构列表（高校+院系统一查询）."""
     # Try DB first
     try:
         client = _get_client()
         q = client.table("institutions").select(
-            "id,name,type,category,priority,scholar_count,student_count_total,mentor_count,parent_id"
+            "id,name,type,category,priority,scholar_count,student_count_total,mentor_count,parent_id,custom_fields"
         )
         if type_filter:
             q = q.eq("type", type_filter)
@@ -247,10 +274,17 @@ async def get_institution_list(
         institutions = res.data or []
 
         # group 过滤（客户端派生，因为 DB 没有 group 列）
+        # 支持聚合分组：group=高校 匹配 共建高校/兄弟院校/海外高校/其他高校
         if group:
             institutions = [
                 i for i in institutions
-                if _derive_group(i.get("category")) == group
+                if _match_group(_derive_group(i.get("category")), group)
+            ]
+
+        if custom_field_key:
+            institutions = [
+                i for i in institutions
+                if (i.get("custom_fields") or {}).get(custom_field_key) == custom_field_value
             ]
 
         institutions.sort(key=_institution_sort_key)
@@ -288,7 +322,7 @@ async def get_institution_list(
         filtered = [i for i in filtered if i["type"] == type_filter]
 
     if group:
-        filtered = [i for i in filtered if _derive_group(i.get("category")) == group]
+        filtered = [i for i in filtered if _match_group(_derive_group(i.get("category")), group)]
 
     if category:
         filtered = [i for i in filtered if i.get("category") == category]
@@ -453,6 +487,7 @@ def _build_university_detail(univ: dict, last_updated: str | None = None) -> Ins
         scholar_count=univ.get("scholar_count", 0),
         sources=[],
         last_updated=last_updated,
+        custom_fields=univ.get("custom_fields") or {},
     )
 
 
@@ -489,6 +524,7 @@ def _build_department_detail(dept: dict, parent_id: str) -> InstitutionDetailRes
         scholar_count=dept.get("scholar_count", 0),
         sources=sources,
         last_updated=None,
+        custom_fields=dept.get("custom_fields") or {},
     )
 
 
@@ -551,6 +587,7 @@ def _build_university_detail_from_db(row: dict) -> InstitutionDetailResponse:
         scholar_count=row.get("scholar_count", 0),
         sources=[],
         last_updated=None,
+        custom_fields=row.get("custom_fields") or {},
     )
 
 
@@ -594,6 +631,7 @@ def _build_department_detail_from_db(row: dict) -> InstitutionDetailResponse:
         scholar_count=row.get("scholar_count", 0),
         sources=sources,
         last_updated=None,
+        custom_fields=row.get("custom_fields") or {},
     )
 
 
@@ -721,6 +759,7 @@ async def create_institution(inst_data: dict[str, Any]) -> InstitutionDetailResp
             "recruitment_events": inst_data.get("recruitment_events") or [],
             "visit_exchanges": inst_data.get("visit_exchanges") or [],
             "cooperation_focus": inst_data.get("cooperation_focus") or [],
+            "custom_fields": inst_data.get("custom_fields") or {},
         }
         res = await client.table("institutions").insert(row).execute()
         created = res.data[0] if res.data else row
@@ -760,7 +799,19 @@ async def update_institution(
     institution_id: str, updates: dict[str, Any]
 ) -> InstitutionDetailResponse | None:
     """更新机构信息（DB）."""
+    from app.services.core.custom_fields import apply_custom_fields_update  # noqa: PLC0415
+
     client = _get_client()
+
+    # custom_fields 浅合并
+    if "custom_fields" in updates:
+        tbl = client.table("institutions")
+        cur = await tbl.select("custom_fields").eq("id", institution_id).execute()
+        if cur.data:
+            apply_custom_fields_update(updates, cur.data[0])
+        else:
+            return None
+
     # 重新计算学生总数
     if "student_count_24" in updates or "student_count_25" in updates:
         # Get current values first
@@ -773,7 +824,7 @@ async def update_institution(
             sc25 = updates.get("student_count_25", cur_row.get("student_count_25") or 0) or 0
             updates["student_count_total"] = sc24 + sc25
 
-    res = await client.table("institutions").update(updates).eq("id", institution_id).execute()
+    res = await client.table("institutions").update(updates).eq("id", institution_id).select("*").execute()
     if not res.data:
         return None
     row = res.data[0]
@@ -785,8 +836,11 @@ async def update_institution(
 async def delete_institution(institution_id: str) -> bool:
     """删除机构（DB）."""
     client = _get_client()
-    res = await client.table("institutions").delete().eq("id", institution_id).execute()
-    return bool(res.data)
+    exist = await client.table("institutions").select("id").eq("id", institution_id).execute()
+    if not exist.data:
+        return False
+    await client.table("institutions").delete().eq("id", institution_id).execute()
+    return True
 
 
 # ---------------------------------------------------------------------------
@@ -831,13 +885,117 @@ async def _fetch_all_institutions_from_db() -> list[dict]:
     return res.data or []
 
 
+async def get_institution_tree() -> Any:
+    """返回机构分类树（group → category → institution → departments）。
+
+    供前端侧边栏使用，按照后端 category/group 体系分类，不再依赖名称启发式推断。
+    """
+    from app.schemas.institution import (  # noqa: PLC0415
+        InstitutionTreeCategory,
+        InstitutionTreeDepartment,
+        InstitutionTreeGroup,
+        InstitutionTreeInstitution,
+        InstitutionTreeResponse,
+    )
+
+    try:
+        client = _get_client()
+        res = await client.table("institutions").select(
+            "id,name,type,category,priority,scholar_count,parent_id"
+        ).execute()
+        rows = res.data or []
+    except Exception as exc:
+        import logging as _log  # noqa: PLC0415
+        _log.getLogger(__name__).warning("DB get_institution_tree failed: %s", exc)
+        data = _load_institutions()
+        rows = _flatten_institutions(data.get("universities", []))
+
+    unis = [r for r in rows if r.get("type") == "university"]
+    depts = [r for r in rows if r.get("type") == "department"]
+
+    # Build university → departments map
+    dept_map: dict[str, list[dict]] = {}
+    for d in depts:
+        pid = d.get("parent_id")
+        if pid:
+            dept_map.setdefault(pid, []).append({
+                "name": d["name"],
+                "scholar_count": d.get("scholar_count", 0),
+            })
+
+    # Group unis: group → category → [institution, ...]
+    tree: dict[str, dict[str, list]] = {}
+    for uni in unis:
+        cat = uni.get("category") or ""
+        group = _derive_group(cat) or "其他高校"
+        tree.setdefault(group, {}).setdefault(cat, []).append({
+            "id": uni["id"],
+            "name": uni["name"],
+            "scholar_count": uni.get("scholar_count", 0),
+            "departments": sorted(
+                dept_map.get(uni["id"], []),
+                key=lambda d: -d["scholar_count"],
+            ),
+        })
+
+    # Sort institutions within each category by prestige → scholar count → name
+    for cats_map in tree.values():
+        for insts in cats_map.values():
+            insts.sort(key=lambda i: (
+                _INSTITUTION_PRESTIGE_ORDER.get(i["id"], 999),
+                -i["scholar_count"],
+                i["name"],
+            ))
+
+    # Build response
+    groups_list = []
+    for group, cats_map in sorted(tree.items(), key=lambda kv: _GROUP_ORDER.get(kv[0], 99)):
+        categories_list = []
+        for cat, insts in sorted(cats_map.items(), key=lambda kv: _CATEGORY_ORDER.get(kv[0], 99)):
+            cat_count = sum(i["scholar_count"] for i in insts)
+            categories_list.append(InstitutionTreeCategory(
+                category=cat,
+                scholar_count=cat_count,
+                institutions=[
+                    InstitutionTreeInstitution(
+                        id=i["id"],
+                        name=i["name"],
+                        scholar_count=i["scholar_count"],
+                        departments=[InstitutionTreeDepartment(**d) for d in i["departments"]],
+                    )
+                    for i in insts
+                ],
+            ))
+        group_count = sum(c.scholar_count for c in categories_list)
+        groups_list.append(InstitutionTreeGroup(
+            group=group,
+            scholar_count=group_count,
+            categories=categories_list,
+        ))
+
+    total = sum(g.scholar_count for g in groups_list)
+    return InstitutionTreeResponse(total_scholar_count=total, groups=groups_list)
+
+
 async def get_scholar_institutions_list(
     keyword: str | None = None,
+    region: str | None = None,
+    affiliation_type: str | None = None,
     page: int = 1,
     page_size: int = 20,
 ) -> dict[str, Any]:
-    """Get paginated list of universities with departments (from DB)."""
+    """Get paginated list of universities with departments (from DB).
+
+    Args:
+        region: 国内 | 国际（根据机构名称自动推断）
+        affiliation_type: 高校 | 企业 | 研究机构 | 其他（根据机构名称自动推断）
+    """
     import math
+
+    from app.services.scholar._filters import (  # noqa: PLC0415
+        _derive_affiliation_type_from_university,
+        _derive_region_from_university,
+    )
 
     rows = await _fetch_all_institutions_from_db()
     unis = {r["id"]: r for r in rows if r.get("type") == "university"}
@@ -860,7 +1018,22 @@ async def get_scholar_institutions_list(
         kw = keyword.lower()
         university_list = [
             u for u in university_list
-            if kw in u.get("name", "").lower() or kw in u.get("id", "").lower()
+            if kw in u.get("name", "").lower()
+            or kw in u.get("id", "").lower()
+        ]
+
+    if region:
+        university_list = [
+            u for u in university_list
+            if _derive_region_from_university(u.get("name", "")) == region
+        ]
+
+    if affiliation_type:
+        university_list = [
+            u for u in university_list
+            if _derive_affiliation_type_from_university(
+                u.get("name", "")
+            ) == affiliation_type
         ]
 
     total = len(university_list)
@@ -913,13 +1086,42 @@ async def get_scholar_department_detail(
     return None
 
 
-async def get_scholar_institutions_stats() -> dict[str, Any]:
-    """Get overall statistics (from DB)."""
+async def get_scholar_institutions_stats(
+    region: str | None = None,
+    affiliation_type: str | None = None,
+) -> dict[str, Any]:
+    """Get overall statistics (from DB), optionally filtered by region/affiliation_type."""
+    from app.services.scholar._filters import (  # noqa: PLC0415
+        _derive_affiliation_type_from_university,
+        _derive_region_from_university,
+    )
+
     rows = await _fetch_all_institutions_from_db()
     unis = [r for r in rows if r.get("type") == "university"]
     depts = [r for r in rows if r.get("type") == "department"]
+
+    if region:
+        unis = [
+            u for u in unis
+            if _derive_region_from_university(u.get("name", "")) == region
+        ]
+        uni_ids = {u["id"] for u in unis}
+        depts = [d for d in depts if d.get("parent_id") in uni_ids]
+
+    if affiliation_type:
+        unis = [
+            u for u in unis
+            if _derive_affiliation_type_from_university(
+                u.get("name", "")
+            ) == affiliation_type
+        ]
+        uni_ids = {u["id"] for u in unis}
+        depts = [d for d in depts if d.get("parent_id") in uni_ids]
+
     return {
         "total_universities": len(unis),
         "total_departments": len(depts),
-        "total_scholars": sum(u.get("scholar_count", 0) or 0 for u in unis),
+        "total_scholars": sum(
+            u.get("scholar_count", 0) or 0 for u in unis
+        ),
     }

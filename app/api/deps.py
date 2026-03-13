@@ -16,6 +16,10 @@ def get_article_search_params(
     order: str = Query("desc", description="Sort order: asc or desc"),
     page: int = Query(1, ge=1, description="Page number"),
     page_size: int = Query(20, ge=1, le=100, description="Items per page"),
+    custom_field_key: str | None = Query(None, description="按自定义字段 key 过滤"),
+    custom_field_value: str | None = Query(
+        None, description="自定义字段 value（需配合 custom_field_key）"
+    ),
 ) -> ArticleSearchParams:
     return ArticleSearchParams(
         dimension=dimension,
@@ -30,4 +34,6 @@ def get_article_search_params(
         order=order,
         page=page,
         page_size=page_size,
+        custom_field_key=custom_field_key,
+        custom_field_value=custom_field_value,
     )

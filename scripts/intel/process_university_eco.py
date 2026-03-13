@@ -2,9 +2,9 @@
 """Process university ecosystem data — generate overview, feed, and research outputs.
 
 Usage:
-    python scripts/process_university_eco.py             # incremental
-    python scripts/process_university_eco.py --force     # reprocess all
-    python scripts/process_university_eco.py --dry-run   # preview only
+    python scripts/intel/process_university_eco.py             # incremental
+    python scripts/intel/process_university_eco.py --force     # reprocess all
+    python scripts/intel/process_university_eco.py --dry-run   # preview only
 """
 from __future__ import annotations
 

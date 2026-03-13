@@ -71,11 +71,25 @@ async def list_scholars(
     is_advisor_committee: bool | None = Query(None, description="仅显示顾问委员会成员"),
     is_adjunct_supervisor: bool | None = Query(None, description="仅显示兼职导师（adjunct_supervisor.status 非空）"),
     has_email: bool | None = Query(None, description="仅显示有邮箱联系方式的学者"),
+    region: str | None = Query(
+        None, description="地区筛选：国内 | 国际（根据高校名称自动推断）"
+    ),
+    affiliation_type: str | None = Query(
+        None, description="机构类型筛选：高校 | 企业 | 研究机构 | 其他（根据高校名称自动推断）"
+    ),
     keyword: str | None = Query(
         None, description="关键词搜索（姓名/英文名/bio/研究方向/关键词）"
     ),
+    institution_group: str | None = Query(
+        None, description="机构顶层分组（共建高校/兄弟院校/海外高校/其他高校/科研院所/行业学会）"
+    ),
+    institution_category: str | None = Query(
+        None, description="机构细粒度分类（示范性合作伙伴/京内高校/京外C9/综合强校/工科强校/特色高校等）"
+    ),
     page: int = Query(1, ge=1, description="页码"),
     page_size: int = Query(20, ge=1, le=200, description="每页条数"),
+    custom_field_key: str | None = Query(None, description="自定义字段名（需配合 custom_field_value）"),
+    custom_field_value: str | None = Query(None, description="自定义字段值"),
 ):
     return await svc.get_scholar_list(
         university=university,
@@ -86,9 +100,15 @@ async def list_scholars(
         is_advisor_committee=is_advisor_committee,
         is_adjunct_supervisor=is_adjunct_supervisor,
         has_email=has_email,
+        region=region,
+        affiliation_type=affiliation_type,
         keyword=keyword,
+        institution_group=institution_group,
+        institution_category=institution_category,
         page=page,
         page_size=page_size,
+        custom_field_key=custom_field_key,
+        custom_field_value=custom_field_value,
     )
 
 

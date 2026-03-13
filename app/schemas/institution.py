@@ -125,6 +125,7 @@ class InstitutionDetailResponse(BaseModel):
 
     # 元数据
     last_updated: str | None = Field(default=None, description="最后更新时间 ISO8601")
+    custom_fields: dict[str, str] = Field(default_factory=dict, description="用户自定义字段")
 
 
 # ---------------------------------------------------------------------------
@@ -219,6 +220,9 @@ class InstitutionCreate(BaseModel):
     recruitment_events: list[str] | None = Field(default=None, description="招生宣讲列表")
     visit_exchanges: list[str] | None = Field(default=None, description="交流互访列表")
     cooperation_focus: list[str] | None = Field(default=None, description="合作重点列表")
+    custom_fields: dict[str, str] | None = Field(
+        default=None, description="用户自定义字段（KV 键值对）",
+    )
 
 
 class InstitutionUpdate(BaseModel):
@@ -243,6 +247,9 @@ class InstitutionUpdate(BaseModel):
     recruitment_events: list[str] | None = Field(default=None, description="招生宣讲")
     visit_exchanges: list[str] | None = Field(default=None, description="交流互访")
     cooperation_focus: list[str] | None = Field(default=None, description="合作重点")
+    custom_fields: dict[str, str | None] | None = Field(
+        default=None, description="用户自定义字段（浅合并：值为 null 删除该 key）",
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -284,3 +291,47 @@ class ScholarInstitutionsStatsResponse(BaseModel):
     total_universities: int = Field(description="总高校数")
     total_departments: int = Field(description="总院系数")
     total_scholars: int = Field(description="总学者数")
+
+
+# ---------------------------------------------------------------------------
+# Institution Tree API schemas (for /api/v1/institutions/scholars/tree)
+# ---------------------------------------------------------------------------
+
+
+class InstitutionTreeDepartment(BaseModel):
+    """院系节点"""
+
+    name: str = Field(description="院系名称")
+    scholar_count: int = Field(default=0, description="学者数量")
+
+
+class InstitutionTreeInstitution(BaseModel):
+    """机构节点（高校/科研院所/学会等）"""
+
+    id: str = Field(description="机构 ID")
+    name: str = Field(description="机构名称")
+    scholar_count: int = Field(default=0, description="学者数量")
+    departments: list[InstitutionTreeDepartment] = Field(default_factory=list, description="院系列表")
+
+
+class InstitutionTreeCategory(BaseModel):
+    """细粒度分类节点（示范性合作伙伴/京内高校/京外C9 等）"""
+
+    category: str = Field(description="分类名称")
+    scholar_count: int = Field(default=0, description="该分类学者总数")
+    institutions: list[InstitutionTreeInstitution] = Field(default_factory=list, description="机构列表")
+
+
+class InstitutionTreeGroup(BaseModel):
+    """顶层分组节点（共建高校/兄弟院校/海外高校/其他高校/科研院所/行业学会）"""
+
+    group: str = Field(description="分组名称")
+    scholar_count: int = Field(default=0, description="该分组学者总数")
+    categories: list[InstitutionTreeCategory] = Field(default_factory=list, description="分类列表")
+
+
+class InstitutionTreeResponse(BaseModel):
+    """GET /institutions/scholars/tree 响应 — 机构分类树"""
+
+    total_scholar_count: int = Field(description="学者总数")
+    groups: list[InstitutionTreeGroup] = Field(description="顶层分组列表")

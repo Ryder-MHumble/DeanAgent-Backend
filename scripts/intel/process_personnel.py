@@ -4,11 +4,11 @@ Tier 1: Rule-based extraction of appointment/dismissal data (always runs).
 Tier 2: LLM enrichment with relevance, importance, action suggestions (--enrich flag).
 
 Usage:
-    python scripts/process_personnel_intel.py              # Incremental (rules only)
-    python scripts/process_personnel_intel.py --force      # Reprocess all
-    python scripts/process_personnel_intel.py --dry-run    # Preview extraction
-    python scripts/process_personnel_intel.py --enrich     # Add LLM enrichment
-    python scripts/process_personnel_intel.py --enrich --force  # Full reprocess + LLM
+    python scripts/intel/process_personnel.py              # Incremental (rules only)
+    python scripts/intel/process_personnel.py --force      # Reprocess all
+    python scripts/intel/process_personnel.py --dry-run    # Preview extraction
+    python scripts/intel/process_personnel.py --enrich     # Add LLM enrichment
+    python scripts/intel/process_personnel.py --enrich --force  # Full reprocess + LLM
 """
 from __future__ import annotations
 

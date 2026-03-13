@@ -631,11 +631,11 @@ cmd_crawl() {
     if [[ -z "$dimension" ]] || [[ "$dimension" == "all" ]]; then
         printf " ${C}⟳${NC}  Running crawler for all dimensions...\n"
         cd "$PROJECT_DIR"
-        python3 scripts/run_all_crawl.py --concurrency "$concurrency"
+        python3 scripts/crawl/run_all.py --concurrency "$concurrency"
     else
         printf " ${C}⟳${NC}  Running crawler for dimension: ${BOLD}%s${NC}\n" "$dimension"
         cd "$PROJECT_DIR"
-        python3 scripts/run_all_crawl.py --dimension "$dimension" --concurrency "$concurrency"
+        python3 scripts/crawl/run_all.py --dimension "$dimension" --concurrency "$concurrency"
     fi
 
     printf "\n"
@@ -667,7 +667,7 @@ cmd_crawl_single() {
 
     printf " ${C}⟳${NC}  Running crawler for source: ${BOLD}%s${NC}\n" "$source_id"
     cd "$PROJECT_DIR"
-    python3 scripts/run_single_crawl.py --source "$source_id"
+    python3 scripts/crawl/run_single.py --source "$source_id"
 
     printf "\n"
     if [[ $? -eq 0 ]]; then

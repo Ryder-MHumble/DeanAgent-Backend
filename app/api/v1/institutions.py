@@ -44,7 +44,7 @@ router = APIRouter()
     description=(
         "获取机构列表（高校+院系），支持多维过滤和分页。"
         "\n\n**分类体系：**"
-        "\n- `group`（顶层分组）：共建高校 / 兄弟院校 / 海外高校 / 其他高校 / 科研院所 / 行业学会"
+        "\n- `group`（顶层分组）：高校（聚合，含共建高校+兄弟院校+海外高校+其他高校） / 共建高校 / 兄弟院校 / 海外高校 / 其他高校 / 科研院所 / 行业学会"
         "\n- `category`（细粒度分类）：示范性合作伙伴 / 京内高校 / 京外C9 / 综合强校 / 工科强校 / 特色高校 / "
         "香港高校 / 亚太高校 / 欧美高校 / 其他地区高校 / 北京市属高校 / 特色专科学校 / 地方重点高校 / "
         "科研院所-同行业 / 科研院所-交叉学科 / 科研院所-国家实验室 / 行业学会"
@@ -54,13 +54,15 @@ router = APIRouter()
 )
 async def list_institutions(
     type: str | None = Query(default=None, description="机构类型：university | department | research_institute | academic_society"),
-    group: str | None = Query(default=None, description="顶层分组：共建高校 | 兄弟院校 | 海外高校 | 其他高校 | 科研院所 | 行业学会"),
+    group: str | None = Query(default=None, description="顶层分组：高校（聚合：含共建高校/兄弟院校/海外高校/其他高校） | 共建高校 | 兄弟院校 | 海外高校 | 其他高校 | 科研院所 | 行业学会"),
     category: str | None = Query(default=None, description="细粒度分类（如：示范性合作伙伴, 京内高校, 京外C9）"),
     priority: str | None = Query(default=None, description="优先级：P0 | P1 | P2 | P3"),
     parent_id: str | None = Query(default=None, description="父高校 ID（筛选某高校下的院系）"),
     keyword: str | None = Query(default=None, description="关键词搜索（机构名称或 ID）"),
     page: int = Query(default=1, ge=1, description="页码"),
     page_size: int = Query(default=20, ge=1, le=200, description="每页条数"),
+    custom_field_key: str | None = Query(default=None, description="自定义字段名"),
+    custom_field_value: str | None = Query(default=None, description="自定义字段值"),
 ):
     return await svc.get_institution_list(
         type_filter=type,
@@ -71,6 +73,8 @@ async def list_institutions(
         keyword=keyword,
         page=page,
         page_size=page_size,
+        custom_field_key=custom_field_key,
+        custom_field_value=custom_field_value,
     )
 
 

@@ -130,7 +130,7 @@ async def _stage_crawl_all() -> dict[str, Any]:
     if project_root not in sys.path:
         sys.path.insert(0, project_root)
 
-    from scripts.run_all_crawl import run_all
+    from scripts.crawl.run_all import run_all
 
     logger.info("Stage 1: 开始爬取所有启用信源...")
     result = await run_all(strategy="grouped")
@@ -236,7 +236,7 @@ async def _stage_generate_index() -> dict[str, Any]:
     if project_root not in sys.path:
         sys.path.insert(0, project_root)
 
-    from scripts.generate_index import INDEX_PATH, generate_index
+    from scripts.data.generate_index import INDEX_PATH, generate_index
 
     index = await asyncio.to_thread(generate_index)
     INDEX_PATH.parent.mkdir(parents=True, exist_ok=True)

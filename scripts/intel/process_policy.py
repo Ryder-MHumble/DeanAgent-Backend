@@ -4,11 +4,11 @@ Tier 1: Rule-based scoring for ALL articles (fast, no API calls).
 Tier 2: LLM enrichment only for articles with matchScore >= threshold.
 
 Usage:
-    python scripts/process_policy_intel.py                   # Incremental (two-tier)
-    python scripts/process_policy_intel.py --force           # Reprocess all
-    python scripts/process_policy_intel.py --dry-run         # Preview Tier 1 scoring
-    python scripts/process_policy_intel.py --limit 3         # Process N articles
-    python scripts/process_policy_intel.py --threshold 50    # Custom LLM threshold
+    python scripts/intel/process_policy.py                   # Incremental (two-tier)
+    python scripts/intel/process_policy.py --force           # Reprocess all
+    python scripts/intel/process_policy.py --dry-run         # Preview Tier 1 scoring
+    python scripts/intel/process_policy.py --limit 3         # Process N articles
+    python scripts/intel/process_policy.py --threshold 50    # Custom LLM threshold
 """
 from __future__ import annotations
 

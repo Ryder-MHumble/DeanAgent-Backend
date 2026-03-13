@@ -36,6 +36,9 @@ class ArticleBrief(BaseModel):
     importance: int | None = Field(
         default=None, description="重要度评分（0-100）", examples=[85]
     )
+    custom_fields: dict[str, str] = Field(
+        default={}, description="用户自定义字段（key-value 均为字符串）"
+    )
 
 
 class ArticleDetail(ArticleBrief):
@@ -66,6 +69,10 @@ class ArticleUpdate(BaseModel):
     importance: int | None = Field(
         default=None, description="设置重要度评分（0-100）", examples=[90]
     )
+    custom_fields: dict[str, str | None] | None = Field(
+        default=None,
+        description="自定义字段更新（浅合并：新 key 添加，null 值删除对应 key）",
+    )
 
 
 class ArticleSearchParams(BaseModel):
@@ -84,6 +91,8 @@ class ArticleSearchParams(BaseModel):
     order: str = "desc"
     page: int = 1
     page_size: int = 20
+    custom_field_key: str | None = None
+    custom_field_value: str | None = None
 
 
 class ArticleStats(BaseModel):

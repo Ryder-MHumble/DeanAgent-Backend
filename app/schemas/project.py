@@ -122,6 +122,7 @@ class ProjectDetailResponse(BaseModel):
     created_at: str | None = Field(default=None, description="创建时间 ISO8601")
     updated_at: str | None = Field(default=None, description="最后更新时间 ISO8601")
     extra: dict[str, Any] = Field(default_factory=dict, description="扩展字段（导入时保留原始数据）")
+    custom_fields: dict[str, str] = Field(default_factory=dict, description="用户自定义字段")
 
 
 # ---------------------------------------------------------------------------
@@ -170,6 +171,10 @@ class ProjectCreate(BaseModel):
     cooperation_institutions: list[str] | None = Field(default=None, description="合作机构")
     outputs: list[ProjectOutput] | None = Field(default=None, description="项目成果")
     extra: dict[str, Any] | None = Field(default=None, description="扩展字段")
+    custom_fields: dict[str, str] | None = Field(
+        default=None,
+        description="用户自定义字段（KV 键值对，字段名和值均为字符串）",
+    )
 
 
 class ProjectUpdate(BaseModel):
@@ -191,3 +196,7 @@ class ProjectUpdate(BaseModel):
     cooperation_institutions: list[str] | None = Field(default=None)
     outputs: list[ProjectOutput] | None = Field(default=None)
     extra: dict[str, Any] | None = Field(default=None)
+    custom_fields: dict[str, str | None] | None = Field(
+        default=None,
+        description="用户自定义字段（浅合并：传入 key 覆盖，值为 null 删除该 key）",
+    )

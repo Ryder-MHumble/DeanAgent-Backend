@@ -65,6 +65,7 @@ def _db_to_detail(row: dict) -> EventDetailResponse:
         created_at=str(row.get("created_at") or ""),
         updated_at=str(row.get("updated_at") or ""),
         audit_status=row.get("audit_status") or "",
+        custom_fields=row.get("custom_fields") or {},
     )
 
 
@@ -87,6 +88,7 @@ def _event_to_db_row(evt: dict) -> dict:
         "is_past": evt.get("is_past", False),
         "created_at": _clean(evt.get("created_at")),
         "updated_at": _clean(evt.get("updated_at")),
+        "custom_fields": evt.get("custom_fields"),
     }
 
 
@@ -103,6 +105,8 @@ async def get_event_list(
     keyword: str | None = None,
     page: int = 1,
     page_size: int = 20,
+    custom_field_key: str | None = None,
+    custom_field_value: str | None = None,
 ) -> EventListResponse:
     client = _get_client()
     q = client.table("events").select("*").order("event_date", desc=True)
@@ -121,6 +125,12 @@ async def get_event_list(
 
     if scholar_id:
         rows = [r for r in rows if scholar_id in (r.get("scholar_ids") or [])]
+
+    if custom_field_key:
+        rows = [
+            r for r in rows
+            if (r.get("custom_fields") or {}).get(custom_field_key) == custom_field_value
+        ]
 
     total = len(rows)
     total_pages = max(1, (total + page_size - 1) // page_size)
@@ -195,12 +205,27 @@ async def create_event(evt_data: dict[str, Any]) -> EventDetailResponse:
 
 
 async def update_event(event_id: str, updates: dict[str, Any]) -> EventDetailResponse | None:
+    from app.services.core.custom_fields import apply_custom_fields_update  # noqa: PLC0415
+
     updates["updated_at"] = datetime.now(timezone.utc).isoformat()
+
+    # custom_fields 浅合并
+    if "custom_fields" in updates:
+        client = _get_client()
+        cur = await client.table("events").select("custom_fields").eq("id", event_id).execute()
+        if cur.data:
+            apply_custom_fields_update(updates, cur.data[0])
+        else:
+            return None
+
     db_updates = _event_to_db_row({**updates, "id": event_id})
     db_updates = {k: v for k, v in db_updates.items() if k != "id" and v is not None}
+    # custom_fields goes directly, not through _event_to_db_row
+    if "custom_fields" in updates:
+        db_updates["custom_fields"] = updates["custom_fields"]
 
     client = _get_client()
-    res = await client.table("events").update(db_updates).eq("id", event_id).execute()
+    res = await client.table("events").update(db_updates).eq("id", event_id).select("*").execute()
     if res.data:
         return _db_to_detail(res.data[0])
     return None
@@ -208,8 +233,11 @@ async def update_event(event_id: str, updates: dict[str, Any]) -> EventDetailRes
 
 async def delete_event(event_id: str) -> bool:
     client = _get_client()
-    res = await client.table("events").delete().eq("id", event_id).execute()
-    return bool(res.data)
+    exist = await client.table("events").select("id").eq("id", event_id).execute()
+    if not exist.data:
+        return False
+    await client.table("events").delete().eq("id", event_id).execute()
+    return True
 
 
 async def add_scholar_to_event(event_id: str, scholar_id: str) -> EventDetailResponse | None:

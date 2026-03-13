@@ -65,6 +65,8 @@ async def list_projects(
     pi_name: str | None = Query(default=None, description="负责人姓名（模糊匹配）"),
     tag: str | None = Query(default=None, description="标签（精确匹配）"),
     keyword: str | None = Query(default=None, description="全文关键词搜索"),
+    custom_field_key: str | None = Query(default=None, description="自定义字段名（需配合 custom_field_value 使用）"),
+    custom_field_value: str | None = Query(default=None, description="自定义字段值"),
 ):
     return await svc.list_projects(
         page=page,
@@ -75,6 +77,8 @@ async def list_projects(
         pi_name=pi_name,
         tag=tag,
         keyword=keyword,
+        custom_field_key=custom_field_key,
+        custom_field_value=custom_field_value,
     )
 
 

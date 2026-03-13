@@ -12,7 +12,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 # Import after mocking to avoid actual crawler registry initialization
 def test_load_crawl_concurrency_config_defaults():
     """Test _load_crawl_concurrency_config returns defaults when file missing."""
-    from scripts.run_all_crawl import _load_crawl_concurrency_config
+    from scripts.crawl.run_all import _load_crawl_concurrency_config
 
     config = _load_crawl_concurrency_config()
 
@@ -34,7 +34,7 @@ def test_load_crawl_concurrency_config_defaults():
 
 def test_group_configs_by_method():
     """Test _group_configs_by_method groups configs correctly."""
-    from scripts.run_all_crawl import _group_configs_by_method
+    from scripts.crawl.run_all import _group_configs_by_method
 
     configs = [
         {"id": "static1", "crawl_method": "static"},
@@ -55,7 +55,7 @@ def test_group_configs_by_method():
 @pytest.mark.asyncio
 async def test_run_grouped_concurrently():
     """Test _run_grouped_concurrently executes groups with correct concurrency."""
-    from scripts.run_all_crawl import _run_grouped_concurrently
+    from scripts.crawl.run_all import _run_grouped_concurrently
 
     # Mock _crawl_single_source to track calls
     call_count = {"count": 0}
@@ -80,7 +80,7 @@ async def test_run_grouped_concurrently():
             "error": None,
         }
 
-    with patch("scripts.run_all_crawl._crawl_single_source", new=mock_crawl_single_source):
+    with patch("scripts.crawl.run_all._crawl_single_source", new=mock_crawl_single_source):
         grouped = {
             "static": [
                 {"id": f"static_{i}"} for i in range(5)
@@ -109,7 +109,7 @@ async def test_run_grouped_concurrently():
 
 def test_run_all_parameter_types():
     """Test run_all function signature and parameters."""
-    from scripts.run_all_crawl import run_all
+    from scripts.crawl.run_all import run_all
     import inspect
 
     sig = inspect.signature(run_all)
@@ -128,7 +128,7 @@ def test_run_all_parameter_types():
 def test_strategy_decision_logic_grouped():
     """Test that grouped strategy selects correct execution path."""
     # This is more of an integration test, verifying the logic is there
-    from scripts.run_all_crawl import _load_crawl_concurrency_config
+    from scripts.crawl.run_all import _load_crawl_concurrency_config
 
     conc_config = _load_crawl_concurrency_config()
     strategy = "grouped"
@@ -148,7 +148,7 @@ def test_strategy_decision_logic_grouped():
 
 def test_strategy_decision_logic_fixed():
     """Test that fixed strategy selects correct execution path."""
-    from scripts.run_all_crawl import _load_crawl_concurrency_config
+    from scripts.crawl.run_all import _load_crawl_concurrency_config
 
     conc_config = _load_crawl_concurrency_config()
     strategy = "fixed"
@@ -165,7 +165,7 @@ def test_strategy_decision_logic_fixed():
 
 def test_strategy_description_generation():
     """Test that strategy descriptions are generated correctly."""
-    from scripts.run_all_crawl import _load_crawl_concurrency_config
+    from scripts.crawl.run_all import _load_crawl_concurrency_config
 
     conc_config = _load_crawl_concurrency_config()
 

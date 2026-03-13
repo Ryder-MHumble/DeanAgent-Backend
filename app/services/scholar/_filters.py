@@ -23,12 +23,22 @@ def _derive_region_from_university(university: str) -> str:
     if has_chinese:
         return "国内"
 
+    # Known domestic keywords (Chinese institutions with non-Chinese chars)
+    domestic_keywords = [
+        "中科院", "中国科学院", "中国工程院", "中关村", "昌平",
+        "深圳", "上海", "北京", "香港", "澳门",
+    ]
+    if any(kw in university for kw in domestic_keywords):
+        return "国内"
+
     # Known international universities (English names)
     intl_keywords = [
         "University", "Institute", "College", "School",
         "MIT", "Stanford", "Harvard", "Berkeley", "CMU",
         "Oxford", "Cambridge", "ETH", "EPFL",
-        "NUS", "NTU", "KAIST", "Tokyo"
+        "NUS", "NTU", "KAIST", "Tokyo",
+        "A*STAR", "CNRS", "INRIA", "Max Planck",
+        "UCLA", "USC", "Caltech", "Georgia Tech",
     ]
 
     if any(kw in university for kw in intl_keywords):
@@ -53,22 +63,33 @@ def _derive_affiliation_type_from_university(university: str) -> str:
     uni_lower = university.lower()
 
     # 高校 keywords
-    if any(kw in uni_lower for kw in ["大学", "学院", "university", "college"]):
+    if any(kw in uni_lower for kw in [
+        "大学", "学院", "university", "college",
+        "ucla", "usc", "mit", "caltech", "georgia tech",
+    ]):
         return "高校"
 
     # 研究机构 keywords
     if any(kw in uni_lower for kw in [
         "研究院", "研究所", "研究中心", "科学院", "工程院",
-        "institute", "laboratory", "lab", "research center"
+        "实验室", "中科院", "自动化所", "计算所", "软件所",
+        "数学所", "物理所", "化学所", "生物所",
+        "institute", "laboratory", "lab", "research center",
+        "a*star", "cnrs", "inria", "max planck",
     ]):
         return "研究机构"
 
     # 企业 keywords
     if any(kw in uni_lower for kw in [
-        "公司", "集团", "科技", "技术", "企业",
-        "company", "corp", "inc", "ltd", "technology", "tech"
+        "公司", "集团", "企业",
+        "company", "corp", "inc", "ltd",
+        "亚马逊", "谷歌", "微软", "华为", "腾讯", "阿里", "百度", "字节",
+        "amazon", "google", "microsoft", "meta", "apple",
+        "科技", "technology", "tech",
     ]):
-        return "企业"
+        # Exclude false positives: "大学" or "学院" in name takes precedence
+        if not any(kw in uni_lower for kw in ["大学", "学院", "university", "college"]):
+            return "企业"
 
     return "其他"
 
@@ -87,8 +108,16 @@ def _apply_filters(
     keyword: str | None,
     region: str | None,
     affiliation_type: str | None,
+    institution_names: list[str] | None = None,
+    custom_field_key: str | None = None,
+    custom_field_value: str | None = None,
 ) -> list[dict[str, Any]]:
     result = items
+
+    # institution_names: exact-match on university field (used by institution_group/category filter)
+    if institution_names is not None:
+        name_set = set(institution_names)
+        result = [i for i in result if (i.get("university") or "") in name_set]
 
     if university:
         result = [i for i in result if _match_fuzzy(i.get("university", ""), university)]
@@ -148,5 +177,11 @@ def _apply_filters(
             return False
 
         result = [i for i in result if _matches(i)]
+
+    if custom_field_key:
+        result = [
+            i for i in result
+            if (i.get("custom_fields") or {}).get(custom_field_key) == custom_field_value
+        ]
 
     return result

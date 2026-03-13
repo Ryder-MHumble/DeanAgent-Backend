@@ -54,6 +54,8 @@ async def list_events(
     keyword: str | None = Query(None, description="关键词搜索（标题/摘要/讲者）"),
     page: int = Query(1, ge=1, description="页码"),
     page_size: int = Query(20, ge=1, le=200, description="每页条数"),
+    custom_field_key: str | None = Query(None, description="自定义字段名"),
+    custom_field_value: str | None = Query(None, description="自定义字段值"),
 ):
     return await svc.get_event_list(
         event_type=event_type,
@@ -64,6 +66,8 @@ async def list_events(
         keyword=keyword,
         page=page,
         page_size=page_size,
+        custom_field_key=custom_field_key,
+        custom_field_value=custom_field_value,
     )
 
 

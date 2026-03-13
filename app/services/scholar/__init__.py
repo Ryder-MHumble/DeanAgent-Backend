@@ -279,6 +279,27 @@ async def batch_create_scholars(
 # ---------------------------------------------------------------------------
 
 
+async def _resolve_institution_names_by_group_or_category(
+    group: str | None,
+    category: str | None,
+) -> list[str] | None:
+    """通过 institution_group 或 institution_category 查找机构名称列表，用于学者过滤."""
+    if not group and not category:
+        return None
+    try:
+        from app.services import institution_service as inst_svc  # noqa: PLC0415
+        result = await inst_svc.get_institution_list(
+            group=group,
+            category=category,
+            type_filter="university",
+            page_size=500,
+        )
+        return [item.name for item in result.items]
+    except Exception as exc:
+        logger.warning("Failed to resolve institution names for group=%s category=%s: %s", group, category, exc)
+        return None
+
+
 async def get_scholar_list(
     *,
     university: str | None = None,
@@ -292,9 +313,20 @@ async def get_scholar_list(
     keyword: str | None = None,
     region: str | None = None,
     affiliation_type: str | None = None,
+    institution_group: str | None = None,
+    institution_category: str | None = None,
     page: int = 1,
     page_size: int = 20,
+    custom_field_key: str | None = None,
+    custom_field_value: str | None = None,
 ) -> dict[str, Any]:
+    # Resolve institution_group/category → list of institution names for filtering
+    institution_names: list[str] | None = None
+    if institution_group or institution_category:
+        institution_names = await _resolve_institution_names_by_group_or_category(
+            institution_group, institution_category
+        )
+
     items = await _load_all_with_annotations_async()
 
     filtered = _apply_filters(
@@ -310,6 +342,9 @@ async def get_scholar_list(
         keyword=keyword,
         region=region,
         affiliation_type=affiliation_type,
+        institution_names=institution_names,
+        custom_field_key=custom_field_key,
+        custom_field_value=custom_field_value,
     )
 
     filtered.sort(key=lambda i: i.get("name", ""))
@@ -463,14 +498,27 @@ async def update_scholar_basic(url_hash: str, updates: dict[str, Any]) -> dict[s
             db_updates[key] = value
     db_updates["updated_at"] = datetime.now(UTC).isoformat()
 
+    # custom_fields 浅合并
+    if "custom_fields" in db_updates:
+        from app.services.core.custom_fields import apply_custom_fields_update  # noqa: PLC0415
+        try:
+            from app.db.client import get_client as _gc  # noqa: PLC0415
+            cur = await _gc().table("scholars").select("custom_fields").eq("id", url_hash).execute()
+            if cur.data:
+                apply_custom_fields_update(db_updates, cur.data[0])
+        except Exception:
+            pass  # fallback: write as-is
+
     # --- Try Supabase first (matches the read path) ---
     try:
         from app.db.client import get_client  # noqa: PLC0415
         client = get_client()
-        res = await client.table("scholars").update(db_updates).eq("id", url_hash).execute()
-        if res.data:
+        # Check existence first (supabase-py v2 update() returns [] by default without .select())
+        exist = await client.table("scholars").select("id").eq("id", url_hash).execute()
+        if exist.data:
+            await client.table("scholars").update(db_updates).eq("id", url_hash).execute()
             return await get_scholar_detail(url_hash)
-        # res.data is empty → scholar not found in DB; fall through to JSON
+        # Not in DB → fall through to JSON fallback
     except Exception as exc:
         logger.warning("Supabase update_scholar_basic failed, trying local JSON: %s", exc)
 
@@ -502,12 +550,14 @@ async def delete_scholar(url_hash: str) -> bool:
     try:
         from app.db.client import get_client  # noqa: PLC0415
         client = get_client()
-        res = await client.table("scholars").delete().eq("id", url_hash).execute()
-        if res.data:
+        # supabase-py v2 delete() also returns [] by default without .select()
+        exist = await client.table("scholars").select("id").eq("id", url_hash).execute()
+        if exist.data:
+            await client.table("scholars").delete().eq("id", url_hash).execute()
             annotation_store.delete_all_for_faculty(url_hash)
             student_store.delete_all_students(url_hash)
             return True
-        # res.data empty → not in DB; fall through to JSON
+        # Not in DB → fall through to JSON
     except Exception as exc:
         logger.warning("DB delete_scholar failed, trying JSON: %s", exc)
 

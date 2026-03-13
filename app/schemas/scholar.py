@@ -691,6 +691,7 @@ class ScholarDetailResponse(BaseModel):
     relation_updated_at: str = ""
     recent_updates: list[DynamicUpdate] = Field(default_factory=list)
     supervised_students_count: int = 0
+    custom_fields: dict[str, str] = Field(default_factory=dict, description="用户自定义字段")
 
 
 class UniversityCount(BaseModel):
@@ -776,6 +777,9 @@ class ScholarBasicUpdate(BaseModel):
     education: list[EducationRecord] | None = None
     secondary_departments: list[str] | None = None
     updated_by: str | None = None
+    custom_fields: dict[str, str | None] | None = Field(
+        default=None, description="用户自定义字段（浅合并：值为 null 删除该 key）",
+    )
 
 
 class InstituteRelationUpdate(BaseModel):

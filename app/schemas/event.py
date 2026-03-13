@@ -74,6 +74,7 @@ class EventDetailResponse(BaseModel):
     created_at: str = ""
     updated_at: str = ""
     audit_status: str = ""
+    custom_fields: dict[str, str] = Field(default_factory=dict, description="用户自定义字段")
 
 
 # ---------------------------------------------------------------------------
@@ -129,6 +130,9 @@ class EventCreate(BaseModel):
     certificate_number: str = Field(default="", description="纪念证书编号")
     created_by: str = Field(default="user", description="创建人")
     audit_status: str = Field(default="pending", description="审核状态")
+    custom_fields: dict[str, str] | None = Field(
+        default=None, description="用户自定义字段（KV 键值对）",
+    )
 
 
 class EventUpdate(BaseModel):
@@ -160,6 +164,9 @@ class EventUpdate(BaseModel):
     certificate_number: str | None = Field(default=None, description="纪念证书编号")
     audit_status: str | None = Field(default=None, description="审核状态")
     updated_by: str = Field(default="user", description="更新人")
+    custom_fields: dict[str, str | None] | None = Field(
+        default=None, description="用户自定义字段（浅合并：值为 null 删除该 key）",
+    )
 
 
 class ScholarAssociation(BaseModel):

@@ -100,6 +100,7 @@ def _to_detail(p: dict) -> ProjectDetailResponse:
         created_at=p.get("created_at"),
         updated_at=p.get("updated_at"),
         extra=p.get("extra") or {},
+        custom_fields=p.get("custom_fields") or {},
     )
 
 
@@ -127,6 +128,8 @@ async def list_projects(
     keyword: str | None = None,
     pi_name: str | None = None,
     tag: str | None = None,
+    custom_field_key: str | None = None,
+    custom_field_value: str | None = None,
 ) -> ProjectListResponse:
     client = _get_client()
     q = client.table("projects").select("*")
@@ -145,6 +148,12 @@ async def list_projects(
 
     if tag:
         rows = [r for r in rows if tag in (r.get("tags") or [])]
+
+    if custom_field_key:
+        rows = [
+            r for r in rows
+            if (r.get("custom_fields") or {}).get(custom_field_key) == custom_field_value
+        ]
 
     total = len(rows)
     total_pages = max(1, (total + page_size - 1) // page_size)
@@ -224,9 +233,21 @@ async def create_project(payload: dict[str, Any]) -> ProjectDetailResponse:
 
 
 async def update_project(project_id: str, updates: dict[str, Any]) -> ProjectDetailResponse | None:
+    from app.services.core.custom_fields import apply_custom_fields_update  # noqa: PLC0415
+
     now = datetime.now(timezone.utc).isoformat()
     clean_updates = {k: v for k, v in updates.items() if v is not None}
     clean_updates["updated_at"] = now
+
+    # custom_fields 浅合并：需要先读取现有值
+    if "custom_fields" in updates:
+        clean_updates["custom_fields"] = updates["custom_fields"]  # 保留 null 值用于合并
+        client = _get_client()
+        cur = await client.table("projects").select("custom_fields").eq("id", project_id).execute()
+        if cur.data:
+            apply_custom_fields_update(clean_updates, cur.data[0])
+        else:
+            return None
     for list_field in ("related_scholars", "outputs"):
         if isinstance(clean_updates.get(list_field), list):
             clean_updates[list_field] = [
@@ -236,7 +257,7 @@ async def update_project(project_id: str, updates: dict[str, Any]) -> ProjectDet
 
     client = _get_client()
     db_updates = {k: v for k, v in clean_updates.items() if k not in ("keywords", "extra")}
-    res = await client.table("projects").update(db_updates).eq("id", project_id).execute()
+    res = await client.table("projects").update(db_updates).eq("id", project_id).select("*").execute()
     if res.data:
         return _to_detail(_row_to_dict(res.data[0]))
     return None
@@ -244,8 +265,11 @@ async def update_project(project_id: str, updates: dict[str, Any]) -> ProjectDet
 
 async def delete_project(project_id: str) -> bool:
     client = _get_client()
-    res = await client.table("projects").delete().eq("id", project_id).execute()
-    return bool(res.data)
+    exist = await client.table("projects").select("id").eq("id", project_id).execute()
+    if not exist.data:
+        return False
+    await client.table("projects").delete().eq("id", project_id).execute()
+    return True
 
 
 async def batch_create_projects(

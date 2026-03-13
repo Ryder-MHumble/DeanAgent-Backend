@@ -90,4 +90,5 @@ def _to_detail(item: dict[str, Any]) -> dict[str, Any]:
         "relation_updated_at": item.get("relation_updated_at") or "",
         "recent_updates": item.get("recent_updates") or [],
         "tags": item.get("tags") or [],
+        "custom_fields": item.get("custom_fields") or {},
     }

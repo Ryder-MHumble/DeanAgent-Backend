@@ -83,6 +83,7 @@ def _to_brief(item: dict[str, Any]) -> dict[str, Any]:
         "tags": item.get("tags", []),
         "is_read": item.get("is_read", False),
         "importance": item.get("importance"),
+        "custom_fields": item.get("custom_fields") or {},
     }
 
 
@@ -134,6 +135,14 @@ async def list_articles(params: ArticleSearchParams) -> PaginatedResponse:
     # 手动应用信源过滤
     if source_filter:
         items = [item for item in items if item.get("source_id") in source_filter]
+
+    # custom_fields filtering (before transformation for efficiency)
+    if params.custom_field_key:
+        items = [
+            item for item in items
+            if (item.get("custom_fields") or {}).get(params.custom_field_key)
+            == params.custom_field_value
+        ]
 
     # Apply annotations
     briefs = [_to_brief(item) for item in items]
@@ -198,6 +207,16 @@ async def update_article(article_id: str, data: ArticleUpdate) -> dict[str, Any]
 
         client = get_client()
         update_data = {k: v for k, v in values.items() if k in ("is_read", "importance")}
+
+        # custom_fields shallow merge
+        if "custom_fields" in values and values["custom_fields"] is not None:
+            from app.services.core.custom_fields import merge_custom_fields  # noqa: PLC0415
+            cur = await client.table("articles").select("custom_fields").eq(
+                "url_hash", article_id
+            ).execute()
+            existing_cf = (cur.data[0].get("custom_fields") or {}) if cur.data else {}
+            update_data["custom_fields"] = merge_custom_fields(existing_cf, values["custom_fields"])
+
         if update_data:
             await client.table("articles").update(update_data).eq("url_hash", article_id).execute()
             db_updated = True

@@ -4,10 +4,10 @@ Tier 1: Rule-based topic classification, heat calculation, signal extraction.
 Tier 2: LLM enrichment for topic summaries, insights, and opportunities (optional).
 
 Usage:
-    python scripts/process_tech_frontier.py               # Incremental Tier 1
-    python scripts/process_tech_frontier.py --force        # Reprocess all
-    python scripts/process_tech_frontier.py --dry-run      # Preview classification
-    python scripts/process_tech_frontier.py --enrich       # Include LLM enrichment
+    python scripts/intel/process_tech_frontier.py               # Incremental Tier 1
+    python scripts/intel/process_tech_frontier.py --force        # Reprocess all
+    python scripts/intel/process_tech_frontier.py --dry-run      # Preview classification
+    python scripts/intel/process_tech_frontier.py --enrich       # Include LLM enrichment
 """
 from __future__ import annotations
 
