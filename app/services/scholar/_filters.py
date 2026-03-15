@@ -24,7 +24,7 @@ _INTL_GROUPS = {"海外高校"}
 async def get_institution_classification_map() -> dict[str, dict[str, str]]:
     """Return {institution_name: {region, org_type}} from the institutions table.
 
-    Uses the `type` field for org_type and `group` field (海外高校 → 国际) for region.
+    Uses `org_type` for org_type and `classification` field (海外高校 → 国际) for region.
     Fetches once per process and caches the result.
     Falls back to empty dict on error (callers will use heuristics).
 
@@ -37,23 +37,26 @@ async def get_institution_classification_map() -> dict[str, dict[str, str]]:
     try:
         from app.db.client import get_client  # noqa: PLC0415
         client = get_client()
-        # Fetch all rows including departments so we skip them via type filter
+        # Fetch all organizations (not departments)
         res = await client.table("institutions").select(
-            "name,type,group"
-        ).execute()
+            "name,entity_type,region,org_type,classification"
+        ).eq("entity_type", "organization").execute()
         rows = res.data or []
         mapping: dict[str, dict[str, str]] = {}
         for row in rows:
-            inst_type = row.get("type") or ""
-            if inst_type == "department":
-                continue  # skip departments
             name = (row.get("name") or "").strip()
             if not name:
                 continue
-            org_type = _TYPE_TO_ORG_TYPE.get(inst_type, "")
-            group = row.get("group") or ""
-            region = "国际" if group in _INTL_GROUPS else "国内"
-            mapping[name] = {"region": region, "org_type": org_type}
+            # Use DB fields directly if populated
+            db_region = row.get("region") or ""
+            db_org_type = row.get("org_type") or ""
+            classification = row.get("classification") or ""
+
+            # Derive region from classification if DB region is empty
+            if not db_region:
+                db_region = "国际" if classification == "海外高校" else "国内"
+
+            mapping[name] = {"region": db_region, "org_type": db_org_type}
         _INSTITUTION_CLASSIFICATION_CACHE = mapping
         return mapping
     except Exception as exc:
