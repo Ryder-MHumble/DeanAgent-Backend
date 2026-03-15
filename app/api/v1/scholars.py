@@ -52,7 +52,7 @@ router = APIRouter()
 
 
 @router.get(
-    "/",
+    "",
     response_model=ScholarListResponse,
     summary="学者列表",
     description=(
@@ -115,10 +115,16 @@ async def list_scholars(
 @router.get(
     "/universities",
     summary="高校及院系列表",
-    description="返回学者库中所有高校及其院系列表，用于前端自动补全。",
+    description="返回学者库中所有高校及其院系列表（含 scholar_count），支持按 region/affiliation_type 过滤。",
 )
-async def get_universities():
-    return await svc.get_universities_with_departments()
+async def get_universities(
+    region: str | None = Query(None, description="地区筛选：国内 | 国际"),
+    affiliation_type: str | None = Query(None, description="机构类型：高校 | 企业 | 研究机构 | 其他"),
+):
+    return await svc.get_universities_with_departments(
+        region=region,
+        affiliation_type=affiliation_type,
+    )
 
 
 @router.get(
@@ -132,7 +138,7 @@ async def get_stats():
 
 
 @router.post(
-    "/",
+    "",
     response_model=ScholarDetailResponse,
     summary="手动创建学者",
     description=(
@@ -212,19 +218,6 @@ async def batch_create_scholars(body: ScholarBatchRequest):
         skip_duplicates=body.skip_duplicates,
         added_by=body.added_by,
     )
-    return result
-
-
-@router.get(
-    "/{url_hash}",
-    response_model=ScholarDetailResponse,
-    summary="学者详情",
-    description="根据 url_hash 获取单条学者完整数据（爬虫字段 + 用户标注合并）。",
-)
-async def get_faculty(url_hash: str):
-    result = await svc.get_scholar_detail(url_hash)
-    if result is None:
-        raise HTTPException(status_code=404, detail=f"Faculty '{url_hash}' not found")
     return result
 
 
@@ -337,6 +330,19 @@ async def delete_update(url_hash: str, update_idx: int):
 async def update_achievements(url_hash: str, body: AchievementUpdate):
     updates = body.model_dump(exclude_none=True)
     result = await svc.update_scholar_achievements(url_hash, updates)
+    if result is None:
+        raise HTTPException(status_code=404, detail=f"Faculty '{url_hash}' not found")
+    return result
+
+
+@router.get(
+    "/{url_hash}",
+    response_model=ScholarDetailResponse,
+    summary="学者详情",
+    description="根据 url_hash 获取单条学者完整数据（爬虫字段 + 用户标注合并）。",
+)
+async def get_faculty(url_hash: str):
+    result = await svc.get_scholar_detail(url_hash)
     if result is None:
         raise HTTPException(status_code=404, detail=f"Faculty '{url_hash}' not found")
     return result

@@ -24,7 +24,10 @@ from app.services.scholar._data import (
     _load_all_with_annotations,
     _load_all_with_annotations_async,
 )
-from app.services.scholar._filters import _apply_filters
+from app.services.scholar._filters import (
+    _apply_filters,
+    get_institution_classification_map,
+)
 from app.services.scholar._transformers import _to_detail, _to_list_item
 from app.services.scholar._create import import_scholars_excel, _parse_excel_row  # noqa: F401
 
@@ -329,6 +332,11 @@ async def get_scholar_list(
 
     items = await _load_all_with_annotations_async()
 
+    # Fetch DB-based classification map when region/affiliation_type filter is active
+    inst_map: dict = {}
+    if region or affiliation_type:
+        inst_map = await get_institution_classification_map()
+
     filtered = _apply_filters(
         items,
         university=university,
@@ -345,6 +353,7 @@ async def get_scholar_list(
         institution_names=institution_names,
         custom_field_key=custom_field_key,
         custom_field_value=custom_field_value,
+        inst_map=inst_map,
     )
 
     filtered.sort(key=lambda i: i.get("name", ""))
@@ -374,24 +383,55 @@ async def get_scholar_detail(url_hash: str) -> dict[str, Any] | None:
     return None
 
 
-async def get_universities_with_departments() -> list[dict[str, Any]]:
-    """返回所有高校及其院系列表，用于前端自动补全。"""
+async def get_universities_with_departments(
+    region: str | None = None,
+    affiliation_type: str | None = None,
+) -> list[dict[str, Any]]:
+    """返回所有高校及其院系列表，包含学者数量。
+
+    支持按 region（国内/国际）和 affiliation_type（高校/企业/研究机构/其他）过滤。
+    使用 institutions 表的 region/org_type 字段分类，启发式规则作为后备。
+    """
+    from app.services.scholar._filters import _get_region, _get_org_type  # noqa: PLC0415
+
     items = await _load_all_with_annotations_async()
 
-    uni_depts: dict[str, set[str]] = {}
+    # Fetch DB classification map when filter is active
+    inst_map: dict = {}
+    if region or affiliation_type:
+        inst_map = await get_institution_classification_map()
+
+    # uni -> {depts: {dept_name -> count}, total: int}
+    uni_data: dict[str, dict[str, Any]] = {}
     for item in items:
         uni = (item.get("university") or "").strip()
         if not uni:
             continue
+        # Apply region filter using DB map + heuristic fallback
+        if region and _get_region(uni, inst_map) != region:
+            continue
+        # Apply affiliation_type filter using DB map + heuristic fallback
+        if affiliation_type and _get_org_type(uni, inst_map) != affiliation_type:
+            continue
+
+        if uni not in uni_data:
+            uni_data[uni] = {"total": 0, "depts": {}}
+        uni_data[uni]["total"] += 1
+
         dept = (item.get("department") or "").strip()
-        if uni not in uni_depts:
-            uni_depts[uni] = set()
         if dept:
-            uni_depts[uni].add(dept)
+            uni_data[uni]["depts"][dept] = uni_data[uni]["depts"].get(dept, 0) + 1
 
     return [
-        {"university": uni, "departments": sorted(depts)}
-        for uni, depts in sorted(uni_depts.items())
+        {
+            "university": uni,
+            "scholar_count": data["total"],
+            "departments": [
+                {"name": d, "scholar_count": c}
+                for d, c in sorted(data["depts"].items(), key=lambda x: -x[1])
+            ],
+        }
+        for uni, data in sorted(uni_data.items(), key=lambda x: -x[1]["total"])
     ]
 
 

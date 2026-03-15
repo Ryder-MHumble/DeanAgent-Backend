@@ -3,6 +3,80 @@ from __future__ import annotations
 
 from typing import Any
 
+# ---------------------------------------------------------------------------
+# Institution classification map (from DB, cached in-process)
+# ---------------------------------------------------------------------------
+
+_INSTITUTION_CLASSIFICATION_CACHE: dict[str, dict[str, str]] | None = None
+
+
+_TYPE_TO_ORG_TYPE: dict[str, str] = {
+    "university": "高校",
+    "company": "企业",
+    "research_institute": "研究机构",
+    "academic_society": "其他",
+}
+
+# Groups that indicate international institutions
+_INTL_GROUPS = {"海外高校"}
+
+
+async def get_institution_classification_map() -> dict[str, dict[str, str]]:
+    """Return {institution_name: {region, org_type}} from the institutions table.
+
+    Uses the `type` field for org_type and `group` field (海外高校 → 国际) for region.
+    Fetches once per process startup and caches the result.
+    Falls back to empty dict on error (callers will use heuristics).
+    """
+    global _INSTITUTION_CLASSIFICATION_CACHE
+    if _INSTITUTION_CLASSIFICATION_CACHE is not None:
+        return _INSTITUTION_CLASSIFICATION_CACHE
+
+    try:
+        from app.db.client import get_client  # noqa: PLC0415
+        client = get_client()
+        # Fetch all rows including departments so we skip them via type filter
+        res = await client.table("institutions").select(
+            "name,type,group"
+        ).execute()
+        rows = res.data or []
+        mapping: dict[str, dict[str, str]] = {}
+        for row in rows:
+            inst_type = row.get("type") or ""
+            if inst_type == "department":
+                continue  # skip departments
+            name = (row.get("name") or "").strip()
+            if not name:
+                continue
+            org_type = _TYPE_TO_ORG_TYPE.get(inst_type, "")
+            group = row.get("group") or ""
+            region = "国际" if group in _INTL_GROUPS else "国内"
+            mapping[name] = {"region": region, "org_type": org_type}
+        _INSTITUTION_CLASSIFICATION_CACHE = mapping
+        return mapping
+    except Exception:
+        return {}
+
+
+def invalidate_institution_classification_cache() -> None:
+    """Call this when institution data changes."""
+    global _INSTITUTION_CLASSIFICATION_CACHE
+    _INSTITUTION_CLASSIFICATION_CACHE = None
+
+
+def _get_region(university: str, inst_map: dict[str, dict[str, str]]) -> str:
+    """Resolve region for a university name using DB map first, heuristics as fallback."""
+    if university in inst_map and inst_map[university].get("region"):
+        return inst_map[university]["region"]
+    return _derive_region_from_university(university)
+
+
+def _get_org_type(university: str, inst_map: dict[str, dict[str, str]]) -> str:
+    """Resolve org_type for a university name using DB map first, heuristics as fallback."""
+    if university in inst_map and inst_map[university].get("org_type"):
+        return inst_map[university]["org_type"]
+    return _derive_affiliation_type_from_university(university)
+
 
 def _match_fuzzy(value: str, query: str) -> bool:
     return query.strip().lower() in (value or "").lower()
@@ -44,8 +118,8 @@ def _derive_region_from_university(university: str) -> str:
     if any(kw in university for kw in intl_keywords):
         return "国际"
 
-    # Default to 国内 if uncertain (most scholars in DB are domestic)
-    return "国内"
+    # Pure English name (no Chinese chars) → treat as 国际
+    return "国际"
 
 
 def _derive_affiliation_type_from_university(university: str) -> str:
@@ -111,6 +185,7 @@ def _apply_filters(
     institution_names: list[str] | None = None,
     custom_field_key: str | None = None,
     custom_field_value: str | None = None,
+    inst_map: dict[str, dict[str, str]] | None = None,
 ) -> list[dict[str, Any]]:
     result = items
 
@@ -148,16 +223,17 @@ def _apply_filters(
     if has_email is not None:
         result = [i for i in result if bool(i.get("email", "")) == has_email]
 
+    _map = inst_map or {}
     if region:
         result = [
             i for i in result
-            if _derive_region_from_university(i.get("university", "")) == region
+            if _get_region(i.get("university", ""), _map) == region
         ]
 
     if affiliation_type:
         result = [
             i for i in result
-            if _derive_affiliation_type_from_university(i.get("university", "")) == affiliation_type
+            if _get_org_type(i.get("university", ""), _map) == affiliation_type
         ]
 
     if keyword:
