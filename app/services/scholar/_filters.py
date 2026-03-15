@@ -25,17 +25,17 @@ async def get_institution_classification_map() -> dict[str, dict[str, str]]:
     """Return {institution_name: {region, org_type}} from the institutions table.
 
     Uses the `type` field for org_type and `group` field (海外高校 → 国际) for region.
-    Fetches once per process startup and caches the result.
+    Fetches once per process and caches the result.
     Falls back to empty dict on error (callers will use heuristics).
+
+    NOTE: Assumes Supabase client is already initialized (via app startup).
     """
     global _INSTITUTION_CLASSIFICATION_CACHE
     if _INSTITUTION_CLASSIFICATION_CACHE is not None:
         return _INSTITUTION_CLASSIFICATION_CACHE
 
     try:
-        from app.db.client import get_client, init_client  # noqa: PLC0415
-        # Ensure client is initialized before use
-        init_client()
+        from app.db.client import get_client  # noqa: PLC0415
         client = get_client()
         # Fetch all rows including departments so we skip them via type filter
         res = await client.table("institutions").select(
@@ -56,7 +56,12 @@ async def get_institution_classification_map() -> dict[str, dict[str, str]]:
             mapping[name] = {"region": region, "org_type": org_type}
         _INSTITUTION_CLASSIFICATION_CACHE = mapping
         return mapping
-    except Exception:
+    except Exception as exc:
+        # Log error but don't crash - fall back to heuristics
+        import logging  # noqa: PLC0415
+        logging.getLogger(__name__).warning(
+            "Failed to load institution classification map: %s", exc
+        )
         return {}
 
 
