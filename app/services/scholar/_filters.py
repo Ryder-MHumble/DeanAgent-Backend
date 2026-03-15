@@ -22,41 +22,48 @@ _INTL_GROUPS = {"海外高校"}
 
 
 async def get_institution_classification_map() -> dict[str, dict[str, str]]:
-    """Return {institution_name: {region, org_type}} from the institutions table.
+    """Return {institution_name: {region, org_type}} from institutions data.
 
-    Uses `org_type` for org_type and `classification` field (海外高校 → 国际) for region.
+    Reads from JSON file (data/scholars/institutions.json) which has complete data,
+    rather than DB table which has NULL values for region/org_type/classification.
+
     Fetches once per process and caches the result.
     Falls back to empty dict on error (callers will use heuristics).
-
-    NOTE: Assumes Supabase client is already initialized (via app startup).
     """
     global _INSTITUTION_CLASSIFICATION_CACHE
     if _INSTITUTION_CLASSIFICATION_CACHE is not None:
         return _INSTITUTION_CLASSIFICATION_CACHE
 
     try:
-        from app.db.client import get_client  # noqa: PLC0415
-        client = get_client()
-        # Fetch all organizations (not departments)
-        res = await client.table("institutions").select(
-            "name,entity_type,region,org_type,classification"
-        ).eq("entity_type", "organization").execute()
-        rows = res.data or []
+        import json  # noqa: PLC0415
+        from pathlib import Path  # noqa: PLC0415
+
+        # Read from JSON file which has complete classification data
+        json_path = Path("data/scholars/institutions.json")
+        if not json_path.exists():
+            return {}
+
+        with open(json_path, encoding="utf-8") as f:
+            data = json.load(f)
+
+        universities = data.get("universities", [])
         mapping: dict[str, dict[str, str]] = {}
-        for row in rows:
-            name = (row.get("name") or "").strip()
+
+        for uni in universities:
+            name = (uni.get("name") or "").strip()
             if not name:
                 continue
-            # Use DB fields directly if populated
-            db_region = row.get("region") or ""
-            db_org_type = row.get("org_type") or ""
-            classification = row.get("classification") or ""
 
-            # Derive region from classification if DB region is empty
-            if not db_region:
-                db_region = "国际" if classification == "海外高校" else "国内"
+            # Use group field to determine region
+            group = uni.get("group") or ""
+            region = "国际" if group == "海外高校" else "国内"
 
-            mapping[name] = {"region": db_region, "org_type": db_org_type}
+            # Use type field to determine org_type
+            uni_type = uni.get("type") or ""
+            org_type = _TYPE_TO_ORG_TYPE.get(uni_type, "")
+
+            mapping[name] = {"region": region, "org_type": org_type}
+
         _INSTITUTION_CLASSIFICATION_CACHE = mapping
         return mapping
     except Exception as exc:
