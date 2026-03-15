@@ -8,12 +8,15 @@ All implementation now lives in app/services/faculty/:
 """
 from app.services.scholar import (  # noqa: F401
     add_scholar_update,
+    batch_create_scholars,
     create_scholar,
     delete_scholar,
     delete_scholar_update,
     get_scholar_detail,
     get_scholar_list,
     get_scholar_stats,
+    get_universities_with_departments,
+    import_scholars_async,
     update_scholar_achievements,
     update_scholar_basic,
     update_scholar_relation,
