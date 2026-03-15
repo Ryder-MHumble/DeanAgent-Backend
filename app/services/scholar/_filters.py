@@ -33,7 +33,9 @@ async def get_institution_classification_map() -> dict[str, dict[str, str]]:
         return _INSTITUTION_CLASSIFICATION_CACHE
 
     try:
-        from app.db.client import get_client  # noqa: PLC0415
+        from app.db.client import get_client, init_client  # noqa: PLC0415
+        # Ensure client is initialized before use
+        init_client()
         client = get_client()
         # Fetch all rows including departments so we skip them via type filter
         res = await client.table("institutions").select(
