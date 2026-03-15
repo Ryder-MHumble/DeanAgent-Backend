@@ -113,21 +113,6 @@ async def list_scholars(
 
 
 @router.get(
-    "/universities",
-    summary="高校及院系列表",
-    description="返回学者库中所有高校及其院系列表（含 scholar_count），支持按 region/affiliation_type 过滤。",
-)
-async def get_universities(
-    region: str | None = Query(None, description="地区筛选：国内 | 国际"),
-    affiliation_type: str | None = Query(None, description="机构类型：高校 | 企业 | 研究机构 | 其他"),
-):
-    return await svc.get_universities_with_departments(
-        region=region,
-        affiliation_type=affiliation_type,
-    )
-
-
-@router.get(
     "/stats",
     response_model=ScholarStatsResponse,
     summary="学者统计",

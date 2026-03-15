@@ -15,7 +15,9 @@ class EventListItem(BaseModel):
     """Single event in the list."""
 
     id: str = Field(description="活动唯一标识")
-    event_type: str = Field(description="活动类型（讲座/青年论坛/XAI讲坛等）")
+    category: str = Field(default="", description="一级分类（教育培养/科研学术/人才引育）")
+    series: str = Field(default="", description="二级分类/活动系列（如：XAI智汇讲坛、国际AI科学家大会）")
+    event_type: str = Field(default="", description="活动类型（讲座/前沿沙龙等）")
     title: str = Field(description="活动/讲座题目")
     speaker_name: str = Field(description="讲者姓名")
     speaker_organization: str = Field(default="", description="讲者单位")
@@ -46,7 +48,9 @@ class EventDetailResponse(BaseModel):
 
     # 基本信息
     id: str
-    event_type: str
+    category: str = Field(default="", description="一级分类（教育培养/科研学术/人才引育）")
+    series: str = Field(default="", description="二级分类/活动系列（如：XAI智汇讲坛、国际AI科学家大会）")
+    event_type: str = Field(default="", description="活动类型（讲座/前沿沙龙等）")
     series_number: str = ""
 
     # 讲者信息
@@ -86,8 +90,11 @@ class EventStatsResponse(BaseModel):
     """Statistics for events."""
 
     total: int = Field(description="总活动数")
+    by_category: list[dict[str, Any]] = Field(
+        description="按一级分类统计 [{category, count}]"
+    )
     by_type: list[dict[str, Any]] = Field(
-        description="按类型统计 [{event_type, count}]"
+        description="按活动类型统计 [{event_type, count}]"
     )
     by_month: list[dict[str, Any]] = Field(
         description="按月份统计 [{month, count}]"
@@ -104,7 +111,9 @@ class EventStatsResponse(BaseModel):
 class EventCreate(BaseModel):
     """POST /events/ — create new event."""
 
-    event_type: str = Field(description="活动类型")
+    category: str = Field(default="", description="一级分类（教育培养/科研学术/人才引育）")
+    series: str = Field(default="", description="二级分类/活动系列（如：XAI智汇讲坛）")
+    event_type: str = Field(default="", description="活动类型（如：学术前沿讲座/前沿沙龙）")
     series_number: str = Field(default="", description="系列期数")
 
     # 讲者信息
@@ -138,6 +147,8 @@ class EventCreate(BaseModel):
 class EventUpdate(BaseModel):
     """PATCH /events/{id} — update event (all fields optional)."""
 
+    category: str | None = Field(default=None, description="一级分类")
+    series: str | None = Field(default=None, description="二级分类/活动系列")
     event_type: str | None = Field(default=None, description="活动类型")
     series_number: str | None = Field(default=None, description="系列期数")
 
@@ -173,3 +184,63 @@ class ScholarAssociation(BaseModel):
     """POST /events/{id}/scholars — add scholar association."""
 
     scholar_id: str = Field(description="学者 url_hash")
+
+
+# ---------------------------------------------------------------------------
+# Taxonomy schemas (3-level category tree)
+# ---------------------------------------------------------------------------
+
+
+class TaxonomyNode(BaseModel):
+    """Single node in the taxonomy tree."""
+
+    id: str = Field(description="节点 UUID")
+    level: int = Field(description="层级：1=一级分类, 2=二级系列, 3=活动类型")
+    name: str = Field(description="节点名称")
+    parent_id: str | None = Field(default=None, description="父节点 UUID（L1 为 null）")
+    sort_order: int = Field(default=0, description="排序权重（越小越靠前）")
+    created_at: str = Field(default="", description="创建时间")
+
+
+class TaxonomyL3(TaxonomyNode):
+    """L3 活动类型节点（叶子节点）。"""
+
+
+class TaxonomyL2(TaxonomyNode):
+    """L2 系列节点，含下级活动类型列表。"""
+
+    children: list[TaxonomyL3] = Field(default_factory=list, description="活动类型列表")
+
+
+class TaxonomyL1(TaxonomyNode):
+    """L1 一级分类节点，含下级系列列表。"""
+
+    children: list[TaxonomyL2] = Field(default_factory=list, description="系列列表")
+
+
+class TaxonomyTree(BaseModel):
+    """完整的三级分类树（GET /events/taxonomy 响应）。"""
+
+    total_l1: int = Field(description="一级分类数量")
+    total_l2: int = Field(description="二级系列数量")
+    total_l3: int = Field(description="活动类型数量")
+    items: list[TaxonomyL1] = Field(description="一级分类列表（含完整子树）")
+
+
+class TaxonomyCreate(BaseModel):
+    """POST /events/taxonomy — 新增分类节点。"""
+
+    level: int = Field(description="层级：1=一级分类, 2=二级系列, 3=活动类型", ge=1, le=3)
+    name: str = Field(description="节点名称", min_length=1)
+    parent_id: str | None = Field(
+        default=None,
+        description="父节点 UUID（L1 留空；L2 填一级分类 ID；L3 填二级系列 ID）",
+    )
+    sort_order: int = Field(default=0, description="排序权重")
+
+
+class TaxonomyUpdate(BaseModel):
+    """PATCH /events/taxonomy/{id} — 更新分类节点。"""
+
+    name: str | None = Field(default=None, description="新名称")
+    sort_order: int | None = Field(default=None, description="排序权重")

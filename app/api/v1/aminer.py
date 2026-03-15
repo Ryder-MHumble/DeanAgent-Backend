@@ -17,7 +17,7 @@ from app.schemas.aminer import (
     ScholarSearchItem,
     ScholarSearchResponse,
 )
-from app.services import institution_service
+from app.services.core.institution import search_institutions_for_aminer
 from app.services.external.aminer_client import get_aminer_client
 
 router = APIRouter()
@@ -33,7 +33,7 @@ async def search_organizations(
     name: str = Query(..., description="机构名称（支持模糊匹配）"),
 ):
     """Search organizations from local institution.json."""
-    matches = institution_service.search_institutions_for_aminer(name)
+    matches = search_institutions_for_aminer(name)
 
     items = []
     for org in matches:

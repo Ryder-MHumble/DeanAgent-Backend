@@ -7,7 +7,7 @@ router = APIRouter()
 
 
 @router.get(
-    "/",
+    "",
     summary="系统健康检查",
     description="检查调度器运行状态，用于监控和部署健康探针。",
 )

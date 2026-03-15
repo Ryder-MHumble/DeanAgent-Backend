@@ -65,6 +65,12 @@ TAG_METADATA = [
         "description": "舆情监测 — 国内社媒平台（小红书、抖音等）内容与评论监测。"
         "数据存储于 Supabase，提供内容信息流、互动统计、评论分析等功能。",
     },
+    {
+        "name": "venues",
+        "description": "学术社群 — AI 领域顶会与期刊知识库。"
+        "维护顶会（AAAI/NeurIPS/CVPR 等）和期刊（Nature/TPAMI/JMLR 等）的级别、"
+        "H5 指数、录用率、影响因子等元数据，支持按类型/级别/领域过滤。",
+    },
 ]
 
 

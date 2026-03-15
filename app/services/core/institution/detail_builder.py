@@ -14,7 +14,6 @@ from app.schemas.institution import (
     ScholarInfo,
 )
 from app.services.core.institution.classification import (
-    convert_classification_to_category,
     normalize_priority,
 )
 
@@ -103,43 +102,20 @@ def build_list_item(record: dict) -> InstitutionListItem:
     # Normalize priority
     priority = normalize_priority(record.get("priority"))
 
-    # Convert new classification back to old category for backward compatibility
-    classification = record.get("classification")
-    sub_classification = record.get("sub_classification")
-    category = convert_classification_to_category(classification, sub_classification)
-
-    # Build old group field (for backward compatibility)
-    # group is derived from classification or org_type
-    group = None
-    if classification:
-        group = classification
-    elif record.get("org_type") == "研究机构":
-        group = "科研院所"
-    elif record.get("org_type") == "行业学会":
-        group = "行业学会"
-
     return InstitutionListItem(
         id=record["id"],
         name=record["name"],
-        # New classification fields
+        # Classification fields
         entity_type=record.get("entity_type"),
         region=record.get("region"),
         org_type=record.get("org_type"),
-        classification=classification,
-        sub_classification=sub_classification,
-        # Old fields (backward compatibility)
-        type=record.get("type"),
-        group=group,
-        category=category,
+        classification=record.get("classification"),
         # Common fields
         priority=priority,
         parent_id=record.get("parent_id"),
         scholar_count=record.get("scholar_count", 0),
-        student_count_24=record.get("student_count_24"),
-        student_count_25=record.get("student_count_25"),
+        student_count_total=record.get("student_count_total"),
         mentor_count=record.get("mentor_count"),
-        reputation_rank=record.get("reputation_rank"),
-        org_name=record.get("org_name"),
         avatar=record.get("avatar"),
     )
 

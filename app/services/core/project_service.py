@@ -257,7 +257,10 @@ async def update_project(project_id: str, updates: dict[str, Any]) -> ProjectDet
 
     client = _get_client()
     db_updates = {k: v for k, v in clean_updates.items() if k not in ("keywords", "extra")}
-    res = await client.table("projects").update(db_updates).eq("id", project_id).select("*").execute()
+    await client.table("projects").update(db_updates).eq("id", project_id).execute()
+
+    # Fetch the updated record
+    res = await client.table("projects").select("*").eq("id", project_id).execute()
     if res.data:
         return _to_detail(_row_to_dict(res.data[0]))
     return None

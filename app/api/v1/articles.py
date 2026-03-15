@@ -15,7 +15,7 @@ router = APIRouter()
 
 
 @router.get(
-    "/",
+    "",
     response_model=PaginatedResponse[ArticleBrief],
     summary="文章列表",
     description="查询文章列表，支持按维度、信源、关键词、日期范围过滤，以及字段排序和分页。",

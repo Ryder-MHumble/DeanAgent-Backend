@@ -11,6 +11,11 @@ from app.schemas.event import (
     EventListItem,
     EventListResponse,
     EventStatsResponse,
+    TaxonomyL1,
+    TaxonomyL2,
+    TaxonomyL3,
+    TaxonomyNode,
+    TaxonomyTree,
 )
 
 
@@ -45,7 +50,9 @@ def _db_to_detail(row: dict) -> EventDetailResponse:
     """Map DB columns → EventDetailResponse (handles field name differences)."""
     return EventDetailResponse(
         id=row.get("id", ""),
+        category=row.get("category") or "",
         event_type=row.get("event_type") or "",
+        series=row.get("series") or "",
         series_number=str(row.get("series_number") or ""),
         speaker_name=row.get("speaker_name") or "",
         speaker_organization=row.get("speaker_organization") or "",
@@ -74,7 +81,9 @@ def _event_to_db_row(evt: dict) -> dict:
     return {
         "id": evt.get("id"),
         "title": evt.get("title", ""),
+        "category": _clean(evt.get("category")),
         "event_type": _clean(evt.get("event_type")),
+        "series": _clean(evt.get("series")),
         "series_number": _clean(evt.get("series_number"), "int"),
         "speaker_name": _clean(evt.get("speaker_name")),
         "speaker_organization": _clean(evt.get("speaker_organization")),
@@ -97,7 +106,9 @@ def _event_to_db_row(evt: dict) -> dict:
 # ---------------------------------------------------------------------------
 
 async def get_event_list(
+    category: str | None = None,
     event_type: str | None = None,
+    series: str | None = None,
     speaker_name: str | None = None,
     start_date: str | None = None,
     end_date: str | None = None,
@@ -110,8 +121,12 @@ async def get_event_list(
 ) -> EventListResponse:
     client = _get_client()
     q = client.table("events").select("*").order("event_date", desc=True)
+    if category:
+        q = q.eq("category", category)
     if event_type:
         q = q.eq("event_type", event_type)
+    if series:
+        q = q.eq("series", series)
     if speaker_name:
         q = q.ilike("speaker_name", f"%{speaker_name}%")
     if start_date:
@@ -138,7 +153,9 @@ async def get_event_list(
     items = [
         EventListItem(
             id=r.get("id", ""),
+            category=r.get("category") or "",
             event_type=r.get("event_type") or "",
+            series=r.get("series") or "",
             title=r.get("title", ""),
             speaker_name=r.get("speaker_name") or "",
             speaker_organization=r.get("speaker_organization") or "",
@@ -165,13 +182,16 @@ async def get_event_detail(event_id: str) -> EventDetailResponse | None:
 async def get_event_stats() -> EventStatsResponse:
     client = _get_client()
     res = await client.table("events").select(
-        "event_type,event_date,speaker_name,scholar_ids"
+        "category,event_type,event_date,speaker_name,scholar_ids"
     ).execute()
     rows = res.data or []
+    by_category: dict[str, int] = {}
     by_type: dict[str, int] = {}
     by_month: dict[str, int] = {}
     speakers: set[str] = set()
     for r in rows:
+        cat = r.get("category") or "未分类"
+        by_category[cat] = by_category.get(cat, 0) + 1
         t = r.get("event_type") or "未分类"
         by_type[t] = by_type.get(t, 0) + 1
         d = _clean_date(r.get("event_date"))
@@ -182,6 +202,7 @@ async def get_event_stats() -> EventStatsResponse:
             speakers.add(r["speaker_name"])
     return EventStatsResponse(
         total=len(rows),
+        by_category=[{"category": k, "count": v} for k, v in by_category.items()],
         by_type=[{"event_type": k, "count": v} for k, v in by_type.items()],
         by_month=[{"month": k, "count": v} for k, v in sorted(by_month.items(), reverse=True)],
         total_speakers=len(speakers),
@@ -225,7 +246,10 @@ async def update_event(event_id: str, updates: dict[str, Any]) -> EventDetailRes
         db_updates["custom_fields"] = updates["custom_fields"]
 
     client = _get_client()
-    res = await client.table("events").update(db_updates).eq("id", event_id).select("*").execute()
+    await client.table("events").update(db_updates).eq("id", event_id).execute()
+
+    # Fetch the updated record
+    res = await client.table("events").select("*").eq("id", event_id).execute()
     if res.data:
         return _db_to_detail(res.data[0])
     return None
@@ -326,3 +350,104 @@ async def batch_create_events(
                                      "reason": str(exc)})
 
     return result
+
+
+# ---------------------------------------------------------------------------
+# Taxonomy operations
+# ---------------------------------------------------------------------------
+
+def _row_to_node(row: dict) -> TaxonomyNode:
+    return TaxonomyNode(
+        id=row.get("id", ""),
+        level=row.get("level", 1),
+        name=row.get("name", ""),
+        parent_id=row.get("parent_id"),
+        sort_order=row.get("sort_order") or 0,
+        created_at=str(row.get("created_at") or ""),
+    )
+
+
+async def get_taxonomy_tree() -> TaxonomyTree:
+    """Return the full 3-level taxonomy tree."""
+    client = _get_client()
+    res = await client.table("event_taxonomy").select("*").order("sort_order").execute()
+    rows = res.data or []
+
+    # Index by id and group by level
+    by_id: dict[str, dict] = {r["id"]: r for r in rows}
+    l1_rows = [r for r in rows if r["level"] == 1]
+    l2_rows = [r for r in rows if r["level"] == 2]
+    l3_rows = [r for r in rows if r["level"] == 3]
+
+    # Build L3 grouped by parent_id
+    l3_by_parent: dict[str, list[TaxonomyL3]] = {}
+    for r in l3_rows:
+        pid = r.get("parent_id") or ""
+        l3_by_parent.setdefault(pid, []).append(
+            TaxonomyL3(**_row_to_node(r).model_dump())
+        )
+
+    # Build L2 grouped by parent_id
+    l2_by_parent: dict[str, list[TaxonomyL2]] = {}
+    for r in l2_rows:
+        pid = r.get("parent_id") or ""
+        node = TaxonomyL2(
+            **_row_to_node(r).model_dump(),
+            children=l3_by_parent.get(r["id"], []),
+        )
+        l2_by_parent.setdefault(pid, []).append(node)
+
+    # Build L1 list
+    l1_items: list[TaxonomyL1] = []
+    for r in l1_rows:
+        node = TaxonomyL1(
+            **_row_to_node(r).model_dump(),
+            children=l2_by_parent.get(r["id"], []),
+        )
+        l1_items.append(node)
+
+    return TaxonomyTree(
+        total_l1=len(l1_rows),
+        total_l2=len(l2_rows),
+        total_l3=len(l3_rows),
+        items=l1_items,
+    )
+
+
+async def create_taxonomy_node(data: dict[str, Any]) -> TaxonomyNode:
+    """Create a new taxonomy node (L1/L2/L3)."""
+    client = _get_client()
+    row = {
+        "id": str(uuid.uuid4()),
+        "level": data["level"],
+        "name": data["name"],
+        "parent_id": data.get("parent_id"),
+        "sort_order": data.get("sort_order", 0),
+    }
+    res = await client.table("event_taxonomy").insert(row).select("*").execute()
+    if not res.data:
+        raise ValueError("Failed to create taxonomy node")
+    return _row_to_node(res.data[0])
+
+
+async def update_taxonomy_node(node_id: str, data: dict[str, Any]) -> TaxonomyNode | None:
+    """Update name or sort_order of a taxonomy node."""
+    client = _get_client()
+    updates = {k: v for k, v in data.items() if v is not None}
+    if not updates:
+        res = await client.table("event_taxonomy").select("*").eq("id", node_id).execute()
+        return _row_to_node(res.data[0]) if res.data else None
+    res = await client.table("event_taxonomy").update(updates).eq("id", node_id).execute()
+    if res.data:
+        return _row_to_node(res.data[0])
+    return None
+
+
+async def delete_taxonomy_node(node_id: str) -> bool:
+    """Delete a taxonomy node (cascades to children via FK)."""
+    client = _get_client()
+    exist = await client.table("event_taxonomy").select("id").eq("id", node_id).execute()
+    if not exist.data:
+        return False
+    await client.table("event_taxonomy").delete().eq("id", node_id).execute()
+    return True

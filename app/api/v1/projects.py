@@ -42,7 +42,7 @@ class ProjectBatchRequest(BaseModel):
 
 
 @router.get(
-    "/",
+    "",
     response_model=ProjectListResponse,
     summary="项目列表",
     description=(
@@ -118,7 +118,7 @@ async def get_project(project_id: str):
 
 
 @router.post(
-    "/",
+    "",
     response_model=ProjectDetailResponse,
     summary="创建项目",
     description=(

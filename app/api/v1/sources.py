@@ -9,7 +9,7 @@ router = APIRouter()
 
 
 @router.get(
-    "/",
+    "",
     response_model=list[SourceResponse],
     summary="信源列表",
     description="查询所有信源及其状态信息，可按维度过滤。",

@@ -20,12 +20,9 @@ from fastapi import APIRouter, HTTPException, Query
 from app.schemas.institution import (
     InstitutionCreate,
     InstitutionDetailResponse,
-    InstitutionListResponse,
     InstitutionStatsResponse,
     InstitutionUpdate,
 )
-from app.services import institution_service as svc
-from app.services.core.institution_service import InstitutionAlreadyExistsError
 
 logger = logging.getLogger(__name__)
 
@@ -38,43 +35,49 @@ router = APIRouter()
 
 
 @router.get(
-    "/",
-    response_model=InstitutionListResponse,
-    summary="机构列表",
+    "",
+    summary="机构列表（统一接口）",
     description=(
-        "获取机构列表（高校+院系），支持多维过滤和分页。"
+        "获取机构列表，支持扁平列表和层级结构两种视图。"
+        "\n\n**视图类型（view 参数）：**"
+        "\n- `flat`（默认）：扁平列表，用于「机构页」渲染组织卡片"
+        "\n- `hierarchy`：层级结构，用于「学者页」支持高校→院系两级展开"
         "\n\n**分类体系：**"
-        "\n- `group`（顶层分组）：高校（聚合，含共建高校+兄弟院校+海外高校+其他高校） / 共建高校 / 兄弟院校 / 海外高校 / 其他高校 / 科研院所 / 行业学会"
-        "\n- `category`（细粒度分类）：示范性合作伙伴 / 京内高校 / 京外C9 / 综合强校 / 工科强校 / 特色高校 / "
-        "香港高校 / 亚太高校 / 欧美高校 / 其他地区高校 / 北京市属高校 / 特色专科学校 / 地方重点高校 / "
-        "科研院所-同行业 / 科研院所-交叉学科 / 科研院所-国家实验室 / 行业学会"
-        "\n\n**排序规则：**按分组顺序 → 优先级（P0>P1>P2>P3）→ 分类顺序 → 声望排名 → 名称"
-        "\n\n清华/北大等核心合作高校优先显示（P0），C9/京内高校次之（P1）。"
+        "\n- `entity_type`：实体类型（organization | department）"
+        "\n- `region`：地域（国内 | 国际）"
+        "\n- `org_type`：机构类型（高校 | 企业 | 研究机构 | 行业学会 | 其他）"
+        "\n- `classification`：顶层分类（共建高校 | 兄弟院校 | 海外高校 | 其他高校）"
+        "\n\n**排序规则：**region → org_type → classification → priority → 声望 → 名称"
+        "\n\n**示例：**"
+        "\n- 机构页：`?view=flat&entity_type=organization&region=国内&org_type=高校`"
+        "\n- 学者页：`?view=hierarchy&region=国内&org_type=高校&classification=共建高校`"
     ),
 )
 async def list_institutions(
-    type: str | None = Query(default=None, description="机构类型：university | department | research_institute | academic_society"),
-    group: str | None = Query(default=None, description="顶层分组：高校（聚合：含共建高校/兄弟院校/海外高校/其他高校） | 共建高校 | 兄弟院校 | 海外高校 | 其他高校 | 科研院所 | 行业学会"),
-    category: str | None = Query(default=None, description="细粒度分类（如：示范性合作伙伴, 京内高校, 京外C9）"),
-    priority: str | None = Query(default=None, description="优先级：P0 | P1 | P2 | P3"),
-    parent_id: str | None = Query(default=None, description="父高校 ID（筛选某高校下的院系）"),
+    # View control
+    view: str = Query(default="flat", description="视图类型：flat（扁平列表）| hierarchy（层级结构）"),
+    # Classification parameters
+    entity_type: str | None = Query(default=None, description="实体类型：organization | department"),
+    region: str | None = Query(default=None, description="地域：国内 | 国际"),
+    org_type: str | None = Query(default=None, description="机构类型：高校 | 企业 | 研究机构 | 行业学会 | 其他"),
+    classification: str | None = Query(default=None, description="顶层分类：共建高校 | 兄弟院校 | 海外高校 | 其他高校"),
+    # Common parameters
     keyword: str | None = Query(default=None, description="关键词搜索（机构名称或 ID）"),
-    page: int = Query(default=1, ge=1, description="页码"),
-    page_size: int = Query(default=20, ge=1, le=200, description="每页条数"),
-    custom_field_key: str | None = Query(default=None, description="自定义字段名"),
-    custom_field_value: str | None = Query(default=None, description="自定义字段值"),
+    page: int = Query(default=1, ge=1, description="页码（仅 flat 视图）"),
+    page_size: int = Query(default=20, ge=1, le=200, description="每页条数（仅 flat 视图）"),
 ):
-    return await svc.get_institution_list(
-        type_filter=type,
-        group=group,
-        category=category,
-        priority=priority,
-        parent_id=parent_id,
+    """统一的机构查询接口，支持扁平和层级两种视图."""
+    from app.services.core.institution import get_institutions_unified
+
+    return await get_institutions_unified(
+        view=view,
+        entity_type=entity_type,
+        region=region,
+        org_type=org_type,
+        classification=classification,
         keyword=keyword,
         page=page,
         page_size=page_size,
-        custom_field_key=custom_field_key,
-        custom_field_value=custom_field_value,
     )
 
 
@@ -85,7 +88,85 @@ async def list_institutions(
     description="返回机构统计数据：总数、按分类/优先级分布、学生/导师总数。",
 )
 async def get_institution_stats():
-    return await svc.get_institution_stats()
+    from app.services.core.institution import get_institution_stats
+
+    return await get_institution_stats()
+
+
+@router.get(
+    "/taxonomy",
+    summary="分类体系统计",
+    description=(
+        "返回机构分类体系的层级结构和统计数据，用于前端动态渲染导航栏。"
+        "\n\n返回格式："
+        "\n```json"
+        "\n{"
+        "\n  \"total\": 277,"
+        "\n  \"regions\": {"
+        "\n    \"国内\": {"
+        "\n      \"count\": 250,"
+        "\n      \"org_types\": {"
+        "\n        \"高校\": {"
+        "\n          \"count\": 200,"
+        "\n          \"classifications\": {"
+        "\n            \"共建高校\": {\"count\": 50},"
+        "\n            \"兄弟院校\": {\"count\": 80}"
+        "\n          }"
+        "\n        },"
+        "\n        \"企业\": {\"count\": 10},"
+        "\n        \"研究机构\": {\"count\": 15}"
+        "\n      }"
+        "\n    },"
+        "\n    \"国际\": {\"count\": 27, \"org_types\": {...}}"
+        "\n  }"
+        "\n}"
+        "\n```"
+    ),
+)
+async def get_institution_taxonomy():
+    from app.services.core.institution import get_institution_taxonomy
+
+    return await get_institution_taxonomy()
+
+
+
+@router.get(
+    "/taxonomy",
+    summary="分类体系统计",
+    description=(
+        "返回分类体系的层级统计，用于前端动态渲染导航栏。"
+        "\n\n**返回格式：**"
+        "\n```json"
+        "\n{"
+        "\n  \"total\": 277,"
+        "\n  \"regions\": {"
+        "\n    \"国内\": {"
+        "\n      \"count\": 250,"
+        "\n      \"org_types\": {"
+        "\n        \"高校\": {"
+        "\n          \"count\": 200,"
+        "\n          \"classifications\": {"
+        "\n            \"共建高校\": {\"count\": 50},"
+        "\n            \"兄弟院校\": {\"count\": 80},"
+        "\n            \"海外高校\": {\"count\": 50},"
+        "\n            \"其他高校\": {\"count\": 20}"
+        "\n          }"
+        "\n        },"
+        "\n        \"企业\": {\"count\": 10},"
+        "\n        \"研究机构\": {\"count\": 15}"
+        "\n      }"
+        "\n    },"
+        "\n    \"国际\": {\"count\": 27, \"org_types\": {...}}"
+        "\n  }"
+        "\n}"
+        "\n```"
+    ),
+)
+async def get_institution_taxonomy():
+    """返回分类体系的层级统计（region → org_type → classification）."""
+    from app.services.core.institution import get_institution_taxonomy
+
+    return await get_institution_taxonomy()
 
 
 # ---------------------------------------------------------------------------
@@ -174,7 +255,9 @@ async def search_aminer_organizations(q: str, size: int = 5):
     ),
 )
 async def get_institution(institution_id: str):
-    result = await svc.get_institution_detail(institution_id)
+    from app.services.core.institution import get_institution_detail
+
+    result = await get_institution_detail(institution_id)
     if result is None:
         raise HTTPException(
             status_code=404, detail=f"Institution '{institution_id}' not found"
@@ -188,7 +271,7 @@ async def get_institution(institution_id: str):
 
 
 @router.post(
-    "/",
+    "",
     response_model=InstitutionDetailResponse,
     summary="创建机构（支持简化模式）",
     description=(
@@ -196,23 +279,23 @@ async def get_institution(institution_id: str):
         "\n\n## 三种使用场景"
         "\n\n### 场景 1: 新增高校（最简单）"
         "\n```json"
-        "\n{\"name\": \"清华大学\", \"type\": \"university\"}"
+        "\n{\"name\": \"清华大学\", \"entity_type\": \"organization\", \"org_type\": \"高校\", \"region\": \"国内\", \"classification\": \"共建高校\"}"
         "\n```"
-        "\nBody 最少字段：`name`, `type='university'`"
+        "\nBody 最少字段：`name`, `entity_type='organization'`"
         "\n- `id` 不提供会自动生成（如 'qinghua'）"
-        "\n- 可选：category, priority, student_count_24/25, 人员和合作信息等"
+        "\n- 可选：region, org_type, classification, priority, student_count_24/25, 人员和合作信息等"
         "\n\n### 场景 2: 新增院系（需选择高校）"
         "\n```json"
-        "\n{\"name\": \"计算机科学与技术系\", \"type\": \"department\", \"parent_id\": \"qinghua\"}"
+        "\n{\"name\": \"计算机科学与技术系\", \"entity_type\": \"department\", \"parent_id\": \"qinghua\"}"
         "\n```"
-        "\nBody 必填字段：`name`, `type='department'`, `parent_id`"
+        "\nBody 必填字段：`name`, `entity_type='department'`, `parent_id`"
         "\n- `id` 不提供会自动生成"
         "\n- `parent_id` 必须是已存在的高校 ID（可先用 GET /institutions/ 查询）"
         "\n\n### 场景 3: 一次性创建高校+多个院系"
         "\n```json"
         "\n{"
         "\n  \"name\": \"北京大学\","
-        "\n  \"type\": \"university\","
+        "\n  \"entity_type\": \"organization\","
         "\n  \"departments\": ["
         "\n    {\"name\": \"计算机学院\"},"
         "\n    {\"name\": \"信息科学技术学院\"}"
@@ -229,9 +312,11 @@ async def get_institution(institution_id: str):
     status_code=201,
 )
 async def create_institution(body: InstitutionCreate):
+    from app.services.core.institution import InstitutionAlreadyExistsError, create_institution
+
     inst_data = body.model_dump()
     try:
-        result = await svc.create_institution(inst_data)
+        result = await create_institution(inst_data)
     except InstitutionAlreadyExistsError as exc:
         raise HTTPException(status_code=409, detail=str(exc)) from exc
     except ValueError as exc:
@@ -241,6 +326,7 @@ async def create_institution(body: InstitutionCreate):
     if not inst_data.get("org_name"):
         try:
             from app.services.external.aminer_client import get_aminer_client
+            from app.services.core.institution import update_institution
 
             client = get_aminer_client()
             aminer_resp = await client.search_organizations(body.name)
@@ -248,7 +334,7 @@ async def create_institution(body: InstitutionCreate):
             if orgs:
                 fetched_org_name = orgs[0].get("name_en") or orgs[0].get("name")
                 if fetched_org_name:
-                    updated = await svc.update_institution(result.id, {"org_name": fetched_org_name})
+                    updated = await update_institution(result.id, {"org_name": fetched_org_name})
                     if updated:
                         result = updated
                         logger.info(
@@ -274,7 +360,7 @@ async def create_institution(body: InstitutionCreate):
     description=(
         "更新指定机构的信息。所有字段均可选，仅传入需要修改的字段。"
         "\n\n**高校可更新字段：**"
-        "\n- 基本信息：name, category, priority"
+        "\n- 基本信息：name, avatar（校徽图片 URL）, category, priority"
         "\n- 学生导师：student_count_24, student_count_25, mentor_count"
         "\n- 人员信息：resident_leaders, degree_committee, teaching_committee, "
         "university_leaders, notable_scholars"
@@ -286,8 +372,10 @@ async def create_institution(body: InstitutionCreate):
     ),
 )
 async def update_institution(institution_id: str, body: InstitutionUpdate):
+    from app.services.core.institution import update_institution
+
     updates = body.model_dump(exclude_none=True)
-    result = await svc.update_institution(institution_id, updates)
+    result = await update_institution(institution_id, updates)
     if result is None:
         raise HTTPException(
             status_code=404, detail=f"Institution '{institution_id}' not found"
@@ -307,7 +395,9 @@ async def update_institution(institution_id: str, body: InstitutionUpdate):
     status_code=204,
 )
 async def delete_institution(institution_id: str):
-    deleted = await svc.delete_institution(institution_id)
+    from app.services.core.institution import delete_institution
+
+    deleted = await delete_institution(institution_id)
     if not deleted:
         raise HTTPException(
             status_code=404, detail=f"Institution '{institution_id}' not found"

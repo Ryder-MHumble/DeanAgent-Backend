@@ -8,7 +8,7 @@ router = APIRouter()
 
 
 @router.get(
-    "/",
+    "",
     summary="维度列表",
     description="列出全部 9 个维度，返回每个维度的文章数量和最后更新时间。",
 )

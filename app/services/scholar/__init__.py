@@ -290,8 +290,8 @@ async def _resolve_institution_names_by_group_or_category(
     if not group and not category:
         return None
     try:
-        from app.services import institution_service as inst_svc  # noqa: PLC0415
-        result = await inst_svc.get_institution_list(
+        from app.services.core.institution import get_institution_list  # noqa: PLC0415
+        result = await get_institution_list(
             group=group,
             category=category,
             type_filter="university",
@@ -381,58 +381,6 @@ async def get_scholar_detail(url_hash: str) -> dict[str, Any] | None:
             detail["supervised_students_count"] = student_store.count_students(url_hash)
             return detail
     return None
-
-
-async def get_universities_with_departments(
-    region: str | None = None,
-    affiliation_type: str | None = None,
-) -> list[dict[str, Any]]:
-    """返回所有高校及其院系列表，包含学者数量。
-
-    支持按 region（国内/国际）和 affiliation_type（高校/企业/研究机构/其他）过滤。
-    使用 institutions 表的 region/org_type 字段分类，启发式规则作为后备。
-    """
-    from app.services.scholar._filters import _get_region, _get_org_type  # noqa: PLC0415
-
-    items = await _load_all_with_annotations_async()
-
-    # Fetch DB classification map when filter is active
-    inst_map: dict = {}
-    if region or affiliation_type:
-        inst_map = await get_institution_classification_map()
-
-    # uni -> {depts: {dept_name -> count}, total: int}
-    uni_data: dict[str, dict[str, Any]] = {}
-    for item in items:
-        uni = (item.get("university") or "").strip()
-        if not uni:
-            continue
-        # Apply region filter using DB map + heuristic fallback
-        if region and _get_region(uni, inst_map) != region:
-            continue
-        # Apply affiliation_type filter using DB map + heuristic fallback
-        if affiliation_type and _get_org_type(uni, inst_map) != affiliation_type:
-            continue
-
-        if uni not in uni_data:
-            uni_data[uni] = {"total": 0, "depts": {}}
-        uni_data[uni]["total"] += 1
-
-        dept = (item.get("department") or "").strip()
-        if dept:
-            uni_data[uni]["depts"][dept] = uni_data[uni]["depts"].get(dept, 0) + 1
-
-    return [
-        {
-            "university": uni,
-            "scholar_count": data["total"],
-            "departments": [
-                {"name": d, "scholar_count": c}
-                for d, c in sorted(data["depts"].items(), key=lambda x: -x[1])
-            ],
-        }
-        for uni, data in sorted(uni_data.items(), key=lambda x: -x[1]["total"])
-    ]
 
 
 async def get_scholar_stats() -> dict[str, Any]:

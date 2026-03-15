@@ -22,10 +22,10 @@ _INTL_GROUPS = {"海外高校"}
 
 
 async def get_institution_classification_map() -> dict[str, dict[str, str]]:
-    """Return {institution_name: {region, org_type}} from institutions data.
+    """Return {institution_name: {region, org_type}} from institutions service.
 
-    Reads from JSON file (data/scholars/institutions.json) which has complete data,
-    rather than DB table which has NULL values for region/org_type/classification.
+    Calls the institution service which reads from JSON files with complete data.
+    DB table has NULL values for region/org_type/classification fields.
 
     Fetches once per process and caches the result.
     Falls back to empty dict on error (callers will use heuristics).
@@ -35,32 +35,28 @@ async def get_institution_classification_map() -> dict[str, dict[str, str]]:
         return _INSTITUTION_CLASSIFICATION_CACHE
 
     try:
-        import json  # noqa: PLC0415
-        from pathlib import Path  # noqa: PLC0415
+        from app.services.core.institution import get_institution_list  # noqa: PLC0415
 
-        # Read from JSON file which has complete classification data
-        json_path = Path("data/scholars/institutions.json")
-        if not json_path.exists():
-            return {}
+        # Get all institutions from the service (reads from JSON with complete data)
+        result = await get_institution_list(
+            page=1,
+            page_size=500,
+            type_filter=None,  # Get all types
+        )
 
-        with open(json_path, encoding="utf-8") as f:
-            data = json.load(f)
-
-        universities = data.get("universities", [])
         mapping: dict[str, dict[str, str]] = {}
-
-        for uni in universities:
-            name = (uni.get("name") or "").strip()
+        for inst in result.items:
+            name = (inst.name or "").strip()
             if not name:
                 continue
 
             # Use group field to determine region
-            group = uni.get("group") or ""
+            group = inst.group or ""
             region = "国际" if group == "海外高校" else "国内"
 
             # Use type field to determine org_type
-            uni_type = uni.get("type") or ""
-            org_type = _TYPE_TO_ORG_TYPE.get(uni_type, "")
+            inst_type = inst.type or ""
+            org_type = _TYPE_TO_ORG_TYPE.get(inst_type, "")
 
             mapping[name] = {"region": region, "org_type": org_type}
 

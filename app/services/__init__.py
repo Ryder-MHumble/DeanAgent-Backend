@@ -13,9 +13,9 @@ from app.services.core import (
     crawl_service,
     dimension_service,
     event_service,
-    institution_service,
     source_service,
 )
+from app.services.core import institution as institution_service
 from app.services.external import sentiment_service
 from app.services.stores import supervised_student_store
 
