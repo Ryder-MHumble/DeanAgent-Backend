@@ -1,6 +1,6 @@
 # 信源爬取状态总览
 
-> 最后更新: 2026-03-16 (v39: 修复 miit_policy 工信部政策文件源 — 更新 URL 到搜索端点，修复列表选择器 `div.jcse-result-box.search-list`，修复日期选择器 `div.search-list-b span:nth-child(2)`，修复正文选择器 `div.ccontent.center`，成功爬取 10 条政策文件，100% 正文覆盖率；national_policy 维度从 6/8 提升到 7/8 启用)
+> 最后更新: 2026-03-16 (v41: 新增 4 个北京市科委/中关村科创一线子频道信源 — bjkw_reform 深化改革、bjkw_industry 产业发展、bjkw_cooperation 开放合作、bjkw_frontier 科技前沿，每个信源爬取 20 条文章，100% 正文覆盖率；beijing_policy 维度从 11/14 提升到 15/18 启用，新增 80 条数据)
 
 ---
 
@@ -118,7 +118,7 @@ python scripts/process_tech_frontier.py --dry-run
 | universities (对高校) | 55 | 46 | ✅ 528条 | 81% | `sources/universities.yaml` |
 | technology (对技术) | 34+4† | 33+4† | ✅ 299条+ | 97% | `sources/technology.yaml` + twitter |
 | national_policy (对国家) | 8 | 6 | ✅ 52条 | 73% | `sources/national_policy.yaml` |
-| beijing_policy (对北京) | 14 | 10 | ✅ 70条 | 96% | `sources/beijing_policy.yaml` |
+| beijing_policy (对北京) | 18 | 15 | ✅ 158条 | 98% | `sources/beijing_policy.yaml` |
 | industry (对产业) | 10+1† | 6+1† | ✅ 49条 | 100% | `sources/industry.yaml` + twitter |
 | talent (对人才) | 7+1† | 4+1† | ✅ 51条 | 86% | `sources/talent.yaml` + twitter |
 | sentiment (对学院舆情) | 1† | 1† | ✅ 20条 | 100% | twitter 跨维度 |
@@ -326,9 +326,9 @@ python scripts/process_tech_frontier.py --dry-run
 | miit_policy | 工信部-政策文件 | dynamic | ✅ | 10 | ✅ (10/10) | `div.ccontent.center` 已修复 (2026-03-16) |
 | nsfc_news | 国家自然科学基金委 | static | ❌ | — | — | URL 404 |
 
-### 详细状态：beijing_policy (对北京) — 10/14 启用
+### 详细状态：beijing_policy (对北京) — 15/18 启用
 
-10 启用源全部配置 detail_selectors。
+15 启用源全部配置 detail_selectors。
 
 #### A. 政策文件
 
@@ -336,6 +336,10 @@ python scripts/process_tech_frontier.py --dry-run
 |-----------|------|------|------|--------|--------|
 | beijing_zhengce | 首都之窗-政策文件 | static | ✅ | 2 | ✅ (2/2) |
 | bjkw_policy | 北京市科委/中关村管委会 | static | ✅ | 4 | ✅ (4/4) |
+| bjkw_reform | 北京市科委/中关村-深化改革 | static | ✅ | 20 | ✅ (20/20) |
+| bjkw_industry | 北京市科委/中关村-产业发展 | static | ✅ | 20 | ✅ (20/20) |
+| bjkw_cooperation | 北京市科委/中关村-开放合作 | static | ✅ | 20 | ✅ (20/20) |
+| bjkw_frontier | 北京市科委/中关村-科技前沿 | static | ✅ | 20 | ✅ (20/20) |
 | bjjw_policy | 北京市教委 | static | ✅ | 14 | ✅ (13/14) |
 | bjrsj_policy | 北京市人社局 | static | ✅ | 3 | ✅ (3/3) |
 | zgc_policy | 中关村示范区 | static | ❌ | — | 域名连接被重置 |
@@ -343,7 +347,7 @@ python scripts/process_tech_frontier.py --dry-run
 | bjjxj_policy | 北京市经信局-通知公告 | static | ✅ | 20 | ✅ (20/20) keyword_filter=[] 不过滤，base_url 已修复 |
 | bjzscqj_policy | 北京市知识产权局 | static | ✅ | 10 | ✅ (10/10) keyword_filter=[] 不过滤 |
 | bjfgw_policy | 北京市发改委-政策文件 | static | ✅ | 7 | ✅ (7/7) base_url 已修复，关键词已扩展 |
-| bjhd_policy | 海淀区政府 | static | ❌ | — | 404 |
+| bjhd_policy | 海淀区政府-要闻动态 | static | ✅ | 8 | ✅ (8/8) |
 
 #### B. 人事变动与要闻
 

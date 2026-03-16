@@ -100,7 +100,15 @@ class DynamicPageCrawler(BaseCrawler):
         wait_for = self.config.get("wait_for", "networkidle")
         wait_timeout = self.config.get("wait_timeout", 10000)
 
+        warmup_url = self.config.get("warmup_url")
+
         async with get_page() as page:
+            if warmup_url:
+                try:
+                    await page.goto(warmup_url, wait_until="domcontentloaded", timeout=wait_timeout)
+                except Exception:
+                    pass  # warmup may return non-200; we just need the cookies/session
+
             await page.goto(url, wait_until="domcontentloaded", timeout=wait_timeout)
 
             if wait_for == "networkidle":

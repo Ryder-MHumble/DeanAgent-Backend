@@ -811,6 +811,91 @@ domain_filter: "all"
 **配置文件**：`config/domains.yaml` — 包含所有领域的关键词定义，可自定义扩展。
 
 **优先级**：命令行参数 > YAML keyword_filter > 空列表（不过滤）
-ruff check app/                                      # Lint
-pytest                                               # 测试
+
+## AI 分析报告系统（2026-03-16 新增）
+
+**通用报告生成框架**，基于爬取数据生成多维度智能分析报告，提供数据洞察、风险预警、机会识别和行动建议。
+
+### 架构设计
+
 ```
+app/services/intel/reports/
+├── base.py                    # 基础抽象类（BaseReportAnalyzer）
+├── generator.py               # 报告生成引擎（ReportGenerator）
+├── formatters.py              # 格式化工具（Markdown/JSON/HTML）
+└── analyzers/                 # 各维度分析器
+    ├── sentiment.py           # 舆情分析器 ✅
+    ├── policy.py              # 政策分析器（待实现）
+    ├── technology.py          # 科技前沿分析器（待实现）
+    ├── personnel.py           # 人事分析器（待实现）
+    └── university.py          # 高校生态分析器（待实现）
+```
+
+### API 端点
+
+| 端点 | 方法 | 说明 |
+|------|------|------|
+| `/api/v1/reports/generate` | POST | 生成指定维度的分析报告 |
+| `/api/v1/reports/sentiment/latest` | GET | 快捷获取最近N天舆情报告 |
+| `/api/v1/reports/dimensions` | GET | 列出所有支持的报告维度 |
+
+### 使用示例
+
+```bash
+# 生成最近 7 天的舆情报告
+curl "http://43.98.254.243:8001/api/v1/reports/sentiment/latest?days=7"
+
+# 生成指定日期范围的报告
+curl -X POST "http://43.98.254.243:8001/api/v1/reports/generate" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "dimension": "sentiment",
+    "date_range": ["2026-03-01T00:00:00", "2026-03-15T23:59:59"],
+    "output_format": "markdown"
+  }'
+
+# 生成 JSON 格式报告
+curl -X POST "http://43.98.254.243:8001/api/v1/reports/generate" \
+  -H "Content-Type: application/json" \
+  -d '{"dimension": "sentiment", "output_format": "json"}'
+```
+
+### 舆情报告结构
+
+1. **数据概览** — 总内容数、总互动量、情感分布、平台分布
+2. **情感分析** — 各情感类别的数量和占比
+3. **平台分析** — 各平台的内容数、互动量、情感分布
+4. **风险预警** — 高/中优先级风险，附原文链接和回应建议
+5. **正向机会** — 高互动正面内容，可转发/借势
+6. **立即执行清单** — 3-5 条具体可执行的行动项
+
+### 扩展新维度
+
+1. 在 `app/services/intel/reports/analyzers/` 创建新分析器类，继承 `BaseReportAnalyzer`
+2. 实现 `analyze()`, `get_overview_metrics()`, `identify_key_insights()`, `generate_recommendations()` 方法
+3. 在 `app/api/v1/reports.py` 添加新维度的处理逻辑
+4. 更新 `/dimensions` 端点返回的维度列表
+
+### 测试验证
+
+```bash
+# 测试报告生成（模拟数据）
+python3 scripts/test_report_generation.py
+
+# 测试报告生成（真实数据库数据）
+python3 scripts/test_report_generation.py --real
+
+# 测试 API 端点（需要先启动服务）
+./scripts/test_reports_api.sh
+```
+
+### 与 Nanobot 舆情监测的对比
+
+| 特性 | Nanobot | OpenClaw 报告系统 |
+|------|---------|------------------|
+| 数据来源 | MediaCrawler | Supabase 数据库 |
+| 报告维度 | 仅舆情 | 多维度（舆情/政策/科技/人事/高校） |
+| 架构 | 独立脚本 | 模块化框架 |
+| 输出格式 | Markdown | Markdown/JSON/HTML |
+| API 接口 | 无 | RESTful API |
+| 扩展性 | 低 | 高（基于抽象类） |

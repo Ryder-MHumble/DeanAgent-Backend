@@ -174,17 +174,18 @@ sources:
     name: "中国信通院-动态"
     group: "news"
     url: "http://www.caict.ac.cn/xwdt/ynxw/"
-    crawl_method: "static"
+    crawl_method: "dynamic"
+    warmup_url: "http://www.caict.ac.cn/"
     schedule: "daily"
     priority: 2
-    is_enabled: false  # 412 Precondition Failed - server blocks all automated requests regardless of User-Agent
+    is_enabled: true
     selectors:
       list_item: "tr"
       title: "a.main_t_list"
       link: "a.main_t_list"
-      date: "td:last-child"
+      date: "td.main_t_list"
       date_format: "%Y-%m-%d"
-    base_url: "http://www.caict.ac.cn/xwdt/ynxw/"
+    base_url: "http://www.caict.ac.cn"
     keyword_filter:
       - "人工智能"
       - "AI"

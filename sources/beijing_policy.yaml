@@ -86,6 +86,86 @@ sources:
       content: "div.TRS_UEDITOR"
     tags: ["policy", "bjkw", "science"]
 
+  - id: "bjkw_reform"
+    name: "北京市科委/中关村-深化改革"
+    group: "policy"
+    url: "https://kw.beijing.gov.cn/xwdt/kcyx/xwdtshgg/"
+    crawl_method: "static"
+    schedule: "4h"
+    priority: 1
+    is_enabled: true
+    keyword_filter: []  # 科创一线内容全部相关
+    keyword_blacklist: []
+    selectors:
+      list_item: "div.right-columns ul.list li"
+      title: "a"
+      link: "a"
+      date: "span"
+      date_format: "%Y-%m-%d"
+    detail_selectors:
+      content: "div.TRS_UEDITOR"
+    tags: ["policy", "bjkw", "reform", "innovation"]
+
+  - id: "bjkw_industry"
+    name: "北京市科委/中关村-产业发展"
+    group: "policy"
+    url: "https://kw.beijing.gov.cn/xwdt/kcyx/xwdtcyfz/"
+    crawl_method: "static"
+    schedule: "4h"
+    priority: 1
+    is_enabled: true
+    keyword_filter: []  # 科创一线内容全部相关
+    keyword_blacklist: []
+    selectors:
+      list_item: "div.right-columns ul.list li"
+      title: "a"
+      link: "a"
+      date: "span"
+      date_format: "%Y-%m-%d"
+    detail_selectors:
+      content: "div.TRS_UEDITOR"
+    tags: ["policy", "bjkw", "industry", "innovation"]
+
+  - id: "bjkw_cooperation"
+    name: "北京市科委/中关村-开放合作"
+    group: "policy"
+    url: "https://kw.beijing.gov.cn/xwdt/kcyx/xwdtkfhz/"
+    crawl_method: "static"
+    schedule: "4h"
+    priority: 1
+    is_enabled: true
+    keyword_filter: []  # 科创一线内容全部相关
+    keyword_blacklist: []
+    selectors:
+      list_item: "div.right-columns ul.list li"
+      title: "a"
+      link: "a"
+      date: "span"
+      date_format: "%Y-%m-%d"
+    detail_selectors:
+      content: "div.TRS_UEDITOR"
+    tags: ["policy", "bjkw", "cooperation", "innovation"]
+
+  - id: "bjkw_frontier"
+    name: "北京市科委/中关村-科技前沿"
+    group: "policy"
+    url: "https://kw.beijing.gov.cn/xwdt/kcyx/xwdtkjqy/"
+    crawl_method: "static"
+    schedule: "4h"
+    priority: 1
+    is_enabled: true
+    keyword_filter: []  # 科创一线内容全部相关
+    keyword_blacklist: []
+    selectors:
+      list_item: "div.right-columns ul.list li"
+      title: "a"
+      link: "a"
+      date: "span"
+      date_format: "%Y-%m-%d"
+    detail_selectors:
+      content: "div.TRS_UEDITOR"
+    tags: ["policy", "bjkw", "frontier", "technology"]
+
   - id: "bjjw_policy"
     name: "北京市教委"
     group: "policy"
@@ -117,23 +197,6 @@ sources:
     detail_selectors:
       content: "div.TRS_UEDITOR"
     tags: ["policy", "hr", "beijing"]
-
-  - id: "zgc_policy"
-    name: "中关村示范区"
-    group: "policy"
-    url: "https://zgc.beijing.gov.cn/"
-    crawl_method: "static"
-    schedule: "daily"
-    priority: 1
-    is_enabled: false  # Connection reset by peer, domain may be restructured
-    selectors:
-      list_item: "ul.list li"
-      title: "a"
-      link: "a"
-      date: "span"
-      date_format: "%Y-%m-%d"
-    base_url: "https://zgc.beijing.gov.cn"
-    tags: ["policy", "zgc", "innovation"]
 
   - id: "ncsti_policy"
     name: "国际科创中心"
@@ -227,21 +290,23 @@ sources:
     tags: ["policy", "development", "beijing"]
 
   - id: "bjhd_policy"
-    name: "海淀区政府"
+    name: "海淀区政府-要闻动态"
     group: "policy"
-    url: "https://www.bjhd.gov.cn/"
+    url: "https://zyk.bjhd.gov.cn/ywdt/hdywx/"
     crawl_method: "static"
     schedule: "daily"
     priority: 1
-    is_enabled: false  # /zwgk/ returns 404, root page has sparse content
+    is_enabled: true
     selectors:
-      list_item: "ul.list li"
+      list_item: "div.listBox li"
       title: "a"
       link: "a"
-      date: "span"
-      date_format: "%Y-%m-%d"
-    base_url: "https://www.bjhd.gov.cn"
-    tags: ["policy", "haidian", "district"]
+      date: "span.date"
+      date_format: "[%Y-%m-%d]"
+    base_url: "https://zyk.bjhd.gov.cn"
+    detail_selectors:
+      content: "div.common_content"
+    tags: ["policy", "haidian", "district", "news"]
 
   # === B. 人事变动与要闻 ===
   - id: "beijing_ywdt"

@@ -77,6 +77,12 @@ TAG_METADATA = [
         "维护顶会（AAAI/NeurIPS/CVPR 等）和期刊（Nature/TPAMI/JMLR 等）的级别、"
         "H5 指数、录用率、影响因子等元数据，支持按类型/级别/领域过滤。",
     },
+    {
+        "name": "reports",
+        "description": "AI 分析报告 — 基于爬取数据生成多维度智能分析报告。"
+        "支持舆情监测、政策分析、科技前沿、人事情报、高校生态等维度，"
+        "提供数据洞察、风险预警、机会识别和行动建议。",
+    },
 ]
 
 
@@ -266,6 +272,7 @@ app.add_middleware(
     allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["Content-Disposition"],
 )
 
 # Register API routes

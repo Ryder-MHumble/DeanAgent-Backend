@@ -58,8 +58,24 @@ class CrawlerControlService:
         logger.info("Crawl stop requested")
 
     def get_result_file(self) -> Path | None:
-        """Get the path to the latest result file."""
-        return self._result_file
+        """Get the path to the latest result file.
+
+        Falls back to the most recent file in the exports directory
+        if the in-memory reference was lost (e.g. after a server restart).
+        """
+        if self._result_file is not None and self._result_file.exists():
+            return self._result_file
+
+        exports_dir = BASE_DIR / "data" / "exports"
+        if not exports_dir.exists():
+            return None
+
+        candidates = sorted(
+            exports_dir.glob("crawl_results_*.*"),
+            key=lambda p: p.stat().st_mtime,
+            reverse=True,
+        )
+        return candidates[0] if candidates else None
 
     async def start_crawl(
         self,
@@ -163,10 +179,15 @@ class CrawlerControlService:
         output_dir = BASE_DIR / "data" / "exports"
         output_dir.mkdir(parents=True, exist_ok=True)
 
+        def _json_default(obj: Any) -> Any:
+            if isinstance(obj, datetime):
+                return obj.isoformat()
+            raise TypeError(f"Object of type {type(obj).__name__} is not JSON serializable")
+
         if format == "json":
             file_path = output_dir / f"crawl_results_{timestamp}.json"
             with open(file_path, "w", encoding="utf-8") as f:
-                json.dump(results, f, ensure_ascii=False, indent=2)
+                json.dump(results, f, ensure_ascii=False, indent=2, default=_json_default)
 
         elif format == "csv":
             file_path = output_dir / f"crawl_results_{timestamp}.csv"
