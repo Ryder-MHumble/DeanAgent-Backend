@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from scalar_fastapi import get_scalar_api_reference
 
 from app.api.v1.router import v1_router
@@ -29,6 +30,11 @@ TAG_METADATA = [
         "name": "sources",
         "description": "信源管理 — 查看信源配置与状态，启用/禁用信源，手动触发爬取，查看爬取日志。"
         "系统共 134 个信源（109 个启用），覆盖 9 个维度。",
+    },
+    {
+        "name": "crawler-control",
+        "description": "爬虫控制 — 前端 UI 专用接口，支持批量启动爬取、实时状态监控、"
+        "自定义领域过滤、多格式导出（JSON/CSV/数据库）。",
     },
     {
         "name": "dimensions",
@@ -265,6 +271,13 @@ app.add_middleware(
 # Register API routes
 app.include_router(v1_router)
 
+# Mount static files for frontend UI
+from pathlib import Path
+frontend_dir = Path(__file__).parent.parent / "frontend"
+if frontend_dir.exists():
+    app.mount("/ui", StaticFiles(directory=str(frontend_dir), html=True), name="ui")
+    logger.info("Frontend UI mounted at /ui")
+
 
 @app.get("/", tags=["default"], summary="API 入口", include_in_schema=False)
 async def root():
@@ -274,6 +287,7 @@ async def root():
         "docs": "/docs",
         "swagger": "/swagger",
         "openapi": "/openapi.json",
+        "ui": "/ui",
     }
 
 

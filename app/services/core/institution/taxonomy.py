@@ -7,6 +7,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 
+from app.db.client import get_client
 from app.schemas.institution import InstitutionStatsResponse
 from app.services.core.institution.sorting import (
     CLASSIFICATION_ORDER,
@@ -44,12 +45,22 @@ async def get_institution_stats() -> InstitutionStatsResponse:
     total_students_25 = sum(rec.get("student_count_25", 0) or 0 for rec in all_records)
     total_mentors = sum(rec.get("mentor_count", 0) or 0 for rec in all_records)
 
+    organizations = [r for r in all_records if r.get("entity_type") == "organization"]
+    departments = [r for r in all_records if r.get("entity_type") == "department"]
+    total_students = total_students_24 + total_students_25
+
+    # Query actual scholar count directly from scholars table
+    client = get_client()
+    scholars_resp = await client.table("scholars").select("id", count="exact").limit(1).execute()
+    total_scholars = scholars_resp.count or 0
+
     return InstitutionStatsResponse(
-        total=len(all_records),
-        by_category=dict(by_category),
-        by_priority=dict(by_priority),
-        total_students_24=total_students_24,
-        total_students_25=total_students_25,
+        total_universities=len(organizations),
+        total_departments=len(departments),
+        total_scholars=total_scholars,
+        by_category=[{"classification": k, "count": v} for k, v in sorted(by_category.items())],
+        by_priority=[{"priority": k, "count": v} for k, v in sorted(by_priority.items())],
+        total_students=total_students,
         total_mentors=total_mentors,
     )
 

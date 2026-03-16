@@ -5,7 +5,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any
+from typing import Any, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -53,9 +53,58 @@ class CrawlResult:
 class BaseCrawler(ABC):
     """Abstract base for all crawlers."""
 
-    def __init__(self, source_config: dict[str, Any]) -> None:
+    def __init__(
+        self,
+        source_config: dict[str, Any],
+        domain_keywords: Optional[list[str]] = None,
+    ) -> None:
         self.config = source_config
         self.source_id: str = source_config["id"]
+        self.domain_keywords = domain_keywords  # 命令行传入的领域关键词
+
+    def _get_filter_keywords(self) -> list[str]:
+        """
+        获取最终使用的过滤关键词
+
+        优先级：
+        1. 命令行传入的 domain_keywords（最高优先级）
+        2. YAML 配置的 keyword_filter
+        3. 空列表（不过滤）
+        """
+        # 优先使用命令行传入的领域关键词
+        if self.domain_keywords is not None:
+            return self.domain_keywords
+
+        # 其次使用 YAML 配置的 keyword_filter
+        return self.config.get("keyword_filter", [])
+
+    def _filter_by_keywords(self, items: list[CrawledItem]) -> list[CrawledItem]:
+        """
+        根据关键词过滤条目
+
+        Args:
+            items: 待过滤的条目列表
+
+        Returns:
+            过滤后的条目列表
+        """
+        keywords = self._get_filter_keywords()
+
+        # 空关键词列表表示不过滤
+        if not keywords:
+            return items
+
+        filtered_items = []
+        for item in items:
+            # 检查标题和正文
+            text = (item.title or "") + " " + (item.content or "")
+            if any(kw.lower() in text.lower() for kw in keywords):
+                filtered_items.append(item)
+
+        logger.info(
+            f"Filtered {len(items)} items to {len(filtered_items)} items using keywords: {keywords[:5]}..."
+        )
+        return filtered_items
 
     async def run(self) -> CrawlResult:
         """Orchestrate: timing, error handling, logging."""
@@ -63,11 +112,16 @@ class BaseCrawler(ABC):
         result.started_at = datetime.now(timezone.utc)
         try:
             items = await self.fetch_and_parse()
+
+            # 应用领域过滤
+            filtered_items = self._filter_by_keywords(items)
+
             result.items_total = len(items)
             result.items_all = items
-            result.items = items
-            result.items_new = len(items)
-            if items:
+            result.items = filtered_items
+            result.items_new = len(filtered_items)
+
+            if filtered_items:
                 result.status = CrawlStatus.SUCCESS
             else:
                 result.status = CrawlStatus.NO_NEW_CONTENT

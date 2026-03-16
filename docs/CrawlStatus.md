@@ -1,6 +1,6 @@
 # 信源爬取状态总览
 
-> 最后更新: 2026-03-05 (v38: 新增项目库模块 — /api/v1/projects/ 6 端点，data/projects.json 本地存储，10 条 mock 数据；v37 LLM 数据清洗框架：集成 LLM 智能提取层到 faculty_crawler，支持多 LLM provider（OpenRouter/SiliconFlow/DashScope），自动提取 phone/research_areas/education 等混合数据；35 个信源配置 llm_extraction=true；并行爬取架构（按高校维度，每校最多 3 并发）；完成全量 faculty 维度重爬：37/39 源成功，1,873 位教师，总耗时 6.3h，成本 $0.50-0.70)
+> 最后更新: 2026-03-16 (v39: 修复 miit_policy 工信部政策文件源 — 更新 URL 到搜索端点，修复列表选择器 `div.jcse-result-box.search-list`，修复日期选择器 `div.search-list-b span:nth-child(2)`，修复正文选择器 `div.ccontent.center`，成功爬取 10 条政策文件，100% 正文覆盖率；national_policy 维度从 6/8 提升到 7/8 启用)
 
 ---
 
@@ -311,9 +311,9 @@ python scripts/process_tech_frontier.py --dry-run
 | hunyuan_news | 腾讯混元-最新动态 | hunyuan_api | ✅ | 自定义 API Parser，数据来自公众号文章 |
 | zhipu_news | 智谱AI-最新动态 | dynamic | ❌ | React SPA 无 DOM 链接，新闻更新停滞 |
 
-### 详细状态：national_policy (对国家) — 6/8 启用
+### 详细状态：national_policy (对国家) — 7/8 启用
 
-全部 6 启用源已配置 detail_selectors。
+全部 7 启用源已配置 detail_selectors。
 
 | source_id | 名称 | 方法 | 启用 | 条目数 | 详情页 | content selector |
 |-----------|------|------|------|--------|--------|-----------------|
@@ -323,7 +323,7 @@ python scripts/process_tech_frontier.py --dry-run
 | most_policy | 科技部-信息公开 | static | ✅ | 10 | ✅ (6/10) | `div.TRS_UEDITOR` (PDF 项无正文) |
 | cac_policy | 国家网信办-政策法规 | static | ✅ | 9 | ✅ (9/9) | `div.main-content` AI 治理核心监管 |
 | samr_news | 国家市监总局-要闻 | static | ✅ | 0 | — | `#zoom` 当期无匹配关键词 |
-| miit_policy | 工信部-政策文件 | dynamic | ❌ | — | — | IP 级 WAF 封锁 (403) |
+| miit_policy | 工信部-政策文件 | dynamic | ✅ | 10 | ✅ (10/10) | `div.ccontent.center` 已修复 (2026-03-16) |
 | nsfc_news | 国家自然科学基金委 | static | ❌ | — | — | URL 404 |
 
 ### 详细状态：beijing_policy (对北京) — 10/14 启用

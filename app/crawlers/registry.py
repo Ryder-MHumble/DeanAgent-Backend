@@ -35,6 +35,7 @@ _CUSTOM_MAP: dict[str, str] = {
     "ymsc_faculty": "app.crawlers.parsers.ymsc_faculty.YMSCFacultyCrawler",
     "llm_faculty": "app.crawlers.parsers.llm_faculty.LLMFacultyCrawler",
     "tsinghua_cs_faculty": "app.crawlers.parsers.tsinghua_cs_faculty.TsinghuaCsFacultyCrawler",
+    "samr_api": "app.crawlers.parsers.samr_api.SamrAPICrawler",
 }
 
 
@@ -49,14 +50,17 @@ class CrawlerRegistry:
     """Resolves source configs to instantiated crawler objects."""
 
     @staticmethod
-    def create_crawler(source_config: dict[str, Any]) -> BaseCrawler:
+    def create_crawler(
+        source_config: dict[str, Any],
+        domain_keywords: list[str] | None = None,
+    ) -> BaseCrawler:
         # Custom parser takes priority
         if custom_key := source_config.get("crawler_class"):
             dotted_path = _CUSTOM_MAP.get(custom_key)
             if dotted_path is None:
                 raise ValueError(f"Unknown custom crawler_class: {custom_key}")
             cls = _import_class(dotted_path)
-            return cls(source_config)
+            return cls(source_config, domain_keywords=domain_keywords)
 
         # Fall back to template by crawl_method
         method = source_config.get("crawl_method")
@@ -66,7 +70,7 @@ class CrawlerRegistry:
         if dotted_path is None:
             raise ValueError(f"Unknown crawl_method: {method}")
         cls = _import_class(dotted_path)
-        return cls(source_config)
+        return cls(source_config, domain_keywords=domain_keywords)
 
     @staticmethod
     def list_available_methods() -> list[str]:
@@ -75,3 +79,11 @@ class CrawlerRegistry:
     @staticmethod
     def list_custom_parsers() -> list[str]:
         return list(_CUSTOM_MAP.keys())
+
+
+# 模块级兼容别名，供旧代码 `from app.crawlers.registry import create_crawler` 使用
+def create_crawler(
+    source_config: dict[str, Any],
+    domain_keywords: list[str] | None = None,
+) -> "BaseCrawler":
+    return CrawlerRegistry.create_crawler(source_config, domain_keywords=domain_keywords)

@@ -425,6 +425,90 @@ data/scholars/projects.json         → 项目数据本地 JSON 存储
   - 过滤参数：status, category, funder（模糊）, pi_name（模糊）, tag, keyword（全文）
 ```
 
+## 内容过滤配置
+
+**灵活的关键词过滤机制**，支持三种模式：
+
+### 1. 无过滤模式（抓取所有内容）
+
+```yaml
+- id: "example_source"
+  url: "https://example.com/news"
+  crawl_method: "static"
+  # 不设置 keyword_filter 和 keyword_blacklist
+  # 将抓取所有文章
+```
+
+### 2. 白名单过滤（只抓取特定领域）
+
+```yaml
+- id: "ai_policy"
+  url: "https://example.com/policy"
+  crawl_method: "static"
+  keyword_filter:
+    - "人工智能"
+    - "AI"
+    - "机器学习"
+    - "算法"
+  # 只保留标题包含以上任一关键词的文章
+```
+
+**其他领域示例**：
+
+- 医疗：`["医疗", "健康", "疫苗", "药品"]`
+- 金融：`["金融", "银行", "支付", "区块链"]`
+- 教育：`["教育", "在线学习", "MOOC", "智慧教育"]`
+
+### 3. 黑名单过滤（排除不想要的内容）
+
+```yaml
+- id: "tech_news"
+  url: "https://example.com/tech"
+  crawl_method: "static"
+  keyword_blacklist:
+    - "广告"
+    - "推广"
+    - "招聘"
+  # 排除标题包含以上任一关键词的文章
+```
+
+### 4. 组合过滤（白名单 + 黑名单）
+
+```yaml
+- id: "ai_research"
+  url: "https://example.com/research"
+  crawl_method: "static"
+  keyword_filter: ["人工智能", "AI"]
+  keyword_blacklist: ["招聘", "培训", "广告"]
+  # 必须包含白名单关键词，且不包含黑名单关键词
+```
+
+### 过滤逻辑
+
+```
+1. 检查黑名单（优先级最高）→ 包含任一黑名单词 → 丢弃
+2. 检查白名单（如果配置了）→ 不包含任一白名单词 → 丢弃
+3. 通过所有检查 → 保留
+```
+
+### 自定义 Parser 集成
+
+```python
+from app.crawlers.utils.content_filter import should_keep_item
+
+class MyCustomCrawler(BaseCrawler):
+    async def fetch_and_parse(self) -> list[CrawledItem]:
+        keyword_filter = self.config.get("keyword_filter")
+        keyword_blacklist = self.config.get("keyword_blacklist")
+
+        items = []
+        for raw_item in self._fetch_raw_items():
+            if not should_keep_item(raw_item.title, keyword_filter, keyword_blacklist):
+                continue
+            items.append(self._convert_to_crawled_item(raw_item))
+        return items
+```
+
 ## 常用工作流
 
 ### 修复某个信源的选择器
@@ -657,13 +741,76 @@ curl "http://43.98.254.243:8001/api/v1/institutions?region=%E5%9B%BD%E5%86%85&or
 
 # 开发调试
 uvicorn app.main:app --reload                        # 前台启动（开发用）
-python scripts/run_single_crawl.py --source <id>     # 测试单源
-python scripts/run_all_crawl.py                      # 批量运行所有启用源
+python scripts/crawl/run_single.py --source <id>     # 测试单源
+python scripts/crawl/run_all.py                      # 批量运行所有启用源
 python scripts/process_policy_intel.py --dry-run     # 政策智能预览
 python scripts/process_personnel_intel.py --dry-run  # 人事情报预览
 python scripts/process_personnel_intel.py --enrich --force  # 人事 LLM 富化
 python scripts/rebuild_institutions.py               # 手动重建 institutions.json（仅在添加新学者信源后使用）
 python scripts/rebuild_institutions.py --dry-run     # 预览重建结果（不保存）
+ruff check app/                                      # Lint
+pytest                                               # 测试
+
+# 领域过滤（2026-03-16 新增）
+python scripts/crawl/run_single.py --source <id> --domain technology.ai          # 使用 AI 领域过滤
+python scripts/crawl/run_single.py --source <id> --domain economy.finance        # 使用金融领域过滤
+python scripts/crawl/run_single.py --source <id> --domain technology.ai,livelihood.education  # 多领域
+python scripts/crawl/run_single.py --source <id> --domain-group tech_all         # 使用领域组合
+python scripts/crawl/run_single.py --source <id> --domain all                    # 全领域不过滤
+```
+
+## 领域过滤系统（2026-03-16 新增）
+
+**通用领域分类体系**，支持 6 大类 × 30+ 子领域，让爬虫框架适用于不同业务场景。
+
+### 领域分类
+
+| 一级领域 | 二级子领域示例 |
+|---------|--------------|
+| `technology` 科技 | `ai` 人工智能、`biotech` 生物科技、`quantum` 量子科技、`semiconductor` 半导体、`aerospace` 航空航天、`energy` 新能源 |
+| `economy` 经济 | `finance` 金融、`industry` 产业、`trade` 贸易、`realestate` 房地产 |
+| `livelihood` 民生 | `education` 教育、`healthcare` 医疗、`employment` 就业、`housing` 住房、`transportation` 交通 |
+| `environment` 环境 | `pollution` 污染治理、`climate` 气候、`ecology` 生态 |
+| `society` 社会 | `governance` 治理、`security` 安全、`law` 法律 |
+| `culture` 文化 | `heritage` 文化遗产、`media` 传媒、`sports` 体育 |
+
+### 使用方式
+
+**命令行参数**（优先级最高）：
+```bash
+# 二级子领域
+--domain technology.ai
+
+# 一级领域（包含所有子领域）
+--domain technology
+
+# 多领域组合
+--domain technology.ai,economy.finance
+
+# 预设组合
+--domain-group tech_all
+
+# 全领域不过滤
+--domain all
+```
+
+**YAML 配置**（向后兼容）：
+```yaml
+# 方式1：使用领域标识
+domain_filter: "technology.ai"
+
+# 方式2：自定义关键词
+keyword_filter:
+  - "自定义词1"
+  - "自定义词2"
+
+# 方式3：不过滤
+domain_filter: "all"
+```
+
+**配置文件**：`config/domains.yaml` — 包含所有领域的关键词定义，可自定义扩展。
+
+**优先级**：命令行参数 > YAML keyword_filter > 空列表（不过滤）
 ruff check app/                                      # Lint
 pytest                                               # 测试
 ```

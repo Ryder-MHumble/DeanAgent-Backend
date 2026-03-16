@@ -54,6 +54,40 @@ uvicorn app.main:app --reload
 
 ---
 
+## 🎨 前端 UI 控制台
+
+**新增可视化爬虫管理界面**，支持信源选择、领域过滤、实时监控、多格式导出。
+
+### 快速启动
+
+```bash
+# 方式 1：使用启动脚本（推荐）
+./start_ui.sh
+
+# 方式 2：手动启动
+source venv/bin/activate
+uvicorn app.main:app --host 0.0.0.0 --port 8001 --reload
+```
+
+### 访问地址
+
+- **前端界面**：<http://localhost:8001/ui>
+- **API 文档**：<http://localhost:8001/docs>
+
+### 核心功能
+
+1. **信源管理** - 按维度分组，支持批量选择，显示启用状态
+2. **领域过滤** - 白名单/黑名单关键词过滤
+3. **导出格式** - JSON/CSV/数据库三种格式
+4. **实时监控** - 进度条、成功/失败统计、总条目数
+5. **结果下载** - 自动生成下载链接，文件名含时间戳
+
+技术栈：Vue 3 (CDN) + Axios + FastAPI
+
+详细文档：[frontend/README.md](frontend/README.md)
+
+---
+
 ## 问题定位指南
 
 遇到问题时，按下表快速找到对应文件：

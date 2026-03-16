@@ -161,16 +161,10 @@ sources:
     name: "国家市监总局-要闻"
     group: "policy"
     url: "https://www.samr.gov.cn/xw/zj/"
-    crawl_method: "static"
+    crawler_class: "samr_api"
     schedule: "daily"
     priority: 2
-    is_enabled: false  # Page now uses JS-only rendering (unitbuild.js); returns 3KB shell with no content
-    selectors:
-      list_item: "div.Three_zhnlist_02 > ul"
-      title: "li.nav04Left02_content a"
-      link: "li.nav04Left02_content a"
-      date: "li.nav04Left02_contenttime"
-      date_format: "%Y-%m-%d"
+    is_enabled: true
     base_url: "https://www.samr.gov.cn"
     keyword_filter:
       - "人工智能"
@@ -188,20 +182,31 @@ sources:
   - id: "miit_policy"
     name: "工信部-政策文件"
     group: "policy"
-    url: "https://www.miit.gov.cn/zwgk/zcwj/"
+    url: "https://www.miit.gov.cn/search/zcwjk.html?websiteid=110000000000000&pg=&p=&tpl=14&category=183&q="
     crawl_method: "dynamic"
     schedule: "daily"
     priority: 2
-    is_enabled: false  # IP-level WAF block (403), needs proxy or VPN
+    is_enabled: true
     wait_for: "networkidle"
-    wait_timeout: 15000
+    wait_timeout: 20000
     selectors:
-      list_item: "ul.gzdt-list li"
-      title: "a"
-      link: "a"
-      date: "span.date"
+      list_item: "div.jcse-result-box.search-list"
+      title: "div.search-list-t a"
+      link: "div.search-list-t a"
+      date: "div.search-list-b span:nth-child(2)"
       date_format: "%Y-%m-%d"
     base_url: "https://www.miit.gov.cn"
+    keyword_filter:
+      - "人工智能"
+      - "AI"
+      - "算法"
+      - "数据"
+      - "信息化"
+      - "科技"
+      - "智能制造"
+      - "数字经济"
+    detail_selectors:
+      content: "div.ccontent.center, #con_con"
     tags: ["policy", "miit", "industry"]
 
   - id: "nsfc_news"
