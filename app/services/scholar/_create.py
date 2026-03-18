@@ -127,15 +127,15 @@ def create_scholar(data: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
         "phd_institution": data.get("phd_institution", ""),
         "phd_year": data.get("phd_year", ""),
         "education": data.get("education") or [],
-        # Metrics
-        "publications_count": -1,
-        "h_index": -1,
-        "citations_count": -1,
+        # Metrics (support enriched data)
+        "publications_count": data.get("publications_count", -1),
+        "h_index": data.get("h_index", -1),
+        "citations_count": data.get("citations_count", -1),
         "metrics_updated_at": "",
-        # Achievements
-        "representative_publications": [],
-        "patents": [],
-        "awards": [],
+        # Achievements (support enriched data)
+        "representative_publications": data.get("representative_publications") or [],
+        "patents": data.get("patents") or [],
+        "awards": data.get("awards") or [],
         # Institute relations
         "is_advisor_committee": False,
         "adjunct_supervisor": dict(_EMPTY_ADJUNCT),
@@ -148,6 +148,8 @@ def create_scholar(data: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
         "relation_updated_by": "",
         "relation_updated_at": "",
         "recent_updates": [],
+        # Custom fields (support enriched data)
+        "custom_fields": data.get("custom_fields") or {},
     }
 
     try:
@@ -171,12 +173,14 @@ _COLUMN_MAP = {
     "照片": "photo_url", "photo": "photo_url", "photo_url": "photo_url",
     "高校": "university", "大学": "university", "university": "university",
     "院系": "department", "department": "department",
+    "兼职院系": "secondary_departments", "secondary_departments": "secondary_departments",
     "职称": "position", "position": "position",
     "学术头衔": "academic_titles", "academic_titles": "academic_titles",
     "是否院士": "is_academician", "is_academician": "is_academician",
     "研究方向": "research_areas", "research_areas": "research_areas",
     "关键词": "keywords", "keywords": "keywords",
     "简介": "bio", "bio": "bio",
+    "英文简介": "bio_en", "bio_en": "bio_en",
     "邮箱": "email", "email": "email",
     "电话": "phone", "phone": "phone",
     "办公室": "office", "office": "office",
@@ -187,6 +191,14 @@ _COLUMN_MAP = {
     "orcid": "orcid",
     "博士院校": "phd_institution", "phd_institution": "phd_institution",
     "博士年份": "phd_year", "phd_year": "phd_year",
+    "教育经历": "education", "education": "education",
+    "h指数": "h_index", "h_index": "h_index",
+    "被引次数": "citations_count", "citations_count": "citations_count",
+    "论文数": "publications_count", "publications_count": "publications_count",
+    "代表性论文": "representative_publications", "representative_publications": "representative_publications",
+    "专利": "patents", "patents": "patents",
+    "获奖": "awards", "awards": "awards",
+    "自定义字段": "custom_fields", "custom_fields": "custom_fields",
 }
 
 
@@ -206,17 +218,53 @@ def _parse_list(value: str, delimiter: str = ",") -> list[str]:
     return [item.strip() for item in value.split(delimiter) if item.strip()]
 
 
+def _parse_json_field(value: str) -> Any:
+    """Parse JSON string field (for education, awards, publications, custom_fields)."""
+    if not value or not value.strip():
+        return None
+    try:
+        return json.loads(value)
+    except json.JSONDecodeError:
+        logger.warning(f"Failed to parse JSON field: {value[:100]}")
+        return None
+
+
+def _parse_int(value: str) -> int:
+    """Parse integer field with fallback to -1."""
+    if not value or not value.strip():
+        return -1
+    try:
+        return int(value)
+    except ValueError:
+        return -1
+
+
 def _parse_excel_row(row: dict[str, str]) -> dict[str, Any]:
     result: dict[str, Any] = {}
     for col, value in row.items():
         field = _normalize_column_name(col)
-        if not field or not value:
+        if not field:
             continue
-        value = value.strip()
+        if not value or (isinstance(value, str) and not value.strip()):
+            continue
+
+        value = value.strip() if isinstance(value, str) else value
+
+        # Boolean fields
         if field == "is_academician":
             result[field] = _parse_bool(value)
-        elif field in ("academic_titles", "research_areas", "keywords"):
+        # List fields
+        elif field in ("academic_titles", "research_areas", "keywords", "secondary_departments"):
             result[field] = _parse_list(value)
+        # Integer fields
+        elif field in ("h_index", "citations_count", "publications_count"):
+            result[field] = _parse_int(value)
+        # JSON fields
+        elif field in ("education", "representative_publications", "patents", "awards", "custom_fields"):
+            parsed = _parse_json_field(value)
+            if parsed is not None:
+                result[field] = parsed
+        # String fields
         else:
             result[field] = value
     return result

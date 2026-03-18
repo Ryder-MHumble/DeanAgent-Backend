@@ -646,7 +646,8 @@ class ScholarDetailResponse(BaseModel):
     url_hash: str = ""
     url: str = ""
     content: str = ""
-    tags: list[str] = Field(default_factory=list)
+    project_category: str = ""
+    project_subcategory: str = ""
     name: str = ""
     name_en: str = ""
     gender: str = ""
@@ -793,6 +794,8 @@ class InstituteRelationUpdate(BaseModel):
     academic_exchange_records: list[str] | None = None
     is_potential_recruit: bool | None = None
     institute_relation_notes: str | None = None
+    project_category: str | None = None
+    project_subcategory: str | None = None
     relation_updated_by: str | None = None
 
 

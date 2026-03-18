@@ -7,10 +7,8 @@ from __future__ import annotations
 
 from app.schemas.institution import (
     DepartmentInfo,
-    DepartmentSource,
     InstitutionDetailResponse,
     InstitutionListItem,
-    MentorInfo,
     ScholarInfo,
 )
 from app.services.core.institution.classification import (
@@ -38,27 +36,6 @@ def _parse_scholar_list(raw: list | None) -> list[ScholarInfo]:
     return result
 
 
-def _parse_mentor_info(mentors_list: list | None) -> MentorInfo | None:
-    """Extract first mentor as MentorInfo.
-
-    Args:
-        mentors_list: List of mentor dicts
-
-    Returns:
-        MentorInfo object or None
-    """
-    if not mentors_list:
-        return None
-    m = mentors_list[0]
-    if isinstance(m, dict):
-        return MentorInfo(
-            name=m.get("name"),
-            category=m.get("category"),
-            department=m.get("department"),
-        )
-    return None
-
-
 def _build_department_info_list(department_items: list[InstitutionListItem] | None, department_records: list[dict] | None = None) -> list[DepartmentInfo]:
     """Convert InstitutionListItem objects to DepartmentInfo objects.
 
@@ -84,7 +61,6 @@ def _build_department_info_list(department_items: list[InstitutionListItem] | No
             id=item.id,
             name=item.name,
             scholar_count=item.scholar_count,
-            sources=[],  # Sources not available in list items
             org_name=record.get("org_name"),
         ))
     return result
@@ -138,9 +114,6 @@ def build_detail_response(record: dict, departments: list[dict] | None = None) -
     if departments:
         department_items = [build_list_item(dept) for dept in departments]
 
-    # Parse mentor info
-    mentor_info = _parse_mentor_info(record.get("mentors"))
-
     # Extract additional detail fields
     detail_data = {
         **base_item.model_dump(),
@@ -148,18 +121,8 @@ def build_detail_response(record: dict, departments: list[dict] | None = None) -
         "resident_leaders": record.get("resident_leaders") or [],
         "degree_committee": record.get("degree_committee") or [],
         "teaching_committee": record.get("teaching_committee") or [],
-        "mentor_info": mentor_info,
         "university_leaders": _parse_scholar_list(record.get("university_leaders")),
         "notable_scholars": _parse_scholar_list(record.get("notable_scholars")),
-        # Cooperation
-        "key_departments": record.get("key_departments") or [],
-        "joint_labs": record.get("joint_labs") or [],
-        "training_cooperation": record.get("training_cooperation") or [],
-        "academic_cooperation": record.get("academic_cooperation") or [],
-        "talent_dual_appointment": record.get("talent_dual_appointment") or [],
-        "recruitment_events": record.get("recruitment_events") or [],
-        "visit_exchanges": record.get("visit_exchanges") or [],
-        "cooperation_focus": record.get("cooperation_focus") or [],
         # Departments
         "departments": _build_department_info_list(department_items, departments),
     }

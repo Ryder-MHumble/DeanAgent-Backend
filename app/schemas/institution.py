@@ -20,31 +20,12 @@ class ScholarInfo(BaseModel):
     research_area: str | None = Field(default=None, description="研究方向")
 
 
-class MentorInfo(BaseModel):
-    """共建导师信息"""
-
-    name: str | None = Field(default=None, description="姓名")
-    category: str | None = Field(default=None, description="类别（教学研究等）")
-    department: str | None = Field(default=None, description="所属院系")
-
-
-class DepartmentSource(BaseModel):
-    """院系信源信息"""
-
-    source_id: str = Field(description="信源 ID")
-    source_name: str = Field(description="信源名称")
-    scholar_count: int = Field(default=0, description="学者数量")
-    is_enabled: bool = Field(default=True, description="是否启用")
-    last_crawl_at: str | None = Field(default=None, description="最后爬取时间")
-
-
 class DepartmentInfo(BaseModel):
     """院系信息"""
 
     id: str = Field(description="院系 ID")
     name: str = Field(description="院系名称")
     scholar_count: int = Field(default=0, description="学者数量")
-    sources: list[DepartmentSource] = Field(default_factory=list, description="信源列表")
     org_name: str | None = Field(default=None, description="AMiner 标准化机构名（院系级别）")
 
 
@@ -112,17 +93,8 @@ class InstitutionDetailResponse(BaseModel):
     resident_leaders: list[str] = Field(default_factory=list, description="驻院领导及共建老师")
     degree_committee: list[str] = Field(default_factory=list, description="学位委员")
     teaching_committee: list[str] = Field(default_factory=list, description="教学委员")
-    mentor_info: MentorInfo | None = Field(default=None, description="共建导师信息")
     university_leaders: list[ScholarInfo] = Field(default_factory=list, description="相关校领导")
     notable_scholars: list[ScholarInfo] = Field(default_factory=list, description="重要学者")
-    key_departments: list[str] = Field(default_factory=list, description="重点院系")
-    joint_labs: list[str] = Field(default_factory=list, description="联合实验室")
-    training_cooperation: list[str] = Field(default_factory=list, description="培养合作")
-    academic_cooperation: list[str] = Field(default_factory=list, description="学术合作")
-    talent_dual_appointment: list[str] = Field(default_factory=list, description="人才双聘")
-    recruitment_events: list[str] = Field(default_factory=list, description="招生宣讲")
-    visit_exchanges: list[str] = Field(default_factory=list, description="交流互访")
-    cooperation_focus: list[str] = Field(default_factory=list, description="合作重点")
 
     # 院系特有字段
     parent_id: str | None = Field(default=None, description="父机构 ID（所属高校）")
@@ -130,11 +102,9 @@ class InstitutionDetailResponse(BaseModel):
 
     # 共同字段
     scholar_count: int = Field(default=0, description="学者数量")
-    sources: list[DepartmentSource] = Field(default_factory=list, description="信源列表（仅 department）")
 
     # 元数据
     last_updated: str | None = Field(default=None, description="最后更新时间 ISO8601")
-    custom_fields: dict[str, str] = Field(default_factory=dict, description="用户自定义字段")
 
 
 # ---------------------------------------------------------------------------

@@ -74,13 +74,13 @@ class AMinerClient:
         Raises:
             httpx.HTTPStatusError: If API call fails
         """
-        url = f"{BASE_URL}/org/search"
-        params = {"name": name, "size": size}
+        url = f"{BASE_URL}/organization/search"
+        payload = {"name": name, "size": size}
 
         async with httpx.AsyncClient(timeout=15.0) as client:
-            response = await client.get(
+            response = await client.post(
                 url,
-                params=params,
+                json=payload,
                 headers=self._get_headers(),
             )
             response.raise_for_status()

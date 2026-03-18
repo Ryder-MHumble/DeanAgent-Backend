@@ -116,10 +116,42 @@ async def list_scholars(
     "/stats",
     response_model=ScholarStatsResponse,
     summary="学者统计",
-    description="返回学者库总览统计：总数、院士数、潜在招募数、按高校/职称分布、完整度分布。",
+    description="返回学者库总览统计：总数、院士数、潜在招募数、按高校/职称分布、完整度分布。支持与列表接口相同的筛选参数。",
 )
-async def get_stats():
-    return await svc.get_scholar_stats()
+async def get_stats(
+    university: str | None = Query(None, description="高校名称（模糊匹配）"),
+    department: str | None = Query(None, description="院系名称（模糊匹配）"),
+    position: str | None = Query(None, description="职称（精确匹配）"),
+    is_academician: bool | None = Query(None, description="仅统计院士"),
+    is_potential_recruit: bool | None = Query(None, description="仅统计潜在招募对象"),
+    is_advisor_committee: bool | None = Query(None, description="仅统计顾问委员会成员"),
+    is_adjunct_supervisor: bool | None = Query(None, description="仅统计兼职导师"),
+    has_email: bool | None = Query(None, description="仅统计有邮箱的学者"),
+    region: str | None = Query(None, description="地区筛选：国内 | 国际"),
+    affiliation_type: str | None = Query(None, description="机构类型筛选：高校 | 企业 | 研究机构 | 其他"),
+    keyword: str | None = Query(None, description="关键词搜索"),
+    institution_group: str | None = Query(None, description="机构顶层分组"),
+    institution_category: str | None = Query(None, description="机构细粒度分类"),
+    custom_field_key: str | None = Query(None, description="自定义字段名"),
+    custom_field_value: str | None = Query(None, description="自定义字段值"),
+):
+    return await svc.get_scholar_stats(
+        university=university,
+        department=department,
+        position=position,
+        is_academician=is_academician,
+        is_potential_recruit=is_potential_recruit,
+        is_advisor_committee=is_advisor_committee,
+        is_adjunct_supervisor=is_adjunct_supervisor,
+        has_email=has_email,
+        region=region,
+        affiliation_type=affiliation_type,
+        keyword=keyword,
+        institution_group=institution_group,
+        institution_category=institution_category,
+        custom_field_key=custom_field_key,
+        custom_field_value=custom_field_value,
+    )
 
 
 @router.post(

@@ -383,15 +383,70 @@ async def get_scholar_detail(url_hash: str) -> dict[str, Any] | None:
     return None
 
 
-async def get_scholar_stats() -> dict[str, Any]:
+async def get_scholar_stats(
+    *,
+    university: str | None = None,
+    department: str | None = None,
+    position: str | None = None,
+    is_academician: bool | None = None,
+    is_potential_recruit: bool | None = None,
+    is_advisor_committee: bool | None = None,
+    is_adjunct_supervisor: bool | None = None,
+    has_email: bool | None = None,
+    keyword: str | None = None,
+    region: str | None = None,
+    affiliation_type: str | None = None,
+    institution_group: str | None = None,
+    institution_category: str | None = None,
+    custom_field_key: str | None = None,
+    custom_field_value: str | None = None,
+) -> dict[str, Any]:
+    """Get scholar statistics with optional filtering.
+
+    Applies the same filters as get_scholar_list() to ensure consistency
+    between list view and stats view.
+    """
+    # Resolve institution_group/category → list of institution names for filtering
+    institution_names: list[str] | None = None
+    if institution_group or institution_category:
+        institution_names = await _resolve_institution_names_by_group_or_category(
+            institution_group, institution_category
+        )
+
     items = await _load_all_with_annotations_async()
 
-    total = len(items)
-    academicians = sum(1 for i in items if i.get("is_academician", False))
-    potential_recruits = sum(1 for i in items if i.get("is_potential_recruit", False))
-    advisor_committee = sum(1 for i in items if i.get("is_advisor_committee", False))
+    # Fetch DB-based classification map when region/affiliation_type filter is active
+    inst_map: dict = {}
+    if region or affiliation_type:
+        inst_map = await get_institution_classification_map()
+
+    # Apply the same filters as get_scholar_list()
+    filtered = _apply_filters(
+        items,
+        university=university,
+        department=department,
+        position=position,
+        is_academician=is_academician,
+        is_potential_recruit=is_potential_recruit,
+        is_advisor_committee=is_advisor_committee,
+        is_adjunct_supervisor=is_adjunct_supervisor,
+        has_email=has_email,
+        keyword=keyword,
+        region=region,
+        affiliation_type=affiliation_type,
+        institution_names=institution_names,
+        custom_field_key=custom_field_key,
+        custom_field_value=custom_field_value,
+        inst_map=inst_map,
+    )
+
+    # Calculate stats based on filtered items
+    total = len(filtered)
+    academicians = sum(1 for i in filtered if i.get("is_academician", False))
+    potential_recruits = sum(1 for i in filtered if i.get("is_potential_recruit", False))
+    advisor_committee = sum(1 for i in filtered if i.get("is_advisor_committee", False))
     adjunct_supervisors = sum(
-        1 for i in items
+        1 for i in filtered
         if (i.get("adjunct_supervisor") or {}).get("status")
     )
 
@@ -399,7 +454,7 @@ async def get_scholar_stats() -> dict[str, Any]:
     dept_counter: Counter = Counter()
     pos_counter: Counter = Counter()
 
-    for item in items:
+    for item in filtered:
         uni = item.get("university", "") or "未知"
         uni_counter[uni] += 1
         dept = item.get("department", "") or "未知"
@@ -415,15 +470,15 @@ async def get_scholar_stats() -> dict[str, Any]:
         "adjunct_supervisors": adjunct_supervisors,
         "by_university": [
             {"university": u, "count": c}
-            for u, c in uni_counter.most_common(15)
+            for u, c in uni_counter.most_common()  # 返回所有机构，不限制数量
         ],
         "by_department": [
             {"university": u, "department": d, "count": c}
-            for (u, d), c in dept_counter.most_common(30)
+            for (u, d), c in dept_counter.most_common()  # 返回所有院系
         ],
         "by_position": [
             {"position": p, "count": c}
-            for p, c in pos_counter.most_common(10)
+            for p, c in pos_counter.most_common()  # 返回所有职称
         ],
     }
 
