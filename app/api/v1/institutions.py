@@ -65,6 +65,8 @@ async def list_institutions(
     keyword: str | None = Query(default=None, description="关键词搜索（机构名称或 ID）"),
     page: int = Query(default=1, ge=1, description="页码（仅 flat 视图）"),
     page_size: int = Query(default=20, ge=1, le=200, description="每页条数（仅 flat 视图）"),
+    # Scholar filter
+    is_adjunct_supervisor: bool | None = Query(default=None, description="仅统计共建导师（用于学者页侧边栏）"),
 ):
     """统一的机构查询接口，支持扁平和层级两种视图."""
     from app.services.core.institution import get_institutions_unified
@@ -78,6 +80,7 @@ async def list_institutions(
         keyword=keyword,
         page=page,
         page_size=page_size,
+        is_adjunct_supervisor=is_adjunct_supervisor,
     )
 
 

@@ -1,6 +1,6 @@
 # 信源全景概览 — SourceOverview
 
-> 最后更新: 2026-03-06 | 系统版本: v39
+> 最后更新: 2026-03-18 | 系统版本: v42
 
 ---
 
@@ -8,9 +8,9 @@
 
 | 指标 | 数值 |
 |------|------|
-| 信源总数 | 181 |
+| 信源总数 | 180 |
 | 启用信源 | 138 |
-| 禁用信源 | 43 |
+| 禁用信源 | 42 |
 | 信息监测维度 | 9（国家政策/北京政策/技术动态/人才/产业/高校/活动/人事/舆情） |
 | 学者知识库维度 | 1（49 个采集源，覆盖 9 所高校） |
 
@@ -41,12 +41,16 @@
 | miit_policy | 工信部-政策文件 | dynamic | daily | ✅ |
 | nsfc_news | 国家自然科学基金委-通知公告 | static | daily | ❌ |
 
-### 2.2 北京政策（14 源，10 启用）
+### 2.2 北京政策（17 源，15 启用）
 
 | source_id | 信源名称 | 爬虫类型 | 调度频率 | 启用 |
 |-----------|---------|---------|---------|:----:|
 | beijing_zhengce | 首都之窗-政策文件 | static | 4h | ✅ |
 | bjkw_policy | 北京市科委/中关村管委会 | static | 4h | ✅ |
+| bjkw_reform | 北京市科委/中关村-深化改革 | static | 4h | ✅ |
+| bjkw_industry | 北京市科委/中关村-产业发展 | static | 4h | ✅ |
+| bjkw_cooperation | 北京市科委/中关村-开放合作 | static | 4h | ✅ |
+| bjkw_frontier | 北京市科委/中关村-科技前沿 | static | 4h | ✅ |
 | bjjw_policy | 北京市教委 | static | daily | ✅ |
 | bjrsj_policy | 北京市人社局 | static | daily | ✅ |
 | zgc_policy | 中关村示范区 | static | daily | ❌ |
@@ -54,11 +58,10 @@
 | bjjxj_policy | 北京市经信局-通知公告 | static | 4h | ✅ |
 | bjzscqj_policy | 北京市知识产权局 | static | daily | ✅ |
 | bjfgw_policy | 北京市发改委-政策文件 | static | daily | ✅ |
-| bjhd_policy | 海淀区政府 | static | daily | ❌ |
+| bjhd_policy | 海淀区政府 | static | daily | ✅ |
 | beijing_ywdt | 首都之窗-要闻 | static | 4h | ✅ |
 | bjd_news | 北京日报 | static | daily | ❌ |
 | bjrd_renshi | 北京市人大常委会 | static | daily | ✅ |
-| beijing_rsrm | 首都之窗-人事任免 | static | daily | ❌ |
 
 ### 2.3 技术动态（34 源，33 启用）
 
@@ -370,12 +373,12 @@
 
 ## 五、禁用信源说明
 
-以下 43 个信源当前处于禁用状态（is_enabled: false）：
+以下 42 个信源当前处于禁用状态（is_enabled: false）：
 
 | 维度 | 禁用数量 | 主要禁用原因 |
 |------|---------|------------|
 | 国家政策 | 2 | 网站结构变更、信息价值低 |
-| 北京政策 | 4 | 选择器失效、重复来源 |
+| 北京政策 | 2 | 选择器失效、重复来源 |
 | 技术动态 | 5 | API 限制、内容质量问题 |
 | 人才发展 | 3 | 更新频率低、需专项账号 |
 | 产业趋势 | 4 | 网站改版、需认证 |

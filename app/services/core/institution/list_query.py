@@ -5,6 +5,8 @@ Provides unified query interface supporting both flat and hierarchy views.
 
 from __future__ import annotations
 
+from collections import defaultdict
+
 from app.schemas.institution import InstitutionListResponse
 from app.services.core.institution.detail_builder import build_list_item
 from app.services.core.institution.sorting import sort_institutions
@@ -20,6 +22,7 @@ async def get_institutions_unified(
     keyword: str | None = None,
     page: int = 1,
     page_size: int = 20,
+    is_adjunct_supervisor: bool | None = None,
 ) -> InstitutionListResponse | dict:
     """Unified institution query interface.
 
@@ -32,6 +35,7 @@ async def get_institutions_unified(
         keyword: Search keyword (matches id or name)
         page: Page number (1-indexed)
         page_size: Items per page
+        is_adjunct_supervisor: Filter scholars by adjunct supervisor status
 
     Returns:
         InstitutionListResponse for flat view, dict for hierarchy view
@@ -41,6 +45,7 @@ async def get_institutions_unified(
             region=region,
             org_type=org_type,
             classification=classification,
+            is_adjunct_supervisor=is_adjunct_supervisor,
         )
     else:
         return await _get_flat_view(
@@ -115,6 +120,7 @@ async def _get_hierarchy_view(
     region: str | None = None,
     org_type: str | None = None,
     classification: str | None = None,
+    is_adjunct_supervisor: bool | None = None,
 ) -> dict:
     """Get hierarchy view of institutions (organizations with nested departments).
 
@@ -122,6 +128,7 @@ async def _get_hierarchy_view(
         region: Filter by region
         org_type: Filter by org type
         classification: Filter by classification
+        is_adjunct_supervisor: Filter scholars by adjunct supervisor status
 
     Returns:
         Dict with organizations list, each containing nested departments
@@ -141,10 +148,16 @@ async def _get_hierarchy_view(
     # Sort organizations
     sorted_orgs = sort_institutions(organizations)
 
+    # If is_adjunct_supervisor filter is active, we need to recount scholars
+    scholar_counts = None
+    if is_adjunct_supervisor is not None:
+        scholar_counts = await _count_scholars_by_institution(is_adjunct_supervisor)
+
     # Build hierarchy
     result_orgs = []
     for org in sorted_orgs:
         org_id = org["id"]
+        org_name = org["name"]
 
         # Find departments for this organization
         departments = [
@@ -154,14 +167,29 @@ async def _get_hierarchy_view(
 
         # Build organization item with departments
         org_item = build_list_item(org).model_dump()
-        org_item["departments"] = [
-            {
-                "id": dept["id"],
-                "name": dept["name"],
-                "scholar_count": dept.get("scholar_count", 0),
-            }
-            for dept in sorted_depts
-        ]
+
+        # Override scholar_count if filtering by is_adjunct_supervisor
+        if scholar_counts is not None:
+            org_scholar_count = scholar_counts.get(("org", org_name), 0)
+            org_item["scholar_count"] = org_scholar_count
+
+            org_item["departments"] = [
+                {
+                    "id": dept["id"],
+                    "name": dept["name"],
+                    "scholar_count": scholar_counts.get(("dept", org_name, dept["name"]), 0),
+                }
+                for dept in sorted_depts
+            ]
+        else:
+            org_item["departments"] = [
+                {
+                    "id": dept["id"],
+                    "name": dept["name"],
+                    "scholar_count": dept.get("scholar_count", 0),
+                }
+                for dept in sorted_depts
+            ]
 
         result_orgs.append(org_item)
 
@@ -212,3 +240,48 @@ def _apply_filters(
         ]
 
     return filtered
+
+
+async def _count_scholars_by_institution(is_adjunct_supervisor: bool) -> dict[tuple, int]:
+    """Count scholars by university and department with adjunct supervisor filter.
+
+    Args:
+        is_adjunct_supervisor: Whether to count only adjunct supervisors
+
+    Returns:
+        Dict mapping (type, university[, department]) to scholar count
+        - ("org", "上海交通大学") -> count for university
+        - ("dept", "上海交通大学", "计算机系") -> count for department
+    """
+    from app.services.scholar._data import _load_all_with_annotations_async
+
+    # Fetch all scholars
+    all_scholars = await _load_all_with_annotations_async()
+
+    # Filter by adjunct supervisor status
+    if is_adjunct_supervisor:
+        def _has_adjunct(scholar: dict) -> bool:
+            adj = scholar.get("adjunct_supervisor")
+            if isinstance(adj, dict):
+                return bool(adj.get("status", ""))
+            return False
+        filtered_scholars = [s for s in all_scholars if _has_adjunct(s)]
+    else:
+        filtered_scholars = all_scholars
+
+    # Count by university and department
+    counts: dict[tuple, int] = defaultdict(int)
+
+    for scholar in filtered_scholars:
+        university = scholar.get("university", "")
+        department = scholar.get("department", "")
+
+        if university:
+            # Count for organization
+            counts[("org", university)] += 1
+
+            # Count for department
+            if department:
+                counts[("dept", university, department)] += 1
+
+    return dict(counts)

@@ -1,6 +1,6 @@
 # 信源爬取状态总览
 
-> 最后更新: 2026-03-16 (v41: 新增 4 个北京市科委/中关村科创一线子频道信源 — bjkw_reform 深化改革、bjkw_industry 产业发展、bjkw_cooperation 开放合作、bjkw_frontier 科技前沿，每个信源爬取 20 条文章，100% 正文覆盖率；beijing_policy 维度从 11/14 提升到 15/18 启用，新增 80 条数据)
+> 最后更新: 2026-03-18 (v43: 修复 national_policy 维度 3 个信源：cac_policy 切换动态渲染、nsfc_news 更新选择器、samr_news 移除关键词过滤，启用率从 6/8 提升至 8/8)
 
 ---
 
@@ -117,14 +117,14 @@ python scripts/process_tech_frontier.py --dry-run
 | personnel (对人事) | 4 | 4 | ✅ 62条 | 98% | `sources/personnel.yaml` |
 | universities (对高校) | 55 | 46 | ✅ 528条 | 81% | `sources/universities.yaml` |
 | technology (对技术) | 34+4† | 33+4† | ✅ 299条+ | 97% | `sources/technology.yaml` + twitter |
-| national_policy (对国家) | 8 | 6 | ✅ 52条 | 73% | `sources/national_policy.yaml` |
-| beijing_policy (对北京) | 18 | 15 | ✅ 158条 | 98% | `sources/beijing_policy.yaml` |
+| national_policy (对国家) | 8 | 8 | ✅ 52条 | 100% | `sources/national_policy.yaml` |
+| beijing_policy (对北京) | 17 | 15 | ✅ 158条 | 98% | `sources/beijing_policy.yaml` |
 | industry (对产业) | 10+1† | 6+1† | ✅ 49条 | 100% | `sources/industry.yaml` + twitter |
 | talent (对人才) | 7+1† | 4+1† | ✅ 51条 | 86% | `sources/talent.yaml` + twitter |
 | sentiment (对学院舆情) | 1† | 1† | ✅ 20条 | 100% | twitter 跨维度 |
 | events (对日程) | 6 | 4 | ✅ 221条 | 0% (会议列表) | `sources/events.yaml` |
 | university_faculty (高校师资) | 47 | 44 | ✅ 2200+位教师 | N/A (师资无正文) | `sources/university_faculty.yaml` |
-| **合计** | **181** | **148** | **3000条+** | **74%** | **148 个数据文件** |
+| **合计** | **180** | **148** | **3000条+** | **74%** | **148 个数据文件** |
 
 > † `sources/twitter.yaml` 的 7 个源按 `dimension` 字段分配到 4 个维度：technology 4源、industry 1源、talent 1源、sentiment 1源。
 >
@@ -311,9 +311,9 @@ python scripts/process_tech_frontier.py --dry-run
 | hunyuan_news | 腾讯混元-最新动态 | hunyuan_api | ✅ | 自定义 API Parser，数据来自公众号文章 |
 | zhipu_news | 智谱AI-最新动态 | dynamic | ❌ | React SPA 无 DOM 链接，新闻更新停滞 |
 
-### 详细状态：national_policy (对国家) — 7/8 启用
+### 详细状态：national_policy (对国家) — 8/8 启用
 
-全部 7 启用源已配置 detail_selectors。
+全部 8 启用源已配置 detail_selectors。
 
 | source_id | 名称 | 方法 | 启用 | 条目数 | 详情页 | content selector |
 |-----------|------|------|------|--------|--------|-----------------|
@@ -321,12 +321,12 @@ python scripts/process_tech_frontier.py --dry-run
 | ndrc_policy | 发改委-通知通告 | static | ✅ | 5 | ✅ (4/5) | `div.TRS_Editor` |
 | moe_policy | 教育部-政策法规 | static | ✅ | 8 | ✅ (8/8) | `div.TRS_Editor` |
 | most_policy | 科技部-信息公开 | static | ✅ | 10 | ✅ (6/10) | `div.TRS_UEDITOR` (PDF 项无正文) |
-| cac_policy | 国家网信办-政策法规 | static | ✅ | 9 | ✅ (9/9) | `div.main-content` AI 治理核心监管 |
-| samr_news | 国家市监总局-要闻 | static | ✅ | 0 | — | `#zoom` 当期无匹配关键词 |
+| cac_policy | 国家网信办-政策法规 | dynamic | ✅ | 9 | ✅ (9/9) | `div.main-content` 已修复 (2026-03-18) |
+| samr_news | 国家市监总局-要闻 | samr_api | ✅ | 17 | ✅ (17/17) | `#zoom` 已修复 (2026-03-18) |
 | miit_policy | 工信部-政策文件 | dynamic | ✅ | 10 | ✅ (10/10) | `div.ccontent.center` 已修复 (2026-03-16) |
-| nsfc_news | 国家自然科学基金委 | static | ❌ | — | — | URL 404 |
+| nsfc_news | 国家自然科学基金委 | static | ✅ | 20 | — | 已修复 (2026-03-18) |
 
-### 详细状态：beijing_policy (对北京) — 15/18 启用
+### 详细状态：beijing_policy (对北京) — 15/17 启用
 
 15 启用源全部配置 detail_selectors。
 
@@ -356,7 +356,6 @@ python scripts/process_tech_frontier.py --dry-run
 | beijing_ywdt | 首都之窗-要闻 | static | ✅ | 2 | ✅ (2/2) |
 | bjd_news | 北京日报 | static | ❌ | — | 布局复杂 |
 | bjrd_renshi | 北京市人大常委会 | static | ✅ | 1 | ✅ (1/1) |
-| beijing_rsrm | 首都之窗-人事任免 | static | ❌ | — | URL 404 |
 
 ### 详细状态：industry (对产业) — 6/10 启用 + 1 Twitter
 

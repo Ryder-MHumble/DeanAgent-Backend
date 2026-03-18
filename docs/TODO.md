@@ -1,6 +1,6 @@
 # 后续任务清单
 
-> 最后更新: 2026-03-10 (v39: 社媒舆情数据迁移 — 将社媒 Supabase（dfpijqpgsupvdmidztup）的 contents/comments/creators 三表迁移至主库 sentiment_contents/sentiment_comments/sentiment_creators，服务层改为从主库读取，删除旧 supabase_client.py)
+> 最后更新: 2026-03-18 (v44: 修复 national_policy 维度 3 个信源 — cac_policy 切换动态渲染、nsfc_news 更新选择器、samr_news 移除关键词过滤，启用率从 6/8 提升至 8/8，100% 覆盖率)
 > 基于前端 (Dean-Agent) 需求反推的优先级排序
 
 ---
@@ -29,6 +29,9 @@
 ### 信源补充
 - [ ] 新增「领导讲话」信源 — gov.cn 国务院领导活动页 + 部委领导讲话
 - [x] ~~恢复 bjfgw_policy~~ — v16: 改 URL 为 /fgwzwgk/2024zcwj/ 静态列表，static 可用
+- [x] ~~修复 cac_policy~~ — v44: 切换到 dynamic 渲染，绕过 Cloudflare 521 错误
+- [x] ~~修复 nsfc_news~~ — v44: 更新选择器适配新页面结构，移除关键词过滤
+- [x] ~~修复 samr_news~~ — v44: 移除过严的关键词过滤，恢复正常抓取
 - [ ] 恢复 thepaper_tech (解析 __NEXT_DATA__ JSON)
 - [ ] 恢复 huxiu_news (寻找 RSS feed 或 API)
 

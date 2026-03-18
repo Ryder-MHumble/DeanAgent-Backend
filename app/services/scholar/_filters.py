@@ -24,9 +24,7 @@ _INTL_GROUPS = {"海外高校"}
 async def get_institution_classification_map() -> dict[str, dict[str, str]]:
     """Return {institution_name: {region, org_type}} from institutions service.
 
-    Calls the institution service which reads from JSON files with complete data.
-    DB table has NULL values for region/org_type/classification fields.
-
+    Fetches from Supabase institutions table with complete classification data.
     Fetches once per process and caches the result.
     Falls back to empty dict on error (callers will use heuristics).
     """
@@ -35,28 +33,20 @@ async def get_institution_classification_map() -> dict[str, dict[str, str]]:
         return _INSTITUTION_CLASSIFICATION_CACHE
 
     try:
-        from app.services.core.institution import get_institution_list  # noqa: PLC0415
+        from app.services.core.institution.storage import fetch_all_institutions  # noqa: PLC0415
 
-        # Get all institutions from the service (reads from JSON with complete data)
-        result = await get_institution_list(
-            page=1,
-            page_size=500,
-            type_filter=None,  # Get all types
-        )
+        # Get all institutions from database
+        institutions = await fetch_all_institutions()
 
         mapping: dict[str, dict[str, str]] = {}
-        for inst in result.items:
-            name = (inst.name or "").strip()
+        for inst in institutions:
+            name = (inst.get("name") or "").strip()
             if not name:
                 continue
 
-            # Use group field to determine region
-            group = inst.group or ""
-            region = "国际" if group == "海外高校" else "国内"
-
-            # Use type field to determine org_type
-            inst_type = inst.type or ""
-            org_type = _TYPE_TO_ORG_TYPE.get(inst_type, "")
+            # Use region and org_type directly from database
+            region = inst.get("region") or ""
+            org_type = inst.get("org_type") or ""
 
             mapping[name] = {"region": region, "org_type": org_type}
 
