@@ -16,7 +16,7 @@ REGION_ORDER = ["国内", "国际"]
 ORG_TYPE_ORDER = ["高校", "企业", "研究机构", "行业学会", "其他"]
 
 # Classification display order (within each org_type)
-CLASSIFICATION_ORDER = ["共建高校", "兄弟院校", "海外高校", "其他高校"]
+CLASSIFICATION_ORDER = ["共建高校", "兄弟院校", "海外高校", "其他高校", "新研机构", "行业学会"]
 
 # Priority display order (P0 > P1 > P2 > P3)
 PRIORITY_ORDER = ["P0", "P1", "P2", "P3"]
@@ -62,7 +62,16 @@ def get_sort_key(record: dict) -> tuple:
     )
 
     # Priority order
-    priority_idx = PRIORITY_ORDER.index(priority) if priority in PRIORITY_ORDER else 999
+    if isinstance(priority, int):
+        priority_value = f"P{priority}"
+    elif isinstance(priority, str):
+        value = priority.strip().upper()
+        priority_value = value if value.startswith("P") else f"P{value}" if value.isdigit() else value
+    else:
+        priority_value = None
+    priority_idx = (
+        PRIORITY_ORDER.index(priority_value) if priority_value in PRIORITY_ORDER else 999
+    )
 
     # Reputation rank (None goes last)
     reputation_key = (reputation_rank is None, reputation_rank or 0)

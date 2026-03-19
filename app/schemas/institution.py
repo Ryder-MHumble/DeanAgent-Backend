@@ -27,6 +27,8 @@ class DepartmentInfo(BaseModel):
     name: str = Field(description="院系名称")
     scholar_count: int = Field(default=0, description="学者数量")
     org_name: str | None = Field(default=None, description="AMiner 标准化机构名（院系级别）")
+    parent_id: str | None = Field(default=None, description="父机构 ID")
+    sources: list[dict[str, Any]] = Field(default_factory=list, description="院系关联信源列表")
 
 
 # ---------------------------------------------------------------------------
@@ -45,6 +47,12 @@ class InstitutionListItem(BaseModel):
     region: str | None = Field(default=None, description="地域（国内 | 国际）")
     org_type: str | None = Field(default=None, description="机构类型（高校 | 企业 | 研究机构 | 行业学会 | 其他）")
     classification: str | None = Field(default=None, description="顶层分类（共建高校 | 兄弟院校 | 海外高校 | 其他高校）")
+    sub_classification: str | None = Field(default=None, description="二级分类")
+
+    # 旧字段兼容
+    type: str | None = Field(default=None, description="[兼容] 旧版类型字段")
+    group: str | None = Field(default=None, description="[兼容] 旧版分组字段")
+    category: str | None = Field(default=None, description="[兼容] 旧版分类字段")
 
     priority: str | None = Field(default=None, description="优先级（P0/P1/P2/P3，仅高校）")
     scholar_count: int = Field(default=0, description="学者数量")
@@ -52,6 +60,7 @@ class InstitutionListItem(BaseModel):
     mentor_count: int | None = Field(default=None, description="导师总数（仅高校）")
     parent_id: str | None = Field(default=None, description="父机构 ID（仅 department）")
     avatar: str | None = Field(default=None, description="机构校徽图片链接")
+    org_name: str | None = Field(default=None, description="AMiner 标准化机构名")
 
 
 class InstitutionListResponse(BaseModel):
@@ -83,6 +92,12 @@ class InstitutionDetailResponse(BaseModel):
     region: str | None = Field(default=None, description="地域（国内 | 国际）")
     org_type: str | None = Field(default=None, description="机构类型（高校 | 企业 | 研究机构 | 行业学会 | 其他）")
     classification: str | None = Field(default=None, description="顶层分类（共建高校 | 兄弟院校 | 海外高校 | 其他高校）")
+    sub_classification: str | None = Field(default=None, description="二级分类")
+
+    # 旧字段兼容
+    type: str | None = Field(default=None, description="[兼容] 旧版类型字段")
+    group: str | None = Field(default=None, description="[兼容] 旧版分组字段")
+    category: str | None = Field(default=None, description="[兼容] 旧版分类字段")
 
     # 高校特有字段
     priority: str | None = Field(default=None, description="优先级（P0/P1/P2/P3）")
@@ -95,6 +110,15 @@ class InstitutionDetailResponse(BaseModel):
     teaching_committee: list[str] = Field(default_factory=list, description="教学委员")
     university_leaders: list[ScholarInfo] = Field(default_factory=list, description="相关校领导")
     notable_scholars: list[ScholarInfo] = Field(default_factory=list, description="重要学者")
+    key_departments: list[str] = Field(default_factory=list, description="重点院系列表")
+    joint_labs: list[str] = Field(default_factory=list, description="联合实验室列表")
+    training_cooperation: list[str] = Field(default_factory=list, description="培养合作列表")
+    academic_cooperation: list[str] = Field(default_factory=list, description="学术合作列表")
+    talent_dual_appointment: list[str] = Field(default_factory=list, description="人才双聘列表")
+    recruitment_events: list[str] = Field(default_factory=list, description="招生宣讲列表")
+    visit_exchanges: list[str] = Field(default_factory=list, description="交流互访列表")
+    cooperation_focus: list[str] = Field(default_factory=list, description="合作重点列表")
+    custom_fields: dict[str, str] = Field(default_factory=dict, description="用户自定义字段")
 
     # 院系特有字段
     parent_id: str | None = Field(default=None, description="父机构 ID（所属高校）")
@@ -105,6 +129,7 @@ class InstitutionDetailResponse(BaseModel):
 
     # 元数据
     last_updated: str | None = Field(default=None, description="最后更新时间 ISO8601")
+    sources: list[dict[str, Any]] = Field(default_factory=list, description="机构关联信源列表")
 
 
 # ---------------------------------------------------------------------------
@@ -136,6 +161,14 @@ class DepartmentCreateInput(BaseModel):
 
     name: str = Field(description="院系名称")
     id: str | None = Field(default=None, description="院系唯一 ID（全局唯一）。不提供则自动生成")
+    org_name: str | None = Field(default=None, description="AMiner 标准化机构名（院系级别）")
+
+
+class DepartmentUpdateInput(BaseModel):
+    """院系更新输入（用于机构 PATCH 中的 departments 字段）"""
+
+    id: str | None = Field(default=None, description="院系 ID（不传则自动生成）")
+    name: str = Field(description="院系名称")
     org_name: str | None = Field(default=None, description="AMiner 标准化机构名（院系级别）")
 
 
@@ -183,6 +216,7 @@ class InstitutionCreate(BaseModel):
     region: str | None = Field(default=None, description="地域（国内 | 国际）")
     org_type: str | None = Field(default=None, description="机构类型（高校 | 企业 | 研究机构 | 行业学会 | 其他）")
     classification: str | None = Field(default=None, description="顶层分类（共建高校 | 兄弟院校 | 海外高校 | 其他高校）")
+    sub_classification: str | None = Field(default=None, description="二级分类")
 
     # ---- 院系专用 ----
     parent_id: str | None = Field(default=None, description="父高校 ID（entity_type=department 时必填）")
@@ -229,10 +263,14 @@ class InstitutionUpdate(BaseModel):
     """PATCH /institutions/{id} — 更新机构信息（所有字段可选）"""
 
     name: str | None = Field(default=None, description="机构名称")
+    org_name: str | None = Field(default=None, description="AMiner 标准化机构名")
     avatar: str | None = Field(default=None, description="机构校徽图片链接")
+    entity_type: str | None = Field(default=None, description="实体类型（organization | department）")
+    parent_id: str | None = Field(default=None, description="父机构 ID（entity_type=department 时可用）")
     region: str | None = Field(default=None, description="地域（国内 | 国际）")
     org_type: str | None = Field(default=None, description="机构类型（高校 | 企业 | 研究机构 | 行业学会 | 其他）")
     classification: str | None = Field(default=None, description="顶层分类（共建高校 | 兄弟院校 | 海外高校 | 其他高校）")
+    sub_classification: str | None = Field(default=None, description="二级分类")
     priority: str | None = Field(default=None, description="优先级")
     student_count_24: int | None = Field(default=None, description="24级学生人数")
     student_count_25: int | None = Field(default=None, description="25级学生人数")
@@ -250,6 +288,10 @@ class InstitutionUpdate(BaseModel):
     recruitment_events: list[str] | None = Field(default=None, description="招生宣讲")
     visit_exchanges: list[str] | None = Field(default=None, description="交流互访")
     cooperation_focus: list[str] | None = Field(default=None, description="合作重点")
+    departments: list[DepartmentUpdateInput] | None = Field(
+        default=None,
+        description="二级机构列表（仅一级机构可用，传入时按全量同步）",
+    )
     custom_fields: dict[str, str | None] | None = Field(
         default=None, description="用户自定义字段（浅合并：值为 null 删除该 key）",
     )
@@ -322,3 +364,36 @@ class InstitutionTreeResponse(BaseModel):
 
     total_scholar_count: int = Field(description="学者总数")
     groups: list[InstitutionTreeGroup] = Field(description="顶层分组列表")
+
+
+# ---------------------------------------------------------------------------
+# Institution Search API schemas (for /api/v1/institutions/search)
+# ---------------------------------------------------------------------------
+
+
+class InstitutionSearchResult(BaseModel):
+    """机构搜索结果项"""
+
+    id: str = Field(description="机构 ID")
+    name: str = Field(description="机构名称")
+    entity_type: str | None = Field(default=None, description="实体类型（organization | department）")
+    region: str | None = Field(default=None, description="地域（国内 | 国际）")
+    org_type: str | None = Field(default=None, description="机构类型（高校 | 企业 | 研究机构 | 其他）")
+    parent_id: str | None = Field(default=None, description="父机构 ID（仅 department）")
+    scholar_count: int = Field(default=0, description="学者数量")
+
+
+class InstitutionSearchResponse(BaseModel):
+    """GET /institutions/search 响应"""
+
+    query: str = Field(description="搜索关键词")
+    total: int = Field(description="结果总数")
+    results: list[InstitutionSearchResult] = Field(description="搜索结果列表")
+
+
+class InstitutionSuggestionResponse(BaseModel):
+    """GET /institutions/suggest 响应"""
+
+    university: str = Field(description="输入的大学名称")
+    matched: InstitutionSearchResult | None = Field(default=None, description="最佳匹配（强匹配）")
+    suggestions: list[InstitutionSearchResult] = Field(default_factory=list, description="建议列表")

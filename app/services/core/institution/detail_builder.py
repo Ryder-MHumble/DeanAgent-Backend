@@ -62,6 +62,8 @@ def _build_department_info_list(department_items: list[InstitutionListItem] | No
             name=item.name,
             scholar_count=item.scholar_count,
             org_name=record.get("org_name"),
+            parent_id=record.get("parent_id"),
+            sources=record.get("sources") or [],
         ))
     return result
 
@@ -86,6 +88,7 @@ def build_list_item(record: dict) -> InstitutionListItem:
         region=record.get("region"),
         org_type=record.get("org_type"),
         classification=record.get("classification"),
+        sub_classification=record.get("sub_classification"),
         # Common fields
         priority=priority,
         parent_id=record.get("parent_id"),
@@ -93,6 +96,7 @@ def build_list_item(record: dict) -> InstitutionListItem:
         student_count_total=record.get("student_count_total"),
         mentor_count=record.get("mentor_count"),
         avatar=record.get("avatar"),
+        org_name=record.get("org_name"),
     )
 
 
@@ -123,8 +127,23 @@ def build_detail_response(record: dict, departments: list[dict] | None = None) -
         "teaching_committee": record.get("teaching_committee") or [],
         "university_leaders": _parse_scholar_list(record.get("university_leaders")),
         "notable_scholars": _parse_scholar_list(record.get("notable_scholars")),
+        # Cooperation
+        "key_departments": record.get("key_departments") or [],
+        "joint_labs": record.get("joint_labs") or [],
+        "training_cooperation": record.get("training_cooperation") or [],
+        "academic_cooperation": record.get("academic_cooperation") or [],
+        "talent_dual_appointment": record.get("talent_dual_appointment") or [],
+        "recruitment_events": record.get("recruitment_events") or [],
+        "visit_exchanges": record.get("visit_exchanges") or [],
+        "cooperation_focus": record.get("cooperation_focus") or [],
+        "custom_fields": record.get("custom_fields") or {},
         # Departments
         "departments": _build_department_info_list(department_items, departments),
+        # Legacy compatibility
+        "type": record.get("type"),
+        "group": record.get("group"),
+        "category": record.get("category"),
+        "sources": record.get("sources") or [],
     }
 
     return InstitutionDetailResponse(**detail_data)

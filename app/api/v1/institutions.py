@@ -61,6 +61,7 @@ async def list_institutions(
     region: str | None = Query(default=None, description="地域：国内 | 国际"),
     org_type: str | None = Query(default=None, description="机构类型：高校 | 企业 | 研究机构 | 行业学会 | 其他"),
     classification: str | None = Query(default=None, description="顶层分类：共建高校 | 兄弟院校 | 海外高校 | 其他高校"),
+    sub_classification: str | None = Query(default=None, description="二级分类"),
     # Common parameters
     keyword: str | None = Query(default=None, description="关键词搜索（机构名称或 ID）"),
     page: int = Query(default=1, ge=1, description="页码（仅 flat 视图）"),
@@ -77,6 +78,7 @@ async def list_institutions(
         region=region,
         org_type=org_type,
         classification=classification,
+        sub_classification=sub_classification,
         keyword=keyword,
         page=page,
         page_size=page_size,
@@ -175,6 +177,140 @@ async def get_institution_taxonomy():
 # ---------------------------------------------------------------------------
 # Helper endpoints
 # ---------------------------------------------------------------------------
+
+
+@router.get(
+    "/search",
+    summary="搜索机构（模糊匹配）",
+    description=(
+        "根据关键词搜索机构，支持模糊匹配。用于前端自动完成（autocomplete）功能。"
+        "\n\n**匹配规则：**"
+        "\n1. 精确匹配（最高优先级）"
+        "\n2. 以关键词开头"
+        "\n3. 包含关键词（不区分大小写）"
+        "\n4. 字符重叠匹配"
+        "\n\n**排序规则：**"
+        "\n- 按相关性得分排序"
+        "\n- 组织（organization）优先于院系（department）"
+        "\n- 学者数量多的机构优先"
+        "\n\n**Query Parameters:**"
+        "\n- `q` (required): 搜索关键词"
+        "\n- `limit` (optional, default=10): 返回结果数量"
+        "\n- `region` (optional): 地域过滤（国内 | 国际）"
+        "\n- `org_type` (optional): 机构类型过滤（高校 | 企业 | 研究机构 | 其他）"
+    ),
+)
+async def search_institutions_endpoint(
+    q: str = Query(..., description="搜索关键词"),
+    limit: int = Query(10, ge=1, le=50, description="返回结果数量"),
+    region: str | None = Query(None, description="地域过滤"),
+    org_type: str | None = Query(None, description="机构类型过滤"),
+):
+    """搜索机构（模糊匹配）."""
+    from app.schemas.institution import InstitutionSearchResponse, InstitutionSearchResult
+    from app.services.core.institution.search import search_institutions
+
+    if not q or not q.strip():
+        raise HTTPException(
+            status_code=400, detail="Query parameter 'q' is required and cannot be empty"
+        )
+
+    try:
+        results = await search_institutions(
+            q, limit=limit, region=region, org_type=org_type
+        )
+
+        # Convert to response schema
+        search_results = [
+            InstitutionSearchResult(
+                id=inst.get("id", ""),
+                name=inst.get("name", ""),
+                entity_type=inst.get("entity_type"),
+                region=inst.get("region"),
+                org_type=inst.get("org_type"),
+                parent_id=inst.get("parent_id"),
+                scholar_count=inst.get("scholar_count", 0),
+            )
+            for inst in results
+        ]
+
+        return InstitutionSearchResponse(
+            query=q,
+            total=len(search_results),
+            results=search_results,
+        )
+    except Exception as e:
+        logger.exception("Failed to search institutions: %s", e)
+        raise HTTPException(status_code=500, detail=f"Search failed: {e!s}") from e
+
+
+@router.get(
+    "/suggest",
+    summary="建议机构匹配",
+    description=(
+        "根据大学名称查找最佳匹配的机构。用于学者编辑时自动匹配已有机构。"
+        "\n\n**返回内容：**"
+        "\n- `matched`: 最佳匹配（强匹配，精确或前缀匹配）"
+        "\n- `suggestions`: 建议列表（所有相关匹配）"
+        "\n\n**使用场景：**"
+        "\n- 用户编辑学者的大学字段时，调用此接口查找是否已有该机构"
+        "\n- 如果 `matched` 不为空，建议用户使用该标准名称"
+        "\n- 如果 `matched` 为空但 `suggestions` 不为空，展示建议列表供用户选择"
+        "\n- 如果都为空，说明是新机构，需要创建"
+        "\n\n**Query Parameters:**"
+        "\n- `university` (required): 大学名称"
+    ),
+)
+async def suggest_institution_endpoint(
+    university: str = Query(..., description="大学名称"),
+):
+    """建议机构匹配."""
+    from app.schemas.institution import InstitutionSearchResult, InstitutionSuggestionResponse
+    from app.services.core.institution.search import suggest_institution
+
+    if not university or not university.strip():
+        raise HTTPException(
+            status_code=400, detail="Query parameter 'university' is required and cannot be empty"
+        )
+
+    try:
+        result = await suggest_institution(university)
+
+        # Convert to response schema
+        matched = None
+        if result.get("matched"):
+            inst = result["matched"]
+            matched = InstitutionSearchResult(
+                id=inst.get("id", ""),
+                name=inst.get("name", ""),
+                entity_type=inst.get("entity_type"),
+                region=inst.get("region"),
+                org_type=inst.get("org_type"),
+                parent_id=inst.get("parent_id"),
+                scholar_count=inst.get("scholar_count", 0),
+            )
+
+        suggestions = [
+            InstitutionSearchResult(
+                id=inst.get("id", ""),
+                name=inst.get("name", ""),
+                entity_type=inst.get("entity_type"),
+                region=inst.get("region"),
+                org_type=inst.get("org_type"),
+                parent_id=inst.get("parent_id"),
+                scholar_count=inst.get("scholar_count", 0),
+            )
+            for inst in result.get("suggestions", [])
+        ]
+
+        return InstitutionSuggestionResponse(
+            university=university,
+            matched=matched,
+            suggestions=suggestions,
+        )
+    except Exception as e:
+        logger.exception("Failed to suggest institution: %s", e)
+        raise HTTPException(status_code=500, detail=f"Suggestion failed: {e!s}") from e
 
 
 @router.get(
@@ -377,8 +513,11 @@ async def create_institution(body: InstitutionCreate):
 async def update_institution(institution_id: str, body: InstitutionUpdate):
     from app.services.core.institution import update_institution
 
-    updates = body.model_dump(exclude_none=True)
-    result = await update_institution(institution_id, updates)
+    updates = body.model_dump(exclude_unset=True)
+    try:
+        result = await update_institution(institution_id, updates)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
     if result is None:
         raise HTTPException(
             status_code=404, detail=f"Institution '{institution_id}' not found"

@@ -19,6 +19,7 @@ async def get_institutions_unified(
     region: str | None = None,
     org_type: str | None = None,
     classification: str | None = None,
+    sub_classification: str | None = None,
     keyword: str | None = None,
     page: int = 1,
     page_size: int = 20,
@@ -53,6 +54,7 @@ async def get_institutions_unified(
             region=region,
             org_type=org_type,
             classification=classification,
+            sub_classification=sub_classification,
             keyword=keyword,
             page=page,
             page_size=page_size,
@@ -64,6 +66,7 @@ async def _get_flat_view(
     region: str | None = None,
     org_type: str | None = None,
     classification: str | None = None,
+    sub_classification: str | None = None,
     keyword: str | None = None,
     page: int = 1,
     page_size: int = 20,
@@ -92,6 +95,7 @@ async def _get_flat_view(
         region=region,
         org_type=org_type,
         classification=classification,
+        sub_classification=sub_classification,
         keyword=keyword,
     )
 
@@ -202,6 +206,7 @@ def _apply_filters(
     region: str | None = None,
     org_type: str | None = None,
     classification: str | None = None,
+    sub_classification: str | None = None,
     keyword: str | None = None,
 ) -> list[dict]:
     """Apply filters to institution records.
@@ -230,6 +235,9 @@ def _apply_filters(
 
     if classification:
         filtered = [r for r in filtered if r.get("classification") == classification]
+
+    if sub_classification:
+        filtered = [r for r in filtered if r.get("sub_classification") == sub_classification]
 
     if keyword:
         keyword_lower = keyword.lower()

@@ -65,6 +65,7 @@ async def get_institution_list(
         region=region,
         org_type=org_type,
         classification=classification,
+        sub_classification=sub_classification,
         keyword=keyword,
         page=page,
         page_size=page_size,
