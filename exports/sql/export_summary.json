@@ -1,0 +1,124 @@
+{
+  "tables": [
+    "articles",
+    "crawl_logs",
+    "event_scholars",
+    "event_taxonomy",
+    "events",
+    "institutions",
+    "intel_cache",
+    "scholar_awards",
+    "scholar_dynamic_updates",
+    "scholar_education",
+    "scholar_patents",
+    "scholar_publications",
+    "scholars",
+    "sentiment_comments",
+    "sentiment_contents",
+    "sentiment_creators",
+    "snapshots",
+    "source_states",
+    "supervised_students",
+    "venues",
+    "vibe_coding_raw_data"
+  ],
+  "readonly_views": [
+    "intel_cache_latest",
+    "scholars_with_institution"
+  ],
+  "foreign_keys": [
+    {
+      "name": "fk_event_scholars_event_id_events_id",
+      "table": "event_scholars",
+      "column": "event_id",
+      "ref_table": "events",
+      "ref_col": "id"
+    },
+    {
+      "name": "fk_event_scholars_scholar_id_scholars_id",
+      "table": "event_scholars",
+      "column": "scholar_id",
+      "ref_table": "scholars",
+      "ref_col": "id"
+    },
+    {
+      "name": "fk_event_taxonomy_parent_id_event_taxonomy_id",
+      "table": "event_taxonomy",
+      "column": "parent_id",
+      "ref_table": "event_taxonomy",
+      "ref_col": "id"
+    },
+    {
+      "name": "fk_institutions_parent_id_institutions_id",
+      "table": "institutions",
+      "column": "parent_id",
+      "ref_table": "institutions",
+      "ref_col": "id"
+    },
+    {
+      "name": "fk_scholar_awards_scholar_id_scholars_id",
+      "table": "scholar_awards",
+      "column": "scholar_id",
+      "ref_table": "scholars",
+      "ref_col": "id"
+    },
+    {
+      "name": "fk_scholar_dynamic_updates_scholar_id_scholars_id",
+      "table": "scholar_dynamic_updates",
+      "column": "scholar_id",
+      "ref_table": "scholars",
+      "ref_col": "id"
+    },
+    {
+      "name": "fk_scholar_education_scholar_id_scholars_id",
+      "table": "scholar_education",
+      "column": "scholar_id",
+      "ref_table": "scholars",
+      "ref_col": "id"
+    },
+    {
+      "name": "fk_scholar_patents_scholar_id_scholars_id",
+      "table": "scholar_patents",
+      "column": "scholar_id",
+      "ref_table": "scholars",
+      "ref_col": "id"
+    },
+    {
+      "name": "fk_scholar_publications_scholar_id_scholars_id",
+      "table": "scholar_publications",
+      "column": "scholar_id",
+      "ref_table": "scholars",
+      "ref_col": "id"
+    },
+    {
+      "name": "fk_supervised_students_scholar_id_scholars_id",
+      "table": "supervised_students",
+      "column": "scholar_id",
+      "ref_table": "scholars",
+      "ref_col": "id"
+    }
+  ],
+  "row_counts": {
+    "articles": 6403,
+    "crawl_logs": 4414,
+    "event_taxonomy": 14,
+    "events": 63,
+    "institutions": 593,
+    "intel_cache": 0,
+    "scholars": 3617,
+    "event_scholars": 0,
+    "scholar_awards": 0,
+    "scholar_dynamic_updates": 0,
+    "scholar_education": 0,
+    "scholar_patents": 0,
+    "scholar_publications": 0,
+    "sentiment_comments": 9912,
+    "sentiment_contents": 355,
+    "sentiment_creators": 115,
+    "snapshots": 0,
+    "source_states": 112,
+    "supervised_students": 0,
+    "venues": 48,
+    "vibe_coding_raw_data": 113
+  }
+}

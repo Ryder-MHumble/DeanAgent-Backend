@@ -1,6 +1,6 @@
 # 信源爬取状态总览
 
-> 最后更新: 2026-03-18 (v43: 修复 national_policy 维度 3 个信源：cac_policy 切换动态渲染、nsfc_news 更新选择器、samr_news 移除关键词过滤，启用率从 6/8 提升至 8/8)
+> 最后更新: 2026-03-19 (v45: 学者机构口径修正，将「中国科学院」统一更名为「中国科学院大学」，保留 cas 子机构结构与统计)
 
 ---
 
@@ -440,9 +440,9 @@ python scripts/process_tech_frontier.py --dry-run
 | pku_math_faculty | 北京大学 | 数学学院 | ✅ 20人 | v27 修复，URL → jsdw/js_20180628175159671361/index.htm |
 | pku_eecs_sz_faculty | 北京大学 | 信息工程学院（深圳） | ✅ 已启用 | v35 修复：URL → pkusz.edu.cn/szdw/bsh/xxgcxy1.htm，ul li 结构 |
 | pku_coe_faculty | 北京大学 | 工学院 | ✅ 已启用 | v35 修复：list_item=`a[href*='/teaching/all_time/']`，enable_llm=true |
-| ict_cas_faculty | 中国科学院 | 计算技术研究所 | ✅ 24人 | `ul li > h5 a:last-child` |
-| casia_faculty | 中国科学院 | 自动化研究所 | ✅ 20人 | `ul.row li > div.name` |
-| iscas_faculty | 中国科学院 | 软件研究所 | ✅ 73人 | v30 自定义 Parser (`iscas_faculty`)，纯文本名单+正则提取 |
+| ict_cas_faculty | 中国科学院大学 | 计算技术研究所 | ✅ 24人 | `ul li > h5 a:last-child` |
+| casia_faculty | 中国科学院大学 | 自动化研究所 | ✅ 20人 | `ul.row li > div.name` |
+| iscas_faculty | 中国科学院大学 | 软件研究所 | ✅ 73人 | v30 自定义 Parser (`iscas_faculty`)，纯文本名单+正则提取 |
 | sjtu_ai_faculty | 上海交通大学 | 人工智能研究院 | ✅ 已启用 | v34 开发自定义 Parser (`sjtu_ai_faculty`)，直接调用 /api/teacher?time=xxx API 端点获取教师列表 |
 | sjtu_cs_faculty | 上海交通大学 | 计算机系 | ✅ 253人 | 自定义 AJAX Parser (`sjtu_cs_faculty`) |
 | sjtu_se_faculty | 上海交通大学 | 软件学院 | ✅ 已启用 | v35 修复：URL → /Data/List/people，list_item=`div.tli`，label_prefix_sections |
@@ -522,7 +522,7 @@ uvicorn app.main:app --reload
 |--------|------|--------|--------|-----------|------|
 | **tsinghua** | 13 | 11 | 683+ | 55.3% | 清华各院系，v35 ymsc修复+启用，2个禁用(sigs/iaiig) |
 | **pku** | 9 | 9 | 275+ | 56.0% | 北大各院系，v35 eecs_sz/coe修复启用，全部已启用 |
-| **cas** | 4 | 3 | 117+ | 59.1% | 中科院3所，ISCAS自定义Parser(73人)，ict_cas(24人)，casia(20人) |
+| **cas** | 4 | 3 | 117+ | 59.1% | 中国科学院大学（原中国科学院）3所，ISCAS自定义Parser(73人)，ict_cas(24人)，casia(20人) |
 | **sjtu** | 5 | 5 | 333+ | 42.5% | 上交大，v35 se/qingyuan修复，v34 ai自定义Parser，全部已启用 |
 | **fudan** | 2 | 1 | 189 | 45.0% | 复旦大学，Playwright AJAX加载，1个待启用(ai_robot，URL待确认) |
 | **nju** | 5 | 5 | 186 | 42.6% | 南京大学，全部启用 |
@@ -559,7 +559,7 @@ uvicorn app.main:app --reload
 | pku_cfcs_faculty | 36 | 69.2% | ✅ 良好 | 前沿计算研究中心，v28 修复 bio + research_areas |
 | pku_math_faculty | 20 | 60.0% | ✅ 良好 | 数学学院，v28 添加 research_areas 选择器 |
 
-#### 中国科学院 (3/4 启用)
+#### 中国科学院大学 (3/4 启用)
 
 | source_id | 教师数 | 完整度 | 状态 | 说明 |
 |-----------|--------|--------|------|------|
@@ -708,4 +708,3 @@ ISCAS的三个列表页面只包含名称，已分别创建source条目：
 3. 特殊处理院士名字提取（匹配"XX院士"格式）
 
 **总计**：178名ISCAS师资人员
-

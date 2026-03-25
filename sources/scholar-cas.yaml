@@ -4,7 +4,7 @@ sources:
 - id: ict_cas_faculty
   name: 中科院计算技术研究所-研究员
   group: cas_ict
-  university: 中国科学院
+  university: 中国科学院大学
   department: 计算技术研究所
   url: http://www.ict.ac.cn/yjdw/yjy2020/
   crawl_method: faculty
@@ -38,7 +38,7 @@ sources:
 - id: casia_faculty
   name: 中科院自动化研究所-研究员
   group: cas_ia
-  university: 中国科学院
+  university: 中国科学院大学
   department: 自动化研究所
   url: http://www.ia.cas.cn/rcdw/yjy/
   crawl_method: faculty
@@ -76,7 +76,7 @@ sources:
 - id: iscas_academician
   name: 中科院软件研究所-院士专家
   group: cas_iscas
-  university: 中国科学院
+  university: 中国科学院大学
   department: 软件研究所
   url: http://www.iscas.ac.cn/rcdw2016/yszj2016/
   crawler_class: iscas_scholar
@@ -96,7 +96,7 @@ sources:
 - id: iscas_researcher
   name: 中科院软件研究所-研究员
   group: cas_iscas
-  university: 中国科学院
+  university: 中国科学院大学
   department: 软件研究所
   url: http://www.iscas.ac.cn/rcdw2016/yjyzgjgcs2016/
   crawler_class: iscas_scholar
@@ -115,7 +115,7 @@ sources:
 - id: iscas_associate_researcher
   name: 中科院软件研究所-副研究员
   group: cas_iscas
-  university: 中国科学院
+  university: 中国科学院大学
   department: 软件研究所
   url: http://www.iscas.ac.cn/rcdw2016/fyjygjgcs2016/
   crawler_class: iscas_scholar

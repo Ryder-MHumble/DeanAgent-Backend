@@ -1,6 +1,6 @@
 # 后续任务清单
 
-> 最后更新: 2026-03-18 (v44: 修复 national_policy 维度 3 个信源 — cac_policy 切换动态渲染、nsfc_news 更新选择器、samr_news 移除关键词过滤，启用率从 6/8 提升至 8/8，100% 覆盖率)
+> 最后更新: 2026-03-19 (v46: 完成 CAS→UCAS 二次归并，将「中国科学院计算技术研究所」学者全部并入「中国科学院大学-计算技术研究所」)
 > 基于前端 (Dean-Agent) 需求反推的优先级排序
 
 ---
@@ -46,6 +46,7 @@
 - [x] ~~修复 sii_news/buaa_news~~ — v13: sii_news 首页改版导致 404，改用 /czxw/list.htm (6→14条); buaa_news 首页 banner 仅 2 项，改用 /zhxw.htm (2→5条)
 - [x] ~~人事变动提取~~ — v15: 纯规则引擎（正则）从 47 篇 personnel 文章中提取 84 条结构化任免记录（姓名、动作、职位、部门、日期），3 个 API 端点 (/api/v1/intel/personnel/feed|changes|stats)
 - [x] ~~人事变动 LLM 富化~~ — v17: 为 84 条人事变动记录增加 LLM 分析（relevance/importance/group/note/actionSuggestion/background/signals/aiInsight），输出 enriched_feed.json，新增 2 个 API 端点 (/api/v1/intel/personnel/enriched-feed|enriched-stats)
+- [x] ~~机构名统一迁移（CAS→UCAS）~~ — v46: institutions/scholars 表将「中国科学院」全量迁移为「中国科学院大学」，并将「中国科学院计算技术研究所」学者归并到「中国科学院大学-计算技术研究所」子机构；保留 cas 子机构层级不变；同步更新 `sources/scholar-cas.yaml` 避免后续回写旧机构名
 
 ---
 
