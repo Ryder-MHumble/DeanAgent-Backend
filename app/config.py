@@ -18,7 +18,18 @@ class Settings(BaseSettings):
     MAX_CONCURRENT_CRAWLS: int = 5
     DEFAULT_REQUEST_DELAY: float = 1.0
 
-    # Supabase (主库 — 数据仓库)
+    # Database backend
+    DB_BACKEND: str = "postgres"  # postgres | supabase
+
+    # Local PostgreSQL (recommended)
+    POSTGRES_DSN: str = ""  # optional, e.g. postgresql://user:pass@127.0.0.1:5432/zgci_db
+    POSTGRES_HOST: str = "127.0.0.1"
+    POSTGRES_PORT: int = 5432
+    POSTGRES_USER: str = "postgres"
+    POSTGRES_PASSWORD: str = ""
+    POSTGRES_DB: str = "zgci_db"
+
+    # Supabase (legacy / optional fallback)
     SUPABASE_URL: str = ""
     SUPABASE_KEY: str = ""
 

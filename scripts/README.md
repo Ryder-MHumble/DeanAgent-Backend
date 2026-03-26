@@ -1,28 +1,49 @@
 # Scripts 目录说明
 
-## crawl/ — 爬取
+## crawl/ — 爬取脚本
 
-| 脚本 | 说明 |
-|------|------|
-| `run_single.py` | 单源爬虫测试：`python scripts/crawl/run_single.py --source <id>` |
-| `run_all.py` | 批量爬虫：`python scripts/crawl/run_all.py` |
+- `run_single.py`: 单源爬取测试
+- `run_all.py`: 批量爬取（支持并发策略）
 
-## intel/ — 业务智能处理
+## intel/ — 智能处理脚本
 
-| 脚本 | 说明 |
-|------|------|
-| `process_policy.py` | 政策智能：`python scripts/intel/process_policy.py [--dry-run]` |
-| `process_personnel.py` | 人事情报：`python scripts/intel/process_personnel.py [--dry-run] [--enrich]` |
-| `process_tech_frontier.py` | 科技前沿：`python scripts/intel/process_tech_frontier.py [--dry-run]` |
-| `process_university_eco.py` | 高校生态：`python scripts/intel/process_university_eco.py` |
+- `process_policy.py`
+- `process_personnel.py`
+- `process_tech_frontier.py`
+- `process_university_eco.py`
 
-## data/ — 数据构建与导入
+## migration/ — 数据迁移与结构维护
 
-| 脚本 | 说明 |
-|------|------|
-| `generate_index.py` | 生成 data/index.json（前端索引，Pipeline Stage 5 调用） |
-| `rebuild_institutions.py` | 重建机构数据：`python scripts/data/rebuild_institutions.py [--dry-run]` |
-| `update_institution_categories.py` | 批量更新机构分类/优先级（Supabase） |
-| `import_supervised_students.py` | 导入在读/毕业生信息 |
-| `import_adjunct_supervisors.py` | 从 Excel 导入兼职导师协议 |
-| `redistribute_adjunct_scholars.py` | 重新分配兼职学者到对应院系 |
+- `export_supabase_to_sql.py`: 从 Supabase 导出 schema/data 到 `exports/sql`
+- `refresh_and_load_local.sh`: 一键执行导出 -> 导入本地 PostgreSQL -> 校验
+- `verify_local_pg_counts.py`: 校验本地 PostgreSQL 行数是否与导出摘要一致
+- `init_event_taxonomy.py`
+- `migrate_event_categories.py`
+- `rename_cas_to_ucas.py`
+
+## core/ — 脚本公共模块
+
+- `base_script.py`: 脚本基类
+- `api_client.py`: HTTP 客户端
+- `file_utils.py`: 文件工具
+- `data_transformer.py`: 数据转换工具
+- `progress_tracker.py`: 进度追踪
+
+## examples/ — 示例脚本
+
+- `data_import_example.py`
+- `database_cleanup_example.py`
+- `aminer_enrichment_example.py`
+
+## 推荐迁移流程
+
+```bash
+# 1) 从 Supabase 拉取最新导出
+python scripts/migration/export_supabase_to_sql.py --output-dir exports/sql
+
+# 2) 导入本地 PostgreSQL（需 .env 中 POSTGRES_*）
+bash scripts/migration/refresh_and_load_local.sh
+
+# 3) 校验行数
+python scripts/migration/verify_local_pg_counts.py
+```

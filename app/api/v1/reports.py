@@ -87,17 +87,27 @@ async def _generate_sentiment_report(
     # 从数据库获取舆情数据
     query = db.table("sentiment_contents").select("*")
 
-    # 日期过滤
-    if start_date:
-        query = query.gte("publish_time", start_date.isoformat())
-    if end_date:
-        query = query.lte("publish_time", end_date.isoformat())
-
     # 限制数量
     query = query.limit(1000)
 
     result = await query.execute()
     contents = result.data or []
+
+    # sentiment_contents.publish_time is bigint and may contain mixed seconds/ms.
+    # Normalize and filter in Python for compatibility across historical data.
+    if start_date or end_date:
+        filtered: list[dict] = []
+        for row in contents:
+            raw_ts = row.get("publish_time")
+            dt = _parse_publish_time(raw_ts)
+            if dt is None:
+                continue
+            if start_date and dt < start_date:
+                continue
+            if end_date and dt > end_date:
+                continue
+            filtered.append(row)
+        contents = filtered
 
     # 2. 生成报告
     analyzer = SentimentReportAnalyzer()
@@ -122,6 +132,23 @@ async def _generate_sentiment_report(
         content=report_content,
         format=request.output_format,
     )
+
+
+def _parse_publish_time(value: int | str | None) -> datetime | None:
+    """Parse mixed sentiment publish_time (seconds or milliseconds)."""
+    if value is None:
+        return None
+    try:
+        ts = int(value)
+    except (TypeError, ValueError):
+        return None
+    # >= 1e12 is treated as milliseconds.
+    if ts >= 1_000_000_000_000:
+        ts = ts // 1000
+    try:
+        return datetime.fromtimestamp(ts)
+    except (OverflowError, OSError, ValueError):
+        return None
 
 
 @router.get("/sentiment/latest")

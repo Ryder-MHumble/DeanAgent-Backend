@@ -357,11 +357,13 @@ async def batch_create_events(
 # ---------------------------------------------------------------------------
 
 def _row_to_node(row: dict) -> TaxonomyNode:
+    node_id = row.get("id")
+    parent = row.get("parent_id")
     return TaxonomyNode(
-        id=row.get("id", ""),
+        id=str(node_id) if node_id is not None else "",
         level=row.get("level", 1),
         name=row.get("name", ""),
-        parent_id=row.get("parent_id"),
+        parent_id=str(parent) if parent is not None else None,
         sort_order=row.get("sort_order") or 0,
         created_at=str(row.get("created_at") or ""),
     )
@@ -374,7 +376,7 @@ async def get_taxonomy_tree() -> TaxonomyTree:
     rows = res.data or []
 
     # Index by id and group by level
-    by_id: dict[str, dict] = {r["id"]: r for r in rows}
+    by_id: dict[str, dict] = {str(r["id"]): r for r in rows}
     l1_rows = [r for r in rows if r["level"] == 1]
     l2_rows = [r for r in rows if r["level"] == 2]
     l3_rows = [r for r in rows if r["level"] == 3]
@@ -382,7 +384,7 @@ async def get_taxonomy_tree() -> TaxonomyTree:
     # Build L3 grouped by parent_id
     l3_by_parent: dict[str, list[TaxonomyL3]] = {}
     for r in l3_rows:
-        pid = r.get("parent_id") or ""
+        pid = str(r.get("parent_id") or "")
         l3_by_parent.setdefault(pid, []).append(
             TaxonomyL3(**_row_to_node(r).model_dump())
         )
@@ -390,19 +392,21 @@ async def get_taxonomy_tree() -> TaxonomyTree:
     # Build L2 grouped by parent_id
     l2_by_parent: dict[str, list[TaxonomyL2]] = {}
     for r in l2_rows:
-        pid = r.get("parent_id") or ""
+        pid = str(r.get("parent_id") or "")
+        node_id = str(r["id"])
         node = TaxonomyL2(
             **_row_to_node(r).model_dump(),
-            children=l3_by_parent.get(r["id"], []),
+            children=l3_by_parent.get(node_id, []),
         )
         l2_by_parent.setdefault(pid, []).append(node)
 
     # Build L1 list
     l1_items: list[TaxonomyL1] = []
     for r in l1_rows:
+        node_id = str(r["id"])
         node = TaxonomyL1(
             **_row_to_node(r).model_dump(),
-            children=l2_by_parent.get(r["id"], []),
+            children=l2_by_parent.get(node_id, []),
         )
         l1_items.append(node)
 

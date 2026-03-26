@@ -9,6 +9,7 @@ from scalar_fastapi import get_scalar_api_reference
 from app.api.v1.router import v1_router
 from app.config import BASE_DIR, settings
 from app.db.client import close_client, init_client
+from app.db.pool import close_pool, init_pool
 from app.scheduler.manager import SchedulerManager
 
 logging.basicConfig(
@@ -150,13 +151,34 @@ async def lifespan(app: FastAPI):
     logger.info("  Information Crawler starting")
     logger.info("=" * 60)
 
-    # Step 0: Initialize Supabase client (optional — skipped if not configured)
+    # Step 0: Initialize database client
     try:
-        if settings.SUPABASE_URL and settings.SUPABASE_KEY:
-            await init_client(settings.SUPABASE_URL, settings.SUPABASE_KEY)
+        backend = settings.DB_BACKEND.strip().lower()
+        if backend in {"postgres", "postgresql", "local"}:
+            if settings.POSTGRES_DSN:
+                await init_pool(dsn=settings.POSTGRES_DSN)
+            else:
+                await init_pool(
+                    host=settings.POSTGRES_HOST,
+                    port=settings.POSTGRES_PORT,
+                    user=settings.POSTGRES_USER,
+                    password=settings.POSTGRES_PASSWORD,
+                    database=settings.POSTGRES_DB,
+                )
+            await init_client(backend="postgres")
+            logger.info(
+                "PostgreSQL client initialized (%s:%s/%s)",
+                settings.POSTGRES_HOST,
+                settings.POSTGRES_PORT,
+                settings.POSTGRES_DB,
+            )
+        elif settings.SUPABASE_URL and settings.SUPABASE_KEY:
+            await init_client(settings.SUPABASE_URL, settings.SUPABASE_KEY, backend="supabase")
             logger.info("Supabase client initialized")
+        else:
+            logger.warning("No database backend configured; DB features will fallback to local JSON")
     except Exception as e:
-        logger.warning("Supabase client initialization failed: %s", e)
+        logger.warning("Database client initialization failed: %s", e)
 
     # Step 1: Validate dependencies
     startup_issues = await _validate_startup()
@@ -204,6 +226,7 @@ async def lifespan(app: FastAPI):
 
     # Shutdown
     await close_client()
+    await close_pool()
 
     if scheduler:
         try:

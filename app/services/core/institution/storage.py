@@ -105,9 +105,32 @@ async def upsert_institution(institution_data: dict) -> dict:
         raise ValueError("institution_data must include id")
 
     columns = await _get_institution_columns()
-    payload = {k: v for k, v in institution_data.items() if k in columns}
 
-    dropped_keys = sorted(set(institution_data.keys()) - set(payload.keys()))
+    normalized = dict(institution_data)
+    # Backward compatibility: legacy schema keeps `type` as NOT NULL.
+    if "type" in columns and not normalized.get("type"):
+        entity_type = normalized.get("entity_type")
+        org_type = normalized.get("org_type")
+        if entity_type == "department":
+            normalized["type"] = "department"
+        elif org_type == "高校":
+            normalized["type"] = "university"
+        elif org_type == "研究机构":
+            normalized["type"] = "research_institute"
+        elif org_type == "行业学会":
+            normalized["type"] = "academic_society"
+        else:
+            normalized["type"] = "university"
+
+    # Keep compatibility with strict NOT NULL columns in legacy schema.
+    if "scholar_count" in columns and normalized.get("scholar_count") is None:
+        normalized["scholar_count"] = 0
+    if "mentor_count" in columns and normalized.get("mentor_count") is None:
+        normalized["mentor_count"] = 0
+
+    payload = {k: v for k, v in normalized.items() if k in columns}
+
+    dropped_keys = sorted(set(normalized.keys()) - set(payload.keys()))
     if dropped_keys:
         logger.warning(
             "Skipping unsupported institution columns for id=%s: %s",

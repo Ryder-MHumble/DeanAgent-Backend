@@ -99,8 +99,8 @@
     }
   ],
   "row_counts": {
-    "articles": 6403,
-    "crawl_logs": 4414,
+    "articles": 6566,
+    "crawl_logs": 4456,
     "event_taxonomy": 14,
     "events": 63,
     "institutions": 593,
