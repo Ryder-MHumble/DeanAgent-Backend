@@ -21,6 +21,7 @@ from app.services.stores import supervised_student_store as student_store
 from app.services.scholar._data import (
     SCHOLARS_FILE,
     _find_raw_file_by_hash,
+    _merge_annotation,
     _load_all_with_annotations,
     _load_all_with_annotations_async,
 )
@@ -30,6 +31,7 @@ from app.services.scholar._filters import (
 )
 from app.services.scholar._transformers import _to_detail, _to_list_item
 from app.services.scholar._create import import_scholars_excel, _parse_excel_row  # noqa: F401
+from app.services.scholar._fast_query import query_scholar_list_fast
 
 
 # ---------------------------------------------------------------------------
@@ -330,9 +332,32 @@ async def get_scholar_list(
             institution_group, institution_category
         )
 
+    # Primary path: SQL pushdown + pagination (much faster than loading all rows).
+    try:
+        return await query_scholar_list_fast(
+            university=university,
+            department=department,
+            position=position,
+            is_academician=is_academician,
+            is_potential_recruit=is_potential_recruit,
+            is_advisor_committee=is_advisor_committee,
+            is_adjunct_supervisor=is_adjunct_supervisor,
+            has_email=has_email,
+            keyword=keyword,
+            region=region,
+            affiliation_type=affiliation_type,
+            institution_names=institution_names,
+            custom_field_key=custom_field_key,
+            custom_field_value=custom_field_value,
+            page=page,
+            page_size=page_size,
+        )
+    except Exception as exc:
+        logger.warning("Fast scholar list query failed, fallback to legacy path: %s", exc)
+
+    # Fallback path: in-memory filtering over full dataset.
     items = await _load_all_with_annotations_async()
 
-    # Fetch DB-based classification map when region/affiliation_type filter is active
     inst_map: dict = {}
     if region or affiliation_type:
         inst_map = await get_institution_classification_map()
@@ -374,6 +399,28 @@ async def get_scholar_list(
 
 async def get_scholar_detail(url_hash: str) -> dict[str, Any] | None:
     """Return full scholar detail merged with annotations, or None if not found."""
+    # Primary path: direct DB point query by primary key.
+    try:
+        from app.db.client import get_client  # noqa: PLC0415
+
+        client = get_client()
+        resp = await client.table("scholars").select("*").eq("id", url_hash).limit(1).execute()
+        if resp.data:
+            item = dict(resp.data[0])
+            if "url_hash" not in item:
+                item["url_hash"] = item.get("id", "")
+            if "url" not in item:
+                item["url"] = item.get("source_url", "")
+            ann = annotation_store.get_annotation(url_hash)
+            if ann:
+                _merge_annotation(item, ann)
+            detail = _to_detail(item)
+            detail["supervised_students_count"] = student_store.count_students(url_hash)
+            return detail
+    except Exception as exc:
+        logger.warning("Fast scholar detail query failed, fallback to legacy path: %s", exc)
+
+    # Fallback path: legacy full-data scan.
     items = await _load_all_with_annotations_async()
     for item in items:
         if item.get("url_hash", "") == url_hash:

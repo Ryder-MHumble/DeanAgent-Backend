@@ -17,6 +17,8 @@
 - `export_supabase_to_sql.py`: 从 Supabase 导出 schema/data 到 `exports/sql`
 - `refresh_and_load_local.sh`: 一键执行导出 -> 导入本地 PostgreSQL -> 校验
 - `verify_local_pg_counts.py`: 校验本地 PostgreSQL 行数是否与导出摘要一致
+- `optimize_pg_performance.sql`: PostgreSQL 读写性能索引（可重复执行）
+- `apply_pg_optimizations.sh`: 执行性能索引脚本（非 owner 时自动尝试 `sudo -u postgres`）
 - `init_event_taxonomy.py`
 - `migrate_event_categories.py`
 - `rename_cas_to_ucas.py`
@@ -46,4 +48,8 @@ bash scripts/migration/refresh_and_load_local.sh
 
 # 3) 校验行数
 python scripts/migration/verify_local_pg_counts.py
+
+# 4) （可选）执行性能优化索引
+# 若当前 DB 用户不是表 owner，脚本会自动尝试 sudo 切换到 postgres
+bash scripts/migration/apply_pg_optimizations.sh
 ```

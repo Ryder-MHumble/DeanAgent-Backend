@@ -6,11 +6,15 @@ Provides unified query interface supporting both flat and hierarchy views.
 from __future__ import annotations
 
 from collections import defaultdict
+from time import monotonic
 
 from app.schemas.institution import InstitutionListResponse
 from app.services.core.institution.detail_builder import build_list_item
 from app.services.core.institution.sorting import sort_institutions
 from app.services.core.institution.storage import fetch_all_institutions
+
+_HIERARCHY_CACHE_TTL_SECONDS = 30.0
+_hierarchy_cache: dict[tuple[str | None, str | None, str | None, bool | None], tuple[float, dict]] = {}
 
 
 async def get_institutions_unified(
@@ -42,12 +46,20 @@ async def get_institutions_unified(
         InstitutionListResponse for flat view, dict for hierarchy view
     """
     if view == "hierarchy":
-        return await _get_hierarchy_view(
+        cache_key = (region, org_type, classification, is_adjunct_supervisor)
+        now = monotonic()
+        cached = _hierarchy_cache.get(cache_key)
+        if cached and (now - cached[0]) < _HIERARCHY_CACHE_TTL_SECONDS:
+            return cached[1]
+
+        result = await _get_hierarchy_view(
             region=region,
             org_type=org_type,
             classification=classification,
             is_adjunct_supervisor=is_adjunct_supervisor,
         )
+        _hierarchy_cache[cache_key] = (now, result)
+        return result
     else:
         return await _get_flat_view(
             entity_type=entity_type,
@@ -157,20 +169,33 @@ async def _get_hierarchy_view(
     if is_adjunct_supervisor is not None:
         scholar_counts = await _count_scholars_by_institution(is_adjunct_supervisor)
 
+    # Build parent_id -> departments map once (avoid O(org * all_records) scans).
+    departments_by_parent: dict[str, list[dict]] = defaultdict(list)
+    for rec in all_records:
+        parent_id = rec.get("parent_id")
+        if parent_id:
+            departments_by_parent[parent_id].append(rec)
+
     # Build hierarchy
     result_orgs = []
     for org in sorted_orgs:
         org_id = org["id"]
         org_name = org["name"]
 
-        # Find departments for this organization
-        departments = [
-            rec for rec in all_records if rec.get("parent_id") == org_id
-        ]
+        # Departments under current organization
+        departments = departments_by_parent.get(org_id, [])
         sorted_depts = sort_institutions(departments)
 
-        # Build organization item with departments
-        org_item = build_list_item(org).model_dump()
+        # Keep hierarchy payload lean for scholar page sidebar.
+        org_item = {
+            "id": org["id"],
+            "name": org["name"],
+            "entity_type": org.get("entity_type"),
+            "region": org.get("region"),
+            "org_type": org.get("org_type"),
+            "classification": org.get("classification"),
+            "sub_classification": org.get("sub_classification"),
+        }
 
         # Override scholar_count if filtering by is_adjunct_supervisor
         if scholar_counts is not None:
@@ -261,35 +286,33 @@ async def _count_scholars_by_institution(is_adjunct_supervisor: bool) -> dict[tu
         - ("org", "上海交通大学") -> count for university
         - ("dept", "上海交通大学", "计算机系") -> count for department
     """
-    from app.services.scholar._data import _load_all_with_annotations_async
+    from app.db.pool import get_pool
 
-    # Fetch all scholars
-    all_scholars = await _load_all_with_annotations_async()
+    # SQL aggregation is far faster than loading all scholars into Python.
+    where_sql = (
+        "WHERE COALESCE(university, '') <> ''"
+        + (" AND COALESCE(adjunct_supervisor->>'status', '') <> ''" if is_adjunct_supervisor else "")
+    )
+    sql = f"""
+        SELECT
+            university,
+            department,
+            COUNT(*)::int AS scholar_count
+        FROM scholars
+        {where_sql}
+        GROUP BY university, department
+    """
+    rows = await get_pool().fetch(sql)
 
-    # Filter by adjunct supervisor status
-    if is_adjunct_supervisor:
-        def _has_adjunct(scholar: dict) -> bool:
-            adj = scholar.get("adjunct_supervisor")
-            if isinstance(adj, dict):
-                return bool(adj.get("status", ""))
-            return False
-        filtered_scholars = [s for s in all_scholars if _has_adjunct(s)]
-    else:
-        filtered_scholars = all_scholars
-
-    # Count by university and department
     counts: dict[tuple, int] = defaultdict(int)
-
-    for scholar in filtered_scholars:
-        university = scholar.get("university", "")
-        department = scholar.get("department", "")
-
-        if university:
-            # Count for organization
-            counts[("org", university)] += 1
-
-            # Count for department
-            if department:
-                counts[("dept", university, department)] += 1
+    for row in rows:
+        university = row.get("university") or ""
+        if not university:
+            continue
+        department = row.get("department") or ""
+        c = int(row.get("scholar_count") or 0)
+        counts[("org", university)] += c
+        if department:
+            counts[("dept", university, department)] += c
 
     return dict(counts)
