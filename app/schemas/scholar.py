@@ -36,6 +36,7 @@ Sections
 from __future__ import annotations
 
 import re as _re
+from typing import Any
 
 from pydantic import BaseModel, Field
 
@@ -745,7 +746,7 @@ class ScholarDetailResponse(BaseModel):
     relation_updated_at: str = ""
     recent_updates: list[DynamicUpdate] = Field(default_factory=list)
     supervised_students_count: int = 0
-    custom_fields: dict[str, str] = Field(default_factory=dict, description="用户自定义字段")
+    custom_fields: dict[str, Any] = Field(default_factory=dict, description="用户自定义字段")
 
 
 class UniversityCount(BaseModel):

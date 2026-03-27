@@ -166,7 +166,7 @@ def row_26_to_candidate(row: dict[str, str]) -> StudentCandidate | None:
         source_priority=3,
         student_no="",
         name=name,
-        enrollment_year=year_from_text(degree_type) or 2026,
+        enrollment_year=2026,
         degree_type=degree_type,
         home_university=clean(row.get("确认接受高校")),
         major=clean(row.get("确认接受专业")),
@@ -225,7 +225,7 @@ def merge_candidate(base: StudentCandidate, incoming: StudentCandidate) -> Stude
     return base
 
 
-def build_candidates() -> tuple[list[StudentCandidate], dict[str, int]]:
+def build_candidates(include_all: bool = False) -> tuple[list[StudentCandidate], dict[str, int]]:
     stats = {
         "raw_24": 0,
         "raw_25": 0,
@@ -285,11 +285,12 @@ def build_candidates() -> tuple[list[StudentCandidate], dict[str, int]]:
         c = row_26_to_candidate(row)
         if c is not None:
             add_or_merge(c)
-    for row in load_rows(FILE_ALL):
-        stats["raw_all"] += 1
-        c = row_all_to_candidate(row)
-        if c is not None:
-            add_or_merge(c)
+    if include_all:
+        for row in load_rows(FILE_ALL):
+            stats["raw_all"] += 1
+            c = row_all_to_candidate(row)
+            if c is not None:
+                add_or_merge(c)
 
     return selected, stats
 
@@ -406,10 +407,25 @@ async def connect_pool() -> None:
         )
 
 
-async def run(apply_changes: bool) -> None:
-    candidates, local_stats = build_candidates()
+async def run(
+    apply_changes: bool,
+    *,
+    include_all: bool = False,
+    prune_not_in_source: bool = False,
+) -> None:
+    candidates, local_stats = build_candidates(include_all=include_all)
     await connect_pool()
     pool = get_pool()
+
+    canonical_keys: set[tuple[str, str, str]] = set()
+    for c in candidates:
+        canonical_keys.add(
+            (
+                n(c.name),
+                str(c.enrollment_year or ""),
+                n(c.home_university),
+            )
+        )
 
     async with pool.acquire() as conn:
         await conn.execute(
@@ -465,6 +481,7 @@ async def run(apply_changes: bool) -> None:
         unresolved = 0
         inserted = 0
         updated = 0
+        pruned = 0
         unresolved_samples: list[str] = []
         reason_counter: dict[str, int] = {}
 
@@ -606,6 +623,33 @@ async def run(apply_changes: bool) -> None:
                 )
                 existing_by_nyu[key] = new_id
 
+        if prune_not_in_source:
+            existing_rows_for_prune = await conn.fetch(
+                """
+                SELECT id, name, enrollment_year, home_university
+                FROM supervised_students
+                WHERE enrollment_year IN (2024, 2025, 2026)
+                """
+            )
+            to_prune: list[str] = []
+            for r in existing_rows_for_prune:
+                row_id = clean(r["id"])
+                key = (
+                    n(r["name"]),
+                    str(r["enrollment_year"] or ""),
+                    n(r["home_university"]),
+                )
+                if key in canonical_keys:
+                    continue
+                to_prune.append(row_id)
+
+            if apply_changes and to_prune:
+                await conn.execute(
+                    "DELETE FROM supervised_students WHERE id::text = ANY($1::text[])",
+                    to_prune,
+                )
+            pruned = len(to_prune)
+
         total_students = await conn.fetchval("SELECT COUNT(*)::bigint FROM supervised_students")
 
     print("")
@@ -614,13 +658,14 @@ async def run(apply_changes: bool) -> None:
     print(f"source_rows_24: {local_stats['raw_24']}")
     print(f"source_rows_25: {local_stats['raw_25']}")
     print(f"source_rows_26: {local_stats['raw_26']}")
-    print(f"source_rows_all: {local_stats['raw_all']}")
+    print(f"source_rows_all: {local_stats['raw_all']} (include_all={include_all})")
     print(f"candidate_new_records: {local_stats['new_records']}")
     print(f"candidate_merged_updates: {local_stats['merged_updates']}")
     print(f"mentor_mapped_records: {mapped}")
     print(f"mentor_unresolved_records: {unresolved}")
     print(f"rows_inserted: {inserted}")
     print(f"rows_updated: {updated}")
+    print(f"rows_pruned_not_in_source: {pruned} (prune_not_in_source={prune_not_in_source})")
     print(f"supervised_students_table_count: {total_students}")
     if reason_counter:
         print("unresolved_reason_breakdown:")
@@ -641,12 +686,28 @@ def parse_args() -> argparse.Namespace:
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--dry-run", action="store_true", help="Preview only")
     mode.add_argument("--apply", action="store_true", help="Apply import")
+    parser.add_argument(
+        "--include-all",
+        action="store_true",
+        help="Include all_student.xlsx as supplementary source",
+    )
+    parser.add_argument(
+        "--prune-not-in-source",
+        action="store_true",
+        help="Delete 2024/2025/2026 rows not found in selected source files",
+    )
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
-    asyncio.run(run(apply_changes=bool(args.apply)))
+    asyncio.run(
+        run(
+            apply_changes=bool(args.apply),
+            include_all=bool(args.include_all),
+            prune_not_in_source=bool(args.prune_not_in_source),
+        )
+    )
 
 
 if __name__ == "__main__":

@@ -1,6 +1,7 @@
 """Response shape transformers — convert raw scholar dicts to API output shapes."""
 from __future__ import annotations
 
+import json
 from typing import Any
 
 _EMPTY_ADJUNCT: dict[str, str] = {
@@ -78,11 +79,33 @@ def _coerce_event_tags(raw: Any) -> list[dict[str, str]]:
     return tags
 
 
-def _is_cobuild_scholar(item: dict[str, Any], project_tags: list[dict[str, str]]) -> bool:
+def _is_cobuild_scholar(
+    item: dict[str, Any],
+    project_tags: list[dict[str, str]],
+    event_tags: list[dict[str, str]],
+) -> bool:
+    # Category tags are the source of truth for co-build relationship.
+    if project_tags or event_tags:
+        return True
     explicit = item.get("is_cobuild_scholar")
     if isinstance(explicit, bool):
         return explicit
-    return bool(project_tags)
+    return False
+
+
+def _coerce_custom_fields(raw: Any) -> dict[str, Any]:
+    if isinstance(raw, dict):
+        return raw
+    if isinstance(raw, str):
+        text = raw.strip()
+        if not text:
+            return {}
+        try:
+            parsed = json.loads(text)
+        except Exception:
+            return {}
+        return parsed if isinstance(parsed, dict) else {}
+    return {}
 
 
 def _to_list_item(item: dict[str, Any]) -> dict[str, Any]:
@@ -94,7 +117,9 @@ def _to_list_item(item: dict[str, Any]) -> dict[str, Any]:
     participated_event_ids = item.get("participated_event_ids") or []
     event_tags = _coerce_event_tags(item.get("event_tags"))
     return {
-        "url_hash": item.get("url_hash") or "",
+        # DB rows commonly use `id` as the canonical scholar key.
+        # Fallback to id when legacy payload misses `url_hash`.
+        "url_hash": item.get("url_hash") or item.get("id") or "",
         "name": item.get("name") or "",
         "name_en": item.get("name_en") or "",
         "photo_url": item.get("photo_url") or "",
@@ -109,7 +134,7 @@ def _to_list_item(item: dict[str, Any]) -> dict[str, Any]:
         "is_potential_recruit": bool(item.get("is_potential_recruit", False)),
         "is_advisor_committee": bool(item.get("is_advisor_committee", False)),
         "adjunct_supervisor": _coerce_adjunct_supervisor(item.get("adjunct_supervisor")),
-        "is_cobuild_scholar": _is_cobuild_scholar(item, project_tags),
+        "is_cobuild_scholar": _is_cobuild_scholar(item, project_tags, event_tags),
         "project_tags": project_tags,
         "participated_event_ids": participated_event_ids,
         "event_tags": event_tags,
@@ -124,7 +149,9 @@ def _to_detail(item: dict[str, Any]) -> dict[str, Any]:
     )
     event_tags = _coerce_event_tags(item.get("event_tags"))
     return {
-        "url_hash": item.get("url_hash") or "",
+        # DB rows commonly use `id` as the canonical scholar key.
+        # Fallback to id when legacy payload misses `url_hash`.
+        "url_hash": item.get("url_hash") or item.get("id") or "",
         "url": item.get("url") or "",
         "content": item.get("content") or "",
         "name": item.get("name") or "",
@@ -168,12 +195,12 @@ def _to_detail(item: dict[str, Any]) -> dict[str, Any]:
         "participated_event_ids": item.get("participated_event_ids") or [],
         "event_tags": event_tags,
         "project_tags": project_tags,
-        "is_cobuild_scholar": _is_cobuild_scholar(item, project_tags),
+        "is_cobuild_scholar": _is_cobuild_scholar(item, project_tags, event_tags),
         "is_potential_recruit": bool(item.get("is_potential_recruit", False)),
         "institute_relation_notes": item.get("institute_relation_notes") or "",
         "relation_updated_by": item.get("relation_updated_by") or "",
         "relation_updated_at": item.get("relation_updated_at") or "",
         "recent_updates": item.get("recent_updates") or [],
         "tags": item.get("tags") or [],
-        "custom_fields": item.get("custom_fields") or {},
+        "custom_fields": _coerce_custom_fields(item.get("custom_fields")),
     }

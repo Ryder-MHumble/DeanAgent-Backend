@@ -1,6 +1,7 @@
 """Filtering helpers for scholar queries."""
 from __future__ import annotations
 
+import json
 from typing import Any
 
 # ---------------------------------------------------------------------------
@@ -117,13 +118,26 @@ def _to_text_list(raw: Any) -> list[str]:
     return []
 
 
+def _coerce_custom_fields(raw: Any) -> dict[str, Any]:
+    if isinstance(raw, dict):
+        return raw
+    if isinstance(raw, str):
+        text = raw.strip()
+        if not text:
+            return {}
+        try:
+            parsed = json.loads(text)
+        except Exception:
+            return {}
+        return parsed if isinstance(parsed, dict) else {}
+    return {}
+
+
 def _community_matches(item: dict[str, Any], community_name: str | None, community_type: str | None) -> bool:
     if not community_name and not community_type:
         return True
 
-    custom_fields = item.get("custom_fields") or {}
-    if not isinstance(custom_fields, dict):
-        custom_fields = {}
+    custom_fields = _coerce_custom_fields(item.get("custom_fields"))
 
     tags_raw = _to_text_list(item.get("tags"))
     community_tags_raw = _to_text_list(custom_fields.get("community_tags"))
@@ -185,6 +199,29 @@ def _extract_project_tags(item: dict[str, Any]) -> list[dict[str, str]]:
     return [{"category": legacy_category, "subcategory": legacy_subcategory}]
 
 
+def _extract_event_tags(item: dict[str, Any]) -> list[dict[str, str]]:
+    raw_tags = item.get("event_tags")
+    tags: list[dict[str, str]] = []
+    if not isinstance(raw_tags, list):
+        return tags
+    for raw in raw_tags:
+        if not isinstance(raw, dict):
+            continue
+        category = str(raw.get("category") or "").strip()
+        series = str(raw.get("series") or "").strip()
+        event_type = str(raw.get("event_type") or "").strip()
+        if not category and not series and not event_type:
+            continue
+        tags.append(
+            {
+                "category": category,
+                "series": series,
+                "event_type": event_type,
+            }
+        )
+    return tags
+
+
 _PROJECT_SUBCATEGORY_ALIASES: dict[str, set[str]] = {
     "学院学生高校导师": {"学院学生事务导师"},
     "学院学生事务导师": {"学院学生高校导师"},
@@ -202,11 +239,17 @@ def _project_subcategory_targets(value: str) -> set[str]:
     return targets
 
 
-def _is_cobuild_scholar(item: dict[str, Any], project_tags: list[dict[str, str]]) -> bool:
+def _is_cobuild_scholar(
+    item: dict[str, Any],
+    project_tags: list[dict[str, str]],
+    event_tags: list[dict[str, str]],
+) -> bool:
+    if project_tags or event_tags:
+        return True
     explicit = item.get("is_cobuild_scholar")
     if isinstance(explicit, bool):
         return explicit
-    return bool(project_tags)
+    return False
 
 
 def _derive_region_from_university(university: str) -> str:
@@ -400,7 +443,12 @@ def _apply_filters(
     if is_cobuild_scholar is not None:
         result = [
             i for i in result
-            if _is_cobuild_scholar(i, _extract_project_tags(i)) == is_cobuild_scholar
+            if _is_cobuild_scholar(
+                i,
+                _extract_project_tags(i),
+                _extract_event_tags(i),
+            )
+            == is_cobuild_scholar
         ]
 
     if keyword:
@@ -424,7 +472,7 @@ def _apply_filters(
     if custom_field_key:
         result = [
             i for i in result
-            if (i.get("custom_fields") or {}).get(custom_field_key) == custom_field_value
+            if _coerce_custom_fields(i.get("custom_fields")).get(custom_field_key) == custom_field_value
         ]
 
     return result

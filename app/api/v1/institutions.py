@@ -446,7 +446,7 @@ async def get_institution(institution_id: str):
         "\n\n**自动生成 ID** — 从机构名称自动生成简洁易记的 ID（如 '清华' → 'qinghua'）"
         "\n\n**AMiner 标准化名** — 创建后自动调用 AMiner 机构搜索接口填充 `org_name`，"
         "获取标准化的英文机构名。查询失败不影响创建。"
-        "\n\n**冲突检测** — 若 ID 已存在，返回 409 Conflict。院系 ID 必须全局唯一。"
+        "\n\n**冲突检测** — 若 ID 已存在，返回 409 Conflict。二级机构重名仅在同一父机构下拦截。"
     ),
     status_code=201,
 )

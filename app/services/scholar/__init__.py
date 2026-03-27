@@ -36,6 +36,51 @@ from app.services.scholar._create import import_scholars_excel, _parse_excel_row
 from app.services.scholar._fast_query import query_scholar_list_fast
 
 
+_MISSING_COLUMN_RE = re.compile(
+    r'column\s+"(?P<column>[^"]+)"\s+of\s+relation\s+"scholars"\s+does\s+not\s+exist',
+    re.IGNORECASE,
+)
+
+
+def _extract_missing_scholar_column(exc: Exception) -> str | None:
+    match = _MISSING_COLUMN_RE.search(str(exc))
+    if not match:
+        return None
+    return str(match.group("column") or "").strip() or None
+
+
+async def _insert_scholar_with_schema_fallback(client: Any, payload: dict[str, Any]) -> None:
+    """Insert scholar row with runtime schema fallback.
+
+    Some environments have a lagging scholars table schema (missing optional
+    columns like participated_event_ids/event_tags/project_tags). In that case
+    we remove the missing column from insert payload and retry.
+    """
+    insert_payload = dict(payload)
+    removed_columns: list[str] = []
+    max_attempts = max(1, len(insert_payload))
+
+    for _ in range(max_attempts):
+        try:
+            await client.table("scholars").insert(insert_payload).execute()
+            if removed_columns:
+                logger.warning(
+                    "Inserted scholar after dropping missing columns: %s",
+                    ",".join(removed_columns),
+                )
+            return
+        except Exception as exc:
+            missing_column = _extract_missing_scholar_column(exc)
+            if not missing_column or missing_column not in insert_payload:
+                raise
+            insert_payload.pop(missing_column, None)
+            removed_columns.append(missing_column)
+
+    raise RuntimeError(
+        "Unable to insert scholar due to unresolved schema mismatch after retries",
+    )
+
+
 def _normalize_project_tags(raw: Any) -> list[dict[str, str]]:
     tags: list[dict[str, str]] = []
     if not isinstance(raw, list):
@@ -91,6 +136,20 @@ def _first_project_tag(tags: list[dict[str, str]]) -> tuple[str, str]:
         return "", ""
     first = tags[0]
     return first.get("category", ""), first.get("subcategory", "")
+
+
+def _derive_cobuild_from_tags(
+    *,
+    explicit: Any = None,
+    project_tags: list[dict[str, str]] | None = None,
+    event_tags: list[dict[str, str]] | None = None,
+) -> bool:
+    has_tags = bool(project_tags or []) or bool(event_tags or [])
+    if has_tags:
+        return True
+    if isinstance(explicit, bool):
+        return explicit
+    return False
 
 
 def _clean_text(value: Any) -> str:
@@ -503,8 +562,10 @@ async def create_scholar(data: dict[str, Any]) -> tuple[dict[str, Any] | None, s
             "participated_event_ids": participated_event_ids,
             "event_tags": event_tags,
             "project_tags": project_tags,
-            "is_cobuild_scholar": bool(
-                data.get("is_cobuild_scholar", bool(project_tags))
+            "is_cobuild_scholar": _derive_cobuild_from_tags(
+                explicit=data.get("is_cobuild_scholar"),
+                project_tags=project_tags,
+                event_tags=event_tags,
             ),
             "relation_updated_by": "",
             "relation_updated_at": None,
@@ -532,7 +593,7 @@ async def create_scholar(data: dict[str, Any]) -> tuple[dict[str, Any] | None, s
         except Exception as exc:
             logger.warning("Failed to introspect scholars columns, using full payload: %s", exc)
 
-        await client.table("scholars").insert(insert_record).execute()
+        await _insert_scholar_with_schema_fallback(client, insert_record)
 
         # Keep relation fields in annotation overlay as compatibility fallback
         # when runtime DB schema has not added all optional relation columns.
@@ -543,8 +604,11 @@ async def create_scholar(data: dict[str, Any]) -> tuple[dict[str, Any] | None, s
             relation_overlay["event_tags"] = event_tags
         if project_tags:
             relation_overlay["project_tags"] = project_tags
-            relation_overlay["is_cobuild_scholar"] = bool(
-                data.get("is_cobuild_scholar", bool(project_tags))
+        if project_tags or event_tags:
+            relation_overlay["is_cobuild_scholar"] = _derive_cobuild_from_tags(
+                explicit=data.get("is_cobuild_scholar"),
+                project_tags=project_tags,
+                event_tags=event_tags,
             )
         if relation_overlay:
             annotation_store.update_relation(url_hash, relation_overlay)
@@ -1000,8 +1064,6 @@ async def update_scholar_relation(url_hash: str, updates: dict[str, Any]) -> dic
     if "project_tags" in normalized_updates:
         tags = _normalize_project_tags(normalized_updates.get("project_tags"))
         normalized_updates["project_tags"] = tags
-        if "is_cobuild_scholar" not in normalized_updates:
-            normalized_updates["is_cobuild_scholar"] = bool(tags)
         first_category, first_subcategory = _first_project_tag(tags)
         normalized_updates["project_category"] = first_category
         normalized_updates["project_subcategory"] = first_subcategory
@@ -1012,10 +1074,14 @@ async def update_scholar_relation(url_hash: str, updates: dict[str, Any]) -> dic
         )
 
     if (
-        "is_cobuild_scholar" not in normalized_updates
-        and normalized_updates.get("project_tags")
+        "project_tags" in normalized_updates
+        or "event_tags" in normalized_updates
     ):
-        normalized_updates["is_cobuild_scholar"] = bool(normalized_updates["project_tags"])
+        normalized_updates["is_cobuild_scholar"] = _derive_cobuild_from_tags(
+            explicit=normalized_updates.get("is_cobuild_scholar"),
+            project_tags=normalized_updates.get("project_tags"),
+            event_tags=normalized_updates.get("event_tags"),
+        )
 
     normalized_updates["relation_updated_at"] = datetime.now(UTC).isoformat()
 

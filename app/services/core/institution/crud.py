@@ -84,17 +84,7 @@ async def create_institution(inst_data: dict) -> InstitutionDetailResponse:
     raw_data = dict(inst_data)
     _validate_people_payload(raw_data)
 
-    # Generate ID if not provided
-    if not raw_data.get("id"):
-        raw_data["id"] = _generate_institution_id(raw_data["name"])
-
-    # Check if ID already exists
-    existing = await fetch_institution_by_id(raw_data["id"])
-    if existing:
-        raise InstitutionAlreadyExistsError(f"Institution with ID '{raw_data['id']}' already exists")
-
-    # Validate parent_id if provided
-    # Set entity_type if not provided
+    # Set entity_type if not provided.
     if not raw_data.get("entity_type"):
         if raw_data.get("parent_id"):
             raw_data["entity_type"] = "department"
@@ -116,18 +106,38 @@ async def create_institution(inst_data: dict) -> InstitutionDetailResponse:
     raw_data["classification"] = classification
     raw_data["sub_classification"] = sub_classification
 
-    if raw_data.get("parent_id"):
-        parent = await fetch_institution_by_id(raw_data["parent_id"])
-        if not parent:
-            raise ValueError(f"Parent institution '{raw_data['parent_id']}' not found")
-        if parent.get("entity_type") != "organization":
-            raise ValueError("Parent must be an organization")
-
     if entity_type == "organization":
         raw_data["parent_id"] = None
+    else:
+        parent_id = str(raw_data.get("parent_id") or "").strip()
+        if not parent_id:
+            raise ValueError("entity_type=department 时必须提供 parent_id")
+        parent = await fetch_institution_by_id(parent_id)
+        if not parent:
+            raise ValueError(f"Parent institution '{parent_id}' not found")
+        if parent.get("entity_type") != "organization":
+            raise ValueError("Parent must be an organization")
+        raw_data["parent_id"] = parent_id
 
     # Check duplicate by normalized name.
     all_records = await fetch_all_institutions()
+    used_ids = {str(r.get("id") or "") for r in all_records}
+
+    # Generate ID lazily after entity_type / parent_id are finalized.
+    if not raw_data.get("id"):
+        if entity_type == "department":
+            raw_data["id"] = _generate_unique_department_id(
+                str(raw_data.get("name") or ""),
+                str(raw_data.get("parent_id") or ""),
+                used_ids,
+            )
+        else:
+            raw_data["id"] = _generate_institution_id(str(raw_data.get("name") or "")) or "institution"
+
+    # ID uniqueness stays global, but department auto-generated IDs are parent-scoped.
+    if str(raw_data["id"]) in used_ids:
+        raise InstitutionAlreadyExistsError(f"Institution with ID '{raw_data['id']}' already exists")
+
     conflict = _find_conflicting_institution(
         records=all_records,
         entity_type=entity_type,
