@@ -355,7 +355,7 @@ app/services/llm/
 | intel/university | `/intel/university` | 4 | 高校 Feed/概览/研究成果 |
 | intel/daily-briefing | `/intel/daily-briefing` | 3 | 今日/最新/历史简报 |
 
-基础路径：`/api/v1`。Swagger UI：`http://43.98.254.243:8001/docs`
+基础路径：`/api/v1`。Swagger UI：`http://10.1.132.21:8001/docs`
 
 ### 5.2 通用过滤参数
 

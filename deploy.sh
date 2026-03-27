@@ -71,7 +71,7 @@ show_banner() {
     _time=$(date '+%Y-%m-%d  %H:%M:%S')
     printf "  ${D}TIME${NC}   ${BW}%s${NC}    ${D}PORT${NC}   ${BC}${BOLD}:%s${NC}\n" "$_time" "$PORT"
     printf "  ${D}BRANCH${NC} ${Y}%s${NC}          ${D}PYTHON${NC} ${G}%s${NC}\n" "$_branch" "$_py"
-    printf "  ${D}TARGET${NC} ${D}43.98.254.243${NC}    ${D}v%s${NC}\n" "$VERSION"
+    printf "  ${D}TARGET${NC} ${D}10.1.132.21${NC}    ${D}v%s${NC}\n" "$VERSION"
     printf "\n"
     _hr
 }
@@ -253,7 +253,7 @@ _wait_health() {
     local chars='⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'
     printf " ${C}⟳${NC} Waiting for health check..."
     while [[ $i -lt $max ]]; do
-        if curl -sf "http://43.98.254.243:$PORT/api/v1/health/" >/dev/null 2>&1; then
+        if curl -sf "http://10.1.132.21:$PORT/api/v1/health/" >/dev/null 2>&1; then
             printf "\r ${G}✓${NC}  Health check passed           \n"
             return 0
         fi
@@ -299,7 +299,7 @@ show_dashboard() {
 
         # Pipeline status
         local pipe_json
-        pipe_json=$(curl -sf "http://43.98.254.243:$PORT/api/v1/health/pipeline-status" 2>/dev/null) || pipe_json=""
+        pipe_json=$(curl -sf "http://10.1.132.21:$PORT/api/v1/health/pipeline-status" 2>/dev/null) || pipe_json=""
         if [[ -n "$pipe_json" ]]; then
             printf "\n"
             printf "   ${BOLD}PIPELINE${NC}\n"
@@ -343,9 +343,9 @@ if stages:
         # Endpoints
         printf "\n"
         printf "   ${BOLD}ENDPOINTS${NC}\n"
-        printf "   ${D}Docs${NC}     http://43.98.254.243:%s/docs\n" "$PORT"
-        printf "   ${D}Health${NC}   http://43.98.254.243:%s/api/v1/health/\n" "$PORT"
-        printf "   ${D}Pipeline${NC} http://43.98.254.243:%s/api/v1/health/pipeline-status\n" "$PORT"
+        printf "   ${D}Docs${NC}     http://10.1.132.21:%s/docs\n" "$PORT"
+        printf "   ${D}Health${NC}   http://10.1.132.21:%s/api/v1/health/\n" "$PORT"
+        printf "   ${D}Pipeline${NC} http://10.1.132.21:%s/api/v1/health/pipeline-status\n" "$PORT"
     else
         printf "\n"
         printf "   ${BOLD}SERVICE${NC}\n"
@@ -367,7 +367,7 @@ _check_pipeline_hint() {
     if [[ ! -f "$feed" ]]; then
         printf "\n"
         warn "Processed data missing — Pipeline will auto-trigger on startup"
-        dim "   Or trigger manually: curl -X POST http://43.98.254.243:$PORT/api/v1/health/pipeline-trigger"
+        dim "   Or trigger manually: curl -X POST http://10.1.132.21:$PORT/api/v1/health/pipeline-trigger"
         return
     fi
 
@@ -383,7 +383,7 @@ _check_pipeline_hint() {
     if [[ $age_hours -gt 24 ]]; then
         printf "\n"
         warn "Pipeline data is ${BOLD}${age_hours}h${NC}${Y} old — consider re-running:${NC}"
-        dim "   curl -X POST http://43.98.254.243:$PORT/api/v1/health/pipeline-trigger"
+        dim "   curl -X POST http://10.1.132.21:$PORT/api/v1/health/pipeline-trigger"
     fi
 }
 

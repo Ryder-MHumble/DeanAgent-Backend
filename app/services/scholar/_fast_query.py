@@ -14,25 +14,71 @@ from app.services.scholar._filters import (
 from app.services.scholar._transformers import _to_list_item
 from app.services.stores import scholar_annotation_store as annotation_store
 
-_LIST_SELECT_SQL = """
-SELECT
-    id AS url_hash,
-    name,
-    name_en,
-    photo_url,
-    university,
-    department,
-    position,
-    academic_titles,
-    is_academician,
-    research_areas,
-    email,
-    profile_url,
-    is_potential_recruit,
-    is_advisor_committee,
-    adjunct_supervisor
-FROM scholars
-"""
+_SCHOLAR_COLUMNS_CACHE: set[str] | None = None
+
+_BASE_LIST_SELECT_FIELDS: tuple[str, ...] = (
+    "id AS url_hash",
+    "name",
+    "name_en",
+    "photo_url",
+    "university",
+    "department",
+    "position",
+    "academic_titles",
+    "is_academician",
+    "research_areas",
+    "email",
+    "profile_url",
+    "is_potential_recruit",
+    "is_advisor_committee",
+    "adjunct_supervisor",
+    "project_category",
+    "project_subcategory",
+)
+
+
+def _normalize_exact_text(value: str) -> str:
+    return " ".join((value or "").strip().split()).lower()
+
+
+async def _get_scholar_columns() -> set[str]:
+    global _SCHOLAR_COLUMNS_CACHE
+    if _SCHOLAR_COLUMNS_CACHE is not None:
+        return _SCHOLAR_COLUMNS_CACHE
+
+    pool = get_pool()
+    rows = await pool.fetch(
+        """
+        SELECT column_name
+        FROM information_schema.columns
+        WHERE table_schema='public' AND table_name='scholars'
+        """,
+    )
+    _SCHOLAR_COLUMNS_CACHE = {str(r["column_name"]) for r in rows}
+    return _SCHOLAR_COLUMNS_CACHE
+
+
+async def _build_list_select_sql() -> str:
+    scholar_cols = await _get_scholar_columns()
+    fields = list(_BASE_LIST_SELECT_FIELDS)
+    if "project_tags" in scholar_cols:
+        fields.append("project_tags")
+    else:
+        fields.append("'[]'::jsonb AS project_tags")
+    if "participated_event_ids" in scholar_cols:
+        fields.append("participated_event_ids")
+    else:
+        fields.append("ARRAY[]::text[] AS participated_event_ids")
+    if "event_tags" in scholar_cols:
+        fields.append("event_tags")
+    else:
+        fields.append("'[]'::jsonb AS event_tags")
+    if "is_cobuild_scholar" in scholar_cols:
+        fields.append("is_cobuild_scholar")
+    else:
+        fields.append("FALSE AS is_cobuild_scholar")
+
+    return "SELECT\n    " + ",\n    ".join(fields) + "\nFROM scholars"
 
 
 async def _resolve_institution_names_by_region_and_type(
@@ -101,12 +147,18 @@ def _build_where_clause(
         conditions.append(f"university = ANY(${len(params)}::text[])")
 
     if university:
-        params.append(f"%{university}%")
-        conditions.append(f"university ILIKE ${len(params)}")
+        params.append(_normalize_exact_text(university))
+        conditions.append(
+            "LOWER(REGEXP_REPLACE(BTRIM(COALESCE(university, '')), '\\s+', ' ', 'g'))"
+            f" = ${len(params)}"
+        )
 
     if department:
-        params.append(f"%{department}%")
-        conditions.append(f"department ILIKE ${len(params)}")
+        params.append(_normalize_exact_text(department))
+        conditions.append(
+            "LOWER(REGEXP_REPLACE(BTRIM(COALESCE(department, '')), '\\s+', ' ', 'g'))"
+            f" = ${len(params)}"
+        )
 
     if position:
         params.append(position)
@@ -177,6 +229,12 @@ async def query_scholar_list_fast(
     is_adjunct_supervisor: bool | None,
     has_email: bool | None,
     keyword: str | None,
+    community_name: str | None,
+    community_type: str | None,
+    project_category: str | None,
+    project_subcategory: str | None,
+    participated_event_id: str | None,
+    is_cobuild_scholar: bool | None,
     region: str | None,
     affiliation_type: str | None,
     institution_names: list[str] | None,
@@ -185,6 +243,17 @@ async def query_scholar_list_fast(
     page: int,
     page_size: int,
 ) -> dict[str, Any]:
+    if (
+        community_name
+        or community_type
+        or
+        project_category
+        or project_subcategory
+        or participated_event_id
+        or is_cobuild_scholar is not None
+    ):
+        raise RuntimeError("community/project/event tag filters are handled by fallback query path")
+
     by_region_or_type = await _resolve_institution_names_by_region_and_type(
         region,
         affiliation_type,
@@ -225,8 +294,9 @@ async def query_scholar_list_fast(
     data_params = [*params, page_size, offset]
     limit_param = len(data_params) - 1
     offset_param = len(data_params)
+    list_select_sql = await _build_list_select_sql()
     data_sql = (
-        f"{_LIST_SELECT_SQL}{where_sql}"
+        f"{list_select_sql}{where_sql}"
         f" ORDER BY name ASC LIMIT ${limit_param} OFFSET ${offset_param}"
     )
     rows = [dict(r) for r in await pool.fetch(data_sql, *data_params)]

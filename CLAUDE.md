@@ -19,7 +19,7 @@
 
 | 服务 | 地址 | 说明 |
 |------|------|------|
-| 后端 API | http://43.98.254.243:8001/ | FastAPI，API 文档：http://43.98.254.243:8001/docs |
+| 后端 API | http://10.1.132.21:8001/ | FastAPI，API 文档：http://10.1.132.21:8001/docs |
 | ScholarDB-System 前端 | http://43.98.254.243:8080/ | Next.js (学者知识库系统) |
 | Dean-Agent 前端 | (另一个端口) | Next.js (院长智能体) |
 
@@ -784,10 +784,10 @@ SQL 清理脚本：`scripts/sql/cleanup_institutions_fields.sql`
 
 ```bash
 # 测试分类体系API
-curl "http://43.98.254.243:8001/api/v1/institutions/taxonomy"
+curl "http://10.1.132.21:8001/api/v1/institutions/taxonomy"
 
 # 测试筛选API（注意：中文需要URL编码）
-curl "http://43.98.254.243:8001/api/v1/institutions?region=%E5%9B%BD%E5%86%85&org_type=%E9%AB%98%E6%A0%A1&page_size=5"
+curl "http://10.1.132.21:8001/api/v1/institutions?region=%E5%9B%BD%E5%86%85&org_type=%E9%AB%98%E6%A0%A1&page_size=5"
 ```
 
 前端测试：
@@ -1157,10 +1157,10 @@ app/services/intel/reports/
 
 ```bash
 # 生成最近 7 天的舆情报告
-curl "http://43.98.254.243:8001/api/v1/reports/sentiment/latest?days=7"
+curl "http://10.1.132.21:8001/api/v1/reports/sentiment/latest?days=7"
 
 # 生成指定日期范围的报告
-curl -X POST "http://43.98.254.243:8001/api/v1/reports/generate" \
+curl -X POST "http://10.1.132.21:8001/api/v1/reports/generate" \
   -H "Content-Type: application/json" \
   -d '{
     "dimension": "sentiment",
@@ -1169,7 +1169,7 @@ curl -X POST "http://43.98.254.243:8001/api/v1/reports/generate" \
   }'
 
 # 生成 JSON 格式报告
-curl -X POST "http://43.98.254.243:8001/api/v1/reports/generate" \
+curl -X POST "http://10.1.132.21:8001/api/v1/reports/generate" \
   -H "Content-Type: application/json" \
   -d '{"dimension": "sentiment", "output_format": "json"}'
 ```

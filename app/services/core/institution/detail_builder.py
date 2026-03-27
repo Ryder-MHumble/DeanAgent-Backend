@@ -32,7 +32,15 @@ def _parse_scholar_list(raw: list | None) -> list[ScholarInfo]:
         if isinstance(item, str):
             result.append(ScholarInfo(name=item))
         elif isinstance(item, dict):
-            result.append(ScholarInfo(**{k: v for k, v in item.items() if k in ("name", "title", "department", "research_area")}))
+            result.append(
+                ScholarInfo(
+                    **{
+                        k: v
+                        for k, v in item.items()
+                        if k in ("name", "scholar_id", "title", "department", "research_area")
+                    }
+                )
+            )
     return result
 
 
@@ -121,6 +129,11 @@ def build_detail_response(record: dict, departments: list[dict] | None = None) -
     # Extract additional detail fields
     detail_data = {
         **base_item.model_dump(),
+        # Student and mentor metrics
+        "student_count_24": record.get("student_count_24"),
+        "student_count_25": record.get("student_count_25"),
+        "student_count_total": record.get("student_count_total"),
+        "mentor_count": record.get("mentor_count"),
         # People
         "resident_leaders": record.get("resident_leaders") or [],
         "degree_committee": record.get("degree_committee") or [],

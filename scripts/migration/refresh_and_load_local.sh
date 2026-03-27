@@ -21,10 +21,10 @@ if [ -f ".env" ]; then
   set +a
 fi
 
-echo "[1/4] Exporting latest schema+data from Supabase ..."
+echo "[1/5] Exporting latest schema+data from Supabase ..."
 python scripts/migration/export_supabase_to_sql.py --output-dir exports/sql
 
-echo "[2/4] Loading dump into local PostgreSQL ..."
+echo "[2/5] Loading dump into local PostgreSQL ..."
 : "${POSTGRES_HOST:=127.0.0.1}"
 : "${POSTGRES_PORT:=5432}"
 : "${POSTGRES_USER:=postgres}"
@@ -37,7 +37,7 @@ fi
 
 psql -h "${POSTGRES_HOST}" -p "${POSTGRES_PORT}" -U "${POSTGRES_USER}" -d "${POSTGRES_DB}" -v ON_ERROR_STOP=1 -f exports/sql/supabase_full_dump.sql
 
-echo "[3/4] Ensuring projects table exists ..."
+echo "[3/5] Ensuring projects table exists ..."
 psql -h "${POSTGRES_HOST}" -p "${POSTGRES_PORT}" -U "${POSTGRES_USER}" -d "${POSTGRES_DB}" -v ON_ERROR_STOP=1 <<'SQL'
 CREATE TABLE IF NOT EXISTS projects (
   id TEXT PRIMARY KEY,
@@ -65,7 +65,10 @@ CREATE INDEX IF NOT EXISTS idx_projects_pi_name ON projects(pi_name);
 CREATE INDEX IF NOT EXISTS idx_projects_updated_at ON projects(updated_at DESC);
 SQL
 
-echo "[4/4] Verifying row counts ..."
+echo "[4/5] Ensuring university leadership tables exist ..."
+psql -h "${POSTGRES_HOST}" -p "${POSTGRES_PORT}" -U "${POSTGRES_USER}" -d "${POSTGRES_DB}" -v ON_ERROR_STOP=1 -f scripts/migration/create_university_leadership_tables.sql
+
+echo "[5/5] Verifying row counts ..."
 python scripts/migration/verify_local_pg_counts.py
 
 echo "Done: local PostgreSQL has been refreshed from Supabase export."

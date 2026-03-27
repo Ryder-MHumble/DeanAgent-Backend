@@ -91,6 +91,26 @@ def create_scholar(data: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
 
     url = _generate_url_for_scholar(name, university, data.get("department", ""), profile_url)
     url_hash = compute_url_hash(url)
+    project_tags_raw = data.get("project_tags") or []
+    project_tags: list[dict[str, str]] = []
+    if isinstance(project_tags_raw, list):
+        for tag in project_tags_raw:
+            if not isinstance(tag, dict):
+                continue
+            category = str(tag.get("category") or "").strip()
+            subcategory = str(tag.get("subcategory") or "").strip()
+            if not category and not subcategory:
+                continue
+            project_tags.append(
+                {
+                    "category": category,
+                    "subcategory": subcategory,
+                    "project_id": str(tag.get("project_id") or ""),
+                    "project_title": str(tag.get("project_title") or ""),
+                }
+            )
+    first_project_category = project_tags[0]["category"] if project_tags else ""
+    first_project_subcategory = project_tags[0]["subcategory"] if project_tags else ""
 
     record: dict[str, Any] = {
         "url_hash": url_hash,
@@ -145,11 +165,17 @@ def create_scholar(data: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
         "joint_research_projects": [],
         "joint_management_roles": [],
         "academic_exchange_records": [],
+        "participated_event_ids": data.get("participated_event_ids") or [],
+        "event_tags": data.get("event_tags") or [],
+        "project_tags": project_tags,
+        "is_cobuild_scholar": bool(data.get("is_cobuild_scholar", bool(project_tags))),
         "relation_updated_by": "",
         "relation_updated_at": "",
         "recent_updates": [],
         # Custom fields (support enriched data)
         "custom_fields": data.get("custom_fields") or {},
+        "project_category": first_project_category,
+        "project_subcategory": first_project_subcategory,
     }
 
     try:

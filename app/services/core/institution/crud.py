@@ -33,6 +33,41 @@ class InstitutionAlreadyExistsError(Exception):
     pass
 
 
+def _normalize_name(value: Any) -> str:
+    return " ".join(str(value or "").strip().split()).lower()
+
+
+def _find_conflicting_institution(
+    *,
+    records: list[dict[str, Any]],
+    entity_type: str,
+    name: str,
+    parent_id: str | None = None,
+    exclude_id: str | None = None,
+) -> dict[str, Any] | None:
+    target = _normalize_name(name)
+    if not target:
+        return None
+
+    for record in records:
+        if record.get("entity_type") != entity_type:
+            continue
+        if exclude_id and record.get("id") == exclude_id:
+            continue
+        if entity_type == "department" and record.get("parent_id") != parent_id:
+            continue
+        if _normalize_name(record.get("name")) == target:
+            return record
+    return None
+
+
+def _validate_people_payload(payload: dict[str, Any]) -> None:
+    """Validate people-related payload constraints."""
+    notable = payload.get("notable_scholars")
+    if isinstance(notable, list) and len(notable) > 10:
+        raise ValueError("notable_scholars 最多只能配置 10 位学者")
+
+
 async def create_institution(inst_data: dict) -> InstitutionDetailResponse:
     """Create a new institution.
 
@@ -47,6 +82,7 @@ async def create_institution(inst_data: dict) -> InstitutionDetailResponse:
         ValueError: If validation fails
     """
     raw_data = dict(inst_data)
+    _validate_people_payload(raw_data)
 
     # Generate ID if not provided
     if not raw_data.get("id"):
@@ -90,6 +126,24 @@ async def create_institution(inst_data: dict) -> InstitutionDetailResponse:
     if entity_type == "organization":
         raw_data["parent_id"] = None
 
+    # Check duplicate by normalized name.
+    all_records = await fetch_all_institutions()
+    conflict = _find_conflicting_institution(
+        records=all_records,
+        entity_type=entity_type,
+        name=raw_data.get("name"),
+        parent_id=raw_data.get("parent_id"),
+    )
+    if conflict:
+        if entity_type == "organization":
+            raise InstitutionAlreadyExistsError(
+                f"一级机构名称重复: '{raw_data.get('name')}' (existing id={conflict.get('id')})"
+            )
+        raise InstitutionAlreadyExistsError(
+            "二级机构名称重复: "
+            f"'{raw_data.get('name')}' 在父机构 '{raw_data.get('parent_id')}' 下已存在 (existing id={conflict.get('id')})"
+        )
+
     # Insert into database
     departments_payload = raw_data.pop("departments", None)
     created = await upsert_institution(raw_data)
@@ -126,6 +180,7 @@ async def update_institution(
         return None
 
     update_data = dict(updates)
+    _validate_people_payload(update_data)
     departments_payload = update_data.pop("departments", None)
 
     target_entity_type = update_data.get("entity_type", existing.get("entity_type")) or "organization"
@@ -159,6 +214,28 @@ async def update_institution(
             children = [r for r in all_records if r.get("parent_id") == institution_id]
             if children:
                 raise ValueError("当前一级机构下存在二级机构，无法直接转换为 department")
+
+    new_name = update_data.get("name", existing.get("name"))
+    new_parent_id = update_data.get("parent_id", existing.get("parent_id"))
+
+    # Check duplicate by normalized name after mutation.
+    all_records = await fetch_all_institutions()
+    conflict = _find_conflicting_institution(
+        records=all_records,
+        entity_type=target_entity_type,
+        name=new_name,
+        parent_id=new_parent_id,
+        exclude_id=institution_id,
+    )
+    if conflict:
+        if target_entity_type == "organization":
+            raise ValueError(
+                f"一级机构名称重复: '{new_name}' (existing id={conflict.get('id')})"
+            )
+        raise ValueError(
+            f"二级机构名称重复: '{new_name}' 在父机构 '{new_parent_id}' 下已存在 "
+            f"(existing id={conflict.get('id')})"
+        )
 
     # Merge updates
     updated_data = {**existing, **update_data, "id": institution_id}
@@ -290,6 +367,7 @@ async def _sync_organization_departments(
     if not parent or parent.get("entity_type") != "organization":
         raise ValueError(f"父机构 '{parent_id}' 不存在或不是 organization")
 
+    payload_name_keys: set[str] = set()
     for idx, payload in enumerate(department_payloads):
         if not isinstance(payload, dict):
             raise ValueError(f"departments[{idx}] 必须是对象")
@@ -297,6 +375,10 @@ async def _sync_organization_departments(
         name = str(payload.get("name") or "").strip()
         if not name:
             raise ValueError(f"departments[{idx}].name 不能为空")
+        name_key = _normalize_name(name)
+        if name_key in payload_name_keys:
+            raise ValueError(f"departments 中存在重复名称: {name}")
+        payload_name_keys.add(name_key)
 
         raw_id = payload.get("id")
         dept_id = str(raw_id).strip() if raw_id else None
@@ -312,6 +394,16 @@ async def _sync_organization_departments(
                     raise ValueError(f"院系 id '{dept_id}' 已属于其他一级机构")
         else:
             dept_id = _generate_unique_department_id(name, parent_id, used_ids | keep_ids)
+
+        # Prevent duplicate department names under one parent.
+        for existing_child in existing_children.values():
+            if existing_child.get("id") == dept_id:
+                continue
+            if _normalize_name(existing_child.get("name")) == name_key:
+                raise ValueError(
+                    f"二级机构名称重复: '{name}' 在父机构 '{parent_id}' 下已存在 "
+                    f"(existing id={existing_child.get('id')})"
+                )
 
         base = existing_by_id.get(dept_id) or {}
         row: dict[str, Any] = {

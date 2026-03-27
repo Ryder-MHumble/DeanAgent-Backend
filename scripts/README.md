@@ -1,5 +1,12 @@
 # Scripts 目录说明
 
+## 设计原则
+
+- `scripts/` 只放“可直接复用的能力脚本”，不放 `test_*.py` 风格文件。
+- 命名以用途为中心，优先使用动词或能力名（如 `verify_*` / `process_*` / `run_*`）。
+- 每个脚本都应可独立运行，并给出明确输出（通过/失败/摘要）。
+- 示例脚本放 `examples/`，通用校验与工具放 `core/`，迁移放 `migration/`。
+
 ## crawl/ — 爬取脚本
 
 - `run_single.py`: 单源爬取测试
@@ -30,12 +37,16 @@
 - `file_utils.py`: 文件工具
 - `data_transformer.py`: 数据转换工具
 - `progress_tracker.py`: 进度追踪
+- `verify_event_tag_mapping.py`: 校验活动标签模型字段映射（cover_image_url/event_time 等）
+- `verify_project_tag_mapping.py`: 校验项目标签模型兼容映射（subcategory/scholar_ids）
+- `inspect_project_taxonomy.py`: 检查项目分类树加载结果
 
 ## examples/ — 示例脚本
 
 - `data_import_example.py`
 - `database_cleanup_example.py`
 - `aminer_enrichment_example.py`
+- `aminer_detail_api_diagnostic.py`: AMiner 学者详情 API 诊断示例
 
 ## 推荐迁移流程
 

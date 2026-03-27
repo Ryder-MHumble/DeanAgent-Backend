@@ -7,6 +7,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 from time import monotonic
+from typing import Any
 
 from app.schemas.institution import InstitutionListResponse
 from app.services.core.institution.detail_builder import build_list_item
@@ -15,6 +16,10 @@ from app.services.core.institution.storage import fetch_all_institutions
 
 _HIERARCHY_CACHE_TTL_SECONDS = 30.0
 _hierarchy_cache: dict[tuple[str | None, str | None, str | None, bool | None], tuple[float, dict]] = {}
+
+
+def _normalize_name(value: Any) -> str:
+    return " ".join(str(value or "").strip().split()).lower()
 
 
 async def get_institutions_unified(
@@ -161,30 +166,60 @@ async def _get_hierarchy_view(
         classification=classification,
     )
 
-    # Sort organizations
-    sorted_orgs = sort_institutions(organizations)
+    # Always use scholar table aggregation as source of truth for counts.
+    scholar_counts = await _count_scholars_by_institution(
+        is_adjunct_supervisor=is_adjunct_supervisor
+    )
 
-    # If is_adjunct_supervisor filter is active, we need to recount scholars
-    scholar_counts = None
-    if is_adjunct_supervisor is not None:
-        scholar_counts = await _count_scholars_by_institution(is_adjunct_supervisor)
-
-    # Build parent_id -> departments map once (avoid O(org * all_records) scans).
+    # Build parent_id -> departments map.
     departments_by_parent: dict[str, list[dict]] = defaultdict(list)
     for rec in all_records:
+        if rec.get("entity_type") != "department":
+            continue
         parent_id = rec.get("parent_id")
-        if parent_id:
+        if parent_id and rec.get("name"):
             departments_by_parent[parent_id].append(rec)
+
+    # Deduplicate organizations by normalized name.
+    sorted_orgs = sort_institutions(organizations)
+    orgs_by_name_key: dict[str, dict[str, Any]] = {}
+    for org in sorted_orgs:
+        org_name = org.get("name")
+        name_key = _normalize_name(org_name)
+        if not name_key:
+            continue
+        entry = orgs_by_name_key.get(name_key)
+        if entry is None:
+            orgs_by_name_key[name_key] = {
+                "canonical": org,
+                "all_records": [org],
+            }
+        else:
+            entry["all_records"].append(org)
 
     # Build hierarchy
     result_orgs = []
-    for org in sorted_orgs:
-        org_id = org["id"]
+    for org_entry in orgs_by_name_key.values():
+        org = org_entry["canonical"]
         org_name = org["name"]
+        org_name_key = _normalize_name(org_name)
+        org_records: list[dict[str, Any]] = org_entry["all_records"]
 
-        # Departments under current organization
-        departments = departments_by_parent.get(org_id, [])
-        sorted_depts = sort_institutions(departments)
+        # Merge departments from duplicate organization rows.
+        all_depts: list[dict[str, Any]] = []
+        for org_record in org_records:
+            all_depts.extend(departments_by_parent.get(org_record["id"], []))
+
+        # Deduplicate departments by normalized name.
+        sorted_depts = sort_institutions(all_depts)
+        dept_by_name_key: dict[str, dict[str, Any]] = {}
+        for dept in sorted_depts:
+            dept_name = dept.get("name")
+            dept_key = _normalize_name(dept_name)
+            if not dept_key:
+                continue
+            if dept_key not in dept_by_name_key:
+                dept_by_name_key[dept_key] = dept
 
         # Keep hierarchy payload lean for scholar page sidebar.
         org_item = {
@@ -197,30 +232,28 @@ async def _get_hierarchy_view(
             "sub_classification": org.get("sub_classification"),
         }
 
-        # Override scholar_count if filtering by is_adjunct_supervisor
-        if scholar_counts is not None:
-            org_scholar_count = scholar_counts.get(("org", org_name), 0)
-            org_item["scholar_count"] = org_scholar_count
-
-            org_item["departments"] = [
+        org_item["scholar_count"] = scholar_counts.get(("org", org_name_key), 0)
+        org_item["departments"] = sorted(
+            [
                 {
                     "id": dept["id"],
                     "name": dept["name"],
-                    "scholar_count": scholar_counts.get(("dept", org_name, dept["name"]), 0),
+                    "scholar_count": scholar_counts.get(
+                        ("dept", org_name_key, _normalize_name(dept["name"])),
+                        0,
+                    ),
                 }
-                for dept in sorted_depts
-            ]
-        else:
-            org_item["departments"] = [
-                {
-                    "id": dept["id"],
-                    "name": dept["name"],
-                    "scholar_count": dept.get("scholar_count", 0),
-                }
-                for dept in sorted_depts
-            ]
+                for dept in dept_by_name_key.values()
+            ],
+            key=lambda d: (-int(d.get("scholar_count") or 0), str(d.get("name") or "")),
+        )
 
         result_orgs.append(org_item)
+
+    # Keep organization order deterministic by scholar_count then name.
+    result_orgs.sort(
+        key=lambda i: (-int(i.get("scholar_count") or 0), str(i.get("name") or ""))
+    )
 
     return {"organizations": result_orgs}
 
@@ -275,44 +308,51 @@ def _apply_filters(
     return filtered
 
 
-async def _count_scholars_by_institution(is_adjunct_supervisor: bool) -> dict[tuple, int]:
-    """Count scholars by university and department with adjunct supervisor filter.
+async def _count_scholars_by_institution(
+    is_adjunct_supervisor: bool | None = None,
+) -> dict[tuple, int]:
+    """Count scholars by normalized university and department.
 
     Args:
-        is_adjunct_supervisor: Whether to count only adjunct supervisors
+        is_adjunct_supervisor: When True, only count adjunct supervisors;
+            when False/None, count all scholars.
 
     Returns:
-        Dict mapping (type, university[, department]) to scholar count
-        - ("org", "上海交通大学") -> count for university
-        - ("dept", "上海交通大学", "计算机系") -> count for department
+        Dict mapping (type, university_key[, department_key]) to scholar count
+        - ("org", "上海交通大学".lower()) -> count for university
+        - ("dept", "上海交通大学".lower(), "计算机系".lower()) -> count for department
     """
     from app.db.pool import get_pool
 
     # SQL aggregation is far faster than loading all scholars into Python.
     where_sql = (
         "WHERE COALESCE(university, '') <> ''"
-        + (" AND COALESCE(adjunct_supervisor->>'status', '') <> ''" if is_adjunct_supervisor else "")
+        + (
+            " AND COALESCE(adjunct_supervisor->>'status', '') <> ''"
+            if is_adjunct_supervisor is True
+            else ""
+        )
     )
     sql = f"""
         SELECT
-            university,
-            department,
+            LOWER(REGEXP_REPLACE(BTRIM(COALESCE(university, '')), '\\s+', ' ', 'g')) AS university_key,
+            LOWER(REGEXP_REPLACE(BTRIM(COALESCE(department, '')), '\\s+', ' ', 'g')) AS department_key,
             COUNT(*)::int AS scholar_count
         FROM scholars
         {where_sql}
-        GROUP BY university, department
+        GROUP BY university_key, department_key
     """
     rows = await get_pool().fetch(sql)
 
     counts: dict[tuple, int] = defaultdict(int)
     for row in rows:
-        university = row.get("university") or ""
-        if not university:
+        university_key = row.get("university_key") or ""
+        if not university_key:
             continue
-        department = row.get("department") or ""
+        department_key = row.get("department_key") or ""
         c = int(row.get("scholar_count") or 0)
-        counts[("org", university)] += c
-        if department:
-            counts[("dept", university, department)] += c
+        counts[("org", university_key)] += c
+        if department_key:
+            counts[("dept", university_key, department_key)] += c
 
     return dict(counts)

@@ -106,7 +106,16 @@ class SchedulerManager:
             logger.debug("Registered crawl job: %s (schedule=%s)", job_id, schedule_key)
 
         # Register daily pipeline job (5 stages)
+        from app.scheduler.jobs import execute_university_leadership_monthly_job
         from app.scheduler.pipeline import execute_daily_pipeline
+
+        self.scheduler.add_job(
+            execute_university_leadership_monthly_job,
+            trigger=CronTrigger(day=1, hour=2, minute=30),
+            id="monthly_university_leadership_full",
+            replace_existing=True,
+            misfire_grace_time=3600,
+        )
 
         self.scheduler.add_job(
             execute_daily_pipeline,
@@ -124,7 +133,7 @@ class SchedulerManager:
             [c for c in self._source_configs if c.get("is_enabled", True)]
         )
         logger.info(
-            "Scheduler started with %d source jobs + daily pipeline (%02d:%02d UTC)",
+            "Scheduler started with %d source jobs + monthly leadership full crawl + daily pipeline (%02d:%02d UTC)",
             enabled_count,
             settings.PIPELINE_CRON_HOUR,
             settings.PIPELINE_CRON_MINUTE,

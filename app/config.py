@@ -52,6 +52,7 @@ class Settings(BaseSettings):
 
     # AMiner API
     AMINER_API_KEY: str = ""
+    AMINER_SCHOLAR_DETAIL_URL: str = "https://data.ihainan.me/api/aminer/scholar/detail"
 
     # Pipeline schedule (UTC)
     PIPELINE_CRON_HOUR: int = 6

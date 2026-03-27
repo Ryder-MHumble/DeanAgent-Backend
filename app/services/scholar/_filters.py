@@ -81,8 +81,132 @@ def _get_org_type(university: str, inst_map: dict[str, dict[str, str]]) -> str:
     return _derive_affiliation_type_from_university(university)
 
 
-def _match_fuzzy(value: str, query: str) -> bool:
-    return query.strip().lower() in (value or "").lower()
+def _normalize_exact_text(value: Any) -> str:
+    """Normalize text for exact-match comparison.
+
+    Rules:
+    - trim leading/trailing spaces
+    - collapse consecutive whitespace to a single space
+    - lowercase (for case-insensitive exact match)
+    """
+    if value is None:
+        return ""
+    return " ".join(str(value).strip().split()).lower()
+
+
+def _match_exact(value: str, query: str) -> bool:
+    return _normalize_exact_text(value) == _normalize_exact_text(query)
+
+
+def _norm_token(value: Any) -> str:
+    if value is None:
+        return ""
+    return "".join(str(value).strip().split()).lower()
+
+
+def _to_text_list(raw: Any) -> list[str]:
+    if raw is None:
+        return []
+    if isinstance(raw, list):
+        return [str(x).strip() for x in raw if str(x).strip()]
+    if isinstance(raw, str):
+        text = raw.strip()
+        if not text:
+            return []
+        return [text]
+    return []
+
+
+def _community_matches(item: dict[str, Any], community_name: str | None, community_type: str | None) -> bool:
+    if not community_name and not community_type:
+        return True
+
+    custom_fields = item.get("custom_fields") or {}
+    if not isinstance(custom_fields, dict):
+        custom_fields = {}
+
+    tags_raw = _to_text_list(item.get("tags"))
+    community_tags_raw = _to_text_list(custom_fields.get("community_tags"))
+    pool = tags_raw + community_tags_raw
+
+    name_target = _norm_token(community_name) if community_name else ""
+    type_target = _norm_token(community_type) if community_type else ""
+
+    def _pool_has(target: str) -> bool:
+        if not target:
+            return True
+        for tag in pool:
+            token = _norm_token(tag)
+            if not token:
+                continue
+            if token == target:
+                return True
+            if ":" in token and token.split(":")[-1] == target:
+                return True
+        return False
+
+    if name_target:
+        cf_name = _norm_token(custom_fields.get("community_name"))
+        if cf_name != name_target and not _pool_has(name_target):
+            return False
+
+    if type_target:
+        cf_type = _norm_token(custom_fields.get("community_type"))
+        if cf_type != type_target and not _pool_has(type_target):
+            return False
+
+    return True
+
+
+def _extract_project_tags(item: dict[str, Any]) -> list[dict[str, str]]:
+    raw_tags = item.get("project_tags")
+    tags: list[dict[str, str]] = []
+    if isinstance(raw_tags, list):
+        for raw in raw_tags:
+            if not isinstance(raw, dict):
+                continue
+            category = str(raw.get("category") or "").strip()
+            subcategory = str(raw.get("subcategory") or "").strip()
+            if not category and not subcategory:
+                continue
+            tags.append(
+                {
+                    "category": category,
+                    "subcategory": subcategory,
+                }
+            )
+    if tags:
+        return tags
+
+    legacy_category = str(item.get("project_category") or "").strip()
+    legacy_subcategory = str(item.get("project_subcategory") or "").strip()
+    if not legacy_category and not legacy_subcategory:
+        return []
+    return [{"category": legacy_category, "subcategory": legacy_subcategory}]
+
+
+_PROJECT_SUBCATEGORY_ALIASES: dict[str, set[str]] = {
+    "学院学生高校导师": {"学院学生事务导师"},
+    "学院学生事务导师": {"学院学生高校导师"},
+    "科技教育委员会": {"科技育青委员会"},
+    "科技育青委员会": {"科技教育委员会"},
+}
+
+
+def _project_subcategory_targets(value: str) -> set[str]:
+    target = value.strip()
+    if not target:
+        return set()
+    targets = {target}
+    targets.update(_PROJECT_SUBCATEGORY_ALIASES.get(target, set()))
+    return targets
+
+
+def _is_cobuild_scholar(item: dict[str, Any], project_tags: list[dict[str, str]]) -> bool:
+    explicit = item.get("is_cobuild_scholar")
+    if isinstance(explicit, bool):
+        return explicit
+    return bool(project_tags)
 
 
 def _derive_region_from_university(university: str) -> str:
@@ -183,12 +307,18 @@ def _apply_filters(
     is_adjunct_supervisor: bool | None,
     has_email: bool | None,
     keyword: str | None,
+    project_category: str | None,
+    project_subcategory: str | None,
+    participated_event_id: str | None,
+    is_cobuild_scholar: bool | None,
     region: str | None,
     affiliation_type: str | None,
     institution_names: list[str] | None = None,
     custom_field_key: str | None = None,
     custom_field_value: str | None = None,
     inst_map: dict[str, dict[str, str]] | None = None,
+    community_name: str | None = None,
+    community_type: str | None = None,
 ) -> list[dict[str, Any]]:
     result = items
 
@@ -198,10 +328,10 @@ def _apply_filters(
         result = [i for i in result if (i.get("university") or "") in name_set]
 
     if university:
-        result = [i for i in result if _match_fuzzy(i.get("university", ""), university)]
+        result = [i for i in result if _match_exact(i.get("university", ""), university)]
 
     if department:
-        result = [i for i in result if _match_fuzzy(i.get("department", ""), department)]
+        result = [i for i in result if _match_exact(i.get("department", ""), department)]
 
     if position:
         result = [i for i in result if i.get("position", "") == position]
@@ -237,6 +367,40 @@ def _apply_filters(
         result = [
             i for i in result
             if _get_org_type(i.get("university", ""), _map) == affiliation_type
+        ]
+
+    if community_name or community_type:
+        result = [i for i in result if _community_matches(i, community_name, community_type)]
+
+    if project_category:
+        target = project_category.strip()
+        result = [
+            i for i in result
+            if any((tag.get("category") or "") == target for tag in _extract_project_tags(i))
+        ]
+
+    if project_subcategory:
+        targets = _project_subcategory_targets(project_subcategory)
+        result = [
+            i for i in result
+            if any((tag.get("subcategory") or "") in targets for tag in _extract_project_tags(i))
+        ]
+
+    if participated_event_id:
+        target = participated_event_id.strip()
+
+        def _has_event(item: dict[str, Any]) -> bool:
+            event_ids = item.get("participated_event_ids") or []
+            if isinstance(event_ids, list):
+                return target in event_ids
+            return False
+
+        result = [i for i in result if _has_event(i)]
+
+    if is_cobuild_scholar is not None:
+        result = [
+            i for i in result
+            if _is_cobuild_scholar(i, _extract_project_tags(i)) == is_cobuild_scholar
         ]
 
     if keyword:

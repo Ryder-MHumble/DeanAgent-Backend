@@ -1,9 +1,10 @@
 """Pydantic schemas for the Institution API (/api/v1/institutions/)."""
 from __future__ import annotations
 
+from datetime import date, datetime
 from typing import Any
 
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 
 # ---------------------------------------------------------------------------
@@ -15,6 +16,7 @@ class ScholarInfo(BaseModel):
     """学者信息（校领导/重要学者）"""
 
     name: str = Field(description="姓名")
+    scholar_id: str | None = Field(default=None, description="学者 ID（scholars.id）")
     title: str | None = Field(default=None, description="头衔（院士/校长/书记等）")
     department: str | None = Field(default=None, description="所属院系")
     research_area: str | None = Field(default=None, description="研究方向")
@@ -397,3 +399,157 @@ class InstitutionSuggestionResponse(BaseModel):
     university: str = Field(description="输入的大学名称")
     matched: InstitutionSearchResult | None = Field(default=None, description="最佳匹配（强匹配）")
     suggestions: list[InstitutionSearchResult] = Field(default_factory=list, description="建议列表")
+
+
+# ---------------------------------------------------------------------------
+# University Leadership API schemas
+# ---------------------------------------------------------------------------
+
+
+class UniversityLeadershipMember(BaseModel):
+    """高校领导成员（爬虫结果）"""
+
+    name: str = Field(description="姓名")
+    role: str = Field(description="职务")
+    profile_url: str | None = Field(default=None, description="个人主页链接")
+    avatar_url: str | None = Field(default=None, description="头像链接")
+    bio: str | None = Field(default=None, description="简介全文")
+    intro_lines: list[str] = Field(default_factory=list, description="简介摘要段落")
+    source_page_url: str | None = Field(default=None, description="来源列表页 URL")
+    detail_name_text: str | None = Field(default=None, description="详情页标题文本")
+
+
+class UniversityLeadershipCurrentResponse(BaseModel):
+    """当前高校领导信息（按学校最新版本）"""
+
+    source_id: str = Field(description="信源 ID")
+    institution_id: str | None = Field(default=None, description="机构 ID")
+    university_name: str = Field(description="高校名称")
+    source_name: str | None = Field(default=None, description="信源名称")
+    source_url: str | None = Field(default=None, description="信源 URL")
+    dimension: str | None = Field(default=None, description="维度")
+    group: str | None = Field(default=None, description="分组")
+    crawled_at: datetime | None = Field(default=None, description="最近爬取时间 ISO8601")
+    previous_crawled_at: datetime | None = Field(default=None, description="上次爬取时间 ISO8601")
+    leader_count: int = Field(default=0, description="领导总数")
+    new_leader_count: int = Field(default=0, description="相对上次新增人数")
+    role_counts: dict[str, int] = Field(default_factory=dict, description="按职务统计")
+    leaders: list[UniversityLeadershipMember] = Field(default_factory=list, description="领导列表")
+    data_hash: str | None = Field(default=None, description="数据哈希")
+    change_version: int = Field(default=1, description="版本号（变化+1）")
+    last_changed_at: datetime | None = Field(default=None, description="最近变更时间 ISO8601")
+    updated_at: datetime | None = Field(default=None, description="记录更新时间 ISO8601")
+
+
+class UniversityLeadershipListResponse(BaseModel):
+    """高校领导列表（分页）"""
+
+    total: int = Field(default=0, description="总数")
+    page: int = Field(default=1, description="页码")
+    page_size: int = Field(default=20, description="每页数量")
+    items: list[UniversityLeadershipCurrentResponse] = Field(default_factory=list, description="列表项")
+
+
+class UniversityLeadershipAllResponse(BaseModel):
+    """高校领导全量数据"""
+
+    total: int = Field(default=0, description="总数")
+    items: list[UniversityLeadershipCurrentResponse] = Field(default_factory=list, description="全部高校领导数据")
+
+
+class UniversityLeadershipSnapshotItem(BaseModel):
+    """高校领导月度快照记录"""
+
+    snapshot_id: int | None = Field(default=None, description="快照 ID")
+    source_id: str = Field(description="信源 ID")
+    institution_id: str | None = Field(default=None, description="机构 ID")
+    university_name: str = Field(description="高校名称")
+    source_name: str | None = Field(default=None, description="信源名称")
+    source_url: str | None = Field(default=None, description="信源 URL")
+    crawl_month: date | None = Field(default=None, description="快照月份（YYYY-MM-01）")
+    crawled_at: datetime | None = Field(default=None, description="爬取时间 ISO8601")
+    previous_crawled_at: datetime | None = Field(default=None, description="上次爬取时间 ISO8601")
+    leader_count: int = Field(default=0, description="领导总数")
+    new_leader_count: int = Field(default=0, description="新增人数")
+    role_counts: dict[str, int] = Field(default_factory=dict, description="按职务统计")
+    leaders: list[UniversityLeadershipMember] = Field(default_factory=list, description="领导列表")
+    data_hash: str | None = Field(default=None, description="数据哈希")
+    changed: bool = Field(default=False, description="相对上次是否变化")
+    change_summary: dict[str, Any] = Field(default_factory=dict, description="变化摘要")
+    updated_at: datetime | None = Field(default=None, description="记录更新时间 ISO8601")
+
+
+class UniversityLeadershipHistoryResponse(BaseModel):
+    """高校领导历史快照列表"""
+
+    institution_id: str = Field(description="机构 ID")
+    university_name: str = Field(description="高校名称")
+    total: int = Field(default=0, description="返回条数")
+    items: list[UniversityLeadershipSnapshotItem] = Field(default_factory=list, description="历史快照")
+
+
+class UniversityLeadershipCrawlSourceResult(BaseModel):
+    """全量抓取单信源执行结果"""
+
+    source_id: str = Field(description="信源 ID")
+    source_name: str | None = Field(default=None, description="信源名称")
+    university_name: str | None = Field(default=None, description="高校名称")
+    status: str = Field(description="执行状态")
+    error: str | None = Field(default=None, description="错误信息")
+    leaders_total: int = Field(default=0, description="抓取到的领导人数")
+    changed: bool = Field(default=False, description="是否触发数据变化")
+    new_leader_count: int | None = Field(default=None, description="新增领导数")
+    change_version: int | None = Field(default=None, description="版本号")
+    duration_seconds: float = Field(default=0.0, description="耗时（秒）")
+    started_at: datetime | None = Field(default=None, description="开始时间 ISO8601")
+    finished_at: datetime | None = Field(default=None, description="结束时间 ISO8601")
+
+
+class UniversityLeadershipCrawlRunResponse(BaseModel):
+    """全量抓取任务结果"""
+
+    started_at: datetime | None = Field(default=None, description="任务开始时间 ISO8601")
+    finished_at: datetime | None = Field(default=None, description="任务结束时间 ISO8601")
+    duration_seconds: float | None = Field(default=None, description="任务耗时（秒）")
+    total_sources: int = Field(default=0, description="总信源数")
+    success_sources: int = Field(default=0, description="成功数")
+    failed_sources: int = Field(default=0, description="失败数")
+    changed_sources: int = Field(default=0, description="发生变化的信源数")
+    results: list[UniversityLeadershipCrawlSourceResult] = Field(default_factory=list, description="明细")
+
+
+class InstitutionScholarCandidate(BaseModel):
+    """可选学者候选项（用于手工配置机构人员）"""
+
+    scholar_id: str = Field(description="学者 ID")
+    name: str = Field(description="姓名")
+    university: str | None = Field(default=None, description="高校")
+    department: str | None = Field(default=None, description="院系")
+    position: str | None = Field(default=None, description="职称/职务")
+    photo_url: str | None = Field(default=None, description="头像")
+    research_areas: list[str] = Field(default_factory=list, description="研究方向")
+
+
+class InstitutionScholarCandidateResponse(BaseModel):
+    """机构学者候选列表响应"""
+
+    institution_id: str = Field(description="机构 ID")
+    institution_name: str = Field(description="机构名称")
+    query: str = Field(description="关键词")
+    total: int = Field(description="结果数")
+    items: list[InstitutionScholarCandidate] = Field(default_factory=list, description="候选项列表")
+
+
+class InstitutionManualPeopleUpdate(BaseModel):
+    """机构手工人员配置（从 scholars 表引用）"""
+
+    governance_scholar_ids: list[str] = Field(default_factory=list, description="负责人/治理团队学者 ID 列表")
+    notable_scholar_ids: list[str] = Field(default_factory=list, description="知名学者 ID 列表（最多 10）")
+    enforce_same_university: bool = Field(default=True, description="是否限制为同一高校学者")
+
+    @field_validator("notable_scholar_ids")
+    @classmethod
+    def _validate_notable_limit(cls, value: list[str]) -> list[str]:
+        if len(value) > 10:
+            raise ValueError("notable_scholar_ids 最多 10 位")
+        return value
