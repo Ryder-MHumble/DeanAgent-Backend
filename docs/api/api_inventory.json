@@ -1,0 +1,1531 @@
+{
+  "generated_at": "2026-03-30T04:04:43.158346+00:00",
+  "routes": [
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/aminer/organizations",
+      "service": "aminer",
+      "tags": [
+        "aminer"
+      ],
+      "summary": "查询机构信息",
+      "name": "search_organizations"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/aminer/scholars/search",
+      "service": "aminer",
+      "tags": [
+        "aminer"
+      ],
+      "summary": "搜索学者基础信息",
+      "name": "search_scholars"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/aminer/scholars/{aminer_id}",
+      "service": "aminer",
+      "tags": [
+        "aminer"
+      ],
+      "summary": "获取学者详细信息",
+      "name": "get_scholar_detail"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/articles",
+      "service": "articles",
+      "tags": [
+        "articles"
+      ],
+      "summary": "文章列表",
+      "name": "list_articles"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/articles/search",
+      "service": "articles",
+      "tags": [
+        "articles"
+      ],
+      "summary": "全文搜索",
+      "name": "search_articles"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/articles/stats",
+      "service": "articles",
+      "tags": [
+        "articles"
+      ],
+      "summary": "文章统计",
+      "name": "get_stats"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/articles/{article_id}",
+      "service": "articles",
+      "tags": [
+        "articles"
+      ],
+      "summary": "文章详情",
+      "name": "get_article"
+    },
+    {
+      "methods": [
+        "PATCH"
+      ],
+      "path": "/api/v1/articles/{article_id}",
+      "service": "articles",
+      "tags": [
+        "articles"
+      ],
+      "summary": "更新文章",
+      "name": "update_article"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/crawler/download",
+      "service": "crawler",
+      "tags": [
+        "crawler-control"
+      ],
+      "summary": "下载爬取结果",
+      "name": "download_result"
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/crawler/start",
+      "service": "crawler",
+      "tags": [
+        "crawler-control"
+      ],
+      "summary": "启动爬取任务",
+      "name": "start_crawl"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/crawler/status",
+      "service": "crawler",
+      "tags": [
+        "crawler-control"
+      ],
+      "summary": "获取爬取状态",
+      "name": "get_status"
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/crawler/stop",
+      "service": "crawler",
+      "tags": [
+        "crawler-control"
+      ],
+      "summary": "停止爬取任务",
+      "name": "stop_crawl"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/dimensions",
+      "service": "dimensions",
+      "tags": [
+        "dimensions"
+      ],
+      "summary": "维度列表",
+      "name": "list_dimensions"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/dimensions/{dimension}",
+      "service": "dimensions",
+      "tags": [
+        "dimensions"
+      ],
+      "summary": "维度文章",
+      "name": "get_dimension_articles"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/events",
+      "service": "events",
+      "tags": [
+        "events"
+      ],
+      "summary": "活动列表",
+      "name": "list_events"
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/events",
+      "service": "events",
+      "tags": [
+        "events"
+      ],
+      "summary": "创建活动",
+      "name": "create_event"
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/events/batch",
+      "service": "events",
+      "tags": [
+        "events"
+      ],
+      "summary": "批量创建活动",
+      "name": "batch_create_events"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/events/stats",
+      "service": "events",
+      "tags": [
+        "events"
+      ],
+      "summary": "活动统计",
+      "name": "get_stats"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/events/taxonomy",
+      "service": "events",
+      "tags": [
+        "events"
+      ],
+      "summary": "获取三级分类树",
+      "name": "get_taxonomy"
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/events/taxonomy",
+      "service": "events",
+      "tags": [
+        "events"
+      ],
+      "summary": "新增分类节点",
+      "name": "create_taxonomy_node"
+    },
+    {
+      "methods": [
+        "DELETE"
+      ],
+      "path": "/api/v1/events/taxonomy/{node_id}",
+      "service": "events",
+      "tags": [
+        "events"
+      ],
+      "summary": "删除分类节点",
+      "name": "delete_taxonomy_node"
+    },
+    {
+      "methods": [
+        "PATCH"
+      ],
+      "path": "/api/v1/events/taxonomy/{node_id}",
+      "service": "events",
+      "tags": [
+        "events"
+      ],
+      "summary": "更新分类节点",
+      "name": "update_taxonomy_node"
+    },
+    {
+      "methods": [
+        "DELETE"
+      ],
+      "path": "/api/v1/events/{event_id}",
+      "service": "events",
+      "tags": [
+        "events"
+      ],
+      "summary": "删除活动",
+      "name": "delete_event"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/events/{event_id}",
+      "service": "events",
+      "tags": [
+        "events"
+      ],
+      "summary": "活动详情",
+      "name": "get_event"
+    },
+    {
+      "methods": [
+        "PATCH"
+      ],
+      "path": "/api/v1/events/{event_id}",
+      "service": "events",
+      "tags": [
+        "events"
+      ],
+      "summary": "更新活动",
+      "name": "update_event"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/events/{event_id}/scholars",
+      "service": "events",
+      "tags": [
+        "events"
+      ],
+      "summary": "获取活动关联的学者列表",
+      "name": "get_event_scholars"
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/events/{event_id}/scholars",
+      "service": "events",
+      "tags": [
+        "events"
+      ],
+      "summary": "添加学者关联",
+      "name": "add_scholar_to_event"
+    },
+    {
+      "methods": [
+        "DELETE"
+      ],
+      "path": "/api/v1/events/{event_id}/scholars/{scholar_id}",
+      "service": "events",
+      "tags": [
+        "events"
+      ],
+      "summary": "移除学者关联",
+      "name": "remove_scholar_from_event"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/health",
+      "service": "health",
+      "tags": [
+        "health"
+      ],
+      "summary": "系统健康检查",
+      "name": "health_check"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/health/crawl-status",
+      "service": "health",
+      "tags": [
+        "health"
+      ],
+      "summary": "爬取健康概览",
+      "name": "crawl_status"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/health/pipeline-status",
+      "service": "health",
+      "tags": [
+        "health"
+      ],
+      "summary": "管线状态",
+      "name": "pipeline_status"
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/health/pipeline-trigger",
+      "service": "health",
+      "tags": [
+        "health"
+      ],
+      "summary": "手动触发管线",
+      "name": "trigger_pipeline"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/institutions",
+      "service": "institutions",
+      "tags": [
+        "institutions"
+      ],
+      "summary": "机构列表（统一接口）",
+      "name": "list_institutions"
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/institutions",
+      "service": "institutions",
+      "tags": [
+        "institutions"
+      ],
+      "summary": "创建机构（支持简化模式）",
+      "name": "create_institution"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/institutions/aminer/search-org",
+      "service": "institutions",
+      "tags": [
+        "institutions"
+      ],
+      "summary": "搜索 AMiner 机构名",
+      "name": "search_aminer_organizations"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/institutions/search",
+      "service": "institutions",
+      "tags": [
+        "institutions"
+      ],
+      "summary": "搜索机构（模糊匹配）",
+      "name": "search_institutions_endpoint"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/institutions/stats",
+      "service": "institutions",
+      "tags": [
+        "institutions"
+      ],
+      "summary": "机构统计",
+      "name": "get_institution_stats"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/institutions/suggest",
+      "service": "institutions",
+      "tags": [
+        "institutions"
+      ],
+      "summary": "建议机构匹配",
+      "name": "suggest_institution_endpoint"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/institutions/taxonomy",
+      "service": "institutions",
+      "tags": [
+        "institutions"
+      ],
+      "summary": "分类体系统计",
+      "name": "get_institution_taxonomy"
+    },
+    {
+      "methods": [
+        "DELETE"
+      ],
+      "path": "/api/v1/institutions/{institution_id}",
+      "service": "institutions",
+      "tags": [
+        "institutions"
+      ],
+      "summary": "删除机构",
+      "name": "delete_institution"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/institutions/{institution_id}",
+      "service": "institutions",
+      "tags": [
+        "institutions"
+      ],
+      "summary": "机构详情",
+      "name": "get_institution"
+    },
+    {
+      "methods": [
+        "PATCH"
+      ],
+      "path": "/api/v1/institutions/{institution_id}",
+      "service": "institutions",
+      "tags": [
+        "institutions"
+      ],
+      "summary": "更新机构",
+      "name": "update_institution"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intel/daily-briefing/metrics",
+      "service": "intel/daily-briefing",
+      "tags": [
+        "intel",
+        "daily-briefing"
+      ],
+      "summary": "获取早报指标卡片",
+      "name": "get_briefing_metrics"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intel/daily-briefing/report",
+      "service": "intel/daily-briefing",
+      "tags": [
+        "intel",
+        "daily-briefing"
+      ],
+      "summary": "获取 AI 早报",
+      "name": "get_daily_briefing"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intel/paper-transfer/results",
+      "service": "intel/paper-transfer",
+      "tags": [
+        "intel",
+        "paper-transfer"
+      ],
+      "summary": "获取论文转化分析结果",
+      "name": "get_results"
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/intel/paper-transfer/run",
+      "service": "intel/paper-transfer",
+      "tags": [
+        "intel",
+        "paper-transfer"
+      ],
+      "summary": "触发论文转化分析 Pipeline",
+      "name": "run_pipeline"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intel/paper-transfer/status",
+      "service": "intel/paper-transfer",
+      "tags": [
+        "intel",
+        "paper-transfer"
+      ],
+      "summary": "查询 Pipeline 运行状态",
+      "name": "get_status"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intel/personnel/changes",
+      "service": "intel/personnel",
+      "tags": [
+        "intel",
+        "personnel-intel"
+      ],
+      "summary": "结构化任免变动",
+      "name": "get_personnel_changes"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intel/personnel/enriched-feed",
+      "service": "intel/personnel",
+      "tags": [
+        "intel",
+        "personnel-intel"
+      ],
+      "summary": "LLM 富化人事动态",
+      "name": "get_enriched_feed"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intel/personnel/enriched-stats",
+      "service": "intel/personnel",
+      "tags": [
+        "intel",
+        "personnel-intel"
+      ],
+      "summary": "富化数据统计",
+      "name": "get_enriched_stats"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intel/personnel/feed",
+      "service": "intel/personnel",
+      "tags": [
+        "intel",
+        "personnel-intel"
+      ],
+      "summary": "人事动态 Feed",
+      "name": "get_personnel_feed"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intel/personnel/stats",
+      "service": "intel/personnel",
+      "tags": [
+        "intel",
+        "personnel-intel"
+      ],
+      "summary": "人事统计",
+      "name": "get_personnel_stats"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intel/policy/feed",
+      "service": "intel/policy",
+      "tags": [
+        "intel",
+        "policy-intel"
+      ],
+      "summary": "政策动态 Feed",
+      "name": "get_policy_feed"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intel/policy/opportunities",
+      "service": "intel/policy",
+      "tags": [
+        "intel",
+        "policy-intel"
+      ],
+      "summary": "政策机会看板",
+      "name": "get_policy_opportunities"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intel/policy/stats",
+      "service": "intel/policy",
+      "tags": [
+        "intel",
+        "policy-intel"
+      ],
+      "summary": "政策统计",
+      "name": "get_policy_stats"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intel/tech-frontier/opportunities",
+      "service": "intel/tech-frontier",
+      "tags": [
+        "intel",
+        "tech-frontier"
+      ],
+      "summary": "科技前沿机会列表",
+      "name": "get_opportunities"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intel/tech-frontier/signals",
+      "service": "intel/tech-frontier",
+      "tags": [
+        "intel",
+        "tech-frontier"
+      ],
+      "summary": "扁平信号流",
+      "name": "get_signals"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intel/tech-frontier/stats",
+      "service": "intel/tech-frontier",
+      "tags": [
+        "intel",
+        "tech-frontier"
+      ],
+      "summary": "科技前沿 KPI 统计",
+      "name": "get_stats"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intel/tech-frontier/topics",
+      "service": "intel/tech-frontier",
+      "tags": [
+        "intel",
+        "tech-frontier"
+      ],
+      "summary": "科技前沿主题列表",
+      "name": "get_topics"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intel/tech-frontier/topics/{topic_id}",
+      "service": "intel/tech-frontier",
+      "tags": [
+        "intel",
+        "tech-frontier"
+      ],
+      "summary": "单个主题详情",
+      "name": "get_topic_detail"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intel/university/article/{url_hash}",
+      "service": "intel/university",
+      "tags": [
+        "intel",
+        "university-eco"
+      ],
+      "summary": "高校文章详情",
+      "name": "get_article"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intel/university/feed",
+      "service": "intel/university",
+      "tags": [
+        "intel",
+        "university-eco"
+      ],
+      "summary": "高校动态 Feed",
+      "name": "get_feed"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intel/university/overview",
+      "service": "intel/university",
+      "tags": [
+        "intel",
+        "university-eco"
+      ],
+      "summary": "高校生态总览",
+      "name": "get_overview"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intel/university/research",
+      "service": "intel/university",
+      "tags": [
+        "intel",
+        "university-eco"
+      ],
+      "summary": "高校科研成果",
+      "name": "get_research"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/intel/university/sources",
+      "service": "intel/university",
+      "tags": [
+        "intel",
+        "university-eco"
+      ],
+      "summary": "高校信源列表",
+      "name": "get_sources"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/leadership",
+      "service": "leadership",
+      "tags": [
+        "leadership"
+      ],
+      "summary": "高校领导列表",
+      "name": "list_university_leadership_endpoint"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/leadership/all",
+      "service": "leadership",
+      "tags": [
+        "leadership"
+      ],
+      "summary": "高校领导全量数据",
+      "name": "get_all_university_leadership_endpoint"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/leadership/{institution_id}",
+      "service": "leadership",
+      "tags": [
+        "leadership"
+      ],
+      "summary": "高校领导当前数据",
+      "name": "get_university_leadership_current_endpoint"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/llm-tracking/audit-trail",
+      "service": "llm-tracking",
+      "tags": [
+        "llm-tracking"
+      ],
+      "summary": null,
+      "name": "get_audit_trail"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/llm-tracking/calls-by-article/{article_id}",
+      "service": "llm-tracking",
+      "tags": [
+        "llm-tracking"
+      ],
+      "summary": null,
+      "name": "get_calls_by_article"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/llm-tracking/calls-by-stage/{stage}",
+      "service": "llm-tracking",
+      "tags": [
+        "llm-tracking"
+      ],
+      "summary": null,
+      "name": "get_calls_by_stage"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/llm-tracking/cost-by-model",
+      "service": "llm-tracking",
+      "tags": [
+        "llm-tracking"
+      ],
+      "summary": null,
+      "name": "get_cost_by_model"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/llm-tracking/health",
+      "service": "llm-tracking",
+      "tags": [
+        "llm-tracking"
+      ],
+      "summary": null,
+      "name": "llm_tracking_health"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/llm-tracking/summary",
+      "service": "llm-tracking",
+      "tags": [
+        "llm-tracking"
+      ],
+      "summary": null,
+      "name": "get_llm_summary"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/projects",
+      "service": "projects",
+      "tags": [
+        "projects"
+      ],
+      "summary": "项目列表",
+      "name": "list_projects"
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/projects",
+      "service": "projects",
+      "tags": [
+        "projects"
+      ],
+      "summary": "创建项目",
+      "name": "create_project"
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/projects/batch",
+      "service": "projects",
+      "tags": [
+        "projects"
+      ],
+      "summary": "批量创建项目",
+      "name": "batch_create_projects"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/projects/stats",
+      "service": "projects",
+      "tags": [
+        "projects"
+      ],
+      "summary": "项目统计",
+      "name": "get_stats"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/projects/taxonomy",
+      "service": "projects",
+      "tags": [
+        "projects"
+      ],
+      "summary": "项目分类树",
+      "name": "get_taxonomy"
+    },
+    {
+      "methods": [
+        "DELETE"
+      ],
+      "path": "/api/v1/projects/{project_id}",
+      "service": "projects",
+      "tags": [
+        "projects"
+      ],
+      "summary": "删除项目",
+      "name": "delete_project"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/projects/{project_id}",
+      "service": "projects",
+      "tags": [
+        "projects"
+      ],
+      "summary": "项目详情",
+      "name": "get_project"
+    },
+    {
+      "methods": [
+        "PATCH"
+      ],
+      "path": "/api/v1/projects/{project_id}",
+      "service": "projects",
+      "tags": [
+        "projects"
+      ],
+      "summary": "更新项目",
+      "name": "update_project"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/reports/dimensions",
+      "service": "reports",
+      "tags": [
+        "reports",
+        "Reports"
+      ],
+      "summary": null,
+      "name": "list_dimensions"
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/reports/generate",
+      "service": "reports",
+      "tags": [
+        "reports",
+        "Reports"
+      ],
+      "summary": null,
+      "name": "generate_report"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/reports/sentiment/latest",
+      "service": "reports",
+      "tags": [
+        "reports",
+        "Reports"
+      ],
+      "summary": null,
+      "name": "get_latest_sentiment_report"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/scholars",
+      "service": "scholars",
+      "tags": [
+        "scholars"
+      ],
+      "summary": "学者列表",
+      "name": "list_scholars"
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/scholars",
+      "service": "scholars",
+      "tags": [
+        "scholars"
+      ],
+      "summary": "手动创建学者",
+      "name": "create_scholar"
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/scholars/batch",
+      "service": "scholars",
+      "tags": [
+        "scholars"
+      ],
+      "summary": "JSON 批量创建学者",
+      "name": "batch_create_scholars"
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/scholars/import",
+      "service": "scholars",
+      "tags": [
+        "scholars"
+      ],
+      "summary": "Excel/CSV 批量导入学者",
+      "name": "import_scholars_file"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/scholars/stats",
+      "service": "scholars",
+      "tags": [
+        "scholars"
+      ],
+      "summary": "学者统计",
+      "name": "get_stats"
+    },
+    {
+      "methods": [
+        "DELETE"
+      ],
+      "path": "/api/v1/scholars/{url_hash}",
+      "service": "scholars",
+      "tags": [
+        "scholars"
+      ],
+      "summary": "删除学者记录",
+      "name": "delete_scholar"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/scholars/{url_hash}",
+      "service": "scholars",
+      "tags": [
+        "scholars"
+      ],
+      "summary": "学者详情",
+      "name": "get_faculty"
+    },
+    {
+      "methods": [
+        "PATCH"
+      ],
+      "path": "/api/v1/scholars/{url_hash}/achievements",
+      "service": "scholars",
+      "tags": [
+        "scholars"
+      ],
+      "summary": "更新学术成就",
+      "name": "update_achievements"
+    },
+    {
+      "methods": [
+        "PATCH"
+      ],
+      "path": "/api/v1/scholars/{url_hash}/basic",
+      "service": "scholars",
+      "tags": [
+        "scholars"
+      ],
+      "summary": "更新基础信息",
+      "name": "update_basic"
+    },
+    {
+      "methods": [
+        "PATCH"
+      ],
+      "path": "/api/v1/scholars/{url_hash}/relation",
+      "service": "scholars",
+      "tags": [
+        "scholars"
+      ],
+      "summary": "更新与两院关系",
+      "name": "update_relation"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/scholars/{url_hash}/students",
+      "service": "scholars",
+      "tags": [
+        "scholars"
+      ],
+      "summary": "查询指导学生列表",
+      "name": "list_students"
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/scholars/{url_hash}/students",
+      "service": "scholars",
+      "tags": [
+        "scholars"
+      ],
+      "summary": "新增指导学生",
+      "name": "add_student"
+    },
+    {
+      "methods": [
+        "DELETE"
+      ],
+      "path": "/api/v1/scholars/{url_hash}/students/{student_id}",
+      "service": "scholars",
+      "tags": [
+        "scholars"
+      ],
+      "summary": "删除学生记录",
+      "name": "delete_student"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/scholars/{url_hash}/students/{student_id}",
+      "service": "scholars",
+      "tags": [
+        "scholars"
+      ],
+      "summary": "查询单名学生详情",
+      "name": "get_student"
+    },
+    {
+      "methods": [
+        "PATCH"
+      ],
+      "path": "/api/v1/scholars/{url_hash}/students/{student_id}",
+      "service": "scholars",
+      "tags": [
+        "scholars"
+      ],
+      "summary": "更新学生信息",
+      "name": "update_student"
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/scholars/{url_hash}/updates",
+      "service": "scholars",
+      "tags": [
+        "scholars"
+      ],
+      "summary": "新增用户备注动态",
+      "name": "add_update"
+    },
+    {
+      "methods": [
+        "DELETE"
+      ],
+      "path": "/api/v1/scholars/{url_hash}/updates/{update_idx}",
+      "service": "scholars",
+      "tags": [
+        "scholars"
+      ],
+      "summary": "删除用户备注动态",
+      "name": "delete_update"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/sentiment/content/{content_id}",
+      "service": "sentiment",
+      "tags": [
+        "sentiment"
+      ],
+      "summary": "内容详情 + 评论",
+      "name": "content_detail"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/sentiment/feed",
+      "service": "sentiment",
+      "tags": [
+        "sentiment"
+      ],
+      "summary": "社媒内容信息流",
+      "name": "feed"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/sentiment/overview",
+      "service": "sentiment",
+      "tags": [
+        "sentiment"
+      ],
+      "summary": "舆情概览统计",
+      "name": "overview"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/sources",
+      "service": "sources",
+      "tags": [
+        "sources"
+      ],
+      "summary": "信源列表",
+      "name": "list_sources"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/sources/catalog",
+      "service": "sources",
+      "tags": [
+        "sources"
+      ],
+      "summary": "信源目录（分页 + 分面）",
+      "name": "list_sources_catalog"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/sources/facets",
+      "service": "sources",
+      "tags": [
+        "sources"
+      ],
+      "summary": "信源筛选分面",
+      "name": "get_source_facets"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/sources/{source_id}",
+      "service": "sources",
+      "tags": [
+        "sources"
+      ],
+      "summary": "信源详情",
+      "name": "get_source"
+    },
+    {
+      "methods": [
+        "PATCH"
+      ],
+      "path": "/api/v1/sources/{source_id}",
+      "service": "sources",
+      "tags": [
+        "sources"
+      ],
+      "summary": "启用/禁用信源",
+      "name": "update_source"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/sources/{source_id}/logs",
+      "service": "sources",
+      "tags": [
+        "sources"
+      ],
+      "summary": "爬取日志",
+      "name": "get_source_logs"
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/sources/{source_id}/trigger",
+      "service": "sources",
+      "tags": [
+        "sources"
+      ],
+      "summary": "手动触发爬取",
+      "name": "trigger_crawl"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/students",
+      "service": "students",
+      "tags": [
+        "students"
+      ],
+      "summary": "学生列表",
+      "name": "list_students"
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/students",
+      "service": "students",
+      "tags": [
+        "students"
+      ],
+      "summary": "新增学生",
+      "name": "create_student"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/students/options",
+      "service": "students",
+      "tags": [
+        "students"
+      ],
+      "summary": "学生筛选项",
+      "name": "get_filter_options"
+    },
+    {
+      "methods": [
+        "DELETE"
+      ],
+      "path": "/api/v1/students/{student_id}",
+      "service": "students",
+      "tags": [
+        "students"
+      ],
+      "summary": "删除学生",
+      "name": "delete_student"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/students/{student_id}",
+      "service": "students",
+      "tags": [
+        "students"
+      ],
+      "summary": "学生详情",
+      "name": "get_student"
+    },
+    {
+      "methods": [
+        "PATCH"
+      ],
+      "path": "/api/v1/students/{student_id}",
+      "service": "students",
+      "tags": [
+        "students"
+      ],
+      "summary": "更新学生",
+      "name": "update_student"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/venues",
+      "service": "venues",
+      "tags": [
+        "venues"
+      ],
+      "summary": "获取顶会/期刊列表",
+      "name": "list_venues"
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/venues",
+      "service": "venues",
+      "tags": [
+        "venues"
+      ],
+      "summary": "创建顶会/期刊",
+      "name": "create_venue"
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/venues/batch",
+      "service": "venues",
+      "tags": [
+        "venues"
+      ],
+      "summary": "批量导入顶会/期刊",
+      "name": "batch_create_venues"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/venues/stats",
+      "service": "venues",
+      "tags": [
+        "venues"
+      ],
+      "summary": "顶会/期刊统计",
+      "name": "get_venue_stats"
+    },
+    {
+      "methods": [
+        "DELETE"
+      ],
+      "path": "/api/v1/venues/{venue_id}",
+      "service": "venues",
+      "tags": [
+        "venues"
+      ],
+      "summary": "删除顶会/期刊",
+      "name": "delete_venue"
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/venues/{venue_id}",
+      "service": "venues",
+      "tags": [
+        "venues"
+      ],
+      "summary": "获取顶会/期刊详情",
+      "name": "get_venue"
+    },
+    {
+      "methods": [
+        "PATCH"
+      ],
+      "path": "/api/v1/venues/{venue_id}",
+      "service": "venues",
+      "tags": [
+        "venues"
+      ],
+      "summary": "更新顶会/期刊",
+      "name": "update_venue"
+    }
+  ]
+}

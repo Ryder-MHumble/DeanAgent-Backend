@@ -11,6 +11,7 @@ from typing import Any
 
 from app.schemas.institution import InstitutionDetailResponse
 from app.services.core.institution.classification import (
+    normalize_org_type,
     parse_priority,
     resolve_classification_pair,
 )
@@ -97,6 +98,8 @@ async def create_institution(inst_data: dict) -> InstitutionDetailResponse:
 
     if "priority" in raw_data:
         raw_data["priority"] = parse_priority(raw_data.get("priority"))
+
+    raw_data["org_type"] = normalize_org_type(raw_data.get("org_type"))
 
     classification, sub_classification = resolve_classification_pair(
         raw_data.get("classification"),
@@ -199,6 +202,9 @@ async def update_institution(
 
     if "priority" in update_data:
         update_data["priority"] = parse_priority(update_data.get("priority"))
+
+    if "org_type" in update_data:
+        update_data["org_type"] = normalize_org_type(update_data.get("org_type"))
 
     if any(k in update_data for k in ("classification", "sub_classification", "org_type")):
         classification, sub_classification = resolve_classification_pair(

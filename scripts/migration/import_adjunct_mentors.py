@@ -17,8 +17,18 @@ import json
 from pathlib import Path
 from typing import Any
 
-from app.config import settings
-from app.db.pool import close_pool, init_pool
+try:
+    from scripts.migration.components.runtime import (
+        close_postgres_pool,
+        get_postgres_pool,
+        init_postgres_pool_from_settings,
+    )
+except ModuleNotFoundError:  # direct execution fallback
+    from components.runtime import (  # type: ignore[no-redef]
+        close_postgres_pool,
+        get_postgres_pool,
+        init_postgres_pool_from_settings,
+    )
 
 BASIC_CSV = Path("data/scholars/学院导师信息.csv")
 AAAI_CSV = Path("data/scholars/AAAI+学院导师.csv")
@@ -272,16 +282,7 @@ def resolve_mentor_university_for_aaai_row(
 
 
 async def connect_pool() -> None:
-    if settings.POSTGRES_DSN:
-        await init_pool(dsn=settings.POSTGRES_DSN)
-    else:
-        await init_pool(
-            host=settings.POSTGRES_HOST,
-            port=settings.POSTGRES_PORT,
-            user=settings.POSTGRES_USER,
-            password=settings.POSTGRES_PASSWORD,
-            database=settings.POSTGRES_DB,
-        )
+    await init_postgres_pool_from_settings()
 
 
 async def run(apply_changes: bool) -> None:
@@ -322,9 +323,8 @@ async def run(apply_changes: bool) -> None:
         mentor_name_to_unis.setdefault(n(m["name"]), []).append(m["university"])
 
     await connect_pool()
-    from app.db.pool import get_pool  # imported late after init
 
-    pool = get_pool()
+    pool = get_postgres_pool()
     async with pool.acquire() as conn:
         db_rows_raw = await conn.fetch(
             """
@@ -998,7 +998,7 @@ async def run(apply_changes: bool) -> None:
     print(f"updated: {stage3_stats['updated']}")
     print(f"unchanged: {stage3_stats['unchanged']}")
 
-    await close_pool()
+    await close_postgres_pool()
 
 
 def parse_args() -> argparse.Namespace:

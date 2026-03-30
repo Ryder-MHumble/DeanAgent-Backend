@@ -18,6 +18,7 @@ from typing import Any
 
 logger = logging.getLogger(__name__)
 
+from app.services.core.institution.classification import normalize_org_type
 from app.services.stores import scholar_annotation_store as annotation_store
 from app.services.stores import supervised_student_store as student_store
 from app.services.scholar._data import (
@@ -788,6 +789,9 @@ async def get_scholar_list(
     community_type: str | None = None,
     project_category: str | None = None,
     project_subcategory: str | None = None,
+    project_categories: str | None = None,
+    project_subcategories: str | None = None,
+    event_types: str | None = None,
     participated_event_id: str | None = None,
     is_cobuild_scholar: bool | None = None,
     region: str | None = None,
@@ -799,6 +803,8 @@ async def get_scholar_list(
     custom_field_key: str | None = None,
     custom_field_value: str | None = None,
 ) -> dict[str, Any]:
+    affiliation_type = normalize_org_type(affiliation_type)
+
     # Resolve institution_group/category → list of institution names for filtering
     institution_names: list[str] | None = None
     if institution_group or institution_category:
@@ -807,33 +813,37 @@ async def get_scholar_list(
         )
 
     # Primary path: SQL pushdown + pagination (much faster than loading all rows).
-    try:
-        return await query_scholar_list_fast(
-            university=university,
-            department=department,
-            position=position,
-            is_academician=is_academician,
-            is_potential_recruit=is_potential_recruit,
-            is_advisor_committee=is_advisor_committee,
-            is_adjunct_supervisor=is_adjunct_supervisor,
-            has_email=has_email,
-            keyword=keyword,
-            community_name=community_name,
-            community_type=community_type,
-            project_category=project_category,
-            project_subcategory=project_subcategory,
-            participated_event_id=participated_event_id,
-            is_cobuild_scholar=is_cobuild_scholar,
-            region=region,
-            affiliation_type=affiliation_type,
-            institution_names=institution_names,
-            custom_field_key=custom_field_key,
-            custom_field_value=custom_field_value,
-            page=page,
-            page_size=page_size,
-        )
-    except Exception as exc:
-        logger.warning("Fast scholar list query failed, fallback to legacy path: %s", exc)
+    # Multi-value tag filters are currently implemented in in-memory fallback path.
+    has_multi_tag_filters = bool(project_categories or project_subcategories or event_types)
+    has_region_or_type_filters = bool(region or affiliation_type)
+    if not has_multi_tag_filters and not has_region_or_type_filters:
+        try:
+            return await query_scholar_list_fast(
+                university=university,
+                department=department,
+                position=position,
+                is_academician=is_academician,
+                is_potential_recruit=is_potential_recruit,
+                is_advisor_committee=is_advisor_committee,
+                is_adjunct_supervisor=is_adjunct_supervisor,
+                has_email=has_email,
+                keyword=keyword,
+                community_name=community_name,
+                community_type=community_type,
+                project_category=project_category,
+                project_subcategory=project_subcategory,
+                participated_event_id=participated_event_id,
+                is_cobuild_scholar=is_cobuild_scholar,
+                region=region,
+                affiliation_type=affiliation_type,
+                institution_names=institution_names,
+                custom_field_key=custom_field_key,
+                custom_field_value=custom_field_value,
+                page=page,
+                page_size=page_size,
+            )
+        except Exception as exc:
+            logger.warning("Fast scholar list query failed, fallback to legacy path: %s", exc)
 
     # Fallback path: in-memory filtering over full dataset.
     items = await _load_all_with_annotations_async()
@@ -857,6 +867,9 @@ async def get_scholar_list(
         community_type=community_type,
         project_category=project_category,
         project_subcategory=project_subcategory,
+        project_categories=project_categories,
+        project_subcategories=project_subcategories,
+        event_types=event_types,
         participated_event_id=participated_event_id,
         is_cobuild_scholar=is_cobuild_scholar,
         region=region,
@@ -943,6 +956,9 @@ async def get_scholar_stats(
     community_type: str | None = None,
     project_category: str | None = None,
     project_subcategory: str | None = None,
+    project_categories: str | None = None,
+    project_subcategories: str | None = None,
+    event_types: str | None = None,
     participated_event_id: str | None = None,
     is_cobuild_scholar: bool | None = None,
     region: str | None = None,
@@ -957,6 +973,8 @@ async def get_scholar_stats(
     Applies the same filters as get_scholar_list() to ensure consistency
     between list view and stats view.
     """
+    affiliation_type = normalize_org_type(affiliation_type)
+
     # Resolve institution_group/category → list of institution names for filtering
     institution_names: list[str] | None = None
     if institution_group or institution_category:
@@ -987,6 +1005,9 @@ async def get_scholar_stats(
         community_type=community_type,
         project_category=project_category,
         project_subcategory=project_subcategory,
+        project_categories=project_categories,
+        project_subcategories=project_subcategories,
+        event_types=event_types,
         participated_event_id=participated_event_id,
         is_cobuild_scholar=is_cobuild_scholar,
         region=region,

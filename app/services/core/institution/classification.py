@@ -97,6 +97,17 @@ _CLASSIFICATION_ALIASES: Final[dict[str, str]] = {
     "研究机构": "新研机构",
 }
 
+_ORG_TYPE_ALIASES: Final[dict[str, str]] = {
+    "高校": "高校",
+    "企业": "企业",
+    "公司": "企业",
+    "研究机构": "研究机构",
+    "科研院所": "研究机构",
+    "行业学会": "行业学会",
+    "行业协会": "行业学会",
+    "其他": "其他",
+}
+
 _SUB_CLASSIFICATION_ALIASES: Final[dict[str, str]] = {
     "京内高校": "境内高校",
     "京外C9": "京外C9高校",
@@ -216,6 +227,16 @@ def normalize_classification(classification: str | None) -> str | None:
     return _CLASSIFICATION_ALIASES.get(value, value)
 
 
+def normalize_org_type(org_type: str | None) -> str | None:
+    """Normalize org_type with aliases."""
+    if org_type is None:
+        return None
+    value = org_type.strip()
+    if value == "":
+        return None
+    return _ORG_TYPE_ALIASES.get(value, value)
+
+
 def normalize_sub_classification(sub_classification: str | None) -> str | None:
     """Normalize sub-classification with aliases."""
     if sub_classification is None:
@@ -241,6 +262,7 @@ def resolve_classification_pair(
     """
     normalized_classification = normalize_classification(classification)
     normalized_sub = normalize_sub_classification(sub_classification)
+    normalized_org_type = normalize_org_type(org_type)
 
     if normalized_sub and not normalized_classification:
         normalized_classification = SUB_CLASSIFICATION_TO_CLASSIFICATION.get(normalized_sub)
@@ -261,19 +283,19 @@ def resolve_classification_pair(
         if normalized_classification not in CLASSIFICATION_SUBCLASSIFICATION_OPTIONS:
             raise ValueError(f"未知的 classification: {normalized_classification}")
 
-    if org_type:
-        allowed = _ORG_TYPE_ALLOWED_CLASSIFICATIONS.get(org_type)
+    if normalized_org_type:
+        allowed = _ORG_TYPE_ALLOWED_CLASSIFICATIONS.get(normalized_org_type)
         if allowed:
             if normalized_classification and normalized_classification not in allowed:
                 allowed_text = " / ".join(sorted(allowed))
                 raise ValueError(
-                    f"org_type '{org_type}' 仅允许 classification 为: {allowed_text}"
+                    f"org_type '{normalized_org_type}' 仅允许 classification 为: {allowed_text}"
                 )
         else:
             # 企业/其他等类型默认不挂高校分类
             if normalized_classification:
                 raise ValueError(
-                    f"org_type '{org_type}' 不支持设置 classification/sub_classification"
+                    f"org_type '{normalized_org_type}' 不支持设置 classification/sub_classification"
                 )
 
     return normalized_classification, normalized_sub

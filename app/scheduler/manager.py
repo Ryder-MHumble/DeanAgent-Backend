@@ -48,11 +48,16 @@ def load_all_source_configs() -> list[dict[str, Any]]:
             continue
 
         dimension = data.get("dimension", yaml_file.stem)
+        dimension_name = data.get("dimension_name")
+        dimension_description = data.get("description")
         default_keywords = data.get("default_keyword_filter", [])
         default_blacklist = data.get("default_keyword_blacklist", [])
 
         for source in data.get("sources", []):
             source.setdefault("dimension", dimension)
+            source.setdefault("dimension_name", dimension_name)
+            source.setdefault("dimension_description", dimension_description)
+            source.setdefault("source_file", yaml_file.name)
             if "keyword_filter" not in source:
                 source["keyword_filter"] = default_keywords
             if "keyword_blacklist" not in source:

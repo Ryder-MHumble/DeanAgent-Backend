@@ -15,8 +15,18 @@ import json
 import re
 from typing import Any
 
-from app.config import settings
-from app.db.pool import close_pool, get_pool, init_pool
+try:
+    from scripts.migration.components.runtime import (
+        close_postgres_pool,
+        get_postgres_pool,
+        init_postgres_pool_from_settings,
+    )
+except ModuleNotFoundError:  # direct execution fallback
+    from components.runtime import (  # type: ignore[no-redef]
+        close_postgres_pool,
+        get_postgres_pool,
+        init_postgres_pool_from_settings,
+    )
 
 YEAR_RE = re.compile(r"(19|20)\d{2}")
 
@@ -159,21 +169,12 @@ def normalize_patent(raw: Any, scholar_id: str, idx: int) -> dict[str, Any] | No
 
 
 async def connect_pool() -> None:
-    if settings.POSTGRES_DSN:
-        await init_pool(dsn=settings.POSTGRES_DSN)
-    else:
-        await init_pool(
-            host=settings.POSTGRES_HOST,
-            port=settings.POSTGRES_PORT,
-            user=settings.POSTGRES_USER,
-            password=settings.POSTGRES_PASSWORD,
-            database=settings.POSTGRES_DB,
-        )
+    await init_postgres_pool_from_settings()
 
 
 async def run(apply_changes: bool) -> None:
     await connect_pool()
-    pool = get_pool()
+    pool = get_postgres_pool()
 
     async with pool.acquire() as conn:
         rows = await conn.fetch(
@@ -309,7 +310,7 @@ async def run(apply_changes: bool) -> None:
     print(f"scholar_publications_table_count: {target_pub_count}")
     print(f"scholar_patents_table_count: {target_pat_count}")
 
-    await close_pool()
+    await close_postgres_pool()
 
 
 def parse_args() -> argparse.Namespace:

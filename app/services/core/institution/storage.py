@@ -9,6 +9,7 @@ import logging
 from typing import Final
 
 from app.db.client import get_client
+from app.services.core.institution.classification import normalize_org_type
 
 logger = logging.getLogger(__name__)
 
@@ -117,6 +118,7 @@ async def upsert_institution(institution_data: dict) -> dict:
     columns = await _get_institution_columns()
 
     normalized = dict(institution_data)
+    normalized["org_type"] = normalize_org_type(normalized.get("org_type"))
     # Backward compatibility: legacy schema keeps `type` as NOT NULL.
     if "type" in columns and not normalized.get("type"):
         entity_type = normalized.get("entity_type")
@@ -150,6 +152,13 @@ async def upsert_institution(institution_data: dict) -> dict:
 
     client = get_client()
     resp = await client.table("institutions").upsert(payload).execute()
+    try:
+        from app.services.scholar._filters import invalidate_institution_classification_cache  # noqa: PLC0415
+
+        invalidate_institution_classification_cache()
+    except Exception:
+        # Do not fail institution write if scholar cache invalidation is unavailable.
+        pass
     return resp.data[0]
 
 
@@ -164,4 +173,12 @@ async def delete_institution_by_id(institution_id: str) -> bool:
     """
     client = get_client()
     resp = await client.table("institutions").delete().eq("id", institution_id).execute()
+    if resp.data:
+        try:
+            from app.services.scholar._filters import invalidate_institution_classification_cache  # noqa: PLC0415
+
+            invalidate_institution_classification_cache()
+        except Exception:
+            # Do not fail institution delete if scholar cache invalidation is unavailable.
+            pass
     return len(resp.data) > 0

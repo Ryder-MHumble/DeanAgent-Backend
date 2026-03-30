@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from app.services.core.institution.classification import normalize_org_type
 from app.services.core.institution.storage import fetch_all_institutions
 
 
@@ -44,7 +45,12 @@ async def search_institutions(
     if region:
         filtered = [inst for inst in filtered if inst.get("region") == region]
     if org_type:
-        filtered = [inst for inst in filtered if inst.get("org_type") == org_type]
+        normalized_org_type = normalize_org_type(org_type)
+        filtered = [
+            inst
+            for inst in filtered
+            if normalize_org_type(inst.get("org_type")) == normalized_org_type
+        ]
 
     # Score and rank results
     scored_results: list[tuple[int, dict[str, Any]]] = []

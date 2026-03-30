@@ -2,8 +2,8 @@
 """Rename institution/scholar affiliation from 中国科学院 to 中国科学院大学.
 
 Usage:
-    python scripts/migration/rename_cas_to_ucas.py --dry-run
-    python scripts/migration/rename_cas_to_ucas.py
+    python scripts/migration/archive/oneoff/rename_cas_to_ucas.py --dry-run
+    python scripts/migration/archive/oneoff/rename_cas_to_ucas.py
 """
 
 from __future__ import annotations

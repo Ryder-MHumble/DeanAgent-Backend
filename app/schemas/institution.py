@@ -105,6 +105,10 @@ class InstitutionDetailResponse(BaseModel):
     priority: str | None = Field(default=None, description="优先级（P0/P1/P2/P3）")
     student_count_24: int | None = Field(default=None, description="24级学生人数")
     student_count_25: int | None = Field(default=None, description="25级学生人数")
+    student_counts_by_year: dict[str, int] = Field(
+        default_factory=dict,
+        description="按入学年级统计（键为四位年份，如 2026）",
+    )
     student_count_total: int | None = Field(default=None, description="学生总数")
     mentor_count: int | None = Field(default=None, description="导师总数")
     resident_leaders: list[str] = Field(default_factory=list, description="驻院领导及共建老师")

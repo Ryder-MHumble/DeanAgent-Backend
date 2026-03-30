@@ -15,9 +15,20 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from app.config import settings
-from app.db.pool import close_pool, get_pool, init_pool
 from app.services.stores import scholar_annotation_store as annotation_store
+
+try:
+    from scripts.migration.components.runtime import (
+        close_postgres_pool,
+        get_postgres_pool,
+        init_postgres_pool_from_settings,
+    )
+except ModuleNotFoundError:  # direct execution fallback
+    from components.runtime import (  # type: ignore[no-redef]
+        close_postgres_pool,
+        get_postgres_pool,
+        init_postgres_pool_from_settings,
+    )
 
 CSV_PATH = Path("data/scholars/学院导师信息.csv")
 
@@ -66,16 +77,7 @@ def load_rows() -> list[MentorRow]:
 
 
 async def connect_pool() -> None:
-    if settings.POSTGRES_DSN:
-        await init_pool(dsn=settings.POSTGRES_DSN)
-    else:
-        await init_pool(
-            host=settings.POSTGRES_HOST,
-            port=settings.POSTGRES_PORT,
-            user=settings.POSTGRES_USER,
-            password=settings.POSTGRES_PASSWORD,
-            database=settings.POSTGRES_DB,
-        )
+    await init_postgres_pool_from_settings()
 
 
 def _choose_candidates(
@@ -102,7 +104,7 @@ def _choose_candidates(
 async def run(apply_changes: bool) -> None:
     rows = load_rows()
     await connect_pool()
-    pool = get_pool()
+    pool = get_postgres_pool()
 
     async with pool.acquire() as conn:
         scholars = [
@@ -209,7 +211,7 @@ async def run(apply_changes: bool) -> None:
         for row in unresolved_rows[:20]:
             print(f"  - {row.name} | {row.university} | {row.email or '(empty)'}")
 
-    await close_pool()
+    await close_postgres_pool()
 
 
 def parse_args() -> argparse.Namespace:

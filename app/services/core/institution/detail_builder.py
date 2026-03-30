@@ -132,6 +132,7 @@ def build_detail_response(record: dict, departments: list[dict] | None = None) -
         # Student and mentor metrics
         "student_count_24": record.get("student_count_24"),
         "student_count_25": record.get("student_count_25"),
+        "student_counts_by_year": record.get("student_counts_by_year") or {},
         "student_count_total": record.get("student_count_total"),
         "mentor_count": record.get("mentor_count"),
         # People

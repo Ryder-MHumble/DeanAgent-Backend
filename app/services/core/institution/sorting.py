@@ -5,6 +5,8 @@ Defines display order for regions, org_types, classifications, and priorities.
 
 from __future__ import annotations
 
+from app.services.core.institution.classification import normalize_org_type
+
 # ---------------------------------------------------------------------------
 # Display Order Definitions
 # ---------------------------------------------------------------------------
@@ -44,7 +46,7 @@ def get_sort_key(record: dict) -> tuple:
         Sort key tuple
     """
     region = record.get("region")
-    org_type = record.get("org_type")
+    org_type = normalize_org_type(record.get("org_type"))
     classification = record.get("classification")
     priority = record.get("priority")
     reputation_rank = record.get("reputation_rank")

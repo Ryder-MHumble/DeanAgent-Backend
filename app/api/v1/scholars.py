@@ -75,7 +75,7 @@ async def list_scholars(
         None, description="地区筛选：国内 | 国际（根据高校名称自动推断）"
     ),
     affiliation_type: str | None = Query(
-        None, description="机构类型筛选：高校 | 企业 | 研究机构 | 其他（根据高校名称自动推断）"
+        None, description="机构类型筛选：高校 | 企业（公司） | 研究机构 | 其他（根据高校名称自动推断）"
     ),
     keyword: str | None = Query(
         None, description="关键词搜索（姓名/英文名/bio/研究方向/关键词）"
@@ -84,6 +84,18 @@ async def list_scholars(
     community_type: str | None = Query(None, description="社群类型筛选（如 顶会/期刊）"),
     project_category: str | None = Query(None, description="按项目一级分类筛选（如 教育培养）"),
     project_subcategory: str | None = Query(None, description="按项目二级子类筛选（如 学术委员会）"),
+    project_categories: str | None = Query(
+        None,
+        description="按多个项目一级分类筛选（逗号分隔，如 教育培养,科研学术）",
+    ),
+    project_subcategories: str | None = Query(
+        None,
+        description="按多个项目二级子类筛选（逗号分隔）",
+    ),
+    event_types: str | None = Query(
+        None,
+        description="按多个活动类型筛选（event_tags.event_type，逗号分隔）",
+    ),
     participated_event_id: str | None = Query(None, description="按参与活动 ID 筛选"),
     is_cobuild_scholar: bool | None = Query(None, description="是否共建学者（项目分类标签非空）"),
     institution_group: str | None = Query(
@@ -113,6 +125,9 @@ async def list_scholars(
         community_type=community_type,
         project_category=project_category,
         project_subcategory=project_subcategory,
+        project_categories=project_categories,
+        project_subcategories=project_subcategories,
+        event_types=event_types,
         participated_event_id=participated_event_id,
         is_cobuild_scholar=is_cobuild_scholar,
         institution_group=institution_group,
@@ -140,12 +155,15 @@ async def get_stats(
     is_adjunct_supervisor: bool | None = Query(None, description="仅统计兼职导师"),
     has_email: bool | None = Query(None, description="仅统计有邮箱的学者"),
     region: str | None = Query(None, description="地区筛选：国内 | 国际"),
-    affiliation_type: str | None = Query(None, description="机构类型筛选：高校 | 企业 | 研究机构 | 其他"),
+    affiliation_type: str | None = Query(None, description="机构类型筛选：高校 | 企业（公司） | 研究机构 | 其他"),
     keyword: str | None = Query(None, description="关键词搜索"),
     community_name: str | None = Query(None, description="社群名称筛选（如 AAAI）"),
     community_type: str | None = Query(None, description="社群类型筛选（如 顶会/期刊）"),
     project_category: str | None = Query(None, description="按项目一级分类筛选"),
     project_subcategory: str | None = Query(None, description="按项目二级子类筛选"),
+    project_categories: str | None = Query(None, description="按多个项目一级分类筛选（逗号分隔）"),
+    project_subcategories: str | None = Query(None, description="按多个项目二级子类筛选（逗号分隔）"),
+    event_types: str | None = Query(None, description="按多个活动类型筛选（逗号分隔）"),
     participated_event_id: str | None = Query(None, description="按参与活动 ID 筛选"),
     is_cobuild_scholar: bool | None = Query(None, description="是否共建学者"),
     institution_group: str | None = Query(None, description="机构顶层分组"),
@@ -169,6 +187,9 @@ async def get_stats(
         community_type=community_type,
         project_category=project_category,
         project_subcategory=project_subcategory,
+        project_categories=project_categories,
+        project_subcategories=project_subcategories,
+        event_types=event_types,
         participated_event_id=participated_event_id,
         is_cobuild_scholar=is_cobuild_scholar,
         institution_group=institution_group,

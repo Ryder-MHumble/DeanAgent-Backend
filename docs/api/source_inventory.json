@@ -1,0 +1,536 @@
+{
+  "generated_at": "2026-03-30T04:04:43.159366+00:00",
+  "total_sources": 225,
+  "enabled_sources": 148,
+  "files": [
+    {
+      "file": "beijing_policy.yaml",
+      "dimension": "beijing_policy",
+      "dimension_name": "对北京",
+      "total": 16,
+      "enabled": 15
+    },
+    {
+      "file": "events.yaml",
+      "dimension": "events",
+      "dimension_name": "对日程",
+      "total": 6,
+      "enabled": 3
+    },
+    {
+      "file": "industry.yaml",
+      "dimension": "industry",
+      "dimension_name": "对产业",
+      "total": 10,
+      "enabled": 6
+    },
+    {
+      "file": "national_policy.yaml",
+      "dimension": "national_policy",
+      "dimension_name": "对国家",
+      "total": 8,
+      "enabled": 8
+    },
+    {
+      "file": "personnel.yaml",
+      "dimension": "personnel",
+      "dimension_name": "对人事",
+      "total": 4,
+      "enabled": 4
+    },
+    {
+      "file": "scholar-cas.yaml",
+      "dimension": "scholars",
+      "dimension_name": "高校师资",
+      "total": 5,
+      "enabled": 0
+    },
+    {
+      "file": "scholar-fudan.yaml",
+      "dimension": "scholars",
+      "dimension_name": "高校师资",
+      "total": 2,
+      "enabled": 0
+    },
+    {
+      "file": "scholar-nju.yaml",
+      "dimension": "scholars",
+      "dimension_name": "高校师资",
+      "total": 5,
+      "enabled": 0
+    },
+    {
+      "file": "scholar-pku.yaml",
+      "dimension": "scholars",
+      "dimension_name": "高校师资",
+      "total": 9,
+      "enabled": 0
+    },
+    {
+      "file": "scholar-ruc.yaml",
+      "dimension": "scholars",
+      "dimension_name": "高校师资",
+      "total": 2,
+      "enabled": 0
+    },
+    {
+      "file": "scholar-sjtu.yaml",
+      "dimension": "scholars",
+      "dimension_name": "高校师资",
+      "total": 5,
+      "enabled": 0
+    },
+    {
+      "file": "scholar-tsinghua.yaml",
+      "dimension": "scholars",
+      "dimension_name": "高校师资",
+      "total": 13,
+      "enabled": 0
+    },
+    {
+      "file": "scholar-ustc.yaml",
+      "dimension": "scholars",
+      "dimension_name": "高校师资",
+      "total": 5,
+      "enabled": 0
+    },
+    {
+      "file": "scholar-zju.yaml",
+      "dimension": "scholars",
+      "dimension_name": "高校师资",
+      "total": 3,
+      "enabled": 0
+    },
+    {
+      "file": "talent.yaml",
+      "dimension": "talent",
+      "dimension_name": "对人才",
+      "total": 7,
+      "enabled": 4
+    },
+    {
+      "file": "technology.yaml",
+      "dimension": "technology",
+      "dimension_name": "对技术",
+      "total": 33,
+      "enabled": 26
+    },
+    {
+      "file": "twitter.yaml",
+      "dimension": "twitter",
+      "dimension_name": null,
+      "total": 7,
+      "enabled": 7
+    },
+    {
+      "file": "universities-aggregators.yaml",
+      "dimension": "universities",
+      "dimension_name": "对高校",
+      "total": 3,
+      "enabled": 2
+    },
+    {
+      "file": "universities-ai-institutes.yaml",
+      "dimension": "universities",
+      "dimension_name": "对高校",
+      "total": 11,
+      "enabled": 9
+    },
+    {
+      "file": "universities-awards.yaml",
+      "dimension": "universities",
+      "dimension_name": "对高校",
+      "total": 4,
+      "enabled": 4
+    },
+    {
+      "file": "universities-news.yaml",
+      "dimension": "universities",
+      "dimension_name": "对高校",
+      "total": 32,
+      "enabled": 25
+    },
+    {
+      "file": "universities-provinces.yaml",
+      "dimension": "universities",
+      "dimension_name": "对高校",
+      "total": 5,
+      "enabled": 5
+    },
+    {
+      "file": "university_leadership_sources.yaml",
+      "dimension": "personnel",
+      "dimension_name": "对人事",
+      "total": 30,
+      "enabled": 30
+    }
+  ],
+  "dimensions": [
+    {
+      "key": "universities",
+      "label": "对高校",
+      "total": 55,
+      "enabled": 45
+    },
+    {
+      "key": "scholars",
+      "label": "高校师资",
+      "total": 49,
+      "enabled": 0
+    },
+    {
+      "key": "technology",
+      "label": "对技术",
+      "total": 37,
+      "enabled": 30
+    },
+    {
+      "key": "personnel",
+      "label": "对人事",
+      "total": 34,
+      "enabled": 34
+    },
+    {
+      "key": "beijing_policy",
+      "label": "对北京",
+      "total": 16,
+      "enabled": 15
+    },
+    {
+      "key": "industry",
+      "label": "对产业",
+      "total": 11,
+      "enabled": 7
+    },
+    {
+      "key": "national_policy",
+      "label": "对国家",
+      "total": 8,
+      "enabled": 8
+    },
+    {
+      "key": "talent",
+      "label": "对人才",
+      "total": 8,
+      "enabled": 5
+    },
+    {
+      "key": "events",
+      "label": "对日程",
+      "total": 6,
+      "enabled": 3
+    },
+    {
+      "key": "sentiment",
+      "label": null,
+      "total": 1,
+      "enabled": 1
+    }
+  ],
+  "top_groups": [
+    {
+      "key": "university_news",
+      "count": 32
+    },
+    {
+      "key": "university_leadership_official",
+      "count": 30
+    },
+    {
+      "key": "policy",
+      "count": 24
+    },
+    {
+      "key": "tsinghua",
+      "count": 13
+    },
+    {
+      "key": "company_blogs",
+      "count": 12
+    },
+    {
+      "key": "ai_institutes",
+      "count": 11
+    },
+    {
+      "key": "news",
+      "count": 9
+    },
+    {
+      "key": "pku",
+      "count": 9
+    },
+    {
+      "key": "academic",
+      "count": 8
+    },
+    {
+      "key": "international_media",
+      "count": 7
+    },
+    {
+      "key": "community",
+      "count": 6
+    },
+    {
+      "key": "nju",
+      "count": 5
+    },
+    {
+      "key": "sjtu",
+      "count": 5
+    },
+    {
+      "key": "ustc",
+      "count": 5
+    },
+    {
+      "key": "tracking",
+      "count": 5
+    },
+    {
+      "key": "cn_ai_company",
+      "count": 5
+    },
+    {
+      "key": "provincial",
+      "count": 5
+    },
+    {
+      "key": "awards",
+      "count": 4
+    },
+    {
+      "key": "news_personnel",
+      "count": 3
+    },
+    {
+      "key": "cas_iscas",
+      "count": 3
+    },
+    {
+      "key": "zju",
+      "count": 3
+    },
+    {
+      "key": "aggregators",
+      "count": 3
+    },
+    {
+      "key": "investment",
+      "count": 2
+    },
+    {
+      "key": "moe",
+      "count": 2
+    },
+    {
+      "key": "fudan",
+      "count": 2
+    },
+    {
+      "key": "ruc",
+      "count": 2
+    },
+    {
+      "key": "domestic_media",
+      "count": 2
+    },
+    {
+      "key": "kol",
+      "count": 2
+    },
+    {
+      "key": "industry",
+      "count": 1
+    },
+    {
+      "key": "state_council",
+      "count": 1
+    }
+  ],
+  "top_methods": [
+    {
+      "key": "static",
+      "count": 100
+    },
+    {
+      "key": "faculty",
+      "count": 43
+    },
+    {
+      "key": "university_leadership",
+      "count": 30
+    },
+    {
+      "key": "dynamic",
+      "count": 24
+    },
+    {
+      "key": "rss",
+      "count": 14
+    }
+  ],
+  "top_tags": [
+    {
+      "key": "university",
+      "count": 62
+    },
+    {
+      "key": "faculty",
+      "count": 49
+    },
+    {
+      "key": "news",
+      "count": 44
+    },
+    {
+      "key": "personnel",
+      "count": 35
+    },
+    {
+      "key": "official",
+      "count": 31
+    },
+    {
+      "key": "leadership",
+      "count": 30
+    },
+    {
+      "key": "ai",
+      "count": 26
+    },
+    {
+      "key": "policy",
+      "count": 25
+    },
+    {
+      "key": "company_blog",
+      "count": 17
+    },
+    {
+      "key": "cs",
+      "count": 16
+    },
+    {
+      "key": "academic",
+      "count": 15
+    },
+    {
+      "key": "tsinghua",
+      "count": 15
+    },
+    {
+      "key": "education",
+      "count": 11
+    },
+    {
+      "key": "institute",
+      "count": 11
+    },
+    {
+      "key": "pku",
+      "count": 10
+    },
+    {
+      "key": "industry",
+      "count": 9
+    },
+    {
+      "key": "cas",
+      "count": 9
+    },
+    {
+      "key": "tech_media",
+      "count": 9
+    },
+    {
+      "key": "international",
+      "count": 8
+    },
+    {
+      "key": "se",
+      "count": 7
+    },
+    {
+      "key": "twitter",
+      "count": 7
+    },
+    {
+      "key": "domestic",
+      "count": 6
+    },
+    {
+      "key": "nju",
+      "count": 6
+    },
+    {
+      "key": "sjtu",
+      "count": 6
+    },
+    {
+      "key": "ustc",
+      "count": 6
+    },
+    {
+      "key": "bjkw",
+      "count": 5
+    },
+    {
+      "key": "science",
+      "count": 5
+    },
+    {
+      "key": "beijing",
+      "count": 5
+    },
+    {
+      "key": "conference",
+      "count": 5
+    },
+    {
+      "key": "moe",
+      "count": 5
+    },
+    {
+      "key": "papers",
+      "count": 5
+    },
+    {
+      "key": "cn_ai",
+      "count": 5
+    },
+    {
+      "key": "innovation",
+      "count": 4
+    },
+    {
+      "key": "cybersecurity",
+      "count": 4
+    },
+    {
+      "key": "zju",
+      "count": 4
+    },
+    {
+      "key": "ranking",
+      "count": 4
+    },
+    {
+      "key": "talent",
+      "count": 4
+    },
+    {
+      "key": "open_source",
+      "count": 4
+    },
+    {
+      "key": "community",
+      "count": 4
+    },
+    {
+      "key": "tech",
+      "count": 3
+    }
+  ]
+}

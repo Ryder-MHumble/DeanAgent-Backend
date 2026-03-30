@@ -19,7 +19,7 @@ async def _load_student_metrics_for_institution(
     institution_name: str,
     *,
     org_name: str | None = None,
-) -> dict[str, int]:
+) -> dict[str, object]:
     pool = get_pool()
     names = [_normalize_text(institution_name), _normalize_text(org_name)]
     names = [name for name in names if name]
@@ -28,39 +28,49 @@ async def _load_student_metrics_for_institution(
         return {
             "student_count_24": 0,
             "student_count_25": 0,
+            "student_counts_by_year": {},
             "student_count_total": 0,
         }
 
-    row = await pool.fetchrow(
-        """
-        SELECT
-          COUNT(*) FILTER (WHERE enrollment_year = 2024) AS student_count_24,
-          COUNT(*) FILTER (WHERE enrollment_year = 2025) AS student_count_25,
-          COUNT(*) AS student_count_total
-        FROM supervised_students
-        WHERE COALESCE(home_university, '') = ANY($1::text[])
-        """,
+    async def _query_year_counts(
+        where_sql: str,
+        *params: object,
+    ) -> tuple[dict[str, int], int]:
+        rows = await pool.fetch(
+            f"""
+            SELECT enrollment_year, COUNT(*)::int AS student_count
+            FROM supervised_students
+            WHERE {where_sql}
+            GROUP BY enrollment_year
+            """,
+            *params,
+        )
+        year_counts: dict[str, int] = {}
+        total_count = 0
+        for row in rows:
+            year = row.get("enrollment_year")
+            count = int(row.get("student_count") or 0)
+            total_count += count
+            if year is None or count <= 0:
+                continue
+            year_counts[str(int(year))] = count
+        return year_counts, total_count
+
+    year_counts, total = await _query_year_counts(
+        "COALESCE(home_university, '') = ANY($1::text[])",
         names,
     )
-
-    total = int((row or {}).get("student_count_total") or 0)
     if total == 0:
-        row = await pool.fetchrow(
-            """
-            SELECT
-              COUNT(*) FILTER (WHERE enrollment_year = 2024) AS student_count_24,
-              COUNT(*) FILTER (WHERE enrollment_year = 2025) AS student_count_25,
-              COUNT(*) AS student_count_total
-            FROM supervised_students
-            WHERE COALESCE(home_university, '') ILIKE ('%' || $1 || '%')
-            """,
+        year_counts, total = await _query_year_counts(
+            "COALESCE(home_university, '') ILIKE ('%' || $1 || '%')",
             _normalize_text(institution_name),
         )
 
     return {
-        "student_count_24": int((row or {}).get("student_count_24") or 0),
-        "student_count_25": int((row or {}).get("student_count_25") or 0),
-        "student_count_total": int((row or {}).get("student_count_total") or 0),
+        "student_count_24": int(year_counts.get("2024") or 0),
+        "student_count_25": int(year_counts.get("2025") or 0),
+        "student_counts_by_year": year_counts,
+        "student_count_total": total,
     }
 
 
@@ -92,6 +102,7 @@ async def get_institution_detail(institution_id: str) -> InstitutionDetailRespon
         **record,
         "student_count_24": metrics["student_count_24"],
         "student_count_25": metrics["student_count_25"],
+        "student_counts_by_year": metrics["student_counts_by_year"],
         "student_count_total": metrics["student_count_total"],
     }
 

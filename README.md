@@ -330,88 +330,25 @@ data/
 
 ## API 参考
 
-基础路径 `/api/v1`，Swagger UI：<http://10.1.132.21:8001/docs>。共 27 个端点。
+基础路径 `/api/v1`，在线文档：<http://10.1.132.21:8001/docs>。
 
-### 核心端点（14 个）
+当前以自动生成文档为准：
 
-**文章 `/articles`**
+- 汇总文档：`docs/api/API_REFERENCE.md`
+- 路由清单（JSON）：`docs/api/api_inventory.json`
+- 信源盘点（JSON）：`docs/api/source_inventory.json`
 
-| 方法 | 路径 | 说明 |
-|------|------|------|
-| GET | `/` | 列表（筛选+分页）：`dimension` `source_id` `keyword` `date_from` `date_to` `page` |
-| GET | `/search` | 全文搜索（参数同上） |
-| GET | `/stats` | 聚合统计：`group_by=dimension\|source\|day` |
-| GET | `/{id}` | 详情 |
-| PATCH | `/{id}` | 更新：`is_read` `importance` |
+重新生成（代码变更后执行）：
 
-**信源 `/sources`**
+```bash
+./.venv/bin/python scripts/core/generate_api_docs.py
+```
 
-| 方法 | 路径 | 说明 |
-|------|------|------|
-| GET | `/` | 列表（可按 `dimension` 过滤） |
-| GET | `/{source_id}` | 详情 |
-| GET | `/{source_id}/logs` | 爬取日志 |
-| PATCH | `/{source_id}` | 启用/禁用 |
-| POST | `/{source_id}/trigger` | 手动触发爬取 |
+`/sources` 已升级为目录化查询能力：
 
-**维度 `/dimensions`**
-
-| 方法 | 路径 | 说明 |
-|------|------|------|
-| GET | `/` | 9 维度概览（文章数 + 最后更新） |
-| GET | `/{dimension}` | 维度下文章列表 |
-
-**健康 `/health`**
-
-| 方法 | 路径 | 说明 |
-|------|------|------|
-| GET | `/` | 系统状态（Scheduler 运行状态） |
-| GET | `/crawl-status` | 爬取健康（healthy/warning/failing 统计） |
-
-### 业务智能端点（13 个）`/intel`
-
-**政策智能 `/intel/policy`**（3 端点）
-
-| 方法 | 路径 | 说明 |
-|------|------|------|
-| GET | `/feed` | 政策动态 Feed（规则引擎 + LLM 富化，含匹配度评分、资金信息） |
-| GET | `/opportunities` | 政策机会（筛选可申报的资助/项目） |
-| GET | `/stats` | 政策统计（按分类、重要性、时间聚合） |
-
-**人事情报 `/intel/personnel`**（5 端点）
-
-| 方法 | 路径 | 说明 |
-|------|------|------|
-| GET | `/feed` | 人事动态 Feed（文章级，含自动提取的任免变动） |
-| GET | `/changes` | 人事变动列表（人员级，正则提取姓名/职务/机构） |
-| GET | `/stats` | 人事统计 |
-| GET | `/enriched-feed` | LLM 富化 Feed（含 relevance/group/actionSuggestion） |
-| GET | `/enriched-stats` | 富化统计 |
-
-**科技前沿 `/intel/tech-frontier`**（4 端点）
-
-| 方法 | 路径 | 说明 |
-|------|------|------|
-| GET | `/topics` | 8 大技术主题（热度趋势、信号、KOL 声音） |
-| GET | `/opportunities` | 技术机会（合作/申报/采购） |
-| GET | `/stats` | 科技前沿 KPI |
-| GET | `/signals` | 技术信号流 |
-
-**高校生态 `/intel/university`**（3 端点）
-
-| 方法 | 路径 | 说明 |
-|------|------|------|
-| GET | `/feed` | 高校动态 Feed |
-| GET | `/overview` | 高校生态总览（分组统计） |
-| GET | `/research-outputs` | 研究成果（论文/专利/获奖分类） |
-
-**每日简报 `/intel/daily-briefing`**（3 端点）
-
-| 方法 | 路径 | 说明 |
-|------|------|------|
-| GET | `/today` | 今日简报 |
-| GET | `/latest` | 最近一期简报 |
-| GET | `/history` | 历史简报列表 |
+- `GET /api/v1/sources/catalog`：分页 + 分面 + 多维筛选（dimension/group/tag/health）
+- `GET /api/v1/sources/facets`：筛选分面值
+- `GET /api/v1/sources`：兼容旧接口，已支持更多筛选参数
 
 ---
 
@@ -586,9 +523,13 @@ python scripts/run_all_crawl.py --concurrency 5  # 仅爬取阶段
 
 | 文档 | 路径 | 内容 |
 |------|------|------|
+| API 总览（自动生成） | `docs/api/API_REFERENCE.md` | 全量路由、服务分组、信源维度覆盖、Agent 调用映射 |
+| API 路由清单（JSON） | `docs/api/api_inventory.json` | 机器可读路由盘点（供 Agent/脚本使用） |
+| 信源盘点（JSON） | `docs/api/source_inventory.json` | 机器可读信源统计（维度/分组/标签） |
 | 平台架构 | `docs/architecture.md` | 5 层平台架构、消费端接入、设计决策 |
 | 信源全景 | `docs/SourceOverview.md` | 181 个信源全量清单，按维度/类型/状态 |
 | 产品生态 | `docs/files/产品生态架构全景.md` | 领导汇报用，平台定位 + 价值地图 + 演进方向 |
 | 爬取状态 | `docs/CrawlStatus.md` | 各维度各源的爬取状态、数据量 |
 | 任务优先级 | `docs/TODO.md` | P0-P3 分级待办 |
 | 院长需求 | `docs/files/院长智能体.md` | 前端 Dean-Agent 功能需求 |
+| Agent Skill（OpenClaw 拉数） | `fetch-data/SKILL.md` | fetch-data 技能：接口路由、参数映射、一次性执行（不落盘脚本） |

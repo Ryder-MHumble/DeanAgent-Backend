@@ -5,6 +5,7 @@ import math
 from typing import Any
 
 from app.db.pool import get_pool
+from app.services.core.institution.classification import normalize_org_type
 from app.services.scholar._data import _merge_annotation
 from app.services.scholar._filters import (
     _get_org_type,
@@ -85,7 +86,8 @@ async def _resolve_institution_names_by_region_and_type(
     region: str | None,
     affiliation_type: str | None,
 ) -> set[str] | None:
-    if not region and not affiliation_type:
+    normalized_affiliation_type = normalize_org_type(affiliation_type)
+    if not region and not normalized_affiliation_type:
         return None
 
     inst_map = await get_institution_classification_map()
@@ -96,7 +98,9 @@ async def _resolve_institution_names_by_region_and_type(
     for name in inst_map:
         if region and _get_region(name, inst_map) != region:
             continue
-        if affiliation_type and _get_org_type(name, inst_map) != affiliation_type:
+        if normalized_affiliation_type and (
+            normalize_org_type(_get_org_type(name, inst_map)) != normalized_affiliation_type
+        ):
             continue
         matched.add(name)
     return matched

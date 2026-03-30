@@ -641,7 +641,9 @@ class UniversityLeadershipCrawler(BaseCrawler):
         source_name = self.config.get("name", self.source_id)
         university_name = _extract_university_name(source_name, self.source_id)
 
-        async with get_page() as page:
+        apply_webdriver_patch = not bool(self.config.get("disable_webdriver_patch", False))
+
+        async with get_page(apply_webdriver_patch=apply_webdriver_patch) as page:
             await page.goto(source_url, wait_until="domcontentloaded", timeout=wait_timeout)
             if wait_for == "networkidle":
                 try:

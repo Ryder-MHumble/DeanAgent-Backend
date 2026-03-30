@@ -45,7 +45,7 @@ router = APIRouter()
         "\n\n**分类体系：**"
         "\n- `entity_type`：实体类型（organization | department）"
         "\n- `region`：地域（国内 | 国际）"
-        "\n- `org_type`：机构类型（高校 | 企业 | 研究机构 | 行业学会 | 其他）"
+        "\n- `org_type`：机构类型（高校 | 企业（公司） | 研究机构 | 行业学会 | 其他）"
         "\n- `classification`：顶层分类（共建高校 | 兄弟院校 | 海外高校 | 其他高校）"
         "\n\n**排序规则：**region → org_type → classification → priority → 声望 → 名称"
         "\n\n**示例：**"
@@ -59,7 +59,7 @@ async def list_institutions(
     # Classification parameters
     entity_type: str | None = Query(default=None, description="实体类型：organization | department"),
     region: str | None = Query(default=None, description="地域：国内 | 国际"),
-    org_type: str | None = Query(default=None, description="机构类型：高校 | 企业 | 研究机构 | 行业学会 | 其他"),
+    org_type: str | None = Query(default=None, description="机构类型：高校 | 企业（公司） | 研究机构 | 行业学会 | 其他"),
     classification: str | None = Query(default=None, description="顶层分类：共建高校 | 兄弟院校 | 海外高校 | 其他高校"),
     sub_classification: str | None = Query(default=None, description="二级分类"),
     # Common parameters
@@ -118,7 +118,7 @@ async def get_institution_stats():
         "\n            \"兄弟院校\": {\"count\": 80}"
         "\n          }"
         "\n        },"
-        "\n        \"企业\": {\"count\": 10},"
+        "\n        \"企业\": {\"count\": 10, \"display_name\": \"公司\"},"
         "\n        \"研究机构\": {\"count\": 15}"
         "\n      }"
         "\n    },"
@@ -129,46 +129,6 @@ async def get_institution_stats():
     ),
 )
 async def get_institution_taxonomy():
-    from app.services.core.institution import get_institution_taxonomy
-
-    return await get_institution_taxonomy()
-
-
-
-@router.get(
-    "/taxonomy",
-    summary="分类体系统计",
-    description=(
-        "返回分类体系的层级统计，用于前端动态渲染导航栏。"
-        "\n\n**返回格式：**"
-        "\n```json"
-        "\n{"
-        "\n  \"total\": 277,"
-        "\n  \"regions\": {"
-        "\n    \"国内\": {"
-        "\n      \"count\": 250,"
-        "\n      \"org_types\": {"
-        "\n        \"高校\": {"
-        "\n          \"count\": 200,"
-        "\n          \"classifications\": {"
-        "\n            \"共建高校\": {\"count\": 50},"
-        "\n            \"兄弟院校\": {\"count\": 80},"
-        "\n            \"海外高校\": {\"count\": 50},"
-        "\n            \"其他高校\": {\"count\": 20}"
-        "\n          }"
-        "\n        },"
-        "\n        \"企业\": {\"count\": 10},"
-        "\n        \"研究机构\": {\"count\": 15}"
-        "\n      }"
-        "\n    },"
-        "\n    \"国际\": {\"count\": 27, \"org_types\": {...}}"
-        "\n  }"
-        "\n}"
-        "\n```"
-    ),
-)
-async def get_institution_taxonomy():
-    """返回分类体系的层级统计（region → org_type → classification）."""
     from app.services.core.institution import get_institution_taxonomy
 
     return await get_institution_taxonomy()
@@ -197,7 +157,7 @@ async def get_institution_taxonomy():
         "\n- `q` (required): 搜索关键词"
         "\n- `limit` (optional, default=10): 返回结果数量"
         "\n- `region` (optional): 地域过滤（国内 | 国际）"
-        "\n- `org_type` (optional): 机构类型过滤（高校 | 企业 | 研究机构 | 其他）"
+        "\n- `org_type` (optional): 机构类型过滤（高校 | 企业（公司） | 研究机构 | 其他）"
     ),
 )
 async def search_institutions_endpoint(

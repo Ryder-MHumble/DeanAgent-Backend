@@ -1,7 +1,7 @@
 dimension: personnel
 dimension_name: 对人事
 description: 高校现任领导官方信源（截图名单）
-generated_at: '2026-03-25T20:22:01'
+generated_at: '2026-03-30T00:00:00'
 sources:
 - id: leaders_official_uedb1d57ad7
   name: 清华大学-现任领导(官方)
@@ -913,6 +913,406 @@ sources:
     name:
     - .articleTitle h3
   wait_for: .leaderList01 > li
+  ignore_patterns:
+  - 更新时间[:：]?\s*\d{4}-\d{1,2}-\d{1,2}
+  - \d{4}年\d{1,2}月\d{1,2}日
+  tags:
+  - personnel
+  - university
+  - leadership
+  - official
+- id: leaders_official_buaa
+  name: 北京航空航天大学-现任领导(官方)
+  group: university_leadership_official
+  url: https://www.buaa.edu.cn/xygk/xxld.htm
+  crawl_method: university_leadership
+  schedule: weekly
+  priority: 1
+  is_enabled: true
+  selectors:
+    content_area: body
+  ignore_patterns:
+  - 更新时间[:：]?\s*\d{4}-\d{1,2}-\d{1,2}
+  - \d{4}年\d{1,2}月\d{1,2}日
+  tags:
+  - personnel
+  - university
+  - leadership
+  - official
+- id: leaders_official_cau
+  name: 中国农业大学-现任领导(官方)
+  group: university_leadership_official
+  url: https://www.cau.edu.cn/xxgk/xxld/index.htm
+  crawl_method: university_leadership
+  schedule: weekly
+  priority: 1
+  is_enabled: true
+  selectors:
+    content_area: body
+  ignore_patterns:
+  - 更新时间[:：]?\s*\d{4}-\d{1,2}-\d{1,2}
+  - \d{4}年\d{1,2}月\d{1,2}日
+  tags:
+  - personnel
+  - university
+  - leadership
+  - official
+- id: leaders_official_dlut
+  name: 大连理工大学-现任领导(官方)
+  group: university_leadership_official
+  url: https://www.dlut.edu.cn/xxgk/xrld.htm
+  crawl_method: university_leadership
+  schedule: weekly
+  priority: 1
+  is_enabled: true
+  selectors:
+    content_area: body
+    list_item: ul.nyleadlist1 > li
+    role: div.info p
+    name: div.name h4
+  ignore_patterns:
+  - 更新时间[:：]?\s*\d{4}-\d{1,2}-\d{1,2}
+  - \d{4}年\d{1,2}月\d{1,2}日
+  tags:
+  - personnel
+  - university
+  - leadership
+  - official
+- id: leaders_official_sjtu
+  name: 上海交通大学-现任领导(官方)
+  group: university_leadership_official
+  url: https://gk.sjtu.edu.cn/Data/View/1535
+  crawl_method: university_leadership
+  schedule: weekly
+  priority: 1
+  is_enabled: true
+  selectors:
+    content_area: body
+    list_item: div.view-cnt > p:has(strong)
+    role: span[style*="font-family:仿宋_GB2312"]
+    name: strong span, strong
+    name_first_only: true
+  ignore_patterns:
+  - 更新时间[:：]?\s*\d{4}-\d{1,2}-\d{1,2}
+  - \d{4}年\d{1,2}月\d{1,2}日
+  tags:
+  - personnel
+  - university
+  - leadership
+  - official
+- id: leaders_official_nju
+  name: 南京大学-现任领导(官方)
+  group: university_leadership_official
+  url: https://www.nju.edu.cn/ndgk/xrld.htm
+  crawl_method: university_leadership
+  schedule: weekly
+  priority: 1
+  is_enabled: true
+  selectors:
+    content_area: body
+  ignore_patterns:
+  - 更新时间[:：]?\s*\d{4}-\d{1,2}-\d{1,2}
+  - \d{4}年\d{1,2}月\d{1,2}日
+  tags:
+  - personnel
+  - university
+  - leadership
+  - official
+- id: leaders_official_zju
+  name: 浙江大学-现任领导(官方)
+  group: university_leadership_official
+  url: https://www.zju.edu.cn/xrld/list.htm
+  crawl_method: university_leadership
+  schedule: weekly
+  priority: 1
+  is_enabled: true
+  selectors:
+    content_area: body
+    list_item: div.lead-list div.lead-item
+    role: div.lead-post
+    name: div.lead-name .item-name .names, div.lead-name .item-name > div
+  ignore_patterns:
+  - 更新时间[:：]?\s*\d{4}-\d{1,2}-\d{1,2}
+  - \d{4}年\d{1,2}月\d{1,2}日
+  tags:
+  - personnel
+  - university
+  - leadership
+  - official
+- id: leaders_official_ouc
+  name: 中国海洋大学-现任领导(官方)
+  group: university_leadership_official
+  url: https://www.ouc.edu.cn/31003/list.htm
+  crawl_method: university_leadership
+  schedule: weekly
+  priority: 1
+  is_enabled: true
+  selectors:
+    content_area: body
+    list_item: div.leaderList > div.ld:not(.ld-100):not(.jk)
+    role: div.career:not(.hidden)
+    name: div.nameList div.name a[href], div.nameList div.name
+    profile_link: div.nameList div.name a[href]
+  ignore_patterns:
+  - 更新时间[:：]?\s*\d{4}-\d{1,2}-\d{1,2}
+  - \d{4}年\d{1,2}月\d{1,2}日
+  tags:
+  - personnel
+  - university
+  - leadership
+  - official
+- id: leaders_official_hnu
+  name: 湖南大学-现任领导(官方)
+  group: university_leadership_official
+  url: https://www.hnu.edu.cn/hdgk/xrld.htm
+  crawl_method: university_leadership
+  schedule: weekly
+  priority: 1
+  is_enabled: true
+  selectors:
+    content_area: body
+  ignore_patterns:
+  - 更新时间[:：]?\s*\d{4}-\d{1,2}-\d{1,2}
+  - \d{4}年\d{1,2}月\d{1,2}日
+  tags:
+  - personnel
+  - university
+  - leadership
+  - official
+- id: leaders_official_csu
+  name: 中南大学-现任领导(官方)
+  group: university_leadership_official
+  url: https://www.csu.edu.cn/zjzn/xxld.htm
+  crawl_method: university_leadership
+  schedule: weekly
+  priority: 1
+  is_enabled: true
+  selectors:
+    content_area: body
+    list_item: div.list1 dl
+    role: dt
+    name: dd a[href], dd
+    profile_link: dd a[href]
+  ignore_patterns:
+  - 更新时间[:：]?\s*\d{4}-\d{1,2}-\d{1,2}
+  - \d{4}年\d{1,2}月\d{1,2}日
+  tags:
+  - personnel
+  - university
+  - leadership
+  - official
+- id: leaders_official_nudt
+  name: 国防科技大学-现任领导(官方)
+  group: university_leadership_official
+  url: https://www.nudt.edu.cn/xxgk/xxld/index.htm
+  crawl_method: university_leadership
+  schedule: weekly
+  priority: 1
+  is_enabled: true
+  selectors:
+    content_area: body
+  ignore_patterns:
+  - 更新时间[:：]?\s*\d{4}-\d{1,2}-\d{1,2}
+  - \d{4}年\d{1,2}月\d{1,2}日
+  tags:
+  - personnel
+  - university
+  - leadership
+  - official
+- id: leaders_official_scut
+  name: 华南理工大学-现任领导(官方)
+  group: university_leadership_official
+  url: https://www.scut.edu.cn/new/9019/list.htm
+  crawl_method: university_leadership
+  schedule: weekly
+  priority: 1
+  is_enabled: true
+  selectors:
+    content_area: body
+  ignore_patterns:
+  - 更新时间[:：]?\s*\d{4}-\d{1,2}-\d{1,2}
+  - \d{4}年\d{1,2}月\d{1,2}日
+  tags:
+  - personnel
+  - university
+  - leadership
+  - official
+- id: leaders_official_scu
+  name: 四川大学-现任领导(官方)
+  group: university_leadership_official
+  url: https://www.scu.edu.cn/xxgk/xrld.htm
+  crawl_method: university_leadership
+  schedule: weekly
+  priority: 1
+  is_enabled: true
+  selectors:
+    content_area: body
+  ignore_patterns:
+  - 更新时间[:：]?\s*\d{4}-\d{1,2}-\d{1,2}
+  - \d{4}年\d{1,2}月\d{1,2}日
+  tags:
+  - personnel
+  - university
+  - leadership
+  - official
+- id: leaders_official_cqu
+  name: 重庆大学-现任领导(官方)
+  group: university_leadership_official
+  url: https://www.cqu.edu.cn/xqgk/xrld.htm
+  crawl_method: university_leadership
+  schedule: weekly
+  priority: 1
+  is_enabled: true
+  selectors:
+    content_area: body
+  ignore_patterns:
+  - 更新时间[:：]?\s*\d{4}-\d{1,2}-\d{1,2}
+  - \d{4}年\d{1,2}月\d{1,2}日
+  tags:
+  - personnel
+  - university
+  - leadership
+  - official
+- id: leaders_official_nwafu
+  name: 西北农林科技大学-现任领导(官方)
+  group: university_leadership_official
+  url: https://www.nwafu.edu.cn/xxgk/xrld/index.htm
+  crawl_method: university_leadership
+  schedule: weekly
+  priority: 1
+  is_enabled: true
+  selectors:
+    content_area: body
+  ignore_patterns:
+  - 更新时间[:：]?\s*\d{4}-\d{1,2}-\d{1,2}
+  - \d{4}年\d{1,2}月\d{1,2}日
+  tags:
+  - personnel
+  - university
+  - leadership
+  - official
+- id: leaders_official_lzu
+  name: 兰州大学-现任领导(官方)
+  group: university_leadership_official
+  url: https://www.lzu.edu.cn/xxgk/xrld.htm
+  crawl_method: university_leadership
+  schedule: weekly
+  priority: 1
+  is_enabled: true
+  selectors:
+    content_area: body
+  ignore_patterns:
+  - 更新时间[:：]?\s*\d{4}-\d{1,2}-\d{1,2}
+  - \d{4}年\d{1,2}月\d{1,2}日
+  tags:
+  - personnel
+  - university
+  - leadership
+  - official
+- id: leaders_official_neu
+  name: 东北大学-现任领导(官方)
+  group: university_leadership_official
+  url: https://www.neu.edu.cn/xygk/xrld.htm
+  crawl_method: university_leadership
+  schedule: weekly
+  priority: 1
+  is_enabled: true
+  selectors:
+    content_area: body
+    list_item: div.ldy ul li.flex
+    role: p.flex
+    name: div.span a[href], div.span
+    profile_link: div.span a[href]
+  ignore_patterns:
+  - 更新时间[:：]?\s*\d{4}-\d{1,2}-\d{1,2}
+  - \d{4}年\d{1,2}月\d{1,2}日
+  tags:
+  - personnel
+  - university
+  - leadership
+  - official
+- id: leaders_official_bupt
+  name: 北京邮电大学-现任领导(官方)
+  group: university_leadership_official
+  url: https://www.bupt.edu.cn/bygk/ldjg.htm
+  crawl_method: university_leadership
+  schedule: weekly
+  priority: 1
+  is_enabled: true
+  disable_webdriver_patch: true
+  selectors:
+    content_area: body
+    list_item: div.present-leader table tr
+    role: ul.leaderPost
+    name: ul.leaderlist a[href], ul.leaderlist
+    profile_link: ul.leaderlist a[href]
+  detail_selectors:
+    avatar: div.cont img
+    content: '#vsb_content'
+  ignore_patterns:
+  - 更新时间[:：]?\s*\d{4}-\d{1,2}-\d{1,2}
+  - \d{4}年\d{1,2}月\d{1,2}日
+  tags:
+  - personnel
+  - university
+  - leadership
+  - official
+- id: leaders_official_sufe
+  name: 上海财经大学-现任领导(官方)
+  group: university_leadership_official
+  url: https://www.sufe.edu.cn/xxgk/xrld.htm
+  crawl_method: university_leadership
+  schedule: weekly
+  priority: 1
+  is_enabled: true
+  selectors:
+    content_area: body
+  ignore_patterns:
+  - 更新时间[:：]?\s*\d{4}-\d{1,2}-\d{1,2}
+  - \d{4}年\d{1,2}月\d{1,2}日
+  tags:
+  - personnel
+  - university
+  - leadership
+  - official
+- id: leaders_official_cufe
+  name: 中央财经大学-现任领导(官方)
+  group: university_leadership_official
+  url: https://www.cufe.edu.cn/xxgk/xrld.htm
+  crawl_method: university_leadership
+  schedule: weekly
+  priority: 1
+  is_enabled: true
+  selectors:
+    content_area: body
+    list_item: div.xrld-left div.xrld2
+    role: h3
+    name: div.xrld3 ul li a[href], div.xrld3 ul li
+    profile_link: div.xrld3 ul li a[href]
+  detail_selectors:
+    avatar: div.ldxq-img img
+  ignore_patterns:
+  - 更新时间[:：]?\s*\d{4}-\d{1,2}-\d{1,2}
+  - \d{4}年\d{1,2}月\d{1,2}日
+  tags:
+  - personnel
+  - university
+  - leadership
+  - official
+- id: leaders_official_nuaa
+  name: 南京航空航天大学-现任领导(官方)
+  group: university_leadership_official
+  url: https://www.nuaa.edu.cn/481/list.htm
+  crawl_method: university_leadership
+  schedule: weekly
+  priority: 1
+  is_enabled: true
+  selectors:
+    content_area: body
+    list_item: .wp_articlecontent tr
+    role: td:nth-child(2)
+    name: td:nth-child(1)
+    name_first_only: true
   ignore_patterns:
   - 更新时间[:：]?\s*\d{4}-\d{1,2}-\d{1,2}
   - \d{4}年\d{1,2}月\d{1,2}日

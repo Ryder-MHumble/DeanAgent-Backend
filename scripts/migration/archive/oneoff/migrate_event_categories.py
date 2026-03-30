@@ -7,8 +7,8 @@ Current situation:
 - According to the taxonomy, they should be '科研学术 - XAI智汇讲坛'
 
 Usage:
-    python scripts/migrate_event_categories.py --dry-run  # Preview changes
-    python scripts/migrate_event_categories.py            # Apply changes
+    python scripts/migration/archive/oneoff/migrate_event_categories.py --dry-run  # Preview changes
+    python scripts/migration/archive/oneoff/migrate_event_categories.py            # Apply changes
 """
 
 import argparse

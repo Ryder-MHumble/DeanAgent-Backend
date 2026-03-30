@@ -2,8 +2,8 @@
 """Batch set specific scholars to project tag 教育培养-兼职导师.
 
 Usage:
-  ./.venv/bin/python scripts/migration/tag_named_scholars_as_adjunct_mentors.py --dry-run
-  ./.venv/bin/python scripts/migration/tag_named_scholars_as_adjunct_mentors.py --apply
+  ./.venv/bin/python scripts/migration/archive/oneoff/tag_named_scholars_as_adjunct_mentors.py --dry-run
+  ./.venv/bin/python scripts/migration/archive/oneoff/tag_named_scholars_as_adjunct_mentors.py --apply
 """
 
 from __future__ import annotations
