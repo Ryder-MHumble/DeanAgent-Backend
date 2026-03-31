@@ -38,7 +38,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger("process_policy_intel")
 
-DIMENSIONS = ["national_policy", "beijing_policy", "personnel"]
+DIMENSIONS = ["national_policy", "beijing_policy"]
 PROCESSED_DIR = BASE_DIR / "data" / "processed" / "policy_intel"
 ENRICHED_DIR = PROCESSED_DIR / "_enriched"
 HASHES_FILE = PROCESSED_DIR / "_processed_hashes.json"
@@ -56,8 +56,6 @@ def determine_category(
         return "政策机会"
     dim = article.get("dimension", "")
     group = article.get("group", "")
-    if dim == "personnel":
-        return "领导讲话"
     if dim == "beijing_policy" and group == "news_personnel":
         return "领导讲话"
     if dim == "beijing_policy":
@@ -128,7 +126,7 @@ def build_feed_item(article: dict, llm: dict) -> dict:
         "category": category,
         "importance": llm.get("importance", "一般"),
         "date": article_date(article),
-        "source": article.get("source_name", ""),
+        "source": article.get("source_name") or article.get("source_id") or "",
         "tags": merged_tags,
         "matchScore": llm.get("matchScore"),
         "funding": llm.get("funding"),

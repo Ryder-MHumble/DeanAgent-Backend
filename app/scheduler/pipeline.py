@@ -121,7 +121,7 @@ async def _run_stage(name: str, func, **kwargs) -> StageResult:
 # ---------------------------------------------------------------------------
 
 async def _stage_crawl_all() -> dict[str, Any]:
-    """Stage 1: Crawl all enabled sources (JSON only, no DB)."""
+    """Stage 1: Crawl all enabled sources and persist to DB."""
     import sys
     from pathlib import Path
 

@@ -13,9 +13,11 @@ import json
 import logging
 import re
 from datetime import datetime
+from functools import lru_cache
 from typing import Any
 
 from app.config import BASE_DIR
+from app.scheduler.manager import load_all_source_configs
 from app.services.intel.personnel.rules import (
     change_id,
     compute_match_score,
@@ -78,6 +80,36 @@ _TITLE_DEPT_RE = re.compile(
 )
 
 
+@lru_cache(maxsize=1)
+def _personnel_source_name_map() -> dict[str, str]:
+    mapping: dict[str, str] = {}
+    for source in load_all_source_configs():
+        if source.get("dimension") != "personnel":
+            continue
+        source_id = source.get("id", "")
+        if source_id:
+            mapping[source_id] = source.get("name", source_id)
+    return mapping
+
+
+def _resolve_source_name(article: dict[str, Any]) -> str:
+    source_name = (article.get("source_name") or article.get("source") or "").strip()
+    if source_name:
+        return source_name
+    return _personnel_source_name_map().get(article.get("source_id", ""), "")
+
+
+def _article_detail_payload(article: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "source": _resolve_source_name(article),
+        "source_name": _resolve_source_name(article),
+        "source_id": article.get("source_id", ""),
+        "sourceUrl": article.get("url"),
+        "sourceTitle": article.get("title", ""),
+        "sourceContent": article.get("content"),
+    }
+
+
 def _extract_title_info(title: str) -> tuple[str, str | None]:
     """Extract a short description and department from article title.
 
@@ -136,7 +168,11 @@ async def _compute_live_changes() -> list[dict[str, Any]]:
         seen_ids.add(cid)
 
         if cid in enrichment_cache:
-            items.append(enrichment_cache[cid])
+            enriched = dict(enrichment_cache[cid])
+            for key, value in _article_detail_payload(article).items():
+                if value and not enriched.get(key):
+                    enriched[key] = value
+            items.append(enriched)
         else:
             items.append({
                 "id": cid,
@@ -145,10 +181,6 @@ async def _compute_live_changes() -> list[dict[str, Any]]:
                 "position": change.get("position", ""),
                 "department": change.get("department"),
                 "date": change.get("date", _article_date(article)),
-                "source": article.get("source_name", ""),
-                "source_id": article.get("source_id", ""),
-                "source_name": article.get("source_name", ""),
-                "sourceUrl": article.get("url"),
                 "relevance": 10,
                 "importance": "一般",
                 "group": "watch",
@@ -157,6 +189,7 @@ async def _compute_live_changes() -> list[dict[str, Any]]:
                 "background": None,
                 "signals": [],
                 "aiInsight": None,
+                **_article_detail_payload(article),
             })
 
     # Include article-level items for articles without specific changes
@@ -182,10 +215,6 @@ async def _compute_live_changes() -> list[dict[str, Any]]:
             "position": "",
             "department": dept or article.get("source_name", ""),
             "date": _article_date(article),
-            "source": article.get("source_name", ""),
-            "source_id": article.get("source_id", ""),
-            "source_name": article.get("source_name", ""),
-            "sourceUrl": article.get("url"),
             "relevance": max(match_score // 5, 5),
             "importance": "关注" if match_score >= 30 else "一般",
             "group": "watch",
@@ -194,6 +223,7 @@ async def _compute_live_changes() -> list[dict[str, Any]]:
             "background": None,
             "signals": [],
             "aiInsight": content if content else None,
+            **_article_detail_payload(article),
         })
 
     # Sort: action first, then relevance desc, then date desc

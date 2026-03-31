@@ -49,6 +49,24 @@ def _save_cache(target_date: date, data: dict[str, Any]) -> None:
         tmp.unlink(missing_ok=True)
 
 
+def _load_latest_cache_on_or_before(target_date: date) -> dict[str, Any] | None:
+    """Return the newest cached briefing whose date is <= target_date."""
+    candidates: list[date] = []
+    for path in PROCESSED_DIR.glob("*.json"):
+        try:
+            candidates.append(date.fromisoformat(path.stem))
+        except ValueError:
+            continue
+
+    for cached_date in sorted(candidates, reverse=True):
+        if cached_date > target_date:
+            continue
+        cached = _load_cache(cached_date)
+        if cached:
+            return cached
+    return None
+
+
 # ---------------------------------------------------------------------------
 # Public API
 # ---------------------------------------------------------------------------
@@ -58,7 +76,7 @@ async def get_daily_briefing(
     target_date: date | None = None,
     force_regenerate: bool = False,
 ) -> dict[str, Any]:
-    """Get the daily briefing, using cache when available.
+    """Get the daily briefing, using cache only unless forced.
 
     Args:
         target_date: Report date (defaults to today).
@@ -70,13 +88,33 @@ async def get_daily_briefing(
     if target_date is None:
         target_date = date.today()
 
-    if not force_regenerate:
-        cached = _load_cache(target_date)
-        if cached:
-            logger.info("Returning cached briefing for %s", target_date)
-            return cached
+    if force_regenerate:
+        return await generate_daily_briefing(target_date)
 
-    return await generate_daily_briefing(target_date)
+    cached = _load_cache(target_date)
+    if cached:
+        logger.info("Returning cached briefing for %s", target_date)
+        return cached
+
+    latest_cached = _load_latest_cache_on_or_before(target_date)
+    if latest_cached:
+        logger.warning(
+            "Briefing cache for %s missing; returning latest cached briefing dated %s",
+            target_date,
+            latest_cached.get("date"),
+        )
+        return latest_cached
+
+    logger.warning("No cached briefing available for %s", target_date)
+    return {
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "date": target_date.isoformat(),
+        "paragraphs": [["今日早报尚未生成，请在定时任务完成后重试。"]],
+        "metric_cards": [],
+        "summary": "今日早报尚未生成。",
+        "article_count": 0,
+        "dimension_counts": {},
+    }
 
 
 async def generate_daily_briefing(target_date: date) -> dict[str, Any]:

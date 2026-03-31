@@ -15,7 +15,8 @@ router = APIRouter()
     summary="获取 AI 早报",
     description=(
         "获取 AI 生成的每日早报。包含叙事段落（带交互链接）和聚合指标卡片。\n\n"
-        "默认返回今日报告。如果今日报告尚未生成（Pipeline 未运行），将实时生成。\n\n"
+        "默认返回今日报告。如果今日缓存缺失，将返回最近一次已生成的缓存结果；"
+        "仅在 `force=true` 时才会实时重生成。\n\n"
         "段落格式为 `BriefingSegment[][]`，每个 segment 是字符串或 "
         "`{text, moduleId, action?}` 链接对象。"
     ),

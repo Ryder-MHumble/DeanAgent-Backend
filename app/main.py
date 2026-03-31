@@ -1,5 +1,6 @@
 import logging
 from contextlib import asynccontextmanager
+from datetime import datetime, timezone
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -148,6 +149,23 @@ async def _check_needs_initial_data() -> bool:
     return False
 
 
+def _check_needs_today_briefing_backfill() -> bool:
+    """Trigger a catch-up pipeline if today's briefing is still missing after schedule time."""
+    now = datetime.now(timezone.utc)
+    scheduled_today = now.replace(
+        hour=settings.PIPELINE_CRON_HOUR,
+        minute=settings.PIPELINE_CRON_MINUTE,
+        second=0,
+        microsecond=0,
+    )
+
+    if now < scheduled_today:
+        return False
+
+    briefing_path = BASE_DIR / "data/processed/daily_briefing" / f"{now.date().isoformat()}.json"
+    return not briefing_path.exists()
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Manage startup and shutdown of scheduler and other resources."""
@@ -202,6 +220,11 @@ async def lifespan(app: FastAPI):
             if needs_initial:
                 logger.info(
                     "Processed data missing — triggering initial pipeline"
+                )
+                await scheduler.trigger_pipeline()
+            elif _check_needs_today_briefing_backfill():
+                logger.info(
+                    "Today's briefing cache missing after scheduled pipeline window — triggering catch-up pipeline"
                 )
                 await scheduler.trigger_pipeline()
         except Exception as e:

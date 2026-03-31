@@ -27,7 +27,7 @@ async def run_crawl(source_id: str, domain: str = None, domain_group: str = None
         await init_client(settings.SUPABASE_URL, settings.SUPABASE_KEY)
     except Exception as e:
         print(f"Warning: Failed to initialize DB client: {e}")
-        print("Will save to JSON only")
+        print("DB unavailable, crawl results will not be persisted")
 
     configs = load_all_source_configs()
     config = next((c for c in configs if c["id"] == source_id), None)
@@ -70,10 +70,9 @@ async def run_crawl(source_id: str, domain: str = None, domain_group: str = None
     if result.error_message:
         print(f"Error: {result.error_message}")
 
-    # Save to JSON
-    json_path = await save_crawl_result_json(result, config)
-    if json_path:
-        print(f"JSON saved to: {json_path}")
+    # Persist to DB
+    await save_crawl_result_json(result, config)
+    print("Persisted to DB (if DB client available)")
 
     if result.items:
         print(f"\n--- First {min(5, len(result.items))} items ---")

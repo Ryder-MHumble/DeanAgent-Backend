@@ -115,6 +115,9 @@ class ResearchOutputsResponse(BaseModel):
 
     generated_at: str = Field(description="数据生成时间 (ISO 8601)")
     item_count: int = Field(description="科研成果总数")
+    page: int = Field(description="当前页码")
+    page_size: int = Field(description="每页条数")
+    total_pages: int = Field(description="总页数")
     type_stats: dict[str, int] = Field(
         description="按类型统计: {论文: N, 专利: N, 获奖: N}"
     )

@@ -85,6 +85,9 @@ def _determine_category(article: dict, llm_result: dict) -> str:
     if llm_result.get("isOpportunity"):
         return "政策机会"
     dim = article.get("dimension", "")
+    group = article.get("group", "")
+    if dim == "beijing_policy" and group == "news_personnel":
+        return "领导讲话"
     if dim == "beijing_policy":
         return "北京政策"
     if dim == "national_policy":
@@ -113,6 +116,7 @@ def _compute_status(days_left: int | None) -> str:
 
 def _build_feed_item(article: dict, llm: dict) -> dict:
     category = _determine_category(article, llm)
+    source_name = article.get("source_name") or article.get("source_id") or ""
     original_tags = article.get("tags", [])
     llm_tags = llm.get("tags", [])
     merged_tags = list(dict.fromkeys(original_tags + llm_tags))
@@ -123,9 +127,9 @@ def _build_feed_item(article: dict, llm: dict) -> dict:
         "category": category,
         "importance": llm.get("importance", "一般"),
         "date": _article_date(article),
-        "source": article.get("source_name", ""),
+        "source": source_name,
         "source_id": article.get("source_id", ""),
-        "source_name": article.get("source_name", ""),
+        "source_name": source_name,
         "tags": merged_tags,
         "matchScore": llm.get("matchScore"),
         "funding": llm.get("funding"),
@@ -144,10 +148,11 @@ def _build_opportunity_item(article: dict, llm: dict) -> dict | None:
     if not llm.get("isOpportunity"):
         return None
     days_left = llm.get("daysLeft")
+    source_name = article.get("source_name") or article.get("source_id") or ""
     return {
         "id": article.get("url_hash", ""),
         "name": article.get("title", ""),
-        "agency": llm.get("agency", article.get("source_name", "")),
+        "agency": llm.get("agency", source_name),
         "agencyType": _determine_agency_type(article),
         "matchScore": llm.get("matchScore", 0),
         "funding": llm.get("funding") or "待确认",
@@ -206,12 +211,6 @@ async def process_policy_pipeline(
         logger.info("  从 %s 加载 %d 篇文章", dim, len(articles))
         all_articles.extend(articles)
 
-    # Exclude personnel-related groups (belong in personnel pipeline)
-    all_articles = [
-        a for a in all_articles
-        if not (a.get("dimension") == "beijing_policy" and a.get("group") == "news_personnel")
-    ]
-
     # Deduplicate by url_hash
     seen: set[str] = set()
     unique_articles: list[dict] = []
@@ -252,11 +251,11 @@ async def process_policy_pipeline(
         _hash_tracker.save(all_hashes)
         logger.info("  ✓ 完成 %d 篇新文章评分", len(new_hashes))
 
-    # Rebuild output files from ALL enriched data (excluding personnel)
+    # Rebuild output files from all enriched data for configured policy dimensions.
     all_enriched = [
-        (a, llm) for a, llm in _load_all_enriched()
-        if a.get("dimension") not in ("personnel",)
-        and not (a.get("dimension") == "beijing_policy" and a.get("group") == "news_personnel")
+        (a, llm)
+        for a, llm in _load_all_enriched()
+        if a.get("dimension") in DIMENSIONS
     ]
     feed_count, opp_count = _rebuild_output_files(all_enriched)
 

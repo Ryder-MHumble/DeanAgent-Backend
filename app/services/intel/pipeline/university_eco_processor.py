@@ -21,6 +21,10 @@ from typing import Any
 from app.config import BASE_DIR
 from app.services.intel.pipeline.base import HashTracker, save_output_json
 from app.services.intel.shared import article_date
+from app.services.intel.university.filters import (
+    dedupe_university_articles,
+    filter_university_articles,
+)
 from app.services.intel.university.rules import classify_article
 from app.services.stores.json_reader import get_articles
 
@@ -169,17 +173,11 @@ async def process_university_eco_pipeline(
     articles = await get_articles(DIMENSION)
     logger.info("University eco pipeline: loaded %d articles", len(articles))
 
-    # Deduplicate by url_hash
-    seen: set[str] = set()
-    unique: list[dict] = []
-    for a in articles:
-        h = a.get("url_hash", "")
-        if h and h not in seen:
-            seen.add(h)
-            unique.append(a)
+    unique = dedupe_university_articles(articles)
 
     # Filter out junk / pagination artifacts
     valid = [a for a in unique if _is_valid_article(a)]
+    valid = filter_university_articles(valid)
     logger.info(
         "University eco pipeline: filtered %d -> %d valid articles",
         len(unique), len(valid),

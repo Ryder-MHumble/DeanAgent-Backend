@@ -8,9 +8,11 @@ from datetime import date, datetime, timezone
 from typing import Any
 
 from app.config import BASE_DIR
-from app.crawlers.utils.json_storage import DATA_DIR as RAW_DATA_DIR
-from app.crawlers.utils.json_storage import LATEST_FILENAME
 from app.services.intel.shared import parse_source_filter
+from app.services.intel.university.filters import (
+    dedupe_university_articles,
+    filter_university_articles,
+)
 from app.services.stores.json_reader import get_articles
 from app.services.stores.source_state import get_all_source_states
 
@@ -105,7 +107,9 @@ async def get_overview() -> dict[str, Any]:
     """Build dashboard overview for the universities dimension."""
     from app.scheduler.manager import load_all_source_configs
 
-    articles = await get_articles(DIMENSION)
+    articles = dedupe_university_articles(
+        filter_university_articles(await get_articles(DIMENSION))
+    )
     today = date.today()
 
     # Per-group aggregation
@@ -191,6 +195,7 @@ async def get_feed(
         date_from=date_from,
         date_to=date_to,
     )
+    articles = dedupe_university_articles(filter_university_articles(articles))
 
     # 手动应用信源过滤
     if source_filter:
@@ -225,7 +230,9 @@ async def get_feed(
 
 async def get_article_detail(url_hash: str) -> dict[str, Any] | None:
     """Get full article by url_hash. Returns None if not found."""
-    articles = await get_articles(DIMENSION)
+    articles = dedupe_university_articles(
+        filter_university_articles(await get_articles(DIMENSION))
+    )
     for item in articles:
         if item.get("url_hash") == url_hash:
             return _to_article_detail(item)
@@ -248,23 +255,29 @@ async def get_sources(group: str | None = None) -> dict[str, Any]:
 
     states = await get_all_source_states()
 
-    # Read per-source metadata from latest.json files
+    # DB aggregation for per-source article count and latest crawl batch new_count
     source_meta: dict[str, dict[str, Any]] = {}
-    dim_dir = RAW_DATA_DIR / DIMENSION
-    if dim_dir.exists():
-        for json_file in dim_dir.rglob(LATEST_FILENAME):
-            try:
-                with open(json_file, encoding="utf-8") as f:
-                    data = json.load(f)
-                sid = data.get("source_id")
-                if sid:
-                    source_meta[sid] = {
-                        "item_count": data.get("item_count", 0),
-                        "new_item_count": data.get("new_item_count", 0),
-                        "crawled_at": data.get("crawled_at"),
-                    }
-            except (json.JSONDecodeError, OSError):
-                continue
+    articles = await get_articles(DIMENSION)
+    for article in articles:
+        sid = str(article.get("source_id") or "")
+        if not sid:
+            continue
+        crawled = article.get("crawled_at")
+        meta = source_meta.setdefault(
+            sid,
+            {
+                "item_count": 0,
+                "new_item_count": 0,
+                "crawled_at": None,
+            },
+        )
+        meta["item_count"] += 1
+
+        if crawled and (meta["crawled_at"] is None or crawled > meta["crawled_at"]):
+            meta["crawled_at"] = crawled
+            meta["new_item_count"] = 1 if article.get("is_new") else 0
+        elif crawled and crawled == meta["crawled_at"] and article.get("is_new"):
+            meta["new_item_count"] += 1
 
     items: list[dict[str, Any]] = []
     enabled_count = 0
@@ -313,6 +326,9 @@ def get_research_outputs(
         return {
             "generated_at": _now_iso(),
             "item_count": 0,
+            "page": page,
+            "page_size": page_size,
+            "total_pages": 1,
             "type_stats": {"论文": 0, "专利": 0, "获奖": 0},
             "items": [],
         }
@@ -337,12 +353,16 @@ def get_research_outputs(
 
     # Pagination
     total = len(items)
+    total_pages = max(1, math.ceil(total / page_size))
     offset = (page - 1) * page_size
     page_items = items[offset:offset + page_size]
 
     return {
         "generated_at": data.get("generated_at", _now_iso()),
         "item_count": total,
+        "page": page,
+        "page_size": page_size,
+        "total_pages": total_pages,
         "type_stats": type_stats,
         "items": page_items,
     }

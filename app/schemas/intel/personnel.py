@@ -87,9 +87,12 @@ class PersonnelChangeEnriched(BaseModel):
     )
     date: str | None = Field(default=None, description="日期", examples=["2024-01-15"])
     source: str | None = Field(default=None, description="来源", examples=["中国政府网"])
+    source_name: str | None = Field(default=None, description="来源名称")
     sourceUrl: str | None = Field(
         default=None, description="原文链接"
     )
+    sourceTitle: str | None = Field(default=None, description="原始文章标题")
+    sourceContent: str | None = Field(default=None, description="原始文章正文")
     # LLM enriched fields
     relevance: int = Field(
         default=0,

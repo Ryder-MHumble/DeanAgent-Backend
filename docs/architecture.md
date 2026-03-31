@@ -1,4 +1,4 @@
-# OpenClaw 数据智能平台 — 架构设计文档
+# 研究院智能情报平台 — 架构设计文档
 
 > 最后更新: 2026-03-06 | 版本: v2.0
 
@@ -434,4 +434,3 @@ NanoBot 自然语言查询（MCP 封装）
 13. **LLM 多 Provider 路由** — `llm_service.py` 统一封装，改 `.env` 切换 Provider，业务代码无感知
 
 14. **学者采集独立存储路径** — `data/scholars/` 与 `data/raw/` 分离，Scholar API 与 Article API 数据源隔离
-

@@ -36,11 +36,11 @@ async def execute_crawl_job(source_config: dict[str, Any]) -> None:
 
     result = await crawler.run()
 
-    # Save to local JSON and upsert to DB
+    # Persist to DB
     try:
         await save_crawl_result_json(result, source_config)
     except Exception as e:
-        logger.warning("Failed to save JSON for %s: %s", source_id, e)
+        logger.warning("Failed to persist crawl result for %s: %s", source_id, e)
 
     # Log the crawl result
     await append_crawl_log(
