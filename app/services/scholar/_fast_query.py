@@ -269,7 +269,7 @@ async def query_scholar_list_fast(
     if allowed_universities is not None and not allowed_universities:
         return {
             "total": 0,
-            "page": page,
+            "page": 1,
             "page_size": page_size,
             "total_pages": 1,
             "items": [],
@@ -293,8 +293,10 @@ async def query_scholar_list_fast(
     pool = get_pool()
     count_sql = f"SELECT COUNT(*)::bigint AS n FROM scholars{where_sql}"
     total = int(await pool.fetchval(count_sql, *params) or 0)
+    total_pages = math.ceil(total / page_size) if total > 0 else 1
+    effective_page = min(max(page, 1), total_pages)
 
-    offset = (page - 1) * page_size
+    offset = (effective_page - 1) * page_size
     data_params = [*params, page_size, offset]
     limit_param = len(data_params) - 1
     offset_param = len(data_params)
@@ -311,10 +313,9 @@ async def query_scholar_list_fast(
         if url_hash and url_hash in all_annotations:
             _merge_annotation(row, all_annotations[url_hash])
 
-    total_pages = math.ceil(total / page_size) if total > 0 else 1
     return {
         "total": total,
-        "page": page,
+        "page": effective_page,
         "page_size": page_size,
         "total_pages": total_pages,
         "items": [_to_list_item(i) for i in rows],

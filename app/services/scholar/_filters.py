@@ -402,6 +402,47 @@ def _match_exact(value: str, query: str) -> bool:
     return _normalize_exact_text(value) == _normalize_exact_text(query)
 
 
+def _normalize_department_text(value: Any) -> str:
+    return " ".join(str(value or "").strip().split()).strip("，,;；:：|/\\-—_ ")
+
+
+def _merge_department_text(existing: str, moved: str) -> str:
+    old_value = _normalize_department_text(existing)
+    moved_value = _normalize_department_text(moved)
+    if not moved_value:
+        return old_value
+    if not old_value:
+        return moved_value
+    if moved_value in old_value:
+        return old_value
+    if old_value in moved_value:
+        return moved_value
+    return f"{old_value} / {moved_value}"
+
+
+def _matches_university_filter(item: dict[str, Any], query: str) -> bool:
+    raw_uni = str(item.get("university", "") or "")
+    primary_uni, _ = _extract_primary_affiliation(raw_uni)
+    if _match_exact(raw_uni, query):
+        return True
+    if primary_uni and _match_exact(primary_uni, query):
+        return True
+    return False
+
+
+def _matches_department_filter(item: dict[str, Any], query: str) -> bool:
+    raw_dep = str(item.get("department", "") or "")
+    _, moved_dep = _extract_primary_affiliation(str(item.get("university", "") or ""))
+    merged_dep = _merge_department_text(raw_dep, moved_dep)
+    if _match_exact(raw_dep, query):
+        return True
+    if moved_dep and _match_exact(moved_dep, query):
+        return True
+    if merged_dep and _match_exact(merged_dep, query):
+        return True
+    return False
+
+
 def _norm_token(value: Any) -> str:
     if value is None:
         return ""
@@ -700,10 +741,10 @@ def _apply_filters(
         result = [i for i in result if (i.get("university") or "") in name_set]
 
     if university:
-        result = [i for i in result if _match_exact(i.get("university", ""), university)]
+        result = [i for i in result if _matches_university_filter(i, university)]
 
     if department:
-        result = [i for i in result if _match_exact(i.get("department", ""), department)]
+        result = [i for i in result if _matches_department_filter(i, department)]
 
     if position:
         result = [i for i in result if i.get("position", "") == position]

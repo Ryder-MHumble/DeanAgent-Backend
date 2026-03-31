@@ -762,16 +762,53 @@ async def _resolve_institution_names_by_group_or_category(
         return None
     try:
         from app.services.core.institution import get_institution_list  # noqa: PLC0415
-        result = await get_institution_list(
-            group=group,
-            category=category,
-            type_filter="university",
-            page_size=500,
-        )
-        return [item.name for item in result.items]
+
+        page = 1
+        page_size = 1000
+        names: list[str] = []
+        seen: set[str] = set()
+        while True:
+            result = await get_institution_list(
+                group=group,
+                category=category,
+                entity_type="organization",
+                page=page,
+                page_size=page_size,
+            )
+            for item in result.items:
+                name = str(getattr(item, "name", "") or "").strip()
+                if not name or name in seen:
+                    continue
+                seen.add(name)
+                names.append(name)
+            if page >= max(int(result.total_pages or 1), 1):
+                break
+            page += 1
+
+        if not names:
+            # Be tolerant to frontend enum mismatches (e.g. "全部"/unknown values):
+            # do not turn the whole scholar list into 0 by applying an empty name-set.
+            logger.warning(
+                "No institutions resolved for group=%s category=%s, skip institution_names filter",
+                group,
+                category,
+            )
+            return None
+        return names
     except Exception as exc:
         logger.warning("Failed to resolve institution names for group=%s category=%s: %s", group, category, exc)
         return None
+
+
+def _normalize_optional_filter_text(value: str | None) -> str | None:
+    if value is None:
+        return None
+    text = str(value).strip()
+    if not text:
+        return None
+    if text in {"全部", "all", "ALL", "All", "不限"}:
+        return None
+    return text
 
 
 async def get_scholar_list(
@@ -803,6 +840,13 @@ async def get_scholar_list(
     custom_field_key: str | None = None,
     custom_field_value: str | None = None,
 ) -> dict[str, Any]:
+    university = _normalize_optional_filter_text(university)
+    department = _normalize_optional_filter_text(department)
+    position = _normalize_optional_filter_text(position)
+    keyword = _normalize_optional_filter_text(keyword)
+    institution_group = _normalize_optional_filter_text(institution_group)
+    institution_category = _normalize_optional_filter_text(institution_category)
+
     affiliation_type = normalize_org_type(affiliation_type)
 
     # Resolve institution_group/category → list of institution names for filtering
@@ -816,7 +860,10 @@ async def get_scholar_list(
     # Multi-value tag filters are currently implemented in in-memory fallback path.
     has_multi_tag_filters = bool(project_categories or project_subcategories or event_types)
     has_region_or_type_filters = bool(region or affiliation_type)
-    if not has_multi_tag_filters and not has_region_or_type_filters:
+    # University/department filters use affiliation normalization logic in
+    # fallback path to stay consistent with institution-tree aggregation.
+    has_affiliation_text_filters = bool(university or department)
+    if not has_multi_tag_filters and not has_region_or_type_filters and not has_affiliation_text_filters:
         try:
             return await query_scholar_list_fast(
                 university=university,
@@ -884,12 +931,14 @@ async def get_scholar_list(
 
     total = len(filtered)
     total_pages = math.ceil(total / page_size) if total > 0 else 1
-    start = (page - 1) * page_size
+    # Be tolerant to stale frontend page index (e.g. keeping page=14 after filters change).
+    effective_page = min(max(page, 1), total_pages)
+    start = (effective_page - 1) * page_size
     page_items = filtered[start : start + page_size]
 
     return {
         "total": total,
-        "page": page,
+        "page": effective_page,
         "page_size": page_size,
         "total_pages": total_pages,
         "items": [_to_list_item(i) for i in page_items],
@@ -973,6 +1022,13 @@ async def get_scholar_stats(
     Applies the same filters as get_scholar_list() to ensure consistency
     between list view and stats view.
     """
+    university = _normalize_optional_filter_text(university)
+    department = _normalize_optional_filter_text(department)
+    position = _normalize_optional_filter_text(position)
+    keyword = _normalize_optional_filter_text(keyword)
+    institution_group = _normalize_optional_filter_text(institution_group)
+    institution_category = _normalize_optional_filter_text(institution_category)
+
     affiliation_type = normalize_org_type(affiliation_type)
 
     # Resolve institution_group/category → list of institution names for filtering

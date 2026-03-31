@@ -24,11 +24,9 @@
 - `export_supabase_to_sql.py`: 从 Supabase 导出 schema/data 到 `exports/sql`
 - `refresh_and_load_local.sh`: 一键执行导出 -> 导入本地 PostgreSQL -> 校验
 - `verify_local_pg_counts.py`: 校验本地 PostgreSQL 行数是否与导出摘要一致
+- `create_university_leadership_tables.sql`: 本地库补充高校领导力表结构
 - `optimize_pg_performance.sql`: PostgreSQL 读写性能索引（可重复执行）
 - `apply_pg_optimizations.sh`: 执行性能索引脚本（非 owner 时自动尝试 `sudo -u postgres`）
-- `init_event_taxonomy.py`
-- `migrate_event_categories.py`
-- `rename_cas_to_ucas.py`
 
 ## core/ — 脚本公共模块
 
@@ -43,9 +41,6 @@
 
 ## examples/ — 示例脚本
 
-- `data_import_example.py`
-- `database_cleanup_example.py`
-- `aminer_enrichment_example.py`
 - `aminer_detail_api_diagnostic.py`: AMiner 学者详情 API 诊断示例
 
 ## 推荐迁移流程
