@@ -83,6 +83,8 @@ async def create_institution(inst_data: dict) -> InstitutionDetailResponse:
         ValueError: If validation fails
     """
     raw_data = dict(inst_data)
+    if "secondary_institutions" in raw_data and "departments" not in raw_data:
+        raw_data["departments"] = raw_data.get("secondary_institutions")
     _validate_people_payload(raw_data)
 
     # Set entity_type if not provided.
@@ -193,6 +195,8 @@ async def update_institution(
         return None
 
     update_data = dict(updates)
+    if "secondary_institutions" in update_data and "departments" not in update_data:
+        update_data["departments"] = update_data.get("secondary_institutions")
     _validate_people_payload(update_data)
     departments_payload = update_data.pop("departments", None)
 

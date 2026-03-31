@@ -64,6 +64,7 @@ async def test_hierarchy_includes_virtual_org_and_missing_departments(monkeypatc
     )
 
     result = await lq._get_hierarchy_view()
+    assert result["primary_institutions"] == result["organizations"]
     organizations = result["organizations"]
     by_name = {org["name"]: org for org in organizations}
 
@@ -71,6 +72,7 @@ async def test_hierarchy_includes_virtual_org_and_missing_departments(monkeypatc
     assert by_name["清华大学"]["scholar_count"] == 100
     assert by_name["北航"]["scholar_count"] == 50
     assert by_name["北航"]["id"].startswith("virtual_org_")
+    assert by_name["清华大学"]["secondary_institutions"] == by_name["清华大学"]["departments"]
 
     dept_by_name = {
         d["name"]: d["scholar_count"]
@@ -115,6 +117,7 @@ async def test_hierarchy_virtual_org_respects_classification_filter(monkeypatch)
     )
 
     result = await lq._get_hierarchy_view(classification="共建高校")
+    assert result["primary_institutions"] == result["organizations"]
     organizations = result["organizations"]
 
     assert [org["name"] for org in organizations] == ["清华大学"]
@@ -182,6 +185,10 @@ async def test_hierarchy_region_filters_do_not_double_count_duplicate_org_rows(m
     domestic = await lq._get_hierarchy_view(region="国内")
     international = await lq._get_hierarchy_view(region="国际")
     all_orgs = await lq._get_hierarchy_view()
+
+    assert domestic["primary_institutions"] == domestic["organizations"]
+    assert international["primary_institutions"] == international["organizations"]
+    assert all_orgs["primary_institutions"] == all_orgs["organizations"]
 
     assert [org["name"] for org in domestic["organizations"]] == ["清华大学"]
     assert [org["name"] for org in international["organizations"]] == ["MIT"]

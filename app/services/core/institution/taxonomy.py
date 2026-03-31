@@ -56,6 +56,8 @@ async def get_institution_stats() -> InstitutionStatsResponse:
     total_scholars = scholars_resp.count or 0
 
     return InstitutionStatsResponse(
+        total_primary_institutions=len(organizations),
+        total_secondary_institutions=len(departments),
         total_universities=len(organizations),
         total_departments=len(departments),
         total_scholars=total_scholars,

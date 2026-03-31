@@ -377,7 +377,7 @@ async def _get_hierarchy_view(
             continue
 
         org_item["scholar_count"] = scholar_counts.get(("org", org_name_key), 0)
-        org_item["departments"] = sorted(
+        secondary_institutions = sorted(
             [
                 {
                     "id": dept["id"],
@@ -391,6 +391,8 @@ async def _get_hierarchy_view(
             ],
             key=lambda d: (-int(d.get("scholar_count") or 0), str(d.get("name") or "")),
         )
+        org_item["secondary_institutions"] = secondary_institutions
+        org_item["departments"] = secondary_institutions
 
         result_orgs.append(org_item)
 
@@ -444,6 +446,7 @@ async def _get_hierarchy_view(
                 "classification": virtual_org.get("classification"),
                 "sub_classification": None,
                 "scholar_count": scholar_counts.get(("org", org_key), 0),
+                "secondary_institutions": departments,
                 "departments": departments,
             }
         )
@@ -453,7 +456,10 @@ async def _get_hierarchy_view(
         key=lambda i: (-int(i.get("scholar_count") or 0), str(i.get("name") or ""))
     )
 
-    return {"organizations": result_orgs}
+    return {
+        "primary_institutions": result_orgs,
+        "organizations": result_orgs,
+    }
 
 
 def _apply_filters(

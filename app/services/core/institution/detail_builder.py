@@ -9,6 +9,7 @@ from app.schemas.institution import (
     DepartmentInfo,
     InstitutionDetailResponse,
     InstitutionListItem,
+    SecondaryInstitutionInfo,
     ScholarInfo,
 )
 from app.services.core.institution.classification import (
@@ -44,28 +45,31 @@ def _parse_scholar_list(raw: list | None) -> list[ScholarInfo]:
     return result
 
 
-def _build_department_info_list(department_items: list[InstitutionListItem] | None, department_records: list[dict] | None = None) -> list[DepartmentInfo]:
-    """Convert InstitutionListItem objects to DepartmentInfo objects.
+def _build_secondary_institution_info_list(
+    secondary_items: list[InstitutionListItem] | None,
+    secondary_records: list[dict] | None = None,
+) -> list[SecondaryInstitutionInfo]:
+    """Convert InstitutionListItem objects to SecondaryInstitutionInfo objects.
 
     Args:
-        department_items: List of InstitutionListItem objects
-        department_records: Optional list of raw department records for additional data
+        secondary_items: List of InstitutionListItem objects
+        secondary_records: Optional list of raw department records for additional data
 
     Returns:
-        List of DepartmentInfo objects
+        List of SecondaryInstitutionInfo objects
     """
-    if not department_items:
+    if not secondary_items:
         return []
 
     # Create a map of records by ID for quick lookup
     record_map = {}
-    if department_records:
-        record_map = {r["id"]: r for r in department_records}
+    if secondary_records:
+        record_map = {r["id"]: r for r in secondary_records}
 
     result = []
-    for item in department_items:
+    for item in secondary_items:
         record = record_map.get(item.id, {})
-        result.append(DepartmentInfo(
+        result.append(SecondaryInstitutionInfo(
             id=item.id,
             name=item.name,
             scholar_count=item.scholar_count,
@@ -121,10 +125,12 @@ def build_detail_response(record: dict, departments: list[dict] | None = None) -
     # Build base list item
     base_item = build_list_item(record)
 
-    # Build department list items if provided
-    department_items = None
+    # Build secondary institution list items if provided
+    secondary_items = None
     if departments:
-        department_items = [build_list_item(dept) for dept in departments]
+        secondary_items = [build_list_item(dept) for dept in departments]
+
+    secondary_institutions = _build_secondary_institution_info_list(secondary_items, departments)
 
     # Extract additional detail fields
     detail_data = {
@@ -151,8 +157,9 @@ def build_detail_response(record: dict, departments: list[dict] | None = None) -
         "visit_exchanges": record.get("visit_exchanges") or [],
         "cooperation_focus": record.get("cooperation_focus") or [],
         "custom_fields": record.get("custom_fields") or {},
-        # Departments
-        "departments": _build_department_info_list(department_items, departments),
+        # Secondary institutions
+        "secondary_institutions": secondary_institutions,
+        "departments": [DepartmentInfo(**item.model_dump()) for item in secondary_institutions],
         # Legacy compatibility
         "type": record.get("type"),
         "group": record.get("group"),
