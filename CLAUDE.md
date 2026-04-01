@@ -1,4 +1,4 @@
-# Information Crawler — AI 开发上下文
+# Intelligence Engine Backend Services — AI 开发上下文
 
 中关村人工智能研究院**数据智能平台**（OpenClaw）。181 信源（138 启用）× 9 个信息维度 + 学者知识库维度（49 源），6 种模板爬虫 + 16 个自定义 Parser，v1 API **65+ 端点**（核心 14 + 业务智能 27 + 学者 14 + 项目/机构/活动/舆情/LLM追踪）。
 82 个启用信源已配置 detail_selectors 或 RSS/API 自带正文，可自动获取文章正文（content 字段）。

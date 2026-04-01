@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import logging
 import math
+import re
 from datetime import datetime
 from threading import Lock
 from typing import Any
@@ -19,6 +20,26 @@ _ALLOWED_SORT_FIELDS = {"crawled_at", "published_at", "title", "importance"}
 _SOCIAL_SOURCE_ID_BY_PLATFORM = {
     "x": "twitter_ai_kol_international",
 }
+_COVER_IMAGE_FIELD_KEYS = (
+    "thumbnail",
+    "thumb",
+    "image",
+    "image_url",
+    "cover",
+    "cover_image",
+    "cover_image_url",
+    "hero_image",
+    "banner",
+    "banner_image",
+)
+_IMAGE_URL_PATTERN = re.compile(
+    r"https?://[^\s\"'<>]+?\.(?:png|jpe?g|webp|gif|bmp|svg)(?:\?[^\s\"'<>]*)?",
+    re.IGNORECASE,
+)
+_IMG_TAG_SRC_PATTERN = re.compile(
+    r"<img[^>]+src=[\"']([^\"']+)[\"']",
+    re.IGNORECASE,
+)
 
 # Article annotations (is_read, importance) stored in a simple JSON file
 # Used as fallback when DB is not available.
@@ -240,8 +261,77 @@ def _to_brief(item: dict[str, Any]) -> dict[str, Any]:
         "tags": item.get("tags", []),
         "is_read": item.get("is_read", False),
         "importance": item.get("importance"),
+        "cover_image_url": _extract_cover_image_url(item),
         "custom_fields": item.get("custom_fields") or {},
     }
+
+
+def _is_http_url(value: Any) -> bool:
+    return isinstance(value, str) and value.startswith(("http://", "https://"))
+
+
+def _first_image_in_value(value: Any) -> str | None:
+    if _is_http_url(value):
+        return value
+
+    if isinstance(value, list):
+        for entry in value:
+            image_url = _first_image_in_value(entry)
+            if image_url:
+                return image_url
+        return None
+
+    if isinstance(value, dict):
+        for key in ("src", "url"):
+            maybe_url = value.get(key)
+            if _is_http_url(maybe_url):
+                return maybe_url
+    return None
+
+
+def _first_image_from_mapping(mapping: Any) -> str | None:
+    if not isinstance(mapping, dict):
+        return None
+
+    for key in _COVER_IMAGE_FIELD_KEYS:
+        image_url = _first_image_in_value(mapping.get(key))
+        if image_url:
+            return image_url
+
+    image_url = _first_image_in_value(mapping.get("images"))
+    if image_url:
+        return image_url
+    return None
+
+
+def _extract_image_from_text(content: Any) -> str | None:
+    if not isinstance(content, str) or not content:
+        return None
+    img_match = _IMG_TAG_SRC_PATTERN.search(content)
+    if img_match and _is_http_url(img_match.group(1)):
+        return img_match.group(1)
+    url_match = _IMAGE_URL_PATTERN.search(content)
+    if url_match:
+        return url_match.group(0)
+    return None
+
+
+def _extract_cover_image_url(item: dict[str, Any]) -> str | None:
+    for key in _COVER_IMAGE_FIELD_KEYS:
+        image_url = _first_image_in_value(item.get(key))
+        if image_url:
+            return image_url
+
+    for field in ("extra", "custom_fields"):
+        image_url = _first_image_from_mapping(item.get(field))
+        if image_url:
+            return image_url
+
+    for field in ("content_html", "content"):
+        image_url = _extract_image_from_text(item.get(field))
+        if image_url:
+            return image_url
+    return None
 
 
 def _to_detail(item: dict[str, Any]) -> dict[str, Any]:

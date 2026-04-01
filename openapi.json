@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Information Crawler API",
+    "title": "Intelligence Engine Backend Services API",
     "summary": "中关村人工智能研究院 — 信息监测系统",
     "description": "## 概述\n\n信息监测系统 API，自动爬取多维度信源，为中关村人工智能研究院提供全方位的信息监测与商业智能服务。\n\n## 功能模块\n\n| 模块 | 说明 |\n|------|------|\n| **文章管理** | 全量文章的查询、搜索、统计 |\n| **信源管理** | 信源配置、状态监控、分面筛选、手动触发 |\n| **维度视图** | 多维度文章聚合浏览 |\n| **政策智能** | 规则引擎 + LLM 二级管线，政策机会挖掘 |\n| **人事情报** | 任免信息自动提取，LLM 相关性分析 |\n| **系统健康** | 调度器、爬取健康度监控 |\n\n## 维度说明\n\n- `national_policy` — 国家政策（国务院、部委）\n- `beijing_policy` — 北京政策（市/区政府）\n- `technology` — 技术动态（ArXiv、GitHub Trending、Hacker News 等）\n- `talent` — 人才政策\n- `industry` — 产业动态\n- `universities` — 高校动态（46 所高校 AI 院系）\n- `events` — 活动会议\n- `personnel` — 人事变动\n- `twitter` — Twitter/X KOL 动态\n- `scholars` — 学者师资信源（知识库导入）\n- `sentiment` — 舆情专项信源\n\n## 技术栈\n\nFastAPI + Local JSON Storage + APScheduler + httpx + BeautifulSoup4 + Playwright",
     "contact": {

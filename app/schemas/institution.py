@@ -330,6 +330,7 @@ class InstitutionUpdate(BaseModel):
     org_type: str | None = Field(default=None, description="机构类型（高校 | 企业 | 研究机构 | 行业学会 | 其他）")
     classification: str | None = Field(default=None, description="顶层分类（共建高校 | 兄弟院校 | 海外高校 | 其他高校）")
     sub_classification: str | None = Field(default=None, description="二级分类")
+    category: str | None = Field(default=None, description="[兼容] 旧版分类字段，等价于 sub_classification")
     priority: str | None = Field(default=None, description="优先级")
     student_count_24: int | None = Field(default=None, description="24级学生人数")
     student_count_25: int | None = Field(default=None, description="25级学生人数")

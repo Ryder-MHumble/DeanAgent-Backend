@@ -36,6 +36,9 @@ class ArticleBrief(BaseModel):
     importance: int | None = Field(
         default=None, description="重要度评分（0-100）", examples=[85]
     )
+    cover_image_url: str | None = Field(
+        default=None, description="封面图 URL（从文章元数据中提取的第一张图片）"
+    )
     custom_fields: dict[str, str] = Field(
         default={}, description="用户自定义字段（key-value 均为字符串）"
     )

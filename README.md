@@ -1,4 +1,4 @@
-# Information Crawler
+# Intelligence Engine Backend Services
 
 中关村人工智能研究院**数据智能平台**（OpenClaw）。自动爬取 **181 个信源**（138 启用，横跨 **9 个信息维度 + 学者知识库**），通过 v1 REST API（**65+ 端点**，含业务智能 27 端点、学者 14 端点）向 **Dean-Agent、ScholarDB-System、Athena、NanoBot** 提供统一数据服务。维护 **2,200+ 位学者**档案，覆盖 9 所顶尖高校。所有数据以本地 JSON 文件存储。
 

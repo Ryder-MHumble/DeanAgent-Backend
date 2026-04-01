@@ -209,7 +209,7 @@ async def _check_needs_today_social_kol_backfill() -> bool:
 async def lifespan(app: FastAPI):
     """Manage startup and shutdown of scheduler and other resources."""
     logger.info("=" * 60)
-    logger.info("  Information Crawler starting")
+    logger.info("  Intelligence Engine Backend Services starting")
     logger.info("=" * 60)
 
     # Step 0: Initialize database client
@@ -339,7 +339,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="Information Crawler API",
+    title="Intelligence Engine Backend Services API",
     summary="中关村人工智能研究院 — 信息监测系统",
     description=(
         "## 概述\n\n"
@@ -408,7 +408,7 @@ if frontend_dir.exists():
 @app.get("/", tags=["default"], summary="API 入口", include_in_schema=False)
 async def root():
     return {
-        "message": "Information Crawler API",
+        "message": "Intelligence Engine Backend Services API",
         "version": "0.2.0",
         "docs": "/docs",
         "swagger": "/swagger",

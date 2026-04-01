@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ------------------------------------------------------------------
-# Information Crawler — 服务器部署脚本
+# Intelligence Engine Backend Services — 服务器部署脚本
 #
 # 将 systemd unit 文件安装到系统并启用服务。
 #

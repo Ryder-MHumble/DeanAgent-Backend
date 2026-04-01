@@ -11,7 +11,10 @@ from time import monotonic
 from typing import Any
 
 from app.schemas.institution import InstitutionListResponse
-from app.services.core.institution.classification import normalize_org_type
+from app.services.core.institution.classification import (
+    normalize_org_type,
+    normalize_sub_classification,
+)
 from app.services.core.institution.detail_builder import build_list_item
 from app.services.core.institution.sorting import sort_institutions
 from app.services.core.institution.storage import fetch_all_institutions
@@ -21,6 +24,11 @@ _hierarchy_cache: dict[
     tuple[str | None, str | None, str | None, bool | None],
     tuple[float, dict],
 ] = {}
+
+
+def invalidate_hierarchy_cache() -> None:
+    """Invalidate in-process hierarchy cache after institution writes."""
+    _hierarchy_cache.clear()
 
 
 def _normalize_name(value: Any) -> str:
@@ -162,6 +170,7 @@ async def get_institutions_unified(
         InstitutionListResponse for flat view, dict for hierarchy view
     """
     normalized_org_type = normalize_org_type(org_type)
+    normalized_sub_classification = normalize_sub_classification(sub_classification)
 
     if view == "hierarchy":
         cache_key = (region, normalized_org_type, classification, is_adjunct_supervisor)
@@ -184,7 +193,7 @@ async def get_institutions_unified(
             region=region,
             org_type=normalized_org_type,
             classification=classification,
-            sub_classification=sub_classification,
+            sub_classification=normalized_sub_classification,
             keyword=keyword,
             page=page,
             page_size=page_size,
@@ -486,6 +495,7 @@ def _apply_filters(
     """
     filtered = records
     normalized_org_type = normalize_org_type(org_type)
+    normalized_sub_classification = normalize_sub_classification(sub_classification)
 
     if entity_type:
         filtered = [r for r in filtered if r.get("entity_type") == entity_type]
@@ -503,8 +513,12 @@ def _apply_filters(
     if classification:
         filtered = [r for r in filtered if r.get("classification") == classification]
 
-    if sub_classification:
-        filtered = [r for r in filtered if r.get("sub_classification") == sub_classification]
+    if normalized_sub_classification:
+        filtered = [
+            r
+            for r in filtered
+            if normalize_sub_classification(r.get("sub_classification")) == normalized_sub_classification
+        ]
 
     if keyword:
         keyword_lower = keyword.lower()

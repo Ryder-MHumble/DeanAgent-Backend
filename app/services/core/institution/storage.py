@@ -159,6 +159,13 @@ async def upsert_institution(institution_data: dict) -> dict:
     except Exception:
         # Do not fail institution write if scholar cache invalidation is unavailable.
         pass
+    try:
+        from app.services.core.institution.list_query import invalidate_hierarchy_cache  # noqa: PLC0415
+
+        invalidate_hierarchy_cache()
+    except Exception:
+        # Do not fail institution write if hierarchy cache invalidation is unavailable.
+        pass
     return resp.data[0]
 
 
@@ -180,5 +187,12 @@ async def delete_institution_by_id(institution_id: str) -> bool:
             invalidate_institution_classification_cache()
         except Exception:
             # Do not fail institution delete if scholar cache invalidation is unavailable.
+            pass
+        try:
+            from app.services.core.institution.list_query import invalidate_hierarchy_cache  # noqa: PLC0415
+
+            invalidate_hierarchy_cache()
+        except Exception:
+            # Do not fail institution delete if hierarchy cache invalidation is unavailable.
             pass
     return len(resp.data) > 0

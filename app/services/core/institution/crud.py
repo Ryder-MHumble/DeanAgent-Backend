@@ -11,6 +11,8 @@ from typing import Any
 
 from app.schemas.institution import InstitutionDetailResponse
 from app.services.core.institution.classification import (
+    convert_category_to_classification,
+    convert_classification_to_category,
     normalize_org_type,
     parse_priority,
     resolve_classification_pair,
@@ -102,6 +104,14 @@ async def create_institution(inst_data: dict) -> InstitutionDetailResponse:
         raw_data["priority"] = parse_priority(raw_data.get("priority"))
 
     raw_data["org_type"] = normalize_org_type(raw_data.get("org_type"))
+    if raw_data.get("category") and not raw_data.get("sub_classification"):
+        legacy_classification, legacy_sub_classification = convert_category_to_classification(
+            raw_data.get("category")
+        )
+        if legacy_sub_classification:
+            raw_data["sub_classification"] = legacy_sub_classification
+        if legacy_classification and not raw_data.get("classification"):
+            raw_data["classification"] = legacy_classification
 
     classification, sub_classification = resolve_classification_pair(
         raw_data.get("classification"),
@@ -110,6 +120,7 @@ async def create_institution(inst_data: dict) -> InstitutionDetailResponse:
     )
     raw_data["classification"] = classification
     raw_data["sub_classification"] = sub_classification
+    raw_data["category"] = convert_classification_to_category(classification, sub_classification)
 
     if entity_type == "organization":
         raw_data["parent_id"] = None
@@ -210,6 +221,14 @@ async def update_institution(
     if "org_type" in update_data:
         update_data["org_type"] = normalize_org_type(update_data.get("org_type"))
 
+    if "category" in update_data and "sub_classification" not in update_data:
+        legacy_classification, legacy_sub_classification = convert_category_to_classification(
+            update_data.get("category")
+        )
+        update_data["sub_classification"] = legacy_sub_classification
+        if "classification" not in update_data and legacy_classification:
+            update_data["classification"] = legacy_classification
+
     if any(k in update_data for k in ("classification", "sub_classification", "org_type")):
         classification, sub_classification = resolve_classification_pair(
             update_data.get("classification", existing.get("classification")),
@@ -218,6 +237,7 @@ async def update_institution(
         )
         update_data["classification"] = classification
         update_data["sub_classification"] = sub_classification
+        update_data["category"] = convert_classification_to_category(classification, sub_classification)
 
     if target_entity_type == "organization":
         update_data["parent_id"] = None

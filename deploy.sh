@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ═══════════════════════════════════════════════════════════════
-#  Information Crawler — Deploy & Manage
+#  Intelligence Engine Backend Services — Deploy & Manage
 #  Usage:  ./deploy.sh [command] [options]
 # ═══════════════════════════════════════════════════════════════
 set -euo pipefail

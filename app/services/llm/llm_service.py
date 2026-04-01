@@ -78,7 +78,7 @@ async def call_llm(
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json",
         "HTTP-Referer": "https://information-crawler.local",
-        "X-Title": "Information Crawler",
+        "X-Title": "Intelligence Engine Backend Services",
     }
 
     last_error: Exception | None = None
