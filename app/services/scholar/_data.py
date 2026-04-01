@@ -119,10 +119,8 @@ def _merge_annotation(item: dict[str, Any], ann: dict[str, Any]) -> dict[str, An
     for field in _ACHIEVEMENT_FIELDS:
         if field in ann:
             item[field] = ann[field]
-    user_updates = ann.get("user_updates", [])
-    if user_updates:
-        existing = list(item.get("recent_updates") or [])
-        item["recent_updates"] = existing + user_updates
+    # `recent_updates` is intentionally not merged into runtime payload for now.
+    # Current product flow focuses on scholar-institute relationship + activities.
     return item
 
 

@@ -330,10 +330,10 @@ async def update_relation(url_hash: str, body: InstituteRelationUpdate):
 @router.post(
     "/{url_hash}/updates",
     response_model=ScholarDetailResponse,
-    summary="新增用户备注动态",
+    summary="新增用户备注动态（已停用）",
     description=(
-        "为指定学者新增一条用户录入的动态备注（获奖/项目立项/任职履新等）。"
-        "added_by 自动转换为 'user:{added_by}'，created_at 由服务端自动填写。"
+        "该功能当前阶段已停用（返回数据中 recent_updates 恒为空列表）。"
+        "调用接口将返回学者详情，不再写入动态记录。"
     ),
     status_code=201,
 )
@@ -359,20 +359,13 @@ async def delete_scholar(url_hash: str):
 @router.delete(
     "/{url_hash}/updates/{update_idx}",
     response_model=ScholarDetailResponse,
-    summary="删除用户备注动态",
+    summary="删除用户备注动态（已停用）",
     description=(
-        "删除指定学者的用户备注动态（按 user_updates 列表中的索引）。"
-        "只能删除 added_by 以 'user:' 开头的条目；尝试删除爬虫动态将返回 403。"
+        "该功能当前阶段已停用。调用接口将返回学者详情，不再执行删除。"
     ),
 )
 async def delete_update(url_hash: str, update_idx: int):
-    try:
-        result = await svc.delete_scholar_update(url_hash, update_idx)
-    except PermissionError as exc:
-        raise HTTPException(status_code=403, detail=str(exc)) from exc
-    except ValueError as exc:
-        raise HTTPException(status_code=400, detail=str(exc)) from exc
-
+    result = await svc.delete_scholar_update(url_hash, update_idx)
     if result is None:
         raise HTTPException(status_code=404, detail=f"Faculty '{url_hash}' not found")
     return result

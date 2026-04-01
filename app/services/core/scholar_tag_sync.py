@@ -1,7 +1,12 @@
 """Cross-entity synchronization helpers for scholar event/project tag fields."""
 from __future__ import annotations
 
+import logging
 from typing import Any
+
+from app.services.stores import scholar_annotation_store as annotation_store
+
+logger = logging.getLogger(__name__)
 
 
 def _get_client():
@@ -43,6 +48,62 @@ def _uniq_ids(ids: list[str] | None) -> list[str]:
         seen.add(sid)
         out.append(sid)
     return out
+
+
+async def _resolve_scholar_refs(
+    refs: set[str],
+    scholar_cols: set[str],
+) -> tuple[dict[str, str], dict[str, str]]:
+    """Resolve external scholar refs to DB id and annotation key.
+
+    - db id: scholars.id
+    - annotation key: prefer scholars.url_hash when column exists, else scholars.id
+    """
+    if not refs:
+        return {}, {}
+
+    from app.db.pool import get_pool  # noqa: PLC0415
+
+    has_url_hash = "url_hash" in scholar_cols
+    select_cols = ["id"]
+    if has_url_hash:
+        select_cols.append("url_hash")
+
+    sql = f"""
+        SELECT {", ".join(select_cols)}
+        FROM scholars
+        WHERE id = ANY($1::text[])
+    """
+    if has_url_hash:
+        sql += " OR url_hash = ANY($1::text[])"
+
+    rows = [dict(r) for r in await get_pool().fetch(sql, sorted(refs))]
+
+    ref_to_db_id: dict[str, str] = {}
+    ref_to_annotation_key: dict[str, str] = {}
+    for row in rows:
+        scholar_id = str(row.get("id") or "").strip()
+        scholar_url_hash = str(row.get("url_hash") or "").strip()
+        annotation_key = scholar_url_hash or scholar_id
+        if not scholar_id:
+            continue
+
+        aliases = {scholar_id}
+        if scholar_url_hash:
+            aliases.add(scholar_url_hash)
+
+        for alias in aliases:
+            if alias not in refs:
+                continue
+            ref_to_db_id[alias] = scholar_id
+            ref_to_annotation_key[alias] = annotation_key
+
+    # Keep unresolved refs as-is for annotation fallback updates.
+    for ref in refs:
+        ref_to_db_id.setdefault(ref, "")
+        ref_to_annotation_key.setdefault(ref, ref)
+
+    return ref_to_db_id, ref_to_annotation_key
 
 
 def _normalize_project_tags(raw: Any) -> list[dict[str, str]]:
@@ -106,47 +167,97 @@ async def sync_event_scholar_memberships(
     old_scholar_ids: list[str] | None = None,
 ) -> None:
     """Synchronize scholars.participated_event_ids after event scholar_ids changes."""
-    new_ids = set(_uniq_ids(new_scholar_ids))
-    old_ids = set(_uniq_ids(old_scholar_ids))
-    add_ids = new_ids - old_ids
-    remove_ids = old_ids - new_ids
-    target_ids = sorted(add_ids | remove_ids)
-    if not target_ids:
+    new_refs = set(_uniq_ids(new_scholar_ids))
+    old_refs = set(_uniq_ids(old_scholar_ids))
+    all_refs = new_refs | old_refs
+    if not all_refs:
         return
 
     scholar_cols = await _get_scholar_columns()
-    if "participated_event_ids" not in scholar_cols:
-        return
+    ref_to_db_id, ref_to_annotation_key = await _resolve_scholar_refs(
+        all_refs,
+        scholar_cols,
+    )
 
-    from app.db.pool import get_pool  # noqa: PLC0415
+    new_db_ids = {ref_to_db_id[r] for r in new_refs if ref_to_db_id.get(r)}
+    old_db_ids = {ref_to_db_id[r] for r in old_refs if ref_to_db_id.get(r)}
+    add_db_ids = new_db_ids - old_db_ids
+    remove_db_ids = old_db_ids - new_db_ids
+    target_db_ids = sorted(add_db_ids | remove_db_ids)
 
-    client = _get_client()
-    rows = [
-        dict(r)
-        for r in await get_pool().fetch(
-            """
-            SELECT id, participated_event_ids
-            FROM scholars
-            WHERE id = ANY($1::text[])
-            """,
-            target_ids,
-        )
-    ]
-    by_id = {str(r.get("id")): r for r in rows}
+    new_keys = {ref_to_annotation_key[r] for r in new_refs}
+    old_keys = {ref_to_annotation_key[r] for r in old_refs}
+    add_keys = new_keys - old_keys
+    remove_keys = old_keys - new_keys
+    target_keys = sorted(add_keys | remove_keys)
 
-    for scholar_id in target_ids:
-        row = by_id.get(scholar_id) or {}
-        current = _uniq_ids(row.get("participated_event_ids") or [])
-        if scholar_id in add_ids and event_id not in current:
+    # 1) Persist to DB column when available.
+    handled_annotation_keys: set[str] = set()
+    if "participated_event_ids" in scholar_cols and target_db_ids:
+        from app.db.pool import get_pool  # noqa: PLC0415
+
+        client = _get_client()
+        has_url_hash = "url_hash" in scholar_cols
+        select_cols = ["id", "participated_event_ids"]
+        if has_url_hash:
+            select_cols.append("url_hash")
+        rows = [
+            dict(r)
+            for r in await get_pool().fetch(
+                f"""
+                SELECT {", ".join(select_cols)}
+                FROM scholars
+                WHERE id = ANY($1::text[])
+                """,
+                target_db_ids,
+            )
+        ]
+        by_id = {str(r.get("id")): r for r in rows}
+
+        for scholar_id in target_db_ids:
+            row = by_id.get(scholar_id) or {}
+            current = _uniq_ids(row.get("participated_event_ids") or [])
+            if scholar_id in add_db_ids and event_id not in current:
+                current.append(event_id)
+            if scholar_id in remove_db_ids:
+                current = [eid for eid in current if eid != event_id]
+
+            await (
+                client.table("scholars")
+                .update({"participated_event_ids": current})
+                .eq("id", scholar_id)
+                .execute()
+            )
+
+            annotation_key = str(row.get("url_hash") or scholar_id).strip()
+            if annotation_key:
+                annotation_store.update_relation(
+                    annotation_key,
+                    {"participated_event_ids": current},
+                )
+                handled_annotation_keys.add(annotation_key)
+
+    # 2) Always maintain annotation overlay for schema-compat and fallback read paths.
+    for key in target_keys:
+        if not key or key in handled_annotation_keys:
+            continue
+        ann = annotation_store.get_annotation(key)
+        current = _uniq_ids(ann.get("participated_event_ids") or [])
+        if key in add_keys and event_id not in current:
             current.append(event_id)
-        if scholar_id in remove_ids:
+        if key in remove_keys:
             current = [eid for eid in current if eid != event_id]
-        await (
-            client.table("scholars")
-            .update({"participated_event_ids": current})
-            .eq("id", scholar_id)
-            .execute()
-        )
+        try:
+            annotation_store.update_relation(
+                key,
+                {"participated_event_ids": current},
+            )
+        except Exception as exc:
+            logger.warning(
+                "Failed to sync participated_event_ids annotation for %s: %s",
+                key,
+                exc,
+            )
 
 
 async def sync_project_scholar_memberships(

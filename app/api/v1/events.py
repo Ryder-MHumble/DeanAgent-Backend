@@ -27,6 +27,7 @@ from app.schemas.event import (
     EventListResponse,
     EventStatsResponse,
     EventUpdate,
+    EventScholarItem,
     ScholarAssociation,
     TaxonomyCreate,
     TaxonomyNode,
@@ -248,9 +249,9 @@ async def delete_event(event_id: str):
 
 @router.get(
     "/{event_id}/scholars",
-    response_model=list[str],
+    response_model=list[EventScholarItem],
     summary="获取活动关联的学者列表",
-    description="返回指定活动关联的所有学者 url_hash 列表。",
+    description="返回指定活动关联的学者列表（含姓名、头像、机构等简要信息）。",
 )
 async def get_event_scholars(event_id: str):
     result = await svc.get_event_scholars(event_id)

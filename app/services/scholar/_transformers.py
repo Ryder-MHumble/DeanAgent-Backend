@@ -200,7 +200,7 @@ def _to_detail(item: dict[str, Any]) -> dict[str, Any]:
         "institute_relation_notes": item.get("institute_relation_notes") or "",
         "relation_updated_by": item.get("relation_updated_by") or "",
         "relation_updated_at": item.get("relation_updated_at") or "",
-        "recent_updates": item.get("recent_updates") or [],
+        "recent_updates": [],
         "tags": item.get("tags") or [],
         "custom_fields": _coerce_custom_fields(item.get("custom_fields")),
     }

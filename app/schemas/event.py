@@ -146,6 +146,19 @@ class ScholarAssociation(BaseModel):
     scholar_id: str = Field(description="学者 url_hash")
 
 
+class EventScholarItem(BaseModel):
+    """Scholar item bound to an event."""
+
+    scholar_id: str = Field(description="学者主键（scholars.id）")
+    scholar_url_hash: str = Field(default="", description="学者详情路由主键（优先 url_hash，缺失则回退 scholar_id）")
+    name: str = Field(default="", description="学者姓名")
+    university: str = Field(default="", description="所属机构/高校")
+    department: str = Field(default="", description="院系")
+    position: str = Field(default="", description="职称")
+    email: str = Field(default="", description="邮箱")
+    photo_url: str = Field(default="", description="头像 URL")
+
+
 # ---------------------------------------------------------------------------
 # Taxonomy schemas (3-level category tree)
 # ---------------------------------------------------------------------------

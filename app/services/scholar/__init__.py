@@ -163,6 +163,49 @@ def _model_dump_maybe(value: Any) -> Any:
     return value
 
 
+def _uniq_text_ids(raw: list[Any] | None) -> list[str]:
+    seen: set[str] = set()
+    out: list[str] = []
+    for item in raw or []:
+        token = _clean_text(item)
+        if not token or token in seen:
+            continue
+        seen.add(token)
+        out.append(token)
+    return out
+
+
+async def _derive_participated_event_ids_for_refs(refs: list[str]) -> list[str]:
+    """Reverse-lookup events by scholar references (id/url_hash aliases)."""
+    ref_set = {token for token in _uniq_text_ids(refs)}
+    if not ref_set:
+        return []
+    try:
+        from app.db.client import get_client  # noqa: PLC0415
+
+        client = get_client()
+        res = await client.table("events").select("id,scholar_ids,event_date").execute()
+        rows = res.data or []
+    except Exception as exc:
+        logger.warning("Failed deriving participated_event_ids from events table: %s", exc)
+        return []
+
+    matched: list[tuple[str, str]] = []
+    for row in rows:
+        event_id = _clean_text((row or {}).get("id"))
+        if not event_id:
+            continue
+        scholar_ids = _uniq_text_ids((row or {}).get("scholar_ids") or [])
+        if not scholar_ids:
+            continue
+        if ref_set.intersection(set(scholar_ids)):
+            matched.append((event_id, _clean_text((row or {}).get("event_date"))))
+
+    # Most recent first; keep deterministic order for empty/invalid dates.
+    matched.sort(key=lambda pair: pair[1], reverse=True)
+    return _uniq_text_ids([event_id for event_id, _ in matched])
+
+
 def _split_people(raw: Any) -> list[str]:
     value = _model_dump_maybe(raw)
     if value is None:
@@ -952,17 +995,52 @@ async def get_scholar_detail(url_hash: str) -> dict[str, Any] | None:
         from app.db.client import get_client  # noqa: PLC0415
 
         client = get_client()
-        resp = await client.table("scholars").select("*").eq("id", url_hash).limit(1).execute()
+        try:
+            resp = await (
+                client.table("scholars")
+                .select("*")
+                .or_(f"id.eq.{url_hash},url_hash.eq.{url_hash}")
+                .limit(1)
+                .execute()
+            )
+        except Exception:
+            # Backward compatibility: some schemas do not include url_hash column.
+            resp = await (
+                client.table("scholars")
+                .select("*")
+                .eq("id", url_hash)
+                .limit(1)
+                .execute()
+            )
         if resp.data:
             item = dict(resp.data[0])
             if "url_hash" not in item:
                 item["url_hash"] = item.get("id", "")
             if "url" not in item:
                 item["url"] = item.get("source_url", "")
-            ann = annotation_store.get_annotation(url_hash)
+            canonical_annotation_key = _clean_text(item.get("url_hash")) or _clean_text(item.get("id"))
+            ann = annotation_store.get_annotation(canonical_annotation_key)
+            if not ann and canonical_annotation_key != url_hash:
+                ann = annotation_store.get_annotation(url_hash)
             if ann:
                 _merge_annotation(item, ann)
             detail = _to_detail(item)
+            derived_event_ids = await _derive_participated_event_ids_for_refs(
+                _uniq_text_ids([
+                    url_hash,
+                    item.get("id"),
+                    item.get("url_hash"),
+                ]),
+            )
+            current_event_ids = _uniq_text_ids(detail.get("participated_event_ids") or [])
+            merged_event_ids = _uniq_text_ids(current_event_ids + derived_event_ids)
+            detail["participated_event_ids"] = merged_event_ids
+            if canonical_annotation_key and merged_event_ids != current_event_ids:
+                annotation_store.update_relation(
+                    canonical_annotation_key,
+                    {"participated_event_ids": merged_event_ids},
+                )
+
             detail["supervised_students_count"] = await student_store.count_students(url_hash)
             publications = await _load_scholar_publications(url_hash)
             patents = await _load_scholar_patents(url_hash)
@@ -977,8 +1055,13 @@ async def get_scholar_detail(url_hash: str) -> dict[str, Any] | None:
     # Fallback path: legacy full-data scan.
     items = await _load_all_with_annotations_async()
     for item in items:
-        if item.get("url_hash", "") == url_hash:
+        if item.get("url_hash", "") == url_hash or item.get("id", "") == url_hash:
             detail = _to_detail(item)
+            derived_event_ids = await _derive_participated_event_ids_for_refs(
+                _uniq_text_ids([url_hash, item.get("id"), item.get("url_hash")]),
+            )
+            current_event_ids = _uniq_text_ids(detail.get("participated_event_ids") or [])
+            detail["participated_event_ids"] = _uniq_text_ids(current_event_ids + derived_event_ids)
             detail["supervised_students_count"] = await student_store.count_students(url_hash)
             publications = await _load_scholar_publications(url_hash)
             patents = await _load_scholar_patents(url_hash)
@@ -1177,16 +1260,16 @@ async def update_scholar_relation(url_hash: str, updates: dict[str, Any]) -> dic
 
 
 async def add_scholar_update(url_hash: str, update: dict[str, Any]) -> dict[str, Any] | None:
+    # Dynamic updates are temporarily disabled in current product phase.
     if await get_scholar_detail(url_hash) is None:
         return None
-    annotation_store.add_user_update(url_hash, update)
     return await get_scholar_detail(url_hash)
 
 
 async def delete_scholar_update(url_hash: str, update_idx: int) -> dict[str, Any] | None:
+    # Dynamic updates are temporarily disabled in current product phase.
     if await get_scholar_detail(url_hash) is None:
         return None
-    annotation_store.delete_user_update(url_hash, update_idx)
     return await get_scholar_detail(url_hash)
 
 

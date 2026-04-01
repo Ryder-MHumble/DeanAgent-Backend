@@ -53,6 +53,62 @@ def _uniq_ids(raw: list[str] | None) -> list[str]:
     return out
 
 
+async def _resolve_scholar_ids(raw_ids: list[str] | None) -> list[str]:
+    """Normalize scholar refs to canonical scholars.id where possible."""
+    refs = _uniq_ids(raw_ids)
+    if not refs:
+        return []
+
+    from app.db.pool import get_pool  # noqa: PLC0415
+
+    rows: list[dict[str, Any]] = []
+    try:
+        rows = [
+            dict(r)
+            for r in await get_pool().fetch(
+                """
+                SELECT id, url_hash
+                FROM scholars
+                WHERE id = ANY($1::text[]) OR url_hash = ANY($1::text[])
+                """,
+                refs,
+            )
+        ]
+    except Exception:
+        # Backward compatibility: some schemas do not have url_hash column.
+        rows = [
+            dict(r)
+            for r in await get_pool().fetch(
+                """
+                SELECT id
+                FROM scholars
+                WHERE id = ANY($1::text[])
+                """,
+                refs,
+            )
+        ]
+
+    alias_to_id: dict[str, str] = {}
+    for row in rows:
+        scholar_id = str(row.get("id") or "").strip()
+        if not scholar_id:
+            continue
+        alias_to_id[scholar_id] = scholar_id
+        scholar_url_hash = str(row.get("url_hash") or "").strip()
+        if scholar_url_hash:
+            alias_to_id[scholar_url_hash] = scholar_id
+
+    normalized: list[str] = []
+    seen: set[str] = set()
+    for ref in refs:
+        canonical = alias_to_id.get(ref, ref)
+        if canonical in seen:
+            continue
+        seen.add(canonical)
+        normalized.append(canonical)
+    return normalized
+
+
 def _db_to_detail(row: dict) -> EventDetailResponse:
     return EventDetailResponse(
         id=row.get("id", ""),
@@ -221,7 +277,9 @@ async def get_event_stats() -> EventStatsResponse:
 async def create_event(evt_data: dict[str, Any]) -> EventDetailResponse:
     now = datetime.now(timezone.utc).isoformat()
     evt_data["id"] = str(uuid.uuid4())
-    evt_data["scholar_ids"] = _uniq_ids(evt_data.get("scholar_ids") or [])
+    evt_data["scholar_ids"] = await _resolve_scholar_ids(
+        evt_data.get("scholar_ids") or [],
+    )
     evt_data.setdefault("created_at", now)
     evt_data.setdefault("updated_at", now)
 
@@ -254,7 +312,9 @@ async def update_event(event_id: str, updates: dict[str, Any]) -> EventDetailRes
     updates = dict(updates)
     updates["updated_at"] = datetime.now(timezone.utc).isoformat()
     if "scholar_ids" in updates:
-        updates["scholar_ids"] = _uniq_ids(updates.get("scholar_ids") or [])
+        updates["scholar_ids"] = await _resolve_scholar_ids(
+            updates.get("scholar_ids") or [],
+        )
 
     if "custom_fields" in updates:
         client = _get_client()
@@ -327,9 +387,96 @@ async def remove_scholar_from_event(event_id: str, scholar_id: str) -> EventDeta
     return await update_event(event_id, {"scholar_ids": ids})
 
 
-async def get_event_scholars(event_id: str) -> list[str] | None:
+async def _fetch_scholar_briefs(scholar_ids: list[str]) -> list[dict[str, str]]:
+    if not scholar_ids:
+        return []
+
+    from app.db.pool import get_pool  # noqa: PLC0415
+
+    rows: list[dict[str, Any]] = []
+    has_url_hash = True
+    try:
+        rows = [
+            dict(r)
+            for r in await get_pool().fetch(
+                """
+                SELECT id, url_hash, name, university, department, position, email, photo_url
+                FROM scholars
+                WHERE id = ANY($1::text[]) OR url_hash = ANY($1::text[])
+                """,
+                scholar_ids,
+            )
+        ]
+    except Exception:
+        has_url_hash = False
+        rows = [
+            dict(r)
+            for r in await get_pool().fetch(
+                """
+                SELECT id, name, university, department, position, email, photo_url
+                FROM scholars
+                WHERE id = ANY($1::text[])
+                """,
+                scholar_ids,
+            )
+        ]
+
+    by_alias: dict[str, dict[str, Any]] = {}
+    for row in rows:
+        sid = str(row.get("id") or "").strip()
+        if not sid:
+            continue
+        by_alias[sid] = row
+        if has_url_hash:
+            shash = str(row.get("url_hash") or "").strip()
+            if shash:
+                by_alias[shash] = row
+
+    items: list[dict[str, str]] = []
+    for raw in scholar_ids:
+        key = str(raw or "").strip()
+        if not key:
+            continue
+        row = by_alias.get(key)
+        if not row:
+            items.append(
+                {
+                    "scholar_id": key,
+                    "scholar_url_hash": key,
+                    "name": "未知学者",
+                    "university": "",
+                    "department": "",
+                    "position": "",
+                    "email": "",
+                    "photo_url": "",
+                }
+            )
+            continue
+
+        scholar_id = str(row.get("id") or key).strip()
+        scholar_url_hash = (
+            str(row.get("url_hash") or "").strip() if has_url_hash else ""
+        ) or scholar_id
+        items.append(
+            {
+                "scholar_id": scholar_id,
+                "scholar_url_hash": scholar_url_hash,
+                "name": str(row.get("name") or "").strip(),
+                "university": str(row.get("university") or "").strip(),
+                "department": str(row.get("department") or "").strip(),
+                "position": str(row.get("position") or "").strip(),
+                "email": str(row.get("email") or "").strip(),
+                "photo_url": str(row.get("photo_url") or "").strip(),
+            }
+        )
+    return items
+
+
+async def get_event_scholars(event_id: str) -> list[dict[str, str]] | None:
     detail = await get_event_detail(event_id)
-    return detail.scholar_ids if detail else None
+    if not detail:
+        return None
+    return await _fetch_scholar_briefs(detail.scholar_ids)
 
 
 async def batch_create_events(
