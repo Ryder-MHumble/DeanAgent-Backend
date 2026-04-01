@@ -175,15 +175,9 @@ _PLATFORM_MAP: dict[str, str] = {
     "github_trending": "GitHub",
     "hacker_news": "GitHub",  # close enough for HN
     "twitter_ai_kol_international": "X",
-    "twitter_ai_kol_chinese": "X",
-    "twitter_ai_breakthrough": "X",
-    "twitter_ai_papers": "X",
-    "twitter_ai_industry": "X",
-    "twitter_ai_talent": "X",
-    "twitter_zgci_sentiment": "X",
 }
 
-_KOL_SOURCE_IDS = {"twitter_ai_kol_international", "twitter_ai_kol_chinese"}
+_KOL_SOURCE_IDS = {"twitter_ai_kol_international"}
 
 # ---------------------------------------------------------------------------
 # News type detection

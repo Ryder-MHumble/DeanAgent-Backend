@@ -19,6 +19,7 @@ async def execute_crawl_job(source_config: dict[str, Any]) -> None:
     logger.info("Starting crawl: %s", source_id)
 
     now = datetime.now(timezone.utc)
+    crawler_class = str(source_config.get("crawler_class") or "").strip().lower()
 
     try:
         crawler = CrawlerRegistry.create_crawler(source_config)
@@ -35,6 +36,22 @@ async def execute_crawl_job(source_config: dict[str, Any]) -> None:
         return
 
     result = await crawler.run()
+
+    # For Twitter KOL source, also ingest into unified social_posts/social_accounts tables.
+    if crawler_class == "twitter_kol":
+        try:
+            from app.services.external.social_kol_service import crawl_and_ingest_twitter_source
+
+            social_result = await crawl_and_ingest_twitter_source(source_config)
+            logger.info(
+                "Social ingest complete: %s | users=%d | posts_upserted=%d | skipped=%d",
+                source_id,
+                social_result.users,
+                social_result.posts_upserted,
+                social_result.skipped_posts,
+            )
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("Social ingest failed for %s: %s", source_id, exc)
 
     # Persist to DB
     try:

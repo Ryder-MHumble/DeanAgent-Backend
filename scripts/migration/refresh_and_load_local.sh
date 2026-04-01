@@ -68,7 +68,16 @@ SQL
 echo "[4/5] Ensuring university leadership tables exist ..."
 psql -h "${POSTGRES_HOST}" -p "${POSTGRES_PORT}" -U "${POSTGRES_USER}" -d "${POSTGRES_DB}" -v ON_ERROR_STOP=1 -f scripts/migration/create_university_leadership_tables.sql
 
-echo "[5/5] Verifying row counts ..."
+echo "[5/7] Extending source_states catalog fields ..."
+if ! psql -h "${POSTGRES_HOST}" -p "${POSTGRES_PORT}" -U "${POSTGRES_USER}" -d "${POSTGRES_DB}" -v ON_ERROR_STOP=1 -f scripts/migration/extend_source_states_catalog.sql; then
+  echo "Primary user cannot ALTER source_states, retrying with postgres owner ..."
+  sudo -u postgres psql -d "${POSTGRES_DB}" -v ON_ERROR_STOP=1 -f scripts/migration/extend_source_states_catalog.sql
+fi
+
+echo "[6/7] Syncing source catalog metadata into source_states ..."
+python scripts/migration/sync_source_catalog_to_db.py
+
+echo "[7/7] Verifying row counts ..."
 python scripts/migration/verify_local_pg_counts.py
 
 echo "Done: local PostgreSQL has been refreshed from Supabase export."

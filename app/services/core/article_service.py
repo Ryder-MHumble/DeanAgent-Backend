@@ -16,11 +16,168 @@ from app.services.stores.json_reader import get_all_articles
 logger = logging.getLogger(__name__)
 
 _ALLOWED_SORT_FIELDS = {"crawled_at", "published_at", "title", "importance"}
+_SOCIAL_SOURCE_ID_BY_PLATFORM = {
+    "x": "twitter_ai_kol_international",
+}
 
 # Article annotations (is_read, importance) stored in a simple JSON file
 # Used as fallback when DB is not available.
 ANNOTATIONS_FILE = BASE_DIR / "data" / "state" / "article_annotations.json"
 _annotations_lock = Lock()
+
+
+def _social_article_id(platform: str, external_post_id: str) -> str:
+    return f"social:{platform}:{external_post_id}"
+
+
+def _is_social_article_id(article_id: str) -> bool:
+    return str(article_id or "").startswith("social:")
+
+
+def _parse_social_article_id(article_id: str) -> tuple[str, str] | None:
+    text = str(article_id or "")
+    if not text.startswith("social:"):
+        return None
+    parts = text.split(":", 2)
+    if len(parts) != 3:
+        return None
+    platform = parts[1].strip().lower()
+    external_post_id = parts[2].strip()
+    if not platform or not external_post_id:
+        return None
+    return platform, external_post_id
+
+
+def _platform_to_article_dimension(platform: str) -> str:
+    if platform == "x":
+        return "twitter"
+    return "social"
+
+
+def _platform_to_source_name(platform: str) -> str:
+    mapping = {
+        "x": "Twitter",
+        "youtube": "YouTube",
+        "linkedin": "LinkedIn",
+        "xiaoyuzhou": "小宇宙",
+    }
+    return mapping.get(platform, platform)
+
+
+def _social_row_to_article_item(row: dict[str, Any]) -> dict[str, Any]:
+    platform = str(row.get("platform") or "").strip().lower()
+    external_post_id = str(row.get("external_post_id") or "").strip()
+    source_id = _SOCIAL_SOURCE_ID_BY_PLATFORM.get(platform, f"social_{platform}")
+    source_name = _platform_to_source_name(platform)
+
+    content_text = str(row.get("content_text") or "")
+    title = content_text.strip().replace("\n", " ")
+    if len(title) > 120:
+        title = title[:120] + "..."
+    if not title:
+        title = f"{source_name} post {external_post_id}"
+
+    username = str(row.get("author_username") or "").strip()
+    display = str(row.get("author_display_name") or "").strip()
+    author = display or username or None
+    if display and username:
+        author = f"{display} (@{username})"
+
+    top_replies = row.get("top_replies")
+    top_replies_count = (
+        len(top_replies) if isinstance(top_replies, list) else int(row.get("top_replies_count") or 0)
+    )
+    tags = [
+        "social",
+        platform,
+        f"type:{row.get('post_type') or 'post'}",
+    ]
+    if username:
+        tags.append(f"@{username}")
+
+    return {
+        "url_hash": _social_article_id(platform, external_post_id),
+        "source_id": source_id,
+        "source_name": source_name,
+        "dimension": _platform_to_article_dimension(platform),
+        "group": "social_kol",
+        "url": row.get("post_url"),
+        "title": title,
+        "author": author,
+        "published_at": row.get("published_at"),
+        "crawled_at": row.get("crawled_at") or row.get("created_at"),
+        "tags": tags,
+        "content": row.get("content_text"),
+        "content_html": None,
+        "extra": {
+            "platform": platform,
+            "external_post_id": external_post_id,
+            "post_type": row.get("post_type"),
+            "author_username": row.get("author_username"),
+            "author_display_name": row.get("author_display_name"),
+            "is_kol_author": row.get("is_kol_author"),
+            "post_url": row.get("post_url"),
+            "like_count": row.get("like_count", 0),
+            "reply_count": row.get("reply_count", 0),
+            "repost_count": row.get("repost_count", 0),
+            "quote_count": row.get("quote_count", 0),
+            "view_count": row.get("view_count", 0),
+            "bookmark_count": row.get("bookmark_count", 0),
+            "top_replies_count": top_replies_count,
+            "top_replies": top_replies if isinstance(top_replies, list) else [],
+            "is_social_post": True,
+        },
+        "custom_fields": {
+            "platform": platform,
+            "post_type": str(row.get("post_type") or "post"),
+            "top_replies_count": str(top_replies_count),
+        },
+    }
+
+
+async def _get_social_article_items(
+    *,
+    dimension: str | None = None,
+    source_filter: set[str] | None = None,
+    keyword: str | None = None,
+    date_from: datetime | None = None,
+    date_to: datetime | None = None,
+) -> list[dict[str, Any]]:
+    if dimension and dimension.lower() not in {"twitter", "social"}:
+        return []
+    if source_filter is not None and not source_filter:
+        return []
+
+    social_source_ids = set(_SOCIAL_SOURCE_ID_BY_PLATFORM.values())
+    if source_filter is not None and not (social_source_ids & source_filter):
+        return []
+
+    try:
+        from app.db.client import get_client  # noqa: PLC0415
+
+        client = get_client()
+        query = client.table("social_posts").select("*").order("published_at", desc=True)
+
+        if dimension and dimension.lower() == "twitter":
+            query = query.eq("platform", "x")
+        if keyword:
+            query = query.or_(
+                f"content_text.ilike.%{keyword}%,author_display_name.ilike.%{keyword}%,"
+                f"author_username.ilike.%{keyword}%"
+            )
+        if date_from is not None:
+            query = query.gte("published_at", date_from.isoformat())
+        if date_to is not None:
+            query = query.lte("published_at", date_to.isoformat())
+
+        res = await query.execute()
+        rows = res.data or []
+        return [_social_row_to_article_item(row) for row in rows]
+    except RuntimeError:
+        return []
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("DB social_posts query failed, skipping social posts: %s", exc)
+        return []
 
 
 def _load_annotations() -> dict[str, dict[str, Any]]:
@@ -100,20 +257,28 @@ async def list_articles(params: ArticleSearchParams) -> PaginatedResponse:
     """List articles with filtering, sorting, and pagination."""
     date_from = None
     date_to = None
+    social_date_from = None
+    social_date_to = None
     if params.date_from:
         if isinstance(params.date_from, datetime):
             date_from = params.date_from.date()
+            social_date_from = params.date_from
         elif isinstance(params.date_from, str):
             try:
-                date_from = datetime.fromisoformat(params.date_from).date()
+                dt = datetime.fromisoformat(params.date_from)
+                date_from = dt.date()
+                social_date_from = dt
             except ValueError:
                 pass
     if params.date_to:
         if isinstance(params.date_to, datetime):
             date_to = params.date_to.date()
+            social_date_to = params.date_to
         elif isinstance(params.date_to, str):
             try:
-                date_to = datetime.fromisoformat(params.date_to).date()
+                dt = datetime.fromisoformat(params.date_to)
+                date_to = dt.date()
+                social_date_to = dt
             except ValueError:
                 pass
 
@@ -131,6 +296,16 @@ async def list_articles(params: ArticleSearchParams) -> PaginatedResponse:
         date_from=date_from,
         date_to=date_to,
     )
+
+    social_items = await _get_social_article_items(
+        dimension=params.dimension,
+        source_filter=source_filter,
+        keyword=params.keyword,
+        date_from=social_date_from,
+        date_to=social_date_to,
+    )
+    if social_items:
+        items.extend(social_items)
 
     # 手动应用信源过滤
     if source_filter:
@@ -168,6 +343,29 @@ async def list_articles(params: ArticleSearchParams) -> PaginatedResponse:
 
 async def get_article(article_id: str) -> dict[str, Any] | None:
     """Get a single article by url_hash."""
+    social_id = _parse_social_article_id(article_id)
+    if social_id is not None:
+        platform, external_post_id = social_id
+        try:
+            from app.db.client import get_client  # noqa: PLC0415
+
+            client = get_client()
+            res = await (
+                client.table("social_posts")
+                .select("*")
+                .eq("platform", platform)
+                .eq("external_post_id", external_post_id)
+                .limit(1)
+                .execute()
+            )
+            if res.data:
+                return _to_detail(_social_row_to_article_item(res.data[0]))
+        except RuntimeError:
+            return None
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("DB get social article failed: %s", exc)
+            return None
+
     # Try DB first for efficiency
     try:
         from app.db.client import get_client  # noqa: PLC0415
@@ -186,6 +384,11 @@ async def get_article(article_id: str) -> dict[str, Any] | None:
 
     items = await get_all_articles()
     for item in items:
+        if item.get("url_hash") == article_id:
+            return _to_detail(item)
+
+    social_items = await _get_social_article_items()
+    for item in social_items:
         if item.get("url_hash") == article_id:
             return _to_detail(item)
     return None
@@ -240,48 +443,10 @@ async def update_article(article_id: str, data: ArticleUpdate) -> dict[str, Any]
 
 async def get_article_stats(group_by: str = "dimension") -> list[dict]:
     """Get article counts grouped by dimension, source, or day."""
-    # Try DB aggregation (via Python since REST API doesn't support GROUP BY directly)
-    try:
-        from app.db.client import get_client  # noqa: PLC0415
-
-        client = get_client()
-        if group_by == "source":
-            res = await client.table("articles").select("source_id").execute()
-            rows = res.data or []
-            counts: dict[str, int] = {}
-            for row in rows:
-                key = row.get("source_id", "unknown")
-                counts[key] = counts.get(key, 0) + 1
-            result = [{"group": k, "count": v} for k, v in counts.items()]
-            result.sort(key=lambda x: x["count"], reverse=True)
-            return result
-        elif group_by == "day":
-            res = await client.table("articles").select("crawled_at").execute()
-            rows = res.data or []
-            counts = {}
-            for row in rows:
-                key = (row.get("crawled_at") or "")[:10] or "unknown"
-                counts[key] = counts.get(key, 0) + 1
-            result = [{"group": k, "count": v} for k, v in counts.items()]
-            result.sort(key=lambda x: x["count"], reverse=True)
-            return result
-        else:
-            res = await client.table("articles").select("dimension").execute()
-            rows = res.data or []
-            counts = {}
-            for row in rows:
-                key = row.get("dimension", "unknown")
-                counts[key] = counts.get(key, 0) + 1
-            result = [{"group": k, "count": v} for k, v in counts.items()]
-            result.sort(key=lambda x: x["count"], reverse=True)
-            return result
-
-    except RuntimeError:
-        pass
-    except Exception as exc:  # noqa: BLE001
-        logger.warning("DB get_article_stats failed, falling back: %s", exc)
-
     items = await get_all_articles()
+    social_items = await _get_social_article_items()
+    if social_items:
+        items.extend(social_items)
 
     counts: dict[str, int] = {}
     for item in items:

@@ -15,10 +15,11 @@ from app.services.core import (
     event_service,
     project_service,
     project_taxonomy_service,
+    social_post_service,
     source_service,
 )
 from app.services.core import institution as institution_service
-from app.services.external import sentiment_service
+from app.services.external import sentiment_service, social_kol_service
 from app.services.stores import supervised_student_store
 
 __all__ = [
@@ -29,7 +30,9 @@ __all__ = [
     "institution_service",
     "project_service",
     "project_taxonomy_service",
+    "social_post_service",
     "sentiment_service",
+    "social_kol_service",
     "source_service",
     "supervised_student_store",
 ]

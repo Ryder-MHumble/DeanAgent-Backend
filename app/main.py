@@ -1,6 +1,7 @@
 import logging
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -11,7 +12,7 @@ from app.api.v1.router import v1_router
 from app.config import BASE_DIR, settings
 from app.db.client import close_client, init_client
 from app.db.pool import close_pool, init_pool
-from app.scheduler.manager import SchedulerManager
+from app.scheduler.manager import SchedulerManager, load_all_source_configs
 
 logging.basicConfig(
     level=logging.INFO,
@@ -72,6 +73,17 @@ TAG_METADATA = [
         "name": "sentiment",
         "description": "舆情监测 — 国内社媒平台（小红书、抖音等）内容与评论监测。"
         "数据存储于 Supabase，提供内容信息流、互动统计、评论分析等功能。",
+    },
+    {
+        "name": "social-kol",
+        "description": "统一社媒KOL数据 — 面向 X/LinkedIn/YouTube/小宇宙等平台的"
+        "统一账号/帖子/回复模型。"
+        "支持批量导入、账号检索、帖子检索与热门回复查询。",
+    },
+    {
+        "name": "social-posts",
+        "description": "统一社媒帖子库 — social_posts 表的通用查询接口。"
+        "支持列表、搜索、聚合统计和详情（含帖子热门回复）。",
     },
     {
         "name": "venues",
@@ -166,6 +178,33 @@ def _check_needs_today_briefing_backfill() -> bool:
     return not briefing_path.exists()
 
 
+async def _check_needs_today_social_kol_backfill() -> bool:
+    """Trigger a catch-up run when today's scheduled social KOL crawl was missed."""
+    now_utc = datetime.now(timezone.utc)
+    bj = ZoneInfo("Asia/Shanghai")
+    now_bj = now_utc.astimezone(bj)
+    scheduled_bj = now_bj.replace(hour=4, minute=0, second=0, microsecond=0)
+    if now_bj < scheduled_bj:
+        return False
+
+    scheduled_utc = scheduled_bj.astimezone(timezone.utc)
+    try:
+        from app.db.client import get_client
+
+        client = get_client()
+        res = await (
+            client.table("social_posts")
+            .select("id", count="exact")
+            .eq("platform", "x")
+            .gte("crawled_at", scheduled_utc)
+            .execute()
+        )
+        return int(res.count or 0) == 0
+    except Exception as e:  # noqa: BLE001
+        logger.warning("Social KOL backfill check skipped (DB unavailable): %s", e)
+        return False
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Manage startup and shutdown of scheduler and other resources."""
@@ -202,6 +241,23 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.warning("Database client initialization failed: %s", e)
 
+    # Step 0.5: Sync source catalog metadata into source_states
+    try:
+        from app.services.stores.source_state import sync_source_catalog_from_configs
+
+        sync_result = await sync_source_catalog_from_configs(
+            source_configs=load_all_source_configs(),
+            mark_missing_unsupported=True,
+        )
+        logger.info(
+            "Source catalog synced: upserted=%d, marked_unsupported=%d, deleted_missing=%d",
+            sync_result.get("upserted", 0),
+            sync_result.get("marked_unsupported", 0),
+            sync_result.get("deleted_missing", 0),
+        )
+    except Exception as e:
+        logger.warning("Source catalog sync failed: %s", e)
+
     # Step 1: Validate dependencies
     startup_issues = await _validate_startup()
 
@@ -229,6 +285,17 @@ async def lifespan(app: FastAPI):
                 await scheduler.trigger_pipeline()
         except Exception as e:
             logger.warning("Initial data check failed: %s", e)
+
+        # Step 3.5: Catch-up social KOL crawl if today's scheduled run was missed.
+        try:
+            if await _check_needs_today_social_kol_backfill():
+                logger.info(
+                    "Today's social KOL crawl appears missing after 04:00 Asia/Shanghai — "
+                    "triggering catch-up crawl for twitter_ai_kol_international"
+                )
+                await scheduler.trigger_source("twitter_ai_kol_international")
+        except Exception as e:
+            logger.warning("Social KOL catch-up check failed: %s", e)
 
     # Step 4: Build scholar institutions data (only if missing)
     try:

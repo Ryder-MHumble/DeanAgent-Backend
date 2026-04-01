@@ -332,6 +332,23 @@ CREATE TABLE IF NOT EXISTS "snapshots" (
 
 CREATE TABLE IF NOT EXISTS "source_states" (
   "source_id" VARCHAR(128) NOT NULL,
+  "source_name" VARCHAR(256) NULL,
+  "source_url" TEXT NULL,
+  "dimension" VARCHAR(64) NULL,
+  "dimension_name" VARCHAR(128) NULL,
+  "group_name" VARCHAR(128) NULL,
+  "source_file" VARCHAR(128) NULL,
+  "crawl_method" VARCHAR(64) NULL,
+  "crawler_class" VARCHAR(128) NULL,
+  "schedule" VARCHAR(32) NULL,
+  "crawl_interval_minutes" INTEGER NULL,
+  "source_type" VARCHAR(64) NULL,
+  "source_platform" VARCHAR(64) NULL,
+  "tags" TEXT[] NULL,
+  "is_enabled_default" BOOLEAN DEFAULT TRUE NULL,
+  "is_supported" BOOLEAN DEFAULT TRUE NOT NULL,
+  "institution_name" VARCHAR(256) NULL,
+  "institution_tier" VARCHAR(32) NULL,
   "last_crawl_at" TIMESTAMPTZ NULL,
   "last_success_at" TIMESTAMPTZ NULL,
   "consecutive_failures" SMALLINT DEFAULT 0 NOT NULL,
@@ -339,6 +356,61 @@ CREATE TABLE IF NOT EXISTS "source_states" (
   "updated_at" TIMESTAMPTZ DEFAULT now() NOT NULL,
   PRIMARY KEY ("source_id")
 );
+
+CREATE OR REPLACE VIEW "source_catalog_overview" AS
+SELECT
+  "source_id",
+  "source_name",
+  "source_type",
+  "source_platform",
+  "dimension",
+  "dimension_name",
+  "group_name",
+  "institution_name",
+  "institution_tier",
+  "source_url",
+  "crawl_method",
+  "crawler_class",
+  "schedule",
+  "crawl_interval_minutes",
+  "tags",
+  "source_file",
+  "is_enabled_default",
+  "is_enabled_override",
+  COALESCE("is_enabled_override", "is_enabled_default", TRUE) AS "is_enabled_effective",
+  "is_supported",
+  "last_crawl_at",
+  "last_success_at",
+  "consecutive_failures",
+  CASE
+    WHEN "consecutive_failures" >= 3 THEN 'failing'
+    WHEN "consecutive_failures" > 0 THEN 'warning'
+    WHEN "last_crawl_at" IS NOT NULL THEN 'healthy'
+    ELSE 'unknown'
+  END AS "health_status",
+  "updated_at"
+FROM "source_states"
+WHERE "is_supported" = TRUE;
+
+CREATE OR REPLACE VIEW "source_catalog_summary" AS
+SELECT
+  COALESCE("dimension", 'unknown') AS "dimension",
+  COALESCE("source_type", 'unknown') AS "source_type",
+  COALESCE("source_platform", 'unknown') AS "source_platform",
+  COALESCE("crawl_method", 'unknown') AS "crawl_method",
+  COALESCE("schedule", 'unknown') AS "schedule",
+  COUNT(*) AS "total_sources",
+  SUM((COALESCE("is_enabled_override", "is_enabled_default", TRUE))::INTEGER) AS "enabled_sources",
+  SUM(("last_crawl_at" IS NOT NULL)::INTEGER) AS "crawled_sources",
+  SUM(("consecutive_failures" >= 3)::INTEGER) AS "failing_sources"
+FROM "source_states"
+WHERE "is_supported" = TRUE
+GROUP BY
+  COALESCE("dimension", 'unknown'),
+  COALESCE("source_type", 'unknown'),
+  COALESCE("source_platform", 'unknown'),
+  COALESCE("crawl_method", 'unknown'),
+  COALESCE("schedule", 'unknown');
 
 CREATE TABLE IF NOT EXISTS "supervised_students" (
   "id" VARCHAR(64) DEFAULT (gen_random_uuid())::text NOT NULL,

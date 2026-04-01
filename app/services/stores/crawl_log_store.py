@@ -21,6 +21,7 @@ import json
 import logging
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+import time
 from typing import Any
 
 from app.config import BASE_DIR
@@ -77,19 +78,29 @@ async def append_crawl_log(
     finished_at: datetime | None = None,
     duration_seconds: float = 0.0,
 ) -> None:
+    started_dt = started_at
+    finished_dt = finished_at
     row: dict[str, Any] = {
         "source_id": source_id,
         "status": status,
         "items_total": items_total,
         "items_new": items_new,
         "error_message": error_message,
-        "started_at": started_at.isoformat() if started_at else None,
-        "finished_at": finished_at.isoformat() if finished_at else None,
+        "started_at": started_dt,
+        "finished_at": finished_dt,
         "duration_seconds": duration_seconds,
     }
     try:
         client = _get_client()
-        await client.table("crawl_logs").insert(row).execute()
+        try:
+            await client.table("crawl_logs").insert(row).execute()
+        except Exception as exc:
+            # Handle legacy schema where crawl_logs.id lacks auto-increment default.
+            if "null value in column \"id\"" not in str(exc):
+                raise
+            row_with_id = dict(row)
+            row_with_id["id"] = int(time.time_ns() // 1000)
+            await client.table("crawl_logs").insert(row_with_id).execute()
         return
     except RuntimeError:
         pass
@@ -98,6 +109,8 @@ async def append_crawl_log(
 
     # JSON fallback
     logs = _load_logs(source_id)
+    row["started_at"] = started_dt.isoformat() if started_dt else None
+    row["finished_at"] = finished_dt.isoformat() if finished_dt else None
     row["created_at"] = datetime.now(timezone.utc).isoformat()
     logs.append(row)
     if len(logs) > MAX_LOGS_PER_SOURCE:
@@ -140,7 +153,7 @@ async def get_crawl_logs(
 
 async def get_recent_log_stats(hours: int = 24) -> dict[str, int]:
     """Get crawl and article counts from the last N hours."""
-    cutoff = (datetime.now(timezone.utc) - timedelta(hours=hours)).isoformat()
+    cutoff = datetime.now(timezone.utc) - timedelta(hours=hours)
     try:
         client = _get_client()
         res = await client.table("crawl_logs").select(
@@ -166,7 +179,7 @@ async def get_recent_log_stats(hours: int = 24) -> dict[str, int]:
             continue
         for log in _load_logs(source_dir.name):
             started = log.get("started_at") or ""
-            if started >= cutoff:
+            if started >= cutoff.isoformat():
                 total_crawls += 1
                 total_new_articles += log.get("items_new", 0)
     return {"crawls": total_crawls, "new_articles": total_new_articles}

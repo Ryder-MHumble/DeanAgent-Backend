@@ -12,6 +12,12 @@
   - 校验本地 PostgreSQL 行数与导出摘要一致
 - `create_university_leadership_tables.sql`
   - 在本地导入后补充高校领导力表结构
+- `create_social_media_tables.sql`
+  - 统一社媒 KOL 数据表（账号 + 帖子，热门回复内嵌 JSON），支持跨平台扩展
+- `extend_source_states_catalog.sql`
+  - 扩展 `source_states`，补充信源名称/类型/平台/频率/院校层级等目录字段，并创建目录视图
+- `sync_source_catalog_to_db.py`
+  - 将“参与定时爬取”的信源 upsert 到 `source_states`（含分类与频率元数据，自动排除 `scholars/faculty`）
 - `optimize_pg_performance.sql`
   - PostgreSQL 索引优化 SQL（可重复执行）
 - `apply_pg_optimizations.sh`
@@ -31,4 +37,8 @@ python scripts/migration/verify_local_pg_counts.py
 
 # 4) 可选：执行性能优化索引
 bash scripts/migration/apply_pg_optimizations.sh
+
+# 5) 可选：仅刷新信源目录（不重导全库）
+psql -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f scripts/migration/extend_source_states_catalog.sql
+python scripts/migration/sync_source_catalog_to_db.py
 ```

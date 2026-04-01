@@ -12,6 +12,7 @@ Output:
 """
 from __future__ import annotations
 
+import importlib.util
 import json
 import logging
 from collections import defaultdict
@@ -35,11 +36,7 @@ from app.services.stores.json_reader import get_articles
 
 logger = logging.getLogger(__name__)
 
-try:
-    from tqdm import tqdm
-    HAS_TQDM = True
-except ImportError:
-    HAS_TQDM = False
+HAS_TQDM = importlib.util.find_spec("tqdm") is not None
 
 PROCESSED_DIR = BASE_DIR / "data" / "processed" / "tech_frontier"
 
@@ -50,9 +47,6 @@ PRIMARY_DIMENSIONS = ["technology"]
 TWITTER_DIMENSION = "twitter"
 TWITTER_TECH_SOURCES = {
     "twitter_ai_kol_international",
-    "twitter_ai_kol_chinese",
-    "twitter_ai_breakthrough",
-    "twitter_ai_papers",
 }
 INDUSTRY_DIMENSION = "industry"
 UNIVERSITY_DIMENSION = "universities"

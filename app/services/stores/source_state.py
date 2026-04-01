@@ -5,6 +5,23 @@ initialised (e.g. during unit-tests or when SUPABASE_DB_URL is empty).
 
 DB table: source_states
   source_id VARCHAR(128) PRIMARY KEY
+  source_name VARCHAR(256)
+  source_url TEXT
+  dimension VARCHAR(64)
+  dimension_name VARCHAR(128)
+  group_name VARCHAR(128)
+  source_file VARCHAR(128)
+  crawl_method VARCHAR(64)
+  crawler_class VARCHAR(128)
+  schedule VARCHAR(32)
+  crawl_interval_minutes INTEGER
+  source_type VARCHAR(64)
+  source_platform VARCHAR(64)
+  tags TEXT[]
+  is_enabled_default BOOLEAN
+  is_supported BOOLEAN
+  institution_name VARCHAR(256)
+  institution_tier VARCHAR(32)
   last_crawl_at TIMESTAMPTZ
   last_success_at TIMESTAMPTZ
   consecutive_failures SMALLINT DEFAULT 0
@@ -22,6 +39,7 @@ from threading import Lock
 from typing import Any
 
 from app.config import BASE_DIR
+from app.services.core.source_catalog_meta import build_source_catalog_meta
 
 logger = logging.getLogger(__name__)
 
@@ -59,6 +77,32 @@ def _get_client():
     return get_client()
 
 
+def _build_catalog_row_from_config(config: dict[str, Any], now_iso: str) -> dict[str, Any]:
+    source_id = str(config.get("id") or "").strip()
+    meta = build_source_catalog_meta(config)
+    return {
+        "source_id": source_id,
+        "source_name": meta.get("source_name"),
+        "source_url": meta.get("source_url"),
+        "dimension": meta.get("dimension"),
+        "dimension_name": meta.get("dimension_name"),
+        "group_name": meta.get("group_name"),
+        "source_file": meta.get("source_file"),
+        "crawl_method": meta.get("crawl_method"),
+        "crawler_class": meta.get("crawler_class"),
+        "schedule": meta.get("schedule"),
+        "crawl_interval_minutes": meta.get("crawl_interval_minutes"),
+        "source_type": meta.get("source_type"),
+        "source_platform": meta.get("source_platform"),
+        "tags": meta.get("tags") or [],
+        "is_enabled_default": bool(meta.get("is_enabled_default", True)),
+        "is_supported": True,
+        "institution_name": meta.get("institution_name"),
+        "institution_tier": meta.get("institution_tier"),
+        "updated_at": now_iso,
+    }
+
+
 # ---------------------------------------------------------------------------
 # Public API  (all async — callers must await)
 # ---------------------------------------------------------------------------
@@ -87,6 +131,94 @@ async def get_all_source_states() -> dict[str, dict[str, Any]]:
     except Exception as exc:
         logger.warning("get_all_source_states DB failed, using JSON: %s", exc)
         return _load_state()
+
+
+async def sync_source_catalog_from_configs(
+    source_configs: list[dict[str, Any]] | None = None,
+    *,
+    mark_missing_unsupported: bool = True,
+) -> dict[str, Any]:
+    """Sync all configured sources into source_states as catalog metadata."""
+    if source_configs is None:
+        from app.scheduler.manager import load_all_source_configs  # noqa: PLC0415
+
+        source_configs = load_all_source_configs()
+
+    from app.scheduler.manager import is_schedulable_source  # noqa: PLC0415
+
+    schedulable_configs = [cfg for cfg in source_configs if is_schedulable_source(cfg)]
+
+    now_iso = datetime.now(timezone.utc).isoformat()
+    rows: list[dict[str, Any]] = []
+    supported_ids: set[str] = set()
+    for config in schedulable_configs:
+        source_id = str(config.get("id") or "").strip()
+        if not source_id:
+            continue
+        row = _build_catalog_row_from_config(config, now_iso)
+        rows.append(row)
+        supported_ids.add(source_id)
+
+    try:
+        client = _get_client()
+        if rows:
+            await client.table("source_states").upsert(
+                rows, on_conflict="source_id"
+            ).execute()
+
+        marked_unsupported = 0
+        deleted_missing = 0
+        if mark_missing_unsupported:
+            res = await client.table("source_states").select("source_id,is_supported").execute()
+            for item in (res.data or []):
+                source_id = str(item.get("source_id") or "").strip()
+                if not source_id:
+                    continue
+                if source_id not in supported_ids:
+                    if item.get("is_supported", True):
+                        marked_unsupported += 1
+                    await client.table("source_states").delete().eq("source_id", source_id).execute()
+                    deleted_missing += 1
+
+        return {
+            "total_configs": len(schedulable_configs),
+            "upserted": len(rows),
+            "marked_unsupported": marked_unsupported,
+            "deleted_missing": deleted_missing,
+        }
+    except RuntimeError:
+        pass
+    except Exception as exc:
+        logger.warning("sync_source_catalog_from_configs DB failed, using JSON: %s", exc)
+
+    # JSON fallback
+    with _lock:
+        state = _load_state()
+        for row in rows:
+            source_id = row["source_id"]
+            entry = state.setdefault(source_id, {})
+            for key, value in row.items():
+                if key == "source_id":
+                    continue
+                entry[key] = value
+
+        marked_unsupported = 0
+        deleted_missing = 0
+        if mark_missing_unsupported:
+            for source_id, entry in list(state.items()):
+                if source_id not in supported_ids and entry.get("is_supported", True):
+                    marked_unsupported += 1
+                if source_id not in supported_ids:
+                    state.pop(source_id, None)
+                    deleted_missing += 1
+
+        _save_state(state)
+        return {
+            "total_configs": len(schedulable_configs),
+            "upserted": len(rows),
+            "marked_unsupported": marked_unsupported,
+            "deleted_missing": deleted_missing,
+        }
 
 
 async def update_source_state(

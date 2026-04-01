@@ -5,7 +5,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from typing import Any
 
-from app.scheduler.manager import load_all_source_configs
+from app.services.core.source_catalog_meta import schedule_to_minutes
 from app.services.stores.source_state import (
     get_all_source_states,
     set_enabled_override,
@@ -43,42 +43,53 @@ def _derive_health_status(last_crawl_at: Any, consecutive_failures: Any) -> str:
     return "unknown"
 
 
-def _merge_config_and_state(
-    config: dict[str, Any], states: dict[str, dict[str, Any]]
-) -> dict[str, Any]:
-    """Merge YAML config with runtime state from source_state.json."""
-    source_id = config["id"]
-    state = states.get(source_id, {})
+def _normalize_source_state_row(row: dict[str, Any]) -> dict[str, Any]:
+    source_id = str(row.get("source_id") or "").strip()
+    if not source_id:
+        return {}
 
-    # is_enabled: override takes precedence over YAML
-    override = state.get("is_enabled_override")
-    is_enabled = override if override is not None else config.get("is_enabled", True)
-    tags_raw = config.get("tags", [])
-    tags = [str(tag) for tag in tags_raw] if isinstance(tags_raw, list) else []
+    override = row.get("is_enabled_override")
+    is_enabled_default = bool(row.get("is_enabled_default", True))
+    is_enabled = override if override is not None else is_enabled_default
+
+    raw_tags = row.get("tags")
+    tags = [str(tag) for tag in raw_tags] if isinstance(raw_tags, list) else []
+
+    schedule = str(row.get("schedule") or "daily")
+    crawl_interval_minutes = row.get("crawl_interval_minutes")
+    if crawl_interval_minutes is None:
+        crawl_interval_minutes = schedule_to_minutes(schedule)
+
     health_status = _derive_health_status(
-        state.get("last_crawl_at"),
-        state.get("consecutive_failures", 0),
+        row.get("last_crawl_at"),
+        row.get("consecutive_failures", 0),
     )
 
     return {
         "id": source_id,
-        "name": config.get("name", source_id),
-        "url": config.get("url", ""),
-        "dimension": config.get("dimension", ""),
-        "crawl_method": config.get("crawl_method", "static"),
-        "schedule": config.get("schedule", "daily"),
+        "name": row.get("source_name") or source_id,
+        "url": row.get("source_url") or "",
+        "dimension": row.get("dimension") or "",
+        "crawl_method": row.get("crawl_method") or "static",
+        "schedule": schedule,
+        "crawl_interval_minutes": crawl_interval_minutes,
         "is_enabled": is_enabled,
-        "priority": config.get("priority", 2),
-        "last_crawl_at": state.get("last_crawl_at"),
-        "last_success_at": state.get("last_success_at"),
-        "consecutive_failures": state.get("consecutive_failures", 0),
-        "source_file": config.get("source_file"),
-        "group": config.get("group"),
+        "priority": int(row.get("priority") or 2),
+        "last_crawl_at": row.get("last_crawl_at"),
+        "last_success_at": row.get("last_success_at"),
+        "consecutive_failures": int(row.get("consecutive_failures") or 0),
+        "source_file": row.get("source_file"),
+        "group": row.get("group_name"),
         "tags": tags,
-        "crawler_class": config.get("crawler_class"),
-        "dimension_name": config.get("dimension_name"),
-        "dimension_description": config.get("dimension_description"),
+        "crawler_class": row.get("crawler_class"),
+        "source_type": row.get("source_type"),
+        "source_platform": row.get("source_platform"),
+        "institution_name": row.get("institution_name"),
+        "institution_tier": row.get("institution_tier"),
+        "dimension_name": row.get("dimension_name"),
+        "dimension_description": row.get("dimension_description"),
         "health_status": health_status,
+        "is_supported": bool(row.get("is_supported", True)),
         "is_enabled_overridden": override is not None,
     }
 
@@ -93,6 +104,8 @@ def _filter_sources(
     tag: str | None = None,
     tags: str | None = None,
     crawl_method: str | None = None,
+    source_type: str | None = None,
+    source_platform: str | None = None,
     schedule: str | None = None,
     is_enabled: bool | None = None,
     health_status: str | None = None,
@@ -104,6 +117,8 @@ def _filter_sources(
     tag_filters = _combine_filters(tag, tags)
     health_filters = _combine_filters(health_status, health_statuses)
     method_filter = _normalize_text(crawl_method)
+    source_type_filter = _normalize_text(source_type)
+    source_platform_filter = _normalize_text(source_platform)
     schedule_filter = _normalize_text(schedule)
     keyword_filter = _normalize_text(keyword)
 
@@ -112,6 +127,8 @@ def _filter_sources(
         item_dimension = _normalize_text(item.get("dimension"))
         item_group = _normalize_text(item.get("group"))
         item_method = _normalize_text(item.get("crawl_method"))
+        item_source_type = _normalize_text(item.get("source_type"))
+        item_source_platform = _normalize_text(item.get("source_platform"))
         item_schedule = _normalize_text(item.get("schedule"))
         item_health = _normalize_text(item.get("health_status"))
         item_tags = {_normalize_text(t) for t in item.get("tags", []) if _normalize_text(t)}
@@ -123,6 +140,10 @@ def _filter_sources(
         if tag_filters and not (item_tags & tag_filters):
             continue
         if method_filter and item_method != method_filter:
+            continue
+        if source_type_filter and item_source_type != source_type_filter:
+            continue
+        if source_platform_filter and item_source_platform != source_platform_filter:
             continue
         if schedule_filter and item_schedule != schedule_filter:
             continue
@@ -139,6 +160,10 @@ def _filter_sources(
                     _normalize_text(item.get("group")),
                     _normalize_text(item.get("dimension")),
                     _normalize_text(item.get("dimension_name")),
+                    _normalize_text(item.get("source_type")),
+                    _normalize_text(item.get("source_platform")),
+                    _normalize_text(item.get("institution_name")),
+                    _normalize_text(item.get("institution_tier")),
                     " ".join(item_tags),
                 ]
             )
@@ -156,6 +181,10 @@ def _filter_sources(
         applied_filters["tags"] = sorted(tag_filters)
     if method_filter:
         applied_filters["crawl_method"] = method_filter
+    if source_type_filter:
+        applied_filters["source_type"] = source_type_filter
+    if source_platform_filter:
+        applied_filters["source_platform"] = source_platform_filter
     if schedule_filter:
         applied_filters["schedule"] = schedule_filter
     if is_enabled is not None:
@@ -211,6 +240,8 @@ def _build_facets(items: list[dict[str, Any]]) -> dict[str, Any]:
     group_counts: Counter[str] = Counter()
     tag_counts: Counter[str] = Counter()
     method_counts: Counter[str] = Counter()
+    source_type_counts: Counter[str] = Counter()
+    source_platform_counts: Counter[str] = Counter()
     schedule_counts: Counter[str] = Counter()
     health_counts: Counter[str] = Counter()
 
@@ -228,6 +259,12 @@ def _build_facets(items: list[dict[str, Any]]) -> dict[str, Any]:
         method = str(item.get("crawl_method", ""))
         if method:
             method_counts[method] += 1
+        source_type = str(item.get("source_type", ""))
+        if source_type:
+            source_type_counts[source_type] += 1
+        source_platform = str(item.get("source_platform", ""))
+        if source_platform:
+            source_platform_counts[source_platform] += 1
         schedule = str(item.get("schedule", ""))
         if schedule:
             schedule_counts[schedule] += 1
@@ -260,15 +297,24 @@ def _build_facets(items: list[dict[str, Any]]) -> dict[str, Any]:
         "groups": to_facet(group_counts),
         "tags": to_facet(tag_counts),
         "crawl_methods": to_facet(method_counts),
+        "source_types": to_facet(source_type_counts),
+        "source_platforms": to_facet(source_platform_counts),
         "schedules": to_facet(schedule_counts),
         "health_statuses": to_facet(health_counts),
     }
 
 
 async def _load_merged_sources() -> list[dict[str, Any]]:
-    configs = load_all_source_configs()
     states = await get_all_source_states()
-    return [_merge_config_and_state(config, states) for config in configs]
+    items: list[dict[str, Any]] = []
+    for row in states.values():
+        normalized = _normalize_source_state_row(row)
+        if not normalized:
+            continue
+        if not normalized.get("is_supported", True):
+            continue
+        items.append(normalized)
+    return items
 
 
 async def list_sources(
@@ -280,6 +326,8 @@ async def list_sources(
     tag: str | None = None,
     tags: str | None = None,
     crawl_method: str | None = None,
+    source_type: str | None = None,
+    source_platform: str | None = None,
     schedule: str | None = None,
     is_enabled: bool | None = None,
     health_status: str | None = None,
@@ -298,6 +346,8 @@ async def list_sources(
         tag=tag,
         tags=tags,
         crawl_method=crawl_method,
+        source_type=source_type,
+        source_platform=source_platform,
         schedule=schedule,
         is_enabled=is_enabled,
         health_status=health_status,
@@ -316,6 +366,8 @@ async def list_source_facets(
     tag: str | None = None,
     tags: str | None = None,
     crawl_method: str | None = None,
+    source_type: str | None = None,
+    source_platform: str | None = None,
     schedule: str | None = None,
     is_enabled: bool | None = None,
     health_status: str | None = None,
@@ -332,6 +384,8 @@ async def list_source_facets(
         tag=tag,
         tags=tags,
         crawl_method=crawl_method,
+        source_type=source_type,
+        source_platform=source_platform,
         schedule=schedule,
         is_enabled=is_enabled,
         health_status=health_status,
@@ -350,6 +404,8 @@ async def list_sources_catalog(
     tag: str | None = None,
     tags: str | None = None,
     crawl_method: str | None = None,
+    source_type: str | None = None,
+    source_platform: str | None = None,
     schedule: str | None = None,
     is_enabled: bool | None = None,
     health_status: str | None = None,
@@ -372,6 +428,8 @@ async def list_sources_catalog(
         tag=tag,
         tags=tags,
         crawl_method=crawl_method,
+        source_type=source_type,
+        source_platform=source_platform,
         schedule=schedule,
         is_enabled=is_enabled,
         health_status=health_status,
@@ -404,19 +462,21 @@ async def list_sources_catalog(
 
 
 async def get_source(source_id: str) -> dict[str, Any] | None:
-    configs = load_all_source_configs()
-    config = next((c for c in configs if c["id"] == source_id), None)
-    if config is None:
-        return None
     states = await get_all_source_states()
-    return _merge_config_and_state(config, states)
+    row = states.get(source_id)
+    if not row:
+        return None
+    normalized = _normalize_source_state_row(row)
+    if not normalized:
+        return None
+    if not normalized.get("is_supported", True):
+        return None
+    return normalized
 
 
 async def update_source(source_id: str, is_enabled: bool) -> dict[str, Any] | None:
-    configs = load_all_source_configs()
-    config = next((c for c in configs if c["id"] == source_id), None)
-    if config is None:
+    existing = await get_source(source_id)
+    if existing is None:
         return None
     await set_enabled_override(source_id, is_enabled)
-    states = await get_all_source_states()
-    return _merge_config_and_state(config, states)
+    return await get_source(source_id)

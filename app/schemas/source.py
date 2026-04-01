@@ -22,6 +22,9 @@ class SourceResponse(BaseModel):
         description="调度频率: hourly / daily / twice_daily 等",
         examples=["daily"],
     )
+    crawl_interval_minutes: int | None = Field(
+        default=None, description="调度频率折算分钟（若可解析）", examples=[1440]
+    )
     is_enabled: bool = Field(description="是否启用", examples=[True])
     priority: int = Field(description="优先级（1-5，1 最高）", examples=[2])
     last_crawl_at: datetime | None = Field(
@@ -45,6 +48,20 @@ class SourceResponse(BaseModel):
     crawler_class: str | None = Field(
         default=None, description="自定义 crawler_class（如有）", examples=["twitter_search"]
     )
+    source_type: str | None = Field(
+        default=None,
+        description="信源类型（如 policy_news / social_kol / university_leadership）",
+    )
+    source_platform: str | None = Field(
+        default=None,
+        description="信源平台（如 web / x / youtube / xiaoyuzhou / rss / api）",
+    )
+    institution_name: str | None = Field(
+        default=None, description="关联高校名称（适用于高校类信源）"
+    )
+    institution_tier: str | None = Field(
+        default=None, description="高校层级：985 / 211 / other"
+    )
     dimension_name: str | None = Field(
         default=None, description="维度中文名", examples=["对人事"]
     )
@@ -53,6 +70,9 @@ class SourceResponse(BaseModel):
     )
     health_status: Literal["healthy", "warning", "failing", "unknown"] = Field(
         default="unknown", description="健康状态（基于连续失败次数与爬取记录）"
+    )
+    is_supported: bool = Field(
+        default=True, description="是否仍在当前配置清单中（用于识别过期/下线信源）"
     )
     is_enabled_overridden: bool = Field(
         default=False, description="是否被运行时启停覆盖（非 YAML 原始状态）"
@@ -88,6 +108,8 @@ class SourceFacetsResponse(BaseModel):
     groups: list[SourceFacetItem] = Field(default_factory=list)
     tags: list[SourceFacetItem] = Field(default_factory=list)
     crawl_methods: list[SourceFacetItem] = Field(default_factory=list)
+    source_types: list[SourceFacetItem] = Field(default_factory=list)
+    source_platforms: list[SourceFacetItem] = Field(default_factory=list)
     schedules: list[SourceFacetItem] = Field(default_factory=list)
     health_statuses: list[SourceFacetItem] = Field(default_factory=list)
 
