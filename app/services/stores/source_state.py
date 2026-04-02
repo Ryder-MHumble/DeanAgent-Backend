@@ -103,6 +103,22 @@ def _build_catalog_row_from_config(config: dict[str, Any], now_iso: str) -> dict
     }
 
 
+def _is_missing_source_states_column_error(exc: Exception) -> bool:
+    text = str(exc)
+    return (
+        "column of 'source_states'" in text
+        and "Could not find the '" in text
+    )
+
+
+def _build_minimal_runtime_row(source_id: str, now_iso: str) -> dict[str, Any]:
+    # Backward compatibility: some deployed DBs only keep runtime state columns.
+    return {
+        "source_id": source_id,
+        "updated_at": now_iso,
+    }
+
+
 # ---------------------------------------------------------------------------
 # Public API  (all async — callers must await)
 # ---------------------------------------------------------------------------
@@ -161,21 +177,45 @@ async def sync_source_catalog_from_configs(
 
     try:
         client = _get_client()
+        used_minimal_schema = False
         if rows:
-            await client.table("source_states").upsert(
-                rows, on_conflict="source_id"
-            ).execute()
+            try:
+                await client.table("source_states").upsert(
+                    rows, on_conflict="source_id"
+                ).execute()
+            except Exception as exc:
+                if not _is_missing_source_states_column_error(exc):
+                    raise
+                used_minimal_schema = True
+                logger.warning(
+                    "source_states schema is minimal; syncing runtime keys only: %s",
+                    exc,
+                )
+                minimal_rows = [
+                    _build_minimal_runtime_row(row["source_id"], now_iso)
+                    for row in rows
+                ]
+                await client.table("source_states").upsert(
+                    minimal_rows, on_conflict="source_id"
+                ).execute()
 
         marked_unsupported = 0
         deleted_missing = 0
         if mark_missing_unsupported:
-            res = await client.table("source_states").select("source_id,is_supported").execute()
+            try:
+                res = await client.table("source_states").select("source_id,is_supported").execute()
+            except Exception as exc:
+                if not _is_missing_source_states_column_error(exc):
+                    raise
+                used_minimal_schema = True
+                res = await client.table("source_states").select("source_id").execute()
+
             for item in (res.data or []):
                 source_id = str(item.get("source_id") or "").strip()
                 if not source_id:
                     continue
                 if source_id not in supported_ids:
-                    if item.get("is_supported", True):
+                    if (not used_minimal_schema) and item.get("is_supported", True):
                         marked_unsupported += 1
                     await client.table("source_states").delete().eq("source_id", source_id).execute()
                     deleted_missing += 1

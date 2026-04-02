@@ -61,6 +61,41 @@ _UNIVERSITY_211_PARTIAL: set[str] = {
     "南京航空航天大学",
     "西安电子科技大学",
     "上海财经大学",
+    "北京交通大学",
+    "北京科技大学",
+    "华北电力大学",
+    "武汉理工大学",
+    "西南交通大学",
+    "南京理工大学",
+    "华东理工大学",
+    "对外经济贸易大学",
+}
+
+_INSTITUTION_SUFFIXES: tuple[str, ...] = (
+    "新闻网",
+    "新闻动态",
+    "新闻中心",
+    "新闻",
+    "要闻",
+    "资讯",
+    "官网",
+    "官方网站",
+    "(自动)",
+    "（自动）",
+)
+
+_INSTITUTION_ALIASES: dict[str, str] = {
+    "上海交大": "上海交通大学",
+    "中国科大": "中国科学技术大学",
+    "哈工大": "哈尔滨工业大学",
+    "北航": "北京航空航天大学",
+    "北理": "北京理工大学",
+    "北师大": "北京师范大学",
+    "北邮": "北京邮电大学",
+    "人大": "中国人民大学",
+    "华科": "华中科技大学",
+    "西电": "西安电子科技大学",
+    "国防科大": "国防科技大学",
 }
 
 
@@ -88,7 +123,19 @@ def extract_institution_name(source_name: str, source_id: str) -> str | None:
         .replace("(OFFICIAL)", "")
         .strip()
     )
-    return cleaned or source_id or None
+    normalized = cleaned
+    while normalized:
+        changed = False
+        for suffix in _INSTITUTION_SUFFIXES:
+            if normalized.endswith(suffix):
+                normalized = normalized[: -len(suffix)].strip(" -_()（）")
+                changed = True
+        if not changed:
+            break
+
+    if normalized in _INSTITUTION_ALIASES:
+        return _INSTITUTION_ALIASES[normalized]
+    return normalized or source_id or None
 
 
 def infer_institution_tier(institution_name: str | None) -> str | None:

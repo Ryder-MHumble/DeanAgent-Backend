@@ -5,6 +5,7 @@ import json
 import logging
 import math
 from datetime import date, datetime, timezone
+from functools import lru_cache
 from typing import Any
 
 from app.config import BASE_DIR
@@ -53,6 +54,62 @@ def _extract_thumbnail(item: dict[str, Any]) -> str | None:
     return None
 
 
+@lru_cache(maxsize=1)
+def _university_source_name_map() -> dict[str, str]:
+    """Load source_id -> source_name mapping for universities dimension."""
+    from app.scheduler.manager import load_all_source_configs
+
+    mapping: dict[str, str] = {}
+    for source in load_all_source_configs():
+        if source.get("dimension") != DIMENSION:
+            continue
+        source_id = str(source.get("id") or "").strip()
+        if not source_id:
+            continue
+        source_name = str(source.get("name") or source_id).strip()
+        mapping[source_id] = source_name or source_id
+    return mapping
+
+
+def _is_missing_text(value: str | None) -> bool:
+    text = (value or "").strip()
+    return text in {"", "未知机构", "未知来源", "unknown", "UNKNOWN"}
+
+
+def _resolve_source_name(item: dict[str, Any]) -> str:
+    source_name = str(item.get("source_name") or "").strip()
+    if not _is_missing_text(source_name):
+        return source_name
+
+    source_id = str(item.get("source_id") or "").strip()
+    if source_id:
+        mapped = _university_source_name_map().get(source_id, "").strip()
+        if mapped:
+            return mapped
+        return source_id
+
+    return source_name or "未知来源"
+
+
+def _normalize_institution_name(name: str | None) -> str:
+    text = (name or "").strip()
+    if _is_missing_text(text):
+        return "未知机构"
+
+    # Remove common media suffixes for clearer institution naming.
+    for suffix in ("新闻网", "官网", "官方网站", "网站", "客户端"):
+        if text.endswith(suffix):
+            text = text[: -len(suffix)].strip()
+            break
+
+    if " - " in text:
+        text = text.split(" - ", 1)[0].strip()
+    if "-" in text:
+        text = text.split("-", 1)[0].strip()
+
+    return text or "未知机构"
+
+
 def _to_feed_item(item: dict[str, Any]) -> dict[str, Any]:
     raw_images = (item.get("extra") or {}).get("images") or []
     images = [
@@ -66,7 +123,7 @@ def _to_feed_item(item: dict[str, Any]) -> dict[str, Any]:
         "url": item.get("url", ""),
         "published_at": item.get("published_at"),
         "source_id": item.get("source_id", ""),
-        "source_name": item.get("source_name", ""),
+        "source_name": _resolve_source_name(item),
         "group": item.get("group"),
         "tags": item.get("tags") or [],
         "has_content": bool(item.get("content")),
@@ -90,7 +147,7 @@ def _to_article_detail(item: dict[str, Any]) -> dict[str, Any]:
         "url": item.get("url", ""),
         "published_at": item.get("published_at"),
         "source_id": item.get("source_id", ""),
-        "source_name": item.get("source_name", ""),
+        "source_name": _resolve_source_name(item),
         "group": item.get("group"),
         "tags": item.get("tags") or [],
         "content": item.get("content"),
@@ -336,7 +393,26 @@ def get_research_outputs(
     with open(research_path, encoding="utf-8") as f:
         data = json.load(f)
 
-    items = data.get("items", [])
+    items = []
+    for item in data.get("items", []):
+        normalized = dict(item)
+        normalized_source_name = _resolve_source_name(normalized)
+        normalized["source_name"] = normalized_source_name
+        institution = normalized.get("institution")
+        if _is_missing_text(str(institution or "")):
+            normalized["institution"] = _normalize_institution_name(
+                normalized_source_name,
+            )
+        ai_analysis = str(normalized.get("aiAnalysis") or "")
+        if (
+            normalized.get("institution") != "未知机构"
+            and ai_analysis
+            and "未知机构" in ai_analysis
+        ):
+            normalized["aiAnalysis"] = ai_analysis.replace(
+                "未知机构", str(normalized.get("institution")), 1,
+            )
+        items.append(normalized)
 
     # Apply filters
     if rtype:
