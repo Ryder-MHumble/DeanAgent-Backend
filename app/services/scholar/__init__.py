@@ -274,6 +274,25 @@ def _stable_bigint(*parts: Any) -> int:
     return value or 1
 
 
+def _normalize_achievement_items(raw: Any) -> list[Any]:
+    value = _model_dump_maybe(raw)
+    if value is None:
+        return []
+    if isinstance(value, list):
+        return value
+    if isinstance(value, str):
+        text = value.strip()
+        if not text:
+            return []
+        try:
+            parsed = json.loads(text)
+            if isinstance(parsed, list):
+                return parsed
+        except Exception:
+            pass
+    return []
+
+
 def _normalize_publication_item(raw: Any, scholar_id: str, idx: int) -> dict[str, Any] | None:
     item = _model_dump_maybe(raw)
     if not isinstance(item, dict):
@@ -347,6 +366,39 @@ def _normalize_patent_item(raw: Any, scholar_id: str, idx: int) -> dict[str, Any
     }
 
 
+def _normalize_award_item(raw: Any, scholar_id: str, idx: int) -> dict[str, Any] | None:
+    item = _model_dump_maybe(raw)
+    if not isinstance(item, dict):
+        return None
+    title = _clean_text(item.get("title"))
+    if not title:
+        return None
+    year = _to_year_int(item.get("year"))
+    level = _clean_text(item.get("level"))
+    grantor = _clean_text(item.get("grantor"))
+    description = _clean_text(item.get("description"))
+    added_by = _clean_text(item.get("added_by")) or "crawler"
+    row_id = _stable_bigint(
+        "awd",
+        scholar_id,
+        idx,
+        title,
+        year or "",
+        level,
+        grantor,
+    )
+    return {
+        "id": row_id,
+        "scholar_id": scholar_id,
+        "title": title,
+        "year": year,
+        "level": level or None,
+        "grantor": grantor or None,
+        "description": description or None,
+        "added_by": added_by,
+    }
+
+
 def _publication_db_row_to_api(row: dict[str, Any]) -> dict[str, Any]:
     authors_raw = row.get("authors")
     if isinstance(authors_raw, list):
@@ -378,6 +430,17 @@ def _patent_db_row_to_api(row: dict[str, Any]) -> dict[str, Any]:
         "inventors": inventors,
         "patent_type": _clean_text(row.get("patent_type")),
         "status": _clean_text(row.get("status")),
+        "added_by": _clean_text(row.get("added_by")) or "crawler",
+    }
+
+
+def _award_db_row_to_api(row: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "title": _clean_text(row.get("title")),
+        "year": "" if row.get("year") is None else str(row.get("year")),
+        "level": _clean_text(row.get("level")),
+        "grantor": _clean_text(row.get("grantor")),
+        "description": _clean_text(row.get("description")),
         "added_by": _clean_text(row.get("added_by")) or "crawler",
     }
 
@@ -417,6 +480,25 @@ async def _load_scholar_patents(scholar_id: str) -> list[dict[str, Any]]:
         return [_patent_db_row_to_api(dict(r)) for r in rows]
     except Exception as exc:
         logger.warning("Failed to load scholar_patents for %s: %s", scholar_id, exc)
+        return []
+
+
+async def _load_scholar_awards(scholar_id: str) -> list[dict[str, Any]]:
+    try:
+        from app.db.pool import get_pool  # noqa: PLC0415
+
+        rows = await get_pool().fetch(
+            """
+            SELECT title, year, level, grantor, description, added_by
+            FROM scholar_awards
+            WHERE scholar_id = $1
+            ORDER BY year DESC NULLS LAST, created_at DESC, id DESC
+            """,
+            scholar_id,
+        )
+        return [_award_db_row_to_api(dict(r)) for r in rows]
+    except Exception as exc:
+        logger.warning("Failed to load scholar_awards for %s: %s", scholar_id, exc)
         return []
 
 
@@ -488,6 +570,42 @@ async def _replace_scholar_patents(scholar_id: str, items: list[Any]) -> None:
                         row["inventors"],
                         row["patent_type"],
                         row["status"],
+                        row["added_by"],
+                    )
+                    for row in normalized_rows
+                ],
+            )
+
+
+async def _replace_scholar_awards(scholar_id: str, items: list[Any]) -> None:
+    normalized_rows = [
+        row
+        for idx, item in enumerate(items)
+        if (row := _normalize_award_item(item, scholar_id, idx)) is not None
+    ]
+    from app.db.pool import get_pool  # noqa: PLC0415
+
+    pool = get_pool()
+    async with pool.acquire() as conn:
+        async with conn.transaction():
+            await conn.execute("DELETE FROM scholar_awards WHERE scholar_id = $1", scholar_id)
+            if not normalized_rows:
+                return
+            await conn.executemany(
+                """
+                INSERT INTO scholar_awards
+                (id, scholar_id, title, year, level, grantor, description, added_by)
+                VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+                """,
+                [
+                    (
+                        row["id"],
+                        row["scholar_id"],
+                        row["title"],
+                        row["year"],
+                        row["level"],
+                        row["grantor"],
+                        row["description"],
                         row["added_by"],
                     )
                     for row in normalized_rows
@@ -1044,10 +1162,13 @@ async def get_scholar_detail(url_hash: str) -> dict[str, Any] | None:
             detail["supervised_students_count"] = await student_store.count_students(url_hash)
             publications = await _load_scholar_publications(url_hash)
             patents = await _load_scholar_patents(url_hash)
+            awards = await _load_scholar_awards(url_hash)
             if publications:
                 detail["representative_publications"] = publications
             if patents:
                 detail["patents"] = patents
+            if awards:
+                detail["awards"] = awards
             return detail
     except Exception as exc:
         logger.warning("Fast scholar detail query failed, fallback to legacy path: %s", exc)
@@ -1065,10 +1186,13 @@ async def get_scholar_detail(url_hash: str) -> dict[str, Any] | None:
             detail["supervised_students_count"] = await student_store.count_students(url_hash)
             publications = await _load_scholar_publications(url_hash)
             patents = await _load_scholar_patents(url_hash)
+            awards = await _load_scholar_awards(url_hash)
             if publications:
                 detail["representative_publications"] = publications
             if patents:
                 detail["patents"] = patents
+            if awards:
+                detail["awards"] = awards
             return detail
     return None
 
@@ -1305,6 +1429,14 @@ async def update_scholar_achievements(url_hash: str, updates: dict[str, Any]) ->
             )
         except Exception as exc:
             logger.warning("Failed updating scholar_patents for %s: %s", url_hash, exc)
+    if "awards" in normalized_updates:
+        try:
+            await _replace_scholar_awards(
+                url_hash,
+                _normalize_achievement_items(normalized_updates.get("awards")),
+            )
+        except Exception as exc:
+            logger.warning("Failed updating scholar_awards for %s: %s", url_hash, exc)
 
     # Keep legacy columns for compatibility.
     db_patch: dict[str, Any] = {"updated_at": datetime.now(UTC).isoformat()}

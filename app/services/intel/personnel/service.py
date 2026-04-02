@@ -1,7 +1,7 @@
-"""Personnel intelligence service — dynamically reads raw data + merges cached LLM enrichments.
+"""Personnel intelligence service — dynamically reads DB data + merges cached LLM enrichments.
 
 Instead of reading a static pre-processed JSON file, this module:
-1. Reads ALL raw articles from data/raw/personnel/ on each call
+1. Reads ALL personnel articles from database on each call
 2. Applies the rules engine (fast regex) to extract appointment/dismissal records
 3. Merges with cached LLM enrichments from data/processed/personnel_intel/_enriched/
 4. Returns the complete, always-up-to-date dataset
@@ -124,10 +124,10 @@ def _extract_title_info(title: str) -> tuple[str, str | None]:
 
 
 async def _compute_live_changes() -> list[dict[str, Any]]:
-    """Read raw personnel articles, apply rules, merge with cached LLM enrichments.
+    """Read personnel articles from database, apply rules, merge with cached LLM enrichments.
 
     For articles that don't produce specific appointment/dismissal records,
-    an article-level item is created so ALL raw data is represented.
+    an article-level item is created so ALL source data is represented.
 
     Returns a list of item dicts, sorted: action group first,
     then by relevance desc, then by date desc.

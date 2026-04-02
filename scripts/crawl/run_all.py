@@ -236,7 +236,32 @@ async def run_all(
     strategy: str = "grouped",
 ):
     from app.crawlers.utils.playwright_pool import close_browser
+    from app.config import settings
+    from app.db.client import close_client, init_client
     from app.scheduler.manager import load_all_source_configs
+
+    # Ensure DB client is initialized so crawl results can be persisted.
+    try:
+        await init_client()
+    except Exception as primary_exc:
+        # CLI context may not have local PG pool pre-initialized; fallback to Supabase creds.
+        try:
+            await init_client(settings.SUPABASE_URL, settings.SUPABASE_KEY)
+        except Exception as fallback_exc:
+            print(
+                "❌ DB 客户端初始化失败，无法持久化爬取结果: "
+                f"{primary_exc} | fallback={fallback_exc}"
+            )
+            return {
+                "total_sources": 0,
+                "success": 0,
+                "failed": 0,
+                "total_items": 0,
+                "total_with_content": 0,
+                "duration_seconds": 0,
+                "content_rate_pct": 0,
+                "error": str(fallback_exc),
+            }
 
     configs = load_all_source_configs()
 
@@ -325,9 +350,13 @@ async def run_all(
     if pbar:
         pbar.close()
 
-    # 关闭 Playwright（如果有 dynamic 源启动了它）
+    # 关闭 Playwright（如果有 dynamic 源启动了它）和 DB 客户端
     try:
         await close_browser()
+    except Exception:
+        pass
+    try:
+        await close_client()
     except Exception:
         pass
 
