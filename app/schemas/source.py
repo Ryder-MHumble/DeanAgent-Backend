@@ -130,3 +130,45 @@ class SourceCatalogResponse(BaseModel):
     applied_filters: dict[str, Any] = Field(
         default_factory=dict, description="本次实际生效的筛选条件"
     )
+
+
+class SourceResolveItem(BaseModel):
+    """按关键词解析出的信源项。"""
+
+    id: str = Field(description="信源 ID")
+    name: str = Field(description="信源名称")
+    dimension: str = Field(description="维度")
+    group: str | None = Field(default=None, description="信源分组")
+    source_type: str | None = Field(default=None, description="信源类型")
+    source_platform: str | None = Field(default=None, description="信源平台")
+    is_enabled: bool = Field(description="是否启用")
+    recommended_endpoint: str = Field(description="推荐直接取数接口")
+
+
+class SourceResolveResponse(BaseModel):
+    """信源解析响应。"""
+
+    query: str | None = Field(default=None, description="本次查询关键词")
+    total: int = Field(description="匹配总数")
+    page: int = Field(description="页码")
+    page_size: int = Field(description="每页数量")
+    total_pages: int = Field(description="总页数")
+    items: list[SourceResolveItem] = Field(default_factory=list)
+
+
+class ApiDeprecationItem(BaseModel):
+    """API 弃用项。"""
+
+    method: str = Field(description="HTTP 方法")
+    path: str = Field(description="已弃用接口路径")
+    replacement_path: str = Field(description="替代接口路径")
+    sunset_date: str = Field(description="计划 Sunset 日期（YYYY-MM-DD）")
+    note: str | None = Field(default=None, description="补充说明")
+
+
+class ApiDeprecationResponse(BaseModel):
+    """API 弃用列表响应。"""
+
+    generated_at: datetime = Field(description="生成时间（UTC）")
+    total: int = Field(description="弃用接口总数")
+    items: list[ApiDeprecationItem] = Field(default_factory=list)

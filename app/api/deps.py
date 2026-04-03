@@ -5,7 +5,11 @@ from app.schemas.article import ArticleSearchParams
 
 def get_article_search_params(
     dimension: str | None = Query(None, description="Filter by dimension"),
-    source_id: str | None = Query(None, description="按单个信源 ID 筛选（精确匹配）"),
+    source_id_filter: str | None = Query(
+        None,
+        alias="source_id",
+        description="按单个信源 ID 筛选（精确匹配）",
+    ),
     source_ids: str | None = Query(None, description="按多个信源 ID 筛选（逗号分隔，精确匹配）"),
     source_name: str | None = Query(None, description="按单个信源名称筛选（模糊匹配）"),
     source_names: str | None = Query(None, description="按多个信源名称筛选（逗号分隔，模糊匹配）"),
@@ -23,7 +27,7 @@ def get_article_search_params(
 ) -> ArticleSearchParams:
     return ArticleSearchParams(
         dimension=dimension,
-        source_id=source_id,
+        source_id=source_id_filter,
         source_ids=source_ids,
         source_name=source_name,
         source_names=source_names,

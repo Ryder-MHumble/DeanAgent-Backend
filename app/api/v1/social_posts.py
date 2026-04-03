@@ -3,8 +3,9 @@ from __future__ import annotations
 
 from typing import Literal
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Query, Response
 
+from app.api.deprecation import apply_deprecation_headers
 from app.schemas.common import PaginatedResponse
 from app.schemas.social_post import SocialPostBrief, SocialPostDetail, SocialPostStats
 from app.services import social_post_service
@@ -66,9 +67,11 @@ async def list_social_posts(
     "/search",
     response_model=PaginatedResponse[SocialPostBrief],
     summary="社媒帖子搜索",
-    description="社媒帖子搜索接口，参数与列表接口一致。",
+    description="社媒帖子搜索接口，参数与列表接口一致。建议迁移到 `GET /api/v1/social-posts`。",
+    deprecated=True,
 )
 async def search_social_posts(
+    response: Response,
     source_id: str | None = Query(None, description="按单个信源 ID 筛选（精确匹配）"),
     source_ids: str | None = Query(None, description="按多个信源 ID 筛选（逗号分隔，精确匹配）"),
     source_name: str | None = Query(None, description="按单个信源名称筛选（模糊匹配）"),
@@ -96,6 +99,7 @@ async def search_social_posts(
     page: int = Query(1, ge=1, description="页码"),
     page_size: int = Query(20, ge=1, le=200, description="每页条数"),
 ):
+    apply_deprecation_headers(response, replacement_path="/api/v1/social-posts")
     source_filter = parse_source_filter(source_id, source_ids, source_name, source_names)
     return await social_post_service.list_social_posts(
         source_filter=source_filter,

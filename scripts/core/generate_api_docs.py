@@ -17,11 +17,13 @@ from typing import Any
 
 import yaml
 
+from app.api.deprecation import DEFAULT_SUNSET_DATE, get_replacement_map
 from app.main import app
 
 ROOT = Path(__file__).resolve().parents[2]
 DOCS_DIR = ROOT / "docs" / "api"
 SOURCES_DIR = ROOT / "sources"
+DEPRECATED_ROUTE_REPLACEMENTS = get_replacement_map()
 
 
 def _collect_routes() -> list[dict[str, Any]]:
@@ -47,6 +49,7 @@ def _collect_routes() -> list[dict[str, Any]]:
                 "tags": list(getattr(route, "tags", []) or []),
                 "summary": getattr(route, "summary", None),
                 "name": getattr(route, "name", None),
+                "deprecated": bool(getattr(route, "deprecated", False)),
             }
         )
     rows.sort(key=lambda x: (x["path"], x["methods"][0]))
@@ -123,12 +126,15 @@ def _to_markdown(routes: list[dict[str, Any]], source_stats: dict[str, Any]) -> 
     by_service: dict[str, list[dict[str, Any]]] = defaultdict(list)
     by_tag = Counter()
     method_counter = Counter()
+    deprecated_routes: list[dict[str, Any]] = []
     for row in routes:
         by_service[row["service"]].append(row)
         for tag in row["tags"]:
             by_tag[tag] += 1
         for method in row["methods"]:
             method_counter[method] += 1
+        if row.get("deprecated"):
+            deprecated_routes.append(row)
 
     lines: list[str] = []
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%SZ")
@@ -180,6 +186,20 @@ def _to_markdown(routes: list[dict[str, Any]], source_stats: dict[str, Any]) -> 
         lines.append(f"| `{item['key']}` | {item['count']} |")
     lines.append("")
 
+    if deprecated_routes:
+        lines.append("## Deprecated 路由")
+        lines.append("")
+        lines.append("| Method | 路径 | 替代接口 | Sunset |")
+        lines.append("|---|---|---|---|")
+        for row in sorted(deprecated_routes, key=lambda x: (x["path"], x["methods"][0])):
+            methods = ",".join(row["methods"])
+            replacement = DEPRECATED_ROUTE_REPLACEMENTS.get(row["path"], "-")
+            lines.append(
+                f"| `{methods}` | `{row['path']}` | "
+                f"`{replacement}` | `{DEFAULT_SUNSET_DATE}` |"
+            )
+        lines.append("")
+
     lines.append("## Agent 调用快捷映射")
     lines.append("")
     lines.append("| 用户意图 | 推荐接口 | 参数建议 |")
@@ -189,12 +209,24 @@ def _to_markdown(routes: list[dict[str, Any]], source_stats: dict[str, Any]) -> 
         "`include_facets=true&page_size=200` |"
     )
     lines.append(
+        "| 快速定位信源 ID | `GET /api/v1/sources/resolve` | "
+        "`q=人社局` 或 `q=清华` |"
+    )
+    lines.append(
         "| 查询高校领导信源 | `GET /api/v1/sources/catalog` | "
         "`tag=leadership` 或 `group=university_leadership_official` |"
     )
     lines.append(
         "| 查询学者/师资信源 | `GET /api/v1/sources/catalog` | "
         "`dimension=scholars` 或 `tag=faculty` |"
+    )
+    lines.append(
+        "| 按单个/多个信源直接拉取数据 | `GET /api/v1/sources/items` | "
+        "`source_id=...` 或 `source_name=...`，配合 `page/page_size` 翻页 |"
+    )
+    lines.append(
+        "| 按路径固定某个信源拉取数据 | `GET /api/v1/sources/{source_id}/items` | "
+        "`date_from/date_to/keyword/page/page_size` |"
     )
     lines.append(
         "| 查询共建导师/两院关系学者 | `GET /api/v1/scholars` | "
@@ -217,6 +249,8 @@ def _to_markdown(routes: list[dict[str, Any]], source_stats: dict[str, Any]) -> 
             methods = ",".join(item["methods"])
             tags = ",".join(item["tags"])
             summary = item.get("summary") or ""
+            if item.get("deprecated"):
+                summary = f"{summary}（deprecated）".strip()
             lines.append(f"| `{methods}` | `{item['path']}` | `{tags}` | {summary} |")
         lines.append("")
 

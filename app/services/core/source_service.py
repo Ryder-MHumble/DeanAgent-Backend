@@ -5,6 +5,10 @@ from collections import Counter
 from datetime import datetime, timezone
 from typing import Any
 
+from app.api.deprecation import get_deprecation_items
+from app.schemas.article import ArticleSearchParams
+from app.schemas.common import PaginatedResponse
+from app.services.core import article_service
 from app.services.core.source_catalog_meta import schedule_to_minutes
 from app.services.stores.source_state import (
     get_all_source_states,
@@ -480,3 +484,118 @@ async def update_source(source_id: str, is_enabled: bool) -> dict[str, Any] | No
         return None
     await set_enabled_override(source_id, is_enabled)
     return await get_source(source_id)
+
+
+def _has_source_filters(params: ArticleSearchParams) -> bool:
+    return any(
+        [
+            params.source_id,
+            params.source_ids,
+            params.source_name,
+            params.source_names,
+        ]
+    )
+
+
+async def list_source_items(
+    params: ArticleSearchParams,
+    *,
+    require_source_filter: bool = True,
+) -> PaginatedResponse:
+    """List source data items via unified article view."""
+    if require_source_filter and not _has_source_filters(params):
+        raise ValueError(
+            "At least one source filter is required: "
+            "source_id/source_ids/source_name/source_names"
+        )
+    return await article_service.list_articles(params)
+
+
+async def list_source_items_for_source(
+    source_id: str,
+    params: ArticleSearchParams,
+) -> PaginatedResponse | None:
+    """List items for one source ID with path-level binding."""
+    existing = await get_source(source_id)
+    if existing is None:
+        return None
+
+    bound_params = params.model_copy(deep=True)
+    bound_params.source_id = source_id
+    bound_params.source_ids = None
+    bound_params.source_name = None
+    bound_params.source_names = None
+
+    return await article_service.list_articles(bound_params)
+
+
+async def resolve_sources(
+    *,
+    q: str | None = None,
+    source_id: str | None = None,
+    dimension: str | None = None,
+    group: str | None = None,
+    tag: str | None = None,
+    is_enabled: bool | None = None,
+    page: int = 1,
+    page_size: int = 20,
+) -> dict[str, Any]:
+    """Resolve source IDs for external teams and provide direct-query endpoints."""
+    if source_id:
+        item = await get_source(source_id)
+        rows = [item] if item else []
+        safe_page = 1
+        safe_page_size = max(1, min(page_size, 200))
+        total = len(rows)
+        total_pages = 1 if total else 0
+    else:
+        safe_page = max(1, page)
+        safe_page_size = max(1, min(page_size, 200))
+        catalog = await list_sources_catalog(
+            dimension=dimension,
+            group=group,
+            tag=tag,
+            is_enabled=is_enabled,
+            keyword=q,
+            sort_by="dimension_priority",
+            order="asc",
+            page=safe_page,
+            page_size=safe_page_size,
+            include_facets=False,
+        )
+        rows = catalog.get("items", [])
+        total = int(catalog.get("filtered_sources", 0))
+        total_pages = int(catalog.get("total_pages", 0))
+
+    items = [
+        {
+            "id": str(row.get("id") or ""),
+            "name": str(row.get("name") or ""),
+            "dimension": str(row.get("dimension") or ""),
+            "group": row.get("group"),
+            "source_type": row.get("source_type"),
+            "source_platform": row.get("source_platform"),
+            "is_enabled": bool(row.get("is_enabled", False)),
+            "recommended_endpoint": f"/api/v1/sources/{row.get('id')}/items",
+        }
+        for row in rows
+        if row
+    ]
+
+    return {
+        "query": q or source_id,
+        "total": total,
+        "page": safe_page,
+        "page_size": safe_page_size,
+        "total_pages": total_pages,
+        "items": items,
+    }
+
+
+def list_api_deprecations() -> dict[str, Any]:
+    items = get_deprecation_items()
+    return {
+        "generated_at": datetime.now(timezone.utc),
+        "total": len(items),
+        "items": items,
+    }

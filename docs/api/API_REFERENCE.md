@@ -108,11 +108,21 @@
 | `conference` | 5 |
 | `moe` | 5 |
 
+## Deprecated 路由
+
+| Method | Path | 替代接口 | Sunset |
+|---|---|---|---|
+| `GET` | `/api/v1/articles/search` | `/api/v1/articles` | `2026-12-31` |
+| `GET` | `/api/v1/social-posts/search` | `/api/v1/social-posts` | `2026-12-31` |
+
 ## Agent 调用快捷映射
 
 | 用户意图 | 推荐接口 | 参数建议 |
 |---|---|---|
 | 快速看全部信源结构 | `GET /api/v1/sources/catalog` | `include_facets=true&page_size=200` |
+| 快速定位信源 ID | `GET /api/v1/sources/resolve` | `q=人社局` 或 `q=清华` |
+| 按信源直接拉取数据 | `GET /api/v1/sources/items` | `source_id=...` 或 `source_name=...`，配合 `page/page_size` 翻页 |
+| 按路径固定单个信源拉取数据 | `GET /api/v1/sources/{source_id}/items` | `date_from/date_to/keyword/page/page_size` |
 | 查询高校领导信源 | `GET /api/v1/sources/catalog` | `tag=leadership` 或 `group=university_leadership_official` |
 | 查询学者/师资信源 | `GET /api/v1/sources/catalog` | `dimension=scholars` 或 `tag=faculty` |
 | 查询共建导师/两院关系学者 | `GET /api/v1/scholars` | `is_adjunct_supervisor=true` 或 `project_subcategory=兼职导师` |
@@ -133,7 +143,7 @@
 | Method | Path | Tags | Summary |
 |---|---|---|---|
 | `GET` | `/api/v1/articles` | `articles` | 文章列表 |
-| `GET` | `/api/v1/articles/search` | `articles` | 全文搜索 |
+| `GET` | `/api/v1/articles/search` | `articles` | 全文搜索（deprecated，迁移到 `/api/v1/articles`） |
 | `GET` | `/api/v1/articles/stats` | `articles` | 文章统计 |
 | `GET` | `/api/v1/articles/{article_id}` | `articles` | 文章详情 |
 | `PATCH` | `/api/v1/articles/{article_id}` | `articles` | 更新文章 |
@@ -320,14 +330,27 @@
 | `GET` | `/api/v1/sentiment/feed` | `sentiment` | 社媒内容信息流 |
 | `GET` | `/api/v1/sentiment/overview` | `sentiment` | 舆情概览统计 |
 
+### `social-posts`
+
+| Method | Path | Tags | Summary |
+|---|---|---|---|
+| `GET` | `/api/v1/social-posts` | `social-posts` | 社媒帖子列表 |
+| `GET` | `/api/v1/social-posts/search` | `social-posts` | 社媒帖子搜索（deprecated，迁移到 `/api/v1/social-posts`） |
+| `GET` | `/api/v1/social-posts/stats` | `social-posts` | 社媒帖子统计 |
+| `GET` | `/api/v1/social-posts/{post_id}` | `social-posts` | 社媒帖子详情 |
+
 ### `sources`
 
 | Method | Path | Tags | Summary |
 |---|---|---|---|
 | `GET` | `/api/v1/sources` | `sources` | 信源列表 |
 | `GET` | `/api/v1/sources/catalog` | `sources` | 信源目录（分页 + 分面） |
+| `GET` | `/api/v1/sources/deprecations` | `sources` | API 弃用迁移表 |
 | `GET` | `/api/v1/sources/facets` | `sources` | 信源筛选分面 |
+| `GET` | `/api/v1/sources/items` | `sources` | 按信源取数据（统一入口） |
+| `GET` | `/api/v1/sources/resolve` | `sources` | 信源解析与直连入口 |
 | `GET` | `/api/v1/sources/{source_id}` | `sources` | 信源详情 |
+| `GET` | `/api/v1/sources/{source_id}/items` | `sources` | 单个信源数据流 |
 | `PATCH` | `/api/v1/sources/{source_id}` | `sources` | 启用/禁用信源 |
 | `GET` | `/api/v1/sources/{source_id}/logs` | `sources` | 爬取日志 |
 | `POST` | `/api/v1/sources/{source_id}/trigger` | `sources` | 手动触发爬取 |

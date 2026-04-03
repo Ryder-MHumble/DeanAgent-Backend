@@ -1,5 +1,6 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Response
 
+from app.api.deprecation import apply_deprecation_headers
 from app.api.deps import get_article_search_params
 from app.schemas.article import (
     ArticleBrief,
@@ -30,11 +31,14 @@ async def list_articles(
     "/search",
     response_model=PaginatedResponse[ArticleBrief],
     summary="全文搜索",
-    description="在文章标题和正文中进行关键词搜索，参数与列表接口相同。",
+    description="在文章标题和正文中进行关键词搜索，参数与列表接口相同。建议迁移到 `GET /api/v1/articles`。",
+    deprecated=True,
 )
 async def search_articles(
+    response: Response,
     params: ArticleSearchParams = Depends(get_article_search_params),
 ):
+    apply_deprecation_headers(response, replacement_path="/api/v1/articles")
     return await article_service.list_articles(params)
 
 

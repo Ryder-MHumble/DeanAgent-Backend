@@ -32,7 +32,9 @@ TAG_METADATA = [
     {
         "name": "sources",
         "description": "信源管理 — 查看信源配置与状态，启用/禁用信源，手动触发爬取，查看爬取日志。"
-        "支持目录化筛选（维度/分组/标签/健康状态）与分面统计。",
+        "支持目录化筛选（维度/分组/标签/健康状态）与分面统计；"
+        "并提供按信源直接取数（/sources/items）、信源解析（/sources/resolve）与"
+        "弃用迁移表（/sources/deprecations）。",
     },
     {
         "name": "crawler-control",

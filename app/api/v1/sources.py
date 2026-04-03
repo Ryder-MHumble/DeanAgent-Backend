@@ -1,10 +1,14 @@
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query
 
-from app.schemas.common import ErrorResponse
+from app.api.deps import get_article_search_params
+from app.schemas.article import ArticleBrief, ArticleSearchParams
+from app.schemas.common import ErrorResponse, PaginatedResponse
 from app.schemas.crawl_log import CrawlLogResponse
 from app.schemas.source import (
+    ApiDeprecationResponse,
     SourceCatalogResponse,
     SourceFacetsResponse,
+    SourceResolveResponse,
     SourceResponse,
     SourceUpdate,
 )
@@ -154,6 +158,83 @@ async def get_source_facets(
         health_statuses=health_statuses,
         keyword=keyword,
     )
+
+
+@router.get(
+    "/items",
+    response_model=PaginatedResponse[ArticleBrief],
+    summary="按信源取数据（统一入口）",
+    description=(
+        "按 source_id/source_ids/source_name/source_names 查询信源数据。"
+        "该接口复用文章统一视图，适合外部团队按渠道快速取数。"
+    ),
+    responses={400: {"model": ErrorResponse, "description": "缺少信源筛选参数"}},
+)
+async def list_source_items(
+    params: ArticleSearchParams = Depends(get_article_search_params),
+):
+    try:
+        return await source_service.list_source_items(params, require_source_filter=True)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@router.get(
+    "/resolve",
+    response_model=SourceResolveResponse,
+    summary="信源解析与直连入口",
+    description=(
+        "用于外部团队快速定位信源 ID 与推荐调用路径。"
+        "可通过 q 模糊检索或 source_id 精确定位。"
+    ),
+)
+async def resolve_sources(
+    q: str | None = Query(default=None, description="关键词（匹配信源 ID/名称/分组/标签）"),
+    source_id: str | None = Query(default=None, description="精确信源 ID"),
+    dimension: str | None = Query(default=None, description="按维度过滤"),
+    group: str | None = Query(default=None, description="按分组过滤"),
+    tag: str | None = Query(default=None, description="按标签过滤"),
+    is_enabled: bool | None = Query(default=None, description="按启用状态过滤"),
+    page: int = Query(default=1, ge=1, description="页码"),
+    page_size: int = Query(default=20, ge=1, le=200, description="每页条数"),
+):
+    return await source_service.resolve_sources(
+        q=q,
+        source_id=source_id,
+        dimension=dimension,
+        group=group,
+        tag=tag,
+        is_enabled=is_enabled,
+        page=page,
+        page_size=page_size,
+    )
+
+
+@router.get(
+    "/deprecations",
+    response_model=ApiDeprecationResponse,
+    summary="API 弃用迁移表",
+    description="返回当前已标记弃用的 API 及替代路径与 Sunset 日期。",
+)
+async def list_api_deprecations():
+    return source_service.list_api_deprecations()
+
+
+@router.get(
+    "/{source_id}/items",
+    response_model=PaginatedResponse[ArticleBrief],
+    summary="单个信源数据流",
+    description="按路径 source_id 获取单个信源的数据流，支持关键词/日期/分页排序参数。",
+    responses={404: {"model": ErrorResponse, "description": "信源不存在"}},
+)
+async def get_source_items(
+    source_id: str,
+    params: ArticleSearchParams = Depends(get_article_search_params),
+):
+    result = await source_service.list_source_items_for_source(source_id, params)
+    if result is None:
+        raise HTTPException(status_code=404, detail="Source not found")
+    return result
 
 
 @router.get(
