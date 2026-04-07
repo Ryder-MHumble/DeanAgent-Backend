@@ -1,5 +1,5 @@
 dimension: scholars
-dimension_name: 高校师资
+dimension_name: 学者与师资库
 sources:
 - id: nju_cs_faculty
   name: 南京大学计算机系-师资队伍

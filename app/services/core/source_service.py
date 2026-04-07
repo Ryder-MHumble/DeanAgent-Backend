@@ -9,7 +9,11 @@ from app.api.deprecation import get_deprecation_items
 from app.schemas.article import ArticleSearchParams
 from app.schemas.common import PaginatedResponse
 from app.services.core import article_service
-from app.services.core.source_catalog_meta import schedule_to_minutes
+from app.services.core.source_catalog_meta import (
+    build_source_taxonomy,
+    normalize_dimension_name,
+    schedule_to_minutes,
+)
 from app.services.stores.source_state import (
     get_all_source_states,
     set_enabled_override,
@@ -68,6 +72,17 @@ def _normalize_source_state_row(row: dict[str, Any]) -> dict[str, Any]:
         row.get("last_crawl_at"),
         row.get("consecutive_failures", 0),
     )
+    taxonomy = build_source_taxonomy(
+        {
+            "dimension": row.get("dimension"),
+            "group": row.get("group_name") or row.get("group"),
+            "crawl_method": row.get("crawl_method"),
+            "crawler_class": row.get("crawler_class"),
+            "source_type": row.get("source_type"),
+            "source_platform": row.get("source_platform"),
+            "tags": tags,
+        }
+    )
 
     return {
         "id": source_id,
@@ -83,18 +98,21 @@ def _normalize_source_state_row(row: dict[str, Any]) -> dict[str, Any]:
         "last_success_at": row.get("last_success_at"),
         "consecutive_failures": int(row.get("consecutive_failures") or 0),
         "source_file": row.get("source_file"),
-        "group": row.get("group_name"),
+        "group": row.get("group_name") or row.get("group"),
         "tags": tags,
         "crawler_class": row.get("crawler_class"),
         "source_type": row.get("source_type"),
         "source_platform": row.get("source_platform"),
         "institution_name": row.get("institution_name"),
         "institution_tier": row.get("institution_tier"),
-        "dimension_name": row.get("dimension_name"),
+        "dimension_name": normalize_dimension_name(
+            row.get("dimension"), row.get("dimension_name")
+        ),
         "dimension_description": row.get("dimension_description"),
         "health_status": health_status,
         "is_supported": bool(row.get("is_supported", True)),
         "is_enabled_overridden": override is not None,
+        **taxonomy,
     }
 
 
@@ -111,6 +129,12 @@ def _filter_sources(
     source_type: str | None = None,
     source_platform: str | None = None,
     schedule: str | None = None,
+    taxonomy_domain: str | None = None,
+    taxonomy_domains: str | None = None,
+    taxonomy_track: str | None = None,
+    taxonomy_tracks: str | None = None,
+    taxonomy_scope: str | None = None,
+    taxonomy_scopes: str | None = None,
     is_enabled: bool | None = None,
     health_status: str | None = None,
     health_statuses: str | None = None,
@@ -120,6 +144,9 @@ def _filter_sources(
     group_filters = _combine_filters(group, groups)
     tag_filters = _combine_filters(tag, tags)
     health_filters = _combine_filters(health_status, health_statuses)
+    taxonomy_domain_filters = _combine_filters(taxonomy_domain, taxonomy_domains)
+    taxonomy_track_filters = _combine_filters(taxonomy_track, taxonomy_tracks)
+    taxonomy_scope_filters = _combine_filters(taxonomy_scope, taxonomy_scopes)
     method_filter = _normalize_text(crawl_method)
     source_type_filter = _normalize_text(source_type)
     source_platform_filter = _normalize_text(source_platform)
@@ -135,6 +162,9 @@ def _filter_sources(
         item_source_platform = _normalize_text(item.get("source_platform"))
         item_schedule = _normalize_text(item.get("schedule"))
         item_health = _normalize_text(item.get("health_status"))
+        item_taxonomy_domain = _normalize_text(item.get("taxonomy_domain"))
+        item_taxonomy_track = _normalize_text(item.get("taxonomy_track"))
+        item_taxonomy_scope = _normalize_text(item.get("taxonomy_scope"))
         item_tags = {_normalize_text(t) for t in item.get("tags", []) if _normalize_text(t)}
 
         if dimension_filters and item_dimension not in dimension_filters:
@@ -151,6 +181,12 @@ def _filter_sources(
             continue
         if schedule_filter and item_schedule != schedule_filter:
             continue
+        if taxonomy_domain_filters and item_taxonomy_domain not in taxonomy_domain_filters:
+            continue
+        if taxonomy_track_filters and item_taxonomy_track not in taxonomy_track_filters:
+            continue
+        if taxonomy_scope_filters and item_taxonomy_scope not in taxonomy_scope_filters:
+            continue
         if is_enabled is not None and item.get("is_enabled") is not is_enabled:
             continue
         if health_filters and item_health not in health_filters:
@@ -166,6 +202,12 @@ def _filter_sources(
                     _normalize_text(item.get("dimension_name")),
                     _normalize_text(item.get("source_type")),
                     _normalize_text(item.get("source_platform")),
+                    _normalize_text(item.get("taxonomy_domain")),
+                    _normalize_text(item.get("taxonomy_domain_name")),
+                    _normalize_text(item.get("taxonomy_track")),
+                    _normalize_text(item.get("taxonomy_track_name")),
+                    _normalize_text(item.get("taxonomy_scope")),
+                    _normalize_text(item.get("taxonomy_scope_name")),
                     _normalize_text(item.get("institution_name")),
                     _normalize_text(item.get("institution_tier")),
                     " ".join(item_tags),
@@ -191,6 +233,12 @@ def _filter_sources(
         applied_filters["source_platform"] = source_platform_filter
     if schedule_filter:
         applied_filters["schedule"] = schedule_filter
+    if taxonomy_domain_filters:
+        applied_filters["taxonomy_domains"] = sorted(taxonomy_domain_filters)
+    if taxonomy_track_filters:
+        applied_filters["taxonomy_tracks"] = sorted(taxonomy_track_filters)
+    if taxonomy_scope_filters:
+        applied_filters["taxonomy_scopes"] = sorted(taxonomy_scope_filters)
     if is_enabled is not None:
         applied_filters["is_enabled"] = is_enabled
     if health_filters:
@@ -248,6 +296,12 @@ def _build_facets(items: list[dict[str, Any]]) -> dict[str, Any]:
     source_platform_counts: Counter[str] = Counter()
     schedule_counts: Counter[str] = Counter()
     health_counts: Counter[str] = Counter()
+    taxonomy_domain_counts: Counter[str] = Counter()
+    taxonomy_domain_labels: dict[str, str | None] = {}
+    taxonomy_track_counts: Counter[str] = Counter()
+    taxonomy_track_labels: dict[str, str | None] = {}
+    taxonomy_scope_counts: Counter[str] = Counter()
+    taxonomy_scope_labels: dict[str, str | None] = {}
 
     for item in items:
         dim = str(item.get("dimension", ""))
@@ -275,13 +329,40 @@ def _build_facets(items: list[dict[str, Any]]) -> dict[str, Any]:
         health = str(item.get("health_status", ""))
         if health:
             health_counts[health] += 1
+        taxonomy_domain = str(item.get("taxonomy_domain", ""))
+        if taxonomy_domain:
+            taxonomy_domain_counts[taxonomy_domain] += 1
+            if (
+                taxonomy_domain not in taxonomy_domain_labels
+                and item.get("taxonomy_domain_name")
+            ):
+                taxonomy_domain_labels[taxonomy_domain] = item.get("taxonomy_domain_name")
+        taxonomy_track = str(item.get("taxonomy_track", ""))
+        if taxonomy_track:
+            taxonomy_track_counts[taxonomy_track] += 1
+            if (
+                taxonomy_track not in taxonomy_track_labels
+                and item.get("taxonomy_track_name")
+            ):
+                taxonomy_track_labels[taxonomy_track] = item.get("taxonomy_track_name")
+        taxonomy_scope = str(item.get("taxonomy_scope", ""))
+        if taxonomy_scope:
+            taxonomy_scope_counts[taxonomy_scope] += 1
+            if (
+                taxonomy_scope not in taxonomy_scope_labels
+                and item.get("taxonomy_scope_name")
+            ):
+                taxonomy_scope_labels[taxonomy_scope] = item.get("taxonomy_scope_name")
         for tag in item.get("tags", []):
             if tag:
                 tag_counts[str(tag)] += 1
 
-    def to_facet(counter: Counter[str]) -> list[dict[str, Any]]:
+    def to_facet(
+        counter: Counter[str], labels: dict[str, str | None] | None = None
+    ) -> list[dict[str, Any]]:
+        labels = labels or {}
         return [
-            {"key": key, "count": count}
+            {"key": key, "label": labels.get(key), "count": count}
             for key, count in sorted(counter.items(), key=lambda x: (-x[1], x[0]))
         ]
 
@@ -305,6 +386,9 @@ def _build_facets(items: list[dict[str, Any]]) -> dict[str, Any]:
         "source_platforms": to_facet(source_platform_counts),
         "schedules": to_facet(schedule_counts),
         "health_statuses": to_facet(health_counts),
+        "taxonomy_domains": to_facet(taxonomy_domain_counts, taxonomy_domain_labels),
+        "taxonomy_tracks": to_facet(taxonomy_track_counts, taxonomy_track_labels),
+        "taxonomy_scopes": to_facet(taxonomy_scope_counts, taxonomy_scope_labels),
     }
 
 
@@ -333,6 +417,12 @@ async def list_sources(
     source_type: str | None = None,
     source_platform: str | None = None,
     schedule: str | None = None,
+    taxonomy_domain: str | None = None,
+    taxonomy_domains: str | None = None,
+    taxonomy_track: str | None = None,
+    taxonomy_tracks: str | None = None,
+    taxonomy_scope: str | None = None,
+    taxonomy_scopes: str | None = None,
     is_enabled: bool | None = None,
     health_status: str | None = None,
     health_statuses: str | None = None,
@@ -353,6 +443,12 @@ async def list_sources(
         source_type=source_type,
         source_platform=source_platform,
         schedule=schedule,
+        taxonomy_domain=taxonomy_domain,
+        taxonomy_domains=taxonomy_domains,
+        taxonomy_track=taxonomy_track,
+        taxonomy_tracks=taxonomy_tracks,
+        taxonomy_scope=taxonomy_scope,
+        taxonomy_scopes=taxonomy_scopes,
         is_enabled=is_enabled,
         health_status=health_status,
         health_statuses=health_statuses,
@@ -373,6 +469,12 @@ async def list_source_facets(
     source_type: str | None = None,
     source_platform: str | None = None,
     schedule: str | None = None,
+    taxonomy_domain: str | None = None,
+    taxonomy_domains: str | None = None,
+    taxonomy_track: str | None = None,
+    taxonomy_tracks: str | None = None,
+    taxonomy_scope: str | None = None,
+    taxonomy_scopes: str | None = None,
     is_enabled: bool | None = None,
     health_status: str | None = None,
     health_statuses: str | None = None,
@@ -391,6 +493,12 @@ async def list_source_facets(
         source_type=source_type,
         source_platform=source_platform,
         schedule=schedule,
+        taxonomy_domain=taxonomy_domain,
+        taxonomy_domains=taxonomy_domains,
+        taxonomy_track=taxonomy_track,
+        taxonomy_tracks=taxonomy_tracks,
+        taxonomy_scope=taxonomy_scope,
+        taxonomy_scopes=taxonomy_scopes,
         is_enabled=is_enabled,
         health_status=health_status,
         health_statuses=health_statuses,
@@ -411,6 +519,12 @@ async def list_sources_catalog(
     source_type: str | None = None,
     source_platform: str | None = None,
     schedule: str | None = None,
+    taxonomy_domain: str | None = None,
+    taxonomy_domains: str | None = None,
+    taxonomy_track: str | None = None,
+    taxonomy_tracks: str | None = None,
+    taxonomy_scope: str | None = None,
+    taxonomy_scopes: str | None = None,
     is_enabled: bool | None = None,
     health_status: str | None = None,
     health_statuses: str | None = None,
@@ -435,6 +549,12 @@ async def list_sources_catalog(
         source_type=source_type,
         source_platform=source_platform,
         schedule=schedule,
+        taxonomy_domain=taxonomy_domain,
+        taxonomy_domains=taxonomy_domains,
+        taxonomy_track=taxonomy_track,
+        taxonomy_tracks=taxonomy_tracks,
+        taxonomy_scope=taxonomy_scope,
+        taxonomy_scopes=taxonomy_scopes,
         is_enabled=is_enabled,
         health_status=health_status,
         health_statuses=health_statuses,
@@ -534,6 +654,9 @@ async def resolve_sources(
     q: str | None = None,
     source_id: str | None = None,
     dimension: str | None = None,
+    taxonomy_domain: str | None = None,
+    taxonomy_track: str | None = None,
+    taxonomy_scope: str | None = None,
     group: str | None = None,
     tag: str | None = None,
     is_enabled: bool | None = None,
@@ -553,6 +676,9 @@ async def resolve_sources(
         safe_page_size = max(1, min(page_size, 200))
         catalog = await list_sources_catalog(
             dimension=dimension,
+            taxonomy_domain=taxonomy_domain,
+            taxonomy_track=taxonomy_track,
+            taxonomy_scope=taxonomy_scope,
             group=group,
             tag=tag,
             is_enabled=is_enabled,
@@ -575,6 +701,9 @@ async def resolve_sources(
             "group": row.get("group"),
             "source_type": row.get("source_type"),
             "source_platform": row.get("source_platform"),
+            "taxonomy_domain": row.get("taxonomy_domain"),
+            "taxonomy_track": row.get("taxonomy_track"),
+            "taxonomy_scope": row.get("taxonomy_scope"),
             "is_enabled": bool(row.get("is_enabled", False)),
             "recommended_endpoint": f"/api/v1/sources/{row.get('id')}/items",
         }

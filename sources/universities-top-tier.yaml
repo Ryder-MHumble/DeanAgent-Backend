@@ -1,5 +1,5 @@
 dimension: universities
-dimension_name: 对高校
+dimension_name: 高校与科研生态
 description: 高校相关信源 - top_tier_expansion (985 + top 211)
 default_keyword_filter: []
 sources:

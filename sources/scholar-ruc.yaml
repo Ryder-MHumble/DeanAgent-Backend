@@ -1,5 +1,5 @@
 dimension: scholars
-dimension_name: 高校师资
+dimension_name: 学者与师资库
 sources:
 - id: ruc_info_faculty
   name: 中国人民大学信息学院-师资队伍

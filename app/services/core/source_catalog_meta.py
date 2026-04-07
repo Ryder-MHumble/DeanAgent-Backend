@@ -98,6 +98,79 @@ _INSTITUTION_ALIASES: dict[str, str] = {
     "国防科大": "国防科技大学",
 }
 
+_TAXONOMY_DOMAIN_NAMES: dict[str, str] = {
+    "policy_governance": "政策治理",
+    "education_research": "高校与科研生态",
+    "technology_frontier": "技术前沿与创新",
+    "industry_market": "产业与资本市场",
+    "talent_personnel": "人才与组织发展",
+    "academic_events": "学术会议与活动",
+    "social_intelligence": "社交情报与舆情",
+    "general_monitoring": "综合监测",
+}
+
+_TAXONOMY_TRACK_NAMES: dict[str, str] = {
+    "policy_national": "国家政策",
+    "policy_local_beijing": "北京市政策",
+    "personnel_appointments": "人事任免",
+    "university_leadership": "高校领导班子",
+    "university_news": "高校新闻",
+    "ai_research_institutes": "AI 研究机构",
+    "research_awards": "科研奖励与评选",
+    "education_governance": "教育行政动态",
+    "education_aggregators": "高教资讯聚合",
+    "scholar_profiles": "学者与师资库",
+    "technology_media": "技术媒体",
+    "company_releases": "企业官方发布",
+    "research_feeds": "论文与研究动态",
+    "tech_communities": "技术社区与开源",
+    "social_kol_monitoring": "社媒 KOL 监测",
+    "industry_media": "产业媒体",
+    "investment_financing": "投融资动态",
+    "talent_programs": "人才项目与学术影响力",
+    "conferences_events": "会议与活动",
+    "generic_monitoring": "通用监测",
+}
+
+_TAXONOMY_SCOPE_NAMES: dict[str, str] = {
+    "national": "国家级",
+    "beijing": "北京市",
+    "university": "高校",
+    "research_institute": "科研机构",
+    "provincial": "省市教育部门",
+    "china": "中国",
+    "global": "全球",
+    "mixed": "综合",
+    "social_platform": "社交平台",
+}
+
+_PROFESSIONAL_DIMENSION_NAMES: dict[str, str] = {
+    "national_policy": "国家政策治理",
+    "beijing_policy": "北京市政策治理",
+    "technology": "技术前沿与创新",
+    "talent": "人才与学术发展",
+    "industry": "产业与投融资",
+    "sentiment": "社交情报与舆情",
+    "twitter": "社交媒体监测",
+    "universities": "高校与科研生态",
+    "events": "学术会议与活动",
+    "personnel": "组织人事动态",
+    "scholars": "学者与师资库",
+}
+
+_LEGACY_DIMENSION_NAME_ALIASES: dict[str, str] = {
+    "对国家": "国家政策治理",
+    "对北京": "北京市政策治理",
+    "对技术": "技术前沿与创新",
+    "对人才": "人才与学术发展",
+    "对产业": "产业与投融资",
+    "对学院舆情": "社交情报与舆情",
+    "对高校": "高校与科研生态",
+    "对日程": "学术会议与活动",
+    "对人事": "组织人事动态",
+    "高校师资": "学者与师资库",
+}
+
 
 def _normalize_text(value: Any) -> str:
     return str(value or "").strip()
@@ -108,6 +181,16 @@ def _normalize_tags(config: dict[str, Any]) -> set[str]:
     if not isinstance(raw, list):
         return set()
     return {str(item).strip().lower() for item in raw if str(item).strip()}
+
+
+def normalize_dimension_name(dimension: Any, dimension_name: Any) -> str | None:
+    raw_name = _normalize_text(dimension_name)
+    if raw_name in _LEGACY_DIMENSION_NAME_ALIASES:
+        return _LEGACY_DIMENSION_NAME_ALIASES[raw_name]
+    dim_key = _normalize_text(dimension).lower()
+    if dim_key in _PROFESSIONAL_DIMENSION_NAMES:
+        return _PROFESSIONAL_DIMENSION_NAMES[dim_key]
+    return raw_name or None
 
 
 def extract_institution_name(source_name: str, source_id: str) -> str | None:
@@ -203,6 +286,151 @@ def infer_source_type(config: dict[str, Any]) -> str:
     return "general_news"
 
 
+def _infer_taxonomy_track(config: dict[str, Any]) -> str:
+    dimension = _normalize_text(config.get("dimension")).lower()
+    group = _normalize_text(config.get("group")).lower()
+    source_type = _normalize_text(config.get("source_type")).lower()
+    if not source_type:
+        source_type = infer_source_type(config)
+    tags = _normalize_tags(config)
+
+    if source_type in {"social_kol", "social_topic"} or group == "social_platform":
+        return "social_kol_monitoring"
+    if source_type == "university_leadership":
+        return "university_leadership"
+    if source_type == "personnel_news":
+        return "personnel_appointments"
+    if dimension == "national_policy":
+        return "policy_national"
+    if dimension == "beijing_policy":
+        return "policy_local_beijing"
+    if source_type == "scholar_profile":
+        return "scholar_profiles"
+    if source_type == "university_news":
+        if group == "ai_institutes":
+            return "ai_research_institutes"
+        if group == "awards":
+            return "research_awards"
+        if group == "provincial":
+            return "education_governance"
+        if group == "aggregators":
+            return "education_aggregators"
+        return "university_news"
+    if source_type == "technology_news":
+        if group == "company_blogs" or "company_blog" in tags:
+            return "company_releases"
+        if group == "academic" or {"academic", "arxiv", "papers"} & tags:
+            return "research_feeds"
+        if group == "community" or {"community", "github", "reddit"} & tags:
+            return "tech_communities"
+        return "technology_media"
+    if source_type == "industry_news":
+        if group == "investment" or {"investment", "financing", "vc"} & tags:
+            return "investment_financing"
+        return "industry_media"
+    if source_type == "talent_news":
+        return "talent_programs"
+    if source_type == "event_news":
+        return "conferences_events"
+    return "generic_monitoring"
+
+
+def _infer_taxonomy_domain(track: str) -> str:
+    if track in {"policy_national", "policy_local_beijing"}:
+        return "policy_governance"
+    if track in {
+        "university_news",
+        "ai_research_institutes",
+        "research_awards",
+        "education_governance",
+        "education_aggregators",
+        "scholar_profiles",
+    }:
+        return "education_research"
+    if track in {"technology_media", "company_releases", "research_feeds", "tech_communities"}:
+        return "technology_frontier"
+    if track in {"industry_media", "investment_financing"}:
+        return "industry_market"
+    if track in {"personnel_appointments", "university_leadership", "talent_programs"}:
+        return "talent_personnel"
+    if track == "conferences_events":
+        return "academic_events"
+    if track == "social_kol_monitoring":
+        return "social_intelligence"
+    return "general_monitoring"
+
+
+def _infer_taxonomy_scope(config: dict[str, Any], track: str) -> str:
+    dimension = _normalize_text(config.get("dimension")).lower()
+    group = _normalize_text(config.get("group")).lower()
+    source_type = _normalize_text(config.get("source_type")).lower()
+    if not source_type:
+        source_type = infer_source_type(config)
+    source_platform = _normalize_text(config.get("source_platform")).lower()
+    if not source_platform:
+        source_platform = infer_source_platform(config)
+    tags = _normalize_tags(config)
+
+    if dimension == "national_policy":
+        return "national"
+    if dimension == "beijing_policy":
+        return "beijing"
+    if track == "social_kol_monitoring" or source_type in {"social_kol", "social_topic"}:
+        return "social_platform"
+    if source_type == "university_leadership":
+        return "university"
+    if source_type == "personnel_news":
+        return "national"
+    if source_type == "scholar_profile":
+        return "university"
+    if source_type == "university_news":
+        if group == "ai_institutes":
+            return "research_institute"
+        if group == "provincial":
+            return "provincial"
+        if group in {"awards", "aggregators"}:
+            return "china"
+        return "university"
+    if source_type in {"industry_news", "talent_news"}:
+        if {"nature_index", "overseas", "international"} & tags:
+            return "global"
+        return "china"
+    if source_type == "event_news":
+        if {"international", "global", "wikicfp", "aideadlines"} & tags:
+            return "global"
+        return "china"
+    if source_type == "technology_news":
+        if source_platform in {"x", "youtube", "linkedin"}:
+            return "global"
+        if {"international", "global"} & tags:
+            return "global"
+        if {"domestic", "cn_ai", "china"} & tags:
+            return "china"
+        return "mixed"
+    return "mixed"
+
+
+def build_source_taxonomy(config: dict[str, Any]) -> dict[str, str]:
+    """Build professional taxonomy fields while keeping legacy dimensions unchanged."""
+    adapted = dict(config)
+    if "group" not in adapted and "group_name" in adapted:
+        adapted["group"] = adapted.get("group_name")
+
+    track = _infer_taxonomy_track(adapted)
+    domain = _infer_taxonomy_domain(track)
+    scope = _infer_taxonomy_scope(adapted, track)
+
+    return {
+        "taxonomy_version": "v2",
+        "taxonomy_domain": domain,
+        "taxonomy_domain_name": _TAXONOMY_DOMAIN_NAMES.get(domain, domain),
+        "taxonomy_track": track,
+        "taxonomy_track_name": _TAXONOMY_TRACK_NAMES.get(track, track),
+        "taxonomy_scope": scope,
+        "taxonomy_scope_name": _TAXONOMY_SCOPE_NAMES.get(scope, scope),
+    }
+
+
 def schedule_to_minutes(schedule: str | None) -> int | None:
     if schedule is None:
         return None
@@ -226,11 +454,21 @@ def build_source_catalog_meta(config: dict[str, Any]) -> dict[str, Any]:
     tags_raw = config.get("tags", [])
     tags = [str(tag).strip() for tag in tags_raw] if isinstance(tags_raw, list) else []
 
+    taxonomy = build_source_taxonomy(
+        {
+            **config,
+            "source_type": source_type,
+            "source_platform": source_platform,
+        }
+    )
+
     return {
         "source_name": source_name or source_id,
         "source_url": _normalize_text(config.get("url")) or None,
         "dimension": _normalize_text(config.get("dimension")) or None,
-        "dimension_name": _normalize_text(config.get("dimension_name")) or None,
+        "dimension_name": normalize_dimension_name(
+            config.get("dimension"), config.get("dimension_name")
+        ),
         "group_name": _normalize_text(config.get("group")) or None,
         "source_file": _normalize_text(config.get("source_file")) or None,
         "crawl_method": _normalize_text(config.get("crawl_method")) or "static",
@@ -243,4 +481,5 @@ def build_source_catalog_meta(config: dict[str, Any]) -> dict[str, Any]:
         "tags": tags,
         "institution_name": institution_name,
         "institution_tier": infer_institution_tier(institution_name),
+        **taxonomy,
     }

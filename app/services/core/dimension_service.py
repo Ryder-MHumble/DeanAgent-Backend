@@ -3,16 +3,17 @@ from __future__ import annotations
 from app.services.stores.json_reader import get_dimension_stats
 
 DIMENSION_NAMES = {
-    "national_policy": "对国家",
-    "beijing_policy": "对北京",
-    "technology": "对技术",
-    "talent": "对人才",
-    "industry": "对产业",
-    "sentiment": "对学院舆情",
-    "universities": "对高校",
-    "events": "对日程",
-    "personnel": "对人事",
-    "scholars": "高校师资",
+    "national_policy": "国家政策治理",
+    "beijing_policy": "北京市政策治理",
+    "technology": "技术前沿与创新",
+    "talent": "人才与学术发展",
+    "industry": "产业与投融资",
+    "sentiment": "社交情报与舆情",
+    "twitter": "社交媒体监测",
+    "universities": "高校与科研生态",
+    "events": "学术会议与活动",
+    "personnel": "组织人事动态",
+    "scholars": "学者与师资库",
 }
 
 

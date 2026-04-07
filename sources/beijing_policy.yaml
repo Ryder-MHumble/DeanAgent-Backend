@@ -1,5 +1,5 @@
 dimension: "beijing_policy"
-dimension_name: "对北京"
+dimension_name: "北京市政策治理"
 description: "北京市政策文件、市领导动态、委办局人事变动"
 
 default_keyword_filter:

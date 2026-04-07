@@ -10,7 +10,7 @@ router = APIRouter()
 @router.get(
     "",
     summary="维度列表",
-    description="列出全部 9 个维度，返回每个维度的文章数量和最后更新时间。",
+    description="列出全部维度，返回每个维度的文章数量和最后更新时间。",
 )
 async def list_dimensions():
     return await dimension_service.list_dimensions()
@@ -22,7 +22,7 @@ async def list_dimensions():
     summary="维度文章",
     description="获取指定维度下的文章列表，支持关键词搜索、排序和分页。\n\n"
     "可用维度: `national_policy`, `beijing_policy`, `technology`, `talent`, "
-    "`industry`, `universities`, `events`, `personnel`, `twitter`",
+    "`industry`, `universities`, `events`, `personnel`, `scholars`, `sentiment`, `twitter`",
 )
 async def get_dimension_articles(
     dimension: str,

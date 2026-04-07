@@ -1,5 +1,5 @@
 dimension: scholars
-dimension_name: 高校师资
+dimension_name: 学者与师资库
 sources:
 - id: pku_cs_faculty
   name: 北京大学计算机学院-师资队伍

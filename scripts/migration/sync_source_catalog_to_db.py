@@ -11,6 +11,7 @@ import asyncpg
 import yaml
 
 from app.config import BASE_DIR, settings
+from app.services.core.source_catalog_meta import build_source_catalog_meta
 
 SCHEDULE_TO_MINUTES: dict[str, int] = {
     "2h": 120,
@@ -194,40 +195,34 @@ def _is_schedulable_source(config: dict[str, Any]) -> bool:
 
 def _build_row(config: dict[str, Any], now_dt: datetime) -> dict[str, Any]:
     source_id = _text(config.get("id"))
-    source_name = _text(config.get("name")) or source_id
-    source_schedule = _text(config.get("schedule")) or "daily"
-    source_platform = _source_platform(config)
-    source_type = _source_type(config)
-    if source_type.startswith("social_"):
-        source_name = {
-            "x": "Twitter",
-            "youtube": "YouTube",
-            "linkedin": "LinkedIn",
-            "xiaoyuzhou": "小宇宙",
-        }.get(source_platform, source_name or source_id)
-    institution_name = _institution_name(source_name, source_id)
-    raw_tags = config.get("tags")
-    tags = [str(item).strip() for item in raw_tags] if isinstance(raw_tags, list) else []
+    meta = build_source_catalog_meta(config)
 
     return {
         "source_id": source_id,
-        "source_name": source_name,
-        "source_url": _text(config.get("url")) or None,
-        "dimension": _text(config.get("dimension")) or None,
-        "dimension_name": _text(config.get("dimension_name")) or None,
-        "group_name": _text(config.get("group")) or None,
-        "source_file": _text(config.get("source_file")) or None,
-        "crawl_method": _text(config.get("crawl_method")) or "static",
-        "crawler_class": _text(config.get("crawler_class")) or None,
-        "schedule": source_schedule,
-        "crawl_interval_minutes": SCHEDULE_TO_MINUTES.get(source_schedule.lower()),
-        "source_type": source_type,
-        "source_platform": source_platform,
-        "tags": tags,
-        "is_enabled_default": bool(config.get("is_enabled", True)),
+        "source_name": meta.get("source_name"),
+        "source_url": meta.get("source_url"),
+        "dimension": meta.get("dimension"),
+        "dimension_name": meta.get("dimension_name"),
+        "taxonomy_version": meta.get("taxonomy_version"),
+        "taxonomy_domain": meta.get("taxonomy_domain"),
+        "taxonomy_domain_name": meta.get("taxonomy_domain_name"),
+        "taxonomy_track": meta.get("taxonomy_track"),
+        "taxonomy_track_name": meta.get("taxonomy_track_name"),
+        "taxonomy_scope": meta.get("taxonomy_scope"),
+        "taxonomy_scope_name": meta.get("taxonomy_scope_name"),
+        "group_name": meta.get("group_name"),
+        "source_file": meta.get("source_file"),
+        "crawl_method": meta.get("crawl_method"),
+        "crawler_class": meta.get("crawler_class"),
+        "schedule": meta.get("schedule"),
+        "crawl_interval_minutes": meta.get("crawl_interval_minutes"),
+        "source_type": meta.get("source_type"),
+        "source_platform": meta.get("source_platform"),
+        "tags": meta.get("tags") or [],
+        "is_enabled_default": bool(meta.get("is_enabled_default", True)),
         "is_supported": True,
-        "institution_name": institution_name,
-        "institution_tier": _institution_tier(institution_name),
+        "institution_name": meta.get("institution_name"),
+        "institution_tier": meta.get("institution_tier"),
         "updated_at": now_dt,
     }
 
@@ -250,65 +245,62 @@ async def _run() -> None:
         now_dt = datetime.now(timezone.utc)
         rows = [_build_row(cfg, now_dt) for cfg in sources if _text(cfg.get("id"))]
         source_ids = [row["source_id"] for row in rows]
-
-        upsert_sql = """
-        INSERT INTO source_states (
-            source_id, source_name, source_url, dimension, dimension_name, group_name,
-            source_file, crawl_method, crawler_class, schedule, crawl_interval_minutes,
-            source_type, source_platform, tags, is_enabled_default, is_supported,
-            institution_name, institution_tier, updated_at
-        ) VALUES (
-            $1, $2, $3, $4, $5, $6,
-            $7, $8, $9, $10, $11,
-            $12, $13, $14, $15, $16,
-            $17, $18, $19
+        columns_res = await conn.fetch(
+            """
+            SELECT column_name
+            FROM information_schema.columns
+            WHERE table_name = 'source_states'
+            """
         )
-        ON CONFLICT (source_id) DO UPDATE SET
-            source_name = EXCLUDED.source_name,
-            source_url = EXCLUDED.source_url,
-            dimension = EXCLUDED.dimension,
-            dimension_name = EXCLUDED.dimension_name,
-            group_name = EXCLUDED.group_name,
-            source_file = EXCLUDED.source_file,
-            crawl_method = EXCLUDED.crawl_method,
-            crawler_class = EXCLUDED.crawler_class,
-            schedule = EXCLUDED.schedule,
-            crawl_interval_minutes = EXCLUDED.crawl_interval_minutes,
-            source_type = EXCLUDED.source_type,
-            source_platform = EXCLUDED.source_platform,
-            tags = EXCLUDED.tags,
-            is_enabled_default = EXCLUDED.is_enabled_default,
-            is_supported = EXCLUDED.is_supported,
-            institution_name = EXCLUDED.institution_name,
-            institution_tier = EXCLUDED.institution_tier,
-            updated_at = EXCLUDED.updated_at
-        """
+        available_columns = {str(item["column_name"]) for item in columns_res}
+        if "source_id" not in available_columns:
+            raise RuntimeError("source_states.source_id column is missing")
 
-        tuples = [
-            (
-                row["source_id"],
-                row["source_name"],
-                row["source_url"],
-                row["dimension"],
-                row["dimension_name"],
-                row["group_name"],
-                row["source_file"],
-                row["crawl_method"],
-                row["crawler_class"],
-                row["schedule"],
-                row["crawl_interval_minutes"],
-                row["source_type"],
-                row["source_platform"],
-                row["tags"],
-                row["is_enabled_default"],
-                row["is_supported"],
-                row["institution_name"],
-                row["institution_tier"],
-                row["updated_at"],
-            )
-            for row in rows
+        desired_columns = [
+            "source_id",
+            "source_name",
+            "source_url",
+            "dimension",
+            "dimension_name",
+            "taxonomy_version",
+            "taxonomy_domain",
+            "taxonomy_domain_name",
+            "taxonomy_track",
+            "taxonomy_track_name",
+            "taxonomy_scope",
+            "taxonomy_scope_name",
+            "group_name",
+            "source_file",
+            "crawl_method",
+            "crawler_class",
+            "schedule",
+            "crawl_interval_minutes",
+            "source_type",
+            "source_platform",
+            "tags",
+            "is_enabled_default",
+            "is_supported",
+            "institution_name",
+            "institution_tier",
+            "updated_at",
         ]
-        await conn.executemany(upsert_sql, tuples)
+        active_columns = [col for col in desired_columns if col in available_columns]
+
+        if active_columns:
+            placeholders = ", ".join(f"${idx}" for idx in range(1, len(active_columns) + 1))
+            col_list = ", ".join(active_columns)
+            update_assignments = ", ".join(
+                f"{col} = EXCLUDED.{col}" for col in active_columns if col != "source_id"
+            )
+
+            upsert_sql = f"""
+            INSERT INTO source_states ({col_list})
+            VALUES ({placeholders})
+            ON CONFLICT (source_id) DO UPDATE SET
+                {update_assignments}
+            """
+            tuples = [tuple(row.get(col) for col in active_columns) for row in rows]
+            await conn.executemany(upsert_sql, tuples)
 
         marked_unsupported = 0
         deleted_missing = 0

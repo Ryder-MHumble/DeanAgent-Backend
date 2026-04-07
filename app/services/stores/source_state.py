@@ -9,6 +9,13 @@ DB table: source_states
   source_url TEXT
   dimension VARCHAR(64)
   dimension_name VARCHAR(128)
+  taxonomy_version VARCHAR(16)
+  taxonomy_domain VARCHAR(64)
+  taxonomy_domain_name VARCHAR(128)
+  taxonomy_track VARCHAR(64)
+  taxonomy_track_name VARCHAR(128)
+  taxonomy_scope VARCHAR(64)
+  taxonomy_scope_name VARCHAR(128)
   group_name VARCHAR(128)
   source_file VARCHAR(128)
   crawl_method VARCHAR(64)
@@ -86,6 +93,13 @@ def _build_catalog_row_from_config(config: dict[str, Any], now_iso: str) -> dict
         "source_url": meta.get("source_url"),
         "dimension": meta.get("dimension"),
         "dimension_name": meta.get("dimension_name"),
+        "taxonomy_version": meta.get("taxonomy_version"),
+        "taxonomy_domain": meta.get("taxonomy_domain"),
+        "taxonomy_domain_name": meta.get("taxonomy_domain_name"),
+        "taxonomy_track": meta.get("taxonomy_track"),
+        "taxonomy_track_name": meta.get("taxonomy_track_name"),
+        "taxonomy_scope": meta.get("taxonomy_scope"),
+        "taxonomy_scope_name": meta.get("taxonomy_scope_name"),
         "group_name": meta.get("group_name"),
         "source_file": meta.get("source_file"),
         "crawl_method": meta.get("crawl_method"),
@@ -117,6 +131,19 @@ def _build_minimal_runtime_row(source_id: str, now_iso: str) -> dict[str, Any]:
         "source_id": source_id,
         "updated_at": now_iso,
     }
+
+
+def _strip_taxonomy_fields(row: dict[str, Any]) -> dict[str, Any]:
+    taxonomy_keys = {
+        "taxonomy_version",
+        "taxonomy_domain",
+        "taxonomy_domain_name",
+        "taxonomy_track",
+        "taxonomy_track_name",
+        "taxonomy_scope",
+        "taxonomy_scope_name",
+    }
+    return {key: value for key, value in row.items() if key not in taxonomy_keys}
 
 
 # ---------------------------------------------------------------------------
@@ -178,6 +205,7 @@ async def sync_source_catalog_from_configs(
     try:
         client = _get_client()
         used_minimal_schema = False
+        used_legacy_schema = False
         if rows:
             try:
                 await client.table("source_states").upsert(
@@ -186,18 +214,32 @@ async def sync_source_catalog_from_configs(
             except Exception as exc:
                 if not _is_missing_source_states_column_error(exc):
                     raise
-                used_minimal_schema = True
                 logger.warning(
-                    "source_states schema is minimal; syncing runtime keys only: %s",
+                    "source_states schema misses some catalog columns; "
+                    "retrying with legacy-compatible fields: %s",
                     exc,
                 )
-                minimal_rows = [
-                    _build_minimal_runtime_row(row["source_id"], now_iso)
-                    for row in rows
-                ]
-                await client.table("source_states").upsert(
-                    minimal_rows, on_conflict="source_id"
-                ).execute()
+                legacy_rows = [_strip_taxonomy_fields(row) for row in rows]
+                try:
+                    await client.table("source_states").upsert(
+                        legacy_rows, on_conflict="source_id"
+                    ).execute()
+                    used_legacy_schema = True
+                except Exception as legacy_exc:
+                    if not _is_missing_source_states_column_error(legacy_exc):
+                        raise
+                    used_minimal_schema = True
+                    logger.warning(
+                        "source_states schema is minimal; syncing runtime keys only: %s",
+                        legacy_exc,
+                    )
+                    minimal_rows = [
+                        _build_minimal_runtime_row(row["source_id"], now_iso)
+                        for row in rows
+                    ]
+                    await client.table("source_states").upsert(
+                        minimal_rows, on_conflict="source_id"
+                    ).execute()
 
         marked_unsupported = 0
         deleted_missing = 0
@@ -217,7 +259,12 @@ async def sync_source_catalog_from_configs(
                 if source_id not in supported_ids:
                     if (not used_minimal_schema) and item.get("is_supported", True):
                         marked_unsupported += 1
-                    await client.table("source_states").delete().eq("source_id", source_id).execute()
+                    await (
+                        client.table("source_states")
+                        .delete()
+                        .eq("source_id", source_id)
+                        .execute()
+                    )
                     deleted_missing += 1
 
         return {
@@ -225,6 +272,13 @@ async def sync_source_catalog_from_configs(
             "upserted": len(rows),
             "marked_unsupported": marked_unsupported,
             "deleted_missing": deleted_missing,
+            "schema_mode": (
+                "minimal"
+                if used_minimal_schema
+                else "legacy"
+                if used_legacy_schema
+                else "full"
+            ),
         }
     except RuntimeError:
         pass

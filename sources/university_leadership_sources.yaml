@@ -1,5 +1,5 @@
 dimension: personnel
-dimension_name: 对人事
+dimension_name: 组织人事动态
 description: 高校现任领导官方信源（截图名单）
 generated_at: '2026-03-30T00:00:00'
 sources:

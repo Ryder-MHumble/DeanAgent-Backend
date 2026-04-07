@@ -1,5 +1,5 @@
 dimension: scholars
-dimension_name: 高校师资
+dimension_name: 学者与师资库
 sources:
 - id: tsinghua_air_faculty
   name: 清华大学智能产业研究院-研究团队

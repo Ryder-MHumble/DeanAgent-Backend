@@ -1,5 +1,5 @@
 dimension: scholars
-dimension_name: 高校师资
+dimension_name: 学者与师资库
 sources:
 - id: ustc_cs_faculty
   name: 中国科学技术大学计算机学院-教授

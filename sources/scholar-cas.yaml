@@ -1,5 +1,5 @@
 dimension: scholars
-dimension_name: 高校师资
+dimension_name: 学者与师资库
 sources:
 - id: ict_cas_faculty
   name: 中科院计算技术研究所-研究员

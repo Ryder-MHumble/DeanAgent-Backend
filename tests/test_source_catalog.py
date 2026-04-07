@@ -65,19 +65,35 @@ MOCK_STATES = {
 
 
 def _mock_deps():
+    merged_states: dict[str, dict] = {}
+    for config in MOCK_CONFIGS:
+        merged_states[config["id"]] = {
+            "source_id": config["id"],
+            "source_name": config["name"],
+            "source_url": config["url"],
+            "dimension": config["dimension"],
+            "dimension_name": config["dimension_name"],
+            "group_name": config["group"],
+            "tags": config["tags"],
+            "crawl_method": config["crawl_method"],
+            "schedule": config["schedule"],
+            "source_file": config["source_file"],
+            "source_type": config.get("source_type"),
+            "source_platform": config.get("source_platform"),
+            "is_enabled_default": config["is_enabled"],
+            "is_supported": True,
+        }
+        merged_states[config["id"]].update(MOCK_STATES.get(config["id"], {}))
+
     return patch(
-        "app.services.core.source_service.load_all_source_configs",
-        return_value=MOCK_CONFIGS,
-    ), patch(
         "app.services.core.source_service.get_all_source_states",
-        new=AsyncMock(return_value=MOCK_STATES),
+        new=AsyncMock(return_value=merged_states),
     )
 
 
 @pytest.mark.asyncio
 async def test_list_sources_supports_tag_and_enable_filters():
-    p1, p2 = _mock_deps()
-    with p1, p2:
+    with _mock_deps():
         result = await source_service.list_sources(
             tags="leadership,faculty",
             is_enabled=True,
@@ -94,8 +110,7 @@ async def test_list_sources_supports_tag_and_enable_filters():
 
 @pytest.mark.asyncio
 async def test_list_sources_filters_health_status():
-    p1, p2 = _mock_deps()
-    with p1, p2:
+    with _mock_deps():
         result = await source_service.list_sources(health_status="failing")
 
     assert len(result) == 1
@@ -105,15 +120,16 @@ async def test_list_sources_filters_health_status():
 
 @pytest.mark.asyncio
 async def test_list_source_facets_returns_dimension_and_tags():
-    p1, p2 = _mock_deps()
-    with p1, p2:
+    with _mock_deps():
         facets = await source_service.list_source_facets(dimensions="personnel,scholars")
 
     dimensions = {item["key"]: item for item in facets["dimensions"]}
     assert dimensions["personnel"]["count"] == 1
     assert dimensions["personnel"]["enabled_count"] == 1
+    assert dimensions["personnel"]["label"] == "组织人事动态"
     assert dimensions["scholars"]["count"] == 1
     assert dimensions["scholars"]["enabled_count"] == 1
+    assert dimensions["scholars"]["label"] == "学者与师资库"
     tags = {item["key"]: item["count"] for item in facets["tags"]}
     assert tags["leadership"] == 1
     assert tags["faculty"] == 1
@@ -121,8 +137,7 @@ async def test_list_source_facets_returns_dimension_and_tags():
 
 @pytest.mark.asyncio
 async def test_list_sources_catalog_pagination_and_applied_filters():
-    p1, p2 = _mock_deps()
-    with p1, p2:
+    with _mock_deps():
         result = await source_service.list_sources_catalog(
             keyword="清华",
             page=1,
@@ -139,3 +154,20 @@ async def test_list_sources_catalog_pagination_and_applied_filters():
     assert len(result["items"]) == 1
     assert result["facets"] is not None
     assert result["applied_filters"]["keyword"] == "清华"
+
+
+@pytest.mark.asyncio
+async def test_list_sources_supports_taxonomy_filters_and_facets():
+    with _mock_deps():
+        result = await source_service.list_sources(
+            taxonomy_domain="talent_personnel",
+            taxonomy_track="university_leadership",
+        )
+        facets = await source_service.list_source_facets(taxonomy_domain="policy_governance")
+
+    assert len(result) == 1
+    assert result[0]["id"] == "leaders_tsinghua"
+    assert result[0]["taxonomy_scope"] == "university"
+
+    track_facets = {item["key"]: item for item in facets["taxonomy_tracks"]}
+    assert "policy_national" in track_facets

@@ -63,10 +63,31 @@ class SourceResponse(BaseModel):
         default=None, description="高校层级：985 / 211 / other"
     )
     dimension_name: str | None = Field(
-        default=None, description="维度中文名", examples=["对人事"]
+        default=None, description="维度中文名", examples=["组织人事动态"]
     )
     dimension_description: str | None = Field(
         default=None, description="维度说明"
+    )
+    taxonomy_version: str | None = Field(
+        default=None, description="专业分类版本号", examples=["v2"]
+    )
+    taxonomy_domain: str | None = Field(
+        default=None, description="一级专业域 ID", examples=["policy_governance"]
+    )
+    taxonomy_domain_name: str | None = Field(
+        default=None, description="一级专业域名称", examples=["政策治理"]
+    )
+    taxonomy_track: str | None = Field(
+        default=None, description="二级主题 ID", examples=["policy_national"]
+    )
+    taxonomy_track_name: str | None = Field(
+        default=None, description="二级主题名称", examples=["国家政策"]
+    )
+    taxonomy_scope: str | None = Field(
+        default=None, description="覆盖范围 ID", examples=["national"]
+    )
+    taxonomy_scope_name: str | None = Field(
+        default=None, description="覆盖范围名称", examples=["国家级"]
     )
     health_status: Literal["healthy", "warning", "failing", "unknown"] = Field(
         default="unknown", description="健康状态（基于连续失败次数与爬取记录）"
@@ -112,6 +133,9 @@ class SourceFacetsResponse(BaseModel):
     source_platforms: list[SourceFacetItem] = Field(default_factory=list)
     schedules: list[SourceFacetItem] = Field(default_factory=list)
     health_statuses: list[SourceFacetItem] = Field(default_factory=list)
+    taxonomy_domains: list[SourceFacetItem] = Field(default_factory=list)
+    taxonomy_tracks: list[SourceFacetItem] = Field(default_factory=list)
+    taxonomy_scopes: list[SourceFacetItem] = Field(default_factory=list)
 
 
 class SourceCatalogResponse(BaseModel):
@@ -141,6 +165,9 @@ class SourceResolveItem(BaseModel):
     group: str | None = Field(default=None, description="信源分组")
     source_type: str | None = Field(default=None, description="信源类型")
     source_platform: str | None = Field(default=None, description="信源平台")
+    taxonomy_domain: str | None = Field(default=None, description="一级专业域 ID")
+    taxonomy_track: str | None = Field(default=None, description="二级主题 ID")
+    taxonomy_scope: str | None = Field(default=None, description="覆盖范围 ID")
     is_enabled: bool = Field(description="是否启用")
     recommended_endpoint: str = Field(description="推荐直接取数接口")
 

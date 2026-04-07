@@ -1,5 +1,5 @@
 dimension: scholars
-dimension_name: 高校师资
+dimension_name: 学者与师资库
 sources:
 - id: fudan_cs_faculty
   name: 复旦大学计算与智能创新学院-师资队伍

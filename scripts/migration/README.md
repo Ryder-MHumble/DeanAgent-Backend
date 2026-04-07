@@ -15,9 +15,9 @@
 - `create_social_media_tables.sql`
   - 统一社媒 KOL 数据表（账号 + 帖子，热门回复内嵌 JSON），支持跨平台扩展
 - `extend_source_states_catalog.sql`
-  - 扩展 `source_states`，补充信源名称/类型/平台/频率/院校层级等目录字段，并创建目录视图
+  - 扩展 `source_states`，补充信源名称/类型/平台/频率/院校层级与 taxonomy(v2) 字段，并创建目录视图
 - `sync_source_catalog_to_db.py`
-  - 将“参与定时爬取”的信源 upsert 到 `source_states`（含分类与频率元数据，自动排除 `scholars/faculty`）
+  - 将“参与定时爬取”的信源 upsert 到 `source_states`（含 taxonomy 字段，自动排除 `scholars/faculty`，并兼容旧表结构）
 - `optimize_pg_performance.sql`
   - PostgreSQL 索引优化 SQL（可重复执行）
 - `apply_pg_optimizations.sh`

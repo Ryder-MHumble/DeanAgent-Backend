@@ -1,5 +1,5 @@
 dimension: "talent"
-dimension_name: "对人才"
+dimension_name: "人才与学术发展"
 description: "AI人才动向、人才指数排名、学者追踪"
 
 default_keyword_filter:

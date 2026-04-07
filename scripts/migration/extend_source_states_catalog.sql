@@ -6,6 +6,13 @@ ALTER TABLE source_states
   ADD COLUMN IF NOT EXISTS source_url TEXT,
   ADD COLUMN IF NOT EXISTS dimension VARCHAR(64),
   ADD COLUMN IF NOT EXISTS dimension_name VARCHAR(128),
+  ADD COLUMN IF NOT EXISTS taxonomy_version VARCHAR(16),
+  ADD COLUMN IF NOT EXISTS taxonomy_domain VARCHAR(64),
+  ADD COLUMN IF NOT EXISTS taxonomy_domain_name VARCHAR(128),
+  ADD COLUMN IF NOT EXISTS taxonomy_track VARCHAR(64),
+  ADD COLUMN IF NOT EXISTS taxonomy_track_name VARCHAR(128),
+  ADD COLUMN IF NOT EXISTS taxonomy_scope VARCHAR(64),
+  ADD COLUMN IF NOT EXISTS taxonomy_scope_name VARCHAR(128),
   ADD COLUMN IF NOT EXISTS group_name VARCHAR(128),
   ADD COLUMN IF NOT EXISTS source_file VARCHAR(128),
   ADD COLUMN IF NOT EXISTS crawl_method VARCHAR(64),
@@ -30,6 +37,9 @@ CREATE INDEX IF NOT EXISTS idx_source_states_source_platform ON source_states(so
 CREATE INDEX IF NOT EXISTS idx_source_states_schedule ON source_states(schedule);
 CREATE INDEX IF NOT EXISTS idx_source_states_is_supported ON source_states(is_supported);
 CREATE INDEX IF NOT EXISTS idx_source_states_institution_tier ON source_states(institution_tier);
+CREATE INDEX IF NOT EXISTS idx_source_states_taxonomy_domain ON source_states(taxonomy_domain);
+CREATE INDEX IF NOT EXISTS idx_source_states_taxonomy_track ON source_states(taxonomy_track);
+CREATE INDEX IF NOT EXISTS idx_source_states_taxonomy_scope ON source_states(taxonomy_scope);
 
 CREATE OR REPLACE VIEW source_catalog_overview AS
 SELECT
@@ -90,3 +100,62 @@ GROUP BY
   COALESCE(source_platform, 'unknown'),
   COALESCE(crawl_method, 'unknown'),
   COALESCE(schedule, 'unknown');
+
+-- Backward-compatible v2 overview view with professional taxonomy columns.
+CREATE OR REPLACE VIEW source_catalog_overview_v2 AS
+SELECT
+  source_id,
+  source_name,
+  source_type,
+  source_platform,
+  dimension,
+  dimension_name,
+  taxonomy_version,
+  taxonomy_domain,
+  taxonomy_domain_name,
+  taxonomy_track,
+  taxonomy_track_name,
+  taxonomy_scope,
+  taxonomy_scope_name,
+  group_name,
+  institution_name,
+  institution_tier,
+  source_url,
+  crawl_method,
+  crawler_class,
+  schedule,
+  crawl_interval_minutes,
+  tags,
+  source_file,
+  is_enabled_default,
+  is_enabled_override,
+  COALESCE(is_enabled_override, is_enabled_default, TRUE) AS is_enabled_effective,
+  is_supported,
+  last_crawl_at,
+  last_success_at,
+  consecutive_failures,
+  CASE
+    WHEN consecutive_failures >= 3 THEN 'failing'
+    WHEN consecutive_failures > 0 THEN 'warning'
+    WHEN last_crawl_at IS NOT NULL THEN 'healthy'
+    ELSE 'unknown'
+  END AS health_status,
+  updated_at
+FROM source_states
+WHERE is_supported = TRUE;
+
+CREATE OR REPLACE VIEW source_catalog_taxonomy_summary AS
+SELECT
+  COALESCE(taxonomy_domain, 'unknown') AS taxonomy_domain,
+  COALESCE(taxonomy_track, 'unknown') AS taxonomy_track,
+  COALESCE(taxonomy_scope, 'unknown') AS taxonomy_scope,
+  COUNT(*) AS total_sources,
+  SUM((COALESCE(is_enabled_override, is_enabled_default, TRUE))::int) AS enabled_sources,
+  SUM((last_crawl_at IS NOT NULL)::int) AS crawled_sources,
+  SUM((consecutive_failures >= 3)::int) AS failing_sources
+FROM source_states
+WHERE is_supported = TRUE
+GROUP BY
+  COALESCE(taxonomy_domain, 'unknown'),
+  COALESCE(taxonomy_track, 'unknown'),
+  COALESCE(taxonomy_scope, 'unknown');

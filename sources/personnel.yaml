@@ -1,5 +1,5 @@
 dimension: "personnel"
-dimension_name: "对人事"
+dimension_name: "组织人事动态"
 description: "国务院及各部委人事任免、高校及科研机构领导变动"
 
 default_keyword_filter: []  # 人事任免信息全量采集，后续 AI 处理时再分类

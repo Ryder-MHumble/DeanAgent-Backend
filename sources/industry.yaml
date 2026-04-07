@@ -1,5 +1,5 @@
 dimension: "industry"
-dimension_name: "对产业"
+dimension_name: "产业与投融资"
 description: "产业新闻、AI融资/IPO、产业动态"
 
 default_keyword_filter:

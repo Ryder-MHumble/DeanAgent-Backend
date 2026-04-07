@@ -1,5 +1,5 @@
 dimension: "national_policy"
-dimension_name: "对国家"
+dimension_name: "国家政策治理"
 description: "国家级政策文件、人事任免、领导讲话"
 
 default_keyword_filter:

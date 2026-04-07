@@ -34,6 +34,18 @@ async def list_sources(
     source_type: str | None = Query(default=None, description="按信源类型过滤"),
     source_platform: str | None = Query(default=None, description="按信源平台过滤"),
     schedule: str | None = Query(default=None, description="按调度频率过滤"),
+    taxonomy_domain: str | None = Query(default=None, description="按一级专业域过滤"),
+    taxonomy_domains: str | None = Query(
+        default=None, description="按多个一级专业域过滤（逗号分隔）"
+    ),
+    taxonomy_track: str | None = Query(default=None, description="按二级主题过滤"),
+    taxonomy_tracks: str | None = Query(
+        default=None, description="按多个二级主题过滤（逗号分隔）"
+    ),
+    taxonomy_scope: str | None = Query(default=None, description="按覆盖范围过滤"),
+    taxonomy_scopes: str | None = Query(
+        default=None, description="按多个覆盖范围过滤（逗号分隔）"
+    ),
     is_enabled: bool | None = Query(default=None, description="按启用状态过滤"),
     health_status: str | None = Query(default=None, description="按健康状态过滤"),
     health_statuses: str | None = Query(
@@ -54,6 +66,12 @@ async def list_sources(
         source_type=source_type,
         source_platform=source_platform,
         schedule=schedule,
+        taxonomy_domain=taxonomy_domain,
+        taxonomy_domains=taxonomy_domains,
+        taxonomy_track=taxonomy_track,
+        taxonomy_tracks=taxonomy_tracks,
+        taxonomy_scope=taxonomy_scope,
+        taxonomy_scopes=taxonomy_scopes,
         is_enabled=is_enabled,
         health_status=health_status,
         health_statuses=health_statuses,
@@ -83,6 +101,18 @@ async def list_sources_catalog(
     source_type: str | None = Query(default=None, description="按信源类型过滤"),
     source_platform: str | None = Query(default=None, description="按信源平台过滤"),
     schedule: str | None = Query(default=None, description="按调度频率过滤"),
+    taxonomy_domain: str | None = Query(default=None, description="按一级专业域过滤"),
+    taxonomy_domains: str | None = Query(
+        default=None, description="按多个一级专业域过滤（逗号分隔）"
+    ),
+    taxonomy_track: str | None = Query(default=None, description="按二级主题过滤"),
+    taxonomy_tracks: str | None = Query(
+        default=None, description="按多个二级主题过滤（逗号分隔）"
+    ),
+    taxonomy_scope: str | None = Query(default=None, description="按覆盖范围过滤"),
+    taxonomy_scopes: str | None = Query(
+        default=None, description="按多个覆盖范围过滤（逗号分隔）"
+    ),
     is_enabled: bool | None = Query(default=None, description="按启用状态过滤"),
     health_status: str | None = Query(default=None, description="按健康状态过滤"),
     health_statuses: str | None = Query(
@@ -106,6 +136,12 @@ async def list_sources_catalog(
         source_type=source_type,
         source_platform=source_platform,
         schedule=schedule,
+        taxonomy_domain=taxonomy_domain,
+        taxonomy_domains=taxonomy_domains,
+        taxonomy_track=taxonomy_track,
+        taxonomy_tracks=taxonomy_tracks,
+        taxonomy_scope=taxonomy_scope,
+        taxonomy_scopes=taxonomy_scopes,
         is_enabled=is_enabled,
         health_status=health_status,
         health_statuses=health_statuses,
@@ -122,7 +158,10 @@ async def list_sources_catalog(
     "/facets",
     response_model=SourceFacetsResponse,
     summary="信源筛选分面",
-    description="返回当前筛选条件下的维度/分组/标签/爬取方式/频率/健康状态分布。",
+    description=(
+        "返回当前筛选条件下的维度/分组/标签/爬取方式/频率/健康状态分布，"
+        "并包含 taxonomy 一级域/二级主题/覆盖范围分布。"
+    ),
 )
 async def get_source_facets(
     dimension: str | None = Query(default=None, description="按单个维度过滤"),
@@ -135,6 +174,18 @@ async def get_source_facets(
     source_type: str | None = Query(default=None, description="按信源类型过滤"),
     source_platform: str | None = Query(default=None, description="按信源平台过滤"),
     schedule: str | None = Query(default=None, description="按调度频率过滤"),
+    taxonomy_domain: str | None = Query(default=None, description="按一级专业域过滤"),
+    taxonomy_domains: str | None = Query(
+        default=None, description="按多个一级专业域过滤（逗号分隔）"
+    ),
+    taxonomy_track: str | None = Query(default=None, description="按二级主题过滤"),
+    taxonomy_tracks: str | None = Query(
+        default=None, description="按多个二级主题过滤（逗号分隔）"
+    ),
+    taxonomy_scope: str | None = Query(default=None, description="按覆盖范围过滤"),
+    taxonomy_scopes: str | None = Query(
+        default=None, description="按多个覆盖范围过滤（逗号分隔）"
+    ),
     is_enabled: bool | None = Query(default=None, description="按启用状态过滤"),
     health_status: str | None = Query(default=None, description="按健康状态过滤"),
     health_statuses: str | None = Query(
@@ -153,6 +204,12 @@ async def get_source_facets(
         source_type=source_type,
         source_platform=source_platform,
         schedule=schedule,
+        taxonomy_domain=taxonomy_domain,
+        taxonomy_domains=taxonomy_domains,
+        taxonomy_track=taxonomy_track,
+        taxonomy_tracks=taxonomy_tracks,
+        taxonomy_scope=taxonomy_scope,
+        taxonomy_scopes=taxonomy_scopes,
         is_enabled=is_enabled,
         health_status=health_status,
         health_statuses=health_statuses,
@@ -192,6 +249,9 @@ async def resolve_sources(
     q: str | None = Query(default=None, description="关键词（匹配信源 ID/名称/分组/标签）"),
     source_id: str | None = Query(default=None, description="精确信源 ID"),
     dimension: str | None = Query(default=None, description="按维度过滤"),
+    taxonomy_domain: str | None = Query(default=None, description="按一级专业域过滤"),
+    taxonomy_track: str | None = Query(default=None, description="按二级主题过滤"),
+    taxonomy_scope: str | None = Query(default=None, description="按覆盖范围过滤"),
     group: str | None = Query(default=None, description="按分组过滤"),
     tag: str | None = Query(default=None, description="按标签过滤"),
     is_enabled: bool | None = Query(default=None, description="按启用状态过滤"),
@@ -202,6 +262,9 @@ async def resolve_sources(
         q=q,
         source_id=source_id,
         dimension=dimension,
+        taxonomy_domain=taxonomy_domain,
+        taxonomy_track=taxonomy_track,
+        taxonomy_scope=taxonomy_scope,
         group=group,
         tag=tag,
         is_enabled=is_enabled,

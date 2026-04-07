@@ -1,5 +1,5 @@
 dimension: scholars
-dimension_name: 高校师资
+dimension_name: 学者与师资库
 sources:
 - id: sjtu_ai_faculty
   name: 上海交通大学人工智能研究院-师资

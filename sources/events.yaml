@@ -1,5 +1,5 @@
 dimension: "events"
-dimension_name: "对日程"
+dimension_name: "学术会议与活动"
 description: "AI相关会议活动、学术会议deadline、行业峰会"
 
 default_keyword_filter:
