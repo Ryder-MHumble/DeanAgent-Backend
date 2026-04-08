@@ -6,11 +6,14 @@ import csv
 import dataclasses
 import json
 import logging
+import contextlib
 from copy import deepcopy
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Literal
 from uuid import uuid4
+
+import yaml
 
 from app.config import BASE_DIR
 from app.crawlers.base import CrawlStatus
@@ -21,6 +24,7 @@ from app.services.stores.crawl_log_store import append_crawl_log
 from app.services.stores.source_state import update_source_state
 
 logger = logging.getLogger(__name__)
+MAX_ACTIVITY_ENTRIES = 200
 
 class CrawlJobValidationError(ValueError):
     """Invalid manual crawl job request."""
@@ -119,11 +123,17 @@ class CrawlerControlService:
             "failed_sources": [],
             "requested_source_count_effective": len(accepted_sources),
             "total_items": 0,
+            "db_upserted_total": 0,
+            "db_new_total": 0,
+            "db_deduped_in_batch_total": 0,
             "created_at": now,
             "started_at": None,
             "finished_at": None,
             "result_file": None,
             "all_results": [],
+            "running_sources": [],
+            "recent_activity": [],
+            "summary_report": None,
             "error_message": None,
             "task": None,
         }
@@ -234,74 +244,194 @@ class CrawlerControlService:
                 raise CrawlJobValidationError("No valid source configs found")
 
             for config in selected_configs:
-                if job["cancel_requested"]:
-                    logger.info("Crawl job %s stopped by user", job_id)
-                    break
+                if job["keyword_filter"] is not None:
+                    config["keyword_filter"] = job["keyword_filter"]
+                if job["keyword_blacklist"] is not None:
+                    config["keyword_blacklist"] = job["keyword_blacklist"]
 
-                source_id = config["id"]
-                job["current_source"] = source_id
+            grouped_limits = _load_grouped_crawl_limits()
+            running_sources: set[str] = set()
+            state_lock = asyncio.Lock()
+            semaphores = {
+                method: asyncio.Semaphore(max(1, int(limit)))
+                for method, limit in grouped_limits.items()
+            }
+            default_semaphore = asyncio.Semaphore(5)
 
-                try:
-                    if job["keyword_filter"] is not None:
-                        config["keyword_filter"] = job["keyword_filter"]
-                    if job["keyword_blacklist"] is not None:
-                        config["keyword_blacklist"] = job["keyword_blacklist"]
+            async def _run_single_config(config: dict[str, Any]) -> dict[str, Any]:
+                source_id = str(config.get("id") or "")
+                crawl_method = str(config.get("crawl_method") or "static")
+                semaphore = semaphores.get(crawl_method, default_semaphore)
 
-                    crawler = create_crawler(config)
-                    result = await crawler.run()
+                async with semaphore:
+                    if job["cancel_requested"]:
+                        self._append_activity(
+                            job,
+                            source_id=source_id,
+                            phase="cancelled",
+                            status="cancelled",
+                            message="任务取消，信源未执行",
+                        )
+                        return {
+                            "source_id": source_id,
+                            "status": "cancelled",
+                            "items_total": 0,
+                            "items_dict": [],
+                            "skipped": True,
+                        }
 
-                    items_dict = [dataclasses.asdict(item) for item in result.items]
-                    job["all_results"].extend(items_dict)
-                    job["total_items"] += len(items_dict)
+                    async with state_lock:
+                        running_sources.add(source_id)
+                        job["current_source"] = source_id
+                        job["running_sources"] = sorted(running_sources)
 
-                    if job["export_format"] == "database":
-                        await save_crawl_result_json(result, config)
-
-                    await append_crawl_log(
+                    self._append_activity(
+                        job,
                         source_id=source_id,
-                        status=result.status.value,
-                        items_total=result.items_total,
-                        items_new=result.items_new,
-                        error_message=result.error_message,
-                        started_at=result.started_at,
-                        finished_at=result.finished_at,
-                        duration_seconds=result.duration_seconds,
+                        phase="running",
+                        status="running",
+                        message="开始抓取",
                     )
 
-                    finished = result.finished_at or datetime.now(timezone.utc)
-                    if result.status in (CrawlStatus.SUCCESS, CrawlStatus.NO_NEW_CONTENT):
-                        await update_source_state(
-                            source_id,
-                            last_crawl_at=finished,
-                            last_success_at=finished,
-                            reset_failures=True,
+                    try:
+                        crawler = create_crawler(config)
+                        result = await crawler.run()
+
+                        items_dict = [dataclasses.asdict(item) for item in result.items]
+                        db_upserted = 0
+                        db_new = 0
+                        db_deduped_in_batch = 0
+                        if job["export_format"] in ("json", "csv"):
+                            job["all_results"].extend(items_dict)
+
+                        if job["export_format"] == "database":
+                            db_stats = await save_crawl_result_json(result, config)
+                            if db_stats:
+                                db_upserted = int(db_stats.get("upserted", 0) or 0)
+                                db_new = int(db_stats.get("new", 0) or 0)
+                                db_deduped_in_batch = int(db_stats.get("deduped_in_batch", 0) or 0)
+                                logger.info(
+                                    "Job %s persisted source=%s upserted=%d new=%d dedup_batch=%d",
+                                    job_id,
+                                    source_id,
+                                    db_upserted,
+                                    db_new,
+                                    db_deduped_in_batch,
+                                )
+
+                        await append_crawl_log(
+                            source_id=source_id,
+                            status=result.status.value,
+                            items_total=result.items_total,
+                            items_new=result.items_new,
+                            error_message=result.error_message,
+                            started_at=result.started_at,
+                            finished_at=result.finished_at,
+                            duration_seconds=result.duration_seconds,
                         )
+
+                        finished = result.finished_at or datetime.now(timezone.utc)
+                        if result.status in (CrawlStatus.SUCCESS, CrawlStatus.NO_NEW_CONTENT):
+                            await update_source_state(
+                                source_id,
+                                last_crawl_at=finished,
+                                last_success_at=finished,
+                                reset_failures=True,
+                            )
+                        else:
+                            await update_source_state(source_id, last_crawl_at=finished)
+
+                        self._append_activity(
+                            job,
+                            source_id=source_id,
+                            phase="finished",
+                            status=result.status.value,
+                            message=(
+                                f"抓取完成: items={int(result.items_total or 0)} "
+                                f"db_new={db_new} db_upserted={db_upserted}"
+                            ),
+                            items_total=int(result.items_total or 0),
+                            db_upserted=db_upserted,
+                            db_new=db_new,
+                            db_deduped_in_batch=db_deduped_in_batch,
+                        )
+
+                        return {
+                            "source_id": source_id,
+                            "status": result.status.value,
+                            "items_total": int(result.items_total or 0),
+                            "items_dict": items_dict,
+                            "db_upserted": db_upserted,
+                            "db_new": db_new,
+                            "db_deduped_in_batch": db_deduped_in_batch,
+                            "skipped": False,
+                        }
+                    except Exception as exc:  # noqa: BLE001
+                        logger.error("Failed to crawl %s in job %s: %s", source_id, job_id, exc)
+                        now = datetime.now(timezone.utc)
+                        await append_crawl_log(
+                            source_id=source_id,
+                            status=CrawlStatus.FAILED.value,
+                            error_message=str(exc),
+                            started_at=now,
+                            finished_at=now,
+                        )
+                        await update_source_state(source_id, last_crawl_at=now)
+                        self._append_activity(
+                            job,
+                            source_id=source_id,
+                            phase="finished",
+                            status=CrawlStatus.FAILED.value,
+                            message=f"抓取失败: {exc}",
+                            items_total=0,
+                            db_upserted=0,
+                            db_new=0,
+                            db_deduped_in_batch=0,
+                        )
+                        return {
+                            "source_id": source_id,
+                            "status": CrawlStatus.FAILED.value,
+                            "items_total": 0,
+                            "items_dict": [],
+                            "db_upserted": 0,
+                            "db_new": 0,
+                            "db_deduped_in_batch": 0,
+                            "skipped": False,
+                        }
+                    finally:
+                        async with state_lock:
+                            running_sources.discard(source_id)
+                            job["current_source"] = next(iter(running_sources), None)
+                            job["running_sources"] = sorted(running_sources)
+
+            tasks = [asyncio.create_task(_run_single_config(config)) for config in selected_configs]
+            cancel_dispatched = False
+            for finished_task in asyncio.as_completed(tasks):
+                if job["cancel_requested"] and not cancel_dispatched:
+                    for pending in tasks:
+                        if not pending.done():
+                            pending.cancel()
+                    cancel_dispatched = True
+
+                with contextlib.suppress(asyncio.CancelledError):
+                    outcome = await finished_task
+                    if outcome.get("skipped"):
+                        continue
+                    status = str(outcome.get("status") or "")
+                    source_id = str(outcome.get("source_id") or "")
+                    if status in (CrawlStatus.SUCCESS.value, CrawlStatus.NO_NEW_CONTENT.value):
                         job["completed_sources"].append(source_id)
                     else:
-                        await update_source_state(source_id, last_crawl_at=finished)
                         job["failed_sources"].append(source_id)
-
-                    logger.info(
-                        "Completed job %s source %s: %d items",
-                        job_id,
-                        source_id,
-                        len(items_dict),
+                    job["total_items"] += int(outcome.get("items_total") or 0)
+                    job["db_upserted_total"] += int(outcome.get("db_upserted") or 0)
+                    job["db_new_total"] += int(outcome.get("db_new") or 0)
+                    job["db_deduped_in_batch_total"] += int(
+                        outcome.get("db_deduped_in_batch") or 0
                     )
 
-                except Exception as exc:  # noqa: BLE001
-                    logger.error("Failed to crawl %s in job %s: %s", source_id, job_id, exc)
-                    now = datetime.now(timezone.utc)
-                    await append_crawl_log(
-                        source_id=source_id,
-                        status=CrawlStatus.FAILED.value,
-                        error_message=str(exc),
-                        started_at=now,
-                        finished_at=now,
-                    )
-                    await update_source_state(source_id, last_crawl_at=now)
-                    job["failed_sources"].append(source_id)
-                finally:
-                    job["current_source"] = None
+            if tasks:
+                await asyncio.gather(*tasks, return_exceptions=True)
 
             if job["export_format"] in ("json", "csv") and job["all_results"]:
                 job["result_file"] = await self._export_results(
@@ -320,9 +450,11 @@ class CrawlerControlService:
             job["error_message"] = str(exc)
         finally:
             job["current_source"] = None
+            job["running_sources"] = []
             job["finished_at"] = datetime.now(timezone.utc)
             if self._running_job_id == job_id:
                 self._running_job_id = None
+            job["summary_report"] = self._build_summary_report(job)
             logger.info(
                 "Crawl job %s finished: status=%s, %d completed, %d failed, %d total items",
                 job_id,
@@ -376,6 +508,9 @@ class CrawlerControlService:
             "completed_count": 0,
             "failed_count": 0,
             "total_items": 0,
+            "running_sources": [],
+            "recent_activity": [],
+            "summary_report": None,
             "progress": 0.0,
             "started_at": None,
             "finished_at": None,
@@ -429,6 +564,12 @@ class CrawlerControlService:
             "completed_count": len(job["completed_sources"]),
             "failed_count": len(job["failed_sources"]),
             "total_items": int(job["total_items"]),
+            "running_sources": list(job.get("running_sources") or []),
+            "recent_activity": [
+                self._serialize_activity_item(item)
+                for item in (job.get("recent_activity") or [])
+            ],
+            "summary_report": self._build_summary_report(job),
             "progress": self._job_progress(job),
             "created_at": job["created_at"],
             "started_at": job["started_at"],
@@ -452,10 +593,74 @@ class CrawlerControlService:
             "completed_count": payload["completed_count"],
             "failed_count": payload["failed_count"],
             "total_items": payload["total_items"],
+            "running_sources": payload["running_sources"],
+            "recent_activity": payload["recent_activity"],
+            "summary_report": payload["summary_report"],
             "progress": payload["progress"],
             "started_at": payload["started_at"],
             "finished_at": payload["finished_at"],
             "result_file_name": payload["result_file_name"],
+        }
+
+    def _append_activity(
+        self,
+        job: dict[str, Any],
+        *,
+        source_id: str,
+        phase: str,
+        status: str,
+        message: str,
+        items_total: int = 0,
+        db_upserted: int = 0,
+        db_new: int = 0,
+        db_deduped_in_batch: int = 0,
+    ) -> None:
+        entry = {
+            "timestamp": datetime.now(timezone.utc),
+            "source_id": source_id,
+            "phase": phase,
+            "status": status,
+            "message": message,
+            "items_total": int(items_total),
+            "db_upserted": int(db_upserted),
+            "db_new": int(db_new),
+            "db_deduped_in_batch": int(db_deduped_in_batch),
+        }
+        job["recent_activity"].append(entry)
+        if len(job["recent_activity"]) > MAX_ACTIVITY_ENTRIES:
+            job["recent_activity"] = job["recent_activity"][-MAX_ACTIVITY_ENTRIES:]
+
+    def _serialize_activity_item(self, item: dict[str, Any]) -> dict[str, Any]:
+        return {
+            "timestamp": item.get("timestamp"),
+            "source_id": str(item.get("source_id") or ""),
+            "phase": str(item.get("phase") or "update"),
+            "status": str(item.get("status") or "unknown"),
+            "message": str(item.get("message") or ""),
+            "items_total": int(item.get("items_total") or 0),
+            "db_upserted": int(item.get("db_upserted") or 0),
+            "db_new": int(item.get("db_new") or 0),
+            "db_deduped_in_batch": int(item.get("db_deduped_in_batch") or 0),
+        }
+
+    def _build_summary_report(self, job: dict[str, Any]) -> dict[str, Any]:
+        started_at = job.get("started_at")
+        finished_at = job.get("finished_at")
+        duration_seconds = 0.0
+        if isinstance(started_at, datetime) and isinstance(finished_at, datetime):
+            duration_seconds = max((finished_at - started_at).total_seconds(), 0.0)
+        return {
+            "requested_source_count": int(job.get("requested_source_count_effective") or 0),
+            "completed_count": len(job.get("completed_sources") or []),
+            "failed_count": len(job.get("failed_sources") or []),
+            "total_items": int(job.get("total_items") or 0),
+            "db_upserted_total": int(job.get("db_upserted_total") or 0),
+            "db_new_total": int(job.get("db_new_total") or 0),
+            "db_deduped_in_batch_total": int(job.get("db_deduped_in_batch_total") or 0),
+            "started_at": started_at,
+            "finished_at": finished_at,
+            "duration_seconds": round(duration_seconds, 2),
+            "status": str(job.get("status") or "unknown"),
         }
 
 
@@ -468,3 +673,36 @@ def get_control_service() -> CrawlerControlService:
     if _control_service is None:
         _control_service = CrawlerControlService()
     return _control_service
+
+
+def _load_grouped_crawl_limits() -> dict[str, int]:
+    """Load grouped crawl concurrency limits from yaml with safe defaults."""
+    defaults = {
+        "static": 20,
+        "rss": 20,
+        "dynamic": 8,
+        "snapshot": 10,
+        "university_leadership": 6,
+    }
+    config_path = BASE_DIR / "app" / "config" / "crawl_concurrency.yaml"
+    if not config_path.exists():
+        return defaults
+
+    try:
+        with open(config_path, "r", encoding="utf-8") as handle:
+            loaded = yaml.safe_load(handle) or {}
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("Failed to read crawl concurrency config, using defaults: %s", exc)
+        return defaults
+
+    grouped = loaded.get("grouped") or (loaded.get("strategies") or {}).get("grouped")
+    if not isinstance(grouped, dict):
+        return defaults
+
+    resolved = dict(defaults)
+    for key, value in grouped.items():
+        try:
+            resolved[str(key)] = max(1, int(value))
+        except (TypeError, ValueError):
+            continue
+    return resolved

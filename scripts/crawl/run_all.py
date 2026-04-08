@@ -5,6 +5,7 @@ import logging
 import sys
 import time
 import unicodedata
+from datetime import datetime, timezone
 from pathlib import Path
 
 import yaml
@@ -207,13 +208,17 @@ async def _crawl_single_source(config: dict, pbar=None) -> dict:
             "method": method,
             "status": status_str,
             "items_total": result.items_total,
+            "items_new": result.items_new,
             "items_with_content": items_with_content,
             "duration": result.duration_seconds,
             "error": result.error_message,
+            "started_at": result.started_at,
+            "finished_at": result.finished_at,
             "json_path": None,
         }
 
     except Exception as exc:
+        now = datetime.now(timezone.utc)
         if pbar:
             pbar.update(1)
         return {
@@ -223,9 +228,12 @@ async def _crawl_single_source(config: dict, pbar=None) -> dict:
             "method": method,
             "status": "failed",
             "items_total": 0,
+            "items_new": 0,
             "items_with_content": 0,
             "duration": 0,
             "error": str(exc),
+            "started_at": now,
+            "finished_at": now,
             "json_path": None,
         }
 
@@ -238,12 +246,26 @@ async def run_all(
     from app.crawlers.utils.playwright_pool import close_browser
     from app.config import settings
     from app.db.client import close_client, init_client
+    from app.db.pool import init_pool
     from app.scheduler.manager import load_all_source_configs
+    from app.services.stores.crawl_log_store import append_crawl_log
+    from app.services.stores.crawl_runtime_store import set_crawl_runtime_state
+    from app.services.stores.source_state import update_source_state
 
     # Ensure DB client is initialized so crawl results can be persisted.
+    primary_exc: Exception | None = None
     try:
-        await init_client()
-    except Exception as primary_exc:
+        # Try local PostgreSQL first so script behavior matches API/console path.
+        await init_pool(
+            host=settings.POSTGRES_HOST,
+            port=settings.POSTGRES_PORT,
+            user=settings.POSTGRES_USER,
+            password=settings.POSTGRES_PASSWORD,
+            database=settings.POSTGRES_DB,
+        )
+        await init_client(backend="postgres")
+    except Exception as exc:
+        primary_exc = exc
         # CLI context may not have local PG pool pre-initialized; fallback to Supabase creds.
         try:
             await init_client(settings.SUPABASE_URL, settings.SUPABASE_KEY)
@@ -311,6 +333,23 @@ async def run_all(
         dim_groups.setdefault(dim, []).append(c)
 
     total = len(enabled)
+    run_started_at = datetime.now(timezone.utc).isoformat()
+    set_crawl_runtime_state(
+        is_running=True,
+        mode="full",
+        current_source=None,
+        requested_source_count=total,
+        completed_count=0,
+        failed_count=0,
+        completed_sources=[],
+        failed_sources=[],
+        total_items=0,
+        progress=0.0,
+        started_at=run_started_at,
+        finished_at=None,
+        result_file_name=None,
+    )
+
     print("=" * 70)
     print(f"  全量爬取 — 共 {total} 个启用信源，{len(dim_groups)} 个维度")
     print(f"  策略: {strategy_desc}")
@@ -331,21 +370,109 @@ async def run_all(
         pbar = None
         print(f"开始爬取 {total} 个信源...")
 
-    # 并发爬取 - 根据策略选择执行方式
-    if strategy == "grouped":
-        grouped = _group_configs_by_method(enabled)
-        assert isinstance(concurrency_map, dict)
-        results = await _run_grouped_concurrently(grouped, concurrency_map, pbar)
-    else:  # fixed
-        assert isinstance(concurrency_map, int)
-        semaphore = asyncio.Semaphore(concurrency_map)
+    completed_sources: list[str] = []
+    failed_sources: list[str] = []
+    running_total_items = 0
 
-        async def _crawl_with_semaphore(cfg):
-            async with semaphore:
-                return await _crawl_single_source(cfg, pbar)
+    async def _crawl_with_source_id(cfg: dict, sem: asyncio.Semaphore | None = None):
+        if sem is None:
+            result = await _crawl_single_source(cfg, pbar)
+        else:
+            async with sem:
+                result = await _crawl_single_source(cfg, pbar)
+        return str(cfg.get("id") or ""), result
 
-        tasks = [_crawl_with_semaphore(cfg) for cfg in enabled]
-        results = await asyncio.gather(*tasks)
+    try:
+        # 并发爬取 - 根据策略选择执行方式
+        tasks: list[asyncio.Task] = []
+        if strategy == "grouped":
+            grouped = _group_configs_by_method(enabled)
+            assert isinstance(concurrency_map, dict)
+            for method, method_configs in grouped.items():
+                max_concurrent = int(concurrency_map.get(method, 5))
+                semaphore = asyncio.Semaphore(max_concurrent)
+                for cfg in method_configs:
+                    tasks.append(
+                        asyncio.create_task(_crawl_with_source_id(cfg, semaphore))
+                    )
+        else:  # fixed
+            assert isinstance(concurrency_map, int)
+            semaphore = asyncio.Semaphore(concurrency_map)
+            for cfg in enabled:
+                tasks.append(asyncio.create_task(_crawl_with_source_id(cfg, semaphore)))
+
+        for finished in asyncio.as_completed(tasks):
+            source_id, result = await finished
+            results.append(result)
+            running_total_items += int(result.get("items_total") or 0)
+
+            status = str(result.get("status") or "")
+            result_started_at = result.get("started_at")
+            result_finished_at = result.get("finished_at")
+            if not isinstance(result_started_at, datetime):
+                result_started_at = datetime.now(timezone.utc)
+            if not isinstance(result_finished_at, datetime):
+                result_finished_at = datetime.now(timezone.utc)
+
+            # Keep console and source health snapshots in sync for script-based full runs.
+            await append_crawl_log(
+                source_id=source_id,
+                status=status,
+                items_total=int(result.get("items_total") or 0),
+                items_new=int(result.get("items_new") or 0),
+                error_message=str(result.get("error") or "") or None,
+                started_at=result_started_at,
+                finished_at=result_finished_at,
+                duration_seconds=float(result.get("duration") or 0.0),
+            )
+
+            if status in ("success", "no_new_content"):
+                completed_sources.append(source_id)
+                await update_source_state(
+                    source_id,
+                    last_crawl_at=result_finished_at,
+                    last_success_at=result_finished_at,
+                    reset_failures=True,
+                )
+            else:
+                failed_sources.append(source_id)
+                await update_source_state(source_id, last_crawl_at=result_finished_at)
+
+            done_count = len(completed_sources) + len(failed_sources)
+            progress = (done_count / total) if total else 0.0
+            set_crawl_runtime_state(
+                is_running=True,
+                mode="full",
+                current_source=source_id,
+                requested_source_count=total,
+                completed_count=len(completed_sources),
+                failed_count=len(failed_sources),
+                completed_sources=completed_sources,
+                failed_sources=failed_sources,
+                total_items=running_total_items,
+                progress=progress,
+                started_at=run_started_at,
+                finished_at=None,
+            )
+    finally:
+        set_crawl_runtime_state(
+            is_running=False,
+            mode="full",
+            current_source=None,
+            requested_source_count=total,
+            completed_count=len(completed_sources),
+            failed_count=len(failed_sources),
+            completed_sources=completed_sources,
+            failed_sources=failed_sources,
+            total_items=running_total_items,
+            progress=(
+                (len(completed_sources) + len(failed_sources)) / total
+                if total
+                else 0.0
+            ),
+            started_at=run_started_at,
+            finished_at=datetime.now(timezone.utc).isoformat(),
+        )
 
     if pbar:
         pbar.close()

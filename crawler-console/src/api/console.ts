@@ -1,7 +1,10 @@
 import type {
   ConsoleOverview,
   JobTransport,
+  ManualJobActivity,
   ManualJobPayload,
+  ManualJobRunningSource,
+  ManualJobSummaryReport,
   ManualJobStatus,
   ServerMetrics,
   SourceCatalogResponse,
@@ -158,6 +161,138 @@ function syncJobContext(status: ManualJobStatus) {
   }
 }
 
+function normalizeRunningSource(payload: unknown): ManualJobRunningSource | null {
+  if (typeof payload === "string") {
+    const sourceId = asString(payload);
+    return sourceId ? { source_id: sourceId, status: "running" } : null;
+  }
+
+  if (!isRecord(payload)) {
+    return null;
+  }
+
+  const sourceId =
+    pickString(payload, ["source_id", "id", "source", "current_source"]) ??
+    pickString(payload, ["source_name", "name", "label", "display_name"]);
+
+  if (!sourceId) {
+    return null;
+  }
+
+  return {
+    source_id: sourceId,
+    source_name: pickString(payload, ["source_name", "name", "label", "display_name"]),
+    status: pickString(payload, ["status", "state"]) ?? "running",
+    started_at: pickString(payload, ["started_at", "created_at", "timestamp"]),
+  };
+}
+
+function normalizeActivity(payload: unknown, index: number): ManualJobActivity | null {
+  if (typeof payload === "string") {
+    const message = asString(payload);
+    if (!message) {
+      return null;
+    }
+    return {
+      id: `activity-${index}`,
+      status: "info",
+      message,
+    };
+  }
+
+  if (!isRecord(payload)) {
+    return null;
+  }
+
+  const status = pickString(payload, ["status", "event", "level", "state"]) ?? "info";
+  const timestamp = pickString(payload, [
+    "timestamp",
+    "at",
+    "created_at",
+    "updated_at",
+    "finished_at",
+    "started_at",
+  ]);
+  const sourceId = pickString(payload, ["source_id", "id", "source"]);
+  const sourceName = pickString(payload, ["source_name", "name", "label", "display_name"]);
+  const message = pickString(payload, ["message", "detail", "summary", "error_message"]);
+  const itemsTotal = pickNumber(payload, ["items_total", "total_items", "total"]);
+  const itemsNew = pickNumber(payload, ["db_new", "items_new", "new_items", "new"]);
+  const insertedCount = pickNumber(payload, [
+    "db_upserted",
+    "inserted_count",
+    "inserted_items",
+    "upserted",
+    "upserted_count",
+    "ingested",
+    "ingested_count",
+    "saved_count",
+  ]);
+  const dedupedInBatch = pickNumber(payload, [
+    "db_deduped_in_batch",
+    "deduped_in_batch",
+    "deduped_count",
+    "batch_deduped",
+    "deduplicated_in_batch",
+  ]);
+  const durationSeconds = pickNumber(payload, ["duration_seconds", "elapsed_seconds", "duration"]);
+
+  if (!timestamp && !sourceId && !sourceName && !message && itemsTotal === null && itemsNew === null) {
+    return null;
+  }
+
+  return {
+    id: pickString(payload, ["id", "activity_id", "event_id"]) ?? `activity-${index}`,
+    timestamp,
+    status,
+    source_id: sourceId,
+    source_name: sourceName,
+    items_total: itemsTotal,
+    items_new: itemsNew,
+    inserted_count: insertedCount,
+    deduped_in_batch: dedupedInBatch,
+    duration_seconds: durationSeconds,
+    message,
+  };
+}
+
+function normalizeSummaryReport(payload: unknown): ManualJobSummaryReport | null {
+  if (!isRecord(payload)) {
+    return null;
+  }
+
+  const report: ManualJobSummaryReport = {
+    total_sources: pickNumber(payload, ["total_sources", "requested_source_count", "requested", "total"]),
+    success_count: pickNumber(payload, ["success_count", "completed_count", "completed", "succeeded"]),
+    failed_count: pickNumber(payload, ["failed_count", "errors", "error_count"]),
+    total_items: pickNumber(payload, ["total_items", "items_total", "total_results"]),
+    inserted_count: pickNumber(payload, [
+      "db_upserted_total",
+      "db_new_total",
+      "inserted_count",
+      "inserted_items",
+      "upserted",
+      "upserted_count",
+      "ingested_count",
+      "new_items",
+    ]),
+    deduped_in_batch: pickNumber(payload, [
+      "db_deduped_in_batch_total",
+      "deduped_in_batch",
+      "deduped_count",
+      "batch_deduped",
+      "deduplicated_in_batch",
+    ]),
+    duration_seconds: pickNumber(payload, ["duration_seconds", "elapsed_seconds", "total_duration_seconds"]),
+    started_at: pickString(payload, ["started_at", "created_at"]),
+    finished_at: pickString(payload, ["finished_at", "updated_at"]),
+    result_file_name: pickString(payload, ["result_file_name", "file_name"]),
+  };
+
+  const hasReportValue = Object.values(report).some((value) => value !== null && value !== undefined);
+  return hasReportValue ? report : null;
+}
+
 function normalizeJobStatus(
   payload: unknown,
   options: {
@@ -216,6 +351,44 @@ function normalizeJobStatus(
     (resultRecord ? pickString(resultRecord, ["download_url", "url"]) : null) ??
     (jobId && options.transport === "jobs" ? buildJobDownloadUrl(jobId) : options.fallbackDownloadUrl ?? null);
 
+  const runningSources = (
+    Array.isArray(record.running_sources)
+      ? record.running_sources
+      : Array.isArray(record.active_sources)
+        ? record.active_sources
+        : Array.isArray(record.parallel_sources)
+          ? record.parallel_sources
+          : []
+  )
+    .map(normalizeRunningSource)
+    .filter((item): item is ManualJobRunningSource => item !== null);
+
+  const recentActivity = (
+    Array.isArray(record.recent_activity)
+      ? record.recent_activity
+      : Array.isArray(record.activity)
+        ? record.activity
+        : Array.isArray(record.activity_log)
+          ? record.activity_log
+          : []
+  )
+    .map((item, index) => normalizeActivity(item, index))
+    .filter((item): item is ManualJobActivity => item !== null);
+
+  const summaryReport =
+    normalizeSummaryReport(record.summary_report) ??
+    normalizeSummaryReport(record.report) ??
+    normalizeSummaryReport(record.summary);
+
+  if (!runningSources.length) {
+    const fallbackRunningSource = normalizeRunningSource(
+      pickString(record, ["current_source", "active_source", "source_id"]),
+    );
+    if (fallbackRunningSource && isRunning) {
+      runningSources.push(fallbackRunningSource);
+    }
+  }
+
   return {
     job_id: jobId,
     status,
@@ -233,6 +406,23 @@ function normalizeJobStatus(
     download_url: downloadUrl,
     transport: options.transport ?? (jobId ? "jobs" : "manual-jobs"),
     is_running: isRunning,
+    running_sources: runningSources,
+    recent_activity: recentActivity,
+    summary_report:
+      summaryReport
+        ? {
+            ...summaryReport,
+            total_sources:
+              summaryReport.total_sources ??
+              Math.max(requestedSourceCount, completedSources.length + failedSources.length),
+            success_count: summaryReport.success_count ?? Math.max(completedCount, completedSources.length),
+            failed_count: summaryReport.failed_count ?? Math.max(failedCount, failedSources.length),
+            total_items: summaryReport.total_items ?? Math.max(totalItems, 0),
+            result_file_name: summaryReport.result_file_name ?? resultFileName,
+            started_at: summaryReport.started_at ?? pickString(record, ["started_at", "created_at"]),
+            finished_at: summaryReport.finished_at ?? pickString(record, ["finished_at", "updated_at"]),
+          }
+        : null,
   };
 }
 

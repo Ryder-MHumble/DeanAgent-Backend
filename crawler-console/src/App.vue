@@ -22,6 +22,7 @@ const {
   canNextPage,
   canPrevPage,
   clearFilters,
+  clearSelection,
   closeDrawer,
   currentPage,
   drawerOpen,
@@ -42,6 +43,8 @@ const {
   selectedCount,
   selectedSourceId,
   selectedSourceIds,
+  selectAllFiltered,
+  selectAllFilteredLoading,
   sourceCatalog,
   sourceLoading,
   sourceLogs,
@@ -115,6 +118,33 @@ const feedbackMessage = computed(() => errorMessage.value || lastAction.value ||
 const filterResultSummary = computed(
   () => `筛选结果 ${sourceCatalog.value?.filtered_sources || 0} / ${sourceCatalog.value?.total_sources || 0}`,
 );
+const selectAllFilteredLabel = computed(() => {
+  if (selectAllFilteredLoading.value) {
+    return "跨页选择中...";
+  }
+  return `全选筛选结果（${sourceCatalog.value?.filtered_sources || 0}）`;
+});
+const selectionCoverageHint = computed(() => {
+  const filtered = sourceCatalog.value?.filtered_sources || 0;
+  if (!filtered) {
+    return "完成筛选与勾选后，可直接进入批量执行面板。";
+  }
+
+  if (
+    filtered > selectedCount.value &&
+    selectedCount.value > 0 &&
+    selectedCount.value === sources.value.length &&
+    allVisibleSelected.value
+  ) {
+    return `当前仅选中本页 ${selectedCount.value} 条，启动批量任务时会自动扩展到筛选命中的 ${filtered} 条。`;
+  }
+
+  if (selectedCount.value > 0 && filtered > selectedCount.value) {
+    return `当前已选 ${selectedCount.value} / ${filtered} 条信源。`;
+  }
+
+  return "完成筛选与勾选后，可直接进入批量执行面板。";
+});
 const batchPrimaryLabel = computed(() => {
   if (!selectedCount.value) {
     return "先在主表勾选信源";
@@ -449,10 +479,21 @@ onBeforeUnmount(() => {
             </div>
 
             <div class="summary-actions">
+              <button
+                class="ghost-button summary-action"
+                type="button"
+                :disabled="selectAllFilteredLoading || !(sourceCatalog?.filtered_sources || 0)"
+                @click="selectAllFiltered"
+              >
+                {{ selectAllFilteredLabel }}
+              </button>
+              <button class="ghost-button summary-action" type="button" :disabled="!selectedCount" @click="clearSelection">
+                清空已选
+              </button>
               <button class="ghost-button summary-action" type="button" @click="openBatchPanel">
                 去第 3 步：批量执行
               </button>
-              <p class="summary-tip">完成筛选与勾选后，可直接进入批量执行面板。</p>
+              <p class="summary-tip">{{ selectionCoverageHint }}</p>
             </div>
           </section>
 

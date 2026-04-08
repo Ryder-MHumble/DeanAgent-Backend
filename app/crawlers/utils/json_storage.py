@@ -17,7 +17,7 @@ LATEST_FILENAME = "latest.json"
 async def save_crawl_result_json(
     result: Any,
     source_config: dict[str, Any],
-) -> None:
+) -> dict[str, int]:
     """Persist crawl items to DB.
 
     NOTE: Function name kept for backward compatibility with existing call-sites.
@@ -25,7 +25,7 @@ async def save_crawl_result_json(
     """
     all_items = getattr(result, "items_all", None) or result.items
     if not all_items:
-        return None
+        return {"upserted": 0, "new": 0, "deduped_in_batch": 0}
 
     dimension = source_config.get("dimension", "unknown")
     group = source_config.get("group")
@@ -41,10 +41,10 @@ async def save_crawl_result_json(
         existing_hashes = {row["url_hash"] for row in (res.data or [])}
     except RuntimeError:
         logger.warning("DB client not initialized; skip persisting source %s", source_id)
-        return None
+        return {"upserted": 0, "new": 0, "deduped_in_batch": 0}
     except Exception as exc:  # noqa: BLE001
         logger.warning("DB fetch existing hashes failed for %s, skip persisting: %s", source_id, exc)
-        return None
+        return {"upserted": 0, "new": 0, "deduped_in_batch": 0}
 
     now_dt = datetime.now(timezone.utc)
     now_iso = now_dt.isoformat()
@@ -56,11 +56,13 @@ async def save_crawl_result_json(
         upsert_data = []
         seen_hashes: set[str] = set()
         new_count = 0
+        deduped_in_batch = 0
         for item in all_items:
             url_hash = compute_url_hash(item.url)
             # Guard against duplicate hashes in the same batch, which can
             # break a single Postgres upsert statement.
             if url_hash in seen_hashes:
+                deduped_in_batch += 1
                 continue
             seen_hashes.add(url_hash)
             is_new = url_hash not in existing_hashes
@@ -96,7 +98,11 @@ async def save_crawl_result_json(
             new_count,
             source_id,
         )
+        return {
+            "upserted": len(upsert_data),
+            "new": new_count,
+            "deduped_in_batch": deduped_in_batch,
+        }
     except Exception as exc:  # noqa: BLE001
         logger.warning("DB upsert failed for %s: %s", source_id, exc)
-
-    return None
+        return {"upserted": 0, "new": 0, "deduped_in_batch": 0}

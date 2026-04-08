@@ -2,6 +2,7 @@
 from app.services.stores import (
     base_store,
     crawl_log_store,
+    crawl_runtime_store,
     json_reader,
     scholar_annotation_store,
     snapshot_store,
@@ -12,6 +13,7 @@ from app.services.stores import (
 __all__ = [
     "base_store",
     "crawl_log_store",
+    "crawl_runtime_store",
     "json_reader",
     "scholar_annotation_store",
     "snapshot_store",

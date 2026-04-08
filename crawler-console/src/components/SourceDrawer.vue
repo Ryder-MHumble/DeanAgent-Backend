@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { onBeforeUnmount, ref } from "vue";
 import type { CrawlLog, SourceItem } from "../types";
 import { formatDateTime, healthLabel } from "../utils/consoleFormat";
 
-defineProps<{
+const props = defineProps<{
   source: SourceItem | null;
   logs: CrawlLog[];
   logsLoading: boolean;
@@ -15,6 +16,58 @@ const emit = defineEmits<{
   (event: "trigger", sourceId: string): void;
   (event: "toggle", source: SourceItem): void;
 }>();
+
+const copyStatus = ref<"idle" | "success" | "error">("idle");
+let copyTimer: number | null = null;
+
+function clearCopyTimer() {
+  if (copyTimer !== null) {
+    window.clearTimeout(copyTimer);
+    copyTimer = null;
+  }
+}
+
+function setCopyStatus(next: "success" | "error") {
+  clearCopyTimer();
+  copyStatus.value = next;
+  copyTimer = window.setTimeout(() => {
+    copyStatus.value = "idle";
+    copyTimer = null;
+  }, 1800);
+}
+
+async function copyUrl() {
+  const source = props.source;
+  if (!source?.url) {
+    setCopyStatus("error");
+    return;
+  }
+
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(source.url);
+      setCopyStatus("success");
+      return;
+    }
+
+    const input = document.createElement("input");
+    input.value = source.url;
+    input.setAttribute("readonly", "true");
+    input.style.position = "absolute";
+    input.style.left = "-9999px";
+    document.body.appendChild(input);
+    input.select();
+    const ok = document.execCommand("copy");
+    document.body.removeChild(input);
+    setCopyStatus(ok ? "success" : "error");
+  } catch {
+    setCopyStatus("error");
+  }
+}
+
+onBeforeUnmount(() => {
+  clearCopyTimer();
+});
 </script>
 
 <template>
@@ -24,9 +77,11 @@ const emit = defineEmits<{
     <aside class="source-drawer" aria-label="单源详情抽屉">
       <div v-if="source" class="drawer-shell">
         <header class="drawer-header">
-          <div>
-            <p class="eyebrow">Source Drawer</p>
-            <h2>{{ source.name }}</h2>
+          <div class="drawer-title-block">
+            <div>
+              <p class="eyebrow">Source Inspector</p>
+              <h2>{{ source.name }}</h2>
+            </div>
             <p class="drawer-subtitle">{{ source.id }}</p>
           </div>
           <div class="drawer-header-actions">
@@ -64,14 +119,31 @@ const emit = defineEmits<{
           </button>
         </div>
 
-        <section class="drawer-section">
+        <section class="drawer-section drawer-section-hero">
           <div class="drawer-section-header">
             <h3>基础信息</h3>
           </div>
           <div class="drawer-grid">
-            <div>
+            <div class="drawer-grid-full">
               <span>URL</span>
-              <strong>{{ source.url }}</strong>
+              <div class="url-copy-row">
+                <strong>{{ source.url }}</strong>
+                <button
+                  class="ghost-button url-copy-btn"
+                  type="button"
+                  aria-live="polite"
+                  :aria-label="`复制 ${source.name} 的 URL`"
+                  @click="copyUrl"
+                >
+                  {{
+                    copyStatus === "success"
+                      ? "已复制"
+                      : copyStatus === "error"
+                        ? "复制失败"
+                        : "复制 URL"
+                  }}
+                </button>
+              </div>
             </div>
             <div>
               <span>维度</span>
@@ -116,6 +188,10 @@ const emit = defineEmits<{
             <div v-if="source.crawl_interval_minutes">
               <span>间隔</span>
               <strong>{{ source.crawl_interval_minutes }} 分钟</strong>
+            </div>
+            <div>
+              <span>当前状态</span>
+              <strong>{{ source.is_enabled ? "已启用" : "已停用" }}</strong>
             </div>
           </div>
         </section>

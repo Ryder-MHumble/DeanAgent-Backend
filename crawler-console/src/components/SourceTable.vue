@@ -36,6 +36,13 @@ function isToggling(sourceId: string) {
 function inspect(sourceId: string) {
   emit("inspect-source", sourceId);
 }
+
+function onRowKeydown(event: KeyboardEvent, sourceId: string) {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    inspect(sourceId);
+  }
+}
 </script>
 
 <template>
@@ -68,7 +75,7 @@ function inspect(sourceId: string) {
               border: 0;
             "
           >
-            信源主表，可选择信源并使用运行、启停操作。点击信源名称可查看详情。
+            信源主表，可选择信源并使用运行、启停操作。点击任意数据行可查看详情。
           </caption>
           <thead>
             <tr>
@@ -95,6 +102,11 @@ function inspect(sourceId: string) {
                 'source-row',
                 { 'is-active': source.id === activeSourceId, 'is-selected': isSelected(source.id) },
               ]"
+              tabindex="0"
+              role="button"
+              :aria-label="`查看 ${source.name} 详情`"
+              @click="inspect(source.id)"
+              @keydown="onRowKeydown($event, source.id)"
             >
               <td class="checkbox-cell" @click.stop>
                 <input
@@ -105,14 +117,7 @@ function inspect(sourceId: string) {
                 />
               </td>
               <th scope="row">
-                <button
-                  class="source-name-link"
-                  type="button"
-                  :aria-label="`查看 ${source.name} 详情`"
-                  @click="inspect(source.id)"
-                >
-                  {{ source.name }}
-                </button>
+                <span class="source-name">{{ source.name }}</span>
               </th>
               <td>
                 <span class="status-pill" :data-status="source.health_status">
@@ -169,9 +174,14 @@ function inspect(sourceId: string) {
             'source-card',
             { 'is-active': source.id === activeSourceId, 'is-selected': isSelected(source.id) },
           ]"
+          tabindex="0"
+          role="button"
+          :aria-label="`查看 ${source.name} 详情`"
+          @click="inspect(source.id)"
+          @keydown="onRowKeydown($event, source.id)"
         >
           <div class="source-card-top">
-            <label class="card-check">
+            <label class="card-check" @click.stop>
               <input
                 :checked="isSelected(source.id)"
                 type="checkbox"
@@ -185,9 +195,9 @@ function inspect(sourceId: string) {
             </span>
           </div>
 
-          <button class="source-name-link card-name-link" type="button" @click="inspect(source.id)">
+          <strong class="source-name card-name-link">
             {{ source.name }}
-          </button>
+          </strong>
 
           <div class="source-card-grid">
             <div>
@@ -214,7 +224,7 @@ function inspect(sourceId: string) {
               type="button"
               :disabled="isTriggering(source.id)"
               :aria-label="`触发 ${source.name}`"
-              @click="emit('trigger-source', source.id)"
+              @click.stop="emit('trigger-source', source.id)"
             >
               {{ isTriggering(source.id) ? "执行中..." : "运行" }}
             </button>
@@ -223,7 +233,7 @@ function inspect(sourceId: string) {
               type="button"
               :disabled="isToggling(source.id)"
               :aria-label="`${source.is_enabled ? '停用' : '启用'} ${source.name}`"
-              @click="emit('toggle-source', source)"
+              @click.stop="emit('toggle-source', source)"
             >
               {{
                 isToggling(source.id)

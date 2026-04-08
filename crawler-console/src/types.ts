@@ -27,6 +27,9 @@ export interface JobStatus {
   job_id: string | null;
   status: JobLifecycleStatus;
   current_source: string | null;
+  running_sources: ManualJobRunningSource[];
+  recent_activity: ManualJobActivity[];
+  summary_report: ManualJobSummaryReport | null;
   completed_sources: string[];
   failed_sources: string[];
   requested_source_count: number;
@@ -38,6 +41,40 @@ export interface JobStatus {
   finished_at: string | null;
   result_file_name: string | null;
   download_url: string | null;
+}
+
+export interface ManualJobRunningSource {
+  source_id: string;
+  source_name?: string | null;
+  status?: JobLifecycleStatus | null;
+  started_at?: string | null;
+}
+
+export interface ManualJobActivity {
+  id?: string | null;
+  timestamp?: string | null;
+  status: string;
+  source_id?: string | null;
+  source_name?: string | null;
+  items_total?: number | null;
+  items_new?: number | null;
+  inserted_count?: number | null;
+  deduped_in_batch?: number | null;
+  duration_seconds?: number | null;
+  message?: string | null;
+}
+
+export interface ManualJobSummaryReport {
+  total_sources?: number | null;
+  success_count?: number | null;
+  failed_count?: number | null;
+  total_items?: number | null;
+  inserted_count?: number | null;
+  deduped_in_batch?: number | null;
+  duration_seconds?: number | null;
+  started_at?: string | null;
+  finished_at?: string | null;
+  result_file_name?: string | null;
 }
 
 export interface ManualJobStatus extends JobStatus {

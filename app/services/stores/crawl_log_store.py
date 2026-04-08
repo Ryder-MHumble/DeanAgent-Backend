@@ -162,7 +162,7 @@ async def get_crawl_logs_since(
         query = (
             client.table("crawl_logs")
             .select("*")
-            .gte("started_at", since.isoformat())
+            .gte("started_at", since)
             .order("started_at", desc=True)
             .limit(limit)
         )

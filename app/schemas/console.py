@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from datetime import date, datetime
 from typing import Literal
 
@@ -26,6 +28,9 @@ class CrawlStatusResponse(BaseModel):
     completed_count: int = 0
     failed_count: int = 0
     total_items: int = 0
+    running_sources: list[str] = Field(default_factory=list)
+    recent_activity: list[CrawlActivityEntry] = Field(default_factory=list)
+    summary_report: CrawlSummaryReport | None = None
     progress: float = 0.0
     started_at: datetime | None = None
     finished_at: datetime | None = None
@@ -57,6 +62,9 @@ class CrawlJobResponse(BaseModel):
     completed_count: int = 0
     failed_count: int = 0
     total_items: int = 0
+    running_sources: list[str] = Field(default_factory=list)
+    recent_activity: list[CrawlActivityEntry] = Field(default_factory=list)
+    summary_report: CrawlSummaryReport | None = None
     progress: float = 0.0
     created_at: datetime
     started_at: datetime | None = None
@@ -79,6 +87,36 @@ class ConsoleTodayStats(BaseModel):
     new_items: int
     average_duration_seconds: float = 0.0
     last_run_at: datetime | None = None
+
+
+class CrawlActivityEntry(BaseModel):
+    """Per-source activity item for live crawl timeline."""
+
+    timestamp: datetime
+    source_id: str
+    phase: str
+    status: str
+    message: str = ""
+    items_total: int = 0
+    db_upserted: int = 0
+    db_new: int = 0
+    db_deduped_in_batch: int = 0
+
+
+class CrawlSummaryReport(BaseModel):
+    """Manual crawl summary report (final or in-progress snapshot)."""
+
+    requested_source_count: int = 0
+    completed_count: int = 0
+    failed_count: int = 0
+    total_items: int = 0
+    db_upserted_total: int = 0
+    db_new_total: int = 0
+    db_deduped_in_batch_total: int = 0
+    started_at: datetime | None = None
+    finished_at: datetime | None = None
+    duration_seconds: float = 0.0
+    status: str = "idle"
 
 
 class ConsoleDimensionSummary(BaseModel):

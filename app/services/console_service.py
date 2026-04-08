@@ -22,6 +22,7 @@ from app.schemas.console import (
 from app.services import crawl_service, source_service
 from app.services.crawler_control_service import get_control_service
 from app.services.stores.crawl_log_store import get_crawl_logs, get_crawl_logs_since
+from app.services.stores.crawl_runtime_store import get_crawl_runtime_state
 
 CONSOLE_TIMEZONE = ZoneInfo("Asia/Shanghai")
 
@@ -45,6 +46,32 @@ def _local_day_bounds(target_day: date) -> tuple[datetime, datetime]:
 
 def _now_local_day() -> date:
     return datetime.now(CONSOLE_TIMEZONE).date()
+
+
+def _resolve_console_job_status() -> dict[str, Any]:
+    """Prefer in-process manual job, fallback to persisted full-run runtime state."""
+    manual_status = get_control_service().get_status()
+    if bool(manual_status.get("is_running")):
+        return manual_status
+
+    runtime_status = get_crawl_runtime_state()
+    if not bool(runtime_status.get("is_running")):
+        return manual_status
+
+    return {
+        "is_running": True,
+        "current_source": runtime_status.get("current_source"),
+        "completed_sources": list(runtime_status.get("completed_sources") or []),
+        "failed_sources": list(runtime_status.get("failed_sources") or []),
+        "requested_source_count": int(runtime_status.get("requested_source_count") or 0),
+        "completed_count": int(runtime_status.get("completed_count") or 0),
+        "failed_count": int(runtime_status.get("failed_count") or 0),
+        "total_items": int(runtime_status.get("total_items") or 0),
+        "progress": float(runtime_status.get("progress") or 0.0),
+        "started_at": _parse_dt(runtime_status.get("started_at")),
+        "finished_at": _parse_dt(runtime_status.get("finished_at")),
+        "result_file_name": runtime_status.get("result_file_name"),
+    }
 
 
 def _read_proc_stat_snapshot() -> tuple[int, int]:
@@ -238,7 +265,7 @@ async def get_console_overview(*, recent_run_limit: int = 12) -> ConsoleOverview
         scheduler_status="running" if scheduler else "not_started",
         health=health,
         today=_build_today_stats(today_logs, target_day=target_day),
-        manual_job=get_control_service().get_status(),
+        manual_job=_resolve_console_job_status(),
         dimension_stats=[
             ConsoleDimensionSummary(**item)
             for item in sorted(

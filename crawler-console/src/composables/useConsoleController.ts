@@ -24,6 +24,7 @@ export function useConsoleController() {
   const page = ref(1);
   const isRefreshing = ref(false);
   const manualActionLoading = ref(false);
+  const selectAllFilteredLoading = ref(false);
   const togglingSourceIds = ref<string[]>([]);
   const triggeringSourceIds = ref<string[]>([]);
   const statusMessage = ref("正在连接控制台 API...");
@@ -229,11 +230,6 @@ export function useConsoleController() {
   }
 
   async function startManualJob() {
-    if (!selectedSourceIds.value.length) {
-      errorMessage.value = "请先选择至少一个信源";
-      return;
-    }
-
     if (manualActionLoading.value) {
       return;
     }
@@ -241,6 +237,43 @@ export function useConsoleController() {
     manualActionLoading.value = true;
     errorMessage.value = "";
     try {
+      const filteredCount = sourceCatalog.value?.filtered_sources || 0;
+      const visibleCount = sources.value.length;
+      const selectedCountNow = selectedSourceIds.value.length;
+      let autoExpandAttempted = false;
+      const hasAnyFilterApplied =
+        Boolean(filters.keyword.trim()) ||
+        Boolean(filters.dimension) ||
+        Boolean(filters.health_status) ||
+        filters.is_enabled !== "";
+
+      if (!selectedCountNow && hasAnyFilterApplied && filteredCount > 0) {
+        autoExpandAttempted = true;
+        await selectAllFiltered();
+      } else if (
+        hasAnyFilterApplied &&
+        selectedCountNow > 0 &&
+        selectedCountNow === visibleCount &&
+        allVisibleSelected.value &&
+        filteredCount > selectedCountNow
+      ) {
+        autoExpandAttempted = true;
+        await selectAllFiltered();
+        if (!errorMessage.value) {
+          lastAction.value = `已自动扩展为全筛选结果，共 ${selectedSourceIds.value.length} 个信源`;
+        }
+      }
+
+      if (autoExpandAttempted && filteredCount > selectedSourceIds.value.length) {
+        errorMessage.value = "跨页全选未完成，请稍后重试后再启动批量任务";
+        return;
+      }
+
+      if (!selectedSourceIds.value.length) {
+        errorMessage.value = "请先选择至少一个信源";
+        return;
+      }
+
       const payload: ManualJobPayload = {
         source_ids: selectedSourceIds.value,
         keyword_filter: parseKeywordText(manualForm.keywordFilterText),
@@ -292,6 +325,70 @@ export function useConsoleController() {
 
     const merged = new Set([...selectedSourceIds.value, ...sources.value.map((item) => item.id)]);
     selectedSourceIds.value = Array.from(merged);
+  }
+
+  async function selectAllFiltered() {
+    if (selectAllFilteredLoading.value) {
+      return;
+    }
+
+    selectAllFilteredLoading.value = true;
+    errorMessage.value = "";
+    try {
+      const baseParams = {
+        keyword: filters.keyword || null,
+        dimension: filters.dimension || null,
+        health_status: filters.health_status || null,
+        is_enabled: filters.is_enabled === "" ? null : filters.is_enabled,
+        include_facets: false,
+        page_size: 500,
+      } as const;
+
+      const firstPage = await consoleApi.getSources({
+        ...baseParams,
+        page: 1,
+      });
+
+      const selectedIds = firstPage.items.map((item) => item.id);
+      const totalPages = Math.max(firstPage.total_pages || 1, 1);
+      const batchSize = 4;
+
+      for (let pageIndex = 2; pageIndex <= totalPages; pageIndex += batchSize) {
+        const pages = Array.from(
+          { length: Math.min(batchSize, totalPages - pageIndex + 1) },
+          (_, idx) => pageIndex + idx,
+        );
+        const responses = await Promise.all(
+          pages.map((pageNo) =>
+            consoleApi.getSources({
+              ...baseParams,
+              page: pageNo,
+            }),
+          ),
+        );
+        for (const pageResponse of responses) {
+          selectedIds.push(...pageResponse.items.map((item) => item.id));
+        }
+      }
+
+      selectedSourceIds.value = Array.from(new Set(selectedIds));
+      lastAction.value =
+        selectedSourceIds.value.length > 0
+          ? `已跨页选中 ${selectedSourceIds.value.length} 个信源`
+          : "当前筛选结果为空，未选中任何信源";
+    } catch (error) {
+      errorMessage.value = error instanceof Error ? error.message : "跨页全选失败";
+    } finally {
+      selectAllFilteredLoading.value = false;
+    }
+  }
+
+  function clearSelection() {
+    if (!selectedSourceIds.value.length) {
+      return;
+    }
+    selectedSourceIds.value = [];
+    lastAction.value = "已清空已选信源";
   }
 
   function clearFilters() {
@@ -387,6 +484,7 @@ export function useConsoleController() {
     canNextPage,
     canPrevPage,
     clearFilters,
+    clearSelection,
     closeDrawer,
     currentPage,
     drawerOpen,
@@ -409,6 +507,8 @@ export function useConsoleController() {
     selectedCount,
     selectedSourceId,
     selectedSourceIds,
+    selectAllFiltered,
+    selectAllFilteredLoading,
     sourceCatalog,
     sourceLoading,
     sourceLogs,
