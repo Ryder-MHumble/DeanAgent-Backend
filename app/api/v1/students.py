@@ -73,6 +73,24 @@ def _iso(value: Any) -> str:
     return _clean_text(value)
 
 
+def _resolve_pagination(
+    *,
+    page: int,
+    page_size: int,
+    offset: int | None,
+    limit: int | None,
+) -> tuple[int, int, int]:
+    resolved_limit = limit if limit is not None else page_size
+    resolved_limit = max(1, min(int(resolved_limit), 500))
+    if offset is None:
+        resolved_page = max(1, int(page))
+        resolved_offset = (resolved_page - 1) * resolved_limit
+    else:
+        resolved_offset = max(0, int(offset))
+        resolved_page = (resolved_offset // resolved_limit) + 1
+    return resolved_page, resolved_limit, resolved_offset
+
+
 def _to_student_list_item(row: dict[str, Any]) -> StudentListItem:
     enrollment_year = row.get("enrollment_year")
     return StudentListItem(
@@ -204,6 +222,7 @@ async def _resolve_scholar_ref(
 
 
 def _build_list_where(
+    scholar_id: str | None,
     institution: str | None,
     enrollment_year: str | None,
     name: str | None,
@@ -215,6 +234,10 @@ def _build_list_where(
 ) -> tuple[str, list[Any]]:
     conditions: list[str] = []
     params: list[Any] = []
+
+    if _clean_text(scholar_id):
+        params.append(_clean_text(scholar_id))
+        conditions.append(f"COALESCE(s.scholar_id, '') = ${len(params)}")
 
     year = _to_year(enrollment_year)
     if year is not None:
@@ -375,6 +398,9 @@ async def _fetch_student_row(student_id: str) -> dict[str, Any] | None:
     description="按年级/高校/导师/关键词筛选学生，返回分页列表。",
 )
 async def list_students(
+    scholar_id: str | None = Query(
+        None, description="导师 scholar_id / url_hash（精确匹配）"
+    ),
     institution: str | None = Query(None, description="机构/共建高校（模糊匹配）"),
     grade: str | None = Query(None, description="兼容参数：年级，如 2025"),
     enrollment_year: str | None = Query(None, description="入学年级，如 2024 或 2024级"),
@@ -390,12 +416,21 @@ async def list_students(
     keyword: str | None = Query(None, description="关键词（姓名/学号/学校/导师/邮箱）"),
     page: int = Query(1, ge=1, description="页码"),
     page_size: int = Query(20, ge=1, le=500, description="每页条数"),
+    offset: int | None = Query(None, ge=0, description="偏移量（与 limit 搭配）"),
+    limit: int | None = Query(None, ge=1, le=500, description="返回条数（与 offset 搭配）"),
 ):
     await _ensure_placeholder_scholar()
     pool = get_pool()
     institution_filter = institution or home_university
     year_filter = enrollment_year or grade
+    resolved_page, resolved_page_size, resolved_offset = _resolve_pagination(
+        page=page,
+        page_size=page_size,
+        offset=offset,
+        limit=limit,
+    )
     where_sql, params = _build_list_where(
+        scholar_id=scholar_id,
         institution=institution_filter,
         enrollment_year=year_filter,
         name=name,
@@ -414,8 +449,7 @@ async def list_students(
     )
     total = int(await pool.fetchval(count_sql, *params) or 0)
 
-    offset = (page - 1) * page_size
-    data_params = [*params, page_size, offset]
+    data_params = [*params, resolved_page_size, resolved_offset]
     limit_idx = len(params) + 1
     offset_idx = len(params) + 2
     order_sql = (
@@ -509,13 +543,43 @@ async def list_students(
         *data_params,
     )
 
-    total_pages = math.ceil(total / page_size) if total > 0 else 1
+    total_pages = math.ceil(total / resolved_page_size) if total > 0 else 1
+    has_more = (resolved_offset + len(rows)) < total
     return StudentListResponse(
         total=total,
+        page=resolved_page,
+        page_size=resolved_page_size,
+        total_pages=total_pages,
+        limit=resolved_page_size,
+        offset=resolved_offset,
+        has_more=has_more,
+        next_offset=(resolved_offset + resolved_page_size) if has_more else None,
+        items=[_to_student_list_item(dict(row)) for row in rows],
+    )
+
+
+@router.get(
+    "/by-scholar/{scholar_id}",
+    response_model=StudentListResponse,
+    summary="按导师查询学生",
+    description=(
+        "按导师 scholar_id/url_hash 返回学生分页列表。"
+        "这是从 /api/v1/scholars/{url_hash}/students 迁移后的推荐入口。"
+    ),
+)
+async def list_students_by_scholar(
+    scholar_id: str,
+    page: int = Query(1, ge=1, description="页码"),
+    page_size: int = Query(20, ge=1, le=500, description="每页条数"),
+    offset: int | None = Query(None, ge=0, description="偏移量（与 limit 搭配）"),
+    limit: int | None = Query(None, ge=1, le=500, description="返回条数（与 offset 搭配）"),
+):
+    return await list_students(
+        scholar_id=scholar_id,
         page=page,
         page_size=page_size,
-        total_pages=total_pages,
-        items=[_to_student_list_item(dict(row)) for row in rows],
+        offset=offset,
+        limit=limit,
     )
 
 

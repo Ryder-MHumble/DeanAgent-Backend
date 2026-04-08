@@ -9,6 +9,7 @@ from fastapi.staticfiles import StaticFiles
 from scalar_fastapi import get_scalar_api_reference
 
 from app.api.v1.router import v1_router
+from app.console_api import console_api_app
 from app.config import BASE_DIR, settings
 from app.db.client import close_client, init_client
 from app.db.pool import close_pool, init_pool
@@ -398,6 +399,7 @@ app.add_middleware(
 
 # Register API routes
 app.include_router(v1_router)
+app.mount("/console-api", console_api_app)
 
 # Mount static files for frontend UI
 from pathlib import Path
@@ -405,6 +407,11 @@ frontend_dir = Path(__file__).parent.parent / "frontend"
 if frontend_dir.exists():
     app.mount("/ui", StaticFiles(directory=str(frontend_dir), html=True), name="ui")
     logger.info("Frontend UI mounted at /ui")
+
+console_frontend_dir = Path(__file__).parent.parent / "crawler-console" / "dist"
+if console_frontend_dir.exists():
+    app.mount("/console", StaticFiles(directory=str(console_frontend_dir), html=True), name="console")
+    logger.info("Crawler console mounted at /console")
 
 
 @app.get("/", tags=["default"], summary="API 入口", include_in_schema=False)
@@ -416,6 +423,8 @@ async def root():
         "swagger": "/swagger",
         "openapi": "/openapi.json",
         "ui": "/ui",
+        "console_api_docs": "/console-api/docs",
+        "console_ui": "/console",
     }
 
 

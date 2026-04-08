@@ -151,6 +151,45 @@ async def get_crawl_logs(
     return all_logs[:limit]
 
 
+async def get_crawl_logs_since(
+    *,
+    since: datetime,
+    source_id: str | None = None,
+    limit: int = 5000,
+) -> list[dict[str, Any]]:
+    try:
+        client = _get_client()
+        query = (
+            client.table("crawl_logs")
+            .select("*")
+            .gte("started_at", since.isoformat())
+            .order("started_at", desc=True)
+            .limit(limit)
+        )
+        if source_id:
+            query = query.eq("source_id", source_id)
+        res = await query.execute()
+        return res.data or []
+    except RuntimeError:
+        pass
+    except Exception as exc:
+        logger.warning("get_crawl_logs_since DB failed, using JSON: %s", exc)
+
+    if source_id:
+        logs = _load_logs(source_id)
+    else:
+        logs = []
+        if LOGS_DIR.exists():
+            for source_dir in LOGS_DIR.iterdir():
+                if source_dir.is_dir():
+                    logs.extend(_load_logs(source_dir.name))
+
+    since_iso = since.isoformat()
+    filtered = [log for log in logs if (log.get("started_at") or "") >= since_iso]
+    filtered.sort(key=lambda x: x.get("started_at") or "", reverse=True)
+    return filtered[:limit]
+
+
 async def get_recent_log_stats(hours: int = 24) -> dict[str, int]:
     """Get crawl and article counts from the last N hours."""
     cutoff = datetime.now(timezone.utc) - timedelta(hours=hours)

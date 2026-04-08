@@ -368,6 +368,43 @@ app/services/llm/
 | `source_name` | 单个名称 | 模糊（子串/大小写/空格不敏感） |
 | `source_names` | 逗号分隔名称 | 模糊匹配 |
 
+### 5.3 API 语义治理对数仓与消费层影响
+
+本轮 planned 语义治理包含两项：
+
+- 将触发型接口收敛为 `jobs` 资源，动作端点改为兼容入口。
+- 将 `students` 收敛为单一主资源，`/scholars/{url_hash}/students` 降级为兼容视图。
+
+对数据层的约束是“先加法、后切换”，不在第一阶段重写现有事实口径。
+
+| 契约对象 | 当前主存储/口径 | 当前主要消费方 | planned 变更后的定位 |
+|--------|----------------|---------------|--------------------|
+| `source_states` | `source_states` 表 + `data/state/source_state.json` 兜底 | `/sources`、`/sources/catalog`、`/health/crawl-status`、`/intel/university/sources` | 继续作为“每源最新状态快照”主口径，不被 `jobs` 替代 |
+| `crawl_logs` | `crawl_logs` 表 + `data/logs/{source_id}/crawl_logs.json` 兜底 | `/sources/{source_id}/logs`、爬取健康聚合、console 近 24h 统计 | 继续作为“按 source 聚合的运行事实”；`jobs` 只新增更通用的任务视角 |
+| `supervised_students` | `supervised_students` 表 + `data/state/supervised_students.json` 兜底 | `/students`、学者详情学生数、机构详情按年级学生统计 | 继续作为学生主事实表，不按导师子资源拆表 |
+| `scholars` | `scholars` 表 + 学者聚合视图 | `/scholars`、导师解析、学生-导师归属 | 继续作为导师维表；学生口径通过 `scholar_id` 关联，不反向内嵌为主数据源 |
+
+当前仓库中的直接依赖已经说明这四类口径不能一次性替换：
+
+- `source_states` 已被信源目录聚合和健康视图直接读取。
+- `crawl_logs` 已被 24 小时爬取健康统计与 source 日志查询直接聚合。
+- `supervised_students` 已被全局学生 API 直接 CRUD，也被学者详情和机构详情做派生计数。
+- `scholars` 当前承担导师解析和学生归属维表角色。
+
+对数仓/BI 的最小影响原则如下：
+
+- 不改现有健康类指标口径：`last_crawl_at`、`consecutive_failures`、`is_enabled_override`、`items_total`、`items_new`、`status` 继续来自 `source_states`/`crawl_logs`。
+- 不改现有学生类指标口径：学生总数、按 `enrollment_year` 分布、按 `home_university` 分布、导师名下学生数继续来自 `supervised_students`。
+- `jobs` 资源上线后，新增的是“任务实例事实表”视角，用于统一 crawl/pipeline/report/paper-transfer 的审计，不要求第一阶段替换现有报表字段。
+- `students` 资源边界收敛属于 API 语义收敛，不要求第一阶段调整 `supervised_students` 物理模型。
+
+推荐的仓储建模边界：
+
+- `source_states` 保留“latest snapshot”职责。
+- `crawl_logs` 保留“source 维度可读日志”职责。
+- `crawl_jobs`/`crawl_job_events` 若后续落库，承担“跨任务类型统一审计事实”职责。
+- `supervised_students` 保留单表主事实；导师视图、机构视图、学者详情学生数均由该表派生。
+
 ---
 
 ## 六、消费端接入

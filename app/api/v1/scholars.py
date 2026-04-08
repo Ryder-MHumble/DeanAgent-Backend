@@ -422,7 +422,11 @@ async def _assert_faculty_exists(url_hash: str) -> None:
     "/{url_hash}/students",
     response_model=SupervisedStudentListResponse,
     summary="查询指导学生列表",
-    description="返回指定导师下的所有指导学生记录（联合培养学生）。建议迁移至 /api/v1/students。",
+    description=(
+        "返回指定导师下的所有指导学生记录（联合培养学生）。"
+        "建议迁移至 /api/v1/students?scholar_id={url_hash} "
+        "或 /api/v1/students/by-scholar/{url_hash}。"
+    ),
     deprecated=True,
 )
 async def list_students(url_hash: str):
@@ -442,7 +446,7 @@ async def list_students(url_hash: str):
     description=(
         "为指定导师新增一名指导学生记录。"
         "id / created_at / updated_at 由服务端自动生成，added_by 自动补充为 'user:{added_by}'。"
-        "建议迁移至 /api/v1/students。"
+        "建议迁移至 /api/v1/students（请求体中携带 scholar_id）。"
     ),
     status_code=201,
     deprecated=True,
@@ -457,7 +461,10 @@ async def add_student(url_hash: str, body: SupervisedStudentCreate):
     "/{url_hash}/students/{student_id}",
     response_model=SupervisedStudentResponse,
     summary="查询单名学生详情",
-    description="根据学生记录 ID 获取单名指导学生的完整信息。建议迁移至 /api/v1/students。",
+    description=(
+        "根据学生记录 ID 获取单名指导学生的完整信息。"
+        "建议迁移至 /api/v1/students/{student_id}。"
+    ),
     deprecated=True,
 )
 async def get_student(url_hash: str, student_id: str):
@@ -475,7 +482,7 @@ async def get_student(url_hash: str, student_id: str):
     description=(
         "部分更新指定学生记录。所有字段均可选，传 null 或不传则保持不变。"
         "updated_at 由服务端自动更新。"
-        "建议迁移至 /api/v1/students。"
+        "建议迁移至 /api/v1/students/{student_id}。"
     ),
     deprecated=True,
 )
@@ -491,7 +498,7 @@ async def update_student(url_hash: str, student_id: str, body: SupervisedStudent
 @router.delete(
     "/{url_hash}/students/{student_id}",
     summary="删除学生记录",
-    description="删除指定导师下的一条学生记录。建议迁移至 /api/v1/students。",
+    description="删除指定导师下的一条学生记录。建议迁移至 /api/v1/students/{student_id}。",
     status_code=204,
     deprecated=True,
 )

@@ -46,7 +46,7 @@ sources:
     crawl_method: "static"
     schedule: "4h"
     priority: 1
-    is_enabled: false  # WAF anti-bot protection, returns captcha page
+    is_enabled: false  # Alibaba Cloud WAF challenge page blocks unattended crawlers
     selectors:
       list_item: "div.article-item"
       title: "a.article-title"
@@ -83,25 +83,28 @@ sources:
     tags: ["news", "jiemian", "tech"]
 
   - id: "thepaper_tech"
-    name: "澎湃新闻-科技"
+    name: "澎湃新闻-10%公司"
     group: "news"
-    url: "https://www.thepaper.cn/"
+    url: "https://www.thepaper.cn/list_25434"
     crawl_method: "static"
     schedule: "daily"
     priority: 2
-    is_enabled: false  # Next.js SPA, content loaded via JS (__NEXT_DATA__), static crawl gets 0 items
+    is_enabled: true  # SSR list/detail pages are directly crawlable; 10%公司 is a stable AI/business entry
     selectors:
-      list_item: "div.news_li"
-      title: "a"
-      link: "a"
-      date: "span.time"
+      list_item: "div.article_card__XAuva"
+      title: "div.toplink__MC3AJ h2"
+      link: "div.toplink__MC3AJ a"
     base_url: "https://www.thepaper.cn"
+    detail_selectors:
+      content: "div.cententWrap__UojXm"
+      author: "div.headerContent__AS6Ux .left__IlIiv > div:first-child"
     keyword_filter:
       - "AI"
       - "人工智能"
       - "大模型"
       - "芯片"
       - "科技"
+      - "智能"
     tags: ["news", "thepaper", "tech"]
 
   - id: "iyiou_ai"
@@ -111,7 +114,7 @@ sources:
     crawl_method: "static"
     schedule: "daily"
     priority: 2
-    is_enabled: false  # Site returns empty 209-byte response, likely defunct or heavy JS SPA
+    is_enabled: false  # WAF probe page returns HTTP 202 and probe.js instead of article list HTML
     selectors:
       list_item: "div.article-item"
       title: "a.title"
@@ -204,7 +207,7 @@ sources:
     crawl_method: "static"
     schedule: "daily"
     priority: 1
-    is_enabled: false  # URL returns 302 -> 404 (page removed/restructured)
+    is_enabled: false  # URL redirects to error page and then 404; original channel has been removed/restructured
     selectors:
       list_item: "div.article-item"
       title: "a.article-title"

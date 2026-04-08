@@ -16,7 +16,7 @@ from pathlib import Path
 from typing import Any
 
 from app.config import BASE_DIR
-from app.crawlers.base import CrawledItem
+from app.crawlers.base import CrawlStatus, CrawledItem
 from app.crawlers.registry import CrawlerRegistry
 from app.crawlers.utils.json_storage import save_crawl_result_json
 from app.db.pool import get_pool
@@ -27,6 +27,8 @@ from app.services.core.institution.storage import (
     fetch_institution_by_id,
     upsert_institution,
 )
+from app.services.stores.crawl_log_store import append_crawl_log
+from app.services.stores.source_state import update_source_state
 
 logger = logging.getLogger(__name__)
 
@@ -763,6 +765,44 @@ async def run_university_leadership_full_crawl(
 
     semaphore = asyncio.Semaphore(max(1, min(int(max_concurrency), 12)))
 
+    async def _record_runtime_state(
+        *,
+        source_id: str,
+        status: str,
+        started_at: datetime,
+        finished_at: datetime,
+        items_total: int = 0,
+        items_new: int = 0,
+        error_message: str | None = None,
+        duration_seconds: float = 0.0,
+    ) -> None:
+        log_status = (
+            CrawlStatus.NO_NEW_CONTENT.value
+            if status == "skipped_empty"
+            else status
+        )
+
+        await append_crawl_log(
+            source_id=source_id,
+            status=log_status,
+            items_total=items_total,
+            items_new=items_new,
+            error_message=error_message,
+            started_at=started_at,
+            finished_at=finished_at,
+            duration_seconds=duration_seconds,
+        )
+
+        if log_status in (CrawlStatus.SUCCESS.value, CrawlStatus.NO_NEW_CONTENT.value):
+            await update_source_state(
+                source_id,
+                last_crawl_at=finished_at,
+                last_success_at=finished_at,
+                reset_failures=True,
+            )
+        else:
+            await update_source_state(source_id, last_crawl_at=finished_at)
+
     async def _run_one(source_config: dict[str, Any]) -> dict[str, Any]:
         source_id = _normalize_str(source_config.get("id"))
         source_name = _normalize_str(source_config.get("name"))
@@ -774,6 +814,14 @@ async def run_university_leadership_full_crawl(
             try:
                 crawler = CrawlerRegistry.create_crawler(source_config)
             except Exception as exc:
+                finished = datetime.now(timezone.utc)
+                await _record_runtime_state(
+                    source_id=source_id,
+                    status=CrawlStatus.FAILED.value,
+                    started_at=started,
+                    finished_at=finished,
+                    error_message=f"create crawler failed: {exc}",
+                )
                 return {
                     "source_id": source_id,
                     "source_name": source_name,
@@ -784,7 +832,7 @@ async def run_university_leadership_full_crawl(
                     "changed": False,
                     "duration_seconds": 0.0,
                     "started_at": started,
-                    "finished_at": datetime.now(timezone.utc),
+                    "finished_at": finished,
                 }
 
             result = await crawler.run()
@@ -798,12 +846,23 @@ async def run_university_leadership_full_crawl(
                 logger.warning("Leadership JSON save failed for %s: %s", source_id, exc)
 
             if result.status.value == "failed":
+                error_message = result.error_message or json_sync_error
+                await _record_runtime_state(
+                    source_id=source_id,
+                    status=CrawlStatus.FAILED.value,
+                    started_at=result.started_at,
+                    finished_at=finished,
+                    items_total=result.items_total,
+                    items_new=result.items_new,
+                    error_message=error_message,
+                    duration_seconds=result.duration_seconds,
+                )
                 return {
                     "source_id": source_id,
                     "source_name": source_name,
                     "university_name": university_name,
                     "status": "failed",
-                    "error": result.error_message or json_sync_error,
+                    "error": error_message,
                     "leaders_total": 0,
                     "changed": False,
                     "duration_seconds": result.duration_seconds,
@@ -813,6 +872,16 @@ async def run_university_leadership_full_crawl(
 
             raw_items = result.items_all or result.items or []
             if not raw_items:
+                await _record_runtime_state(
+                    source_id=source_id,
+                    status="skipped_empty",
+                    started_at=result.started_at,
+                    finished_at=finished,
+                    items_total=result.items_total,
+                    items_new=0,
+                    error_message=json_sync_error,
+                    duration_seconds=result.duration_seconds,
+                )
                 return {
                     "source_id": source_id,
                     "source_name": source_name,
@@ -834,6 +903,16 @@ async def run_university_leadership_full_crawl(
             )
 
             if payload["leader_count"] <= 0:
+                await _record_runtime_state(
+                    source_id=source_id,
+                    status="skipped_empty",
+                    started_at=result.started_at,
+                    finished_at=finished,
+                    items_total=result.items_total,
+                    items_new=0,
+                    error_message=json_sync_error,
+                    duration_seconds=result.duration_seconds,
+                )
                 return {
                     "source_id": source_id,
                     "source_name": source_name,
@@ -848,6 +927,16 @@ async def run_university_leadership_full_crawl(
                 }
 
             sync_result = await _upsert_current(payload)
+            await _record_runtime_state(
+                source_id=source_id,
+                status=result.status.value,
+                started_at=result.started_at,
+                finished_at=finished,
+                items_total=result.items_total,
+                items_new=payload["leader_count"],
+                error_message=json_sync_error,
+                duration_seconds=result.duration_seconds,
+            )
 
             return {
                 "source_id": source_id,

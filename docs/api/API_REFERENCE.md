@@ -1,8 +1,8 @@
 # API 参考总览
 
-- 生成时间（UTC）：`2026-04-07 13:32:09Z`
-- API 路由总数：`138`
-- Method 分布：`DELETE` 10、`GET` 94、`PATCH` 12、`POST` 22
+- 生成时间（UTC）：`2026-04-08 07:06:30Z`
+- API 路由总数：`143`
+- Method 分布：`DELETE` 10、`GET` 97、`PATCH` 12、`POST` 24
 - 信源总数：`268`
 - 启用信源：`191`
 
@@ -14,15 +14,15 @@
 | `events` | 14 | events |
 | `sources` | 11 | sources |
 | `institutions` | 10 | institutions |
+| `crawler` | 8 | crawler-control |
 | `projects` | 8 | projects |
+| `students` | 7 | students |
 | `venues` | 7 | venues |
 | `llm-tracking` | 6 | llm-tracking |
-| `students` | 6 | students |
 | `articles` | 5 | articles |
 | `intel/personnel` | 5 | intel / personnel-intel |
 | `intel/tech-frontier` | 5 | intel / tech-frontier |
 | `intel/university` | 5 | intel / university-eco |
-| `crawler` | 4 | crawler-control |
 | `health` | 4 | health |
 | `social-kol` | 4 | social-kol |
 | `social-posts` | 4 | social-posts |
@@ -114,6 +114,10 @@
 | Method | 路径 | 替代接口 | Sunset |
 |---|---|---|---|
 | `GET` | `/api/v1/articles/search` | `/api/v1/articles` | `2026-12-31` |
+| `GET` | `/api/v1/crawler/download` | `-` | `2026-12-31` |
+| `POST` | `/api/v1/crawler/start` | `-` | `2026-12-31` |
+| `GET` | `/api/v1/crawler/status` | `-` | `2026-12-31` |
+| `POST` | `/api/v1/crawler/stop` | `-` | `2026-12-31` |
 | `GET` | `/api/v1/scholars/{url_hash}/students` | `-` | `2026-12-31` |
 | `POST` | `/api/v1/scholars/{url_hash}/students` | `-` | `2026-12-31` |
 | `DELETE` | `/api/v1/scholars/{url_hash}/students/{student_id}` | `-` | `2026-12-31` |
@@ -160,10 +164,14 @@
 
 | Method | Path | Tags | Summary |
 |---|---|---|---|
-| `GET` | `/api/v1/crawler/download` | `crawler-control` | 下载爬取结果 |
-| `POST` | `/api/v1/crawler/start` | `crawler-control` | 启动爬取任务 |
-| `GET` | `/api/v1/crawler/status` | `crawler-control` | 获取爬取状态 |
-| `POST` | `/api/v1/crawler/stop` | `crawler-control` | 停止爬取任务 |
+| `GET` | `/api/v1/crawler/download` | `crawler-control` | 下载爬取结果（deprecated） |
+| `POST` | `/api/v1/crawler/jobs` | `crawler-control` | 创建手动爬取任务 |
+| `GET` | `/api/v1/crawler/jobs/{job_id}` | `crawler-control` | 查询手动爬取任务状态 |
+| `POST` | `/api/v1/crawler/jobs/{job_id}/cancel` | `crawler-control` | 取消手动爬取任务 |
+| `GET` | `/api/v1/crawler/jobs/{job_id}/result` | `crawler-control` | 下载指定手动爬取任务结果 |
+| `POST` | `/api/v1/crawler/start` | `crawler-control` | 启动爬取任务（deprecated） |
+| `GET` | `/api/v1/crawler/status` | `crawler-control` | 获取爬取状态（deprecated） |
+| `POST` | `/api/v1/crawler/stop` | `crawler-control` | 停止爬取任务（deprecated） |
 
 ### `dimensions`
 
@@ -379,6 +387,7 @@
 |---|---|---|---|
 | `GET` | `/api/v1/students` | `students` | 学生列表 |
 | `POST` | `/api/v1/students` | `students` | 新增学生 |
+| `GET` | `/api/v1/students/by-scholar/{scholar_id}` | `students` | 按导师查询学生 |
 | `GET` | `/api/v1/students/options` | `students` | 学生筛选项 |
 | `DELETE` | `/api/v1/students/{student_id}` | `students` | 删除学生 |
 | `GET` | `/api/v1/students/{student_id}` | `students` | 学生详情 |

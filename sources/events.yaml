@@ -63,7 +63,7 @@ sources:
     crawl_method: "static"
     schedule: "daily"
     priority: 1
-    is_enabled: false  # Alibaba Cloud WAF JS challenge blocks all automated access
+    is_enabled: false  # Alibaba Cloud WAF JS challenge page blocks unattended crawlers
     keyword_filter:
       - "AI"
       - "人工智能"
@@ -115,8 +115,8 @@ sources:
     crawl_method: "static"
     schedule: "weekly"
     priority: 2
-    is_enabled: false  # CAPTCHA/anti-bot protection (302 redirect to verify page)
-    keyword_filter: []  # Already filtered by tag
+    is_enabled: true  # Runtime crawl succeeded; keep enabled and monitor for CAPTCHA/noise regressions
+    keyword_filter: ["AI", "人工智能", "智能", "大模型", "机器学习", "机器人", "算力", "AIGC", "自动驾驶"]  # Tag page still has noisy items; keep only AI-related event titles
     selectors:
       list_item: "div.search-tab-content-item"
       title: "a.item-title"
@@ -131,7 +131,7 @@ sources:
     crawl_method: "static"
     schedule: "weekly"
     priority: 2
-    is_enabled: false  # Site unreachable (connection error), needs URL verification
+    is_enabled: false  # Current runtime environment cannot connect to the site (TCP connect timeout)
     selectors:
       list_item: "ul.list li"
       title: "a"

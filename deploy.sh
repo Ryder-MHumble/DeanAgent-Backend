@@ -10,6 +10,8 @@ VENV_DIR="$PROJECT_DIR/.venv"
 PID_FILE="$PROJECT_DIR/.service.pid"
 LOG_DIR="$PROJECT_DIR/logs"
 LOG_FILE="$LOG_DIR/server.log"
+CONSOLE_DIR="$PROJECT_DIR/crawler-console"
+CONSOLE_DIST_DIR="$CONSOLE_DIR/dist"
 VERSION=$(grep '^version' "$PROJECT_DIR/pyproject.toml" 2>/dev/null \
     | head -1 | sed 's/.*"\(.*\)".*/\1/' || echo "0.0.0")
 
@@ -81,8 +83,16 @@ validate_python() {
     python3 -c "import sys; exit(0 if sys.version_info >= (3, 11) else 1)" 2>/dev/null
 }
 
+validate_node() {
+    command -v node >/dev/null 2>&1 && command -v npm >/dev/null 2>&1
+}
+
 get_python_ver() {
     python3 -c "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')" 2>/dev/null || echo "?"
+}
+
+get_node_ver() {
+    node -v 2>/dev/null || echo "N/A"
 }
 
 ensure_venv() {
@@ -130,6 +140,71 @@ install_deps() {
     spinner $pid "Installing Python dependencies..."
     wait $pid 2>/dev/null
     return ${PIPESTATUS[0]:-0}
+}
+
+install_console_deps() {
+    [[ -d "$CONSOLE_DIR" ]] || return 0
+    cd "$CONSOLE_DIR"
+    if [[ -f "package-lock.json" ]]; then
+        npm ci --silent >/dev/null 2>&1 &
+    else
+        npm install --silent >/dev/null 2>&1 &
+    fi
+    local pid=$!
+    spinner $pid "Installing crawler console dependencies..."
+    wait $pid 2>/dev/null
+    return ${PIPESTATUS[0]:-0}
+}
+
+build_console_frontend() {
+    [[ -d "$CONSOLE_DIR" ]] || return 0
+    cd "$CONSOLE_DIR"
+    npm run build >/dev/null 2>&1 &
+    local pid=$!
+    spinner $pid "Building crawler console..."
+    wait $pid 2>/dev/null
+    return ${PIPESTATUS[0]:-0}
+}
+
+console_build_needed() {
+    [[ -d "$CONSOLE_DIR" ]] || return 1
+    [[ -d "$CONSOLE_DIST_DIR" ]] || return 0
+    [[ -f "$CONSOLE_DIST_DIR/index.html" ]] || return 0
+
+    find \
+        "$CONSOLE_DIR/src" \
+        "$CONSOLE_DIR/index.html" \
+        "$CONSOLE_DIR/package.json" \
+        "$CONSOLE_DIR/package-lock.json" \
+        "$CONSOLE_DIR/tsconfig.json" \
+        "$CONSOLE_DIR/tsconfig.node.json" \
+        "$CONSOLE_DIR/vite.config.ts" \
+        -newer "$CONSOLE_DIST_DIR/index.html" 2>/dev/null | grep -q .
+}
+
+ensure_console_frontend_dist() {
+    [[ -d "$CONSOLE_DIR" ]] || return 0
+
+    if ! validate_node; then
+        if [[ ! -d "$CONSOLE_DIST_DIR" ]]; then
+            warn "Node.js/npm unavailable — crawler console dist missing, /console will not be mounted"
+        fi
+        return 0
+    fi
+
+    if ! console_build_needed; then
+        return 0
+    fi
+
+    if [[ -d "$CONSOLE_DIST_DIR" ]]; then
+        warn "Crawler console source changed — rebuilding before start"
+    else
+        warn "Crawler console dist missing — building once before start"
+    fi
+
+    install_console_deps || { fail "crawler-console npm install failed"; return 1; }
+    build_console_frontend || { fail "crawler-console build failed"; return 1; }
+    ok "Crawler console built"
 }
 
 check_playwright() {
@@ -346,6 +421,10 @@ if stages:
         printf "   ${D}Docs${NC}     http://10.1.132.21:%s/docs\n" "$PORT"
         printf "   ${D}Health${NC}   http://10.1.132.21:%s/api/v1/health/\n" "$PORT"
         printf "   ${D}Pipeline${NC} http://10.1.132.21:%s/api/v1/health/pipeline-status\n" "$PORT"
+        if [[ -d "$CONSOLE_DIST_DIR" ]]; then
+            printf "   ${D}Console${NC}  http://10.1.132.21:%s/console\n" "$PORT"
+        fi
+        printf "   ${D}Console API${NC} http://10.1.132.21:%s/console-api/docs\n" "$PORT"
     else
         printf "\n"
         printf "   ${BOLD}SERVICE${NC}\n"
@@ -448,7 +527,26 @@ cmd_deploy() {
     ensure_dirs
     ok "Data directories"
 
-    # 7. Service
+    # 7. Console frontend
+    if [[ -d "$CONSOLE_DIR" ]]; then
+        if validate_node; then
+            ok "Node $(get_node_ver)"
+            local t1; t1=$(date +%s)
+            install_console_deps && ok "Crawler console dependencies ${D}$(($(date +%s) - t1))s${NC}" || {
+                fail "crawler-console npm install failed"
+                return 1
+            }
+            t1=$(date +%s)
+            build_console_frontend && ok "Crawler console build ${D}$(($(date +%s) - t1))s${NC}" || {
+                fail "crawler-console build failed"
+                return 1
+            }
+        else
+            warn "Node.js/npm not found — crawler console will not be rebuilt"
+        fi
+    fi
+
+    # 8. Service
     printf "\n"
     if _is_running; then
         local old_pid; old_pid=$(_get_pid)
@@ -500,7 +598,34 @@ cmd_init() {
     ok "Environment file"
 
     local t0; t0=$(date +%s)
-    install_deps && ok "Dependencies ${D}$(($(date +%s) - t0))s${NC}" || fail "pip install failed"
+    if install_deps; then
+        ok "Dependencies ${D}$(($(date +%s) - t0))s${NC}"
+    else
+        fail "pip install failed"
+        return 1
+    fi
+
+    if [[ -d "$CONSOLE_DIR" ]]; then
+        if validate_node; then
+            ok "Node $(get_node_ver)"
+            local t1; t1=$(date +%s)
+            if install_console_deps; then
+                ok "Crawler console dependencies ${D}$(($(date +%s) - t1))s${NC}"
+            else
+                fail "crawler-console npm install failed"
+                return 1
+            fi
+            t1=$(date +%s)
+            if build_console_frontend; then
+                ok "Crawler console build ${D}$(($(date +%s) - t1))s${NC}"
+            else
+                fail "crawler-console build failed"
+                return 1
+            fi
+        else
+            warn "Node.js/npm not found — crawler console not built"
+        fi
+    fi
 
     if check_playwright; then
         ok "Playwright Chromium"
@@ -528,6 +653,8 @@ cmd_start() {
         fail "No virtual environment. Run: ./deploy.sh init"
         return 1
     fi
+
+    ensure_console_frontend_dist || return 1
 
     if _is_running; then
         warn "Already running (PID $(_get_pid))"
@@ -575,6 +702,8 @@ cmd_restart() {
         fail "No virtual environment. Run: ./deploy.sh init"
         return 1
     fi
+
+    ensure_console_frontend_dist || return 1
 
     PRODUCTION=true
 

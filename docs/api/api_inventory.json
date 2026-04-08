@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-07T13:32:09.301972+00:00",
+  "generated_at": "2026-04-08T07:06:30.503972+00:00",
   "routes": [
     {
       "methods": [
@@ -116,6 +116,58 @@
       ],
       "summary": "下载爬取结果",
       "name": "download_result",
+      "deprecated": true
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/crawler/jobs",
+      "service": "crawler",
+      "tags": [
+        "crawler-control"
+      ],
+      "summary": "创建手动爬取任务",
+      "name": "create_crawl_job",
+      "deprecated": false
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/crawler/jobs/{job_id}",
+      "service": "crawler",
+      "tags": [
+        "crawler-control"
+      ],
+      "summary": "查询手动爬取任务状态",
+      "name": "get_crawl_job",
+      "deprecated": false
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/crawler/jobs/{job_id}/cancel",
+      "service": "crawler",
+      "tags": [
+        "crawler-control"
+      ],
+      "summary": "取消手动爬取任务",
+      "name": "cancel_crawl_job",
+      "deprecated": false
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/crawler/jobs/{job_id}/result",
+      "service": "crawler",
+      "tags": [
+        "crawler-control"
+      ],
+      "summary": "下载指定手动爬取任务结果",
+      "name": "download_crawl_job_result",
       "deprecated": false
     },
     {
@@ -129,7 +181,7 @@
       ],
       "summary": "启动爬取任务",
       "name": "start_crawl",
-      "deprecated": false
+      "deprecated": true
     },
     {
       "methods": [
@@ -142,7 +194,7 @@
       ],
       "summary": "获取爬取状态",
       "name": "get_status",
-      "deprecated": false
+      "deprecated": true
     },
     {
       "methods": [
@@ -155,7 +207,7 @@
       ],
       "summary": "停止爬取任务",
       "name": "stop_crawl",
-      "deprecated": false
+      "deprecated": true
     },
     {
       "methods": [
@@ -1674,6 +1726,19 @@
       ],
       "summary": "新增学生",
       "name": "create_student",
+      "deprecated": false
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/students/by-scholar/{scholar_id}",
+      "service": "students",
+      "tags": [
+        "students"
+      ],
+      "summary": "按导师查询学生",
+      "name": "list_students_by_scholar",
       "deprecated": false
     },
     {

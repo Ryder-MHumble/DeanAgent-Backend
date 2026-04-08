@@ -175,31 +175,21 @@ sources:
     tags: ["policy", "samr", "regulation"]
 
   - id: "miit_policy"
-    name: "工信部-政策文件"
+    name: "工信部-新闻发布（部领导活动/司局动态）"
     group: "policy"
-    url: "https://www.miit.gov.cn/search/zcwjk.html?websiteid=110000000000000&pg=&p=&tpl=14&category=183&q="
-    crawl_method: "dynamic"
+    url: "https://www.miit.gov.cn/xwfb/index.html"
+    crawl_method: "static"
     schedule: "daily"
     priority: 2
     is_enabled: true
-    wait_for: "networkidle"
-    wait_timeout: 20000
     selectors:
-      list_item: "div.jcse-result-box.search-list"
-      title: "div.search-list-t a"
-      link: "div.search-list-t a"
-      date: "div.search-list-b span:nth-child(2)"
+      list_item: "div.bt-lists-cover.bt-con-tab:not(.bt-none):not(.bt-none-yyc) li"
+      title: "a.bt-left"
+      link: "a.bt-left"
+      date: "span.bt-list-time"
       date_format: "%Y-%m-%d"
     base_url: "https://www.miit.gov.cn"
-    keyword_filter:
-      - "人工智能"
-      - "AI"
-      - "算法"
-      - "数据"
-      - "信息化"
-      - "科技"
-      - "智能制造"
-      - "数字经济"
+    keyword_filter: []  # Home page is already narrowed to the requested blocks
     detail_selectors:
       content: "div.ccontent.center, #con_con"
     tags: ["policy", "miit", "industry"]

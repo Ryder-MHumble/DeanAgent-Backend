@@ -35,6 +35,10 @@ class StudentListResponse(BaseModel):
     page: int
     page_size: int
     total_pages: int
+    limit: int
+    offset: int
+    has_more: bool
+    next_offset: int | None = None
     items: list[StudentListItem]
 
 
