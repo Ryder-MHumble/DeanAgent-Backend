@@ -148,6 +148,14 @@ class TechFrontierTopicsResponse(BaseModel):
 
     generated_at: str | None = Field(default=None, description="数据生成时间")
     item_count: int = Field(description="主题数")
+    total: int = Field(description="筛选后的总记录数")
+    limit: int = Field(description="分页条数上限")
+    offset: int = Field(description="分页偏移量")
+    has_more: bool = Field(description="是否还有下一页")
+    next_offset: int | None = Field(
+        default=None,
+        description="下一页偏移量（无下一页时为 null）",
+    )
     items: list[TechTopic] = Field(description="主题列表")
 
 
@@ -156,6 +164,14 @@ class TechFrontierOpportunitiesResponse(BaseModel):
 
     generated_at: str | None = Field(default=None, description="数据生成时间")
     item_count: int = Field(description="机会数")
+    total: int = Field(description="筛选后的总记录数")
+    limit: int = Field(description="分页条数上限")
+    offset: int = Field(description="分页偏移量")
+    has_more: bool = Field(description="是否还有下一页")
+    next_offset: int | None = Field(
+        default=None,
+        description="下一页偏移量（无下一页时为 null）",
+    )
     items: list[Opportunity] = Field(description="机会列表")
 
 
@@ -189,4 +205,12 @@ class TechFrontierSignalsResponse(BaseModel):
 
     generated_at: str | None = Field(default=None, description="数据生成时间")
     item_count: int = Field(description="信号总数")
+    total: int = Field(description="筛选后的总记录数")
+    limit: int = Field(description="分页条数上限")
+    offset: int = Field(description="分页偏移量")
+    has_more: bool = Field(description="是否还有下一页")
+    next_offset: int | None = Field(
+        default=None,
+        description="下一页偏移量（无下一页时为 null）",
+    )
     items: list[SignalItem] = Field(description="信号列表")

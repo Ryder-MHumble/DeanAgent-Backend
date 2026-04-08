@@ -287,8 +287,18 @@ def get_personnel_feed(
         ]
 
     total = len(items)
-    items = items[offset:offset + limit]
-    return {"generated_at": data.get("generated_at"), "item_count": total, "items": items}
+    paged_items = items[offset:offset + limit]
+    next_offset = offset + limit if (offset + len(paged_items)) < total else None
+    return {
+        "generated_at": data.get("generated_at"),
+        "item_count": total,
+        "total": total,
+        "limit": limit,
+        "offset": offset,
+        "has_more": next_offset is not None,
+        "next_offset": next_offset,
+        "items": paged_items,
+    }
 
 
 def get_personnel_changes(
@@ -319,8 +329,18 @@ def get_personnel_changes(
         ]
 
     total = len(items)
-    items = items[offset:offset + limit]
-    return {"generated_at": data.get("generated_at"), "item_count": total, "items": items}
+    paged_items = items[offset:offset + limit]
+    next_offset = offset + limit if (offset + len(paged_items)) < total else None
+    return {
+        "generated_at": data.get("generated_at"),
+        "item_count": total,
+        "total": total,
+        "limit": limit,
+        "offset": offset,
+        "has_more": next_offset is not None,
+        "next_offset": next_offset,
+        "items": paged_items,
+    }
 
 
 def get_personnel_stats() -> dict[str, Any]:
@@ -388,14 +408,19 @@ async def get_enriched_feed(
     total = len(items)
     action_count = sum(1 for i in items if i.get("group") == "action")
     watch_count = total - action_count
-    items = items[offset:offset + limit]
+    paged_items = items[offset:offset + limit]
+    next_offset = offset + limit if (offset + len(paged_items)) < total else None
 
     return {
         "generated_at": datetime.now().isoformat(),
         "total_count": total,
         "action_count": action_count,
         "watch_count": watch_count,
-        "items": items,
+        "limit": limit,
+        "offset": offset,
+        "has_more": next_offset is not None,
+        "next_offset": next_offset,
+        "items": paged_items,
     }
 
 

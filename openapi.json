@@ -285,8 +285,9 @@
           "articles"
         ],
         "summary": "全文搜索",
-        "description": "在文章标题和正文中进行关键词搜索，参数与列表接口相同。",
+        "description": "在文章标题和正文中进行关键词搜索，参数与列表接口相同。建议迁移到 `GET /api/v1/articles`。",
         "operationId": "search_articles_api_v1_articles_search_get",
+        "deprecated": true,
         "parameters": [
           {
             "name": "dimension",
@@ -842,6 +843,42 @@
             "description": "按爬取方式过滤"
           },
           {
+            "name": "source_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按信源类型过滤",
+              "title": "Source Type"
+            },
+            "description": "按信源类型过滤"
+          },
+          {
+            "name": "source_platform",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按信源平台过滤",
+              "title": "Source Platform"
+            },
+            "description": "按信源平台过滤"
+          },
+          {
             "name": "schedule",
             "in": "query",
             "required": false,
@@ -858,6 +895,114 @@
               "title": "Schedule"
             },
             "description": "按调度频率过滤"
+          },
+          {
+            "name": "taxonomy_domain",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按一级专业域过滤",
+              "title": "Taxonomy Domain"
+            },
+            "description": "按一级专业域过滤"
+          },
+          {
+            "name": "taxonomy_domains",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按多个一级专业域过滤（逗号分隔）",
+              "title": "Taxonomy Domains"
+            },
+            "description": "按多个一级专业域过滤（逗号分隔）"
+          },
+          {
+            "name": "taxonomy_track",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按二级主题过滤",
+              "title": "Taxonomy Track"
+            },
+            "description": "按二级主题过滤"
+          },
+          {
+            "name": "taxonomy_tracks",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按多个二级主题过滤（逗号分隔）",
+              "title": "Taxonomy Tracks"
+            },
+            "description": "按多个二级主题过滤（逗号分隔）"
+          },
+          {
+            "name": "taxonomy_scope",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按覆盖范围过滤",
+              "title": "Taxonomy Scope"
+            },
+            "description": "按覆盖范围过滤"
+          },
+          {
+            "name": "taxonomy_scopes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按多个覆盖范围过滤（逗号分隔）",
+              "title": "Taxonomy Scopes"
+            },
+            "description": "按多个覆盖范围过滤（逗号分隔）"
           },
           {
             "name": "is_enabled",
@@ -1120,6 +1265,42 @@
             "description": "按爬取方式过滤"
           },
           {
+            "name": "source_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按信源类型过滤",
+              "title": "Source Type"
+            },
+            "description": "按信源类型过滤"
+          },
+          {
+            "name": "source_platform",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按信源平台过滤",
+              "title": "Source Platform"
+            },
+            "description": "按信源平台过滤"
+          },
+          {
             "name": "schedule",
             "in": "query",
             "required": false,
@@ -1136,6 +1317,114 @@
               "title": "Schedule"
             },
             "description": "按调度频率过滤"
+          },
+          {
+            "name": "taxonomy_domain",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按一级专业域过滤",
+              "title": "Taxonomy Domain"
+            },
+            "description": "按一级专业域过滤"
+          },
+          {
+            "name": "taxonomy_domains",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按多个一级专业域过滤（逗号分隔）",
+              "title": "Taxonomy Domains"
+            },
+            "description": "按多个一级专业域过滤（逗号分隔）"
+          },
+          {
+            "name": "taxonomy_track",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按二级主题过滤",
+              "title": "Taxonomy Track"
+            },
+            "description": "按二级主题过滤"
+          },
+          {
+            "name": "taxonomy_tracks",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按多个二级主题过滤（逗号分隔）",
+              "title": "Taxonomy Tracks"
+            },
+            "description": "按多个二级主题过滤（逗号分隔）"
+          },
+          {
+            "name": "taxonomy_scope",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按覆盖范围过滤",
+              "title": "Taxonomy Scope"
+            },
+            "description": "按覆盖范围过滤"
+          },
+          {
+            "name": "taxonomy_scopes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按多个覆盖范围过滤（逗号分隔）",
+              "title": "Taxonomy Scopes"
+            },
+            "description": "按多个覆盖范围过滤（逗号分隔）"
           },
           {
             "name": "is_enabled",
@@ -1303,7 +1592,7 @@
           "sources"
         ],
         "summary": "信源筛选分面",
-        "description": "返回当前筛选条件下的维度/分组/标签/爬取方式/频率/健康状态分布。",
+        "description": "返回当前筛选条件下的维度/分组/标签/爬取方式/频率/健康状态分布，并包含 taxonomy 一级域/二级主题/覆盖范围分布。",
         "operationId": "get_source_facets_api_v1_sources_facets_get",
         "parameters": [
           {
@@ -1433,6 +1722,42 @@
             "description": "按爬取方式过滤"
           },
           {
+            "name": "source_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按信源类型过滤",
+              "title": "Source Type"
+            },
+            "description": "按信源类型过滤"
+          },
+          {
+            "name": "source_platform",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按信源平台过滤",
+              "title": "Source Platform"
+            },
+            "description": "按信源平台过滤"
+          },
+          {
             "name": "schedule",
             "in": "query",
             "required": false,
@@ -1449,6 +1774,114 @@
               "title": "Schedule"
             },
             "description": "按调度频率过滤"
+          },
+          {
+            "name": "taxonomy_domain",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按一级专业域过滤",
+              "title": "Taxonomy Domain"
+            },
+            "description": "按一级专业域过滤"
+          },
+          {
+            "name": "taxonomy_domains",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按多个一级专业域过滤（逗号分隔）",
+              "title": "Taxonomy Domains"
+            },
+            "description": "按多个一级专业域过滤（逗号分隔）"
+          },
+          {
+            "name": "taxonomy_track",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按二级主题过滤",
+              "title": "Taxonomy Track"
+            },
+            "description": "按二级主题过滤"
+          },
+          {
+            "name": "taxonomy_tracks",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按多个二级主题过滤（逗号分隔）",
+              "title": "Taxonomy Tracks"
+            },
+            "description": "按多个二级主题过滤（逗号分隔）"
+          },
+          {
+            "name": "taxonomy_scope",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按覆盖范围过滤",
+              "title": "Taxonomy Scope"
+            },
+            "description": "按覆盖范围过滤"
+          },
+          {
+            "name": "taxonomy_scopes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按多个覆盖范围过滤（逗号分隔）",
+              "title": "Taxonomy Scopes"
+            },
+            "description": "按多个覆盖范围过滤（逗号分隔）"
           },
           {
             "name": "is_enabled",
@@ -1530,6 +1963,810 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SourceFacetsResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/sources/items": {
+      "get": {
+        "tags": [
+          "sources"
+        ],
+        "summary": "按信源取数据（统一入口）",
+        "description": "按 source_id/source_ids/source_name/source_names 查询信源数据。该接口复用文章统一视图，适合外部团队按渠道快速取数。",
+        "operationId": "list_source_items_api_v1_sources_items_get",
+        "parameters": [
+          {
+            "name": "dimension",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by dimension",
+              "title": "Dimension"
+            },
+            "description": "Filter by dimension"
+          },
+          {
+            "name": "source_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按单个信源 ID 筛选（精确匹配）",
+              "title": "Source Id"
+            },
+            "description": "按单个信源 ID 筛选（精确匹配）"
+          },
+          {
+            "name": "source_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按多个信源 ID 筛选（逗号分隔，精确匹配）",
+              "title": "Source Ids"
+            },
+            "description": "按多个信源 ID 筛选（逗号分隔，精确匹配）"
+          },
+          {
+            "name": "source_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按单个信源名称筛选（模糊匹配）",
+              "title": "Source Name"
+            },
+            "description": "按单个信源名称筛选（模糊匹配）"
+          },
+          {
+            "name": "source_names",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按多个信源名称筛选（逗号分隔，模糊匹配）",
+              "title": "Source Names"
+            },
+            "description": "按多个信源名称筛选（逗号分隔，模糊匹配）"
+          },
+          {
+            "name": "keyword",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Keyword filter in title/content",
+              "title": "Keyword"
+            },
+            "description": "Keyword filter in title/content"
+          },
+          {
+            "name": "date_from",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Start date (ISO format)",
+              "title": "Date From"
+            },
+            "description": "Start date (ISO format)"
+          },
+          {
+            "name": "date_to",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "End date (ISO format)",
+              "title": "Date To"
+            },
+            "description": "End date (ISO format)"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Sort field",
+              "default": "crawled_at",
+              "title": "Sort By"
+            },
+            "description": "Sort field"
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Sort order: asc or desc",
+              "default": "desc",
+              "title": "Order"
+            },
+            "description": "Sort order: asc or desc"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Page number",
+              "default": 1,
+              "title": "Page"
+            },
+            "description": "Page number"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "description": "Items per page",
+              "default": 20,
+              "title": "Page Size"
+            },
+            "description": "Items per page"
+          },
+          {
+            "name": "custom_field_key",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按自定义字段 key 过滤",
+              "title": "Custom Field Key"
+            },
+            "description": "按自定义字段 key 过滤"
+          },
+          {
+            "name": "custom_field_value",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "自定义字段 value（需配合 custom_field_key）",
+              "title": "Custom Field Value"
+            },
+            "description": "自定义字段 value（需配合 custom_field_key）"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResponse_ArticleBrief_"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "缺少信源筛选参数",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/sources/resolve": {
+      "get": {
+        "tags": [
+          "sources"
+        ],
+        "summary": "信源解析与直连入口",
+        "description": "用于外部团队快速定位信源 ID 与推荐调用路径。可通过 q 模糊检索或 source_id 精确定位。",
+        "operationId": "resolve_sources_api_v1_sources_resolve_get",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "关键词（匹配信源 ID/名称/分组/标签）",
+              "title": "Q"
+            },
+            "description": "关键词（匹配信源 ID/名称/分组/标签）"
+          },
+          {
+            "name": "source_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "精确信源 ID",
+              "title": "Source Id"
+            },
+            "description": "精确信源 ID"
+          },
+          {
+            "name": "dimension",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按维度过滤",
+              "title": "Dimension"
+            },
+            "description": "按维度过滤"
+          },
+          {
+            "name": "taxonomy_domain",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按一级专业域过滤",
+              "title": "Taxonomy Domain"
+            },
+            "description": "按一级专业域过滤"
+          },
+          {
+            "name": "taxonomy_track",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按二级主题过滤",
+              "title": "Taxonomy Track"
+            },
+            "description": "按二级主题过滤"
+          },
+          {
+            "name": "taxonomy_scope",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按覆盖范围过滤",
+              "title": "Taxonomy Scope"
+            },
+            "description": "按覆盖范围过滤"
+          },
+          {
+            "name": "group",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按分组过滤",
+              "title": "Group"
+            },
+            "description": "按分组过滤"
+          },
+          {
+            "name": "tag",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按标签过滤",
+              "title": "Tag"
+            },
+            "description": "按标签过滤"
+          },
+          {
+            "name": "is_enabled",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按启用状态过滤",
+              "title": "Is Enabled"
+            },
+            "description": "按启用状态过滤"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "页码",
+              "default": 1,
+              "title": "Page"
+            },
+            "description": "页码"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 200,
+              "minimum": 1,
+              "description": "每页条数",
+              "default": 20,
+              "title": "Page Size"
+            },
+            "description": "每页条数"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SourceResolveResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/sources/deprecations": {
+      "get": {
+        "tags": [
+          "sources"
+        ],
+        "summary": "API 弃用迁移表",
+        "description": "返回当前已标记弃用的 API 及替代路径与 Sunset 日期。",
+        "operationId": "list_api_deprecations_api_v1_sources_deprecations_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiDeprecationResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/sources/{source_id}/items": {
+      "get": {
+        "tags": [
+          "sources"
+        ],
+        "summary": "单个信源数据流",
+        "description": "按路径 source_id 获取单个信源的数据流，支持关键词/日期/分页排序参数。",
+        "operationId": "get_source_items_api_v1_sources__source_id__items_get",
+        "parameters": [
+          {
+            "name": "source_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Source Id"
+            }
+          },
+          {
+            "name": "dimension",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by dimension",
+              "title": "Dimension"
+            },
+            "description": "Filter by dimension"
+          },
+          {
+            "name": "source_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按单个信源 ID 筛选（精确匹配）",
+              "title": "Source Id"
+            },
+            "description": "按单个信源 ID 筛选（精确匹配）"
+          },
+          {
+            "name": "source_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按多个信源 ID 筛选（逗号分隔，精确匹配）",
+              "title": "Source Ids"
+            },
+            "description": "按多个信源 ID 筛选（逗号分隔，精确匹配）"
+          },
+          {
+            "name": "source_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按单个信源名称筛选（模糊匹配）",
+              "title": "Source Name"
+            },
+            "description": "按单个信源名称筛选（模糊匹配）"
+          },
+          {
+            "name": "source_names",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按多个信源名称筛选（逗号分隔，模糊匹配）",
+              "title": "Source Names"
+            },
+            "description": "按多个信源名称筛选（逗号分隔，模糊匹配）"
+          },
+          {
+            "name": "keyword",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Keyword filter in title/content",
+              "title": "Keyword"
+            },
+            "description": "Keyword filter in title/content"
+          },
+          {
+            "name": "date_from",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Start date (ISO format)",
+              "title": "Date From"
+            },
+            "description": "Start date (ISO format)"
+          },
+          {
+            "name": "date_to",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "End date (ISO format)",
+              "title": "Date To"
+            },
+            "description": "End date (ISO format)"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Sort field",
+              "default": "crawled_at",
+              "title": "Sort By"
+            },
+            "description": "Sort field"
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Sort order: asc or desc",
+              "default": "desc",
+              "title": "Order"
+            },
+            "description": "Sort order: asc or desc"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Page number",
+              "default": 1,
+              "title": "Page"
+            },
+            "description": "Page number"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "description": "Items per page",
+              "default": 20,
+              "title": "Page Size"
+            },
+            "description": "Items per page"
+          },
+          {
+            "name": "custom_field_key",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按自定义字段 key 过滤",
+              "title": "Custom Field Key"
+            },
+            "description": "按自定义字段 key 过滤"
+          },
+          {
+            "name": "custom_field_value",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "自定义字段 value（需配合 custom_field_key）",
+              "title": "Custom Field Value"
+            },
+            "description": "自定义字段 value（需配合 custom_field_key）"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResponse_ArticleBrief_"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "信源不存在",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1685,9 +2922,13 @@
             "required": false,
             "schema": {
               "type": "integer",
+              "maximum": 200,
+              "minimum": 1,
+              "description": "返回日志条数上限",
               "default": 20,
               "title": "Limit"
-            }
+            },
+            "description": "返回日志条数上限"
           }
         ],
         "responses": {
@@ -1701,6 +2942,16 @@
                     "$ref": "#/components/schemas/CrawlLogResponse"
                   },
                   "title": "Response Get Source Logs Api V1 Sources  Source Id  Logs Get"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "信源不存在",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1802,7 +3053,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CrawlStartResponse"
+                }
               }
             }
           },
@@ -1999,7 +3252,7 @@
           "dimensions"
         ],
         "summary": "维度列表",
-        "description": "列出全部 9 个维度，返回每个维度的文章数量和最后更新时间。",
+        "description": "列出全部维度，返回每个维度的文章数量和最后更新时间。",
         "operationId": "list_dimensions_api_v1_dimensions_get",
         "responses": {
           "200": {
@@ -2019,7 +3272,7 @@
           "dimensions"
         ],
         "summary": "维度文章",
-        "description": "获取指定维度下的文章列表，支持关键词搜索、排序和分页。\n\n可用维度: `national_policy`, `beijing_policy`, `technology`, `talent`, `industry`, `universities`, `events`, `personnel`, `twitter`",
+        "description": "获取指定维度下的文章列表，支持关键词搜索、排序和分页。\n\n可用维度: `national_policy`, `beijing_policy`, `technology`, `talent`, `industry`, `universities`, `events`, `personnel`, `scholars`, `sentiment`, `twitter`",
         "operationId": "get_dimension_articles_api_v1_dimensions__dimension__get",
         "parameters": [
           {
@@ -3009,7 +4262,7 @@
           "daily-briefing"
         ],
         "summary": "获取 AI 早报",
-        "description": "获取 AI 生成的每日早报。包含叙事段落（带交互链接）和聚合指标卡片。\n\n默认返回今日报告。如果今日报告尚未生成（Pipeline 未运行），将实时生成。\n\n段落格式为 `BriefingSegment[][]`，每个 segment 是字符串或 `{text, moduleId, action?}` 链接对象。",
+        "description": "获取 AI 生成的每日早报。包含叙事段落（带交互链接）和聚合指标卡片。\n\n默认返回今日报告。如果今日缓存缺失，将返回最近一次已生成的缓存结果；仅在 `force=true` 时才会实时重生成。\n\n段落格式为 `BriefingSegment[][]`，每个 segment 是字符串或 `{text, moduleId, action?}` 链接对象。",
         "operationId": "get_daily_briefing_api_v1_intel_daily_briefing_report_get",
         "parameters": [
           {
@@ -3061,6 +4314,29 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/intel/daily-briefing/today": {
+      "get": {
+        "tags": [
+          "intel",
+          "daily-briefing"
+        ],
+        "summary": "获取今日 AI 早报（兼容路径）",
+        "description": "兼容旧版调用路径，等价于 `GET /report`（target_date=今天, force=false）。",
+        "operationId": "get_today_daily_briefing_api_v1_intel_daily_briefing_today_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyBriefingResponse"
                 }
               }
             }
@@ -4380,11 +5656,1145 @@
         }
       }
     },
+    "/api/v1/social-kol/ingest/twitter": {
+      "post": {
+        "tags": [
+          "social-kol"
+        ],
+        "summary": "导入 Twitter/KOL 聚合数据",
+        "description": "将 twitterapi.io 聚合结果（最新帖子 + 每帖热门回复）导入统一社媒表。\n\n输入推荐直接复用我们当前的本地 JSON 结构。",
+        "operationId": "ingest_twitter_bundle_api_v1_social_kol_ingest_twitter_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SocialTwitterIngestRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SocialIngestResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/social-kol/accounts": {
+      "get": {
+        "tags": [
+          "social-kol"
+        ],
+        "summary": "账号列表",
+        "description": "查询统一社媒账号库，支持平台/关键词/KOL 标记过滤。",
+        "operationId": "list_accounts_api_v1_social_kol_accounts_get",
+        "parameters": [
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "平台过滤，如 x/linkedin/youtube",
+              "title": "Platform"
+            },
+            "description": "平台过滤，如 x/linkedin/youtube"
+          },
+          {
+            "name": "keyword",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "用户名/显示名/Bio 关键词",
+              "title": "Keyword"
+            },
+            "description": "用户名/显示名/Bio 关键词"
+          },
+          {
+            "name": "is_kol",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "是否只看 KOL 账号",
+              "title": "Is Kol"
+            },
+            "description": "是否只看 KOL 账号"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "last_seen_at",
+                "follower_count",
+                "created_at",
+                "username"
+              ],
+              "type": "string",
+              "description": "排序字段",
+              "default": "last_seen_at",
+              "title": "Sort By"
+            },
+            "description": "排序字段"
+          },
+          {
+            "name": "sort_order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "排序方向",
+              "default": "desc",
+              "title": "Sort Order"
+            },
+            "description": "排序方向"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "页码",
+              "default": 1,
+              "title": "Page"
+            },
+            "description": "页码"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "description": "每页条数",
+              "default": 20,
+              "title": "Page Size"
+            },
+            "description": "每页条数"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SocialAccountListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/social-kol/posts": {
+      "get": {
+        "tags": [
+          "social-kol"
+        ],
+        "summary": "帖子列表",
+        "description": "查询统一社媒帖子表。默认返回 KOL 主帖（post_type=post, is_kol_author=true）。\n可按账号、关键词等过滤。",
+        "operationId": "list_posts_api_v1_social_kol_posts_get",
+        "parameters": [
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "平台过滤，如 x/linkedin/youtube",
+              "title": "Platform"
+            },
+            "description": "平台过滤，如 x/linkedin/youtube"
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "作者用户名",
+              "title": "Username"
+            },
+            "description": "作者用户名"
+          },
+          {
+            "name": "post_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "post",
+                    "reply",
+                    "repost",
+                    "quote",
+                    "comment"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "帖子类型过滤",
+              "default": "post",
+              "title": "Post Type"
+            },
+            "description": "帖子类型过滤"
+          },
+          {
+            "name": "is_kol_author",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "是否仅返回 KOL 作者内容",
+              "default": true,
+              "title": "Is Kol Author"
+            },
+            "description": "是否仅返回 KOL 作者内容"
+          },
+          {
+            "name": "keyword",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "正文/作者关键词搜索",
+              "title": "Keyword"
+            },
+            "description": "正文/作者关键词搜索"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "published_at",
+                "like_count",
+                "reply_count",
+                "repost_count",
+                "view_count",
+                "created_at"
+              ],
+              "type": "string",
+              "description": "排序字段",
+              "default": "published_at",
+              "title": "Sort By"
+            },
+            "description": "排序字段"
+          },
+          {
+            "name": "sort_order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "排序方向",
+              "default": "desc",
+              "title": "Sort Order"
+            },
+            "description": "排序方向"
+          },
+          {
+            "name": "include_top_replies",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "是否附带每条主帖的热门回复（写入 post.top_replies）",
+              "default": false,
+              "title": "Include Top Replies"
+            },
+            "description": "是否附带每条主帖的热门回复（写入 post.top_replies）"
+          },
+          {
+            "name": "top_replies_limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 20,
+              "minimum": 1,
+              "description": "每条主帖附带回复条数",
+              "default": 5,
+              "title": "Top Replies Limit"
+            },
+            "description": "每条主帖附带回复条数"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "页码",
+              "default": 1,
+              "title": "Page"
+            },
+            "description": "页码"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "description": "每页条数",
+              "default": 20,
+              "title": "Page Size"
+            },
+            "description": "每页条数"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SocialPostListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/social-kol/posts/{platform}/{external_post_id}": {
+      "get": {
+        "tags": [
+          "social-kol"
+        ],
+        "summary": "帖子详情（含热门回复）",
+        "description": "按平台 + 帖子外部 ID 获取帖子详情，并返回热门回复。",
+        "operationId": "get_post_detail_api_v1_social_kol_posts__platform___external_post_id__get",
+        "parameters": [
+          {
+            "name": "platform",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Platform"
+            }
+          },
+          {
+            "name": "external_post_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "External Post Id"
+            }
+          },
+          {
+            "name": "top_replies_limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 20,
+              "minimum": 1,
+              "description": "返回热门回复条数",
+              "default": 5,
+              "title": "Top Replies Limit"
+            },
+            "description": "返回热门回复条数"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SocialPostDetailResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Post not found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/social-posts": {
+      "get": {
+        "tags": [
+          "social-posts"
+        ],
+        "summary": "社媒帖子列表",
+        "description": "查询统一社媒帖子库，支持平台/信源/作者/关键词过滤与分页排序。",
+        "operationId": "list_social_posts_api_v1_social_posts_get",
+        "parameters": [
+          {
+            "name": "source_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按单个信源 ID 筛选（精确匹配）",
+              "title": "Source Id"
+            },
+            "description": "按单个信源 ID 筛选（精确匹配）"
+          },
+          {
+            "name": "source_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按多个信源 ID 筛选（逗号分隔，精确匹配）",
+              "title": "Source Ids"
+            },
+            "description": "按多个信源 ID 筛选（逗号分隔，精确匹配）"
+          },
+          {
+            "name": "source_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按单个信源名称筛选（模糊匹配）",
+              "title": "Source Name"
+            },
+            "description": "按单个信源名称筛选（模糊匹配）"
+          },
+          {
+            "name": "source_names",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按多个信源名称筛选（逗号分隔，模糊匹配）",
+              "title": "Source Names"
+            },
+            "description": "按多个信源名称筛选（逗号分隔，模糊匹配）"
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "平台过滤，如 x/youtube/linkedin",
+              "title": "Platform"
+            },
+            "description": "平台过滤，如 x/youtube/linkedin"
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "作者用户名（去掉 @）",
+              "title": "Username"
+            },
+            "description": "作者用户名（去掉 @）"
+          },
+          {
+            "name": "post_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "post",
+                    "reply",
+                    "repost",
+                    "quote",
+                    "comment"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "帖子类型过滤",
+              "title": "Post Type"
+            },
+            "description": "帖子类型过滤"
+          },
+          {
+            "name": "is_kol_author",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "是否仅返回 KOL 作者内容",
+              "title": "Is Kol Author"
+            },
+            "description": "是否仅返回 KOL 作者内容"
+          },
+          {
+            "name": "keyword",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "正文/作者关键词搜索",
+              "title": "Keyword"
+            },
+            "description": "正文/作者关键词搜索"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "published_at",
+                "crawled_at",
+                "like_count",
+                "reply_count",
+                "repost_count",
+                "quote_count",
+                "view_count",
+                "bookmark_count",
+                "created_at"
+              ],
+              "type": "string",
+              "description": "排序字段",
+              "default": "published_at",
+              "title": "Sort By"
+            },
+            "description": "排序字段"
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "排序方向",
+              "default": "desc",
+              "title": "Order"
+            },
+            "description": "排序方向"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "页码",
+              "default": 1,
+              "title": "Page"
+            },
+            "description": "页码"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 200,
+              "minimum": 1,
+              "description": "每页条数",
+              "default": 20,
+              "title": "Page Size"
+            },
+            "description": "每页条数"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResponse_SocialPostBrief_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/social-posts/search": {
+      "get": {
+        "tags": [
+          "social-posts"
+        ],
+        "summary": "社媒帖子搜索",
+        "description": "社媒帖子搜索接口，参数与列表接口一致。建议迁移到 `GET /api/v1/social-posts`。",
+        "operationId": "search_social_posts_api_v1_social_posts_search_get",
+        "deprecated": true,
+        "parameters": [
+          {
+            "name": "source_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按单个信源 ID 筛选（精确匹配）",
+              "title": "Source Id"
+            },
+            "description": "按单个信源 ID 筛选（精确匹配）"
+          },
+          {
+            "name": "source_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按多个信源 ID 筛选（逗号分隔，精确匹配）",
+              "title": "Source Ids"
+            },
+            "description": "按多个信源 ID 筛选（逗号分隔，精确匹配）"
+          },
+          {
+            "name": "source_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按单个信源名称筛选（模糊匹配）",
+              "title": "Source Name"
+            },
+            "description": "按单个信源名称筛选（模糊匹配）"
+          },
+          {
+            "name": "source_names",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按多个信源名称筛选（逗号分隔，模糊匹配）",
+              "title": "Source Names"
+            },
+            "description": "按多个信源名称筛选（逗号分隔，模糊匹配）"
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "平台过滤，如 x/youtube/linkedin",
+              "title": "Platform"
+            },
+            "description": "平台过滤，如 x/youtube/linkedin"
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "作者用户名（去掉 @）",
+              "title": "Username"
+            },
+            "description": "作者用户名（去掉 @）"
+          },
+          {
+            "name": "post_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "post",
+                    "reply",
+                    "repost",
+                    "quote",
+                    "comment"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "帖子类型过滤",
+              "title": "Post Type"
+            },
+            "description": "帖子类型过滤"
+          },
+          {
+            "name": "is_kol_author",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "是否仅返回 KOL 作者内容",
+              "title": "Is Kol Author"
+            },
+            "description": "是否仅返回 KOL 作者内容"
+          },
+          {
+            "name": "keyword",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "正文/作者关键词搜索",
+              "title": "Keyword"
+            },
+            "description": "正文/作者关键词搜索"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "published_at",
+                "crawled_at",
+                "like_count",
+                "reply_count",
+                "repost_count",
+                "quote_count",
+                "view_count",
+                "bookmark_count",
+                "created_at"
+              ],
+              "type": "string",
+              "description": "排序字段",
+              "default": "published_at",
+              "title": "Sort By"
+            },
+            "description": "排序字段"
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "排序方向",
+              "default": "desc",
+              "title": "Order"
+            },
+            "description": "排序方向"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "页码",
+              "default": 1,
+              "title": "Page"
+            },
+            "description": "页码"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 200,
+              "minimum": 1,
+              "description": "每页条数",
+              "default": 20,
+              "title": "Page Size"
+            },
+            "description": "每页条数"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedResponse_SocialPostBrief_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/social-posts/stats": {
+      "get": {
+        "tags": [
+          "social-posts"
+        ],
+        "summary": "社媒帖子统计",
+        "description": "按平台/信源/作者/帖子类型/日期聚合统计。",
+        "operationId": "get_social_post_stats_api_v1_social_posts_stats_get",
+        "parameters": [
+          {
+            "name": "group_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "platform",
+                "source",
+                "author",
+                "post_type",
+                "day"
+              ],
+              "type": "string",
+              "description": "聚合维度",
+              "default": "platform",
+              "title": "Group By"
+            },
+            "description": "聚合维度"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SocialPostStats"
+                  },
+                  "title": "Response Get Social Post Stats Api V1 Social Posts Stats Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/social-posts/{post_id}": {
+      "get": {
+        "tags": [
+          "social-posts"
+        ],
+        "summary": "社媒帖子详情",
+        "description": "根据帖子 ID 获取详情，返回帖子和内嵌热门回复。",
+        "operationId": "get_social_post_detail_api_v1_social_posts__post_id__get",
+        "parameters": [
+          {
+            "name": "post_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Post Id"
+            }
+          },
+          {
+            "name": "top_replies_limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 20,
+              "minimum": 0,
+              "description": "返回热门回复条数",
+              "default": 5,
+              "title": "Top Replies Limit"
+            },
+            "description": "返回热门回复条数"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SocialPostDetail"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/reports/generate": {
       "post": {
         "tags": [
-          "reports",
-          "Reports"
+          "reports"
         ],
         "summary": "Generate Report",
         "description": "生成 AI 分析报告\n\n支持的维度：\n- sentiment: 舆情监测报告\n- policy: 政策分析报告（待实现）\n- technology: 科技前沿报告（待实现）\n- personnel: 人事情报报告（待实现）\n- university: 高校生态报告（待实现）",
@@ -4410,6 +6820,36 @@
               }
             }
           },
+          "400": {
+            "description": "请求参数不合法",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "该报告维度尚未实现",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "报告生成失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
           "422": {
             "description": "Validation Error",
             "content": {
@@ -4426,8 +6866,7 @@
     "/api/v1/reports/sentiment/latest": {
       "get": {
         "tags": [
-          "reports",
-          "Reports"
+          "reports"
         ],
         "summary": "Get Latest Sentiment Report",
         "description": "获取最新的舆情监测报告\n\n快捷接口，生成最近N天的舆情报告。",
@@ -4485,8 +6924,7 @@
     "/api/v1/reports/dimensions": {
       "get": {
         "tags": [
-          "reports",
-          "Reports"
+          "reports"
         ],
         "summary": "List Dimensions",
         "description": "列出所有支持的报告维度\n\n返回各维度的名称、描述和实现状态。",
@@ -4552,11 +6990,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "additionalProperties": true
-                  },
+                  "type": "object",
+                  "additionalProperties": true,
                   "title": "Response Get Calls By Stage Api V1 Llm Tracking Calls By Stage  Stage  Get"
                 }
               }
@@ -4600,11 +7035,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "additionalProperties": true
-                  },
+                  "type": "object",
+                  "additionalProperties": true,
                   "title": "Response Get Calls By Article Api V1 Llm Tracking Calls By Article  Article Id  Get"
                 }
               }
@@ -4935,10 +7367,10 @@
                   "type": "null"
                 }
               ],
-              "description": "机构类型筛选：高校 | 企业 | 研究机构 | 其他（根据高校名称自动推断）",
+              "description": "机构类型筛选：高校 | 企业（公司） | 研究机构 | 其他（根据高校名称自动推断）",
               "title": "Affiliation Type"
             },
-            "description": "机构类型筛选：高校 | 企业 | 研究机构 | 其他（根据高校名称自动推断）"
+            "description": "机构类型筛选：高校 | 企业（公司） | 研究机构 | 其他（根据高校名称自动推断）"
           },
           {
             "name": "keyword",
@@ -5468,10 +7900,10 @@
                   "type": "null"
                 }
               ],
-              "description": "机构类型筛选：高校 | 企业 | 研究机构 | 其他",
+              "description": "机构类型筛选：高校 | 企业（公司） | 研究机构 | 其他",
               "title": "Affiliation Type"
             },
-            "description": "机构类型筛选：高校 | 企业 | 研究机构 | 其他"
+            "description": "机构类型筛选：高校 | 企业（公司） | 研究机构 | 其他"
           },
           {
             "name": "keyword",
@@ -5971,9 +8403,10 @@
         "tags": [
           "scholars"
         ],
-        "summary": "新增用户备注动态",
-        "description": "为指定学者新增一条用户录入的动态备注（获奖/项目立项/任职履新等）。added_by 自动转换为 'user:{added_by}'，created_at 由服务端自动填写。",
+        "summary": "新增用户备注动态（已停用）",
+        "description": "该接口已下线，不再接受写入请求。请改为使用学者标签、项目关联或备注类字段承载人工信息。",
         "operationId": "add_update_api_v1_scholars__url_hash__updates_post",
+        "deprecated": true,
         "parameters": [
           {
             "name": "url_hash",
@@ -5996,13 +8429,11 @@
           }
         },
         "responses": {
-          "201": {
+          "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/app__schemas__scholar__ScholarDetailResponse"
-                }
+                "schema": {}
               }
             }
           },
@@ -6101,9 +8532,10 @@
         "tags": [
           "scholars"
         ],
-        "summary": "删除用户备注动态",
-        "description": "删除指定学者的用户备注动态（按 user_updates 列表中的索引）。只能删除 added_by 以 'user:' 开头的条目；尝试删除爬虫动态将返回 403。",
+        "summary": "删除用户备注动态（已停用）",
+        "description": "该接口已下线，不再接受删除请求。请改为使用学者标签、项目关联或备注类字段承载人工信息。",
         "operationId": "delete_update_api_v1_scholars__url_hash__updates__update_idx__delete",
+        "deprecated": true,
         "parameters": [
           {
             "name": "url_hash",
@@ -6129,9 +8561,7 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/app__schemas__scholar__ScholarDetailResponse"
-                }
+                "schema": {}
               }
             }
           },
@@ -6207,8 +8637,9 @@
           "scholars"
         ],
         "summary": "查询指导学生列表",
-        "description": "返回指定导师下的所有指导学生记录（联合培养学生）。",
+        "description": "返回指定导师下的所有指导学生记录（联合培养学生）。建议迁移至 /api/v1/students。",
         "operationId": "list_students_api_v1_scholars__url_hash__students_get",
+        "deprecated": true,
         "parameters": [
           {
             "name": "url_hash",
@@ -6248,8 +8679,9 @@
           "scholars"
         ],
         "summary": "新增指导学生",
-        "description": "为指定导师新增一名指导学生记录。id / created_at / updated_at 由服务端自动生成，added_by 自动补充为 'user:{added_by}'。",
+        "description": "为指定导师新增一名指导学生记录。id / created_at / updated_at 由服务端自动生成，added_by 自动补充为 'user:{added_by}'。建议迁移至 /api/v1/students。",
         "operationId": "add_student_api_v1_scholars__url_hash__students_post",
+        "deprecated": true,
         "parameters": [
           {
             "name": "url_hash",
@@ -6301,8 +8733,9 @@
           "scholars"
         ],
         "summary": "查询单名学生详情",
-        "description": "根据学生记录 ID 获取单名指导学生的完整信息。",
+        "description": "根据学生记录 ID 获取单名指导学生的完整信息。建议迁移至 /api/v1/students。",
         "operationId": "get_student_api_v1_scholars__url_hash__students__student_id__get",
+        "deprecated": true,
         "parameters": [
           {
             "name": "url_hash",
@@ -6351,8 +8784,9 @@
           "scholars"
         ],
         "summary": "更新学生信息",
-        "description": "部分更新指定学生记录。所有字段均可选，传 null 或不传则保持不变。updated_at 由服务端自动更新。",
+        "description": "部分更新指定学生记录。所有字段均可选，传 null 或不传则保持不变。updated_at 由服务端自动更新。建议迁移至 /api/v1/students。",
         "operationId": "update_student_api_v1_scholars__url_hash__students__student_id__patch",
+        "deprecated": true,
         "parameters": [
           {
             "name": "url_hash",
@@ -6411,8 +8845,9 @@
           "scholars"
         ],
         "summary": "删除学生记录",
-        "description": "删除指定导师下的一条学生记录。",
+        "description": "删除指定导师下的一条学生记录。建议迁移至 /api/v1/students。",
         "operationId": "delete_student_api_v1_scholars__url_hash__students__student_id__delete",
+        "deprecated": true,
         "parameters": [
           {
             "name": "url_hash",
@@ -7515,7 +9950,7 @@
           "events"
         ],
         "summary": "获取活动关联的学者列表",
-        "description": "返回指定活动关联的所有学者 url_hash 列表。",
+        "description": "返回指定活动关联的学者列表（含姓名、头像、机构等简要信息）。",
         "operationId": "get_event_scholars_api_v1_events__event_id__scholars_get",
         "parameters": [
           {
@@ -7536,7 +9971,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "string"
+                    "$ref": "#/components/schemas/EventScholarItem"
                   },
                   "title": "Response Get Event Scholars Api V1 Events  Event Id  Scholars Get"
                 }
@@ -8827,7 +11262,7 @@
           "institutions"
         ],
         "summary": "机构列表（统一接口）",
-        "description": "获取机构列表，支持扁平列表和层级结构两种视图。\n\n**视图类型（view 参数）：**\n- `flat`（默认）：扁平列表，用于「机构页」渲染组织卡片\n- `hierarchy`：层级结构，用于「学者页」支持高校→院系两级展开\n\n**分类体系：**\n- `entity_type`：实体类型（organization | department）\n- `region`：地域（国内 | 国际）\n- `org_type`：机构类型（高校 | 企业 | 研究机构 | 行业学会 | 其他）\n- `classification`：顶层分类（共建高校 | 兄弟院校 | 海外高校 | 其他高校）\n\n**排序规则：**region → org_type → classification → priority → 声望 → 名称\n\n**示例：**\n- 机构页：`?view=flat&entity_type=organization&region=国内&org_type=高校`\n- 学者页：`?view=hierarchy&region=国内&org_type=高校&classification=共建高校`",
+        "description": "获取机构列表，支持扁平列表和层级结构两种视图。\n\n**视图类型（view 参数）：**\n- `flat`（默认）：扁平列表，用于「机构页」渲染组织卡片\n- `hierarchy`：层级结构，用于「学者页」支持一级机构→二级机构两级展开\n\n**分类体系：**\n- `entity_type`：实体类型（organization | department）\n- `region`：地域（国内 | 国际）\n- `org_type`：机构类型（高校 | 企业（公司） | 研究机构 | 行业学会 | 其他）\n- `classification`：顶层分类（共建高校 | 兄弟院校 | 海外高校 | 其他高校）\n\n**排序规则：**region → org_type → classification → priority → 声望 → 名称\n\n**示例：**\n- 机构页：`?view=flat&entity_type=organization&region=国内&org_type=高校`\n- 学者页：`?view=hierarchy&region=国内&org_type=高校&classification=共建高校`",
         "operationId": "list_institutions_api_v1_institutions_get",
         "parameters": [
           {
@@ -8835,6 +11270,10 @@
             "in": "query",
             "required": false,
             "schema": {
+              "enum": [
+                "flat",
+                "hierarchy"
+              ],
               "type": "string",
               "description": "视图类型：flat（扁平列表）| hierarchy（层级结构）",
               "default": "flat",
@@ -8891,10 +11330,10 @@
                   "type": "null"
                 }
               ],
-              "description": "机构类型：高校 | 企业 | 研究机构 | 行业学会 | 其他",
+              "description": "机构类型：高校 | 企业（公司） | 研究机构 | 行业学会 | 其他",
               "title": "Org Type"
             },
-            "description": "机构类型：高校 | 企业 | 研究机构 | 行业学会 | 其他"
+            "description": "机构类型：高校 | 企业（公司） | 研究机构 | 行业学会 | 其他"
           },
           {
             "name": "classification",
@@ -9001,7 +11440,17 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/InstitutionListResponse"
+                    },
+                    {
+                      "$ref": "#/components/schemas/InstitutionHierarchyResponse"
+                    }
+                  ],
+                  "title": "Response List Institutions Api V1 Institutions Get"
+                }
               }
             }
           },
@@ -9022,7 +11471,7 @@
           "institutions"
         ],
         "summary": "创建机构（支持简化模式）",
-        "description": "创建新的机构记录（高校或院系）。**ID 不提供会自动生成**，让你专注于填写关键信息。\n\n## 三种使用场景\n\n### 场景 1: 新增高校（最简单）\n```json\n{\"name\": \"清华大学\", \"entity_type\": \"organization\", \"org_type\": \"高校\", \"region\": \"国内\", \"classification\": \"共建高校\"}\n```\nBody 最少字段：`name`, `entity_type='organization'`\n- `id` 不提供会自动生成（如 'qinghua'）\n- 可选：region, org_type, classification, priority, student_count_24/25, 人员和合作信息等\n\n### 场景 2: 新增院系（需选择高校）\n```json\n{\"name\": \"计算机科学与技术系\", \"entity_type\": \"department\", \"parent_id\": \"qinghua\"}\n```\nBody 必填字段：`name`, `entity_type='department'`, `parent_id`\n- `id` 不提供会自动生成\n- `parent_id` 必须是已存在的高校 ID（可先用 GET /institutions/ 查询）\n\n### 场景 3: 一次性创建高校+多个院系\n```json\n{\n  \"name\": \"北京大学\",\n  \"entity_type\": \"organization\",\n  \"departments\": [\n    {\"name\": \"计算机学院\"},\n    {\"name\": \"信息科学技术学院\"}\n  ]\n}\n```\n- 高校和所有院系的 ID 都会自动生成\n\n## 功能特性\n\n**自动生成 ID** — 从机构名称自动生成简洁易记的 ID（如 '清华' → 'qinghua'）\n\n**AMiner 标准化名** — 创建后自动调用 AMiner 机构搜索接口填充 `org_name`，获取标准化的英文机构名。查询失败不影响创建。\n\n**冲突检测** — 若 ID 已存在，返回 409 Conflict。二级机构重名仅在同一父机构下拦截。",
+        "description": "创建新的机构记录（一级机构或二级机构）。**ID 不提供会自动生成**，让你专注于填写关键信息。\n\n## 三种使用场景\n\n### 场景 1: 新增一级机构（最简单）\n```json\n{\"name\": \"清华大学\", \"entity_type\": \"organization\", \"org_type\": \"高校\", \"region\": \"国内\", \"classification\": \"共建高校\"}\n```\nBody 最少字段：`name`, `entity_type='organization'`\n- `id` 不提供会自动生成（如 'qinghua'）\n- 可选：region, org_type, classification, priority, student_count_24/25, 人员和合作信息等\n\n### 场景 2: 新增二级机构（需选择父一级机构）\n```json\n{\"name\": \"计算机科学与技术系\", \"entity_type\": \"department\", \"parent_id\": \"qinghua\"}\n```\nBody 必填字段：`name`, `entity_type='department'`, `parent_id`\n- `id` 不提供会自动生成\n- `parent_id` 必须是已存在的一级机构 ID（可先用 GET /institutions/ 查询）\n\n### 场景 3: 一次性创建一级机构+多个二级机构\n```json\n{\n  \"name\": \"北京大学\",\n  \"entity_type\": \"organization\",\n  \"secondary_institutions\": [\n    {\"name\": \"计算机学院\"},\n    {\"name\": \"信息科学技术学院\"}\n  ]\n}\n```\n- 一级机构和所有二级机构的 ID 都会自动生成\n\n## 功能特性\n\n**自动生成 ID** — 从机构名称自动生成简洁易记的 ID（如 '清华' → 'qinghua'）\n\n**AMiner 标准化名** — 创建后自动调用 AMiner 机构搜索接口填充 `org_name`，获取标准化的英文机构名。查询失败不影响创建。\n\n**冲突检测** — 若 ID 已存在，返回 409 Conflict。二级机构重名仅在同一父机构下拦截。",
         "operationId": "create_institution_api_v1_institutions_post",
         "requestBody": {
           "required": true,
@@ -9086,7 +11535,7 @@
           "institutions"
         ],
         "summary": "分类体系统计",
-        "description": "返回机构分类体系的层级结构和统计数据，用于前端动态渲染导航栏。\n\n返回格式：\n```json\n{\n  \"total\": 277,\n  \"regions\": {\n    \"国内\": {\n      \"count\": 250,\n      \"org_types\": {\n        \"高校\": {\n          \"count\": 200,\n          \"classifications\": {\n            \"共建高校\": {\"count\": 50},\n            \"兄弟院校\": {\"count\": 80}\n          }\n        },\n        \"企业\": {\"count\": 10},\n        \"研究机构\": {\"count\": 15}\n      }\n    },\n    \"国际\": {\"count\": 27, \"org_types\": {...}}\n  }\n}\n```",
+        "description": "返回机构分类体系的层级结构和统计数据，用于前端动态渲染导航栏。\n\n返回格式：\n```json\n{\n  \"total\": 277,\n  \"regions\": {\n    \"国内\": {\n      \"count\": 250,\n      \"org_types\": {\n        \"高校\": {\n          \"count\": 200,\n          \"classifications\": {\n            \"共建高校\": {\"count\": 50},\n            \"兄弟院校\": {\"count\": 80}\n          }\n        },\n        \"企业\": {\"count\": 10, \"display_name\": \"公司\"},\n        \"研究机构\": {\"count\": 15}\n      }\n    },\n    \"国际\": {\"count\": 27, \"org_types\": {...}}\n  }\n}\n```",
         "operationId": "get_institution_taxonomy_api_v1_institutions_taxonomy_get",
         "responses": {
           "200": {
@@ -9106,7 +11555,7 @@
           "institutions"
         ],
         "summary": "搜索机构（模糊匹配）",
-        "description": "根据关键词搜索机构，支持模糊匹配。用于前端自动完成（autocomplete）功能。\n\n**匹配规则：**\n1. 精确匹配（最高优先级）\n2. 以关键词开头\n3. 包含关键词（不区分大小写）\n4. 字符重叠匹配\n\n**排序规则：**\n- 按相关性得分排序\n- 组织（organization）优先于院系（department）\n- 学者数量多的机构优先\n\n**Query Parameters:**\n- `q` (required): 搜索关键词\n- `limit` (optional, default=10): 返回结果数量\n- `region` (optional): 地域过滤（国内 | 国际）\n- `org_type` (optional): 机构类型过滤（高校 | 企业 | 研究机构 | 其他）",
+        "description": "根据关键词搜索机构，支持模糊匹配。用于前端自动完成（autocomplete）功能。\n\n**匹配规则：**\n1. 精确匹配（最高优先级）\n2. 以关键词开头\n3. 包含关键词（不区分大小写）\n4. 字符重叠匹配\n\n**排序规则：**\n- 按相关性得分排序\n- 组织（organization）优先于院系（department）\n- 学者数量多的机构优先\n\n**Query Parameters:**\n- `q` (required): 搜索关键词\n- `limit` (optional, default=10): 返回结果数量\n- `region` (optional): 地域过滤（国内 | 国际）\n- `org_type` (optional): 机构类型过滤（高校 | 企业（公司） | 研究机构 | 其他）",
         "operationId": "search_institutions_endpoint_api_v1_institutions_search_get",
         "parameters": [
           {
@@ -9199,19 +11648,44 @@
           "institutions"
         ],
         "summary": "建议机构匹配",
-        "description": "根据大学名称查找最佳匹配的机构。用于学者编辑时自动匹配已有机构。\n\n**返回内容：**\n- `matched`: 最佳匹配（强匹配，精确或前缀匹配）\n- `suggestions`: 建议列表（所有相关匹配）\n\n**使用场景：**\n- 用户编辑学者的大学字段时，调用此接口查找是否已有该机构\n- 如果 `matched` 不为空，建议用户使用该标准名称\n- 如果 `matched` 为空但 `suggestions` 不为空，展示建议列表供用户选择\n- 如果都为空，说明是新机构，需要创建\n\n**Query Parameters:**\n- `university` (required): 大学名称",
+        "description": "根据机构名称查找最佳匹配的机构。用于学者编辑时自动匹配已有机构。\n\n**返回内容：**\n- `matched`: 最佳匹配（强匹配，精确或前缀匹配）\n- `suggestions`: 建议列表（所有相关匹配）\n\n**使用场景：**\n- 用户编辑学者所属机构时，调用此接口查找是否已有该机构\n- 如果 `matched` 不为空，建议用户使用该标准名称\n- 如果 `matched` 为空但 `suggestions` 不为空，展示建议列表供用户选择\n- 如果都为空，说明是新机构，需要创建\n\n**Query Parameters:**\n- `institution_name` (recommended): 机构名称\n- `university` (legacy): 大学名称（兼容参数）",
         "operationId": "suggest_institution_endpoint_api_v1_institutions_suggest_get",
         "parameters": [
           {
+            "name": "institution_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "机构名称",
+              "title": "Institution Name"
+            },
+            "description": "机构名称"
+          },
+          {
             "name": "university",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
-              "type": "string",
-              "description": "大学名称",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "[兼容] 大学名称",
               "title": "University"
             },
-            "description": "大学名称"
+            "description": "[兼容] 大学名称"
           }
         ],
         "responses": {
@@ -9293,7 +11767,7 @@
           "institutions"
         ],
         "summary": "机构详情",
-        "description": "根据机构 ID 获取完整机构信息。\n\n**高校详情包含：**\n- 基本信息（分类、优先级、学生数、导师数）\n- 人员信息（驻院领导、委员会、校领导、重要学者）\n- 合作信息（联合实验室、培养合作、学术合作、人才双聘）\n- 院系列表\n\n**院系详情包含：**\n- 基本信息（名称、学者数）\n- 信源列表（source_id, source_name, scholar_count, is_enabled）",
+        "description": "根据机构 ID 获取完整机构信息。\n\n**一级机构详情包含：**\n- 基本信息（分类、优先级、学生数、导师数）\n- 人员信息（驻院领导、委员会、校领导、重要学者）\n- 合作信息（联合实验室、培养合作、学术合作、人才双聘）\n- 二级机构列表（`secondary_institutions`，兼容字段 `departments`）\n\n**二级机构详情包含：**\n- 基本信息（名称、学者数）\n- 信源列表（source_id, source_name, scholar_count, is_enabled）",
         "operationId": "get_institution_api_v1_institutions__institution_id__get",
         "parameters": [
           {
@@ -9334,7 +11808,7 @@
           "institutions"
         ],
         "summary": "更新机构",
-        "description": "更新指定机构的信息。所有字段均可选，仅传入需要修改的字段。\n\n**高校可更新字段：**\n- 基本信息：name, avatar（校徽图片 URL）, category, priority\n- 学生导师：student_count_24, student_count_25, mentor_count\n- 人员信息：resident_leaders, degree_committee, teaching_committee, university_leaders, notable_scholars\n- 合作信息：key_departments, joint_labs, training_cooperation, academic_cooperation, talent_dual_appointment, recruitment_events, visit_exchanges, cooperation_focus\n\n**院系可更新字段：**\n- name",
+        "description": "更新指定机构的信息。所有字段均可选，仅传入需要修改的字段。\n\n**一级机构可更新字段：**\n- 基本信息：name, avatar（校徽图片 URL）, category, priority\n- 学生导师：student_count_24, student_count_25, mentor_count\n- 人员信息：resident_leaders, degree_committee, teaching_committee, university_leaders, notable_scholars\n- 合作信息：key_departments, joint_labs, training_cooperation, academic_cooperation, talent_dual_appointment, recruitment_events, visit_exchanges, cooperation_focus\n- 二级机构维护：`secondary_institutions`（兼容字段：`departments`）\n\n**二级机构可更新字段：**\n- name",
         "operationId": "update_institution_api_v1_institutions__institution_id__patch",
         "parameters": [
           {
@@ -9385,7 +11859,7 @@
           "institutions"
         ],
         "summary": "删除机构",
-        "description": "删除指定的机构记录。\n\n**注意：**\n- 删除高校会同时删除其下所有院系\n- 删除院系不影响父高校",
+        "description": "删除指定的机构记录。\n\n**注意：**\n- 删除一级机构会同时删除其下所有二级机构\n- 删除二级机构不影响父一级机构",
         "operationId": "delete_institution_api_v1_institutions__institution_id__delete",
         "parameters": [
           {
@@ -9532,6 +12006,80 @@
         "title": "AdjunctSupervisorInfo",
         "description": "兼职导师协议详情，替代原 is_adjunct_supervisor: bool。[用户 - 人力部]"
       },
+      "ApiDeprecationItem": {
+        "properties": {
+          "method": {
+            "type": "string",
+            "title": "Method",
+            "description": "HTTP 方法"
+          },
+          "path": {
+            "type": "string",
+            "title": "Path",
+            "description": "已弃用接口路径"
+          },
+          "replacement_path": {
+            "type": "string",
+            "title": "Replacement Path",
+            "description": "替代接口路径"
+          },
+          "sunset_date": {
+            "type": "string",
+            "title": "Sunset Date",
+            "description": "计划 Sunset 日期（YYYY-MM-DD）"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note",
+            "description": "补充说明"
+          }
+        },
+        "type": "object",
+        "required": [
+          "method",
+          "path",
+          "replacement_path",
+          "sunset_date"
+        ],
+        "title": "ApiDeprecationItem",
+        "description": "API 弃用项。"
+      },
+      "ApiDeprecationResponse": {
+        "properties": {
+          "generated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Generated At",
+            "description": "生成时间（UTC）"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "description": "弃用接口总数"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ApiDeprecationItem"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "generated_at",
+          "total"
+        ],
+        "title": "ApiDeprecationResponse",
+        "description": "API 弃用列表响应。"
+      },
       "ArticleBrief": {
         "properties": {
           "id": {
@@ -9651,6 +12199,18 @@
             "examples": [
               85
             ]
+          },
+          "cover_image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cover Image Url",
+            "description": "封面图 URL（从文章元数据中提取的第一张图片）"
           },
           "custom_fields": {
             "additionalProperties": {
@@ -9792,6 +12352,18 @@
             "examples": [
               85
             ]
+          },
+          "cover_image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cover Image Url",
+            "description": "封面图 URL（从文章元数据中提取的第一张图片）"
           },
           "custom_fields": {
             "additionalProperties": {
@@ -10216,6 +12788,38 @@
         "title": "CrawlRequest",
         "description": "Request to start a crawl job."
       },
+      "CrawlStartResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "requested_source_count": {
+            "type": "integer",
+            "title": "Requested Source Count"
+          },
+          "accepted_source_count": {
+            "type": "integer",
+            "title": "Accepted Source Count"
+          },
+          "rejected_source_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Rejected Source Ids",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "requested_source_count",
+          "accepted_source_count"
+        ],
+        "title": "CrawlStartResponse",
+        "description": "Crawl start acknowledgement."
+      },
       "CrawlStatusResponse": {
         "properties": {
           "is_running": {
@@ -10248,6 +12852,11 @@
             "type": "array",
             "title": "Failed Sources",
             "default": []
+          },
+          "requested_source_count": {
+            "type": "integer",
+            "title": "Requested Source Count",
+            "default": 0
           },
           "total_items": {
             "type": "integer",
@@ -10379,7 +12988,7 @@
           "name": {
             "type": "string",
             "title": "Name",
-            "description": "院系名称"
+            "description": "二级机构名称"
           },
           "id": {
             "anyOf": [
@@ -10391,7 +13000,7 @@
               }
             ],
             "title": "Id",
-            "description": "院系唯一 ID（全局唯一）。不提供则自动生成"
+            "description": "二级机构唯一 ID（全局唯一）。不提供则自动生成"
           },
           "org_name": {
             "anyOf": [
@@ -10403,7 +13012,7 @@
               }
             ],
             "title": "Org Name",
-            "description": "AMiner 标准化机构名（院系级别）"
+            "description": "AMiner 标准化机构名（二级机构级别）"
           }
         },
         "type": "object",
@@ -10411,19 +13020,19 @@
           "name"
         ],
         "title": "DepartmentCreateInput",
-        "description": "院系创建输入（用于批量创建或嵌套创建）"
+        "description": "[兼容] 旧版字段模型，请优先使用 SecondaryInstitutionCreateInput。"
       },
       "DepartmentInfo": {
         "properties": {
           "id": {
             "type": "string",
             "title": "Id",
-            "description": "院系 ID"
+            "description": "二级机构 ID"
           },
           "name": {
             "type": "string",
             "title": "Name",
-            "description": "院系名称"
+            "description": "二级机构名称"
           },
           "scholar_count": {
             "type": "integer",
@@ -10441,7 +13050,7 @@
               }
             ],
             "title": "Org Name",
-            "description": "AMiner 标准化机构名（院系级别）"
+            "description": "AMiner 标准化机构名（二级机构级别）"
           },
           "parent_id": {
             "anyOf": [
@@ -10453,7 +13062,7 @@
               }
             ],
             "title": "Parent Id",
-            "description": "父机构 ID"
+            "description": "父机构 ID（一级机构）"
           },
           "sources": {
             "items": {
@@ -10462,7 +13071,7 @@
             },
             "type": "array",
             "title": "Sources",
-            "description": "院系关联信源列表"
+            "description": "二级机构关联信源列表"
           }
         },
         "type": "object",
@@ -10471,7 +13080,7 @@
           "name"
         ],
         "title": "DepartmentInfo",
-        "description": "院系信息"
+        "description": "[兼容] 旧版院系字段模型，请优先使用 SecondaryInstitutionInfo。"
       },
       "DepartmentUpdateInput": {
         "properties": {
@@ -10485,12 +13094,12 @@
               }
             ],
             "title": "Id",
-            "description": "院系 ID（不传则自动生成）"
+            "description": "二级机构 ID（不传则自动生成）"
           },
           "name": {
             "type": "string",
             "title": "Name",
-            "description": "院系名称"
+            "description": "二级机构名称"
           },
           "org_name": {
             "anyOf": [
@@ -10502,7 +13111,7 @@
               }
             ],
             "title": "Org Name",
-            "description": "AMiner 标准化机构名（院系级别）"
+            "description": "AMiner 标准化机构名（二级机构级别）"
           }
         },
         "type": "object",
@@ -10510,7 +13119,7 @@
           "name"
         ],
         "title": "DepartmentUpdateInput",
-        "description": "院系更新输入（用于机构 PATCH 中的 departments 字段）"
+        "description": "[兼容] 旧版字段模型，请优先使用 SecondaryInstitutionUpdateInput。"
       },
       "DynamicUpdate": {
         "properties": {
@@ -10916,6 +13525,63 @@
         ],
         "title": "EventListResponse",
         "description": "Response for GET /events/."
+      },
+      "EventScholarItem": {
+        "properties": {
+          "scholar_id": {
+            "type": "string",
+            "title": "Scholar Id",
+            "description": "学者主键（scholars.id）"
+          },
+          "scholar_url_hash": {
+            "type": "string",
+            "title": "Scholar Url Hash",
+            "description": "学者详情路由主键（优先 url_hash，缺失则回退 scholar_id）",
+            "default": ""
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "学者姓名",
+            "default": ""
+          },
+          "university": {
+            "type": "string",
+            "title": "University",
+            "description": "所属机构/高校",
+            "default": ""
+          },
+          "department": {
+            "type": "string",
+            "title": "Department",
+            "description": "院系",
+            "default": ""
+          },
+          "position": {
+            "type": "string",
+            "title": "Position",
+            "description": "职称",
+            "default": ""
+          },
+          "email": {
+            "type": "string",
+            "title": "Email",
+            "description": "邮箱",
+            "default": ""
+          },
+          "photo_url": {
+            "type": "string",
+            "title": "Photo Url",
+            "description": "头像 URL",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [
+          "scholar_id"
+        ],
+        "title": "EventScholarItem",
+        "description": "Scholar item bound to an event."
       },
       "EventStatsResponse": {
         "properties": {
@@ -11486,7 +14152,22 @@
               }
             ],
             "title": "Parent Id",
-            "description": "父高校 ID（entity_type=department 时必填）"
+            "description": "父一级机构 ID（entity_type=department 时必填）"
+          },
+          "secondary_institutions": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/SecondaryInstitutionCreateInput"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Secondary Institutions",
+            "description": "二级机构列表（entity_type=organization 时可选，支持一次性创建一级+二级机构）"
           },
           "departments": {
             "anyOf": [
@@ -11501,7 +14182,7 @@
               }
             ],
             "title": "Departments",
-            "description": "院系列表（entity_type=organization 时可选，支持一次性创建高校+院系）"
+            "description": "[兼容] 旧版字段，等价于 secondary_institutions"
           },
           "org_name": {
             "anyOf": [
@@ -11779,7 +14460,7 @@
           "name"
         ],
         "title": "InstitutionCreate",
-        "description": "POST /institutions/ — 创建新机构记录\n\n场景 1: 创建高校（organization）\n    - 必填：name, entity_type='organization', org_type='高校'\n    - 可选：id（不提供则自动生成）, region, classification, priority 等\n\n场景 2: 创建院系（高校已存在）\n    - 必填：name, entity_type='department', parent_id\n\n场景 3: 创建高校 + 院系（一次性创建）\n    - 必填：name, entity_type='organization'\n    - 可选：departments 列表"
+        "description": "POST /institutions/ — 创建新机构记录\n\n场景 1: 创建一级机构（organization）\n    - 必填：name, entity_type='organization'\n    - 可选：id（不提供则自动生成）, region, classification, priority 等\n\n场景 2: 创建二级机构（一级机构已存在）\n    - 必填：name, entity_type='department', parent_id\n\n场景 3: 创建一级机构 + 二级机构（一次性创建）\n    - 必填：name, entity_type='organization'\n    - 可选：secondary_institutions 列表"
       },
       "InstitutionDetailResponse": {
         "properties": {
@@ -12103,7 +14784,15 @@
               }
             ],
             "title": "Parent Id",
-            "description": "父机构 ID（所属高校）"
+            "description": "父机构 ID（所属一级机构）"
+          },
+          "secondary_institutions": {
+            "items": {
+              "$ref": "#/components/schemas/SecondaryInstitutionInfo"
+            },
+            "type": "array",
+            "title": "Secondary Institutions",
+            "description": "子二级机构列表（仅一级机构）"
           },
           "departments": {
             "items": {
@@ -12111,7 +14800,7 @@
             },
             "type": "array",
             "title": "Departments",
-            "description": "子院系列表（仅高校）"
+            "description": "[兼容] 旧版字段，等价于 secondary_institutions"
           },
           "scholar_count": {
             "type": "integer",
@@ -12149,17 +14838,416 @@
         "title": "InstitutionDetailResponse",
         "description": "完整机构记录：基本信息 + 人员 + 合作 + 交流"
       },
+      "InstitutionHierarchyDepartment": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "二级机构 ID"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "二级机构名称"
+          },
+          "scholar_count": {
+            "type": "integer",
+            "title": "Scholar Count",
+            "description": "学者数量",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "InstitutionHierarchyDepartment",
+        "description": "层级视图中的二级机构节点。"
+      },
+      "InstitutionHierarchyOrganization": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "一级机构 ID"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "一级机构名称"
+          },
+          "entity_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Entity Type",
+            "description": "实体类型（organization）"
+          },
+          "region": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Region",
+            "description": "地域（国内 | 国际）"
+          },
+          "org_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Org Type",
+            "description": "机构类型"
+          },
+          "classification": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Classification",
+            "description": "顶层分类"
+          },
+          "sub_classification": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sub Classification",
+            "description": "二级分类"
+          },
+          "scholar_count": {
+            "type": "integer",
+            "title": "Scholar Count",
+            "description": "学者数量",
+            "default": 0
+          },
+          "secondary_institutions": {
+            "items": {
+              "$ref": "#/components/schemas/InstitutionHierarchyDepartment"
+            },
+            "type": "array",
+            "title": "Secondary Institutions",
+            "description": "二级机构列表"
+          },
+          "departments": {
+            "items": {
+              "$ref": "#/components/schemas/InstitutionHierarchyDepartment"
+            },
+            "type": "array",
+            "title": "Departments",
+            "description": "[兼容] 旧版字段，等价于 secondary_institutions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "InstitutionHierarchyOrganization",
+        "description": "层级视图中的一级机构节点。"
+      },
+      "InstitutionHierarchyResponse": {
+        "properties": {
+          "primary_institutions": {
+            "items": {
+              "$ref": "#/components/schemas/InstitutionHierarchyOrganization"
+            },
+            "type": "array",
+            "title": "Primary Institutions",
+            "description": "一级机构树（主字段）"
+          },
+          "organizations": {
+            "items": {
+              "$ref": "#/components/schemas/InstitutionHierarchyOrganization"
+            },
+            "type": "array",
+            "title": "Organizations",
+            "description": "[兼容] 旧版字段，等价于 primary_institutions"
+          }
+        },
+        "type": "object",
+        "title": "InstitutionHierarchyResponse",
+        "description": "Response for GET /institutions?view=hierarchy."
+      },
+      "InstitutionListItem": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "机构唯一 ID（通常为高校名称的拼音或缩写）"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "机构名称（一级机构或二级机构）"
+          },
+          "entity_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Entity Type",
+            "description": "实体类型（organization | department）"
+          },
+          "region": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Region",
+            "description": "地域（国内 | 国际）"
+          },
+          "org_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Org Type",
+            "description": "机构类型（高校 | 企业 | 研究机构 | 行业学会 | 其他）"
+          },
+          "classification": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Classification",
+            "description": "顶层分类（共建高校 | 兄弟院校 | 海外高校 | 其他高校）"
+          },
+          "sub_classification": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sub Classification",
+            "description": "二级分类"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type",
+            "description": "[兼容] 旧版类型字段"
+          },
+          "group": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Group",
+            "description": "[兼容] 旧版分组字段"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category",
+            "description": "[兼容] 旧版分类字段"
+          },
+          "priority": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Priority",
+            "description": "优先级（P0/P1/P2/P3，仅高校）"
+          },
+          "scholar_count": {
+            "type": "integer",
+            "title": "Scholar Count",
+            "description": "学者数量",
+            "default": 0
+          },
+          "student_count_total": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Student Count Total",
+            "description": "学生总数（仅高校）"
+          },
+          "mentor_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mentor Count",
+            "description": "导师总数（仅高校）"
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id",
+            "description": "父机构 ID（仅二级机构）"
+          },
+          "avatar": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Avatar",
+            "description": "机构校徽图片链接"
+          },
+          "org_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Org Name",
+            "description": "AMiner 标准化机构名"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "InstitutionListItem",
+        "description": "机构列表项 — 关键字段"
+      },
+      "InstitutionListResponse": {
+        "properties": {
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "description": "符合条件的总机构数"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page",
+            "description": "当前页码"
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size",
+            "description": "每页条数"
+          },
+          "total_pages": {
+            "type": "integer",
+            "title": "Total Pages",
+            "description": "总页数"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/InstitutionListItem"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "total",
+          "page",
+          "page_size",
+          "total_pages",
+          "items"
+        ],
+        "title": "InstitutionListResponse",
+        "description": "Response for GET /institutions/."
+      },
       "InstitutionStatsResponse": {
         "properties": {
+          "total_primary_institutions": {
+            "type": "integer",
+            "title": "Total Primary Institutions",
+            "description": "总一级机构数（entity_type=organization）"
+          },
+          "total_secondary_institutions": {
+            "type": "integer",
+            "title": "Total Secondary Institutions",
+            "description": "总二级机构数（entity_type=department）"
+          },
           "total_universities": {
             "type": "integer",
             "title": "Total Universities",
-            "description": "总高校数"
+            "description": "[兼容] 旧版字段，等价于 total_primary_institutions"
           },
           "total_departments": {
             "type": "integer",
             "title": "Total Departments",
-            "description": "总院系数"
+            "description": "[兼容] 旧版字段，等价于 total_secondary_institutions"
           },
           "total_scholars": {
             "type": "integer",
@@ -12197,6 +15285,8 @@
         },
         "type": "object",
         "required": [
+          "total_primary_institutions",
+          "total_secondary_institutions",
           "total_universities",
           "total_departments",
           "total_scholars",
@@ -12267,7 +15357,7 @@
               }
             ],
             "title": "Parent Id",
-            "description": "父机构 ID（entity_type=department 时可用）"
+            "description": "父机构 ID（entity_type=department，指向一级机构）"
           },
           "region": {
             "anyOf": [
@@ -12316,6 +15406,18 @@
             ],
             "title": "Sub Classification",
             "description": "二级分类"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category",
+            "description": "[兼容] 旧版分类字段，等价于 sub_classification"
           },
           "priority": {
             "anyOf": [
@@ -12560,6 +15662,21 @@
             "title": "Cooperation Focus",
             "description": "合作重点"
           },
+          "secondary_institutions": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/SecondaryInstitutionUpdateInput"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Secondary Institutions",
+            "description": "二级机构列表（仅一级机构可用，传入时按全量同步）"
+          },
           "departments": {
             "anyOf": [
               {
@@ -12573,7 +15690,7 @@
               }
             ],
             "title": "Departments",
-            "description": "二级机构列表（仅一级机构可用，传入时按全量同步）"
+            "description": "[兼容] 旧版字段，等价于 secondary_institutions"
           },
           "custom_fields": {
             "anyOf": [
@@ -13014,6 +16131,59 @@
         ],
         "title": "PaginatedResponse[ArticleBrief]"
       },
+      "PaginatedResponse_SocialPostBrief_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/SocialPostBrief"
+            },
+            "type": "array",
+            "title": "Items",
+            "description": "当前页的数据列表"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "description": "符合条件的总记录数",
+            "examples": [
+              156
+            ]
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page",
+            "description": "当前页码（从 1 开始）",
+            "examples": [
+              1
+            ]
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size",
+            "description": "每页条数",
+            "examples": [
+              20
+            ]
+          },
+          "total_pages": {
+            "type": "integer",
+            "title": "Total Pages",
+            "description": "总页数",
+            "examples": [
+              8
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total",
+          "page",
+          "page_size",
+          "total_pages"
+        ],
+        "title": "PaginatedResponse[SocialPostBrief]"
+      },
       "PaperMeta": {
         "properties": {
           "paper_id": {
@@ -13351,6 +16521,18 @@
               "中国政府网"
             ]
           },
+          "source_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Name",
+            "description": "来源名称"
+          },
           "sourceUrl": {
             "anyOf": [
               {
@@ -13362,6 +16544,30 @@
             ],
             "title": "Sourceurl",
             "description": "原文链接"
+          },
+          "sourceTitle": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sourcetitle",
+            "description": "原始文章标题"
+          },
+          "sourceContent": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sourcecontent",
+            "description": "原始文章正文"
           },
           "relevance": {
             "type": "integer",
@@ -13494,6 +16700,53 @@
               30
             ]
           },
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "description": "筛选后的总记录数",
+            "examples": [
+              30
+            ]
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit",
+            "description": "分页条数上限",
+            "examples": [
+              50
+            ]
+          },
+          "offset": {
+            "type": "integer",
+            "title": "Offset",
+            "description": "分页偏移量",
+            "examples": [
+              0
+            ]
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More",
+            "description": "是否还有下一页",
+            "examples": [
+              false
+            ]
+          },
+          "next_offset": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Offset",
+            "description": "下一页偏移量（无下一页时为 null）",
+            "examples": [
+              null
+            ]
+          },
           "items": {
             "items": {
               "$ref": "#/components/schemas/PersonnelChange"
@@ -13506,6 +16759,10 @@
         "type": "object",
         "required": [
           "item_count",
+          "total",
+          "limit",
+          "offset",
+          "has_more",
           "items"
         ],
         "title": "PersonnelChangesResponse",
@@ -13554,6 +16811,45 @@
               37
             ]
           },
+          "limit": {
+            "type": "integer",
+            "title": "Limit",
+            "description": "分页条数上限",
+            "examples": [
+              50
+            ]
+          },
+          "offset": {
+            "type": "integer",
+            "title": "Offset",
+            "description": "分页偏移量",
+            "examples": [
+              0
+            ]
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More",
+            "description": "是否还有下一页",
+            "examples": [
+              true
+            ]
+          },
+          "next_offset": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Offset",
+            "description": "下一页偏移量（无下一页时为 null）",
+            "examples": [
+              50
+            ]
+          },
           "items": {
             "items": {
               "$ref": "#/components/schemas/PersonnelChangeEnriched"
@@ -13566,6 +16862,9 @@
         "type": "object",
         "required": [
           "total_count",
+          "limit",
+          "offset",
+          "has_more",
           "items"
         ],
         "title": "PersonnelEnrichedFeedResponse",
@@ -13799,6 +17098,53 @@
               12
             ]
           },
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "description": "筛选后的总记录数",
+            "examples": [
+              12
+            ]
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit",
+            "description": "分页条数上限",
+            "examples": [
+              50
+            ]
+          },
+          "offset": {
+            "type": "integer",
+            "title": "Offset",
+            "description": "分页偏移量",
+            "examples": [
+              0
+            ]
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More",
+            "description": "是否还有下一页",
+            "examples": [
+              true
+            ]
+          },
+          "next_offset": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Offset",
+            "description": "下一页偏移量（无下一页时为 null）",
+            "examples": [
+              50
+            ]
+          },
           "items": {
             "items": {
               "$ref": "#/components/schemas/PersonnelFeedItem"
@@ -13811,6 +17157,10 @@
         "type": "object",
         "required": [
           "item_count",
+          "total",
+          "limit",
+          "offset",
+          "has_more",
           "items"
         ],
         "title": "PersonnelFeedResponse",
@@ -14272,6 +17622,53 @@
               25
             ]
           },
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "description": "筛选后的总记录数",
+            "examples": [
+              25
+            ]
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit",
+            "description": "分页条数上限",
+            "examples": [
+              50
+            ]
+          },
+          "offset": {
+            "type": "integer",
+            "title": "Offset",
+            "description": "分页偏移量",
+            "examples": [
+              0
+            ]
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More",
+            "description": "是否还有下一页",
+            "examples": [
+              true
+            ]
+          },
+          "next_offset": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Offset",
+            "description": "下一页偏移量（无下一页时为 null）",
+            "examples": [
+              50
+            ]
+          },
           "items": {
             "items": {
               "$ref": "#/components/schemas/PolicyFeedItem"
@@ -14284,6 +17681,10 @@
         "type": "object",
         "required": [
           "item_count",
+          "total",
+          "limit",
+          "offset",
+          "has_more",
           "items"
         ],
         "title": "PolicyFeedResponse",
@@ -14480,6 +17881,53 @@
               8
             ]
           },
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "description": "筛选后的总记录数",
+            "examples": [
+              8
+            ]
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit",
+            "description": "分页条数上限",
+            "examples": [
+              50
+            ]
+          },
+          "offset": {
+            "type": "integer",
+            "title": "Offset",
+            "description": "分页偏移量",
+            "examples": [
+              0
+            ]
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More",
+            "description": "是否还有下一页",
+            "examples": [
+              false
+            ]
+          },
+          "next_offset": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Offset",
+            "description": "下一页偏移量（无下一页时为 null）",
+            "examples": [
+              null
+            ]
+          },
           "items": {
             "items": {
               "$ref": "#/components/schemas/PolicyItem"
@@ -14492,6 +17940,10 @@
         "type": "object",
         "required": [
           "item_count",
+          "total",
+          "limit",
+          "offset",
+          "has_more",
           "items"
         ],
         "title": "PolicyOpportunitiesResponse",
@@ -15293,6 +18745,21 @@
             "title": "Item Count",
             "description": "科研成果总数"
           },
+          "page": {
+            "type": "integer",
+            "title": "Page",
+            "description": "当前页码"
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size",
+            "description": "每页条数"
+          },
+          "total_pages": {
+            "type": "integer",
+            "title": "Total Pages",
+            "description": "总页数"
+          },
           "type_stats": {
             "additionalProperties": {
               "type": "integer"
@@ -15314,6 +18781,9 @@
         "required": [
           "generated_at",
           "item_count",
+          "page",
+          "page_size",
+          "total_pages",
           "type_stats",
           "items"
         ],
@@ -16068,7 +19538,7 @@
               }
             ],
             "title": "Department",
-            "description": "所属院系"
+            "description": "所属二级机构（如院系/事业部/研究中心）"
           },
           "research_area": {
             "anyOf": [
@@ -16391,6 +19861,144 @@
         ],
         "title": "ScholarStatsResponse",
         "description": "Scholar statistics response."
+      },
+      "SecondaryInstitutionCreateInput": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "二级机构名称"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id",
+            "description": "二级机构唯一 ID（全局唯一）。不提供则自动生成"
+          },
+          "org_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Org Name",
+            "description": "AMiner 标准化机构名（二级机构级别）"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "SecondaryInstitutionCreateInput",
+        "description": "二级机构创建输入（用于批量创建或嵌套创建）"
+      },
+      "SecondaryInstitutionInfo": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "二级机构 ID"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "二级机构名称"
+          },
+          "scholar_count": {
+            "type": "integer",
+            "title": "Scholar Count",
+            "description": "学者数量",
+            "default": 0
+          },
+          "org_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Org Name",
+            "description": "AMiner 标准化机构名（二级机构级别）"
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id",
+            "description": "父机构 ID（一级机构）"
+          },
+          "sources": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Sources",
+            "description": "二级机构关联信源列表"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "SecondaryInstitutionInfo",
+        "description": "二级机构信息（一级机构下挂载的子机构）"
+      },
+      "SecondaryInstitutionUpdateInput": {
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id",
+            "description": "二级机构 ID（不传则自动生成）"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "二级机构名称"
+          },
+          "org_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Org Name",
+            "description": "AMiner 标准化机构名（二级机构级别）"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "SecondaryInstitutionUpdateInput",
+        "description": "二级机构更新输入（用于机构 PATCH）"
       },
       "SentimentComment": {
         "properties": {
@@ -17247,6 +20855,843 @@
         "title": "SignalItem",
         "description": "扁平信号条目（news + kol 混合流）。"
       },
+      "SocialAccountItem": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "platform": {
+            "type": "string",
+            "title": "Platform"
+          },
+          "username": {
+            "type": "string",
+            "title": "Username"
+          },
+          "username_normalized": {
+            "type": "string",
+            "title": "Username Normalized"
+          },
+          "display_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Display Name"
+          },
+          "platform_user_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Platform User Id"
+          },
+          "profile_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile Url"
+          },
+          "avatar_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Avatar Url"
+          },
+          "bio": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bio"
+          },
+          "follower_count": {
+            "type": "integer",
+            "title": "Follower Count",
+            "default": 0
+          },
+          "following_count": {
+            "type": "integer",
+            "title": "Following Count",
+            "default": 0
+          },
+          "post_count": {
+            "type": "integer",
+            "title": "Post Count",
+            "default": 0
+          },
+          "is_verified": {
+            "type": "boolean",
+            "title": "Is Verified",
+            "default": false
+          },
+          "is_kol": {
+            "type": "boolean",
+            "title": "Is Kol",
+            "default": false
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata"
+          },
+          "first_seen_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "First Seen At"
+          },
+          "last_seen_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Seen At"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "platform",
+          "username",
+          "username_normalized"
+        ],
+        "title": "SocialAccountItem",
+        "description": "Unified social account profile."
+      },
+      "SocialAccountListResponse": {
+        "properties": {
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size"
+          },
+          "total_pages": {
+            "type": "integer",
+            "title": "Total Pages"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/SocialAccountItem"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "total",
+          "page",
+          "page_size",
+          "total_pages",
+          "items"
+        ],
+        "title": "SocialAccountListResponse"
+      },
+      "SocialIngestResponse": {
+        "properties": {
+          "platform": {
+            "type": "string",
+            "title": "Platform"
+          },
+          "users": {
+            "type": "integer",
+            "title": "Users"
+          },
+          "kol_accounts_upserted": {
+            "type": "integer",
+            "title": "Kol Accounts Upserted"
+          },
+          "accounts_upserted": {
+            "type": "integer",
+            "title": "Accounts Upserted"
+          },
+          "posts_upserted": {
+            "type": "integer",
+            "title": "Posts Upserted"
+          },
+          "skipped_posts": {
+            "type": "integer",
+            "title": "Skipped Posts",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "platform",
+          "users",
+          "kol_accounts_upserted",
+          "accounts_upserted",
+          "posts_upserted"
+        ],
+        "title": "SocialIngestResponse"
+      },
+      "SocialPostBrief": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "内部帖子 ID，格式 social:<platform>:<external_post_id>"
+          },
+          "platform": {
+            "type": "string",
+            "title": "Platform"
+          },
+          "external_post_id": {
+            "type": "string",
+            "title": "External Post Id"
+          },
+          "source_id": {
+            "type": "string",
+            "title": "Source Id"
+          },
+          "source_name": {
+            "type": "string",
+            "title": "Source Name"
+          },
+          "author_username": {
+            "type": "string",
+            "title": "Author Username"
+          },
+          "author_display_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Author Display Name"
+          },
+          "post_type": {
+            "type": "string",
+            "title": "Post Type",
+            "default": "post"
+          },
+          "content_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Content Text"
+          },
+          "post_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Post Url"
+          },
+          "published_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published At"
+          },
+          "crawled_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Crawled At"
+          },
+          "like_count": {
+            "type": "integer",
+            "title": "Like Count",
+            "default": 0
+          },
+          "reply_count": {
+            "type": "integer",
+            "title": "Reply Count",
+            "default": 0
+          },
+          "repost_count": {
+            "type": "integer",
+            "title": "Repost Count",
+            "default": 0
+          },
+          "quote_count": {
+            "type": "integer",
+            "title": "Quote Count",
+            "default": 0
+          },
+          "view_count": {
+            "type": "integer",
+            "title": "View Count",
+            "default": 0
+          },
+          "bookmark_count": {
+            "type": "integer",
+            "title": "Bookmark Count",
+            "default": 0
+          },
+          "top_replies_count": {
+            "type": "integer",
+            "title": "Top Replies Count",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "platform",
+          "external_post_id",
+          "source_id",
+          "source_name",
+          "author_username"
+        ],
+        "title": "SocialPostBrief"
+      },
+      "SocialPostDetail": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "内部帖子 ID，格式 social:<platform>:<external_post_id>"
+          },
+          "platform": {
+            "type": "string",
+            "title": "Platform"
+          },
+          "external_post_id": {
+            "type": "string",
+            "title": "External Post Id"
+          },
+          "source_id": {
+            "type": "string",
+            "title": "Source Id"
+          },
+          "source_name": {
+            "type": "string",
+            "title": "Source Name"
+          },
+          "author_username": {
+            "type": "string",
+            "title": "Author Username"
+          },
+          "author_display_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Author Display Name"
+          },
+          "post_type": {
+            "type": "string",
+            "title": "Post Type",
+            "default": "post"
+          },
+          "content_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Content Text"
+          },
+          "post_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Post Url"
+          },
+          "published_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published At"
+          },
+          "crawled_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Crawled At"
+          },
+          "like_count": {
+            "type": "integer",
+            "title": "Like Count",
+            "default": 0
+          },
+          "reply_count": {
+            "type": "integer",
+            "title": "Reply Count",
+            "default": 0
+          },
+          "repost_count": {
+            "type": "integer",
+            "title": "Repost Count",
+            "default": 0
+          },
+          "quote_count": {
+            "type": "integer",
+            "title": "Quote Count",
+            "default": 0
+          },
+          "view_count": {
+            "type": "integer",
+            "title": "View Count",
+            "default": 0
+          },
+          "bookmark_count": {
+            "type": "integer",
+            "title": "Bookmark Count",
+            "default": 0
+          },
+          "top_replies_count": {
+            "type": "integer",
+            "title": "Top Replies Count",
+            "default": 0
+          },
+          "top_replies": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Top Replies"
+          },
+          "extra": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Extra"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "platform",
+          "external_post_id",
+          "source_id",
+          "source_name",
+          "author_username"
+        ],
+        "title": "SocialPostDetail"
+      },
+      "SocialPostDetailResponse": {
+        "properties": {
+          "post": {
+            "$ref": "#/components/schemas/SocialPostItem"
+          }
+        },
+        "type": "object",
+        "required": [
+          "post"
+        ],
+        "title": "SocialPostDetailResponse",
+        "description": "Post detail (top replies embedded in post.top_replies)."
+      },
+      "SocialPostItem": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "platform": {
+            "type": "string",
+            "title": "Platform"
+          },
+          "external_post_id": {
+            "type": "string",
+            "title": "External Post Id"
+          },
+          "account_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Account Id"
+          },
+          "author_username": {
+            "type": "string",
+            "title": "Author Username"
+          },
+          "author_display_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Author Display Name"
+          },
+          "author_platform_user_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Author Platform User Id"
+          },
+          "is_kol_author": {
+            "type": "boolean",
+            "title": "Is Kol Author",
+            "default": false
+          },
+          "post_type": {
+            "type": "string",
+            "title": "Post Type",
+            "default": "post"
+          },
+          "content_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Content Text"
+          },
+          "content_lang": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Content Lang"
+          },
+          "post_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Post Url"
+          },
+          "published_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published At"
+          },
+          "crawled_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Crawled At"
+          },
+          "like_count": {
+            "type": "integer",
+            "title": "Like Count",
+            "default": 0
+          },
+          "reply_count": {
+            "type": "integer",
+            "title": "Reply Count",
+            "default": 0
+          },
+          "repost_count": {
+            "type": "integer",
+            "title": "Repost Count",
+            "default": 0
+          },
+          "quote_count": {
+            "type": "integer",
+            "title": "Quote Count",
+            "default": 0
+          },
+          "view_count": {
+            "type": "integer",
+            "title": "View Count",
+            "default": 0
+          },
+          "bookmark_count": {
+            "type": "integer",
+            "title": "Bookmark Count",
+            "default": 0
+          },
+          "top_replies": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Top Replies"
+          },
+          "top_replies_count": {
+            "type": "integer",
+            "title": "Top Replies Count",
+            "default": 0
+          },
+          "extra": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Extra"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "platform",
+          "external_post_id",
+          "author_username"
+        ],
+        "title": "SocialPostItem",
+        "description": "Unified post record (hot replies embedded in one row)."
+      },
+      "SocialPostListResponse": {
+        "properties": {
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size"
+          },
+          "total_pages": {
+            "type": "integer",
+            "title": "Total Pages"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/SocialPostItem"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "total",
+          "page",
+          "page_size",
+          "total_pages",
+          "items"
+        ],
+        "title": "SocialPostListResponse"
+      },
+      "SocialPostStats": {
+        "properties": {
+          "group": {
+            "type": "string",
+            "title": "Group"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "group",
+          "count"
+        ],
+        "title": "SocialPostStats"
+      },
+      "SocialTwitterIngestRequest": {
+        "properties": {
+          "platform": {
+            "type": "string",
+            "title": "Platform",
+            "description": "Source platform code",
+            "default": "x"
+          },
+          "fetched_at_utc": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fetched At Utc",
+            "description": "Batch crawl timestamp"
+          },
+          "max_posts_per_user": {
+            "type": "integer",
+            "maximum": 20.0,
+            "minimum": 1.0,
+            "title": "Max Posts Per User",
+            "description": "每账号入库帖子数",
+            "default": 3
+          },
+          "top_replies_per_post": {
+            "type": "integer",
+            "maximum": 20.0,
+            "minimum": 0.0,
+            "title": "Top Replies Per Post",
+            "description": "每帖保留热门回复数",
+            "default": 5
+          },
+          "include_replies": {
+            "type": "boolean",
+            "title": "Include Replies",
+            "description": "是否抓取/保留回复信息",
+            "default": true
+          },
+          "users": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Users"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "title": "SocialTwitterIngestRequest",
+        "description": "Raw twitterapi.io-like payload for ingestion."
+      },
       "SourceCatalogResponse": {
         "properties": {
           "generated_at": {
@@ -17419,6 +21864,20 @@
             "type": "array",
             "title": "Crawl Methods"
           },
+          "source_types": {
+            "items": {
+              "$ref": "#/components/schemas/SourceFacetItem"
+            },
+            "type": "array",
+            "title": "Source Types"
+          },
+          "source_platforms": {
+            "items": {
+              "$ref": "#/components/schemas/SourceFacetItem"
+            },
+            "type": "array",
+            "title": "Source Platforms"
+          },
           "schedules": {
             "items": {
               "$ref": "#/components/schemas/SourceFacetItem"
@@ -17432,11 +21891,195 @@
             },
             "type": "array",
             "title": "Health Statuses"
+          },
+          "taxonomy_domains": {
+            "items": {
+              "$ref": "#/components/schemas/SourceFacetItem"
+            },
+            "type": "array",
+            "title": "Taxonomy Domains"
+          },
+          "taxonomy_tracks": {
+            "items": {
+              "$ref": "#/components/schemas/SourceFacetItem"
+            },
+            "type": "array",
+            "title": "Taxonomy Tracks"
+          },
+          "taxonomy_scopes": {
+            "items": {
+              "$ref": "#/components/schemas/SourceFacetItem"
+            },
+            "type": "array",
+            "title": "Taxonomy Scopes"
           }
         },
         "type": "object",
         "title": "SourceFacetsResponse",
         "description": "信源筛选分面。"
+      },
+      "SourceResolveItem": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "信源 ID"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "信源名称"
+          },
+          "dimension": {
+            "type": "string",
+            "title": "Dimension",
+            "description": "维度"
+          },
+          "group": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Group",
+            "description": "信源分组"
+          },
+          "source_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Type",
+            "description": "信源类型"
+          },
+          "source_platform": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Platform",
+            "description": "信源平台"
+          },
+          "taxonomy_domain": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Taxonomy Domain",
+            "description": "一级专业域 ID"
+          },
+          "taxonomy_track": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Taxonomy Track",
+            "description": "二级主题 ID"
+          },
+          "taxonomy_scope": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Taxonomy Scope",
+            "description": "覆盖范围 ID"
+          },
+          "is_enabled": {
+            "type": "boolean",
+            "title": "Is Enabled",
+            "description": "是否启用"
+          },
+          "recommended_endpoint": {
+            "type": "string",
+            "title": "Recommended Endpoint",
+            "description": "推荐直接取数接口"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "dimension",
+          "is_enabled",
+          "recommended_endpoint"
+        ],
+        "title": "SourceResolveItem",
+        "description": "按关键词解析出的信源项。"
+      },
+      "SourceResolveResponse": {
+        "properties": {
+          "query": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Query",
+            "description": "本次查询关键词"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "description": "匹配总数"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page",
+            "description": "页码"
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size",
+            "description": "每页数量"
+          },
+          "total_pages": {
+            "type": "integer",
+            "title": "Total Pages",
+            "description": "总页数"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/SourceResolveItem"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "total",
+          "page",
+          "page_size",
+          "total_pages"
+        ],
+        "title": "SourceResolveResponse",
+        "description": "信源解析响应。"
       },
       "SourceResponse": {
         "properties": {
@@ -17486,6 +22129,21 @@
             "description": "调度频率: hourly / daily / twice_daily 等",
             "examples": [
               "daily"
+            ]
+          },
+          "crawl_interval_minutes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Crawl Interval Minutes",
+            "description": "调度频率折算分钟（若可解析）",
+            "examples": [
+              1440
             ]
           },
           "is_enabled": {
@@ -17598,6 +22256,54 @@
               "twitter_search"
             ]
           },
+          "source_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Type",
+            "description": "信源类型（如 policy_news / social_kol / university_leadership）"
+          },
+          "source_platform": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Platform",
+            "description": "信源平台（如 web / x / youtube / xiaoyuzhou / rss / api）"
+          },
+          "institution_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Institution Name",
+            "description": "关联高校名称（适用于高校类信源）"
+          },
+          "institution_tier": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Institution Tier",
+            "description": "高校层级：985 / 211 / other"
+          },
           "dimension_name": {
             "anyOf": [
               {
@@ -17610,7 +22316,7 @@
             "title": "Dimension Name",
             "description": "维度中文名",
             "examples": [
-              "对人事"
+              "组织人事动态"
             ]
           },
           "dimension_description": {
@@ -17625,6 +22331,111 @@
             "title": "Dimension Description",
             "description": "维度说明"
           },
+          "taxonomy_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Taxonomy Version",
+            "description": "专业分类版本号",
+            "examples": [
+              "v2"
+            ]
+          },
+          "taxonomy_domain": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Taxonomy Domain",
+            "description": "一级专业域 ID",
+            "examples": [
+              "policy_governance"
+            ]
+          },
+          "taxonomy_domain_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Taxonomy Domain Name",
+            "description": "一级专业域名称",
+            "examples": [
+              "政策治理"
+            ]
+          },
+          "taxonomy_track": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Taxonomy Track",
+            "description": "二级主题 ID",
+            "examples": [
+              "policy_national"
+            ]
+          },
+          "taxonomy_track_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Taxonomy Track Name",
+            "description": "二级主题名称",
+            "examples": [
+              "国家政策"
+            ]
+          },
+          "taxonomy_scope": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Taxonomy Scope",
+            "description": "覆盖范围 ID",
+            "examples": [
+              "national"
+            ]
+          },
+          "taxonomy_scope_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Taxonomy Scope Name",
+            "description": "覆盖范围名称",
+            "examples": [
+              "国家级"
+            ]
+          },
           "health_status": {
             "type": "string",
             "enum": [
@@ -17636,6 +22447,12 @@
             "title": "Health Status",
             "description": "健康状态（基于连续失败次数与爬取记录）",
             "default": "unknown"
+          },
+          "is_supported": {
+            "type": "boolean",
+            "title": "Is Supported",
+            "description": "是否仍在当前配置清单中（用于识别过期/下线信源）",
+            "default": true
           },
           "is_enabled_overridden": {
             "type": "boolean",
@@ -18971,6 +23788,38 @@
             "title": "Item Count",
             "description": "机会数"
           },
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "description": "筛选后的总记录数"
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit",
+            "description": "分页条数上限"
+          },
+          "offset": {
+            "type": "integer",
+            "title": "Offset",
+            "description": "分页偏移量"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More",
+            "description": "是否还有下一页"
+          },
+          "next_offset": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Offset",
+            "description": "下一页偏移量（无下一页时为 null）"
+          },
           "items": {
             "items": {
               "$ref": "#/components/schemas/Opportunity"
@@ -18983,6 +23832,10 @@
         "type": "object",
         "required": [
           "item_count",
+          "total",
+          "limit",
+          "offset",
+          "has_more",
           "items"
         ],
         "title": "TechFrontierOpportunitiesResponse",
@@ -19007,6 +23860,38 @@
             "title": "Item Count",
             "description": "信号总数"
           },
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "description": "筛选后的总记录数"
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit",
+            "description": "分页条数上限"
+          },
+          "offset": {
+            "type": "integer",
+            "title": "Offset",
+            "description": "分页偏移量"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More",
+            "description": "是否还有下一页"
+          },
+          "next_offset": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Offset",
+            "description": "下一页偏移量（无下一页时为 null）"
+          },
           "items": {
             "items": {
               "$ref": "#/components/schemas/SignalItem"
@@ -19019,6 +23904,10 @@
         "type": "object",
         "required": [
           "item_count",
+          "total",
+          "limit",
+          "offset",
+          "has_more",
           "items"
         ],
         "title": "TechFrontierSignalsResponse",
@@ -19124,6 +24013,38 @@
             "title": "Item Count",
             "description": "主题数"
           },
+          "total": {
+            "type": "integer",
+            "title": "Total",
+            "description": "筛选后的总记录数"
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit",
+            "description": "分页条数上限"
+          },
+          "offset": {
+            "type": "integer",
+            "title": "Offset",
+            "description": "分页偏移量"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More",
+            "description": "是否还有下一页"
+          },
+          "next_offset": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Offset",
+            "description": "下一页偏移量（无下一页时为 null）"
+          },
           "items": {
             "items": {
               "$ref": "#/components/schemas/TechTopic"
@@ -19136,6 +24057,10 @@
         "type": "object",
         "required": [
           "item_count",
+          "total",
+          "limit",
+          "offset",
+          "has_more",
           "items"
         ],
         "title": "TechFrontierTopicsResponse",
@@ -21595,7 +26520,7 @@
     },
     {
       "name": "sources",
-      "description": "信源管理 — 查看信源配置与状态，启用/禁用信源，手动触发爬取，查看爬取日志。支持目录化筛选（维度/分组/标签/健康状态）与分面统计。"
+      "description": "信源管理 — 查看信源配置与状态，启用/禁用信源，手动触发爬取，查看爬取日志。支持目录化筛选（维度/分组/标签/健康状态）与分面统计；并提供按信源直接取数（/sources/items）、信源解析（/sources/resolve）与弃用迁移表（/sources/deprecations）。"
     },
     {
       "name": "crawler-control",
@@ -21628,6 +26553,14 @@
     {
       "name": "sentiment",
       "description": "舆情监测 — 国内社媒平台（小红书、抖音等）内容与评论监测。数据存储于 Supabase，提供内容信息流、互动统计、评论分析等功能。"
+    },
+    {
+      "name": "social-kol",
+      "description": "统一社媒KOL数据 — 面向 X/LinkedIn/YouTube/小宇宙等平台的统一账号/帖子/回复模型。支持批量导入、账号检索、帖子检索与热门回复查询。"
+    },
+    {
+      "name": "social-posts",
+      "description": "统一社媒帖子库 — social_posts 表的通用查询接口。支持列表、搜索、聚合统计和详情（含帖子热门回复）。"
     },
     {
       "name": "venues",

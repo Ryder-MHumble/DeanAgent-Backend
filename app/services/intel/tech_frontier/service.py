@@ -35,12 +35,18 @@ def get_topics(
         ]
 
     total = len(items)
-    items = items[offset:offset + limit]
+    paged_items = items[offset:offset + limit]
+    next_offset = offset + limit if (offset + len(paged_items)) < total else None
 
     return {
         "generated_at": data.get("generated_at"),
         "item_count": total,
-        "items": items,
+        "total": total,
+        "limit": limit,
+        "offset": offset,
+        "has_more": next_offset is not None,
+        "next_offset": next_offset,
+        "items": paged_items,
     }
 
 
@@ -79,12 +85,18 @@ def get_opportunities(
         ]
 
     total = len(items)
-    items = items[offset:offset + limit]
+    paged_items = items[offset:offset + limit]
+    next_offset = offset + limit if (offset + len(paged_items)) < total else None
 
     return {
         "generated_at": data.get("generated_at"),
         "item_count": total,
-        "items": items,
+        "total": total,
+        "limit": limit,
+        "offset": offset,
+        "has_more": next_offset is not None,
+        "next_offset": next_offset,
+        "items": paged_items,
     }
 
 
@@ -182,10 +194,16 @@ def get_signals(
     unique.sort(key=lambda s: s.get("date", ""), reverse=True)
 
     total = len(unique)
-    unique = unique[offset:offset + limit]
+    paged_items = unique[offset:offset + limit]
+    next_offset = offset + limit if (offset + len(paged_items)) < total else None
 
     return {
         "generated_at": data.get("generated_at"),
         "item_count": total,
-        "items": unique,
+        "total": total,
+        "limit": limit,
+        "offset": offset,
+        "has_more": next_offset is not None,
+        "next_offset": next_offset,
+        "items": paged_items,
     }

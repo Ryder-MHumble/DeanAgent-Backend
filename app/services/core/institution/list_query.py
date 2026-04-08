@@ -22,7 +22,7 @@ from app.services.core.institution.storage import fetch_all_institutions
 _HIERARCHY_CACHE_TTL_SECONDS = 30.0
 _hierarchy_cache: dict[
     tuple[str | None, str | None, str | None, bool | None],
-    tuple[float, dict],
+    tuple[float, dict[str, Any]],
 ] = {}
 
 
@@ -152,7 +152,7 @@ async def get_institutions_unified(
     page: int = 1,
     page_size: int = 20,
     is_adjunct_supervisor: bool | None = None,
-) -> InstitutionListResponse | dict:
+) -> InstitutionListResponse | dict[str, Any]:
     """Unified institution query interface.
 
     Args:
@@ -187,7 +187,7 @@ async def get_institutions_unified(
         )
         _hierarchy_cache[cache_key] = (now, result)
         return result
-    else:
+    if view == "flat":
         return await _get_flat_view(
             entity_type=entity_type,
             region=region,
@@ -198,6 +198,7 @@ async def get_institutions_unified(
             page=page,
             page_size=page_size,
         )
+    raise ValueError("Unsupported view. Use 'flat' or 'hierarchy'.")
 
 
 async def _get_flat_view(
@@ -266,7 +267,7 @@ async def _get_hierarchy_view(
     org_type: str | None = None,
     classification: str | None = None,
     is_adjunct_supervisor: bool | None = None,
-) -> dict:
+) -> dict[str, Any]:
     """Get hierarchy view of institutions (organizations with nested departments).
 
     Args:

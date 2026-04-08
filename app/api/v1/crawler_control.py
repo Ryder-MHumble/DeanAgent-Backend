@@ -39,12 +39,23 @@ class CrawlStatusResponse(BaseModel):
     current_source: str | None = None
     completed_sources: list[str] = []
     failed_sources: list[str] = []
+    requested_source_count: int = 0
     total_items: int = 0
     progress: float = 0.0  # 0.0 to 1.0
 
 
+class CrawlStartResponse(BaseModel):
+    """Crawl start acknowledgement."""
+
+    status: str
+    requested_source_count: int
+    accepted_source_count: int
+    rejected_source_ids: list[str] = []
+
+
 @router.post(
     "/start",
+    response_model=CrawlStartResponse,
     summary="启动爬取任务",
     description="启动一个新的爬取任务，可指定信源、关键词过滤和导出格式。",
     responses={
@@ -58,17 +69,32 @@ async def start_crawl(request: CrawlRequest):
     if service.is_running():
         raise HTTPException(status_code=400, detail="A crawl job is already running")
 
+    if not request.source_ids:
+        raise HTTPException(status_code=400, detail="source_ids cannot be empty")
+
+    accepted_sources, rejected_sources = service.validate_source_ids(request.source_ids)
+    if not accepted_sources:
+        raise HTTPException(
+            status_code=400,
+            detail="No valid source IDs were provided",
+        )
+
     # Start crawl in background
     asyncio.create_task(
         service.start_crawl(
-            source_ids=request.source_ids,
+            source_ids=accepted_sources,
             keyword_filter=request.keyword_filter,
             keyword_blacklist=request.keyword_blacklist,
             export_format=request.export_format,
         )
     )
 
-    return {"status": "started", "source_count": len(request.source_ids)}
+    return {
+        "status": "started",
+        "requested_source_count": len(request.source_ids),
+        "accepted_source_count": len(accepted_sources),
+        "rejected_source_ids": rejected_sources,
+    }
 
 
 @router.post(

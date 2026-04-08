@@ -12,7 +12,7 @@ from app.config import BASE_DIR
 from app.schemas.article import ArticleSearchParams, ArticleUpdate
 from app.schemas.common import PaginatedResponse
 from app.services.intel.shared import parse_source_filter
-from app.services.stores.json_reader import get_all_articles
+from app.services.stores.json_reader import get_all_articles, get_all_articles_paginated
 
 logger = logging.getLogger(__name__)
 
@@ -83,6 +83,21 @@ def _platform_to_source_name(platform: str) -> str:
         "xiaoyuzhou": "小宇宙",
     }
     return mapping.get(platform, platform)
+
+
+def _should_include_social_items(
+    *,
+    dimension: str | None,
+    source_filter: set[str] | None,
+) -> bool:
+    """Whether current query should merge social_posts into article feed."""
+    social_source_ids = set(_SOCIAL_SOURCE_ID_BY_PLATFORM.values())
+
+    if dimension and dimension.lower() not in {"twitter", "social"}:
+        return bool(source_filter and (social_source_ids & source_filter))
+    if source_filter is not None:
+        return bool(social_source_ids & source_filter)
+    return True
 
 
 def _social_row_to_article_item(row: dict[str, Any]) -> dict[str, Any]:
@@ -377,31 +392,73 @@ async def list_articles(params: ArticleSearchParams) -> PaginatedResponse:
         params.source_id, params.source_ids, params.source_name, params.source_names
     )
 
-    # 如果有 source_filter，不传 source_id 给 get_all_articles，之后手动过滤
+    include_social_items = _should_include_social_items(
+        dimension=params.dimension,
+        source_filter=source_filter,
+    )
+    sort_field = params.sort_by if params.sort_by in _ALLOWED_SORT_FIELDS else "crawled_at"
+    reverse = params.order != "asc"
+    offset = (params.page - 1) * params.page_size
+
+    can_use_db_pagination = not include_social_items and not params.custom_field_key
+    if can_use_db_pagination:
+        query_source_ids: list[str] | None
+        if source_filter is None:
+            query_source_ids = [params.source_id] if params.source_id else None
+        else:
+            query_source_ids = sorted(source_filter)
+
+        try:
+            rows, total = await get_all_articles_paginated(
+                dimension=params.dimension,
+                source_ids=query_source_ids,
+                keyword=params.keyword,
+                tags=params.tags,
+                date_from=date_from,
+                date_to=date_to,
+                sort_by=sort_field,
+                order=params.order,
+                limit=params.page_size,
+                offset=offset,
+            )
+            page_items = [_to_brief(item) for item in rows]
+            return PaginatedResponse(
+                items=page_items,
+                total=total,
+                page=params.page,
+                page_size=params.page_size,
+                total_pages=math.ceil(total / params.page_size) if params.page_size else 0,
+            )
+        except RuntimeError:
+            logger.info("DB pagination unavailable, falling back to in-memory article listing")
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("DB pagination failed, falling back to in-memory listing: %s", exc)
+
+    # fallback path: full fetch + in-memory merge/filter/sort/pagination
+    # If there is source_filter, avoid pushing source_id to DB query and filter later.
     items = await get_all_articles(
         dimension=params.dimension,
-        source_id=None if source_filter else params.source_id,
+        source_id=None if source_filter is not None else params.source_id,
         keyword=params.keyword,
         tags=params.tags,
         date_from=date_from,
         date_to=date_to,
     )
 
-    social_items = await _get_social_article_items(
-        dimension=params.dimension,
-        source_filter=source_filter,
-        keyword=params.keyword,
-        date_from=social_date_from,
-        date_to=social_date_to,
-    )
-    if social_items:
-        items.extend(social_items)
+    if include_social_items:
+        social_items = await _get_social_article_items(
+            dimension=params.dimension,
+            source_filter=source_filter,
+            keyword=params.keyword,
+            date_from=social_date_from,
+            date_to=social_date_to,
+        )
+        if social_items:
+            items.extend(social_items)
 
-    # 手动应用信源过滤
-    if source_filter:
+    if source_filter is not None:
         items = [item for item in items if item.get("source_id") in source_filter]
 
-    # custom_fields filtering (before transformation for efficiency)
     if params.custom_field_key:
         items = [
             item for item in items
@@ -409,18 +466,10 @@ async def list_articles(params: ArticleSearchParams) -> PaginatedResponse:
             == params.custom_field_value
         ]
 
-    # Apply annotations
     briefs = [_to_brief(item) for item in items]
-
-    # Sorting
-    sort_field = params.sort_by if params.sort_by in _ALLOWED_SORT_FIELDS else "crawled_at"
-    reverse = params.order != "asc"
     briefs.sort(key=lambda x: x.get(sort_field) or "", reverse=reverse)
-
-    # Pagination
     total = len(briefs)
-    offset = (params.page - 1) * params.page_size
-    page_items = briefs[offset : offset + params.page_size]
+    page_items = briefs[offset: offset + params.page_size]
 
     return PaginatedResponse(
         items=page_items,

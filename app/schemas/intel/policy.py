@@ -99,6 +99,15 @@ class PolicyFeedResponse(BaseModel):
         default=None, description="数据生成时间", examples=["2024-01-15T10:30:00"]
     )
     item_count: int = Field(description="返回的记录数", examples=[25])
+    total: int = Field(description="筛选后的总记录数", examples=[25])
+    limit: int = Field(description="分页条数上限", examples=[50])
+    offset: int = Field(description="分页偏移量", examples=[0])
+    has_more: bool = Field(description="是否还有下一页", examples=[True])
+    next_offset: int | None = Field(
+        default=None,
+        description="下一页偏移量（无下一页时为 null）",
+        examples=[50],
+    )
     items: list[PolicyFeedItem] = Field(description="政策动态列表")
 
 
@@ -109,4 +118,13 @@ class PolicyOpportunitiesResponse(BaseModel):
         default=None, description="数据生成时间", examples=["2024-01-15T10:30:00"]
     )
     item_count: int = Field(description="返回的记录数", examples=[8])
+    total: int = Field(description="筛选后的总记录数", examples=[8])
+    limit: int = Field(description="分页条数上限", examples=[50])
+    offset: int = Field(description="分页偏移量", examples=[0])
+    has_more: bool = Field(description="是否还有下一页", examples=[False])
+    next_offset: int | None = Field(
+        default=None,
+        description="下一页偏移量（无下一页时为 null）",
+        examples=[None],
+    )
     items: list[PolicyItem] = Field(description="政策机会列表")

@@ -25,7 +25,7 @@ async def get_llm_summary() -> dict[str, Any]:
 
 
 @router.get("/calls-by-stage/{stage}")
-async def get_calls_by_stage(stage: str) -> list[dict[str, Any]]:
+async def get_calls_by_stage(stage: str) -> dict[str, Any]:
     """Get all LLM calls for a specific pipeline stage.
 
     Args:
@@ -44,7 +44,7 @@ async def get_calls_by_stage(stage: str) -> list[dict[str, Any]]:
 
 
 @router.get("/calls-by-article/{article_id}")
-async def get_calls_by_article(article_id: str) -> list[dict[str, Any]]:
+async def get_calls_by_article(article_id: str) -> dict[str, Any]:
     """Get all LLM calls for a specific article.
 
     Args:

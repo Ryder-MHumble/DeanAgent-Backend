@@ -38,6 +38,19 @@ async def get_daily_briefing(
 
 
 @router.get(
+    "/today",
+    response_model=DailyBriefingResponse,
+    summary="获取今日 AI 早报（兼容路径）",
+    description="兼容旧版调用路径，等价于 `GET /report`（target_date=今天, force=false）。",
+)
+async def get_today_daily_briefing():
+    return await briefing_service.get_daily_briefing(
+        target_date=None,
+        force_regenerate=False,
+    )
+
+
+@router.get(
     "/metrics",
     response_model=MetricsOnlyResponse,
     summary="获取早报指标卡片",

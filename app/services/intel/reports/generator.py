@@ -26,8 +26,9 @@ class ReportGenerator:
         data: List[Dict[str, Any]],
         date_range: Optional[tuple[datetime, datetime]] = None,
         output_format: str = "markdown",
+        return_analysis: bool = False,
         **kwargs,
-    ) -> str:
+    ) -> str | tuple[str, AnalysisResult]:
         """
         生成完整报告
 
@@ -35,10 +36,11 @@ class ReportGenerator:
             data: 原始数据
             date_range: 日期范围
             output_format: 输出格式 (markdown/json/html)
+            return_analysis: 是否返回分析结果对象
             **kwargs: 传递给分析器的额外参数
 
         Returns:
-            str: 格式化后的报告内容
+            str | tuple[str, AnalysisResult]: 报告内容，或 (报告内容, 分析结果)
         """
         logger.info(
             f"Generating {self.analyzer.dimension} report for {len(data)} items"
@@ -49,13 +51,17 @@ class ReportGenerator:
 
         # 2. 格式化输出
         if output_format == "markdown":
-            return self.formatter.format(analysis_result)
+            formatted_content = self.formatter.format(analysis_result)
         elif output_format == "json":
-            return self._format_json(analysis_result)
+            formatted_content = self._format_json(analysis_result)
         elif output_format == "html":
-            return self._format_html(analysis_result)
+            formatted_content = self._format_html(analysis_result)
         else:
             raise ValueError(f"Unsupported output format: {output_format}")
+
+        if return_analysis:
+            return formatted_content, analysis_result
+        return formatted_content
 
     def _format_json(self, result: AnalysisResult) -> str:
         """格式化为 JSON"""

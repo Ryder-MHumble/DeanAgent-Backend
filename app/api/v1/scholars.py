@@ -329,19 +329,20 @@ async def update_relation(url_hash: str, body: InstituteRelationUpdate):
 
 @router.post(
     "/{url_hash}/updates",
-    response_model=ScholarDetailResponse,
     summary="新增用户备注动态（已停用）",
     description=(
-        "该功能当前阶段已停用（返回数据中 recent_updates 恒为空列表）。"
-        "调用接口将返回学者详情，不再写入动态记录。"
+        "该接口已下线，不再接受写入请求。"
+        "请改为使用学者标签、项目关联或备注类字段承载人工信息。"
     ),
-    status_code=201,
+    deprecated=True,
 )
 async def add_update(url_hash: str, body: UserUpdateCreate):
-    result = await svc.add_scholar_update(url_hash, body.model_dump())
-    if result is None:
-        raise HTTPException(status_code=404, detail=f"Faculty '{url_hash}' not found")
-    return result
+    _ = body
+    await _assert_faculty_exists(url_hash)
+    raise HTTPException(
+        status_code=410,
+        detail="Endpoint '/scholars/{url_hash}/updates' has been retired",
+    )
 
 
 @router.delete(
@@ -358,17 +359,20 @@ async def delete_scholar(url_hash: str):
 
 @router.delete(
     "/{url_hash}/updates/{update_idx}",
-    response_model=ScholarDetailResponse,
     summary="删除用户备注动态（已停用）",
     description=(
-        "该功能当前阶段已停用。调用接口将返回学者详情，不再执行删除。"
+        "该接口已下线，不再接受删除请求。"
+        "请改为使用学者标签、项目关联或备注类字段承载人工信息。"
     ),
+    deprecated=True,
 )
 async def delete_update(url_hash: str, update_idx: int):
-    result = await svc.delete_scholar_update(url_hash, update_idx)
-    if result is None:
-        raise HTTPException(status_code=404, detail=f"Faculty '{url_hash}' not found")
-    return result
+    _ = update_idx
+    await _assert_faculty_exists(url_hash)
+    raise HTTPException(
+        status_code=410,
+        detail="Endpoint '/scholars/{url_hash}/updates/{update_idx}' has been retired",
+    )
 
 
 @router.patch(
@@ -418,7 +422,8 @@ async def _assert_faculty_exists(url_hash: str) -> None:
     "/{url_hash}/students",
     response_model=SupervisedStudentListResponse,
     summary="查询指导学生列表",
-    description="返回指定导师下的所有指导学生记录（联合培养学生）。",
+    description="返回指定导师下的所有指导学生记录（联合培养学生）。建议迁移至 /api/v1/students。",
+    deprecated=True,
 )
 async def list_students(url_hash: str):
     await _assert_faculty_exists(url_hash)
@@ -437,8 +442,10 @@ async def list_students(url_hash: str):
     description=(
         "为指定导师新增一名指导学生记录。"
         "id / created_at / updated_at 由服务端自动生成，added_by 自动补充为 'user:{added_by}'。"
+        "建议迁移至 /api/v1/students。"
     ),
     status_code=201,
+    deprecated=True,
 )
 async def add_student(url_hash: str, body: SupervisedStudentCreate):
     await _assert_faculty_exists(url_hash)
@@ -450,7 +457,8 @@ async def add_student(url_hash: str, body: SupervisedStudentCreate):
     "/{url_hash}/students/{student_id}",
     response_model=SupervisedStudentResponse,
     summary="查询单名学生详情",
-    description="根据学生记录 ID 获取单名指导学生的完整信息。",
+    description="根据学生记录 ID 获取单名指导学生的完整信息。建议迁移至 /api/v1/students。",
+    deprecated=True,
 )
 async def get_student(url_hash: str, student_id: str):
     await _assert_faculty_exists(url_hash)
@@ -467,7 +475,9 @@ async def get_student(url_hash: str, student_id: str):
     description=(
         "部分更新指定学生记录。所有字段均可选，传 null 或不传则保持不变。"
         "updated_at 由服务端自动更新。"
+        "建议迁移至 /api/v1/students。"
     ),
+    deprecated=True,
 )
 async def update_student(url_hash: str, student_id: str, body: SupervisedStudentUpdate):
     await _assert_faculty_exists(url_hash)
@@ -481,8 +491,9 @@ async def update_student(url_hash: str, student_id: str, body: SupervisedStudent
 @router.delete(
     "/{url_hash}/students/{student_id}",
     summary="删除学生记录",
-    description="删除指定导师下的一条学生记录。",
+    description="删除指定导师下的一条学生记录。建议迁移至 /api/v1/students。",
     status_code=204,
+    deprecated=True,
 )
 async def delete_student(url_hash: str, student_id: str):
     await _assert_faculty_exists(url_hash)

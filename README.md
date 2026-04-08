@@ -1,8 +1,8 @@
 # Intelligence Engine Backend Services
 
-中关村人工智能研究院**数据智能平台**（OpenClaw）。自动爬取 **181 个信源**（138 启用，横跨 **9 个信息维度 + 学者知识库**），通过 v1 REST API（**65+ 端点**，含业务智能 27 端点、学者 14 端点）向 **Dean-Agent、ScholarDB-System、Athena、NanoBot** 提供统一数据服务。维护 **2,200+ 位学者**档案，覆盖 9 所顶尖高校。所有数据以本地 JSON 文件存储。
+中关村人工智能研究院**数据智能平台**（OpenClaw）。自动爬取多维信源（覆盖 **9 个信息维度 + 学者知识库**），通过 v1 REST API 向 **Dean-Agent、ScholarDB-System、Athena、NanoBot** 提供统一数据服务。维护 **2,200+ 位学者**档案，覆盖 9 所顶尖高校。接口与信源统计以自动生成文档为准（`docs/api/API_REFERENCE.md`）。
 
-**技术栈**：FastAPI · APScheduler 3.x · httpx · BeautifulSoup4 · Playwright · feedparser · 纯 JSON 存储（无数据库）
+**技术栈**：FastAPI · APScheduler 3.x · httpx · BeautifulSoup4 · Playwright · feedparser · PostgreSQL（Supabase）+ 文件存储
 
 ---
 
@@ -394,7 +394,10 @@ dynamic 类型额外需要：
 
 ## 数据输出
 
-**纯 JSON 存储**（无数据库）：
+**混合存储（数据库 + 文件）**：
+
+- 结构化业务数据（如文章、学者、机构、学生）以数据库为主存储。
+- 爬取原始落盘、处理产物、运行状态与日志仍保留在 `data/` 目录。
 
 **原始数据**：`data/raw/{dimension}/{group}/{source_id}/latest.json`（覆盖模式，每条标记 `is_new`）
 
@@ -506,12 +509,12 @@ python scripts/run_all_crawl.py --concurrency 5  # 仅爬取阶段
 
 - 6 种模板爬虫 + 16 个自定义 Parser（含 LLM 自适应学者爬虫）
 - 181 信源配置（138 启用），覆盖 9 个信息维度 + 学者知识库
-- v1 API **65+ 端点**（核心 14 + 业务智能 27 + 学者 14 + 项目/机构/活动/舆情/LLM追踪）
+- v1 API 全量端点与能力说明由 `docs/api/API_REFERENCE.md` 自动生成
 - 9 阶段每日 Pipeline（爬取→处理→LLM→索引→简报）
 - 5 个业务智能模块：政策智能 · 人事情报 · 科技前沿 · 高校生态 · 每日简报
 - 学者知识库：**2,200+ 位学者**档案，覆盖清华/北大/上交/中科院等 9 所高校
 - 4 个消费端：Dean-Agent · ScholarDB-System · Athena · NanoBot
-- 纯 JSON 存储，无数据库依赖；前后端已部署至线上服务器
+- 数据库 + 文件混合存储；前后端已部署至线上服务器
 
 **待完成**：sentiment 维度扩展 · 部分禁用高校源修复 · 测试覆盖
 

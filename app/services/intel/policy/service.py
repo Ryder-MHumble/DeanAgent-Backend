@@ -46,8 +46,18 @@ def get_policy_feed(
         ]
 
     total = len(items)
-    items = items[offset:offset + limit]
-    return {"generated_at": data.get("generated_at"), "item_count": total, "items": items}
+    paged_items = items[offset:offset + limit]
+    next_offset = offset + limit if (offset + len(paged_items)) < total else None
+    return {
+        "generated_at": data.get("generated_at"),
+        "item_count": total,
+        "total": total,
+        "limit": limit,
+        "offset": offset,
+        "has_more": next_offset is not None,
+        "next_offset": next_offset,
+        "items": paged_items,
+    }
 
 
 def get_policy_opportunities(
@@ -66,8 +76,18 @@ def get_policy_opportunities(
         items = [i for i in items if (i.get("matchScore") or 0) >= min_match_score]
 
     total = len(items)
-    items = items[offset:offset + limit]
-    return {"generated_at": data.get("generated_at"), "item_count": total, "items": items}
+    paged_items = items[offset:offset + limit]
+    next_offset = offset + limit if (offset + len(paged_items)) < total else None
+    return {
+        "generated_at": data.get("generated_at"),
+        "item_count": total,
+        "total": total,
+        "limit": limit,
+        "offset": offset,
+        "has_more": next_offset is not None,
+        "next_offset": next_offset,
+        "items": paged_items,
+    }
 
 
 def get_policy_stats() -> dict[str, Any]:

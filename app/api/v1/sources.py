@@ -321,11 +321,15 @@ async def get_source(
     response_model=list[CrawlLogResponse],
     summary="爬取日志",
     description="获取指定信源的最近爬取日志，默认返回最近 20 条。",
+    responses={404: {"model": ErrorResponse, "description": "信源不存在"}},
 )
 async def get_source_logs(
     source_id: str,
-    limit: int = 20,
+    limit: int = Query(20, ge=1, le=200, description="返回日志条数上限"),
 ):
+    source = await source_service.get_source(source_id)
+    if source is None:
+        raise HTTPException(status_code=404, detail="Source not found")
     return await crawl_service.get_crawl_logs(source_id=source_id, limit=limit)
 
 

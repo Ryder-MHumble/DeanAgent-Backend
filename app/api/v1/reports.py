@@ -6,11 +6,11 @@ AI 分析报告 API
 
 import logging
 from datetime import datetime, timedelta
-from typing import Optional
 
 from fastapi import APIRouter, HTTPException, Query
 
 from app.db.client import get_client
+from app.schemas.common import ErrorResponse
 from app.schemas.report import (
     ReportGenerateRequest,
     ReportMetadataResponse,
@@ -21,10 +21,18 @@ from app.services.intel.reports.generator import ReportGenerator
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(prefix="/reports", tags=["Reports"])
+router = APIRouter(prefix="/reports")
 
 
-@router.post("/generate", response_model=ReportResponse)
+@router.post(
+    "/generate",
+    response_model=ReportResponse,
+    responses={
+        400: {"model": ErrorResponse, "description": "请求参数不合法"},
+        501: {"model": ErrorResponse, "description": "该报告维度尚未实现"},
+        500: {"model": ErrorResponse, "description": "报告生成失败"},
+    },
+)
 async def generate_report(request: ReportGenerateRequest):
     """
     生成 AI 分析报告
@@ -61,9 +69,13 @@ async def generate_report(request: ReportGenerateRequest):
                 status_code=400, detail=f"Unknown dimension: {request.dimension}"
             )
 
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e)) from e
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"Failed to generate report: {e}", exc_info=True)
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail="Failed to generate report") from e
 
 
 async def _generate_sentiment_report(
@@ -113,13 +125,14 @@ async def _generate_sentiment_report(
     analyzer = SentimentReportAnalyzer()
     generator = ReportGenerator(analyzer)
 
-    report_content = await generator.generate(
-        data=contents, date_range=date_range, output_format=request.output_format
+    report_content, analysis_result = await generator.generate(
+        data=contents,
+        date_range=date_range,
+        output_format=request.output_format,
+        return_analysis=True,
     )
 
     # 3. 构建响应
-    analysis_result = await analyzer.analyze(contents, date_range)
-
     return ReportResponse(
         metadata=ReportMetadataResponse(
             title=analysis_result.metadata.title,

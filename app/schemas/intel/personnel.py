@@ -53,6 +53,15 @@ class PersonnelFeedResponse(BaseModel):
         default=None, description="数据生成时间", examples=["2024-01-15T10:30:00"]
     )
     item_count: int = Field(description="返回的记录数", examples=[12])
+    total: int = Field(description="筛选后的总记录数", examples=[12])
+    limit: int = Field(description="分页条数上限", examples=[50])
+    offset: int = Field(description="分页偏移量", examples=[0])
+    has_more: bool = Field(description="是否还有下一页", examples=[True])
+    next_offset: int | None = Field(
+        default=None,
+        description="下一页偏移量（无下一页时为 null）",
+        examples=[50],
+    )
     items: list[PersonnelFeedItem] = Field(description="人事动态列表")
 
 
@@ -63,6 +72,15 @@ class PersonnelChangesResponse(BaseModel):
         default=None, description="数据生成时间", examples=["2024-01-15T10:30:00"]
     )
     item_count: int = Field(description="返回的记录数", examples=[30])
+    total: int = Field(description="筛选后的总记录数", examples=[30])
+    limit: int = Field(description="分页条数上限", examples=[50])
+    offset: int = Field(description="分页偏移量", examples=[0])
+    has_more: bool = Field(description="是否还有下一页", examples=[False])
+    next_offset: int | None = Field(
+        default=None,
+        description="下一页偏移量（无下一页时为 null）",
+        examples=[None],
+    )
     items: list[PersonnelChange] = Field(description="人事变动列表")
 
 
@@ -137,6 +155,14 @@ class PersonnelEnrichedFeedResponse(BaseModel):
     )
     watch_count: int = Field(
         default=0, description="仅关注的记录数", examples=[37]
+    )
+    limit: int = Field(description="分页条数上限", examples=[50])
+    offset: int = Field(description="分页偏移量", examples=[0])
+    has_more: bool = Field(description="是否还有下一页", examples=[True])
+    next_offset: int | None = Field(
+        default=None,
+        description="下一页偏移量（无下一页时为 null）",
+        examples=[50],
     )
     items: list[PersonnelChangeEnriched] = Field(
         description="富化后的人事变动列表"

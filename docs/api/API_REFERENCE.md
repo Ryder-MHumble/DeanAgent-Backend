@@ -1,10 +1,10 @@
 # API 参考总览
 
-- 生成时间（UTC）：`2026-03-30 04:04:43Z`
-- API 路由总数：`125`
-- Method 分布：`DELETE` 10、`GET` 82、`PATCH` 12、`POST` 21
-- 信源总数：`225`
-- 启用信源：`148`
+- 生成时间（UTC）：`2026-04-07 13:32:09Z`
+- API 路由总数：`138`
+- Method 分布：`DELETE` 10、`GET` 94、`PATCH` 12、`POST` 22
+- 信源总数：`268`
+- 启用信源：`191`
 
 ## 服务清单
 
@@ -12,9 +12,9 @@
 |---|---:|---|
 | `scholars` | 17 | scholars |
 | `events` | 14 | events |
+| `sources` | 11 | sources |
 | `institutions` | 10 | institutions |
 | `projects` | 8 | projects |
-| `sources` | 7 | sources |
 | `venues` | 7 | venues |
 | `llm-tracking` | 6 | llm-tracking |
 | `students` | 6 | students |
@@ -24,51 +24,52 @@
 | `intel/university` | 5 | intel / university-eco |
 | `crawler` | 4 | crawler-control |
 | `health` | 4 | health |
+| `social-kol` | 4 | social-kol |
+| `social-posts` | 4 | social-posts |
 | `aminer` | 3 | aminer |
+| `intel/daily-briefing` | 3 | daily-briefing / intel |
 | `intel/paper-transfer` | 3 | intel / paper-transfer |
 | `intel/policy` | 3 | intel / policy-intel |
 | `leadership` | 3 | leadership |
-| `reports` | 3 | Reports / reports |
+| `reports` | 3 | reports |
 | `sentiment` | 3 | sentiment |
 | `dimensions` | 2 | dimensions |
-| `intel/daily-briefing` | 2 | daily-briefing / intel |
 
 ## 信源维度覆盖
 
 | 维度 | 中文名 | 总数 | 启用 |
 |---|---|---:|---:|
-| `universities` | 对高校 | 55 | 45 |
-| `scholars` | 高校师资 | 49 | 0 |
-| `technology` | 对技术 | 37 | 30 |
-| `personnel` | 对人事 | 34 | 34 |
-| `beijing_policy` | 对北京 | 16 | 15 |
-| `industry` | 对产业 | 11 | 7 |
-| `national_policy` | 对国家 | 8 | 8 |
-| `talent` | 对人才 | 8 | 5 |
-| `events` | 对日程 | 6 | 3 |
-| `sentiment` | - | 1 | 1 |
+| `universities` | 高校与科研生态 | 84 | 74 |
+| `personnel` | 组织人事动态 | 54 | 54 |
+| `scholars` | 学者与师资库 | 49 | 0 |
+| `technology` | 技术前沿与创新 | 34 | 27 |
+| `beijing_policy` | 北京市政策治理 | 16 | 15 |
+| `industry` | 产业与投融资 | 10 | 6 |
+| `national_policy` | 国家政策治理 | 8 | 8 |
+| `talent` | 人才与学术发展 | 7 | 4 |
+| `events` | 学术会议与活动 | 6 | 3 |
 
 ## 信源分组 TOP 20
 
 | group | 数量 |
 |---|---:|
-| `university_news` | 32 |
-| `university_leadership_official` | 30 |
+| `university_news` | 61 |
+| `university_leadership_official` | 50 |
 | `policy` | 24 |
 | `tsinghua` | 13 |
 | `company_blogs` | 12 |
 | `ai_institutes` | 11 |
-| `news` | 9 |
 | `pku` | 9 |
 | `academic` | 8 |
+| `news` | 8 |
 | `international_media` | 7 |
-| `community` | 6 |
 | `nju` | 5 |
 | `sjtu` | 5 |
 | `ustc` | 5 |
-| `tracking` | 5 |
 | `cn_ai_company` | 5 |
 | `provincial` | 5 |
+| `tracking` | 4 |
+| `community` | 4 |
 | `awards` | 4 |
 | `news_personnel` | 3 |
 | `cas_iscas` | 3 |
@@ -77,42 +78,49 @@
 
 | tag | 数量 |
 |---|---:|
-| `university` | 62 |
+| `university` | 111 |
+| `personnel` | 55 |
+| `official` | 51 |
+| `leadership` | 50 |
 | `faculty` | 49 |
 | `news` | 44 |
-| `personnel` | 35 |
-| `official` | 31 |
-| `leadership` | 30 |
+| `auto` | 29 |
 | `ai` | 26 |
 | `policy` | 25 |
 | `company_blog` | 17 |
 | `cs` | 16 |
+| `985` | 16 |
 | `academic` | 15 |
 | `tsinghua` | 15 |
+| `211` | 13 |
 | `education` | 11 |
 | `institute` | 11 |
 | `pku` | 10 |
-| `industry` | 9 |
 | `cas` | 9 |
 | `tech_media` | 9 |
-| `international` | 8 |
+| `industry` | 8 |
+| `nju` | 7 |
 | `se` | 7 |
-| `twitter` | 7 |
+| `international` | 7 |
 | `domestic` | 6 |
-| `nju` | 6 |
 | `sjtu` | 6 |
 | `ustc` | 6 |
 | `bjkw` | 5 |
 | `science` | 5 |
 | `beijing` | 5 |
-| `conference` | 5 |
-| `moe` | 5 |
 
 ## Deprecated 路由
 
-| Method | Path | 替代接口 | Sunset |
+| Method | 路径 | 替代接口 | Sunset |
 |---|---|---|---|
 | `GET` | `/api/v1/articles/search` | `/api/v1/articles` | `2026-12-31` |
+| `GET` | `/api/v1/scholars/{url_hash}/students` | `-` | `2026-12-31` |
+| `POST` | `/api/v1/scholars/{url_hash}/students` | `-` | `2026-12-31` |
+| `DELETE` | `/api/v1/scholars/{url_hash}/students/{student_id}` | `-` | `2026-12-31` |
+| `GET` | `/api/v1/scholars/{url_hash}/students/{student_id}` | `-` | `2026-12-31` |
+| `PATCH` | `/api/v1/scholars/{url_hash}/students/{student_id}` | `-` | `2026-12-31` |
+| `POST` | `/api/v1/scholars/{url_hash}/updates` | `-` | `2026-12-31` |
+| `DELETE` | `/api/v1/scholars/{url_hash}/updates/{update_idx}` | `-` | `2026-12-31` |
 | `GET` | `/api/v1/social-posts/search` | `/api/v1/social-posts` | `2026-12-31` |
 
 ## Agent 调用快捷映射
@@ -121,10 +129,10 @@
 |---|---|---|
 | 快速看全部信源结构 | `GET /api/v1/sources/catalog` | `include_facets=true&page_size=200` |
 | 快速定位信源 ID | `GET /api/v1/sources/resolve` | `q=人社局` 或 `q=清华` |
-| 按信源直接拉取数据 | `GET /api/v1/sources/items` | `source_id=...` 或 `source_name=...`，配合 `page/page_size` 翻页 |
-| 按路径固定单个信源拉取数据 | `GET /api/v1/sources/{source_id}/items` | `date_from/date_to/keyword/page/page_size` |
 | 查询高校领导信源 | `GET /api/v1/sources/catalog` | `tag=leadership` 或 `group=university_leadership_official` |
 | 查询学者/师资信源 | `GET /api/v1/sources/catalog` | `dimension=scholars` 或 `tag=faculty` |
+| 按单个/多个信源直接拉取数据 | `GET /api/v1/sources/items` | `source_id=...` 或 `source_name=...`，配合 `page/page_size` 翻页 |
+| 按路径固定某个信源拉取数据 | `GET /api/v1/sources/{source_id}/items` | `date_from/date_to/keyword/page/page_size` |
 | 查询共建导师/两院关系学者 | `GET /api/v1/scholars` | `is_adjunct_supervisor=true` 或 `project_subcategory=兼职导师` |
 | 查询两院学生名单 | `GET /api/v1/students` | `institution=...`、`mentor_name=...`、`enrollment_year=...` |
 
@@ -143,7 +151,7 @@
 | Method | Path | Tags | Summary |
 |---|---|---|---|
 | `GET` | `/api/v1/articles` | `articles` | 文章列表 |
-| `GET` | `/api/v1/articles/search` | `articles` | 全文搜索（deprecated，迁移到 `/api/v1/articles`） |
+| `GET` | `/api/v1/articles/search` | `articles` | 全文搜索（deprecated） |
 | `GET` | `/api/v1/articles/stats` | `articles` | 文章统计 |
 | `GET` | `/api/v1/articles/{article_id}` | `articles` | 文章详情 |
 | `PATCH` | `/api/v1/articles/{article_id}` | `articles` | 更新文章 |
@@ -213,6 +221,7 @@
 |---|---|---|---|
 | `GET` | `/api/v1/intel/daily-briefing/metrics` | `intel,daily-briefing` | 获取早报指标卡片 |
 | `GET` | `/api/v1/intel/daily-briefing/report` | `intel,daily-briefing` | 获取 AI 早报 |
+| `GET` | `/api/v1/intel/daily-briefing/today` | `intel,daily-briefing` | 获取今日 AI 早报（兼容路径） |
 
 ### `intel/paper-transfer`
 
@@ -296,9 +305,9 @@
 
 | Method | Path | Tags | Summary |
 |---|---|---|---|
-| `GET` | `/api/v1/reports/dimensions` | `reports,Reports` |  |
-| `POST` | `/api/v1/reports/generate` | `reports,Reports` |  |
-| `GET` | `/api/v1/reports/sentiment/latest` | `reports,Reports` |  |
+| `GET` | `/api/v1/reports/dimensions` | `reports` |  |
+| `POST` | `/api/v1/reports/generate` | `reports` |  |
+| `GET` | `/api/v1/reports/sentiment/latest` | `reports` |  |
 
 ### `scholars`
 
@@ -314,13 +323,13 @@
 | `PATCH` | `/api/v1/scholars/{url_hash}/achievements` | `scholars` | 更新学术成就 |
 | `PATCH` | `/api/v1/scholars/{url_hash}/basic` | `scholars` | 更新基础信息 |
 | `PATCH` | `/api/v1/scholars/{url_hash}/relation` | `scholars` | 更新与两院关系 |
-| `GET` | `/api/v1/scholars/{url_hash}/students` | `scholars` | 查询指导学生列表 |
-| `POST` | `/api/v1/scholars/{url_hash}/students` | `scholars` | 新增指导学生 |
-| `DELETE` | `/api/v1/scholars/{url_hash}/students/{student_id}` | `scholars` | 删除学生记录 |
-| `GET` | `/api/v1/scholars/{url_hash}/students/{student_id}` | `scholars` | 查询单名学生详情 |
-| `PATCH` | `/api/v1/scholars/{url_hash}/students/{student_id}` | `scholars` | 更新学生信息 |
-| `POST` | `/api/v1/scholars/{url_hash}/updates` | `scholars` | 新增用户备注动态 |
-| `DELETE` | `/api/v1/scholars/{url_hash}/updates/{update_idx}` | `scholars` | 删除用户备注动态 |
+| `GET` | `/api/v1/scholars/{url_hash}/students` | `scholars` | 查询指导学生列表（deprecated） |
+| `POST` | `/api/v1/scholars/{url_hash}/students` | `scholars` | 新增指导学生（deprecated） |
+| `DELETE` | `/api/v1/scholars/{url_hash}/students/{student_id}` | `scholars` | 删除学生记录（deprecated） |
+| `GET` | `/api/v1/scholars/{url_hash}/students/{student_id}` | `scholars` | 查询单名学生详情（deprecated） |
+| `PATCH` | `/api/v1/scholars/{url_hash}/students/{student_id}` | `scholars` | 更新学生信息（deprecated） |
+| `POST` | `/api/v1/scholars/{url_hash}/updates` | `scholars` | 新增用户备注动态（已停用）（deprecated） |
+| `DELETE` | `/api/v1/scholars/{url_hash}/updates/{update_idx}` | `scholars` | 删除用户备注动态（已停用）（deprecated） |
 
 ### `sentiment`
 
@@ -330,12 +339,21 @@
 | `GET` | `/api/v1/sentiment/feed` | `sentiment` | 社媒内容信息流 |
 | `GET` | `/api/v1/sentiment/overview` | `sentiment` | 舆情概览统计 |
 
+### `social-kol`
+
+| Method | Path | Tags | Summary |
+|---|---|---|---|
+| `GET` | `/api/v1/social-kol/accounts` | `social-kol` | 账号列表 |
+| `POST` | `/api/v1/social-kol/ingest/twitter` | `social-kol` | 导入 Twitter/KOL 聚合数据 |
+| `GET` | `/api/v1/social-kol/posts` | `social-kol` | 帖子列表 |
+| `GET` | `/api/v1/social-kol/posts/{platform}/{external_post_id}` | `social-kol` | 帖子详情（含热门回复） |
+
 ### `social-posts`
 
 | Method | Path | Tags | Summary |
 |---|---|---|---|
 | `GET` | `/api/v1/social-posts` | `social-posts` | 社媒帖子列表 |
-| `GET` | `/api/v1/social-posts/search` | `social-posts` | 社媒帖子搜索（deprecated，迁移到 `/api/v1/social-posts`） |
+| `GET` | `/api/v1/social-posts/search` | `social-posts` | 社媒帖子搜索（deprecated） |
 | `GET` | `/api/v1/social-posts/stats` | `social-posts` | 社媒帖子统计 |
 | `GET` | `/api/v1/social-posts/{post_id}` | `social-posts` | 社媒帖子详情 |
 
@@ -350,8 +368,8 @@
 | `GET` | `/api/v1/sources/items` | `sources` | 按信源取数据（统一入口） |
 | `GET` | `/api/v1/sources/resolve` | `sources` | 信源解析与直连入口 |
 | `GET` | `/api/v1/sources/{source_id}` | `sources` | 信源详情 |
-| `GET` | `/api/v1/sources/{source_id}/items` | `sources` | 单个信源数据流 |
 | `PATCH` | `/api/v1/sources/{source_id}` | `sources` | 启用/禁用信源 |
+| `GET` | `/api/v1/sources/{source_id}/items` | `sources` | 单个信源数据流 |
 | `GET` | `/api/v1/sources/{source_id}/logs` | `sources` | 爬取日志 |
 | `POST` | `/api/v1/sources/{source_id}/trigger` | `sources` | 手动触发爬取 |
 

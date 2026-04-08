@@ -1,5 +1,4 @@
 """Service for controlling crawler execution from frontend UI."""
-import asyncio
 import csv
 import dataclasses
 import json
@@ -10,8 +9,8 @@ from typing import Any, Literal
 
 from app.config import BASE_DIR
 from app.crawlers.registry import create_crawler
-from app.scheduler.manager import load_all_source_configs
 from app.crawlers.utils.json_storage import save_crawl_result_json
+from app.scheduler.manager import load_all_source_configs
 
 logger = logging.getLogger(__name__)
 
@@ -25,6 +24,7 @@ class CrawlerControlService:
         self._current_source: str | None = None
         self._completed_sources: list[str] = []
         self._failed_sources: list[str] = []
+        self._requested_source_count = 0
         self._total_items = 0
         self._result_file: Path | None = None
         self._all_results: list[dict[str, Any]] = []
@@ -35,19 +35,22 @@ class CrawlerControlService:
 
     def get_status(self) -> dict[str, Any]:
         """Get current crawl job status."""
-        total = len(self._completed_sources) + len(self._failed_sources)
-        if self._current_source:
-            total += 1
+        total = self._requested_source_count
+        if total <= 0:
+            total = len(self._completed_sources) + len(self._failed_sources)
+            if self._current_source:
+                total += 1
 
         progress = 0.0
         if total > 0:
-            progress = len(self._completed_sources) / total
+            progress = (len(self._completed_sources) + len(self._failed_sources)) / total
 
         return {
             "is_running": self._is_running,
             "current_source": self._current_source,
             "completed_sources": self._completed_sources,
             "failed_sources": self._failed_sources,
+            "requested_source_count": self._requested_source_count,
             "total_items": self._total_items,
             "progress": progress,
         }
@@ -90,6 +93,7 @@ class CrawlerControlService:
         self._current_source = None
         self._completed_sources = []
         self._failed_sources = []
+        self._requested_source_count = 0
         self._total_items = 0
         self._all_results = []
 
@@ -108,6 +112,7 @@ class CrawlerControlService:
             selected_configs = [
                 config_map[sid] for sid in source_ids if sid in config_map
             ]
+            self._requested_source_count = len(selected_configs)
 
             if not selected_configs:
                 logger.warning("No valid source configs found")
@@ -170,6 +175,26 @@ class CrawlerControlService:
                 len(self._failed_sources),
                 self._total_items,
             )
+
+    def validate_source_ids(self, source_ids: list[str]) -> tuple[list[str], list[str]]:
+        """Split incoming source IDs into accepted and rejected sets."""
+        all_configs = load_all_source_configs()
+        valid_ids = {str(cfg.get("id") or "").strip() for cfg in all_configs if cfg.get("id")}
+
+        accepted: list[str] = []
+        rejected: list[str] = []
+        seen: set[str] = set()
+        for raw_id in source_ids:
+            source_id = str(raw_id or "").strip()
+            if not source_id or source_id in seen:
+                continue
+            seen.add(source_id)
+            if source_id in valid_ids:
+                accepted.append(source_id)
+            else:
+                rejected.append(source_id)
+
+        return accepted, rejected
 
     async def _export_results(
         self, results: list[dict[str, Any]], format: Literal["json", "csv"]

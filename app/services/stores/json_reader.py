@@ -169,6 +169,78 @@ async def get_all_articles(
     return rows
 
 
+async def get_all_articles_paginated(
+    *,
+    dimension: str | None = None,
+    source_ids: list[str] | None = None,
+    keyword: str | None = None,
+    tags: list[str] | None = None,
+    date_from: date | None = None,
+    date_to: date | None = None,
+    sort_by: str = "crawled_at",
+    order: str = "desc",
+    limit: int = 20,
+    offset: int = 0,
+) -> tuple[list[dict[str, Any]], int]:
+    """Fetch one page of articles from DB with total count."""
+    if source_ids is not None and len(source_ids) == 0:
+        return [], 0
+
+    client = _get_client()
+    safe_limit = max(1, int(limit))
+    safe_offset = max(0, int(offset))
+    allowed_sort_fields = {"published_at", "crawled_at", "title", "importance"}
+    sort_field = sort_by if sort_by in allowed_sort_fields else "crawled_at"
+    is_desc = order != "asc"
+
+    query = client.table("articles").select("*", count="exact").order(sort_field, desc=is_desc)
+    if dimension is not None:
+        query = query.eq("dimension", dimension)
+    if source_ids is not None:
+        query = query.in_("source_id", source_ids)
+    if date_from is not None:
+        query = query.gte(
+            "published_at",
+            datetime(
+                date_from.year,
+                date_from.month,
+                date_from.day,
+                tzinfo=timezone.utc,
+            ).isoformat(),
+        )
+    if date_to is not None:
+        query = query.lte(
+            "published_at",
+            datetime(
+                date_to.year,
+                date_to.month,
+                date_to.day,
+                23,
+                59,
+                59,
+                tzinfo=timezone.utc,
+            ).isoformat(),
+        )
+    if keyword is not None:
+        query = query.or_(f"title.ilike.%{keyword}%,content.ilike.%{keyword}%")
+    if tags:
+        query = query.contains("tags", tags)
+
+    res = await query.range(safe_offset, safe_offset + safe_limit - 1).execute()
+    rows = res.data or []
+    for r in rows:
+        if "group_name" in r:
+            r["group"] = r.pop("group_name")
+
+    total = res.count
+    if total is None:
+        # Fallback when count is unavailable in DB response.
+        total = safe_offset + len(rows)
+        if len(rows) == safe_limit:
+            total += 1
+    return rows, int(total)
+
+
 async def get_available_dates(dimension: str) -> list[str]:
     """Get all distinct crawl dates for a dimension, sorted desc."""
     client = _get_client()

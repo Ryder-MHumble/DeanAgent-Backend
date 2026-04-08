@@ -14,12 +14,15 @@ Endpoints:
 from __future__ import annotations
 
 import logging
+from typing import Literal
 
 from fastapi import APIRouter, HTTPException, Query
 
 from app.schemas.institution import (
     InstitutionCreate,
     InstitutionDetailResponse,
+    InstitutionHierarchyResponse,
+    InstitutionListResponse,
     InstitutionStatsResponse,
     InstitutionUpdate,
 )
@@ -36,6 +39,7 @@ router = APIRouter()
 
 @router.get(
     "",
+    response_model=InstitutionListResponse | InstitutionHierarchyResponse,
     summary="机构列表（统一接口）",
     description=(
         "获取机构列表，支持扁平列表和层级结构两种视图。"
@@ -55,7 +59,10 @@ router = APIRouter()
 )
 async def list_institutions(
     # View control
-    view: str = Query(default="flat", description="视图类型：flat（扁平列表）| hierarchy（层级结构）"),
+    view: Literal["flat", "hierarchy"] = Query(
+        default="flat",
+        description="视图类型：flat（扁平列表）| hierarchy（层级结构）",
+    ),
     # Classification parameters
     entity_type: str | None = Query(default=None, description="实体类型：organization | department"),
     region: str | None = Query(default=None, description="地域：国内 | 国际"),
@@ -201,7 +208,7 @@ async def search_institutions_endpoint(
         )
     except Exception as e:
         logger.exception("Failed to search institutions: %s", e)
-        raise HTTPException(status_code=500, detail=f"Search failed: {e!s}") from e
+        raise HTTPException(status_code=500, detail="Institution search failed") from e
 
 
 @router.get(
@@ -275,7 +282,7 @@ async def suggest_institution_endpoint(
         )
     except Exception as e:
         logger.exception("Failed to suggest institution: %s", e)
-        raise HTTPException(status_code=500, detail=f"Suggestion failed: {e!s}") from e
+        raise HTTPException(status_code=500, detail="Institution suggestion failed") from e
 
 
 @router.get(
@@ -327,13 +334,13 @@ async def search_aminer_organizations(q: str, size: int = 5):
     except ValueError as exc:
         raise HTTPException(
             status_code=400,
-            detail=f"AMiner API configuration error: {exc}",
+            detail="AMiner API configuration error",
         ) from exc
     except Exception as exc:  # noqa: BLE001
         logger.warning("AMiner search failed for '%s': %s", q, exc)
         raise HTTPException(
             status_code=502,
-            detail=f"AMiner search failed: {exc}",
+            detail="AMiner search failed",
         ) from exc
 
 
