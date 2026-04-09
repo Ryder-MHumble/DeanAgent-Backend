@@ -153,6 +153,146 @@ export interface ServerMetrics {
   sampled_at: string;
 }
 
+export type ApiUsageSuccessFilter = "all" | "success" | "failed";
+
+export interface ApiUsageOverview {
+  total_calls: number;
+  success_calls: number;
+  failed_calls: number;
+  success_rate: number;
+  total_input_tokens: number;
+  total_output_tokens: number;
+  total_tokens: number;
+  total_cost_usd: number;
+  priced_calls: number;
+  unpriced_calls: number;
+  unpriced_tokens: number;
+  avg_cost_per_call_usd: number;
+}
+
+export interface ApiUsageModuleItem {
+  module: string;
+  call_count: number;
+  success_count: number;
+  failed_count: number;
+  input_tokens: number;
+  output_tokens: number;
+  total_tokens: number;
+  total_cost_usd: number;
+  priced_calls: number;
+  unpriced_calls: number;
+}
+
+export interface ApiUsageModelItem {
+  model: string;
+  call_count: number;
+  success_count: number;
+  failed_count: number;
+  input_tokens: number;
+  output_tokens: number;
+  total_tokens: number;
+  total_cost_usd: number;
+  priced_calls: number;
+  unpriced_calls: number;
+  avg_cost_per_call_usd: number;
+}
+
+export interface ApiUsageSystemItem {
+  system: string;
+  system_label: string | null;
+  call_count: number;
+  success_count: number;
+  failed_count: number;
+  input_tokens: number;
+  output_tokens: number;
+  total_tokens: number;
+  total_cost_usd: number;
+  priced_calls: number;
+  unpriced_calls: number;
+  success_rate: number;
+}
+
+export interface ApiUsageTrendSeriesPoint {
+  date: string;
+  call_count: number;
+  total_tokens: number;
+  total_cost_usd: number;
+}
+
+export interface ApiUsageTrendSeriesItem {
+  system: string;
+  system_label: string | null;
+  points: ApiUsageTrendSeriesPoint[];
+}
+
+export interface ApiUsageStageItem {
+  stage: string;
+  module: string;
+  call_count: number;
+  success_count: number;
+  failed_count: number;
+  input_tokens: number;
+  output_tokens: number;
+  total_tokens: number;
+  total_cost_usd: number;
+  priced_calls: number;
+  unpriced_calls: number;
+}
+
+export interface ApiRecentCall {
+  timestamp: string;
+  provider: string;
+  system: string;
+  system_label: string | null;
+  module: string;
+  stage: string;
+  model: string;
+  source_id: string | null;
+  article_id: string | null;
+  article_title: string | null;
+  input_tokens: number;
+  output_tokens: number;
+  total_tokens: number;
+  effective_cost_usd: number | null;
+  cost_source: string;
+  success: boolean;
+  duration_ms: number | null;
+}
+
+export interface ApiUsageAvailableFilters {
+  systems: string[];
+  modules: string[];
+  stages: string[];
+  models: string[];
+  source_ids: string[];
+}
+
+export interface ApiUsageScope {
+  provider: string;
+  days: number;
+  system: string | null;
+  module: string | null;
+  stage: string | null;
+  model: string | null;
+  source_id: string | null;
+  success: ApiUsageSuccessFilter;
+  limit: number;
+}
+
+export interface ApiUsageResponse {
+  generated_at: string;
+  scope: ApiUsageScope;
+  overview: ApiUsageOverview;
+  by_system: ApiUsageSystemItem[];
+  by_module: ApiUsageModuleItem[];
+  by_model: ApiUsageModelItem[];
+  by_stage: ApiUsageStageItem[];
+  trend_series: ApiUsageTrendSeriesItem[];
+  recent_calls: ApiRecentCall[];
+  available_filters: ApiUsageAvailableFilters;
+}
+
+
 export interface SourceFacetItem {
   key: string;
   label: string | null;

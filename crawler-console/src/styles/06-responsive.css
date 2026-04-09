@@ -1,0 +1,352 @@
+@media (max-width: 1280px) {
+  .workspace-shell {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
+  }
+
+  .toolbar-row {
+    grid-template-columns: minmax(220px, 1fr) repeat(3, minmax(120px, 1fr));
+  }
+
+  .action-config-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dock-terminal-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .dock-report-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1279px) and (min-width: 1024px) {
+  .workspace-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .workspace-side-column {
+    order: -1;
+  }
+
+  .workspace-side-column .toolbar-row,
+  .workspace-side-column .action-config-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1080px) {
+  .console-shell {
+    grid-template-columns: 1fr;
+    width: min(100vw - 20px, 100%);
+    padding-bottom: 88px;
+  }
+
+  .system-nav {
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    top: auto;
+    height: auto;
+    align-items: center;
+    padding: 10px;
+    border-radius: 20px;
+    z-index: 18;
+  }
+
+  .nav-brand,
+  .nav-status {
+    display: none;
+  }
+
+  .nav-list {
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 8px;
+    padding: 0;
+  }
+
+  .nav-group {
+    display: contents;
+  }
+
+  .nav-group-title {
+    display: none;
+  }
+
+  .nav-item {
+    min-height: 64px;
+    padding: 10px 6px;
+    border-radius: 16px;
+  }
+
+  .nav-item::before {
+    display: none;
+  }
+
+  .nav-item-meta {
+    display: none;
+  }
+
+  .command-header {
+    grid-template-columns: 1fr;
+  }
+
+  .workspace-shell,
+  .workspace-head {
+    grid-template-columns: 1fr;
+  }
+
+  .workspace-main-tabs,
+  .workspace-side-tabs {
+    width: 100%;
+  }
+
+  .command-actions {
+    justify-content: flex-start;
+  }
+
+  .kpi-band {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .toolbar-row,
+  .toolbar-row-bottom,
+  .action-bar-body,
+  .ledger-summary,
+  .pager-bar {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .workspace-summary-card {
+    gap: 10px;
+  }
+
+  .workspace-side-column .toolbar-row,
+  .workspace-side-column .action-config-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .action-head-metrics,
+  .action-buttons {
+    justify-content: flex-start;
+  }
+
+  .action-inline-stat {
+    min-width: 0;
+  }
+
+  .toolbar-summary,
+  .pager-actions {
+    justify-content: space-between;
+  }
+
+  .source-drawer {
+    width: min(600px, 100vw);
+  }
+}
+
+@media (max-width: 760px) {
+  :root {
+    --drawer-width: 100vw;
+  }
+
+  .console-shell {
+    width: min(100vw - 12px, 100%);
+    padding-top: 8px;
+  }
+
+  .command-header,
+  .kpi-band,
+  .ledger-summary,
+  .pager-bar,
+  .source-ledger,
+  .intel-dock,
+  .workspace-head,
+  .workspace-side-card {
+    padding: 14px;
+  }
+
+  .workspace-shell {
+    gap: 12px;
+  }
+
+  .workspace-summary-card {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .kpi-band {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(180px, 1fr);
+    overflow-x: auto;
+  }
+
+  .kpi-cell {
+    border-right: 1px solid var(--line);
+    min-width: 180px;
+  }
+
+  .command-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .workspace-head {
+    gap: 12px;
+  }
+
+  .workspace-main-tabs,
+  .workspace-side-tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 2px;
+  }
+
+  .workspace-tab {
+    min-width: max-content;
+  }
+
+  .workspace-side-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: visible;
+  }
+
+  .workspace-side-tabs .workspace-tab {
+    width: 100%;
+    min-width: 0;
+    padding-inline: 8px;
+  }
+
+  .summary-metrics,
+  .quick-filter-row {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-action {
+    white-space: normal;
+  }
+
+  .desktop-table {
+    display: none;
+  }
+
+  .source-cards {
+    display: grid;
+    gap: 10px;
+  }
+
+  .nav-item-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .source-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .drawer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dock-tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 2px;
+  }
+
+  .dock-manual-head-terminal,
+  .dock-terminal-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dock-terminal-progress-meta {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .dock-terminal-line,
+  .dock-terminal-entry,
+  .dock-report-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dock-terminal-feed {
+    max-height: 320px;
+  }
+
+  .drawer-layer {
+    z-index: 30;
+  }
+
+  .source-drawer {
+    inset: auto 0 0 0;
+    width: 100vw;
+    padding: 0;
+  }
+
+  .drawer-shell {
+    height: 88vh;
+    border-radius: 20px 20px 0 0;
+  }
+}
+
+.workspace-side-column .toolbar-row {
+  grid-template-columns: 1fr;
+}
+
+.workspace-side-column .toolbar-row-bottom {
+  grid-template-columns: 1fr;
+  align-items: stretch;
+}
+
+.workspace-side-column .toolbar-summary {
+  justify-content: space-between;
+}
+
+.workspace-side-column .action-bar-head,
+.workspace-side-column .action-bar-body {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.workspace-side-column .action-head-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  justify-content: stretch;
+}
+
+.workspace-side-column .action-config-grid {
+  grid-template-columns: 1fr;
+}
+
+.workspace-side-column .action-buttons {
+  width: 100%;
+}
+
+.workspace-side-column .action-buttons .accent-button,
+.workspace-side-column .action-buttons .ghost-button {
+  width: 100%;
+}
+
+.workspace-side-column .secondary-actions .ghost-button {
+  width: auto;
+}
+
+.workspace-side-column .secondary-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+@media (max-width: 760px) {
+  .workspace-side-column .action-head-metrics,
+  .workspace-side-column .secondary-actions {
+    grid-template-columns: 1fr;
+  }
+}

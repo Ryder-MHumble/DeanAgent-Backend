@@ -296,6 +296,16 @@
 | `GET` | `/api/v1/llm-tracking/health` | `llm-tracking` |  |
 | `GET` | `/api/v1/llm-tracking/summary` | `llm-tracking` |  |
 
+> 字段补充（2026-04-09）：`/api/v1/llm-tracking/*` 在不破坏兼容的前提下新增以下记录字段。
+>
+> - `provider`: 调用提供方（当前重点监控 `openrouter`）。
+> - `cost_source`: 费用来源，取值 `provider` / `pricing_map` / `legacy_recorded` / `unpriced`。
+> - `provider_cost_usd`: Provider 回传费用（若有）。
+> - `effective_cost_usd`: 统计口径使用的最终费用。
+> - `unpriced` 语义：表示该调用无法可靠定价，不计入 `total_cost_usd` 与均次成本分母。
+>
+> 控制台专用接口与返回结构见：[CONSOLE_API_MONITOR.md](./CONSOLE_API_MONITOR.md)。
+
 ### `projects`
 
 | Method | Path | Tags | Summary |

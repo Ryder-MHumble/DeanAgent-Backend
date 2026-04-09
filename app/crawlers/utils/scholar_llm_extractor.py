@@ -17,7 +17,41 @@ import os
 
 import httpx
 
+from app.services.llm.llm_call_tracker import get_tracker
+
 logger = logging.getLogger(__name__)
+
+def _safe_float(value: object) -> float | None:
+    if value is None:
+        return None
+    if isinstance(value, (int, float)):
+        return float(value)
+    if isinstance(value, str):
+        try:
+            return float(value.strip())
+        except ValueError:
+            return None
+    return None
+
+
+def _extract_provider_cost_usd(payload: dict) -> float | None:
+    usage = payload.get("usage") if isinstance(payload.get("usage"), dict) else {}
+    candidates = [
+        usage.get("cost"),
+        usage.get("cost_usd"),
+        usage.get("total_cost"),
+        usage.get("total_cost_usd"),
+        payload.get("cost"),
+        payload.get("cost_usd"),
+        payload.get("total_cost"),
+        payload.get("total_cost_usd"),
+    ]
+    for candidate in candidates:
+        parsed = _safe_float(candidate)
+        if parsed is not None and parsed >= 0:
+            return parsed
+    return None
+
 
 
 async def extract_faculty_fields_with_llm(
@@ -29,10 +63,18 @@ async def extract_faculty_fields_with_llm(
     llm_provider: str = "openrouter",
     llm_model: str = "google/gemini-2.5-flash",
     max_tokens: int = 2000,
+    *,
+    stage: str = "crawler_scholar_fields",
+    source_id: str | None = None,
+    dimension: str | None = None,
+    article_id: str | None = None,
+    article_title: str | None = None,
 ) -> dict:
     """Extract faculty fields from raw text using LLM."""
     if fields_to_extract is None:
         fields_to_extract = ["phone", "research_areas", "education", "work_experience"]
+
+    tracker = get_tracker()
 
     # Get API key
     if llm_provider == "openrouter":
@@ -96,12 +138,31 @@ async def extract_faculty_fields_with_llm(
 
             # Track token usage
             usage = result.get("usage", {})
-            input_tokens = usage.get("prompt_tokens", 0)
-            output_tokens = usage.get("completion_tokens", 0)
+            input_tokens = int(usage.get("prompt_tokens", 0) or 0)
+            output_tokens = int(usage.get("completion_tokens", 0) or 0)
             logger.debug(
                 "LLM extraction: input=%d tokens, output=%d tokens",
                 input_tokens,
                 output_tokens,
+            )
+
+            tracker.log_call(
+                model=llm_model,
+                provider=llm_provider,
+                prompt=prompt,
+                system_prompt=(
+                    "你是一个数据提取助手。从学术网页中提取结构化信息，只返回有效的 JSON，不要包含任何解释或 markdown 格式。"
+                ),
+                response_text=str(resp_content),
+                input_tokens=input_tokens,
+                output_tokens=output_tokens,
+                stage=stage,
+                article_id=article_id,
+                article_title=article_title or raw_name or None,
+                source_id=source_id,
+                dimension=dimension,
+                success=True,
+                provider_cost_usd=_extract_provider_cost_usd(result),
             )
 
             # Parse JSON response
@@ -120,12 +181,60 @@ async def extract_faculty_fields_with_llm(
 
     except json.JSONDecodeError as e:
         logger.warning("Failed to parse LLM JSON response: %s", e)
+        tracker.log_call(
+            model=llm_model,
+            provider=llm_provider,
+            prompt=prompt,
+            system_prompt="",
+            response_text="",
+            input_tokens=0,
+            output_tokens=0,
+            stage=stage,
+            article_id=article_id,
+            article_title=article_title or raw_name or None,
+            source_id=source_id,
+            dimension=dimension,
+            success=False,
+            error_message=str(e),
+        )
         return {}
     except httpx.HTTPError as e:
         logger.warning("LLM API error: %s", e)
+        tracker.log_call(
+            model=llm_model,
+            provider=llm_provider,
+            prompt=prompt,
+            system_prompt="",
+            response_text="",
+            input_tokens=0,
+            output_tokens=0,
+            stage=stage,
+            article_id=article_id,
+            article_title=article_title or raw_name or None,
+            source_id=source_id,
+            dimension=dimension,
+            success=False,
+            error_message=str(e),
+        )
         return {}
     except Exception as e:
         logger.warning("Unexpected error in LLM extraction: %s", e)
+        tracker.log_call(
+            model=llm_model,
+            provider=llm_provider,
+            prompt=prompt,
+            system_prompt="",
+            response_text="",
+            input_tokens=0,
+            output_tokens=0,
+            stage=stage,
+            article_id=article_id,
+            article_title=article_title or raw_name or None,
+            source_id=source_id,
+            dimension=dimension,
+            success=False,
+            error_message=str(e),
+        )
         return {}
 
 

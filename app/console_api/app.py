@@ -5,7 +5,7 @@ from app.console_api.router import router
 TAG_METADATA = [
     {
         "name": "console-overview",
-        "description": "控制台总览与每日趋势接口。",
+        "description": "控制台总览、每日趋势与 OpenRouter API 监控接口。",
     },
     {
         "name": "console-sources",

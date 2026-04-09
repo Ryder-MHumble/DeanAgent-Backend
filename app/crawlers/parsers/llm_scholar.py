@@ -26,6 +26,7 @@ import httpx
 from bs4 import BeautifulSoup
 
 from app.crawlers.base import BaseCrawler, CrawledItem
+from app.services.llm.llm_call_tracker import get_tracker
 from app.schemas.scholar import (
     AwardRecord,
     EducationRecord,
@@ -146,6 +147,38 @@ def _repair_json(text: str) -> str:
     return text
 
 
+def _safe_float(value: object) -> float | None:
+    if value is None:
+        return None
+    if isinstance(value, (int, float)):
+        return float(value)
+    if isinstance(value, str):
+        try:
+            return float(value.strip())
+        except ValueError:
+            return None
+    return None
+
+
+def _extract_provider_cost_usd(payload: dict) -> float | None:
+    usage = payload.get("usage") if isinstance(payload.get("usage"), dict) else {}
+    candidates = [
+        usage.get("cost"),
+        usage.get("cost_usd"),
+        usage.get("total_cost"),
+        usage.get("total_cost_usd"),
+        payload.get("cost"),
+        payload.get("cost_usd"),
+        payload.get("total_cost"),
+        payload.get("total_cost_usd"),
+    ]
+    for candidate in candidates:
+        parsed = _safe_float(candidate)
+        if parsed is not None and parsed >= 0:
+            return parsed
+    return None
+
+
 class LLMFacultyCrawler(BaseCrawler):
     """基于 LLM 的自适应学者信息爬取器"""
 
@@ -160,6 +193,7 @@ class LLMFacultyCrawler(BaseCrawler):
         self.total_input_tokens = 0
         self.total_output_tokens = 0
         self.api_calls = 0
+        self._tracker = get_tracker()
 
         # API key 根据 provider 选择
         if self.llm_provider == "openrouter":
@@ -212,8 +246,15 @@ class LLMFacultyCrawler(BaseCrawler):
             raise
 
     async def _llm_extract(
-        self, prompt: str, content: str,
-        max_tokens: int = 2000, retry_count: int = 3,
+        self,
+        prompt: str,
+        content: str,
+        max_tokens: int = 2000,
+        retry_count: int = 3,
+        *,
+        stage: str = "crawler_llm_faculty_detail",
+        article_id: str | None = None,
+        article_title: str | None = None,
     ) -> dict:
         """使用 LLM 从清洗后的内容中提取结构化数据，带重试机制"""
         for attempt in range(retry_count):
@@ -251,14 +292,33 @@ class LLMFacultyCrawler(BaseCrawler):
 
                     # Track token usage
                     usage = result.get("usage", {})
-                    input_tokens = usage.get("prompt_tokens", 0)
-                    output_tokens = usage.get("completion_tokens", 0)
+                    input_tokens = int(usage.get("prompt_tokens", 0) or 0)
+                    output_tokens = int(usage.get("completion_tokens", 0) or 0)
                     self.total_input_tokens += input_tokens
                     self.total_output_tokens += output_tokens
                     self.api_calls += 1
                     logger.debug(
                         "LLMFacultyCrawler: API call #%d - input: %d, output: %d tokens",
                         self.api_calls, input_tokens, output_tokens
+                    )
+
+                    self._tracker.log_call(
+                        model=self.llm_model,
+                        provider=self.llm_provider,
+                        prompt=prompt,
+                        system_prompt=(
+                            "你是一个数据提取助手。从学术网页中提取结构化信息，只返回有效的 JSON，不要包含任何解释或 markdown 格式。"
+                        ),
+                        response_text=str(resp_content),
+                        input_tokens=input_tokens,
+                        output_tokens=output_tokens,
+                        stage=stage,
+                        article_id=article_id,
+                        article_title=article_title,
+                        source_id=self.source_id,
+                        dimension=self.config.get("dimension"),
+                        success=True,
+                        provider_cost_usd=_extract_provider_cost_usd(result),
                     )
 
                     # 清理可能的 markdown 代码块
@@ -278,6 +338,22 @@ class LLMFacultyCrawler(BaseCrawler):
                     attempt + 1, retry_count, e,
                 )
                 if attempt == retry_count - 1:
+                    self._tracker.log_call(
+                        model=self.llm_model,
+                        provider=self.llm_provider,
+                        prompt=prompt,
+                        system_prompt="",
+                        response_text="",
+                        input_tokens=0,
+                        output_tokens=0,
+                        stage=stage,
+                        article_id=article_id,
+                        article_title=article_title,
+                        source_id=self.source_id,
+                        dimension=self.config.get("dimension"),
+                        success=False,
+                        error_message=str(e),
+                    )
                     raise
                 await asyncio.sleep(2 ** attempt)  # Exponential backoff
             except httpx.TimeoutException as e:
@@ -286,6 +362,22 @@ class LLMFacultyCrawler(BaseCrawler):
                     attempt + 1, retry_count, e,
                 )
                 if attempt == retry_count - 1:
+                    self._tracker.log_call(
+                        model=self.llm_model,
+                        provider=self.llm_provider,
+                        prompt=prompt,
+                        system_prompt="",
+                        response_text="",
+                        input_tokens=0,
+                        output_tokens=0,
+                        stage=stage,
+                        article_id=article_id,
+                        article_title=article_title,
+                        source_id=self.source_id,
+                        dimension=self.config.get("dimension"),
+                        success=False,
+                        error_message=str(e),
+                    )
                     raise
                 await asyncio.sleep(2 ** attempt)
             except httpx.HTTPError as e:
@@ -294,6 +386,22 @@ class LLMFacultyCrawler(BaseCrawler):
                     attempt + 1, retry_count, e,
                 )
                 if attempt == retry_count - 1:
+                    self._tracker.log_call(
+                        model=self.llm_model,
+                        provider=self.llm_provider,
+                        prompt=prompt,
+                        system_prompt="",
+                        response_text="",
+                        input_tokens=0,
+                        output_tokens=0,
+                        stage=stage,
+                        article_id=article_id,
+                        article_title=article_title,
+                        source_id=self.source_id,
+                        dimension=self.config.get("dimension"),
+                        success=False,
+                        error_message=str(e),
+                    )
                     raise
                 await asyncio.sleep(2 ** attempt)
 
@@ -334,7 +442,14 @@ class LLMFacultyCrawler(BaseCrawler):
 3. 如果没找到学者，返回空数组 []"""
 
         try:
-            scholars = await self._llm_extract(prompt, content, max_tokens=self.max_list_tokens)
+            scholars = await self._llm_extract(
+                prompt,
+                content,
+                max_tokens=self.max_list_tokens,
+                stage="crawler_llm_faculty_list",
+                article_id=list_url,
+                article_title=f"{self.source_id}:list",
+            )
             if not isinstance(scholars, list):
                 logger.error("LLMFacultyCrawler: expected list, got %s", type(scholars).__name__)
                 return []
@@ -387,7 +502,14 @@ class LLMFacultyCrawler(BaseCrawler):
 6. publications 尽可能提取代表性论文（标题、期刊/会议、年份）
 7. awards 提取所有能找到的奖项/荣誉"""
 
-            details = await self._llm_extract(prompt, content, max_tokens=self.max_detail_tokens)
+            details = await self._llm_extract(
+                prompt,
+                content,
+                max_tokens=self.max_detail_tokens,
+                stage="crawler_llm_faculty_detail",
+                article_id=profile_url,
+                article_title=name_hint,
+            )
             return details
 
         except Exception as e:

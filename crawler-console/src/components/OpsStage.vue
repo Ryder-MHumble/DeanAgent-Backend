@@ -401,15 +401,15 @@ const tooltipStats = computed(() => {
 .ops-stage {
   display: grid;
   grid-template-columns: minmax(0, 1.7fr) minmax(320px, 0.9fr);
-  gap: 18px;
-  padding: 18px;
+  gap: 16px;
+  padding: 16px;
 }
 
 .ops-stage-main {
   display: grid;
-  gap: 18px;
+  gap: 16px;
   min-width: 0;
-  padding: 10px;
+  padding: 8px;
 }
 
 .ops-stage-head,
@@ -446,7 +446,7 @@ const tooltipStats = computed(() => {
 }
 
 .ops-stage-head-meta strong {
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1;
   letter-spacing: -0.04em;
   font-variant-numeric: tabular-nums;
@@ -455,13 +455,14 @@ const tooltipStats = computed(() => {
 .ops-stage-subtitle {
   margin-top: 10px;
   max-width: 640px;
+  font-size: 14px;
 }
 
 .ops-stage-chart-shell {
   display: grid;
   gap: 14px;
   min-width: 0;
-  padding: 18px;
+  padding: 16px;
   border-radius: 24px;
   background:
     linear-gradient(180deg, rgba(9, 20, 31, 0.88), rgba(8, 16, 24, 0.94)),
@@ -510,7 +511,7 @@ const tooltipStats = computed(() => {
 }
 
 .ops-stage-focus-copy strong {
-  font-size: 24px;
+  font-size: 22px;
   line-height: 1;
   letter-spacing: -0.04em;
 }
@@ -705,7 +706,7 @@ const tooltipStats = computed(() => {
 }
 
 .ops-stage-summary strong {
-  font-size: 28px;
+  font-size: 24px;
   line-height: 1;
   letter-spacing: -0.05em;
 }

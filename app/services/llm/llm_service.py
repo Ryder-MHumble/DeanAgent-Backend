@@ -16,6 +16,41 @@ logger = logging.getLogger(__name__)
 OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 
+def _safe_float(value: Any) -> float | None:
+    if value is None:
+        return None
+    if isinstance(value, (int, float)):
+        return float(value)
+    if isinstance(value, str):
+        try:
+            return float(value.strip())
+        except ValueError:
+            return None
+    return None
+
+
+def _extract_provider_cost_usd(data: dict[str, Any]) -> float | None:
+    """Best-effort extraction of provider-reported cost from OpenRouter response."""
+    usage = data.get("usage") if isinstance(data.get("usage"), dict) else {}
+
+    candidates = [
+        usage.get("cost"),
+        usage.get("cost_usd"),
+        usage.get("total_cost"),
+        usage.get("total_cost_usd"),
+        data.get("cost"),
+        data.get("cost_usd"),
+        data.get("total_cost"),
+        data.get("total_cost_usd"),
+    ]
+
+    for candidate in candidates:
+        parsed = _safe_float(candidate)
+        if parsed is not None and parsed >= 0:
+            return parsed
+    return None
+
+
 async def call_llm(
     prompt: str,
     system_prompt: str = "",
@@ -82,7 +117,6 @@ async def call_llm(
     }
 
     last_error: Exception | None = None
-    last_response: dict[str, Any] = {}
 
     # Use longer timeout for heavier models (e.g. gemini-2.5-pro)
     timeout_secs = 180.0 if "pro" in (model or "").lower() else 60.0
@@ -97,23 +131,22 @@ async def call_llm(
                 )
                 resp.raise_for_status()
                 data = resp.json()
-                last_response = data
 
                 choice = data.get("choices", [{}])[0]
                 content = choice.get("message", {}).get("content", "")
                 if not content:
                     raise LLMError(f"Empty response from model {model}")
 
-                # Track successful API call
                 duration_ms = (time.time() - start_time) * 1000
                 usage = data.get("usage", {})
                 tracker.log_call(
                     model=model,
+                    provider="openrouter",
                     prompt=prompt,
                     system_prompt=system_prompt,
                     response_text=content,
-                    input_tokens=usage.get("prompt_tokens", 0),
-                    output_tokens=usage.get("completion_tokens", 0),
+                    input_tokens=int(usage.get("prompt_tokens", 0) or 0),
+                    output_tokens=int(usage.get("completion_tokens", 0) or 0),
                     stage=stage,
                     article_id=article_id,
                     article_title=article_title,
@@ -121,6 +154,7 @@ async def call_llm(
                     dimension=dimension,
                     duration_ms=duration_ms,
                     success=True,
+                    provider_cost_usd=_extract_provider_cost_usd(data),
                 )
 
                 return content
@@ -129,13 +163,15 @@ async def call_llm(
             last_error = e
             if e.response.status_code == 429:
                 import asyncio
-                wait = 2 ** attempt
+
+                wait = 2**attempt
                 logger.warning("Rate limited, waiting %ds...", wait)
                 await asyncio.sleep(wait)
                 continue
             error_msg = f"HTTP {e.response.status_code}: {e.response.text}"
             tracker.log_call(
                 model=model,
+                provider="openrouter",
                 prompt=prompt,
                 system_prompt=system_prompt,
                 response_text="",
@@ -156,12 +192,14 @@ async def call_llm(
             last_error = e
             logger.warning("Request error (attempt %d): %s", attempt + 1, e)
             import asyncio
+
             await asyncio.sleep(1)
             continue
 
     error_msg = f"Failed after 3 attempts: {last_error}"
     tracker.log_call(
         model=model,
+        provider="openrouter",
         prompt=prompt,
         system_prompt=system_prompt,
         response_text="",
@@ -221,7 +259,7 @@ async def call_llm_json(
     try:
         return json.loads(text)
     except json.JSONDecodeError as e:
-        raise LLMError(f"Failed to parse LLM response as JSON: {e}\nRaw: {text[:500]}") from e
+        raise LLMError(f"Failed to parse LLM response as JSON: {e}\\nRaw: {text[:500]}") from e
 
 
 class LLMError(Exception):

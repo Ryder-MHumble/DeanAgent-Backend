@@ -1,0 +1,111 @@
+:root {
+  color-scheme: dark;
+  --bg: #050c14;
+  --bg-soft: #0b1621;
+  --bg-elevated: #0e1c29;
+  --panel: rgba(8, 17, 27, 0.86);
+  --panel-strong: rgba(11, 23, 35, 0.96);
+  --line: transparent;
+  --line-strong: transparent;
+  --text: #edf5ff;
+  --muted: #8aa2bc;
+  --accent: #d3ff5f;
+  --accent-strong: #e6ff9b;
+  --accent-soft: rgba(211, 255, 95, 0.14);
+  --cyan: #69d4ff;
+  --success: #3dd8a1;
+  --warning: #ffbe63;
+  --danger: #ff7f7f;
+  --shadow: 0 22px 48px rgba(0, 0, 0, 0.28);
+  --radius-lg: 22px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-md: 14px;
+  --text-lg: 16px;
+  --text-xl: 22px;
+  --shell-gap: 20px;
+  --nav-width: 118px;
+  --drawer-width: 620px;
+  font-family: "Sora", "IBM Plex Sans", "Noto Sans SC", "PingFang SC", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  font-size: var(--text-md);
+  line-height: 1.45;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at top left, rgba(105, 212, 255, 0.12), transparent 26%),
+    radial-gradient(circle at top right, rgba(211, 255, 95, 0.1), transparent 26%),
+    linear-gradient(180deg, #09131d 0%, #050c14 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.8), transparent 92%);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button:disabled {
+  opacity: 0.54;
+  cursor: not-allowed;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+[id^="section-"] {
+  scroll-margin-top: 18px;
+}
+
+.console-shell {
+  display: grid;
+  grid-template-columns: var(--nav-width) minmax(0, 1fr);
+  gap: var(--shell-gap);
+  width: min(1800px, calc(100vw - 28px));
+  margin: 0 auto;
+  padding: 18px 0 28px;
+}
+
+.console-main {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+  overflow-x: clip;
+}
+
+.panel {
+  background: linear-gradient(180deg, rgba(15, 28, 41, 0.78) 0%, rgba(8, 16, 24, 0.92) 100%);
+  border: 0;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(16px);
+  animation: panel-in 320ms ease both;
+}
+

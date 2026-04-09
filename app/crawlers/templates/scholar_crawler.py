@@ -407,6 +407,11 @@ class ScholarCrawler(BaseCrawler):
                             fields_to_extract=llm_fields_to_extract if llm_fields_to_extract else None,
                             llm_provider=llm_provider,
                             llm_model=llm_model,
+                            stage="crawler_scholar_fields",
+                            source_id=self.source_id,
+                            dimension=self.config.get("dimension"),
+                            article_id=profile_url,
+                            article_title=name_text,
                         )
 
                         # Extract phone

@@ -7,6 +7,7 @@ from app.schemas.console import (
     CrawlRequest,
     CrawlStartResponse,
     CrawlStatusResponse,
+    ConsoleApiUsageResponse,
     ConsoleDailyTrendPoint,
     ConsoleOverviewResponse,
     ConsoleServerMetrics,
@@ -77,6 +78,36 @@ async def get_daily_trend(
 async def get_server_metrics():
     return await console_service.get_console_server_metrics()
 
+
+
+
+@router.get(
+    "/api-monitor/usage",
+    response_model=ConsoleApiUsageResponse,
+    tags=["console-overview"],
+    summary="API token/费用监控",
+    description="返回 OpenRouter API 的 token 消耗、费用、模块归因与最近调用明细；未知模型按 unpriced 返回并单独统计。",
+)
+async def get_api_usage(
+    days: int = Query(default=7, ge=1, le=30, description="统计最近天数"),
+    system: str | None = Query(default=None, description="按系统过滤"),
+    module: str | None = Query(default=None, description="按模块过滤"),
+    stage: str | None = Query(default=None, description="按 stage 过滤"),
+    model: str | None = Query(default=None, description="按模型过滤"),
+    source_id: str | None = Query(default=None, description="按 source_id 过滤"),
+    success: str = Query(default="all", description="调用状态过滤：all/success/failed"),
+    limit: int = Query(default=80, ge=1, le=200, description="最近明细条数"),
+):
+    return await console_service.get_console_api_usage(
+        days=days,
+        system=system,
+        module=module,
+        stage=stage,
+        model=model,
+        source_id=source_id,
+        success=success,
+        limit=limit,
+    )
 
 @router.get(
     "/sources",

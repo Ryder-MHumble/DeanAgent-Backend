@@ -44,7 +44,37 @@ PRICING_MAP = {
         "input": 0.54,
         "output": 0.81,
     },
+    "minimax/minimax-m2.5": {
+        "input": 0.118,
+        "output": 0.99,
+    },
 }
+
+
+def _empty_model_stats() -> dict[str, Any]:
+    return {
+        "call_count": 0,
+        "success_count": 0,
+        "error_count": 0,
+        "total_input_tokens": 0,
+        "total_output_tokens": 0,
+        "total_cost_usd": 0.0,
+        "priced_calls": 0,
+        "unpriced_calls": 0,
+        "unpriced_tokens": 0,
+    }
+
+
+def _empty_summary() -> dict[str, Any]:
+    return {
+        "last_updated": datetime.now(timezone.utc).isoformat(),
+        "total_calls": 0,
+        "total_cost_usd": 0.0,
+        "priced_calls": 0,
+        "unpriced_calls": 0,
+        "unpriced_tokens": 0,
+        "models": {},
+    }
 
 
 class LLMCallTracker:
@@ -62,6 +92,7 @@ class LLMCallTracker:
         self,
         *,
         model: str,
+        provider: str | None = None,
         prompt: str,
         system_prompt: str,
         response_text: str,
@@ -75,31 +106,33 @@ class LLMCallTracker:
         duration_ms: float | None = None,
         success: bool = True,
         error_message: str | None = None,
+        provider_cost_usd: float | None = None,
     ) -> None:
         """Log a single LLM API call.
 
-        Args:
-            model: Model identifier (e.g., 'google/gemini-2.0-flash-001')
-            prompt: User prompt sent to LLM
-            system_prompt: System instruction
-            response_text: Full response text from LLM
-            input_tokens: Number of input tokens used
-            output_tokens: Number of output tokens used
-            stage: Pipeline stage name (policy, personnel, tech_frontier, etc.)
-            article_id: URL hash or article identifier
-            article_title: Article title for reference
-            source_id: News source ID
-            dimension: Data dimension (national_policy, beijing_policy, etc.)
-            duration_ms: API call duration in milliseconds
-            success: Whether the call succeeded
-            error_message: Error details if call failed
+        Cost policy:
+        1. provider_cost_usd (if provided)
+        2. local PRICING_MAP estimate
+        3. unpriced (None)
         """
         now = datetime.now(timezone.utc)
-        cost_usd = self._calculate_cost(model, input_tokens, output_tokens)
+        estimated_cost_usd = self._calculate_cost(model, input_tokens, output_tokens)
+        safe_provider_cost = self._safe_float(provider_cost_usd)
+
+        if safe_provider_cost is not None:
+            cost_source = "provider"
+            effective_cost_usd: float | None = safe_provider_cost
+        elif estimated_cost_usd is not None:
+            cost_source = "pricing_map"
+            effective_cost_usd = estimated_cost_usd
+        else:
+            cost_source = "unpriced"
+            effective_cost_usd = None
 
         call_record = {
             "timestamp": now.isoformat(),
             "model": model,
+            "provider": provider or "openrouter",
             "stage": stage,
             "article_id": article_id,
             "article_title": article_title,
@@ -108,7 +141,13 @@ class LLMCallTracker:
             "input_tokens": input_tokens,
             "output_tokens": output_tokens,
             "total_tokens": input_tokens + output_tokens,
-            "cost_usd": round(cost_usd, 6),
+            # Backward compatibility
+            "cost_usd": round(effective_cost_usd, 6) if effective_cost_usd is not None else None,
+            "cost_source": cost_source,
+            "provider_cost_usd": round(safe_provider_cost, 6) if safe_provider_cost is not None else None,
+            "effective_cost_usd": (
+                round(effective_cost_usd, 6) if effective_cost_usd is not None else None
+            ),
             "duration_ms": duration_ms,
             "success": success,
             "error_message": error_message,
@@ -117,40 +156,58 @@ class LLMCallTracker:
             "response_length": len(response_text),
         }
 
-        # Append to JSONL log
         self._append_to_log(call_record)
+        self._update_summary(
+            model=model,
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
+            effective_cost_usd=effective_cost_usd,
+            success=success,
+        )
 
-        # Update summary
-        self._update_summary(model, input_tokens, output_tokens, cost_usd, success)
-
-        # Log to standard logger
         if success:
             logger.info(
                 "LLM call [%s/%s] — model=%s, tokens=%d/%d (%.2f¢), duration=%.1fms",
-                stage, article_id or "?",
+                stage,
+                article_id or "?",
                 model.split("/")[-1],
-                input_tokens, output_tokens,
-                cost_usd * 100,  # Convert to cents
+                input_tokens,
+                output_tokens,
+                (effective_cost_usd or 0.0) * 100,
                 duration_ms or 0,
             )
         else:
             logger.warning(
                 "LLM call failed [%s/%s] — %s",
-                stage, article_id or "?",
+                stage,
+                article_id or "?",
                 error_message,
             )
 
     @staticmethod
-    def _calculate_cost(model: str, input_tokens: int, output_tokens: int) -> float:
-        """Calculate API cost in USD."""
+    def _calculate_cost(model: str, input_tokens: int, output_tokens: int) -> float | None:
+        """Calculate API cost in USD using local pricing table."""
         pricing = PRICING_MAP.get(model)
         if not pricing:
-            logger.warning("Unknown model pricing: %s", model)
-            return 0.0
+            return None
 
         input_cost = (input_tokens / 1_000_000) * pricing["input"]
         output_cost = (output_tokens / 1_000_000) * pricing["output"]
         return input_cost + output_cost
+
+    @staticmethod
+    def _safe_float(value: Any) -> float | None:
+        if value is None:
+            return None
+        if isinstance(value, (int, float)):
+            return float(value) if value >= 0 else None
+        if isinstance(value, str):
+            try:
+                parsed = float(value.strip())
+            except ValueError:
+                return None
+            return parsed if parsed >= 0 else None
+        return None
 
     @staticmethod
     def _append_to_log(call_record: dict[str, Any]) -> None:
@@ -166,34 +223,28 @@ class LLMCallTracker:
         model: str,
         input_tokens: int,
         output_tokens: int,
-        cost_usd: float,
+        effective_cost_usd: float | None,
         success: bool,
     ) -> None:
         """Update summary statistics."""
         try:
-            summary = {}
+            summary = _empty_summary()
             if SUMMARY_FILE.exists():
                 with open(SUMMARY_FILE, encoding="utf-8") as f:
-                    summary = json.load(f)
+                    loaded = json.load(f)
+                if isinstance(loaded, dict):
+                    summary.update(loaded)
 
-            if "last_updated" not in summary:
-                summary["last_updated"] = datetime.now(timezone.utc).isoformat()
-
-            if "models" not in summary:
+            if "models" not in summary or not isinstance(summary["models"], dict):
                 summary["models"] = {}
 
-            model_key = model.split("/")[-1]  # Extract model name
-            if model_key not in summary["models"]:
-                summary["models"][model_key] = {
-                    "call_count": 0,
-                    "success_count": 0,
-                    "error_count": 0,
-                    "total_input_tokens": 0,
-                    "total_output_tokens": 0,
-                    "total_cost_usd": 0.0,
-                }
+            model_key = model.split("/")[-1]
+            existing_model_stats = summary["models"].get(model_key)
+            if not isinstance(existing_model_stats, dict):
+                existing_model_stats = {}
+            model_stats = _empty_model_stats()
+            model_stats.update(existing_model_stats)
 
-            model_stats = summary["models"][model_key]
             model_stats["call_count"] += 1
             if success:
                 model_stats["success_count"] += 1
@@ -201,16 +252,34 @@ class LLMCallTracker:
                 model_stats["error_count"] += 1
             model_stats["total_input_tokens"] += input_tokens
             model_stats["total_output_tokens"] += output_tokens
-            model_stats["total_cost_usd"] = round(
-                model_stats["total_cost_usd"] + cost_usd,
+
+            if effective_cost_usd is None:
+                model_stats["unpriced_calls"] += 1
+                model_stats["unpriced_tokens"] += input_tokens + output_tokens
+            else:
+                model_stats["priced_calls"] += 1
+                model_stats["total_cost_usd"] = round(
+                    float(model_stats["total_cost_usd"]) + effective_cost_usd,
+                    6,
+                )
+
+            summary["models"][model_key] = model_stats
+            summary["last_updated"] = datetime.now(timezone.utc).isoformat()
+            summary["total_calls"] = sum(
+                int(m.get("call_count", 0)) for m in summary["models"].values()
+            )
+            summary["total_cost_usd"] = round(
+                sum(float(m.get("total_cost_usd", 0.0)) for m in summary["models"].values()),
                 6,
             )
-
-            summary["last_updated"] = datetime.now(timezone.utc).isoformat()
-            summary["total_calls"] = sum(m["call_count"] for m in summary["models"].values())
-            summary["total_cost_usd"] = round(
-                sum(m["total_cost_usd"] for m in summary["models"].values()),
-                6,
+            summary["priced_calls"] = sum(
+                int(m.get("priced_calls", 0)) for m in summary["models"].values()
+            )
+            summary["unpriced_calls"] = sum(
+                int(m.get("unpriced_calls", 0)) for m in summary["models"].values()
+            )
+            summary["unpriced_tokens"] = sum(
+                int(m.get("unpriced_tokens", 0)) for m in summary["models"].values()
             )
 
             with open(SUMMARY_FILE, "w", encoding="utf-8") as f:
@@ -223,21 +292,20 @@ class LLMCallTracker:
     def get_summary() -> dict[str, Any]:
         """Get current LLM usage summary."""
         if not SUMMARY_FILE.exists():
-            return {
-                "total_calls": 0,
-                "total_cost_usd": 0.0,
-                "models": {},
-            }
+            return _empty_summary()
 
         try:
             with open(SUMMARY_FILE, encoding="utf-8") as f:
-                return json.load(f)
+                summary = json.load(f)
+            if not isinstance(summary, dict):
+                return _empty_summary()
+            defaults = _empty_summary()
+            defaults.update(summary)
+            if not isinstance(defaults.get("models"), dict):
+                defaults["models"] = {}
+            return defaults
         except OSError:
-            return {
-                "total_calls": 0,
-                "total_cost_usd": 0.0,
-                "models": {},
-            }
+            return _empty_summary()
 
     @staticmethod
     def get_calls_by_stage(stage: str) -> list[dict[str, Any]]:

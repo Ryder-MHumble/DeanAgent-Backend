@@ -7,17 +7,30 @@ const props = defineProps<{
   generatedAt: string | null;
 }>();
 
-const sections = [
-  { id: "overview", label: "总览", meta: "Status" },
-  { id: "sources", label: "信源", meta: "Catalog" },
-  { id: "tasks", label: "任务", meta: "Batch" },
-  { id: "intel", label: "情报", meta: "Intel" },
+const navGroups = [
+  {
+    id: "monitor",
+    title: "监控",
+    items: [
+      { id: "overview", label: "总览", meta: "Overview" },
+      { id: "ops", label: "运行", meta: "Ops" },
+      { id: "api", label: "API", meta: "OpenRouter" },
+    ],
+  },
+  {
+    id: "execution",
+    title: "执行",
+    items: [
+      { id: "sources", label: "信源", meta: "Catalog" },
+      { id: "tasks", label: "批量", meta: "Batch" },
+      { id: "intel", label: "情报", meta: "Intel" },
+    ],
+  },
 ] as const;
 
 const emit = defineEmits<{
-  (event: "navigate", section: (typeof sections)[number]["id"]): void;
+  (event: "navigate", section: "overview" | "ops" | "api" | "sources" | "tasks" | "intel"): void;
 }>();
-
 </script>
 
 <template>
@@ -36,21 +49,24 @@ const emit = defineEmits<{
     </div>
 
     <nav class="nav-list" aria-label="控制台分区导航">
-      <button
-        v-for="section in sections"
-        :key="section.id"
-        :class="['nav-item', { 'is-active': activeSection === section.id }]"
-        type="button"
-        @click="emit('navigate', section.id)"
-      >
-        <span class="nav-item-icon" :data-kind="section.id" aria-hidden="true">
-          <span class="nav-item-glyph"></span>
-        </span>
-        <span class="nav-item-copy">
-          <span class="nav-item-label">{{ section.label }}</span>
-          <span class="nav-item-meta">{{ section.meta }}</span>
-        </span>
-      </button>
+      <section v-for="group in navGroups" :key="group.id" class="nav-group">
+        <p class="nav-group-title">{{ group.title }}</p>
+        <button
+          v-for="section in group.items"
+          :key="section.id"
+          :class="['nav-item', { 'is-active': activeSection === section.id }]"
+          type="button"
+          @click="emit('navigate', section.id)"
+        >
+          <span class="nav-item-icon" :data-kind="section.id" aria-hidden="true">
+            <span class="nav-item-glyph"></span>
+          </span>
+          <span class="nav-item-copy">
+            <span class="nav-item-label">{{ section.label }}</span>
+            <span class="nav-item-meta">{{ section.meta }}</span>
+          </span>
+        </button>
+      </section>
     </nav>
 
     <div class="nav-status">

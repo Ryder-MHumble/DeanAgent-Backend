@@ -110,6 +110,7 @@ async def get_cost_by_model() -> dict[str, Any]:
 
     by_model = {}
     for model_name, stats in summary.get("models", {}).items():
+        priced_calls = stats.get("priced_calls", stats.get("call_count", 0))
         by_model[model_name] = {
             "call_count": stats.get("call_count", 0),
             "success_count": stats.get("success_count", 0),
@@ -120,9 +121,12 @@ async def get_cost_by_model() -> dict[str, Any]:
             "input_tokens": stats.get("total_input_tokens", 0),
             "output_tokens": stats.get("total_output_tokens", 0),
             "total_cost_usd": stats.get("total_cost_usd", 0.0),
+            "priced_calls": stats.get("priced_calls", 0),
+            "unpriced_calls": stats.get("unpriced_calls", 0),
+            "unpriced_tokens": stats.get("unpriced_tokens", 0),
             "avg_cost_per_call": (
-                stats.get("total_cost_usd", 0.0) / stats.get("call_count", 1)
-                if stats.get("call_count", 0) > 0
+                stats.get("total_cost_usd", 0.0) / priced_calls
+                if priced_calls > 0
                 else 0.0
             ),
         }
@@ -131,6 +135,9 @@ async def get_cost_by_model() -> dict[str, Any]:
         "generated_at": datetime.now().isoformat(),
         "total_cost_usd": summary.get("total_cost_usd", 0.0),
         "total_calls": summary.get("total_calls", 0),
+        "priced_calls": summary.get("priced_calls", 0),
+        "unpriced_calls": summary.get("unpriced_calls", 0),
+        "unpriced_tokens": summary.get("unpriced_tokens", 0),
         "by_model": by_model,
     }
 

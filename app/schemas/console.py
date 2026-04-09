@@ -174,6 +174,165 @@ class ConsoleServerMetrics(BaseModel):
     sampled_at: datetime
 
 
+class ConsoleApiUsageOverview(BaseModel):
+    """Aggregated API usage overview metrics."""
+
+    total_calls: int = 0
+    success_calls: int = 0
+    failed_calls: int = 0
+    success_rate: float = 0.0
+    total_input_tokens: int = 0
+    total_output_tokens: int = 0
+    total_tokens: int = 0
+    total_cost_usd: float = 0.0
+    priced_calls: int = 0
+    unpriced_calls: int = 0
+    unpriced_tokens: int = 0
+    avg_cost_per_call_usd: float = 0.0
+
+
+class ConsoleApiUsageModuleItem(BaseModel):
+    """API usage aggregation by module."""
+
+    module: str
+    call_count: int = 0
+    success_count: int = 0
+    failed_count: int = 0
+    input_tokens: int = 0
+    output_tokens: int = 0
+    total_tokens: int = 0
+    total_cost_usd: float = 0.0
+    priced_calls: int = 0
+    unpriced_calls: int = 0
+
+
+class ConsoleApiUsageModelItem(BaseModel):
+    """API usage aggregation by model."""
+
+    model: str
+    call_count: int = 0
+    success_count: int = 0
+    failed_count: int = 0
+    input_tokens: int = 0
+    output_tokens: int = 0
+    total_tokens: int = 0
+    total_cost_usd: float = 0.0
+    priced_calls: int = 0
+    unpriced_calls: int = 0
+    avg_cost_per_call_usd: float = 0.0
+
+
+class ConsoleApiUsageStageItem(BaseModel):
+    """API usage aggregation by stage."""
+
+    stage: str
+    module: str
+    call_count: int = 0
+    success_count: int = 0
+    failed_count: int = 0
+    input_tokens: int = 0
+    output_tokens: int = 0
+    total_tokens: int = 0
+    total_cost_usd: float = 0.0
+    priced_calls: int = 0
+    unpriced_calls: int = 0
+
+
+class ConsoleApiUsageSystemItem(BaseModel):
+    """API usage aggregation by system/project."""
+
+    system: str
+    system_label: str | None = None
+    call_count: int = 0
+    success_count: int = 0
+    failed_count: int = 0
+    success_rate: float = 0.0
+    input_tokens: int = 0
+    output_tokens: int = 0
+    total_tokens: int = 0
+    total_cost_usd: float = 0.0
+    priced_calls: int = 0
+    unpriced_calls: int = 0
+
+
+class ConsoleApiUsageTrendPoint(BaseModel):
+    """Daily trend point for API usage chart."""
+
+    date: date
+    call_count: int = 0
+    total_tokens: int = 0
+    total_cost_usd: float = 0.0
+
+
+class ConsoleApiUsageTrendSeries(BaseModel):
+    """Per-system trend series."""
+
+    system: str
+    system_label: str | None = None
+    points: list[ConsoleApiUsageTrendPoint] = Field(default_factory=list)
+
+
+class ConsoleApiRecentCall(BaseModel):
+    """Single API call row in recent records."""
+
+    timestamp: datetime
+    provider: str
+    system: str
+    system_label: str | None = None
+    module: str
+    stage: str
+    model: str
+    source_id: str | None = None
+    article_id: str | None = None
+    article_title: str | None = None
+    input_tokens: int = 0
+    output_tokens: int = 0
+    total_tokens: int = 0
+    effective_cost_usd: float | None = None
+    cost_source: str = "unpriced"
+    success: bool = True
+    duration_ms: float | None = None
+
+
+class ConsoleApiUsageAvailableFilters(BaseModel):
+    """Values available for API monitor filters."""
+
+    modules: list[str] = Field(default_factory=list)
+    stages: list[str] = Field(default_factory=list)
+    models: list[str] = Field(default_factory=list)
+    source_ids: list[str] = Field(default_factory=list)
+    systems: list[str] = Field(default_factory=list)
+
+
+class ConsoleApiUsageScope(BaseModel):
+    """Applied filter scope for API monitor payload."""
+
+    provider: str = "openrouter"
+    days: int = 7
+    system: str | None = None
+    module: str | None = None
+    stage: str | None = None
+    model: str | None = None
+    source_id: str | None = None
+    success: Literal["all", "success", "failed"] = "all"
+    limit: int = 80
+
+
+class ConsoleApiUsageResponse(BaseModel):
+    """Top-level API monitor payload for console."""
+
+    generated_at: datetime
+    scope: ConsoleApiUsageScope
+    overview: ConsoleApiUsageOverview
+    by_system: list[ConsoleApiUsageSystemItem] = Field(default_factory=list)
+    by_module: list[ConsoleApiUsageModuleItem] = Field(default_factory=list)
+    by_model: list[ConsoleApiUsageModelItem] = Field(default_factory=list)
+    by_stage: list[ConsoleApiUsageStageItem] = Field(default_factory=list)
+    trend_series: list[ConsoleApiUsageTrendSeries] = Field(default_factory=list)
+    recent_calls: list[ConsoleApiRecentCall] = Field(default_factory=list)
+    available_filters: ConsoleApiUsageAvailableFilters
+
+
 class ConsoleOverviewResponse(BaseModel):
     """Top-level crawler console overview payload."""
 

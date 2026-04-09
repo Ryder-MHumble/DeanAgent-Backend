@@ -1,6 +1,8 @@
 import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from "vue";
 import { consoleApi } from "../api/console";
 import type {
+  ApiUsageResponse,
+  ApiUsageSuccessFilter,
   ConsoleOverview,
   CrawlLog,
   ManualJobPayload,
@@ -15,6 +17,9 @@ export function useConsoleController() {
   const trend = ref<TrendPoint[]>([]);
   const serverMetrics = ref<ServerMetrics | null>(null);
   const serverMetricsError = ref("");
+  const apiUsage = ref<ApiUsageResponse | null>(null);
+  const apiUsageLoading = ref(false);
+  const apiUsageError = ref("");
   const sourceCatalog = ref<SourceCatalogResponse | null>(null);
   const sourceLogs = ref<CrawlLog[]>([]);
   const selectedSourceId = ref("");
@@ -47,6 +52,24 @@ export function useConsoleController() {
     keywordFilterText: "",
     keywordBlacklistText: "",
     exportFormat: "json",
+  });
+
+  const apiUsageFilters = reactive<{
+    days: number;
+    system: string;
+    module: string;
+    stage: string;
+    model: string;
+    source_id: string;
+    success: ApiUsageSuccessFilter;
+  }>({
+    days: 7,
+    system: "",
+    module: "",
+    stage: "",
+    model: "",
+    source_id: "",
+    success: "all",
   });
 
   let pollTimer: number | null = null;
@@ -106,6 +129,36 @@ export function useConsoleController() {
     }
   }
 
+  async function loadApiUsage(allowFailure = false) {
+    apiUsageLoading.value = true;
+    try {
+      apiUsage.value = await consoleApi.getApiUsage({
+        days: apiUsageFilters.days,
+        system: apiUsageFilters.system || null,
+        module: apiUsageFilters.module || null,
+        stage: apiUsageFilters.stage || null,
+        model: apiUsageFilters.model || null,
+        source_id: apiUsageFilters.source_id || null,
+        success: apiUsageFilters.success,
+        limit: 80,
+      });
+      apiUsageError.value = "";
+    } catch (error) {
+      apiUsage.value = null;
+      const status = typeof error === "object" && error !== null && "status" in error ? Number((error as { status?: unknown }).status) : null;
+      if (status === 404 || (error instanceof Error && /not found/i.test(error.message))) {
+        apiUsageError.value = "API 监控端点未就绪（/console-api/api-monitor/usage），请重启后端后重试";
+      } else {
+        apiUsageError.value = error instanceof Error ? error.message : "API 监控加载失败";
+      }
+      if (!allowFailure) {
+        throw error;
+      }
+    } finally {
+      apiUsageLoading.value = false;
+    }
+  }
+
   async function fetchLogs(sourceId: string, resetBeforeLoad = false) {
     logsLoading.value = true;
     if (resetBeforeLoad) {
@@ -155,7 +208,13 @@ export function useConsoleController() {
     isRefreshing.value = true;
     errorMessage.value = "";
     try {
-      await Promise.all([loadOverview(), loadTrend(), loadSources(), loadServerMetrics(true)]);
+      await Promise.all([
+        loadOverview(),
+        loadTrend(),
+        loadSources(),
+        loadServerMetrics(true),
+        loadApiUsage(true),
+      ]);
       if (drawerOpen.value && selectedSourceId.value) {
         await fetchLogs(selectedSourceId.value);
       }
@@ -436,7 +495,7 @@ export function useConsoleController() {
       pollInFlight = true;
       pollTick += 1;
       try {
-        await Promise.all([loadOverview(), loadServerMetrics(true)]);
+        await Promise.all([loadOverview(), loadServerMetrics(true), loadApiUsage(true)]);
         if (pollTick % 3 === 0) {
           await Promise.all([loadTrend(), loadSources()]);
         }
@@ -465,6 +524,26 @@ export function useConsoleController() {
   watch(page, () => {
     queueLoadSources();
   });
+
+
+  watch(
+    () => [
+      apiUsageFilters.days,
+      apiUsageFilters.system,
+      apiUsageFilters.module,
+      apiUsageFilters.stage,
+      apiUsageFilters.model,
+      apiUsageFilters.source_id,
+      apiUsageFilters.success,
+    ],
+    async () => {
+      try {
+        await loadApiUsage(true);
+      } catch {
+        // keep silent for filter auto reload
+      }
+    },
+  );
 
   onMounted(async () => {
     await refreshAll();
@@ -504,6 +583,10 @@ export function useConsoleController() {
     refreshAll,
     serverMetrics,
     serverMetricsError,
+    apiUsage,
+    apiUsageLoading,
+    apiUsageError,
+    apiUsageFilters,
     selectedCount,
     selectedSourceId,
     selectedSourceIds,

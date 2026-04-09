@@ -1,4 +1,6 @@
 import type {
+  ApiUsageResponse,
+  ApiUsageSuccessFilter,
   ConsoleOverview,
   JobTransport,
   ManualJobActivity,
@@ -576,6 +578,28 @@ export const consoleApi = {
   },
   getServerMetrics() {
     return request<ServerMetrics>("/server-metrics");
+  },
+
+  getApiUsage(params: {
+    days?: number;
+    system?: string | null;
+    module?: string | null;
+    stage?: string | null;
+    model?: string | null;
+    source_id?: string | null;
+    success?: ApiUsageSuccessFilter;
+    limit?: number;
+  } = {}) {
+    return request<ApiUsageResponse>(`/api-monitor/usage${buildQuery({
+      days: params.days ?? 7,
+      system: params.system ?? null,
+      module: params.module ?? null,
+      stage: params.stage ?? null,
+      model: params.model ?? null,
+      source_id: params.source_id ?? null,
+      success: params.success ?? "all",
+      limit: params.limit ?? 80,
+    })}`);
   },
   getSources(params: Record<string, string | number | boolean | null | undefined>) {
     return request<SourceCatalogResponse>(`/sources${buildQuery(params)}`);
