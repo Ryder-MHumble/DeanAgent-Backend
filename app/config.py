@@ -64,6 +64,7 @@ class Settings(BaseSettings):
 
     # Startup behavior
     STARTUP_CRAWL_ENABLED: bool = True  # trigger pipeline on first start if no data
+    REQUIRE_DB_ON_STARTUP: bool = True  # fail fast if DB init fails
 
     # Paths
     SOURCES_DIR: Path = BASE_DIR / "sources"

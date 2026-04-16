@@ -242,6 +242,7 @@ async def run_all(
     dimension_filter: str | None = None,
     concurrency: int | None = None,
     strategy: str = "grouped",
+    cleanup_runtime_resources: bool = True,
 ):
     from app.crawlers.utils.playwright_pool import close_browser
     from app.config import settings
@@ -477,15 +478,16 @@ async def run_all(
     if pbar:
         pbar.close()
 
-    # 关闭 Playwright（如果有 dynamic 源启动了它）和 DB 客户端
-    try:
-        await close_browser()
-    except Exception:
-        pass
-    try:
-        await close_client()
-    except Exception:
-        pass
+    # 仅在 CLI/独立脚本模式清理全局资源；被应用内 pipeline 调用时必须保持全局 DB 可用。
+    if cleanup_runtime_resources:
+        try:
+            await close_browser()
+        except Exception:
+            pass
+        try:
+            await close_client()
+        except Exception:
+            pass
 
     total_duration = time.time() - global_start
 

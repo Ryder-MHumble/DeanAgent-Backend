@@ -1,6 +1,16 @@
-from fastapi import Query
+from fastapi import HTTPException, Query
+from pydantic import ValidationError
 
 from app.schemas.article import ArticleSearchParams
+
+
+def _normalize_optional_text(value: str | None) -> str | None:
+    if value is None:
+        return None
+    if not isinstance(value, str):
+        return None
+    normalized = value.strip()
+    return normalized or None
 
 
 def get_article_search_params(
@@ -25,19 +35,22 @@ def get_article_search_params(
         None, description="自定义字段 value（需配合 custom_field_key）"
     ),
 ) -> ArticleSearchParams:
-    return ArticleSearchParams(
-        dimension=dimension,
-        source_id=source_id_filter,
-        source_ids=source_ids,
-        source_name=source_name,
-        source_names=source_names,
-        keyword=keyword,
-        date_from=date_from,
-        date_to=date_to,
-        sort_by=sort_by,
-        order=order,
-        page=page,
-        page_size=page_size,
-        custom_field_key=custom_field_key,
-        custom_field_value=custom_field_value,
-    )
+    try:
+        return ArticleSearchParams(
+            dimension=_normalize_optional_text(dimension),
+            source_id=_normalize_optional_text(source_id_filter),
+            source_ids=_normalize_optional_text(source_ids),
+            source_name=_normalize_optional_text(source_name),
+            source_names=_normalize_optional_text(source_names),
+            keyword=_normalize_optional_text(keyword),
+            date_from=_normalize_optional_text(date_from),
+            date_to=_normalize_optional_text(date_to),
+            sort_by=sort_by,
+            order=order,
+            page=page,
+            page_size=page_size,
+            custom_field_key=_normalize_optional_text(custom_field_key),
+            custom_field_value=_normalize_optional_text(custom_field_value),
+        )
+    except ValidationError as exc:
+        raise HTTPException(status_code=422, detail=exc.errors()) from exc

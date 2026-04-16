@@ -216,6 +216,8 @@ async def lifespan(app: FastAPI):
     logger.info("=" * 60)
 
     # Step 0: Initialize database client
+    db_ready = False
+    db_init_error: Exception | None = None
     try:
         backend = settings.DB_BACKEND.strip().lower()
         if backend in {"postgres", "postgresql", "local"}:
@@ -230,6 +232,7 @@ async def lifespan(app: FastAPI):
                     database=settings.POSTGRES_DB,
                 )
             await init_client(backend="postgres")
+            db_ready = True
             logger.info(
                 "PostgreSQL client initialized (%s:%s/%s)",
                 settings.POSTGRES_HOST,
@@ -237,12 +240,26 @@ async def lifespan(app: FastAPI):
                 settings.POSTGRES_DB,
             )
         elif settings.SUPABASE_URL and settings.SUPABASE_KEY:
-            await init_client(settings.SUPABASE_URL, settings.SUPABASE_KEY, backend="supabase")
+            await init_client(
+                settings.SUPABASE_URL,
+                settings.SUPABASE_KEY,
+                backend="supabase",
+            )
+            db_ready = True
             logger.info("Supabase client initialized")
         else:
-            logger.warning("No database backend configured; DB features will fallback to local JSON")
+            logger.warning(
+                "No database backend configured; DB features will fallback to local JSON"
+            )
     except Exception as e:
+        db_init_error = e
         logger.warning("Database client initialization failed: %s", e)
+
+    if settings.REQUIRE_DB_ON_STARTUP and not db_ready:
+        base_msg = "Database is required but initialization failed"
+        if db_init_error:
+            raise RuntimeError(f"{base_msg}: {db_init_error}") from db_init_error
+        raise RuntimeError(f"{base_msg}: no backend configured")
 
     # Step 0.5: Sync source catalog metadata into source_states
     try:
