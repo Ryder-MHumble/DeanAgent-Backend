@@ -43,5 +43,11 @@ data/
 !data/institutions/
 !data/institutions/institutions.json
 
+# Prevent committing exported/internal bulk datasets
+exports/csv/export_*/
+exports/source_catalog/*.xlsx
+exports/sql/supabase_data.sql
+exports/sql/supabase_full_dump.sql
+
 # Git worktrees
 .worktrees/
