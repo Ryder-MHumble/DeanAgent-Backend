@@ -19,6 +19,7 @@ const API_BASE = (import.meta.env.VITE_CONSOLE_API_BASE || "/console-api").repla
 
 type JsonRecord = Record<string, unknown>;
 type RawConsoleOverview = Omit<ConsoleOverview, "manual_job"> & { manual_job?: unknown };
+type QueryValue = string | number | boolean;
 
 const FALLBACK_STATUSES = new Set([404, 405, 501]);
 const RUNNING_JOB_STATUSES = new Set(["queued", "pending", "running", "started", "cancelling"]);
@@ -39,10 +40,21 @@ class ApiError extends Error {
   }
 }
 
-function buildQuery(params: Record<string, string | number | boolean | null | undefined>) {
+function buildQuery(
+  params: Record<string, QueryValue | QueryValue[] | null | undefined>,
+) {
   const search = new URLSearchParams();
   Object.entries(params).forEach(([key, value]) => {
     if (value === null || value === undefined || value === "") {
+      return;
+    }
+    if (Array.isArray(value)) {
+      value.forEach((item) => {
+        if (item === null || item === undefined || item === "") {
+          return;
+        }
+        search.append(key, String(item));
+      });
       return;
     }
     search.set(key, String(value));
@@ -428,13 +440,13 @@ function normalizeJobStatus(
   };
 }
 
-async function request<T>(path: string, init?: RequestInit): Promise<T> {
+async function request<T>(path: string, init?: RequestInit, base = API_BASE): Promise<T> {
   const headers = new Headers(init?.headers);
   if (init?.body && !headers.has("Content-Type")) {
     headers.set("Content-Type", "application/json");
   }
 
-  const response = await fetch(`${API_BASE}${path}`, {
+  const response = await fetch(`${base}${path}`, {
     ...init,
     headers,
   });

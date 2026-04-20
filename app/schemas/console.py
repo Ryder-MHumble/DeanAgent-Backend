@@ -350,3 +350,5 @@ class ConsoleSourceLogsResponse(BaseModel):
 
     source_id: str
     logs: list[CrawlLogResponse] = Field(default_factory=list)
+
+

@@ -108,7 +108,6 @@ async def get_api_usage(
         success=success,
         limit=limit,
     )
-
 @router.get(
     "/sources",
     response_model=SourceCatalogResponse,

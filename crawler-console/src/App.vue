@@ -47,7 +47,7 @@ const {
   manualActionLoading,
   manualForm,
   overview,
-  refreshAll,
+  refreshAll: refreshConsoleData,
   serverMetrics,
   serverMetricsError,
   apiUsage,
@@ -98,6 +98,10 @@ async function openBatchWorkspace() {
   monitorTab.value = "crawler";
   await nextTick();
   await openBatchPanel();
+}
+
+async function refreshAll() {
+  await refreshConsoleData();
 }
 
 const manualProgressPercent = computed(() =>

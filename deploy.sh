@@ -16,10 +16,13 @@ VERSION=$(grep '^version' "$PROJECT_DIR/pyproject.toml" 2>/dev/null \
     | head -1 | sed 's/.*"\(.*\)".*/\1/' || echo "0.0.0")
 
 PORT=8001
-WORKERS=1
+WORKERS=4
 TAIL_LINES=50
 FOLLOW=false
 PRODUCTION=false
+BIND_HOST=0.0.0.0
+HEALTH_CHECK_HOST="${HEALTH_CHECK_HOST:-127.0.0.1}"
+PUBLIC_HOST="${PUBLIC_HOST:-10.1.132.21}"
 
 # ── ANSI ──────────────────────────────────────────────────────
 R='\033[0;31m';   G='\033[0;32m';  Y='\033[0;33m'
@@ -73,7 +76,7 @@ show_banner() {
     _time=$(date '+%Y-%m-%d  %H:%M:%S')
     printf "  ${D}TIME${NC}   ${BW}%s${NC}    ${D}PORT${NC}   ${BC}${BOLD}:%s${NC}\n" "$_time" "$PORT"
     printf "  ${D}BRANCH${NC} ${Y}%s${NC}          ${D}PYTHON${NC} ${G}%s${NC}\n" "$_branch" "$_py"
-    printf "  ${D}TARGET${NC} ${D}10.1.132.21${NC}    ${D}v%s${NC}\n" "$VERSION"
+    printf "  ${D}TARGET${NC} ${D}%s${NC}    ${D}v%s${NC}\n" "$PUBLIC_HOST" "$VERSION"
     printf "\n"
     _hr
 }
@@ -182,7 +185,7 @@ console_build_needed() {
         -newer "$CONSOLE_DIST_DIR/index.html" 2>/dev/null | grep -q .
 }
 
-ensure_console_frontend_dist() {
+ensure_frontend_dists() {
     [[ -d "$CONSOLE_DIR" ]] || return 0
 
     if ! validate_node; then
@@ -315,7 +318,7 @@ _start_service() {
 
     cd "$PROJECT_DIR"
     nohup "$VENV_DIR/bin/python" -m uvicorn app.main:app \
-        --host 0.0.0.0 --port "$PORT" --workers "$WORKERS" \
+        --host "$BIND_HOST" --port "$PORT" --workers "$WORKERS" \
         ${extra_args[@]+"${extra_args[@]}"} >> "$LOG_FILE" 2>&1 &
 
     echo $! > "$PID_FILE"
@@ -328,7 +331,7 @@ _wait_health() {
     local chars='⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'
     printf " ${C}⟳${NC} Waiting for health check..."
     while [[ $i -lt $max ]]; do
-        if curl -sf "http://10.1.132.21:$PORT/api/v1/health/" >/dev/null 2>&1; then
+        if curl -sf "http://${HEALTH_CHECK_HOST}:$PORT/api/v1/health/" >/dev/null 2>&1; then
             printf "\r ${G}✓${NC}  Health check passed           \n"
             return 0
         fi
@@ -353,7 +356,7 @@ show_dashboard() {
         cpu=$(ps -p "$pid" -o %cpu= 2>/dev/null | xargs || echo "-")
         mem_kb=$(ps -p "$pid" -o rss= 2>/dev/null | xargs || echo "0")
         mem_mb=$(echo "$mem_kb" | awk '{printf "%.1f", $1/1024}')
-        conns=$(lsof -i "tcp:$PORT" 2>/dev/null | grep -c ESTABLISHED || echo "0")
+        conns=$(lsof -i "tcp:$PORT" 2>/dev/null | awk '/ESTABLISHED/ {count += 1} END {print count + 0}')
 
         printf "\n"
         printf "   ${BOLD}SERVICE${NC}\n"
@@ -374,7 +377,7 @@ show_dashboard() {
 
         # Pipeline status
         local pipe_json
-        pipe_json=$(curl -sf "http://10.1.132.21:$PORT/api/v1/health/pipeline-status" 2>/dev/null) || pipe_json=""
+        pipe_json=$(curl -sf "http://${HEALTH_CHECK_HOST}:$PORT/api/v1/health/pipeline-status" 2>/dev/null) || pipe_json=""
         if [[ -n "$pipe_json" ]]; then
             printf "\n"
             printf "   ${BOLD}PIPELINE${NC}\n"
@@ -418,13 +421,13 @@ if stages:
         # Endpoints
         printf "\n"
         printf "   ${BOLD}ENDPOINTS${NC}\n"
-        printf "   ${D}Docs${NC}     http://10.1.132.21:%s/docs\n" "$PORT"
-        printf "   ${D}Health${NC}   http://10.1.132.21:%s/api/v1/health/\n" "$PORT"
-        printf "   ${D}Pipeline${NC} http://10.1.132.21:%s/api/v1/health/pipeline-status\n" "$PORT"
+        printf "   ${D}Docs${NC}     http://%s:%s/docs\n" "$PUBLIC_HOST" "$PORT"
+        printf "   ${D}Health${NC}   http://%s:%s/api/v1/health/\n" "$PUBLIC_HOST" "$PORT"
+        printf "   ${D}Pipeline${NC} http://%s:%s/api/v1/health/pipeline-status\n" "$PUBLIC_HOST" "$PORT"
         if [[ -d "$CONSOLE_DIST_DIR" ]]; then
-            printf "   ${D}Console${NC}  http://10.1.132.21:%s/console\n" "$PORT"
+            printf "   ${D}Console${NC}  http://%s:%s/console\n" "$PUBLIC_HOST" "$PORT"
         fi
-        printf "   ${D}Console API${NC} http://10.1.132.21:%s/console-api/docs\n" "$PORT"
+        printf "   ${D}Console API${NC} http://%s:%s/console-api/docs\n" "$PUBLIC_HOST" "$PORT"
     else
         printf "\n"
         printf "   ${BOLD}SERVICE${NC}\n"
@@ -446,7 +449,7 @@ _check_pipeline_hint() {
     if [[ ! -f "$feed" ]]; then
         printf "\n"
         warn "Processed data missing — Pipeline will auto-trigger on startup"
-        dim "   Or trigger manually: curl -X POST http://10.1.132.21:$PORT/api/v1/health/pipeline-trigger"
+        dim "   Or trigger manually: curl -X POST http://${PUBLIC_HOST}:$PORT/api/v1/health/pipeline-trigger"
         return
     fi
 
@@ -462,7 +465,7 @@ _check_pipeline_hint() {
     if [[ $age_hours -gt 24 ]]; then
         printf "\n"
         warn "Pipeline data is ${BOLD}${age_hours}h${NC}${Y} old — consider re-running:${NC}"
-        dim "   curl -X POST http://10.1.132.21:$PORT/api/v1/health/pipeline-trigger"
+        dim "   curl -X POST http://${PUBLIC_HOST}:$PORT/api/v1/health/pipeline-trigger"
     fi
 }
 
@@ -527,7 +530,7 @@ cmd_deploy() {
     ensure_dirs
     ok "Data directories"
 
-    # 7. Console frontend
+    # 7. Frontend UIs
     if [[ -d "$CONSOLE_DIR" ]]; then
         if validate_node; then
             ok "Node $(get_node_ver)"
@@ -654,7 +657,7 @@ cmd_start() {
         return 1
     fi
 
-    ensure_console_frontend_dist || return 1
+    ensure_frontend_dists || return 1
 
     if _is_running; then
         warn "Already running (PID $(_get_pid))"
@@ -703,7 +706,7 @@ cmd_restart() {
         return 1
     fi
 
-    ensure_console_frontend_dist || return 1
+    ensure_frontend_dists || return 1
 
     PRODUCTION=true
 
@@ -921,9 +924,9 @@ cmd_help() {
     printf "   ${D}\$${NC} ./deploy.sh logs -f       ${D}# follow logs${NC}\n"
     printf "   ${D}\$${NC} ./deploy.sh status         ${D}# view dashboard${NC}\n"
     printf "   ${D}\$${NC} ./deploy.sh crawl all      ${D}# crawl all dimensions${NC}\n"
-    printf "   ${D}\$${NC} ./deploy.sh crawl university_faculty 2  {{D}# crawl faculty with concurrency 2${NC}\n"
-    printf "   ${D}\$${NC} ./deploy.sh crawl-single tsinghua_cs_faculty  {{D}# crawl single source${NC}\n"
-    printf "   ${D}\$${NC} ./deploy.sh api-usage      {{D}# view API usage stats${NC}\n"
+    printf "   ${D}\$${NC} ./deploy.sh crawl university_faculty 2  ${D}# crawl faculty with concurrency 2${NC}\n"
+    printf "   ${D}\$${NC} ./deploy.sh crawl-single tsinghua_cs_faculty  ${D}# crawl single source${NC}\n"
+    printf "   ${D}\$${NC} ./deploy.sh api-usage      ${D}# view API usage stats${NC}\n"
     printf "\n"
 }
 
