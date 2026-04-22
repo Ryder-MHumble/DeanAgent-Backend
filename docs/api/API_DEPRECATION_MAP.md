@@ -5,12 +5,8 @@
 
 ## 已标记弃用（仍可用）
 
-| 旧接口 | 状态 | 建议迁移到 | 说明 |
-|---|---|---|---|
-| `GET /api/v1/articles/search` | deprecated | `GET /api/v1/articles` | 两者参数与行为一致，保留 `keyword` 即可完成搜索 |
-| `GET /api/v1/social-posts/search` | deprecated | `GET /api/v1/social-posts` | 两者参数与行为一致 |
+当前无运行期弃用接口。
 
-> 运行时提示：上述 deprecated 接口会返回 `Deprecation` / `Sunset` / `Link` 响应头。
 > 统一查询入口：`GET /api/v1/sources/deprecations`。
 
 ## 新增统一入口（按信源取数）
@@ -23,5 +19,5 @@
 ## 迁移建议
 
 1. 新调用统一优先走 `sources/items`（面向“按渠道拿数据”）。  
-2. 存量调用若还在使用 `*/search`，先平移到对应列表接口（无字段破坏）。  
-3. 观测期内保留旧接口，后续按消费端完成度制定冻结/下线时间表。
+2. 后续若再次引入兼容接口，优先为其补充明确 sunset 日期与迁移负责人。  
+3. 继续以 `GET /api/v1/sources/deprecations` 作为统一弃用查询入口。

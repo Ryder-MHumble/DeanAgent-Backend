@@ -227,25 +227,51 @@ async def _stage_rebuild_institutions() -> dict[str, Any]:
 
 async def _stage_generate_index() -> dict[str, Any]:
     """Stage 5: Generate data/index.json for frontend."""
-    import asyncio
     import json
-    import sys
+    from datetime import datetime, timezone
     from pathlib import Path
 
-    project_root = str(Path(__file__).resolve().parent.parent.parent)
-    if project_root not in sys.path:
-        sys.path.insert(0, project_root)
+    from app.db.client import get_client
+    from app.services.core.source_service import list_sources_catalog
 
-    from scripts.data.generate_index import INDEX_PATH, generate_index
+    index_path = Path(__file__).resolve().parent.parent.parent / "data" / "index.json"
 
-    index = await asyncio.to_thread(generate_index)
-    INDEX_PATH.parent.mkdir(parents=True, exist_ok=True)
-    with open(INDEX_PATH, "w", encoding="utf-8") as f:
+    catalog = await list_sources_catalog(page=1, page_size=500, include_facets=True)
+    dimensions_raw = (catalog.get("facets") or {}).get("dimensions") or []
+    dimensions = [
+        {
+            "key": item.get("key"),
+            "label": item.get("label"),
+            "total": int(item.get("count") or 0),
+            "enabled": int(item.get("enabled_count") or 0),
+        }
+        for item in dimensions_raw
+    ]
+    total_enabled = sum(int(item.get("enabled") or 0) for item in dimensions)
+
+    total_articles = 0
+    try:
+        # Use exact count query instead of full scan.
+        resp = await get_client().table("articles").select("*", count="exact").limit(1).execute()
+        total_articles = int(resp.count or 0)
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("Failed to count articles for index generation: %s", exc)
+
+    index = {
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "total_sources": int(catalog.get("total_sources") or 0),
+        "total_enabled": total_enabled,
+        "total_articles": total_articles,
+        "dimensions": dimensions,
+    }
+
+    index_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(index_path, "w", encoding="utf-8") as f:
         json.dump(index, f, ensure_ascii=False, indent=2)
 
     return {
         "total_sources": index["total_sources"],
-        "total_enabled": index["total_enabled"],
+        "total_enabled": total_enabled,
         "total_articles": index["total_articles"],
         "dimensions": len(index["dimensions"]),
     }

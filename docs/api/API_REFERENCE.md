@@ -1,8 +1,8 @@
 # API 参考总览
 
-- 生成时间（UTC）：`2026-04-08 07:06:30Z`
-- API 路由总数：`143`
-- Method 分布：`DELETE` 10、`GET` 97、`PATCH` 12、`POST` 24
+- 生成时间（UTC）：`2026-04-21 10:34:48Z`
+- API 路由总数：`139`
+- Method 分布：`DELETE` 9、`GET` 95、`PATCH` 12、`POST` 23
 - 信源总数：`268`
 - 启用信源：`191`
 
@@ -10,7 +10,7 @@
 
 | 服务 | 路由数 | 典型用途 |
 |---|---:|---|
-| `scholars` | 17 | scholars |
+| `scholars` | 15 | scholars |
 | `events` | 14 | events |
 | `sources` | 11 | sources |
 | `institutions` | 10 | institutions |
@@ -19,13 +19,12 @@
 | `students` | 7 | students |
 | `venues` | 7 | venues |
 | `llm-tracking` | 6 | llm-tracking |
-| `articles` | 5 | articles |
 | `intel/personnel` | 5 | intel / personnel-intel |
 | `intel/tech-frontier` | 5 | intel / tech-frontier |
 | `intel/university` | 5 | intel / university-eco |
+| `articles` | 4 | articles |
 | `health` | 4 | health |
 | `social-kol` | 4 | social-kol |
-| `social-posts` | 4 | social-posts |
 | `aminer` | 3 | aminer |
 | `intel/daily-briefing` | 3 | daily-briefing / intel |
 | `intel/paper-transfer` | 3 | intel / paper-transfer |
@@ -33,6 +32,7 @@
 | `leadership` | 3 | leadership |
 | `reports` | 3 | reports |
 | `sentiment` | 3 | sentiment |
+| `social-posts` | 3 | social-posts |
 | `dimensions` | 2 | dimensions |
 
 ## 信源维度覆盖
@@ -113,7 +113,6 @@
 
 | Method | 路径 | 替代接口 | Sunset |
 |---|---|---|---|
-| `GET` | `/api/v1/articles/search` | `/api/v1/articles` | `2026-12-31` |
 | `GET` | `/api/v1/crawler/download` | `-` | `2026-12-31` |
 | `POST` | `/api/v1/crawler/start` | `-` | `2026-12-31` |
 | `GET` | `/api/v1/crawler/status` | `-` | `2026-12-31` |
@@ -123,9 +122,6 @@
 | `DELETE` | `/api/v1/scholars/{url_hash}/students/{student_id}` | `-` | `2026-12-31` |
 | `GET` | `/api/v1/scholars/{url_hash}/students/{student_id}` | `-` | `2026-12-31` |
 | `PATCH` | `/api/v1/scholars/{url_hash}/students/{student_id}` | `-` | `2026-12-31` |
-| `POST` | `/api/v1/scholars/{url_hash}/updates` | `-` | `2026-12-31` |
-| `DELETE` | `/api/v1/scholars/{url_hash}/updates/{update_idx}` | `-` | `2026-12-31` |
-| `GET` | `/api/v1/social-posts/search` | `/api/v1/social-posts` | `2026-12-31` |
 
 ## Agent 调用快捷映射
 
@@ -155,7 +151,6 @@
 | Method | Path | Tags | Summary |
 |---|---|---|---|
 | `GET` | `/api/v1/articles` | `articles` | 文章列表 |
-| `GET` | `/api/v1/articles/search` | `articles` | 全文搜索（deprecated） |
 | `GET` | `/api/v1/articles/stats` | `articles` | 文章统计 |
 | `GET` | `/api/v1/articles/{article_id}` | `articles` | 文章详情 |
 | `PATCH` | `/api/v1/articles/{article_id}` | `articles` | 更新文章 |
@@ -346,8 +341,6 @@
 | `DELETE` | `/api/v1/scholars/{url_hash}/students/{student_id}` | `scholars` | 删除学生记录（deprecated） |
 | `GET` | `/api/v1/scholars/{url_hash}/students/{student_id}` | `scholars` | 查询单名学生详情（deprecated） |
 | `PATCH` | `/api/v1/scholars/{url_hash}/students/{student_id}` | `scholars` | 更新学生信息（deprecated） |
-| `POST` | `/api/v1/scholars/{url_hash}/updates` | `scholars` | 新增用户备注动态（已停用）（deprecated） |
-| `DELETE` | `/api/v1/scholars/{url_hash}/updates/{update_idx}` | `scholars` | 删除用户备注动态（已停用）（deprecated） |
 
 ### `sentiment`
 
@@ -371,7 +364,6 @@
 | Method | Path | Tags | Summary |
 |---|---|---|---|
 | `GET` | `/api/v1/social-posts` | `social-posts` | 社媒帖子列表 |
-| `GET` | `/api/v1/social-posts/search` | `social-posts` | 社媒帖子搜索（deprecated） |
 | `GET` | `/api/v1/social-posts/stats` | `social-posts` | 社媒帖子统计 |
 | `GET` | `/api/v1/social-posts/{post_id}` | `social-posts` | 社媒帖子详情 |
 

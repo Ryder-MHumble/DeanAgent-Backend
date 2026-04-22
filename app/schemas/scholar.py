@@ -855,17 +855,6 @@ class InstituteRelationUpdate(BaseModel):
     relation_updated_by: str | None = None
 
 
-class UserUpdateCreate(BaseModel):
-    """Request body for creating a user-authored dynamic update."""
-
-    update_type: str
-    title: str
-    content: str = ""
-    source_url: str = ""
-    published_at: str = ""
-    added_by: str = "user"
-
-
 class AchievementUpdate(BaseModel):
     """Request body for updating academic achievements."""
 

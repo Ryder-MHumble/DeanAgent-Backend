@@ -191,17 +191,6 @@ class InstituteRelationUpdate(BaseModel):
     relation_updated_by: str | None = Field(default=None, description="更新人")
 
 
-class UserUpdateCreate(BaseModel):
-    """POST /scholars/{url_hash}/updates — add a user-authored dynamic update."""
-
-    update_type: str = Field(description="动态类型（任意字符串，如 general/major_project/award 等）")
-    title: str = Field(description="标题/摘要")
-    content: str = Field(default="", description="详细内容")
-    source_url: str = Field(default="", description="来源链接（可选）")
-    published_at: str = Field(default="", description="事件时间 YYYY-MM-DD 或 ISO8601（可选）")
-    added_by: str = Field(description="录入人（用户名），系统自动补充为 'user:{added_by}'")
-
-
 class AchievementUpdate(BaseModel):
     """PATCH /scholars/{url_hash}/achievements — update academic achievements."""
 

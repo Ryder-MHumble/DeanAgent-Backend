@@ -7,22 +7,7 @@ DEFAULT_SUNSET = "Thu, 31 Dec 2026 23:59:59 GMT"
 DEFAULT_SUNSET_DATE = "2026-12-31"
 DEPRECATION_DOCS_PATH = "/api/v1/sources/deprecations"
 
-DEPRECATED_ENDPOINTS = [
-    {
-        "method": "GET",
-        "path": "/api/v1/articles/search",
-        "replacement_path": "/api/v1/articles",
-        "sunset_date": DEFAULT_SUNSET_DATE,
-        "note": "参数与列表接口一致，建议统一改用列表接口。",
-    },
-    {
-        "method": "GET",
-        "path": "/api/v1/social-posts/search",
-        "replacement_path": "/api/v1/social-posts",
-        "sunset_date": DEFAULT_SUNSET_DATE,
-        "note": "参数与列表接口一致，建议统一改用列表接口。",
-    },
-]
+DEPRECATED_ENDPOINTS: list[dict[str, str]] = []
 
 
 def get_deprecation_items() -> list[dict[str, str]]:

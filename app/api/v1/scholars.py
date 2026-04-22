@@ -9,8 +9,6 @@ Endpoints:
   DELETE /scholars/{url_hash}                           删除学者记录
   PATCH /scholars/{url_hash}/basic                      更新基础信息（直接修改原始 JSON）
   PATCH /scholars/{url_hash}/relation                   更新「与两院关系」字段（用户管理）
-  POST  /faculty/{url_hash}/updates                    新增用户备注动态
-  DELETE /scholars/{url_hash}/updates/{update_idx}      删除用户备注动态
   PATCH /scholars/{url_hash}/achievements               更新学术成就（论文、专利、奖项）
   GET  /scholars/{url_hash}/students                    查询指导学生列表
   POST /scholars/{url_hash}/students                    新增指导学生
@@ -32,7 +30,6 @@ from app.schemas.scholar import (
     ScholarListResponse,
     ScholarStatsResponse,
     InstituteRelationUpdate,
-    UserUpdateCreate,
 )
 from app.schemas.supervised_student import (
     SupervisedStudentCreate,
@@ -327,24 +324,6 @@ async def update_relation(url_hash: str, body: InstituteRelationUpdate):
     return result
 
 
-@router.post(
-    "/{url_hash}/updates",
-    summary="新增用户备注动态（已停用）",
-    description=(
-        "该接口已下线，不再接受写入请求。"
-        "请改为使用学者标签、项目关联或备注类字段承载人工信息。"
-    ),
-    deprecated=True,
-)
-async def add_update(url_hash: str, body: UserUpdateCreate):
-    _ = body
-    await _assert_faculty_exists(url_hash)
-    raise HTTPException(
-        status_code=410,
-        detail="Endpoint '/scholars/{url_hash}/updates' has been retired",
-    )
-
-
 @router.delete(
     "/{url_hash}",
     summary="删除学者记录",
@@ -355,24 +334,6 @@ async def delete_scholar(url_hash: str):
     deleted = await svc.delete_scholar(url_hash)
     if not deleted:
         raise HTTPException(status_code=404, detail=f"Faculty '{url_hash}' not found")
-
-
-@router.delete(
-    "/{url_hash}/updates/{update_idx}",
-    summary="删除用户备注动态（已停用）",
-    description=(
-        "该接口已下线，不再接受删除请求。"
-        "请改为使用学者标签、项目关联或备注类字段承载人工信息。"
-    ),
-    deprecated=True,
-)
-async def delete_update(url_hash: str, update_idx: int):
-    _ = update_idx
-    await _assert_faculty_exists(url_hash)
-    raise HTTPException(
-        status_code=410,
-        detail="Endpoint '/scholars/{url_hash}/updates/{update_idx}' has been retired",
-    )
 
 
 @router.patch(

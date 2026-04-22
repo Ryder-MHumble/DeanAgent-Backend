@@ -122,5 +122,5 @@ async def test_resolve_sources_with_exact_source_id():
 
 def test_list_api_deprecations_has_items():
     result = source_service.list_api_deprecations()
-    assert result["total"] >= 2
-    assert any(item["path"] == "/api/v1/articles/search" for item in result["items"])
+    assert result["total"] == 0
+    assert result["items"] == []

@@ -7,6 +7,7 @@ into `init_client`.
 from __future__ import annotations
 
 import json
+import re
 from datetime import date, datetime
 from dataclasses import dataclass
 from typing import Any
@@ -18,6 +19,10 @@ _client: Any | None = None
 _backend: str | None = None
 _table_column_types: dict[str, dict[str, str]] = {}
 _table_pk_columns: dict[str, list[str]] = {}
+_OR_OPERATORS = ("eq", "neq", "ilike", "like", "gte", "lte", "gt", "lt")
+_OR_TOKEN_BOUNDARY_RE = re.compile(
+    rf",(?=[A-Za-z_][A-Za-z0-9_]*\.(?:{'|'.join(_OR_OPERATORS)})\.)"
+)
 
 
 @dataclass(slots=True)
@@ -100,19 +105,19 @@ class _PgTableQuery:
         return self
 
     def gte(self, column: str, value: Any):
-        self._filters.append((f"{_quote_ident(column)} >= {{}}", [value]))
+        self._append_comparison_filter(column, ">=", value)
         return self
 
     def lte(self, column: str, value: Any):
-        self._filters.append((f"{_quote_ident(column)} <= {{}}", [value]))
+        self._append_comparison_filter(column, "<=", value)
         return self
 
     def gt(self, column: str, value: Any):
-        self._filters.append((f"{_quote_ident(column)} > {{}}", [value]))
+        self._append_comparison_filter(column, ">", value)
         return self
 
     def lt(self, column: str, value: Any):
-        self._filters.append((f"{_quote_ident(column)} < {{}}", [value]))
+        self._append_comparison_filter(column, "<", value)
         return self
 
     def contains(self, column: str, value: Any):
@@ -123,7 +128,7 @@ class _PgTableQuery:
     def or_(self, expression: str):
         conds: list[str] = []
         vals: list[Any] = []
-        for raw in expression.split(","):
+        for raw in _split_or_expression(expression):
             token = raw.strip()
             if not token:
                 continue
@@ -149,22 +154,26 @@ class _PgTableQuery:
                 vals.append(str(val))
             elif op == "gte":
                 conds.append(f"{col_sql} >= {{}}")
-                vals.append(val)
+                vals.append(_coerce_comparison_value(col, val))
             elif op == "lte":
                 conds.append(f"{col_sql} <= {{}}")
-                vals.append(val)
+                vals.append(_coerce_comparison_value(col, val))
             elif op == "gt":
                 conds.append(f"{col_sql} > {{}}")
-                vals.append(val)
+                vals.append(_coerce_comparison_value(col, val))
             elif op == "lt":
                 conds.append(f"{col_sql} < {{}}")
-                vals.append(val)
+                vals.append(_coerce_comparison_value(col, val))
             else:
                 raise ValueError(f"Unsupported or_ operator: {op}")
 
         if conds:
             self._filters.append(("(" + " OR ".join(conds) + ")", vals))
         return self
+
+    def _append_comparison_filter(self, column: str, operator: str, value: Any) -> None:
+        coerced = _coerce_comparison_value(column, value)
+        self._filters.append((f"{_quote_ident(column)} {operator} {{}}", [coerced]))
 
     def order(self, column: str, *, desc: bool = False):
         self._orders.append((column, desc))
@@ -384,6 +393,33 @@ def _parse_or_token(token: str) -> tuple[str, str, Any]:
     if op in {"ilike", "like"}:
         return col, op, raw_val
     return col, op, _parse_scalar(raw_val)
+
+
+def _split_or_expression(expression: str) -> list[str]:
+    if not expression:
+        return []
+    return [part.strip() for part in _OR_TOKEN_BOUNDARY_RE.split(expression) if part.strip()]
+
+
+def _is_temporal_column(column: str) -> bool:
+    normalized = column.strip().lower()
+    return normalized.endswith("_date") or normalized.endswith("_at")
+
+
+def _coerce_comparison_value(column: str, value: Any) -> Any:
+    if not isinstance(value, str) or not _is_temporal_column(column):
+        return value
+
+    if column.strip().lower().endswith("_date"):
+        parsed_date = _parse_date(value)
+        return parsed_date if parsed_date is not None else value
+
+    parsed_datetime = _parse_datetime(value)
+    if parsed_datetime is not None:
+        return parsed_datetime
+
+    parsed_date = _parse_date(value)
+    return parsed_date if parsed_date is not None else value
 
 
 def _parse_scalar(value: str) -> Any:

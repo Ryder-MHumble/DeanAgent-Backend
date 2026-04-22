@@ -10,8 +10,7 @@ from app.api.deprecation import (
 
 def test_get_replacement_map_contains_known_paths():
     replacement_map = get_replacement_map()
-    assert replacement_map["/api/v1/articles/search"] == "/api/v1/articles"
-    assert replacement_map["/api/v1/social-posts/search"] == "/api/v1/social-posts"
+    assert replacement_map == {}
 
 
 def test_apply_deprecation_headers_sets_standard_headers():
@@ -28,7 +27,7 @@ def test_apply_deprecation_headers_sets_standard_headers():
 
 def test_deprecation_items_have_required_fields():
     items = get_deprecation_items()
-    assert len(items) >= 2
+    assert items == []
     for item in items:
         assert item["method"]
         assert item["path"]

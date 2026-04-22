@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-08T07:06:30.503972+00:00",
+  "generated_at": "2026-04-21T10:34:48.507771+00:00",
   "routes": [
     {
       "methods": [
@@ -52,19 +52,6 @@
       "summary": "文章列表",
       "name": "list_articles",
       "deprecated": false
-    },
-    {
-      "methods": [
-        "GET"
-      ],
-      "path": "/api/v1/articles/search",
-      "service": "articles",
-      "tags": [
-        "articles"
-      ],
-      "summary": "全文搜索",
-      "name": "search_articles",
-      "deprecated": true
     },
     {
       "methods": [
@@ -1392,32 +1379,6 @@
     },
     {
       "methods": [
-        "POST"
-      ],
-      "path": "/api/v1/scholars/{url_hash}/updates",
-      "service": "scholars",
-      "tags": [
-        "scholars"
-      ],
-      "summary": "新增用户备注动态（已停用）",
-      "name": "add_update",
-      "deprecated": true
-    },
-    {
-      "methods": [
-        "DELETE"
-      ],
-      "path": "/api/v1/scholars/{url_hash}/updates/{update_idx}",
-      "service": "scholars",
-      "tags": [
-        "scholars"
-      ],
-      "summary": "删除用户备注动态（已停用）",
-      "name": "delete_update",
-      "deprecated": true
-    },
-    {
-      "methods": [
         "GET"
       ],
       "path": "/api/v1/sentiment/content/{content_id}",
@@ -1519,19 +1480,6 @@
       "summary": "社媒帖子列表",
       "name": "list_social_posts",
       "deprecated": false
-    },
-    {
-      "methods": [
-        "GET"
-      ],
-      "path": "/api/v1/social-posts/search",
-      "service": "social-posts",
-      "tags": [
-        "social-posts"
-      ],
-      "summary": "社媒帖子搜索",
-      "name": "search_social_posts",
-      "deprecated": true
     },
     {
       "methods": [
