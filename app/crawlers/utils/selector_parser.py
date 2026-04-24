@@ -12,6 +12,12 @@ from urllib.parse import urljoin, urlparse, urlunparse
 
 from bs4 import BeautifulSoup, Tag
 
+from app.utils.date_parsing import (
+    extract_datetime_from_html,
+    extract_datetime_from_text,
+    extract_datetime_from_url,
+    parse_datetime_text,
+)
 from app.crawlers.utils.dedup import compute_content_hash
 from app.crawlers.utils.html_sanitizer import sanitize_html
 from app.crawlers.utils.image_extractor import extract_images
@@ -36,6 +42,7 @@ class DetailResult:
 
     content: str | None = None
     content_html: str | None = None
+    published_at: datetime | None = None
     author: str | None = None
     content_hash: str | None = None
     pdf_url: str | None = None
@@ -55,8 +62,6 @@ def extract_date(el: Tag, selectors: dict) -> datetime | None:
     if date_el is None:
         return None
     date_format = selectors.get("date_format")
-    if not date_format:
-        return None
 
     date_regex = selectors.get("date_regex")
 
@@ -71,35 +76,25 @@ def extract_date(el: Tag, selectors: dict) -> datetime | None:
                 text = m.group(0)
             else:
                 continue
-        try:
-            return datetime.strptime(text, date_format)
-        except ValueError:
-            continue
+        if date_format:
+            try:
+                return datetime.strptime(text, date_format)
+            except ValueError:
+                continue
+
+        parsed = parse_datetime_text(text, default_year=datetime.now().year)
+        if parsed is not None:
+            return parsed
+
+        parsed = extract_datetime_from_text(text, default_year=datetime.now().year)
+        if parsed is not None:
+            return parsed
     return None
 
 
 def extract_date_from_url(url: str) -> datetime | None:
-    """Extract date from URL path, common in Chinese government websites.
-
-    Supports:
-    - /t20250701_xxx.html  → 2025-07-01
-    - /202507/txxx.html    → 2025-07-01 (day from tYYYYMMDD if present, else 1st)
-    """
-    # Pattern 1: tYYYYMMDD_ (most specific)
-    m = re.search(r'/t(\d{4})(\d{2})(\d{2})_', url)
-    if m:
-        try:
-            return datetime(int(m[1]), int(m[2]), int(m[3]))
-        except ValueError:
-            pass
-    # Pattern 2: /YYYYMM/ directory with t-prefixed filename
-    m = re.search(r'/(\d{4})(\d{2})/t\d+', url)
-    if m:
-        try:
-            return datetime(int(m[1]), int(m[2]), 1)
-        except ValueError:
-            pass
-    return None
+    """Extract date from common news/policy URL patterns."""
+    return extract_datetime_from_url(url)
 
 
 def _normalize_base_url(base_url: str) -> str:
@@ -220,6 +215,11 @@ def parse_detail_html(
             result.content_hash = compute_content_hash(result.content)
             result.content_html = sanitize_html(raw_html, base_url=page_url)
             result.images = extract_images(raw_html, base_url=page_url)
+
+    result.published_at = (
+        extract_datetime_from_html(html, require_hint=True)
+        or extract_date_from_url(page_url)
+    )
 
     if author_sel := detail_selectors.get("author"):
         author_el = detail_soup.select_one(author_sel)

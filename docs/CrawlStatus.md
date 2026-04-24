@@ -1,6 +1,40 @@
 # 信源爬取状态总览
 
-> 最后更新: 2026-03-19 (v45: 学者机构口径修正，将「中国科学院」统一更名为「中国科学院大学」，保留 cas 子机构结构与统计)
+> 最后更新: 2026-04-24 (v46: 高校动态发布时间修复迭代，新增之江实验室官网 API 抓取，修复 auto crawler 详情发布日期回填)
+
+---
+
+## 0. 本轮迭代结论（2026-04-24）
+
+### 已完成并验证写库
+
+| source_id | 结果 | 关键验证 |
+|-----------|------|----------|
+| xjtu_news | ✅ 发布时间正确 | `https://news.xjtu.edu.cn/info/1002/230332.htm` 入库 `published_at=2026-03-28 10:29:00+00` |
+| nwpu_news | ✅ 恢复抓取 + 日期回填 | 10 条入库，`published_at` 非空（0 null） |
+| zhejianglab_news | ✅ 从 SPA 壳页改为官网 API | 12 条入库，`published_at` 非空（0 null） |
+| runway_blog | ✅ 新入口 + 英文日期解析 | 38 条稳定入库，发布时间正常 |
+| moonshot_research | ✅ 新入口 + 选择器修复 | 26 条稳定入库，发布时间正常 |
+
+### 本轮新增/调整
+
+- 入库健壮性：`tags` 混合类型统一转字符串，避免 `text[]` 写库报错。
+- dynamic 模板健壮性：`wait_for` 超时时回退当前 HTML，不再整源失败。
+- 日期解析增强：新增英文月份日期格式（`March 31, 2026` 等）。
+- `university_news_auto` 修复：详情页提取到 `published_at` 后回填到最终 item。
+- `zhejianglab_news` 改造：新增 `zhejianglab_website_api` parser，直接抓 `ZJGW` 官方接口数据。
+
+### 仍受限（站点接入层）
+
+| source_id | 现状 | 说明 |
+|-----------|------|------|
+| bupt_news | ⚠️ no_new_content | 目标站返回 412/WAF，非选择器问题 |
+| lzu_news | ⚠️ no_new_content | 目标站返回 412/WAF，非选择器问题 |
+| scu_news | ⚠️ no_new_content | 目标站返回 412/WAF，非选择器问题 |
+| mistral_ai_news | ⚠️ failed | 当前环境网络连接超时（ConnectTimeout） |
+
+- 已关闭上述 3 个高校源的 `snapshot_on_empty`，避免写入“页面快照”伪文章污染数据。
+- 结论：对这 3 个受限站点，当前无法承诺“可稳定抓到真实发布日期”。
 
 ---
 

@@ -70,6 +70,8 @@ class StaticHTMLCrawler(BaseCrawler):
                         request_delay=self.config.get("request_delay"),
                     )
                     detail = parse_detail_html(detail_html, detail_selectors, raw.url, self.config)
+                    if raw.published_at is None:
+                        raw.published_at = detail.published_at
                     content = detail.content
                     content_html = detail.content_html
                     author = detail.author

@@ -211,9 +211,10 @@ sources:
   priority: 2
   is_enabled: true
   selectors:
-    list_item: li div.slideTitle
+    list_item: li:has(div.slideTitle)
     title: h3 a
     link: h3 a
+    date: span.time
   base_url: https://news.bnu.edu.cn
   keyword_filter: []
   detail_selectors:
@@ -257,6 +258,7 @@ sources:
     list_item: div.swiper-slide
     title: a
     link: a
+    date: div.left
   base_url: https://news.ruc.edu.cn
   keyword_filter: []
   detail_selectors:
@@ -337,6 +339,7 @@ sources:
     list_item: div.list-right-2 a
     title: _self
     link: _self
+  encoding: utf-8
   base_url: https://news.jlu.edu.cn/jdxw/
   keyword_filter: []
   detail_selectors:
@@ -357,6 +360,8 @@ sources:
     list_item: div.col-r ul.ul-cnn li
     title: a
     link: a
+    date: span.time
+    date_format: '%Y.%m.%d'
   base_url: https://news.hit.edu.cn
   keyword_filter: []
   detail_selectors:
@@ -398,6 +403,7 @@ sources:
     list_item: ul.picList li
     title: a
     link: a
+    date: div.xsjz-item-local
   base_url: https://news.xmu.edu.cn
   keyword_filter: []
   detail_selectors:
@@ -460,6 +466,8 @@ sources:
     list_item: div.part1-R ul li
     title: a
     link: a
+    date: i
+    date_format: '%Y-%m-%d'
   base_url: https://news.hust.edu.cn
   keyword_filter: []
   detail_selectors:
@@ -627,6 +635,7 @@ sources:
     list_item: ul.listCon li
     title: a
     link: a
+    date: div.date
   base_url: https://www.nudt.edu.cn/xwgg/kdyw/
   keyword_filter: []
   detail_selectors:
@@ -669,6 +678,7 @@ sources:
     list_item: div.iban div.bd ul a
     title: _self
     link: _self
+  encoding: utf-8
   base_url: https://newshub.sustech.edu.cn
   keyword_filter: []
   detail_selectors:

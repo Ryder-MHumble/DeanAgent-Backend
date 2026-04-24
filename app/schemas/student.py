@@ -1,6 +1,8 @@
 """Pydantic schemas for global student management endpoints."""
 from __future__ import annotations
 
+from typing import Any
+
 from pydantic import BaseModel, Field
 
 
@@ -83,3 +85,112 @@ class StudentFilterOptions(BaseModel):
     grades: list[str] = Field(default_factory=list)
     universities: list[str] = Field(default_factory=list)
     mentors: list[str] = Field(default_factory=list)
+
+
+class StudentPaperRecord(BaseModel):
+    paper_uid: str
+    title: str
+    doi: str | None = None
+    arxiv_id: str | None = None
+    abstract: str | None = None
+    publication_date: str | None = None
+    source: str | None = None
+    authors: list[str] = Field(default_factory=list)
+    affiliations: list[str] = Field(default_factory=list)
+    created_at: str | None = None
+
+
+class StudentPapersResponse(BaseModel):
+    items: list[StudentPaperRecord]
+    total: int
+
+
+class StudentPaperUpsertRequest(BaseModel):
+    title: str
+    doi: str | None = None
+    arxiv_id: str | None = None
+    abstract: str | None = None
+    publication_date: str | None = None
+    source: str | None = None
+    authors: list[str] = Field(default_factory=list)
+    affiliations: list[str] = Field(default_factory=list)
+
+
+class StudentPaperComplianceRequest(BaseModel):
+    note: str | None = None
+
+
+class StudentPaperWriteResponse(BaseModel):
+    status: str
+    paper_uid: str
+
+
+class StudentPublicationCandidateRecord(BaseModel):
+    candidate_id: str
+    target_key: str | None = None
+    owner_type: str
+    owner_id: str
+    canonical_uid: str
+    paper_uid: str | None = None
+    title: str
+    doi: str | None = None
+    arxiv_id: str | None = None
+    abstract: str | None = None
+    publication_date: str | None = None
+    source: str | None = None
+    source_type: str | None = None
+    source_details: dict[str, Any] = Field(default_factory=dict)
+    authors: list[str] = Field(default_factory=list)
+    affiliations: list[str] = Field(default_factory=list)
+    review_status: str
+    review_decision: dict[str, Any] = Field(default_factory=dict)
+    compliance_details: dict[str, Any] = Field(default_factory=dict)
+    affiliation_status: str | None = None
+    compliance_reason: str | None = None
+    matched_tokens: list[str] = Field(default_factory=list)
+    checked_affiliations: list[str] = Field(default_factory=list)
+    assessed_at: str | None = None
+    first_seen_at: str | None = None
+    last_seen_at: str | None = None
+    created_at: str | None = None
+    updated_at: str | None = None
+
+
+class StudentPublicationWorkspaceCounts(BaseModel):
+    confirmed: int = 0
+    pending_review: int = 0
+    rejected: int = 0
+
+
+class StudentPublicationWorkspaceResponse(BaseModel):
+    counts: StudentPublicationWorkspaceCounts
+    confirmed_publications: list[StudentPaperRecord] = Field(default_factory=list)
+    pending_candidates: list[StudentPublicationCandidateRecord] = Field(default_factory=list)
+    rejected_candidates: list[StudentPublicationCandidateRecord] = Field(default_factory=list)
+
+
+class StudentPublicationCandidatePatchRequest(BaseModel):
+    title: str | None = None
+    doi: str | None = None
+    arxiv_id: str | None = None
+    abstract: str | None = None
+    publication_date: str | None = None
+    source: str | None = None
+    authors: list[str] | None = None
+    affiliations: list[str] | None = None
+
+
+class StudentPublicationCandidateDecisionRequest(BaseModel):
+    reviewed_by: str | None = None
+    note: str | None = None
+    affiliation_status: str | None = None
+    compliance_reason: str | None = None
+    matched_tokens: list[str] | None = None
+    checked_affiliations: list[str] | None = None
+    compliance_details: dict[str, Any] | None = None
+
+
+class StudentPublicationCandidateActionResponse(BaseModel):
+    status: str
+    candidate_id: str
+    paper_uid: str | None = None

@@ -16,6 +16,11 @@ from app.services.intel.university.filters import (
 )
 from app.services.stores.json_reader import get_articles
 from app.services.stores.source_state import get_all_source_states
+from app.utils.date_parsing import (
+    extract_datetime_from_html,
+    extract_datetime_from_text,
+    extract_datetime_from_url,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -121,7 +126,7 @@ def _to_feed_item(item: dict[str, Any]) -> dict[str, Any]:
         "id": item.get("url_hash", ""),
         "title": item.get("title", ""),
         "url": item.get("url", ""),
-        "published_at": item.get("published_at"),
+        "published_at": _resolve_published_at(item),
         "source_id": item.get("source_id", ""),
         "source_name": _resolve_source_name(item),
         "group": item.get("group"),
@@ -145,7 +150,7 @@ def _to_article_detail(item: dict[str, Any]) -> dict[str, Any]:
         "id": item.get("url_hash", ""),
         "title": item.get("title", ""),
         "url": item.get("url", ""),
-        "published_at": item.get("published_at"),
+        "published_at": _resolve_published_at(item),
         "source_id": item.get("source_id", ""),
         "source_name": _resolve_source_name(item),
         "group": item.get("group"),
@@ -154,6 +159,27 @@ def _to_article_detail(item: dict[str, Any]) -> dict[str, Any]:
         "images": images,
         "is_new": item.get("is_new", False),
     }
+
+
+def _resolve_published_at(item: dict[str, Any]) -> str | None:
+    published_at = item.get("published_at")
+    if published_at:
+        return published_at
+
+    inferred = (
+        extract_datetime_from_html(item.get("content_html"), require_hint=True)
+        or extract_datetime_from_text(item.get("title"))
+        or extract_datetime_from_url(item.get("url"))
+    )
+    if inferred is None:
+        return None
+    return inferred.isoformat()
+
+
+def _sort_key(item: dict[str, Any]) -> tuple[bool, str, str]:
+    published_at = _resolve_published_at(item)
+    crawled_at = str(item.get("crawled_at") or item.get("created_at") or "")
+    return published_at is not None, published_at or "", crawled_at
 
 
 # ---------------------------------------------------------------------------
@@ -265,6 +291,8 @@ async def get_feed(
             a for a in articles
             if kw in (a.get("title") or "").lower()
         ]
+
+    articles.sort(key=_sort_key, reverse=True)
 
     total = len(articles)
     total_pages = max(1, math.ceil(total / page_size))

@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from scalar_fastapi import get_scalar_api_reference
 
+from app.api.academic_monitor import router as academic_monitor_router
 from app.api.v1.router import v1_router
 from app.console_api import console_api_app
 from app.config import BASE_DIR, settings
@@ -416,6 +417,11 @@ app.add_middleware(
 
 # Register API routes
 app.include_router(v1_router)
+app.include_router(
+    academic_monitor_router,
+    prefix="/academic-monitor/api/v1",
+    tags=["academic-monitor-compat"],
+)
 app.mount("/console-api", console_api_app)
 
 # Mount static files for frontend UI

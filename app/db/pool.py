@@ -1,9 +1,57 @@
 """Global asyncpg connection pool for Supabase."""
 from __future__ import annotations
 
+import asyncio
+
 import asyncpg
 
-_pool: asyncpg.Pool | None = None
+_pools: dict[int, asyncpg.Pool] = {}
+_connect_kwargs: dict | None = None
+_primary_loop_id: int | None = None
+
+
+def _normalize_args(args):
+    normalized = []
+    for value in args:
+        if isinstance(value, (dict, list)):
+            import json
+
+            normalized.append(json.dumps(value))
+        else:
+            normalized.append(value)
+    return tuple(normalized)
+
+
+class _LoopAwarePoolProxy:
+    async def _resolve_pool(self) -> asyncpg.Pool:
+        loop = asyncio.get_running_loop()
+        pool = _pools.get(id(loop))
+        if pool is not None:
+            return pool
+        if _connect_kwargs is None:
+            raise RuntimeError("DB pool not initialized. Call init_pool() first.")
+        pool = await asyncpg.create_pool(**_connect_kwargs)
+        _pools[id(loop)] = pool
+        return pool
+
+    async def execute(self, query: str, *args, timeout=None) -> str:
+        pool = await self._resolve_pool()
+        return await pool.execute(query, *_normalize_args(args), timeout=timeout)
+
+    async def fetch(self, query: str, *args, timeout=None):
+        pool = await self._resolve_pool()
+        return await pool.fetch(query, *_normalize_args(args), timeout=timeout)
+
+    async def fetchrow(self, query: str, *args, timeout=None):
+        pool = await self._resolve_pool()
+        return await pool.fetchrow(query, *_normalize_args(args), timeout=timeout)
+
+    async def fetchval(self, query: str, *args, timeout=None):
+        pool = await self._resolve_pool()
+        return await pool.fetchval(query, *_normalize_args(args), timeout=timeout)
+
+
+_proxy = _LoopAwarePoolProxy()
 
 
 async def init_pool(
@@ -24,8 +72,9 @@ async def init_pool(
     - DSN string: init_pool(dsn="postgresql+asyncpg://user:pass@host:port/db")
       Passwords with '@' or ']' must be URL-encoded (%40, %5D).
     """
-    global _pool
-    if _pool is not None:
+    global _connect_kwargs, _primary_loop_id
+    loop = asyncio.get_running_loop()
+    if id(loop) in _pools:
         return
 
     if host:
@@ -75,22 +124,41 @@ async def init_pool(
             **kwargs,
         }
 
-    _pool = await asyncpg.create_pool(**connect_kwargs)
+    _connect_kwargs = connect_kwargs
+    if _primary_loop_id is None:
+        _primary_loop_id = id(loop)
+    pool = await asyncpg.create_pool(**connect_kwargs)
+    _pools[id(loop)] = pool
 
 
 async def close_pool() -> None:
     """Close the connection pool. Call at app shutdown."""
-    global _pool
-    if _pool:
-        await _pool.close()
-        _pool = None
+    global _pools, _primary_loop_id
+    for pool in list(_pools.values()):
+        try:
+            if getattr(pool, "_loop", None) is not None and pool._loop.is_closed():
+                continue
+            await pool.close()
+        except RuntimeError:
+            continue
+    _pools = {}
+    _primary_loop_id = None
 
 
 def get_pool() -> asyncpg.Pool:
     """Get the active pool. Raises RuntimeError if not initialized."""
-    if _pool is None:
+    try:
+        loop = asyncio.get_running_loop()
+    except RuntimeError:
+        if not _pools:
+            raise RuntimeError("DB pool not initialized. Call init_pool() first.")
+        return next(iter(_pools.values()))
+    pool = _pools.get(id(loop))
+    if pool is not None and id(loop) == _primary_loop_id:
+        return pool
+    if not _pools and _connect_kwargs is None:
         raise RuntimeError("DB pool not initialized. Call init_pool() first.")
-    return _pool
+    return _proxy  # type: ignore[return-value]
 
 
 async def execute(query: str, *args) -> str:

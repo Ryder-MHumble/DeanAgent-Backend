@@ -1,6 +1,24 @@
 # 信源全景概览 — SourceOverview
 
-> 最后更新: 2026-03-18 | 系统版本: v42
+> 最后更新: 2026-04-24 | 系统版本: v46
+
+---
+
+## 增量更新（2026-04-24）
+
+本文件保留全景结构，爬取可用性与修复细节以 [docs/CrawlStatus.md](/home/ubuntu/workspace/DeanAgent-Backend/docs/CrawlStatus.md) 为最新口径。
+
+### 本轮已确认恢复
+
+- `xjtu_news`：发布时间字段已验证正确（含 `2026-03-28 10:29` 目标样例）。
+- `nwpu_news`：恢复到可抓取状态，且 `published_at` 可回填落库。
+- `zhejianglab_news`：由 SPA 壳页改为官网 `ZJGW` API 抓取并稳定落库。
+- `runway_blog` / `moonshot_research`：新入口与选择器修复后稳定抓取。
+
+### 本轮仍受站点接入限制
+
+- `bupt_news` / `lzu_news` / `scu_news`：站点 WAF/412 拦截，当前环境无法稳定提取真实新闻列表。
+- `mistral_ai_news`：当前环境网络连接超时（非解析逻辑错误）。
 
 ---
 

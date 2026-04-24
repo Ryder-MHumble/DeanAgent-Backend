@@ -72,6 +72,21 @@ class PublicationRecord(BaseModel):
     url: str = ""
     """论文链接（DOI/arXiv/ACM 等）"""
 
+    doi: str = ""
+    """DOI"""
+
+    abstract: str = ""
+    """摘要"""
+
+    publication_date: str = ""
+    """发表时间"""
+
+    project_group_name: str = ""
+    """所属项目组"""
+
+    source_type: str = ""
+    """来源类型"""
+
     citation_count: int = -1
     """被引次数（-1 = 未知）"""
 

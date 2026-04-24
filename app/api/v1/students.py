@@ -1,9 +1,11 @@
 """Global student APIs backed by supervised_students table."""
 from __future__ import annotations
 
+import hashlib
 import math
 from datetime import datetime, timezone
 from typing import Any
+from uuid import uuid4
 
 from fastapi import APIRouter, HTTPException, Query
 
@@ -14,8 +16,19 @@ from app.schemas.student import (
     StudentFilterOptions,
     StudentListItem,
     StudentListResponse,
+    StudentPublicationCandidateActionResponse,
+    StudentPublicationCandidateDecisionRequest,
+    StudentPublicationCandidatePatchRequest,
+    StudentPublicationCandidateRecord,
+    StudentPublicationWorkspaceResponse,
+    StudentPaperComplianceRequest,
+    StudentPaperRecord,
+    StudentPapersResponse,
+    StudentPaperUpsertRequest,
+    StudentPaperWriteResponse,
     StudentUpdateRequest,
 )
+from app.services import student_publication_workspace
 
 router = APIRouter()
 
@@ -71,6 +84,116 @@ def _iso(value: Any) -> str:
     if hasattr(value, "isoformat"):
         return value.isoformat()
     return _clean_text(value)
+
+
+def _iso_or_none(value: Any) -> str | None:
+    text = _iso(value)
+    return text or None
+
+
+def _to_text_list(value: Any) -> list[str]:
+    if value is None:
+        return []
+    if isinstance(value, list):
+        return [_clean_text(item) for item in value if _clean_text(item)]
+    if isinstance(value, tuple):
+        return [_clean_text(item) for item in value if _clean_text(item)]
+    if isinstance(value, str):
+        token = _clean_text(value)
+        return [token] if token else []
+    return []
+
+
+def _to_student_paper(row: dict[str, Any]) -> StudentPaperRecord:
+    return StudentPaperRecord(
+        paper_uid=_clean_text(row.get("paper_uid")),
+        title=_clean_text(row.get("title")),
+        doi=_clean_text(row.get("doi")) or None,
+        arxiv_id=_clean_text(row.get("arxiv_id")) or None,
+        abstract=_clean_text(row.get("abstract")) or None,
+        publication_date=_iso_or_none(row.get("publication_date")),
+        source=_clean_text(row.get("source")) or None,
+        authors=_to_text_list(row.get("authors")),
+        affiliations=_to_text_list(row.get("affiliations")),
+        created_at=_iso_or_none(row.get("created_at")),
+    )
+
+
+def _stable_student_target_key_from_name(name: str) -> str:
+    normalized = f"student|{name.strip().lower()}"
+    digest = hashlib.sha1(normalized.encode("utf-8")).hexdigest()[:20]
+    return f"student_{digest}"
+
+
+async def _student_publication_target_candidates(student_id: str) -> list[str]:
+    normalized_student_id = _clean_text(student_id)
+    if not normalized_student_id:
+        return []
+
+    candidates: list[str] = [normalized_student_id]
+    pool = get_pool()
+    row = await pool.fetchrow(
+        """
+        SELECT name
+        FROM supervised_students
+        WHERE id = $1
+        LIMIT 1
+        """,
+        normalized_student_id,
+    )
+    if row:
+        name = _clean_text(row["name"])
+        if name:
+            name_key = _stable_student_target_key_from_name(name)
+            if name_key not in candidates:
+                candidates.append(name_key)
+    return candidates
+
+
+async def _resolve_write_target_key(student_id: str) -> str:
+    candidates = await _student_publication_target_candidates(student_id)
+    if not candidates:
+        return _clean_text(student_id)
+
+    pool = get_pool()
+    rows = await pool.fetch(
+        """
+        SELECT target_key, COUNT(*)::int AS cnt
+        FROM student_publications
+        WHERE target_key = ANY($1::text[])
+        GROUP BY target_key
+        """,
+        candidates,
+    )
+    counts = {_clean_text(row["target_key"]): int(row["cnt"] or 0) for row in rows}
+    for key in candidates:
+        if counts.get(key, 0) > 0:
+            return key
+    return candidates[0]
+
+
+async def _resolve_target_key_for_paper(student_id: str, paper_uid: str) -> str | None:
+    candidates = await _student_publication_target_candidates(student_id)
+    if not candidates:
+        return None
+
+    pool = get_pool()
+    row = await pool.fetchrow(
+        """
+        SELECT sp.target_key
+        FROM student_publications sp
+        JOIN unnest($1::text[]) WITH ORDINALITY AS c(target_key, ord)
+          ON c.target_key = sp.target_key
+        WHERE sp.paper_uid = $2
+        ORDER BY c.ord ASC
+        LIMIT 1
+        """,
+        candidates,
+        _clean_text(paper_uid),
+    )
+    if not row:
+        return None
+    return _clean_text(row["target_key"])
 
 
 def _resolve_pagination(
@@ -389,6 +512,13 @@ async def _fetch_student_row(student_id: str) -> dict[str, Any] | None:
     if not row:
         return None
     return dict(row)
+
+
+async def _ensure_student_exists(student_id: str) -> dict[str, Any]:
+    row = await _fetch_student_row(student_id)
+    if row is None:
+        raise HTTPException(status_code=404, detail=f"Student '{student_id}' not found")
+    return row
 
 
 @router.get(
@@ -816,3 +946,296 @@ async def delete_student(student_id: str):
     deleted = int(result.split()[-1]) if result else 0
     if deleted <= 0:
         raise HTTPException(status_code=404, detail=f"Student '{student_id}' not found")
+
+
+@router.get(
+    "/{student_id}/publication-workspace",
+    response_model=StudentPublicationWorkspaceResponse,
+    summary="学生成果审核工作台",
+)
+async def get_student_publication_workspace(
+    student_id: str,
+) -> StudentPublicationWorkspaceResponse:
+    await _ensure_student_exists(student_id)
+    return await student_publication_workspace.get_workspace(
+        get_pool(),
+        student_id=student_id,
+    )
+
+
+@router.patch(
+    "/{student_id}/publication-candidates/{candidate_id}",
+    response_model=StudentPublicationCandidateRecord,
+    summary="编辑学生候选成果客观字段",
+)
+async def patch_student_publication_candidate(
+    student_id: str,
+    candidate_id: str,
+    body: StudentPublicationCandidatePatchRequest,
+) -> StudentPublicationCandidateRecord:
+    await _ensure_student_exists(student_id)
+    try:
+        updated = await student_publication_workspace.patch_candidate(
+            get_pool(),
+            student_id=student_id,
+            candidate_id=candidate_id,
+            body=body,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    if updated is None:
+        raise HTTPException(status_code=404, detail="candidate not found")
+    return updated
+
+
+@router.post(
+    "/{student_id}/publication-candidates/{candidate_id}/confirm",
+    response_model=StudentPublicationCandidateActionResponse,
+    summary="确认学生候选成果",
+)
+async def confirm_student_publication_candidate(
+    student_id: str,
+    candidate_id: str,
+    body: StudentPublicationCandidateDecisionRequest,
+) -> StudentPublicationCandidateActionResponse:
+    await _ensure_student_exists(student_id)
+    result = await student_publication_workspace.confirm_candidate(
+        get_pool(),
+        student_id=student_id,
+        candidate_id=candidate_id,
+        body=body,
+    )
+    if result is None:
+        raise HTTPException(status_code=404, detail="candidate not found")
+    return result
+
+
+@router.post(
+    "/{student_id}/publication-candidates/{candidate_id}/reject",
+    response_model=StudentPublicationCandidateActionResponse,
+    summary="拒绝学生候选成果",
+)
+async def reject_student_publication_candidate(
+    student_id: str,
+    candidate_id: str,
+    body: StudentPublicationCandidateDecisionRequest,
+) -> StudentPublicationCandidateActionResponse:
+    await _ensure_student_exists(student_id)
+    result = await student_publication_workspace.reject_candidate(
+        get_pool(),
+        student_id=student_id,
+        candidate_id=candidate_id,
+        body=body,
+    )
+    if result is None:
+        raise HTTPException(status_code=404, detail="candidate not found")
+    return result
+
+
+@router.post(
+    "/{student_id}/publication-candidates/{candidate_id}/reopen",
+    response_model=StudentPublicationCandidateActionResponse,
+    summary="恢复学生候选成果到待审核",
+)
+async def reopen_student_publication_candidate(
+    student_id: str,
+    candidate_id: str,
+    body: StudentPublicationCandidateDecisionRequest,
+) -> StudentPublicationCandidateActionResponse:
+    await _ensure_student_exists(student_id)
+    result = await student_publication_workspace.reopen_candidate(
+        get_pool(),
+        student_id=student_id,
+        candidate_id=candidate_id,
+        body=body,
+    )
+    if result is None:
+        raise HTTPException(status_code=404, detail="candidate not found")
+    return result
+
+
+@router.get(
+    "/{student_id}/papers",
+    response_model=StudentPapersResponse,
+    summary="学生论文列表",
+)
+async def list_student_papers(student_id: str) -> StudentPapersResponse:
+    pool = get_pool()
+    await _ensure_student_exists(student_id)
+
+    rows = await pool.fetch(
+        """
+        SELECT
+          paper_uid,
+          title,
+          doi,
+          arxiv_id,
+          abstract,
+          publication_date,
+          source,
+          authors,
+          affiliations,
+          created_at
+        FROM student_publications
+        WHERE target_key = $1
+        ORDER BY publication_date DESC NULLS LAST, created_at DESC, paper_uid ASC
+        """,
+        student_id,
+    )
+    records = [_to_student_paper(dict(row)) for row in rows]
+    return StudentPapersResponse(items=records, total=len(records))
+
+
+@router.get(
+    "/{student_id}/publications",
+    response_model=StudentPapersResponse,
+    summary="学生论文列表（兼容别名）",
+)
+async def list_student_publications(student_id: str) -> StudentPapersResponse:
+    return await list_student_papers(student_id)
+
+
+@router.post(
+    "/{student_id}/papers",
+    response_model=StudentPaperWriteResponse,
+    status_code=201,
+    summary="新增学生论文",
+)
+async def create_student_paper(
+    student_id: str,
+    body: StudentPaperUpsertRequest,
+) -> StudentPaperWriteResponse:
+    pool = get_pool()
+    await _ensure_student_exists(student_id)
+    paper_uid = f"manual_{uuid4().hex[:24]}"
+    await pool.execute(
+        """
+        INSERT INTO student_publications (
+          target_key,
+          paper_uid,
+          title,
+          doi,
+          arxiv_id,
+          abstract,
+          publication_date,
+          source,
+          authors,
+          affiliations
+        )
+        VALUES (
+          $1, $2, $3, $4, $5, $6, $7::timestamptz, $8, $9::jsonb, $10::jsonb
+        )
+        """,
+        student_id,
+        paper_uid,
+        _clean_text(body.title),
+        _clean_text(body.doi) or None,
+        _clean_text(body.arxiv_id) or None,
+        _clean_text(body.abstract) or None,
+        body.publication_date or None,
+        _clean_text(body.source) or "manual",
+        body.authors,
+        body.affiliations,
+    )
+    return StudentPaperWriteResponse(status="created", paper_uid=paper_uid)
+
+
+@router.put(
+    "/{student_id}/papers/{paper_uid}",
+    response_model=StudentPaperWriteResponse,
+    summary="更新学生论文",
+)
+async def update_student_paper(
+    student_id: str,
+    paper_uid: str,
+    body: StudentPaperUpsertRequest,
+) -> StudentPaperWriteResponse:
+    pool = get_pool()
+    await _ensure_student_exists(student_id)
+
+    updated = await pool.fetchrow(
+        """
+        UPDATE student_publications
+        SET
+          title = $3,
+          doi = $4,
+          arxiv_id = $5,
+          abstract = $6,
+          publication_date = $7::timestamptz,
+          source = $8,
+          authors = $9::jsonb,
+          affiliations = $10::jsonb,
+          updated_at = now()
+        WHERE target_key = $1 AND paper_uid = $2
+        RETURNING paper_uid
+        """,
+        student_id,
+        _clean_text(paper_uid),
+        _clean_text(body.title),
+        _clean_text(body.doi) or None,
+        _clean_text(body.arxiv_id) or None,
+        _clean_text(body.abstract) or None,
+        body.publication_date or None,
+        _clean_text(body.source) or "manual",
+        body.authors,
+        body.affiliations,
+    )
+    if not updated:
+        raise HTTPException(status_code=404, detail="paper not found")
+    return StudentPaperWriteResponse(
+        status="updated",
+        paper_uid=_clean_text(updated["paper_uid"]),
+    )
+
+
+@router.patch(
+    "/{student_id}/papers/{paper_uid}/compliance",
+    response_model=StudentPaperWriteResponse,
+    summary="兼容接口：更新论文（不再存储合规字段）",
+)
+async def patch_student_paper_compliance(
+    student_id: str,
+    paper_uid: str,
+    body: StudentPaperComplianceRequest,
+) -> StudentPaperWriteResponse:
+    pool = get_pool()
+    await _ensure_student_exists(student_id)
+
+    updated = await pool.fetchrow(
+        """
+        UPDATE student_publications
+        SET
+          updated_at = now()
+        WHERE target_key = $1 AND paper_uid = $2
+        RETURNING paper_uid
+        """,
+        student_id,
+        _clean_text(paper_uid),
+    )
+    if not updated:
+        raise HTTPException(status_code=404, detail="paper not found")
+    return StudentPaperWriteResponse(
+        status="updated",
+        paper_uid=_clean_text(updated["paper_uid"]),
+    )
+
+
+@router.delete(
+    "/{student_id}/papers/{paper_uid}",
+    status_code=204,
+    summary="删除学生论文",
+)
+async def delete_student_paper(student_id: str, paper_uid: str):
+    pool = get_pool()
+    await _ensure_student_exists(student_id)
+
+    result = await pool.execute(
+        """
+        DELETE FROM student_publications
+        WHERE target_key = $1 AND paper_uid = $2
+        """,
+        student_id,
+        _clean_text(paper_uid),
+    )
+    if result.endswith("0"):
+        raise HTTPException(status_code=404, detail="paper not found")

@@ -1,6 +1,25 @@
 # 信源分类总览
 
-> 最后更新: 2026-02-28
+> 最后更新: 2026-04-24（增量对齐）
+
+## 增量更新（2026-04-24）
+
+本文件保留原有分类结构说明；本轮爬取修复与可用性状态以以下文档为准：
+
+- [docs/CrawlStatus.md](/home/ubuntu/workspace/DeanAgent-Backend/docs/CrawlStatus.md)
+- [docs/SourceOverview.md](/home/ubuntu/workspace/DeanAgent-Backend/docs/SourceOverview.md)
+
+本轮已确认恢复并可稳定写库的重点信源：
+
+- `xjtu_news`（发布时间样例已核验）
+- `nwpu_news`（`published_at` 回填正常）
+- `zhejianglab_news`（切换官网 API 抓取并稳定落库）
+- `runway_blog`、`moonshot_research`
+
+仍受外部接入限制的信源：
+
+- `bupt_news`、`lzu_news`、`scu_news`（WAF/412）
+- `mistral_ai_news`（当前环境网络超时）
 
 ## 摘要
 

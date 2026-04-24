@@ -146,6 +146,8 @@ class DynamicPageCrawler(BaseCrawler):
                             raw.url, detail_selectors,
                         )
                     if detail:
+                        if raw.published_at is None:
+                            raw.published_at = detail.published_at
                         content = detail.content
                         content_html = detail.content_html
                         author = detail.author
