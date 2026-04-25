@@ -2,11 +2,11 @@
 from __future__ import annotations
 
 import asyncio
+import contextlib
 import csv
 import dataclasses
 import json
 import logging
-import contextlib
 from copy import deepcopy
 from datetime import datetime, timezone
 from pathlib import Path
@@ -22,6 +22,7 @@ from app.crawlers.utils.json_storage import save_crawl_result_json
 from app.scheduler.manager import load_all_source_configs
 from app.services.stores.crawl_log_store import append_crawl_log
 from app.services.stores.source_state import update_source_state
+from app.services.talent_scout import export_talent_scout_workbook
 
 logger = logging.getLogger(__name__)
 MAX_ACTIVITY_ENTRIES = 200
@@ -93,7 +94,7 @@ class CrawlerControlService:
         source_ids: list[str],
         keyword_filter: list[str] | None = None,
         keyword_blacklist: list[str] | None = None,
-        export_format: Literal["json", "csv", "database"] = "json",
+        export_format: Literal["json", "csv", "database", "xlsx"] = "json",
     ) -> dict[str, Any]:
         """Create and start a manual crawl job."""
         if self.is_running():
@@ -131,6 +132,7 @@ class CrawlerControlService:
             "finished_at": None,
             "result_file": None,
             "all_results": [],
+            "source_runs": [],
             "running_sources": [],
             "recent_activity": [],
             "summary_report": None,
@@ -171,7 +173,7 @@ class CrawlerControlService:
         source_ids: list[str],
         keyword_filter: list[str] | None = None,
         keyword_blacklist: list[str] | None = None,
-        export_format: Literal["json", "csv", "database"] = "json",
+        export_format: Literal["json", "csv", "database", "xlsx"] = "json",
     ):
         """Compatibility wrapper around jobs resource."""
         self.create_job(
@@ -187,7 +189,7 @@ class CrawlerControlService:
         source_ids: list[str],
         keyword_filter: list[str] | None = None,
         keyword_blacklist: list[str] | None = None,
-        export_format: Literal["json", "csv", "database"] = "json",
+        export_format: Literal["json", "csv", "database", "xlsx"] = "json",
     ) -> dict[str, Any]:
         """Compatibility wrapper used by older endpoints."""
         return self.create_job(
@@ -358,12 +360,15 @@ class CrawlerControlService:
 
                         return {
                             "source_id": source_id,
+                            "source_name": str(config.get("name") or source_id),
                             "status": result.status.value,
                             "items_total": int(result.items_total or 0),
                             "items_dict": items_dict,
                             "db_upserted": db_upserted,
                             "db_new": db_new,
                             "db_deduped_in_batch": db_deduped_in_batch,
+                            "executed_at": finished,
+                            "error_message": result.error_message,
                             "skipped": False,
                         }
                     except Exception as exc:  # noqa: BLE001
@@ -390,12 +395,15 @@ class CrawlerControlService:
                         )
                         return {
                             "source_id": source_id,
+                            "source_name": str(config.get("name") or source_id),
                             "status": CrawlStatus.FAILED.value,
                             "items_total": 0,
                             "items_dict": [],
                             "db_upserted": 0,
                             "db_new": 0,
                             "db_deduped_in_batch": 0,
+                            "executed_at": now,
+                            "error_message": str(exc),
                             "skipped": False,
                         }
                     finally:
@@ -419,6 +427,7 @@ class CrawlerControlService:
                         continue
                     status = str(outcome.get("status") or "")
                     source_id = str(outcome.get("source_id") or "")
+                    job["source_runs"].append(outcome)
                     if status in (CrawlStatus.SUCCESS.value, CrawlStatus.NO_NEW_CONTENT.value):
                         job["completed_sources"].append(source_id)
                     else:
@@ -437,6 +446,15 @@ class CrawlerControlService:
                 job["result_file"] = await self._export_results(
                     job["all_results"],
                     job["export_format"],
+                )
+                logger.info("Results for job %s exported to %s", job_id, job["result_file"])
+            elif job["export_format"] == "xlsx":
+                output_dir = BASE_DIR / "data" / "exports"
+                job["result_file"] = export_talent_scout_workbook(
+                    source_configs=selected_configs,
+                    source_runs=job["source_runs"],
+                    output_dir=output_dir,
+                    generated_at=job.get("finished_at") or datetime.now(timezone.utc),
                 )
                 logger.info("Results for job %s exported to %s", job_id, job["result_file"])
 

@@ -1,0 +1,569 @@
+dimension: "talent_scout"
+dimension_name: "人才候选池"
+description: "潜在引入人才的竞赛、论文与 GitHub 信号源，仅用于手动任务导出 Excel。"
+
+default_keyword_filter: []
+default_keyword_blacklist: []
+
+competition_defaults: &competition_defaults
+  crawl_method: "static"
+  schedule: "daily"
+  priority: 1
+  is_enabled: false
+  crawler_class: "competition_source"
+  entity_family: "competition"
+  fallback_mode: "evidence_only"
+  persist_to_db: false
+  request_timeout: 8
+  max_retries: 1
+  request_delay: 0.1
+
+paper_defaults: &paper_defaults
+  crawl_method: "static"
+  schedule: "daily"
+  priority: 1
+  is_enabled: false
+  crawler_class: "paper_author_source"
+  entity_family: "paper_author"
+  fallback_mode: "evidence_only"
+  persist_to_db: false
+  request_timeout: 10
+  max_retries: 1
+  request_delay: 0.1
+
+github_defaults: &github_defaults
+  crawl_method: "static"
+  schedule: "daily"
+  priority: 1
+  is_enabled: false
+  crawler_class: "github_talent_source"
+  entity_family: "github_talent"
+  fallback_mode: "evidence_only"
+  persist_to_db: false
+  request_timeout: 10
+  max_retries: 1
+  request_delay: 0.1
+
+evidence_competition_defaults: &evidence_competition_defaults
+  crawl_method: "static"
+  schedule: "daily"
+  priority: 1
+  is_enabled: false
+  crawler_class: "evidence_only_source"
+  entity_family: "competition"
+  capture_mode: "evidence_only"
+  fallback_mode: "evidence_only"
+  persist_to_db: false
+  request_timeout: 8
+  max_retries: 1
+  request_delay: 0.1
+
+evidence_paper_defaults: &evidence_paper_defaults
+  crawl_method: "static"
+  schedule: "daily"
+  priority: 1
+  is_enabled: false
+  crawler_class: "evidence_only_source"
+  entity_family: "paper_author"
+  capture_mode: "evidence_only"
+  fallback_mode: "evidence_only"
+  persist_to_db: false
+  request_timeout: 8
+  max_retries: 1
+  request_delay: 0.1
+
+sources:
+  - <<: *competition_defaults
+    id: "ccf_bdci"
+    name: "CCF BDCI"
+    group: "talent_competitions"
+    url: "https://www.datafountain.cn/competitions"
+    capture_mode: "semi_structured"
+    sheet_name: "CCF_BDCI"
+    tracks: ["data_mining", "nlp"]
+    requires_auth: false
+    adapter_key: "rank_table"
+    seed_urls:
+      - "https://www.datafountain.cn/competitions"
+    tags: ["talent_scout", "competition", "ccf"]
+
+  - <<: *competition_defaults
+    id: "aliyun_tianchi"
+    name: "阿里天池"
+    group: "talent_competitions"
+    url: "https://tianchi.aliyun.com/competition/entrance/532406/rankRange"
+    capture_mode: "structured"
+    sheet_name: "AliyunTianchi"
+    tracks: ["data_mining", "cv"]
+    requires_auth: false
+    adapter_key: "tianchi_rank_list"
+    race_id: "532406"
+    max_pages: 3
+    seed_urls:
+      - "https://tianchi.aliyun.com/competition/entrance/532406/rankRange"
+      - "https://tianchi.aliyun.com/competition/entrance/532406/customize767"
+    tags: ["talent_scout", "competition", "aliyun"]
+
+  - <<: *competition_defaults
+    id: "clue_benchmark"
+    name: "CLUE Benchmark"
+    group: "talent_competitions"
+    url: "https://www.cluebenchmarks.com/"
+    capture_mode: "structured"
+    sheet_name: "CLUE"
+    tracks: ["nlp"]
+    requires_auth: false
+    adapter_key: "json_records"
+    seed_urls:
+      - "https://www.cluebenchmarks.com/"
+    tags: ["talent_scout", "competition", "nlp"]
+
+  - <<: *competition_defaults
+    id: "semeval_conll"
+    name: "SemEval / CoNLL Shared Tasks"
+    group: "talent_competitions"
+    url: "https://semeval.github.io/"
+    capture_mode: "semi_structured"
+    sheet_name: "SemEvalCoNLL"
+    tracks: ["nlp"]
+    requires_auth: false
+    adapter_key: "rank_table"
+    seed_urls:
+      - "https://semeval.github.io/"
+      - "https://aclanthology.org/venues/conll/"
+    tags: ["talent_scout", "competition", "nlp"]
+
+  - <<: *competition_defaults
+    id: "neurips_competition"
+    name: "NeurIPS Competition Track"
+    group: "talent_competitions"
+    url: "https://neurips.cc/Conferences/2025/CallForCompetitions"
+    capture_mode: "semi_structured"
+    sheet_name: "NeurIPSComp"
+    tracks: ["ml"]
+    requires_auth: false
+    adapter_key: "rank_table"
+    seed_urls:
+      - "https://neurips.cc/Conferences/2025/CallForCompetitions"
+    tags: ["talent_scout", "competition", "neurips"]
+
+  - <<: *competition_defaults
+    id: "robomaster"
+    name: "RoboMaster"
+    group: "talent_competitions"
+    url: "https://www.robomaster.com/"
+    capture_mode: "semi_structured"
+    sheet_name: "RoboMaster"
+    tracks: ["robotics", "embedded"]
+    requires_auth: false
+    adapter_key: "rank_table"
+    seed_urls:
+      - "https://www.robomaster.com/"
+    tags: ["talent_scout", "competition", "robotics"]
+
+  - <<: *evidence_competition_defaults
+    id: "tencent_hok_ai"
+    name: "腾讯王者荣耀 AI"
+    group: "talent_competitions"
+    url: "https://aiarena.tencent.com/"
+    sheet_name: "TencentHOKAI"
+    tracks: ["reinforcement_learning", "game_ai"]
+    requires_auth: true
+    adapter_key: "manual_seed"
+    seed_urls:
+      - "https://aiarena.tencent.com/"
+    tags: ["talent_scout", "competition", "tencent"]
+
+  - <<: *competition_defaults
+    id: "kaggle_grandmaster"
+    name: "Kaggle Grandmaster"
+    group: "talent_competitions"
+    url: "https://www.kaggle.com/rankings?group=competitions"
+    capture_mode: "structured"
+    sheet_name: "KaggleGM"
+    tracks: ["data_mining", "ml"]
+    requires_auth: false
+    adapter_key: "kaggle_rankings_v2"
+    max_results: 100
+    seed_urls:
+      - "https://www.kaggle.com/rankings?group=competitions"
+    tags: ["talent_scout", "competition", "kaggle"]
+
+  - <<: *competition_defaults
+    id: "kdd_cup"
+    name: "KDD Cup"
+    group: "talent_competitions"
+    url: "https://www.kdd.org/kdd-cup"
+    capture_mode: "semi_structured"
+    sheet_name: "KDDCup"
+    tracks: ["data_mining", "knowledge_graph"]
+    requires_auth: false
+    adapter_key: "rank_table"
+    seed_urls:
+      - "https://www.kdd.org/kdd-cup"
+    tags: ["talent_scout", "competition", "kdd"]
+
+  - <<: *competition_defaults
+    id: "icpc_rankings"
+    name: "ICPC Rankings"
+    group: "talent_competitions"
+    url: "https://icpc.global/"
+    capture_mode: "semi_structured"
+    sheet_name: "ICPC"
+    tracks: ["algorithm"]
+    requires_auth: false
+    adapter_key: "rank_table"
+    seed_urls:
+      - "https://icpc.global/"
+    tags: ["talent_scout", "competition", "algorithm"]
+
+  - <<: *evidence_competition_defaults
+    id: "huawei_elite_challenge"
+    name: "华为软件精英挑战赛"
+    group: "talent_competitions"
+    url: "https://developer.huawei.com/consumer/cn/activity/"
+    sheet_name: "HuaweiElite"
+    tracks: ["systems", "software_engineering"]
+    requires_auth: true
+    adapter_key: "manual_seed"
+    seed_urls:
+      - "https://developer.huawei.com/consumer/cn/activity/"
+    tags: ["talent_scout", "competition", "huawei"]
+
+  - <<: *competition_defaults
+    id: "casp"
+    name: "CASP"
+    group: "talent_competitions"
+    url: "https://predictioncenter.org/"
+    capture_mode: "semi_structured"
+    sheet_name: "CASP"
+    tracks: ["bioinformatics"]
+    requires_auth: false
+    adapter_key: "rank_table"
+    seed_urls:
+      - "https://predictioncenter.org/"
+    tags: ["talent_scout", "competition", "bioinformatics"]
+
+  - <<: *competition_defaults
+    id: "igem"
+    name: "iGEM"
+    group: "talent_competitions"
+    url: "https://competition.igem.org/"
+    capture_mode: "semi_structured"
+    sheet_name: "iGEM"
+    tracks: ["synthetic_biology"]
+    requires_auth: false
+    adapter_key: "rank_table"
+    seed_urls:
+      - "https://competition.igem.org/"
+    tags: ["talent_scout", "competition", "biology"]
+
+  - <<: *evidence_competition_defaults
+    id: "ecmwf_ai_challenge"
+    name: "ECMWF AI Challenge"
+    group: "talent_competitions"
+    url: "https://www.ecmwf.int/"
+    sheet_name: "ECMWFAI"
+    tracks: ["weather", "earth_science"]
+    requires_auth: false
+    adapter_key: "manual_seed"
+    seed_urls:
+      - "https://www.ecmwf.int/"
+    tags: ["talent_scout", "competition", "earth_science"]
+
+  - <<: *competition_defaults
+    id: "noi_ioi"
+    name: "NOI / IOI"
+    group: "talent_competitions"
+    url: "https://www.noi.cn/"
+    capture_mode: "semi_structured"
+    sheet_name: "NOI_IOI"
+    tracks: ["algorithm"]
+    requires_auth: false
+    adapter_key: "rank_table"
+    seed_urls:
+      - "https://www.noi.cn/"
+      - "https://ioinformatics.org/"
+    tags: ["talent_scout", "competition", "algorithm"]
+
+  - <<: *competition_defaults
+    id: "ccpc"
+    name: "CCPC"
+    group: "talent_competitions"
+    url: "https://ccpc.io/"
+    capture_mode: "semi_structured"
+    sheet_name: "CCPC"
+    tracks: ["algorithm"]
+    requires_auth: false
+    adapter_key: "rank_table"
+    seed_urls:
+      - "https://ccpc.io/"
+    tags: ["talent_scout", "competition", "algorithm"]
+
+  - <<: *competition_defaults
+    id: "lanqiao"
+    name: "蓝桥杯"
+    group: "talent_competitions"
+    url: "https://x-static.lanqiao.cn/upload/202406/courseimg/b5c3e9cc-0ec5-4a3d-a89a-0637b950423e.rar"
+    capture_mode: "structured"
+    sheet_name: "LanQiao"
+    tracks: ["software_engineering", "algorithm"]
+    requires_auth: false
+    adapter_key: "lanqiao_archive"
+    competition_name: "第十五届蓝桥杯全国软件和信息技术专业人才大赛全国总决赛"
+    season_year: 2024
+    seed_urls:
+      - url: "https://x-static.lanqiao.cn/upload/202406/courseimg/b5c3e9cc-0ec5-4a3d-a89a-0637b950423e.rar"
+        evidence_title: "第十五届蓝桥杯全国总决赛获奖名单归档"
+        season_year: 2024
+    tags: ["talent_scout", "competition", "software"]
+
+  - <<: *competition_defaults
+    id: "asc_competition"
+    name: "ASC Student Supercomputer Challenge"
+    group: "talent_competitions"
+    url: "https://www.asc-events.net/StudentChallenge/History/2025/index.html"
+    capture_mode: "semi_structured"
+    sheet_name: "ASC"
+    tracks: ["hpc"]
+    requires_auth: false
+    adapter_key: "rank_table"
+    seed_urls:
+      - "https://www.asc-events.net/StudentChallenge/History/2025/index.html"
+    tags: ["talent_scout", "competition", "hpc"]
+
+  - <<: *competition_defaults
+    id: "sc_student_cluster"
+    name: "SC Student Cluster Competition"
+    group: "talent_competitions"
+    url: "https://sc25.supercomputing.org/students/student-cluster-competition/"
+    capture_mode: "semi_structured"
+    sheet_name: "SCCluster"
+    tracks: ["hpc"]
+    requires_auth: false
+    adapter_key: "rank_table"
+    seed_urls:
+      - "https://sc25.supercomputing.org/students/student-cluster-competition/"
+    tags: ["talent_scout", "competition", "hpc"]
+
+  - <<: *competition_defaults
+    id: "isc_student_cluster"
+    name: "ISC Student Cluster Competition"
+    group: "talent_competitions"
+    url: "https://www.isc-hpc.com/"
+    capture_mode: "semi_structured"
+    sheet_name: "ISCCluster"
+    tracks: ["hpc"]
+    requires_auth: false
+    adapter_key: "rank_table"
+    seed_urls:
+      - "https://www.isc-hpc.com/"
+    tags: ["talent_scout", "competition", "hpc"]
+
+  - <<: *evidence_competition_defaults
+    id: "pacman_huawei"
+    name: "PAC-MAN Huawei"
+    group: "talent_competitions"
+    url: "https://developer.huawei.com/"
+    sheet_name: "PacmanHuawei"
+    tracks: ["chip_design", "systems"]
+    requires_auth: true
+    adapter_key: "manual_seed"
+    seed_urls:
+      - "https://developer.huawei.com/"
+    tags: ["talent_scout", "competition", "huawei"]
+
+  - <<: *competition_defaults
+    id: "ctftime"
+    name: "CTFTime"
+    group: "talent_competitions"
+    url: "https://ctftime.org/"
+    capture_mode: "semi_structured"
+    sheet_name: "CTFTime"
+    tracks: ["cybersecurity"]
+    requires_auth: false
+    adapter_key: "rank_table"
+    seed_urls:
+      - "https://ctftime.org/"
+    tags: ["talent_scout", "competition", "ctf"]
+
+  - <<: *competition_defaults
+    id: "ciscn_student"
+    name: "CISCN Student"
+    group: "talent_competitions"
+    url: "https://www.ciscn.cn/"
+    capture_mode: "semi_structured"
+    sheet_name: "CISCN"
+    tracks: ["cybersecurity"]
+    requires_auth: false
+    adapter_key: "rank_table"
+    seed_urls:
+      - "https://www.ciscn.cn/"
+    tags: ["talent_scout", "competition", "cybersecurity"]
+
+  - <<: *competition_defaults
+    id: "os_kernel_competition"
+    name: "OS Kernel Competition"
+    group: "talent_competitions"
+    url: "https://kernel.org/"
+    capture_mode: "semi_structured"
+    sheet_name: "OSKernel"
+    tracks: ["systems", "os"]
+    requires_auth: false
+    adapter_key: "rank_table"
+    seed_urls:
+      - "https://kernel.org/"
+    tags: ["talent_scout", "competition", "systems"]
+
+  - <<: *competition_defaults
+    id: "icra_competition"
+    name: "ICRA Competition"
+    group: "talent_competitions"
+    url: "https://2026.ieee-icra.org/program/competitions/"
+    capture_mode: "semi_structured"
+    sheet_name: "ICRAComp"
+    tracks: ["robotics"]
+    requires_auth: false
+    adapter_key: "rank_table"
+    seed_urls:
+      - "https://2026.ieee-icra.org/program/competitions/"
+    tags: ["talent_scout", "competition", "robotics"]
+
+  - <<: *competition_defaults
+    id: "world_robot_contest"
+    name: "World Robot Contest"
+    group: "talent_competitions"
+    url: "http://www.cnrobocon.com/"
+    capture_mode: "semi_structured"
+    sheet_name: "WorldRobot"
+    tracks: ["robotics"]
+    requires_auth: false
+    adapter_key: "rank_table"
+    seed_urls:
+      - "http://www.cnrobocon.com/"
+    tags: ["talent_scout", "competition", "robotics"]
+
+  - <<: *paper_defaults
+    id: "dblp_author"
+    name: "DBLP Author"
+    group: "talent_papers"
+    url: "https://dblp.org/search/publ/api"
+    capture_mode: "structured"
+    sheet_name: "DBLP"
+    tracks: ["ICML", "ICLR", "NeurIPS", "AAAI", "ACL", "EMNLP", "CVPR", "ICCV", "ECCV"]
+    requires_auth: false
+    adapter_key: "dblp_json"
+    search_query: "machine learning"
+    max_results: 8
+    seed_urls:
+      - "https://dblp.org/search/publ/api"
+    tags: ["talent_scout", "paper", "dblp"]
+
+  - <<: *paper_defaults
+    id: "arxiv_author"
+    name: "arXiv Author"
+    group: "talent_papers"
+    url: "https://export.arxiv.org/api/query"
+    capture_mode: "structured"
+    sheet_name: "arXiv"
+    tracks: ["ICML", "ICLR", "NeurIPS", "AAAI", "ACL", "EMNLP", "CVPR", "ICCV", "ECCV"]
+    requires_auth: false
+    adapter_key: "arxiv_atom"
+    search_query: "cat:cs.AI OR cat:cs.LG"
+    max_results: 8
+    seed_urls:
+      - "https://export.arxiv.org/api/query"
+    tags: ["talent_scout", "paper", "arxiv"]
+
+  - <<: *paper_defaults
+    id: "semantic_scholar_author"
+    name: "Semantic Scholar Author"
+    group: "talent_papers"
+    url: "https://api.semanticscholar.org/graph/v1/paper/search"
+    capture_mode: "structured"
+    sheet_name: "SemanticScholar"
+    tracks: ["ICML", "ICLR", "NeurIPS", "AAAI", "ACL", "EMNLP", "CVPR", "ICCV", "ECCV"]
+    requires_auth: false
+    adapter_key: "semantic_scholar"
+    search_query: "machine learning"
+    max_results: 8
+    seed_urls:
+      - "https://api.semanticscholar.org/graph/v1/paper/search"
+    tags: ["talent_scout", "paper", "semantic_scholar"]
+
+  - <<: *evidence_paper_defaults
+    id: "openreview_author"
+    name: "OpenReview Author"
+    group: "talent_papers"
+    url: "https://openreview.net/"
+    sheet_name: "OpenReview"
+    tracks: ["ICML", "ICLR", "NeurIPS"]
+    requires_auth: false
+    adapter_key: "manual_seed"
+    seed_urls:
+      - "https://openreview.net/"
+    tags: ["talent_scout", "paper", "openreview"]
+
+  - <<: *paper_defaults
+    id: "acl_anthology_author"
+    name: "ACL Anthology Author"
+    group: "talent_papers"
+    url: "https://aclanthology.org/"
+    capture_mode: "structured"
+    sheet_name: "ACLAnthology"
+    tracks: ["ACL", "EMNLP", "CoNLL", "SemEval"]
+    requires_auth: false
+    adapter_key: "paper_json"
+    seed_urls:
+      - "https://aclanthology.org/"
+    tags: ["talent_scout", "paper", "acl"]
+
+  - <<: *paper_defaults
+    id: "cvf_openaccess_author"
+    name: "CVF OpenAccess Author"
+    group: "talent_papers"
+    url: "https://openaccess.thecvf.com/"
+    capture_mode: "structured"
+    sheet_name: "CVFOpenAccess"
+    tracks: ["CVPR", "ICCV", "ECCV"]
+    requires_auth: false
+    adapter_key: "paper_json"
+    seed_urls:
+      - "https://openaccess.thecvf.com/"
+    tags: ["talent_scout", "paper", "cvf"]
+
+  - <<: *github_defaults
+    id: "github_ai_users"
+    name: "GitHub AI Users"
+    group: "talent_github"
+    url: "https://api.github.com/search/users"
+    capture_mode: "structured"
+    sheet_name: "GitHubUsers"
+    tracks: ["llm", "cv", "nlp", "agents"]
+    requires_auth: false
+    adapter_key: "github_users"
+    search_query: "machine learning"
+    max_results: 10
+    seed_urls:
+      - "https://api.github.com/search/users"
+    tags: ["talent_scout", "github", "users"]
+
+  - <<: *github_defaults
+    id: "github_ai_repo_contributors"
+    name: "GitHub AI Repo Contributors"
+    group: "talent_github"
+    url: "https://api.github.com/repos"
+    capture_mode: "structured"
+    sheet_name: "GitHubContribs"
+    tracks: ["llm", "open_source"]
+    requires_auth: false
+    adapter_key: "github_contributors"
+    repo_seeds:
+      - "huggingface/transformers"
+      - "vllm-project/vllm"
+      - "langchain-ai/langchain"
+    max_repos: 3
+    max_results_per_repo: 8
+    seed_urls:
+      - "https://api.github.com/repos"
+    tags: ["talent_scout", "github", "contributors"]

@@ -1,10 +1,40 @@
 # 信源爬取状态总览
 
-> 最后更新: 2026-04-24 (v46: 高校动态发布时间修复迭代，新增之江实验室官网 API 抓取，修复 auto crawler 详情发布日期回填)
+> 最后更新: 2026-04-25 (v48: talent_scout 官方源重定位，蓝桥杯/天池/Kaggle 修复，禁用 DB 持久化)
 
 ---
 
-## 0. 本轮迭代结论（2026-04-24）
+## 0. 本轮迭代结论（2026-04-25）
+
+### 已完成并验证
+
+| source_id | 结果 | 关键验证 |
+|-----------|------|----------|
+| lanqiao | ✅ 改为官方全国总决赛归档 | 官方 RAR 200，解出 21 个全国总决赛获奖名单 PDF；单源抓取 17,910 条，前 5 条：许镇江、张嘉权、朱道爽、顾生飞、杨彭 |
+| aliyun_tianchi | ✅ 改为真实公开 rank API | `race/rank/list?raceId=532406` 抓取 59 条，前 5 条：若有眠、Rec之神、帮帮我!肯德基爷爷、aliyun5209892490、aliyun9891988177 |
+| kaggle_grandmaster | ✅ 改为当前 RankingService API | 旧 `rankings.json` 当前 404；新 `/api/i/users.RankingService/GetUserRankingsV2` 抓取 100 条 Competition ranking 人物 |
+| talent_scout 手动导出 | ✅ Excel 可下载人物行 | 顺序执行 34 源完成，`TalentSignals` 候选人行 18,140 条，结果文件 `data/exports/crawl_results_20260425_052436.xlsx` |
+| Excel SourceStatus / TalentSignals | ✅ 不再把 blocked/needs_review 当人物 | `rows_exported` 只统计 `candidate_name` 非空的人物行；blocked/needs_review 行的 `candidate_name` 保持空 |
+
+### 本轮新增/调整
+
+- `talent_scout` 默认 `persist_to_db: false`，`run_single.py` 对这些源跳过 DB 初始化与写入；本轮导出未保存到 Supabase。
+- `competition_source` 新增 `lanqiao_archive`：下载官方 RAR，用 `bsdtar` 解包，使用 `pypdf` 解析全国总决赛 PDF 行。
+- `competition_source` 新增 `tianchi_rank_list`：从天池前端 JS 定位真实 rank API，不再只抓 HTML 壳页。
+- `competition_source` 新增 `kaggle_rankings_v2`：从 Kaggle 页面会话拿 CSRF 后调用当前 RankingService。
+- Excel 导出修复：blocked 源的 `block_reason` 优先使用 `talent_signal.notes`；blocked/needs_review 行不再用源标题兜底 `candidate_name`。
+
+### 仍受限
+
+| 范围 | 现状 | 说明 |
+|------|------|------|
+| 竞赛首页类 URL | ⚠️ needs_review | 如 CCF BDCI、ASC、ICPC、CCPC 等 URL 多数 200，但是官网首页/团队榜/活动页，不直接给个人获奖名单，需继续定位具体获奖页/API |
+| CLUE / ACL / CVF | ⚠️ blocked | 当前配置按 JSON 解析，但实际返回 HTML，属于 parser/API 定位不准，不是 403 |
+| CISCN | ⚠️ blocked | `https://www.ciscn.cn/` 当前证书链为自签名，Python 校验证书失败 |
+| Semantic Scholar | ⚠️ blocked | 当前运行触发 429 限流 |
+| ICRA / SC / ISC / WRC 等 | ⚠️ needs_review / blocked | URL 可访问或间歇超时，但页面不是个人获奖名单，当前不产出候选人 |
+
+## 0A. 上轮迭代结论（2026-04-24）
 
 ### 已完成并验证写库
 

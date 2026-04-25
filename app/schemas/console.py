@@ -14,7 +14,7 @@ class CrawlRequest(BaseModel):
     source_ids: list[str]
     keyword_filter: list[str] | None = None
     keyword_blacklist: list[str] | None = None
-    export_format: Literal["json", "csv", "database"] = "json"
+    export_format: Literal["json", "csv", "database", "xlsx"] = "json"
 
 
 class CrawlStatusResponse(BaseModel):
@@ -350,5 +350,4 @@ class ConsoleSourceLogsResponse(BaseModel):
 
     source_id: str
     logs: list[CrawlLogResponse] = Field(default_factory=list)
-
 
