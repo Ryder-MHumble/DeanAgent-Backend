@@ -87,16 +87,18 @@ sources:
   name: 之江实验室
   group: ai_institutes
   url: https://www.zhejianglab.org/lab/home
-  crawl_method: dynamic
+  crawl_method: static
+  crawler_class: zhejianglab_website_api
   schedule: daily
   priority: 2
-  is_enabled: false
-  wait_for: networkidle
-  wait_timeout: 15000
-  selectors:
-    list_item: h5
-    title: _self
-    link: _self
+  is_enabled: true
+  website_id: 1
+  api_base_url: https://www.zhejianglab.org/ZJGW/api/v1/website
+  detail_url_template: https://www.zhejianglab.org/lab/post/{id}
+  module_ids:
+  - 515
+  - 527
+  max_items: 12
   base_url: https://www.zhejianglab.org
   tags:
   - institute

@@ -198,9 +198,11 @@ class UniversityNewsAutoCrawler(BaseCrawler):
             logger.warning("Playwright fallback failed for %s: %s", self.source_id, exc)
             return None
 
-    async def _extract_detail(self, url: str) -> tuple[str | None, str | None, str | None, list[dict] | None]:
+    async def _extract_detail(
+        self, url: str,
+    ) -> tuple[str | None, str | None, str | None, list[dict] | None, datetime | None]:
         if not self.config.get("fetch_detail", True):
-            return None, None, None, None
+            return None, None, None, None, None
 
         try:
             detail_html = await fetch_page(
@@ -212,21 +214,33 @@ class UniversityNewsAutoCrawler(BaseCrawler):
             )
         except Exception as exc:  # noqa: BLE001
             logger.debug("Detail fetch failed for %s: %s", url, exc)
-            return None, None, None, None
+            return None, None, None, None, None
 
         detail_selectors = self.config.get("detail_selectors")
         min_len = int(self.config.get("detail_min_length", 80))
 
         if isinstance(detail_selectors, dict) and detail_selectors.get("content"):
             detail = parse_detail_html(detail_html, detail_selectors, url, self.config)
-            return detail.content, detail.content_html, detail.content_hash, detail.images
+            return (
+                detail.content,
+                detail.content_html,
+                detail.content_hash,
+                detail.images,
+                detail.published_at,
+            )
 
         for selector in _AUTO_CONTENT_SELECTORS:
             detail = parse_detail_html(detail_html, {"content": selector}, url, self.config)
             if detail.content and len(detail.content.strip()) >= min_len:
-                return detail.content, detail.content_html, detail.content_hash, detail.images
+                return (
+                    detail.content,
+                    detail.content_html,
+                    detail.content_hash,
+                    detail.images,
+                    detail.published_at,
+                )
 
-        return None, None, None, None
+        return None, None, None, None, None
 
     async def fetch_and_parse(self) -> list[CrawledItem]:
         list_url = self.config["url"]
@@ -286,7 +300,11 @@ class UniversityNewsAutoCrawler(BaseCrawler):
             if i < detail_max_items and self.config.get("fetch_detail", True):
                 if request_delay > 0:
                     await asyncio.sleep(request_delay)
-                content, content_html, content_hash, images = await self._extract_detail(cand["url"])
+                content, content_html, content_hash, images, detail_published_at = (
+                    await self._extract_detail(cand["url"])
+                )
+                if cand["published_at"] is None and detail_published_at is not None:
+                    cand["published_at"] = detail_published_at
 
             extra: dict = {}
             if images:

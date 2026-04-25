@@ -102,7 +102,10 @@ class BaseCrawler(ABC):
                 filtered_items.append(item)
 
         logger.info(
-            f"Filtered {len(items)} items to {len(filtered_items)} items using keywords: {keywords[:5]}..."
+            "Filtered %d items to %d items using keywords: %s...",
+            len(items),
+            len(filtered_items),
+            keywords[:5],
         )
         return filtered_items
 
@@ -121,7 +124,9 @@ class BaseCrawler(ABC):
             result.items = filtered_items
             result.items_new = len(filtered_items)
 
-            if filtered_items:
+            if self.config.get("dimension") == "talent_scout":
+                self._apply_talent_scout_metrics(result, items, filtered_items)
+            elif filtered_items:
                 result.status = CrawlStatus.SUCCESS
             else:
                 result.status = CrawlStatus.NO_NEW_CONTENT
@@ -138,3 +143,27 @@ class BaseCrawler(ABC):
     async def fetch_and_parse(self) -> list[CrawledItem]:
         """Subclasses implement: fetch the source, parse, return items."""
         ...
+
+    def _apply_talent_scout_metrics(
+        self,
+        result: CrawlResult,
+        all_items: list[CrawledItem],
+        filtered_items: list[CrawledItem],
+    ) -> None:
+        """Count only rows with candidate names as talent_scout items."""
+        total_candidates = sum(1 for item in all_items if self._has_talent_candidate(item))
+        filtered_candidates = sum(
+            1 for item in filtered_items if self._has_talent_candidate(item)
+        )
+        result.items_total = total_candidates
+        result.items_new = filtered_candidates
+        result.status = (
+            CrawlStatus.SUCCESS if filtered_candidates else CrawlStatus.NO_NEW_CONTENT
+        )
+
+    @staticmethod
+    def _has_talent_candidate(item: CrawledItem) -> bool:
+        signal = item.extra.get("talent_signal")
+        if not isinstance(signal, dict):
+            return bool(item.title)
+        return bool(str(signal.get("candidate_name") or "").strip())

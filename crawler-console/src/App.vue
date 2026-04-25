@@ -1058,6 +1058,7 @@ function clearApiFilters() {
                     <select v-model="manualForm.exportFormat">
                       <option value="json">JSON</option>
                       <option value="csv">CSV</option>
+                      <option value="xlsx">Excel (.xlsx)</option>
                       <option value="database">数据库</option>
                     </select>
                   </label>

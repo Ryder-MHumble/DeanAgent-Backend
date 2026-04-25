@@ -9,28 +9,25 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 # Load .env file
 from dotenv import load_dotenv
+
 load_dotenv()
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+)
 
 
 async def run_crawl(source_id: str, domain: str = None, domain_group: str = None):
-    from app.crawlers.registry import CrawlerRegistry
-    from app.crawlers.utils.playwright_pool import close_browser
-    from app.crawlers.utils.json_storage import save_crawl_result_json
-    from app.scheduler.manager import load_all_source_configs
-    from app.db.client import close_client, init_client
     from app.config import settings
+    from app.crawlers.registry import CrawlerRegistry
+    from app.crawlers.utils.json_storage import save_crawl_result_json
+    from app.crawlers.utils.playwright_pool import close_browser
+    from app.db.client import close_client, init_client
+    from app.scheduler.manager import load_all_source_configs
     from app.services.domain_filter import get_domain_filter
 
     try:
-        # Initialize DB client
-        try:
-            await init_client(settings.SUPABASE_URL, settings.SUPABASE_KEY)
-        except Exception as e:
-            print(f"Warning: Failed to initialize DB client: {e}")
-            print("DB unavailable, crawl results will not be persisted")
-
         configs = load_all_source_configs()
         config = next((c for c in configs if c["id"] == source_id), None)
 
@@ -38,6 +35,15 @@ async def run_crawl(source_id: str, domain: str = None, domain_group: str = None
             print(f"Source not found: {source_id}")
             print(f"Available sources: {[c['id'] for c in configs]}")
             return
+
+        should_persist = config.get("persist_to_db") is not False
+        if should_persist:
+            # Initialize DB client
+            try:
+                await init_client(settings.SUPABASE_URL, settings.SUPABASE_KEY)
+            except Exception as e:
+                print(f"Warning: Failed to initialize DB client: {e}")
+                print("DB unavailable, crawl results will not be persisted")
 
         # 解析领域关键词
         domain_keywords = None
@@ -51,7 +57,10 @@ async def run_crawl(source_id: str, domain: str = None, domain_group: str = None
             )
             print(f"Domain filter: {domain or domain_group}")
             if domain_keywords:
-                print(f"Keywords: {domain_keywords[:10]}..." if len(domain_keywords) > 10 else f"Keywords: {domain_keywords}")
+                if len(domain_keywords) > 10:
+                    print(f"Keywords: {domain_keywords[:10]}...")
+                else:
+                    print(f"Keywords: {domain_keywords}")
             else:
                 print("Keywords: [] (no filter)")
 
@@ -72,9 +81,12 @@ async def run_crawl(source_id: str, domain: str = None, domain_group: str = None
         if result.error_message:
             print(f"Error: {result.error_message}")
 
-        # Persist to DB
-        await save_crawl_result_json(result, config)
-        print("Persisted to DB (if DB client available)")
+        # Persist to DB unless the source explicitly opts out.
+        if should_persist:
+            await save_crawl_result_json(result, config)
+            print("Persisted to DB (if DB client available)")
+        else:
+            print("DB persistence skipped by source config")
 
         if result.items:
             print(f"\n--- First {min(5, len(result.items))} items ---")
@@ -99,7 +111,15 @@ async def run_crawl(source_id: str, domain: str = None, domain_group: str = None
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Test crawl a single source")
     parser.add_argument("--source", "-s", required=True, help="Source ID to crawl")
-    parser.add_argument("--domain", "-d", help="Domain filter (e.g., technology.ai, economy.finance)")
-    parser.add_argument("--domain-group", "-g", help="Domain group filter (e.g., tech_all, livelihood_all)")
+    parser.add_argument(
+        "--domain",
+        "-d",
+        help="Domain filter (e.g., technology.ai, economy.finance)",
+    )
+    parser.add_argument(
+        "--domain-group",
+        "-g",
+        help="Domain group filter (e.g., tech_all, livelihood_all)",
+    )
     args = parser.parse_args()
     asyncio.run(run_crawl(args.source, domain=args.domain, domain_group=args.domain_group))

@@ -10,6 +10,10 @@ _DATE_TOKEN_RE = re.compile(
     [12]\d{3}[年./-]\d{1,2}(?:月|[./-])\d{1,2}(?:日)?
     (?:\s+\d{1,2}:\d{2}(?::\d{2})?)?
     |
+    (?:Jan|January|Feb|February|Mar|March|Apr|April|May|Jun|June|Jul|July|Aug|August|Sep|Sept|September|Oct|October|Nov|November|Dec|December)
+    \s+\d{1,2},\s+[12]\d{3}
+    (?:\s+\d{1,2}:\d{2}(?::\d{2})?)?
+    |
     \d{1,2}[./-]\d{1,2}
     """,
     re.VERBOSE,
@@ -65,6 +69,12 @@ def parse_datetime_text(
         "%Y/%m/%d",
         "%Y.%m.%d",
         "%Y年%m月%d日",
+        "%B %d, %Y %H:%M:%S",
+        "%B %d, %Y %H:%M",
+        "%b %d, %Y %H:%M:%S",
+        "%b %d, %Y %H:%M",
+        "%B %d, %Y",
+        "%b %d, %Y",
     )
     for fmt in formats:
         try:

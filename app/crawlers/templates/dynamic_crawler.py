@@ -111,10 +111,18 @@ class DynamicPageCrawler(BaseCrawler):
 
             await page.goto(url, wait_until="domcontentloaded", timeout=wait_timeout)
 
-            if wait_for == "networkidle":
-                await page.wait_for_load_state("networkidle", timeout=wait_timeout)
-            else:
-                await page.wait_for_selector(wait_for, timeout=wait_timeout)
+            try:
+                if wait_for == "networkidle":
+                    await page.wait_for_load_state("networkidle", timeout=wait_timeout)
+                else:
+                    await page.wait_for_selector(wait_for, timeout=wait_timeout)
+            except Exception as exc:
+                logger.warning(
+                    "Wait condition %r timed out for %s, falling back to current HTML: %s",
+                    wait_for,
+                    self.source_id,
+                    exc,
+                )
 
             html = await page.content()
 

@@ -14,6 +14,20 @@ DATA_DIR = BASE_DIR / "data" / "raw"
 
 LATEST_FILENAME = "latest.json"
 
+
+def _normalize_tags(raw_tags: Any) -> list[str]:
+    """Coerce crawler tags to a clean text list accepted by Postgres text[]."""
+    if not isinstance(raw_tags, list):
+        return []
+
+    normalized: list[str] = []
+    for tag in raw_tags:
+        text = str(tag).strip()
+        if text:
+            normalized.append(text)
+    return normalized
+
+
 async def save_crawl_result_json(
     result: Any,
     source_config: dict[str, Any],
@@ -23,6 +37,9 @@ async def save_crawl_result_json(
     NOTE: Function name kept for backward compatibility with existing call-sites.
     No local JSON files are written.
     """
+    if source_config.get("persist_to_db") is False:
+        return {"upserted": 0, "new": 0, "deduped_in_batch": 0}
+
     all_items = getattr(result, "items_all", None) or result.items
     if not all_items:
         return {"upserted": 0, "new": 0, "deduped_in_batch": 0}
@@ -43,7 +60,11 @@ async def save_crawl_result_json(
         logger.warning("DB client not initialized; skip persisting source %s", source_id)
         return {"upserted": 0, "new": 0, "deduped_in_batch": 0}
     except Exception as exc:  # noqa: BLE001
-        logger.warning("DB fetch existing hashes failed for %s, skip persisting: %s", source_id, exc)
+        logger.warning(
+            "DB fetch existing hashes failed for %s, skip persisting: %s",
+            source_id,
+            exc,
+        )
         return {"upserted": 0, "new": 0, "deduped_in_batch": 0}
 
     now_dt = datetime.now(timezone.utc)
@@ -81,7 +102,7 @@ async def save_crawl_result_json(
                 "content": item.content,
                 "content_html": item.content_html,
                 "content_hash": item.content_hash,
-                "tags": item.tags or [],
+                "tags": _normalize_tags(item.tags),
                 "extra": item.extra or {},
                 "crawled_at": now_iso,
                 "is_new": is_new,

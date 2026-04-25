@@ -228,16 +228,16 @@ sources:
   group: university_news
   url: https://news.bupt.edu.cn/
   crawl_method: dynamic
+  crawler_class: university_news_auto
   schedule: daily
   priority: 2
   is_enabled: false
-  wait_for: div.news
   wait_timeout: 15000
-  selectors:
-    list_item: div.news-list ul li
-    title: a
-    link: a
-    date: span
+  max_items: 10
+  auto_min_score: 3
+  fetch_detail: false
+  playwright_fallback: true
+  snapshot_on_empty: false
   base_url: https://news.bupt.edu.cn
   keyword_filter: []
   tags:
@@ -271,14 +271,12 @@ sources:
   name: 南开大学新闻网
   group: university_news
   url: https://news.nankai.edu.cn/
-  crawl_method: dynamic
+  crawl_method: static
   schedule: daily
   priority: 2
-  is_enabled: false
-  wait_for: div.right_con
-  wait_timeout: 15000
+  is_enabled: true
   selectors:
-    list_item: div.right_con a
+    list_item: a[href*='/ywsd/system/']
     title: _self
     link: _self
   base_url: https://news.nankai.edu.cn
@@ -544,15 +542,16 @@ sources:
   group: university_news
   url: https://www.nwpu.edu.cn/
   crawl_method: dynamic
+  crawler_class: university_news_auto
   schedule: daily
   priority: 2
   is_enabled: false
-  wait_for: div.news-list
   wait_timeout: 15000
-  selectors:
-    list_item: div.news-list li
-    title: div.li-bottom p a
-    link: div.li-bottom p a
+  max_items: 10
+  auto_min_score: 3
+  fetch_detail: true
+  detail_max_items: 10
+  playwright_fallback: true
   base_url: https://www.nwpu.edu.cn
   keyword_filter: []
   tags:
@@ -562,19 +561,19 @@ sources:
 - id: scu_news
   name: 四川大学新闻网
   group: university_news
-  url: https://news.scu.edu.cn/
+  url: https://www.scu.edu.cn/
   crawl_method: dynamic
+  crawler_class: university_news_auto
   schedule: daily
   priority: 2
   is_enabled: false
-  wait_for: div.news
   wait_timeout: 15000
-  selectors:
-    list_item: ul.newsList01 li
-    title: a
-    link: a
-    date: span
-  base_url: https://news.scu.edu.cn
+  max_items: 10
+  auto_min_score: 3
+  fetch_detail: false
+  playwright_fallback: true
+  snapshot_on_empty: false
+  base_url: https://www.scu.edu.cn/
   keyword_filter: []
   tags:
   - university
@@ -607,16 +606,16 @@ sources:
   group: university_news
   url: https://news.lzu.edu.cn/
   crawl_method: dynamic
+  crawler_class: university_news_auto
   schedule: daily
   priority: 2
   is_enabled: false
-  wait_for: div.news
   wait_timeout: 15000
-  selectors:
-    list_item: ul.newsList01 li
-    title: a
-    link: a
-    date: span
+  max_items: 10
+  auto_min_score: 3
+  fetch_detail: false
+  playwright_fallback: true
+  snapshot_on_empty: false
   base_url: https://news.lzu.edu.cn
   keyword_filter: []
   tags:

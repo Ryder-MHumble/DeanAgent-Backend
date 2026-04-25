@@ -285,19 +285,19 @@ sources:
   - id: "runway_blog"
     name: "Runway Blog"
     group: "company_blogs"
-    url: "https://runwayml.com/blog/"
-    crawl_method: "dynamic"
+    url: "https://runwayml.com/news"
+    crawl_method: "static"
     schedule: "weekly"
     priority: 2
-    is_enabled: false  # Blog moved to /news/ with very few static items; dynamic times out
-    wait_for: "article"
-    wait_timeout: 15000
+    is_enabled: true  # News cards are rendered in static HTML on /news
     selectors:
-      list_item: "article"
-      title: "h2"
-      link: "a"
-      date: "time"
-    base_url: "https://runwayml.com"
+      list_item: "a.group[href^='news/']"
+      title: "div.text-2xl"
+      link: "_self"
+      date: "div.mt-1"
+    base_url: "https://runwayml.com/"
+    detail_selectors:
+      content: "article"
     keyword_filter: []  # All Runway content is generative AI relevant
     tags: ["company_blog", "runway", "video_generation"]
 
@@ -454,20 +454,19 @@ sources:
   - id: "moonshot_research"
     name: "月之暗面-最新研究"
     group: "cn_ai_company"
-    url: "https://www.moonshot.cn/news"
-    crawl_method: "dynamic"
+    url: "https://platform.moonshot.cn/blog"
+    crawl_method: "static"
     schedule: "daily"
     priority: 1
     is_enabled: true
-    wait_for: "h2"
-    wait_timeout: 15000
     selectors:
-      list_item: "a[href*='blog'], a[href*='github'], a[href*='huggingface']"
-      title: "h2"
-      link: "_self"
-      date: "p"
-      date_format: "%Y-%m-%d"
-      date_regex: "\\d{4}-\\d{2}-\\d{2}"
+      list_item: "div.post-item"
+      title: "h3 a"
+      link: "h3 a"
+      date: "time"
+    base_url: "https://platform.moonshot.cn"
+    detail_selectors:
+      content: "article"
     keyword_filter: []
     tags: ["company_blog", "moonshot", "kimi", "cn_ai"]
 

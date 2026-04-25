@@ -383,5 +383,5 @@ export interface ManualJobPayload {
   source_ids: string[];
   keyword_filter: string[] | null;
   keyword_blacklist: string[] | null;
-  export_format: "json" | "csv" | "database";
+  export_format: "json" | "csv" | "database" | "xlsx";
 }
