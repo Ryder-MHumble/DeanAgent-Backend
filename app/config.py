@@ -43,6 +43,11 @@ class Settings(BaseSettings):
     # OpenRouter LLM
     OPENROUTER_API_KEY: str = ""
     OPENROUTER_MODEL: str = "google/gemini-2.0-flash-001"
+    OPENROUTER_API_URL: str = "https://openrouter.ai/api/v1/chat/completions"
+    # SiliconFlow fallback LLM
+    SILICONFLOW_API_KEY: str = ""
+    SILICONFLOW_MODEL: str = "Pro/moonshotai/Kimi-K2.6"
+    SILICONFLOW_API_URL: str = "https://api.siliconflow.cn/v1/chat/completions"
     # Dedicated model for daily briefing (stronger model for better narrative)
     BRIEFING_LLM_MODEL: str = "google/gemini-2.5-pro"
 
@@ -58,7 +63,7 @@ class Settings(BaseSettings):
     PIPELINE_CRON_HOUR: int = 6
     PIPELINE_CRON_MINUTE: int = 0
 
-    # LLM enrichment in daily pipeline (requires OPENROUTER_API_KEY)
+    # LLM enrichment in daily pipeline (requires at least one LLM provider key)
     ENABLE_LLM_ENRICHMENT: bool = True
     LLM_THRESHOLD: int = 40  # min matchScore for policy LLM enrichment
 

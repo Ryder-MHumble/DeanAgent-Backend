@@ -3,7 +3,7 @@
 Registered as a single APScheduler job. Each stage runs sequentially and
 logs progress. If crawling fails, processing still runs on existing data/raw/.
 
-Stage 4 (LLM enrichment) is conditional on ENABLE_LLM_ENRICHMENT + API key.
+Stage 4 (LLM enrichment) is conditional on ENABLE_LLM_ENRICHMENT + provider key.
 Stage 5 (index generation) always runs.
 Stage 6 (daily briefing) always runs — uses LLM when available, fallback otherwise.
 """
@@ -321,6 +321,7 @@ async def execute_daily_pipeline() -> PipelineResult:
     global _last_pipeline_result
 
     from app.config import settings
+    from app.services.llm.llm_service import has_llm_provider_configured
 
     pipeline = PipelineResult()
 
@@ -360,7 +361,7 @@ async def execute_daily_pipeline() -> PipelineResult:
     pipeline.stages.append(tf_stage)
 
     # Stage 4: LLM enrichment (conditional)
-    llm_enabled = settings.ENABLE_LLM_ENRICHMENT and settings.OPENROUTER_API_KEY
+    llm_enabled = settings.ENABLE_LLM_ENRICHMENT and has_llm_provider_configured()
     if llm_enabled:
         llm_policy = await _run_stage(
             "enrich_policy_llm", _stage_enrich_policy_llm,
@@ -378,8 +379,8 @@ async def execute_daily_pipeline() -> PipelineResult:
         pipeline.stages.append(llm_tech_frontier)
     else:
         reason = (
-            "OPENROUTER_API_KEY not set"
-            if not settings.OPENROUTER_API_KEY
+            "No LLM provider key configured"
+            if not has_llm_provider_configured()
             else "ENABLE_LLM_ENRICHMENT=false"
         )
         pipeline.stages.append(_skipped_stage("enrich_policy_llm", reason))

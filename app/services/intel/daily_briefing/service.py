@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from app.config import BASE_DIR, settings
+from app.services.llm.llm_service import has_llm_provider_configured
 
 logger = logging.getLogger(__name__)
 
@@ -149,7 +150,7 @@ async def generate_daily_briefing(target_date: date) -> dict[str, Any]:
             "paragraphs": [["院长，今日暂无新的信息更新。各维度数据将在下次爬取后自动更新。"]],
             "summary": "今日暂无新的信息更新。",
         }
-    elif settings.ENABLE_LLM_ENRICHMENT and settings.OPENROUTER_API_KEY:
+    elif settings.ENABLE_LLM_ENRICHMENT and has_llm_provider_configured():
         # Try LLM generation
         try:
             metric_summary = rules.build_metric_summary(articles_by_dim, target_date)

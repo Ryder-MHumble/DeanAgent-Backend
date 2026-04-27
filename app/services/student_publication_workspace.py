@@ -117,6 +117,12 @@ def _date_key(value: Any) -> str:
     return resolved.date().isoformat()
 
 
+def _stable_student_target_key_from_name(name: str) -> str:
+    normalized = f"student|{name.strip().lower()}"
+    digest = hashlib.sha1(normalized.encode("utf-8")).hexdigest()[:20]
+    return f"student_{digest}"
+
+
 def _build_canonical_uid(
     *,
     doi: Any = None,
@@ -134,6 +140,39 @@ def _build_canonical_uid(
         f"{_title_fingerprint(title)}|{_date_key(publication_date)}".encode("utf-8")
     ).hexdigest()[:24]
     return f"fingerprint:{digest}"
+
+
+async def _student_target_candidates(
+    conn: asyncpg.Connection,
+    *,
+    student_id: str,
+) -> list[str]:
+    normalized_student_id = _clean_text(student_id)
+    if not normalized_student_id:
+        return []
+    candidates: list[str] = [normalized_student_id]
+    row = await conn.fetchrow(
+        """
+        SELECT name, COALESCE(student_no, '') AS student_no
+        FROM supervised_students
+        WHERE id = $1
+        LIMIT 1
+        """,
+        normalized_student_id,
+    )
+    if row is None:
+        return candidates
+
+    student_no = _clean_text(row.get("student_no"))
+    if student_no and student_no not in candidates:
+        candidates.append(student_no)
+
+    name = _clean_text(row.get("name"))
+    if name:
+        name_key = _stable_student_target_key_from_name(name)
+        if name_key not in candidates:
+            candidates.append(name_key)
+    return candidates
 
 
 def _build_dedup_metadata(
@@ -211,71 +250,77 @@ async def get_workspace(
     *,
     student_id: str,
 ) -> StudentPublicationWorkspaceResponse:
-    confirmed_rows = await pool.fetch(
-        """
-        SELECT
-          paper_uid,
-          title,
-          doi,
-          arxiv_id,
-          abstract,
-          publication_date,
-          source,
-          authors,
-          affiliations,
-          created_at
-        FROM student_publications
-        WHERE target_key = $1
-        ORDER BY publication_date DESC NULLS LAST, created_at DESC, paper_uid ASC
-        """,
-        student_id,
-    )
-    candidate_rows = await pool.fetch(
-        """
-        SELECT
-          candidate_id,
-          target_key,
-          owner_type,
-          owner_id,
-          canonical_uid,
-          paper_uid,
-          title,
-          doi,
-          arxiv_id,
-          abstract,
-          publication_date,
-          authors,
-          affiliations,
-          source,
-          source_type,
-          source_details,
-          review_status,
-          review_decision,
-          compliance_details,
-          affiliation_status,
-          compliance_reason,
-          matched_tokens,
-          checked_affiliations,
-          assessed_at,
-          first_seen_at,
-          last_seen_at,
-          created_at,
-          updated_at
-        FROM publication_candidates
-        WHERE owner_type = 'student'
-          AND owner_id = $1
-        ORDER BY
-          CASE review_status
-            WHEN 'pending_review' THEN 0
-            WHEN 'rejected' THEN 1
-            ELSE 2
-          END,
-          last_seen_at DESC,
-          created_at DESC,
-          candidate_id ASC
-        """,
-        student_id,
-    )
+    async with pool.acquire() as conn:
+        target_candidates = await _student_target_candidates(conn, student_id=student_id)
+        if not target_candidates:
+            target_candidates = [_clean_text(student_id)]
+        confirmed_rows = await conn.fetch(
+            """
+            SELECT
+              sp.paper_uid,
+              sp.title,
+              sp.doi,
+              sp.arxiv_id,
+              sp.abstract,
+              sp.publication_date,
+              sp.source,
+              sp.authors,
+              sp.affiliations,
+              sp.created_at,
+              c.ord AS target_order
+            FROM student_publications sp
+            JOIN unnest($1::text[]) WITH ORDINALITY AS c(target_key, ord)
+              ON c.target_key = sp.target_key
+            ORDER BY sp.publication_date DESC NULLS LAST, sp.created_at DESC, c.ord ASC, sp.paper_uid ASC
+            """,
+            target_candidates,
+        )
+        candidate_rows = await conn.fetch(
+            """
+            SELECT
+              candidate_id,
+              target_key,
+              owner_type,
+              owner_id,
+              canonical_uid,
+              paper_uid,
+              title,
+              doi,
+              arxiv_id,
+              abstract,
+              publication_date,
+              authors,
+              affiliations,
+              source,
+              source_type,
+              source_details,
+              review_status,
+              review_decision,
+              compliance_details,
+              affiliation_status,
+              compliance_reason,
+              matched_tokens,
+              checked_affiliations,
+              assessed_at,
+              first_seen_at,
+              last_seen_at,
+              created_at,
+              updated_at
+            FROM publication_candidates
+            WHERE owner_type = 'student'
+              AND owner_id = ANY($1::text[])
+            ORDER BY
+              CASE review_status
+                WHEN 'pending_review' THEN 0
+                WHEN 'rejected' THEN 1
+                ELSE 2
+              END,
+              last_seen_at DESC,
+              created_at DESC,
+              candidate_id ASC
+            """,
+            target_candidates,
+        )
 
     pending_candidates: list[StudentPublicationCandidateRecord] = []
     rejected_candidates: list[StudentPublicationCandidateRecord] = []
@@ -286,7 +331,20 @@ async def get_workspace(
         elif record.review_status == "rejected":
             rejected_candidates.append(record)
 
-    confirmed_publications = [_to_student_paper(dict(row)) for row in confirmed_rows]
+    confirmed_publications: list[StudentPaperRecord] = []
+    seen_confirmed_keys: set[tuple[str, str, str, str]] = set()
+    for row in confirmed_rows:
+        record = _to_student_paper(dict(row))
+        key = (
+            _clean_text(record.paper_uid),
+            _clean_text(record.doi),
+            _clean_text(record.arxiv_id),
+            f"{_clean_text(record.title)}|{_clean_text(record.publication_date)}",
+        )
+        if key in seen_confirmed_keys:
+            continue
+        seen_confirmed_keys.add(key)
+        confirmed_publications.append(record)
     return StudentPublicationWorkspaceResponse(
         counts=StudentPublicationWorkspaceCounts(
             confirmed=len(confirmed_publications),
@@ -302,20 +360,22 @@ async def get_workspace(
 async def _load_candidate_for_update(
     conn: asyncpg.Connection,
     *,
-    student_id: str,
+    owner_candidates: list[str],
     candidate_id: str,
 ) -> asyncpg.Record | None:
+    if not owner_candidates:
+        return None
     return await conn.fetchrow(
         """
         SELECT *
         FROM publication_candidates
         WHERE candidate_id = $1
           AND owner_type = 'student'
-          AND owner_id = $2
+          AND owner_id = ANY($2::text[])
         FOR UPDATE
         """,
         candidate_id,
-        student_id,
+        owner_candidates,
     )
 
 
@@ -327,9 +387,10 @@ async def patch_candidate(
     body: StudentPublicationCandidatePatchRequest,
 ) -> StudentPublicationCandidateRecord | None:
     async with pool.acquire() as conn, conn.transaction():
+        owner_candidates = await _student_target_candidates(conn, student_id=student_id)
         current = await _load_candidate_for_update(
             conn,
-            student_id=student_id,
+            owner_candidates=owner_candidates,
             candidate_id=candidate_id,
         )
         if current is None:
@@ -393,12 +454,12 @@ async def patch_candidate(
             SELECT candidate_id
             FROM publication_candidates
             WHERE owner_type = 'student'
-              AND owner_id = $1
+              AND owner_id = ANY($1::text[])
               AND canonical_uid = $2
               AND candidate_id <> $3
             LIMIT 1
             """,
-            student_id,
+            owner_candidates,
             canonical_uid,
             candidate_id,
         )
@@ -409,26 +470,25 @@ async def patch_candidate(
             """
             UPDATE publication_candidates
             SET
-              target_key = $3,
-              canonical_uid = $4,
-              title = $5,
-              doi = $6,
-              arxiv_id = $7,
-              abstract = $8,
-              publication_date = $9,
-              source = $10,
-              authors = $11::jsonb,
-              affiliations = $12::jsonb,
-              dedup_key = $13,
-              title_fingerprint = $14,
+              target_key = $2,
+              canonical_uid = $3,
+              title = $4,
+              doi = $5,
+              arxiv_id = $6,
+              abstract = $7,
+              publication_date = $8,
+              source = $9,
+              authors = $10::jsonb,
+              affiliations = $11::jsonb,
+              dedup_key = $12,
+              title_fingerprint = $13,
               updated_at = now()
             WHERE candidate_id = $1
               AND owner_type = 'student'
-              AND owner_id = $2
+              AND owner_id = ANY($14::text[])
             RETURNING *
             """,
             candidate_id,
-            student_id,
             student_id,
             canonical_uid,
             title,
@@ -441,6 +501,7 @@ async def patch_candidate(
             json.dumps(affiliations),
             dedup_key,
             title_fp,
+            owner_candidates,
         )
         assert updated is not None
         return _to_candidate_record(dict(updated))
@@ -521,9 +582,11 @@ def _merge_confirmed_row(existing: dict[str, Any], candidate: dict[str, Any]) ->
 async def _find_existing_confirmed_publication(
     conn: asyncpg.Connection,
     *,
-    student_id: str,
+    target_candidates: list[str],
     canonical_uid: str,
 ) -> dict[str, Any] | None:
+    if not target_candidates:
+        return None
     rows = await conn.fetch(
         """
         SELECT
@@ -540,9 +603,9 @@ async def _find_existing_confirmed_publication(
           created_at,
           updated_at
         FROM student_publications
-        WHERE target_key = $1
+        WHERE target_key = ANY($1::text[])
         """,
-        student_id,
+        target_candidates,
     )
     for row in rows:
         payload = dict(row)
@@ -565,9 +628,10 @@ async def confirm_candidate(
     body: StudentPublicationCandidateDecisionRequest,
 ) -> StudentPublicationCandidateActionResponse | None:
     async with pool.acquire() as conn, conn.transaction():
+        owner_candidates = await _student_target_candidates(conn, student_id=student_id)
         current = await _load_candidate_for_update(
             conn,
-            student_id=student_id,
+            owner_candidates=owner_candidates,
             candidate_id=candidate_id,
         )
         if current is None:
@@ -583,7 +647,7 @@ async def confirm_candidate(
         )
         existing_publication = await _find_existing_confirmed_publication(
             conn,
-            student_id=student_id,
+            target_candidates=owner_candidates,
             canonical_uid=canonical_uid,
         )
 
@@ -625,20 +689,22 @@ async def confirm_candidate(
                 """
                 UPDATE student_publications
                 SET
-                  title = $3,
-                  doi = $4,
-                  arxiv_id = $5,
-                  abstract = $6,
-                  publication_date = $7,
-                  source = $8,
-                  authors = $9::jsonb,
-                  affiliations = $10::jsonb,
+                  target_key = $3,
+                  title = $4,
+                  doi = $5,
+                  arxiv_id = $6,
+                  abstract = $7,
+                  publication_date = $8,
+                  source = $9,
+                  authors = $10::jsonb,
+                  affiliations = $11::jsonb,
                   updated_at = now()
-                WHERE target_key = $1
+                WHERE target_key = ANY($1::text[])
                   AND paper_uid = $2
                 """,
-                student_id,
+                owner_candidates,
                 paper_uid,
+                student_id,
                 merged["title"],
                 merged["doi"],
                 merged["arxiv_id"],
@@ -665,23 +731,22 @@ async def confirm_candidate(
             """
             UPDATE publication_candidates
             SET
-              target_key = $3,
-              canonical_uid = $4,
+              target_key = $2,
+              canonical_uid = $3,
               review_status = 'confirmed',
-              review_decision = $5::jsonb,
-              compliance_details = $6::jsonb,
-              affiliation_status = CASE WHEN $7::text IS NULL THEN affiliation_status ELSE $7 END,
-              compliance_reason = CASE WHEN $8::text IS NULL THEN compliance_reason ELSE $8 END,
-              matched_tokens = CASE WHEN $9::jsonb IS NULL THEN matched_tokens ELSE $9::jsonb END,
-              checked_affiliations = CASE WHEN $10::jsonb IS NULL THEN checked_affiliations ELSE $10::jsonb END,
+              review_decision = $4::jsonb,
+              compliance_details = $5::jsonb,
+              affiliation_status = CASE WHEN $6::text IS NULL THEN affiliation_status ELSE $6 END,
+              compliance_reason = CASE WHEN $7::text IS NULL THEN compliance_reason ELSE $7 END,
+              matched_tokens = CASE WHEN $8::jsonb IS NULL THEN matched_tokens ELSE $8::jsonb END,
+              checked_affiliations = CASE WHEN $9::jsonb IS NULL THEN checked_affiliations ELSE $9::jsonb END,
               assessed_at = now(),
               updated_at = now()
             WHERE candidate_id = $1
               AND owner_type = 'student'
-              AND owner_id = $2
+              AND owner_id = ANY($10::text[])
             """,
             candidate_id,
-            student_id,
             student_id,
             canonical_uid,
             json.dumps(review_decision),
@@ -690,6 +755,7 @@ async def confirm_candidate(
             _clean_text(body.compliance_reason) or None if body.compliance_reason is not None else None,
             json.dumps(_to_text_list(body.matched_tokens)) if body.matched_tokens is not None else None,
             json.dumps(_to_text_list(body.checked_affiliations)) if body.checked_affiliations is not None else None,
+            owner_candidates,
         )
         return StudentPublicationCandidateActionResponse(
             status="confirmed",
@@ -706,9 +772,10 @@ async def reject_candidate(
     body: StudentPublicationCandidateDecisionRequest,
 ) -> StudentPublicationCandidateActionResponse | None:
     async with pool.acquire() as conn, conn.transaction():
+        owner_candidates = await _student_target_candidates(conn, student_id=student_id)
         current = await _load_candidate_for_update(
             conn,
-            student_id=student_id,
+            owner_candidates=owner_candidates,
             candidate_id=candidate_id,
         )
         if current is None:
@@ -729,22 +796,21 @@ async def reject_candidate(
             """
             UPDATE publication_candidates
             SET
-              target_key = $3,
+              target_key = $2,
               review_status = 'rejected',
-              review_decision = $4::jsonb,
-              compliance_details = $5::jsonb,
-              affiliation_status = CASE WHEN $6::text IS NULL THEN affiliation_status ELSE $6 END,
-              compliance_reason = CASE WHEN $7::text IS NULL THEN compliance_reason ELSE $7 END,
-              matched_tokens = CASE WHEN $8::jsonb IS NULL THEN matched_tokens ELSE $8::jsonb END,
-              checked_affiliations = CASE WHEN $9::jsonb IS NULL THEN checked_affiliations ELSE $9::jsonb END,
+              review_decision = $3::jsonb,
+              compliance_details = $4::jsonb,
+              affiliation_status = CASE WHEN $5::text IS NULL THEN affiliation_status ELSE $5 END,
+              compliance_reason = CASE WHEN $6::text IS NULL THEN compliance_reason ELSE $6 END,
+              matched_tokens = CASE WHEN $7::jsonb IS NULL THEN matched_tokens ELSE $7::jsonb END,
+              checked_affiliations = CASE WHEN $8::jsonb IS NULL THEN checked_affiliations ELSE $8::jsonb END,
               assessed_at = now(),
               updated_at = now()
             WHERE candidate_id = $1
               AND owner_type = 'student'
-              AND owner_id = $2
+              AND owner_id = ANY($9::text[])
             """,
             candidate_id,
-            student_id,
             student_id,
             json.dumps(review_decision),
             json.dumps(compliance_details),
@@ -752,6 +818,7 @@ async def reject_candidate(
             _clean_text(body.compliance_reason) or None if body.compliance_reason is not None else None,
             json.dumps(_to_text_list(body.matched_tokens)) if body.matched_tokens is not None else None,
             json.dumps(_to_text_list(body.checked_affiliations)) if body.checked_affiliations is not None else None,
+            owner_candidates,
         )
         return StudentPublicationCandidateActionResponse(
             status="rejected",
@@ -767,9 +834,10 @@ async def reopen_candidate(
     body: StudentPublicationCandidateDecisionRequest,
 ) -> StudentPublicationCandidateActionResponse | None:
     async with pool.acquire() as conn, conn.transaction():
+        owner_candidates = await _student_target_candidates(conn, student_id=student_id)
         current = await _load_candidate_for_update(
             conn,
-            student_id=student_id,
+            owner_candidates=owner_candidates,
             candidate_id=candidate_id,
         )
         if current is None:
@@ -790,22 +858,21 @@ async def reopen_candidate(
             """
             UPDATE publication_candidates
             SET
-              target_key = $3,
+              target_key = $2,
               review_status = 'pending_review',
-              review_decision = $4::jsonb,
-              compliance_details = $5::jsonb,
-              affiliation_status = CASE WHEN $6::text IS NULL THEN affiliation_status ELSE $6 END,
-              compliance_reason = CASE WHEN $7::text IS NULL THEN compliance_reason ELSE $7 END,
-              matched_tokens = CASE WHEN $8::jsonb IS NULL THEN matched_tokens ELSE $8::jsonb END,
-              checked_affiliations = CASE WHEN $9::jsonb IS NULL THEN checked_affiliations ELSE $9::jsonb END,
+              review_decision = $3::jsonb,
+              compliance_details = $4::jsonb,
+              affiliation_status = CASE WHEN $5::text IS NULL THEN affiliation_status ELSE $5 END,
+              compliance_reason = CASE WHEN $6::text IS NULL THEN compliance_reason ELSE $6 END,
+              matched_tokens = CASE WHEN $7::jsonb IS NULL THEN matched_tokens ELSE $7::jsonb END,
+              checked_affiliations = CASE WHEN $8::jsonb IS NULL THEN checked_affiliations ELSE $8::jsonb END,
               assessed_at = now(),
               updated_at = now()
             WHERE candidate_id = $1
               AND owner_type = 'student'
-              AND owner_id = $2
+              AND owner_id = ANY($9::text[])
             """,
             candidate_id,
-            student_id,
             student_id,
             json.dumps(review_decision),
             json.dumps(compliance_details),
@@ -813,6 +880,7 @@ async def reopen_candidate(
             _clean_text(body.compliance_reason) or None if body.compliance_reason is not None else None,
             json.dumps(_to_text_list(body.matched_tokens)) if body.matched_tokens is not None else None,
             json.dumps(_to_text_list(body.checked_affiliations)) if body.checked_affiliations is not None else None,
+            owner_candidates,
         )
         return StudentPublicationCandidateActionResponse(
             status="pending_review",
