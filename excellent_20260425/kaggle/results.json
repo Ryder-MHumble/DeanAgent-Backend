@@ -1,0 +1,989 @@
+{
+  "source": "kaggle",
+  "crawl_time": "2026-04-25T08:16:25.640492",
+  "competitions": [
+    {
+      "name": "ARC Prize 2026 - ARC-AGI-3",
+      "ref": "arc-prize-2026-arc-agi-3",
+      "reward": "850,000 Usd",
+      "deadline": "2026-11-02T23:59:00Z",
+      "top_teams": [
+        {
+          "rank": null,
+          "team": "Redfield Rentals",
+          "score": "0.68",
+          "members": [
+            "niyatisingla"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "Barada Sahu",
+          "score": "0.66",
+          "members": [
+            "mercurialsolo007"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "Kevin E R MILLE",
+          "score": "0.66",
+          "members": [
+            "kevinermille"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "SVG",
+          "score": "0.65",
+          "members": [
+            "sandeepgoyal1980"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "Matthew Philip Poetker",
+          "score": "0.64",
+          "members": [
+            "mattpoetker"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ARC Prize 2026 - ARC-AGI-2",
+      "ref": "arc-prize-2026-arc-agi-2",
+      "reward": "700,000 Usd",
+      "deadline": "2026-11-02T23:59:00Z",
+      "top_teams": [
+        {
+          "rank": null,
+          "team": "nvbanana",
+          "score": "37.64",
+          "members": [
+            "cpmpml",
+            "darraghdog"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "Sanjay Dutt",
+          "score": "33.47",
+          "members": [
+            "sanjaygoyal1982"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "Tony Li",
+          "score": "32.64",
+          "members": [
+            "tonylica"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "SVG",
+          "score": "32.64",
+          "members": [
+            "sandeepgoyal1980"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "Kamado Tanjiro",
+          "score": "32.64",
+          "members": [
+            "parthg0106"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ARC Prize 2026 - Paper Track",
+      "ref": "arc-prize-2026-paper-track",
+      "reward": "450,000 Usd",
+      "deadline": "2026-11-09T23:59:00Z",
+      "top_teams": []
+    },
+    {
+      "name": "The Gemma 4 Good Hackathon",
+      "ref": "gemma-4-good-hackathon",
+      "reward": "200,000 Usd",
+      "deadline": "2026-05-18T23:59:00Z",
+      "top_teams": []
+    },
+    {
+      "name": "NVIDIA Nemotron Model Reasoning Challenge",
+      "ref": "nvidia-nemotron-model-reasoning-challenge",
+      "reward": "106,388 Usd",
+      "deadline": "2026-06-15T23:59:00Z",
+      "top_teams": [
+        {
+          "rank": null,
+          "team": "MOONMOON",
+          "score": "0.87",
+          "members": [
+            "kevin1742064161"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "Lora is all you need",
+          "score": "0.87",
+          "members": [
+            "daulettoibazar"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "Diptyajit Das",
+          "score": "0.86",
+          "members": [
+            "diptyajitdas"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "Mattpelor",
+          "score": "0.86",
+          "members": [
+            "mattpelor"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "Nemotron in wonderland",
+          "score": "0.86",
+          "members": [
+            "kishanvavdara",
+            "ravi20076"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "BirdCLEF+ 2026",
+      "ref": "birdclef-2026",
+      "reward": "50,000 Usd",
+      "deadline": "2026-06-03T23:59:00Z",
+      "top_teams": [
+        {
+          "rank": null,
+          "team": "BirdCLEF+ 2026 Team🤗🤗🤗",
+          "score": "0.955",
+          "members": [
+            "shtljw",
+            "tonylica",
+            "yiheng"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "PeopleClaw👨‍🦽",
+          "score": "0.953",
+          "members": [
+            "cudacoding"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "coolz",
+          "score": "0.952",
+          "members": [
+            "cooolz"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "Nikita Babych",
+          "score": "0.950",
+          "members": [
+            "nikitababich"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "Tom + Capybara",
+          "score": "0.949",
+          "members": [
+            "tom99763"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Orbit Wars",
+      "ref": "orbit-wars",
+      "reward": "50,000 Usd",
+      "deadline": "2026-06-23T23:59:00Z",
+      "top_teams": [
+        {
+          "rank": null,
+          "team": "kovi",
+          "score": "2551.0",
+          "members": [
+            "kovi22"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "Shun_PI",
+          "score": "1587.6",
+          "members": [
+            "shunrcn"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "Erfan Eshratifar",
+          "score": "1423.7",
+          "members": [
+            "erfaneshrati"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "Orbital Occle",
+          "score": "1417.4",
+          "members": [
+            "milanpeelman"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "glass_256",
+          "score": "1381.9",
+          "members": [
+            "glass256"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "The 2026 NeuroGolf Championship",
+      "ref": "neurogolf-2026",
+      "reward": "50,000 Usd",
+      "deadline": "2026-07-15T23:59:00Z",
+      "top_teams": [
+        {
+          "rank": null,
+          "team": "Kaggle Agent",
+          "score": "6907.86",
+          "members": [
+            "arc144",
+            "jiweiliu",
+            "maxjeblick"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "keymoon",
+          "score": "6857.79",
+          "members": [
+            "keymoon"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "chicm",
+          "score": "6273.25",
+          "members": [
+            "idv2005"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "Yash Bhaskar",
+          "score": "6161.70",
+          "members": [
+            "yash9439"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "Shift Cascade",
+          "score": "6024.42",
+          "members": [
+            "kameronkilchrist"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Predicting Irrigation Need",
+      "ref": "playground-series-s6e4",
+      "reward": "Swag",
+      "deadline": "2026-04-30T23:59:00Z",
+      "top_teams": [
+        {
+          "rank": null,
+          "team": "Chris Deotte",
+          "score": "0.98219",
+          "members": [
+            "cdeotte"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "automatylicza",
+          "score": "0.98215",
+          "members": [
+            "automatylicza"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "Kevin E R MILLE",
+          "score": "0.98214",
+          "members": [
+            "kevinermille"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "Optimistix",
+          "score": "0.98190",
+          "members": [
+            "optimistix"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "Jimmer",
+          "score": "0.98173",
+          "members": [
+            "przemysawonr"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Titanic - Machine Learning from Disaster",
+      "ref": "titanic",
+      "reward": "Knowledge",
+      "deadline": "2030-01-01T00:00:00Z",
+      "top_teams": [
+        {
+          "rank": null,
+          "team": "n3onnhowever",
+          "score": "1.00000",
+          "members": [
+            "n3onnhowever"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "Sas Pav",
+          "score": "1.00000",
+          "members": [
+            "saspav"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "Veniamin_Nelin",
+          "score": "1.00000",
+          "members": [
+            "veniaminnelin"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "sigmaborov",
+          "score": "1.00000",
+          "members": [
+            "sigmaborov"
+          ]
+        },
+        {
+          "rank": null,
+          "team": "Kirill Rezontov",
+          "score": "1.00000",
+          "members": [
+            "kirillrezontov"
+          ]
+        }
+      ]
+    }
+  ],
+  "top_competitors": [
+    {
+      "username": "niyatisingla",
+      "competitions": [
+        "ARC Prize 2026 - ARC-AGI-3"
+      ],
+      "best_ranks": [
+        {
+          "competition": "ARC Prize 2026 - ARC-AGI-3",
+          "rank": 0,
+          "score": "0.68"
+        }
+      ]
+    },
+    {
+      "username": "mercurialsolo007",
+      "competitions": [
+        "ARC Prize 2026 - ARC-AGI-3"
+      ],
+      "best_ranks": [
+        {
+          "competition": "ARC Prize 2026 - ARC-AGI-3",
+          "rank": 0,
+          "score": "0.66"
+        }
+      ]
+    },
+    {
+      "username": "kevinermille",
+      "competitions": [
+        "ARC Prize 2026 - ARC-AGI-3",
+        "Predicting Irrigation Need"
+      ],
+      "best_ranks": [
+        {
+          "competition": "ARC Prize 2026 - ARC-AGI-3",
+          "rank": 0,
+          "score": "0.66"
+        },
+        {
+          "competition": "Predicting Irrigation Need",
+          "rank": 0,
+          "score": "0.98214"
+        }
+      ]
+    },
+    {
+      "username": "sandeepgoyal1980",
+      "competitions": [
+        "ARC Prize 2026 - ARC-AGI-3",
+        "ARC Prize 2026 - ARC-AGI-2"
+      ],
+      "best_ranks": [
+        {
+          "competition": "ARC Prize 2026 - ARC-AGI-3",
+          "rank": 0,
+          "score": "0.65"
+        },
+        {
+          "competition": "ARC Prize 2026 - ARC-AGI-2",
+          "rank": 0,
+          "score": "32.64"
+        }
+      ]
+    },
+    {
+      "username": "mattpoetker",
+      "competitions": [
+        "ARC Prize 2026 - ARC-AGI-3"
+      ],
+      "best_ranks": [
+        {
+          "competition": "ARC Prize 2026 - ARC-AGI-3",
+          "rank": 0,
+          "score": "0.64"
+        }
+      ]
+    },
+    {
+      "username": "cpmpml",
+      "competitions": [
+        "ARC Prize 2026 - ARC-AGI-2"
+      ],
+      "best_ranks": [
+        {
+          "competition": "ARC Prize 2026 - ARC-AGI-2",
+          "rank": 0,
+          "score": "37.64"
+        }
+      ]
+    },
+    {
+      "username": "darraghdog",
+      "competitions": [
+        "ARC Prize 2026 - ARC-AGI-2"
+      ],
+      "best_ranks": [
+        {
+          "competition": "ARC Prize 2026 - ARC-AGI-2",
+          "rank": 0,
+          "score": "37.64"
+        }
+      ]
+    },
+    {
+      "username": "sanjaygoyal1982",
+      "competitions": [
+        "ARC Prize 2026 - ARC-AGI-2"
+      ],
+      "best_ranks": [
+        {
+          "competition": "ARC Prize 2026 - ARC-AGI-2",
+          "rank": 0,
+          "score": "33.47"
+        }
+      ]
+    },
+    {
+      "username": "tonylica",
+      "competitions": [
+        "ARC Prize 2026 - ARC-AGI-2",
+        "BirdCLEF+ 2026"
+      ],
+      "best_ranks": [
+        {
+          "competition": "ARC Prize 2026 - ARC-AGI-2",
+          "rank": 0,
+          "score": "32.64"
+        },
+        {
+          "competition": "BirdCLEF+ 2026",
+          "rank": 0,
+          "score": "0.955"
+        }
+      ]
+    },
+    {
+      "username": "parthg0106",
+      "competitions": [
+        "ARC Prize 2026 - ARC-AGI-2"
+      ],
+      "best_ranks": [
+        {
+          "competition": "ARC Prize 2026 - ARC-AGI-2",
+          "rank": 0,
+          "score": "32.64"
+        }
+      ]
+    },
+    {
+      "username": "kevin1742064161",
+      "competitions": [
+        "NVIDIA Nemotron Model Reasoning Challenge"
+      ],
+      "best_ranks": [
+        {
+          "competition": "NVIDIA Nemotron Model Reasoning Challenge",
+          "rank": 0,
+          "score": "0.87"
+        }
+      ]
+    },
+    {
+      "username": "daulettoibazar",
+      "competitions": [
+        "NVIDIA Nemotron Model Reasoning Challenge"
+      ],
+      "best_ranks": [
+        {
+          "competition": "NVIDIA Nemotron Model Reasoning Challenge",
+          "rank": 0,
+          "score": "0.87"
+        }
+      ]
+    },
+    {
+      "username": "diptyajitdas",
+      "competitions": [
+        "NVIDIA Nemotron Model Reasoning Challenge"
+      ],
+      "best_ranks": [
+        {
+          "competition": "NVIDIA Nemotron Model Reasoning Challenge",
+          "rank": 0,
+          "score": "0.86"
+        }
+      ]
+    },
+    {
+      "username": "mattpelor",
+      "competitions": [
+        "NVIDIA Nemotron Model Reasoning Challenge"
+      ],
+      "best_ranks": [
+        {
+          "competition": "NVIDIA Nemotron Model Reasoning Challenge",
+          "rank": 0,
+          "score": "0.86"
+        }
+      ]
+    },
+    {
+      "username": "kishanvavdara",
+      "competitions": [
+        "NVIDIA Nemotron Model Reasoning Challenge"
+      ],
+      "best_ranks": [
+        {
+          "competition": "NVIDIA Nemotron Model Reasoning Challenge",
+          "rank": 0,
+          "score": "0.86"
+        }
+      ]
+    },
+    {
+      "username": "ravi20076",
+      "competitions": [
+        "NVIDIA Nemotron Model Reasoning Challenge"
+      ],
+      "best_ranks": [
+        {
+          "competition": "NVIDIA Nemotron Model Reasoning Challenge",
+          "rank": 0,
+          "score": "0.86"
+        }
+      ]
+    },
+    {
+      "username": "shtljw",
+      "competitions": [
+        "BirdCLEF+ 2026"
+      ],
+      "best_ranks": [
+        {
+          "competition": "BirdCLEF+ 2026",
+          "rank": 0,
+          "score": "0.955"
+        }
+      ]
+    },
+    {
+      "username": "yiheng",
+      "competitions": [
+        "BirdCLEF+ 2026"
+      ],
+      "best_ranks": [
+        {
+          "competition": "BirdCLEF+ 2026",
+          "rank": 0,
+          "score": "0.955"
+        }
+      ]
+    },
+    {
+      "username": "cudacoding",
+      "competitions": [
+        "BirdCLEF+ 2026"
+      ],
+      "best_ranks": [
+        {
+          "competition": "BirdCLEF+ 2026",
+          "rank": 0,
+          "score": "0.953"
+        }
+      ]
+    },
+    {
+      "username": "cooolz",
+      "competitions": [
+        "BirdCLEF+ 2026"
+      ],
+      "best_ranks": [
+        {
+          "competition": "BirdCLEF+ 2026",
+          "rank": 0,
+          "score": "0.952"
+        }
+      ]
+    },
+    {
+      "username": "nikitababich",
+      "competitions": [
+        "BirdCLEF+ 2026"
+      ],
+      "best_ranks": [
+        {
+          "competition": "BirdCLEF+ 2026",
+          "rank": 0,
+          "score": "0.950"
+        }
+      ]
+    },
+    {
+      "username": "tom99763",
+      "competitions": [
+        "BirdCLEF+ 2026"
+      ],
+      "best_ranks": [
+        {
+          "competition": "BirdCLEF+ 2026",
+          "rank": 0,
+          "score": "0.949"
+        }
+      ]
+    },
+    {
+      "username": "kovi22",
+      "competitions": [
+        "Orbit Wars"
+      ],
+      "best_ranks": [
+        {
+          "competition": "Orbit Wars",
+          "rank": 0,
+          "score": "2551.0"
+        }
+      ]
+    },
+    {
+      "username": "shunrcn",
+      "competitions": [
+        "Orbit Wars"
+      ],
+      "best_ranks": [
+        {
+          "competition": "Orbit Wars",
+          "rank": 0,
+          "score": "1587.6"
+        }
+      ]
+    },
+    {
+      "username": "erfaneshrati",
+      "competitions": [
+        "Orbit Wars"
+      ],
+      "best_ranks": [
+        {
+          "competition": "Orbit Wars",
+          "rank": 0,
+          "score": "1423.7"
+        }
+      ]
+    },
+    {
+      "username": "milanpeelman",
+      "competitions": [
+        "Orbit Wars"
+      ],
+      "best_ranks": [
+        {
+          "competition": "Orbit Wars",
+          "rank": 0,
+          "score": "1417.4"
+        }
+      ]
+    },
+    {
+      "username": "glass256",
+      "competitions": [
+        "Orbit Wars"
+      ],
+      "best_ranks": [
+        {
+          "competition": "Orbit Wars",
+          "rank": 0,
+          "score": "1381.9"
+        }
+      ]
+    },
+    {
+      "username": "arc144",
+      "competitions": [
+        "The 2026 NeuroGolf Championship"
+      ],
+      "best_ranks": [
+        {
+          "competition": "The 2026 NeuroGolf Championship",
+          "rank": 0,
+          "score": "6907.86"
+        }
+      ]
+    },
+    {
+      "username": "jiweiliu",
+      "competitions": [
+        "The 2026 NeuroGolf Championship"
+      ],
+      "best_ranks": [
+        {
+          "competition": "The 2026 NeuroGolf Championship",
+          "rank": 0,
+          "score": "6907.86"
+        }
+      ]
+    },
+    {
+      "username": "maxjeblick",
+      "competitions": [
+        "The 2026 NeuroGolf Championship"
+      ],
+      "best_ranks": [
+        {
+          "competition": "The 2026 NeuroGolf Championship",
+          "rank": 0,
+          "score": "6907.86"
+        }
+      ]
+    },
+    {
+      "username": "keymoon",
+      "competitions": [
+        "The 2026 NeuroGolf Championship"
+      ],
+      "best_ranks": [
+        {
+          "competition": "The 2026 NeuroGolf Championship",
+          "rank": 0,
+          "score": "6857.79"
+        }
+      ]
+    },
+    {
+      "username": "idv2005",
+      "competitions": [
+        "The 2026 NeuroGolf Championship"
+      ],
+      "best_ranks": [
+        {
+          "competition": "The 2026 NeuroGolf Championship",
+          "rank": 0,
+          "score": "6273.25"
+        }
+      ]
+    },
+    {
+      "username": "yash9439",
+      "competitions": [
+        "The 2026 NeuroGolf Championship"
+      ],
+      "best_ranks": [
+        {
+          "competition": "The 2026 NeuroGolf Championship",
+          "rank": 0,
+          "score": "6161.70"
+        }
+      ]
+    },
+    {
+      "username": "kameronkilchrist",
+      "competitions": [
+        "The 2026 NeuroGolf Championship"
+      ],
+      "best_ranks": [
+        {
+          "competition": "The 2026 NeuroGolf Championship",
+          "rank": 0,
+          "score": "6024.42"
+        }
+      ]
+    },
+    {
+      "username": "cdeotte",
+      "competitions": [
+        "Predicting Irrigation Need"
+      ],
+      "best_ranks": [
+        {
+          "competition": "Predicting Irrigation Need",
+          "rank": 0,
+          "score": "0.98219"
+        }
+      ]
+    },
+    {
+      "username": "automatylicza",
+      "competitions": [
+        "Predicting Irrigation Need"
+      ],
+      "best_ranks": [
+        {
+          "competition": "Predicting Irrigation Need",
+          "rank": 0,
+          "score": "0.98215"
+        }
+      ]
+    },
+    {
+      "username": "optimistix",
+      "competitions": [
+        "Predicting Irrigation Need"
+      ],
+      "best_ranks": [
+        {
+          "competition": "Predicting Irrigation Need",
+          "rank": 0,
+          "score": "0.98190"
+        }
+      ]
+    },
+    {
+      "username": "przemysawonr",
+      "competitions": [
+        "Predicting Irrigation Need"
+      ],
+      "best_ranks": [
+        {
+          "competition": "Predicting Irrigation Need",
+          "rank": 0,
+          "score": "0.98173"
+        }
+      ]
+    },
+    {
+      "username": "n3onnhowever",
+      "competitions": [
+        "Titanic - Machine Learning from Disaster"
+      ],
+      "best_ranks": [
+        {
+          "competition": "Titanic - Machine Learning from Disaster",
+          "rank": 0,
+          "score": "1.00000"
+        }
+      ]
+    },
+    {
+      "username": "saspav",
+      "competitions": [
+        "Titanic - Machine Learning from Disaster"
+      ],
+      "best_ranks": [
+        {
+          "competition": "Titanic - Machine Learning from Disaster",
+          "rank": 0,
+          "score": "1.00000"
+        }
+      ]
+    },
+    {
+      "username": "veniaminnelin",
+      "competitions": [
+        "Titanic - Machine Learning from Disaster"
+      ],
+      "best_ranks": [
+        {
+          "competition": "Titanic - Machine Learning from Disaster",
+          "rank": 0,
+          "score": "1.00000"
+        }
+      ]
+    },
+    {
+      "username": "sigmaborov",
+      "competitions": [
+        "Titanic - Machine Learning from Disaster"
+      ],
+      "best_ranks": [
+        {
+          "competition": "Titanic - Machine Learning from Disaster",
+          "rank": 0,
+          "score": "1.00000"
+        }
+      ]
+    },
+    {
+      "username": "kirillrezontov",
+      "competitions": [
+        "Titanic - Machine Learning from Disaster"
+      ],
+      "best_ranks": [
+        {
+          "competition": "Titanic - Machine Learning from Disaster",
+          "rank": 0,
+          "score": "1.00000"
+        }
+      ]
+    }
+  ]
+}

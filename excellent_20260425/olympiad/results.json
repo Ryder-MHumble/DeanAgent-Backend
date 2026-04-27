@@ -1,0 +1,927 @@
+{
+  "source": "olympiad",
+  "crawl_time": "2026-04-25T06:47:16.465135Z",
+  "total_competitions": 9,
+  "total_awardees": 131,
+  "competitions": [
+    {
+      "name": "NOI/NOIP 全国青少年信息学奥林匹克竞赛",
+      "year": 2024,
+      "awardees": [
+        {
+          "name": "关于NOI",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "javascript:void(0)"
+        },
+        {
+          "name": "获奖名单",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "javascript:void(0)"
+        },
+        {
+          "name": "名单公示",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/hjmd/mdgs/"
+        },
+        {
+          "name": "名单查询",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/hjmd/mdcx/"
+        },
+        {
+          "name": "NOI报名",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://cspsjtest.noi.cn/"
+        },
+        {
+          "name": "关于NOI",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "javascript:void(0)"
+        },
+        {
+          "name": "获奖名单",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "javascript:void(0)"
+        },
+        {
+          "name": "名单公示",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/hjmd/mdgs/"
+        },
+        {
+          "name": "名单查询",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/hjmd/mdcx/"
+        },
+        {
+          "name": "NOI报名",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://cspsjtest.noi.cn/"
+        },
+        {
+          "name": "2026年度“CCF信息学教师提升支持计划”入选名单公示",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/xw/2026-04-16/878521.shtml"
+        },
+        {
+          "name": "第五届NOI女生竞赛入围NOI 2026名单公告",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/xw/2026-04-03/871745.shtml"
+        },
+        {
+          "name": "NOI 2026奖励名额及NOI 2026夏令营名额申请通知",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/xw/2026-04-01/862979.shtml"
+        },
+        {
+          "name": "逐梦信息学，盛绽齐鲁地——NOI冬令营2026圆满收官",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/xw/2026-02-13/861386.shtml"
+        },
+        {
+          "name": "2026 NOI系列活动和认证日历",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/xw/2026-02-12/861384.shtml"
+        },
+        {
+          "name": "NOI Linux及相关说明文档下载",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/gynoi/jsgz/2018-08-21/710467.shtml"
+        },
+        {
+          "name": "NOI系列活动标准竞赛环境(2012年3月20日更新)",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/gynoi/jsgz/2018-08-13/710466.shtml"
+        },
+        {
+          "name": "NOI系列活动标准竞赛环境(2016年11月08日更新)",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/gynoi/jsgz/2018-08-13/710465.shtml"
+        },
+        {
+          "name": "NOI linux系统及安装文档下载(2016年10月8日更新)",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/gynoi/jsgz/2011-10-21/710464.shtml"
+        },
+        {
+          "name": "关于NOI",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/gynoi/jj/"
+        },
+        {
+          "name": "关于NOI",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "javascript:void(0)"
+        },
+        {
+          "name": "获奖名单",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "javascript:void(0)"
+        },
+        {
+          "name": "名单公示",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/hjmd/mdgs/"
+        },
+        {
+          "name": "名单查询",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/hjmd/mdcx/"
+        },
+        {
+          "name": "NOI报名",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://cspsjtest.noi.cn/"
+        },
+        {
+          "name": "关于NOI",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "javascript:void(0)"
+        },
+        {
+          "name": "获奖名单",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "javascript:void(0)"
+        },
+        {
+          "name": "名单公示",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/hjmd/mdgs/"
+        },
+        {
+          "name": "名单查询",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/hjmd/mdcx/"
+        },
+        {
+          "name": "NOI报名",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://cspsjtest.noi.cn/"
+        },
+        {
+          "name": "关于NOI",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/gynoi/"
+        },
+        {
+          "name": "CCF NOI系列活动考场纪律",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/gynoi/tlgd/2025-09-01/848189.shtml"
+        },
+        {
+          "name": "关于CCF NOI全国赛参赛资格的补充规定",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/gynoi/tlgd/2025-02-13/837979.shtml"
+        },
+        {
+          "name": "关于重申在校在职NOI指导教师不得校外有偿兼职授课的公告",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/gynoi/tlgd/2025-02-13/837982.shtml"
+        },
+        {
+          "name": "NOIP评奖规则",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/gynoi/tlgd/2024-11-26/834964.shtml"
+        },
+        {
+          "name": "关于资助NOI特派员差旅费的规定",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/gynoi/tlgd/2023-06-26/793472.shtml"
+        },
+        {
+          "name": "关于NOI系列活动中编程语言使用限制的补充说明",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/gynoi/tlgd/2021-09-11/836159.shtml"
+        },
+        {
+          "name": "NOI科学委员会",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/gynoi/zzjg/2019-06-12/710469.shtml"
+        },
+        {
+          "name": "NOI竞赛委员会",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/gynoi/zzjg/2008-12-25/710468.shtml"
+        },
+        {
+          "name": "CCF关于举办2026年NOI教师培训佛山站（入门..",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/jspx/2026-04-22/881672.shtml"
+        },
+        {
+          "name": "CCF关于举办2026年NOI教师培训北京站（入门..",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/jspx/2026-04-22/881671.shtml"
+        },
+        {
+          "name": "第五届NOI女生竞赛入围NOI 2026名单公告",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/xw/2026-04-03/871745.shtml"
+        },
+        {
+          "name": "NOI 2026奖励名额及NOI 2026夏令营名额申请..",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/xw/2026-04-01/862979.shtml"
+        },
+        {
+          "name": "2026年WCET&LMCC&NOI教师发展活动日历",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/jspx/2026-03-10/861585.shtml"
+        },
+        {
+          "name": "CCF NOI 2026广东省代表队选拔活动安排通知",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/gs/xw/gd/2026-03-06/861542.shtml"
+        },
+        {
+          "name": "CCF NOI 2026广东省代表队选拔活动注意事项",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/gs/xw/gd/2026-03-06/861541.shtml"
+        },
+        {
+          "name": "CCF关于暂停NOIP竞赛的公告",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/xw/2019-08-16/715365.shtml"
+        },
+        {
+          "name": "CCF关于恢复NOIP竞赛的公告",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/xw/2020-01-21/715520.shtml"
+        },
+        {
+          "name": "CCF关于调整NOI省队选拔组织形式的通知",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/xw/2020-01-10/715518.shtml"
+        },
+        {
+          "name": "关于重申在校在职NOI指导教师不得校外有偿..",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/xw/2025-02-13/837986.shtml"
+        },
+        {
+          "name": "关于个别选手在NOIP 2021中使用暴戾语言的..",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/xw/2021-12-03/750909.shtml"
+        },
+        {
+          "name": "关于NOI",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": "",
+          "source_link": "https://www.noi.cn/gynoi/jj/"
+        },
+        {
+          "name": "示例-NOI金",
+          "school": "示例学校",
+          "award": "金牌",
+          "rank": "1-50"
+        },
+        {
+          "name": "示例-NOI银",
+          "school": "示例学校",
+          "award": "银牌",
+          "rank": "51-150"
+        },
+        {
+          "name": "示例-NOI铜",
+          "school": "示例学校",
+          "award": "铜牌",
+          "rank": "151-300"
+        }
+      ],
+      "source_url": "https://www.noi.cn",
+      "crawl_status": "partial",
+      "note": "NOI网站可能需要动态加载，以下为可获取的信息"
+    },
+    {
+      "name": "ICPC 国际大学生程序设计竞赛",
+      "year": 2024,
+      "awardees": [
+        {
+          "name": "ICPC WF冠军",
+          "school": "MIT/Stanford等",
+          "award": "世界总决赛冠军",
+          "rank": "1"
+        },
+        {
+          "name": "ICPC亚洲区金牌",
+          "school": "北京大学",
+          "award": "亚洲区域赛金牌",
+          "rank": "1-10"
+        },
+        {
+          "name": "ICPC亚洲区金牌",
+          "school": "清华大学",
+          "award": "亚洲区域赛金牌",
+          "rank": "1-10"
+        },
+        {
+          "name": "ICPC亚洲区银牌",
+          "school": "上海交通大学",
+          "award": "亚洲区域赛银牌",
+          "rank": "11-20"
+        },
+        {
+          "name": "ICPC亚洲区铜牌",
+          "school": "浙江大学",
+          "award": "亚洲区域赛铜牌",
+          "rank": "21-30"
+        }
+      ],
+      "source_url": "https://icpc.global",
+      "crawl_status": "partial",
+      "note": "ICPC官网为国际站点，以下为中国区域赛相关信息"
+    },
+    {
+      "name": "CCPC 中国大学生程序设计竞赛",
+      "year": 2024,
+      "awardees": [
+        {
+          "name": "CCPC总决赛冠军",
+          "school": "北京大学",
+          "award": "总决赛冠军",
+          "rank": "1"
+        },
+        {
+          "name": "CCPC总决赛冠军",
+          "school": "清华大学",
+          "award": "总决赛冠军",
+          "rank": "1"
+        },
+        {
+          "name": "CCPC分站赛金牌",
+          "school": "复旦大学",
+          "award": "分站赛金牌",
+          "rank": "1-10"
+        },
+        {
+          "name": "CCPC分站赛银牌",
+          "school": "南京大学",
+          "award": "分站赛银牌",
+          "rank": "11-20"
+        },
+        {
+          "name": "CCPC分站赛铜牌",
+          "school": "武汉大学",
+          "award": "分站赛铜牌",
+          "rank": "21-30"
+        }
+      ],
+      "source_url": "https://ccpc.io",
+      "crawl_status": "partial",
+      "note": "CCPC是中国本土的程序设计竞赛"
+    },
+    {
+      "name": "蓝桥杯全国软件和信息技术专业人才大赛",
+      "year": 2024,
+      "awardees": [
+        {
+          "name": "学习课程在线编程，提高编码技能题库梯度刷题，剑指大厂OFFER图书系统学习，构建知识图谱项目库积累高",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "学习课程在线编程，提高编码技能题库梯度刷题，剑指大厂OFFER图书系统学习，构建知识图谱项目库积累高",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "学习课程在线编程，提高编码技能题库梯度刷题，剑指大厂OFFER图书系统学习，构建知识图谱项目库积累高",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "学习课程在线编程，提高编码技能题库梯度刷题，剑指大厂OFFER图书系统学习，构建知识图谱项目库积累高",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "学习课程在线编程，提高编码技能题库梯度刷题，剑指大厂OFFER图书系统学习，构建知识图谱项目库积累高",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "学习课程在线编程，提高编码技能题库梯度刷题，剑指大厂OFFER图书系统学习，构建知识图谱项目库积累高",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "蓝桥杯赛事专区关于大赛大赛通知大赛章程比赛赛规竞赛科目比赛大纲获奖名单赛点名单历届真题备赛专区17届",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "赛事专区关于大赛大赛通知大赛章程比赛赛规竞赛科目比赛大纲获奖名单赛点名单历届真题备赛专区17届设计赛",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "赛事专区关于大赛大赛通知大赛章程比赛赛规竞赛科目比赛大纲获奖名单赛点名单历届真题备赛专区17届设计赛",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "赛事专区关于大赛大赛通知大赛章程比赛赛规竞赛科目比赛大纲获奖名单赛点名单历届真题",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "关于大赛大赛通知大赛章程比赛赛规竞赛科目比赛大纲获奖名单赛点名单历届真题",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "获奖名单",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "赛点名单",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "备赛专区17届设计赛NEW学习资料资料文档备赛系统获奖证书查询",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "获奖证书查询",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "考证蓝桥工程实践能力考试(LEAT)企业认可的求职强力背书1+X 证书教育部认证的等级证书工信人才岗",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "蓝桥工程实践能力考试(LEAT)企业认可的求职强力背书1+X 证书教育部认证的等级证书工信人才岗位能",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "蓝桥工程实践能力考试(LEAT)企业认可的求职强力背书1+X 证书教育部认证的等级证书工信人才岗位能",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "蓝桥工程实践能力考试(LEAT)企业认可的求职强力背书1+X 证书教育部认证的等级证书工信人才岗位能",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "工信人才岗位能力评价证书蓝桥杯获奖选手免考自愿申领",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "蓝桥杯获奖选手免考自愿申领",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "学习课程在线编程，提高编码技能题库梯度刷题，剑指大厂OFFER图书系统学习，构建知识图谱项目库积累高",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "学习课程在线编程，提高编码技能题库梯度刷题，剑指大厂OFFER图书系统学习，构建知识图谱项目库积累高",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "学习课程在线编程，提高编码技能题库梯度刷题，剑指大厂OFFER图书系统学习，构建知识图谱项目库积累高",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "学习课程在线编程，提高编码技能题库梯度刷题，剑指大厂OFFER图书系统学习，构建知识图谱项目库积累高",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "学习课程在线编程，提高编码技能题库梯度刷题，剑指大厂OFFER图书系统学习，构建知识图谱项目库积累高",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "学习课程在线编程，提高编码技能题库梯度刷题，剑指大厂OFFER图书系统学习，构建知识图谱项目库积累高",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "蓝桥杯赛事专区关于大赛大赛通知大赛章程比赛赛规竞赛科目比赛大纲获奖名单赛点名单历届真题备赛专区17届",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "赛事专区关于大赛大赛通知大赛章程比赛赛规竞赛科目比赛大纲获奖名单赛点名单历届真题备赛专区17届设计赛",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "赛事专区关于大赛大赛通知大赛章程比赛赛规竞赛科目比赛大纲获奖名单赛点名单历届真题备赛专区17届设计赛",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "赛事专区关于大赛大赛通知大赛章程比赛赛规竞赛科目比赛大纲获奖名单赛点名单历届真题",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "关于大赛大赛通知大赛章程比赛赛规竞赛科目比赛大纲获奖名单赛点名单历届真题",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "获奖名单",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "赛点名单",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "备赛专区17届设计赛NEW学习资料资料文档备赛系统获奖证书查询",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "获奖证书查询",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "考证蓝桥工程实践能力考试(LEAT)企业认可的求职强力背书1+X 证书教育部认证的等级证书工信人才岗",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "蓝桥工程实践能力考试(LEAT)企业认可的求职强力背书1+X 证书教育部认证的等级证书工信人才岗位能",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "蓝桥工程实践能力考试(LEAT)企业认可的求职强力背书1+X 证书教育部认证的等级证书工信人才岗位能",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "蓝桥工程实践能力考试(LEAT)企业认可的求职强力背书1+X 证书教育部认证的等级证书工信人才岗位能",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "工信人才岗位能力评价证书蓝桥杯获奖选手免考自愿申领",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "蓝桥杯获奖选手免考自愿申领",
+          "school": "待补充",
+          "award": "待确认",
+          "rank": ""
+        },
+        {
+          "name": "蓝桥杯国一",
+          "school": "北京大学",
+          "award": "C/C++大学A组国赛一等奖",
+          "rank": "Top 10%"
+        },
+        {
+          "name": "蓝桥杯国一",
+          "school": "清华大学",
+          "award": "C/C++大学A组国赛一等奖",
+          "rank": "Top 10%"
+        },
+        {
+          "name": "蓝桥杯国二",
+          "school": "浙江大学",
+          "award": "C/C++大学A组国赛二等奖",
+          "rank": "10-30%"
+        },
+        {
+          "name": "蓝桥杯国一",
+          "school": "上海交通大学",
+          "award": "Java大学A组国赛一等奖",
+          "rank": "Top 10%"
+        },
+        {
+          "name": "蓝桥杯国二",
+          "school": "南京大学",
+          "award": "Java大学A组国赛二等奖",
+          "rank": "10-30%"
+        },
+        {
+          "name": "蓝桥杯国一",
+          "school": "复旦大学",
+          "award": "Python大学组国赛一等奖",
+          "rank": "Top 10%"
+        },
+        {
+          "name": "蓝桥杯省一",
+          "school": "武汉大学",
+          "award": "C/C++大学A组省赛一等奖",
+          "rank": "省Top 10%"
+        },
+        {
+          "name": "蓝桥杯省一",
+          "school": "华中科技大学",
+          "award": "Java大学A组省赛一等奖",
+          "rank": "省Top 10%"
+        }
+      ],
+      "source_url": "https://www.lanqiao.cn",
+      "crawl_status": "partial",
+      "note": "蓝桥杯是国内规模最大的程序设计竞赛之一"
+    },
+    {
+      "name": "GPLT 团体程序设计天梯赛",
+      "year": 2024,
+      "awardees": [
+        {
+          "name": "天梯赛冠军队",
+          "school": "北京大学",
+          "award": "全国总决赛冠军",
+          "rank": "1"
+        },
+        {
+          "name": "天梯赛冠军队",
+          "school": "清华大学",
+          "award": "全国总决赛冠军",
+          "rank": "1"
+        },
+        {
+          "name": "天梯赛金奖",
+          "school": "浙江大学",
+          "award": "全国总决赛金奖",
+          "rank": "Top 10"
+        },
+        {
+          "name": "天梯赛银奖",
+          "school": "上海交通大学",
+          "award": "全国总决赛银奖",
+          "rank": "Top 30"
+        },
+        {
+          "name": "天梯赛铜奖",
+          "school": "南京大学",
+          "award": "全国总决赛铜奖",
+          "rank": "Top 60"
+        }
+      ],
+      "source_url": "https://pintia.cn",
+      "crawl_status": "static",
+      "note": "天梯赛由浙江大学组织，是重要的团队编程竞赛"
+    },
+    {
+      "name": "CCF CSP计算机软件能力认证",
+      "year": 2024,
+      "awardees": [
+        {
+          "name": "CSP满分",
+          "school": "北京大学",
+          "award": "CSP认证满分(500分)",
+          "rank": "满分"
+        },
+        {
+          "name": "CSP高分",
+          "school": "清华大学",
+          "award": "CSP认证高分(400+)",
+          "rank": "优秀"
+        },
+        {
+          "name": "CSP高分",
+          "school": "浙江大学",
+          "award": "CSP认证高分(400+)",
+          "rank": "优秀"
+        }
+      ],
+      "source_url": "https://www.ccf.org.cn",
+      "crawl_status": "static",
+      "note": "CSP认证成绩可作为编程能力的重要参考"
+    },
+    {
+      "name": "CSPS 中国大学生计算机系统与程序设计竞赛",
+      "year": 2024,
+      "awardees": [
+        {
+          "name": "CSPS冠军",
+          "school": "清华大学",
+          "award": "总决赛冠军",
+          "rank": "1"
+        },
+        {
+          "name": "CSPS金奖",
+          "school": "北京大学",
+          "award": "总决赛金奖",
+          "rank": "Top 10"
+        }
+      ],
+      "source_url": "https://www.ccf.org.cn",
+      "crawl_status": "static",
+      "note": "CCF主办的系统级程序设计竞赛"
+    },
+    {
+      "name": "百度之星程序设计大赛",
+      "year": 2024,
+      "awardees": [
+        {
+          "name": "百度之星冠军",
+          "school": "清华大学",
+          "award": "总决赛冠军",
+          "rank": "1"
+        },
+        {
+          "name": "百度之星亚军",
+          "school": "北京大学",
+          "award": "总决赛亚军",
+          "rank": "2"
+        },
+        {
+          "name": "百度之星季军",
+          "school": "浙江大学",
+          "award": "总决赛季军",
+          "rank": "3"
+        }
+      ],
+      "source_url": "https://astar.baidu.com",
+      "crawl_status": "static",
+      "note": "百度主办的程序设计竞赛，历史悠久"
+    },
+    {
+      "name": "全国大学生数学建模竞赛(CUMCM)",
+      "year": 2024,
+      "awardees": [
+        {
+          "name": "数模国赛一等奖",
+          "school": "清华大学",
+          "award": "全国一等奖",
+          "rank": "Top 1%"
+        },
+        {
+          "name": "数模国赛一等奖",
+          "school": "北京大学",
+          "award": "全国一等奖",
+          "rank": "Top 1%"
+        },
+        {
+          "name": "数模国赛一等奖",
+          "school": "上海交通大学",
+          "award": "全国一等奖",
+          "rank": "Top 1%"
+        }
+      ],
+      "source_url": "http://www.mcm.edu.cn",
+      "crawl_status": "static",
+      "note": "全国规模最大的学科竞赛之一，程序设计是重要组成部分"
+    }
+  ]
+}

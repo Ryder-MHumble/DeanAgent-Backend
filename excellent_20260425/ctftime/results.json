@@ -1,0 +1,1384 @@
+{
+  "source": "ctftime",
+  "crawl_time": "2026-04-25T06:45:49.640757Z",
+  "crawl_config": {
+    "teams_limit": 50,
+    "events_limit": 30
+  },
+  "teams": [
+    {
+      "id": 1301,
+      "name": "Team H4C",
+      "country": "KR",
+      "academic": false,
+      "primary_alias": "TeamH4C",
+      "aliases": [
+        "TeamH4C",
+        "C4C"
+      ],
+      "rating": {
+        "rating_place": 1,
+        "organizer_points": 0,
+        "rating_points": 832.119178952,
+        "country_place": 1
+      },
+      "logo": "https://ctftime.org//media/team/558122_325400004221410_33691947_n.jpg",
+      "points": 832.1191789517452,
+      "rank": 1
+    },
+    {
+      "id": 303159,
+      "name": "RubiyaLab",
+      "country": "KR",
+      "academic": false,
+      "primary_alias": "RubiyaLab",
+      "aliases": [
+        "RubiyaLab Expeditions"
+      ],
+      "rating": {
+        "rating_place": 2,
+        "organizer_points": 0,
+        "rating_points": 826.676931888,
+        "country_place": 2
+      },
+      "logo": "https://ctftime.org//media/team/file_00000000683461f7a751eab2091724a7.png",
+      "points": 826.6769318884387,
+      "rank": 2
+    },
+    {
+      "id": 364723,
+      "name": "Infobahn",
+      "country": "",
+      "academic": false,
+      "primary_alias": "Infobahn",
+      "aliases": [],
+      "rating": {
+        "organizer_points": 0,
+        "rating_points": 680.45274876,
+        "rating_place": 3
+      },
+      "logo": "https://ctftime.org//media/team/IMG_0687_1.jpeg",
+      "points": 680.4527487596279,
+      "rank": 3
+    },
+    {
+      "id": 376192,
+      "name": "H-T8",
+      "country": "FI",
+      "academic": false,
+      "primary_alias": "H-T8",
+      "aliases": [],
+      "rating": {
+        "rating_place": 4,
+        "organizer_points": 0,
+        "rating_points": 674.091512944,
+        "country_place": 1
+      },
+      "logo": "https://ctftime.org//media/team/H-T8_LinkedIn_Logo.png",
+      "points": 674.0915129436561,
+      "rank": 4
+    },
+    {
+      "id": 53812,
+      "name": "tjcsc",
+      "country": "US",
+      "academic": true,
+      "primary_alias": "tjcsc",
+      "aliases": [
+        "tj/sin"
+      ],
+      "rating": {
+        "rating_place": 5,
+        "organizer_points": 130.1,
+        "rating_points": 605.317178989,
+        "country_place": 1
+      },
+      "logo": "https://ctftime.org//media/team/logo_624.png",
+      "points": 605.31717898876,
+      "rank": 5
+    },
+    {
+      "id": 354033,
+      "name": "Bunkyowerstens",
+      "country": "SA",
+      "academic": false,
+      "primary_alias": "0xFUN",
+      "aliases": [
+        "0xFUN",
+        "0xFUN ツ"
+      ],
+      "rating": {
+        "rating_place": 6,
+        "organizer_points": 36.1,
+        "rating_points": 561.68312127,
+        "country_place": 1
+      },
+      "logo": "https://ctftime.org//media/team/252363789.png",
+      "points": 561.6831212703607,
+      "rank": 6
+    },
+    {
+      "id": 397301,
+      "name": "W4llz",
+      "country": "",
+      "academic": false,
+      "primary_alias": "W4llz",
+      "aliases": [],
+      "rating": {
+        "organizer_points": 0,
+        "rating_points": 558.900639514,
+        "rating_place": 7
+      },
+      "logo": "https://ctftime.org//media/team/IMG_9178.png",
+      "points": 558.9006395137341,
+      "rank": 7
+    },
+    {
+      "id": 393723,
+      "name": "sarrus",
+      "country": "DZ",
+      "academic": true,
+      "primary_alias": "sarrus",
+      "aliases": [],
+      "rating": {
+        "rating_place": 8,
+        "organizer_points": 0,
+        "rating_points": 518.833877576,
+        "country_place": 1
+      },
+      "logo": "https://ctftime.org//media/team/images_39_1.jpg",
+      "points": 518.8338775758853,
+      "rank": 8
+    },
+    {
+      "id": 248318,
+      "name": "krauq",
+      "country": "US",
+      "academic": false,
+      "primary_alias": "krauq",
+      "aliases": [],
+      "rating": {
+        "rating_place": 9,
+        "organizer_points": 0,
+        "rating_points": 474.567829034,
+        "country_place": 2
+      },
+      "logo": "",
+      "points": 474.5678290335461,
+      "rank": 9
+    },
+    {
+      "id": 373452,
+      "name": "z0d1ak",
+      "country": "IN",
+      "academic": true,
+      "primary_alias": "z0d1ak",
+      "aliases": [
+        "Goon Knights",
+        "ka1d0z",
+        "ACM-VIT"
+      ],
+      "rating": {
+        "rating_place": 10,
+        "organizer_points": 0,
+        "rating_points": 467.766543014,
+        "country_place": 1
+      },
+      "logo": "https://ctftime.org//media/team/aaaaz.jpg",
+      "points": 467.76654301395814,
+      "rank": 10
+    },
+    {
+      "id": 62713,
+      "name": "Cryptonite",
+      "country": "IN",
+      "academic": true,
+      "primary_alias": "Cryptonite",
+      "aliases": [
+        "Team Cryptonite",
+        "Cryptonite .",
+        "CryptoniteMIT"
+      ],
+      "rating": {
+        "rating_place": 11,
+        "organizer_points": 0,
+        "rating_points": 461.592039671,
+        "country_place": 2
+      },
+      "logo": "https://ctftime.org//media/team/WhatsApp_Image_2020-06-21_at_6.54.40_PM.jpeg",
+      "points": 461.5920396706719,
+      "rank": 11
+    },
+    {
+      "id": 82759,
+      "name": "KCSC",
+      "country": "VN",
+      "academic": true,
+      "primary_alias": "KCSC",
+      "aliases": [
+        "KMA Cyber Security Club",
+        "__KCSC__"
+      ],
+      "rating": {
+        "rating_place": 12,
+        "organizer_points": 0,
+        "rating_points": 458.187122002,
+        "country_place": 1
+      },
+      "logo": "https://ctftime.org//media/team/KCSC.jpg",
+      "points": 458.1871220019415,
+      "rank": 12
+    },
+    {
+      "id": 408704,
+      "name": "Ch0wn3rs",
+      "country": "CO",
+      "academic": false,
+      "primary_alias": "Ch0wn3rs",
+      "aliases": [
+        "Number_1_OSINT_Haters"
+      ],
+      "rating": {
+        "rating_place": 13,
+        "organizer_points": 0,
+        "rating_points": 457.637549814,
+        "country_place": 1
+      },
+      "logo": "https://ctftime.org//media/team/LogoCh0wn3rs.jpeg",
+      "points": 457.6375498144078,
+      "rank": 13
+    },
+    {
+      "id": 199510,
+      "name": "BK-ISC",
+      "country": "VN",
+      "academic": true,
+      "primary_alias": "BKISC",
+      "aliases": [
+        "BKISC",
+        "CLB ATTT HCMUT"
+      ],
+      "rating": {
+        "rating_place": 14,
+        "organizer_points": 0.0,
+        "rating_points": 449.220842998,
+        "country_place": 2
+      },
+      "logo": "https://ctftime.org//media/team/logo_BKISC-06.jpg",
+      "points": 449.2208429981019,
+      "rank": 14
+    },
+    {
+      "id": 58979,
+      "name": "r3kapig",
+      "country": "CN",
+      "academic": false,
+      "primary_alias": "r3kapig",
+      "aliases": [
+        "mini-r3kapig",
+        "r4kapig",
+        "r6kapig",
+        "r1kapig",
+        "no rev/pwn no life",
+        "CP-r3kapig",
+        "P1G SEKAI",
+        "sahuang's osu fan club",
+        "No_PJSK_No_Life",
+        "crazyman's friends"
+      ],
+      "rating": {
+        "rating_place": 15,
+        "organizer_points": 71.9,
+        "rating_points": 442.448346509,
+        "country_place": 1
+      },
+      "logo": "https://ctftime.org//media/team/log.jpg",
+      "points": 442.44834650855853,
+      "rank": 15
+    },
+    {
+      "id": 28797,
+      "name": "PwnSec",
+      "country": "",
+      "academic": false,
+      "primary_alias": "PwnSec",
+      "aliases": [
+        "TheRealPwnSec",
+        "PwnSec - Free Palestine"
+      ],
+      "rating": {
+        "organizer_points": 67.78,
+        "rating_points": 434.273590358,
+        "rating_place": 16
+      },
+      "logo": "https://ctftime.org//media/team/pwnsec_square_gradient_512.png",
+      "points": 434.2735903582094,
+      "rank": 16
+    },
+    {
+      "id": 419053,
+      "name": "CTF.mn",
+      "country": "MN",
+      "academic": false,
+      "primary_alias": "CTF.mn",
+      "aliases": [],
+      "rating": {
+        "rating_place": 17,
+        "organizer_points": 0,
+        "rating_points": 428.337102694,
+        "country_place": 1
+      },
+      "logo": "",
+      "points": 428.3371026942389,
+      "rank": 17
+    },
+    {
+      "id": 370140,
+      "name": "0bscuri7y",
+      "country": "IN",
+      "academic": true,
+      "primary_alias": "0bscuri7y",
+      "aliases": [
+        "not0bscuri7y"
+      ],
+      "rating": {
+        "rating_place": 18,
+        "organizer_points": 0,
+        "rating_points": 427.29194643,
+        "country_place": 3
+      },
+      "logo": "https://ctftime.org//media/team/logo_569.png",
+      "points": 427.2919464300088,
+      "rank": 18
+    },
+    {
+      "id": 300432,
+      "name": "hackratic",
+      "country": "MN",
+      "academic": false,
+      "primary_alias": "hackratic",
+      "aliases": [],
+      "rating": {
+        "rating_place": 19,
+        "organizer_points": 0,
+        "rating_points": 418.860540652,
+        "country_place": 2
+      },
+      "logo": "https://ctftime.org//media/team/HACKRATIC.png",
+      "points": 418.860540652376,
+      "rank": 19
+    },
+    {
+      "id": 394081,
+      "name": "Null Script Infiltrators",
+      "country": "BD",
+      "academic": true,
+      "primary_alias": "Null Script Infiltrators",
+      "aliases": [
+        "Null_Script_Infiltrators",
+        "Null Script",
+        "N_S_I",
+        "GasMask",
+        "#JusticeForHadi"
+      ],
+      "rating": {
+        "rating_place": 20,
+        "organizer_points": 0,
+        "rating_points": 417.931742986,
+        "country_place": 1
+      },
+      "logo": "https://ctftime.org//media/team/NSI.png",
+      "points": 417.9317429855764,
+      "rank": 20
+    },
+    {
+      "id": 284686,
+      "name": "MindCrafters",
+      "country": "PL",
+      "academic": false,
+      "primary_alias": "MindCrafters",
+      "aliases": [
+        "You look and you don't see."
+      ],
+      "rating": {
+        "rating_place": 21,
+        "organizer_points": 0,
+        "rating_points": 409.338935407,
+        "country_place": 1
+      },
+      "logo": "https://ctftime.org//media/team/logo-4.jpg",
+      "points": 409.33893540699415,
+      "rank": 21
+    },
+    {
+      "id": 662,
+      "name": "bi0s",
+      "country": "IN",
+      "academic": true,
+      "primary_alias": "bi0s",
+      "aliases": [
+        "Team bi0s",
+        "BIOS",
+        "Amrita-bi0s",
+        "amritabi0s",
+        "teambi0s"
+      ],
+      "rating": {
+        "rating_place": 22,
+        "organizer_points": 0,
+        "rating_points": 409.23437155,
+        "country_place": 4
+      },
+      "logo": "https://ctftime.org//media/team/bi0s_black_logo.png",
+      "points": 409.23437154983986,
+      "rank": 22
+    },
+    {
+      "id": 87434,
+      "name": "The Flat Network Society",
+      "country": "FR",
+      "academic": false,
+      "primary_alias": "The Flat Network Society",
+      "aliases": [
+        "TheFlatNetworkSociety",
+        "TFNS",
+        "Flat Network Society",
+        "Slaid Sarliament of Stego",
+        "Turbo Forensic and Network Steganography",
+        "TFNS: The Good Parts"
+      ],
+      "rating": {
+        "rating_place": 23,
+        "organizer_points": 0,
+        "rating_points": 407.346313299,
+        "country_place": 1
+      },
+      "logo": "https://ctftime.org//media/team/logo_tfns_1.png",
+      "points": 407.3463132992468,
+      "rank": 23
+    },
+    {
+      "id": 426447,
+      "name": "hacknowa",
+      "country": "MN",
+      "academic": false,
+      "primary_alias": "hacknowa",
+      "aliases": [],
+      "rating": {
+        "rating_place": 24,
+        "organizer_points": 0,
+        "rating_points": 407.199078444,
+        "country_place": 3
+      },
+      "logo": "https://ctftime.org//media/team/hack_nowa_1.png",
+      "points": 407.19907844438075,
+      "rank": 24
+    },
+    {
+      "id": 422018,
+      "name": "jeanclaude",
+      "country": "",
+      "academic": false,
+      "primary_alias": "jeanclaude",
+      "aliases": [],
+      "rating": {
+        "organizer_points": 0,
+        "rating_points": 404.060517778,
+        "rating_place": 25
+      },
+      "logo": "",
+      "points": 404.0605177778514,
+      "rank": 25
+    },
+    {
+      "id": 287651,
+      "name": "milworms",
+      "country": "UA",
+      "academic": true,
+      "primary_alias": "milworms",
+      "aliases": [],
+      "rating": {
+        "rating_place": 26,
+        "organizer_points": 0,
+        "rating_points": 398.584684446,
+        "country_place": 1
+      },
+      "logo": "https://ctftime.org//media/team/521B4AC1-53C8-45DB-B746-C9F3DB86ADF1.png",
+      "points": 398.58468444642676,
+      "rank": 26
+    },
+    {
+      "id": 420523,
+      "name": "VOID_Walkers",
+      "country": "",
+      "academic": false,
+      "primary_alias": "VOID_Walkers",
+      "aliases": [
+        "voidwalkersog"
+      ],
+      "rating": {
+        "organizer_points": 0,
+        "rating_points": 395.14423168,
+        "rating_place": 27
+      },
+      "logo": "https://ctftime.org//media/team/17653039478762_2.jpg",
+      "points": 395.14423168040406,
+      "rank": 27
+    },
+    {
+      "id": 414345,
+      "name": "Royal Crawlers Ensemble",
+      "country": "VN",
+      "academic": true,
+      "primary_alias": "Redback Crawlers Ensemble",
+      "aliases": [
+        "Redback Crawlers Ensemble",
+        "RMIT_RoyalRedback"
+      ],
+      "rating": {
+        "rating_place": 28,
+        "organizer_points": 0,
+        "rating_points": 393.063544438,
+        "country_place": 3
+      },
+      "logo": "https://ctftime.org//media/team/582069120_1158503522552358_128780540121496993_n.jpg",
+      "points": 393.0635444379456,
+      "rank": 28
+    },
+    {
+      "id": 132776,
+      "name": "0xL4ugh",
+      "country": "EG",
+      "academic": false,
+      "primary_alias": "0xL4ugh",
+      "aliases": [
+        "L4ughers",
+        "0xL4ugh - Free Palestine",
+        "0xL4ugh - 🇵🇸",
+        "0xL4ugh_Free_Palestine"
+      ],
+      "rating": {
+        "rating_place": 29,
+        "organizer_points": 58.44,
+        "rating_points": 387.626177566,
+        "country_place": 1
+      },
+      "logo": "https://ctftime.org//media/team/lol0xlfugh.png",
+      "points": 387.62617756567795,
+      "rank": 29
+    },
+    {
+      "id": 220336,
+      "name": "L3ak",
+      "country": "US",
+      "academic": false,
+      "primary_alias": "L3ak",
+      "aliases": [
+        "hufflepuff house of hacking",
+        "L3aky Blinders",
+        "SteakEnthusiasts",
+        "BY ORDER OF THE L3AKY FUCKING BLINDERS"
+      ],
+      "rating": {
+        "rating_place": 30,
+        "organizer_points": 68.94,
+        "rating_points": 386.032233049,
+        "country_place": 3
+      },
+      "logo": "https://ctftime.org//media/team/logo_588.png",
+      "points": 386.03223304935386,
+      "rank": 30
+    },
+    {
+      "id": 22310,
+      "name": "BITSkrieg",
+      "country": "IN",
+      "academic": true,
+      "primary_alias": "BITSkrieg",
+      "aliases": [
+        "BITSkrieg Go",
+        "BITSkriegAlt",
+        "BITSGoa",
+        "BITSkrieg [U] (Ind)",
+        "BITSkrieg2025"
+      ],
+      "rating": {
+        "rating_place": 31,
+        "organizer_points": 102.16,
+        "rating_points": 378.916913202,
+        "country_place": 5
+      },
+      "logo": "https://ctftime.org//media/team/New_Logo1.png",
+      "points": 378.9169132018849,
+      "rank": 31
+    },
+    {
+      "id": 155678,
+      "name": "FR13NDS TEAM",
+      "country": "KZ",
+      "academic": false,
+      "primary_alias": "FR13NDS TEAM",
+      "aliases": [
+        "UnknownImpact",
+        "fr13nds_kz"
+      ],
+      "rating": {
+        "rating_place": 32,
+        "organizer_points": 49.18,
+        "rating_points": 378.789891035,
+        "country_place": 1
+      },
+      "logo": "https://ctftime.org//media/team/logo_var13.png",
+      "points": 378.7898910351233,
+      "rank": 32
+    },
+    {
+      "id": 79336,
+      "name": "UAZ",
+      "country": "RU",
+      "academic": false,
+      "primary_alias": "UAZ",
+      "aliases": [],
+      "rating": {
+        "rating_place": 33,
+        "organizer_points": 0,
+        "rating_points": 377.924095325,
+        "country_place": 1
+      },
+      "logo": "https://ctftime.org//media/team/uaz.png",
+      "points": 377.92409532544207,
+      "rank": 33
+    },
+    {
+      "id": 260705,
+      "name": "JordanSec",
+      "country": "JO",
+      "academic": false,
+      "primary_alias": "JordanSec",
+      "aliases": [
+        "JordanSecTeam"
+      ],
+      "rating": {
+        "rating_place": 34,
+        "organizer_points": 0,
+        "rating_points": 372.743538749,
+        "country_place": 1
+      },
+      "logo": "https://ctftime.org//media/team/Finallllllll.png",
+      "points": 372.7435387485258,
+      "rank": 34
+    },
+    {
+      "id": 406718,
+      "name": "RootRunners",
+      "country": "IT",
+      "academic": false,
+      "primary_alias": "RootRunners",
+      "aliases": [],
+      "rating": {
+        "rating_place": 35,
+        "organizer_points": 0,
+        "rating_points": 370.799932009,
+        "country_place": 1
+      },
+      "logo": "https://ctftime.org//media/team/RootRunners.png",
+      "points": 370.7999320088783,
+      "rank": 35
+    },
+    {
+      "id": 387399,
+      "name": "THEM?",
+      "country": "DE",
+      "academic": false,
+      "primary_alias": "THEM?!",
+      "aliases": [
+        "The Hackers Elite Movement",
+        "ninjahere fanclub",
+        "THEM?!",
+        "THEM?! x $cr1pt_K1dd13$"
+      ],
+      "rating": {
+        "rating_place": 36,
+        "organizer_points": 0.0,
+        "rating_points": 369.278866762,
+        "country_place": 1
+      },
+      "logo": "https://ctftime.org//media/team/THEM_logo_3000_black.png",
+      "points": 369.2788667620826,
+      "rank": 36
+    },
+    {
+      "id": 400816,
+      "name": "ATTT_PTIT",
+      "country": "VN",
+      "academic": true,
+      "primary_alias": "InfosecPTIT",
+      "aliases": [
+        "ATTT PTIT",
+        "InfosecPTIT",
+        "Information Security PTlT",
+        "PTIT.Modnoc",
+        "PTIT.Xerud"
+      ],
+      "rating": {
+        "rating_place": 37,
+        "organizer_points": 0,
+        "rating_points": 369.061247482,
+        "country_place": 4
+      },
+      "logo": "https://ctftime.org//media/team/279854015_123183807032141_3563719396530605663_n.jpg",
+      "points": 369.0612474817087,
+      "rank": 37
+    },
+    {
+      "id": 402823,
+      "name": "Mont5ab El2hwa",
+      "country": "EG",
+      "academic": false,
+      "primary_alias": "Mont5ab El2hwa",
+      "aliases": [],
+      "rating": {
+        "rating_place": 38,
+        "organizer_points": 0,
+        "rating_points": 365.502083068,
+        "country_place": 2
+      },
+      "logo": "https://ctftime.org//media/team/Finallogo.png",
+      "points": 365.5020830681995,
+      "rank": 38
+    },
+    {
+      "id": 271292,
+      "name": "mimicats",
+      "country": "KZ",
+      "academic": true,
+      "primary_alias": "mimicats",
+      "aliases": [],
+      "rating": {
+        "rating_place": 39,
+        "organizer_points": 0,
+        "rating_points": 363.098530084,
+        "country_place": 2
+      },
+      "logo": "https://ctftime.org//media/team/mimicats_logo.png",
+      "points": 363.09853008420623,
+      "rank": 39
+    },
+    {
+      "id": 269765,
+      "name": "BunkyoWesterns",
+      "country": "JP",
+      "academic": false,
+      "primary_alias": "BunkyoWesterns",
+      "aliases": [
+        "25時、ディスコードで。",
+        "藤原豆腐店",
+        "Team BuNkyo",
+        "BuNkyo"
+      ],
+      "rating": {
+        "rating_place": 40,
+        "organizer_points": 0,
+        "rating_points": 358.745825056,
+        "country_place": 1
+      },
+      "logo": "https://ctftime.org//media/team/RSNrQDg8_400x400.jpg",
+      "points": 358.74582505582976,
+      "rank": 40
+    },
+    {
+      "id": 409835,
+      "name": "CYBERDUNE CLUB",
+      "country": "MA",
+      "academic": true,
+      "primary_alias": "CYBERDUNE CLUB",
+      "aliases": [
+        "Lwa3riin"
+      ],
+      "rating": {
+        "rating_place": 41,
+        "organizer_points": 0.0,
+        "rating_points": 357.814455915,
+        "country_place": 1
+      },
+      "logo": "https://ctftime.org//media/team/WhatsApp_Image_2025-10-24_at_11.37.56.jpeg",
+      "points": 357.8144559146355,
+      "rank": 41
+    },
+    {
+      "id": 412891,
+      "name": "Na_Zavod!",
+      "country": "RU",
+      "academic": false,
+      "primary_alias": "Na_Zavod!",
+      "aliases": [
+        "Na_Zavod"
+      ],
+      "rating": {
+        "rating_place": 42,
+        "organizer_points": 0,
+        "rating_points": 349.957944173,
+        "country_place": 2
+      },
+      "logo": "https://ctftime.org//media/team/000ebf6d-a31b-4055-8058-0f1d3e5be4f2.png",
+      "points": 349.95794417332326,
+      "rank": 42
+    },
+    {
+      "id": 407678,
+      "name": "Twilight.",
+      "country": "VN",
+      "academic": true,
+      "primary_alias": "Twilight.",
+      "aliases": [],
+      "rating": {
+        "rating_place": 43,
+        "organizer_points": 0,
+        "rating_points": 349.334555589,
+        "country_place": 5
+      },
+      "logo": "https://ctftime.org//media/team/ChatGPT_Image_00_49_35_9_thg_3_2026.png",
+      "points": 349.3345555894168,
+      "rank": 43
+    },
+    {
+      "id": 394229,
+      "name": "Rea11y Annoying Bots(RAB)",
+      "country": "BD",
+      "academic": true,
+      "primary_alias": "Rea11y Annoying Bots(RAB)",
+      "aliases": [
+        "Rea11y Annoying Bots",
+        "RAB",
+        "BUP_RAB",
+        "B4ain_B4eake4s",
+        "really Annoying Bots (RAB)"
+      ],
+      "rating": {
+        "rating_place": 44,
+        "organizer_points": 0,
+        "rating_points": 346.890041081,
+        "country_place": 2
+      },
+      "logo": "https://ctftime.org//media/team/Picsart_25-07-29_01-21-44-004.png",
+      "points": 346.8900410811669,
+      "rank": 44
+    },
+    {
+      "id": 187248,
+      "name": "TCP1P",
+      "country": "ID",
+      "academic": false,
+      "primary_alias": "TCP1P",
+      "aliases": [
+        "The CTF Player < [1P]",
+        "The CTF Player 1P",
+        "The CaptureTheFlag Player 1P",
+        "TCP1P V1"
+      ],
+      "rating": {
+        "rating_place": 45,
+        "organizer_points": 0,
+        "rating_points": 343.149171965,
+        "country_place": 1
+      },
+      "logo": "https://ctftime.org//media/team/Asset_10.jpg",
+      "points": 343.1491719647018,
+      "rank": 45
+    },
+    {
+      "id": 305688,
+      "name": "ХИШИГТЭН",
+      "country": "MN",
+      "academic": false,
+      "primary_alias": "Kheshig",
+      "aliases": [
+        "Kheshig",
+        "муйхар хүчний мөлжлөг",
+        "Khehsig"
+      ],
+      "rating": {
+        "rating_place": 46,
+        "organizer_points": 0,
+        "rating_points": 341.764262832,
+        "country_place": 4
+      },
+      "logo": "https://ctftime.org//media/team/image_46.png",
+      "points": 341.764262831991,
+      "rank": 46
+    },
+    {
+      "id": 222485,
+      "name": "TPC",
+      "country": "JP",
+      "academic": false,
+      "primary_alias": "TPC",
+      "aliases": [],
+      "rating": {
+        "rating_place": 47,
+        "organizer_points": 50.0,
+        "rating_points": 341.576639769,
+        "country_place": 2
+      },
+      "logo": "https://ctftime.org//media/team/TPC_logo.jpeg",
+      "points": 341.57663976886965,
+      "rank": 47
+    },
+    {
+      "id": 211637,
+      "name": "Gray Chameleons",
+      "country": "CO",
+      "academic": false,
+      "primary_alias": "Bugs B0unt3r",
+      "aliases": [
+        "Bugs B0unt3r",
+        "Eat, Sleep, OSINT, Repeat",
+        "the flag club",
+        "Bugs_B0unt3r",
+        "MalwareMustCry",
+        "OSINT_HARD_OR_GO_HOME"
+      ],
+      "rating": {
+        "rating_place": 48,
+        "organizer_points": 0,
+        "rating_points": 340.365459664,
+        "country_place": 2
+      },
+      "logo": "https://ctftime.org//media/team/Bugs_1_-_copia.png",
+      "points": 340.3654596640704,
+      "rank": 48
+    },
+    {
+      "id": 439,
+      "name": "NYUSEC",
+      "country": "US",
+      "academic": true,
+      "primary_alias": "NYUSEC",
+      "aliases": [
+        "BrooklyntOverflow",
+        "Brooklyn Overflow",
+        "Brooklynt_Overflow",
+        "OSIRIS_Lab",
+        "NYUSECC"
+      ],
+      "rating": {
+        "rating_place": 49,
+        "organizer_points": 0,
+        "rating_points": 333.398706693,
+        "country_place": 4
+      },
+      "logo": "https://ctftime.org//media/team/OSIRIS_Logo_2.png",
+      "points": 333.3987066927608,
+      "rank": 49
+    },
+    {
+      "id": 419024,
+      "name": "Temperature0",
+      "country": "DZ",
+      "academic": false,
+      "primary_alias": "Temperature0",
+      "aliases": [],
+      "rating": {
+        "rating_place": 50,
+        "organizer_points": 0,
+        "rating_points": 331.75005947,
+        "country_place": 2
+      },
+      "logo": "https://ctftime.org//media/team/profile-white-min.png",
+      "points": 331.75005947017735,
+      "rank": 50
+    }
+  ],
+  "events": [
+    {
+      "id": 3188,
+      "title": "Stranger's CTF - Techtrix '26",
+      "format": "Jeopardy",
+      "start": "2026-03-26T07:30:00+00:00",
+      "finish": "2026-03-27T07:30:00+00:00",
+      "url": "https://upsidectf.online/",
+      "participants": 88,
+      "weight": 0.0,
+      "onsite": true,
+      "location": ""
+    },
+    {
+      "id": 3130,
+      "title": "TexSAW 2026",
+      "format": "Jeopardy",
+      "start": "2026-03-27T12:00:00+00:00",
+      "finish": "2026-03-29T12:00:00+00:00",
+      "url": "https://texsaw.org/",
+      "participants": 162,
+      "weight": 41.59,
+      "onsite": false,
+      "location": ""
+    },
+    {
+      "id": 2983,
+      "title": "KalmarCTF 2026",
+      "format": "Jeopardy",
+      "start": "2026-03-27T17:00:00+00:00",
+      "finish": "2026-03-29T17:00:00+00:00",
+      "url": "https://kalmarc.tf/",
+      "participants": 151,
+      "weight": 49.97,
+      "onsite": false,
+      "location": ""
+    },
+    {
+      "id": 3039,
+      "title": "HackDay 2026 - Finals",
+      "format": "Jeopardy",
+      "start": "2026-03-27T18:00:00+00:00",
+      "finish": "2026-03-28T18:00:00+00:00",
+      "url": "https://hackday.fr/",
+      "participants": 22,
+      "weight": 0,
+      "onsite": false,
+      "location": ""
+    },
+    {
+      "id": 3131,
+      "title": "Codegate CTF 2026 Preliminary",
+      "format": "Jeopardy",
+      "start": "2026-03-28T00:00:00+00:00",
+      "finish": "2026-03-28T15:00:00+00:00",
+      "url": "http://ctf.codegate.org/",
+      "participants": 116,
+      "weight": 62.0,
+      "onsite": false,
+      "location": ""
+    },
+    {
+      "id": 3200,
+      "title": "NovruzCTF 2026",
+      "format": "Jeopardy",
+      "start": "2026-03-28T05:00:00+00:00",
+      "finish": "2026-03-29T05:00:00+00:00",
+      "url": "https://canyouhack.org/",
+      "participants": 44,
+      "weight": 0,
+      "onsite": false,
+      "location": ""
+    },
+    {
+      "id": 3084,
+      "title": "Flag Wars",
+      "format": "Jeopardy",
+      "start": "2026-03-28T09:00:00+00:00",
+      "finish": "2026-03-28T19:00:00+00:00",
+      "url": "https://laokoon-security.com/ctf2026",
+      "participants": 11,
+      "weight": 0,
+      "onsite": true,
+      "location": "Godesberger Allee 125, Bonn - Germany"
+    },
+    {
+      "id": 3183,
+      "title": "KAALCHAKRA CTF Qualifiers",
+      "format": "Jeopardy",
+      "start": "2026-03-28T09:00:00+00:00",
+      "finish": "2026-03-29T09:00:00+00:00",
+      "url": "https://kaalchakractf.com/",
+      "participants": 81,
+      "weight": 0.0,
+      "onsite": false,
+      "location": ""
+    },
+    {
+      "id": 3045,
+      "title": "VolgaCTF 2026 Qualifier",
+      "format": "Jeopardy",
+      "start": "2026-03-28T13:00:00+00:00",
+      "finish": "2026-03-29T13:00:00+00:00",
+      "url": "https://q.2026.volgactf.ru/",
+      "participants": 97,
+      "weight": 38.67,
+      "onsite": false,
+      "location": ""
+    },
+    {
+      "id": 3223,
+      "title": "MythX: An Endgame Protocol CTF",
+      "format": "Jeopardy",
+      "start": "2026-03-28T16:30:00+00:00",
+      "finish": "2026-03-29T16:30:00+00:00",
+      "url": "https://unstop.com/o/eZQ9xw6?lb=RatXyLX4",
+      "participants": 4,
+      "weight": 0,
+      "onsite": false,
+      "location": ""
+    },
+    {
+      "id": 3155,
+      "title": "CU school CTF 2026",
+      "format": "Jeopardy",
+      "start": "2026-03-29T07:00:00+00:00",
+      "finish": "2026-03-29T15:00:00+00:00",
+      "url": "https://cu.ru/olympiad/events/cu-school-ctf",
+      "participants": 13,
+      "weight": 0,
+      "onsite": false,
+      "location": "Moscow, Central University"
+    },
+    {
+      "id": 3057,
+      "title": "GLOBAL CYBER GAMES: Women's Attack and Defense Edition @Wicked6",
+      "format": "Attack-Defense",
+      "start": "2026-03-29T12:00:00+00:00",
+      "finish": "2026-03-29T21:00:00+00:00",
+      "url": "https://www.wicked6.com/tournament",
+      "participants": 13,
+      "weight": 0,
+      "onsite": false,
+      "location": "Virtual"
+    },
+    {
+      "id": 3184,
+      "title": "Hack for a Change 2026 March: UN SDG 3",
+      "format": "Jeopardy",
+      "start": "2026-03-31T00:00:00+00:00",
+      "finish": "2026-04-01T23:59:59+00:00",
+      "url": "https://www.hackforachange.org/",
+      "participants": 79,
+      "weight": 24.21,
+      "onsite": false,
+      "location": ""
+    },
+    {
+      "id": 3227,
+      "title": "gryphCTF",
+      "format": "Jeopardy",
+      "start": "2026-04-02T18:30:00+00:00",
+      "finish": "2026-04-03T00:30:00+00:00",
+      "url": "https://guelphcss.com/links",
+      "participants": 22,
+      "weight": 0,
+      "onsite": true,
+      "location": "University of Guelph – Reynolds Building (REYN 0002), Guelph, ON, Canada"
+    },
+    {
+      "id": 3197,
+      "title": "VishwaCTF'2026",
+      "format": "Jeopardy",
+      "start": "2026-04-03T09:30:00+00:00",
+      "finish": "2026-04-05T09:30:00+00:00",
+      "url": "http://vishwactf.com/",
+      "participants": 122,
+      "weight": 36.0,
+      "onsite": false,
+      "location": ""
+    },
+    {
+      "id": 3150,
+      "title": "Kashi CTF 2026",
+      "format": "Jeopardy",
+      "start": "2026-04-03T12:00:00+00:00",
+      "finish": "2026-04-04T12:00:00+00:00",
+      "url": "https://kashictf.iitbhucybersec.in/",
+      "participants": 98,
+      "weight": 21.78,
+      "onsite": false,
+      "location": ""
+    },
+    {
+      "id": 3096,
+      "title": "RITSEC CTF 2026",
+      "format": "Jeopardy",
+      "start": "2026-04-03T21:00:00+00:00",
+      "finish": "2026-04-05T21:00:00+00:00",
+      "url": "https://ctfd.ritsec.club/",
+      "participants": 123,
+      "weight": 48.64,
+      "onsite": false,
+      "location": ""
+    },
+    {
+      "id": 3175,
+      "title": "CITEFLAG QUALS 2026",
+      "format": "Jeopardy",
+      "start": "2026-04-03T22:00:00+00:00",
+      "finish": "2026-04-04T22:00:00+00:00",
+      "url": "https://ctf.citeflag.online/",
+      "participants": 42,
+      "weight": 25.0,
+      "onsite": false,
+      "location": ""
+    },
+    {
+      "id": 3206,
+      "title": "NCTF 2026",
+      "format": "Jeopardy",
+      "start": "2026-04-04T01:00:00+00:00",
+      "finish": "2026-04-05T13:00:00+00:00",
+      "url": "https://nctf.x1ct34m.com/games/2",
+      "participants": 28,
+      "weight": 25.0,
+      "onsite": false,
+      "location": ""
+    },
+    {
+      "id": 3226,
+      "title": "THE UNI6CTF 1.0",
+      "format": "Jeopardy",
+      "start": "2026-04-04T03:30:00+00:00",
+      "finish": "2026-04-04T09:30:00+00:00",
+      "url": "https://uni6ctf.online/",
+      "participants": 27,
+      "weight": 23.0,
+      "onsite": false,
+      "location": ""
+    },
+    {
+      "id": 3212,
+      "title": "CRACK-IN 2.0",
+      "format": "Jeopardy",
+      "start": "2026-04-04T04:30:00+00:00",
+      "finish": "2026-04-04T10:30:00+00:00",
+      "url": "https://www.crackin.tech/",
+      "participants": 0,
+      "weight": 0,
+      "onsite": false,
+      "location": "India"
+    },
+    {
+      "id": 3042,
+      "title": "SillyCTF 2",
+      "format": "Jeopardy",
+      "start": "2026-04-04T12:00:00+00:00",
+      "finish": "2026-04-05T04:00:00+00:00",
+      "url": "https://sillyctf.psuccso.org/",
+      "participants": 64,
+      "weight": 25.0,
+      "onsite": false,
+      "location": ""
+    },
+    {
+      "id": 3257,
+      "title": "MIPT CTF Finals 2026",
+      "format": "Attack-Defense",
+      "start": "2026-04-05T07:00:00+00:00",
+      "finish": "2026-04-05T14:00:00+00:00",
+      "url": "https://miptctf.ru/",
+      "participants": 0,
+      "weight": 0.0,
+      "onsite": true,
+      "location": "Russia, Dolgoprudny, MIPT"
+    },
+    {
+      "id": 3187,
+      "title": "Triada CTF '26",
+      "format": "Jeopardy",
+      "start": "2026-04-06T04:30:00+00:00",
+      "finish": "2026-04-07T04:30:00+00:00",
+      "url": "http://ctf26.triada.in/",
+      "participants": 16,
+      "weight": 0,
+      "onsite": true,
+      "location": "Yenepoya (Deemed to be University), Bangalore Campus"
+    },
+    {
+      "id": 3026,
+      "title": "Dreamhack Invitational 2026",
+      "format": "Jeopardy",
+      "start": "2026-04-07T00:00:00+00:00",
+      "finish": "2026-04-07T15:00:00+00:00",
+      "url": "https://dreamhack.io/",
+      "participants": 0,
+      "weight": 0,
+      "onsite": true,
+      "location": "COEX, Seoul, South Korea"
+    },
+    {
+      "id": 3211,
+      "title": "Pàlcam Cybergames 2026",
+      "format": "Jeopardy",
+      "start": "2026-04-10T10:00:00+00:00",
+      "finish": "2026-04-11T23:00:00+00:00",
+      "url": "https://palcamcg2026.soterctf.com/",
+      "participants": 30,
+      "weight": 0,
+      "onsite": false,
+      "location": ""
+    },
+    {
+      "id": 3102,
+      "title": "DawgCTF 2026",
+      "format": "Jeopardy",
+      "start": "2026-04-10T16:00:00+00:00",
+      "finish": "2026-04-12T16:00:00+00:00",
+      "url": "https://metactf.com/join/dawgctf26",
+      "participants": 187,
+      "weight": 66.64,
+      "onsite": false,
+      "location": ""
+    },
+    {
+      "id": 2937,
+      "title": "UMassCTF 2026",
+      "format": "Jeopardy",
+      "start": "2026-04-10T22:00:00+00:00",
+      "finish": "2026-04-12T22:00:00+00:00",
+      "url": "https://ctf.umasscybersec.org/",
+      "participants": 179,
+      "weight": 65.95,
+      "onsite": false,
+      "location": ""
+    },
+    {
+      "id": 3190,
+      "title": "Cybersplash 2026",
+      "format": "Jeopardy",
+      "start": "2026-04-11T02:00:00+00:00",
+      "finish": "2026-04-12T02:00:00+00:00",
+      "url": "https://lobby-ctf.secplayground.com/lobby/8c09ae30-a668-448b-b6dc-b777b1e62521",
+      "participants": 24,
+      "weight": 0.0,
+      "onsite": false,
+      "location": ""
+    },
+    {
+      "id": 3230,
+      "title": "KAALCHAKRA CTF Finals",
+      "format": "Jeopardy",
+      "start": "2026-04-11T04:30:00+00:00",
+      "finish": "2026-04-11T11:30:00+00:00",
+      "url": "https://kaalchakractf.com/",
+      "participants": 8,
+      "weight": 0.0,
+      "onsite": true,
+      "location": "National Forensic Sciences University, Goa Campus"
+    }
+  ],
+  "results": {
+    "events_count": 91,
+    "events": [
+      "2969",
+      "3078",
+      "3043",
+      "3042",
+      "3045",
+      "3046",
+      "3129",
+      "3122",
+      "3123",
+      "3127",
+      "3257",
+      "3135",
+      "3131",
+      "3130",
+      "3133",
+      "3038",
+      "3143",
+      "3146",
+      "3147",
+      "3027"
+    ]
+  },
+  "summary": {
+    "total_teams": 50,
+    "total_events": 30,
+    "countries_represented": 23
+  }
+}

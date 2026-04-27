@@ -1,0 +1,182 @@
+{
+  "source": "ai_competitions",
+  "crawl_time": "2026-04-25T06:51:10.557100",
+  "competitions": [
+    {
+      "name": "AI新睿人才“星探计划”",
+      "platform": "DataFountain",
+      "year": 2026,
+      "tracks": [
+        {
+          "track_name": "主赛道",
+          "winners": []
+        }
+      ]
+    },
+    {
+      "name": "“猎鹰·微波智探”—雷达多目标智能探测与识别挑战",
+      "platform": "DataFountain",
+      "year": 2026,
+      "tracks": [
+        {
+          "track_name": "主赛道",
+          "winners": []
+        }
+      ]
+    },
+    {
+      "name": "具有多模态能力的客服智能体设计",
+      "platform": "DataFountain",
+      "year": 2026,
+      "tracks": [
+        {
+          "track_name": "主赛道",
+          "winners": []
+        }
+      ]
+    },
+    {
+      "name": "红外智感—红外开放世界全模态分割挑战",
+      "platform": "DataFountain",
+      "year": 2026,
+      "tracks": [
+        {
+          "track_name": "主赛道",
+          "winners": []
+        }
+      ]
+    },
+    {
+      "name": "多模态感知融合增强的具身自主抓取任务挑战",
+      "platform": "DataFountain",
+      "year": 2026,
+      "tracks": [
+        {
+          "track_name": "主赛道",
+          "winners": []
+        }
+      ]
+    },
+    {
+      "name": "大数据和人工智能",
+      "platform": "DataFountain",
+      "year": 2026,
+      "tracks": [
+        {
+          "track_name": "主赛道",
+          "winners": []
+        }
+      ]
+    },
+    {
+      "name": "高端智能制造和半导体",
+      "platform": "DataFountain",
+      "year": 2026,
+      "tracks": [
+        {
+          "track_name": "主赛道",
+          "winners": []
+        }
+      ]
+    },
+    {
+      "name": "新材料和新能源",
+      "platform": "DataFountain",
+      "year": 2026,
+      "tracks": [
+        {
+          "track_name": "主赛道",
+          "winners": []
+        }
+      ]
+    },
+    {
+      "name": "KDD Cup",
+      "platform": "KDD Cup",
+      "year": 2026,
+      "tracks": [
+        {
+          "track_name": "主赛道",
+          "winners": []
+        }
+      ]
+    },
+    {
+      "name": "Conferences",
+      "platform": "KDD Cup",
+      "year": 2026,
+      "tracks": [
+        {
+          "track_name": "主赛道",
+          "winners": []
+        }
+      ]
+    },
+    {
+      "name": "KDD Cup",
+      "platform": "KDD Cup",
+      "year": 2026,
+      "tracks": [
+        {
+          "track_name": "主赛道",
+          "winners": [
+            {
+              "rank": 1,
+              "team_name": "Aug 8th, 2024",
+              "members": [],
+              "score": "Aug 8th, 2024"
+            },
+            {
+              "rank": 2,
+              "team_name": "Oct 4-18, 2024",
+              "members": [],
+              "score": "Oct 4-18, 2024"
+            },
+            {
+              "rank": 3,
+              "team_name": "Nov 16th, 2024",
+              "members": [],
+              "score": "Nov 16th, 2024"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "KDD Cup",
+      "platform": "KDD Cup",
+      "year": 2026,
+      "tracks": [
+        {
+          "track_name": "主赛道",
+          "winners": [
+            {
+              "rank": 1,
+              "team_name": "Feb 8th 2024",
+              "members": [],
+              "score": "Feb 8th 2024"
+            },
+            {
+              "rank": 2,
+              "team_name": "May 16th 2024",
+              "members": [],
+              "score": "May 16th 2024"
+            },
+            {
+              "rank": 3,
+              "team_name": "August 1st 2024",
+              "members": [],
+              "score": "August 1st 2024"
+            },
+            {
+              "rank": 4,
+              "team_name": "August 8th 2024",
+              "members": [],
+              "score": "August 8th 2024"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
