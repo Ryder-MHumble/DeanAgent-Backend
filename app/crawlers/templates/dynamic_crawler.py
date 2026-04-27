@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import asyncio
+import json
 import logging
+import re
 from typing import Any
 
 from bs4 import BeautifulSoup
@@ -23,6 +25,26 @@ async (url) => {
 }
 """
 
+_WINDOW_STATE_SNIPPET = """
+() => {
+    const states = [];
+    const candidates = [
+        ["__NEXT_DATA__", window.__NEXT_DATA__],
+        ["__NUXT__", window.__NUXT__],
+        ["__INITIAL_STATE__", window.__INITIAL_STATE__],
+        ["__DATA__", window.__DATA__],
+        ["__APOLLO_STATE__", window.__APOLLO_STATE__],
+        ["__PRELOADED_STATE__", window.__PRELOADED_STATE__],
+    ];
+    for (const [name, value] of candidates) {
+        if (value !== undefined && value !== null) {
+            states.push({name, value});
+        }
+    }
+    return states;
+}
+"""
+
 
 class DynamicPageCrawler(BaseCrawler):
     """
@@ -32,6 +54,9 @@ class DynamicPageCrawler(BaseCrawler):
     Config fields (same as StaticHTMLCrawler plus):
       - wait_for: CSS selector or "networkidle" to wait for
       - wait_timeout: milliseconds (default 10000)
+      - actions: optional browser actions before parsing the list page
+      - next_button / max_pages: optional pagination support for multi-page lists
+      - capture_page_json: bool (default False) — attach lightweight page JSON preview
       - detail_use_playwright: bool (default True) — use Playwright or httpx for detail pages
       - detail_fetch_js: bool (default False) — use JS fetch() for detail pages
         (avoids page.goto anti-bot issues; requires same-origin detail URLs)
@@ -86,6 +111,94 @@ class DynamicPageCrawler(BaseCrawler):
             logger.warning("Failed to fetch detail page %s: %s", detail_url, e)
             return None
 
+    async def _wait_for_content(self, page: Any, wait_for: str, wait_timeout: int) -> None:
+        try:
+            if wait_for == "networkidle":
+                await page.wait_for_load_state("networkidle", timeout=wait_timeout)
+            else:
+                await page.wait_for_selector(wait_for, timeout=wait_timeout)
+        except Exception as exc:
+            logger.warning(
+                "Wait condition %r timed out for %s, falling back to current HTML: %s",
+                wait_for,
+                self.source_id,
+                exc,
+            )
+
+    async def _run_actions(self, page: Any, actions: list[dict[str, Any]], wait_timeout: int) -> None:
+        for action in actions:
+            if not isinstance(action, dict):
+                continue
+            action_type = str(action.get("type") or "").strip().lower()
+            selector = action.get("selector")
+            delay_ms = int(action.get("delay_ms", action.get("delay", 0)) or 0)
+            if action_type == "click" and selector:
+                await page.click(selector)
+            elif action_type == "fill" and selector:
+                await page.fill(selector, str(action.get("value") or ""))
+            elif action_type == "scroll":
+                await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+            elif action_type == "wait":
+                if selector:
+                    await page.wait_for_selector(selector, timeout=wait_timeout)
+                else:
+                    delay_ms = max(delay_ms, int(action.get("milliseconds", 0) or 0))
+            if delay_ms > 0:
+                await page.wait_for_timeout(delay_ms)
+
+    async def _extract_page_json_preview(self, page: Any, html: str) -> dict[str, Any] | None:
+        try:
+            states = await page.evaluate(_WINDOW_STATE_SNIPPET)
+        except Exception:
+            states = None
+        if isinstance(states, list) and states:
+            state = states[0]
+            if isinstance(state, dict):
+                return {
+                    "source": str(state.get("name") or "window_state"),
+                    "preview": self._shrink_json(state.get("value")),
+                }
+
+        patterns = [
+            ("__NEXT_DATA__", r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>'),
+            ("__NUXT__", r'window\.__NUXT__\s*=\s*(\{.*?\})\s*;'),
+            ("__INITIAL_STATE__", r'window\.__INITIAL_STATE__\s*=\s*(\{.*?\})\s*;'),
+            ("__DATA__", r'window\.__DATA__\s*=\s*(\{.*?\})\s*;'),
+        ]
+        for source, pattern in patterns:
+            match = re.search(pattern, html, re.DOTALL)
+            if not match:
+                continue
+            try:
+                parsed = json.loads(match.group(1))
+            except json.JSONDecodeError:
+                continue
+            return {"source": source, "preview": self._shrink_json(parsed)}
+        return None
+
+    @classmethod
+    def _shrink_json(cls, value: Any, *, depth: int = 0) -> Any:
+        if depth >= 2:
+            if isinstance(value, dict):
+                return {"type": "object", "size": len(value)}
+            if isinstance(value, list):
+                return {"type": "array", "size": len(value)}
+            return value
+        if isinstance(value, dict):
+            result: dict[str, Any] = {}
+            for index, (key, nested) in enumerate(value.items()):
+                if index >= 5:
+                    result["__truncated__"] = len(value) - 5
+                    break
+                result[str(key)] = cls._shrink_json(nested, depth=depth + 1)
+            return result
+        if isinstance(value, list):
+            preview = [cls._shrink_json(item, depth=depth + 1) for item in value[:3]]
+            if len(value) > 3:
+                preview.append({"__truncated__": len(value) - 3})
+            return preview
+        return value
+
     async def fetch_and_parse(self) -> list[CrawledItem]:
         from app.crawlers.utils.playwright_pool import get_page
 
@@ -99,10 +212,20 @@ class DynamicPageCrawler(BaseCrawler):
         detail_fetch_js = self.config.get("detail_fetch_js", False)
         wait_for = self.config.get("wait_for", "networkidle")
         wait_timeout = self.config.get("wait_timeout", 10000)
+        actions = self.config.get("actions") or []
+        next_button = self.config.get("next_button")
+        max_pages = max(1, int(self.config.get("max_pages", 1)))
+        next_page_wait_for = self.config.get("next_page_wait_for", wait_for)
+        capture_page_json = bool(self.config.get("capture_page_json"))
 
         warmup_url = self.config.get("warmup_url")
+        storage_state_path = self.config.get("storage_state_path")
+        save_storage_state = bool(self.config.get("save_storage_state"))
 
-        async with get_page() as page:
+        async with get_page(
+            storage_state_path=storage_state_path,
+            save_storage_state=save_storage_state,
+        ) as page:
             if warmup_url:
                 try:
                     await page.goto(warmup_url, wait_until="domcontentloaded", timeout=wait_timeout)
@@ -110,31 +233,49 @@ class DynamicPageCrawler(BaseCrawler):
                     pass  # warmup may return non-200; we just need the cookies/session
 
             await page.goto(url, wait_until="domcontentloaded", timeout=wait_timeout)
+            await self._wait_for_content(page, wait_for, wait_timeout)
+            if actions:
+                await self._run_actions(page, actions, wait_timeout)
+                await self._wait_for_content(page, wait_for, wait_timeout)
 
-            try:
-                if wait_for == "networkidle":
-                    await page.wait_for_load_state("networkidle", timeout=wait_timeout)
-                else:
-                    await page.wait_for_selector(wait_for, timeout=wait_timeout)
-            except Exception as exc:
-                logger.warning(
-                    "Wait condition %r timed out for %s, falling back to current HTML: %s",
-                    wait_for,
-                    self.source_id,
-                    exc,
+            raw_items_with_page_data: list[tuple[Any, dict[str, Any]]] = []
+            seen_urls: set[str] = set()
+            for page_number in range(1, max_pages + 1):
+                html = await page.content()
+                page_json_preview = None
+                if capture_page_json:
+                    page_json_preview = await self._extract_page_json_preview(page, html)
+
+                soup = BeautifulSoup(html, "lxml")
+                parsed_items = parse_list_items(
+                    soup, selectors, base_url, keyword_filter, keyword_blacklist
                 )
+                for raw in parsed_items:
+                    if raw.url in seen_urls:
+                        continue
+                    seen_urls.add(raw.url)
+                    raw_items_with_page_data.append(
+                        (
+                            raw,
+                            {
+                                "page_number": page_number,
+                                "page_json_preview": page_json_preview,
+                            },
+                        )
+                    )
 
-            html = await page.content()
-
-            soup = BeautifulSoup(html, "lxml")
-            raw_items = parse_list_items(
-                soup, selectors, base_url, keyword_filter, keyword_blacklist
-            )
+                if not next_button or page_number >= max_pages:
+                    break
+                try:
+                    await page.click(next_button)
+                except Exception:
+                    break
+                await self._wait_for_content(page, next_page_wait_for, wait_timeout)
 
             request_delay = self.config.get("request_delay", 0)
 
             items: list[CrawledItem] = []
-            for raw in raw_items:
+            for raw, page_data in raw_items_with_page_data:
                 content = author = content_hash = content_html = pdf_url = None
                 images = None
 
@@ -163,7 +304,11 @@ class DynamicPageCrawler(BaseCrawler):
                         pdf_url = detail.pdf_url
                         images = detail.images
 
-                extra = {}
+                extra = {
+                    "page_number": page_data["page_number"],
+                }
+                if page_data.get("page_json_preview") is not None:
+                    extra["page_json_preview"] = page_data["page_json_preview"]
                 if pdf_url:
                     extra["pdf_url"] = pdf_url
                 if images:

@@ -27,6 +27,8 @@ class StudentDetailResponse(StudentListItem):
 
     degree_type: str = ""
     expected_graduation_year: str = ""
+    entry_date: str = ""
+    paper_date_floor: str = ""
     added_by: str = ""
     created_at: str = ""
     updated_at: str = ""
@@ -57,6 +59,8 @@ class StudentCreateRequest(BaseModel):
     degree_type: str = Field(default="", description="培养类型")
     enrollment_year: str = Field(default="", description="年级/入学年份")
     expected_graduation_year: str = Field(default="", description="预计毕业年份")
+    entry_date: str = Field(default="", description="入项时间")
+    paper_date_floor: str = Field(default="", description="论文时间下限")
     status: str = Field(default="在读", description="状态")
     email: str = Field(default="", description="邮箱")
     phone: str = Field(default="", description="电话")
@@ -74,6 +78,8 @@ class StudentUpdateRequest(BaseModel):
     degree_type: str | None = Field(default=None, description="培养类型")
     enrollment_year: str | None = Field(default=None, description="年级/入学年份")
     expected_graduation_year: str | None = Field(default=None, description="预计毕业年份")
+    entry_date: str | None = Field(default=None, description="入项时间")
+    paper_date_floor: str | None = Field(default=None, description="论文时间下限")
     status: str | None = Field(default=None, description="状态")
     email: str | None = Field(default=None, description="邮箱")
     phone: str | None = Field(default=None, description="电话")

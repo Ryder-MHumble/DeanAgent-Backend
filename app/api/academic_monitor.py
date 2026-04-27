@@ -7,12 +7,12 @@ from __future__ import annotations
 
 import hashlib
 from typing import Any
-from uuid import uuid4
 
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel, Field
 
 from app.db.pool import get_pool
+from app.services import publication_service
 
 router = APIRouter()
 
@@ -191,6 +191,21 @@ def _build_paper_record(row: dict[str, Any]) -> StudentPaperRecord:
     )
 
 
+def _build_formal_paper_record(row: dict[str, Any]) -> StudentPaperRecord:
+    return StudentPaperRecord(
+        paper_uid=_clean_text(row.get("owner_link_id")) or _clean_text(row.get("publication_id")),
+        title=_clean_text(row.get("title")),
+        doi=_clean_text(row.get("doi")) or None,
+        arxiv_id=_clean_text(row.get("arxiv_id")) or None,
+        abstract=_clean_text(row.get("abstract")) or None,
+        publication_date=_to_iso(row.get("publication_date")),
+        source=_clean_text(row.get("source")) or None,
+        authors=_to_text_list(row.get("authors")),
+        affiliations=_to_text_list(row.get("affiliations")),
+        created_at=_to_iso(row.get("created_at")),
+    )
+
+
 @router.get(
     "/students",
     response_model=AcademicStudentsResponse,
@@ -315,6 +330,15 @@ async def list_academic_students(
 )
 async def list_academic_student_papers(target_key: str) -> AcademicStudentPapersResponse:
     pool = get_pool()
+    formal_items = await publication_service.list_publications(
+        pool,
+        owner_type="student",
+        owner_id=_clean_text(target_key),
+    )
+    if formal_items:
+        records = [_build_formal_paper_record(item) for item in formal_items]
+        return AcademicStudentPapersResponse(items=records, total=len(records))
+
     target_keys = await _student_publication_target_candidates(target_key)
     if not target_keys:
         return AcademicStudentPapersResponse(items=[], total=0)
@@ -350,42 +374,23 @@ async def create_academic_paper(
     target_key: str,
     payload: AcademicPaperUpsertPayload,
 ) -> PaperWriteResponse:
-    pool = get_pool()
-    write_target_key = await _resolve_write_target_key(target_key)
-    paper_uid = f"manual_{uuid4().hex[:24]}"
-    pub_date = payload.publication_date or None
-    source = _clean_text(payload.source) or "manual"
-
-    await pool.execute(
-        """
-        INSERT INTO student_publications (
-          target_key,
-          paper_uid,
-          title,
-          doi,
-          arxiv_id,
-          abstract,
-          publication_date,
-          source,
-          authors,
-          affiliations
-        )
-        VALUES (
-          $1, $2, $3, $4, $5, $6, $7::timestamptz, $8, $9::jsonb, $10::jsonb
-        )
-        """,
-        write_target_key,
-        paper_uid,
-        _clean_text(payload.title),
-        _clean_text(payload.doi) or None,
-        _clean_text(payload.arxiv_id) or None,
-        _clean_text(payload.abstract) or None,
-        pub_date,
-        source,
-        payload.authors,
-        payload.affiliations,
+    result = await publication_service.create_formal_publication(
+        get_pool(),
+        owner_type="student",
+        owner_id=_clean_text(target_key),
+        title=_clean_text(payload.title),
+        doi=_clean_text(payload.doi) or None,
+        arxiv_id=_clean_text(payload.arxiv_id) or None,
+        abstract=_clean_text(payload.abstract) or None,
+        publication_date=payload.publication_date or None,
+        authors=payload.authors,
+        affiliations=payload.affiliations,
+        source_type=_clean_text(payload.source) or "manual",
     )
-    return PaperWriteResponse(status="created", paper_uid=paper_uid)
+    return PaperWriteResponse(
+        status=result["status"],
+        paper_uid=_clean_text(result.get("owner_link_id")) or _clean_text(result.get("publication_id")),
+    )
 
 
 @router.put(

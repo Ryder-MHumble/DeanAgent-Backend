@@ -8,7 +8,7 @@ from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
 from app.api import academic_monitor
-from app.api.v1 import publications
+from app.api.v1 import publications, students
 from app.config import settings
 from app.db.pool import close_pool, get_pool, init_pool
 
@@ -31,6 +31,7 @@ def _build_test_app() -> FastAPI:
 
     app = FastAPI(lifespan=lifespan)
     app.include_router(publications.router, prefix="/api/v1")
+    app.include_router(students.router, prefix="/api/v1/students")
     app.include_router(academic_monitor.router, prefix="/academic-monitor/api/v1")
     return app
 
@@ -43,6 +44,12 @@ def api_client():
 
 async def _cleanup_publication_test_rows(prefix: str) -> None:
     pool = get_pool()
+    publication_owners_exists = await pool.fetchval(
+        "SELECT to_regclass('public.publication_owners') IS NOT NULL"
+    )
+    publications_exists = await pool.fetchval(
+        "SELECT to_regclass('public.publications') IS NOT NULL"
+    )
     await pool.execute(
         """
         DELETE FROM publication_candidates
@@ -50,20 +57,22 @@ async def _cleanup_publication_test_rows(prefix: str) -> None:
         """,
         f"{prefix}%",
     )
-    await pool.execute(
-        """
-        DELETE FROM publication_owners
-        WHERE owner_id LIKE $1 OR owner_link_id LIKE $1
-        """,
-        f"{prefix}%",
-    )
-    await pool.execute(
-        """
-        DELETE FROM publications
-        WHERE publication_id LIKE $1 OR canonical_uid LIKE $1
-        """,
-        f"{prefix}%",
-    )
+    if publication_owners_exists:
+        await pool.execute(
+            """
+            DELETE FROM publication_owners
+            WHERE owner_id LIKE $1 OR owner_link_id LIKE $1
+            """,
+            f"{prefix}%",
+        )
+    if publications_exists:
+        await pool.execute(
+            """
+            DELETE FROM publications
+            WHERE publication_id LIKE $1 OR canonical_uid LIKE $1
+            """,
+            f"{prefix}%",
+        )
     await pool.execute(
         """
         DELETE FROM supervised_students
@@ -236,6 +245,32 @@ async def test_candidate_confirm_promotes_into_single_formal_publication(api_cli
     assert candidate_row["review_status"] == "confirmed"
     assert candidate_row["promoted_publication_id"]
     assert candidate_row["promoted_owner_link_id"]
+
+
+@pytest.mark.asyncio
+async def test_student_detail_round_trips_entry_date_and_paper_date_floor(api_client: TestClient):
+    prefix = f"test_pub_{uuid4().hex[:10]}"
+    await _cleanup_publication_test_rows(prefix)
+    _, student_id = await _seed_student(prefix)
+
+    patch_resp = api_client.patch(
+        f"/api/v1/students/{student_id}",
+        json={
+            "entry_date": "2025-03-14",
+            "paper_date_floor": "2025-05-14",
+            "updated_by": "tester",
+        },
+    )
+    assert patch_resp.status_code == 200, patch_resp.text
+    patch_body = patch_resp.json()
+    assert patch_body["entry_date"] == "2025-03-14"
+    assert patch_body["paper_date_floor"] == "2025-05-14"
+
+    detail_resp = api_client.get(f"/api/v1/students/{student_id}")
+    assert detail_resp.status_code == 200, detail_resp.text
+    detail_body = detail_resp.json()
+    assert detail_body["entry_date"] == "2025-03-14"
+    assert detail_body["paper_date_floor"] == "2025-05-14"
 
 
 @pytest.mark.asyncio

@@ -3,6 +3,7 @@ from __future__ import annotations
 import asyncio
 import logging
 from contextlib import asynccontextmanager
+from pathlib import Path
 from typing import Any, AsyncGenerator
 
 from playwright.async_api import Browser, Page, Playwright, async_playwright
@@ -61,18 +62,33 @@ async def _get_browser() -> Browser:
 
 
 @asynccontextmanager
-async def get_page(*, apply_webdriver_patch: bool = True) -> AsyncGenerator[Page, None]:
+async def get_page(
+    *,
+    apply_webdriver_patch: bool = True,
+    storage_state_path: str | None = None,
+    save_storage_state: bool = False,
+) -> AsyncGenerator[Page, None]:
     """Acquire a browser page from the pool, yield it, then close.
 
     Limits concurrent contexts to PLAYWRIGHT_MAX_CONTEXTS to avoid resource exhaustion.
     """
     async with _context_semaphore:
         browser = await _get_browser()
+        context_kwargs = {
+            "user_agent": (
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+            ),
+            "viewport": {"width": 1920, "height": 1080},
+            "locale": "zh-CN",
+            "timezone_id": "Asia/Shanghai",
+        }
+        if storage_state_path:
+            state_path = Path(storage_state_path)
+            if state_path.exists():
+                context_kwargs["storage_state"] = str(state_path)
         context = await browser.new_context(
-            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
-            viewport={"width": 1920, "height": 1080},
-            locale="zh-CN",
-            timezone_id="Asia/Shanghai",
+            **context_kwargs,
         )
         if apply_webdriver_patch:
             # Some sites detect automation through navigator.webdriver.
@@ -86,6 +102,13 @@ async def get_page(*, apply_webdriver_patch: bool = True) -> AsyncGenerator[Page
             page = await context.new_page()
             yield page
         finally:
+            if save_storage_state and storage_state_path:
+                state_path = Path(storage_state_path)
+                state_path.parent.mkdir(parents=True, exist_ok=True)
+                try:
+                    await context.storage_state(path=str(state_path))
+                except Exception as exc:  # noqa: BLE001
+                    logger.warning("Failed to persist Playwright storage state: %s", exc)
             if page is not None:
                 await _safe_close(page, "page")
             await _safe_close(context, "context")

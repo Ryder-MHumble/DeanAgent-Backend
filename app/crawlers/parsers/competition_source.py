@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+import json
 import re
 import shutil
 import subprocess
 import tempfile
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 from urllib.parse import quote
@@ -11,6 +13,7 @@ from urllib.parse import quote
 import httpx
 from bs4 import BeautifulSoup
 
+from app.config import BASE_DIR
 from app.crawlers.base import BaseCrawler, CrawledItem
 from app.crawlers.parsers._talent_scout_common import (
     build_blocked_item,
@@ -75,6 +78,12 @@ class CompetitionSourceCrawler(BaseCrawler):
             return await self._fetch_lanqiao_archive()
         if adapter_key == "kaggle_rankings_v2":
             return await self._fetch_kaggle_rankings()
+        if adapter_key == "ctftime_top_teams":
+            return await self._fetch_ctftime_top_teams()
+        if adapter_key == "casp_groups":
+            return await self._fetch_casp_groups()
+        if adapter_key == "competition_history_json":
+            return await self._fetch_competition_history_json()
 
         try:
             payload = await fetch_json(self._source_url(), **fetch_options(self.config))
@@ -148,6 +157,227 @@ class CompetitionSourceCrawler(BaseCrawler):
                 break
 
         return self._tianchi_records_to_items(records)
+
+    async def _fetch_ctftime_top_teams(self) -> list[CrawledItem]:
+        headers = {
+            "Accept": "application/json",
+            "User-Agent": (
+                "Mozilla/5.0 (compatible; CTFtimeCrawler/1.0; "
+                "+https://github.com/openclaw)"
+            )
+        }
+        max_results = max(1, int(self.config.get("max_results", 25)))
+        payload = await fetch_json(
+            "https://ctftime.org/api/v1/top/",
+            params={"limit": str(max_results)},
+            headers=headers,
+            **fetch_options(self.config),
+        )
+
+        current_year = str(
+            int(self.config.get("season_year") or datetime.now(timezone.utc).year)
+        )
+        previous_year = str(int(current_year) - 1)
+        teams = payload.get(current_year)
+        resolved_year = int(current_year)
+        if not teams:
+            teams = payload.get(previous_year) or []
+            resolved_year = int(previous_year)
+        if not isinstance(teams, list) or not teams:
+            return [
+                build_review_item(
+                    self.config,
+                    notes="no CTFtime top teams returned from public API",
+                    signal_type="competition",
+                )
+            ]
+
+        items: list[CrawledItem] = []
+        for index, team in enumerate(teams[:max_results], start=1):
+            if not isinstance(team, dict):
+                continue
+            detail = await self._fetch_ctftime_team_detail(
+                team.get("team_id"),
+                headers=headers,
+            )
+            item = self._ctftime_team_to_item(
+                team,
+                detail=detail,
+                ranking=index,
+                season_year=resolved_year,
+            )
+            if item is not None:
+                items.append(item)
+
+        if items:
+            return items
+        return [
+            build_review_item(
+                self.config,
+                notes="no CTFtime team-level signals mapped into talent rows",
+                signal_type="competition",
+            )
+        ]
+
+    async def _fetch_ctftime_team_detail(
+        self,
+        team_id: Any,
+        *,
+        headers: dict[str, str],
+    ) -> dict[str, Any] | None:
+        if team_id in ("", None):
+            return None
+        try:
+            detail = await fetch_json(
+                f"https://ctftime.org/api/v1/teams/{team_id}/",
+                headers=headers,
+                **fetch_options(self.config),
+            )
+        except Exception:
+            return None
+        return detail if isinstance(detail, dict) else None
+
+    def _ctftime_team_to_item(
+        self,
+        record: dict[str, Any],
+        *,
+        detail: dict[str, Any] | None,
+        ranking: int,
+        season_year: int,
+    ) -> CrawledItem | None:
+        detail = detail or {}
+        team_name = self._clean(
+            detail.get("name")
+            or record.get("team_name")
+            or record.get("name")
+            or detail.get("primary_alias")
+        )
+        if not team_name:
+            return None
+
+        rating = detail.get("rating") if isinstance(detail.get("rating"), dict) else {}
+        evidence_url = (
+            f"https://ctftime.org/team/{detail.get('id')}"
+            if detail.get("id")
+            else self._source_url()
+        )
+        notes = "team-level signal parsed from CTFtime public API"
+        talent_signal = build_talent_signal(
+            signal_type="competition",
+            record_status="structured",
+            evidence_url=evidence_url,
+            candidate_name=team_name,
+            track=get_track(self.config),
+            confidence=0.66,
+            identity_hints={
+                key: value
+                for key, value in {
+                    "team_id": detail.get("id") or record.get("team_id"),
+                    "primary_alias": self._clean(detail.get("primary_alias")),
+                    "aliases": detail.get("aliases") if isinstance(detail.get("aliases"), list) else None,
+                    "country": self._clean(detail.get("country")),
+                    "academic": detail.get("academic"),
+                }.items()
+                if value not in ("", None, [])
+            },
+            source_metrics={
+                key: value
+                for key, value in {
+                    "ranking": ranking,
+                    "points": record.get("points"),
+                    "rating_points": rating.get("rating_points") if isinstance(rating, dict) else None,
+                    "country_place": rating.get("country_place") if isinstance(rating, dict) else None,
+                    "organizer_points": rating.get("organizer_points") if isinstance(rating, dict) else None,
+                }.items()
+                if value not in ("", None)
+            },
+            evidence_title=self.config.get("competition_name") or self.config.get("name") or self.source_id,
+            notes=notes,
+        )
+        return build_crawled_item(
+            self.config,
+            title=team_name,
+            url=evidence_url,
+            talent_signal=talent_signal,
+            extra={
+                "competition_name": self.config.get("competition_name") or self.config.get("name"),
+                "season_year": season_year,
+                "award_level": "",
+                "ranking": str(ranking),
+                "team_name": team_name,
+                "entity_kind": "team",
+                "country": self._clean(detail.get("country")),
+                "academic": detail.get("academic"),
+                "primary_alias": self._clean(detail.get("primary_alias")),
+            },
+        )
+
+    async def _fetch_casp_groups(self) -> list[CrawledItem]:
+        items: list[CrawledItem] = []
+        for source_ref in self._source_refs():
+            source_url = str(source_ref["url"])
+            html = await fetch_page(source_url, **fetch_options(self.config))
+            items.extend(self._parse_casp_groups_html(html, source_url=source_url, source_ref=source_ref))
+
+        if items:
+            return items
+        return [
+            build_review_item(
+                self.config,
+                notes="no CASP groups parsed from official table pages",
+                signal_type="competition",
+            )
+        ]
+
+    async def _fetch_competition_history_json(self) -> list[CrawledItem]:
+        data_path = self._resolve_local_results_path(self.config.get("local_results_path"))
+        if data_path is None:
+            return [
+                build_blocked_item(
+                    self.config,
+                    notes="local_results_path is required for competition_history_json",
+                    signal_type="competition",
+                )
+            ]
+
+        payload = json.loads(data_path.read_text(encoding="utf-8"))
+        competitions = payload.get("competitions")
+        if not isinstance(competitions, list):
+            return [
+                build_review_item(
+                    self.config,
+                    notes="competition history payload does not contain competitions[]",
+                    signal_type="competition",
+                )
+            ]
+
+        matched = [
+            comp
+            for comp in competitions
+            if self._history_competition_matches(comp)
+        ]
+        if not matched:
+            return [
+                build_review_item(
+                    self.config,
+                    notes="no competition history matched current source config",
+                    signal_type="competition",
+                )
+            ]
+
+        items: list[CrawledItem] = []
+        for competition in matched:
+            items.extend(self._competition_history_to_items(competition))
+
+        if items:
+            return items
+        return [
+            build_review_item(
+                self.config,
+                notes="no competition history items mapped into talent rows",
+                signal_type="competition",
+            )
+        ]
 
     async def _fetch_lanqiao_archive(self) -> list[CrawledItem]:
         items: list[CrawledItem] = []
@@ -667,6 +897,89 @@ class CompetitionSourceCrawler(BaseCrawler):
             },
         )
 
+    def _parse_casp_groups_html(
+        self,
+        html: str,
+        *,
+        source_url: str,
+        source_ref: dict[str, Any],
+    ) -> list[CrawledItem]:
+        soup = BeautifulSoup(html, "lxml")
+        items: list[CrawledItem] = []
+        for table in soup.select("table"):
+            rows = table.select("tr")
+            if len(rows) < 2:
+                continue
+            for row in rows[1:]:
+                cells = [cell.get_text(" ", strip=True) for cell in row.select("td")]
+                if len(cells) < 3:
+                    continue
+                ranking = self._clean(cells[0])
+                gr_number = self._clean(cells[1])
+                team_name = self._clean(cells[2])
+                if not ranking.isdigit() or not team_name:
+                    continue
+                domains_count = self._clean(cells[3] if len(cells) > 3 else "")
+                avg_gdt_ts = self._clean(cells[6] if len(cells) > 6 else "")
+                institution = self._infer_competition_institution(team_name)
+                country = self._infer_competition_country(team_name)
+                season_year = source_ref.get("season_year", self.config.get("season_year"))
+                evidence_title = (
+                    self._clean(source_ref.get("evidence_title"))
+                    or self._clean(self.config.get("name"))
+                    or self.source_id
+                )
+                talent_signal = build_talent_signal(
+                    signal_type="competition",
+                    record_status="structured",
+                    evidence_url=source_url,
+                    candidate_name=team_name,
+                    university=institution,
+                    track=get_track(self.config),
+                    confidence=0.82,
+                    identity_hints={
+                        key: value
+                        for key, value in {
+                            "gr_number": re.sub(r"[A-Za-z]", "", gr_number),
+                            "is_server": gr_number.lower().endswith("s"),
+                            "country": country,
+                        }.items()
+                        if value not in ("", None)
+                    },
+                    source_metrics={
+                        key: value
+                        for key, value in {
+                            "ranking": ranking,
+                            "domains_count": domains_count,
+                            "avg_gdt_ts": avg_gdt_ts,
+                        }.items()
+                        if value not in ("", None)
+                    },
+                    evidence_title=evidence_title,
+                    notes="team-level signal parsed from CASP official groups table",
+                )
+                items.append(
+                    build_crawled_item(
+                        self.config,
+                        title=team_name,
+                        url=source_url,
+                        talent_signal=talent_signal,
+                        extra={
+                            "competition_name": evidence_title,
+                            "season_year": season_year,
+                            "award_level": self._casp_award_level(int(ranking)),
+                            "ranking": ranking,
+                            "team_name": team_name,
+                            "entity_kind": "team",
+                            "country": country,
+                            "gr_number": re.sub(r"[A-Za-z]", "", gr_number),
+                            "domains_count": domains_count,
+                            "avg_gdt_ts": avg_gdt_ts,
+                        },
+                    )
+                )
+        return items
+
     def _parse_structured_records(self, payload: Any) -> list[CrawledItem]:
         items: list[CrawledItem] = []
         competition_name = (
@@ -724,6 +1037,160 @@ class CompetitionSourceCrawler(BaseCrawler):
             )
 
         return items
+
+    def _competition_history_to_items(self, competition: dict[str, Any]) -> list[CrawledItem]:
+        items: list[CrawledItem] = []
+        competition_name = self._clean(competition.get("name")) or (
+            self.config.get("competition_name")
+            or self.config.get("name")
+            or self.source_id
+        )
+        competition_url = self._clean(competition.get("url")) or self._source_url()
+
+        if isinstance(competition.get("years"), list):
+            for season in competition.get("years", []):
+                if not isinstance(season, dict):
+                    continue
+                season_year = season.get("year", self.config.get("season_year"))
+                for team in season.get("teams", []):
+                    if isinstance(team, dict):
+                        item = self._history_team_to_item(
+                            team,
+                            competition_name=competition_name,
+                            competition_url=competition_url,
+                            season_year=season_year,
+                        )
+                        if item is not None:
+                            items.append(item)
+            return items
+
+        if isinstance(competition.get("teams"), list):
+            season_year = competition.get("year", self.config.get("season_year"))
+            for team in competition.get("teams", []):
+                if isinstance(team, dict):
+                    item = self._history_team_to_item(
+                        team,
+                        competition_name=competition_name,
+                        competition_url=competition_url,
+                        season_year=season_year,
+                    )
+                    if item is not None:
+                        items.append(item)
+            return items
+
+        if isinstance(competition.get("awardees"), list):
+            season_year = competition.get("year", self.config.get("season_year"))
+            for awardee in competition.get("awardees", []):
+                if isinstance(awardee, dict):
+                    item = self._history_awardee_to_item(
+                        awardee,
+                        competition_name=competition_name,
+                        competition_url=competition_url,
+                        season_year=season_year,
+                    )
+                    if item is not None:
+                        items.append(item)
+        return items
+
+    def _history_team_to_item(
+        self,
+        team: dict[str, Any],
+        *,
+        competition_name: str,
+        competition_url: str,
+        season_year: Any,
+    ) -> CrawledItem | None:
+        team_name = self._clean(team.get("name"))
+        if not team_name:
+            return None
+        rank = self._clean(team.get("rank"))
+        school = self._clean(team.get("school"))
+        country = self._clean(team.get("country"))
+        members = team.get("members") if isinstance(team.get("members"), list) else []
+        talent_signal = build_talent_signal(
+            signal_type="competition",
+            record_status="structured",
+            evidence_url=competition_url,
+            candidate_name=team_name,
+            university=school,
+            track=get_track(self.config),
+            confidence=0.74,
+            identity_hints={
+                key: value
+                for key, value in {
+                    "country": country,
+                    "members": members or None,
+                }.items()
+                if value not in ("", None, [])
+            },
+            source_metrics={"ranking": rank} if rank else {},
+            evidence_title=competition_name,
+            notes="team-level signal imported from curated competition history",
+        )
+        return build_crawled_item(
+            self.config,
+            title=team_name,
+            url=competition_url,
+            talent_signal=talent_signal,
+            extra={
+                "competition_name": competition_name,
+                "season_year": season_year,
+                "award_level": rank,
+                "ranking": rank,
+                "team_name": team_name,
+                "entity_kind": "team",
+                "country": country,
+                "source_members": members,
+            },
+        )
+
+    def _history_awardee_to_item(
+        self,
+        awardee: dict[str, Any],
+        *,
+        competition_name: str,
+        competition_url: str,
+        season_year: Any,
+    ) -> CrawledItem | None:
+        candidate_name = self._clean(awardee.get("name"))
+        if not candidate_name:
+            return None
+        school = self._clean(awardee.get("school"))
+        award_level = self._clean(awardee.get("award"))
+        ranking = self._clean(awardee.get("rank"))
+        source_link = self._clean(awardee.get("source_link")) or competition_url
+        talent_signal = build_talent_signal(
+            signal_type="competition",
+            record_status="partial",
+            evidence_url=source_link,
+            candidate_name=candidate_name,
+            university=school,
+            track=get_track(self.config),
+            confidence=0.64,
+            source_metrics={
+                key: value
+                for key, value in {
+                    "ranking": ranking,
+                    "award_level": award_level,
+                }.items()
+                if value
+            },
+            evidence_title=competition_name,
+            notes="competition awardee imported from curated historical crawler output",
+        )
+        return build_crawled_item(
+            self.config,
+            title=candidate_name,
+            url=source_link,
+            talent_signal=talent_signal,
+            extra={
+                "competition_name": competition_name,
+                "season_year": season_year,
+                "award_level": award_level,
+                "ranking": ranking,
+                "team_name": "",
+            },
+        )
 
     def _source_url(self) -> str:
         refs = self._source_refs()
@@ -950,3 +1417,91 @@ class CompetitionSourceCrawler(BaseCrawler):
     @staticmethod
     def _normalize_lanqiao_subject(value: str) -> str:
         return re.sub(r"[\s/]+", "", value or "")
+
+    def _history_competition_matches(self, competition: dict[str, Any]) -> bool:
+        target_name = self._clean(self.config.get("history_name"))
+        prefix = self._clean(self.config.get("history_name_prefix"))
+        competition_name = self._clean(competition.get("name"))
+        if target_name and competition_name == target_name:
+            return True
+        if prefix and competition_name.startswith(prefix):
+            return True
+        return False
+
+    @staticmethod
+    def _resolve_local_results_path(raw_path: Any) -> Path | None:
+        if raw_path in ("", None):
+            return None
+        path = Path(str(raw_path))
+        if not path.is_absolute():
+            path = BASE_DIR / path
+        return path if path.exists() else None
+
+    @staticmethod
+    def _casp_award_level(rank: int) -> str:
+        if rank == 1:
+            return "Gold Medal / Top Performer"
+        if rank <= 3:
+            return "Silver Medal / Top 3"
+        if rank <= 10:
+            return "Bronze Medal / Top 10"
+        if rank <= 20:
+            return "Top 20"
+        return "Participant"
+
+    @staticmethod
+    def _infer_competition_institution(team_name: str) -> str:
+        hints = {
+            "AlphaFold": "DeepMind",
+            "BAKER": "University of Washington",
+            "Zhang": "University of Michigan",
+            "MULTICOM": "University of Missouri",
+            "McGuffin": "University of Reading",
+            "Elofsson": "Stockholm University",
+            "Kiharalab": "University of Kansas",
+            "ShanghaiTech": "ShanghaiTech University",
+            "Gonglab-THU": "Tsinghua University",
+            "BeijingAIProtein": "Beijing AI Protein",
+            "Yang": "Yang Lab",
+            "UM-TBM": "University of Michigan",
+            "PEZY": "PEZY Computing",
+            "RaptorX": "RaptorX",
+            "ColabFold": "Google/Colab",
+            "FEIG": "Michigan State University",
+            "MESHI": "Weizmann Institute",
+            "Wallner": "Stockholm University",
+            "Venclovas": "Vilnius University",
+        }
+        for token, institution in hints.items():
+            if token.lower() in team_name.lower():
+                return institution
+        return ""
+
+    @staticmethod
+    def _infer_competition_country(team_name: str) -> str:
+        hints = {
+            "ShanghaiTech": "China",
+            "Tsinghua": "China",
+            "Beijing": "China",
+            "Gonglab": "China",
+            "Yang": "China",
+            "PEZY": "Japan",
+            "Kiharalab": "USA",
+            "BAKER": "USA",
+            "Zhang": "USA",
+            "DeepMind": "UK",
+            "AlphaFold": "UK",
+            "Stockholm": "Sweden",
+            "Elofsson": "Sweden",
+            "Wallner": "Sweden",
+            "Reading": "UK",
+            "McGuffin": "UK",
+            "Michigan": "USA",
+            "Missouri": "USA",
+            "Vilnius": "Lithuania",
+            "Weizmann": "Israel",
+        }
+        for token, country in hints.items():
+            if token.lower() in team_name.lower():
+                return country
+        return ""

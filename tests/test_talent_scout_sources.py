@@ -33,6 +33,7 @@ EXPECTED_TALENT_SCOUT_SOURCE_IDS = {
     "arxiv_author",
     "semantic_scholar_author",
     "openreview_author",
+    "academic_paper_authors",
     "acl_anthology_author",
     "cvf_openaccess_author",
     "github_ai_users",
@@ -84,3 +85,34 @@ def test_talent_scout_sources_expose_required_contract_fields():
         assert isinstance(cfg.get("name"), str) and cfg["name"].strip()
         assert cfg.get("schedule") == "daily"
 
+
+def test_talent_scout_sources_wire_excellent_capabilities():
+    configs = load_all_source_configs()
+    talent_configs = {
+        cfg["id"]: cfg for cfg in configs if cfg.get("dimension") == "talent_scout"
+    }
+
+    openreview = talent_configs["openreview_author"]
+    assert openreview["crawler_class"] == "paper_author_source"
+    assert openreview["capture_mode"] == "structured"
+    assert openreview["adapter_key"] == "openreview_notes"
+    assert openreview["openreview_group_id"] == "ICLR.cc/2026/Conference"
+
+    academic = talent_configs["academic_paper_authors"]
+    assert academic["crawler_class"] == "paper_author_source"
+    assert academic["adapter_key"] == "author_aggregate_json"
+    assert academic["local_results_path"] == "excellent_20260425/academic_papers/results.json"
+
+    github = talent_configs["github_ai_repo_contributors"]
+    assert github["adapter_key"] == "github_contributors"
+    assert github.get("repo_seeds") in (None, [])
+    assert github["topics"] == [
+        "llm",
+        "machine-learning",
+        "deep-learning",
+        "nlp",
+        "reinforcement-learning",
+        "autonomous-agents",
+    ]
+    assert github["search_query"] == "stars:>1000 pushed:>2023-01-01"
+    assert github["profile_enrichment"] is True

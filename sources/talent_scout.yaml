@@ -152,11 +152,14 @@ sources:
     name: "RoboMaster"
     group: "talent_competitions"
     url: "https://www.robomaster.com/"
-    capture_mode: "semi_structured"
+    capture_mode: "structured"
     sheet_name: "RoboMaster"
     tracks: ["robotics", "embedded"]
     requires_auth: false
-    adapter_key: "rank_table"
+    adapter_key: "competition_history_json"
+    competition_name: "RoboMaster 机甲大师赛"
+    local_results_path: "excellent_20260425/robotics_hpc/results.json"
+    history_name: "RoboMaster 机甲大师赛"
     seed_urls:
       - "https://www.robomaster.com/"
     tags: ["talent_scout", "competition", "robotics"]
@@ -235,13 +238,21 @@ sources:
     name: "CASP"
     group: "talent_competitions"
     url: "https://predictioncenter.org/"
-    capture_mode: "semi_structured"
+    capture_mode: "structured"
     sheet_name: "CASP"
     tracks: ["bioinformatics"]
     requires_auth: false
-    adapter_key: "rank_table"
+    adapter_key: "casp_groups"
     seed_urls:
-      - "https://predictioncenter.org/"
+      - url: "https://predictioncenter.org/casp13/groups_analysis.cgi"
+        season_year: 2018
+        evidence_title: "CASP13"
+      - url: "https://predictioncenter.org/casp14/groups_analysis.cgi"
+        season_year: 2020
+        evidence_title: "CASP14"
+      - url: "https://predictioncenter.org/casp15/groups_analysis.cgi"
+        season_year: 2022
+        evidence_title: "CASP15"
     tags: ["talent_scout", "competition", "bioinformatics"]
 
   - <<: *competition_defaults
@@ -249,11 +260,14 @@ sources:
     name: "iGEM"
     group: "talent_competitions"
     url: "https://competition.igem.org/"
-    capture_mode: "semi_structured"
+    capture_mode: "structured"
     sheet_name: "iGEM"
     tracks: ["synthetic_biology"]
     requires_auth: false
-    adapter_key: "rank_table"
+    adapter_key: "competition_history_json"
+    competition_name: "iGEM"
+    local_results_path: "excellent_20260425/ai4science/results.json"
+    history_name_prefix: "iGEM"
     seed_urls:
       - "https://competition.igem.org/"
     tags: ["talent_scout", "competition", "biology"]
@@ -323,11 +337,14 @@ sources:
     name: "ASC Student Supercomputer Challenge"
     group: "talent_competitions"
     url: "https://www.asc-events.net/StudentChallenge/History/2025/index.html"
-    capture_mode: "semi_structured"
+    capture_mode: "structured"
     sheet_name: "ASC"
     tracks: ["hpc"]
     requires_auth: false
-    adapter_key: "rank_table"
+    adapter_key: "competition_history_json"
+    competition_name: "ASC 世界大学生超算竞赛"
+    local_results_path: "excellent_20260425/robotics_hpc/results.json"
+    history_name: "ASC 世界大学生超算竞赛"
     seed_urls:
       - "https://www.asc-events.net/StudentChallenge/History/2025/index.html"
     tags: ["talent_scout", "competition", "hpc"]
@@ -337,11 +354,13 @@ sources:
     name: "SC Student Cluster Competition"
     group: "talent_competitions"
     url: "https://sc25.supercomputing.org/students/student-cluster-competition/"
-    capture_mode: "semi_structured"
+    capture_mode: "structured"
     sheet_name: "SCCluster"
     tracks: ["hpc"]
     requires_auth: false
-    adapter_key: "rank_table"
+    adapter_key: "competition_history_json"
+    local_results_path: "excellent_20260425/robotics_hpc/results.json"
+    history_name: "SC Student Cluster Competition"
     seed_urls:
       - "https://sc25.supercomputing.org/students/student-cluster-competition/"
     tags: ["talent_scout", "competition", "hpc"]
@@ -351,11 +370,13 @@ sources:
     name: "ISC Student Cluster Competition"
     group: "talent_competitions"
     url: "https://www.isc-hpc.com/"
-    capture_mode: "semi_structured"
+    capture_mode: "structured"
     sheet_name: "ISCCluster"
     tracks: ["hpc"]
     requires_auth: false
-    adapter_key: "rank_table"
+    adapter_key: "competition_history_json"
+    local_results_path: "excellent_20260425/robotics_hpc/results.json"
+    history_name: "ISC Student Cluster Competition"
     seed_urls:
       - "https://www.isc-hpc.com/"
     tags: ["talent_scout", "competition", "hpc"]
@@ -378,11 +399,12 @@ sources:
     name: "CTFTime"
     group: "talent_competitions"
     url: "https://ctftime.org/"
-    capture_mode: "semi_structured"
+    capture_mode: "structured"
     sheet_name: "CTFTime"
     tracks: ["cybersecurity"]
     requires_auth: false
-    adapter_key: "rank_table"
+    adapter_key: "ctftime_top_teams"
+    max_results: 25
     seed_urls:
       - "https://ctftime.org/"
     tags: ["talent_scout", "competition", "ctf"]
@@ -491,18 +513,36 @@ sources:
       - "https://api.semanticscholar.org/graph/v1/paper/search"
     tags: ["talent_scout", "paper", "semantic_scholar"]
 
-  - <<: *evidence_paper_defaults
+  - <<: *paper_defaults
     id: "openreview_author"
     name: "OpenReview Author"
     group: "talent_papers"
-    url: "https://openreview.net/"
+    url: "https://openreview.net/group?id=ICLR.cc/2026/Conference"
+    capture_mode: "structured"
     sheet_name: "OpenReview"
     tracks: ["ICML", "ICLR", "NeurIPS"]
     requires_auth: false
-    adapter_key: "manual_seed"
+    adapter_key: "openreview_notes"
+    openreview_group_id: "ICLR.cc/2026/Conference"
+    max_results: 20
     seed_urls:
-      - "https://openreview.net/"
+      - "https://openreview.net/group?id=ICLR.cc/2026/Conference"
     tags: ["talent_scout", "paper", "openreview"]
+
+  - <<: *paper_defaults
+    id: "academic_paper_authors"
+    name: "Academic Paper Authors"
+    group: "talent_papers"
+    url: "excellent_20260425/academic_papers/results.json"
+    capture_mode: "structured"
+    sheet_name: "AcademicAuthors"
+    tracks: ["foundation_models", "llm", "agents"]
+    requires_auth: false
+    adapter_key: "author_aggregate_json"
+    local_results_path: "excellent_20260425/academic_papers/results.json"
+    seed_urls:
+      - "excellent_20260425/academic_papers/results.json"
+    tags: ["talent_scout", "paper", "academic_papers"]
 
   - <<: *paper_defaults
     id: "acl_anthology_author"
@@ -558,12 +598,19 @@ sources:
     tracks: ["llm", "open_source"]
     requires_auth: false
     adapter_key: "github_contributors"
-    repo_seeds:
-      - "huggingface/transformers"
-      - "vllm-project/vllm"
-      - "langchain-ai/langchain"
-    max_repos: 3
-    max_results_per_repo: 8
+    topics:
+      - "llm"
+      - "machine-learning"
+      - "deep-learning"
+      - "nlp"
+      - "reinforcement-learning"
+      - "autonomous-agents"
+    search_query: "stars:>1000 pushed:>2023-01-01"
+    min_contributions: 10
+    max_repos: 6
+    max_results_per_repo: 10
+    profile_enrichment: true
+    max_profile_enrichment: 10
     seed_urls:
       - "https://api.github.com/repos"
     tags: ["talent_scout", "github", "contributors"]

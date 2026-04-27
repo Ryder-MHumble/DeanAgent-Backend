@@ -156,6 +156,51 @@ async def ensure_publication_tables(pool: asyncpg.Pool) -> None:
         async with pool.acquire() as conn:
             await conn.execute(
                 """
+                CREATE TABLE IF NOT EXISTS publications (
+                    publication_id TEXT PRIMARY KEY,
+                    canonical_uid TEXT NOT NULL UNIQUE,
+                    title TEXT NOT NULL,
+                    doi TEXT,
+                    arxiv_id TEXT,
+                    abstract TEXT,
+                    publication_date TIMESTAMPTZ,
+                    authors JSONB NOT NULL DEFAULT '[]'::jsonb,
+                    affiliations JSONB NOT NULL DEFAULT '[]'::jsonb,
+                    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+                    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+                )
+                """
+            )
+            await conn.execute(
+                "CREATE INDEX IF NOT EXISTS idx_publications_publication_date ON publications(publication_date DESC)"
+            )
+            await conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS publication_owners (
+                    owner_link_id TEXT PRIMARY KEY,
+                    publication_id TEXT NOT NULL REFERENCES publications(publication_id) ON DELETE CASCADE,
+                    owner_type TEXT NOT NULL,
+                    owner_id TEXT NOT NULL,
+                    project_group_name TEXT,
+                    source_type TEXT NOT NULL DEFAULT 'manual_upload',
+                    source_details JSONB NOT NULL DEFAULT '{}'::jsonb,
+                    compliance_details JSONB NOT NULL DEFAULT '{}'::jsonb,
+                    confirmed_by TEXT,
+                    confirmed_at TIMESTAMPTZ,
+                    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+                    updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+                    UNIQUE (publication_id, owner_type, owner_id)
+                )
+                """
+            )
+            await conn.execute(
+                "CREATE INDEX IF NOT EXISTS idx_publication_owners_owner ON publication_owners(owner_type, owner_id)"
+            )
+            await conn.execute(
+                "CREATE INDEX IF NOT EXISTS idx_publication_owners_publication_id ON publication_owners(publication_id)"
+            )
+            await conn.execute(
+                """
                 CREATE TABLE IF NOT EXISTS publication_candidates (
                     candidate_id TEXT PRIMARY KEY,
                     owner_type TEXT NOT NULL,

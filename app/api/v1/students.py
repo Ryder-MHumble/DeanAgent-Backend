@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import math
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from typing import Any
 from uuid import uuid4
 
@@ -67,6 +67,18 @@ def _to_year(value: Any) -> int | None:
     if year < 1900 or year > 2100:
         return None
     return year
+
+
+def _to_date(value: Any) -> date | None:
+    token = _clean_text(value)
+    if not token:
+        return None
+    if token.endswith("Z"):
+        token = f"{token[:-1]}+00:00"
+    try:
+        return datetime.fromisoformat(token).date()
+    except ValueError:
+        return None
 
 
 def _normalize_added_by(raw_added_by: Any) -> str:
@@ -250,6 +262,8 @@ def _to_student_detail(row: dict[str, Any]) -> StudentDetailResponse:
         expected_graduation_year=(
             "" if expected_graduation_year is None else str(expected_graduation_year)
         ),
+        entry_date=_iso(row.get("entry_date")),
+        paper_date_floor=_iso(row.get("paper_date_floor")),
         added_by=_normalize_added_by(row.get("added_by")),
         created_at=_iso(row.get("created_at")),
         updated_at=_iso(row.get("updated_at")),
@@ -499,6 +513,8 @@ async def _fetch_student_row(student_id: str) -> dict[str, Any] | None:
           COALESCE(NULLIF(s.mentor_name, ''), m.name, '') AS mentor_name,
           s.degree_type,
           s.expected_graduation_year,
+          s.entry_date,
+          s.paper_date_floor,
           s.added_by,
           s.created_at,
           s.updated_at
@@ -807,10 +823,10 @@ async def create_student(body: StudentCreateRequest):
         """
         INSERT INTO supervised_students
         (scholar_id, student_no, name, home_university, major, degree_type,
-         enrollment_year, expected_graduation_year, status, email, phone, notes,
-         mentor_name, added_by)
+         enrollment_year, expected_graduation_year, entry_date, paper_date_floor,
+         status, email, phone, notes, mentor_name, added_by)
         VALUES
-        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
+        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
         RETURNING id
         """,
         scholar_id,
@@ -821,6 +837,8 @@ async def create_student(body: StudentCreateRequest):
         _clean_text(body.degree_type) or None,
         _to_year(body.enrollment_year),
         _to_year(body.expected_graduation_year),
+        _to_date(body.entry_date),
+        _to_date(body.paper_date_floor),
         _clean_text(body.status) or "在读",
         _clean_text(body.email) or None,
         _clean_text(body.phone) or None,
@@ -903,6 +921,10 @@ async def update_student(student_id: str, body: StudentUpdateRequest):
         patch["enrollment_year"] = _to_year(updates.get("enrollment_year"))
     if "expected_graduation_year" in updates:
         patch["expected_graduation_year"] = _to_year(updates.get("expected_graduation_year"))
+    if "entry_date" in updates:
+        patch["entry_date"] = _to_date(updates.get("entry_date"))
+    if "paper_date_floor" in updates:
+        patch["paper_date_floor"] = _to_date(updates.get("paper_date_floor"))
 
     if not patch:
         row = await _fetch_student_row(student_id)
