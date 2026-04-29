@@ -11,6 +11,7 @@ from typing import Any
 
 from app.crawlers.utils.dedup import compute_url_hash
 from app.services.scholar._data import SCHOLARS_FILE, _load_all_with_annotations
+from app.services.scholar._transformers import _build_profile_links, _profile_links_to_legacy_fields
 
 logger = logging.getLogger(__name__)
 
@@ -50,6 +51,14 @@ def _check_duplicate(name: str, university: str, email: str, phone: str) -> tupl
     return False, ""
 
 
+def _profile_link_fields(data: dict[str, Any]) -> tuple[dict[str, str], dict[str, Any]]:
+    custom_fields = dict(data.get("custom_fields") or {})
+    if "profile_links" in data:
+        custom_fields["profile_links"] = data.get("profile_links") or {}
+    profile_links = _build_profile_links(data, custom_fields)
+    return _profile_links_to_legacy_fields(profile_links), {"profile_links": profile_links}
+
+
 def _save_scholar(record: dict[str, Any]) -> None:
     """Append a new scholar record to scholars.json (atomic write)."""
     if SCHOLARS_FILE.exists():
@@ -80,7 +89,8 @@ def create_scholar(data: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
     university = data.get("university", "").strip()
     email = data.get("email", "").strip()
     phone = data.get("phone", "").strip()
-    profile_url = data.get("profile_url", "").strip()
+    legacy_link_fields, profile_custom_fields = _profile_link_fields(data)
+    profile_url = legacy_link_fields.get("profile_url", "")
 
     if not name:
         return None, "name is required"
@@ -139,10 +149,10 @@ def create_scholar(data: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
         "phone": phone,
         "office": data.get("office", ""),
         "profile_url": profile_url,
-        "lab_url": data.get("lab_url", ""),
-        "google_scholar_url": data.get("google_scholar_url", ""),
-        "dblp_url": data.get("dblp_url", ""),
-        "orcid": data.get("orcid", ""),
+        "lab_url": legacy_link_fields.get("lab_url", ""),
+        "google_scholar_url": legacy_link_fields.get("google_scholar_url", ""),
+        "dblp_url": legacy_link_fields.get("dblp_url", ""),
+        "orcid": legacy_link_fields.get("orcid", ""),
         # Education
         "phd_institution": data.get("phd_institution", ""),
         "phd_year": data.get("phd_year", ""),
@@ -173,7 +183,10 @@ def create_scholar(data: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
         "relation_updated_at": "",
         "recent_updates": [],
         # Custom fields (support enriched data)
-        "custom_fields": data.get("custom_fields") or {},
+        "custom_fields": {
+            **(data.get("custom_fields") or {}),
+            **profile_custom_fields,
+        },
         "project_category": first_project_category,
         "project_subcategory": first_project_subcategory,
     }

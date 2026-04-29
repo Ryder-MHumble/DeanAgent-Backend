@@ -26,12 +26,18 @@ BASE_URL = "https://api.twitterapi.io/twitter"
 
 def _load_source_config(source_id: str) -> dict[str, Any]:
     sources_dir = settings.SOURCES_DIR if settings.SOURCES_DIR else (BASE_DIR / "sources")
-    for yaml_file in sorted(Path(sources_dir).glob("*.yaml")):
+    for yaml_file in sorted(Path(sources_dir).rglob("*.yaml")):
+        if not yaml_file.is_file():
+            continue
         data = yaml.safe_load(yaml_file.read_text(encoding="utf-8")) or {}
         for source in data.get("sources", []) or []:
             if str(source.get("id") or "").strip() == source_id:
                 row = dict(source)
                 row.setdefault("source_file", yaml_file.name)
+                row.setdefault(
+                    "source_file_path",
+                    yaml_file.relative_to(Path(sources_dir)).as_posix(),
+                )
                 return row
     raise ValueError(f"Source not found in YAML: {source_id}")
 
@@ -223,7 +229,7 @@ def main() -> None:
     parser.add_argument(
         "--source-id",
         default="twitter_ai_kol_international",
-        help="Source ID in sources/*.yaml",
+        help="Source ID in sources/**/*.yaml",
     )
     parser.add_argument(
         "--accounts-file",

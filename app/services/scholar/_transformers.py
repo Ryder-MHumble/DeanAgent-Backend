@@ -7,6 +7,23 @@ from typing import Any
 _EMPTY_ADJUNCT: dict[str, str] = {
     "status": "", "type": "", "agreement_type": "", "agreement_period": "", "recommender": "",
 }
+_PROFILE_LINK_DEFAULTS: dict[str, Any] = {
+    "homepage": "",
+    "lab": "",
+    "github": "",
+    "linkedin": "",
+    "google_scholar": "",
+    "orcid": "",
+    "dblp": "",
+    "other": [],
+}
+_LEGACY_PROFILE_LINK_MAP: dict[str, str] = {
+    "homepage": "profile_url",
+    "lab": "lab_url",
+    "google_scholar": "google_scholar_url",
+    "dblp": "dblp_url",
+    "orcid": "orcid",
+}
 
 
 def _coerce_adjunct_supervisor(raw: Any) -> dict[str, str]:
@@ -108,7 +125,71 @@ def _coerce_custom_fields(raw: Any) -> dict[str, Any]:
     return {}
 
 
+def _normalize_profile_links(raw: Any) -> dict[str, Any]:
+    links = dict(_PROFILE_LINK_DEFAULTS)
+    value = raw
+    if hasattr(value, "model_dump"):
+        value = value.model_dump()
+    if not isinstance(value, dict):
+        return links
+
+    for key in ("homepage", "lab", "github", "linkedin", "google_scholar", "orcid", "dblp"):
+        links[key] = str(value.get(key) or "").strip()
+
+    other = value.get("other")
+    if isinstance(other, list):
+        links["other"] = [str(item).strip() for item in other if str(item).strip()]
+    return links
+
+
+def _profile_links_from_legacy_fields(item: dict[str, Any]) -> dict[str, Any]:
+    links = {
+        "homepage": str(item.get("profile_url") or "").strip(),
+        "lab": str(item.get("lab_url") or "").strip(),
+        "github": "",
+        "linkedin": "",
+        "google_scholar": str(item.get("google_scholar_url") or "").strip(),
+        "orcid": str(item.get("orcid") or "").strip(),
+        "dblp": "",
+        "other": [],
+    }
+    legacy_dblp = str(item.get("dblp_url") or "").strip()
+    legacy_dblp_lower = legacy_dblp.lower()
+    if "github.com" in legacy_dblp_lower:
+        links["github"] = legacy_dblp
+    elif "linkedin.com" in legacy_dblp_lower:
+        links["linkedin"] = legacy_dblp
+    elif "dblp.org" in legacy_dblp_lower:
+        links["dblp"] = legacy_dblp
+    elif legacy_dblp:
+        links["other"] = [legacy_dblp]
+    return links
+
+
+def _build_profile_links(item: dict[str, Any], custom_fields: dict[str, Any] | None = None) -> dict[str, Any]:
+    legacy_links = _profile_links_from_legacy_fields(item)
+    custom_links = _normalize_profile_links((custom_fields or {}).get("profile_links"))
+
+    merged = dict(legacy_links)
+    for key in ("homepage", "lab", "github", "linkedin", "google_scholar", "orcid", "dblp"):
+        if custom_links.get(key):
+            merged[key] = custom_links[key]
+    if custom_links.get("other"):
+        merged["other"] = custom_links["other"]
+    return merged
+
+
+def _profile_links_to_legacy_fields(profile_links: dict[str, Any]) -> dict[str, str]:
+    return {
+        legacy_key: str(profile_links.get(profile_key) or "").strip()
+        for profile_key, legacy_key in _LEGACY_PROFILE_LINK_MAP.items()
+    }
+
+
 def _to_list_item(item: dict[str, Any]) -> dict[str, Any]:
+    custom_fields = _coerce_custom_fields(item.get("custom_fields"))
+    profile_links = _build_profile_links(item, custom_fields)
+    legacy_profile_fields = _profile_links_to_legacy_fields(profile_links)
     project_tags = _coerce_project_tags(
         item.get("project_tags"),
         legacy_category=str(item.get("project_category") or ""),
@@ -130,7 +211,8 @@ def _to_list_item(item: dict[str, Any]) -> dict[str, Any]:
         "is_academician": bool(item.get("is_academician", False)),
         "research_areas": item.get("research_areas") or [],
         "email": item.get("email") or "",
-        "profile_url": item.get("profile_url") or "",
+        "profile_url": legacy_profile_fields["profile_url"],
+        "profile_links": profile_links,
         "is_potential_recruit": bool(item.get("is_potential_recruit", False)),
         "is_advisor_committee": bool(item.get("is_advisor_committee", False)),
         "adjunct_supervisor": _coerce_adjunct_supervisor(item.get("adjunct_supervisor")),
@@ -142,6 +224,9 @@ def _to_list_item(item: dict[str, Any]) -> dict[str, Any]:
 
 
 def _to_detail(item: dict[str, Any]) -> dict[str, Any]:
+    custom_fields = _coerce_custom_fields(item.get("custom_fields"))
+    profile_links = _build_profile_links(item, custom_fields)
+    legacy_profile_fields = _profile_links_to_legacy_fields(profile_links)
     project_tags = _coerce_project_tags(
         item.get("project_tags"),
         legacy_category=str(item.get("project_category") or ""),
@@ -171,11 +256,12 @@ def _to_detail(item: dict[str, Any]) -> dict[str, Any]:
         "email": item.get("email") or "",
         "phone": item.get("phone") or "",
         "office": item.get("office") or "",
-        "profile_url": item.get("profile_url") or "",
-        "lab_url": item.get("lab_url") or "",
-        "google_scholar_url": item.get("google_scholar_url") or "",
-        "dblp_url": item.get("dblp_url") or "",
-        "orcid": item.get("orcid") or "",
+        "profile_url": legacy_profile_fields["profile_url"],
+        "lab_url": legacy_profile_fields["lab_url"],
+        "google_scholar_url": legacy_profile_fields["google_scholar_url"],
+        "dblp_url": legacy_profile_fields["dblp_url"],
+        "orcid": legacy_profile_fields["orcid"],
+        "profile_links": profile_links,
         "phd_institution": item.get("phd_institution") or "",
         "phd_year": item.get("phd_year") or "",
         "education": item.get("education") or [],
@@ -202,5 +288,5 @@ def _to_detail(item: dict[str, Any]) -> dict[str, Any]:
         "relation_updated_at": item.get("relation_updated_at") or "",
         "recent_updates": [],
         "tags": item.get("tags") or [],
-        "custom_fields": _coerce_custom_fields(item.get("custom_fields")),
+        "custom_fields": custom_fields,
     }

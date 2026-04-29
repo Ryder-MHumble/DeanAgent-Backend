@@ -6,6 +6,10 @@ from typing import Any
 
 from openpyxl import Workbook
 
+from app.crawlers.parsers._talent_scout_common import (
+    is_obvious_non_person_candidate_name,
+)
+
 COMMON_SOURCE_COLUMNS = [
     "candidate_name",
     "university",
@@ -197,6 +201,8 @@ def _build_source_rows(*, config: dict[str, Any], run: dict[str, Any]) -> list[d
     for item in list(run.get("items_dict") or []):
         signal = dict(item.get("extra", {}).get("talent_signal") or {})
         candidate_name = signal.get("candidate_name") if signal else item.get("title")
+        if candidate_name and is_obvious_non_person_candidate_name(candidate_name):
+            continue
         row = {
             "candidate_name": candidate_name or None,
             "university": signal.get("university"),

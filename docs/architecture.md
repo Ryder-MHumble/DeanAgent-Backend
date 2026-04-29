@@ -84,7 +84,7 @@ graph TB
 ### 核心数据流
 
 ```
-sources/*.yaml
+sources/**/*.yaml
      ↓ 配置读取
 APScheduler（2h/4h/daily/weekly/monthly 触发）
      ↓
@@ -109,7 +109,7 @@ REST API /api/v1  ←  4 个消费端
 
 ### 2.1 YAML 配置驱动设计
 
-所有信源以 YAML 声明，新增标准信源零代码，配置文件位于 `sources/*.yaml`（每维度一个文件）：
+所有信源以 YAML 声明，新增标准信源零代码，配置文件位于 `sources/**/*.yaml`（按领域分层目录组织）：
 
 ```yaml
 - id: "gov_cn_zhengce"

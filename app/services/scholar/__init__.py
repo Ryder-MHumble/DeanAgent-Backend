@@ -32,7 +32,13 @@ from app.services.scholar._filters import (
     _apply_filters,
     get_institution_classification_map,
 )
-from app.services.scholar._transformers import _to_detail, _to_list_item
+from app.services.scholar._transformers import (
+    _build_profile_links,
+    _normalize_profile_links,
+    _profile_links_to_legacy_fields,
+    _to_detail,
+    _to_list_item,
+)
 from app.services.scholar._create import import_scholars_excel, _parse_excel_row  # noqa: F401
 from app.services.scholar._fast_query import query_scholar_list_fast
 
@@ -130,6 +136,112 @@ def _normalize_event_tags(raw: Any) -> list[dict[str, str]]:
             }
         )
     return tags
+
+
+def _profile_links_from_patch(data: dict[str, Any]) -> dict[str, Any]:
+    """Extract only explicitly supplied profile link fields from a PATCH body."""
+    patch: dict[str, Any] = {}
+    incoming = data.get("profile_links")
+    if hasattr(incoming, "model_dump"):
+        incoming = incoming.model_dump(exclude_none=True)
+    if isinstance(incoming, dict):
+        for key in ("homepage", "lab", "github", "linkedin", "google_scholar", "orcid", "dblp"):
+            if key in incoming:
+                patch[key] = str(incoming.get(key) or "").strip()
+        if "other" in incoming:
+            other = incoming.get("other")
+            patch["other"] = [
+                str(item).strip()
+                for item in (other or [])
+                if str(item).strip()
+            ] if isinstance(other, list) else []
+
+    legacy_map = {
+        "profile_url": "homepage",
+        "lab_url": "lab",
+        "google_scholar_url": "google_scholar",
+        "orcid": "orcid",
+    }
+    for legacy_key, profile_key in legacy_map.items():
+        if legacy_key in data:
+            patch[profile_key] = str(data.get(legacy_key) or "").strip()
+
+    if "dblp_url" in data:
+        url = str(data.get("dblp_url") or "").strip()
+        lower = url.lower()
+        if not url:
+            patch["dblp"] = ""
+        elif "github.com" in lower:
+            patch["github"] = url
+        elif "linkedin.com" in lower:
+            patch["linkedin"] = url
+        elif "dblp.org" in lower:
+            patch["dblp"] = url
+        else:
+            patch["other"] = [url]
+    return patch
+
+
+def _merge_profile_links(current_row: dict[str, Any], updates: dict[str, Any]) -> dict[str, Any]:
+    """Merge profile link updates into the current unified link object."""
+    current_custom_fields = dict(current_row.get("custom_fields") or {})
+    merged = _build_profile_links(current_row, current_custom_fields)
+    patch = _profile_links_from_patch(updates)
+    for key, value in patch.items():
+        merged[key] = value
+    return _normalize_profile_links(merged)
+
+
+def _profile_link_update_payload(
+    data: dict[str, Any],
+    current_row: dict[str, Any] | None = None,
+) -> tuple[dict[str, str], dict[str, Any]]:
+    """Return legacy link columns and custom_fields merge payload for profile_links."""
+    if current_row is not None:
+        profile_links = _merge_profile_links(current_row, data)
+        return _profile_links_to_legacy_fields(profile_links), {"profile_links": profile_links}
+
+    custom_fields = dict(data.get("custom_fields") or {})
+    if "profile_links" in data:
+        incoming = data.get("profile_links") or {}
+        custom_fields["profile_links"] = (
+            incoming.model_dump(exclude_none=True)
+            if hasattr(incoming, "model_dump")
+            else incoming
+        )
+    profile_links = _build_profile_links(data, custom_fields)
+    return _profile_links_to_legacy_fields(profile_links), {"profile_links": profile_links}
+
+
+async def _get_current_scholar_link_row(url_hash: str) -> dict[str, Any] | None:
+    """Load current link fields before applying a partial profile_links patch."""
+    try:
+        from app.db.client import get_client as _gc  # noqa: PLC0415
+
+        cur = await (
+            _gc()
+            .table("scholars")
+            .select("profile_url,lab_url,google_scholar_url,dblp_url,orcid,custom_fields")
+            .eq("id", url_hash)
+            .execute()
+        )
+        if cur.data:
+            return dict(cur.data[0])
+    except Exception as exc:
+        logger.warning("DB prefetch for scholar profile links failed for %s: %s", url_hash, exc)
+
+    result = _find_raw_file_by_hash(url_hash)
+    if result is None:
+        return None
+    file_path, item_idx = result
+    try:
+        with open(file_path, encoding="utf-8") as f:
+            data = json.load(f)
+        scholar = data.get("scholars", [])[item_idx]
+        return scholar if isinstance(scholar, dict) else None
+    except Exception as exc:
+        logger.warning("JSON prefetch for scholar profile links failed for %s: %s", url_hash, exc)
+        return None
 
 
 def _first_project_tag(tags: list[dict[str, str]]) -> tuple[str, str]:
@@ -635,7 +747,8 @@ async def create_scholar(data: dict[str, Any]) -> tuple[dict[str, Any] | None, s
     university = (data.get("university") or "").strip()
     email = (data.get("email") or "").strip()
     phone = (data.get("phone") or "").strip()
-    profile_url = (data.get("profile_url") or "").strip()
+    legacy_link_fields, profile_custom_fields = _profile_link_update_payload(data)
+    profile_url = legacy_link_fields.get("profile_url", "")
     department = (data.get("department") or "").strip()
 
     dept_part = f"/{department}" if department else ""
@@ -700,10 +813,10 @@ async def create_scholar(data: dict[str, Any]) -> tuple[dict[str, Any] | None, s
             "phone": phone,
             "office": data.get("office") or "",
             "profile_url": profile_url,
-            "lab_url": data.get("lab_url") or "",
-            "google_scholar_url": data.get("google_scholar_url") or "",
-            "dblp_url": data.get("dblp_url") or "",
-            "orcid": data.get("orcid") or "",
+            "lab_url": legacy_link_fields.get("lab_url", ""),
+            "google_scholar_url": legacy_link_fields.get("google_scholar_url", ""),
+            "dblp_url": legacy_link_fields.get("dblp_url", ""),
+            "orcid": legacy_link_fields.get("orcid", ""),
             "phd_institution": data.get("phd_institution") or "",
             "phd_year": int(data["phd_year"]) if data.get("phd_year") else None,
             "education": data.get("education") or [],
@@ -737,6 +850,10 @@ async def create_scholar(data: dict[str, Any]) -> tuple[dict[str, Any] | None, s
             "metrics_updated_at": None,
             "project_category": first_project_category,
             "project_subcategory": first_project_subcategory,
+            "custom_fields": {
+                **(data.get("custom_fields") or {}),
+                **profile_custom_fields,
+            },
         }
         insert_record = record
         try:
@@ -1486,6 +1603,33 @@ async def update_scholar_basic(url_hash: str, updates: dict[str, Any]) -> dict[s
             ]
         else:
             db_updates[key] = value
+    link_keys = {
+        "profile_links",
+        "profile_url",
+        "lab_url",
+        "google_scholar_url",
+        "dblp_url",
+        "orcid",
+    }
+    if link_keys & set(db_updates):
+        current_link_row = await _get_current_scholar_link_row(url_hash)
+        if current_link_row is not None:
+            legacy_link_fields, profile_custom_fields = _profile_link_update_payload(
+                db_updates,
+                current_link_row,
+            )
+            db_updates.update(legacy_link_fields)
+            db_updates["custom_fields"] = {
+                **(db_updates.get("custom_fields") or {}),
+                **profile_custom_fields,
+            }
+            db_updates.pop("profile_links", None)
+        else:
+            logger.warning(
+                "Skipping profile_links merge for %s because current row was not found",
+                url_hash,
+            )
+            db_updates.pop("profile_links", None)
     db_updates["updated_at"] = datetime.now(UTC).isoformat()
 
     # custom_fields 浅合并

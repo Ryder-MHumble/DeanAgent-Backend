@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from typing import Any
 
 from app.crawlers.base import CrawledItem
@@ -11,6 +12,55 @@ _SIGNAL_TYPE_BY_ENTITY_FAMILY = {
 }
 
 _ALLOWED_RECORD_STATUSES = {"structured", "partial", "needs_review", "blocked"}
+
+_NON_PERSON_CANDIDATE_KEYWORDS = (
+    "报名",
+    "获奖名单",
+    "名单公示",
+    "名单查询",
+    "获奖公示",
+    "入选名单",
+    "候选名单",
+    "公告",
+    "通知",
+    "查询",
+    "下载",
+    "关于",
+    "简介",
+    "章程",
+    "规程",
+    "规则",
+    "赛程",
+    "日程",
+    "指南",
+    "说明",
+    "文档",
+    "标准",
+    "环境",
+    "系统",
+    "证书",
+    "登录",
+    "注册",
+    "首页",
+    "新闻",
+    "活动",
+    "教师提升",
+    "支持计划",
+    "linux",
+    "award:",
+    "winner list",
+    "winners",
+    "leaderboard",
+    "ranking",
+    "rankings",
+    "registration",
+    "notice",
+    "announcement",
+    "download",
+    "about",
+    "schedule",
+    "rules",
+)
 
 
 def get_signal_type(entity_family: str) -> str:
@@ -32,6 +82,30 @@ def get_track(config: dict[str, Any]) -> str:
                 return value.strip()
 
     return ""
+
+
+def is_obvious_non_person_candidate_name(value: Any) -> bool:
+    """Return true for page titles/navigation text accidentally parsed as names."""
+    candidate = re.sub(r"\s+", " ", str(value or "")).strip()
+    if not candidate:
+        return False
+
+    normalized = candidate.lower()
+    if normalized.startswith(("http://", "https://", "www.")):
+        return True
+    if normalized.startswith("team ") or normalized.endswith(" team"):
+        return True
+    if any(keyword in normalized for keyword in _NON_PERSON_CANDIDATE_KEYWORDS):
+        return True
+    if len(candidate) > 60:
+        return True
+
+    cjk_chars = re.findall(r"[\u4e00-\u9fff]", candidate)
+    has_latin = bool(re.search(r"[A-Za-z]", candidate))
+    if cjk_chars and not has_latin and len(candidate) > 8:
+        return True
+
+    return False
 
 
 def build_talent_signal(

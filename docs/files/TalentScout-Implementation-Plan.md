@@ -91,7 +91,7 @@ app/crawlers/parsers/
 
 ```
 sources/
-└── talent_scout.yaml          [新增] 人才猎头信源配置
+└── talent/talent_scout.yaml   [新增] 人才猎头信源配置
 ```
 
 ### 3.3 新增/修改文件
@@ -310,7 +310,7 @@ _CUSTOM_MAP: dict[str, str] = {
 }
 ```
 
-### 6.2 `sources/talent_scout.yaml`
+### 6.2 `sources/talent/talent_scout.yaml`
 
 ```yaml
 dimension: "talent_scout"
@@ -440,7 +440,7 @@ sources:
 - 再逐个添加其他赛事
 
 ### Step 6: YAML 配置 & 注册
-- 创建 `sources/talent_scout.yaml`
+- 创建 `sources/talent/talent_scout.yaml`
 - 修改 `app/crawlers/registry.py` 注册新 parsers
 
 ### Step 7: API 端点

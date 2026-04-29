@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-21T10:34:48.507771+00:00",
+  "generated_at": "2026-04-28T09:24:38.541742+00:00",
   "routes": [
     {
       "methods": [
@@ -1739,6 +1739,149 @@
       ],
       "summary": "更新学生",
       "name": "update_student",
+      "deprecated": false
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/students/{student_id}/papers",
+      "service": "students",
+      "tags": [
+        "students"
+      ],
+      "summary": "学生论文列表",
+      "name": "list_student_papers",
+      "deprecated": false
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/students/{student_id}/papers",
+      "service": "students",
+      "tags": [
+        "students"
+      ],
+      "summary": "新增学生论文",
+      "name": "create_student_paper",
+      "deprecated": false
+    },
+    {
+      "methods": [
+        "DELETE"
+      ],
+      "path": "/api/v1/students/{student_id}/papers/{paper_uid}",
+      "service": "students",
+      "tags": [
+        "students"
+      ],
+      "summary": "删除学生论文",
+      "name": "delete_student_paper",
+      "deprecated": false
+    },
+    {
+      "methods": [
+        "PUT"
+      ],
+      "path": "/api/v1/students/{student_id}/papers/{paper_uid}",
+      "service": "students",
+      "tags": [
+        "students"
+      ],
+      "summary": "更新学生论文",
+      "name": "update_student_paper",
+      "deprecated": false
+    },
+    {
+      "methods": [
+        "PATCH"
+      ],
+      "path": "/api/v1/students/{student_id}/papers/{paper_uid}/compliance",
+      "service": "students",
+      "tags": [
+        "students"
+      ],
+      "summary": "兼容接口：更新论文（不再存储合规字段）",
+      "name": "patch_student_paper_compliance",
+      "deprecated": false
+    },
+    {
+      "methods": [
+        "PATCH"
+      ],
+      "path": "/api/v1/students/{student_id}/publication-candidates/{candidate_id}",
+      "service": "students",
+      "tags": [
+        "students"
+      ],
+      "summary": "编辑学生候选成果客观字段",
+      "name": "patch_student_publication_candidate",
+      "deprecated": false
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/students/{student_id}/publication-candidates/{candidate_id}/confirm",
+      "service": "students",
+      "tags": [
+        "students"
+      ],
+      "summary": "确认学生候选成果",
+      "name": "confirm_student_publication_candidate",
+      "deprecated": false
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/students/{student_id}/publication-candidates/{candidate_id}/reject",
+      "service": "students",
+      "tags": [
+        "students"
+      ],
+      "summary": "拒绝学生候选成果",
+      "name": "reject_student_publication_candidate",
+      "deprecated": false
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/v1/students/{student_id}/publication-candidates/{candidate_id}/reopen",
+      "service": "students",
+      "tags": [
+        "students"
+      ],
+      "summary": "恢复学生候选成果到待审核",
+      "name": "reopen_student_publication_candidate",
+      "deprecated": false
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/students/{student_id}/publication-workspace",
+      "service": "students",
+      "tags": [
+        "students"
+      ],
+      "summary": "学生成果审核工作台",
+      "name": "get_student_publication_workspace",
+      "deprecated": false
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/v1/students/{student_id}/publications",
+      "service": "students",
+      "tags": [
+        "students"
+      ],
+      "summary": "学生论文列表（兼容别名）",
+      "name": "list_student_publications",
       "deprecated": false
     },
     {

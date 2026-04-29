@@ -23,6 +23,7 @@ from app.crawlers.parsers._talent_scout_common import (
     extract_records,
     fetch_options,
     get_track,
+    is_obvious_non_person_candidate_name,
 )
 from app.crawlers.utils.http_client import fetch_bytes, fetch_json, fetch_page
 
@@ -84,6 +85,8 @@ class CompetitionSourceCrawler(BaseCrawler):
             return await self._fetch_casp_groups()
         if adapter_key == "competition_history_json":
             return await self._fetch_competition_history_json()
+        if adapter_key == "talent_signal_json":
+            return await self._fetch_talent_signal_json()
 
         try:
             payload = await fetch_json(self._source_url(), **fetch_options(self.config))
@@ -271,13 +274,17 @@ class CompetitionSourceCrawler(BaseCrawler):
             confidence=0.66,
             identity_hints={
                 key: value
-                for key, value in {
-                    "team_id": detail.get("id") or record.get("team_id"),
-                    "primary_alias": self._clean(detail.get("primary_alias")),
-                    "aliases": detail.get("aliases") if isinstance(detail.get("aliases"), list) else None,
-                    "country": self._clean(detail.get("country")),
-                    "academic": detail.get("academic"),
-                }.items()
+                    for key, value in {
+                        "team_id": detail.get("id") or record.get("team_id"),
+                        "primary_alias": self._clean(detail.get("primary_alias")),
+                        "aliases": (
+                            detail.get("aliases")
+                            if isinstance(detail.get("aliases"), list)
+                            else None
+                        ),
+                        "country": self._clean(detail.get("country")),
+                        "academic": detail.get("academic"),
+                    }.items()
                 if value not in ("", None, [])
             },
             source_metrics={
@@ -285,13 +292,23 @@ class CompetitionSourceCrawler(BaseCrawler):
                 for key, value in {
                     "ranking": ranking,
                     "points": record.get("points"),
-                    "rating_points": rating.get("rating_points") if isinstance(rating, dict) else None,
-                    "country_place": rating.get("country_place") if isinstance(rating, dict) else None,
-                    "organizer_points": rating.get("organizer_points") if isinstance(rating, dict) else None,
+                    "rating_points": (
+                        rating.get("rating_points") if isinstance(rating, dict) else None
+                    ),
+                    "country_place": (
+                        rating.get("country_place") if isinstance(rating, dict) else None
+                    ),
+                    "organizer_points": (
+                        rating.get("organizer_points") if isinstance(rating, dict) else None
+                    ),
                 }.items()
                 if value not in ("", None)
             },
-            evidence_title=self.config.get("competition_name") or self.config.get("name") or self.source_id,
+            evidence_title=(
+                self.config.get("competition_name")
+                or self.config.get("name")
+                or self.source_id
+            ),
             notes=notes,
         )
         return build_crawled_item(
@@ -317,7 +334,13 @@ class CompetitionSourceCrawler(BaseCrawler):
         for source_ref in self._source_refs():
             source_url = str(source_ref["url"])
             html = await fetch_page(source_url, **fetch_options(self.config))
-            items.extend(self._parse_casp_groups_html(html, source_url=source_url, source_ref=source_ref))
+            items.extend(
+                self._parse_casp_groups_html(
+                    html,
+                    source_url=source_url,
+                    source_ref=source_ref,
+                )
+            )
 
         if items:
             return items
@@ -375,6 +398,49 @@ class CompetitionSourceCrawler(BaseCrawler):
             build_review_item(
                 self.config,
                 notes="no competition history items mapped into talent rows",
+                signal_type="competition",
+            )
+        ]
+
+    async def _fetch_talent_signal_json(self) -> list[CrawledItem]:
+        data_path = self._resolve_local_results_path(self.config.get("local_results_path"))
+        if data_path is None:
+            return [
+                build_blocked_item(
+                    self.config,
+                    notes="local_results_path is required for talent_signal_json",
+                    signal_type="competition",
+                )
+            ]
+
+        try:
+            payload = json.loads(data_path.read_text(encoding="utf-8"))
+        except Exception as exc:  # noqa: BLE001
+            return [
+                build_blocked_item(
+                    self.config,
+                    notes=str(exc),
+                    signal_type="competition",
+                )
+            ]
+
+        source_ids = self._configured_local_source_ids()
+        rows = extract_records(payload)
+        items: list[CrawledItem] = []
+        for row in rows:
+            row_source_id = self._clean(row.get("source_id"))
+            if source_ids and row_source_id not in source_ids:
+                continue
+            item = self._talent_signal_row_to_competition_item(row)
+            if item is not None:
+                items.append(item)
+
+        if items:
+            return items
+        return [
+            build_review_item(
+                self.config,
+                notes="no local talent signal rows matched current source",
                 signal_type="competition",
             )
         ]
@@ -732,7 +798,7 @@ class CompetitionSourceCrawler(BaseCrawler):
         items: list[CrawledItem] = []
         for row in soup.select(row_selector):
             candidate_name = self._extract_text(row, selectors.get("candidate_name"))
-            if not candidate_name:
+            if not candidate_name or is_obvious_non_person_candidate_name(candidate_name):
                 continue
 
             university = self._extract_text(row, selectors.get("university"))
@@ -816,7 +882,7 @@ class CompetitionSourceCrawler(BaseCrawler):
         source_url: str,
         source_ref: dict[str, Any],
     ) -> CrawledItem | None:
-        if not candidate_name:
+        if not candidate_name or is_obvious_non_person_candidate_name(candidate_name):
             return None
 
         competition_name = (
@@ -1038,6 +1104,83 @@ class CompetitionSourceCrawler(BaseCrawler):
 
         return items
 
+    def _talent_signal_row_to_competition_item(
+        self,
+        record: dict[str, Any],
+    ) -> CrawledItem | None:
+        candidate_name = self._clean(record.get("candidate_name"))
+        evidence_url = self._clean(record.get("evidence_url")) or self._source_url()
+        if (
+            not candidate_name
+            or not evidence_url
+            or is_obvious_non_person_candidate_name(candidate_name)
+        ):
+            return None
+
+        competition_name = (
+            self._clean(record.get("source_name"))
+            or self.config.get("competition_name")
+            or self.config.get("name")
+            or self.source_id
+        )
+        original_status = self._clean(record.get("record_status"))
+        record_status = "structured" if original_status == "verified" else "partial"
+        season_year = self._extract_year(record.get("time_info"))
+        award_level = self._clean(record.get("result_label"))
+        ranking = self._clean(record.get("ranking"))
+        team_name = self._clean(record.get("team_name"))
+        notes = self._clean(record.get("notes"))
+
+        talent_signal = build_talent_signal(
+            signal_type="competition",
+            record_status=record_status,
+            evidence_url=evidence_url,
+            candidate_name=candidate_name,
+            university=self._clean(record.get("university")),
+            department=self._clean(record.get("department")),
+            email=self._clean(record.get("email")),
+            track=self._clean(record.get("track")) or get_track(self.config),
+            confidence=float(record.get("confidence", 0.65) or 0.65),
+            identity_hints={
+                key: value
+                for key, value in {
+                    "original_source_id": self._clean(record.get("source_id")),
+                    "team_name": team_name,
+                    "source_platform": self._clean(record.get("source_platform")),
+                }.items()
+                if value
+            },
+            source_metrics={
+                key: value
+                for key, value in {
+                    "ranking": ranking,
+                    "award_level": award_level,
+                    "time_info": self._clean(record.get("time_info")),
+                }.items()
+                if value
+            },
+            evidence_title=self._clean(record.get("evidence_title")) or str(competition_name),
+            notes=notes,
+        )
+
+        return build_crawled_item(
+            self.config,
+            title=candidate_name,
+            url=evidence_url,
+            talent_signal=talent_signal,
+            extra={
+                "competition_name": competition_name,
+                "season_year": season_year,
+                "award_level": award_level,
+                "ranking": ranking,
+                "team_name": team_name,
+                "notes": notes,
+                "time_info": self._clean(record.get("time_info")),
+                "original_source_id": self._clean(record.get("source_id")),
+                "original_record_status": original_status,
+            },
+        )
+
     def _competition_history_to_items(self, competition: dict[str, Any]) -> list[CrawledItem]:
         items: list[CrawledItem] = []
         competition_name = self._clean(competition.get("name")) or (
@@ -1215,6 +1358,17 @@ class CompetitionSourceCrawler(BaseCrawler):
                 refs.append({"url": url})
         return refs
 
+    def _configured_local_source_ids(self) -> set[str]:
+        raw_value = self.config.get("local_source_ids")
+        values: list[str] = []
+        if isinstance(raw_value, str):
+            values = [raw_value]
+        elif isinstance(raw_value, list):
+            values = [value for value in raw_value if isinstance(value, str)]
+        if not values:
+            values = [self.source_id]
+        return {value.strip() for value in values if value.strip()}
+
     @staticmethod
     def _extract_text(row: Any, selector: str | None) -> str:
         if not selector:
@@ -1229,6 +1383,11 @@ class CompetitionSourceCrawler(BaseCrawler):
         if value is None:
             return ""
         return str(value).strip()
+
+    @staticmethod
+    def _extract_year(value: Any) -> int | None:
+        match = re.search(r"(19|20)\d{2}", str(value or ""))
+        return int(match.group(0)) if match else None
 
     @staticmethod
     def _table_rows(table: Any) -> list[list[str]]:
@@ -1291,7 +1450,7 @@ class CompetitionSourceCrawler(BaseCrawler):
         names: list[str] = []
         for piece in pieces:
             name = cls._clean_candidate_name(piece)
-            if name:
+            if name and not is_obvious_non_person_candidate_name(name):
                 names.append(name)
         return names
 

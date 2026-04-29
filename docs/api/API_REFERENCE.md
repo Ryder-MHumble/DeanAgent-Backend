@@ -1,22 +1,22 @@
 # API 参考总览
 
-- 生成时间（UTC）：`2026-04-21 10:34:48Z`
-- API 路由总数：`139`
-- Method 分布：`DELETE` 9、`GET` 95、`PATCH` 12、`POST` 23
-- 信源总数：`268`
-- 启用信源：`191`
+- 生成时间（UTC）：`2026-04-28 09:24:38Z`
+- API 路由总数：`150`
+- Method 分布：`DELETE` 10、`GET` 98、`PATCH` 14、`POST` 27、`PUT` 1
+- 信源总数：`303`
+- 启用信源：`196`
 
 ## 服务清单
 
 | 服务 | 路由数 | 典型用途 |
 |---|---:|---|
+| `students` | 18 | students |
 | `scholars` | 15 | scholars |
 | `events` | 14 | events |
 | `sources` | 11 | sources |
 | `institutions` | 10 | institutions |
 | `crawler` | 8 | crawler-control |
 | `projects` | 8 | projects |
-| `students` | 7 | students |
 | `venues` | 7 | venues |
 | `llm-tracking` | 6 | llm-tracking |
 | `intel/personnel` | 5 | intel / personnel-intel |
@@ -39,15 +39,16 @@
 
 | 维度 | 中文名 | 总数 | 启用 |
 |---|---|---:|---:|
-| `universities` | 高校与科研生态 | 84 | 74 |
+| `universities` | 高校与科研生态 | 84 | 76 |
 | `personnel` | 组织人事动态 | 54 | 54 |
 | `scholars` | 学者与师资库 | 49 | 0 |
-| `technology` | 技术前沿与创新 | 34 | 27 |
+| `talent_scout` | 人才候选池 | 35 | 0 |
+| `technology` | - | 34 | 28 |
 | `beijing_policy` | 北京市政策治理 | 16 | 15 |
-| `industry` | 产业与投融资 | 10 | 6 |
+| `industry` | 产业与投融资 | 10 | 7 |
 | `national_policy` | 国家政策治理 | 8 | 8 |
 | `talent` | 人才与学术发展 | 7 | 4 |
-| `events` | 学术会议与活动 | 6 | 3 |
+| `events` | 学术会议与活动 | 6 | 4 |
 
 ## 信源分组 TOP 20
 
@@ -55,6 +56,7 @@
 |---|---:|
 | `university_news` | 61 |
 | `university_leadership_official` | 50 |
+| `talent_competitions` | 26 |
 | `policy` | 24 |
 | `tsinghua` | 13 |
 | `company_blogs` | 12 |
@@ -62,6 +64,7 @@
 | `pku` | 9 |
 | `academic` | 8 |
 | `news` | 8 |
+| `talent_papers` | 7 |
 | `international_media` | 7 |
 | `nju` | 5 |
 | `sjtu` | 5 |
@@ -71,8 +74,6 @@
 | `tracking` | 4 |
 | `community` | 4 |
 | `awards` | 4 |
-| `news_personnel` | 3 |
-| `cas_iscas` | 3 |
 
 ## 信源标签 TOP 30
 
@@ -84,8 +85,10 @@
 | `leadership` | 50 |
 | `faculty` | 49 |
 | `news` | 44 |
+| `talent_scout` | 35 |
 | `auto` | 29 |
 | `ai` | 26 |
+| `competition` | 26 |
 | `policy` | 25 |
 | `company_blog` | 17 |
 | `cs` | 16 |
@@ -101,13 +104,11 @@
 | `industry` | 8 |
 | `nju` | 7 |
 | `se` | 7 |
+| `paper` | 7 |
 | `international` | 7 |
 | `domestic` | 6 |
 | `sjtu` | 6 |
 | `ustc` | 6 |
-| `bjkw` | 5 |
-| `science` | 5 |
-| `beijing` | 5 |
 
 ## Deprecated 路由
 
@@ -291,16 +292,6 @@
 | `GET` | `/api/v1/llm-tracking/health` | `llm-tracking` |  |
 | `GET` | `/api/v1/llm-tracking/summary` | `llm-tracking` |  |
 
-> 字段补充（2026-04-09）：`/api/v1/llm-tracking/*` 在不破坏兼容的前提下新增以下记录字段。
->
-> - `provider`: 调用提供方（当前重点监控 `openrouter`）。
-> - `cost_source`: 费用来源，取值 `provider` / `pricing_map` / `legacy_recorded` / `unpriced`。
-> - `provider_cost_usd`: Provider 回传费用（若有）。
-> - `effective_cost_usd`: 统计口径使用的最终费用。
-> - `unpriced` 语义：表示该调用无法可靠定价，不计入 `total_cost_usd` 与均次成本分母。
->
-> 控制台专用接口与返回结构见：[CONSOLE_API_MONITOR.md](./CONSOLE_API_MONITOR.md)。
-
 ### `projects`
 
 | Method | Path | Tags | Summary |
@@ -394,6 +385,17 @@
 | `DELETE` | `/api/v1/students/{student_id}` | `students` | 删除学生 |
 | `GET` | `/api/v1/students/{student_id}` | `students` | 学生详情 |
 | `PATCH` | `/api/v1/students/{student_id}` | `students` | 更新学生 |
+| `GET` | `/api/v1/students/{student_id}/papers` | `students` | 学生论文列表 |
+| `POST` | `/api/v1/students/{student_id}/papers` | `students` | 新增学生论文 |
+| `DELETE` | `/api/v1/students/{student_id}/papers/{paper_uid}` | `students` | 删除学生论文 |
+| `PUT` | `/api/v1/students/{student_id}/papers/{paper_uid}` | `students` | 更新学生论文 |
+| `PATCH` | `/api/v1/students/{student_id}/papers/{paper_uid}/compliance` | `students` | 兼容接口：更新论文（不再存储合规字段） |
+| `PATCH` | `/api/v1/students/{student_id}/publication-candidates/{candidate_id}` | `students` | 编辑学生候选成果客观字段 |
+| `POST` | `/api/v1/students/{student_id}/publication-candidates/{candidate_id}/confirm` | `students` | 确认学生候选成果 |
+| `POST` | `/api/v1/students/{student_id}/publication-candidates/{candidate_id}/reject` | `students` | 拒绝学生候选成果 |
+| `POST` | `/api/v1/students/{student_id}/publication-candidates/{candidate_id}/reopen` | `students` | 恢复学生候选成果到待审核 |
+| `GET` | `/api/v1/students/{student_id}/publication-workspace` | `students` | 学生成果审核工作台 |
+| `GET` | `/api/v1/students/{student_id}/publications` | `students` | 学生论文列表（兼容别名） |
 
 ### `venues`
 

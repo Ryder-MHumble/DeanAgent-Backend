@@ -161,7 +161,10 @@ def _source_type(config: dict[str, Any]) -> str:
 def _load_all_sources() -> list[dict[str, Any]]:
     sources_dir = settings.SOURCES_DIR if settings.SOURCES_DIR else (BASE_DIR / "sources")
     all_sources: list[dict[str, Any]] = []
-    for yaml_file in sorted(Path(sources_dir).glob("*.yaml")):
+    root = Path(sources_dir)
+    for yaml_file in sorted(root.rglob("*.yaml")):
+        if not yaml_file.is_file():
+            continue
         data = yaml.safe_load(yaml_file.read_text(encoding="utf-8")) or {}
         dimension = data.get("dimension", yaml_file.stem)
         dimension_name = data.get("dimension_name")
@@ -175,6 +178,7 @@ def _load_all_sources() -> list[dict[str, Any]]:
             source.setdefault("dimension_name", dimension_name)
             source.setdefault("dimension_description", desc)
             source.setdefault("source_file", yaml_file.name)
+            source.setdefault("source_file_path", yaml_file.relative_to(root).as_posix())
             if "keyword_filter" not in source:
                 source["keyword_filter"] = default_keywords
             if "keyword_blacklist" not in source:

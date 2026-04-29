@@ -30,12 +30,19 @@ _BASE_LIST_SELECT_FIELDS: tuple[str, ...] = (
     "research_areas",
     "email",
     "profile_url",
-    "is_potential_recruit",
-    "is_advisor_committee",
-    "adjunct_supervisor",
-    "project_category",
-    "project_subcategory",
 )
+
+_OPTIONAL_LIST_SELECT_FIELDS: dict[str, str] = {
+    "lab_url": "''::text AS lab_url",
+    "google_scholar_url": "''::text AS google_scholar_url",
+    "dblp_url": "''::text AS dblp_url",
+    "orcid": "''::text AS orcid",
+    "is_potential_recruit": "FALSE AS is_potential_recruit",
+    "is_advisor_committee": "FALSE AS is_advisor_committee",
+    "adjunct_supervisor": "'{}'::jsonb AS adjunct_supervisor",
+    "project_category": "''::text AS project_category",
+    "project_subcategory": "''::text AS project_subcategory",
+}
 
 
 def _normalize_exact_text(value: str) -> str:
@@ -62,6 +69,8 @@ async def _get_scholar_columns() -> set[str]:
 async def _build_list_select_sql() -> str:
     scholar_cols = await _get_scholar_columns()
     fields = list(_BASE_LIST_SELECT_FIELDS)
+    for column, fallback_sql in _OPTIONAL_LIST_SELECT_FIELDS.items():
+        fields.append(column if column in scholar_cols else fallback_sql)
     if "project_tags" in scholar_cols:
         fields.append("project_tags")
     else:
@@ -78,6 +87,10 @@ async def _build_list_select_sql() -> str:
         fields.append("is_cobuild_scholar")
     else:
         fields.append("FALSE AS is_cobuild_scholar")
+    if "custom_fields" in scholar_cols:
+        fields.append("custom_fields")
+    else:
+        fields.append("'{}'::jsonb AS custom_fields")
 
     return "SELECT\n    " + ",\n    ".join(fields) + "\nFROM scholars"
 

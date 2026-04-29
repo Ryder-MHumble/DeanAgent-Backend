@@ -1,178 +1,185 @@
 {
-  "generated_at": "2026-04-08T07:06:30.505218+00:00",
-  "total_sources": 268,
-  "enabled_sources": 191,
+  "generated_at": "2026-04-28T09:24:38.556148+00:00",
+  "total_sources": 303,
+  "enabled_sources": 196,
   "files": [
     {
-      "file": "beijing_policy.yaml",
-      "dimension": "beijing_policy",
-      "dimension_name": "北京市政策治理",
-      "total": 16,
-      "enabled": 15
-    },
-    {
-      "file": "events.yaml",
+      "file": "events/events.yaml",
       "dimension": "events",
       "dimension_name": "学术会议与活动",
       "total": 6,
-      "enabled": 3
+      "enabled": 4
     },
     {
-      "file": "industry.yaml",
+      "file": "industry/industry.yaml",
       "dimension": "industry",
       "dimension_name": "产业与投融资",
       "total": 10,
-      "enabled": 6
+      "enabled": 7
     },
     {
-      "file": "national_policy.yaml",
-      "dimension": "national_policy",
-      "dimension_name": "国家政策治理",
-      "total": 8,
-      "enabled": 8
-    },
-    {
-      "file": "personnel.yaml",
+      "file": "personnel/personnel.yaml",
       "dimension": "personnel",
       "dimension_name": "组织人事动态",
       "total": 4,
       "enabled": 4
     },
     {
-      "file": "scholar-cas.yaml",
+      "file": "policy/beijing_policy.yaml",
+      "dimension": "beijing_policy",
+      "dimension_name": "北京市政策治理",
+      "total": 16,
+      "enabled": 15
+    },
+    {
+      "file": "policy/national_policy.yaml",
+      "dimension": "national_policy",
+      "dimension_name": "国家政策治理",
+      "total": 8,
+      "enabled": 8
+    },
+    {
+      "file": "scholars/scholar-cas.yaml",
       "dimension": "scholars",
       "dimension_name": "学者与师资库",
       "total": 5,
       "enabled": 0
     },
     {
-      "file": "scholar-fudan.yaml",
+      "file": "scholars/scholar-fudan.yaml",
       "dimension": "scholars",
       "dimension_name": "学者与师资库",
       "total": 2,
       "enabled": 0
     },
     {
-      "file": "scholar-nju.yaml",
+      "file": "scholars/scholar-nju.yaml",
       "dimension": "scholars",
       "dimension_name": "学者与师资库",
       "total": 5,
       "enabled": 0
     },
     {
-      "file": "scholar-pku.yaml",
+      "file": "scholars/scholar-pku.yaml",
       "dimension": "scholars",
       "dimension_name": "学者与师资库",
       "total": 9,
       "enabled": 0
     },
     {
-      "file": "scholar-ruc.yaml",
+      "file": "scholars/scholar-ruc.yaml",
       "dimension": "scholars",
       "dimension_name": "学者与师资库",
       "total": 2,
       "enabled": 0
     },
     {
-      "file": "scholar-sjtu.yaml",
+      "file": "scholars/scholar-sjtu.yaml",
       "dimension": "scholars",
       "dimension_name": "学者与师资库",
       "total": 5,
       "enabled": 0
     },
     {
-      "file": "scholar-tsinghua.yaml",
+      "file": "scholars/scholar-tsinghua.yaml",
       "dimension": "scholars",
       "dimension_name": "学者与师资库",
       "total": 13,
       "enabled": 0
     },
     {
-      "file": "scholar-ustc.yaml",
+      "file": "scholars/scholar-ustc.yaml",
       "dimension": "scholars",
       "dimension_name": "学者与师资库",
       "total": 5,
       "enabled": 0
     },
     {
-      "file": "scholar-zju.yaml",
+      "file": "scholars/scholar-zju.yaml",
       "dimension": "scholars",
       "dimension_name": "学者与师资库",
       "total": 3,
       "enabled": 0
     },
     {
-      "file": "talent.yaml",
-      "dimension": "talent",
-      "dimension_name": "人才与学术发展",
-      "total": 7,
-      "enabled": 4
-    },
-    {
-      "file": "technology.yaml",
-      "dimension": "technology",
-      "dimension_name": "技术前沿与创新",
-      "total": 33,
-      "enabled": 26
-    },
-    {
-      "file": "twitter.yaml",
+      "file": "social/twitter.yaml",
       "dimension": "twitter",
       "dimension_name": null,
       "total": 1,
       "enabled": 1
     },
     {
-      "file": "twitter_kol_accounts.yaml",
+      "file": "social/twitter_kol_accounts.yaml",
       "dimension": "twitter_kol_accounts",
       "dimension_name": null,
       "total": 0,
       "enabled": 0
     },
     {
-      "file": "universities-aggregators.yaml",
+      "file": "talent/talent.yaml",
+      "dimension": "talent",
+      "dimension_name": "人才与学术发展",
+      "total": 7,
+      "enabled": 4
+    },
+    {
+      "file": "talent/talent_scout.yaml",
+      "dimension": "talent_scout",
+      "dimension_name": "人才候选池",
+      "total": 35,
+      "enabled": 0
+    },
+    {
+      "file": "technology/technology.yaml",
+      "dimension": "technology",
+      "dimension_name": "技术前沿与创新",
+      "total": 33,
+      "enabled": 27
+    },
+    {
+      "file": "universities/universities-aggregators.yaml",
       "dimension": "universities",
       "dimension_name": "高校与科研生态",
       "total": 3,
       "enabled": 2
     },
     {
-      "file": "universities-ai-institutes.yaml",
+      "file": "universities/universities-ai-institutes.yaml",
       "dimension": "universities",
       "dimension_name": "高校与科研生态",
       "total": 11,
-      "enabled": 9
+      "enabled": 10
     },
     {
-      "file": "universities-awards.yaml",
+      "file": "universities/universities-awards.yaml",
       "dimension": "universities",
       "dimension_name": "高校与科研生态",
       "total": 4,
       "enabled": 4
     },
     {
-      "file": "universities-news.yaml",
+      "file": "universities/universities-news.yaml",
       "dimension": "universities",
       "dimension_name": "高校与科研生态",
       "total": 32,
-      "enabled": 25
+      "enabled": 26
     },
     {
-      "file": "universities-provinces.yaml",
+      "file": "universities/universities-provinces.yaml",
       "dimension": "universities",
       "dimension_name": "高校与科研生态",
       "total": 5,
       "enabled": 5
     },
     {
-      "file": "universities-top-tier.yaml",
+      "file": "universities/universities-top-tier.yaml",
       "dimension": "universities",
       "dimension_name": "高校与科研生态",
       "total": 29,
       "enabled": 29
     },
     {
-      "file": "university_leadership_sources.yaml",
+      "file": "universities/university_leadership_sources.yaml",
       "dimension": "personnel",
       "dimension_name": "组织人事动态",
       "total": 50,
@@ -184,7 +191,7 @@
       "key": "universities",
       "label": "高校与科研生态",
       "total": 84,
-      "enabled": 74
+      "enabled": 76
     },
     {
       "key": "personnel",
@@ -199,10 +206,16 @@
       "enabled": 0
     },
     {
+      "key": "talent_scout",
+      "label": "人才候选池",
+      "total": 35,
+      "enabled": 0
+    },
+    {
       "key": "technology",
-      "label": "技术前沿与创新",
+      "label": null,
       "total": 34,
-      "enabled": 27
+      "enabled": 28
     },
     {
       "key": "beijing_policy",
@@ -214,7 +227,7 @@
       "key": "industry",
       "label": "产业与投融资",
       "total": 10,
-      "enabled": 6
+      "enabled": 7
     },
     {
       "key": "national_policy",
@@ -232,7 +245,7 @@
       "key": "events",
       "label": "学术会议与活动",
       "total": 6,
-      "enabled": 3
+      "enabled": 4
     }
   ],
   "top_groups": [
@@ -243,6 +256,10 @@
     {
       "key": "university_leadership_official",
       "count": 50
+    },
+    {
+      "key": "talent_competitions",
+      "count": 26
     },
     {
       "key": "policy",
@@ -271,6 +288,10 @@
     {
       "key": "news",
       "count": 8
+    },
+    {
+      "key": "talent_papers",
+      "count": 7
     },
     {
       "key": "international_media",
@@ -341,34 +362,26 @@
       "count": 2
     },
     {
-      "key": "domestic_media",
+      "key": "talent_github",
       "count": 2
     },
     {
-      "key": "industry",
-      "count": 1
-    },
-    {
-      "key": "state_council",
-      "count": 1
-    },
-    {
-      "key": "cas",
-      "count": 1
+      "key": "domestic_media",
+      "count": 2
     }
   ],
   "top_methods": [
     {
       "key": "static",
-      "count": 100
-    },
-    {
-      "key": "dynamic",
-      "count": 53
+      "count": 140
     },
     {
       "key": "university_leadership",
       "count": 50
+    },
+    {
+      "key": "dynamic",
+      "count": 48
     },
     {
       "key": "faculty",
@@ -405,11 +418,19 @@
       "count": 44
     },
     {
+      "key": "talent_scout",
+      "count": 35
+    },
+    {
       "key": "auto",
       "count": 29
     },
     {
       "key": "ai",
+      "count": 26
+    },
+    {
+      "key": "competition",
       "count": 26
     },
     {
@@ -473,6 +494,10 @@
       "count": 7
     },
     {
+      "key": "paper",
+      "count": 7
+    },
+    {
       "key": "international",
       "count": 7
     },
@@ -489,6 +514,14 @@
       "count": 6
     },
     {
+      "key": "conference",
+      "count": 5
+    },
+    {
+      "key": "moe",
+      "count": 5
+    },
+    {
       "key": "bjkw",
       "count": 5
     },
@@ -501,11 +534,7 @@
       "count": 5
     },
     {
-      "key": "conference",
-      "count": 5
-    },
-    {
-      "key": "moe",
+      "key": "cybersecurity",
       "count": 5
     },
     {
@@ -521,23 +550,7 @@
       "count": 4
     },
     {
-      "key": "cybersecurity",
-      "count": 4
-    },
-    {
       "key": "ranking",
-      "count": 4
-    },
-    {
-      "key": "papers",
-      "count": 4
-    },
-    {
-      "key": "open_source",
-      "count": 4
-    },
-    {
-      "key": "community",
       "count": 4
     }
   ]

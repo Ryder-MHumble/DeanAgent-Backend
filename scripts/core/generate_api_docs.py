@@ -60,7 +60,9 @@ def _collect_sources() -> dict[str, Any]:
     all_sources: list[dict[str, Any]] = []
     file_stats: list[dict[str, Any]] = []
 
-    for yaml_file in sorted(SOURCES_DIR.glob("*.yaml")):
+    for yaml_file in sorted(SOURCES_DIR.rglob("*.yaml")):
+        if not yaml_file.is_file():
+            continue
         data = yaml.safe_load(yaml_file.read_text(encoding="utf-8")) or {}
         dimension = data.get("dimension", yaml_file.stem)
         dimension_name = data.get("dimension_name")
@@ -68,7 +70,7 @@ def _collect_sources() -> dict[str, Any]:
         enabled_count = sum(1 for item in items if item.get("is_enabled", True))
         file_stats.append(
             {
-                "file": yaml_file.name,
+                "file": yaml_file.relative_to(SOURCES_DIR).as_posix(),
                 "dimension": dimension,
                 "dimension_name": dimension_name,
                 "total": len(items),
@@ -80,6 +82,7 @@ def _collect_sources() -> dict[str, Any]:
             merged.setdefault("dimension", dimension)
             merged.setdefault("dimension_name", dimension_name)
             merged["_file"] = yaml_file.name
+            merged["_file_path"] = yaml_file.relative_to(SOURCES_DIR).as_posix()
             all_sources.append(merged)
 
     dim_total = Counter(str(item.get("dimension", "")) for item in all_sources)

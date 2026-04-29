@@ -4,9 +4,12 @@ import json
 import re
 from pathlib import Path
 from typing import Any
-from urllib.parse import parse_qs, urlencode, urlparse
+from urllib.parse import parse_qs, urlencode, urljoin, urlparse
 from xml.etree import ElementTree
 
+from bs4 import BeautifulSoup
+
+from app.config import BASE_DIR
 from app.crawlers.base import BaseCrawler, CrawledItem
 from app.crawlers.parsers._talent_scout_common import (
     build_blocked_item,
@@ -16,9 +19,9 @@ from app.crawlers.parsers._talent_scout_common import (
     extract_records,
     fetch_options,
     get_track,
+    is_obvious_non_person_candidate_name,
 )
 from app.crawlers.utils.http_client import fetch_json, fetch_page
-from app.config import BASE_DIR
 
 
 class PaperAuthorSourceCrawler(BaseCrawler):
@@ -34,6 +37,12 @@ class PaperAuthorSourceCrawler(BaseCrawler):
             return await self._fetch_openreview()
         if adapter_key == "author_aggregate_json":
             return await self._fetch_author_aggregate()
+        if adapter_key == "acl_anthology_events":
+            return await self._fetch_acl_anthology_events()
+        if adapter_key == "cvf_openaccess":
+            return await self._fetch_cvf_openaccess()
+        if adapter_key == "talent_signal_json":
+            return await self._fetch_talent_signal_json()
 
         try:
             payload = await fetch_json(self._source_url(), **fetch_options(self.config))
@@ -219,6 +228,95 @@ class PaperAuthorSourceCrawler(BaseCrawler):
 
         return self._records_or_review(self._author_aggregate_to_records(payload))
 
+    async def _fetch_acl_anthology_events(self) -> list[CrawledItem]:
+        records: list[dict[str, Any]] = []
+        last_exc: Exception | None = None
+        for source_ref in self._source_refs():
+            source_url = str(source_ref["url"])
+            try:
+                html = await fetch_page(source_url, **fetch_options(self.config))
+            except Exception as exc:  # noqa: BLE001
+                last_exc = exc
+                continue
+            records.extend(
+                self._acl_anthology_html_to_records(
+                    html,
+                    source_url=source_url,
+                    source_ref=source_ref,
+                )
+            )
+        if records:
+            return self._records_or_review(records)
+        if last_exc is not None:
+            return [
+                build_blocked_item(
+                    self.config,
+                    notes=str(last_exc),
+                    signal_type="paper_author",
+                )
+            ]
+        return self._records_or_review([])
+
+    async def _fetch_cvf_openaccess(self) -> list[CrawledItem]:
+        records: list[dict[str, Any]] = []
+        last_exc: Exception | None = None
+        for source_ref in self._source_refs():
+            source_url = str(source_ref["url"])
+            try:
+                html = await fetch_page(source_url, **fetch_options(self.config))
+            except Exception as exc:  # noqa: BLE001
+                last_exc = exc
+                continue
+            records.extend(
+                self._cvf_openaccess_html_to_records(
+                    html,
+                    source_url=source_url,
+                    source_ref=source_ref,
+                )
+            )
+        if records:
+            return self._records_or_review(records)
+        if last_exc is not None:
+            return [
+                build_blocked_item(
+                    self.config,
+                    notes=str(last_exc),
+                    signal_type="paper_author",
+                )
+            ]
+        return self._records_or_review([])
+
+    async def _fetch_talent_signal_json(self) -> list[CrawledItem]:
+        raw_path = self.config.get("local_results_path")
+        data_path = self._resolve_local_results_path(raw_path)
+        if data_path is None:
+            return [
+                build_blocked_item(
+                    self.config,
+                    notes="local_results_path is required for talent_signal_json",
+                    signal_type="paper_author",
+                )
+            ]
+
+        try:
+            payload = json.loads(data_path.read_text(encoding="utf-8"))
+        except Exception as exc:  # noqa: BLE001
+            return [
+                build_blocked_item(
+                    self.config,
+                    notes=str(exc),
+                    signal_type="paper_author",
+                )
+            ]
+
+        records = [
+            self._talent_signal_row_to_paper_record(row)
+            for row in extract_records(payload)
+            if self._local_source_filter_matches(row)
+        ]
+        records = [record for record in records if record is not None]
+        return self._records_or_review(records)
+
     def _records_or_review(self, records: list[dict[str, Any]]) -> list[CrawledItem]:
         items = [self._record_to_item(record) for record in records]
         items = [item for item in items if item is not None]
@@ -235,7 +333,11 @@ class PaperAuthorSourceCrawler(BaseCrawler):
     def _record_to_item(self, record: dict[str, Any]) -> CrawledItem | None:
         candidate_name = self._clean(record.get("candidate_name"))
         evidence_url = self._clean(record.get("evidence_url")) or self._source_url()
-        if not candidate_name or not evidence_url:
+        if (
+            not candidate_name
+            or not evidence_url
+            or is_obvious_non_person_candidate_name(candidate_name)
+        ):
             return None
 
         university = self._clean(record.get("university"))
@@ -304,8 +406,39 @@ class PaperAuthorSourceCrawler(BaseCrawler):
                 "affiliations": affiliations,
                 "papers": papers,
                 "notes": notes,
+                "original_record_status": self._clean(record.get("original_record_status")),
             },
         )
+
+    def _talent_signal_row_to_paper_record(
+        self,
+        row: dict[str, Any],
+    ) -> dict[str, Any] | None:
+        candidate_name = self._clean(row.get("candidate_name"))
+        evidence_url = self._clean(row.get("evidence_url"))
+        if (
+            not candidate_name
+            or not evidence_url
+            or is_obvious_non_person_candidate_name(candidate_name)
+        ):
+            return None
+        return {
+            "candidate_name": candidate_name,
+            "university": row.get("university"),
+            "department": row.get("department"),
+            "email": row.get("email"),
+            "paper_title": row.get("paper_title") or row.get("evidence_title"),
+            "venue": row.get("venue") or row.get("source_name"),
+            "venue_year": row.get("venue_year") or self._extract_year(row.get("time_info")),
+            "author_order": row.get("author_order"),
+            "citation_count": row.get("citation_count"),
+            "dblp_pid": row.get("dblp_pid"),
+            "evidence_title": row.get("evidence_title"),
+            "evidence_url": evidence_url,
+            "confidence": row.get("confidence", 0.7),
+            "notes": row.get("notes"),
+            "original_record_status": row.get("record_status"),
+        }
 
     def _author_aggregate_to_records(self, payload: Any) -> list[dict[str, Any]]:
         authors: list[Any] = []
@@ -398,6 +531,105 @@ class PaperAuthorSourceCrawler(BaseCrawler):
                 )
         return records
 
+    def _acl_anthology_html_to_records(
+        self,
+        html: str,
+        *,
+        source_url: str,
+        source_ref: dict[str, Any],
+    ) -> list[dict[str, Any]]:
+        soup = BeautifulSoup(html, "lxml")
+        records: list[dict[str, Any]] = []
+        max_papers = int(source_ref.get("max_papers") or self.config.get("max_papers", 30))
+        max_authors = int(
+            source_ref.get("max_authors_per_paper")
+            or self.config.get("max_authors_per_paper", 3)
+        )
+        venue = self._clean(source_ref.get("venue")) or self._clean(self.config.get("venue"))
+        venue_year = source_ref.get("year") or self._extract_year(source_url)
+
+        seen_papers: set[str] = set()
+        for container in soup.select("p, li, div"):
+            title_link = self._find_acl_paper_link(container)
+            if title_link is None:
+                continue
+            paper_href = self._clean(title_link.get("href"))
+            evidence_url = urljoin(source_url, paper_href)
+            if evidence_url in seen_papers:
+                continue
+            seen_papers.add(evidence_url)
+
+            title = title_link.get_text(" ", strip=True)
+            if not title:
+                continue
+            author_links = [
+                link
+                for link in container.select("a[href]")
+                if "/people/" in self._clean(link.get("href"))
+            ]
+            authors = [link.get_text(" ", strip=True) for link in author_links]
+            authors = [author for author in authors if author][:max_authors]
+            for index, author in enumerate(authors, start=1):
+                records.append(
+                    {
+                        "candidate_name": author,
+                        "paper_title": title,
+                        "venue": venue or self._infer_venue_from_url(source_url),
+                        "venue_year": venue_year,
+                        "author_order": index,
+                        "evidence_url": evidence_url,
+                        "confidence": 0.72,
+                        "notes": "parsed from ACL Anthology event page",
+                    }
+                )
+            if len(seen_papers) >= max_papers:
+                break
+        return records
+
+    def _cvf_openaccess_html_to_records(
+        self,
+        html: str,
+        *,
+        source_url: str,
+        source_ref: dict[str, Any],
+    ) -> list[dict[str, Any]]:
+        soup = BeautifulSoup(html, "lxml")
+        records: list[dict[str, Any]] = []
+        max_papers = int(source_ref.get("max_papers") or self.config.get("max_papers", 30))
+        max_authors = int(
+            source_ref.get("max_authors_per_paper")
+            or self.config.get("max_authors_per_paper", 3)
+        )
+        venue = self._clean(source_ref.get("venue")) or self._infer_venue_from_url(source_url)
+        venue_year = source_ref.get("year") or self._extract_year(source_url)
+
+        for paper_index, title_node in enumerate(soup.select("dt.ptitle"), start=1):
+            if paper_index > max_papers:
+                break
+            link = title_node.select_one("a[href]")
+            if link is None:
+                continue
+            title = link.get_text(" ", strip=True)
+            evidence_url = urljoin(source_url, self._clean(link.get("href")))
+            author_node = title_node.find_next_sibling("dd")
+            authors = self._split_author_text(
+                author_node.get_text(" ", strip=True) if author_node is not None else ""
+            )[:max_authors]
+            for index, author in enumerate(authors, start=1):
+                records.append(
+                    {
+                        "candidate_name": author,
+                        "paper_title": title,
+                        "venue": venue,
+                        "venue_year": venue_year,
+                        "author_order": index,
+                        "evidence_url": evidence_url,
+                        "confidence": 0.72,
+                        "notes": "parsed from CVF OpenAccess paper index",
+                    }
+                )
+        return records
+
     def _openreview_api_url(self) -> str:
         source_url = self._source_url()
         parsed = urlparse(source_url)
@@ -425,9 +657,8 @@ class PaperAuthorSourceCrawler(BaseCrawler):
                 suffix = self._clean(self.config.get("invitation_suffix")) or "-/Submission"
                 invitation = f"{group_id.rstrip('/')}/{suffix.lstrip('/')}"
 
-        params: dict[str, str] = {
-            "limit": str(int(self.config.get("max_results", self._query_value(query, "limit") or 10))),
-        }
+        max_results = self.config.get("max_results", self._query_value(query, "limit") or 10)
+        params: dict[str, str] = {"limit": str(int(max_results))}
         if invitation:
             params["invitation"] = invitation
 
@@ -451,8 +682,57 @@ class PaperAuthorSourceCrawler(BaseCrawler):
         return found.text.strip()
 
     def _source_url(self) -> str:
-        seed_urls = self.config.get("seed_urls") or []
-        return seed_urls[0] if seed_urls else str(self.config.get("url") or "")
+        refs = self._source_refs()
+        if refs:
+            return str(refs[0]["url"])
+        return str(self.config.get("url") or "")
+
+    def _source_refs(self) -> list[dict[str, Any]]:
+        refs: list[dict[str, Any]] = []
+        for value in self.config.get("seed_urls") or []:
+            if isinstance(value, str) and value.strip():
+                refs.append({"url": value.strip()})
+            elif isinstance(value, dict):
+                url = self._clean(value.get("url"))
+                if url:
+                    ref = dict(value)
+                    ref["url"] = url
+                    refs.append(ref)
+        if not refs:
+            url = self._clean(self.config.get("url"))
+            if url:
+                refs.append({"url": url})
+        return refs
+
+    def _local_source_filter_matches(self, row: dict[str, Any]) -> bool:
+        row_source_id = self._clean(row.get("source_id"))
+        if not row_source_id:
+            return False
+        source_ids = self._configured_local_source_ids()
+        if source_ids and row_source_id in source_ids:
+            return True
+        prefixes = self._configured_local_source_prefixes()
+        if prefixes and any(row_source_id.startswith(prefix) for prefix in prefixes):
+            return True
+        return not source_ids and not prefixes and row_source_id == self.source_id
+
+    def _configured_local_source_ids(self) -> set[str]:
+        raw_value = self.config.get("local_source_ids")
+        values: list[str] = []
+        if isinstance(raw_value, str):
+            values = [raw_value]
+        elif isinstance(raw_value, list):
+            values = [value for value in raw_value if isinstance(value, str)]
+        return {value.strip() for value in values if value.strip()}
+
+    def _configured_local_source_prefixes(self) -> list[str]:
+        raw_value = self.config.get("local_source_id_prefixes")
+        values: list[str] = []
+        if isinstance(raw_value, str):
+            values = [raw_value]
+        elif isinstance(raw_value, list):
+            values = [value for value in raw_value if isinstance(value, str)]
+        return [value.strip() for value in values if value.strip()]
 
     @staticmethod
     def _dict_list(value: Any) -> list[dict[str, Any]]:
@@ -486,6 +766,30 @@ class PaperAuthorSourceCrawler(BaseCrawler):
     def _query_value(query: dict[str, list[str]], key: str) -> str:
         values = query.get(key) or []
         return values[0] if values else ""
+
+    @staticmethod
+    def _find_acl_paper_link(container: Any) -> Any | None:
+        for link in container.select("a[href]"):
+            href = str(link.get("href") or "")
+            if re.search(r"/20\d{2}\.[^/]+/$", href):
+                return link
+        return None
+
+    @staticmethod
+    def _split_author_text(value: str) -> list[str]:
+        value = re.sub(r"\s+", " ", value or "").strip()
+        if not value:
+            return []
+        value = value.replace(" and ", ", ")
+        return [piece.strip() for piece in value.split(",") if piece.strip()]
+
+    @staticmethod
+    def _infer_venue_from_url(value: str) -> str:
+        upper_value = value.upper()
+        for venue in ("CVPR", "ICCV", "ECCV", "ACL", "EMNLP", "NAACL"):
+            if venue in upper_value:
+                return venue
+        return ""
 
     @staticmethod
     def _resolve_local_results_path(raw_path: Any) -> Path | None:

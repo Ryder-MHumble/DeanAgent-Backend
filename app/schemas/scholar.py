@@ -163,6 +163,36 @@ class AdjunctSupervisorInfo(BaseModel):
     """推荐主体，如 '培养部' | '科研部'"""
 
 
+class ProfileLinks(BaseModel):
+    """Unified scholar profile link collection for API compatibility."""
+
+    homepage: str = ""
+    lab: str = ""
+    github: str = ""
+    linkedin: str = ""
+    google_scholar: str = ""
+    orcid: str = ""
+    dblp: str = ""
+    other: list[str] = Field(default_factory=list)
+
+
+class ProfileLinksPatch(BaseModel):
+    """Partial profile link update payload.
+
+    Unlike ProfileLinks, missing fields must stay missing so PATCH requests can
+    merge one link without clearing the rest of custom_fields.profile_links.
+    """
+
+    homepage: str | None = None
+    lab: str | None = None
+    github: str | None = None
+    linkedin: str | None = None
+    google_scholar: str | None = None
+    orcid: str | None = None
+    dblp: str | None = None
+    other: list[str] | None = None
+
+
 class ScholarProjectTag(BaseModel):
     """学者所属项目分类标签。"""
 
@@ -688,6 +718,7 @@ class ScholarListItem(BaseModel):
     research_areas: list[str] = Field(default_factory=list)
     email: str = ""
     profile_url: str = ""
+    profile_links: ProfileLinks = Field(default_factory=ProfileLinks)
     is_potential_recruit: bool = False
     is_advisor_committee: bool = False
     adjunct_supervisor: AdjunctSupervisorInfo = Field(default_factory=AdjunctSupervisorInfo)
@@ -735,6 +766,7 @@ class ScholarDetailResponse(BaseModel):
     google_scholar_url: str = ""
     dblp_url: str = ""
     orcid: str = ""
+    profile_links: ProfileLinks = Field(default_factory=ProfileLinks)
     phd_institution: str = ""
     phd_year: str = ""
     education: list[EducationRecord] = Field(default_factory=list)
@@ -842,12 +874,13 @@ class ScholarBasicUpdate(BaseModel):
     google_scholar_url: str | None = None
     dblp_url: str | None = None
     orcid: str | None = None
+    profile_links: ProfileLinksPatch | None = None
     phd_institution: str | None = None
     phd_year: str | None = None
     education: list[EducationRecord] | None = None
     secondary_departments: list[str] | None = None
     updated_by: str | None = None
-    custom_fields: dict[str, str | None] | None = Field(
+    custom_fields: dict[str, Any | None] | None = Field(
         default=None, description="用户自定义字段（浅合并：值为 null 删除该 key）",
     )
 
@@ -927,6 +960,7 @@ class ScholarCreateRequest(BaseModel):
     google_scholar_url: str = ""
     dblp_url: str = ""
     orcid: str = ""
+    profile_links: ProfileLinks = Field(default_factory=ProfileLinks)
 
     # 教育经历
     phd_institution: str = ""

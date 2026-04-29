@@ -178,19 +178,19 @@ python scripts/process_tech_frontier.py --dry-run
 
 | 维度 | 已配置 | 已启用 | 产出数据 | 正文覆盖率 | YAML 文件 |
 |------|--------|--------|---------|-----------|----------|
-| personnel (对人事) | 4 | 4 | ✅ 62条 | 98% | `sources/personnel.yaml` |
-| universities (对高校) | 55 | 46 | ✅ 528条 | 81% | `sources/universities.yaml` |
-| technology (对技术) | 34+4† | 33+4† | ✅ 299条+ | 97% | `sources/technology.yaml` + twitter |
-| national_policy (对国家) | 8 | 8 | ✅ 52条 | 100% | `sources/national_policy.yaml` |
-| beijing_policy (对北京) | 17 | 15 | ✅ 158条 | 98% | `sources/beijing_policy.yaml` |
-| industry (对产业) | 10+1† | 6+1† | ✅ 49条 | 100% | `sources/industry.yaml` + twitter |
-| talent (对人才) | 7+1† | 4+1† | ✅ 51条 | 86% | `sources/talent.yaml` + twitter |
+| personnel (对人事) | 4 | 4 | ✅ 62条 | 98% | `sources/personnel/personnel.yaml` |
+| universities (对高校) | 55 | 46 | ✅ 528条 | 81% | `sources/universities/*.yaml` |
+| technology (对技术) | 34+4† | 33+4† | ✅ 299条+ | 97% | `sources/technology/technology.yaml` + twitter |
+| national_policy (对国家) | 8 | 8 | ✅ 52条 | 100% | `sources/policy/national_policy.yaml` |
+| beijing_policy (对北京) | 17 | 15 | ✅ 158条 | 98% | `sources/policy/beijing_policy.yaml` |
+| industry (对产业) | 10+1† | 6+1† | ✅ 49条 | 100% | `sources/industry/industry.yaml` + twitter |
+| talent (对人才) | 7+1† | 4+1† | ✅ 51条 | 86% | `sources/talent/talent.yaml` + twitter |
 | sentiment (对学院舆情) | 1† | 1† | ✅ 20条 | 100% | twitter 跨维度 |
-| events (对日程) | 6 | 4 | ✅ 221条 | 0% (会议列表) | `sources/events.yaml` |
-| university_faculty (高校师资) | 47 | 44 | ✅ 2200+位教师 | N/A (师资无正文) | `sources/university_faculty.yaml` |
+| events (对日程) | 6 | 4 | ✅ 221条 | 0% (会议列表) | `sources/events/events.yaml` |
+| university_faculty (高校师资) | 47 | 44 | ✅ 2200+位教师 | N/A (师资无正文) | `sources/scholars/*.yaml` |
 | **合计** | **180** | **148** | **3000条+** | **74%** | **148 个数据文件** |
 
-> † `sources/twitter.yaml` 的 7 个源按 `dimension` 字段分配到 4 个维度：technology 4源、industry 1源、talent 1源、sentiment 1源。
+> † `sources/social/twitter.yaml` 的 7 个源按 `dimension` 字段分配到 4 个维度：technology 4源、industry 1源、talent 1源、sentiment 1源。
 >
 > 部分源正文覆盖率低于 100% 是因为 JSON 合并保留了旧条目（detail_selectors 配置前爬的），删除 `latest.json` 后重爬即可恢复。
 

@@ -25,7 +25,7 @@ sources:
     tags: ["twitter", "social", "kol", "platform"]
 
     # 抓取配置（完全 YAML 可配）
-    twitter_accounts_file: "twitter_kol_accounts.yaml"
+    twitter_accounts_file: "social/twitter_kol_accounts.yaml"
     crawl_accounts_cohort: "all"  # core | expansion | all
     max_tweets_per_account: 3       # 每账号抓取帖子数
     include_replies: true           # 是否包含回复信息
