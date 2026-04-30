@@ -2,6 +2,21 @@
 
 The classifier is intentionally conservative: uncertain cases stay ``None`` so
 the UI can show "待判定" instead of over-claiming identity or student status.
+
+⚠️ MAINTENANCE NOTE (2026-04-30)
+-------------------------------
+The Chinese-name / Chinese-institution / student-role heuristics are the domain
+of the **academic-monitor** service (``src/student_paper_crawl/identity/rules.py``).
+That file is the authoritative source — it is called by
+``/api/v1/identity/enrich-paper`` to populate ``papers.profile_flags``.
+
+This local classifier exists because **scholar table rows don't have OpenReview
+profiles** — they carry ``custom_fields.metadata_profile`` instead, so they
+need a row-shaped classifier. When you update CHINESE_ORG_HINTS / _STUDENT_RE /
+_NON_STUDENT_RE here, also update the mirror in academic-monitor to keep the
+two decision surfaces consistent.
+
+See also: ``scripts/sql/20260430_add_paper_author_enrichment_fields.sql``.
 """
 from __future__ import annotations
 
