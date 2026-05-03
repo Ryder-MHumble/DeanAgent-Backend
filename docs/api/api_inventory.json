@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-04-28T09:24:38.541742+00:00",
+  "generated_at": "2026-04-30T10:47:55.411388+00:00",
   "routes": [
     {
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/aminer/organizations",
+      "path": "/api/aminer/organizations",
       "service": "aminer",
       "tags": [
         "aminer"
@@ -18,7 +18,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/aminer/scholars/search",
+      "path": "/api/aminer/scholars/search",
       "service": "aminer",
       "tags": [
         "aminer"
@@ -31,7 +31,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/aminer/scholars/{aminer_id}",
+      "path": "/api/aminer/scholars/{aminer_id}",
       "service": "aminer",
       "tags": [
         "aminer"
@@ -44,7 +44,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/articles",
+      "path": "/api/articles",
       "service": "articles",
       "tags": [
         "articles"
@@ -57,7 +57,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/articles/stats",
+      "path": "/api/articles/stats",
       "service": "articles",
       "tags": [
         "articles"
@@ -70,7 +70,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/articles/{article_id}",
+      "path": "/api/articles/{article_id}",
       "service": "articles",
       "tags": [
         "articles"
@@ -83,7 +83,7 @@
       "methods": [
         "PATCH"
       ],
-      "path": "/api/v1/articles/{article_id}",
+      "path": "/api/articles/{article_id}",
       "service": "articles",
       "tags": [
         "articles"
@@ -96,7 +96,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/crawler/download",
+      "path": "/api/crawler/download",
       "service": "crawler",
       "tags": [
         "crawler-control"
@@ -109,7 +109,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/crawler/jobs",
+      "path": "/api/crawler/jobs",
       "service": "crawler",
       "tags": [
         "crawler-control"
@@ -122,7 +122,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/crawler/jobs/{job_id}",
+      "path": "/api/crawler/jobs/{job_id}",
       "service": "crawler",
       "tags": [
         "crawler-control"
@@ -135,7 +135,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/crawler/jobs/{job_id}/cancel",
+      "path": "/api/crawler/jobs/{job_id}/cancel",
       "service": "crawler",
       "tags": [
         "crawler-control"
@@ -148,7 +148,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/crawler/jobs/{job_id}/result",
+      "path": "/api/crawler/jobs/{job_id}/result",
       "service": "crawler",
       "tags": [
         "crawler-control"
@@ -161,7 +161,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/crawler/start",
+      "path": "/api/crawler/start",
       "service": "crawler",
       "tags": [
         "crawler-control"
@@ -174,7 +174,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/crawler/status",
+      "path": "/api/crawler/status",
       "service": "crawler",
       "tags": [
         "crawler-control"
@@ -187,7 +187,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/crawler/stop",
+      "path": "/api/crawler/stop",
       "service": "crawler",
       "tags": [
         "crawler-control"
@@ -200,7 +200,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/dimensions",
+      "path": "/api/dimensions",
       "service": "dimensions",
       "tags": [
         "dimensions"
@@ -213,7 +213,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/dimensions/{dimension}",
+      "path": "/api/dimensions/{dimension}",
       "service": "dimensions",
       "tags": [
         "dimensions"
@@ -226,7 +226,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/events",
+      "path": "/api/events",
       "service": "events",
       "tags": [
         "events"
@@ -239,7 +239,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/events",
+      "path": "/api/events",
       "service": "events",
       "tags": [
         "events"
@@ -252,7 +252,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/events/batch",
+      "path": "/api/events/batch",
       "service": "events",
       "tags": [
         "events"
@@ -265,7 +265,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/events/stats",
+      "path": "/api/events/stats",
       "service": "events",
       "tags": [
         "events"
@@ -278,7 +278,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/events/taxonomy",
+      "path": "/api/events/taxonomy",
       "service": "events",
       "tags": [
         "events"
@@ -291,7 +291,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/events/taxonomy",
+      "path": "/api/events/taxonomy",
       "service": "events",
       "tags": [
         "events"
@@ -304,7 +304,7 @@
       "methods": [
         "DELETE"
       ],
-      "path": "/api/v1/events/taxonomy/{node_id}",
+      "path": "/api/events/taxonomy/{node_id}",
       "service": "events",
       "tags": [
         "events"
@@ -317,7 +317,7 @@
       "methods": [
         "PATCH"
       ],
-      "path": "/api/v1/events/taxonomy/{node_id}",
+      "path": "/api/events/taxonomy/{node_id}",
       "service": "events",
       "tags": [
         "events"
@@ -330,7 +330,7 @@
       "methods": [
         "DELETE"
       ],
-      "path": "/api/v1/events/{event_id}",
+      "path": "/api/events/{event_id}",
       "service": "events",
       "tags": [
         "events"
@@ -343,7 +343,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/events/{event_id}",
+      "path": "/api/events/{event_id}",
       "service": "events",
       "tags": [
         "events"
@@ -356,7 +356,7 @@
       "methods": [
         "PATCH"
       ],
-      "path": "/api/v1/events/{event_id}",
+      "path": "/api/events/{event_id}",
       "service": "events",
       "tags": [
         "events"
@@ -369,7 +369,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/events/{event_id}/scholars",
+      "path": "/api/events/{event_id}/scholars",
       "service": "events",
       "tags": [
         "events"
@@ -382,7 +382,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/events/{event_id}/scholars",
+      "path": "/api/events/{event_id}/scholars",
       "service": "events",
       "tags": [
         "events"
@@ -395,7 +395,7 @@
       "methods": [
         "DELETE"
       ],
-      "path": "/api/v1/events/{event_id}/scholars/{scholar_id}",
+      "path": "/api/events/{event_id}/scholars/{scholar_id}",
       "service": "events",
       "tags": [
         "events"
@@ -408,7 +408,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/health",
+      "path": "/api/health",
       "service": "health",
       "tags": [
         "health"
@@ -421,7 +421,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/health/crawl-status",
+      "path": "/api/health/crawl-status",
       "service": "health",
       "tags": [
         "health"
@@ -434,7 +434,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/health/pipeline-status",
+      "path": "/api/health/pipeline-status",
       "service": "health",
       "tags": [
         "health"
@@ -447,7 +447,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/health/pipeline-trigger",
+      "path": "/api/health/pipeline-trigger",
       "service": "health",
       "tags": [
         "health"
@@ -460,7 +460,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/institutions",
+      "path": "/api/institutions",
       "service": "institutions",
       "tags": [
         "institutions"
@@ -473,7 +473,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/institutions",
+      "path": "/api/institutions",
       "service": "institutions",
       "tags": [
         "institutions"
@@ -486,7 +486,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/institutions/aminer/search-org",
+      "path": "/api/institutions/aminer/search-org",
       "service": "institutions",
       "tags": [
         "institutions"
@@ -499,7 +499,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/institutions/search",
+      "path": "/api/institutions/search",
       "service": "institutions",
       "tags": [
         "institutions"
@@ -512,7 +512,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/institutions/stats",
+      "path": "/api/institutions/stats",
       "service": "institutions",
       "tags": [
         "institutions"
@@ -525,7 +525,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/institutions/suggest",
+      "path": "/api/institutions/suggest",
       "service": "institutions",
       "tags": [
         "institutions"
@@ -538,7 +538,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/institutions/taxonomy",
+      "path": "/api/institutions/taxonomy",
       "service": "institutions",
       "tags": [
         "institutions"
@@ -551,7 +551,7 @@
       "methods": [
         "DELETE"
       ],
-      "path": "/api/v1/institutions/{institution_id}",
+      "path": "/api/institutions/{institution_id}",
       "service": "institutions",
       "tags": [
         "institutions"
@@ -564,7 +564,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/institutions/{institution_id}",
+      "path": "/api/institutions/{institution_id}",
       "service": "institutions",
       "tags": [
         "institutions"
@@ -577,7 +577,7 @@
       "methods": [
         "PATCH"
       ],
-      "path": "/api/v1/institutions/{institution_id}",
+      "path": "/api/institutions/{institution_id}",
       "service": "institutions",
       "tags": [
         "institutions"
@@ -590,7 +590,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/intel/daily-briefing/metrics",
+      "path": "/api/intel/daily-briefing/metrics",
       "service": "intel/daily-briefing",
       "tags": [
         "intel",
@@ -604,7 +604,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/intel/daily-briefing/report",
+      "path": "/api/intel/daily-briefing/report",
       "service": "intel/daily-briefing",
       "tags": [
         "intel",
@@ -618,7 +618,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/intel/daily-briefing/today",
+      "path": "/api/intel/daily-briefing/today",
       "service": "intel/daily-briefing",
       "tags": [
         "intel",
@@ -632,7 +632,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/intel/paper-transfer/results",
+      "path": "/api/intel/paper-transfer/results",
       "service": "intel/paper-transfer",
       "tags": [
         "intel",
@@ -646,7 +646,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/intel/paper-transfer/run",
+      "path": "/api/intel/paper-transfer/run",
       "service": "intel/paper-transfer",
       "tags": [
         "intel",
@@ -660,7 +660,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/intel/paper-transfer/status",
+      "path": "/api/intel/paper-transfer/status",
       "service": "intel/paper-transfer",
       "tags": [
         "intel",
@@ -674,7 +674,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/intel/personnel/changes",
+      "path": "/api/intel/personnel/changes",
       "service": "intel/personnel",
       "tags": [
         "intel",
@@ -688,7 +688,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/intel/personnel/enriched-feed",
+      "path": "/api/intel/personnel/enriched-feed",
       "service": "intel/personnel",
       "tags": [
         "intel",
@@ -702,7 +702,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/intel/personnel/enriched-stats",
+      "path": "/api/intel/personnel/enriched-stats",
       "service": "intel/personnel",
       "tags": [
         "intel",
@@ -716,7 +716,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/intel/personnel/feed",
+      "path": "/api/intel/personnel/feed",
       "service": "intel/personnel",
       "tags": [
         "intel",
@@ -730,7 +730,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/intel/personnel/stats",
+      "path": "/api/intel/personnel/stats",
       "service": "intel/personnel",
       "tags": [
         "intel",
@@ -744,7 +744,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/intel/policy/feed",
+      "path": "/api/intel/policy/feed",
       "service": "intel/policy",
       "tags": [
         "intel",
@@ -758,7 +758,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/intel/policy/opportunities",
+      "path": "/api/intel/policy/opportunities",
       "service": "intel/policy",
       "tags": [
         "intel",
@@ -772,7 +772,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/intel/policy/stats",
+      "path": "/api/intel/policy/stats",
       "service": "intel/policy",
       "tags": [
         "intel",
@@ -786,7 +786,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/intel/tech-frontier/opportunities",
+      "path": "/api/intel/tech-frontier/opportunities",
       "service": "intel/tech-frontier",
       "tags": [
         "intel",
@@ -800,7 +800,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/intel/tech-frontier/signals",
+      "path": "/api/intel/tech-frontier/signals",
       "service": "intel/tech-frontier",
       "tags": [
         "intel",
@@ -814,7 +814,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/intel/tech-frontier/stats",
+      "path": "/api/intel/tech-frontier/stats",
       "service": "intel/tech-frontier",
       "tags": [
         "intel",
@@ -828,7 +828,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/intel/tech-frontier/topics",
+      "path": "/api/intel/tech-frontier/topics",
       "service": "intel/tech-frontier",
       "tags": [
         "intel",
@@ -842,7 +842,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/intel/tech-frontier/topics/{topic_id}",
+      "path": "/api/intel/tech-frontier/topics/{topic_id}",
       "service": "intel/tech-frontier",
       "tags": [
         "intel",
@@ -856,7 +856,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/intel/university/article/{url_hash}",
+      "path": "/api/intel/university/article/{url_hash}",
       "service": "intel/university",
       "tags": [
         "intel",
@@ -870,7 +870,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/intel/university/feed",
+      "path": "/api/intel/university/feed",
       "service": "intel/university",
       "tags": [
         "intel",
@@ -884,7 +884,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/intel/university/overview",
+      "path": "/api/intel/university/overview",
       "service": "intel/university",
       "tags": [
         "intel",
@@ -898,7 +898,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/intel/university/research",
+      "path": "/api/intel/university/research",
       "service": "intel/university",
       "tags": [
         "intel",
@@ -912,7 +912,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/intel/university/sources",
+      "path": "/api/intel/university/sources",
       "service": "intel/university",
       "tags": [
         "intel",
@@ -926,7 +926,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/leadership",
+      "path": "/api/leadership",
       "service": "leadership",
       "tags": [
         "leadership"
@@ -939,7 +939,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/leadership/all",
+      "path": "/api/leadership/all",
       "service": "leadership",
       "tags": [
         "leadership"
@@ -952,7 +952,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/leadership/{institution_id}",
+      "path": "/api/leadership/{institution_id}",
       "service": "leadership",
       "tags": [
         "leadership"
@@ -965,7 +965,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/llm-tracking/audit-trail",
+      "path": "/api/llm-tracking/audit-trail",
       "service": "llm-tracking",
       "tags": [
         "llm-tracking"
@@ -978,7 +978,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/llm-tracking/calls-by-article/{article_id}",
+      "path": "/api/llm-tracking/calls-by-article/{article_id}",
       "service": "llm-tracking",
       "tags": [
         "llm-tracking"
@@ -991,7 +991,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/llm-tracking/calls-by-stage/{stage}",
+      "path": "/api/llm-tracking/calls-by-stage/{stage}",
       "service": "llm-tracking",
       "tags": [
         "llm-tracking"
@@ -1004,7 +1004,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/llm-tracking/cost-by-model",
+      "path": "/api/llm-tracking/cost-by-model",
       "service": "llm-tracking",
       "tags": [
         "llm-tracking"
@@ -1017,7 +1017,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/llm-tracking/health",
+      "path": "/api/llm-tracking/health",
       "service": "llm-tracking",
       "tags": [
         "llm-tracking"
@@ -1030,7 +1030,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/llm-tracking/summary",
+      "path": "/api/llm-tracking/summary",
       "service": "llm-tracking",
       "tags": [
         "llm-tracking"
@@ -1043,7 +1043,72 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/projects",
+      "path": "/api/papers",
+      "service": "papers",
+      "tags": [
+        "papers"
+      ],
+      "summary": "全局论文列表",
+      "name": "list_papers",
+      "deprecated": false
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/papers/import-runs",
+      "service": "papers",
+      "tags": [
+        "papers"
+      ],
+      "summary": "论文仓导入运行记录",
+      "name": "list_paper_import_runs",
+      "deprecated": false
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/papers/sources",
+      "service": "papers",
+      "tags": [
+        "papers"
+      ],
+      "summary": "论文仓信源列表",
+      "name": "list_paper_sources",
+      "deprecated": false
+    },
+    {
+      "methods": [
+        "POST"
+      ],
+      "path": "/api/papers/sources/{source_id}/crawl",
+      "service": "papers",
+      "tags": [
+        "papers"
+      ],
+      "summary": "触发单个论文仓信源抓取",
+      "name": "crawl_paper_source",
+      "deprecated": false
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/papers/{paper_id}",
+      "service": "papers",
+      "tags": [
+        "papers"
+      ],
+      "summary": "全局论文详情",
+      "name": "get_paper",
+      "deprecated": false
+    },
+    {
+      "methods": [
+        "GET"
+      ],
+      "path": "/api/projects",
       "service": "projects",
       "tags": [
         "projects"
@@ -1056,7 +1121,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/projects",
+      "path": "/api/projects",
       "service": "projects",
       "tags": [
         "projects"
@@ -1069,7 +1134,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/projects/batch",
+      "path": "/api/projects/batch",
       "service": "projects",
       "tags": [
         "projects"
@@ -1082,7 +1147,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/projects/stats",
+      "path": "/api/projects/stats",
       "service": "projects",
       "tags": [
         "projects"
@@ -1095,7 +1160,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/projects/taxonomy",
+      "path": "/api/projects/taxonomy",
       "service": "projects",
       "tags": [
         "projects"
@@ -1108,7 +1173,7 @@
       "methods": [
         "DELETE"
       ],
-      "path": "/api/v1/projects/{project_id}",
+      "path": "/api/projects/{project_id}",
       "service": "projects",
       "tags": [
         "projects"
@@ -1121,7 +1186,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/projects/{project_id}",
+      "path": "/api/projects/{project_id}",
       "service": "projects",
       "tags": [
         "projects"
@@ -1134,7 +1199,7 @@
       "methods": [
         "PATCH"
       ],
-      "path": "/api/v1/projects/{project_id}",
+      "path": "/api/projects/{project_id}",
       "service": "projects",
       "tags": [
         "projects"
@@ -1147,7 +1212,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/reports/dimensions",
+      "path": "/api/reports/dimensions",
       "service": "reports",
       "tags": [
         "reports"
@@ -1160,7 +1225,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/reports/generate",
+      "path": "/api/reports/generate",
       "service": "reports",
       "tags": [
         "reports"
@@ -1173,7 +1238,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/reports/sentiment/latest",
+      "path": "/api/reports/sentiment/latest",
       "service": "reports",
       "tags": [
         "reports"
@@ -1186,7 +1251,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/scholars",
+      "path": "/api/scholars",
       "service": "scholars",
       "tags": [
         "scholars"
@@ -1199,7 +1264,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/scholars",
+      "path": "/api/scholars",
       "service": "scholars",
       "tags": [
         "scholars"
@@ -1212,7 +1277,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/scholars/batch",
+      "path": "/api/scholars/batch",
       "service": "scholars",
       "tags": [
         "scholars"
@@ -1225,7 +1290,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/scholars/import",
+      "path": "/api/scholars/import",
       "service": "scholars",
       "tags": [
         "scholars"
@@ -1238,7 +1303,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/scholars/stats",
+      "path": "/api/scholars/stats",
       "service": "scholars",
       "tags": [
         "scholars"
@@ -1251,7 +1316,7 @@
       "methods": [
         "DELETE"
       ],
-      "path": "/api/v1/scholars/{url_hash}",
+      "path": "/api/scholars/{url_hash}",
       "service": "scholars",
       "tags": [
         "scholars"
@@ -1264,7 +1329,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/scholars/{url_hash}",
+      "path": "/api/scholars/{url_hash}",
       "service": "scholars",
       "tags": [
         "scholars"
@@ -1277,7 +1342,7 @@
       "methods": [
         "PATCH"
       ],
-      "path": "/api/v1/scholars/{url_hash}/achievements",
+      "path": "/api/scholars/{url_hash}/achievements",
       "service": "scholars",
       "tags": [
         "scholars"
@@ -1290,7 +1355,7 @@
       "methods": [
         "PATCH"
       ],
-      "path": "/api/v1/scholars/{url_hash}/basic",
+      "path": "/api/scholars/{url_hash}/basic",
       "service": "scholars",
       "tags": [
         "scholars"
@@ -1303,7 +1368,7 @@
       "methods": [
         "PATCH"
       ],
-      "path": "/api/v1/scholars/{url_hash}/relation",
+      "path": "/api/scholars/{url_hash}/relation",
       "service": "scholars",
       "tags": [
         "scholars"
@@ -1316,7 +1381,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/scholars/{url_hash}/students",
+      "path": "/api/scholars/{url_hash}/students",
       "service": "scholars",
       "tags": [
         "scholars"
@@ -1329,7 +1394,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/scholars/{url_hash}/students",
+      "path": "/api/scholars/{url_hash}/students",
       "service": "scholars",
       "tags": [
         "scholars"
@@ -1342,7 +1407,7 @@
       "methods": [
         "DELETE"
       ],
-      "path": "/api/v1/scholars/{url_hash}/students/{student_id}",
+      "path": "/api/scholars/{url_hash}/students/{student_id}",
       "service": "scholars",
       "tags": [
         "scholars"
@@ -1355,7 +1420,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/scholars/{url_hash}/students/{student_id}",
+      "path": "/api/scholars/{url_hash}/students/{student_id}",
       "service": "scholars",
       "tags": [
         "scholars"
@@ -1368,7 +1433,7 @@
       "methods": [
         "PATCH"
       ],
-      "path": "/api/v1/scholars/{url_hash}/students/{student_id}",
+      "path": "/api/scholars/{url_hash}/students/{student_id}",
       "service": "scholars",
       "tags": [
         "scholars"
@@ -1381,7 +1446,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/sentiment/content/{content_id}",
+      "path": "/api/sentiment/content/{content_id}",
       "service": "sentiment",
       "tags": [
         "sentiment"
@@ -1394,7 +1459,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/sentiment/feed",
+      "path": "/api/sentiment/feed",
       "service": "sentiment",
       "tags": [
         "sentiment"
@@ -1407,7 +1472,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/sentiment/overview",
+      "path": "/api/sentiment/overview",
       "service": "sentiment",
       "tags": [
         "sentiment"
@@ -1420,7 +1485,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/social-kol/accounts",
+      "path": "/api/social-kol/accounts",
       "service": "social-kol",
       "tags": [
         "social-kol"
@@ -1433,7 +1498,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/social-kol/ingest/twitter",
+      "path": "/api/social-kol/ingest/twitter",
       "service": "social-kol",
       "tags": [
         "social-kol"
@@ -1446,7 +1511,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/social-kol/posts",
+      "path": "/api/social-kol/posts",
       "service": "social-kol",
       "tags": [
         "social-kol"
@@ -1459,7 +1524,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/social-kol/posts/{platform}/{external_post_id}",
+      "path": "/api/social-kol/posts/{platform}/{external_post_id}",
       "service": "social-kol",
       "tags": [
         "social-kol"
@@ -1472,7 +1537,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/social-posts",
+      "path": "/api/social-posts",
       "service": "social-posts",
       "tags": [
         "social-posts"
@@ -1485,7 +1550,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/social-posts/stats",
+      "path": "/api/social-posts/stats",
       "service": "social-posts",
       "tags": [
         "social-posts"
@@ -1498,7 +1563,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/social-posts/{post_id}",
+      "path": "/api/social-posts/{post_id}",
       "service": "social-posts",
       "tags": [
         "social-posts"
@@ -1511,7 +1576,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/sources",
+      "path": "/api/sources",
       "service": "sources",
       "tags": [
         "sources"
@@ -1524,7 +1589,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/sources/catalog",
+      "path": "/api/sources/catalog",
       "service": "sources",
       "tags": [
         "sources"
@@ -1537,7 +1602,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/sources/deprecations",
+      "path": "/api/sources/deprecations",
       "service": "sources",
       "tags": [
         "sources"
@@ -1550,7 +1615,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/sources/facets",
+      "path": "/api/sources/facets",
       "service": "sources",
       "tags": [
         "sources"
@@ -1563,7 +1628,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/sources/items",
+      "path": "/api/sources/items",
       "service": "sources",
       "tags": [
         "sources"
@@ -1576,7 +1641,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/sources/resolve",
+      "path": "/api/sources/resolve",
       "service": "sources",
       "tags": [
         "sources"
@@ -1589,7 +1654,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/sources/{source_id}",
+      "path": "/api/sources/{source_id}",
       "service": "sources",
       "tags": [
         "sources"
@@ -1602,7 +1667,7 @@
       "methods": [
         "PATCH"
       ],
-      "path": "/api/v1/sources/{source_id}",
+      "path": "/api/sources/{source_id}",
       "service": "sources",
       "tags": [
         "sources"
@@ -1615,7 +1680,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/sources/{source_id}/items",
+      "path": "/api/sources/{source_id}/items",
       "service": "sources",
       "tags": [
         "sources"
@@ -1628,7 +1693,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/sources/{source_id}/logs",
+      "path": "/api/sources/{source_id}/logs",
       "service": "sources",
       "tags": [
         "sources"
@@ -1641,7 +1706,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/sources/{source_id}/trigger",
+      "path": "/api/sources/{source_id}/trigger",
       "service": "sources",
       "tags": [
         "sources"
@@ -1654,7 +1719,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/students",
+      "path": "/api/students",
       "service": "students",
       "tags": [
         "students"
@@ -1667,7 +1732,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/students",
+      "path": "/api/students",
       "service": "students",
       "tags": [
         "students"
@@ -1680,7 +1745,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/students/by-scholar/{scholar_id}",
+      "path": "/api/students/by-scholar/{scholar_id}",
       "service": "students",
       "tags": [
         "students"
@@ -1693,7 +1758,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/students/options",
+      "path": "/api/students/options",
       "service": "students",
       "tags": [
         "students"
@@ -1706,7 +1771,7 @@
       "methods": [
         "DELETE"
       ],
-      "path": "/api/v1/students/{student_id}",
+      "path": "/api/students/{student_id}",
       "service": "students",
       "tags": [
         "students"
@@ -1719,7 +1784,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/students/{student_id}",
+      "path": "/api/students/{student_id}",
       "service": "students",
       "tags": [
         "students"
@@ -1732,7 +1797,7 @@
       "methods": [
         "PATCH"
       ],
-      "path": "/api/v1/students/{student_id}",
+      "path": "/api/students/{student_id}",
       "service": "students",
       "tags": [
         "students"
@@ -1745,7 +1810,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/students/{student_id}/papers",
+      "path": "/api/students/{student_id}/papers",
       "service": "students",
       "tags": [
         "students"
@@ -1758,7 +1823,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/students/{student_id}/papers",
+      "path": "/api/students/{student_id}/papers",
       "service": "students",
       "tags": [
         "students"
@@ -1771,7 +1836,7 @@
       "methods": [
         "DELETE"
       ],
-      "path": "/api/v1/students/{student_id}/papers/{paper_uid}",
+      "path": "/api/students/{student_id}/papers/{paper_uid}",
       "service": "students",
       "tags": [
         "students"
@@ -1784,7 +1849,7 @@
       "methods": [
         "PUT"
       ],
-      "path": "/api/v1/students/{student_id}/papers/{paper_uid}",
+      "path": "/api/students/{student_id}/papers/{paper_uid}",
       "service": "students",
       "tags": [
         "students"
@@ -1797,7 +1862,7 @@
       "methods": [
         "PATCH"
       ],
-      "path": "/api/v1/students/{student_id}/papers/{paper_uid}/compliance",
+      "path": "/api/students/{student_id}/papers/{paper_uid}/compliance",
       "service": "students",
       "tags": [
         "students"
@@ -1810,7 +1875,7 @@
       "methods": [
         "PATCH"
       ],
-      "path": "/api/v1/students/{student_id}/publication-candidates/{candidate_id}",
+      "path": "/api/students/{student_id}/publication-candidates/{candidate_id}",
       "service": "students",
       "tags": [
         "students"
@@ -1823,7 +1888,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/students/{student_id}/publication-candidates/{candidate_id}/confirm",
+      "path": "/api/students/{student_id}/publication-candidates/{candidate_id}/confirm",
       "service": "students",
       "tags": [
         "students"
@@ -1836,7 +1901,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/students/{student_id}/publication-candidates/{candidate_id}/reject",
+      "path": "/api/students/{student_id}/publication-candidates/{candidate_id}/reject",
       "service": "students",
       "tags": [
         "students"
@@ -1849,7 +1914,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/students/{student_id}/publication-candidates/{candidate_id}/reopen",
+      "path": "/api/students/{student_id}/publication-candidates/{candidate_id}/reopen",
       "service": "students",
       "tags": [
         "students"
@@ -1862,7 +1927,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/students/{student_id}/publication-workspace",
+      "path": "/api/students/{student_id}/publication-workspace",
       "service": "students",
       "tags": [
         "students"
@@ -1875,7 +1940,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/students/{student_id}/publications",
+      "path": "/api/students/{student_id}/publications",
       "service": "students",
       "tags": [
         "students"
@@ -1888,7 +1953,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/venues",
+      "path": "/api/venues",
       "service": "venues",
       "tags": [
         "venues"
@@ -1901,7 +1966,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/venues",
+      "path": "/api/venues",
       "service": "venues",
       "tags": [
         "venues"
@@ -1914,7 +1979,7 @@
       "methods": [
         "POST"
       ],
-      "path": "/api/v1/venues/batch",
+      "path": "/api/venues/batch",
       "service": "venues",
       "tags": [
         "venues"
@@ -1927,7 +1992,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/venues/stats",
+      "path": "/api/venues/stats",
       "service": "venues",
       "tags": [
         "venues"
@@ -1940,7 +2005,7 @@
       "methods": [
         "DELETE"
       ],
-      "path": "/api/v1/venues/{venue_id}",
+      "path": "/api/venues/{venue_id}",
       "service": "venues",
       "tags": [
         "venues"
@@ -1953,7 +2018,7 @@
       "methods": [
         "GET"
       ],
-      "path": "/api/v1/venues/{venue_id}",
+      "path": "/api/venues/{venue_id}",
       "service": "venues",
       "tags": [
         "venues"
@@ -1966,7 +2031,7 @@
       "methods": [
         "PATCH"
       ],
-      "path": "/api/v1/venues/{venue_id}",
+      "path": "/api/venues/{venue_id}",
       "service": "venues",
       "tags": [
         "venues"

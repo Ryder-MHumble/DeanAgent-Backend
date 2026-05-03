@@ -38,7 +38,7 @@ from __future__ import annotations
 import re as _re
 from typing import Any
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 # ---------------------------------------------------------------------------
 # Sub-models
@@ -96,6 +96,24 @@ class PublicationRecord(BaseModel):
     added_by: str = "crawler"
     """数据来源: 'crawler' | 'user:{username}'"""
 
+    @field_validator(
+        "title",
+        "venue",
+        "year",
+        "authors",
+        "url",
+        "doi",
+        "abstract",
+        "publication_date",
+        "project_group_name",
+        "source_type",
+        "added_by",
+        mode="before",
+    )
+    @classmethod
+    def _coerce_string_fields(cls, value: Any) -> str:
+        return "" if value is None else str(value)
+
 
 class PatentRecord(BaseModel):
     """Single patent entry. [爬虫/用户]"""
@@ -142,6 +160,19 @@ class AwardRecord(BaseModel):
 
     added_by: str = "crawler"
     """数据来源: 'crawler' | 'user:{username}'"""
+
+    @field_validator(
+        "title",
+        "year",
+        "level",
+        "grantor",
+        "description",
+        "added_by",
+        mode="before",
+    )
+    @classmethod
+    def _coerce_string_fields(cls, value: Any) -> str:
+        return "" if value is None else str(value)
 
 
 class AdjunctSupervisorInfo(BaseModel):
@@ -719,6 +750,10 @@ class ScholarListItem(BaseModel):
     email: str = ""
     profile_url: str = ""
     profile_links: ProfileLinks = Field(default_factory=ProfileLinks)
+    custom_fields: dict[str, Any] = Field(default_factory=dict, description="用户自定义字段")
+    achievement_tags: list[str] = Field(default_factory=list)
+    representative_publications: list[PublicationRecord] = Field(default_factory=list)
+    awards: list[AwardRecord] = Field(default_factory=list)
     is_potential_recruit: bool = False
     is_advisor_committee: bool = False
     adjunct_supervisor: AdjunctSupervisorInfo = Field(default_factory=AdjunctSupervisorInfo)
@@ -774,6 +809,7 @@ class ScholarDetailResponse(BaseModel):
     h_index: int = -1
     citations_count: int = -1
     metrics_updated_at: str = ""
+    achievement_tags: list[str] = Field(default_factory=list)
     representative_publications: list[PublicationRecord] = Field(default_factory=list)
     patents: list[PatentRecord] = Field(default_factory=list)
     awards: list[AwardRecord] = Field(default_factory=list)

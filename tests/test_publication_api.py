@@ -8,7 +8,7 @@ from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
 from app.api import academic_monitor
-from app.api.v1 import publications, students
+from app.api.academic import publications, students
 from app.config import settings
 from app.db.pool import close_pool, get_pool, init_pool
 
@@ -121,7 +121,9 @@ async def _seed_student(prefix: str) -> tuple[str, str]:
 
 
 @pytest.mark.asyncio
-async def test_manual_publication_enters_formal_layer_and_compat_student_api_reads_it(api_client: TestClient):
+async def test_manual_publication_enters_formal_layer_and_compat_student_api_reads_it(
+    api_client: TestClient,
+):
     prefix = f"test_pub_{uuid4().hex[:10]}"
     await _cleanup_publication_test_rows(prefix)
     _, student_id = await _seed_student(prefix)
@@ -274,7 +276,9 @@ async def test_student_detail_round_trips_entry_date_and_paper_date_floor(api_cl
 
 
 @pytest.mark.asyncio
-async def test_same_doi_for_student_and_scholar_reuses_single_publication_record(api_client: TestClient):
+async def test_same_doi_for_student_and_scholar_reuses_single_publication_record(
+    api_client: TestClient,
+):
     prefix = f"test_pub_{uuid4().hex[:10]}"
     await _cleanup_publication_test_rows(prefix)
     scholar_id, student_id = await _seed_student(prefix)

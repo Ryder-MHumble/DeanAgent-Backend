@@ -53,21 +53,21 @@
 
 建议以下 action 型端点在 `jobs` 资源正式上线后继续保留到 `2026-12-31`：
 
-- `POST /api/v1/sources/{source_id}/trigger`
-- `POST /api/v1/crawler/start`
-- `GET /api/v1/crawler/status`
-- `POST /api/v1/crawler/stop`
-- `POST /api/v1/health/pipeline-trigger`
-- `POST /api/v1/intel/paper-transfer/run`
+- `POST /api/sources/{source_id}/trigger`
+- `POST /api/crawler/start`
+- `GET /api/crawler/status`
+- `POST /api/crawler/stop`
+- `POST /api/health/pipeline-trigger`
+- `POST /api/intel/paper-transfer/run`
 - 相关专用 `status/results` 查询端点
 
 建议以下 scholar-scoped 学生端点继续保留到 `2026-12-31`：
 
-- `GET /api/v1/scholars/{url_hash}/students`
-- `POST /api/v1/scholars/{url_hash}/students`
-- `GET /api/v1/scholars/{url_hash}/students/{student_id}`
-- `PATCH /api/v1/scholars/{url_hash}/students/{student_id}`
-- `DELETE /api/v1/scholars/{url_hash}/students/{student_id}`
+- `GET /api/scholars/{url_hash}/students`
+- `POST /api/scholars/{url_hash}/students`
+- `GET /api/scholars/{url_hash}/students/{student_id}`
+- `PATCH /api/scholars/{url_hash}/students/{student_id}`
+- `DELETE /api/scholars/{url_hash}/students/{student_id}`
 
 ### 3.2 老字段可用周期
 
@@ -171,11 +171,11 @@
 最小调整建议：
 
 - `supervised_students` 继续做唯一主事实表。
-- `/api/v1/students` 作为唯一 canonical collection。
+- `/api/students` 作为唯一 canonical collection。
 - 若需要承接导师视角，优先给 `/students` 增加显式过滤参数：
   - `scholar_id`
   - 或 `mentor_id`
-- `/api/v1/scholars/{url_hash}/students` 在兼容期内只作为 projection，不再承担主 ownership。
+- `/api/scholars/{url_hash}/students` 在兼容期内只作为 projection，不再承担主 ownership。
 
 不要做的事：
 

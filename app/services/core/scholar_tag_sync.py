@@ -320,20 +320,6 @@ async def sync_project_scholar_memberships(
         row = by_id.get(scholar_id) or {"id": scholar_id}
         tags = _normalize_project_tags(row.get("project_tags") or [])
 
-        # Backfill from legacy single-value fields when project_tags column is newly added.
-        if not tags:
-            legacy_category = str(row.get("project_category") or "").strip()
-            legacy_subcategory = str(row.get("project_subcategory") or "").strip()
-            if legacy_category or legacy_subcategory:
-                tags = [
-                    {
-                        "category": legacy_category,
-                        "subcategory": legacy_subcategory,
-                        "project_id": "",
-                        "project_title": "",
-                    }
-                ]
-
         if scholar_id in add_ids:
             tags = [
                 t
@@ -366,7 +352,6 @@ async def sync_project_scholar_memberships(
             ]
 
         tags = _dedupe_project_tags(tags)
-        first = tags[0] if tags else {}
 
         update_payload: dict[str, Any] = {}
         if "project_tags" in updatable_cols:
@@ -374,9 +359,9 @@ async def sync_project_scholar_memberships(
         if "is_cobuild_scholar" in updatable_cols:
             update_payload["is_cobuild_scholar"] = bool(tags)
         if "project_category" in updatable_cols:
-            update_payload["project_category"] = str(first.get("category") or "")
+            update_payload["project_category"] = ""
         if "project_subcategory" in updatable_cols:
-            update_payload["project_subcategory"] = str(first.get("subcategory") or "")
+            update_payload["project_subcategory"] = ""
 
         if update_payload:
             await (

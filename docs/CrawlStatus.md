@@ -139,9 +139,9 @@ data/processed/
 
 | 模块 | 脚本 | 方法 | 输入 | 产出 | API 前缀 |
 |------|------|------|------|------|---------|
-| policy_intel | `scripts/process_policy_intel.py` | 规则 + LLM (两级) | national_policy + beijing_policy + personnel 维度 raw JSON (184篇) | feed.json (184条, 55 LLM增强), opportunities.json (18条) | `/api/v1/intel/policy/` |
-| personnel_intel | `scripts/process_personnel_intel.py` | 纯规则 (正则提取) | personnel 维度 raw JSON (62篇) | feed.json (62条), changes.json (84人次) | `/api/v1/intel/personnel/` |
-| tech_frontier | `scripts/process_tech_frontier.py` | 规则 + LLM (两级) | technology + industry + twitter + universities(AI院所) 4维度 raw JSON (518篇) | topics.json (8主题, 168信号), opportunities.json (37条), stats.json | `/api/v1/intel/tech-frontier/` |
+| policy_intel | `scripts/process_policy_intel.py` | 规则 + LLM (两级) | national_policy + beijing_policy + personnel 维度 raw JSON (184篇) | feed.json (184条, 55 LLM增强), opportunities.json (18条) | `/api/intel/policy/` |
+| personnel_intel | `scripts/process_personnel_intel.py` | 纯规则 (正则提取) | personnel 维度 raw JSON (62篇) | feed.json (62条), changes.json (84人次) | `/api/intel/personnel/` |
+| tech_frontier | `scripts/process_tech_frontier.py` | 规则 + LLM (两级) | technology + industry + twitter + universities(AI院所) 4维度 raw JSON (518篇) | topics.json (8主题, 168信号), opportunities.json (37条), stats.json | `/api/intel/tech-frontier/` |
 
 ```
 data/processed/

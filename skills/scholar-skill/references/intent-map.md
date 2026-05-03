@@ -2,10 +2,10 @@
 
 ## 1) 基础路由
 
-- 学者列表：`GET /api/v1/scholars`
-- 学者统计：`GET /api/v1/scholars/stats`
-- 学者详情：`GET /api/v1/scholars/{url_hash}`
-- 导师学生关系：`GET /api/v1/scholars/{url_hash}/students`
+- 学者列表：`GET /api/scholars`
+- 学者统计：`GET /api/scholars/stats`
+- 学者详情：`GET /api/scholars/{url_hash}`
+- 导师学生关系：`GET /api/scholars/{url_hash}/students`
 
 ## 2) 常见意图到参数
 
@@ -73,21 +73,21 @@
 用户 query：`帮我看一下清华大学做具身智能的潜在招募学者`
 
 参数：
-- `GET /api/v1/scholars?university=清华大学&keyword=具身智能&is_potential_recruit=true&page=1&page_size=20`
+- `GET /api/scholars?university=清华大学&keyword=具身智能&is_potential_recruit=true&page=1&page_size=20`
 
 ### 示例 B：北大计算机学院的院士和顾问委员会成员
 
 用户 query：`有没有北大计算机学院的院士和顾问委员会成员`
 
 参数：
-- `GET /api/v1/scholars?university=北京大学&department=计算机学院&is_academician=true&is_advisor_committee=true&page=1&page_size=20`
+- `GET /api/scholars?university=北京大学&department=计算机学院&is_academician=true&is_advisor_committee=true&page=1&page_size=20`
 
 ### 示例 C：海外高校有邮箱的 AI 学者
 
 用户 query：`帮我找有邮箱的海外高校AI学者`
 
 参数：
-- `GET /api/v1/scholars?region=国际&has_email=true&keyword=AI&page=1&page_size=30`
+- `GET /api/scholars?region=国际&has_email=true&keyword=AI&page=1&page_size=30`
 
 ## 6) 额外需求识别（支持度判定）
 

@@ -257,7 +257,7 @@ def _derive_cobuild_from_tags(
     project_tags: list[dict[str, str]] | None = None,
     event_tags: list[dict[str, str]] | None = None,
 ) -> bool:
-    has_tags = bool(project_tags or []) or bool(event_tags or [])
+    has_tags = bool(project_tags or [])
     if has_tags:
         return True
     if isinstance(explicit, bool):
@@ -789,7 +789,6 @@ async def create_scholar(data: dict[str, Any]) -> tuple[dict[str, Any] | None, s
 
         project_tags = _normalize_project_tags(data.get("project_tags"))
         event_tags = _normalize_event_tags(data.get("event_tags"))
-        first_project_category, first_project_subcategory = _first_project_tag(project_tags)
         participated_event_ids = data.get("participated_event_ids") or []
 
         record: dict[str, Any] = {
@@ -848,8 +847,8 @@ async def create_scholar(data: dict[str, Any]) -> tuple[dict[str, Any] | None, s
             "created_at": datetime.now(UTC).isoformat(),
             "updated_at": datetime.now(UTC).isoformat(),
             "metrics_updated_at": None,
-            "project_category": first_project_category,
-            "project_subcategory": first_project_subcategory,
+            "project_category": "",
+            "project_subcategory": "",
             "custom_fields": {
                 **(data.get("custom_fields") or {}),
                 **profile_custom_fields,
@@ -1089,6 +1088,52 @@ def _normalize_optional_filter_text(value: str | None) -> str | None:
     return text
 
 
+def _uses_project_filter(
+    project_category: str | None,
+    project_subcategory: str | None,
+    project_categories: str | None,
+    project_subcategories: str | None,
+    is_cobuild_scholar: bool | None,
+) -> bool:
+    return bool(
+        project_category
+        or project_subcategory
+        or project_categories
+        or project_subcategories
+        or is_cobuild_scholar is not None
+    )
+
+
+async def _load_supervised_scholar_ids() -> set[str]:
+    try:
+        from app.db.pool import get_pool  # noqa: PLC0415
+
+        rows = await get_pool().fetch(
+            """
+            SELECT DISTINCT scholar_id
+            FROM supervised_students
+            WHERE COALESCE(scholar_id, '') <> ''
+            """,
+        )
+        return {_clean_text(row["scholar_id"]) for row in rows if _clean_text(row["scholar_id"])}
+    except Exception as exc:
+        logger.warning("Failed to load supervised scholar ids for project filters: %s", exc)
+        return set()
+
+
+async def _annotate_supervised_student_project_flags(items: list[dict[str, Any]]) -> None:
+    scholar_ids = await _load_supervised_scholar_ids()
+    if not scholar_ids:
+        return
+    for item in items:
+        refs = {
+            _clean_text(item.get("id")),
+            _clean_text(item.get("url_hash")),
+        }
+        if refs & scholar_ids:
+            item["__has_supervised_students"] = True
+
+
 async def get_scholar_list(
     *,
     university: str | None = None,
@@ -1109,6 +1154,10 @@ async def get_scholar_list(
     event_types: str | None = None,
     participated_event_id: str | None = None,
     is_cobuild_scholar: bool | None = None,
+    is_chinese: bool | None = None,
+    is_current_student: bool | None = None,
+    chinese_identity: str | None = None,
+    achievement_tag: str | None = None,
     region: str | None = None,
     affiliation_type: str | None = None,
     institution_group: str | None = None,
@@ -1164,6 +1213,10 @@ async def get_scholar_list(
                 institution_names=institution_names,
                 custom_field_key=custom_field_key,
                 custom_field_value=custom_field_value,
+                is_chinese=is_chinese,
+                is_current_student=is_current_student,
+                chinese_identity=chinese_identity,
+                achievement_tag=achievement_tag,
                 page=page,
                 page_size=page_size,
             )
@@ -1172,6 +1225,14 @@ async def get_scholar_list(
 
     # Fallback path: in-memory filtering over full dataset.
     items = await _load_all_with_annotations_async()
+    if _uses_project_filter(
+        project_category,
+        project_subcategory,
+        project_categories,
+        project_subcategories,
+        is_cobuild_scholar,
+    ):
+        await _annotate_supervised_student_project_flags(items)
 
     inst_map: dict = {}
     if region or affiliation_type:
@@ -1197,6 +1258,10 @@ async def get_scholar_list(
         event_types=event_types,
         participated_event_id=participated_event_id,
         is_cobuild_scholar=is_cobuild_scholar,
+        is_chinese=is_chinese,
+        is_current_student=is_current_student,
+        chinese_identity=chinese_identity,
+        achievement_tag=achievement_tag,
         region=region,
         affiliation_type=affiliation_type,
         institution_names=institution_names,
@@ -1334,6 +1399,10 @@ async def get_scholar_stats(
     event_types: str | None = None,
     participated_event_id: str | None = None,
     is_cobuild_scholar: bool | None = None,
+    is_chinese: bool | None = None,
+    is_current_student: bool | None = None,
+    chinese_identity: str | None = None,
+    achievement_tag: str | None = None,
     region: str | None = None,
     affiliation_type: str | None = None,
     institution_group: str | None = None,
@@ -1363,6 +1432,14 @@ async def get_scholar_stats(
         )
 
     items = await _load_all_with_annotations_async()
+    if _uses_project_filter(
+        project_category,
+        project_subcategory,
+        project_categories,
+        project_subcategories,
+        is_cobuild_scholar,
+    ):
+        await _annotate_supervised_student_project_flags(items)
 
     # Fetch DB-based classification map when region/affiliation_type filter is active
     inst_map: dict = {}
@@ -1390,6 +1467,10 @@ async def get_scholar_stats(
         event_types=event_types,
         participated_event_id=participated_event_id,
         is_cobuild_scholar=is_cobuild_scholar,
+        is_chinese=is_chinese,
+        is_current_student=is_current_student,
+        chinese_identity=chinese_identity,
+        achievement_tag=achievement_tag,
         region=region,
         affiliation_type=affiliation_type,
         institution_names=institution_names,
@@ -1465,9 +1546,8 @@ async def update_scholar_relation(url_hash: str, updates: dict[str, Any]) -> dic
     if "project_tags" in normalized_updates:
         tags = _normalize_project_tags(normalized_updates.get("project_tags"))
         normalized_updates["project_tags"] = tags
-        first_category, first_subcategory = _first_project_tag(tags)
-        normalized_updates["project_category"] = first_category
-        normalized_updates["project_subcategory"] = first_subcategory
+        normalized_updates["project_category"] = ""
+        normalized_updates["project_subcategory"] = ""
 
     if "event_tags" in normalized_updates:
         normalized_updates["event_tags"] = _normalize_event_tags(
@@ -1678,18 +1758,74 @@ async def update_scholar_basic(url_hash: str, updates: dict[str, Any]) -> dict[s
     return await get_scholar_detail(url_hash)
 
 
+_SCHOLAR_DEPENDENT_TABLES = (
+    "event_scholars",
+    "scholar_awards",
+    "scholar_dynamic_updates",
+    "scholar_education",
+    "scholar_patents",
+    "scholar_publications",
+)
+
+
+async def _resolve_db_scholar_ref_for_delete(client: Any, url_hash: str) -> dict[str, str] | None:
+    try:
+        resp = await (
+            client.table("scholars")
+            .select("id,url_hash")
+            .or_(f"id.eq.{url_hash},url_hash.eq.{url_hash}")
+            .limit(1)
+            .execute()
+        )
+    except Exception:
+        resp = await (
+            client.table("scholars")
+            .select("id")
+            .eq("id", url_hash)
+            .limit(1)
+            .execute()
+        )
+
+    if not resp.data:
+        return None
+
+    row = dict(resp.data[0])
+    scholar_id = _clean_text(row.get("id")) or url_hash
+    public_hash = _clean_text(row.get("url_hash")) or url_hash
+    return {"id": scholar_id, "url_hash": public_hash}
+
+
+async def _delete_scholar_db_dependencies(client: Any, scholar_id: str) -> None:
+    await student_store.delete_all_students(scholar_id)
+    for table in _SCHOLAR_DEPENDENT_TABLES:
+        try:
+            await client.table(table).delete().eq("scholar_id", scholar_id).execute()
+        except Exception as exc:
+            logger.warning("Failed to delete %s rows for scholar %s: %s", table, scholar_id, exc)
+    try:
+        await (
+            client.table("publication_owners")
+            .delete()
+            .eq("owner_type", "scholar")
+            .eq("owner_id", scholar_id)
+            .execute()
+        )
+    except Exception as exc:
+        logger.debug("Skipping publication_owners cleanup for scholar %s: %s", scholar_id, exc)
+
+
 async def delete_scholar(url_hash: str) -> bool:
     """Delete a scholar record (Supabase-first, JSON fallback)."""
     # --- Try Supabase first ---
     try:
         from app.db.client import get_client  # noqa: PLC0415
         client = get_client()
-        # supabase-py v2 delete() also returns [] by default without .select()
-        exist = await client.table("scholars").select("id").eq("id", url_hash).execute()
-        if exist.data:
-            await client.table("scholars").delete().eq("id", url_hash).execute()
+        resolved = await _resolve_db_scholar_ref_for_delete(client, url_hash)
+        if resolved:
+            scholar_id = resolved["id"]
+            await _delete_scholar_db_dependencies(client, scholar_id)
+            await client.table("scholars").delete().eq("id", scholar_id).execute()
             annotation_store.delete_all_for_faculty(url_hash)
-            await student_store.delete_all_students(url_hash)
             return True
         # Not in DB → fall through to JSON
     except Exception as exc:

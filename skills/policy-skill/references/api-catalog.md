@@ -7,7 +7,7 @@
 
 ## 1) 政策动态
 
-### `GET /api/v1/intel/policy/feed`
+### `GET /api/intel/policy/feed`
 
 用途：政策信息检索（规则 + LLM 处理后的 feed）。
 
@@ -35,7 +35,7 @@
 
 ## 2) 政策机会（资金/申报/招商）
 
-### `GET /api/v1/intel/policy/opportunities`
+### `GET /api/intel/policy/opportunities`
 
 用途：项目申报/招商/资金机会看板；适合“重大项目”“申报机会”类问题。
 
@@ -56,7 +56,7 @@
 
 ## 3) 统计
 
-### `GET /api/v1/intel/policy/stats`
+### `GET /api/intel/policy/stats`
 
 返回：
 - `total_feed_items`

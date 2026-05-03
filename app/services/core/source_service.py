@@ -705,7 +705,7 @@ async def resolve_sources(
             "taxonomy_track": row.get("taxonomy_track"),
             "taxonomy_scope": row.get("taxonomy_scope"),
             "is_enabled": bool(row.get("is_enabled", False)),
-            "recommended_endpoint": f"/api/v1/sources/{row.get('id')}/items",
+            "recommended_endpoint": f"/api/sources/{row.get('id')}/items",
         }
         for row in rows
         if row

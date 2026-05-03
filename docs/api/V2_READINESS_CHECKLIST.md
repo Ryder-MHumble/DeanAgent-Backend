@@ -1,11 +1,11 @@
 # API v2 准入评估清单
 
-> 目标：为 `/api/v1` 的演进提供统一、可量化的“是否进入 v2”决策标准。  
+> 目标：为 `/api` 的演进提供统一、可量化的“是否进入 v2”决策标准。
 > 适用范围：所有可能影响现有消费端（Dean-Agent / ScholarDB / Athena / NanoBot）的 API 变更评审。
 
 ## 1. 判定原则
 
-默认策略：**能兼容就留在 v1**。  
+默认策略：**能兼容就留在 v1**。
 仅当出现“系统性破坏兼容”或“兼容成本倒挂”时，进入 v2。
 
 `non-breaking`（通常保留 v1）：
@@ -25,8 +25,8 @@
 
 | 端点 | 变更内容 | 类型 | 影响消费端 | 预计改造量（人天） | 可否兼容实现 |
 |---|---|---|---|---:|---|
-| `GET /api/v1/xxx` | 示例：`status` 字段语义调整 | `breaking` | Dean-Agent, Athena | 2 | 否 |
-| `POST /api/v1/yyy` | 示例：新增可选参数 `source` | `non-breaking` | 无 | 0 | 是 |
+| `GET /api/xxx` | 示例：`status` 字段语义调整 | `breaking` | Dean-Agent, Athena | 2 | 否 |
+| `POST /api/yyy` | 示例：新增可选参数 `source` | `non-breaking` | 无 | 0 | 是 |
 
 ## 3. v2 准入评分卡
 

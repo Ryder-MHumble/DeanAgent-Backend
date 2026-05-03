@@ -14,6 +14,7 @@ class StudentListItem(BaseModel):
     student_no: str = ""
     name: str
     home_university: str = ""
+    institution: str = Field(default="", description="[兼容] 等价于 home_university")
     enrollment_year: str = ""
     status: str = "在读"
     email: str = ""
@@ -29,6 +30,7 @@ class StudentDetailResponse(StudentListItem):
     expected_graduation_year: str = ""
     entry_date: str = ""
     paper_date_floor: str = ""
+    notes: str = ""
     added_by: str = ""
     created_at: str = ""
     updated_at: str = ""
@@ -55,6 +57,7 @@ class StudentCreateRequest(BaseModel):
     student_no: str = Field(default="", description="学号")
     name: str = Field(description="学生姓名")
     home_university: str = Field(default="", description="共建高校/学籍学校")
+    institution: str = Field(default="", description="[兼容] 共建高校/学籍学校，等价于 home_university")
     major: str = Field(default="", description="专业")
     degree_type: str = Field(default="", description="培养类型")
     enrollment_year: str = Field(default="", description="年级/入学年份")
@@ -74,6 +77,7 @@ class StudentUpdateRequest(BaseModel):
     student_no: str | None = Field(default=None, description="学号")
     name: str | None = Field(default=None, description="学生姓名")
     home_university: str | None = Field(default=None, description="共建高校/学籍学校")
+    institution: str | None = Field(default=None, description="[兼容] 共建高校/学籍学校，等价于 home_university")
     major: str | None = Field(default=None, description="专业")
     degree_type: str | None = Field(default=None, description="培养类型")
     enrollment_year: str | None = Field(default=None, description="年级/入学年份")

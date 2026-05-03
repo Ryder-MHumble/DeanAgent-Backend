@@ -1,4 +1,4 @@
-"""Event API — /api/v1/events/
+"""Event API — /api/events/
 
 Endpoints:
   GET    /events/                          活动列表（分页 + 筛选）

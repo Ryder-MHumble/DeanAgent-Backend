@@ -1,4 +1,4 @@
-"""Pydantic schemas for the Scholar API (/api/v1/scholars/)."""
+"""Pydantic schemas for the Scholar API (/api/scholars/)."""
 from __future__ import annotations
 
 from typing import Any

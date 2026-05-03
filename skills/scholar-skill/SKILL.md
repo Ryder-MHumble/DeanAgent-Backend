@@ -23,10 +23,10 @@ description: 面向“学者检索/潜在招募/院士/顾问委员会/兼职导
 ## API 配置
 
 - 服务基址（由服务方提供）：`http://10.1.132.21:8001`
-- 学者列表：`GET /api/v1/scholars`
-- 学者统计：`GET /api/v1/scholars/stats`
-- 学者详情：`GET /api/v1/scholars/{url_hash}`
-- 导师指导学生：`GET /api/v1/scholars/{url_hash}/students`
+- 学者列表：`GET /api/scholars`
+- 学者统计：`GET /api/scholars/stats`
+- 学者详情：`GET /api/scholars/{url_hash}`
+- 导师指导学生：`GET /api/scholars/{url_hash}/students`
 
 ## 通用性约束（非常重要）
 
@@ -229,7 +229,7 @@ feature_request:
 ## 直接请求示例
 
 ```bash
-curl -sS -G "http://10.1.132.21:8001/api/v1/scholars" \
+curl -sS -G "http://10.1.132.21:8001/api/scholars" \
   --data-urlencode "university=清华大学" \
   --data-urlencode "keyword=具身智能" \
   --data-urlencode "is_potential_recruit=true" \
@@ -238,7 +238,7 @@ curl -sS -G "http://10.1.132.21:8001/api/v1/scholars" \
 ```
 
 ```bash
-curl -sS "http://10.1.132.21:8001/api/v1/scholars/{url_hash}"
+curl -sS "http://10.1.132.21:8001/api/scholars/{url_hash}"
 ```
 
 ## 资源

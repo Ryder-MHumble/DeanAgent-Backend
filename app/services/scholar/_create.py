@@ -119,9 +119,6 @@ def create_scholar(data: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
                     "project_title": str(tag.get("project_title") or ""),
                 }
             )
-    first_project_category = project_tags[0]["category"] if project_tags else ""
-    first_project_subcategory = project_tags[0]["subcategory"] if project_tags else ""
-
     record: dict[str, Any] = {
         "url_hash": url_hash,
         "url": url,
@@ -178,7 +175,7 @@ def create_scholar(data: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
         "participated_event_ids": data.get("participated_event_ids") or [],
         "event_tags": data.get("event_tags") or [],
         "project_tags": project_tags,
-        "is_cobuild_scholar": bool(data.get("is_cobuild_scholar", bool(project_tags))),
+        "is_cobuild_scholar": bool(project_tags) or bool(data.get("is_cobuild_scholar", False)),
         "relation_updated_by": "",
         "relation_updated_at": "",
         "recent_updates": [],
@@ -187,8 +184,8 @@ def create_scholar(data: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
             **(data.get("custom_fields") or {}),
             **profile_custom_fields,
         },
-        "project_category": first_project_category,
-        "project_subcategory": first_project_subcategory,
+        "project_category": "",
+        "project_subcategory": "",
     }
 
     try:

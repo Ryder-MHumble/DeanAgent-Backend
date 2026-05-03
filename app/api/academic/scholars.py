@@ -1,4 +1,4 @@
-"""Scholar API — /api/v1/scholars/
+"""Scholar API — /api/scholars/
 
 Endpoints:
   GET  /scholars/                                       学者列表（分页 + 多维度筛选）
@@ -95,6 +95,10 @@ async def list_scholars(
     ),
     participated_event_id: str | None = Query(None, description="按参与活动 ID 筛选"),
     is_cobuild_scholar: bool | None = Query(None, description="是否共建学者（项目分类标签非空）"),
+    is_chinese: bool | None = Query(None, description="按华人身份筛选"),
+    is_current_student: bool | None = Query(None, description="按当前学生身份筛选"),
+    chinese_identity: str | None = Query(None, description="华人身份状态：unknown/待判定"),
+    achievement_tag: str | None = Query(None, description="按学术标识筛选（如 ICML/NeurIPS/ICPC）"),
     institution_group: str | None = Query(
         None, description="机构顶层分组（共建高校/兄弟院校/海外高校/其他高校/科研院所/行业学会）"
     ),
@@ -127,6 +131,10 @@ async def list_scholars(
         event_types=event_types,
         participated_event_id=participated_event_id,
         is_cobuild_scholar=is_cobuild_scholar,
+        is_chinese=is_chinese,
+        is_current_student=is_current_student,
+        chinese_identity=chinese_identity,
+        achievement_tag=achievement_tag,
         institution_group=institution_group,
         institution_category=institution_category,
         page=page,
@@ -163,6 +171,10 @@ async def get_stats(
     event_types: str | None = Query(None, description="按多个活动类型筛选（逗号分隔）"),
     participated_event_id: str | None = Query(None, description="按参与活动 ID 筛选"),
     is_cobuild_scholar: bool | None = Query(None, description="是否共建学者"),
+    is_chinese: bool | None = Query(None, description="按华人身份筛选"),
+    is_current_student: bool | None = Query(None, description="按当前学生身份筛选"),
+    chinese_identity: str | None = Query(None, description="华人身份状态：unknown/待判定"),
+    achievement_tag: str | None = Query(None, description="按学术标识筛选（如 ICML/NeurIPS/ICPC）"),
     institution_group: str | None = Query(None, description="机构顶层分组"),
     institution_category: str | None = Query(None, description="机构细粒度分类"),
     custom_field_key: str | None = Query(None, description="自定义字段名"),
@@ -189,6 +201,10 @@ async def get_stats(
         event_types=event_types,
         participated_event_id=participated_event_id,
         is_cobuild_scholar=is_cobuild_scholar,
+        is_chinese=is_chinese,
+        is_current_student=is_current_student,
+        chinese_identity=chinese_identity,
+        achievement_tag=achievement_tag,
         institution_group=institution_group,
         institution_category=institution_category,
         custom_field_key=custom_field_key,
@@ -385,8 +401,8 @@ async def _assert_faculty_exists(url_hash: str) -> None:
     summary="查询指导学生列表",
     description=(
         "返回指定导师下的所有指导学生记录（联合培养学生）。"
-        "建议迁移至 /api/v1/students?scholar_id={url_hash} "
-        "或 /api/v1/students/by-scholar/{url_hash}。"
+        "建议迁移至 /api/students?scholar_id={url_hash} "
+        "或 /api/students/by-scholar/{url_hash}。"
     ),
     deprecated=True,
 )
@@ -407,7 +423,7 @@ async def list_students(url_hash: str):
     description=(
         "为指定导师新增一名指导学生记录。"
         "id / created_at / updated_at 由服务端自动生成，added_by 自动补充为 'user:{added_by}'。"
-        "建议迁移至 /api/v1/students（请求体中携带 scholar_id）。"
+        "建议迁移至 /api/students（请求体中携带 scholar_id）。"
     ),
     status_code=201,
     deprecated=True,
@@ -424,7 +440,7 @@ async def add_student(url_hash: str, body: SupervisedStudentCreate):
     summary="查询单名学生详情",
     description=(
         "根据学生记录 ID 获取单名指导学生的完整信息。"
-        "建议迁移至 /api/v1/students/{student_id}。"
+        "建议迁移至 /api/students/{student_id}。"
     ),
     deprecated=True,
 )
@@ -443,7 +459,7 @@ async def get_student(url_hash: str, student_id: str):
     description=(
         "部分更新指定学生记录。所有字段均可选，传 null 或不传则保持不变。"
         "updated_at 由服务端自动更新。"
-        "建议迁移至 /api/v1/students/{student_id}。"
+        "建议迁移至 /api/students/{student_id}。"
     ),
     deprecated=True,
 )
@@ -459,7 +475,7 @@ async def update_student(url_hash: str, student_id: str, body: SupervisedStudent
 @router.delete(
     "/{url_hash}/students/{student_id}",
     summary="删除学生记录",
-    description="删除指定导师下的一条学生记录。建议迁移至 /api/v1/students/{student_id}。",
+    description="删除指定导师下的一条学生记录。建议迁移至 /api/students/{student_id}。",
     status_code=204,
     deprecated=True,
 )

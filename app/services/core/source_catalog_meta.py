@@ -156,6 +156,7 @@ _PROFESSIONAL_DIMENSION_NAMES: dict[str, str] = {
     "events": "学术会议与活动",
     "personnel": "组织人事动态",
     "scholars": "学者与师资库",
+    "paper": "论文与作者信源",
 }
 
 _LEGACY_DIMENSION_NAME_ALIASES: dict[str, str] = {

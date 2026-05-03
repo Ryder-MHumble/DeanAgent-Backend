@@ -1,4 +1,4 @@
-"""Pydantic schemas for the Institution API (/api/v1/institutions/)."""
+"""Pydantic schemas for the Institution API (/api/institutions/)."""
 from __future__ import annotations
 
 from datetime import date, datetime
@@ -434,7 +434,7 @@ class InstitutionUpdate(BaseModel):
 
 
 # ---------------------------------------------------------------------------
-# Scholar Institutions API schemas (for /api/v1/institutions/scholars/)
+# Scholar Institutions API schemas (for /api/institutions/scholars/)
 # ---------------------------------------------------------------------------
 
 
@@ -470,7 +470,7 @@ class ScholarUniversity(BaseModel):
 
 
 # ---------------------------------------------------------------------------
-# Institution Tree API schemas (for /api/v1/institutions/scholars/tree)
+# Institution Tree API schemas (for /api/institutions/scholars/tree)
 # ---------------------------------------------------------------------------
 
 
@@ -527,7 +527,7 @@ class InstitutionTreeResponse(BaseModel):
 
 
 # ---------------------------------------------------------------------------
-# Institution Search API schemas (for /api/v1/institutions/search)
+# Institution Search API schemas (for /api/institutions/search)
 # ---------------------------------------------------------------------------
 
 

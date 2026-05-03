@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-04-28T09:24:38.556148+00:00",
-  "total_sources": 303,
+  "generated_at": "2026-04-30T10:47:55.412742+00:00",
+  "total_sources": 311,
   "enabled_sources": 196,
   "files": [
     {
@@ -16,6 +16,27 @@
       "dimension_name": "产业与投融资",
       "total": 10,
       "enabled": 7
+    },
+    {
+      "file": "paper/conferences.yaml",
+      "dimension": "paper",
+      "dimension_name": "论文信源",
+      "total": 3,
+      "enabled": 0
+    },
+    {
+      "file": "paper/journals.yaml",
+      "dimension": "paper",
+      "dimension_name": "论文信源",
+      "total": 4,
+      "enabled": 0
+    },
+    {
+      "file": "paper/top_conference_papers.yaml",
+      "dimension": "paper",
+      "dimension_name": "论文主数据",
+      "total": 8,
+      "enabled": 0
     },
     {
       "file": "personnel/personnel.yaml",
@@ -116,18 +137,25 @@
       "enabled": 0
     },
     {
+      "file": "talent/competition.yaml",
+      "dimension": "talent_scout",
+      "dimension_name": "人才候选池",
+      "total": 26,
+      "enabled": 0
+    },
+    {
+      "file": "talent/github.yaml",
+      "dimension": "talent_scout",
+      "dimension_name": "人才候选池",
+      "total": 2,
+      "enabled": 0
+    },
+    {
       "file": "talent/talent.yaml",
       "dimension": "talent",
       "dimension_name": "人才与学术发展",
       "total": 7,
       "enabled": 4
-    },
-    {
-      "file": "talent/talent_scout.yaml",
-      "dimension": "talent_scout",
-      "dimension_name": "人才候选池",
-      "total": 35,
-      "enabled": 0
     },
     {
       "file": "technology/technology.yaml",
@@ -206,22 +234,28 @@
       "enabled": 0
     },
     {
-      "key": "talent_scout",
-      "label": "人才候选池",
-      "total": 35,
-      "enabled": 0
-    },
-    {
       "key": "technology",
       "label": null,
       "total": 34,
       "enabled": 28
     },
     {
+      "key": "talent_scout",
+      "label": "人才候选池",
+      "total": 28,
+      "enabled": 0
+    },
+    {
       "key": "beijing_policy",
       "label": "北京市政策治理",
       "total": 16,
       "enabled": 15
+    },
+    {
+      "key": "paper",
+      "label": "论文信源",
+      "total": 15,
+      "enabled": 0
     },
     {
       "key": "industry",
@@ -290,8 +324,8 @@
       "count": 8
     },
     {
-      "key": "talent_papers",
-      "count": 7
+      "key": "paper_warehouse",
+      "count": 8
     },
     {
       "key": "international_media",
@@ -318,6 +352,10 @@
       "count": 5
     },
     {
+      "key": "paper_journals",
+      "count": 4
+    },
+    {
       "key": "tracking",
       "count": 4
     },
@@ -328,6 +366,10 @@
     {
       "key": "awards",
       "count": 4
+    },
+    {
+      "key": "paper_conferences",
+      "count": 3
     },
     {
       "key": "news_personnel",
@@ -360,20 +402,12 @@
     {
       "key": "ruc",
       "count": 2
-    },
-    {
-      "key": "talent_github",
-      "count": 2
-    },
-    {
-      "key": "domestic_media",
-      "count": 2
     }
   ],
   "top_methods": [
     {
       "key": "static",
-      "count": 140
+      "count": 148
     },
     {
       "key": "university_leadership",
@@ -418,12 +452,12 @@
       "count": 44
     },
     {
-      "key": "talent_scout",
-      "count": 35
-    },
-    {
       "key": "auto",
       "count": 29
+    },
+    {
+      "key": "talent_scout",
+      "count": 28
     },
     {
       "key": "ai",
@@ -451,6 +485,10 @@
     },
     {
       "key": "academic",
+      "count": 15
+    },
+    {
+      "key": "paper",
       "count": 15
     },
     {
@@ -482,7 +520,15 @@
       "count": 9
     },
     {
+      "key": "conference",
+      "count": 8
+    },
+    {
       "key": "industry",
+      "count": 8
+    },
+    {
+      "key": "warehouse",
       "count": 8
     },
     {
@@ -491,10 +537,6 @@
     },
     {
       "key": "se",
-      "count": 7
-    },
-    {
-      "key": "paper",
       "count": 7
     },
     {
@@ -514,7 +556,7 @@
       "count": 6
     },
     {
-      "key": "conference",
+      "key": "nlp",
       "count": 5
     },
     {
@@ -544,14 +586,6 @@
     {
       "key": "cn_ai",
       "count": 5
-    },
-    {
-      "key": "innovation",
-      "count": 4
-    },
-    {
-      "key": "ranking",
-      "count": 4
     }
   ]
 }

@@ -2,9 +2,9 @@
 
 ## 1) 基础路由
 
-- 政策动态：`GET /api/v1/intel/policy/feed`
-- 政策机会：`GET /api/v1/intel/policy/opportunities`
-- 统计信息：`GET /api/v1/intel/policy/stats`
+- 政策动态：`GET /api/intel/policy/feed`
+- 政策机会：`GET /api/intel/policy/opportunities`
+- 统计信息：`GET /api/intel/policy/stats`
 
 ## 2) 常见意图到参数
 
@@ -41,10 +41,10 @@
 用户 query：`看一下人才政策里提到人才成功转化的信息`
 
 首轮参数：
-- `GET /api/v1/intel/policy/feed?keyword=人才成功转化&limit=80`
+- `GET /api/intel/policy/feed?keyword=人才成功转化&limit=80`
 
 若命中不足，二次过滤：
-- `GET /api/v1/intel/policy/feed?limit=200`
+- `GET /api/intel/policy/feed?limit=200`
 - 二次过滤词：`人才`、`成功转化`、`成果转化`
 
 ### 示例 B：北京重大招商项目
@@ -52,15 +52,15 @@
 用户 query：`看北京近期重大招商项目`
 
 参数：
-- `GET /api/v1/intel/policy/feed?category=北京政策&keyword=招商项目&limit=80`
-- `GET /api/v1/intel/policy/opportunities?status=active&limit=50`
+- `GET /api/intel/policy/feed?category=北京政策&keyword=招商项目&limit=80`
+- `GET /api/intel/policy/opportunities?status=active&limit=50`
 
 ### 示例 C：国家层面高匹配政策
 
 用户 query：`给我国家层面高匹配政策`
 
 参数：
-- `GET /api/v1/intel/policy/feed?category=国家政策&min_match_score=70&limit=50`
+- `GET /api/intel/policy/feed?category=国家政策&min_match_score=70&limit=50`
 
 ## 5) 额外需求识别（支持度判定）
 

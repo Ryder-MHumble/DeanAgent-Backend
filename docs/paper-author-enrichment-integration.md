@@ -11,8 +11,8 @@
 - `1d536cb` 加 profile_extractor + /enrich-paper API
 
 能力：
-- `POST /api/v1/identity/enrich-author` — 单作者查询
-- `POST /api/v1/identity/enrich-paper` — 整篇论文批量查询，按 author_order 对齐
+- `POST /api/identity/enrich-author` — 单作者查询
+- `POST /api/identity/enrich-paper` — 整篇论文批量查询，按 author_order 对齐
 
 返回字段（每个作者）：
 - `author_description` — 由 OpenReview history 生成的中文摘要
@@ -52,7 +52,7 @@ import os
 ACADEMIC_MONITOR_BASE_URL = os.environ.get(
     "ACADEMIC_MONITOR_API_URL", "http://127.0.0.1:8000"
 ).rstrip("/")
-ACADEMIC_MONITOR_ENRICH_PAPER_PATH = "/api/v1/identity/enrich-paper"
+ACADEMIC_MONITOR_ENRICH_PAPER_PATH = "/api/identity/enrich-paper"
 ACADEMIC_MONITOR_TIMEOUT = float(os.environ.get("ACADEMIC_MONITOR_TIMEOUT", "60"))
 ```
 
@@ -77,7 +77,7 @@ class EnrichmentResult:
 
 ### 3. 新增函数 `fetch_author_enrichment_from_academic_monitor`
 
-调 academic-monitor `/api/v1/identity/enrich-paper`：传 authors + 可选的 authorids（从 fetch_openreview 的 note 中拿）+ 现有 affiliations，返回三个字段。失败静默返回 None。
+调 academic-monitor `/api/identity/enrich-paper`：传 authors + 可选的 authorids（从 fetch_openreview 的 note 中拿）+ 现有 affiliations，返回三个字段。失败静默返回 None。
 
 完整实现详见本次 PR 的 academic-monitor commit `1d536cb`。
 

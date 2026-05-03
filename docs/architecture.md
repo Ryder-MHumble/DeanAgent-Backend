@@ -13,10 +13,10 @@
 ```
 ╔══════════════════════════════════════════════════════════════════╗
 ║  📱 应用层                                                        ║
-║  Dean-Agent (院长智能体) │ ScholarDB (学者知识库)                  ║
+║  Dean-Agent (情报引擎基座服务) │ ScholarDB (学者知识库)                  ║
 ║  Athena (战略情报引擎)   │ NanoBot (钉钉统一入口)                  ║
 ╠══════════════════════════════════════════════════════════════════╣
-║  🔌 API 服务层  /api/v1 — 全量端点（自动统计）                      ║
+║  🔌 API 服务层  /api — 全量端点（自动统计）                      ║
 ║  文章/信源/维度/健康  │  政策/人事/科技/高校/简报(intel)            ║
 ║  学者/机构/项目/活动  │  AMiner/舆情/LLM追踪                       ║
 ╠══════════════════════════════════════════════════════════════════╣
@@ -39,7 +39,7 @@
 ```mermaid
 graph TB
     subgraph APP["应用层"]
-        DA["Dean-Agent 院长智能体"]
+        DA["Dean-Agent 情报引擎基座服务"]
         SDB["ScholarDB 学者知识库"]
         ATH["Athena 情报引擎"]
         NB["NanoBot 钉钉入口"]
@@ -100,7 +100,7 @@ data/raw/{dimension}/{group}/{source_id}/latest.json
      ↓
 data/processed/（5 个处理模块）
      ↓
-REST API /api/v1  ←  4 个消费端
+REST API /api  ←  4 个消费端
 ```
 
 ---
@@ -355,7 +355,7 @@ app/services/llm/
 | intel/university | `/intel/university` | 4 | 高校 Feed/概览/研究成果 |
 | intel/daily-briefing | `/intel/daily-briefing` | 3 | 今日/最新/历史简报 |
 
-基础路径：`/api/v1`。Swagger UI：`http://10.1.132.21:8001/docs`
+基础路径：`/api`。Swagger UI：`http://10.1.132.21:8001/docs`
 
 ### 5.2 通用过滤参数
 

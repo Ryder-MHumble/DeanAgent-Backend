@@ -19,6 +19,8 @@ from app.services.core import (
     source_service,
 )
 from app.services.core import institution as institution_service
+import app.services.paper_service as paper_service
+
 from app.services.external import sentiment_service, social_kol_service
 from app.services.stores import supervised_student_store
 
@@ -28,6 +30,7 @@ __all__ = [
     "dimension_service",
     "event_service",
     "institution_service",
+    "paper_service",
     "project_service",
     "project_taxonomy_service",
     "social_post_service",

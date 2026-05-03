@@ -39,7 +39,7 @@ def create_knowledge(name: str, content: dict, category: list, tags: list, meta:
     }
     
     try:
-        resp = requests.post(f"{API_URL}/api/v1/knowledge/create", headers=HEADERS, json=data, timeout=10)
+        resp = requests.post(f"{API_URL}/api/knowledge/create", headers=HEADERS, json=data, timeout=10)
         resp.raise_for_status()
         result = resp.json()
         stats["knowledge_created"] += 1
@@ -58,7 +58,7 @@ def create_statement(subject: str, predicate: str, obj: str, meta: dict = None) 
     }
     
     try:
-        resp = requests.post(f"{API_URL}/api/v1/statement/create", headers=HEADERS, json=data, timeout=10)
+        resp = requests.post(f"{API_URL}/api/statement/create", headers=HEADERS, json=data, timeout=10)
         resp.raise_for_status()
         result = resp.json()
         stats["statements_created"] += 1

@@ -1,4 +1,4 @@
-"""Pydantic schemas for the Project API (/api/v1/projects/).
+"""Pydantic schemas for the Project API (/api/projects/).
 
 项目在当前系统中按「分类标签」管理：
 - 一级分类：教育培养 / 科研学术 / 人才引育

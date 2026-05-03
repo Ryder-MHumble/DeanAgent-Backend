@@ -43,6 +43,13 @@ _CUSTOM_MAP: dict[str, str] = {
     "paper_author_source": "app.crawlers.parsers.paper_author_source.PaperAuthorSourceCrawler",
     "github_talent_source": "app.crawlers.parsers.github_talent_source.GitHubTalentSourceCrawler",
     "evidence_only_source": "app.crawlers.parsers.evidence_only_source.EvidenceOnlySourceCrawler",
+    "aclanthology": "app.crawlers.parsers.aclanthology.ACLAnthologyCrawler",
+    "openreview": "app.crawlers.parsers.openreview_api.OpenReviewCrawler",
+    "nips_papers_cc": "app.crawlers.parsers.nips_papers_cc.NeurIPSCrawler",
+    "cvf_openaccess": "app.crawlers.parsers.cvf_openaccess.CVFCrawler",
+    "ecva_papers": "app.crawlers.parsers.ecva_papers.ECVACrawler",
+    "ijcai_proceedings": "app.crawlers.parsers.ijcai_proceedings.IJCAIProceedingsCrawler",
+    "ojs_aaai": "app.crawlers.parsers.ojs_aaai.AAAICrawler",
 }
 
 

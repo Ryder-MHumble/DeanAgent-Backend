@@ -124,7 +124,7 @@ class BaseCrawler(ABC):
             result.items = filtered_items
             result.items_new = len(filtered_items)
 
-            if self.config.get("dimension") == "talent_scout":
+            if self._should_apply_candidate_metrics():
                 self._apply_talent_scout_metrics(result, items, filtered_items)
             elif filtered_items:
                 result.status = CrawlStatus.SUCCESS
@@ -160,6 +160,12 @@ class BaseCrawler(ABC):
         result.status = (
             CrawlStatus.SUCCESS if filtered_candidates else CrawlStatus.NO_NEW_CONTENT
         )
+
+    def _should_apply_candidate_metrics(self) -> bool:
+        entity_family = str(self.config.get("entity_family") or "").strip().lower()
+        if entity_family == "paper_author":
+            return True
+        return self.config.get("dimension") == "talent_scout"
 
     @staticmethod
     def _has_talent_candidate(item: CrawledItem) -> bool:

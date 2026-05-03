@@ -254,7 +254,7 @@ result = await get_institutions_unified(
 python3 -c "from app.services.core.institution import *; print('✓ Import OK')"
 
 # 测试 API 导入
-python3 -c "from app.api.v1 import institutions; print('✓ API OK')"
+python3 -c "from app.api.academic import institutions; print('✓ API OK')"
 ```
 
 ## 维护指南

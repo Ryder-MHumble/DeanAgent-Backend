@@ -16,7 +16,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from app.api.v1.aminer import get_scholar_detail
+from app.api.external.aminer import get_scholar_detail
 
 
 async def _run(scholar_id: str, force_refresh: bool) -> int:

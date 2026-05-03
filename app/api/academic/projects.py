@@ -1,4 +1,4 @@
-"""Project API — /api/v1/projects/
+"""Project API — /api/projects/
 
 项目库增删改查接口。
 

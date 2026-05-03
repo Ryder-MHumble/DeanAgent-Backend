@@ -91,6 +91,58 @@ async def _build_list_select_sql() -> str:
         fields.append("custom_fields")
     else:
         fields.append("'{}'::jsonb AS custom_fields")
+    if "achievement_tags" in scholar_cols:
+        fields.append("achievement_tags")
+    else:
+        fields.append("ARRAY[]::text[] AS achievement_tags")
+    publication_table_sql = (
+        "SELECT jsonb_agg("
+        "jsonb_build_object("
+        "'title', COALESCE(sp.title, ''), "
+        "'venue', COALESCE(sp.venue, ''), "
+        "'year', COALESCE(sp.year::text, ''), "
+        "'authors', COALESCE(array_to_string(sp.authors, ', '), ''), "
+        "'url', COALESCE(sp.url, ''), "
+        "'citation_count', COALESCE(sp.citation_count, -1), "
+        "'is_corresponding', COALESCE(sp.is_corresponding, FALSE), "
+        "'added_by', COALESCE(sp.added_by, '')"
+        ") ORDER BY sp.year DESC NULLS LAST, sp.created_at DESC, sp.id DESC"
+        ") FROM scholar_publications sp WHERE sp.scholar_id = scholars.id"
+    )
+    if "representative_publications" in scholar_cols:
+        fields.append(
+            "COALESCE(NULLIF(representative_publications, '[]'::jsonb), "
+            f"({publication_table_sql}), '[]'::jsonb) AS representative_publications"
+        )
+    else:
+        fields.append(
+            f"COALESCE(({publication_table_sql}), '[]'::jsonb) AS representative_publications"
+        )
+    award_table_sql = (
+        "SELECT jsonb_agg("
+        "jsonb_build_object("
+        "'title', COALESCE(sa.title, ''), "
+        "'year', COALESCE(sa.year::text, ''), "
+        "'level', COALESCE(sa.level, ''), "
+        "'grantor', COALESCE(sa.grantor, ''), "
+        "'description', COALESCE(sa.description, ''), "
+        "'added_by', COALESCE(sa.added_by, '')"
+        ") ORDER BY sa.year DESC NULLS LAST, sa.created_at DESC, sa.id DESC"
+        ") FROM scholar_awards sa WHERE sa.scholar_id = scholars.id"
+    )
+    if "awards" in scholar_cols:
+        fields.append(
+            "COALESCE(NULLIF(awards, '[]'::jsonb), "
+            f"({award_table_sql}), '[]'::jsonb) AS awards"
+        )
+    else:
+        fields.append(f"COALESCE(({award_table_sql}), '[]'::jsonb) AS awards")
+    fields.append(
+        "EXISTS ("
+        "SELECT 1 FROM supervised_students ss "
+        "WHERE COALESCE(ss.scholar_id, '') = COALESCE(scholars.id, '')"
+        ') AS "__has_supervised_students"'
+    )
 
     return "SELECT\n    " + ",\n    ".join(fields) + "\nFROM scholars"
 
@@ -152,6 +204,10 @@ def _build_where_clause(
     is_adjunct_supervisor: bool | None,
     has_email: bool | None,
     keyword: str | None,
+    is_chinese: bool | None,
+    is_current_student: bool | None,
+    chinese_identity: str | None,
+    achievement_tag: str | None,
     custom_field_key: str | None,
     custom_field_value: str | None,
     allowed_universities: list[str] | None,
@@ -218,6 +274,69 @@ def _build_where_clause(
             ")"
         )
 
+    if is_chinese is not None:
+        params.append(str(is_chinese).lower())
+        p = len(params)
+        conditions.append(
+            "("
+            "COALESCE("
+            "custom_fields #>> '{profile_flags,is_chinese}', "
+            "custom_fields #>> '{metadata_profile,is_chinese}'"
+            f") = ${p}"
+            ")"
+        )
+
+    if is_current_student is not None:
+        params.append(str(is_current_student).lower())
+        p = len(params)
+        conditions.append(
+            "("
+            "COALESCE("
+            "custom_fields #>> '{profile_flags,is_current_student}', "
+            "custom_fields #>> '{profile_flags,is_student}', "
+            "custom_fields #>> '{metadata_profile,is_current_student}', "
+            "custom_fields #>> '{metadata_profile,is_student}'"
+            f") = ${p}"
+            ")"
+        )
+
+    if chinese_identity and chinese_identity.strip().lower() in {"unknown", "待判定"}:
+        conditions.append(
+            "("
+            "COALESCE("
+            "custom_fields #>> '{profile_flags,is_chinese}', "
+            "custom_fields #>> '{metadata_profile,is_chinese}'"
+            ") IS NULL"
+            ")"
+        )
+
+    if achievement_tag and achievement_tag.strip():
+        tag = achievement_tag.strip()
+        params.append(tag)
+        tag_param = len(params)
+        params.append(f"%{tag.lower()}%")
+        like_param = len(params)
+        conditions.append(
+            "("
+            f"achievement_tags @> ARRAY[${tag_param}]::text[] "
+            "OR EXISTS ("
+            "SELECT 1 FROM scholar_publications sp "
+            "WHERE sp.scholar_id = scholars.id "
+            f"AND LOWER(COALESCE(sp.venue, '')) LIKE ${like_param}"
+            ") "
+            "OR EXISTS ("
+            "SELECT 1 FROM scholar_awards sa "
+            "WHERE sa.scholar_id = scholars.id "
+            "AND ("
+            f"LOWER(COALESCE(sa.title, '')) LIKE ${like_param} "
+            f"OR LOWER(COALESCE(sa.level, '')) LIKE ${like_param} "
+            f"OR LOWER(COALESCE(sa.grantor, '')) LIKE ${like_param} "
+            f"OR LOWER(COALESCE(sa.description, '')) LIKE ${like_param}"
+            ")"
+            ")"
+            ")"
+        )
+
     if custom_field_key:
         params.append(custom_field_key)
         key_param = len(params)
@@ -257,6 +376,10 @@ async def query_scholar_list_fast(
     institution_names: list[str] | None,
     custom_field_key: str | None,
     custom_field_value: str | None,
+    is_chinese: bool | None,
+    is_current_student: bool | None,
+    chinese_identity: str | None,
+    achievement_tag: str | None,
     page: int,
     page_size: int,
 ) -> dict[str, Any]:
@@ -298,6 +421,10 @@ async def query_scholar_list_fast(
         is_adjunct_supervisor=is_adjunct_supervisor,
         has_email=has_email,
         keyword=keyword,
+        is_chinese=is_chinese,
+        is_current_student=is_current_student,
+        chinese_identity=chinese_identity,
+        achievement_tag=achievement_tag,
         custom_field_key=custom_field_key,
         custom_field_value=custom_field_value,
         allowed_universities=allowed_universities,

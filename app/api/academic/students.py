@@ -34,6 +34,7 @@ router = APIRouter()
 
 UNKNOWN_MENTOR_SCHOLAR_ID = "__unknown_student_mentor__"
 UNKNOWN_MENTOR_SCHOLAR_NAME = "待匹配导师"
+_STUDENT_COLUMNS_CACHE: set[str] | None = None
 
 _TEXT_FIELDS: dict[str, str] = {
     "student_no": "student_no",
@@ -88,6 +89,33 @@ def _normalize_added_by(raw_added_by: Any) -> str:
     if token.startswith("user:") or token.startswith("system:"):
         return token
     return f"user:{token}"
+
+
+async def _get_student_columns() -> set[str]:
+    global _STUDENT_COLUMNS_CACHE
+    if _STUDENT_COLUMNS_CACHE is not None:
+        return _STUDENT_COLUMNS_CACHE
+    rows = await get_pool().fetch(
+        """
+        SELECT column_name
+        FROM information_schema.columns
+        WHERE table_schema = 'public'
+          AND table_name = 'supervised_students'
+        """,
+    )
+    _STUDENT_COLUMNS_CACHE = {_clean_text(row["column_name"]) for row in rows}
+    return _STUDENT_COLUMNS_CACHE
+
+
+def _resolve_home_university_payload(body: StudentCreateRequest | StudentUpdateRequest) -> str:
+    return _clean_text(body.home_university) or _clean_text(body.institution)
+
+
+def _normalize_student_update_aliases(updates: dict[str, Any]) -> dict[str, Any]:
+    if "institution" in updates and "home_university" not in updates:
+        updates["home_university"] = updates["institution"]
+    updates.pop("institution", None)
+    return updates
 
 
 def _iso(value: Any) -> str:
@@ -228,12 +256,14 @@ def _resolve_pagination(
 
 def _to_student_list_item(row: dict[str, Any]) -> StudentListItem:
     enrollment_year = row.get("enrollment_year")
+    home_university = _clean_text(row.get("home_university"))
     return StudentListItem(
         id=_clean_text(row.get("id")),
         scholar_id=_clean_text(row.get("scholar_id")),
         student_no=_clean_text(row.get("student_no")),
         name=_clean_text(row.get("name")),
-        home_university=_clean_text(row.get("home_university")),
+        home_university=home_university,
+        institution=home_university,
         enrollment_year="" if enrollment_year is None else str(enrollment_year),
         status=_clean_text(row.get("status")) or "在读",
         email=_clean_text(row.get("email")),
@@ -252,6 +282,7 @@ def _to_student_detail(row: dict[str, Any]) -> StudentDetailResponse:
         student_no=base.student_no,
         name=base.name,
         home_university=base.home_university,
+        institution=base.institution,
         major=base.major,
         enrollment_year="" if enrollment_year is None else str(enrollment_year),
         status=base.status,
@@ -264,6 +295,7 @@ def _to_student_detail(row: dict[str, Any]) -> StudentDetailResponse:
         ),
         entry_date=_iso(row.get("entry_date")),
         paper_date_floor=_iso(row.get("paper_date_floor")),
+        notes=_clean_text(row.get("notes")),
         added_by=_normalize_added_by(row.get("added_by")),
         created_at=_iso(row.get("created_at")),
         updated_at=_iso(row.get("updated_at")),
@@ -339,8 +371,9 @@ async def _resolve_scholar_ref(
                 ELSE 1
               END ASC,
               CASE
-                WHEN project_category = '教育培养'
-                 AND project_subcategory IN ('学院学生高校导师', '兼职导师')
+                WHEN COALESCE(custom_fields->>'mentor_is_school_mentor', '') = 'true'
+                  OR COALESCE(custom_fields->>'education_training_adjunct', '') = 'true'
+                  OR COALESCE(custom_fields->>'aaai_plus_adjunct_mapped', '') = 'true'
                 THEN 0
                 ELSE 1
               END ASC,
@@ -431,9 +464,11 @@ def _build_list_where(
 
 
 async def _fetch_student_row(student_id: str) -> dict[str, Any] | None:
+    columns = await _get_student_columns()
+    notes_select = "s.notes" if "notes" in columns else "NULL::text AS notes"
     pool = get_pool()
     row = await pool.fetchrow(
-        """
+        f"""
         SELECT
           s.id,
           CASE
@@ -470,8 +505,9 @@ async def _fetch_student_row(student_id: str) -> dict[str, Any] | None:
                     ELSE 1
                   END ASC,
                   CASE
-                    WHEN m2.project_category = '教育培养'
-                     AND m2.project_subcategory IN ('学院学生高校导师', '兼职导师')
+                    WHEN COALESCE(m2.custom_fields->>'mentor_is_school_mentor', '') = 'true'
+                      OR COALESCE(m2.custom_fields->>'education_training_adjunct', '') = 'true'
+                      OR COALESCE(m2.custom_fields->>'aaai_plus_adjunct_mapped', '') = 'true'
                     THEN 0
                     ELSE 1
                   END ASC,
@@ -515,6 +551,7 @@ async def _fetch_student_row(student_id: str) -> dict[str, Any] | None:
           s.expected_graduation_year,
           s.entry_date,
           s.paper_date_floor,
+          {notes_select},
           s.added_by,
           s.created_at,
           s.updated_at
@@ -640,8 +677,9 @@ async def list_students(
                     ELSE 1
                   END ASC,
                   CASE
-                    WHEN m2.project_category = '教育培养'
-                     AND m2.project_subcategory IN ('学院学生高校导师', '兼职导师')
+                    WHEN COALESCE(m2.custom_fields->>'mentor_is_school_mentor', '') = 'true'
+                      OR COALESCE(m2.custom_fields->>'education_training_adjunct', '') = 'true'
+                      OR COALESCE(m2.custom_fields->>'aaai_plus_adjunct_mapped', '') = 'true'
                     THEN 0
                     ELSE 1
                   END ASC,
@@ -710,7 +748,7 @@ async def list_students(
     summary="按导师查询学生",
     description=(
         "按导师 scholar_id/url_hash 返回学生分页列表。"
-        "这是从 /api/v1/scholars/{url_hash}/students 迁移后的推荐入口。"
+        "这是从 /api/scholars/{url_hash}/students 迁移后的推荐入口。"
     ),
 )
 async def list_students_by_scholar(
@@ -809,30 +847,27 @@ async def get_student(student_id: str):
     summary="新增学生",
 )
 async def create_student(body: StudentCreateRequest):
+    columns = await _get_student_columns()
     scholar_id, resolved_scholar_name = await _resolve_scholar_ref(
         body.scholar_id,
         body.mentor_name,
-        body.home_university,
+        _resolve_home_university_payload(body),
     )
     mentor_name = _clean_text(body.mentor_name)
     if not mentor_name and scholar_id != UNKNOWN_MENTOR_SCHOLAR_ID:
         mentor_name = resolved_scholar_name
 
     pool = get_pool()
-    inserted = await pool.fetchrow(
-        """
-        INSERT INTO supervised_students
-        (scholar_id, student_no, name, home_university, major, degree_type,
-         enrollment_year, expected_graduation_year, entry_date, paper_date_floor,
-         status, email, phone, notes, mentor_name, added_by)
-        VALUES
-        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
-        RETURNING id
-        """,
+    has_notes = "notes" in columns
+    note_columns = ", notes" if has_notes else ""
+    note_values = ", $14" if has_notes else ""
+    mentor_param = 15 if has_notes else 14
+    added_by_param = 16 if has_notes else 15
+    params: list[Any] = [
         scholar_id,
         _clean_text(body.student_no) or None,
         _clean_text(body.name),
-        _clean_text(body.home_university) or None,
+        _resolve_home_university_payload(body) or None,
         _clean_text(body.major) or None,
         _clean_text(body.degree_type) or None,
         _to_year(body.enrollment_year),
@@ -842,9 +877,28 @@ async def create_student(body: StudentCreateRequest):
         _clean_text(body.status) or "在读",
         _clean_text(body.email) or None,
         _clean_text(body.phone) or None,
-        _clean_text(body.notes) or None,
-        mentor_name or None,
-        _normalize_added_by(body.added_by),
+    ]
+    if has_notes:
+        params.append(_clean_text(body.notes) or None)
+    params.extend([mentor_name or None, _normalize_added_by(body.added_by)])
+
+    inserted = await pool.fetchrow(
+        """
+        INSERT INTO supervised_students
+        (scholar_id, student_no, name, home_university, major, degree_type,
+         enrollment_year, expected_graduation_year, entry_date, paper_date_floor,
+         status, email, phone{note_columns}, mentor_name, added_by)
+        VALUES
+        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13{note_values},
+         ${mentor_param}, ${added_by_param})
+        RETURNING id
+        """.format(
+            note_columns=note_columns,
+            note_values=note_values,
+            mentor_param=mentor_param,
+            added_by_param=added_by_param,
+        ),
+        *params,
     )
     if inserted is None:
         raise HTTPException(status_code=500, detail="Failed to create student")
@@ -860,8 +914,17 @@ async def create_student(body: StudentCreateRequest):
     response_model=StudentDetailResponse,
     summary="更新学生",
 )
+@router.put(
+    "/{student_id}",
+    response_model=StudentDetailResponse,
+    summary="更新学生（兼容 PUT）",
+    include_in_schema=False,
+)
 async def update_student(student_id: str, body: StudentUpdateRequest):
-    updates = body.model_dump(exclude_none=True)
+    columns = await _get_student_columns()
+    updates = _normalize_student_update_aliases(body.model_dump(exclude_none=True))
+    if "notes" not in columns:
+        updates.pop("notes", None)
     if not updates:
         row = await _fetch_student_row(student_id)
         if row is None:

@@ -54,6 +54,78 @@ uvicorn app.main:app --reload
 
 ---
 
+## 全局论文仓
+
+新增一套独立的 `papers` 全局论文主数据仓，用于统一沉淀多论文爬虫任务产生的论文客体数据，不直接替换现有 `student_publications` / `publications` / `publication_candidates` 业务链路。
+
+- 主表字段聚焦：`doi`、`title`、`abstract`、`publication_date`、`authors`、`affiliations`、`source`
+- `authors` 为字符串数组
+- `affiliations` 为作者机构映射数组：`[{author_order, author_name, affiliation}]`
+- `source` 对外返回结构化对象：`{type, name, source_id}`
+- 中文论文过滤规则固定为：标题含中文字符即丢弃
+- 新仓不写入 `articles`，`paper_author_source` 现有作者信号链路保持不变
+
+论文仓默认信源配置见 [sources/paper/top_conference_papers.yaml](sources/paper/top_conference_papers.yaml)。当前按 venue 聚合后的 source id 为：
+
+- `acl_long`
+- `acl_short`
+- `iclr`
+- `neurips`
+- `cvpr`
+- `eccv`
+- `ijcai`
+- `aaai`
+
+当前默认抓取窗口：
+
+- ACL：2024-2025（Long / Short）
+- ICLR：2024-2025（Main Conference）
+- NeurIPS：2022-2024
+- CVPR：2023-2025（Main Conference）
+- ECCV：2022、2024
+- IJCAI：2023-2025（Main Track）
+- AAAI：2024-2026
+
+原始 parser 已验证的可扩展年份范围：
+
+- ACL：2024-2025（Long / Short）
+- ICLR：2023-2025
+- NeurIPS：2021-2025
+- CVPR：2022-2025
+- ECCV：2022、2024
+- IJCAI：2023-2025
+- AAAI：2022-2026
+
+说明：
+
+- 没有 topic 关键词过滤
+- 但部分 venue 仍保留 track 口径，例如 ACL 目前只开 Long / Short，IJCAI 目前只开 Main Track，CVPR 目前不含 Workshop
+- ICLR 官方 API 对 `ICLR.cc/2023/Conference` 当前返回 `0` 条，因此默认窗口暂时落在 `2024-2025`
+- NeurIPS 官方 `papers.nips.cc/paper_files/paper/2025` 当前返回 `404`，因此默认窗口暂时落在 `2022-2024`
+- AAAI 默认走 issue 页批量抓取，不在主回填里抓 detail 页机构补全，因此 `affiliations` 字段允许为空
+
+数据库迁移 SQL 见 [scripts/sql/20260429_create_paper_warehouse.sql](scripts/sql/20260429_create_paper_warehouse.sql)。
+
+一次性回填脚本：
+
+```bash
+.venv/bin/python scripts/crawl/backfill_papers.py --dry-run
+.venv/bin/python scripts/crawl/backfill_papers.py --source cvpr
+.venv/bin/python scripts/crawl/backfill_papers.py --source aaai
+```
+
+API 入口：
+
+- `GET /api/papers`
+- `GET /api/papers/{paper_id}`
+- `GET /api/papers/sources`
+- `POST /api/papers/sources/{source_id}/crawl`
+- `GET /api/papers/import-runs`
+
+详细说明见 [docs/paper_warehouse.md](docs/paper_warehouse.md)。
+
+---
+
 ## 🎨 前端 UI 控制台
 
 **新增可视化爬虫管理界面**，支持信源选择、领域过滤、实时监控、多格式导出。
@@ -113,7 +185,7 @@ uvicorn app.main:app --host 0.0.0.0 --port 8001 --reload
 | 文章重复 / 去重失效 | `app/crawlers/utils/dedup.py`（url_hash SHA-256） |
 | JSON 文件没输出 | `app/crawlers/utils/json_storage.py` |
 | 调度不执行 / 频率不对 | `app/scheduler/manager.py` + YAML 中 `schedule`/`is_enabled` |
-| API 返回异常 | `app/api/v1/` 各模块 |
+| API 返回异常 | `app/api/` 各模块 |
 
 ### 调试脚本
 
@@ -135,7 +207,7 @@ OpenClaw 作为数据中台，向 4 个院内应用提供数据服务：
 
 | 消费端 | 服务对象 | 核心数据集 |
 |--------|---------|----------|
-| **Dean-Agent** 院长智能体 | 院长办、院领导 | 政策情报 · 人事变动 · 科技前沿 · 每日简报 |
+| **Dean-Agent** 情报引擎基座服务 | 院长办、院领导 | 政策情报 · 人事变动 · 科技前沿 · 每日简报 |
 | **ScholarDB-System** 学者知识库 | 科研管理办 | 学者档案 · 项目库 · 机构图谱 · 导学关系 |
 | **Athena** 战略情报引擎 | 战略发展部 | 全量文章检索 · 情报分析 · 舆情监测 |
 | **NanoBot** 钉钉智能助理 | 全院各部门 | 全量 API（MCP 协议封装，自然语言访问） |
@@ -259,7 +331,7 @@ sources/*.yaml → APScheduler → CrawlerRegistry → 模板/自定义爬虫
                                                        ↓
                                ┌───────────────────────┴───────────────────────┐
                                ↓                                               ↓
-                      核心 API (/api/v1)                          业务智能 (/api/v1/intel)
+                      核心 API (/api)                          业务智能 (/api/intel)
                       14 端点                                     13 端点（5 个模块）
 ```
 
@@ -269,7 +341,7 @@ sources/*.yaml → APScheduler → CrawlerRegistry → 模板/自定义爬虫
 app/
 ├── main.py                        # FastAPI 入口 + lifespan（启动 scheduler）
 ├── config.py                      # 配置
-├── api/v1/                        # REST API（27 个端点）
+├── api/                        # REST API（27 个端点）
 │   ├── articles.py                #   /articles CRUD + 搜索 + 统计
 │   ├── sources.py                 #   /sources 管理 + 手动触发
 │   ├── dimensions.py              #   /dimensions 9 维度概览
@@ -330,7 +402,7 @@ data/
 
 ## API 参考
 
-基础路径 `/api/v1`，在线文档：<http://10.1.132.21:8001/docs>。
+基础路径 `/api`，在线文档：<http://10.1.132.21:8001/docs>。
 
 当前以自动生成文档为准：
 
@@ -346,9 +418,9 @@ data/
 
 `/sources` 已升级为目录化查询能力：
 
-- `GET /api/v1/sources/catalog`：分页 + 分面 + 多维筛选（dimension/group/tag/health）
-- `GET /api/v1/sources/facets`：筛选分面值
-- `GET /api/v1/sources`：兼容旧接口，已支持更多筛选参数
+- `GET /api/sources/catalog`：分页 + 分面 + 多维筛选（dimension/group/tag/health）
+- `GET /api/sources/facets`：筛选分面值
+- `GET /api/sources`：兼容旧接口，已支持更多筛选参数
 
 ---
 
@@ -534,5 +606,5 @@ python scripts/run_all_crawl.py --concurrency 5  # 仅爬取阶段
 | 产品生态 | `docs/files/产品生态架构全景.md` | 领导汇报用，平台定位 + 价值地图 + 演进方向 |
 | 爬取状态 | `docs/CrawlStatus.md` | 各维度各源的爬取状态、数据量 |
 | 任务优先级 | `docs/TODO.md` | P0-P3 分级待办 |
-| 院长需求 | `docs/files/院长智能体.md` | 前端 Dean-Agent 功能需求 |
+| 院长需求 | `docs/files/情报引擎基座服务.md` | 前端 Dean-Agent 功能需求 |
 | Agent Skill（OpenClaw 拉数） | `fetch-data/SKILL.md` | fetch-data 技能：接口路由、参数映射、一次性执行（不落盘脚本） |

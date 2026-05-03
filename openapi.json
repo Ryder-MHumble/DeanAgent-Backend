@@ -14,14 +14,14 @@
     "version": "0.2.0"
   },
   "paths": {
-    "/api/v1/articles": {
+    "/api/articles": {
       "get": {
         "tags": [
           "articles"
         ],
         "summary": "文章列表",
         "description": "查询文章列表，支持按维度、信源、关键词、日期范围过滤，以及字段排序和分页。",
-        "operationId": "list_articles_api_v1_articles_get",
+        "operationId": "list_articles_api_articles_get",
         "parameters": [
           {
             "name": "dimension",
@@ -279,14 +279,14 @@
         }
       }
     },
-    "/api/v1/articles/stats": {
+    "/api/articles/stats": {
       "get": {
         "tags": [
           "articles"
         ],
         "summary": "文章统计",
         "description": "获取文章聚合统计，默认按维度分组。可选按信源分组。",
-        "operationId": "get_stats_api_v1_articles_stats_get",
+        "operationId": "get_stats_api_articles_stats_get",
         "parameters": [
           {
             "name": "group_by",
@@ -309,7 +309,7 @@
                   "items": {
                     "$ref": "#/components/schemas/ArticleStats"
                   },
-                  "title": "Response Get Stats Api V1 Articles Stats Get"
+                  "title": "Response Get Stats Api Articles Stats Get"
                 }
               }
             }
@@ -327,14 +327,14 @@
         }
       }
     },
-    "/api/v1/articles/{article_id}": {
+    "/api/articles/{article_id}": {
       "get": {
         "tags": [
           "articles"
         ],
         "summary": "文章详情",
         "description": "根据文章 ID (url_hash) 获取完整文章内容，包含正文和额外元数据。",
-        "operationId": "get_article_api_v1_articles__article_id__get",
+        "operationId": "get_article_api_articles__article_id__get",
         "parameters": [
           {
             "name": "article_id",
@@ -385,7 +385,7 @@
         ],
         "summary": "更新文章",
         "description": "更新文章元数据，如标记已读状态或设置重要度评分。",
-        "operationId": "update_article_api_v1_articles__article_id__patch",
+        "operationId": "update_article_api_articles__article_id__patch",
         "parameters": [
           {
             "name": "article_id",
@@ -441,14 +441,14 @@
         }
       }
     },
-    "/api/v1/sources": {
+    "/api/sources": {
       "get": {
         "tags": [
           "sources"
         ],
         "summary": "信源列表",
         "description": "查询所有信源及其状态信息，可按维度过滤。",
-        "operationId": "list_sources_api_v1_sources_get",
+        "operationId": "list_sources_api_sources_get",
         "parameters": [
           {
             "name": "dimension",
@@ -845,7 +845,7 @@
                   "items": {
                     "$ref": "#/components/schemas/SourceResponse"
                   },
-                  "title": "Response List Sources Api V1 Sources Get"
+                  "title": "Response List Sources Api Sources Get"
                 }
               }
             }
@@ -863,14 +863,14 @@
         }
       }
     },
-    "/api/v1/sources/catalog": {
+    "/api/sources/catalog": {
       "get": {
         "tags": [
           "sources"
         ],
         "summary": "信源目录（分页 + 分面）",
         "description": "信源全景目录接口。支持多维筛选、分页、排序，并返回分面聚合，适合前端/Agent 构建“按维度快速理解信源结构”的检索体验。",
-        "operationId": "list_sources_catalog_api_v1_sources_catalog_get",
+        "operationId": "list_sources_catalog_api_sources_catalog_get",
         "parameters": [
           {
             "name": "dimension",
@@ -1320,14 +1320,14 @@
         }
       }
     },
-    "/api/v1/sources/facets": {
+    "/api/sources/facets": {
       "get": {
         "tags": [
           "sources"
         ],
         "summary": "信源筛选分面",
         "description": "返回当前筛选条件下的维度/分组/标签/爬取方式/频率/健康状态分布，并包含 taxonomy 一级域/二级主题/覆盖范围分布。",
-        "operationId": "get_source_facets_api_v1_sources_facets_get",
+        "operationId": "get_source_facets_api_sources_facets_get",
         "parameters": [
           {
             "name": "dimension",
@@ -1714,14 +1714,14 @@
         }
       }
     },
-    "/api/v1/sources/items": {
+    "/api/sources/items": {
       "get": {
         "tags": [
           "sources"
         ],
         "summary": "按信源取数据（统一入口）",
         "description": "按 source_id/source_ids/source_name/source_names 查询信源数据。该接口复用文章统一视图，适合外部团队按渠道快速取数。",
-        "operationId": "list_source_items_api_v1_sources_items_get",
+        "operationId": "list_source_items_api_sources_items_get",
         "parameters": [
           {
             "name": "dimension",
@@ -1989,14 +1989,14 @@
         }
       }
     },
-    "/api/v1/sources/resolve": {
+    "/api/sources/resolve": {
       "get": {
         "tags": [
           "sources"
         ],
         "summary": "信源解析与直连入口",
         "description": "用于外部团队快速定位信源 ID 与推荐调用路径。可通过 q 模糊检索或 source_id 精确定位。",
-        "operationId": "resolve_sources_api_v1_sources_resolve_get",
+        "operationId": "resolve_sources_api_sources_resolve_get",
         "parameters": [
           {
             "name": "q",
@@ -2212,14 +2212,14 @@
         }
       }
     },
-    "/api/v1/sources/deprecations": {
+    "/api/sources/deprecations": {
       "get": {
         "tags": [
           "sources"
         ],
         "summary": "API 弃用迁移表",
         "description": "返回当前已标记弃用的 API 及替代路径与 Sunset 日期。",
-        "operationId": "list_api_deprecations_api_v1_sources_deprecations_get",
+        "operationId": "list_api_deprecations_api_sources_deprecations_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -2234,14 +2234,14 @@
         }
       }
     },
-    "/api/v1/sources/{source_id}/items": {
+    "/api/sources/{source_id}/items": {
       "get": {
         "tags": [
           "sources"
         ],
         "summary": "单个信源数据流",
         "description": "按路径 source_id 获取单个信源的数据流，支持关键词/日期/分页排序参数。",
-        "operationId": "get_source_items_api_v1_sources__source_id__items_get",
+        "operationId": "get_source_items_api_sources__source_id__items_get",
         "parameters": [
           {
             "name": "source_id",
@@ -2518,14 +2518,14 @@
         }
       }
     },
-    "/api/v1/sources/{source_id}": {
+    "/api/sources/{source_id}": {
       "get": {
         "tags": [
           "sources"
         ],
         "summary": "信源详情",
         "description": "根据信源 ID 获取详细配置和运行状态。",
-        "operationId": "get_source_api_v1_sources__source_id__get",
+        "operationId": "get_source_api_sources__source_id__get",
         "parameters": [
           {
             "name": "source_id",
@@ -2576,7 +2576,7 @@
         ],
         "summary": "启用/禁用信源",
         "description": "更新信源的启用状态。禁用后调度器将不再为该信源创建爬取任务。",
-        "operationId": "update_source_api_v1_sources__source_id__patch",
+        "operationId": "update_source_api_sources__source_id__patch",
         "parameters": [
           {
             "name": "source_id",
@@ -2632,14 +2632,14 @@
         }
       }
     },
-    "/api/v1/sources/{source_id}/logs": {
+    "/api/sources/{source_id}/logs": {
       "get": {
         "tags": [
           "sources"
         ],
         "summary": "爬取日志",
         "description": "获取指定信源的最近爬取日志，默认返回最近 20 条。",
-        "operationId": "get_source_logs_api_v1_sources__source_id__logs_get",
+        "operationId": "get_source_logs_api_sources__source_id__logs_get",
         "parameters": [
           {
             "name": "source_id",
@@ -2675,7 +2675,7 @@
                   "items": {
                     "$ref": "#/components/schemas/CrawlLogResponse"
                   },
-                  "title": "Response Get Source Logs Api V1 Sources  Source Id  Logs Get"
+                  "title": "Response Get Source Logs Api Sources  Source Id  Logs Get"
                 }
               }
             }
@@ -2703,14 +2703,14 @@
         }
       }
     },
-    "/api/v1/sources/{source_id}/trigger": {
+    "/api/sources/{source_id}/trigger": {
       "post": {
         "tags": [
           "sources"
         ],
         "summary": "手动触发爬取",
         "description": "立即触发指定信源的一次爬取任务，不影响定时调度。",
-        "operationId": "trigger_crawl_api_v1_sources__source_id__trigger_post",
+        "operationId": "trigger_crawl_api_sources__source_id__trigger_post",
         "parameters": [
           {
             "name": "source_id",
@@ -2764,14 +2764,14 @@
         }
       }
     },
-    "/api/v1/crawler/jobs": {
+    "/api/crawler/jobs": {
       "post": {
         "tags": [
           "crawler-control"
         ],
         "summary": "创建手动爬取任务",
         "description": "创建并立即启动一个新的手动爬取任务，返回 job_id 与初始状态。",
-        "operationId": "create_crawl_job_api_v1_crawler_jobs_post",
+        "operationId": "create_crawl_job_api_crawler_jobs_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -2826,13 +2826,13 @@
         }
       }
     },
-    "/api/v1/crawler/jobs/{job_id}": {
+    "/api/crawler/jobs/{job_id}": {
       "get": {
         "tags": [
           "crawler-control"
         ],
         "summary": "查询手动爬取任务状态",
-        "operationId": "get_crawl_job_api_v1_crawler_jobs__job_id__get",
+        "operationId": "get_crawl_job_api_crawler_jobs__job_id__get",
         "parameters": [
           {
             "name": "job_id",
@@ -2878,13 +2878,13 @@
         }
       }
     },
-    "/api/v1/crawler/jobs/{job_id}/cancel": {
+    "/api/crawler/jobs/{job_id}/cancel": {
       "post": {
         "tags": [
           "crawler-control"
         ],
         "summary": "取消手动爬取任务",
-        "operationId": "cancel_crawl_job_api_v1_crawler_jobs__job_id__cancel_post",
+        "operationId": "cancel_crawl_job_api_crawler_jobs__job_id__cancel_post",
         "parameters": [
           {
             "name": "job_id",
@@ -2940,13 +2940,13 @@
         }
       }
     },
-    "/api/v1/crawler/jobs/{job_id}/result": {
+    "/api/crawler/jobs/{job_id}/result": {
       "get": {
         "tags": [
           "crawler-control"
         ],
         "summary": "下载指定手动爬取任务结果",
-        "operationId": "download_crawl_job_result_api_v1_crawler_jobs__job_id__result_get",
+        "operationId": "download_crawl_job_result_api_crawler_jobs__job_id__result_get",
         "parameters": [
           {
             "name": "job_id",
@@ -2990,14 +2990,14 @@
         }
       }
     },
-    "/api/v1/crawler/start": {
+    "/api/crawler/start": {
       "post": {
         "tags": [
           "crawler-control"
         ],
         "summary": "启动爬取任务",
         "description": "兼容旧接口：内部转为创建新的 jobs 任务。",
-        "operationId": "start_crawl_api_v1_crawler_start_post",
+        "operationId": "start_crawl_api_crawler_start_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -3043,14 +3043,14 @@
         "deprecated": true
       }
     },
-    "/api/v1/crawler/stop": {
+    "/api/crawler/stop": {
       "post": {
         "tags": [
           "crawler-control"
         ],
         "summary": "停止爬取任务",
         "description": "兼容旧接口：内部转为取消当前运行中的最新任务。",
-        "operationId": "stop_crawl_api_v1_crawler_stop_post",
+        "operationId": "stop_crawl_api_crawler_stop_post",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -3074,14 +3074,14 @@
         "deprecated": true
       }
     },
-    "/api/v1/crawler/status": {
+    "/api/crawler/status": {
       "get": {
         "tags": [
           "crawler-control"
         ],
         "summary": "获取爬取状态",
         "description": "兼容旧接口：返回 latest job 的实时状态。",
-        "operationId": "get_status_api_v1_crawler_status_get",
+        "operationId": "get_status_api_crawler_status_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -3097,14 +3097,14 @@
         "deprecated": true
       }
     },
-    "/api/v1/crawler/download": {
+    "/api/crawler/download": {
       "get": {
         "tags": [
           "crawler-control"
         ],
         "summary": "下载爬取结果",
         "description": "兼容旧接口：下载 latest job 的结果文件。",
-        "operationId": "download_result_api_v1_crawler_download_get",
+        "operationId": "download_result_api_crawler_download_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -3128,14 +3128,14 @@
         "deprecated": true
       }
     },
-    "/api/v1/health": {
+    "/api/health": {
       "get": {
         "tags": [
           "health"
         ],
         "summary": "系统健康检查",
         "description": "检查调度器运行状态，用于监控和部署健康探针。",
-        "operationId": "health_check_api_v1_health_get",
+        "operationId": "health_check_api_health_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -3148,14 +3148,14 @@
         }
       }
     },
-    "/api/v1/health/crawl-status": {
+    "/api/health/crawl-status": {
       "get": {
         "tags": [
           "health"
         ],
         "summary": "爬取健康概览",
         "description": "获取全局爬取健康度统计，包括健康/告警/失败的信源数和近 24 小时活跃度。",
-        "operationId": "crawl_status_api_v1_health_crawl_status_get",
+        "operationId": "crawl_status_api_health_crawl_status_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -3170,14 +3170,14 @@
         }
       }
     },
-    "/api/v1/health/pipeline-status": {
+    "/api/health/pipeline-status": {
       "get": {
         "tags": [
           "health"
         ],
         "summary": "管线状态",
         "description": "获取上次每日管线运行的状态、各阶段耗时和结果摘要。",
-        "operationId": "pipeline_status_api_v1_health_pipeline_status_get",
+        "operationId": "pipeline_status_api_health_pipeline_status_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -3190,14 +3190,14 @@
         }
       }
     },
-    "/api/v1/health/pipeline-trigger": {
+    "/api/health/pipeline-trigger": {
       "post": {
         "tags": [
           "health"
         ],
         "summary": "手动触发管线",
         "description": "手动触发每日管线：全量爬取 → 政策处理 → 人事处理。",
-        "operationId": "trigger_pipeline_api_v1_health_pipeline_trigger_post",
+        "operationId": "trigger_pipeline_api_health_pipeline_trigger_post",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -3210,14 +3210,14 @@
         }
       }
     },
-    "/api/v1/dimensions": {
+    "/api/dimensions": {
       "get": {
         "tags": [
           "dimensions"
         ],
         "summary": "维度列表",
         "description": "列出全部维度，返回每个维度的文章数量和最后更新时间。",
-        "operationId": "list_dimensions_api_v1_dimensions_get",
+        "operationId": "list_dimensions_api_dimensions_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -3230,14 +3230,14 @@
         }
       }
     },
-    "/api/v1/dimensions/{dimension}": {
+    "/api/dimensions/{dimension}": {
       "get": {
         "tags": [
           "dimensions"
         ],
         "summary": "维度文章",
         "description": "获取指定维度下的文章列表，支持关键词搜索、排序和分页。\n\n可用维度: `national_policy`, `beijing_policy`, `technology`, `talent`, `industry`, `universities`, `events`, `personnel`, `scholars`, `sentiment`, `twitter`",
-        "operationId": "get_dimension_articles_api_v1_dimensions__dimension__get",
+        "operationId": "get_dimension_articles_api_dimensions__dimension__get",
         "parameters": [
           {
             "name": "dimension",
@@ -3332,7 +3332,7 @@
         }
       }
     },
-    "/api/v1/intel/policy/feed": {
+    "/api/intel/policy/feed": {
       "get": {
         "tags": [
           "intel",
@@ -3340,7 +3340,7 @@
         ],
         "summary": "政策动态 Feed",
         "description": "获取政策情报动态列表。支持按分类、重要性、匹配度过滤，以及关键词搜索。\n\n数据经过规则引擎 + LLM 二级管线处理，包含匹配度评分、资金信息、AI 洞察等富化字段。",
-        "operationId": "get_policy_feed_api_v1_intel_policy_feed_get",
+        "operationId": "get_policy_feed_api_intel_policy_feed_get",
         "parameters": [
           {
             "name": "category",
@@ -3540,7 +3540,7 @@
         }
       }
     },
-    "/api/v1/intel/policy/opportunities": {
+    "/api/intel/policy/opportunities": {
       "get": {
         "tags": [
           "intel",
@@ -3548,7 +3548,7 @@
         ],
         "summary": "政策机会看板",
         "description": "获取政策申报机会列表，用于情报看板展示。包含资金规模、截止日期、匹配度评分、紧急状态等关键字段。",
-        "operationId": "get_policy_opportunities_api_v1_intel_policy_opportunities_get",
+        "operationId": "get_policy_opportunities_api_intel_policy_opportunities_get",
         "parameters": [
           {
             "name": "status",
@@ -3640,7 +3640,7 @@
         }
       }
     },
-    "/api/v1/intel/policy/stats": {
+    "/api/intel/policy/stats": {
       "get": {
         "tags": [
           "intel",
@@ -3648,7 +3648,7 @@
         ],
         "summary": "政策统计",
         "description": "获取已处理政策数据的汇总统计信息。",
-        "operationId": "get_policy_stats_api_v1_intel_policy_stats_get",
+        "operationId": "get_policy_stats_api_intel_policy_stats_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -3661,7 +3661,7 @@
         }
       }
     },
-    "/api/v1/intel/personnel/feed": {
+    "/api/intel/personnel/feed": {
       "get": {
         "tags": [
           "intel",
@@ -3669,7 +3669,7 @@
         ],
         "summary": "人事动态 Feed",
         "description": "获取人事情报动态列表（文章级别）。每条记录对应一篇人事相关文章，包含从文章中自动提取的任免变动列表。",
-        "operationId": "get_personnel_feed_api_v1_intel_personnel_feed_get",
+        "operationId": "get_personnel_feed_api_intel_personnel_feed_get",
         "parameters": [
           {
             "name": "importance",
@@ -3851,7 +3851,7 @@
         }
       }
     },
-    "/api/v1/intel/personnel/changes": {
+    "/api/intel/personnel/changes": {
       "get": {
         "tags": [
           "intel",
@@ -3859,7 +3859,7 @@
         ],
         "summary": "结构化任免变动",
         "description": "获取结构化的人事任免变动列表，每条记录对应一个人员的一次任免动作。支持按部门、任免类型过滤。",
-        "operationId": "get_personnel_changes_api_v1_intel_personnel_changes_get",
+        "operationId": "get_personnel_changes_api_intel_personnel_changes_get",
         "parameters": [
           {
             "name": "department",
@@ -3967,7 +3967,7 @@
         }
       }
     },
-    "/api/v1/intel/personnel/stats": {
+    "/api/intel/personnel/stats": {
       "get": {
         "tags": [
           "intel",
@@ -3975,7 +3975,7 @@
         ],
         "summary": "人事统计",
         "description": "获取人事数据的汇总统计信息。",
-        "operationId": "get_personnel_stats_api_v1_intel_personnel_stats_get",
+        "operationId": "get_personnel_stats_api_intel_personnel_stats_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -3988,7 +3988,7 @@
         }
       }
     },
-    "/api/v1/intel/personnel/enriched-feed": {
+    "/api/intel/personnel/enriched-feed": {
       "get": {
         "tags": [
           "intel",
@@ -3996,7 +3996,7 @@
         ],
         "summary": "LLM 富化人事动态",
         "description": "获取经 LLM 分析富化后的人事变动列表。相比基础 Feed，额外包含：\n\n- **relevance**: 与研究院业务的相关性得分（0-100）\n- **group**: action（需行动）/ watch（关注即可）\n- **actionSuggestion**: LLM 建议的行动方案\n- **background**: 人员背景信息\n- **aiInsight**: AI 综合分析洞察",
-        "operationId": "get_enriched_feed_api_v1_intel_personnel_enriched_feed_get",
+        "operationId": "get_enriched_feed_api_intel_personnel_enriched_feed_get",
         "parameters": [
           {
             "name": "group",
@@ -4196,7 +4196,7 @@
         }
       }
     },
-    "/api/v1/intel/personnel/enriched-stats": {
+    "/api/intel/personnel/enriched-stats": {
       "get": {
         "tags": [
           "intel",
@@ -4204,7 +4204,7 @@
         ],
         "summary": "富化数据统计",
         "description": "获取 LLM 富化人事数据的汇总统计，包括按部门/类型分布和高相关性记录数。",
-        "operationId": "get_enriched_stats_api_v1_intel_personnel_enriched_stats_get",
+        "operationId": "get_enriched_stats_api_intel_personnel_enriched_stats_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -4219,7 +4219,7 @@
         }
       }
     },
-    "/api/v1/intel/daily-briefing/report": {
+    "/api/intel/daily-briefing/report": {
       "get": {
         "tags": [
           "intel",
@@ -4227,7 +4227,7 @@
         ],
         "summary": "获取 AI 早报",
         "description": "获取 AI 生成的每日早报。包含叙事段落（带交互链接）和聚合指标卡片。\n\n默认返回今日报告。如果今日缓存缺失，将返回最近一次已生成的缓存结果；仅在 `force=true` 时才会实时重生成。\n\n段落格式为 `BriefingSegment[][]`，每个 segment 是字符串或 `{text, moduleId, action?}` 链接对象。",
-        "operationId": "get_daily_briefing_api_v1_intel_daily_briefing_report_get",
+        "operationId": "get_daily_briefing_api_intel_daily_briefing_report_get",
         "parameters": [
           {
             "name": "target_date",
@@ -4285,7 +4285,7 @@
         }
       }
     },
-    "/api/v1/intel/daily-briefing/today": {
+    "/api/intel/daily-briefing/today": {
       "get": {
         "tags": [
           "intel",
@@ -4293,7 +4293,7 @@
         ],
         "summary": "获取今日 AI 早报（兼容路径）",
         "description": "兼容旧版调用路径，等价于 `GET /report`（target_date=今天, force=false）。",
-        "operationId": "get_today_daily_briefing_api_v1_intel_daily_briefing_today_get",
+        "operationId": "get_today_daily_briefing_api_intel_daily_briefing_today_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -4308,7 +4308,7 @@
         }
       }
     },
-    "/api/v1/intel/daily-briefing/metrics": {
+    "/api/intel/daily-briefing/metrics": {
       "get": {
         "tags": [
           "intel",
@@ -4316,7 +4316,7 @@
         ],
         "summary": "获取早报指标卡片",
         "description": "仅获取聚合指标卡片数据（无 LLM 叙事），实时计算。",
-        "operationId": "get_briefing_metrics_api_v1_intel_daily_briefing_metrics_get",
+        "operationId": "get_briefing_metrics_api_intel_daily_briefing_metrics_get",
         "parameters": [
           {
             "name": "target_date",
@@ -4362,7 +4362,7 @@
         }
       }
     },
-    "/api/v1/intel/university/overview": {
+    "/api/intel/university/overview": {
       "get": {
         "tags": [
           "intel",
@@ -4370,7 +4370,7 @@
         ],
         "summary": "高校生态总览",
         "description": "获取高校生态仪表盘数据：各分组文章数、今日新增、信源数。",
-        "operationId": "get_overview_api_v1_intel_university_overview_get",
+        "operationId": "get_overview_api_intel_university_overview_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -4385,7 +4385,7 @@
         }
       }
     },
-    "/api/v1/intel/university/feed": {
+    "/api/intel/university/feed": {
       "get": {
         "tags": [
           "intel",
@@ -4393,7 +4393,7 @@
         ],
         "summary": "高校动态 Feed",
         "description": "获取高校动态分页文章列表。支持按分组、信源、关键词、日期范围过滤，按发布时间倒序排列。",
-        "operationId": "get_feed_api_v1_intel_university_feed_get",
+        "operationId": "get_feed_api_intel_university_feed_get",
         "parameters": [
           {
             "name": "group",
@@ -4593,7 +4593,7 @@
         }
       }
     },
-    "/api/v1/intel/university/article/{url_hash}": {
+    "/api/intel/university/article/{url_hash}": {
       "get": {
         "tags": [
           "intel",
@@ -4601,7 +4601,7 @@
         ],
         "summary": "高校文章详情",
         "description": "根据 url_hash 获取单篇文章的完整内容，包含富文本 HTML 和图片列表。",
-        "operationId": "get_article_api_v1_intel_university_article__url_hash__get",
+        "operationId": "get_article_api_intel_university_article__url_hash__get",
         "parameters": [
           {
             "name": "url_hash",
@@ -4640,7 +4640,7 @@
         }
       }
     },
-    "/api/v1/intel/university/sources": {
+    "/api/intel/university/sources": {
       "get": {
         "tags": [
           "intel",
@@ -4648,7 +4648,7 @@
         ],
         "summary": "高校信源列表",
         "description": "获取高校维度下所有信源的配置及最新爬取状态。",
-        "operationId": "get_sources_api_v1_intel_university_sources_get",
+        "operationId": "get_sources_api_intel_university_sources_get",
         "parameters": [
           {
             "name": "group",
@@ -4693,7 +4693,7 @@
         }
       }
     },
-    "/api/v1/intel/university/research": {
+    "/api/intel/university/research": {
       "get": {
         "tags": [
           "intel",
@@ -4701,7 +4701,7 @@
         ],
         "summary": "高校科研成果",
         "description": "获取经规则引擎分类的科研成果列表（论文/专利/获奖）。数据来自 data/processed/university_eco/research_outputs.json，由 process_university_eco 管线生成。",
-        "operationId": "get_research_api_v1_intel_university_research_get",
+        "operationId": "get_research_api_intel_university_research_get",
         "parameters": [
           {
             "name": "type",
@@ -4791,7 +4791,7 @@
         }
       }
     },
-    "/api/v1/intel/tech-frontier/topics": {
+    "/api/intel/tech-frontier/topics": {
       "get": {
         "tags": [
           "intel",
@@ -4799,7 +4799,7 @@
         ],
         "summary": "科技前沿主题列表",
         "description": "获取 8 个技术主题的完整数据，包含热度趋势、产业新闻、KOL 言论、AI 分析等。支持按热度趋势、院方布局状态和关键词过滤。",
-        "operationId": "get_topics_api_v1_intel_tech_frontier_topics_get",
+        "operationId": "get_topics_api_intel_tech_frontier_topics_get",
         "parameters": [
           {
             "name": "heat_trend",
@@ -4907,7 +4907,7 @@
         }
       }
     },
-    "/api/v1/intel/tech-frontier/topics/{topic_id}": {
+    "/api/intel/tech-frontier/topics/{topic_id}": {
       "get": {
         "tags": [
           "intel",
@@ -4915,7 +4915,7 @@
         ],
         "summary": "单个主题详情",
         "description": "获取指定技术主题的完整详情，包含所有内嵌信号数据。",
-        "operationId": "get_topic_detail_api_v1_intel_tech_frontier_topics__topic_id__get",
+        "operationId": "get_topic_detail_api_intel_tech_frontier_topics__topic_id__get",
         "parameters": [
           {
             "name": "topic_id",
@@ -4949,7 +4949,7 @@
         }
       }
     },
-    "/api/v1/intel/tech-frontier/opportunities": {
+    "/api/intel/tech-frontier/opportunities": {
       "get": {
         "tags": [
           "intel",
@@ -4957,7 +4957,7 @@
         ],
         "summary": "科技前沿机会列表",
         "description": "获取检测到的科技前沿机会（会议、合作、内参），支持按优先级和类型过滤。",
-        "operationId": "get_opportunities_api_v1_intel_tech_frontier_opportunities_get",
+        "operationId": "get_opportunities_api_intel_tech_frontier_opportunities_get",
         "parameters": [
           {
             "name": "priority",
@@ -5065,7 +5065,7 @@
         }
       }
     },
-    "/api/v1/intel/tech-frontier/stats": {
+    "/api/intel/tech-frontier/stats": {
       "get": {
         "tags": [
           "intel",
@@ -5073,7 +5073,7 @@
         ],
         "summary": "科技前沿 KPI 统计",
         "description": "获取科技前沿 KPI 汇总统计，包含主题数、飙升主题、缺口数、信号总量、机会数以及维度/主题分布。",
-        "operationId": "get_stats_api_v1_intel_tech_frontier_stats_get",
+        "operationId": "get_stats_api_intel_tech_frontier_stats_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -5088,7 +5088,7 @@
         }
       }
     },
-    "/api/v1/intel/tech-frontier/signals": {
+    "/api/intel/tech-frontier/signals": {
       "get": {
         "tags": [
           "intel",
@@ -5096,7 +5096,7 @@
         ],
         "summary": "扁平信号流",
         "description": "获取所有主题的产业新闻和 KOL 言论，按时间倒序排列的扁平列表。支持按主题、信号类型和关键词过滤。",
-        "operationId": "get_signals_api_v1_intel_tech_frontier_signals_get",
+        "operationId": "get_signals_api_intel_tech_frontier_signals_get",
         "parameters": [
           {
             "name": "topic_id",
@@ -5276,7 +5276,7 @@
         }
       }
     },
-    "/api/v1/intel/paper-transfer/run": {
+    "/api/intel/paper-transfer/run": {
       "post": {
         "tags": [
           "intel",
@@ -5284,7 +5284,7 @@
         ],
         "summary": "触发论文转化分析 Pipeline",
         "description": "触发后台 Pipeline：\n\n1. 从外部 API 获取全部学生列表\n2. 逐一拉取每位学生的论文（可按发表日期和学校筛选）\n3. 为含 arxiv_id 的论文异步补全摘要\n4. 调用 Gemini LLM 进行分级（A/B/C）和转化分析\n5. 将结果保存至本地，供 GET /results 查询\n\n**参数说明：**\n- `date_from`: 论文发表起始日期（YYYY-MM-DD），默认为近 6 个月\n- `school`: 按学生所属学校模糊筛选（如 `北京大学`），为空则处理全部学生\n- `max_papers`: 最多处理的论文数（默认 500，可调高但会增加 LLM 成本）\n\n**返回：** `started`（已启动）或 `already_running`（已有运行中的任务）",
-        "operationId": "run_pipeline_api_v1_intel_paper_transfer_run_post",
+        "operationId": "run_pipeline_api_intel_paper_transfer_run_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -5319,7 +5319,7 @@
         }
       }
     },
-    "/api/v1/intel/paper-transfer/status": {
+    "/api/intel/paper-transfer/status": {
       "get": {
         "tags": [
           "intel",
@@ -5327,7 +5327,7 @@
         ],
         "summary": "查询 Pipeline 运行状态",
         "description": "返回最近一次 Pipeline 的运行状态和实时进度。\n\n**status 枚举值：** `idle` / `running` / `completed` / `failed`\n\n**progress 字段：**\n- `students_fetched`: 已获取的学生数\n- `papers_fetched`: 已拉取的论文数（含学生维度）\n- `abstracts_fetched`: 成功补全摘要的论文数\n- `papers_analyzed`: LLM 已完成分析的论文数",
-        "operationId": "get_status_api_v1_intel_paper_transfer_status_get",
+        "operationId": "get_status_api_intel_paper_transfer_status_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -5342,7 +5342,7 @@
         }
       }
     },
-    "/api/v1/intel/paper-transfer/results": {
+    "/api/intel/paper-transfer/results": {
       "get": {
         "tags": [
           "intel",
@@ -5350,7 +5350,7 @@
         ],
         "summary": "获取论文转化分析结果",
         "description": "返回最近一次 Pipeline 处理后的论文转化分析卡片列表。\n\n**排序规则：** A 档优先，同档内按商业化梯队（第一梯队最优先）升序排列。\n\n**卡片字段说明（A/B 档才有 LLM 生成内容）：**\n- `grade` / `grade_reason`: 分级及原因\n- `content_type`: 成果类型（applied / theoretical / mixed）\n- `commercialization_tier`: 商业化梯队（1/2/3）\n- `matched_signals`: 命中的关键词信号列表\n- `tech_summary`: 非学术语言的一句话技术描述\n- `transformation_directions`: 1-3 个产业转化建议方向\n- `maturity_level`: 转化成熟度（接近可用 / 需要工程化 / 还在早期）\n- `negotiation_angle`: 建议的接触切入角度\n- `recommendation_reason`: 综合推荐理由",
-        "operationId": "get_results_api_v1_intel_paper_transfer_results_get",
+        "operationId": "get_results_api_intel_paper_transfer_results_get",
         "parameters": [
           {
             "name": "grade",
@@ -5431,14 +5431,14 @@
         }
       }
     },
-    "/api/v1/sentiment/overview": {
+    "/api/sentiment/overview": {
       "get": {
         "tags": [
           "sentiment"
         ],
         "summary": "舆情概览统计",
         "description": "返回社媒舆情的整体统计数据：各平台内容数量、互动指标汇总、热门内容 Top5、监测关键词列表。",
-        "operationId": "overview_api_v1_sentiment_overview_get",
+        "operationId": "overview_api_sentiment_overview_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -5453,14 +5453,14 @@
         }
       }
     },
-    "/api/v1/sentiment/feed": {
+    "/api/sentiment/feed": {
       "get": {
         "tags": [
           "sentiment"
         ],
         "summary": "社媒内容信息流",
         "description": "分页返回社媒内容列表，支持按平台和关键词过滤，按时间或互动量排序。",
-        "operationId": "feed_api_v1_sentiment_feed_get",
+        "operationId": "feed_api_sentiment_feed_get",
         "parameters": [
           {
             "name": "platform",
@@ -5574,14 +5574,14 @@
         }
       }
     },
-    "/api/v1/sentiment/content/{content_id}": {
+    "/api/sentiment/content/{content_id}": {
       "get": {
         "tags": [
           "sentiment"
         ],
         "summary": "内容详情 + 评论",
         "description": "返回单条社媒内容的完整信息及其全部评论。",
-        "operationId": "content_detail_api_v1_sentiment_content__content_id__get",
+        "operationId": "content_detail_api_sentiment_content__content_id__get",
         "parameters": [
           {
             "name": "content_id",
@@ -5620,14 +5620,14 @@
         }
       }
     },
-    "/api/v1/social-kol/ingest/twitter": {
+    "/api/social-kol/ingest/twitter": {
       "post": {
         "tags": [
           "social-kol"
         ],
         "summary": "导入 Twitter/KOL 聚合数据",
         "description": "将 twitterapi.io 聚合结果（最新帖子 + 每帖热门回复）导入统一社媒表。\n\n输入推荐直接复用我们当前的本地 JSON 结构。",
-        "operationId": "ingest_twitter_bundle_api_v1_social_kol_ingest_twitter_post",
+        "operationId": "ingest_twitter_bundle_api_social_kol_ingest_twitter_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -5662,14 +5662,14 @@
         }
       }
     },
-    "/api/v1/social-kol/accounts": {
+    "/api/social-kol/accounts": {
       "get": {
         "tags": [
           "social-kol"
         ],
         "summary": "账号列表",
         "description": "查询统一社媒账号库，支持平台/关键词/KOL 标记过滤。",
-        "operationId": "list_accounts_api_v1_social_kol_accounts_get",
+        "operationId": "list_accounts_api_social_kol_accounts_get",
         "parameters": [
           {
             "name": "platform",
@@ -5811,14 +5811,14 @@
         }
       }
     },
-    "/api/v1/social-kol/posts": {
+    "/api/social-kol/posts": {
       "get": {
         "tags": [
           "social-kol"
         ],
         "summary": "帖子列表",
         "description": "查询统一社媒帖子表。默认返回 KOL 主帖（post_type=post, is_kol_author=true）。\n可按账号、关键词等过滤。",
-        "operationId": "list_posts_api_v1_social_kol_posts_get",
+        "operationId": "list_posts_api_social_kol_posts_get",
         "parameters": [
           {
             "name": "platform",
@@ -6033,14 +6033,14 @@
         }
       }
     },
-    "/api/v1/social-kol/posts/{platform}/{external_post_id}": {
+    "/api/social-kol/posts/{platform}/{external_post_id}": {
       "get": {
         "tags": [
           "social-kol"
         ],
         "summary": "帖子详情（含热门回复）",
         "description": "按平台 + 帖子外部 ID 获取帖子详情，并返回热门回复。",
-        "operationId": "get_post_detail_api_v1_social_kol_posts__platform___external_post_id__get",
+        "operationId": "get_post_detail_api_social_kol_posts__platform___external_post_id__get",
         "parameters": [
           {
             "name": "platform",
@@ -6102,14 +6102,14 @@
         }
       }
     },
-    "/api/v1/social-posts": {
+    "/api/social-posts": {
       "get": {
         "tags": [
           "social-posts"
         ],
         "summary": "社媒帖子列表",
         "description": "查询统一社媒帖子库，支持平台/信源/作者/关键词过滤与分页排序。",
-        "operationId": "list_social_posts_api_v1_social_posts_get",
+        "operationId": "list_social_posts_api_social_posts_get",
         "parameters": [
           {
             "name": "source_id",
@@ -6371,14 +6371,14 @@
         }
       }
     },
-    "/api/v1/social-posts/stats": {
+    "/api/social-posts/stats": {
       "get": {
         "tags": [
           "social-posts"
         ],
         "summary": "社媒帖子统计",
         "description": "按平台/信源/作者/帖子类型/日期聚合统计。",
-        "operationId": "get_social_post_stats_api_v1_social_posts_stats_get",
+        "operationId": "get_social_post_stats_api_social_posts_stats_get",
         "parameters": [
           {
             "name": "group_by",
@@ -6410,7 +6410,7 @@
                   "items": {
                     "$ref": "#/components/schemas/SocialPostStats"
                   },
-                  "title": "Response Get Social Post Stats Api V1 Social Posts Stats Get"
+                  "title": "Response Get Social Post Stats Api Social Posts Stats Get"
                 }
               }
             }
@@ -6428,14 +6428,14 @@
         }
       }
     },
-    "/api/v1/social-posts/{post_id}": {
+    "/api/social-posts/{post_id}": {
       "get": {
         "tags": [
           "social-posts"
         ],
         "summary": "社媒帖子详情",
         "description": "根据帖子 ID 获取详情，返回帖子和内嵌热门回复。",
-        "operationId": "get_social_post_detail_api_v1_social_posts__post_id__get",
+        "operationId": "get_social_post_detail_api_social_posts__post_id__get",
         "parameters": [
           {
             "name": "post_id",
@@ -6485,14 +6485,14 @@
         }
       }
     },
-    "/api/v1/reports/generate": {
+    "/api/reports/generate": {
       "post": {
         "tags": [
           "reports"
         ],
         "summary": "Generate Report",
         "description": "生成 AI 分析报告\n\n支持的维度：\n- sentiment: 舆情监测报告\n- policy: 政策分析报告（待实现）\n- technology: 科技前沿报告（待实现）\n- personnel: 人事情报报告（待实现）\n- university: 高校生态报告（待实现）",
-        "operationId": "generate_report_api_v1_reports_generate_post",
+        "operationId": "generate_report_api_reports_generate_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -6557,14 +6557,14 @@
         }
       }
     },
-    "/api/v1/reports/sentiment/latest": {
+    "/api/reports/sentiment/latest": {
       "get": {
         "tags": [
           "reports"
         ],
         "summary": "Get Latest Sentiment Report",
         "description": "获取最新的舆情监测报告\n\n快捷接口，生成最近N天的舆情报告。",
-        "operationId": "get_latest_sentiment_report_api_v1_reports_sentiment_latest_get",
+        "operationId": "get_latest_sentiment_report_api_reports_sentiment_latest_get",
         "parameters": [
           {
             "name": "days",
@@ -6615,14 +6615,14 @@
         }
       }
     },
-    "/api/v1/reports/dimensions": {
+    "/api/reports/dimensions": {
       "get": {
         "tags": [
           "reports"
         ],
         "summary": "List Dimensions",
         "description": "列出所有支持的报告维度\n\n返回各维度的名称、描述和实现状态。",
-        "operationId": "list_dimensions_api_v1_reports_dimensions_get",
+        "operationId": "list_dimensions_api_reports_dimensions_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -6635,14 +6635,14 @@
         }
       }
     },
-    "/api/v1/llm-tracking/summary": {
+    "/api/llm-tracking/summary": {
       "get": {
         "tags": [
           "llm-tracking"
         ],
         "summary": "Get Llm Summary",
         "description": "Get overall LLM usage summary and cost statistics.\n\nReturns:\n    - total_calls: Total number of API calls\n    - total_cost_usd: Total cost in USD\n    - models: Dict with model names and their statistics",
-        "operationId": "get_llm_summary_api_v1_llm_tracking_summary_get",
+        "operationId": "get_llm_summary_api_llm_tracking_summary_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -6651,7 +6651,7 @@
                 "schema": {
                   "additionalProperties": true,
                   "type": "object",
-                  "title": "Response Get Llm Summary Api V1 Llm Tracking Summary Get"
+                  "title": "Response Get Llm Summary Api Llm Tracking Summary Get"
                 }
               }
             }
@@ -6659,14 +6659,14 @@
         }
       }
     },
-    "/api/v1/llm-tracking/calls-by-stage/{stage}": {
+    "/api/llm-tracking/calls-by-stage/{stage}": {
       "get": {
         "tags": [
           "llm-tracking"
         ],
         "summary": "Get Calls By Stage",
         "description": "Get all LLM calls for a specific pipeline stage.\n\nArgs:\n    stage: Pipeline stage name (policy_tier1, policy_tier2, personnel_enrichment, etc.)\n\nReturns:\n    List of call records for that stage",
-        "operationId": "get_calls_by_stage_api_v1_llm_tracking_calls_by_stage__stage__get",
+        "operationId": "get_calls_by_stage_api_llm_tracking_calls_by_stage__stage__get",
         "parameters": [
           {
             "name": "stage",
@@ -6686,7 +6686,7 @@
                 "schema": {
                   "type": "object",
                   "additionalProperties": true,
-                  "title": "Response Get Calls By Stage Api V1 Llm Tracking Calls By Stage  Stage  Get"
+                  "title": "Response Get Calls By Stage Api Llm Tracking Calls By Stage  Stage  Get"
                 }
               }
             }
@@ -6704,14 +6704,14 @@
         }
       }
     },
-    "/api/v1/llm-tracking/calls-by-article/{article_id}": {
+    "/api/llm-tracking/calls-by-article/{article_id}": {
       "get": {
         "tags": [
           "llm-tracking"
         ],
         "summary": "Get Calls By Article",
         "description": "Get all LLM calls for a specific article.\n\nArgs:\n    article_id: URL hash of the article\n\nReturns:\n    List of call records for that article",
-        "operationId": "get_calls_by_article_api_v1_llm_tracking_calls_by_article__article_id__get",
+        "operationId": "get_calls_by_article_api_llm_tracking_calls_by_article__article_id__get",
         "parameters": [
           {
             "name": "article_id",
@@ -6731,7 +6731,7 @@
                 "schema": {
                   "type": "object",
                   "additionalProperties": true,
-                  "title": "Response Get Calls By Article Api V1 Llm Tracking Calls By Article  Article Id  Get"
+                  "title": "Response Get Calls By Article Api Llm Tracking Calls By Article  Article Id  Get"
                 }
               }
             }
@@ -6749,14 +6749,14 @@
         }
       }
     },
-    "/api/v1/llm-tracking/audit-trail": {
+    "/api/llm-tracking/audit-trail": {
       "get": {
         "tags": [
           "llm-tracking"
         ],
         "summary": "Get Audit Trail",
         "description": "Export audit trail of LLM calls for review.\n\nArgs:\n    limit: Maximum number of records to return (default 100, max 1000)\n    stage: Filter by pipeline stage (optional)\n    start_date: Filter from ISO date YYYY-MM-DD (optional)\n\nReturns:\n    - record_count: Number of records returned\n    - records: List of call records\n    - filters_applied: Summary of applied filters",
-        "operationId": "get_audit_trail_api_v1_llm_tracking_audit_trail_get",
+        "operationId": "get_audit_trail_api_llm_tracking_audit_trail_get",
         "parameters": [
           {
             "name": "limit",
@@ -6811,7 +6811,7 @@
                 "schema": {
                   "type": "object",
                   "additionalProperties": true,
-                  "title": "Response Get Audit Trail Api V1 Llm Tracking Audit Trail Get"
+                  "title": "Response Get Audit Trail Api Llm Tracking Audit Trail Get"
                 }
               }
             }
@@ -6829,14 +6829,14 @@
         }
       }
     },
-    "/api/v1/llm-tracking/cost-by-model": {
+    "/api/llm-tracking/cost-by-model": {
       "get": {
         "tags": [
           "llm-tracking"
         ],
         "summary": "Get Cost By Model",
         "description": "Get cost breakdown by model.\n\nReturns:\n    - summary: Overall total cost\n    - by_model: Cost breakdown for each model",
-        "operationId": "get_cost_by_model_api_v1_llm_tracking_cost_by_model_get",
+        "operationId": "get_cost_by_model_api_llm_tracking_cost_by_model_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -6845,7 +6845,7 @@
                 "schema": {
                   "additionalProperties": true,
                   "type": "object",
-                  "title": "Response Get Cost By Model Api V1 Llm Tracking Cost By Model Get"
+                  "title": "Response Get Cost By Model Api Llm Tracking Cost By Model Get"
                 }
               }
             }
@@ -6853,14 +6853,14 @@
         }
       }
     },
-    "/api/v1/llm-tracking/health": {
+    "/api/llm-tracking/health": {
       "get": {
         "tags": [
           "llm-tracking"
         ],
         "summary": "Llm Tracking Health",
         "description": "Check LLM tracking system health.",
-        "operationId": "llm_tracking_health_api_v1_llm_tracking_health_get",
+        "operationId": "llm_tracking_health_api_llm_tracking_health_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -6869,7 +6869,7 @@
                 "schema": {
                   "additionalProperties": true,
                   "type": "object",
-                  "title": "Response Llm Tracking Health Api V1 Llm Tracking Health Get"
+                  "title": "Response Llm Tracking Health Api Llm Tracking Health Get"
                 }
               }
             }
@@ -6877,14 +6877,14 @@
         }
       }
     },
-    "/api/v1/scholars": {
+    "/api/scholars": {
       "get": {
         "tags": [
           "scholars"
         ],
         "summary": "学者列表",
         "description": "获取 scholars 维度下的学者列表，支持按高校、院系、职称、学术称号、关键词、数据完整度及信源过滤，按姓名升序排列。",
-        "operationId": "list_scholars_api_v1_scholars_get",
+        "operationId": "list_scholars_api_scholars_get",
         "parameters": [
           {
             "name": "university",
@@ -7375,7 +7375,7 @@
         ],
         "summary": "手动创建学者",
         "description": "手动创建一条新的学者记录。只有 name 是必填字段，其他字段均可选。自动检测重复（同名 + 同机构 + 同联系方式），重复时返回 409 Conflict。成功创建后返回完整的学者详情（包含自动生成的 url_hash）。",
-        "operationId": "create_scholar_api_v1_scholars_post",
+        "operationId": "create_scholar_api_scholars_post",
         "requestBody": {
           "required": true,
           "content": {
@@ -7410,14 +7410,14 @@
         }
       }
     },
-    "/api/v1/scholars/stats": {
+    "/api/scholars/stats": {
       "get": {
         "tags": [
           "scholars"
         ],
         "summary": "学者统计",
         "description": "返回学者库总览统计：总数、院士数、潜在招募数、按高校/职称分布、完整度分布。支持与列表接口相同的筛选参数。",
-        "operationId": "get_stats_api_v1_scholars_stats_get",
+        "operationId": "get_stats_api_scholars_stats_get",
         "parameters": [
           {
             "name": "university",
@@ -7876,14 +7876,14 @@
         }
       }
     },
-    "/api/v1/scholars/import": {
+    "/api/scholars/import": {
       "post": {
         "tags": [
           "scholars"
         ],
         "summary": "Excel/CSV 批量导入学者",
         "description": "上传 CSV 或 Excel (.xlsx) 文件，批量导入学者信息到 Supabase。\n\n**CSV/Excel 列名（中英文均可）：**\n姓名/name, 高校/university, 院系/department, 职称/position, 邮箱/email, 电话/phone, 个人主页/profile_url, 研究方向/research_areas(逗号分隔), 关键词/keywords(逗号分隔), 学术头衔/academic_titles(逗号分隔), 是否院士/is_academician(是/否), 简介/bio\n\n**重复判定：** 同名 + 同机构（+ 联系方式相同），重复时默认跳过（skip_duplicates=true）。\n\n**返回：** 每行的处理结果（success/skipped/failed），以及汇总统计。",
-        "operationId": "import_scholars_file_api_v1_scholars_import_post",
+        "operationId": "import_scholars_file_api_scholars_import_post",
         "parameters": [
           {
             "name": "skip_duplicates",
@@ -7915,7 +7915,7 @@
           "content": {
             "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/Body_import_scholars_file_api_v1_scholars_import_post"
+                "$ref": "#/components/schemas/Body_import_scholars_file_api_scholars_import_post"
               }
             }
           }
@@ -7944,14 +7944,14 @@
         }
       }
     },
-    "/api/v1/scholars/batch": {
+    "/api/scholars/batch": {
       "post": {
         "tags": [
           "scholars"
         ],
         "summary": "JSON 批量创建学者",
         "description": "通过 JSON 列表批量创建学者，每条记录使用与「手动创建学者」相同的字段。\n\n**重复判定：** 同名 + 同机构（+ 联系方式相同），重复时默认跳过（skip_duplicates=true）。\n\n**返回：** 每条记录的处理结果（success/skipped/failed），以及汇总统计。",
-        "operationId": "batch_create_scholars_api_v1_scholars_batch_post",
+        "operationId": "batch_create_scholars_api_scholars_batch_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -7986,14 +7986,14 @@
         }
       }
     },
-    "/api/v1/scholars/{url_hash}/basic": {
+    "/api/scholars/{url_hash}/basic": {
       "patch": {
         "tags": [
           "scholars"
         ],
         "summary": "更新基础信息",
         "description": "更新指定学者的基础信息字段（名称、机构、院系、职称、简介、联系方式、学术链接、教育经历等）。直接修改原始 JSON 文件（data/raw/scholars/.../latest.json）。所有字段均可选，仅传入需要修改的字段；传 null 或不传则保持不变。列表字段（research_areas/keywords/academic_titles/education 等）传入 [] 表示清空，传入非空列表则完全替换。返回更新后的完整 faculty detail（包含 annotations 合并结果）。",
-        "operationId": "update_basic_api_v1_scholars__url_hash__basic_patch",
+        "operationId": "update_basic_api_scholars__url_hash__basic_patch",
         "parameters": [
           {
             "name": "url_hash",
@@ -8039,14 +8039,14 @@
         }
       }
     },
-    "/api/v1/scholars/{url_hash}/relation": {
+    "/api/scholars/{url_hash}/relation": {
       "patch": {
         "tags": [
           "scholars"
         ],
         "summary": "更新与两院关系",
         "description": "更新指定学者的「与两院关系」字段（顾问委员会、兼职导师、潜在招募等）。所有字段均可选，仅传入需要修改的字段。relation_updated_at 由服务端自动填写。这些字段永不被爬虫覆盖。",
-        "operationId": "update_relation_api_v1_scholars__url_hash__relation_patch",
+        "operationId": "update_relation_api_scholars__url_hash__relation_patch",
         "parameters": [
           {
             "name": "url_hash",
@@ -8092,14 +8092,14 @@
         }
       }
     },
-    "/api/v1/scholars/{url_hash}": {
+    "/api/scholars/{url_hash}": {
       "delete": {
         "tags": [
           "scholars"
         ],
         "summary": "删除学者记录",
         "description": "删除指定的学者记录及其所有关联数据。",
-        "operationId": "delete_scholar_api_v1_scholars__url_hash__delete",
+        "operationId": "delete_scholar_api_scholars__url_hash__delete",
         "parameters": [
           {
             "name": "url_hash",
@@ -8133,7 +8133,7 @@
         ],
         "summary": "学者详情",
         "description": "根据 url_hash 获取单条学者完整数据（爬虫字段 + 用户标注合并）。",
-        "operationId": "get_faculty_api_v1_scholars__url_hash__get",
+        "operationId": "get_faculty_api_scholars__url_hash__get",
         "parameters": [
           {
             "name": "url_hash",
@@ -8169,14 +8169,14 @@
         }
       }
     },
-    "/api/v1/scholars/{url_hash}/achievements": {
+    "/api/scholars/{url_hash}/achievements": {
       "patch": {
         "tags": [
           "scholars"
         ],
         "summary": "更新学术成就",
         "description": "更新指定学者的学术成就字段（代表性论文、专利、获奖）。每个字段传入后会完全替换（而非追加），传 null 或不传则保持不变。这些字段由用户维护，但爬虫也可自动填充初始值。achievements_updated_at 由服务端自动填写。",
-        "operationId": "update_achievements_api_v1_scholars__url_hash__achievements_patch",
+        "operationId": "update_achievements_api_scholars__url_hash__achievements_patch",
         "parameters": [
           {
             "name": "url_hash",
@@ -8222,14 +8222,14 @@
         }
       }
     },
-    "/api/v1/scholars/{url_hash}/students": {
+    "/api/scholars/{url_hash}/students": {
       "get": {
         "tags": [
           "scholars"
         ],
         "summary": "查询指导学生列表",
-        "description": "返回指定导师下的所有指导学生记录（联合培养学生）。建议迁移至 /api/v1/students?scholar_id={url_hash} 或 /api/v1/students/by-scholar/{url_hash}。",
-        "operationId": "list_students_api_v1_scholars__url_hash__students_get",
+        "description": "返回指定导师下的所有指导学生记录（联合培养学生）。建议迁移至 /api/students?scholar_id={url_hash} 或 /api/students/by-scholar/{url_hash}。",
+        "operationId": "list_students_api_scholars__url_hash__students_get",
         "deprecated": true,
         "parameters": [
           {
@@ -8270,8 +8270,8 @@
           "scholars"
         ],
         "summary": "新增指导学生",
-        "description": "为指定导师新增一名指导学生记录。id / created_at / updated_at 由服务端自动生成，added_by 自动补充为 'user:{added_by}'。建议迁移至 /api/v1/students（请求体中携带 scholar_id）。",
-        "operationId": "add_student_api_v1_scholars__url_hash__students_post",
+        "description": "为指定导师新增一名指导学生记录。id / created_at / updated_at 由服务端自动生成，added_by 自动补充为 'user:{added_by}'。建议迁移至 /api/students（请求体中携带 scholar_id）。",
+        "operationId": "add_student_api_scholars__url_hash__students_post",
         "deprecated": true,
         "parameters": [
           {
@@ -8318,14 +8318,14 @@
         }
       }
     },
-    "/api/v1/scholars/{url_hash}/students/{student_id}": {
+    "/api/scholars/{url_hash}/students/{student_id}": {
       "get": {
         "tags": [
           "scholars"
         ],
         "summary": "查询单名学生详情",
-        "description": "根据学生记录 ID 获取单名指导学生的完整信息。建议迁移至 /api/v1/students/{student_id}。",
-        "operationId": "get_student_api_v1_scholars__url_hash__students__student_id__get",
+        "description": "根据学生记录 ID 获取单名指导学生的完整信息。建议迁移至 /api/students/{student_id}。",
+        "operationId": "get_student_api_scholars__url_hash__students__student_id__get",
         "deprecated": true,
         "parameters": [
           {
@@ -8375,8 +8375,8 @@
           "scholars"
         ],
         "summary": "更新学生信息",
-        "description": "部分更新指定学生记录。所有字段均可选，传 null 或不传则保持不变。updated_at 由服务端自动更新。建议迁移至 /api/v1/students/{student_id}。",
-        "operationId": "update_student_api_v1_scholars__url_hash__students__student_id__patch",
+        "description": "部分更新指定学生记录。所有字段均可选，传 null 或不传则保持不变。updated_at 由服务端自动更新。建议迁移至 /api/students/{student_id}。",
+        "operationId": "update_student_api_scholars__url_hash__students__student_id__patch",
         "deprecated": true,
         "parameters": [
           {
@@ -8436,8 +8436,8 @@
           "scholars"
         ],
         "summary": "删除学生记录",
-        "description": "删除指定导师下的一条学生记录。建议迁移至 /api/v1/students/{student_id}。",
-        "operationId": "delete_student_api_v1_scholars__url_hash__students__student_id__delete",
+        "description": "删除指定导师下的一条学生记录。建议迁移至 /api/students/{student_id}。",
+        "operationId": "delete_student_api_scholars__url_hash__students__student_id__delete",
         "deprecated": true,
         "parameters": [
           {
@@ -8476,14 +8476,14 @@
         }
       }
     },
-    "/api/v1/students": {
+    "/api/students": {
       "get": {
         "tags": [
           "students"
         ],
         "summary": "学生列表",
         "description": "按年级/高校/导师/关键词筛选学生，返回分页列表。",
-        "operationId": "list_students_api_v1_students_get",
+        "operationId": "list_students_api_students_get",
         "parameters": [
           {
             "name": "scholar_id",
@@ -8778,7 +8778,7 @@
           "students"
         ],
         "summary": "新增学生",
-        "operationId": "create_student_api_v1_students_post",
+        "operationId": "create_student_api_students_post",
         "requestBody": {
           "required": true,
           "content": {
@@ -8813,14 +8813,14 @@
         }
       }
     },
-    "/api/v1/students/by-scholar/{scholar_id}": {
+    "/api/students/by-scholar/{scholar_id}": {
       "get": {
         "tags": [
           "students"
         ],
         "summary": "按导师查询学生",
-        "description": "按导师 scholar_id/url_hash 返回学生分页列表。这是从 /api/v1/scholars/{url_hash}/students 迁移后的推荐入口。",
-        "operationId": "list_students_by_scholar_api_v1_students_by_scholar__scholar_id__get",
+        "description": "按导师 scholar_id/url_hash 返回学生分页列表。这是从 /api/scholars/{url_hash}/students 迁移后的推荐入口。",
+        "operationId": "list_students_by_scholar_api_students_by_scholar__scholar_id__get",
         "parameters": [
           {
             "name": "scholar_id",
@@ -8922,14 +8922,14 @@
         }
       }
     },
-    "/api/v1/students/options": {
+    "/api/students/options": {
       "get": {
         "tags": [
           "students"
         ],
         "summary": "学生筛选项",
         "description": "返回年级、高校、导师筛选值。可按年级限制高校/导师选项。",
-        "operationId": "get_filter_options_api_v1_students_options_get",
+        "operationId": "get_filter_options_api_students_options_get",
         "parameters": [
           {
             "name": "enrollment_year",
@@ -8974,13 +8974,13 @@
         }
       }
     },
-    "/api/v1/students/{student_id}": {
+    "/api/students/{student_id}": {
       "get": {
         "tags": [
           "students"
         ],
         "summary": "学生详情",
-        "operationId": "get_student_api_v1_students__student_id__get",
+        "operationId": "get_student_api_students__student_id__get",
         "parameters": [
           {
             "name": "student_id",
@@ -9020,7 +9020,7 @@
           "students"
         ],
         "summary": "更新学生",
-        "operationId": "update_student_api_v1_students__student_id__patch",
+        "operationId": "update_student_api_students__student_id__patch",
         "parameters": [
           {
             "name": "student_id",
@@ -9070,7 +9070,7 @@
           "students"
         ],
         "summary": "删除学生",
-        "operationId": "delete_student_api_v1_students__student_id__delete",
+        "operationId": "delete_student_api_students__student_id__delete",
         "parameters": [
           {
             "name": "student_id",
@@ -9099,14 +9099,598 @@
         }
       }
     },
-    "/api/v1/events": {
+    "/api/students/{student_id}/publication-workspace": {
+      "get": {
+        "tags": [
+          "students"
+        ],
+        "summary": "学生成果审核工作台",
+        "operationId": "get_student_publication_workspace_api_students__student_id__publication_workspace_get",
+        "parameters": [
+          {
+            "name": "student_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Student Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudentPublicationWorkspaceResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/students/{student_id}/publication-candidates/{candidate_id}": {
+      "patch": {
+        "tags": [
+          "students"
+        ],
+        "summary": "编辑学生候选成果客观字段",
+        "operationId": "patch_student_publication_candidate_api_students__student_id__publication_candidates__candidate_id__patch",
+        "parameters": [
+          {
+            "name": "student_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Student Id"
+            }
+          },
+          {
+            "name": "candidate_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Candidate Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudentPublicationCandidatePatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudentPublicationCandidateRecord"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/students/{student_id}/publication-candidates/{candidate_id}/confirm": {
+      "post": {
+        "tags": [
+          "students"
+        ],
+        "summary": "确认学生候选成果",
+        "operationId": "confirm_student_publication_candidate_api_students__student_id__publication_candidates__candidate_id__confirm_post",
+        "parameters": [
+          {
+            "name": "student_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Student Id"
+            }
+          },
+          {
+            "name": "candidate_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Candidate Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudentPublicationCandidateDecisionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudentPublicationCandidateActionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/students/{student_id}/publication-candidates/{candidate_id}/reject": {
+      "post": {
+        "tags": [
+          "students"
+        ],
+        "summary": "拒绝学生候选成果",
+        "operationId": "reject_student_publication_candidate_api_students__student_id__publication_candidates__candidate_id__reject_post",
+        "parameters": [
+          {
+            "name": "student_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Student Id"
+            }
+          },
+          {
+            "name": "candidate_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Candidate Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudentPublicationCandidateDecisionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudentPublicationCandidateActionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/students/{student_id}/publication-candidates/{candidate_id}/reopen": {
+      "post": {
+        "tags": [
+          "students"
+        ],
+        "summary": "恢复学生候选成果到待审核",
+        "operationId": "reopen_student_publication_candidate_api_students__student_id__publication_candidates__candidate_id__reopen_post",
+        "parameters": [
+          {
+            "name": "student_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Student Id"
+            }
+          },
+          {
+            "name": "candidate_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Candidate Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudentPublicationCandidateDecisionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudentPublicationCandidateActionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/students/{student_id}/papers": {
+      "get": {
+        "tags": [
+          "students"
+        ],
+        "summary": "学生论文列表",
+        "operationId": "list_student_papers_api_students__student_id__papers_get",
+        "parameters": [
+          {
+            "name": "student_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Student Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudentPapersResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "students"
+        ],
+        "summary": "新增学生论文",
+        "operationId": "create_student_paper_api_students__student_id__papers_post",
+        "parameters": [
+          {
+            "name": "student_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Student Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudentPaperUpsertRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudentPaperWriteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/students/{student_id}/publications": {
+      "get": {
+        "tags": [
+          "students"
+        ],
+        "summary": "学生论文列表（兼容别名）",
+        "operationId": "list_student_publications_api_students__student_id__publications_get",
+        "parameters": [
+          {
+            "name": "student_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Student Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudentPapersResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/students/{student_id}/papers/{paper_uid}": {
+      "put": {
+        "tags": [
+          "students"
+        ],
+        "summary": "更新学生论文",
+        "operationId": "update_student_paper_api_students__student_id__papers__paper_uid__put",
+        "parameters": [
+          {
+            "name": "student_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Student Id"
+            }
+          },
+          {
+            "name": "paper_uid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Paper Uid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudentPaperUpsertRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudentPaperWriteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "students"
+        ],
+        "summary": "删除学生论文",
+        "operationId": "delete_student_paper_api_students__student_id__papers__paper_uid__delete",
+        "parameters": [
+          {
+            "name": "student_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Student Id"
+            }
+          },
+          {
+            "name": "paper_uid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Paper Uid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/students/{student_id}/papers/{paper_uid}/compliance": {
+      "patch": {
+        "tags": [
+          "students"
+        ],
+        "summary": "兼容接口：更新论文（不再存储合规字段）",
+        "operationId": "patch_student_paper_compliance_api_students__student_id__papers__paper_uid__compliance_patch",
+        "parameters": [
+          {
+            "name": "student_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Student Id"
+            }
+          },
+          {
+            "name": "paper_uid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Paper Uid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudentPaperComplianceRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudentPaperWriteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/events": {
       "get": {
         "tags": [
           "events"
         ],
         "summary": "活动列表",
         "description": "获取活动列表，支持三级分类筛选（category/series/event_type）、日期范围、关联学者、关键词筛选，按日期倒序排列。",
-        "operationId": "list_events_api_v1_events_get",
+        "operationId": "list_events_api_events_get",
         "parameters": [
           {
             "name": "category",
@@ -9327,7 +9911,7 @@
         ],
         "summary": "创建活动",
         "description": "创建新的活动记录。ID 自动生成（UUID）。\n\n建议先调用 `GET /events/taxonomy` 获取可用的 category/series/event_type 标签值，再填入对应字段并关联学者。",
-        "operationId": "create_event_api_v1_events_post",
+        "operationId": "create_event_api_events_post",
         "requestBody": {
           "required": true,
           "content": {
@@ -9362,14 +9946,14 @@
         }
       }
     },
-    "/api/v1/events/stats": {
+    "/api/events/stats": {
       "get": {
         "tags": [
           "events"
         ],
         "summary": "活动统计",
         "description": "返回活动总览统计：总数、按一级分类/系列/类型/月份分布、活动-学者关联总数。",
-        "operationId": "get_stats_api_v1_events_stats_get",
+        "operationId": "get_stats_api_events_stats_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -9384,14 +9968,14 @@
         }
       }
     },
-    "/api/v1/events/taxonomy": {
+    "/api/events/taxonomy": {
       "get": {
         "tags": [
           "events"
         ],
         "summary": "获取三级分类树",
         "description": "返回完整的三级活动分类树。\n\n- **L1**：一级分类（教育培养 / 科研学术 / 人才引育），可自定义新增\n- **L2**：二级系列/品牌（XAI智汇讲坛 / 国际AI科学家大会 等），隶属某个一级分类\n- **L3**：活动类型（学术前沿讲座 / 前沿沙龙 等），隶属某个二级系列\n\n前端左侧导航栏可直接用此接口渲染。",
-        "operationId": "get_taxonomy_api_v1_events_taxonomy_get",
+        "operationId": "get_taxonomy_api_events_taxonomy_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -9411,7 +9995,7 @@
         ],
         "summary": "新增分类节点",
         "description": "新增一个分类节点（L1/L2/L3）。\n\n- 新增一级分类：`level=1`，`parent_id` 留空\n- 新增二级系列：`level=2`，`parent_id` 填一级分类的 UUID\n- 新增活动类型：`level=3`，`parent_id` 填二级系列的 UUID\n\n同层同父节点下名称不能重复。",
-        "operationId": "create_taxonomy_node_api_v1_events_taxonomy_post",
+        "operationId": "create_taxonomy_node_api_events_taxonomy_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -9446,14 +10030,14 @@
         }
       }
     },
-    "/api/v1/events/taxonomy/{node_id}": {
+    "/api/events/taxonomy/{node_id}": {
       "patch": {
         "tags": [
           "events"
         ],
         "summary": "更新分类节点",
         "description": "更新分类节点的名称或排序权重（sort_order）。",
-        "operationId": "update_taxonomy_node_api_v1_events_taxonomy__node_id__patch",
+        "operationId": "update_taxonomy_node_api_events_taxonomy__node_id__patch",
         "parameters": [
           {
             "name": "node_id",
@@ -9504,7 +10088,7 @@
         ],
         "summary": "删除分类节点",
         "description": "删除指定分类节点。\n\n**注意**：删除一级分类会级联删除其下所有二级系列和活动类型；删除二级系列会级联删除其下所有活动类型。已关联该分类的活动数据**不会**被删除，仅分类定义被移除。",
-        "operationId": "delete_taxonomy_node_api_v1_events_taxonomy__node_id__delete",
+        "operationId": "delete_taxonomy_node_api_events_taxonomy__node_id__delete",
         "parameters": [
           {
             "name": "node_id",
@@ -9533,14 +10117,14 @@
         }
       }
     },
-    "/api/v1/events/{event_id}": {
+    "/api/events/{event_id}": {
       "get": {
         "tags": [
           "events"
         ],
         "summary": "活动详情",
         "description": "根据活动 ID 获取完整活动信息（分类、时间地点、摘要、关联学者等）。",
-        "operationId": "get_event_api_v1_events__event_id__get",
+        "operationId": "get_event_api_events__event_id__get",
         "parameters": [
           {
             "name": "event_id",
@@ -9581,7 +10165,7 @@
         ],
         "summary": "更新活动",
         "description": "更新指定活动的信息。所有字段均可选，仅传入需要修改的字段。",
-        "operationId": "update_event_api_v1_events__event_id__patch",
+        "operationId": "update_event_api_events__event_id__patch",
         "parameters": [
           {
             "name": "event_id",
@@ -9632,7 +10216,7 @@
         ],
         "summary": "删除活动",
         "description": "删除指定的活动记录。",
-        "operationId": "delete_event_api_v1_events__event_id__delete",
+        "operationId": "delete_event_api_events__event_id__delete",
         "parameters": [
           {
             "name": "event_id",
@@ -9661,14 +10245,14 @@
         }
       }
     },
-    "/api/v1/events/batch": {
+    "/api/events/batch": {
       "post": {
         "tags": [
           "events"
         ],
         "summary": "批量创建活动",
         "description": "通过 JSON 列表批量创建活动。\n\n**重复判定：** 相同标题 + 相同日期 + 相同系列 + 相同活动类型视为重复，skip_duplicates=true 时跳过，false 时报错。\n\n**返回：** 每条记录的处理结果汇总。",
-        "operationId": "batch_create_events_api_v1_events_batch_post",
+        "operationId": "batch_create_events_api_events_batch_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -9701,14 +10285,14 @@
         }
       }
     },
-    "/api/v1/events/{event_id}/scholars": {
+    "/api/events/{event_id}/scholars": {
       "get": {
         "tags": [
           "events"
         ],
         "summary": "获取活动关联的学者列表",
         "description": "返回指定活动关联的学者列表（含姓名、头像、机构等简要信息）。",
-        "operationId": "get_event_scholars_api_v1_events__event_id__scholars_get",
+        "operationId": "get_event_scholars_api_events__event_id__scholars_get",
         "parameters": [
           {
             "name": "event_id",
@@ -9730,7 +10314,7 @@
                   "items": {
                     "$ref": "#/components/schemas/EventScholarItem"
                   },
-                  "title": "Response Get Event Scholars Api V1 Events  Event Id  Scholars Get"
+                  "title": "Response Get Event Scholars Api Events  Event Id  Scholars Get"
                 }
               }
             }
@@ -9753,7 +10337,7 @@
         ],
         "summary": "添加学者关联",
         "description": "为指定活动添加学者关联。如果学者已关联则不重复添加。",
-        "operationId": "add_scholar_to_event_api_v1_events__event_id__scholars_post",
+        "operationId": "add_scholar_to_event_api_events__event_id__scholars_post",
         "parameters": [
           {
             "name": "event_id",
@@ -9799,14 +10383,14 @@
         }
       }
     },
-    "/api/v1/events/{event_id}/scholars/{scholar_id}": {
+    "/api/events/{event_id}/scholars/{scholar_id}": {
       "delete": {
         "tags": [
           "events"
         ],
         "summary": "移除学者关联",
         "description": "移除指定活动与学者的关联关系。",
-        "operationId": "remove_scholar_from_event_api_v1_events__event_id__scholars__scholar_id__delete",
+        "operationId": "remove_scholar_from_event_api_events__event_id__scholars__scholar_id__delete",
         "parameters": [
           {
             "name": "event_id",
@@ -9851,14 +10435,14 @@
         }
       }
     },
-    "/api/v1/aminer/organizations": {
+    "/api/aminer/organizations": {
       "get": {
         "tags": [
           "aminer"
         ],
         "summary": "查询机构信息",
         "description": "从本地 data/institution.json 查询机构信息（模糊匹配 name_zh）",
-        "operationId": "search_organizations_api_v1_aminer_organizations_get",
+        "operationId": "search_organizations_api_aminer_organizations_get",
         "parameters": [
           {
             "name": "name",
@@ -9896,14 +10480,14 @@
         }
       }
     },
-    "/api/v1/aminer/scholars/search": {
+    "/api/aminer/scholars/search": {
       "get": {
         "tags": [
           "aminer"
         ],
         "summary": "搜索学者基础信息",
         "description": "调用 AMiner API 搜索学者，返回候选列表（包含 id, name, org 等基础字段）",
-        "operationId": "search_scholars_api_v1_aminer_scholars_search_get",
+        "operationId": "search_scholars_api_aminer_scholars_search_get",
         "parameters": [
           {
             "name": "name",
@@ -9979,14 +10563,14 @@
         }
       }
     },
-    "/api/v1/aminer/scholars/{aminer_id}": {
+    "/api/aminer/scholars/{aminer_id}": {
       "get": {
         "tags": [
           "aminer"
         ],
         "summary": "获取学者详细信息",
         "description": "通过详情聚合接口获取学者完整 profile（教育经历、论文、专利等）。该接口仅需学者 id，不依赖 AMINER_API_KEY。",
-        "operationId": "get_scholar_detail_api_v1_aminer_scholars__aminer_id__get",
+        "operationId": "get_scholar_detail_api_aminer_scholars__aminer_id__get",
         "parameters": [
           {
             "name": "aminer_id",
@@ -10034,14 +10618,14 @@
         }
       }
     },
-    "/api/v1/projects": {
+    "/api/projects": {
       "get": {
         "tags": [
           "projects"
         ],
         "summary": "项目列表",
         "description": "获取项目标签列表，支持分类和学者关联过滤。\n\n**过滤参数：**\n- `category`: 一级分类（教育培养/科研学术/人才引育）\n- `subcategory`: 二级子类（如 学术委员会）\n- `scholar_id`: 关联学者 ID\n- `keyword`: 标题/摘要关键词",
-        "operationId": "list_projects_api_v1_projects_get",
+        "operationId": "list_projects_api_projects_get",
         "parameters": [
           {
             "name": "page",
@@ -10208,7 +10792,7 @@
         ],
         "summary": "创建项目",
         "description": "创建新的项目标签记录。\n\n**必填字段：** `category`、`subcategory`、`title`\n\n**项目 ID** 由系统自动生成，无需手动传入。",
-        "operationId": "create_project_api_v1_projects_post",
+        "operationId": "create_project_api_projects_post",
         "requestBody": {
           "required": true,
           "content": {
@@ -10243,14 +10827,14 @@
         }
       }
     },
-    "/api/v1/projects/stats": {
+    "/api/projects/stats": {
       "get": {
         "tags": [
           "projects"
         ],
         "summary": "项目统计",
         "description": "返回项目标签的聚合统计信息：按一级分类、二级子类分布，以及项目-学者关联总数。",
-        "operationId": "get_stats_api_v1_projects_stats_get",
+        "operationId": "get_stats_api_projects_stats_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -10265,14 +10849,14 @@
         }
       }
     },
-    "/api/v1/projects/taxonomy": {
+    "/api/projects/taxonomy": {
       "get": {
         "tags": [
           "projects"
         ],
         "summary": "项目分类树",
         "description": "返回项目的二级分类树（一级分类 + 二级子类），用于前端筛选按钮渲染。",
-        "operationId": "get_taxonomy_api_v1_projects_taxonomy_get",
+        "operationId": "get_taxonomy_api_projects_taxonomy_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -10287,14 +10871,14 @@
         }
       }
     },
-    "/api/v1/projects/{project_id}": {
+    "/api/projects/{project_id}": {
       "get": {
         "tags": [
           "projects"
         ],
         "summary": "项目详情",
         "description": "根据项目 ID 获取完整项目标签记录，包含：\n- 分类信息（category/subcategory）\n- 标题与摘要\n- 关联学者列表",
-        "operationId": "get_project_api_v1_projects__project_id__get",
+        "operationId": "get_project_api_projects__project_id__get",
         "parameters": [
           {
             "name": "project_id",
@@ -10335,7 +10919,7 @@
         ],
         "summary": "更新项目",
         "description": "更新指定项目的字段。所有字段均可选，仅传入需要修改的字段。",
-        "operationId": "update_project_api_v1_projects__project_id__patch",
+        "operationId": "update_project_api_projects__project_id__patch",
         "parameters": [
           {
             "name": "project_id",
@@ -10386,7 +10970,7 @@
         ],
         "summary": "删除项目",
         "description": "删除指定项目记录。",
-        "operationId": "delete_project_api_v1_projects__project_id__delete",
+        "operationId": "delete_project_api_projects__project_id__delete",
         "parameters": [
           {
             "name": "project_id",
@@ -10415,14 +10999,14 @@
         }
       }
     },
-    "/api/v1/projects/batch": {
+    "/api/projects/batch": {
       "post": {
         "tags": [
           "projects"
         ],
         "summary": "批量创建项目",
         "description": "通过 JSON 列表批量创建项目标签。\n\n**重复判定：** 相同标题 + 相同一级分类 + 相同二级子类视为重复，skip_duplicates=true 时跳过，false 时报错。\n\n**返回：** 每条记录的处理结果汇总。",
-        "operationId": "batch_create_projects_api_v1_projects_batch_post",
+        "operationId": "batch_create_projects_api_projects_batch_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -10455,14 +11039,14 @@
         }
       }
     },
-    "/api/v1/venues": {
+    "/api/venues": {
       "get": {
         "tags": [
           "venues"
         ],
         "summary": "获取顶会/期刊列表",
         "description": "分页查询 venues 列表，支持按类型、级别、研究领域、关键词过滤。",
-        "operationId": "list_venues_api_v1_venues_get",
+        "operationId": "list_venues_api_venues_get",
         "parameters": [
           {
             "name": "type",
@@ -10610,7 +11194,7 @@
           "venues"
         ],
         "summary": "创建顶会/期刊",
-        "operationId": "create_venue_api_v1_venues_post",
+        "operationId": "create_venue_api_venues_post",
         "requestBody": {
           "required": true,
           "content": {
@@ -10645,14 +11229,14 @@
         }
       }
     },
-    "/api/v1/venues/stats": {
+    "/api/venues/stats": {
       "get": {
         "tags": [
           "venues"
         ],
         "summary": "顶会/期刊统计",
         "description": "返回按类型、级别、研究领域的聚合统计。",
-        "operationId": "get_venue_stats_api_v1_venues_stats_get",
+        "operationId": "get_venue_stats_api_venues_stats_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -10667,13 +11251,13 @@
         }
       }
     },
-    "/api/v1/venues/{venue_id}": {
+    "/api/venues/{venue_id}": {
       "get": {
         "tags": [
           "venues"
         ],
         "summary": "获取顶会/期刊详情",
-        "operationId": "get_venue_api_v1_venues__venue_id__get",
+        "operationId": "get_venue_api_venues__venue_id__get",
         "parameters": [
           {
             "name": "venue_id",
@@ -10714,7 +11298,7 @@
         ],
         "summary": "更新顶会/期刊",
         "description": "部分更新，仅传入需要修改的字段。custom_fields 支持浅合并（值为 null 删除 key）。",
-        "operationId": "update_venue_api_v1_venues__venue_id__patch",
+        "operationId": "update_venue_api_venues__venue_id__patch",
         "parameters": [
           {
             "name": "venue_id",
@@ -10764,7 +11348,7 @@
           "venues"
         ],
         "summary": "删除顶会/期刊",
-        "operationId": "delete_venue_api_v1_venues__venue_id__delete",
+        "operationId": "delete_venue_api_venues__venue_id__delete",
         "parameters": [
           {
             "name": "venue_id",
@@ -10793,14 +11377,14 @@
         }
       }
     },
-    "/api/v1/venues/batch": {
+    "/api/venues/batch": {
       "post": {
         "tags": [
           "venues"
         ],
         "summary": "批量导入顶会/期刊",
         "description": "批量创建，已存在（同名）的条目自动跳过。",
-        "operationId": "batch_create_venues_api_v1_venues_batch_post",
+        "operationId": "batch_create_venues_api_venues_batch_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -10839,14 +11423,443 @@
         }
       }
     },
-    "/api/v1/leadership": {
+    "/api/papers": {
+      "get": {
+        "tags": [
+          "papers"
+        ],
+        "summary": "全局论文列表",
+        "operationId": "list_papers_api_papers_get",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Q"
+            }
+          },
+          {
+            "name": "doi",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Doi"
+            }
+          },
+          {
+            "name": "source_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Source Type"
+            }
+          },
+          {
+            "name": "source_name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Source Name"
+            }
+          },
+          {
+            "name": "source_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Source Id"
+            }
+          },
+          {
+            "name": "venue",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Venue"
+            }
+          },
+          {
+            "name": "venue_year",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Venue Year"
+            }
+          },
+          {
+            "name": "date_from",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Date From"
+            }
+          },
+          {
+            "name": "date_to",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Date To"
+            }
+          },
+          {
+            "name": "has_abstract",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Has Abstract"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Page Size"
+            }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "publication_date",
+              "title": "Sort By"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "desc",
+              "title": "Order"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaperListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/papers/sources": {
+      "get": {
+        "tags": [
+          "papers"
+        ],
+        "summary": "论文仓信源列表",
+        "operationId": "list_paper_sources_api_papers_sources_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaperSourceListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/papers/sources/{source_id}/crawl": {
+      "post": {
+        "tags": [
+          "papers"
+        ],
+        "summary": "触发单个论文仓信源抓取",
+        "operationId": "crawl_paper_source_api_papers_sources__source_id__crawl_post",
+        "parameters": [
+          {
+            "name": "source_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Source Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaperCrawlResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/papers/import-runs": {
+      "get": {
+        "tags": [
+          "papers"
+        ],
+        "summary": "论文仓导入运行记录",
+        "operationId": "list_paper_import_runs_api_papers_import_runs_get",
+        "parameters": [
+          {
+            "name": "source_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Source Id"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Page Size"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaperIngestRunListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/papers/{paper_id}": {
+      "get": {
+        "tags": [
+          "papers"
+        ],
+        "summary": "全局论文详情",
+        "operationId": "get_paper_api_papers__paper_id__get",
+        "parameters": [
+          {
+            "name": "paper_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Paper Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaperRecord"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/leadership": {
       "get": {
         "tags": [
           "leadership"
         ],
         "summary": "高校领导列表",
         "description": "返回高校领导数据列表（分页），用于高校领导模块列表渲染。",
-        "operationId": "list_university_leadership_endpoint_api_v1_leadership_get",
+        "operationId": "list_university_leadership_endpoint_api_leadership_get",
         "parameters": [
           {
             "name": "keyword",
@@ -10918,14 +11931,14 @@
         }
       }
     },
-    "/api/v1/leadership/all": {
+    "/api/leadership/all": {
       "get": {
         "tags": [
           "leadership"
         ],
         "summary": "高校领导全量数据",
         "description": "返回当前库中全部高校领导数据。",
-        "operationId": "get_all_university_leadership_endpoint_api_v1_leadership_all_get",
+        "operationId": "get_all_university_leadership_endpoint_api_leadership_all_get",
         "parameters": [
           {
             "name": "keyword",
@@ -10970,14 +11983,14 @@
         }
       }
     },
-    "/api/v1/leadership/{institution_id}": {
+    "/api/leadership/{institution_id}": {
       "get": {
         "tags": [
           "leadership"
         ],
         "summary": "高校领导当前数据",
         "description": "返回该机构对应高校的最新领导信息（用于机构-高校-大学领导模块渲染）。",
-        "operationId": "get_university_leadership_current_endpoint_api_v1_leadership__institution_id__get",
+        "operationId": "get_university_leadership_current_endpoint_api_leadership__institution_id__get",
         "parameters": [
           {
             "name": "institution_id",
@@ -11013,14 +12026,14 @@
         }
       }
     },
-    "/api/v1/institutions": {
+    "/api/institutions": {
       "get": {
         "tags": [
           "institutions"
         ],
         "summary": "机构列表（统一接口）",
         "description": "获取机构列表，支持扁平列表和层级结构两种视图。\n\n**视图类型（view 参数）：**\n- `flat`（默认）：扁平列表，用于「机构页」渲染组织卡片\n- `hierarchy`：层级结构，用于「学者页」支持一级机构→二级机构两级展开\n\n**分类体系：**\n- `entity_type`：实体类型（organization | department）\n- `region`：地域（国内 | 国际）\n- `org_type`：机构类型（高校 | 企业（公司） | 研究机构 | 行业学会 | 其他）\n- `classification`：顶层分类（共建高校 | 兄弟院校 | 海外高校 | 其他高校）\n\n**排序规则：**region → org_type → classification → priority → 声望 → 名称\n\n**示例：**\n- 机构页：`?view=flat&entity_type=organization&region=国内&org_type=高校`\n- 学者页：`?view=hierarchy&region=国内&org_type=高校&classification=共建高校`",
-        "operationId": "list_institutions_api_v1_institutions_get",
+        "operationId": "list_institutions_api_institutions_get",
         "parameters": [
           {
             "name": "view",
@@ -11206,7 +12219,7 @@
                       "$ref": "#/components/schemas/InstitutionHierarchyResponse"
                     }
                   ],
-                  "title": "Response List Institutions Api V1 Institutions Get"
+                  "title": "Response List Institutions Api Institutions Get"
                 }
               }
             }
@@ -11229,7 +12242,7 @@
         ],
         "summary": "创建机构（支持简化模式）",
         "description": "创建新的机构记录（一级机构或二级机构）。**ID 不提供会自动生成**，让你专注于填写关键信息。\n\n## 三种使用场景\n\n### 场景 1: 新增一级机构（最简单）\n```json\n{\"name\": \"清华大学\", \"entity_type\": \"organization\", \"org_type\": \"高校\", \"region\": \"国内\", \"classification\": \"共建高校\"}\n```\nBody 最少字段：`name`, `entity_type='organization'`\n- `id` 不提供会自动生成（如 'qinghua'）\n- 可选：region, org_type, classification, priority, student_count_24/25, 人员和合作信息等\n\n### 场景 2: 新增二级机构（需选择父一级机构）\n```json\n{\"name\": \"计算机科学与技术系\", \"entity_type\": \"department\", \"parent_id\": \"qinghua\"}\n```\nBody 必填字段：`name`, `entity_type='department'`, `parent_id`\n- `id` 不提供会自动生成\n- `parent_id` 必须是已存在的一级机构 ID（可先用 GET /institutions/ 查询）\n\n### 场景 3: 一次性创建一级机构+多个二级机构\n```json\n{\n  \"name\": \"北京大学\",\n  \"entity_type\": \"organization\",\n  \"secondary_institutions\": [\n    {\"name\": \"计算机学院\"},\n    {\"name\": \"信息科学技术学院\"}\n  ]\n}\n```\n- 一级机构和所有二级机构的 ID 都会自动生成\n\n## 功能特性\n\n**自动生成 ID** — 从机构名称自动生成简洁易记的 ID（如 '清华' → 'qinghua'）\n\n**AMiner 标准化名** — 创建后自动调用 AMiner 机构搜索接口填充 `org_name`，获取标准化的英文机构名。查询失败不影响创建。\n\n**冲突检测** — 若 ID 已存在，返回 409 Conflict。二级机构重名仅在同一父机构下拦截。",
-        "operationId": "create_institution_api_v1_institutions_post",
+        "operationId": "create_institution_api_institutions_post",
         "requestBody": {
           "required": true,
           "content": {
@@ -11264,14 +12277,14 @@
         }
       }
     },
-    "/api/v1/institutions/stats": {
+    "/api/institutions/stats": {
       "get": {
         "tags": [
           "institutions"
         ],
         "summary": "机构统计",
         "description": "返回机构统计数据：总数、按分类/优先级分布、学生/导师总数。",
-        "operationId": "get_institution_stats_api_v1_institutions_stats_get",
+        "operationId": "get_institution_stats_api_institutions_stats_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -11286,14 +12299,14 @@
         }
       }
     },
-    "/api/v1/institutions/taxonomy": {
+    "/api/institutions/taxonomy": {
       "get": {
         "tags": [
           "institutions"
         ],
         "summary": "分类体系统计",
         "description": "返回机构分类体系的层级结构和统计数据，用于前端动态渲染导航栏。\n\n返回格式：\n```json\n{\n  \"total\": 277,\n  \"regions\": {\n    \"国内\": {\n      \"count\": 250,\n      \"org_types\": {\n        \"高校\": {\n          \"count\": 200,\n          \"classifications\": {\n            \"共建高校\": {\"count\": 50},\n            \"兄弟院校\": {\"count\": 80}\n          }\n        },\n        \"企业\": {\"count\": 10, \"display_name\": \"公司\"},\n        \"研究机构\": {\"count\": 15}\n      }\n    },\n    \"国际\": {\"count\": 27, \"org_types\": {...}}\n  }\n}\n```",
-        "operationId": "get_institution_taxonomy_api_v1_institutions_taxonomy_get",
+        "operationId": "get_institution_taxonomy_api_institutions_taxonomy_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -11306,14 +12319,14 @@
         }
       }
     },
-    "/api/v1/institutions/search": {
+    "/api/institutions/search": {
       "get": {
         "tags": [
           "institutions"
         ],
         "summary": "搜索机构（模糊匹配）",
         "description": "根据关键词搜索机构，支持模糊匹配。用于前端自动完成（autocomplete）功能。\n\n**匹配规则：**\n1. 精确匹配（最高优先级）\n2. 以关键词开头\n3. 包含关键词（不区分大小写）\n4. 字符重叠匹配\n\n**排序规则：**\n- 按相关性得分排序\n- 组织（organization）优先于院系（department）\n- 学者数量多的机构优先\n\n**Query Parameters:**\n- `q` (required): 搜索关键词\n- `limit` (optional, default=10): 返回结果数量\n- `region` (optional): 地域过滤（国内 | 国际）\n- `org_type` (optional): 机构类型过滤（高校 | 企业（公司） | 研究机构 | 其他）",
-        "operationId": "search_institutions_endpoint_api_v1_institutions_search_get",
+        "operationId": "search_institutions_endpoint_api_institutions_search_get",
         "parameters": [
           {
             "name": "q",
@@ -11399,14 +12412,14 @@
         }
       }
     },
-    "/api/v1/institutions/suggest": {
+    "/api/institutions/suggest": {
       "get": {
         "tags": [
           "institutions"
         ],
         "summary": "建议机构匹配",
         "description": "根据机构名称查找最佳匹配的机构。用于学者编辑时自动匹配已有机构。\n\n**返回内容：**\n- `matched`: 最佳匹配（强匹配，精确或前缀匹配）\n- `suggestions`: 建议列表（所有相关匹配）\n\n**使用场景：**\n- 用户编辑学者所属机构时，调用此接口查找是否已有该机构\n- 如果 `matched` 不为空，建议用户使用该标准名称\n- 如果 `matched` 为空但 `suggestions` 不为空，展示建议列表供用户选择\n- 如果都为空，说明是新机构，需要创建\n\n**Query Parameters:**\n- `institution_name` (recommended): 机构名称\n- `university` (legacy): 大学名称（兼容参数）",
-        "operationId": "suggest_institution_endpoint_api_v1_institutions_suggest_get",
+        "operationId": "suggest_institution_endpoint_api_institutions_suggest_get",
         "parameters": [
           {
             "name": "institution_name",
@@ -11467,14 +12480,14 @@
         }
       }
     },
-    "/api/v1/institutions/aminer/search-org": {
+    "/api/institutions/aminer/search-org": {
       "get": {
         "tags": [
           "institutions"
         ],
         "summary": "搜索 AMiner 机构名",
         "description": "搜索 AMiner 数据库中的机构信息，获取标准化的英文机构名（org_name）。\n\n此端点用于辅助机构创建：用户在创建高校或院系时，可先调用此接口查询对应的 AMiner 标准化名称，然后在创建请求中传入 `org_name` 字段。\n\n**Query Parameters:**\n- `q` (required): 机构名称（中文或英文均可），如 '清华大学' 或 'Tsinghua'\n- `size` (optional, default=5): 返回的结果数量，最多 10 个\n\n**返回示例：**\n```json\n{\n  \"query\": \"清华大学\",\n  \"total\": 3,\n  \"items\": [\n    {\"id\": \"...\", \"name\": \"清华大学\", \"name_en\": \"Tsinghua University\", \"country\": \"China\"},\n    {\"id\": \"...\", \"name\": \"清华大学\", \"name_en\": \"Tsinghua Univ.\", \"country\": \"China\"}\n  ]\n}\n```",
-        "operationId": "search_aminer_organizations_api_v1_institutions_aminer_search_org_get",
+        "operationId": "search_aminer_organizations_api_institutions_aminer_search_org_get",
         "parameters": [
           {
             "name": "q",
@@ -11518,14 +12531,14 @@
         }
       }
     },
-    "/api/v1/institutions/{institution_id}": {
+    "/api/institutions/{institution_id}": {
       "get": {
         "tags": [
           "institutions"
         ],
         "summary": "机构详情",
         "description": "根据机构 ID 获取完整机构信息。\n\n**一级机构详情包含：**\n- 基本信息（分类、优先级、学生数、导师数）\n- 人员信息（驻院领导、委员会、校领导、重要学者）\n- 合作信息（联合实验室、培养合作、学术合作、人才双聘）\n- 二级机构列表（`secondary_institutions`，兼容字段 `departments`）\n\n**二级机构详情包含：**\n- 基本信息（名称、学者数）\n- 信源列表（source_id, source_name, scholar_count, is_enabled）",
-        "operationId": "get_institution_api_v1_institutions__institution_id__get",
+        "operationId": "get_institution_api_institutions__institution_id__get",
         "parameters": [
           {
             "name": "institution_id",
@@ -11566,7 +12579,7 @@
         ],
         "summary": "更新机构",
         "description": "更新指定机构的信息。所有字段均可选，仅传入需要修改的字段。\n\n**一级机构可更新字段：**\n- 基本信息：name, avatar（校徽图片 URL）, category, priority\n- 学生导师：student_count_24, student_count_25, mentor_count\n- 人员信息：resident_leaders, degree_committee, teaching_committee, university_leaders, notable_scholars\n- 合作信息：key_departments, joint_labs, training_cooperation, academic_cooperation, talent_dual_appointment, recruitment_events, visit_exchanges, cooperation_focus\n- 二级机构维护：`secondary_institutions`（兼容字段：`departments`）\n\n**二级机构可更新字段：**\n- name",
-        "operationId": "update_institution_api_v1_institutions__institution_id__patch",
+        "operationId": "update_institution_api_institutions__institution_id__patch",
         "parameters": [
           {
             "name": "institution_id",
@@ -11617,7 +12630,7 @@
         ],
         "summary": "删除机构",
         "description": "删除指定的机构记录。\n\n**注意：**\n- 删除一级机构会同时删除其下所有二级机构\n- 删除二级机构不影响父一级机构",
-        "operationId": "delete_institution_api_v1_institutions__institution_id__delete",
+        "operationId": "delete_institution_api_institutions__institution_id__delete",
         "parameters": [
           {
             "name": "institution_id",
@@ -11645,10 +12658,539 @@
           }
         }
       }
+    },
+    "/academic-monitor/api/students": {
+      "get": {
+        "tags": [
+          "academic-monitor-compat"
+        ],
+        "summary": "academic-monitor 兼容：学生目标列表",
+        "operationId": "list_academic_students_academic_monitor_api_students_get",
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "按学生姓名或 target_key 模糊匹配",
+              "title": "Keyword"
+            },
+            "description": "按学生姓名或 target_key 模糊匹配"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 500,
+              "minimum": 1,
+              "default": 100,
+              "title": "Page Size"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AcademicStudentsResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/academic-monitor/api/students/{target_key}/papers": {
+      "get": {
+        "tags": [
+          "academic-monitor-compat"
+        ],
+        "summary": "academic-monitor 兼容：学生论文列表",
+        "operationId": "list_academic_student_papers_academic_monitor_api_students__target_key__papers_get",
+        "parameters": [
+          {
+            "name": "target_key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Target Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AcademicStudentPapersResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "academic-monitor-compat"
+        ],
+        "summary": "academic-monitor 兼容：新增学生论文",
+        "operationId": "create_academic_paper_academic_monitor_api_students__target_key__papers_post",
+        "parameters": [
+          {
+            "name": "target_key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Target Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AcademicPaperUpsertPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaperWriteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/academic-monitor/api/students/{target_key}/papers/{paper_uid}": {
+      "put": {
+        "tags": [
+          "academic-monitor-compat"
+        ],
+        "summary": "academic-monitor 兼容：更新学生论文",
+        "operationId": "update_academic_paper_academic_monitor_api_students__target_key__papers__paper_uid__put",
+        "parameters": [
+          {
+            "name": "target_key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Target Key"
+            }
+          },
+          {
+            "name": "paper_uid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Paper Uid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AcademicPaperUpsertPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaperWriteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "academic-monitor-compat"
+        ],
+        "summary": "academic-monitor 兼容：删除论文",
+        "operationId": "delete_academic_paper_academic_monitor_api_students__target_key__papers__paper_uid__delete",
+        "parameters": [
+          {
+            "name": "target_key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Target Key"
+            }
+          },
+          {
+            "name": "paper_uid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Paper Uid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/academic-monitor/api/students/{target_key}/papers/{paper_uid}/compliance": {
+      "patch": {
+        "tags": [
+          "academic-monitor-compat"
+        ],
+        "summary": "academic-monitor 兼容：更新论文（不再存储合规字段）",
+        "operationId": "patch_academic_paper_compliance_academic_monitor_api_students__target_key__papers__paper_uid__compliance_patch",
+        "parameters": [
+          {
+            "name": "target_key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Target Key"
+            }
+          },
+          {
+            "name": "paper_uid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Paper Uid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AcademicPaperCompliancePayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaperWriteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "AcademicPaperCompliancePayload": {
+        "properties": {
+          "note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          }
+        },
+        "type": "object",
+        "title": "AcademicPaperCompliancePayload"
+      },
+      "AcademicPaperUpsertPayload": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "doi": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Doi"
+          },
+          "arxiv_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Arxiv Id"
+          },
+          "abstract": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Abstract"
+          },
+          "publication_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publication Date"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source"
+          },
+          "authors": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Authors"
+          },
+          "affiliations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Affiliations"
+          }
+        },
+        "type": "object",
+        "required": [
+          "title"
+        ],
+        "title": "AcademicPaperUpsertPayload"
+      },
+      "AcademicStudentPapersResponse": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/StudentPaperRecord"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total"
+        ],
+        "title": "AcademicStudentPapersResponse"
+      },
+      "AcademicStudentSummary": {
+        "properties": {
+          "target_key": {
+            "type": "string",
+            "title": "Target Key"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "target_type": {
+            "type": "string",
+            "title": "Target Type",
+            "default": "student"
+          },
+          "paper_count": {
+            "type": "integer",
+            "title": "Paper Count",
+            "default": 0
+          },
+          "compliant_count": {
+            "type": "integer",
+            "title": "Compliant Count",
+            "default": 0
+          },
+          "non_compliant_count": {
+            "type": "integer",
+            "title": "Non Compliant Count",
+            "default": 0
+          },
+          "unknown_count": {
+            "type": "integer",
+            "title": "Unknown Count",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "target_key",
+          "name"
+        ],
+        "title": "AcademicStudentSummary"
+      },
+      "AcademicStudentsResponse": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/AcademicStudentSummary"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size"
+          },
+          "total_pages": {
+            "type": "integer",
+            "title": "Total Pages"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total",
+          "page",
+          "page_size",
+          "total_pages"
+        ],
+        "title": "AcademicStudentsResponse"
+      },
       "AchievementUpdate": {
         "properties": {
           "representative_publications": {
@@ -12305,7 +13847,7 @@
         "title": "AwardRecord",
         "description": "Single award / honor entry. [爬虫/用户]"
       },
-      "Body_import_scholars_file_api_v1_scholars_import_post": {
+      "Body_import_scholars_file_api_scholars_import_post": {
         "properties": {
           "file": {
             "type": "string",
@@ -12318,7 +13860,62 @@
         "required": [
           "file"
         ],
-        "title": "Body_import_scholars_file_api_v1_scholars_import_post"
+        "title": "Body_import_scholars_file_api_scholars_import_post"
+      },
+      "CrawlActivityEntry": {
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
+          "source_id": {
+            "type": "string",
+            "title": "Source Id"
+          },
+          "phase": {
+            "type": "string",
+            "title": "Phase"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": ""
+          },
+          "items_total": {
+            "type": "integer",
+            "title": "Items Total",
+            "default": 0
+          },
+          "db_upserted": {
+            "type": "integer",
+            "title": "Db Upserted",
+            "default": 0
+          },
+          "db_new": {
+            "type": "integer",
+            "title": "Db New",
+            "default": 0
+          },
+          "db_deduped_in_batch": {
+            "type": "integer",
+            "title": "Db Deduped In Batch",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "timestamp",
+          "source_id",
+          "phase",
+          "status"
+        ],
+        "title": "CrawlActivityEntry",
+        "description": "Per-source activity item for live crawl timeline."
       },
       "CrawlHealthResponse": {
         "properties": {
@@ -12478,6 +14075,30 @@
             "type": "integer",
             "title": "Total Items",
             "default": 0
+          },
+          "running_sources": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Running Sources"
+          },
+          "recent_activity": {
+            "items": {
+              "$ref": "#/components/schemas/CrawlActivityEntry"
+            },
+            "type": "array",
+            "title": "Recent Activity"
+          },
+          "summary_report": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CrawlSummaryReport"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "progress": {
             "type": "number",
@@ -12685,7 +14306,8 @@
             "enum": [
               "json",
               "csv",
-              "database"
+              "database",
+              "xlsx"
             ],
             "title": "Export Format",
             "default": "json"
@@ -12780,6 +14402,30 @@
             "title": "Total Items",
             "default": 0
           },
+          "running_sources": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Running Sources"
+          },
+          "recent_activity": {
+            "items": {
+              "$ref": "#/components/schemas/CrawlActivityEntry"
+            },
+            "type": "array",
+            "title": "Recent Activity"
+          },
+          "summary_report": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CrawlSummaryReport"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "progress": {
             "type": "number",
             "title": "Progress",
@@ -12827,6 +14473,82 @@
         ],
         "title": "CrawlStatusResponse",
         "description": "Current manual crawl job status."
+      },
+      "CrawlSummaryReport": {
+        "properties": {
+          "requested_source_count": {
+            "type": "integer",
+            "title": "Requested Source Count",
+            "default": 0
+          },
+          "completed_count": {
+            "type": "integer",
+            "title": "Completed Count",
+            "default": 0
+          },
+          "failed_count": {
+            "type": "integer",
+            "title": "Failed Count",
+            "default": 0
+          },
+          "total_items": {
+            "type": "integer",
+            "title": "Total Items",
+            "default": 0
+          },
+          "db_upserted_total": {
+            "type": "integer",
+            "title": "Db Upserted Total",
+            "default": 0
+          },
+          "db_new_total": {
+            "type": "integer",
+            "title": "Db New Total",
+            "default": 0
+          },
+          "db_deduped_in_batch_total": {
+            "type": "integer",
+            "title": "Db Deduped In Batch Total",
+            "default": 0
+          },
+          "started_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Started At"
+          },
+          "finished_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Finished At"
+          },
+          "duration_seconds": {
+            "type": "number",
+            "title": "Duration Seconds",
+            "default": 0.0
+          },
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "default": "idle"
+          }
+        },
+        "type": "object",
+        "title": "CrawlSummaryReport",
+        "description": "Manual crawl summary report (final or in-progress snapshot)."
       },
       "DailyBriefingResponse": {
         "properties": {
@@ -16136,6 +17858,249 @@
         ],
         "title": "PaginatedResponse[SocialPostBrief]"
       },
+      "PaperAffiliationMapping": {
+        "properties": {
+          "author_order": {
+            "type": "integer",
+            "title": "Author Order"
+          },
+          "author_name": {
+            "type": "string",
+            "title": "Author Name"
+          },
+          "affiliation": {
+            "type": "string",
+            "title": "Affiliation"
+          }
+        },
+        "type": "object",
+        "required": [
+          "author_order",
+          "author_name",
+          "affiliation"
+        ],
+        "title": "PaperAffiliationMapping"
+      },
+      "PaperCrawlResponse": {
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "title": "Source Id"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "inserted_count": {
+            "type": "integer",
+            "title": "Inserted Count",
+            "default": 0
+          },
+          "updated_count": {
+            "type": "integer",
+            "title": "Updated Count",
+            "default": 0
+          },
+          "skipped_count": {
+            "type": "integer",
+            "title": "Skipped Count",
+            "default": 0
+          },
+          "filtered_chinese_count": {
+            "type": "integer",
+            "title": "Filtered Chinese Count",
+            "default": 0
+          },
+          "run_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Run Id"
+          },
+          "error_message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "source_id",
+          "status"
+        ],
+        "title": "PaperCrawlResponse"
+      },
+      "PaperIngestRunListResponse": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/PaperIngestRunRecord"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page",
+            "default": 1
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size",
+            "default": 20
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total"
+        ],
+        "title": "PaperIngestRunListResponse"
+      },
+      "PaperIngestRunRecord": {
+        "properties": {
+          "run_id": {
+            "type": "string",
+            "title": "Run Id"
+          },
+          "source_id": {
+            "type": "string",
+            "title": "Source Id",
+            "default": ""
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "inserted_count": {
+            "type": "integer",
+            "title": "Inserted Count",
+            "default": 0
+          },
+          "updated_count": {
+            "type": "integer",
+            "title": "Updated Count",
+            "default": 0
+          },
+          "skipped_count": {
+            "type": "integer",
+            "title": "Skipped Count",
+            "default": 0
+          },
+          "filtered_chinese_count": {
+            "type": "integer",
+            "title": "Filtered Chinese Count",
+            "default": 0
+          },
+          "error_message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Message"
+          },
+          "started_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Started At"
+          },
+          "finished_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Finished At"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "run_id",
+          "status"
+        ],
+        "title": "PaperIngestRunRecord"
+      },
+      "PaperListResponse": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/PaperRecord"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page",
+            "default": 1
+          },
+          "page_size": {
+            "type": "integer",
+            "title": "Page Size",
+            "default": 20
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total"
+        ],
+        "title": "PaperListResponse"
+      },
       "PaperMeta": {
         "properties": {
           "paper_id": {
@@ -16217,6 +18182,317 @@
         ],
         "title": "PaperMeta"
       },
+      "PaperRecord": {
+        "properties": {
+          "paper_id": {
+            "type": "string",
+            "title": "Paper Id"
+          },
+          "canonical_uid": {
+            "type": "string",
+            "title": "Canonical Uid",
+            "default": ""
+          },
+          "doi": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Doi"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "abstract": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Abstract"
+          },
+          "publication_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publication Date"
+          },
+          "authors": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Authors"
+          },
+          "affiliations": {
+            "items": {
+              "$ref": "#/components/schemas/PaperAffiliationMapping"
+            },
+            "type": "array",
+            "title": "Affiliations"
+          },
+          "source": {
+            "$ref": "#/components/schemas/PaperSourceRef"
+          },
+          "detail_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Detail Url"
+          },
+          "pdf_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pdf Url"
+          },
+          "venue": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Venue"
+          },
+          "venue_year": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Venue Year"
+          },
+          "track": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Track"
+          },
+          "ingested_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ingested At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "paper_id",
+          "title",
+          "source"
+        ],
+        "title": "PaperRecord"
+      },
+      "PaperSourceListResponse": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/PaperSourceStatus"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total"
+        ],
+        "title": "PaperSourceListResponse"
+      },
+      "PaperSourceRef": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "source_id": {
+            "type": "string",
+            "title": "Source Id"
+          },
+          "raw_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Raw Id"
+          },
+          "detail_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Detail Url"
+          },
+          "pdf_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pdf Url"
+          },
+          "venue": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Venue"
+          },
+          "venue_year": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Venue Year"
+          },
+          "track": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Track"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "source_id"
+        ],
+        "title": "PaperSourceRef"
+      },
+      "PaperSourceStatus": {
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "title": "Source Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "source_type": {
+            "type": "string",
+            "title": "Source Type"
+          },
+          "crawler_class": {
+            "type": "string",
+            "title": "Crawler Class",
+            "default": ""
+          },
+          "is_enabled": {
+            "type": "boolean",
+            "title": "Is Enabled",
+            "default": false
+          },
+          "paper_count": {
+            "type": "integer",
+            "title": "Paper Count",
+            "default": 0
+          },
+          "latest_run": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Run"
+          }
+        },
+        "type": "object",
+        "required": [
+          "source_id",
+          "name",
+          "source_type"
+        ],
+        "title": "PaperSourceStatus"
+      },
       "PaperTransferResults": {
         "properties": {
           "generated_at": {
@@ -16267,6 +18543,24 @@
           "items"
         ],
         "title": "PaperTransferResults"
+      },
+      "PaperWriteResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "paper_uid": {
+            "type": "string",
+            "title": "Paper Uid"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "paper_uid"
+        ],
+        "title": "PaperWriteResponse"
       },
       "PatentRecord": {
         "properties": {
@@ -17920,6 +20214,153 @@
         "title": "PositionCount",
         "description": "Position count in stats."
       },
+      "ProfileLinks": {
+        "properties": {
+          "homepage": {
+            "type": "string",
+            "title": "Homepage",
+            "default": ""
+          },
+          "lab": {
+            "type": "string",
+            "title": "Lab",
+            "default": ""
+          },
+          "github": {
+            "type": "string",
+            "title": "Github",
+            "default": ""
+          },
+          "linkedin": {
+            "type": "string",
+            "title": "Linkedin",
+            "default": ""
+          },
+          "google_scholar": {
+            "type": "string",
+            "title": "Google Scholar",
+            "default": ""
+          },
+          "orcid": {
+            "type": "string",
+            "title": "Orcid",
+            "default": ""
+          },
+          "dblp": {
+            "type": "string",
+            "title": "Dblp",
+            "default": ""
+          },
+          "other": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Other"
+          }
+        },
+        "type": "object",
+        "title": "ProfileLinks",
+        "description": "Unified scholar profile link collection for API compatibility."
+      },
+      "ProfileLinksPatch": {
+        "properties": {
+          "homepage": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Homepage"
+          },
+          "lab": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lab"
+          },
+          "github": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Github"
+          },
+          "linkedin": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Linkedin"
+          },
+          "google_scholar": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Google Scholar"
+          },
+          "orcid": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Orcid"
+          },
+          "dblp": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dblp"
+          },
+          "other": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Other"
+          }
+        },
+        "type": "object",
+        "title": "ProfileLinksPatch",
+        "description": "Partial profile link update payload.\n\nUnlike ProfileLinks, missing fields must stay missing so PATCH requests can\nmerge one link without clearing the rest of custom_fields.profile_links."
+      },
       "ProjectBatchRequest": {
         "properties": {
           "items": {
@@ -18424,6 +20865,31 @@
           "url": {
             "type": "string",
             "title": "Url",
+            "default": ""
+          },
+          "doi": {
+            "type": "string",
+            "title": "Doi",
+            "default": ""
+          },
+          "abstract": {
+            "type": "string",
+            "title": "Abstract",
+            "default": ""
+          },
+          "publication_date": {
+            "type": "string",
+            "title": "Publication Date",
+            "default": ""
+          },
+          "project_group_name": {
+            "type": "string",
+            "title": "Project Group Name",
+            "default": ""
+          },
+          "source_type": {
+            "type": "string",
+            "title": "Source Type",
             "default": ""
           },
           "citation_count": {
@@ -19049,6 +21515,16 @@
             ],
             "title": "Orcid"
           },
+          "profile_links": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ProfileLinksPatch"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "phd_institution": {
             "anyOf": [
               {
@@ -19115,9 +21591,7 @@
               {
                 "additionalProperties": {
                   "anyOf": [
-                    {
-                      "type": "string"
-                    },
+                    {},
                     {
                       "type": "null"
                     }
@@ -19283,6 +21757,9 @@
             "type": "string",
             "title": "Orcid",
             "default": ""
+          },
+          "profile_links": {
+            "$ref": "#/components/schemas/ProfileLinks"
           },
           "phd_institution": {
             "type": "string",
@@ -19577,6 +22054,36 @@
             "type": "string",
             "title": "Profile Url",
             "default": ""
+          },
+          "profile_links": {
+            "$ref": "#/components/schemas/ProfileLinks"
+          },
+          "custom_fields": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Custom Fields",
+            "description": "用户自定义字段"
+          },
+          "achievement_tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Achievement Tags"
+          },
+          "representative_publications": {
+            "items": {
+              "$ref": "#/components/schemas/PublicationRecord"
+            },
+            "type": "array",
+            "title": "Representative Publications"
+          },
+          "awards": {
+            "items": {
+              "$ref": "#/components/schemas/AwardRecord"
+            },
+            "type": "array",
+            "title": "Awards"
           },
           "is_potential_recruit": {
             "type": "boolean",
@@ -22546,6 +25053,18 @@
             "description": "预计毕业年份",
             "default": ""
           },
+          "entry_date": {
+            "type": "string",
+            "title": "Entry Date",
+            "description": "入项时间",
+            "default": ""
+          },
+          "paper_date_floor": {
+            "type": "string",
+            "title": "Paper Date Floor",
+            "description": "论文时间下限",
+            "default": ""
+          },
           "status": {
             "type": "string",
             "title": "Status",
@@ -22646,6 +25165,16 @@
           "expected_graduation_year": {
             "type": "string",
             "title": "Expected Graduation Year",
+            "default": ""
+          },
+          "entry_date": {
+            "type": "string",
+            "title": "Entry Date",
+            "default": ""
+          },
+          "paper_date_floor": {
+            "type": "string",
+            "title": "Paper Date Floor",
             "default": ""
           },
           "added_by": {
@@ -22866,6 +25395,761 @@
         ],
         "title": "StudentMeta"
       },
+      "StudentPaperComplianceRequest": {
+        "properties": {
+          "note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          }
+        },
+        "type": "object",
+        "title": "StudentPaperComplianceRequest"
+      },
+      "StudentPaperRecord": {
+        "properties": {
+          "paper_uid": {
+            "type": "string",
+            "title": "Paper Uid"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "doi": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Doi"
+          },
+          "arxiv_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Arxiv Id"
+          },
+          "abstract": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Abstract"
+          },
+          "publication_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publication Date"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source"
+          },
+          "authors": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Authors"
+          },
+          "affiliations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Affiliations"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "paper_uid",
+          "title"
+        ],
+        "title": "StudentPaperRecord"
+      },
+      "StudentPaperUpsertRequest": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "doi": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Doi"
+          },
+          "arxiv_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Arxiv Id"
+          },
+          "abstract": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Abstract"
+          },
+          "publication_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publication Date"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source"
+          },
+          "authors": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Authors"
+          },
+          "affiliations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Affiliations"
+          }
+        },
+        "type": "object",
+        "required": [
+          "title"
+        ],
+        "title": "StudentPaperUpsertRequest"
+      },
+      "StudentPaperWriteResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "paper_uid": {
+            "type": "string",
+            "title": "Paper Uid"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "paper_uid"
+        ],
+        "title": "StudentPaperWriteResponse"
+      },
+      "StudentPapersResponse": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/StudentPaperRecord"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total"
+        ],
+        "title": "StudentPapersResponse"
+      },
+      "StudentPublicationCandidateActionResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "candidate_id": {
+            "type": "string",
+            "title": "Candidate Id"
+          },
+          "paper_uid": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Paper Uid"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "candidate_id"
+        ],
+        "title": "StudentPublicationCandidateActionResponse"
+      },
+      "StudentPublicationCandidateDecisionRequest": {
+        "properties": {
+          "reviewed_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reviewed By"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          },
+          "affiliation_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Affiliation Status"
+          },
+          "compliance_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Compliance Reason"
+          },
+          "matched_tokens": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Matched Tokens"
+          },
+          "checked_affiliations": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Checked Affiliations"
+          },
+          "compliance_details": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Compliance Details"
+          }
+        },
+        "type": "object",
+        "title": "StudentPublicationCandidateDecisionRequest"
+      },
+      "StudentPublicationCandidatePatchRequest": {
+        "properties": {
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "doi": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Doi"
+          },
+          "arxiv_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Arxiv Id"
+          },
+          "abstract": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Abstract"
+          },
+          "publication_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publication Date"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source"
+          },
+          "authors": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Authors"
+          },
+          "affiliations": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Affiliations"
+          }
+        },
+        "type": "object",
+        "title": "StudentPublicationCandidatePatchRequest"
+      },
+      "StudentPublicationCandidateRecord": {
+        "properties": {
+          "candidate_id": {
+            "type": "string",
+            "title": "Candidate Id"
+          },
+          "target_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Key"
+          },
+          "owner_type": {
+            "type": "string",
+            "title": "Owner Type"
+          },
+          "owner_id": {
+            "type": "string",
+            "title": "Owner Id"
+          },
+          "canonical_uid": {
+            "type": "string",
+            "title": "Canonical Uid"
+          },
+          "paper_uid": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Paper Uid"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "doi": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Doi"
+          },
+          "arxiv_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Arxiv Id"
+          },
+          "abstract": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Abstract"
+          },
+          "publication_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publication Date"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source"
+          },
+          "source_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Type"
+          },
+          "source_details": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Source Details"
+          },
+          "authors": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Authors"
+          },
+          "affiliations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Affiliations"
+          },
+          "review_status": {
+            "type": "string",
+            "title": "Review Status"
+          },
+          "review_decision": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Review Decision"
+          },
+          "compliance_details": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Compliance Details"
+          },
+          "affiliation_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Affiliation Status"
+          },
+          "compliance_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Compliance Reason"
+          },
+          "matched_tokens": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Matched Tokens"
+          },
+          "checked_affiliations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Checked Affiliations"
+          },
+          "assessed_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Assessed At"
+          },
+          "first_seen_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "First Seen At"
+          },
+          "last_seen_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Seen At"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "candidate_id",
+          "owner_type",
+          "owner_id",
+          "canonical_uid",
+          "title",
+          "review_status"
+        ],
+        "title": "StudentPublicationCandidateRecord"
+      },
+      "StudentPublicationWorkspaceCounts": {
+        "properties": {
+          "confirmed": {
+            "type": "integer",
+            "title": "Confirmed",
+            "default": 0
+          },
+          "pending_review": {
+            "type": "integer",
+            "title": "Pending Review",
+            "default": 0
+          },
+          "rejected": {
+            "type": "integer",
+            "title": "Rejected",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "StudentPublicationWorkspaceCounts"
+      },
+      "StudentPublicationWorkspaceResponse": {
+        "properties": {
+          "counts": {
+            "$ref": "#/components/schemas/StudentPublicationWorkspaceCounts"
+          },
+          "confirmed_publications": {
+            "items": {
+              "$ref": "#/components/schemas/StudentPaperRecord"
+            },
+            "type": "array",
+            "title": "Confirmed Publications"
+          },
+          "pending_candidates": {
+            "items": {
+              "$ref": "#/components/schemas/StudentPublicationCandidateRecord"
+            },
+            "type": "array",
+            "title": "Pending Candidates"
+          },
+          "rejected_candidates": {
+            "items": {
+              "$ref": "#/components/schemas/StudentPublicationCandidateRecord"
+            },
+            "type": "array",
+            "title": "Rejected Candidates"
+          }
+        },
+        "type": "object",
+        "required": [
+          "counts"
+        ],
+        "title": "StudentPublicationWorkspaceResponse"
+      },
       "StudentUpdateRequest": {
         "properties": {
           "scholar_id": {
@@ -22975,6 +26259,30 @@
             ],
             "title": "Expected Graduation Year",
             "description": "预计毕业年份"
+          },
+          "entry_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Entry Date",
+            "description": "入项时间"
+          },
+          "paper_date_floor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Paper Date Floor",
+            "description": "论文时间下限"
           },
           "status": {
             "anyOf": [
@@ -26287,6 +29595,9 @@
             "title": "Orcid",
             "default": ""
           },
+          "profile_links": {
+            "$ref": "#/components/schemas/ProfileLinks"
+          },
           "phd_institution": {
             "type": "string",
             "title": "Phd Institution",
@@ -26323,6 +29634,13 @@
             "type": "string",
             "title": "Metrics Updated At",
             "default": ""
+          },
+          "achievement_tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Achievement Tags"
           },
           "representative_publications": {
             "items": {
@@ -26504,6 +29822,10 @@
     {
       "name": "venues",
       "description": "学术社群 — AI 领域顶会与期刊知识库。维护顶会（AAAI/NeurIPS/CVPR 等）和期刊（Nature/TPAMI/JMLR 等）的级别、H5 指数、录用率、影响因子等元数据，支持按类型/级别/领域过滤。"
+    },
+    {
+      "name": "papers",
+      "description": "全局论文仓 — 平台级论文主数据查询与导入管理。支持按 DOI、标题、会议信源、日期范围过滤，并提供论文仓信源状态与导入运行记录查询。"
     },
     {
       "name": "leadership",

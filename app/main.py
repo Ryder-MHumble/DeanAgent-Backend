@@ -9,7 +9,7 @@ from fastapi.staticfiles import StaticFiles
 from scalar_fastapi import get_scalar_api_reference
 
 from app.api.academic_monitor import router as academic_monitor_router
-from app.api.v1.router import v1_router
+from app.api.router import api_router, legacy_v1_router
 from app.console_api import console_api_app
 from app.config import BASE_DIR, settings
 from app.db.client import close_client, init_client
@@ -94,6 +94,12 @@ TAG_METADATA = [
         "description": "学术社群 — AI 领域顶会与期刊知识库。"
         "维护顶会（AAAI/NeurIPS/CVPR 等）和期刊（Nature/TPAMI/JMLR 等）的级别、"
         "H5 指数、录用率、影响因子等元数据，支持按类型/级别/领域过滤。",
+    },
+    {
+        "name": "papers",
+        "description": "全局论文仓 — 平台级论文主数据查询与导入管理。"
+        "支持按 DOI、标题、会议信源、日期范围过滤，"
+        "并提供论文仓信源状态与导入运行记录查询。",
     },
     {
         "name": "leadership",
@@ -415,12 +421,20 @@ app.add_middleware(
     expose_headers=["Content-Disposition"],
 )
 
+
 # Register API routes
-app.include_router(v1_router)
+app.include_router(api_router)
+app.include_router(legacy_v1_router, include_in_schema=False)
+app.include_router(
+    academic_monitor_router,
+    prefix="/academic-monitor/api",
+    tags=["academic-monitor-compat"],
+)
 app.include_router(
     academic_monitor_router,
     prefix="/academic-monitor/api/v1",
     tags=["academic-monitor-compat"],
+    include_in_schema=False,
 )
 app.mount("/console-api", console_api_app)
 

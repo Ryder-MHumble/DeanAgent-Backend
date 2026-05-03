@@ -6,7 +6,7 @@
 
 ## 1) 机构搜索与详情
 
-### `GET /api/v1/institutions/search`
+### `GET /api/institutions/search`
 
 用途：按机构名称做模糊匹配。
 
@@ -23,7 +23,7 @@
   - `region`, `org_type`
   - `parent_id`, `scholar_count`
 
-### `GET /api/v1/institutions/suggest`
+### `GET /api/institutions/suggest`
 
 用途：根据机构名称返回最佳匹配与建议列表。
 
@@ -34,7 +34,7 @@
 - `matched`
 - `suggestions[]`
 
-### `GET /api/v1/institutions`
+### `GET /api/institutions`
 
 用途：机构列表与层级结构。
 
@@ -58,7 +58,7 @@
   - `priority`, `scholar_count`
   - `student_count_total`, `mentor_count`
 
-### `GET /api/v1/institutions/{institution_id}`
+### `GET /api/institutions/{institution_id}`
 
 用途：机构完整画像。
 
@@ -72,7 +72,7 @@
 
 ## 2) 机构统计
 
-### `GET /api/v1/institutions/stats`
+### `GET /api/institutions/stats`
 
 用途：机构总览统计。
 
@@ -85,7 +85,7 @@
 - `total_students`
 - `total_mentors`
 
-### `GET /api/v1/institutions/taxonomy`
+### `GET /api/institutions/taxonomy`
 
 用途：机构分类体系统计与导航。
 
@@ -95,7 +95,7 @@
 
 ## 3) 高校动态与文章
 
-### `GET /api/v1/intel/university/feed`
+### `GET /api/intel/university/feed`
 
 用途：高校动态文章列表。
 
@@ -114,7 +114,7 @@
   - `source_id`, `source_name`, `group`
   - `tags`, `has_content`, `content`
 
-### `GET /api/v1/intel/university/article/{url_hash}`
+### `GET /api/intel/university/article/{url_hash}`
 
 用途：单篇文章详情。
 
@@ -125,7 +125,7 @@
 
 ## 4) 高校科研成果
 
-### `GET /api/v1/intel/university/research`
+### `GET /api/intel/university/research`
 
 用途：科研成果列表。
 

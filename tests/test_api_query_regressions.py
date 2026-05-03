@@ -4,7 +4,9 @@ import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from app.api.v1 import articles, social_posts, sources, venues
+from app.api.academic import venues
+from app.api.content import articles, sources
+from app.api.social import social_posts
 from app.config import settings
 from app.db.client import close_client, init_client
 from app.db.pool import close_pool, init_pool

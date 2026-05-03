@@ -4,6 +4,8 @@ from __future__ import annotations
 import json
 from typing import Any
 
+from app.services.scholar._achievement_tags import extract_achievement_tags
+
 _EMPTY_ADJUNCT: dict[str, str] = {
     "status": "", "type": "", "agreement_type": "", "agreement_period": "", "recommender": "",
 }
@@ -39,7 +41,12 @@ def _coerce_adjunct_supervisor(raw: Any) -> dict[str, str]:
     return dict(_EMPTY_ADJUNCT)
 
 
-def _coerce_project_tags(raw: Any, *, legacy_category: str = "", legacy_subcategory: str = "") -> list[dict[str, str]]:
+def _coerce_project_tags(
+    raw: Any,
+    *,
+    legacy_category: str = "",
+    legacy_subcategory: str = "",
+) -> list[dict[str, str]]:
     tags: list[dict[str, str]] = []
     if isinstance(raw, list):
         for item in raw:
@@ -60,16 +67,88 @@ def _coerce_project_tags(raw: Any, *, legacy_category: str = "", legacy_subcateg
     if tags:
         return tags
 
-    category = legacy_category.strip()
-    subcategory = legacy_subcategory.strip()
-    if not category and not subcategory:
-        return []
-    return [{
-        "category": category,
-        "subcategory": subcategory,
-        "project_id": "",
-        "project_title": "",
-    }]
+    return []
+
+
+def _truthy_custom_field(custom_fields: dict[str, Any], key: str) -> bool:
+    value = custom_fields.get(key)
+    if isinstance(value, bool):
+        return value
+    return str(value or "").strip().lower() in {"true", "1", "yes", "y"}
+
+
+def _has_adjunct_supervisor(item: dict[str, Any]) -> bool:
+    adj = item.get("adjunct_supervisor")
+    if isinstance(adj, dict):
+        return bool(str(adj.get("status") or "").strip())
+    return False
+
+
+def _append_project_tag(
+    tags: list[dict[str, str]],
+    seen: set[tuple[str, str]],
+    category: str,
+    subcategory: str,
+) -> None:
+    key = (category, subcategory)
+    if key in seen:
+        return
+    seen.add(key)
+    tags.append(
+        {
+            "category": category,
+            "subcategory": subcategory,
+            "project_id": "",
+            "project_title": "",
+        }
+    )
+
+
+def _derive_project_tags_from_metadata(
+    item: dict[str, Any],
+    custom_fields: dict[str, Any],
+) -> list[dict[str, str]]:
+    tags: list[dict[str, str]] = []
+    seen: set[tuple[str, str]] = set()
+    is_adjunct = (
+        _has_adjunct_supervisor(item)
+        or _truthy_custom_field(custom_fields, "education_training_adjunct")
+        or _truthy_custom_field(custom_fields, "aaai_plus_adjunct_mapped")
+    )
+    if is_adjunct:
+        _append_project_tag(tags, seen, "教育培养", "兼职导师")
+    if _truthy_custom_field(custom_fields, "mentor_is_school_mentor"):
+        _append_project_tag(tags, seen, "教育培养", "学院学生高校导师")
+    if item.get("__has_supervised_students") and not is_adjunct:
+        _append_project_tag(tags, seen, "教育培养", "全职导师")
+    return tags
+
+
+def _merge_project_tags(
+    raw: Any,
+    *,
+    custom_fields: dict[str, Any],
+    item: dict[str, Any],
+    legacy_category: str = "",
+    legacy_subcategory: str = "",
+) -> list[dict[str, str]]:
+    tags = _coerce_project_tags(
+        raw,
+        legacy_category=legacy_category,
+        legacy_subcategory=legacy_subcategory,
+    )
+    seen = {
+        (str(tag.get("category") or ""), str(tag.get("subcategory") or ""))
+        for tag in tags
+    }
+    for tag in _derive_project_tags_from_metadata(item, custom_fields):
+        _append_project_tag(
+            tags,
+            seen,
+            str(tag.get("category") or ""),
+            str(tag.get("subcategory") or ""),
+        )
+    return tags
 
 
 def _coerce_event_tags(raw: Any) -> list[dict[str, str]]:
@@ -101,8 +180,8 @@ def _is_cobuild_scholar(
     project_tags: list[dict[str, str]],
     event_tags: list[dict[str, str]],
 ) -> bool:
-    # Category tags are the source of truth for co-build relationship.
-    if project_tags or event_tags:
+    # Project tags are the source of truth for co-build relationship.
+    if project_tags:
         return True
     explicit = item.get("is_cobuild_scholar")
     if isinstance(explicit, bool):
@@ -123,6 +202,21 @@ def _coerce_custom_fields(raw: Any) -> dict[str, Any]:
             return {}
         return parsed if isinstance(parsed, dict) else {}
     return {}
+
+
+def _coerce_list(raw: Any) -> list[Any]:
+    if isinstance(raw, list):
+        return raw
+    if isinstance(raw, str):
+        text = raw.strip()
+        if not text:
+            return []
+        try:
+            parsed = json.loads(text)
+        except Exception:
+            return []
+        return parsed if isinstance(parsed, list) else []
+    return []
 
 
 def _normalize_profile_links(raw: Any) -> dict[str, Any]:
@@ -166,7 +260,10 @@ def _profile_links_from_legacy_fields(item: dict[str, Any]) -> dict[str, Any]:
     return links
 
 
-def _build_profile_links(item: dict[str, Any], custom_fields: dict[str, Any] | None = None) -> dict[str, Any]:
+def _build_profile_links(
+    item: dict[str, Any],
+    custom_fields: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     legacy_links = _profile_links_from_legacy_fields(item)
     custom_links = _normalize_profile_links((custom_fields or {}).get("profile_links"))
 
@@ -190,8 +287,19 @@ def _to_list_item(item: dict[str, Any]) -> dict[str, Any]:
     custom_fields = _coerce_custom_fields(item.get("custom_fields"))
     profile_links = _build_profile_links(item, custom_fields)
     legacy_profile_fields = _profile_links_to_legacy_fields(profile_links)
-    project_tags = _coerce_project_tags(
+    representative_publications = _coerce_list(item.get("representative_publications"))
+    awards = _coerce_list(item.get("awards"))
+    achievement_tags = extract_achievement_tags(
+        achievement_tags=item.get("achievement_tags"),
+        representative_publications=[
+            pub for pub in representative_publications if isinstance(pub, dict)
+        ],
+        awards=[award for award in awards if isinstance(award, dict)],
+    )
+    project_tags = _merge_project_tags(
         item.get("project_tags"),
+        custom_fields=custom_fields,
+        item=item,
         legacy_category=str(item.get("project_category") or ""),
         legacy_subcategory=str(item.get("project_subcategory") or ""),
     )
@@ -213,6 +321,10 @@ def _to_list_item(item: dict[str, Any]) -> dict[str, Any]:
         "email": item.get("email") or "",
         "profile_url": legacy_profile_fields["profile_url"],
         "profile_links": profile_links,
+        "custom_fields": custom_fields,
+        "achievement_tags": achievement_tags,
+        "representative_publications": representative_publications,
+        "awards": awards,
         "is_potential_recruit": bool(item.get("is_potential_recruit", False)),
         "is_advisor_committee": bool(item.get("is_advisor_committee", False)),
         "adjunct_supervisor": _coerce_adjunct_supervisor(item.get("adjunct_supervisor")),
@@ -227,8 +339,19 @@ def _to_detail(item: dict[str, Any]) -> dict[str, Any]:
     custom_fields = _coerce_custom_fields(item.get("custom_fields"))
     profile_links = _build_profile_links(item, custom_fields)
     legacy_profile_fields = _profile_links_to_legacy_fields(profile_links)
-    project_tags = _coerce_project_tags(
+    representative_publications = _coerce_list(item.get("representative_publications"))
+    awards = _coerce_list(item.get("awards"))
+    achievement_tags = extract_achievement_tags(
+        achievement_tags=item.get("achievement_tags"),
+        representative_publications=[
+            pub for pub in representative_publications if isinstance(pub, dict)
+        ],
+        awards=[award for award in awards if isinstance(award, dict)],
+    )
+    project_tags = _merge_project_tags(
         item.get("project_tags"),
+        custom_fields=custom_fields,
+        item=item,
         legacy_category=str(item.get("project_category") or ""),
         legacy_subcategory=str(item.get("project_subcategory") or ""),
     )
@@ -269,9 +392,10 @@ def _to_detail(item: dict[str, Any]) -> dict[str, Any]:
         "h_index": item.get("h_index") or -1,
         "citations_count": item.get("citations_count") or -1,
         "metrics_updated_at": item.get("metrics_updated_at") or "",
-        "representative_publications": item.get("representative_publications") or [],
+        "achievement_tags": achievement_tags,
+        "representative_publications": representative_publications,
         "patents": item.get("patents") or [],
-        "awards": item.get("awards") or [],
+        "awards": awards,
         "is_advisor_committee": bool(item.get("is_advisor_committee", False)),
         "adjunct_supervisor": _coerce_adjunct_supervisor(item.get("adjunct_supervisor")),
         "supervised_students": item.get("supervised_students") or [],

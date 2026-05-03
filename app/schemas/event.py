@@ -1,4 +1,4 @@
-"""Pydantic schemas for the Event API (/api/v1/events/)."""
+"""Pydantic schemas for the Event API (/api/events/)."""
 from __future__ import annotations
 
 from typing import Any

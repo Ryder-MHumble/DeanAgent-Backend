@@ -22,7 +22,7 @@
 └── [新增] talent_identities 表 → 身份消歧关联表
 
 API 层（新增端点）
-└── /api/v1/talent-scout/* → 查询/搜索/导出
+└── /api/talent-scout/* → 查询/搜索/导出
 ```
 
 ---
@@ -34,7 +34,7 @@ API 层（新增端点）
 | 竞赛 | 真实 URL | API/数据格式 | Parser 类型 | 难度 |
 |------|---------|-------------|------------|------|
 | **Kaggle** | `https://www.kaggle.com/rankings.json?group=competitions&segment=COMBINED&page=1` | JSON API，无需认证即可获取 leaderboard | `kaggle_leaderboard` | ⭐ |
-| **天池** | `https://tianchi.aliyun.com/competition/` + `https://tianchi.aliyun.com/api/v1/competitions?page=1&pageSize=20` | 需登录态，JSON API | 静态爬虫 + 动态 | ⭐⭐ |
+| **天池** | `https://tianchi.aliyun.com/competition/` + `https://tianchi.aliyun.com/api/competitions?page=1&pageSize=20` | 需登录态，JSON API | 静态爬虫 + 动态 | ⭐⭐ |
 | **CCF BDCI** | `https://www.datafountain.cn/competitions` | 网页列表，非结构化 | 静态爬虫 | ⭐⭐ |
 | **ICPC** | `https://icpc.global/ranklist` + `https://icpc.global/api/contest-ranklist/` | JSON API（需探测） | `competition_winners` | ⭐⭐ |
 | **RoboMaster** | `https://www.robomaster.com/zh-CN/resource/pages/announcement/1024` | 官网公示 | 静态爬虫 | ⭐⭐ |
@@ -100,7 +100,7 @@ sources/
 app/crawlers/registry.py       [修改] 注册 5 个新 parser
 app/db/
 ├── talent_dao.py              [新增] 人才数据访问层
-app/api/v1/
+app/api/
 ├── talent_scout.py            [新增] 人才猎头 API 端点
 app/schemas/
 ├── talent_scout.py            [新增] Pydantic schemas
@@ -444,8 +444,8 @@ sources:
 - 修改 `app/crawlers/registry.py` 注册新 parsers
 
 ### Step 7: API 端点
-- `app/api/v1/talent_scout.py`
-- 基本端点：`GET /api/v1/talent-scout/profiles` (分页查询)
+- `app/api/talent_scout.py`
+- 基本端点：`GET /api/talent-scout/profiles` (分页查询)
 - 筛选：按来源、机构、竞赛、论文数、citations
 - 导出：CSV/JSON
 
@@ -470,7 +470,7 @@ python scripts/run_single_crawl.py --source github_ai_contributors
 python scripts/verify_db_migration.py talent_profiles --check-fields name,source,affiliations
 
 # 测试 API 端点
-curl http://10.1.132.21:8001/api/v1/talent-scout/profiles?source=kaggle&limit=10
+curl http://10.1.132.21:8001/api/talent-scout/profiles?source=kaggle&limit=10
 ```
 
 ---

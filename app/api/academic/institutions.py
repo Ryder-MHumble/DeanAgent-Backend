@@ -1,4 +1,4 @@
-"""Institution API — /api/v1/institutions/
+"""Institution API — /api/institutions/
 
 统一的机构接口（一级机构 + 二级机构），支持自动 ID 生成和 AMiner 标准化名自动填充
 

@@ -5,7 +5,7 @@ from fastapi import Response
 
 DEFAULT_SUNSET = "Thu, 31 Dec 2026 23:59:59 GMT"
 DEFAULT_SUNSET_DATE = "2026-12-31"
-DEPRECATION_DOCS_PATH = "/api/v1/sources/deprecations"
+DEPRECATION_DOCS_PATH = "/api/sources/deprecations"
 
 DEPRECATED_ENDPOINTS: list[dict[str, str]] = []
 

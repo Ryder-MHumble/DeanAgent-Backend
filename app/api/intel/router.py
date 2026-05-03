@@ -1,7 +1,7 @@
 """Intel sub-router — aggregates all business intelligence endpoints."""
 from fastapi import APIRouter
 
-from app.api.v1.intel import (
+from app.api.intel import (
     daily_briefing,
     paper_transfer,
     personnel,

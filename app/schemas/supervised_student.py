@@ -1,4 +1,4 @@
-"""Pydantic schemas for supervised students (/api/v1/scholars/{url_hash}/students).
+"""Pydantic schemas for supervised students (/api/scholars/{url_hash}/students).
 
 These represent students in joint training programs, where the student's home
 university is the original university (e.g. Peking University), and the advisor

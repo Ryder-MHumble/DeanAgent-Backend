@@ -7,6 +7,7 @@ import time
 from typing import Any
 
 from app.services.core.institution.classification import normalize_org_type
+from app.services.scholar._achievement_tags import extract_achievement_tags
 
 # ---------------------------------------------------------------------------
 # Institution classification map (from DB, cached in-process)
@@ -477,6 +478,86 @@ def _coerce_custom_fields(raw: Any) -> dict[str, Any]:
     return {}
 
 
+def _coerce_bool(value: Any) -> bool | None:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, int):
+        if value == 1:
+            return True
+        if value == 0:
+            return False
+    if not isinstance(value, str):
+        return None
+    normalized = value.strip().lower()
+    if normalized in {"true", "1", "yes", "y"}:
+        return True
+    if normalized in {"false", "0", "no", "n"}:
+        return False
+    return None
+
+
+def _read_profile_bool(item: dict[str, Any], *keys: str) -> bool | None:
+    custom_fields = _coerce_custom_fields(item.get("custom_fields"))
+    for group_key in ("profile_flags", "metadata_profile"):
+        group = custom_fields.get(group_key)
+        if not isinstance(group, dict):
+            continue
+        for key in keys:
+            value = _coerce_bool(group.get(key))
+            if value is not None:
+                return value
+    return None
+
+
+def _truthy_custom_field(custom_fields: dict[str, Any], key: str) -> bool:
+    value = custom_fields.get(key)
+    if isinstance(value, bool):
+        return value
+    return str(value or "").strip().lower() in {"true", "1", "yes", "y"}
+
+
+def _has_adjunct_supervisor(item: dict[str, Any]) -> bool:
+    adj = item.get("adjunct_supervisor")
+    if isinstance(adj, dict):
+        return bool(str(adj.get("status") or "").strip())
+    return False
+
+
+def _append_project_tag(
+    tags: list[dict[str, str]],
+    seen: set[tuple[str, str]],
+    category: str,
+    subcategory: str,
+) -> None:
+    key = (category, subcategory)
+    if key in seen:
+        return
+    seen.add(key)
+    tags.append({"category": category, "subcategory": subcategory})
+
+
+def _derive_project_tags_from_metadata(item: dict[str, Any]) -> list[dict[str, str]]:
+    custom_fields = _coerce_custom_fields(item.get("custom_fields"))
+    tags: list[dict[str, str]] = []
+    seen: set[tuple[str, str]] = set()
+
+    is_adjunct = (
+        _has_adjunct_supervisor(item)
+        or _truthy_custom_field(custom_fields, "education_training_adjunct")
+        or _truthy_custom_field(custom_fields, "aaai_plus_adjunct_mapped")
+    )
+    if is_adjunct:
+        _append_project_tag(tags, seen, "教育培养", "兼职导师")
+
+    if _truthy_custom_field(custom_fields, "mentor_is_school_mentor"):
+        _append_project_tag(tags, seen, "教育培养", "学院学生高校导师")
+
+    if item.get("__has_supervised_students") and not is_adjunct:
+        _append_project_tag(tags, seen, "教育培养", "全职导师")
+
+    return tags
+
+
 def _community_matches(item: dict[str, Any], community_name: str | None, community_type: str | None) -> bool:
     if not community_name and not community_type:
         return True
@@ -519,6 +600,7 @@ def _community_matches(item: dict[str, Any], community_name: str | None, communi
 def _extract_project_tags(item: dict[str, Any]) -> list[dict[str, str]]:
     raw_tags = item.get("project_tags")
     tags: list[dict[str, str]] = []
+    seen: set[tuple[str, str]] = set()
     if isinstance(raw_tags, list):
         for raw in raw_tags:
             if not isinstance(raw, dict):
@@ -527,20 +609,11 @@ def _extract_project_tags(item: dict[str, Any]) -> list[dict[str, str]]:
             subcategory = str(raw.get("subcategory") or "").strip()
             if not category and not subcategory:
                 continue
-            tags.append(
-                {
-                    "category": category,
-                    "subcategory": subcategory,
-                }
-            )
-    if tags:
-        return tags
+            _append_project_tag(tags, seen, category, subcategory)
 
-    legacy_category = str(item.get("project_category") or "").strip()
-    legacy_subcategory = str(item.get("project_subcategory") or "").strip()
-    if not legacy_category and not legacy_subcategory:
-        return []
-    return [{"category": legacy_category, "subcategory": legacy_subcategory}]
+    for tag in _derive_project_tags_from_metadata(item):
+        _append_project_tag(tags, seen, tag["category"], tag["subcategory"])
+    return tags
 
 
 def _extract_event_tags(item: dict[str, Any]) -> list[dict[str, str]]:
@@ -609,7 +682,7 @@ def _is_cobuild_scholar(
     project_tags: list[dict[str, str]],
     event_tags: list[dict[str, str]],
 ) -> bool:
-    if project_tags or event_tags:
+    if project_tags:
         return True
     explicit = item.get("is_cobuild_scholar")
     if isinstance(explicit, bool):
@@ -724,6 +797,10 @@ def _apply_filters(
     event_types: str | None,
     participated_event_id: str | None,
     is_cobuild_scholar: bool | None,
+    is_chinese: bool | None,
+    is_current_student: bool | None,
+    chinese_identity: str | None,
+    achievement_tag: str | None,
     region: str | None,
     affiliation_type: str | None,
     institution_names: list[str] | None = None,
@@ -845,6 +922,48 @@ def _apply_filters(
             )
             == is_cobuild_scholar
         ]
+
+    if is_chinese is not None:
+        result = [
+            i for i in result
+            if _read_profile_bool(i, "is_chinese") == is_chinese
+        ]
+
+    if is_current_student is not None:
+        result = [
+            i for i in result
+            if _read_profile_bool(i, "is_current_student", "is_student")
+            == is_current_student
+        ]
+
+    if chinese_identity:
+        normalized_identity = chinese_identity.strip().lower()
+        if normalized_identity in {"unknown", "待判定"}:
+            result = [
+                i for i in result
+                if _read_profile_bool(i, "is_chinese") is None
+            ]
+
+    if achievement_tag:
+        target_tag = achievement_tag.strip()
+
+        def _has_achievement_tag(item: dict[str, Any]) -> bool:
+            tags = extract_achievement_tags(
+                achievement_tags=item.get("achievement_tags"),
+                representative_publications=[
+                    pub
+                    for pub in item.get("representative_publications") or []
+                    if isinstance(pub, dict)
+                ],
+                awards=[
+                    award
+                    for award in item.get("awards") or []
+                    if isinstance(award, dict)
+                ],
+            )
+            return target_tag in tags
+
+        result = [i for i in result if _has_achievement_tag(i)]
 
     if keyword:
         kw = keyword.strip().lower()

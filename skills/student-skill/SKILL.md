@@ -23,9 +23,9 @@ description: 面向“学生名单/年级学生/导师带学生/毕业状态/学
 ## API 配置
 
 - 服务基址（由服务方提供）：`http://10.1.132.21:8001`
-- 学生列表：`GET /api/v1/students`
-- 学生筛选项：`GET /api/v1/students/options`
-- 学生详情：`GET /api/v1/students/{student_id}`
+- 学生列表：`GET /api/students`
+- 学生筛选项：`GET /api/students/options`
+- 学生详情：`GET /api/students/{student_id}`
 
 ## 通用性约束（非常重要）
 
@@ -109,7 +109,7 @@ trigger:
 
 6. 输出生成（Narrative Rendering）
 - 严格使用 `references/output-template.md` 的结构。
-- 可用 `GET /api/v1/students/{student_id}` 构造内部记录链接，但必须明确这不是外部原始信源。
+- 可用 `GET /api/students/{student_id}` 构造内部记录链接，但必须明确这不是外部原始信源。
 - 默认不批量暴露 `email/phone`；只有用户明确要求联系方式时才展示。
 
 7. 接口异常处理（Runtime Failure Handling）
@@ -202,7 +202,7 @@ feature_request:
 ## 直接请求示例
 
 ```bash
-curl -sS -G "http://10.1.132.21:8001/api/v1/students" \
+curl -sS -G "http://10.1.132.21:8001/api/students" \
   --data-urlencode "institution=清华大学" \
   --data-urlencode "enrollment_year=2024" \
   --data-urlencode "page=1" \
@@ -210,7 +210,7 @@ curl -sS -G "http://10.1.132.21:8001/api/v1/students" \
 ```
 
 ```bash
-curl -sS "http://10.1.132.21:8001/api/v1/students/{student_id}"
+curl -sS "http://10.1.132.21:8001/api/students/{student_id}"
 ```
 
 ## 资源

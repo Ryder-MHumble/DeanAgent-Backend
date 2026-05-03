@@ -31,16 +31,16 @@ def _collect_routes() -> list[dict[str, Any]]:
     for route in app.routes:
         if not hasattr(route, "methods") or not hasattr(route, "path"):
             continue
-        if not route.path.startswith("/api/v1"):
+        if not route.path.startswith("/api/"):
             continue
         methods = sorted(m for m in route.methods if m not in {"HEAD", "OPTIONS"})
         if not methods:
             continue
         path = route.path
         parts = [p for p in path.split("/") if p]
-        service = parts[2] if len(parts) >= 3 else "unknown"
-        if service == "intel" and len(parts) >= 4:
-            service = f"intel/{parts[3]}"
+        service = parts[1] if len(parts) >= 2 else "unknown"
+        if service == "intel" and len(parts) >= 3:
+            service = f"intel/{parts[2]}"
         rows.append(
             {
                 "methods": methods,
@@ -208,35 +208,35 @@ def _to_markdown(routes: list[dict[str, Any]], source_stats: dict[str, Any]) -> 
     lines.append("| 用户意图 | 推荐接口 | 参数建议 |")
     lines.append("|---|---|---|")
     lines.append(
-        "| 快速看全部信源结构 | `GET /api/v1/sources/catalog` | "
+        "| 快速看全部信源结构 | `GET /api/sources/catalog` | "
         "`include_facets=true&page_size=200` |"
     )
     lines.append(
-        "| 快速定位信源 ID | `GET /api/v1/sources/resolve` | "
+        "| 快速定位信源 ID | `GET /api/sources/resolve` | "
         "`q=人社局` 或 `q=清华` |"
     )
     lines.append(
-        "| 查询高校领导信源 | `GET /api/v1/sources/catalog` | "
+        "| 查询高校领导信源 | `GET /api/sources/catalog` | "
         "`tag=leadership` 或 `group=university_leadership_official` |"
     )
     lines.append(
-        "| 查询学者/师资信源 | `GET /api/v1/sources/catalog` | "
+        "| 查询学者/师资信源 | `GET /api/sources/catalog` | "
         "`dimension=scholars` 或 `tag=faculty` |"
     )
     lines.append(
-        "| 按单个/多个信源直接拉取数据 | `GET /api/v1/sources/items` | "
+        "| 按单个/多个信源直接拉取数据 | `GET /api/sources/items` | "
         "`source_id=...` 或 `source_name=...`，配合 `page/page_size` 翻页 |"
     )
     lines.append(
-        "| 按路径固定某个信源拉取数据 | `GET /api/v1/sources/{source_id}/items` | "
+        "| 按路径固定某个信源拉取数据 | `GET /api/sources/{source_id}/items` | "
         "`date_from/date_to/keyword/page/page_size` |"
     )
     lines.append(
-        "| 查询共建导师/两院关系学者 | `GET /api/v1/scholars` | "
+        "| 查询共建导师/两院关系学者 | `GET /api/scholars` | "
         "`is_adjunct_supervisor=true` 或 `project_subcategory=兼职导师` |"
     )
     lines.append(
-        "| 查询两院学生名单 | `GET /api/v1/students` | "
+        "| 查询两院学生名单 | `GET /api/students` | "
         "`institution=...`、`mentor_name=...`、`enrollment_year=...` |"
     )
     lines.append("")

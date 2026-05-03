@@ -125,13 +125,20 @@ async def generate_briefing_narrative(
         "每个维度段落中引用该维度最重要的3-5条文章。"
     )
 
-    briefing_model = settings.BRIEFING_LLM_MODEL
-    logger.info("Using model %s for daily briefing generation", briefing_model)
+    briefing_models = {
+        "openrouter": settings.BRIEFING_LLM_MODEL,
+        "siliconflow": settings.SILICONFLOW_MODEL,
+    }
+    logger.info(
+        "Using daily briefing models openrouter=%s siliconflow=%s",
+        briefing_models["openrouter"],
+        briefing_models["siliconflow"],
+    )
 
     raw = await call_llm_json(
         prompt=user_prompt,
         system_prompt=SYSTEM_PROMPT,
-        model=briefing_model,
+        model=briefing_models,
         temperature=0.3,
         max_tokens=8000,
         stage="daily_briefing_generation",

@@ -104,6 +104,19 @@ def _resolve_provider_sequence() -> list[dict[str, str]]:
     return ordered
 
 
+def _resolve_model_for_provider(
+    model: str | dict[str, str] | None,
+    provider: dict[str, str],
+) -> str:
+    if isinstance(model, dict):
+        configured = str(model.get(provider["name"], "") or "").strip()
+        return configured or provider["model"]
+    if isinstance(model, str):
+        configured = model.strip()
+        return configured or provider["model"]
+    return provider["model"]
+
+
 async def _call_provider_once(
     provider: str,
     api_url: str,
@@ -173,7 +186,7 @@ async def _call_provider_once(
 async def call_llm(
     prompt: str,
     system_prompt: str = "",
-    model: str | None = None,
+    model: str | dict[str, str] | None = None,
     temperature: float = 0.3,
     max_tokens: int = 2000,
     json_mode: bool = False,
@@ -190,7 +203,7 @@ async def call_llm(
     Args:
         prompt: User message content.
         system_prompt: System instruction.
-        model: Model ID (defaults to settings.OPENROUTER_MODEL).
+        model: Model ID or provider-specific model map.
         temperature: Sampling temperature.
         max_tokens: Maximum response tokens.
         json_mode: If True, request JSON output format.
@@ -236,7 +249,7 @@ async def call_llm(
 
     errors: list[str] = []
     for idx, provider in enumerate(providers):
-        selected_model = model or provider["model"]
+        selected_model = _resolve_model_for_provider(model, provider)
         payload["model"] = selected_model
 
         try:
@@ -300,7 +313,7 @@ async def call_llm(
 async def call_llm_json(
     prompt: str,
     system_prompt: str = "",
-    model: str | None = None,
+    model: str | dict[str, str] | None = None,
     temperature: float = 0.1,
     max_tokens: int = 4000,
     *,

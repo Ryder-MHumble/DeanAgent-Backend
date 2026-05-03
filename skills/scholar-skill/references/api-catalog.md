@@ -6,7 +6,7 @@
 
 ## 1) 学者列表
 
-### `GET /api/v1/scholars`
+### `GET /api/scholars`
 
 用途：学者主检索接口，适合绝大多数学者问答。
 
@@ -47,12 +47,12 @@
 
 ## 2) 学者统计
 
-### `GET /api/v1/scholars/stats`
+### `GET /api/scholars/stats`
 
 用途：在当前筛选条件下返回统计总览。
 
 参数：
-- 与 `/api/v1/scholars` 基本一致。
+- 与 `/api/scholars` 基本一致。
 
 关键返回字段：
 - `total`
@@ -66,7 +66,7 @@
 
 ## 3) 学者详情
 
-### `GET /api/v1/scholars/{url_hash}`
+### `GET /api/scholars/{url_hash}`
 
 用途：拉取单位学者完整档案。
 
@@ -83,7 +83,7 @@
 
 ## 4) 导师指导学生
 
-### `GET /api/v1/scholars/{url_hash}/students`
+### `GET /api/scholars/{url_hash}/students`
 
 用途：查询指定导师下的指导学生记录。
 

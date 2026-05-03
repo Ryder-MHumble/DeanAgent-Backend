@@ -1,4 +1,4 @@
-"""AMiner API endpoints — /api/v1/aminer/
+"""AMiner API endpoints — /api/aminer/
 
 Endpoints:
   GET  /aminer/organizations                查询机构信息（本地 JSON）

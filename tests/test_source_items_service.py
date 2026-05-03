@@ -103,7 +103,7 @@ async def test_resolve_sources_returns_recommended_endpoint():
     assert result["items"][0]["id"] == "leaders_tsinghua"
     assert (
         result["items"][0]["recommended_endpoint"]
-        == "/api/v1/sources/leaders_tsinghua/items"
+        == "/api/sources/leaders_tsinghua/items"
     )
 
 
@@ -111,7 +111,13 @@ async def test_resolve_sources_returns_recommended_endpoint():
 async def test_resolve_sources_with_exact_source_id():
     with patch(
         "app.services.core.source_service.get_source",
-        new=AsyncMock(return_value={"id": "policy_state_council", "name": "国务院政策", "dimension": "national_policy"}),
+        new=AsyncMock(
+            return_value={
+                "id": "policy_state_council",
+                "name": "国务院政策",
+                "dimension": "national_policy",
+            }
+        ),
     ):
         result = await source_service.resolve_sources(source_id="policy_state_council")
 

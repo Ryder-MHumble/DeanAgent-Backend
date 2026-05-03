@@ -2,9 +2,9 @@
 
 ## 1) 基础路由
 
-- 学生列表：`GET /api/v1/students`
-- 学生筛选项：`GET /api/v1/students/options`
-- 学生详情：`GET /api/v1/students/{student_id}`
+- 学生列表：`GET /api/students`
+- 学生筛选项：`GET /api/students/options`
+- 学生详情：`GET /api/students/{student_id}`
 
 ## 2) 常见意图到参数
 
@@ -32,7 +32,7 @@
 
 3. 若用户只说“看某个学生详情”：
 - 先查 `/students?name=...` 或 `/students?student_no=...`
-- 唯一命中后再补 `GET /api/v1/students/{student_id}`
+- 唯一命中后再补 `GET /api/students/{student_id}`
 
 4. 若用户问“有哪些导师/学校/年级可以选”：
 - 直接查 `/students/options`
@@ -44,21 +44,21 @@
 用户 query：`看一下 2024 级清华的学生信息`
 
 参数：
-- `GET /api/v1/students?institution=清华大学&enrollment_year=2024&page=1&page_size=20`
+- `GET /api/students?institution=清华大学&enrollment_year=2024&page=1&page_size=20`
 
 ### 示例 B：某导师的学生
 
 用户 query：`帮我找导师叫张三的学生`
 
 参数：
-- `GET /api/v1/students?mentor_name=张三&page=1&page_size=20`
+- `GET /api/students?mentor_name=张三&page=1&page_size=20`
 
 ### 示例 C：毕业状态学生
 
 用户 query：`我想看毕业状态的学生名单`
 
 参数：
-- `GET /api/v1/students?status=毕业&page=1&page_size=20`
+- `GET /api/students?status=毕业&page=1&page_size=20`
 
 ## 5) 额外需求识别（支持度判定）
 

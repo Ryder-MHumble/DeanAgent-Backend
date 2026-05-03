@@ -1,0 +1,84 @@
+dimension: "paper"
+dimension_name: "论文信源"
+description: "论文期刊与聚合类作者信号源，用于人才候选论文维度挖掘。"
+
+default_keyword_filter: []
+default_keyword_blacklist: []
+
+paper_defaults: &paper_defaults
+  crawl_method: "static"
+  schedule: "daily"
+  priority: 1
+  is_enabled: false
+  crawler_class: "paper_author_source"
+  entity_family: "paper_author"
+  fallback_mode: "evidence_only"
+  persist_to_db: false
+  request_timeout: 10
+  max_retries: 1
+  request_delay: 0.1
+
+sources:
+  - <<: *paper_defaults
+    id: "dblp_author"
+    name: "DBLP Author"
+    group: "paper_journals"
+    url: "https://dblp.org/search/publ/api"
+    capture_mode: "structured"
+    sheet_name: "DBLP"
+    tracks: ["ICML", "ICLR", "NeurIPS", "AAAI", "ACL", "EMNLP", "CVPR", "ICCV", "ECCV"]
+    requires_auth: false
+    adapter_key: "talent_signal_json"
+    local_results_path: "data/subagent_crawls/papers_2024_2025.json"
+    local_source_id_prefixes: ["dblp_"]
+    max_results: 80
+    seed_urls:
+      - "https://dblp.org/search/publ/api"
+    tags: ["paper", "journal", "dblp"]
+
+  - <<: *paper_defaults
+    id: "arxiv_author"
+    name: "arXiv Author"
+    group: "paper_journals"
+    url: "https://export.arxiv.org/api/query"
+    capture_mode: "structured"
+    sheet_name: "arXiv"
+    tracks: ["ICML", "ICLR", "NeurIPS", "AAAI", "ACL", "EMNLP", "CVPR", "ICCV", "ECCV"]
+    requires_auth: false
+    adapter_key: "arxiv_atom"
+    search_query: "cat:cs.AI OR cat:cs.LG"
+    max_results: 8
+    seed_urls:
+      - "https://export.arxiv.org/api/query"
+    tags: ["paper", "journal", "arxiv"]
+
+  - <<: *paper_defaults
+    id: "semantic_scholar_author"
+    name: "Semantic Scholar Author"
+    group: "paper_journals"
+    url: "https://api.semanticscholar.org/graph/v1/paper/search"
+    capture_mode: "structured"
+    sheet_name: "SemanticScholar"
+    tracks: ["ICML", "ICLR", "NeurIPS", "AAAI", "ACL", "EMNLP", "CVPR", "ICCV", "ECCV"]
+    requires_auth: false
+    adapter_key: "semantic_scholar"
+    search_query: "machine learning"
+    max_results: 8
+    seed_urls:
+      - "https://api.semanticscholar.org/graph/v1/paper/search"
+    tags: ["paper", "journal", "semantic_scholar"]
+
+  - <<: *paper_defaults
+    id: "academic_paper_authors"
+    name: "Academic Paper Authors"
+    group: "paper_journals"
+    url: "excellent_20260425/academic_papers/results.json"
+    capture_mode: "structured"
+    sheet_name: "AcademicAuthors"
+    tracks: ["foundation_models", "llm", "agents"]
+    requires_auth: false
+    adapter_key: "author_aggregate_json"
+    local_results_path: "excellent_20260425/academic_papers/results.json"
+    seed_urls:
+      - "excellent_20260425/academic_papers/results.json"
+    tags: ["paper", "journal", "academic_papers"]

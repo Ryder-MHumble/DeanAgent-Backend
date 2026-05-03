@@ -40,6 +40,29 @@ async def save_crawl_result_json(
     if source_config.get("persist_to_db") is False:
         return {"upserted": 0, "new": 0, "deduped_in_batch": 0}
 
+    entity_family = str(source_config.get("entity_family") or "").strip().lower()
+    if entity_family == "paper_record":
+        try:
+            from app.db.pool import get_pool  # noqa: PLC0415
+            from app.services import paper_service  # noqa: PLC0415
+
+            summary = await paper_service.ingest_crawl_result(
+                get_pool(),
+                result,
+                source_config,
+            )
+            return {
+                "upserted": summary.inserted_count + summary.updated_count,
+                "new": summary.inserted_count,
+                "deduped_in_batch": summary.skipped_count + summary.filtered_chinese_count,
+            }
+        except RuntimeError:
+            logger.warning("DB pool not initialized; skip persisting paper source %s", source_config.get("id"))
+            return {"upserted": 0, "new": 0, "deduped_in_batch": 0}
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("Paper ingest failed for %s: %s", source_config.get("id"), exc)
+            return {"upserted": 0, "new": 0, "deduped_in_batch": 0}
+
     all_items = getattr(result, "items_all", None) or result.items
     if not all_items:
         return {"upserted": 0, "new": 0, "deduped_in_batch": 0}

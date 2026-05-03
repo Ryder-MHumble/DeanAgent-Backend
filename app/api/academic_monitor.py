@@ -1,6 +1,7 @@
 """Compatibility APIs for academic-monitor student paper workflows.
 
-These endpoints are mounted under `/academic-monitor/api/v1` so the
+These endpoints are mounted under `/academic-monitor/api` and the legacy
+`/academic-monitor/api/v1` prefix so the
 Scholars-System frontend can rely on this backend only.
 """
 from __future__ import annotations

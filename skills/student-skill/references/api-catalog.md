@@ -6,7 +6,7 @@
 
 ## 1) 学生列表
 
-### `GET /api/v1/students`
+### `GET /api/students`
 
 用途：学生主检索接口。
 
@@ -35,7 +35,7 @@
 
 ## 2) 学生筛选项
 
-### `GET /api/v1/students/options`
+### `GET /api/students/options`
 
 用途：返回当前在库可用的筛选项。
 
@@ -49,7 +49,7 @@
 
 ## 3) 学生详情
 
-### `GET /api/v1/students/{student_id}`
+### `GET /api/students/{student_id}`
 
 用途：拉取单个学生完整记录。
 
@@ -71,5 +71,5 @@
 ## 5) 能力边界提示（对外说明）
 
 - 当前学生接口不提供外部 `sourceUrl` 字段。
-- 若需要可点击追溯，可使用内部记录链接 `/api/v1/students/{student_id}`，但必须说明这不是外部原始信源。
+- 若需要可点击追溯，可使用内部记录链接 `/api/students/{student_id}`，但必须说明这不是外部原始信源。
 - 若接口返回 `5xx`、超时或非法请求错误，应明确说明“当前接口暂时不可用”，不要伪造成“未命中”。
