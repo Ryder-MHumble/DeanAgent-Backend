@@ -1,6 +1,6 @@
 dimension: "paper"
 dimension_name: "论文主数据"
-description: "顶会论文主表信源，面向平台级论文仓。默认抓取近三年口径，不限 topic，但部分 venue 保留 track 口径。"
+description: "AI 顶刊顶会论文主表信源，面向平台级论文仓。默认抓取近三年口径，不限 topic，但部分 venue 保留 track 口径。"
 
 default_keyword_filter: []
 default_keyword_blacklist: []
@@ -17,7 +17,115 @@ paper_defaults: &paper_defaults
   request_delay: 0.2
   group: "paper_warehouse"
 
+enrichment_profiles:
+  openreview_profile: &enrich_openreview_profile
+    primary_methods: ["openreview_note", "openreview_profile", "openalex"]
+    fallback_methods: ["arxiv_by_id"]
+    fields: ["authors", "abstract", "affiliations", "author_descriptions", "author_experiences", "profile_flags"]
+    qps:
+      openreview: 0.8
+      openalex: 3.0
+    notes: "OpenReview profile 是机构和作者画像主路径；剩余缺口多为 profile 自身缺字段。"
+  cvf_pdf: &enrich_cvf_pdf
+    primary_methods: ["official_html", "openalex"]
+    fallback_methods: ["pdf_first_page", "arxiv_by_id"]
+    fields: ["authors", "abstract", "affiliations", "doi", "arxiv_id"]
+    qps:
+      html_per_host: 0.5
+      pdf_per_host: 0.15
+      openalex: 3.0
+    notes: "CVF HTML 补作者/摘要/arXiv；机构主要靠 OpenAlex 和 PDF 首页兜底。"
+  acl_pdf: &enrich_acl_pdf
+    primary_methods: ["official_html"]
+    fallback_methods: ["pdf_first_page", "openalex"]
+    fields: ["authors", "abstract", "affiliations", "doi"]
+    qps:
+      html_per_host: 0.5
+      pdf_per_host: 0.15
+      openalex: 3.0
+    notes: "ACL Anthology HTML 补作者/摘要/DOI/PDF；机构主要靠 PDF 首页。"
+  proceedings_pdf: &enrich_proceedings_pdf
+    primary_methods: ["official_html", "openalex"]
+    fallback_methods: ["pdf_first_page", "arxiv_by_id"]
+    fields: ["authors", "abstract", "affiliations", "doi", "arxiv_id"]
+    qps:
+      html_per_host: 0.5
+      pdf_per_host: 0.15
+      openalex: 3.0
+    notes: "会议官网详情页补基础元数据；机构缺口用 PDF 首页兜底。"
+  ojs_openalex: &enrich_ojs_openalex
+    primary_methods: ["official_html", "openalex"]
+    fallback_methods: ["pdf_first_page"]
+    fields: ["authors", "abstract", "affiliations", "doi"]
+    qps:
+      html_per_host: 0.3
+      pdf_per_host: 0.15
+      openalex: 3.0
+    notes: "OJS 页面较敏感，HTML/PDF 低速；AAAI 机构已接近满覆盖。"
+  journal_pdf: &enrich_journal_pdf
+    primary_methods: ["official_html", "openalex"]
+    fallback_methods: ["pdf_first_page"]
+    fields: ["authors", "abstract", "affiliations", "doi"]
+    qps:
+      html_per_host: 0.3
+      pdf_per_host: 0.1
+      openalex: 3.0
+    notes: "期刊 PDF 首页通常可补机构；JAIR 部分 PDF URL 返回 HTML 包装页，需单独适配下载链接。"
+
 sources:
+  - <<: *paper_defaults
+    id: "jmlr"
+    name: "JMLR Papers"
+    source_type: "raw_official"
+    crawler_class: "jmlr_papers"
+    venue: "JMLR"
+    venue_full: "Journal of Machine Learning Research"
+    track_label: "Journal Article"
+    year_configs:
+      - year: 2023
+        volume: 24
+      - year: 2024
+        volume: 25
+      - year: 2025
+        volume: 26
+    tags: ["paper", "warehouse", "jmlr", "journal", "ml"]
+    enrichment: *enrich_journal_pdf
+
+  - <<: *paper_defaults
+    id: "jair"
+    name: "JAIR Papers"
+    source_type: "raw_official"
+    crawler_class: "jair_oai"
+    venue: "JAIR"
+    venue_full: "Journal of Artificial Intelligence Research"
+    track_label: "Journal Article"
+    oai_url: "https://www.jair.org/index.php/jair/oai"
+    request_delay: 0.5
+    year_configs:
+      - year: 2023
+      - year: 2024
+      - year: 2025
+    tags: ["paper", "warehouse", "jair", "journal", "ai"]
+    enrichment: *enrich_journal_pdf
+
+  - <<: *paper_defaults
+    id: "tmlr"
+    name: "TMLR Papers"
+    source_type: "official_api"
+    crawler_class: "openreview_journal"
+    venue: "TMLR"
+    venue_full: "Transactions on Machine Learning Research"
+    track_label: "Journal Article"
+    venue_id: "TMLR"
+    page_size: 1000
+    request_delay: 0.6
+    year_configs:
+      - year: 2023
+      - year: 2024
+      - year: 2025
+    tags: ["paper", "warehouse", "tmlr", "journal", "openreview", "ml"]
+    enrichment: *enrich_openreview_profile
+
   - <<: *paper_defaults
     id: "acl_long"
     name: "ACL Long Papers"
@@ -33,6 +141,7 @@ sources:
       - year: 2024
       - year: 2025
     tags: ["paper", "warehouse", "acl", "nlp"]
+    enrichment: *enrich_acl_pdf
 
   - <<: *paper_defaults
     id: "acl_short"
@@ -49,6 +158,7 @@ sources:
       - year: 2024
       - year: 2025
     tags: ["paper", "warehouse", "acl", "nlp"]
+    enrichment: *enrich_acl_pdf
 
   - <<: *paper_defaults
     id: "iclr"
@@ -67,6 +177,32 @@ sources:
       - year: 2025
         venue_id: "ICLR.cc/2025/Conference"
     tags: ["paper", "warehouse", "iclr", "openreview"]
+    enrichment: *enrich_openreview_profile
+
+  - <<: *paper_defaults
+    id: "icml"
+    name: "ICML Papers"
+    source_type: "official_api"
+    crawler_class: "openreview"
+    venue: "ICML"
+    venue_full: "International Conference on Machine Learning"
+    track_label: "Main Conference"
+    is_main_track: true
+    is_workshop: false
+    page_size: 1000
+    year_configs:
+      - year: 2023
+        venue_id: "ICML.cc/2023/Conference"
+      - year: 2024
+        venue_id: "ICML.cc/2024/Conference"
+      - year: 2025
+        venue_id: "ICML.cc/2025/Conference"
+      - year: 2026
+        venue_id: "ICML.cc/2026/Conference"
+        source_format: "icml_virtual"
+        data_url: "https://icml.cc/static/virtual/data/icml-2026-orals-posters.json"
+    tags: ["paper", "warehouse", "icml", "openreview"]
+    enrichment: *enrich_openreview_profile
 
   - <<: *paper_defaults
     id: "neurips"
@@ -83,6 +219,7 @@ sources:
       - year: 2023
       - year: 2024
     tags: ["paper", "warehouse", "neurips"]
+    enrichment: *enrich_proceedings_pdf
 
   - <<: *paper_defaults
     id: "cvpr"
@@ -99,6 +236,41 @@ sources:
       - year: 2024
       - year: 2025
     tags: ["paper", "warehouse", "cvpr", "cvf"]
+    enrichment: *enrich_cvf_pdf
+
+  - <<: *paper_defaults
+    id: "iccv"
+    name: "ICCV Papers"
+    source_type: "raw_official"
+    crawler_class: "cvf_openaccess"
+    venue: "ICCV"
+    venue_full: "IEEE/CVF International Conference on Computer Vision"
+    track_label: "Main Conference"
+    is_main_track: true
+    is_workshop: false
+    year_configs:
+      - year: 2023
+      - year: 2025
+    tags: ["paper", "warehouse", "iccv", "cvf"]
+    enrichment: *enrich_cvf_pdf
+
+  - <<: *paper_defaults
+    id: "emnlp_main"
+    name: "EMNLP Main Papers"
+    source_type: "raw_official"
+    crawler_class: "aclanthology"
+    venue: "EMNLP"
+    venue_full: "Conference on Empirical Methods in Natural Language Processing"
+    track: "emnlp-main"
+    track_label: "Main Conference"
+    is_main_track: true
+    is_workshop: false
+    year_configs:
+      - year: 2023
+      - year: 2024
+      - year: 2025
+    tags: ["paper", "warehouse", "emnlp", "nlp"]
+    enrichment: *enrich_acl_pdf
 
   - <<: *paper_defaults
     id: "eccv"
@@ -115,6 +287,7 @@ sources:
       - year: 2022
       - year: 2024
     tags: ["paper", "warehouse", "eccv", "ecva"]
+    enrichment: *enrich_proceedings_pdf
 
   - <<: *paper_defaults
     id: "ijcai"
@@ -132,6 +305,7 @@ sources:
       - year: 2024
       - year: 2025
     tags: ["paper", "warehouse", "ijcai"]
+    enrichment: *enrich_proceedings_pdf
 
   - <<: *paper_defaults
     id: "aaai"
@@ -154,3 +328,4 @@ sources:
         issue_ids: [683, 684, 685, 686, 687, 688, 689, 690, 691, 692, 693, 694, 695, 696, 697, 698, 699, 700, 701, 702, 703, 704, 705, 707, 708, 709, 710, 711, 712, 713, 714, 715, 716, 717, 718, 719, 720, 721, 722, 723, 724, 725, 726, 727, 728, 729, 732, 733]
         fetch_affiliations: true
     tags: ["paper", "warehouse", "aaai"]
+    enrichment: *enrich_ojs_openalex

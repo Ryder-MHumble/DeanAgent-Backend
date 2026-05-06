@@ -23,8 +23,10 @@ import json
 import logging
 import sys
 from datetime import datetime, timezone
+from html import unescape
 from pathlib import Path
 from typing import Any
+from urllib.parse import parse_qs, urljoin, urlparse
 
 try:
     from app.crawlers.base import BaseCrawler, CrawledItem
@@ -87,6 +89,9 @@ class OpenReviewCrawler(BaseCrawler):
         return [self.config]
 
     async def _fetch_single_year(self, cfg: dict[str, Any]) -> list[CrawledItem]:
+        if cfg.get("source_format") == "icml_virtual":
+            return await self._fetch_icml_virtual_year(cfg)
+
         venue: str = cfg["venue"]
         year: int = int(cfg["year"])
         venue_id: str = cfg["venue_id"]
@@ -134,6 +139,152 @@ class OpenReviewCrawler(BaseCrawler):
                 logger.warning(f"  ⚠️ parse note {note.get('id')}: {e}")
 
         return items
+
+    async def _fetch_icml_virtual_year(self, cfg: dict[str, Any]) -> list[CrawledItem]:
+        venue: str = cfg["venue"]
+        year: int = int(cfg["year"])
+        data_url = str(cfg["data_url"])
+        track_label: str = cfg.get("track_label", "Main Conference")
+
+        raw = await fetch_page(data_url, timeout=60.0, max_retries=4)
+        data = json.loads(raw)
+        records = data.get("results", []) if isinstance(data, dict) else data
+        if not isinstance(records, list):
+            return []
+
+        if cfg.get("max_items"):
+            records = records[: int(cfg["max_items"])]
+
+        now = datetime.now(timezone.utc)
+        items: list[CrawledItem] = []
+        for record in records:
+            if not isinstance(record, dict):
+                continue
+            item = self._icml_virtual_record_to_item(
+                record,
+                venue=venue,
+                year=year,
+                track_label=track_label,
+                now=now,
+                cfg=cfg,
+            )
+            if item:
+                items.append(item)
+        logger.info(f"[{self.source_id}] fetched {len(items)} ICML virtual records for {year}")
+        return items
+
+    @staticmethod
+    def _icml_virtual_record_to_item(
+        record: dict[str, Any],
+        *,
+        venue: str,
+        year: int,
+        track_label: str,
+        now: datetime,
+        cfg: dict[str, Any],
+    ) -> CrawledItem | None:
+        title = OpenReviewCrawler._clean_virtual_text(record.get("name"))
+        if not title:
+            return None
+
+        openreview_url = OpenReviewCrawler._clean_virtual_text(record.get("paper_url")) or None
+        openreview_id = OpenReviewCrawler._openreview_id_from_url(openreview_url)
+        event_id = OpenReviewCrawler._clean_virtual_text(record.get("id"))
+        raw_id = openreview_id or event_id
+        paper_id = f"openreview:{openreview_id}" if openreview_id else f"icml_virtual:{year}:{event_id}"
+
+        virtual_path = OpenReviewCrawler._clean_virtual_text(record.get("virtualsite_url"))
+        detail_url = urljoin("https://icml.cc", virtual_path) if virtual_path else openreview_url
+        pdf_url = OpenReviewCrawler._clean_virtual_text(record.get("paper_pdf_url")) or None
+        if pdf_url:
+            pdf_url = urljoin("https://icml.cc", pdf_url)
+
+        authors_data = []
+        authors = record.get("authors") if isinstance(record.get("authors"), list) else []
+        for idx, author in enumerate(authors, start=1):
+            if not isinstance(author, dict):
+                continue
+            name = OpenReviewCrawler._clean_virtual_text(author.get("fullname"))
+            if not name:
+                continue
+            author_url = OpenReviewCrawler._clean_virtual_text(author.get("url")) or None
+            if author_url:
+                author_url = urljoin("https://icml.cc", author_url)
+            authors_data.append(
+                {
+                    "paper_id": paper_id,
+                    "author_order": idx,
+                    "name_raw": name,
+                    "name_normalized": name,
+                    "source_author_id": OpenReviewCrawler._clean_virtual_text(author.get("id")) or None,
+                    "author_url": author_url,
+                    "affiliation": OpenReviewCrawler._clean_virtual_text(author.get("institution")) or None,
+                    "affiliation_country": None,
+                    "email": None,
+                    "orcid": None,
+                    "scraped_at": now.isoformat(),
+                    "schema_version": "1.0",
+                }
+            )
+
+        keywords = record.get("keywords") if isinstance(record.get("keywords"), list) else []
+        event_type = (
+            OpenReviewCrawler._clean_virtual_text(record.get("event_type"))
+            or OpenReviewCrawler._clean_virtual_text(record.get("eventtype"))
+            or None
+        )
+        paper_data = {
+            "paper_id": paper_id,
+            "source": "icml_virtual",
+            "raw_id": raw_id,
+            "venue": venue,
+            "venue_full": cfg.get("venue_full"),
+            "year": year,
+            "track": track_label,
+            "is_main_track": cfg.get("is_main_track", True),
+            "is_workshop": cfg.get("is_workshop", False),
+            "title": title,
+            "abstract": OpenReviewCrawler._clean_virtual_text(record.get("abstract")) or None,
+            "n_authors": len(authors_data),
+            "url": detail_url,
+            "pdf_url": pdf_url,
+            "doi": None,
+            "arxiv_id": None,
+            "scraped_at": now.isoformat(),
+            "schema_version": "1.0",
+        }
+
+        return CrawledItem(
+            title=title,
+            url=detail_url or openreview_url or "",
+            published_at=datetime(year, 5, 5, tzinfo=timezone.utc),
+            author=authors_data[0]["name_normalized"] if authors_data else None,
+            source_id=cfg["id"],
+            dimension=cfg.get("dimension", "academic_venues"),
+            tags=[venue, str(year), track_label]
+            + ([event_type] if event_type else [])
+            + [str(item) for item in keywords if str(item).strip()],
+            extra={
+                "paper": paper_data,
+                "authors": authors_data,
+                "event_type": event_type,
+                "openreview_url": openreview_url,
+            },
+        )
+
+    @staticmethod
+    def _clean_virtual_text(value: Any) -> str:
+        return " ".join(unescape(str(value or "")).replace("\x00", " ").split()).strip()
+
+    @staticmethod
+    def _openreview_id_from_url(url: str | None) -> str | None:
+        if not url:
+            return None
+        parsed = urlparse(url)
+        if "openreview.net" not in parsed.netloc:
+            return None
+        note_id = (parse_qs(parsed.query).get("id") or [""])[0].strip()
+        return note_id or None
 
     @staticmethod
     def _note_to_item(

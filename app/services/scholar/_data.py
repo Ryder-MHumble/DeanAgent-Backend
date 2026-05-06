@@ -56,6 +56,7 @@ async def _load_all_raw_async() -> list[dict[str, Any]]:
             res = await (
                 client.table("scholars")
                 .select("*")
+                .order("id")
                 .range(offset, offset + batch_size - 1)
                 .execute()
             )

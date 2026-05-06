@@ -35,6 +35,7 @@ logs/
 
 # Playwright MCP
 .playwright-mcp/
+.playwright-cli
 .playwright-cli/
 
 # Crawled data output

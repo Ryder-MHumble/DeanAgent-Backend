@@ -753,6 +753,7 @@ class ScholarListItem(BaseModel):
     custom_fields: dict[str, Any] = Field(default_factory=dict, description="用户自定义字段")
     achievement_tags: list[str] = Field(default_factory=list)
     representative_publications: list[PublicationRecord] = Field(default_factory=list)
+    patents: list[PatentRecord] = Field(default_factory=list)
     awards: list[AwardRecord] = Field(default_factory=list)
     is_potential_recruit: bool = False
     is_advisor_committee: bool = False

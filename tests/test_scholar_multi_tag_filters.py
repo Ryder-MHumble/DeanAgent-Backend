@@ -19,6 +19,11 @@ def _run_filters(items, **overrides):
         "event_types": None,
         "participated_event_id": None,
         "is_cobuild_scholar": None,
+        "is_chinese": None,
+        "is_current_student": None,
+        "chinese_identity": None,
+        "achievement_tag": None,
+        "achievement_tags": None,
         "region": None,
         "affiliation_type": None,
         "institution_names": None,
@@ -128,3 +133,30 @@ def test_affiliation_type_company_alias_matches_enterprise():
 
     company = _run_filters(items, affiliation_type="公司", inst_map=inst_map)
     assert [i["name"] for i in company] == ["A"]
+
+
+def test_multi_achievement_tags_support_venue_year_tokens():
+    items = [
+        {
+            "name": "A",
+            "achievement_tags": [],
+            "representative_publications": [{"venue": "ICML", "year": 2025}],
+            "awards": [],
+        },
+        {
+            "name": "B",
+            "achievement_tags": [],
+            "representative_publications": [{"venue": "ICML", "year": 2023}],
+            "awards": [],
+        },
+        {
+            "name": "C",
+            "achievement_tags": [],
+            "representative_publications": [{"venue": "CVPR", "year": 2025}],
+            "awards": [],
+        },
+    ]
+
+    filtered = _run_filters(items, achievement_tags="ICML:2025")
+
+    assert [i["name"] for i in filtered] == ["A"]

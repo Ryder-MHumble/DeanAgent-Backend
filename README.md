@@ -48,71 +48,19 @@ uvicorn app.main:app --reload
 
 新增一套独立的 `papers` 全局论文主数据仓，用于统一沉淀多论文爬虫任务产生的论文客体数据，不直接替换现有 `student_publications` / `publications` / `publication_candidates` 业务链路。
 
-- 主表字段聚焦：`doi`、`title`、`abstract`、`publication_date`、`authors`、`affiliations`、`source`
-- `authors` 为字符串数组
-- `affiliations` 为作者机构映射数组：`[{author_order, author_name, affiliation}]`
-- `source` 对外返回结构化对象：`{type, name, source_id}`
-- 中文论文过滤规则固定为：标题含中文字符即丢弃
-- 新仓不写入 `articles`，`paper_author_source` 现有作者信号链路保持不变
+README 只作为入口索引，详细信息分散到独立文档：
 
-论文仓默认信源配置见 [sources/paper/top_conference_papers.yaml](sources/paper/top_conference_papers.yaml)。当前按 venue 聚合后的 source id 为：
+- 数据模型、去重、API、回填入口：[docs/paper_warehouse.md](docs/paper_warehouse.md)
+- 顶刊顶会信源、爬虫方式、年份口径、字段覆盖率：[docs/paper_source_crawlers.md](docs/paper_source_crawlers.md)
+- 字段补全方法与限流：[docs/paper-enrichment-source-method-matrix-20260503.md](docs/paper-enrichment-source-method-matrix-20260503.md)
+- 作者画像补全状态：[docs/paper-author-enrichment-status-report-20260430.md](docs/paper-author-enrichment-status-report-20260430.md)
 
-- `acl_long`
-- `acl_short`
-- `iclr`
-- `neurips`
-- `cvpr`
-- `eccv`
-- `ijcai`
-- `aaai`
+核心代码与配置：
 
-当前默认抓取窗口：
-
-- ACL：2024-2025（Long / Short）
-- ICLR：2024-2025（Main Conference）
-- NeurIPS：2022-2024
-- CVPR：2023-2025（Main Conference）
-- ECCV：2022、2024
-- IJCAI：2023-2025（Main Track）
-- AAAI：2024-2026
-
-原始 parser 已验证的可扩展年份范围：
-
-- ACL：2024-2025（Long / Short）
-- ICLR：2023-2025
-- NeurIPS：2021-2025
-- CVPR：2022-2025
-- ECCV：2022、2024
-- IJCAI：2023-2025
-- AAAI：2022-2026
-
-说明：
-
-- 没有 topic 关键词过滤
-- 但部分 venue 仍保留 track 口径，例如 ACL 目前只开 Long / Short，IJCAI 目前只开 Main Track，CVPR 目前不含 Workshop
-- ICLR 官方 API 对 `ICLR.cc/2023/Conference` 当前返回 `0` 条，因此默认窗口暂时落在 `2024-2025`
-- NeurIPS 官方 `papers.nips.cc/paper_files/paper/2025` 当前返回 `404`，因此默认窗口暂时落在 `2022-2024`
-- AAAI 默认走 issue 页批量抓取，不在主回填里抓 detail 页机构补全，因此 `affiliations` 字段允许为空
-
-数据库迁移 SQL 见 [scripts/sql/20260429_create_paper_warehouse.sql](scripts/sql/20260429_create_paper_warehouse.sql)。
-
-一次性回填脚本：
-
-```bash
-.venv/bin/python scripts/crawl/backfill_papers.py --dry-run
-.venv/bin/python scripts/crawl/backfill_papers.py --source cvpr
-.venv/bin/python scripts/crawl/backfill_papers.py --source aaai
-```
-
-API 入口：
-
-- `GET /api/papers`
-- `GET /api/papers/{paper_id}`
-- `GET /api/papers/sources`
-- `POST /api/papers/sources/{source_id}/crawl`
-- `GET /api/papers/import-runs`
-
-详细说明见 [docs/paper_warehouse.md](docs/paper_warehouse.md)。
+- 信源配置：[sources/paper/top_conference_papers.yaml](sources/paper/top_conference_papers.yaml)
+- 服务层：[app/services/paper_service.py](app/services/paper_service.py)
+- API：[app/api/academic/papers.py](app/api/academic/papers.py)
+- 回填脚本：[scripts/crawl/backfill_papers.py](scripts/crawl/backfill_papers.py)
 
 ---
 

@@ -90,6 +90,11 @@ TAG_METADATA = [
         "支持列表、搜索、聚合统计和详情（含帖子热门回复）。",
     },
     {
+        "name": "dingtalk-calendar",
+        "description": "钉钉日程 — 通过 DingTalk Workspace CLI 实时读取当前登录账号可访问的"
+        "日程列表与详情。",
+    },
+    {
         "name": "venues",
         "description": "学术社群 — AI 领域顶会与期刊知识库。"
         "维护顶会（AAAI/NeurIPS/CVPR 等）和期刊（Nature/TPAMI/JMLR 等）的级别、"

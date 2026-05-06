@@ -39,18 +39,27 @@ def _counter_key(value: Any) -> str:
     return "unknown"
 
 
-async def backfill(dsn: str, *, dry_run: bool = False) -> dict[str, Any]:
-    conn = await asyncpg.connect(dsn)
-    try:
-        rows = await conn.fetch(
-            """
+def _select_sql(*, icml_2026_only: bool = False) -> str:
+    where = "WHERE custom_fields ? 'icml_2026_import'" if icml_2026_only else ""
+    return f"""
             SELECT
               id, name, name_en, university, department, position, bio,
               custom_fields
             FROM scholars
+            {where}
             ORDER BY id
-            """,
-        )
+            """
+
+
+async def backfill(
+    dsn: str,
+    *,
+    dry_run: bool = False,
+    icml_2026_only: bool = False,
+) -> dict[str, Any]:
+    conn = await asyncpg.connect(dsn)
+    try:
+        rows = await conn.fetch(_select_sql(icml_2026_only=icml_2026_only))
 
         stats: Counter[str] = Counter()
         updates: list[tuple[str, str]] = []
@@ -69,7 +78,11 @@ async def backfill(dsn: str, *, dry_run: bool = False) -> dict[str, Any]:
                 updates,
             )
 
-        return {"total": len(rows), **dict(sorted(stats.items()))}
+        return {
+            "scope": "icml_2026" if icml_2026_only else "all",
+            "total": len(rows),
+            **dict(sorted(stats.items())),
+        }
     finally:
         await conn.close()
 
@@ -78,9 +91,20 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--dsn", default=os.environ.get("DATABASE_URL", DEFAULT_DSN))
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument(
+        "--icml-2026-only",
+        action="store_true",
+        help="Only classify scholars carrying custom_fields.icml_2026_import.",
+    )
     args = parser.parse_args()
 
-    result = asyncio.run(backfill(args.dsn, dry_run=args.dry_run))
+    result = asyncio.run(
+        backfill(
+            args.dsn,
+            dry_run=args.dry_run,
+            icml_2026_only=args.icml_2026_only,
+        )
+    )
     mode = "DRY RUN" if args.dry_run else "UPDATED"
     print(f"{mode}: {json.dumps(result, ensure_ascii=False, sort_keys=True)}")
 

@@ -47,7 +47,7 @@ class PaperIngestSummary:
 
 
 def _clean_text(value: Any) -> str:
-    return str(value or "").strip()
+    return str(value or "").replace("\x00", "").strip()
 
 
 @asynccontextmanager
@@ -223,11 +223,28 @@ def _choose_better_affiliations(
 
 
 def normalize_payload(payload: PaperIngestPayload | dict[str, Any]) -> PaperIngestPayload:
-    model = payload if isinstance(payload, PaperIngestPayload) else PaperIngestPayload.model_validate(payload)
+    if isinstance(payload, PaperIngestPayload):
+        model = payload
+    else:
+        model = PaperIngestPayload.model_validate(payload)
     model.doi = _normalize_doi(model.doi)
     model.title = _clean_text(model.title)
+    model.abstract = _clean_text(model.abstract) or None
     model.authors = _normalize_authors(model.authors)
     model.affiliations = _normalize_affiliations(model.affiliations)
+    model.raw_id = _clean_text(model.raw_id) or None
+    model.detail_url = _clean_text(model.detail_url) or None
+    model.pdf_url = _clean_text(model.pdf_url) or None
+    model.venue = _clean_text(model.venue) or None
+    model.track = _clean_text(model.track) or None
+    model.source.type = _clean_text(model.source.type)
+    model.source.name = _clean_text(model.source.name)
+    model.source.source_id = _clean_text(model.source.source_id)
+    model.source.raw_id = _clean_text(model.source.raw_id) or None
+    model.source.detail_url = _clean_text(model.source.detail_url) or None
+    model.source.pdf_url = _clean_text(model.source.pdf_url) or None
+    model.source.venue = _clean_text(model.source.venue) or None
+    model.source.track = _clean_text(model.source.track) or None
     if model.publication_date:
         model.publication_date = _to_iso(model.publication_date)
     return model
@@ -283,8 +300,13 @@ async def ensure_paper_tables(pool: asyncpg.Pool) -> None:
             await conn.execute("ALTER TABLE papers ADD COLUMN IF NOT EXISTS venue TEXT")
             await conn.execute("ALTER TABLE papers ADD COLUMN IF NOT EXISTS venue_year INTEGER")
             await conn.execute("ALTER TABLE papers ADD COLUMN IF NOT EXISTS track TEXT")
-            await conn.execute("ALTER TABLE papers ADD COLUMN IF NOT EXISTS created_at TIMESTAMPTZ NOT NULL DEFAULT now()")
-            await conn.execute("ALTER TABLE papers ADD COLUMN IF NOT EXISTS ingested_at TIMESTAMPTZ")
+            await conn.execute(
+                "ALTER TABLE papers ADD COLUMN IF NOT EXISTS "
+                "created_at TIMESTAMPTZ NOT NULL DEFAULT now()"
+            )
+            await conn.execute(
+                "ALTER TABLE papers ADD COLUMN IF NOT EXISTS ingested_at TIMESTAMPTZ"
+            )
             await conn.execute("DROP INDEX IF EXISTS idx_papers_canonical_uid")
             await conn.execute("DROP INDEX IF EXISTS idx_papers_paper_id")
             await conn.execute(
@@ -306,7 +328,17 @@ async def ensure_paper_tables(pool: asyncpg.Pool) -> None:
                         NULLIF(canonical_uid, ''),
                         CASE
                             WHEN COALESCE(doi, '') <> '' THEN
-                                'doi:' || lower(replace(replace(replace(doi, 'https://doi.org/', ''), 'http://doi.org/', ''), 'doi:', ''))
+                                'doi:' || lower(
+                                    replace(
+                                        replace(
+                                            replace(doi, 'https://doi.org/', ''),
+                                            'http://doi.org/',
+                                            ''
+                                        ),
+                                        'doi:',
+                                        ''
+                                    )
+                                )
                             WHEN COALESCE(source_id, '') <> '' AND COALESCE(raw_id, '') <> '' THEN
                                 'source:' || source_id || ':' || raw_id
                             ELSE
@@ -342,7 +374,10 @@ async def ensure_paper_tables(pool: asyncpg.Pool) -> None:
                             ctid,
                             row_number() OVER (
                                 PARTITION BY paper_id
-                                ORDER BY updated_at DESC NULLS LAST, created_at DESC NULLS LAST, ctid DESC
+                                ORDER BY
+                                    updated_at DESC NULLS LAST,
+                                    created_at DESC NULLS LAST,
+                                    ctid DESC
                             ) AS rn
                         FROM papers
                         WHERE COALESCE(paper_id, '') <> ''
@@ -361,7 +396,10 @@ async def ensure_paper_tables(pool: asyncpg.Pool) -> None:
                             ctid,
                             row_number() OVER (
                                 PARTITION BY canonical_uid
-                                ORDER BY updated_at DESC NULLS LAST, created_at DESC NULLS LAST, ctid DESC
+                                ORDER BY
+                                    updated_at DESC NULLS LAST,
+                                    created_at DESC NULLS LAST,
+                                    ctid DESC
                             ) AS rn
                         FROM papers
                         WHERE COALESCE(canonical_uid, '') <> ''
@@ -385,7 +423,8 @@ async def ensure_paper_tables(pool: asyncpg.Pool) -> None:
                 """
             )
             await conn.execute(
-                "CREATE INDEX IF NOT EXISTS idx_papers_publication_date ON papers(publication_date DESC)"
+                "CREATE INDEX IF NOT EXISTS idx_papers_publication_date "
+                "ON papers(publication_date DESC)"
             )
             await conn.execute(
                 "CREATE INDEX IF NOT EXISTS idx_papers_source_id ON papers(source_id)"
@@ -413,12 +452,25 @@ async def ensure_paper_tables(pool: asyncpg.Pool) -> None:
                 )
                 """
             )
-            await conn.execute("ALTER TABLE paper_ingest_runs ADD COLUMN IF NOT EXISTS inserted_count INTEGER NOT NULL DEFAULT 0")
-            await conn.execute("ALTER TABLE paper_ingest_runs ADD COLUMN IF NOT EXISTS updated_count INTEGER NOT NULL DEFAULT 0")
-            await conn.execute("ALTER TABLE paper_ingest_runs ADD COLUMN IF NOT EXISTS skipped_count INTEGER NOT NULL DEFAULT 0")
-            await conn.execute("ALTER TABLE paper_ingest_runs ADD COLUMN IF NOT EXISTS filtered_chinese_count INTEGER NOT NULL DEFAULT 0")
             await conn.execute(
-                "CREATE INDEX IF NOT EXISTS idx_paper_ingest_runs_source_id ON paper_ingest_runs(source_id, started_at DESC)"
+                "ALTER TABLE paper_ingest_runs ADD COLUMN IF NOT EXISTS "
+                "inserted_count INTEGER NOT NULL DEFAULT 0"
+            )
+            await conn.execute(
+                "ALTER TABLE paper_ingest_runs ADD COLUMN IF NOT EXISTS "
+                "updated_count INTEGER NOT NULL DEFAULT 0"
+            )
+            await conn.execute(
+                "ALTER TABLE paper_ingest_runs ADD COLUMN IF NOT EXISTS "
+                "skipped_count INTEGER NOT NULL DEFAULT 0"
+            )
+            await conn.execute(
+                "ALTER TABLE paper_ingest_runs ADD COLUMN IF NOT EXISTS "
+                "filtered_chinese_count INTEGER NOT NULL DEFAULT 0"
+            )
+            await conn.execute(
+                "CREATE INDEX IF NOT EXISTS idx_paper_ingest_runs_source_id "
+                "ON paper_ingest_runs(source_id, started_at DESC)"
             )
         _SCHEMA_READY = True
 
@@ -471,7 +523,8 @@ async def _upsert_paper(
                 target_key
             )
             VALUES (
-                $1, $2, $3, $4, $5, $6, $7, $8::jsonb, $9::jsonb, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20
+                $1, $2, $3, $4, $5, $6, $7, $8::jsonb, $9::jsonb, $10, $11,
+                $12, $13, $14, $15, $16, $17, $18, $19, $20
             )
             RETURNING paper_id
             """,
@@ -612,7 +665,11 @@ async def ingest_papers(
     await ensure_paper_tables(pool)
     normalized = [normalize_payload(item) for item in payloads]
     if dry_run:
-        summary = PaperIngestSummary(run_id=f"paper_run_dry_{uuid4().hex}", source_id=source_id, status="dry_run")
+        summary = PaperIngestSummary(
+            run_id=f"paper_run_dry_{uuid4().hex}",
+            source_id=source_id,
+            status="dry_run",
+        )
         for payload in normalized:
             if title_contains_cjk(payload.title):
                 summary.filtered_chinese_count += 1
@@ -649,7 +706,10 @@ async def ingest_papers(
     return summary
 
 
-def payload_from_crawled_item(item: Any, source_config: dict[str, Any]) -> PaperIngestPayload | None:
+def payload_from_crawled_item(
+    item: Any,
+    source_config: dict[str, Any],
+) -> PaperIngestPayload | None:
     extra = getattr(item, "extra", None) or {}
     paper = extra.get("paper")
     if not isinstance(paper, dict):
@@ -672,8 +732,12 @@ def payload_from_crawled_item(item: Any, source_config: dict[str, Any]) -> Paper
                 )
             )
     source = PaperSourceRef(
-        type=_clean_text(source_config.get("source_type") or paper.get("source_type") or "raw_official"),
-        name=_clean_text(source_config.get("name") or paper.get("venue_full") or paper.get("source")),
+        type=_clean_text(
+            source_config.get("source_type") or paper.get("source_type") or "raw_official"
+        ),
+        name=_clean_text(
+            source_config.get("name") or paper.get("venue_full") or paper.get("source")
+        ),
         source_id=_clean_text(source_config.get("id")),
         raw_id=_clean_text(paper.get("raw_id")) or None,
         detail_url=_clean_text(paper.get("url")) or None,

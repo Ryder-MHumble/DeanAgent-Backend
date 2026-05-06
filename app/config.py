@@ -59,6 +59,11 @@ class Settings(BaseSettings):
     AMINER_API_KEY: str = ""
     AMINER_SCHOLAR_DETAIL_URL: str = "https://data.ihainan.me/api/aminer/scholar/detail"
 
+    # DingTalk Workspace CLI
+    DINGTALK_DWS_BIN: str = "dws"
+    DINGTALK_DWS_TIMEOUT_SECONDS: float = 30.0
+    DINGTALK_CALENDAR_TIMEZONE: str = "Asia/Shanghai"
+
     # Pipeline schedule (UTC)
     PIPELINE_CRON_HOUR: int = 6
     PIPELINE_CRON_MINUTE: int = 0

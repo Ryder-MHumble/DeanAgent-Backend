@@ -82,7 +82,18 @@ _CHINESE_ORG_HINTS = (
     "上海交通",
     "中国科学院",
 )
-PDF_AFFILIATION_SOURCE_IDS = {"cvpr", "eccv", "neurips", "acl_long", "acl_short", "ijcai"}
+PDF_AFFILIATION_SOURCE_IDS = {
+    "cvpr",
+    "iccv",
+    "eccv",
+    "neurips",
+    "acl_long",
+    "acl_short",
+    "emnlp_main",
+    "ijcai",
+    "jmlr",
+    "jair",
+}
 _AFFILIATION_LINE_RE = re.compile(
     r"\b(university|institute|college|school|laboratory|lab\.?|centre|center|research|"
     r"academy|hospital|corporation|inc\.?|ltd\.?|company|department)\b|"
@@ -145,7 +156,7 @@ class EnrichmentResult:
 
 
 def clean_text(value: Any) -> str:
-    return " ".join(str(value or "").strip().split())
+    return " ".join(str(value or "").replace("\x00", " ").strip().split())
 
 
 def normalize_doi(value: Any) -> str | None:

@@ -1,10 +1,41 @@
 # 信源爬取状态总览
 
-> 最后更新: 2026-04-25 (v48: talent_scout 官方源重定位，蓝桥杯/天池/Kaggle 修复，禁用 DB 持久化)
+> 最后更新: 2026-05-03 (v49: papers 论文仓新增 AI 顶刊/顶会 2023-2025 信源)
 
 ---
 
-## 0. 本轮迭代结论（2026-04-25）
+## 0. 本轮迭代结论（2026-05-03）
+
+### 已完成并验证
+
+| source_id | 类型 | 结果 | 关键验证 |
+|-----------|------|------|----------|
+| jmlr | 顶刊 | ✅ 新增 JMLR 2023-2025 | 正式回填成功，`papers` 当前 1,130 条 |
+| jair | 顶刊 | ✅ 新增 JAIR 2023-2025 | OAI-PMH `oai_dc` 清洗后正式回填成功，`papers` 当前 337 条 |
+| tmlr | 顶刊 | ✅ 新增 TMLR 2023-2025 | OpenReview `TMLR` 按 note 时间切年，正式回填成功，`papers` 当前 2,998 条 |
+| icml | 顶会 | ✅ 新增 ICML 2023-2025 | OpenReview `ICML.cc/{year}/Conference` 正式回填成功，`papers` 当前 7,695 条 |
+| iccv | 顶会 | ✅ 新增 ICCV 2023/2025 | CVF OpenAccess 正式回填成功，`papers` 当前 4,857 条 |
+| emnlp_main | 顶会 | ✅ 新增 EMNLP Main 2023-2025 | ACL Anthology BibTeX 正式回填成功，`papers` 当前 4,124 条 |
+
+### 本轮新增/调整
+
+- `sources/paper/top_conference_papers.yaml` 新增 6 个 `paper_record` source，均保持 `persist_to_db: true`、`is_enabled: false`，通过回填脚本或 API 手动触发。
+- 新增 `jmlr_papers`、`jair_oai`、`openreview_journal` 三个论文仓 parser，并在 `app/crawlers/registry.py` 注册。
+- 复用现有 `openreview`、`cvf_openaccess`、`aclanthology` parser 扩展 `ICML`、`ICCV`、`EMNLP Main`。
+- 已对新增 6 源各取 3 条样本执行 `ingest_papers(..., dry_run=True)`，并完成正式回填写库。
+- 本轮写库新增/更新记录：`jmlr` 1,130 / 0，`jair` 337 / 0，`tmlr` 2,998 / 0，`icml` 7,695 / 0，`iccv` 4,857 / 0，`emnlp_main` 4,117 / 7。
+- 论文仓信源爬虫详情已独立整理到 [paper_source_crawlers.md](paper_source_crawlers.md)，README 仅保留索引。
+
+### 仍受限
+
+| 范围 | 现状 | 说明 |
+|------|------|------|
+| TMLR 年份口径 | ⚠️ 滚动期刊切年 | 当前按 OpenReview `pdate/odate/cdate` 归属年份，不按固定 volume |
+| ICCV 年份 | ⚠️ 双年会 | 当前默认 2023、2025，不配置 2024 |
+| EMNLP / ICCV 摘要 | ⚠️ 基础字段优先 | 当前复用既有 parser，摘要字段仍可后续通过 detail 页补强 |
+| DOI 覆盖 | ⚠️ 来源差异 | JAIR/EMNLP DOI 较稳定；OpenReview/CVF/JMLR 样本 DOI 不稳定，后续可走 OpenAlex/Crossref 补全 |
+
+## 0A. 上轮迭代结论（2026-04-25）
 
 ### 已完成并验证
 
@@ -34,7 +65,7 @@
 | Semantic Scholar | ⚠️ blocked | 当前运行触发 429 限流 |
 | ICRA / SC / ISC / WRC 等 | ⚠️ needs_review / blocked | URL 可访问或间歇超时，但页面不是个人获奖名单，当前不产出候选人 |
 
-## 0A. 上轮迭代结论（2026-04-24）
+## 0B. 上上轮迭代结论（2026-04-24）
 
 ### 已完成并验证写库
 

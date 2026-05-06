@@ -12,6 +12,7 @@ from app.services.scholar._filters import (
     _get_region,
     get_institution_classification_map,
 )
+from app.services.scholar._achievement_tags import parse_achievement_filter_tokens
 from app.services.scholar._transformers import _to_list_item
 from app.services.stores import scholar_annotation_store as annotation_store
 
@@ -137,6 +138,26 @@ async def _build_list_select_sql() -> str:
         )
     else:
         fields.append(f"COALESCE(({award_table_sql}), '[]'::jsonb) AS awards")
+    patent_table_sql = (
+        "SELECT jsonb_agg("
+        "jsonb_build_object("
+        "'title', COALESCE(spt.title, ''), "
+        "'patent_no', COALESCE(spt.patent_no, ''), "
+        "'year', COALESCE(spt.year::text, ''), "
+        "'inventors', COALESCE(array_to_string(spt.inventors, ', '), ''), "
+        "'patent_type', COALESCE(spt.patent_type, ''), "
+        "'status', COALESCE(spt.status, ''), "
+        "'added_by', COALESCE(spt.added_by, '')"
+        ") ORDER BY spt.year DESC NULLS LAST, spt.created_at DESC, spt.id DESC"
+        ") FROM scholar_patents spt WHERE spt.scholar_id = scholars.id"
+    )
+    if "patents" in scholar_cols:
+        fields.append(
+            "COALESCE(NULLIF(patents, '[]'::jsonb), "
+            f"({patent_table_sql}), '[]'::jsonb) AS patents"
+        )
+    else:
+        fields.append(f"COALESCE(({patent_table_sql}), '[]'::jsonb) AS patents")
     fields.append(
         "EXISTS ("
         "SELECT 1 FROM supervised_students ss "
@@ -208,6 +229,7 @@ def _build_where_clause(
     is_current_student: bool | None,
     chinese_identity: str | None,
     achievement_tag: str | None,
+    achievement_tags: str | None,
     custom_field_key: str | None,
     custom_field_value: str | None,
     allowed_universities: list[str] | None,
@@ -310,32 +332,49 @@ def _build_where_clause(
             ")"
         )
 
+    raw_tag_targets = [
+        tag.strip()
+        for tag in (achievement_tags or "").replace("，", ",").split(",")
+        if tag.strip()
+    ]
     if achievement_tag and achievement_tag.strip():
-        tag = achievement_tag.strip()
-        params.append(tag)
-        tag_param = len(params)
-        params.append(f"%{tag.lower()}%")
-        like_param = len(params)
-        conditions.append(
-            "("
-            f"achievement_tags @> ARRAY[${tag_param}]::text[] "
-            "OR EXISTS ("
-            "SELECT 1 FROM scholar_publications sp "
-            "WHERE sp.scholar_id = scholars.id "
-            f"AND LOWER(COALESCE(sp.venue, '')) LIKE ${like_param}"
-            ") "
-            "OR EXISTS ("
-            "SELECT 1 FROM scholar_awards sa "
-            "WHERE sa.scholar_id = scholars.id "
-            "AND ("
-            f"LOWER(COALESCE(sa.title, '')) LIKE ${like_param} "
-            f"OR LOWER(COALESCE(sa.level, '')) LIKE ${like_param} "
-            f"OR LOWER(COALESCE(sa.grantor, '')) LIKE ${like_param} "
-            f"OR LOWER(COALESCE(sa.description, '')) LIKE ${like_param}"
-            ")"
-            ")"
-            ")"
-        )
+        raw_tag_targets.append(achievement_tag.strip())
+    raw_tag_targets = [tag for tag in dict.fromkeys(raw_tag_targets) if tag]
+    tag_targets = parse_achievement_filter_tokens(raw_tag_targets)
+
+    if tag_targets:
+        venue_tags = [tag for tag, year in tag_targets if year is None]
+        year_filters = [(tag, year) for tag, year in tag_targets if year is not None]
+        tag_conditions: list[str] = []
+        if venue_tags:
+            params.append(venue_tags)
+            tag_param = len(params)
+            params.append([f"%{tag.lower()}%" for tag in venue_tags])
+            like_param = len(params)
+            tag_conditions.append(
+                "("
+                f"achievement_tags && ${tag_param}::text[] "
+                "OR EXISTS ("
+                "SELECT 1 FROM scholar_publications sp "
+                "WHERE sp.scholar_id = scholars.id "
+                f"AND LOWER(COALESCE(sp.venue, '')) LIKE ANY(${like_param}::text[])"
+                ")"
+                ")"
+            )
+        for tag, year in year_filters:
+            params.append(f"%{tag.lower()}%")
+            like_param = len(params)
+            params.append(year)
+            year_param = len(params)
+            tag_conditions.append(
+                "EXISTS ("
+                "SELECT 1 FROM scholar_publications sp "
+                "WHERE sp.scholar_id = scholars.id "
+                f"AND LOWER(COALESCE(sp.venue, '')) LIKE ${like_param} "
+                f"AND sp.year = ${year_param}"
+                ")"
+            )
+        conditions.append("(" + " OR ".join(tag_conditions) + ")")
 
     if custom_field_key:
         params.append(custom_field_key)
@@ -380,6 +419,7 @@ async def query_scholar_list_fast(
     is_current_student: bool | None,
     chinese_identity: str | None,
     achievement_tag: str | None,
+    achievement_tags: str | None,
     page: int,
     page_size: int,
 ) -> dict[str, Any]:
@@ -425,6 +465,7 @@ async def query_scholar_list_fast(
         is_current_student=is_current_student,
         chinese_identity=chinese_identity,
         achievement_tag=achievement_tag,
+        achievement_tags=achievement_tags,
         custom_field_key=custom_field_key,
         custom_field_value=custom_field_value,
         allowed_universities=allowed_universities,

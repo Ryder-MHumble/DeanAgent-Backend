@@ -35,6 +35,12 @@ sources:
     seed_urls:
       - "https://openreview.net/group?id=ICLR.cc/2026/Conference"
     tags: ["paper", "conference", "openreview"]
+    enrichment:
+      primary_methods: ["openreview_note", "openreview_profile"]
+      fields: ["authors", "affiliations", "author_descriptions", "author_experiences", "profile_flags"]
+      qps:
+        openreview: 0.8
+      notes: "作者画像只在 OpenReview profile 可用时高收益；剩余缺口多为 profile 原始信息缺失。"
 
   - <<: *paper_defaults
     id: "acl_anthology_author"
@@ -68,6 +74,14 @@ sources:
         venue: "NAACL"
         year: 2025
     tags: ["paper", "conference", "acl"]
+    enrichment:
+      primary_methods: ["acl_anthology_html"]
+      fallback_methods: ["pdf_first_page", "openalex"]
+      fields: ["authors", "abstract", "doi", "affiliations"]
+      qps:
+        html_per_host: 0.5
+        pdf_per_host: 0.15
+      notes: "ACL/EMNLP 页面补基础元数据，机构主要依赖 PDF 首页。"
 
   - <<: *paper_defaults
     id: "cvf_openaccess_author"
@@ -92,3 +106,11 @@ sources:
         venue: "ICCV"
         year: 2025
     tags: ["paper", "conference", "cvf"]
+    enrichment:
+      primary_methods: ["cvf_openaccess_html", "openalex"]
+      fallback_methods: ["pdf_first_page", "arxiv_by_id"]
+      fields: ["authors", "abstract", "arxiv_id", "affiliations"]
+      qps:
+        html_per_host: 0.5
+        pdf_per_host: 0.15
+      notes: "CVF OpenAccess 适合补作者/摘要/arXiv；机构缺口用 PDF 首页兜底。"

@@ -1,18 +1,37 @@
 # Papers 数据源补全方法矩阵与限流阈值（2026-05-03）
 
-## 口径
+## 当前口径
 
-本文基于当前 `papers` 表真实数据生成，覆盖表内全部 `source_id / venue` 组合。当前总量为 `50,835` 条。
+本文基于 `papers` 表真实数据生成，覆盖表内全部 `source_id / venue` 组合。
+
+截至 2026-05-06 本轮增量任务启动后查询，当前总量为 `71,969` 条。
 
 当前结论：
 
-- `authors` 作者名单字段：`50,835 / 50,835` 已有，当前不存在作者名单缺失问题。
-- `affiliations` 作者机构字段：`20,296 / 50,835` 已有，机构仍是最大缺口。
-- `author_descriptions / author_experiences` 作者画像字段：主要依赖 OpenReview profile，目前只有 ICLR 基本可补。
+- `authors` 作者名单字段：`71,963 / 71,969` 已有，作者名单基本补齐，仅剩 `6` 条异常。
+- `affiliations` 作者机构字段：`58,508 / 71,969` 已有，机构仍是最大缺口，剩余约 `13,461` 条。
+- `abstract` 摘要字段：`65,620 / 71,969` 已有。
+- `doi` 字段：`37,119 / 71,969` 已有。
+- `arxiv_id` 字段：`8,254 / 71,969` 已有。
+- `author_descriptions / author_experiences` 作者画像字段：`13,315 / 71,969` 已有，主要依赖 OpenReview profile；非 OpenReview source 不应承诺大规模补齐。
+
+2026-05-06 当前正在继续执行低 QPS 补全批次：
+
+| 批次 | 目标 | 数量 | 当前方法 | 备注 |
+|---|---|---:|---|---|
+| `cvpr_missing_aff_20260506` | CVPR 缺机构 | 4,412 | CVF HTML + OpenAlex + PDF 首页 | `pdf_qps=0.15`，运行中 |
+| `neurips_missing_aff_20260506` | NeurIPS 缺机构 | 2,112 | NeurIPS HTML + OpenAlex + PDF 首页 | `pdf_qps=0.15`，运行中 |
+| `iccv_missing_aff_20260506` | ICCV 缺机构 | 1,034 | CVF HTML + OpenAlex + PDF 首页 | `pdf_qps=0.15`，运行中 |
+| `acl_emnlp_missing_aff_20260506` | ACL/EMNLP 缺机构 | 1,275 | ACL Anthology + PDF 首页 + OpenAlex | `pdf_qps=0.15`，运行中 |
+| `jair_missing_aff_20260506` | JAIR 缺机构 | 337 | OpenAlex + PDF 首页 | 已完成，OpenAlex 补出主要增量 |
+| `aaai_missing_abs_doi_20260506` | AAAI 缺摘要/DOI | 985 | OpenAlex | 已完成，补摘要/DOI `424` 条 |
+| `openalex_source_missing_core_20260506` | OpenAlex source 缺核心字段 | 5,725 | OpenAlex by title/DOI | 运行中 |
+| `openreview_profile_remaining_20260506` | ICLR/ICML/TMLR 剩余 profile 缺口 | 3,357 | OpenReview note/profile + OpenAlex | `openreview_qps=0.8`，查全部作者 |
+| `eccv_ijcai_jmlr_missing_aff_20260506` | ECCV/IJCAI/JMLR 缺机构 | 521 | 官方 HTML + OpenAlex + PDF 首页 | `pdf_qps=0.1`，运行中 |
 
 ---
 
-## 全量 Source/Venue 状态
+## 全量 Source/Venue 状态基线快照
 
 | source_id | venue | total | 有作者 | 有机构 | 有作者画像 | detail_url | pdf_url | OpenReview URL | 年份 |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---|
@@ -319,3 +338,104 @@
 6. `IJCAI`：HTML + OpenAlex + PDF 首页
 
 当前无需继续重跑 ICLR 作者画像，除非专门处理剩余 `24-26` 条尾部异常。
+
+---
+
+## 2026-05-06 迭代更新
+
+### 策略已沉淀到 YAML
+
+本轮已将补全策略写入 source 配置，后续运行不再只依赖临时命令经验。
+
+已更新：
+
+- `sources/paper/top_conference_papers.yaml`
+- `sources/paper/conferences.yaml`
+- `sources/paper/journals.yaml`
+
+主论文仓 `top_conference_papers.yaml` 中新增 `enrichment_profiles`，并给每个主表 source 绑定 `enrichment`：
+
+| profile | 覆盖 source | 主路径 | 兜底 | 主要字段 |
+|---|---|---|---|---|
+| `openreview_profile` | `iclr`, `icml`, `tmlr` | OpenReview note/profile | OpenAlex/arXiv | 机构、作者简介、经历、profile flags |
+| `cvf_pdf` | `cvpr`, `iccv` | CVF HTML + OpenAlex | PDF 首页 | 作者、摘要、机构、arXiv |
+| `acl_pdf` | `acl_long`, `acl_short`, `emnlp_main` | ACL Anthology HTML | PDF 首页、OpenAlex | 作者、摘要、DOI、机构 |
+| `proceedings_pdf` | `neurips`, `eccv`, `ijcai` | 官方详情页 + OpenAlex | PDF 首页 | 作者、摘要、机构、DOI/arXiv |
+| `ojs_openalex` | `aaai` | AAAI OJS HTML + OpenAlex | PDF 首页 | 作者、摘要、DOI、机构 |
+| `journal_pdf` | `jmlr`, `jair` | 官方 HTML + OpenAlex | PDF 首页 | 作者、摘要、DOI、机构 |
+
+作者信号源 YAML 也新增了 `enrichment` 摘要：
+
+- `openreview_author`：OpenReview 作者画像路径
+- `acl_anthology_author`：ACL/EMNLP HTML + PDF 首页路径
+- `cvf_openaccess_author`：CVF HTML + PDF 首页路径
+- `dblp_author`：作者/DOI 校验，不作为机构主路径
+- `arxiv_author`：摘要/arXiv/DOI 校准，不提供机构
+- `semantic_scholar_author`：作者/摘要/DOI 辅助
+- `academic_paper_authors`：本地结构化证据合并
+
+### 最新字段覆盖状态
+
+截至 2026-05-06 最新查询：
+
+| 指标 | 数量 | 覆盖率 |
+|---|---:|---:|
+| 总论文 | 71,969 | 100% |
+| 有作者 | 71,963 | 100.0% |
+| 有机构 | 58,508 | 81.3% |
+| 有摘要 | 65,620 | 91.2% |
+| 有 DOI | 37,119 | 51.6% |
+| 有 arXiv ID | 8,254 | 11.5% |
+| 有作者简介 | 13,315 | 18.5% |
+| 有作者经历 | 13,315 | 18.5% |
+
+### 继续补全执行策略
+
+2026-05-06 后续补全按“真实可增量”拆分：
+
+1. OpenReview 源：`iclr / icml / tmlr`
+   - 用 OpenReview note/profile 补机构、作者简介、经历、flags。
+   - `openreview_qps=0.8`。
+   - 抽样发现剩余长尾命中但无新增字段，因此不再盲目全量空跑。
+
+2. CVF/ACL/Proceedings 源：`cvpr / iccv / neurips / acl_long / acl_short / emnlp_main / eccv / ijcai`
+   - 官方 HTML 补作者、摘要、DOI、PDF URL、arXiv。
+   - OpenAlex 补机构、摘要、DOI、arXiv。
+   - PDF 首页补机构。
+   - 当前执行 `pdf_qps=0.15`，低于原建议上限，优先降低封禁风险。
+
+3. 期刊源：`jmlr / jair`
+   - JMLR PDF 首页对机构有效。
+   - JAIR 部分 `pdf_url` 返回 HTML 包装页，OpenAlex 已补出部分机构；剩余机构需要适配真实 PDF 下载链接或 OAI 元数据中的 affiliation 字段。
+
+4. OpenAlex 导入源：`openalex`
+   - 该 source 没有 `detail_url/pdf_url`，不能走 HTML/PDF。
+   - 可继续按 title/DOI 重新查 OpenAlex，但剩余数据需要避免被“必须有 detail/pdf URL”的候选过滤排除。
+
+### 当前仍不适合补的字段
+
+非 OpenReview 信源的以下字段不建议继续强行补：
+
+- `author_descriptions`
+- `author_experiences`
+- `profile_flags`
+
+原因：官方 HTML、OpenAlex、arXiv、PDF 首页都不稳定提供个人履历/教育经历。继续补这类字段需要单独建设作者级 profile 抓取链路，而不是混在论文元数据补全任务中。
+
+### 封禁与降速阈值
+
+当前执行阈值：
+
+| 类型 | 当前执行值 | 上限建议 |
+|---|---:|---:|
+| OpenReview | `0.8 req/s` | `0.8 req/s` |
+| PDF 首页 | `0.1-0.15 req/s/host` | `0.2-0.3 req/s/host` |
+| HTML 静态页 | 随任务并发，实际低速 | `0.5 req/s/host` |
+| OpenAlex | 并发 `3` 左右 | `3-5 req/s` |
+
+降速/暂停条件：
+
+- 连续 `429/403 >= 3`：暂停该 host `10-30 min`
+- 连续 `5xx >= 5`：暂停该 host `10 min`
+- PDF 超时/断连率超过 `5%`：PDF QPS 降至 `0.05-0.1 req/s`
+- 明确 `403/429` 时不使用浏览器自动化绕过

@@ -69,47 +69,15 @@
 
 - [sources/paper/top_conference_papers.yaml](../sources/paper/top_conference_papers.yaml)
 
-当前接入的顶会论文源已扩展到多年口径：
-
-- source id：`acl_long`、`acl_short`、`iclr`、`neurips`、`cvpr`、`eccv`、`ijcai`、`aaai`
-
-当前默认抓取窗口：
-
-- ACL：2024-2025（Long / Short）
-- ICLR：2024-2025（Main Conference）
-- NeurIPS：2022-2024
-- CVPR：2023-2025
-- ECCV：2022、2024
-- IJCAI：2023-2025（Main Track）
-- AAAI：2024-2026
-
-原始 parser 已验证的可扩展年份范围：
-
-- ACL：2024-2025（Long / Short）
-- ICLR：2023-2025
-- NeurIPS：2021-2025
-- CVPR：2022-2025
-- ECCV：2022、2024
-- IJCAI：2023-2025
-- AAAI：2022-2026
-
-这些 source 统一约定：
+当前 AI 顶刊/顶会 source 统一约定：
 
 - `dimension: paper`
 - `entity_family: paper_record`
 - `persist_to_db: true`
 
-限制说明：
+具体 source 列表、爬虫方式、年份口径、字段覆盖、写库结果和后续补全缺口见：
 
-- 没有 topic 关键词过滤
-- 当前主要限制来自 venue 自身的 track 口径，而不是 topic：
-  - ACL 当前只采 Long / Short
-  - ICLR 当前只采 Main Conference
-  - CVPR 当前只采 Main Conference，不含 Workshop
-  - IJCAI 当前只采 Main Track
-  - ICLR 官方 API 对 `ICLR.cc/2023/Conference` 当前返回 `0` 条，默认窗口因此使用 `2024-2025`
-  - NeurIPS 官方 `papers.nips.cc/paper_files/paper/2025` 当前返回 `404`，默认窗口因此使用 `2022-2024`
-  - AAAI 默认只抓 issue 页元数据，不在主回填里抓 detail 页机构补全，因此 `affiliations` 允许为空
+- [paper_source_crawlers.md](paper_source_crawlers.md)
 
 ## API
 
@@ -166,6 +134,7 @@ curl -X POST "http://localhost:8000/api/papers/sources/cvpr/crawl"
 
 ```bash
 .venv/bin/python scripts/crawl/backfill_papers.py --dry-run
+.venv/bin/python scripts/crawl/backfill_papers.py --source jmlr --source jair --source tmlr
 .venv/bin/python scripts/crawl/backfill_papers.py --source cvpr
 .venv/bin/python scripts/crawl/backfill_papers.py --source iclr --source aaai
 ```

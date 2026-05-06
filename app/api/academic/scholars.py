@@ -99,6 +99,7 @@ async def list_scholars(
     is_current_student: bool | None = Query(None, description="按当前学生身份筛选"),
     chinese_identity: str | None = Query(None, description="华人身份状态：unknown/待判定"),
     achievement_tag: str | None = Query(None, description="按学术标识筛选（如 ICML/NeurIPS/ICPC）"),
+    achievement_tags: str | None = Query(None, description="按多个学术标识筛选（逗号分隔，如 ICML,NeurIPS）"),
     institution_group: str | None = Query(
         None, description="机构顶层分组（共建高校/兄弟院校/海外高校/其他高校/科研院所/行业学会）"
     ),
@@ -135,6 +136,7 @@ async def list_scholars(
         is_current_student=is_current_student,
         chinese_identity=chinese_identity,
         achievement_tag=achievement_tag,
+        achievement_tags=achievement_tags,
         institution_group=institution_group,
         institution_category=institution_category,
         page=page,
@@ -175,6 +177,7 @@ async def get_stats(
     is_current_student: bool | None = Query(None, description="按当前学生身份筛选"),
     chinese_identity: str | None = Query(None, description="华人身份状态：unknown/待判定"),
     achievement_tag: str | None = Query(None, description="按学术标识筛选（如 ICML/NeurIPS/ICPC）"),
+    achievement_tags: str | None = Query(None, description="按多个学术标识筛选（逗号分隔，如 ICML,NeurIPS）"),
     institution_group: str | None = Query(None, description="机构顶层分组"),
     institution_category: str | None = Query(None, description="机构细粒度分类"),
     custom_field_key: str | None = Query(None, description="自定义字段名"),
@@ -205,6 +208,7 @@ async def get_stats(
         is_current_student=is_current_student,
         chinese_identity=chinese_identity,
         achievement_tag=achievement_tag,
+        achievement_tags=achievement_tags,
         institution_group=institution_group,
         institution_category=institution_category,
         custom_field_key=custom_field_key,

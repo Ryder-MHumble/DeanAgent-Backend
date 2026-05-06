@@ -11,7 +11,7 @@ from app.api.academic import (
     venues,
 )
 from app.api.content import articles, dimensions, sources
-from app.api.external import aminer
+from app.api.external import aminer, dingtalk_calendar
 from app.api.intel.router import intel_router
 from app.api.operations import crawler_control, health, llm_tracking
 from app.api.reports import reports
@@ -36,6 +36,11 @@ def build_api_router(prefix: str = "/api") -> APIRouter:
     router.include_router(students.router, prefix="/students", tags=["students"])
     router.include_router(events.router, prefix="/events", tags=["events"])
     router.include_router(aminer.router, prefix="/aminer", tags=["aminer"])
+    router.include_router(
+        dingtalk_calendar.router,
+        prefix="/dingtalk/calendar",
+        tags=["dingtalk-calendar"],
+    )
     router.include_router(projects.router, prefix="/projects", tags=["projects"])
     router.include_router(venues.router, prefix="/venues", tags=["venues"])
     router.include_router(papers.router, tags=["papers"])

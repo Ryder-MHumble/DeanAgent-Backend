@@ -7,7 +7,11 @@ import time
 from typing import Any
 
 from app.services.core.institution.classification import normalize_org_type
-from app.services.scholar._achievement_tags import extract_achievement_tags
+from app.services.scholar._achievement_tags import (
+    extract_achievement_tags,
+    parse_achievement_filter_tokens,
+    publication_matches_achievement_filters,
+)
 
 # ---------------------------------------------------------------------------
 # Institution classification map (from DB, cached in-process)
@@ -801,6 +805,7 @@ def _apply_filters(
     is_current_student: bool | None,
     chinese_identity: str | None,
     achievement_tag: str | None,
+    achievement_tags: str | None,
     region: str | None,
     affiliation_type: str | None,
     institution_names: list[str] | None = None,
@@ -944,24 +949,39 @@ def _apply_filters(
                 if _read_profile_bool(i, "is_chinese") is None
             ]
 
+    achievement_targets = _split_multi_values(achievement_tags)
     if achievement_tag:
-        target_tag = achievement_tag.strip()
+        achievement_targets.append(achievement_tag.strip())
+    achievement_targets = [tag for tag in dict.fromkeys(achievement_targets) if tag]
+
+    if achievement_targets:
+        target_filters = parse_achievement_filter_tokens(achievement_targets)
+        if not target_filters:
+            return []
 
         def _has_achievement_tag(item: dict[str, Any]) -> bool:
+            publications = [
+                pub
+                for pub in item.get("representative_publications") or []
+                if isinstance(pub, dict)
+            ]
             tags = extract_achievement_tags(
                 achievement_tags=item.get("achievement_tags"),
-                representative_publications=[
-                    pub
-                    for pub in item.get("representative_publications") or []
-                    if isinstance(pub, dict)
-                ],
+                representative_publications=publications,
                 awards=[
                     award
                     for award in item.get("awards") or []
                     if isinstance(award, dict)
                 ],
             )
-            return target_tag in tags
+            return any(
+                (year is None and tag in tags)
+                or any(
+                    publication_matches_achievement_filters(pub, [(tag, year)])
+                    for pub in publications
+                )
+                for tag, year in target_filters
+            )
 
         result = [i for i in result if _has_achievement_tag(i)]
 
