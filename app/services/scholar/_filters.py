@@ -8,6 +8,7 @@ from typing import Any
 
 from app.services.core.institution.classification import normalize_org_type
 from app.services.scholar._achievement_tags import (
+    activity_matches_achievement_filters,
     extract_achievement_tags,
     parse_achievement_filter_tokens,
     publication_matches_achievement_filters,
@@ -965,6 +966,11 @@ def _apply_filters(
                 for pub in item.get("representative_publications") or []
                 if isinstance(pub, dict)
             ]
+            scholar_activities = [
+                activity
+                for activity in item.get("scholar_activities") or []
+                if isinstance(activity, (dict, str))
+            ]
             tags = extract_achievement_tags(
                 achievement_tags=item.get("achievement_tags"),
                 representative_publications=publications,
@@ -973,12 +979,17 @@ def _apply_filters(
                     for award in item.get("awards") or []
                     if isinstance(award, dict)
                 ],
+                scholar_activities=scholar_activities,
             )
             return any(
                 (year is None and tag in tags)
                 or any(
                     publication_matches_achievement_filters(pub, [(tag, year)])
                     for pub in publications
+                )
+                or any(
+                    activity_matches_achievement_filters(activity, [(tag, year)])
+                    for activity in scholar_activities
                 )
                 for tag, year in target_filters
             )

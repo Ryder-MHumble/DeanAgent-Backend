@@ -259,6 +259,18 @@ class ScholarEventTag(BaseModel):
     """来源活动标题（可选）"""
 
 
+class ScholarActivityRecord(BaseModel):
+    """学者详情页右侧使用的个人活动记录。"""
+
+    id: str = ""
+    activity_des: str = ""
+    activity_type: str = ""
+    source_url: str = ""
+    added_by: str = ""
+    created_at: str = ""
+    updated_at: str = ""
+
+
 class DynamicUpdate(BaseModel):
     """A single time-stamped dynamic event for a scholar.
 
@@ -814,6 +826,7 @@ class ScholarDetailResponse(BaseModel):
     representative_publications: list[PublicationRecord] = Field(default_factory=list)
     patents: list[PatentRecord] = Field(default_factory=list)
     awards: list[AwardRecord] = Field(default_factory=list)
+    scholar_activities: list[ScholarActivityRecord] = Field(default_factory=list)
     is_advisor_committee: bool = False
     adjunct_supervisor: AdjunctSupervisorInfo = Field(default_factory=AdjunctSupervisorInfo)
     supervised_students: list[str] = Field(default_factory=list)

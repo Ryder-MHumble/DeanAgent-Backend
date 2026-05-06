@@ -90,6 +90,10 @@ _TAG_MATCHERS: tuple[tuple[str, tuple[re.Pattern[str], ...]], ...] = (
 )
 
 AchievementFilter = tuple[str, int | None]
+EXCLUDED_ACHIEVEMENT_PUBLICATION_ADDED_BY: tuple[str, ...] = (
+    "system:icml2026_import",
+)
+_YEAR_RE = re.compile(r"\b(?:19|20)\d{2}\b")
 
 
 def _normalize_text(value: Any) -> str:
@@ -153,10 +157,19 @@ def _coerce_year(value: Any) -> int | None:
         return None
 
 
+def is_filterable_achievement_publication(publication: dict[str, Any]) -> bool:
+    return str(publication.get("added_by") or "") not in (
+        EXCLUDED_ACHIEVEMENT_PUBLICATION_ADDED_BY
+    )
+
+
 def publication_matches_achievement_filters(
     publication: dict[str, Any],
     filters: list[AchievementFilter],
 ) -> bool:
+    if not is_filterable_achievement_publication(publication):
+        return False
+
     venue_text = " ".join(
         str(publication.get(key) or "")
         for key in (
@@ -178,11 +191,37 @@ def publication_matches_achievement_filters(
     )
 
 
+def activity_matches_achievement_filters(
+    activity: dict[str, Any] | str,
+    filters: list[AchievementFilter],
+) -> bool:
+    if isinstance(activity, dict):
+        activity_text = " ".join(
+            str(activity.get(key) or "")
+            for key in ("activity_des", "activity_label", "title", "description")
+        )
+    else:
+        activity_text = str(activity or "")
+
+    activity_tags: set[str] = set()
+    _add_matches(activity_text, activity_tags)
+    activity_years = {
+        int(match.group(0))
+        for match in _YEAR_RE.finditer(activity_text)
+    }
+
+    return any(
+        tag in activity_tags and (year is None or year in activity_years)
+        for tag, year in filters
+    )
+
+
 def extract_achievement_tags(
     *,
     achievement_tags: Any = None,
     representative_publications: list[dict[str, Any]] | None = None,
     awards: list[dict[str, Any]] | None = None,
+    scholar_activities: list[dict[str, Any] | str] | None = None,
 ) -> list[str]:
     result: set[str] = set()
 
@@ -210,5 +249,17 @@ def extract_achievement_tags(
             ),
             result,
         )
+
+    for activity in scholar_activities or []:
+        if isinstance(activity, dict):
+            _add_matches(
+                " ".join(
+                    str(activity.get(key) or "")
+                    for key in ("activity_des", "activity_label", "title", "description")
+                ),
+                result,
+            )
+        else:
+            _add_matches(activity, result)
 
     return [tag for tag in ACHIEVEMENT_TAG_OPTIONS if tag in result]

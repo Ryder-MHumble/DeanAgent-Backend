@@ -32,6 +32,7 @@ from app.services.scholar._filters import (
     _apply_filters,
     get_institution_classification_map,
 )
+from app.services.scholar._achievement_tags import extract_achievement_tags
 from app.services.scholar._transformers import (
     _build_profile_links,
     _normalize_profile_links,
@@ -51,9 +52,12 @@ _MISSING_COLUMN_RE = re.compile(
 
 def _extract_missing_scholar_column(exc: Exception) -> str | None:
     match = _MISSING_COLUMN_RE.search(str(exc))
-    if not match:
-        return None
-    return str(match.group("column") or "").strip() or None
+    if match:
+        return str(match.group("column") or "").strip() or None
+    message = str(exc).lower()
+    if "url_hash" in message and "does not exist" in message:
+        return "url_hash"
+    return None
 
 
 async def _insert_scholar_with_schema_fallback(client: Any, payload: dict[str, Any]) -> None:
@@ -379,6 +383,15 @@ def _to_int(raw: Any, default: int = -1) -> int:
         return default
 
 
+def _to_iso_text(value: Any) -> str:
+    if hasattr(value, "isoformat"):
+        try:
+            return str(value.isoformat())
+        except Exception:
+            return _clean_text(value)
+    return _clean_text(value)
+
+
 def _stable_bigint(*parts: Any) -> int:
     joined = "|".join(_clean_text(p) for p in parts)
     digest = hashlib.sha256(joined.encode("utf-8")).digest()
@@ -557,6 +570,51 @@ def _award_db_row_to_api(row: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _scholar_activity_db_row_to_api(row: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "id": _clean_text(row.get("id")),
+        "activity_des": _clean_text(row.get("activity_des")),
+        "activity_type": _clean_text(row.get("activity_type")),
+        "source_url": _clean_text(row.get("source_url")),
+        "added_by": _clean_text(row.get("added_by")),
+        "created_at": _to_iso_text(row.get("created_at")),
+        "updated_at": _to_iso_text(row.get("updated_at")),
+    }
+
+
+async def _resolve_scholar_db_id(scholar_ref: str) -> str | None:
+    try:
+        from app.db.pool import get_pool  # noqa: PLC0415
+
+        pool = get_pool()
+        try:
+            row = await pool.fetchrow(
+                """
+                SELECT id
+                FROM scholars
+                WHERE id = $1 OR url_hash = $1
+                LIMIT 1
+                """,
+                scholar_ref,
+            )
+        except Exception as exc:
+            if _extract_missing_scholar_column(exc) != "url_hash":
+                raise
+            row = await pool.fetchrow(
+                """
+                SELECT id
+                FROM scholars
+                WHERE id = $1
+                LIMIT 1
+                """,
+                scholar_ref,
+            )
+        return _clean_text(row["id"]) if row else None
+    except Exception as exc:
+        logger.warning("Failed resolving scholar id for %s: %s", scholar_ref, exc)
+        return None
+
+
 async def _load_scholar_publications(scholar_id: str) -> list[dict[str, Any]]:
     try:
         from app.db.pool import get_pool  # noqa: PLC0415
@@ -574,6 +632,77 @@ async def _load_scholar_publications(scholar_id: str) -> list[dict[str, Any]]:
     except Exception as exc:
         logger.warning("Failed to load scholar_publications for %s: %s", scholar_id, exc)
         return []
+
+
+async def _load_scholar_activities(scholar_ref: str) -> list[dict[str, Any]]:
+    resolved_scholar_id = await _resolve_scholar_db_id(scholar_ref)
+    if not resolved_scholar_id:
+        return []
+
+    try:
+        from app.db.pool import get_pool  # noqa: PLC0415
+
+        rows = await get_pool().fetch(
+            """
+            SELECT id, activity_des, activity_type, source_url, added_by, created_at, updated_at
+            FROM scholar_activities
+            WHERE scholar_id = $1
+            ORDER BY created_at DESC NULLS LAST, updated_at DESC NULLS LAST, id DESC
+            """,
+            resolved_scholar_id,
+        )
+        return [_scholar_activity_db_row_to_api(dict(r)) for r in rows]
+    except Exception as exc:
+        logger.warning("Failed to load scholar_activities for %s: %s", scholar_ref, exc)
+        return []
+
+
+async def _load_scholar_activity_map(
+    scholar_ids: list[str] | None = None,
+) -> dict[str, list[dict[str, Any]]]:
+    try:
+        from app.db.pool import get_pool  # noqa: PLC0415
+
+        query = """
+            SELECT scholar_id, id, activity_des, activity_type, source_url, added_by, created_at, updated_at
+            FROM scholar_activities
+        """
+        params: list[Any] = []
+        if scholar_ids:
+            params.append(scholar_ids)
+            query += " WHERE scholar_id = ANY($1::text[])"
+        query += """
+            ORDER BY scholar_id ASC, created_at DESC NULLS LAST, updated_at DESC NULLS LAST, id DESC
+        """
+
+        rows = await get_pool().fetch(query, *params)
+        activity_map: dict[str, list[dict[str, Any]]] = {}
+        for row in rows:
+            row_dict = dict(row)
+            scholar_id = _clean_text(row_dict.get("scholar_id"))
+            if not scholar_id:
+                continue
+            activity_map.setdefault(scholar_id, []).append(
+                _scholar_activity_db_row_to_api(row_dict)
+            )
+        return activity_map
+    except Exception as exc:
+        logger.warning("Failed to load scholar_activities map: %s", exc)
+        return {}
+
+
+async def _attach_scholar_activities(items: list[dict[str, Any]]) -> None:
+    scholar_ids = _uniq_text_ids([
+        item.get("id") or item.get("url_hash")
+        for item in items
+    ])
+    if not scholar_ids:
+        return
+
+    activity_map = await _load_scholar_activity_map(scholar_ids)
+    for item in items:
+        scholar_id = _clean_text(item.get("id") or item.get("url_hash"))
+        item["scholar_activities"] = activity_map.get(scholar_id, [])
 
 
 async def _load_scholar_patents(scholar_id: str) -> list[dict[str, Any]]:
@@ -1227,6 +1356,7 @@ async def get_scholar_list(
 
     # Fallback path: in-memory filtering over full dataset.
     items = await _load_all_with_annotations_async()
+    await _attach_scholar_activities(items)
     if _uses_project_filter(
         project_category,
         project_subcategory,
@@ -1348,12 +1478,20 @@ async def get_scholar_detail(url_hash: str) -> dict[str, Any] | None:
             publications = await _load_scholar_publications(url_hash)
             patents = await _load_scholar_patents(url_hash)
             awards = await _load_scholar_awards(url_hash)
+            scholar_activities = await _load_scholar_activities(url_hash)
             if publications:
                 detail["representative_publications"] = publications
             if patents:
                 detail["patents"] = patents
             if awards:
                 detail["awards"] = awards
+            detail["scholar_activities"] = scholar_activities
+            detail["achievement_tags"] = extract_achievement_tags(
+                achievement_tags=detail.get("achievement_tags"),
+                representative_publications=publications or detail.get("representative_publications") or [],
+                awards=awards or detail.get("awards") or [],
+                scholar_activities=scholar_activities,
+            )
             return detail
     except Exception as exc:
         logger.warning("Fast scholar detail query failed, fallback to legacy path: %s", exc)
@@ -1372,12 +1510,20 @@ async def get_scholar_detail(url_hash: str) -> dict[str, Any] | None:
             publications = await _load_scholar_publications(url_hash)
             patents = await _load_scholar_patents(url_hash)
             awards = await _load_scholar_awards(url_hash)
+            scholar_activities = await _load_scholar_activities(url_hash)
             if publications:
                 detail["representative_publications"] = publications
             if patents:
                 detail["patents"] = patents
             if awards:
                 detail["awards"] = awards
+            detail["scholar_activities"] = scholar_activities
+            detail["achievement_tags"] = extract_achievement_tags(
+                achievement_tags=detail.get("achievement_tags"),
+                representative_publications=publications or detail.get("representative_publications") or [],
+                awards=awards or detail.get("awards") or [],
+                scholar_activities=scholar_activities,
+            )
             return detail
     return None
 
@@ -1436,6 +1582,7 @@ async def get_scholar_stats(
         )
 
     items = await _load_all_with_annotations_async()
+    await _attach_scholar_activities(items)
     if _uses_project_filter(
         project_category,
         project_subcategory,
@@ -1765,6 +1912,7 @@ async def update_scholar_basic(url_hash: str, updates: dict[str, Any]) -> dict[s
 
 _SCHOLAR_DEPENDENT_TABLES = (
     "event_scholars",
+    "scholar_activities",
     "scholar_awards",
     "scholar_dynamic_updates",
     "scholar_education",

@@ -295,6 +295,11 @@ def _to_list_item(item: dict[str, Any]) -> dict[str, Any]:
             pub for pub in representative_publications if isinstance(pub, dict)
         ],
         awards=[award for award in awards if isinstance(award, dict)],
+        scholar_activities=[
+            activity
+            for activity in _coerce_list(item.get("scholar_activities"))
+            if isinstance(activity, (dict, str))
+        ],
     )
     project_tags = _merge_project_tags(
         item.get("project_tags"),
@@ -347,7 +352,17 @@ def _to_detail(item: dict[str, Any]) -> dict[str, Any]:
             pub for pub in representative_publications if isinstance(pub, dict)
         ],
         awards=[award for award in awards if isinstance(award, dict)],
+        scholar_activities=[
+            activity
+            for activity in _coerce_list(item.get("scholar_activities"))
+            if isinstance(activity, (dict, str))
+        ],
     )
+    scholar_activities = [
+        activity
+        for activity in _coerce_list(item.get("scholar_activities"))
+        if isinstance(activity, dict)
+    ]
     project_tags = _merge_project_tags(
         item.get("project_tags"),
         custom_fields=custom_fields,
@@ -396,6 +411,7 @@ def _to_detail(item: dict[str, Any]) -> dict[str, Any]:
         "representative_publications": representative_publications,
         "patents": item.get("patents") or [],
         "awards": awards,
+        "scholar_activities": scholar_activities,
         "is_advisor_committee": bool(item.get("is_advisor_committee", False)),
         "adjunct_supervisor": _coerce_adjunct_supervisor(item.get("adjunct_supervisor")),
         "supervised_students": item.get("supervised_students") or [],

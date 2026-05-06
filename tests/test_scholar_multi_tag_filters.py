@@ -1,4 +1,5 @@
 from app.services.scholar._filters import _apply_filters
+from app.services.scholar._fast_query import _build_where_clause
 
 
 def _run_filters(items, **overrides):
@@ -160,3 +161,32 @@ def test_multi_achievement_tags_support_venue_year_tokens():
     filtered = _run_filters(items, achievement_tags="ICML:2025")
 
     assert [i["name"] for i in filtered] == ["A"]
+
+
+def test_fast_achievement_filter_does_not_require_materialized_tag_column():
+    where_sql, params = _build_where_clause(
+        university=None,
+        department=None,
+        position=None,
+        is_academician=None,
+        is_potential_recruit=None,
+        is_advisor_committee=None,
+        is_adjunct_supervisor=None,
+        has_email=None,
+        keyword=None,
+        is_chinese=None,
+        is_current_student=None,
+        chinese_identity=None,
+        achievement_tag=None,
+        achievement_tags="ICML",
+        custom_field_key=None,
+        custom_field_value=None,
+        allowed_universities=None,
+        has_achievement_tags_column=False,
+        has_representative_publications_column=True,
+    )
+
+    assert "achievement_tags &&" not in where_sql
+    assert "scholar_publications" in where_sql
+    assert "representative_publications" in where_sql
+    assert params == [["%icml%"]]

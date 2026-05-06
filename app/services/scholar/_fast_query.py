@@ -17,7 +17,7 @@ from app.services.scholar._transformers import _to_list_item
 from app.services.stores import scholar_annotation_store as annotation_store
 
 _SCHOLAR_COLUMNS_CACHE: set[str] | None = None
-
+_PUBLIC_TABLES_CACHE: set[str] | None = None
 _BASE_LIST_SELECT_FIELDS: tuple[str, ...] = (
     "id AS url_hash",
     "name",
@@ -67,8 +67,26 @@ async def _get_scholar_columns() -> set[str]:
     return _SCHOLAR_COLUMNS_CACHE
 
 
+async def _get_public_tables() -> set[str]:
+    global _PUBLIC_TABLES_CACHE
+    if _PUBLIC_TABLES_CACHE is not None:
+        return _PUBLIC_TABLES_CACHE
+
+    pool = get_pool()
+    rows = await pool.fetch(
+        """
+        SELECT table_name
+        FROM information_schema.tables
+        WHERE table_schema='public'
+        """,
+    )
+    _PUBLIC_TABLES_CACHE = {str(r["table_name"]) for r in rows}
+    return _PUBLIC_TABLES_CACHE
+
+
 async def _build_list_select_sql() -> str:
     scholar_cols = await _get_scholar_columns()
+    public_tables = await _get_public_tables()
     fields = list(_BASE_LIST_SELECT_FIELDS)
     for column, fallback_sql in _OPTIONAL_LIST_SELECT_FIELDS.items():
         fields.append(column if column in scholar_cols else fallback_sql)
@@ -96,6 +114,18 @@ async def _build_list_select_sql() -> str:
         fields.append("achievement_tags")
     else:
         fields.append("ARRAY[]::text[] AS achievement_tags")
+    if "scholar_activities" in public_tables:
+        fields.append(
+            "COALESCE(("
+            "SELECT jsonb_agg("
+            "jsonb_build_object("
+            "'activity_des', COALESCE(sa.activity_des, '')"
+            ") ORDER BY sa.created_at DESC NULLS LAST, sa.updated_at DESC NULLS LAST, sa.id DESC"
+            ") FROM scholar_activities sa WHERE sa.scholar_id = scholars.id"
+            "), '[]'::jsonb) AS scholar_activities"
+        )
+    else:
+        fields.append("'[]'::jsonb AS scholar_activities")
     publication_table_sql = (
         "SELECT jsonb_agg("
         "jsonb_build_object("
@@ -233,6 +263,9 @@ def _build_where_clause(
     custom_field_key: str | None,
     custom_field_value: str | None,
     allowed_universities: list[str] | None,
+    has_achievement_tags_column: bool = True,
+    has_representative_publications_column: bool = True,
+    has_scholar_activities_table: bool = True,
 ) -> tuple[str, list[Any]]:
     conditions: list[str] = []
     params: list[Any] = []
@@ -346,34 +379,93 @@ def _build_where_clause(
         venue_tags = [tag for tag, year in tag_targets if year is None]
         year_filters = [(tag, year) for tag, year in tag_targets if year is not None]
         tag_conditions: list[str] = []
+        representative_venue_text = (
+            "LOWER("
+            "COALESCE(rp.pub->>'venue', '') || ' ' || "
+            "COALESCE(rp.pub->>'conference', '') || ' ' || "
+            "COALESCE(rp.pub->>'journal', '') || ' ' || "
+            "COALESCE(rp.pub->>'venue_name', '') || ' ' || "
+            "COALESCE(rp.pub->>'publication_venue', '') || ' ' || "
+            "COALESCE(rp.pub->>'booktitle', '')"
+            ")"
+        )
         if venue_tags:
-            params.append(venue_tags)
-            tag_param = len(params)
             params.append([f"%{tag.lower()}%" for tag in venue_tags])
             like_param = len(params)
-            tag_conditions.append(
-                "("
-                f"achievement_tags && ${tag_param}::text[] "
-                "OR EXISTS ("
-                "SELECT 1 FROM scholar_publications sp "
-                "WHERE sp.scholar_id = scholars.id "
-                f"AND LOWER(COALESCE(sp.venue, '')) LIKE ANY(${like_param}::text[])"
-                ")"
-                ")"
-            )
+            tag_condition_parts = [
+                (
+                    "EXISTS ("
+                    "SELECT 1 FROM scholar_publications sp "
+                    "WHERE sp.scholar_id = scholars.id "
+                    f"AND LOWER(COALESCE(sp.venue, '')) LIKE ANY(${like_param}::text[])"
+                    ")"
+                ),
+            ]
+            if has_scholar_activities_table:
+                tag_condition_parts.append(
+                    "("
+                    "EXISTS ("
+                    "SELECT 1 FROM scholar_activities sa "
+                    "WHERE sa.scholar_id = scholars.id "
+                    f"AND LOWER(COALESCE(sa.activity_des, '')) LIKE ANY(${like_param}::text[])"
+                    ")"
+                    ")"
+                )
+            if has_representative_publications_column:
+                tag_condition_parts.append(
+                    "("
+                    "EXISTS ("
+                    "SELECT 1 FROM jsonb_array_elements("
+                    "COALESCE(scholars.representative_publications, '[]'::jsonb)"
+                    ") AS rp(pub) "
+                    f"WHERE {representative_venue_text} LIKE ANY(${like_param}::text[])"
+                    ")"
+                    ")"
+                )
+            if has_achievement_tags_column:
+                params.append(venue_tags)
+                tag_param = len(params)
+                tag_condition_parts.insert(0, f"achievement_tags && ${tag_param}::text[]")
+            tag_conditions.append("(" + " OR ".join(tag_condition_parts) + ")")
         for tag, year in year_filters:
             params.append(f"%{tag.lower()}%")
             like_param = len(params)
             params.append(year)
             year_param = len(params)
-            tag_conditions.append(
-                "EXISTS ("
-                "SELECT 1 FROM scholar_publications sp "
-                "WHERE sp.scholar_id = scholars.id "
-                f"AND LOWER(COALESCE(sp.venue, '')) LIKE ${like_param} "
-                f"AND sp.year = ${year_param}"
-                ")"
-            )
+            year_condition_parts = [
+                (
+                    "EXISTS ("
+                    "SELECT 1 FROM scholar_publications sp "
+                    "WHERE sp.scholar_id = scholars.id "
+                    f"AND LOWER(COALESCE(sp.venue, '')) LIKE ${like_param} "
+                    f"AND sp.year = ${year_param}"
+                    ")"
+                )
+            ]
+            if has_scholar_activities_table:
+                year_condition_parts.append(
+                    "("
+                    "EXISTS ("
+                    "SELECT 1 FROM scholar_activities sa "
+                    "WHERE sa.scholar_id = scholars.id "
+                    f"AND LOWER(COALESCE(sa.activity_des, '')) LIKE ${like_param} "
+                    f"AND LOWER(COALESCE(sa.activity_des, '')) LIKE ('%' || ${year_param}::text || '%')"
+                    ")"
+                    ")"
+                )
+            if has_representative_publications_column:
+                year_condition_parts.append(
+                    "("
+                    "EXISTS ("
+                    "SELECT 1 FROM jsonb_array_elements("
+                    "COALESCE(scholars.representative_publications, '[]'::jsonb)"
+                    ") AS rp(pub) "
+                    f"WHERE {representative_venue_text} LIKE ${like_param} "
+                    f"AND COALESCE(rp.pub->>'year', rp.pub->>'venue_year', '') = ${year_param}::text"
+                    ")"
+                    ")"
+                )
+            tag_conditions.append("(" + " OR ".join(year_condition_parts) + ")")
         conditions.append("(" + " OR ".join(tag_conditions) + ")")
 
     if custom_field_key:
@@ -469,6 +561,9 @@ async def query_scholar_list_fast(
         custom_field_key=custom_field_key,
         custom_field_value=custom_field_value,
         allowed_universities=allowed_universities,
+        has_achievement_tags_column="achievement_tags" in await _get_scholar_columns(),
+        has_representative_publications_column="representative_publications" in await _get_scholar_columns(),
+        has_scholar_activities_table="scholar_activities" in await _get_public_tables(),
     )
 
     pool = get_pool()
