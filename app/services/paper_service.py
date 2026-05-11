@@ -824,6 +824,7 @@ async def list_papers(
     venue_year: int | None = None,
     date_from: str | None = None,
     date_to: str | None = None,
+    affiliation: str | None = None,
     has_abstract: bool | None = None,
     page: int = 1,
     page_size: int = 20,
@@ -858,6 +859,8 @@ async def list_papers(
         add_clause("p.publication_date >= ${}::timestamptz", _to_datetime(date_from))
     if date_to:
         add_clause("p.publication_date <= ${}::timestamptz", _to_datetime(date_to))
+    if affiliation:
+        add_clause("p.affiliations::text ILIKE ${}", f"%{_clean_text(affiliation)}%")
     if has_abstract is True:
         clauses.append("COALESCE(p.abstract, '') <> ''")
     elif has_abstract is False:

@@ -219,6 +219,118 @@ def _coerce_list(raw: Any) -> list[Any]:
     return []
 
 
+def _to_text(value: Any) -> str:
+    return "" if value is None else str(value)
+
+
+def _join_text_items(value: Any) -> str:
+    if isinstance(value, list):
+        return ", ".join(
+            text for item in value if (text := str(item or "").strip())
+        )
+    return _to_text(value)
+
+
+def _to_int(value: Any, *, default: int = -1) -> int:
+    if value is None:
+        return default
+    if isinstance(value, str) and not value.strip():
+        return default
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _to_bool(value: Any) -> bool:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        return value.strip().lower() in {"1", "true", "yes", "y"}
+    return bool(value)
+
+
+def _normalize_publication_records(raw: list[Any]) -> list[dict[str, Any]]:
+    records: list[dict[str, Any]] = []
+    for item in raw:
+        if not isinstance(item, dict):
+            continue
+        records.append(
+            {
+                "title": _to_text(item.get("title")),
+                "venue": _to_text(item.get("venue")),
+                "year": _to_text(item.get("year")),
+                "authors": _join_text_items(item.get("authors")),
+                "url": _to_text(item.get("url")),
+                "doi": _to_text(item.get("doi")),
+                "abstract": _to_text(item.get("abstract")),
+                "publication_date": _to_text(item.get("publication_date")),
+                "project_group_name": _to_text(item.get("project_group_name")),
+                "source_type": _to_text(item.get("source_type")),
+                "citation_count": _to_int(item.get("citation_count")),
+                "is_corresponding": _to_bool(item.get("is_corresponding")),
+                "added_by": _to_text(item.get("added_by")) or "crawler",
+            }
+        )
+    return records
+
+
+def _normalize_patent_records(raw: list[Any]) -> list[dict[str, Any]]:
+    records: list[dict[str, Any]] = []
+    for item in raw:
+        if not isinstance(item, dict):
+            continue
+        records.append(
+            {
+                "title": _to_text(item.get("title")),
+                "patent_no": _to_text(item.get("patent_no")),
+                "year": _to_text(item.get("year")),
+                "inventors": _join_text_items(item.get("inventors")),
+                "patent_type": _to_text(item.get("patent_type")),
+                "status": _to_text(item.get("status")),
+                "added_by": _to_text(item.get("added_by")) or "crawler",
+            }
+        )
+    return records
+
+
+def _normalize_award_records(raw: list[Any]) -> list[dict[str, Any]]:
+    records: list[dict[str, Any]] = []
+    for item in raw:
+        if not isinstance(item, dict):
+            continue
+        records.append(
+            {
+                "title": _to_text(item.get("title")),
+                "year": _to_text(item.get("year")),
+                "level": _to_text(item.get("level")),
+                "grantor": _to_text(item.get("grantor")),
+                "description": _to_text(item.get("description")),
+                "added_by": _to_text(item.get("added_by")) or "crawler",
+            }
+        )
+    return records
+
+
+def _normalize_education_records(raw: list[Any]) -> list[dict[str, str]]:
+    records: list[dict[str, str]] = []
+    for item in raw:
+        if not isinstance(item, dict):
+            continue
+        year = item.get("year")
+        if year is None:
+            year = item.get("end_year")
+        records.append(
+            {
+                "degree": _to_text(item.get("degree")),
+                "institution": _to_text(item.get("institution")),
+                "year": _to_text(year),
+                "major": _to_text(item.get("major")),
+            }
+        )
+    return records
+
+
 def _normalize_profile_links(raw: Any) -> dict[str, Any]:
     links = dict(_PROFILE_LINK_DEFAULTS)
     value = raw
@@ -287,8 +399,10 @@ def _to_list_item(item: dict[str, Any]) -> dict[str, Any]:
     custom_fields = _coerce_custom_fields(item.get("custom_fields"))
     profile_links = _build_profile_links(item, custom_fields)
     legacy_profile_fields = _profile_links_to_legacy_fields(profile_links)
-    representative_publications = _coerce_list(item.get("representative_publications"))
-    awards = _coerce_list(item.get("awards"))
+    representative_publications = _normalize_publication_records(
+        _coerce_list(item.get("representative_publications"))
+    )
+    awards = _normalize_award_records(_coerce_list(item.get("awards")))
     achievement_tags = extract_achievement_tags(
         achievement_tags=item.get("achievement_tags"),
         representative_publications=[
@@ -344,8 +458,11 @@ def _to_detail(item: dict[str, Any]) -> dict[str, Any]:
     custom_fields = _coerce_custom_fields(item.get("custom_fields"))
     profile_links = _build_profile_links(item, custom_fields)
     legacy_profile_fields = _profile_links_to_legacy_fields(profile_links)
-    representative_publications = _coerce_list(item.get("representative_publications"))
-    awards = _coerce_list(item.get("awards"))
+    representative_publications = _normalize_publication_records(
+        _coerce_list(item.get("representative_publications"))
+    )
+    awards = _normalize_award_records(_coerce_list(item.get("awards")))
+    patents = _normalize_patent_records(_coerce_list(item.get("patents")))
     achievement_tags = extract_achievement_tags(
         achievement_tags=item.get("achievement_tags"),
         representative_publications=[
@@ -401,15 +518,15 @@ def _to_detail(item: dict[str, Any]) -> dict[str, Any]:
         "orcid": legacy_profile_fields["orcid"],
         "profile_links": profile_links,
         "phd_institution": item.get("phd_institution") or "",
-        "phd_year": item.get("phd_year") or "",
-        "education": item.get("education") or [],
+        "phd_year": str(item.get("phd_year") or ""),
+        "education": _normalize_education_records(_coerce_list(item.get("education"))),
         "publications_count": item.get("publications_count") or -1,
         "h_index": item.get("h_index") or -1,
         "citations_count": item.get("citations_count") or -1,
         "metrics_updated_at": item.get("metrics_updated_at") or "",
         "achievement_tags": achievement_tags,
         "representative_publications": representative_publications,
-        "patents": item.get("patents") or [],
+        "patents": patents,
         "awards": awards,
         "scholar_activities": scholar_activities,
         "is_advisor_committee": bool(item.get("is_advisor_committee", False)),

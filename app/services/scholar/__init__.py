@@ -30,6 +30,7 @@ from app.services.scholar._data import (
 )
 from app.services.scholar._filters import (
     _apply_filters,
+    _extract_primary_affiliation,
     get_institution_classification_map,
 )
 from app.services.scholar._achievement_tags import extract_achievement_tags
@@ -1217,6 +1218,47 @@ def _normalize_optional_filter_text(value: str | None) -> str | None:
     return text
 
 
+def _normalize_affiliation_exact_text(value: Any) -> str:
+    return " ".join(str(value or "").strip().split()).lower()
+
+
+async def _resolve_raw_university_names_for_filter(university: str) -> list[str]:
+    """Resolve a canonical institution filter to raw scholar university values."""
+    target = _normalize_affiliation_exact_text(university)
+    if not target:
+        return []
+
+    from app.db.pool import get_pool  # noqa: PLC0415
+
+    rows = await get_pool().fetch(
+        """
+        SELECT DISTINCT university
+        FROM scholars
+        WHERE COALESCE(BTRIM(university), '') <> ''
+        """,
+    )
+
+    matched: list[str] = [university]
+    seen: set[str] = {university}
+    for row in rows:
+        raw_value = str(row["university"] or "")
+        raw = _clean_text(raw_value)
+        if not raw:
+            continue
+        primary, _ = _extract_primary_affiliation(raw)
+        if (
+            _normalize_affiliation_exact_text(raw) != target
+            and _normalize_affiliation_exact_text(primary) != target
+        ):
+            continue
+        if raw_value in seen:
+            continue
+        seen.add(raw_value)
+        matched.append(raw_value)
+
+    return matched
+
+
 def _uses_project_filter(
     project_category: str | None,
     project_subcategory: str | None,
@@ -1317,13 +1359,26 @@ async def get_scholar_list(
     # Multi-value tag filters are currently implemented in in-memory fallback path.
     has_multi_tag_filters = bool(project_categories or project_subcategories or event_types)
     has_region_or_type_filters = bool(region or affiliation_type)
-    # University/department filters use affiliation normalization logic in
-    # fallback path to stay consistent with institution-tree aggregation.
-    has_affiliation_text_filters = bool(university or department)
-    if not has_multi_tag_filters and not has_region_or_type_filters and not has_affiliation_text_filters:
+    # Department filtering still depends on fallback affiliation parsing semantics.
+    has_department_filter = bool(department)
+    if not has_multi_tag_filters and not has_region_or_type_filters and not has_department_filter:
         try:
+            fast_university = university
+            fast_institution_names = institution_names
+            if university:
+                resolved_university_names = await _resolve_raw_university_names_for_filter(
+                    university
+                )
+                if fast_institution_names is None:
+                    fast_institution_names = resolved_university_names
+                else:
+                    allowed = set(fast_institution_names)
+                    fast_institution_names = [
+                        name for name in resolved_university_names if name in allowed
+                    ]
+                fast_university = None
             return await query_scholar_list_fast(
-                university=university,
+                university=fast_university,
                 department=department,
                 position=position,
                 is_academician=is_academician,
@@ -1340,7 +1395,7 @@ async def get_scholar_list(
                 is_cobuild_scholar=is_cobuild_scholar,
                 region=region,
                 affiliation_type=affiliation_type,
-                institution_names=institution_names,
+                institution_names=fast_institution_names,
                 custom_field_key=custom_field_key,
                 custom_field_value=custom_field_value,
                 is_chinese=is_chinese,

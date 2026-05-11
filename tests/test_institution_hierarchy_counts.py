@@ -23,6 +23,11 @@ def _mock_scholar_aggregation():
     return counts, university_names, department_names
 
 
+@pytest.mark.parametrize("raw_name", ["阿里巴巴集团", "Alibaba Group"])
+def test_primary_affiliation_normalizes_alibaba_group(raw_name):
+    assert scholar_filters._extract_primary_affiliation(raw_name) == ("阿里巴巴", "")
+
+
 @pytest.mark.asyncio
 async def test_hierarchy_includes_virtual_org_and_missing_departments(monkeypatch):
     async def fake_get_inst_map():

@@ -30,6 +30,7 @@ FEED_MIN_SCORE = 20  # Minimum matchScore for articles to appear in feed output
 ENRICHED_DIR = PROCESSED_DIR / "_enriched"
 
 _hash_tracker = HashTracker(PROCESSED_DIR / "_processed_hashes.json", PROCESSED_DIR)
+_source_name_by_id: dict[str, str] | None = None
 
 
 # ---------------------------------------------------------------------------
@@ -81,6 +82,35 @@ def _article_date(a: dict) -> str:
     return article_date(a, url_fallback=True)
 
 
+def _get_source_name_by_id() -> dict[str, str]:
+    global _source_name_by_id
+    if _source_name_by_id is None:
+        from app.scheduler.manager import load_all_source_configs
+
+        _source_name_by_id = {
+            str(config.get("id", "")).strip(): str(config.get("name", "")).strip()
+            for config in load_all_source_configs()
+            if str(config.get("id", "")).strip()
+            and str(config.get("name", "")).strip()
+        }
+    return _source_name_by_id
+
+
+def _resolve_source(article: dict) -> tuple[str, str]:
+    source_id = str(article.get("source_id") or "").strip()
+    raw_source_name = str(article.get("source_name") or "").strip()
+    source_map = _get_source_name_by_id()
+
+    configured_name = source_map.get(source_id)
+    if not configured_name and raw_source_name:
+        configured_name = source_map.get(raw_source_name)
+        if configured_name and not source_id:
+            source_id = raw_source_name
+
+    source_name = configured_name or raw_source_name or source_id
+    return source_id, source_name
+
+
 def _determine_category(article: dict, llm_result: dict) -> str:
     if llm_result.get("isOpportunity"):
         return "政策机会"
@@ -116,7 +146,7 @@ def _compute_status(days_left: int | None) -> str:
 
 def _build_feed_item(article: dict, llm: dict) -> dict:
     category = _determine_category(article, llm)
-    source_name = article.get("source_name") or article.get("source_id") or ""
+    source_id, source_name = _resolve_source(article)
     original_tags = article.get("tags", [])
     llm_tags = llm.get("tags", [])
     merged_tags = list(dict.fromkeys(original_tags + llm_tags))
@@ -128,7 +158,7 @@ def _build_feed_item(article: dict, llm: dict) -> dict:
         "importance": llm.get("importance", "一般"),
         "date": _article_date(article),
         "source": source_name,
-        "source_id": article.get("source_id", ""),
+        "source_id": source_id,
         "source_name": source_name,
         "tags": merged_tags,
         "matchScore": llm.get("matchScore"),
@@ -148,7 +178,7 @@ def _build_opportunity_item(article: dict, llm: dict) -> dict | None:
     if not llm.get("isOpportunity"):
         return None
     days_left = llm.get("daysLeft")
-    source_name = article.get("source_name") or article.get("source_id") or ""
+    _, source_name = _resolve_source(article)
     return {
         "id": article.get("url_hash", ""),
         "name": article.get("title", ""),

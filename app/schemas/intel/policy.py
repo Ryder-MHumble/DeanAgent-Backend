@@ -23,6 +23,16 @@ class PolicyFeedItem(BaseModel):
     )
     date: str | None = Field(default=None, description="发布日期", examples=["2024-01-15"])
     source: str | None = Field(default=None, description="来源名称", examples=["国务院"])
+    source_id: str | None = Field(
+        default=None,
+        description="信源 ID",
+        examples=["gov_cn_zhengce"],
+    )
+    source_name: str | None = Field(
+        default=None,
+        description="真实信源名称",
+        examples=["中国政府网-最新政策"],
+    )
     tags: list[str] = Field(
         default=[], description="标签", examples=[["人工智能", "规划"]]
     )

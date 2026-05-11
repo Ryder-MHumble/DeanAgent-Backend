@@ -9,12 +9,25 @@ from app.schemas.institution import (
     DepartmentInfo,
     InstitutionDetailResponse,
     InstitutionListItem,
-    SecondaryInstitutionInfo,
     ScholarInfo,
+    SecondaryInstitutionInfo,
 )
 from app.services.core.institution.classification import (
     normalize_priority,
 )
+from app.services.core.institution.ranking_tags import (
+    build_institution_tags,
+    resolve_qs_rank_band,
+)
+
+
+def _coerce_optional_int(value: object) -> int | None:
+    if value is None:
+        return None
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return None
 
 
 def _parse_scholar_list(raw: list | None) -> list[ScholarInfo]:
@@ -91,6 +104,8 @@ def build_list_item(record: dict) -> InstitutionListItem:
     """
     # Normalize priority
     priority = normalize_priority(record.get("priority"))
+    qs_rank = _coerce_optional_int(record.get("qs_rank"))
+    qs_rank_band = resolve_qs_rank_band({**record, "qs_rank": qs_rank})
 
     return InstitutionListItem(
         id=record["id"],
@@ -109,10 +124,21 @@ def build_list_item(record: dict) -> InstitutionListItem:
         mentor_count=record.get("mentor_count"),
         avatar=record.get("avatar"),
         org_name=record.get("org_name"),
+        is_985=bool(record.get("is_985")),
+        is_211=bool(record.get("is_211")),
+        is_double_first_class=bool(record.get("is_double_first_class")),
+        qs_rank=qs_rank,
+        qs_rank_band=qs_rank_band,
+        institution_tags=build_institution_tags(
+            {**record, "qs_rank": qs_rank, "qs_rank_band": qs_rank_band}
+        ),
     )
 
 
-def build_detail_response(record: dict, departments: list[dict] | None = None) -> InstitutionDetailResponse:
+def build_detail_response(
+    record: dict,
+    departments: list[dict] | None = None,
+) -> InstitutionDetailResponse:
     """Build InstitutionDetailResponse from database record.
 
     Args:

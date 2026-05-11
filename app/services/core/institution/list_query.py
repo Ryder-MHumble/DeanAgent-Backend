@@ -16,12 +16,26 @@ from app.services.core.institution.classification import (
     normalize_sub_classification,
 )
 from app.services.core.institution.detail_builder import build_list_item
+from app.services.core.institution.ranking_tags import (
+    build_institution_tags,
+    normalize_qs_rank_band,
+    resolve_qs_rank_band,
+)
 from app.services.core.institution.sorting import sort_institutions
 from app.services.core.institution.storage import fetch_all_institutions
 
 _HIERARCHY_CACHE_TTL_SECONDS = 30.0
 _hierarchy_cache: dict[
-    tuple[str | None, str | None, str | None, bool | None],
+    tuple[
+        str | None,
+        str | None,
+        str | None,
+        bool | None,
+        bool | None,
+        bool | None,
+        bool | None,
+        str | None,
+    ],
     tuple[float, dict[str, Any]],
 ] = {}
 
@@ -88,7 +102,9 @@ def _build_virtual_org_record(university_name: str) -> dict[str, Any]:
     normalized_name = _normalize_display_name(university_name)
     name_key = _normalize_name(normalized_name)
     region = _derive_region_from_university(normalized_name)
-    resolved_org_type = normalize_org_type(_derive_affiliation_type_from_university(normalized_name))
+    resolved_org_type = normalize_org_type(
+        _derive_affiliation_type_from_university(normalized_name)
+    )
     return {
         "id": _build_virtual_org_id(name_key),
         "name": normalized_name,
@@ -131,12 +147,48 @@ def _match_hierarchy_filters(
     region: str | None,
     org_type: str | None,
     classification: str | None,
+    is_985: bool | None = None,
+    is_211: bool | None = None,
+    is_double_first_class: bool | None = None,
+    qs_rank_band: str | None = None,
 ) -> bool:
     if region and record.get("region") != region:
         return False
     if org_type and normalize_org_type(record.get("org_type")) != normalize_org_type(org_type):
         return False
     if classification and record.get("classification") != classification:
+        return False
+    if not _match_ranking_filters(
+        record,
+        is_985=is_985,
+        is_211=is_211,
+        is_double_first_class=is_double_first_class,
+        qs_rank_band=qs_rank_band,
+    ):
+        return False
+    return True
+
+
+def _match_bool_filter(record: dict[str, Any], field: str, expected: bool | None) -> bool:
+    return expected is None or bool(record.get(field)) is expected
+
+
+def _match_ranking_filters(
+    record: dict[str, Any],
+    *,
+    is_985: bool | None = None,
+    is_211: bool | None = None,
+    is_double_first_class: bool | None = None,
+    qs_rank_band: str | None = None,
+) -> bool:
+    if not _match_bool_filter(record, "is_985", is_985):
+        return False
+    if not _match_bool_filter(record, "is_211", is_211):
+        return False
+    if not _match_bool_filter(record, "is_double_first_class", is_double_first_class):
+        return False
+    normalized_band = normalize_qs_rank_band(qs_rank_band)
+    if normalized_band and resolve_qs_rank_band(record) != normalized_band:
         return False
     return True
 
@@ -152,6 +204,10 @@ async def get_institutions_unified(
     page: int = 1,
     page_size: int = 20,
     is_adjunct_supervisor: bool | None = None,
+    is_985: bool | None = None,
+    is_211: bool | None = None,
+    is_double_first_class: bool | None = None,
+    qs_rank_band: str | None = None,
 ) -> InstitutionListResponse | dict[str, Any]:
     """Unified institution query interface.
 
@@ -171,9 +227,19 @@ async def get_institutions_unified(
     """
     normalized_org_type = normalize_org_type(org_type)
     normalized_sub_classification = normalize_sub_classification(sub_classification)
+    normalized_qs_rank_band = normalize_qs_rank_band(qs_rank_band)
 
     if view == "hierarchy":
-        cache_key = (region, normalized_org_type, classification, is_adjunct_supervisor)
+        cache_key = (
+            region,
+            normalized_org_type,
+            classification,
+            is_adjunct_supervisor,
+            is_985,
+            is_211,
+            is_double_first_class,
+            normalized_qs_rank_band,
+        )
         now = monotonic()
         cached = _hierarchy_cache.get(cache_key)
         if cached and (now - cached[0]) < _HIERARCHY_CACHE_TTL_SECONDS:
@@ -184,6 +250,10 @@ async def get_institutions_unified(
             org_type=normalized_org_type,
             classification=classification,
             is_adjunct_supervisor=is_adjunct_supervisor,
+            is_985=is_985,
+            is_211=is_211,
+            is_double_first_class=is_double_first_class,
+            qs_rank_band=normalized_qs_rank_band,
         )
         _hierarchy_cache[cache_key] = (now, result)
         return result
@@ -197,6 +267,10 @@ async def get_institutions_unified(
             keyword=keyword,
             page=page,
             page_size=page_size,
+            is_985=is_985,
+            is_211=is_211,
+            is_double_first_class=is_double_first_class,
+            qs_rank_band=normalized_qs_rank_band,
         )
     raise ValueError("Unsupported view. Use 'flat' or 'hierarchy'.")
 
@@ -210,6 +284,10 @@ async def _get_flat_view(
     keyword: str | None = None,
     page: int = 1,
     page_size: int = 20,
+    is_985: bool | None = None,
+    is_211: bool | None = None,
+    is_double_first_class: bool | None = None,
+    qs_rank_band: str | None = None,
 ) -> InstitutionListResponse:
     """Get flat list view of institutions.
 
@@ -239,6 +317,10 @@ async def _get_flat_view(
         classification=classification,
         sub_classification=sub_classification,
         keyword=keyword,
+        is_985=is_985,
+        is_211=is_211,
+        is_double_first_class=is_double_first_class,
+        qs_rank_band=qs_rank_band,
     )
 
     # Sort
@@ -267,6 +349,10 @@ async def _get_hierarchy_view(
     org_type: str | None = None,
     classification: str | None = None,
     is_adjunct_supervisor: bool | None = None,
+    is_985: bool | None = None,
+    is_211: bool | None = None,
+    is_double_first_class: bool | None = None,
+    qs_rank_band: str | None = None,
 ) -> dict[str, Any]:
     """Get hierarchy view of institutions (organizations with nested departments).
 
@@ -291,6 +377,23 @@ async def _get_hierarchy_view(
         all_records,
         entity_type="organization",
     )
+    from app.services.scholar._filters import _extract_primary_affiliation
+
+    organization_departments_by_parent_key: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    normalized_organizations = []
+    for org in organizations:
+        org_name = _normalize_display_name(org.get("name"))
+        primary_name, moved_department = _extract_primary_affiliation(org_name)
+        primary_key = _normalize_name(primary_name)
+        org_key = _normalize_name(org_name)
+        if primary_key and moved_department and primary_key != org_key:
+            dept = dict(org)
+            dept["name"] = moved_department
+            dept["entity_type"] = "department"
+            organization_departments_by_parent_key[primary_key].append(dept)
+            continue
+        normalized_organizations.append(org)
+    organizations = normalized_organizations
 
     # Always use scholar table aggregation as source of truth for counts and
     # to bring in institutions missing from the institutions table.
@@ -343,6 +446,7 @@ async def _get_hierarchy_view(
         all_depts: list[dict[str, Any]] = []
         for org_record in org_records:
             all_depts.extend(departments_by_parent.get(org_record["id"], []))
+        all_depts.extend(organization_departments_by_parent_key.get(org_name_key, []))
 
         # Deduplicate departments by normalized name.
         sorted_depts = sort_institutions(all_depts)
@@ -377,12 +481,22 @@ async def _get_hierarchy_view(
             "org_type": resolved_meta.get("org_type"),
             "classification": resolved_meta.get("classification"),
             "sub_classification": resolved_meta.get("sub_classification"),
+            "is_985": bool(org.get("is_985")),
+            "is_211": bool(org.get("is_211")),
+            "is_double_first_class": bool(org.get("is_double_first_class")),
+            "qs_rank": org.get("qs_rank"),
+            "qs_rank_band": resolve_qs_rank_band(org),
+            "institution_tags": build_institution_tags(org),
         }
         if not _match_hierarchy_filters(
             org_item,
             region=region,
             org_type=normalized_org_type,
             classification=classification,
+            is_985=is_985,
+            is_211=is_211,
+            is_double_first_class=is_double_first_class,
+            qs_rank_band=qs_rank_band,
         ):
             continue
 
@@ -421,11 +535,21 @@ async def _get_hierarchy_view(
         virtual_org["org_type"] = resolved_meta.get("org_type")
         virtual_org["classification"] = resolved_meta.get("classification")
         virtual_org["sub_classification"] = resolved_meta.get("sub_classification")
+        virtual_org["is_985"] = False
+        virtual_org["is_211"] = False
+        virtual_org["is_double_first_class"] = False
+        virtual_org["qs_rank"] = None
+        virtual_org["qs_rank_band"] = None
+        virtual_org["institution_tags"] = []
         if not _match_hierarchy_filters(
             virtual_org,
             region=region,
             org_type=normalized_org_type,
             classification=classification,
+            is_985=is_985,
+            is_211=is_211,
+            is_double_first_class=is_double_first_class,
+            qs_rank_band=qs_rank_band,
         ):
             continue
 
@@ -442,6 +566,19 @@ async def _get_hierarchy_view(
                     "scholar_count": dept_count,
                 }
             )
+        for dept in organization_departments_by_parent_key.get(org_key, []):
+            dept_key = _normalize_name(dept.get("name"))
+            if not dept_key:
+                continue
+            if any(_normalize_name(item.get("name")) == dept_key for item in departments):
+                continue
+            departments.append(
+                {
+                    "id": dept.get("id") or _build_virtual_dept_id(org_id, dept_key),
+                    "name": dept.get("name"),
+                    "scholar_count": scholar_counts.get(("dept", org_key, dept_key), 0),
+                }
+            )
         departments.sort(
             key=lambda d: (-int(d.get("scholar_count") or 0), str(d.get("name") or ""))
         )
@@ -455,6 +592,12 @@ async def _get_hierarchy_view(
                 "org_type": virtual_org.get("org_type"),
                 "classification": virtual_org.get("classification"),
                 "sub_classification": None,
+                "is_985": False,
+                "is_211": False,
+                "is_double_first_class": False,
+                "qs_rank": None,
+                "qs_rank_band": None,
+                "institution_tags": [],
                 "scholar_count": scholar_counts.get(("org", org_key), 0),
                 "secondary_institutions": departments,
                 "departments": departments,
@@ -480,6 +623,10 @@ def _apply_filters(
     classification: str | None = None,
     sub_classification: str | None = None,
     keyword: str | None = None,
+    is_985: bool | None = None,
+    is_211: bool | None = None,
+    is_double_first_class: bool | None = None,
+    qs_rank_band: str | None = None,
 ) -> list[dict]:
     """Apply filters to institution records.
 
@@ -518,7 +665,29 @@ def _apply_filters(
         filtered = [
             r
             for r in filtered
-            if normalize_sub_classification(r.get("sub_classification")) == normalized_sub_classification
+            if normalize_sub_classification(r.get("sub_classification"))
+            == normalized_sub_classification
+        ]
+
+    if any(
+        value is not None
+        for value in (
+            is_985,
+            is_211,
+            is_double_first_class,
+            normalize_qs_rank_band(qs_rank_band),
+        )
+    ):
+        filtered = [
+            r
+            for r in filtered
+            if _match_ranking_filters(
+                r,
+                is_985=is_985,
+                is_211=is_211,
+                is_double_first_class=is_double_first_class,
+                qs_rank_band=qs_rank_band,
+            )
         ]
 
     if keyword:
@@ -548,7 +717,6 @@ async def _aggregate_scholars_by_institution(
         3) Dict mapping university_key -> {department_key -> representative dept name}
     """
     from app.db.pool import get_pool
-
     from app.services.scholar._filters import _extract_primary_affiliation
 
     # SQL aggregation remains fast while preserving raw affiliation text for

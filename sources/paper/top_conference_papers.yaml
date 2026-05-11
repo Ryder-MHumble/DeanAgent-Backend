@@ -88,6 +88,8 @@ sources:
         volume: 25
       - year: 2025
         volume: 26
+      - year: 2026
+        volume: 27
     tags: ["paper", "warehouse", "jmlr", "journal", "ml"]
     enrichment: *enrich_journal_pdf
 
@@ -105,6 +107,7 @@ sources:
       - year: 2023
       - year: 2024
       - year: 2025
+      - year: 2026
     tags: ["paper", "warehouse", "jair", "journal", "ai"]
     enrichment: *enrich_journal_pdf
 
@@ -123,6 +126,7 @@ sources:
       - year: 2023
       - year: 2024
       - year: 2025
+      - year: 2026
     tags: ["paper", "warehouse", "tmlr", "journal", "openreview", "ml"]
     enrichment: *enrich_openreview_profile
 
@@ -176,6 +180,8 @@ sources:
         venue_id: "ICLR.cc/2024/Conference"
       - year: 2025
         venue_id: "ICLR.cc/2025/Conference"
+      - year: 2026
+        venue_id: "ICLR.cc/2026/Conference"
     tags: ["paper", "warehouse", "iclr", "openreview"]
     enrichment: *enrich_openreview_profile
 
@@ -218,6 +224,9 @@ sources:
       - year: 2022
       - year: 2023
       - year: 2024
+      - year: 2025
+      - year: 2026
+        optional: true
     tags: ["paper", "warehouse", "neurips"]
     enrichment: *enrich_proceedings_pdf
 
@@ -235,6 +244,10 @@ sources:
       - year: 2023
       - year: 2024
       - year: 2025
+      - year: 2026
+        source_format: "cvf_virtual_page"
+        url: "https://cvpr.thecvf.com/virtual/2026/papers.html"
+        detail_concurrency: 2
     tags: ["paper", "warehouse", "cvpr", "cvf"]
     enrichment: *enrich_cvf_pdf
 

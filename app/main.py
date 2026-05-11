@@ -107,6 +107,12 @@ TAG_METADATA = [
         "并提供论文仓信源状态与导入运行记录查询。",
     },
     {
+        "name": "openreview-authors",
+        "description": (
+            "OpenReview 作者画像 — 查询 OpenReview profile、机构、关键词、发表记录和抓取状态。"
+        ),
+    },
+    {
         "name": "leadership",
         "description": "高校领导 — 高校领导列表与机构领导详情查询。",
     },

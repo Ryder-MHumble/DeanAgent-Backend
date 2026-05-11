@@ -1,6 +1,6 @@
 # AI 顶刊顶会论文仓信源爬虫说明
 
-> 最后更新: 2026-05-03
+> 最后更新: 2026-05-07
 
 本文专门记录 `papers` 全局论文仓的 AI 顶刊顶会信源、爬虫方式、年份口径、字段覆盖和当前写库状态。README 只保留索引，论文仓数据模型与 API 见 [paper_warehouse.md](paper_warehouse.md)。
 
@@ -35,15 +35,15 @@ curl -X POST "http://localhost:8000/api/papers/sources/{source_id}/crawl"
 
 | source_id | Venue | 类型 | 年份口径 | crawler_class | 数据来源 |
 |---|---|---|---|---|---|
-| `jmlr` | JMLR | 顶刊 | 2023-2025 | `jmlr_papers` | JMLR volume index + abs 页 |
-| `jair` | JAIR | 顶刊 | 2023-2025 | `jair_oai` | JAIR OAI-PMH `oai_dc` |
-| `tmlr` | TMLR | 顶刊 | 2023-2025 | `openreview_journal` | OpenReview API |
+| `jmlr` | JMLR | 顶刊 | 2023-2026 | `jmlr_papers` | JMLR volume index + abs 页 |
+| `jair` | JAIR | 顶刊 | 2023-2026 | `jair_oai` | JAIR OAI-PMH `oai_dc` |
+| `tmlr` | TMLR | 顶刊 | 2023-2026 | `openreview_journal` | OpenReview API |
 | `acl_long` | ACL | 顶会 | 2024-2025 | `aclanthology` | ACL Anthology BibTeX |
 | `acl_short` | ACL | 顶会 | 2024-2025 | `aclanthology` | ACL Anthology BibTeX |
-| `iclr` | ICLR | 顶会 | 2024-2025 | `openreview` | OpenReview API |
-| `icml` | ICML | 顶会 | 2023-2025 | `openreview` | OpenReview API |
-| `neurips` | NeurIPS | 顶会 | 2022-2024 | `nips_papers_cc` | NeurIPS official proceedings |
-| `cvpr` | CVPR | 顶会 | 2023-2025 | `cvf_openaccess` | CVF OpenAccess |
+| `iclr` | ICLR | 顶会 | 2024-2026 | `openreview` | OpenReview API |
+| `icml` | ICML | 顶会 | 2023-2026 | `openreview` | OpenReview API / ICML virtual JSON |
+| `neurips` | NeurIPS | 顶会 | 2022-2026（2026 proceedings 未发布前自动跳过） | `nips_papers_cc` | NeurIPS official proceedings |
+| `cvpr` | CVPR | 顶会 | 2023-2026 | `cvf_openaccess` | CVF OpenAccess；2026 暂走 CVPR virtual |
 | `iccv` | ICCV | 顶会 | 2023、2025 | `cvf_openaccess` | CVF OpenAccess |
 | `emnlp_main` | EMNLP | 顶会 | 2023-2025 | `aclanthology` | ACL Anthology BibTeX |
 | `eccv` | ECCV | 顶会 | 2022、2024 | `ecva_papers` | ECVA proceedings |
@@ -78,7 +78,7 @@ curl -X POST "http://localhost:8000/api/papers/sources/{source_id}/crawl"
 - source_id: `jmlr`
 - crawler: [jmlr_papers.py](../app/crawlers/parsers/jmlr_papers.py)
 - 方式：抓取 JMLR volume index，再进入 abs 页获取摘要和 citation meta。
-- 年份：2023-2025，对应 volume 24、25、26。
+- 年份：2023-2026，对应 volume 24、25、26、27。
 - 已验证字段：`title`、`authors`、`abstract`、`publication_date`、`detail_url`、`pdf_url`。
 - 当前缺口：DOI、机构。
 
@@ -87,7 +87,7 @@ curl -X POST "http://localhost:8000/api/papers/sources/{source_id}/crawl"
 - source_id: `jair`
 - crawler: [jair_oai.py](../app/crawlers/parsers/jair_oai.py)
 - 方式：抓取 OAI-PMH `ListRecords&metadataPrefix=oai_dc`，按 `dc:date` 过滤出版年份。
-- 年份：2023-2025。
+- 年份：2023-2026。
 - 已验证字段：`title`、`authors`、`abstract`、`publication_date`、`detail_url`、`pdf_url`、`doi`。
 - 处理细节：JAIR OAI XML 存在少量 XML 1.0 非法控制字符，parser 入库前会清洗。
 - 当前缺口：机构。
@@ -97,7 +97,7 @@ curl -X POST "http://localhost:8000/api/papers/sources/{source_id}/crawl"
 - source_id: `tmlr`
 - crawler: [openreview_journal.py](../app/crawlers/parsers/openreview_journal.py)
 - 方式：抓取 OpenReview `content.venueid=TMLR`，按 note 的 `pdate/odate/cdate` 切入年份。
-- 年份：2023-2025。
+- 年份：2023-2026。
 - 已验证字段：`title`、`authors`、`abstract`、`publication_date`、`detail_url`、`pdf_url`。
 - 处理细节：OpenReview note 中可能出现 PostgreSQL 不接受的 `\x00`，`paper_service.normalize_payload()` 会清洗。
 - 当前缺口：DOI、机构。
@@ -107,7 +107,7 @@ curl -X POST "http://localhost:8000/api/papers/sources/{source_id}/crawl"
 - source_id: `icml`
 - crawler: [openreview_api.py](../app/crawlers/parsers/openreview_api.py)
 - 方式：抓取 OpenReview `ICML.cc/{year}/Conference`。
-- 年份：2023-2025。
+- 年份：2023-2026。2026 当前走 ICML virtual JSON，包含作者机构字段。
 - 已验证字段：`title`、`authors`、`abstract`、`publication_date`、`detail_url`、`pdf_url`。
 - 当前缺口：DOI、机构。
 
@@ -119,6 +119,15 @@ curl -X POST "http://localhost:8000/api/papers/sources/{source_id}/crawl"
 - 年份：2023、2025。ICCV 是双年会，当前不配置 2024。
 - 已验证字段：`title`、`authors`、`publication_date`、`detail_url`、`pdf_url`。
 - 当前缺口：摘要、DOI、机构。
+
+### CVPR
+
+- source_id: `cvpr`
+- crawler: [cvf_openaccess.py](../app/crawlers/parsers/cvf_openaccess.py)
+- 方式：2023-2025 抓取 CVF OpenAccess 列表页；2026 在 OpenAccess 发布前先抓取 CVPR virtual 论文页。
+- 年份：2023-2026。
+- 已验证字段：`title`、`authors`、`abstract`、`publication_date`、`detail_url`。2026 virtual 当前没有稳定 PDF 链接。
+- 当前缺口：2026 PDF、DOI、机构；待 CVF OpenAccess 发布后可切回 OpenAccess 路径补 PDF。
 
 ### EMNLP Main
 

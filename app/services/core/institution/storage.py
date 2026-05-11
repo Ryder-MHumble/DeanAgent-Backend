@@ -10,6 +10,10 @@ from typing import Final
 
 from app.db.client import get_client
 from app.services.core.institution.classification import normalize_org_type
+from app.services.core.institution.ranking_tags import (
+    derive_qs_rank_band,
+    normalize_qs_rank_band,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -46,6 +50,11 @@ _FALLBACK_INSTITUTION_COLUMNS: Final[set[str]] = {
     "cooperation_focus",
     "parent_id",
     "avatar",
+    "is_985",
+    "is_211",
+    "is_double_first_class",
+    "qs_rank",
+    "qs_rank_band",
     "org_name",
     "sources",
     "custom_fields",
@@ -119,6 +128,19 @@ async def upsert_institution(institution_data: dict) -> dict:
 
     normalized = dict(institution_data)
     normalized["org_type"] = normalize_org_type(normalized.get("org_type"))
+    for field in ("is_985", "is_211", "is_double_first_class"):
+        if field in normalized and normalized.get(field) is None:
+            normalized[field] = False
+    if "qs_rank" in normalized:
+        try:
+            rank = int(normalized["qs_rank"]) if normalized["qs_rank"] is not None else None
+        except (TypeError, ValueError):
+            rank = None
+        normalized["qs_rank"] = rank if rank and rank > 0 else None
+    if "qs_rank_band" in normalized:
+        normalized["qs_rank_band"] = normalize_qs_rank_band(normalized.get("qs_rank_band"))
+    if normalized.get("qs_rank") is not None and not normalized.get("qs_rank_band"):
+        normalized["qs_rank_band"] = derive_qs_rank_band(normalized.get("qs_rank"))
     # Backward compatibility: legacy schema keeps `type` as NOT NULL.
     if "type" in columns and not normalized.get("type"):
         entity_type = normalized.get("entity_type")
@@ -153,14 +175,18 @@ async def upsert_institution(institution_data: dict) -> dict:
     client = get_client()
     resp = await client.table("institutions").upsert(payload).execute()
     try:
-        from app.services.scholar._filters import invalidate_institution_classification_cache  # noqa: PLC0415
+        from app.services.scholar._filters import (
+            invalidate_institution_classification_cache,  # noqa: PLC0415
+        )
 
         invalidate_institution_classification_cache()
     except Exception:
         # Do not fail institution write if scholar cache invalidation is unavailable.
         pass
     try:
-        from app.services.core.institution.list_query import invalidate_hierarchy_cache  # noqa: PLC0415
+        from app.services.core.institution.list_query import (
+            invalidate_hierarchy_cache,  # noqa: PLC0415
+        )
 
         invalidate_hierarchy_cache()
     except Exception:
@@ -182,14 +208,18 @@ async def delete_institution_by_id(institution_id: str) -> bool:
     resp = await client.table("institutions").delete().eq("id", institution_id).execute()
     if resp.data:
         try:
-            from app.services.scholar._filters import invalidate_institution_classification_cache  # noqa: PLC0415
+            from app.services.scholar._filters import (
+                invalidate_institution_classification_cache,  # noqa: PLC0415
+            )
 
             invalidate_institution_classification_cache()
         except Exception:
             # Do not fail institution delete if scholar cache invalidation is unavailable.
             pass
         try:
-            from app.services.core.institution.list_query import invalidate_hierarchy_cache  # noqa: PLC0415
+            from app.services.core.institution.list_query import (
+                invalidate_hierarchy_cache,  # noqa: PLC0415
+            )
 
             invalidate_hierarchy_cache()
         except Exception:

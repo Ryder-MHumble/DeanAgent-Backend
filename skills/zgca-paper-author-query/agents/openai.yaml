@@ -1,0 +1,4 @@
+interface:
+  display_name: "ZGCA Paper Author Query"
+  short_description: "Query papers, affiliations, and OpenReview authors"
+  default_prompt: "Use $zgca-paper-author-query to answer ZGCA/OpenClaw paper, conference, institution-publication, paper-author, and OpenReview author-profile queries through the caller-provided BASE_URL, falling back to http://127.0.0.1:8001 for the local backend; if deployment provides another API address, replace only the base URL and keep endpoint paths unchanged. Use only the documented HTTP APIs and their responses."

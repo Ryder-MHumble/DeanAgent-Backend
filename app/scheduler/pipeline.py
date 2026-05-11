@@ -137,6 +137,26 @@ async def _stage_crawl_all() -> dict[str, Any]:
     return result or {}
 
 
+async def _stage_crawl_policy_dimension(dimension: str) -> dict[str, Any]:
+    """Crawl one policy dimension and persist fresh articles to DB."""
+    import sys
+    from pathlib import Path
+
+    project_root = str(Path(__file__).resolve().parent.parent.parent)
+    if project_root not in sys.path:
+        sys.path.insert(0, project_root)
+
+    from scripts.crawl.run_all import run_all
+
+    logger.info("Policy refresh: crawling %s sources...", dimension)
+    result = await run_all(
+        dimension_filter=dimension,
+        strategy="grouped",
+        cleanup_runtime_resources=False,
+    )
+    return result or {}
+
+
 async def _stage_process_policy() -> dict[str, Any]:
     """Stage 2: Process policy intelligence (rules-based)."""
     from app.services.intel.pipeline.policy_processor import (
@@ -425,6 +445,67 @@ async def execute_daily_pipeline() -> PipelineResult:
             icon, stage.name, stage.duration_seconds,
             f" ERROR: {stage.error}" if stage.error else "",
         )
+    logger.info("=" * 70)
+
+    return pipeline
+
+
+async def execute_policy_refresh_pipeline() -> PipelineResult:
+    """Refresh policy intelligence more frequently than the full daily pipeline.
+
+    This job only crawls national/beijing policy sources and rebuilds the policy
+    feed, so the policy page can surface same-day items without waiting for the
+    heavier all-module daily pipeline.
+    """
+    from app.config import settings
+    from app.services.llm.llm_service import has_llm_provider_configured
+
+    pipeline = PipelineResult()
+
+    logger.info("=" * 70)
+    logger.info("  POLICY REFRESH PIPELINE STARTING")
+    logger.info("=" * 70)
+
+    national_stage = await _run_stage(
+        "crawl_policy_national",
+        _stage_crawl_policy_dimension,
+        dimension="national_policy",
+    )
+    pipeline.stages.append(national_stage)
+
+    beijing_stage = await _run_stage(
+        "crawl_policy_beijing",
+        _stage_crawl_policy_dimension,
+        dimension="beijing_policy",
+    )
+    pipeline.stages.append(beijing_stage)
+
+    policy_stage = await _run_stage("process_policy", _stage_process_policy)
+    pipeline.stages.append(policy_stage)
+
+    llm_enabled = settings.ENABLE_LLM_ENRICHMENT and has_llm_provider_configured()
+    if llm_enabled:
+        llm_policy = await _run_stage(
+            "enrich_policy_llm",
+            _stage_enrich_policy_llm,
+        )
+        pipeline.stages.append(llm_policy)
+    else:
+        reason = (
+            "No LLM provider key configured"
+            if not has_llm_provider_configured()
+            else "ENABLE_LLM_ENRICHMENT=false"
+        )
+        pipeline.stages.append(_skipped_stage("enrich_policy_llm", reason))
+
+    pipeline.finished_at = datetime.now(timezone.utc)
+
+    logger.info("=" * 70)
+    logger.info(
+        "  POLICY REFRESH PIPELINE COMPLETE: %s (%.0fs)",
+        pipeline.status,
+        pipeline.duration_seconds,
+    )
     logger.info("=" * 70)
 
     return pipeline

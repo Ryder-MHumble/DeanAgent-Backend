@@ -22,7 +22,7 @@ description: 面向“学者检索/潜在招募/院士/顾问委员会/兼职导
 
 ## API 配置
 
-- 服务基址（由服务方提供）：`http://10.1.132.21:8001`
+- 服务基址：调用方提供 `BASE_URL`；本地后端默认 `http://127.0.0.1:8001`。若部署环境提供其他公网或内网地址，仅替换 base URL，端点路径保持不变。
 - 学者列表：`GET /api/scholars`
 - 学者统计：`GET /api/scholars/stats`
 - 学者详情：`GET /api/scholars/{url_hash}`
@@ -229,7 +229,8 @@ feature_request:
 ## 直接请求示例
 
 ```bash
-curl -sS -G "http://10.1.132.21:8001/api/scholars" \
+BASE_URL="${BASE_URL:-http://127.0.0.1:8001}"
+curl -sS -G "$BASE_URL/api/scholars" \
   --data-urlencode "university=清华大学" \
   --data-urlencode "keyword=具身智能" \
   --data-urlencode "is_potential_recruit=true" \
@@ -238,7 +239,8 @@ curl -sS -G "http://10.1.132.21:8001/api/scholars" \
 ```
 
 ```bash
-curl -sS "http://10.1.132.21:8001/api/scholars/{url_hash}"
+BASE_URL="${BASE_URL:-http://127.0.0.1:8001}"
+curl -sS "$BASE_URL/api/scholars/{url_hash}"
 ```
 
 ## 资源

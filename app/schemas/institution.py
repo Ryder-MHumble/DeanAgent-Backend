@@ -6,7 +6,6 @@ from typing import Any
 
 from pydantic import BaseModel, Field, field_validator, model_validator
 
-
 # ---------------------------------------------------------------------------
 # Core data models
 # ---------------------------------------------------------------------------
@@ -67,6 +66,15 @@ class InstitutionListItem(BaseModel):
     parent_id: str | None = Field(default=None, description="父机构 ID（仅二级机构）")
     avatar: str | None = Field(default=None, description="机构校徽图片链接")
     org_name: str | None = Field(default=None, description="AMiner 标准化机构名")
+    is_985: bool = Field(default=False, description="是否 985 高校")
+    is_211: bool = Field(default=False, description="是否 211 高校")
+    is_double_first_class: bool = Field(default=False, description="是否双一流高校")
+    qs_rank: int | None = Field(default=None, description="QS 世界大学排名名次")
+    qs_rank_band: str | None = Field(
+        default=None,
+        description="QS 排名区间（前30 | 前50 | 前100 | 前200 | 200外）",
+    )
+    institution_tags: list[str] = Field(default_factory=list, description="机构展示标签")
 
 
 class InstitutionListResponse(BaseModel):
@@ -98,6 +106,15 @@ class InstitutionHierarchyOrganization(BaseModel):
     classification: str | None = Field(default=None, description="顶层分类")
     sub_classification: str | None = Field(default=None, description="二级分类")
     scholar_count: int = Field(default=0, description="学者数量")
+    is_985: bool = Field(default=False, description="是否 985 高校")
+    is_211: bool = Field(default=False, description="是否 211 高校")
+    is_double_first_class: bool = Field(default=False, description="是否双一流高校")
+    qs_rank: int | None = Field(default=None, description="QS 世界大学排名名次")
+    qs_rank_band: str | None = Field(
+        default=None,
+        description="QS 排名区间（前30 | 前50 | 前100 | 前200 | 200外）",
+    )
+    institution_tags: list[str] = Field(default_factory=list, description="机构展示标签")
     secondary_institutions: list[InstitutionHierarchyDepartment] = Field(
         default_factory=list,
         description="二级机构列表",
@@ -205,6 +222,15 @@ class InstitutionDetailResponse(BaseModel):
     # 元数据
     last_updated: str | None = Field(default=None, description="最后更新时间 ISO8601")
     sources: list[dict[str, Any]] = Field(default_factory=list, description="机构关联信源列表")
+    is_985: bool = Field(default=False, description="是否 985 高校")
+    is_211: bool = Field(default=False, description="是否 211 高校")
+    is_double_first_class: bool = Field(default=False, description="是否双一流高校")
+    qs_rank: int | None = Field(default=None, description="QS 世界大学排名名次")
+    qs_rank_band: str | None = Field(
+        default=None,
+        description="QS 排名区间（前30 | 前50 | 前100 | 前200 | 200外）",
+    )
+    institution_tags: list[str] = Field(default_factory=list, description="机构展示标签")
 
     @model_validator(mode="after")
     def _sync_secondary_institutions_fields(self) -> "InstitutionDetailResponse":
@@ -335,6 +361,14 @@ class InstitutionCreate(BaseModel):
 
     # ---- 高校优先级 ----
     priority: str | None = Field(default=None, description="优先级（P0/P1/P2/P3，仅高校）")
+    is_985: bool | None = Field(default=None, description="是否 985 高校")
+    is_211: bool | None = Field(default=None, description="是否 211 高校")
+    is_double_first_class: bool | None = Field(default=None, description="是否双一流高校")
+    qs_rank: int | None = Field(default=None, description="QS 世界大学排名名次")
+    qs_rank_band: str | None = Field(
+        default=None,
+        description="QS 排名区间（前30 | 前50 | 前100 | 前200 | 200外）",
+    )
 
     # ---- 高校学生与导师数 ----
     student_count_24: int | None = Field(default=None, description="24 级学生人数")
@@ -390,6 +424,14 @@ class InstitutionUpdate(BaseModel):
     sub_classification: str | None = Field(default=None, description="二级分类")
     category: str | None = Field(default=None, description="[兼容] 旧版分类字段，等价于 sub_classification")
     priority: str | None = Field(default=None, description="优先级")
+    is_985: bool | None = Field(default=None, description="是否 985 高校")
+    is_211: bool | None = Field(default=None, description="是否 211 高校")
+    is_double_first_class: bool | None = Field(default=None, description="是否双一流高校")
+    qs_rank: int | None = Field(default=None, description="QS 世界大学排名名次")
+    qs_rank_band: str | None = Field(
+        default=None,
+        description="QS 排名区间（前30 | 前50 | 前100 | 前200 | 200外）",
+    )
     student_count_24: int | None = Field(default=None, description="24级学生人数")
     student_count_25: int | None = Field(default=None, description="25级学生人数")
     mentor_count: int | None = Field(default=None, description="导师总数")

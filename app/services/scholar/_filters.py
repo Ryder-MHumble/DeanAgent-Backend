@@ -70,10 +70,118 @@ _CAMPUS_PREFIXES = (
     "（深圳）",
     "深圳校区",
 )
+_UC_PARENT_NAME = "加州大学"
+_UC_CAMPUS_PATTERNS: tuple[tuple[str, tuple[str, ...]], ...] = (
+    (
+        "伯克利分校",
+        (
+            r"加州大学伯克利分校",
+            r"UC\s*伯克利",
+            r"\bUC\s*Berkeley\b",
+            r"\bUC\s*Berckly\b",
+            r"\bUniv\.?\s+Calif\.?\s+Berkeley\b",
+            r"\bUniversity\s+of\s+California\s*(?:,\s*|\s+at\s+|\s+)Berkeley\b",
+        ),
+    ),
+    (
+        "洛杉矶分校",
+        (
+            r"加州大学洛杉矶分校",
+            r"\bUCLA\b",
+            r"\bUC\s*Los\s+Angeles\b",
+            r"\bUniv\.?\s+Calif\.?\s+Los\s+Angeles\b",
+            r"\bUniversity\s+of\s+California\s*(?:,\s*|\s+)Los\s+Angeles\b",
+        ),
+    ),
+    (
+        "圣地亚哥分校",
+        (
+            r"加州大学圣地亚哥分校",
+            r"\bUC\s*San\s+Diego\b",
+            r"\bUniv\.?\s+Calif\.?\s+San\s+Diego\b",
+            r"\bUniversity\s+of\s+California\s*(?:,\s*|\s+)San\s+Diego\b",
+        ),
+    ),
+    (
+        "欧文分校",
+        (
+            r"加州大学欧文分校",
+            r"\bUC\s*Irvine\b",
+            r"\bUniv\.?\s+Calif\.?\s+Irvine\b",
+            r"\bUniversity\s+of\s+California\s*(?:,\s*|\s+)Irvine\b",
+            r"\bUniversity\s+of\s+California\s*(?:,\s*|\s+)Irivine\b",
+        ),
+    ),
+    (
+        "戴维斯分校",
+        (
+            r"加州大学戴维斯分校",
+            r"\bUC\s*Davis\b",
+            r"\bUniv\.?\s+Calif\.?\s+Davis\b",
+            r"\bUniversity\s+of\s+California\s*(?:,\s*|\s+)Davis\b",
+        ),
+    ),
+    (
+        "河滨分校",
+        (
+            r"加州大学河滨分校",
+            r"\bUC\s*Riverside\b",
+            r"\bUniv\.?\s+Calif\.?\s+Riverside\b",
+            r"\bUniversity\s+of\s+California\s*(?:,\s*|\s+)Riverside\b",
+        ),
+    ),
+    (
+        "圣塔芭芭拉分校",
+        (
+            r"加州大学圣塔芭芭拉分校",
+            r"加州大学圣巴巴拉分校",
+            r"\bUC\s*Santa\s+Barbara\b",
+            r"\bUniv\.?\s+Calif\.?\s+Santa\s+Barbara\b",
+            r"\bUniversity\s+of\s+California\s*(?:,\s*|\s+at\s+|\s+)Santa\s+Barbara\b",
+        ),
+    ),
+    (
+        "圣克鲁兹分校",
+        (
+            r"加州大学圣克鲁兹分校",
+            r"加州大学圣克鲁斯分校",
+            r"\bUC\s*Santa\s+Cruz\b",
+            r"\bUniv\.?\s+Calif\.?\s+Santa\s+Cruz\b",
+            r"\bUniversity\s+of\s+California\s*(?:,\s*|\s+)Santa\s+Cruz\b",
+        ),
+    ),
+    (
+        "默塞德分校",
+        (
+            r"加州大学默塞德分校",
+            r"\bUC\s*Merced\b",
+            r"\bUniv\.?\s+Calif\.?\s+Merced\b",
+            r"\bUniversity\s+of\s+California\s*(?:,\s*|\s+)Merced\b",
+        ),
+    ),
+    (
+        "旧金山分校",
+        (
+            r"加州大学旧金山分校",
+            r"\bUCSF\b",
+            r"\bUC\s*San\s+Francisco\b",
+            r"\bUniv\.?\s+Calif\.?\s+San\s+Francisco\b",
+            r"\bUniversity\s+of\s+California\s*(?:,\s*|\s+)San\s+Francisco\b",
+        ),
+    ),
+)
+_UC_ALIAS_PREFIX_RE = re.compile(
+    r"^(?:UCLA|UCSF|UC\s+[A-Za-z ]+|UC\s*伯克利)\b[\s,，;；:：|/\\\-—_()（）]*",
+    re.IGNORECASE,
+)
 _CAS_SHORT_MAP = {
     "自动化所": "自动化研究所",
     "计算所": "计算技术研究所",
     "信工所": "信息工程研究所",
+}
+_PRIMARY_INSTITUTION_ALIASES = {
+    "阿里巴巴集团": "阿里巴巴",
+    "alibaba group": "阿里巴巴",
 }
 _INTL_STRONG_MARKERS = (
     "美国", "英国", "德国", "法国", "意大利", "西班牙", "日本", "韩国", "印度", "新加坡", "澳大利亚",
@@ -264,6 +372,10 @@ def _clean_inst_text(value: Any) -> str:
     return " ".join(str(value or "").strip().split())
 
 
+def _canonical_primary_institution(value: str) -> str:
+    return _PRIMARY_INSTITUTION_ALIASES.get(value.lower(), value)
+
+
 def _clean_dept_text(value: Any) -> str:
     text = _clean_inst_text(value)
     text = _LEAD_SEP_RE.sub("", text)
@@ -297,6 +409,48 @@ def _strip_location_tail(suffix: str) -> str:
     return _clean_dept_text(text)
 
 
+def _clean_uc_department_fragment(fragment: str) -> str:
+    text = _clean_dept_text(fragment)
+    if not text:
+        return ""
+    text = _UC_ALIAS_PREFIX_RE.sub("", text)
+    text = re.sub(r"^(?:and|&)\b", "", text, flags=re.IGNORECASE)
+    text = _clean_dept_text(text)
+    if not text or not _department_like(text):
+        return ""
+    return text
+
+
+def _merge_uc_department_parts(campus: str, fragments: list[str]) -> str:
+    parts = [campus]
+    for fragment in fragments:
+        if not fragment:
+            continue
+        if fragment in parts[0] or parts[0] in fragment:
+            continue
+        if fragment not in parts:
+            parts.append(fragment)
+    return " / ".join(parts)
+
+
+def _extract_university_of_california_affiliation(text: str) -> tuple[str, str] | None:
+    for campus, patterns in _UC_CAMPUS_PATTERNS:
+        best_match: re.Match[str] | None = None
+        for pattern in patterns:
+            match = re.search(pattern, text, flags=re.IGNORECASE)
+            if match and (best_match is None or len(match.group(0)) > len(best_match.group(0))):
+                best_match = match
+        if best_match is None:
+            continue
+
+        fragments = [
+            _clean_uc_department_fragment(text[: best_match.start()]),
+            _clean_uc_department_fragment(text[best_match.end() :]),
+        ]
+        return _UC_PARENT_NAME, _merge_uc_department_parts(campus, fragments)
+    return None
+
+
 def _extract_primary_affiliation(university: str) -> tuple[str, str]:
     """Extract level-1 institution name and moved level-2 suffix from university field."""
     text = _clean_inst_text(university)
@@ -319,6 +473,10 @@ def _extract_primary_affiliation(university: str) -> tuple[str, str]:
         ):
             text = trimmed
 
+    canonical_text = _canonical_primary_institution(text)
+    if canonical_text != text:
+        return canonical_text, ""
+
     if text in _CAS_SHORT_MAP:
         return "中国科学院大学", _CAS_SHORT_MAP[text]
 
@@ -327,6 +485,10 @@ def _extract_primary_affiliation(university: str) -> tuple[str, str]:
         body = _clean_dept_text(cas_match.group(1))
         moved = body if body.endswith("研究所") else f"{body}研究所"
         return "中国科学院大学", moved
+
+    uc_affiliation = _extract_university_of_california_affiliation(text)
+    if uc_affiliation is not None:
+        return uc_affiliation
 
     matched = _ROOT_CAPTURE_RE.match(text)
     if not matched:

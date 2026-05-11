@@ -75,6 +75,14 @@ async def list_institutions(
     page_size: int = Query(default=20, ge=1, le=200, description="每页条数（仅 flat 视图）"),
     # Scholar filter
     is_adjunct_supervisor: bool | None = Query(default=None, description="仅统计共建导师（用于学者页侧边栏）"),
+    # Ranking/tag filters
+    is_985: bool | None = Query(default=None, description="筛选 985 高校"),
+    is_211: bool | None = Query(default=None, description="筛选 211 高校"),
+    is_double_first_class: bool | None = Query(default=None, description="筛选双一流高校"),
+    qs_rank_band: str | None = Query(
+        default=None,
+        description="QS 排名区间：前30 | 前50 | 前100 | 前200 | 200外",
+    ),
 ):
     """统一的机构查询接口，支持扁平和层级两种视图."""
     from app.services.core.institution import get_institutions_unified
@@ -90,6 +98,10 @@ async def list_institutions(
         page=page,
         page_size=page_size,
         is_adjunct_supervisor=is_adjunct_supervisor,
+        is_985=is_985,
+        is_211=is_211,
+        is_double_first_class=is_double_first_class,
+        qs_rank_band=qs_rank_band,
     )
 
 
@@ -438,8 +450,8 @@ async def create_institution(body: InstitutionCreate):
     # 若 org_name 未传入，自动从 AMiner 查询并写回
     if not inst_data.get("org_name"):
         try:
-            from app.services.external.aminer_client import get_aminer_client
             from app.services.core.institution import update_institution
+            from app.services.external.aminer_client import get_aminer_client
 
             client = get_aminer_client()
             aminer_resp = await client.search_organizations(body.name)

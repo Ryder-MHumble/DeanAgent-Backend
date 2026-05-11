@@ -1,10 +1,22 @@
 # 信源爬取状态总览
 
-> 最后更新: 2026-05-03 (v49: papers 论文仓新增 AI 顶刊/顶会 2023-2025 信源)
+> 最后更新: 2026-05-11 (v50: policy_intel 高频刷新与信源名称修正)
 
 ---
 
-## 0. 本轮迭代结论（2026-05-03）
+## 0. 本轮迭代结论（2026-05-11）
+
+### 本轮调整
+
+- 政策情报新增 `policy_refresh_pipeline`，每 4 小时只刷新 `national_policy` + `beijing_policy` 并重建 `policy_intel/feed.json`，避免等全量 daily pipeline 才出现当日政策。
+- 启用中的国家/北京政策信源最低频率提升到 4 小时：`samr_news`、`miit_policy`、`nsfc_news`、`bjjw_policy`、`bjrsj_policy`、`ncsti_policy`、`bjzscqj_policy`、`bjfgw_policy`、`bjhd_policy`、`bjrd_renshi`。
+- 政策 feed 输出继续保留 `source_id`，同时把 `source` / `source_name` 解析为真实信源名称，例如 `beijing_ywdt` 展示为 `首都之窗-要闻`。
+
+### 仍受限
+
+- `docs/TODO.md` 在当前仓库中不存在，本轮仅更新 `docs/CrawlStatus.md`。
+
+## 0A. 上轮迭代结论（2026-05-03）
 
 ### 已完成并验证
 

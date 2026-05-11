@@ -3,6 +3,7 @@ from fastapi import APIRouter
 from app.api.academic import (
     events,
     institutions,
+    openreview_authors,
     papers,
     projects,
     scholars,
@@ -44,6 +45,11 @@ def build_api_router(prefix: str = "/api") -> APIRouter:
     router.include_router(projects.router, prefix="/projects", tags=["projects"])
     router.include_router(venues.router, prefix="/venues", tags=["venues"])
     router.include_router(papers.router, tags=["papers"])
+    router.include_router(
+        openreview_authors.router,
+        prefix="/openreview-authors",
+        tags=["openreview-authors"],
+    )
     router.include_router(
         university_leadership.router,
         prefix="/leadership",

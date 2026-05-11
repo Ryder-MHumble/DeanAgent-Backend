@@ -30,7 +30,12 @@ except ImportError:
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
     from base import BaseCrawler, CrawledItem  # type: ignore
 
-    async def fetch_page(url: str, timeout: float = 60.0, max_retries: int = 3) -> str:
+    async def fetch_page(
+        url: str,
+        timeout: float = 60.0,
+        max_retries: int = 3,
+        request_delay: float | None = None,
+    ) -> str:
         import httpx
         last_err = None
         for attempt in range(max_retries + 1):
@@ -56,7 +61,7 @@ BASE = "https://papers.nips.cc"
 
 # NeurIPS 列表页每条论文的结构
 _PAPER_ROW_RE = re.compile(
-    r'<li class="conference"\s+data-track="([^"]+)">\s*'
+    r'<li\b[^>]*\bdata-track="([^"]+)"[^>]*>\s*'
     r'<div class="paper-content">\s*'
     r'<a[^>]*title="paper title"\s+href="([^"]+)">([^<]+)</a>\s*'
     r'<span class="paper-authors">(.*?)</span>',
@@ -67,6 +72,8 @@ _PAPER_ROW_RE = re.compile(
 _TRACK_LABEL = {
     "conference":          "Main Conference",
     "datasets_benchmarks": "Datasets & Benchmarks",
+    "datasets_and_benchmarks_track": "Datasets & Benchmarks",
+    "position_paper_track": "Position Paper",
 }
 
 
@@ -102,7 +109,22 @@ class NeurIPSCrawler(BaseCrawler):
 
         list_url = f"{BASE}/paper_files/paper/{year}"
         logger.info(f"[{self.source_id}] fetching {list_url}")
-        html = await fetch_page(list_url, timeout=60.0, max_retries=3)
+        try:
+            html = await fetch_page(
+                list_url,
+                timeout=60.0,
+                max_retries=int(cfg.get("max_retries", 3)),
+                request_delay=cfg.get("request_delay"),
+            )
+        except Exception as exc:
+            if cfg.get("optional") and _response_status_code(exc) == 404:
+                logger.warning(
+                    "[%s] optional NeurIPS proceedings year %s is not published yet",
+                    self.source_id,
+                    year,
+                )
+                return []
+            raise
 
         matches = _PAPER_ROW_RE.findall(html)
         logger.info(f"[{self.source_id}] parsed {len(matches)} raw rows")
@@ -124,7 +146,7 @@ class NeurIPSCrawler(BaseCrawler):
             title_clean = re.sub(r"\s+", " ", title).strip()
 
             # 作者拆分（逗号分隔）
-            authors_list = [a.strip() for a in authors_raw.split(",") if a.strip()]
+            authors_list = _parse_authors(authors_raw)
             authors_data = [
                 {
                     "paper_id": paper_id,
@@ -179,3 +201,16 @@ class NeurIPSCrawler(BaseCrawler):
             ))
 
         return items
+
+
+def _response_status_code(exc: Exception) -> int | None:
+    response = getattr(exc, "response", None)
+    status_code = getattr(response, "status_code", None)
+    return int(status_code) if isinstance(status_code, int) else None
+
+
+def _parse_authors(authors_raw: str) -> list[str]:
+    authors_text = re.sub(r"\s+", " ", authors_raw).strip()
+    if authors_text.lower() == "error":
+        return []
+    return [author.strip() for author in authors_text.split(",") if author.strip()]

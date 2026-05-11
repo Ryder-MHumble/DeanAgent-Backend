@@ -143,7 +143,10 @@ class SchedulerManager:
 
         # Register daily pipeline job (5 stages)
         from app.scheduler.jobs import execute_university_leadership_monthly_job
-        from app.scheduler.pipeline import execute_daily_pipeline
+        from app.scheduler.pipeline import (
+            execute_daily_pipeline,
+            execute_policy_refresh_pipeline,
+        )
 
         self.scheduler.add_job(
             execute_university_leadership_monthly_job,
@@ -164,16 +167,25 @@ class SchedulerManager:
             misfire_grace_time=3600,
         )
 
+        self.scheduler.add_job(
+            execute_policy_refresh_pipeline,
+            trigger=IntervalTrigger(hours=settings.POLICY_REFRESH_INTERVAL_HOURS),
+            id="policy_refresh_pipeline",
+            replace_existing=True,
+            misfire_grace_time=1800,
+        )
+
         self.scheduler.start()
         enabled_count = len(
             [c for c in self._source_configs if c.get("is_enabled", True)]
         )
         logger.info(
             "Scheduler started with %d source jobs + monthly leadership full crawl + "
-            "daily pipeline (%02d:%02d UTC)",
+            "daily pipeline (%02d:%02d UTC) + policy refresh every %dh",
             enabled_count,
             settings.PIPELINE_CRON_HOUR,
             settings.PIPELINE_CRON_MINUTE,
+            settings.POLICY_REFRESH_INTERVAL_HOURS,
         )
 
     async def stop(self) -> None:

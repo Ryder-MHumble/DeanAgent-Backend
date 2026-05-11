@@ -22,7 +22,7 @@ description: 面向“学生名单/年级学生/导师带学生/毕业状态/学
 
 ## API 配置
 
-- 服务基址（由服务方提供）：`http://10.1.132.21:8001`
+- 服务基址：调用方提供 `BASE_URL`；本地后端默认 `http://127.0.0.1:8001`。若部署环境提供其他公网或内网地址，仅替换 base URL，端点路径保持不变。
 - 学生列表：`GET /api/students`
 - 学生筛选项：`GET /api/students/options`
 - 学生详情：`GET /api/students/{student_id}`
@@ -202,7 +202,8 @@ feature_request:
 ## 直接请求示例
 
 ```bash
-curl -sS -G "http://10.1.132.21:8001/api/students" \
+BASE_URL="${BASE_URL:-http://127.0.0.1:8001}"
+curl -sS -G "$BASE_URL/api/students" \
   --data-urlencode "institution=清华大学" \
   --data-urlencode "enrollment_year=2024" \
   --data-urlencode "page=1" \
@@ -210,7 +211,8 @@ curl -sS -G "http://10.1.132.21:8001/api/students" \
 ```
 
 ```bash
-curl -sS "http://10.1.132.21:8001/api/students/{student_id}"
+BASE_URL="${BASE_URL:-http://127.0.0.1:8001}"
+curl -sS "$BASE_URL/api/students/{student_id}"
 ```
 
 ## 资源
