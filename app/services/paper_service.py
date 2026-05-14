@@ -489,12 +489,22 @@ async def _upsert_paper(
     )
     paper_id = payload.paper_id or f"paper_{uuid4().hex}"
     existing = await conn.fetchrow(
-        "SELECT * FROM papers WHERE canonical_uid = $1 LIMIT 1",
+        """
+        SELECT * FROM papers
+        WHERE canonical_uid = $1
+          AND COALESCE(canonical_uid, '') <> ''
+        LIMIT 1
+        """,
         canonical_uid,
     )
     if existing is None and payload.paper_id:
         existing = await conn.fetchrow(
-            "SELECT * FROM papers WHERE paper_id = $1 LIMIT 1",
+            """
+            SELECT * FROM papers
+            WHERE paper_id = $1
+              AND COALESCE(paper_id, '') <> ''
+            LIMIT 1
+            """,
             payload.paper_id,
         )
     if existing is None:
@@ -593,6 +603,7 @@ async def _upsert_paper(
             target_key = COALESCE(papers.target_key, $19),
             updated_at = now()
         WHERE paper_id = $1
+          AND COALESCE(paper_id, '') <> ''
         """,
         str(existing["paper_id"]),
         canonical_uid,

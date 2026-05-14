@@ -151,6 +151,7 @@ class OpenReviewCrawler(BaseCrawler):
         records = data.get("results", []) if isinstance(data, dict) else data
         if not isinstance(records, list):
             return []
+        records = self._filter_icml_virtual_records(records)
 
         if cfg.get("max_items"):
             records = records[: int(cfg["max_items"])]
@@ -172,6 +173,24 @@ class OpenReviewCrawler(BaseCrawler):
                 items.append(item)
         logger.info(f"[{self.source_id}] fetched {len(items)} ICML virtual records for {year}")
         return items
+
+    @classmethod
+    def _filter_icml_virtual_records(cls, records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        filtered: list[dict[str, Any]] = []
+        seen_forum_ids: set[str] = set()
+        for record in records:
+            if not isinstance(record, dict):
+                continue
+            title = cls._clean_virtual_text(record.get("name"))
+            if not title or title.startswith("Position:"):
+                continue
+            paper_url = cls._clean_virtual_text(record.get("paper_url")) or None
+            forum_id = cls._openreview_id_from_url(paper_url)
+            if not forum_id or forum_id in seen_forum_ids:
+                continue
+            seen_forum_ids.add(forum_id)
+            filtered.append(record)
+        return filtered
 
     @staticmethod
     def _icml_virtual_record_to_item(

@@ -11,6 +11,7 @@
 
 - `run_single.py`: 单源爬取测试
 - `run_all.py`: 批量爬取（支持并发策略）
+- `monitor_paper_release_status.py`: 对照官方发布状态和 `papers` 表计数，判定 `published_and_in_db` / `not_published_yet` / `published_but_missing_in_db` / `not_applicable_year`
 
 ## intel/ — 智能处理脚本
 

@@ -18,6 +18,7 @@ from app.schemas.student import (
     StudentPublicationWorkspaceCounts,
     StudentPublicationWorkspaceResponse,
 )
+from app.services import publication_service
 
 
 def _clean_text(value: Any) -> str:
@@ -250,6 +251,7 @@ async def get_workspace(
     *,
     student_id: str,
 ) -> StudentPublicationWorkspaceResponse:
+    await publication_service.ensure_publication_tables(pool)
     async with pool.acquire() as conn:
         target_candidates = await _student_target_candidates(conn, student_id=student_id)
         if not target_candidates:
@@ -386,6 +388,7 @@ async def patch_candidate(
     candidate_id: str,
     body: StudentPublicationCandidatePatchRequest,
 ) -> StudentPublicationCandidateRecord | None:
+    await publication_service.ensure_publication_tables(pool)
     async with pool.acquire() as conn, conn.transaction():
         owner_candidates = await _student_target_candidates(conn, student_id=student_id)
         current = await _load_candidate_for_update(
@@ -627,6 +630,7 @@ async def confirm_candidate(
     candidate_id: str,
     body: StudentPublicationCandidateDecisionRequest,
 ) -> StudentPublicationCandidateActionResponse | None:
+    await publication_service.ensure_publication_tables(pool)
     async with pool.acquire() as conn, conn.transaction():
         owner_candidates = await _student_target_candidates(conn, student_id=student_id)
         current = await _load_candidate_for_update(
@@ -771,6 +775,7 @@ async def reject_candidate(
     candidate_id: str,
     body: StudentPublicationCandidateDecisionRequest,
 ) -> StudentPublicationCandidateActionResponse | None:
+    await publication_service.ensure_publication_tables(pool)
     async with pool.acquire() as conn, conn.transaction():
         owner_candidates = await _student_target_candidates(conn, student_id=student_id)
         current = await _load_candidate_for_update(
@@ -833,6 +838,7 @@ async def reopen_candidate(
     candidate_id: str,
     body: StudentPublicationCandidateDecisionRequest,
 ) -> StudentPublicationCandidateActionResponse | None:
+    await publication_service.ensure_publication_tables(pool)
     async with pool.acquire() as conn, conn.transaction():
         owner_candidates = await _student_target_candidates(conn, student_id=student_id)
         current = await _load_candidate_for_update(

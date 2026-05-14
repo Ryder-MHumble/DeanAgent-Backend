@@ -139,6 +139,23 @@ curl -X POST "http://localhost:8000/api/papers/sources/cvpr/crawl"
 .venv/bin/python scripts/crawl/backfill_papers.py --source iclr --source aaai
 ```
 
+## 监测脚本
+
+用于核对论文仓 `papers` 表和官方发布状态是否一致：
+
+```bash
+.venv/bin/python scripts/crawl/monitor_paper_release_status.py
+.venv/bin/python scripts/crawl/monitor_paper_release_status.py --year 2026
+.venv/bin/python scripts/crawl/monitor_paper_release_status.py --year 2025 --source neurips --source icml
+```
+
+脚本输出四类结论：
+
+- `published_and_in_db`
+- `not_published_yet`
+- `published_but_missing_in_db`
+- `not_applicable_year`
+
 ## 代码入口
 
 - API: [app/api/papers.py](../app/api/papers.py)

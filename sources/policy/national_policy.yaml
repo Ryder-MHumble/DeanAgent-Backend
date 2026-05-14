@@ -51,7 +51,11 @@ sources:
     group: "policy"
     url: "https://www.gov.cn/zhengce/zuixin/"
     crawl_method: "dynamic"
-    schedule: "2h"
+    schedule: "cron"
+    cron:
+      hour: "10,15,20"
+      minute: 0
+      timezone: "Asia/Shanghai"
     priority: 1
     is_enabled: true
     keyword_filter: []  # gov.cn aggregates all national policies; no title-level filter
@@ -74,7 +78,11 @@ sources:
     group: "policy"
     url: "https://www.ndrc.gov.cn/xxgk/zcfb/tz/"
     crawl_method: "static"
-    schedule: "4h"
+    schedule: "cron"
+    cron:
+      hour: "10,15,20"
+      minute: 0
+      timezone: "Asia/Shanghai"
     priority: 1
     is_enabled: true
     keyword_filter: []  # 发改委通知公告条目偏少，放开标题关键词过滤避免漏抓
@@ -94,7 +102,11 @@ sources:
     group: "policy"
     url: "http://www.moe.gov.cn/jyb_xxgk/moe_1777/moe_1778/"
     crawl_method: "static"
-    schedule: "4h"
+    schedule: "cron"
+    cron:
+      hour: "10,15,20"
+      minute: 0
+      timezone: "Asia/Shanghai"
     priority: 1
     is_enabled: true
     selectors:
@@ -113,7 +125,11 @@ sources:
     group: "policy"
     url: "https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/"
     crawl_method: "static"
-    schedule: "4h"
+    schedule: "cron"
+    cron:
+      hour: "10,15,20"
+      minute: 0
+      timezone: "Asia/Shanghai"
     priority: 1
     is_enabled: true
     keyword_filter: []  # 科技部内容全部与科技相关，不做过滤
@@ -134,7 +150,11 @@ sources:
     group: "policy"
     url: "https://www.cac.gov.cn/wxzw/zcfg/A093703index_1.htm"
     crawl_method: "dynamic"
-    schedule: "4h"
+    schedule: "cron"
+    cron:
+      hour: "10,15,20"
+      minute: 0
+      timezone: "Asia/Shanghai"
     priority: 1
     is_enabled: true
     wait_for: "#loadingInfoPage li"
@@ -165,7 +185,11 @@ sources:
     group: "policy"
     url: "https://www.samr.gov.cn/xw/zj/"
     crawler_class: "samr_api"
-    schedule: "4h"
+    schedule: "cron"
+    cron:
+      hour: "10,15,20"
+      minute: 0
+      timezone: "Asia/Shanghai"
     priority: 2
     is_enabled: true
     base_url: "https://www.samr.gov.cn"
@@ -179,7 +203,11 @@ sources:
     group: "policy"
     url: "https://www.miit.gov.cn/xwfb/index.html"
     crawl_method: "static"
-    schedule: "4h"
+    schedule: "cron"
+    cron:
+      hour: "10,15,20"
+      minute: 0
+      timezone: "Asia/Shanghai"
     priority: 2
     is_enabled: true
     selectors:
@@ -199,7 +227,11 @@ sources:
     group: "policy"
     url: "https://www.nsfc.gov.cn/p1/2828/2831/tzgg11.html"
     crawl_method: "static"
-    schedule: "4h"
+    schedule: "cron"
+    cron:
+      hour: "10,15,20"
+      minute: 0
+      timezone: "Asia/Shanghai"
     priority: 2
     is_enabled: true
     selectors:

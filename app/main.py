@@ -202,13 +202,10 @@ def _check_needs_today_briefing_backfill() -> bool:
 async def _check_needs_today_social_kol_backfill() -> bool:
     """Trigger a catch-up run when today's scheduled social KOL crawl was missed."""
     now_utc = datetime.now(timezone.utc)
-    bj = ZoneInfo("Asia/Shanghai")
-    now_bj = now_utc.astimezone(bj)
-    scheduled_bj = now_bj.replace(hour=4, minute=0, second=0, microsecond=0)
-    if now_bj < scheduled_bj:
+    scheduled_utc = _latest_social_kol_scheduled_utc(now_utc)
+    if scheduled_utc is None:
         return False
 
-    scheduled_utc = scheduled_bj.astimezone(timezone.utc)
     try:
         from app.db.client import get_client
 
@@ -224,6 +221,22 @@ async def _check_needs_today_social_kol_backfill() -> bool:
     except Exception as e:  # noqa: BLE001
         logger.warning("Social KOL backfill check skipped (DB unavailable): %s", e)
         return False
+
+
+def _latest_social_kol_scheduled_utc(now_utc: datetime) -> datetime | None:
+    """Return the latest expected X KOL crawl window in UTC.
+
+    Current schedule runs at 04:00 and 16:00 Asia/Shanghai every day.
+    """
+    bj = ZoneInfo("Asia/Shanghai")
+    now_bj = now_utc.astimezone(bj)
+    first_window = now_bj.replace(hour=4, minute=0, second=0, microsecond=0)
+    second_window = now_bj.replace(hour=16, minute=0, second=0, microsecond=0)
+    if now_bj >= second_window:
+        return second_window.astimezone(timezone.utc)
+    if now_bj >= first_window:
+        return first_window.astimezone(timezone.utc)
+    return None
 
 
 @asynccontextmanager
@@ -328,7 +341,7 @@ async def lifespan(app: FastAPI):
         try:
             if await _check_needs_today_social_kol_backfill():
                 logger.info(
-                    "Today's social KOL crawl appears missing after 04:00 Asia/Shanghai — "
+                    "Social KOL crawl appears missing after the latest scheduled X window — "
                     "triggering catch-up crawl for twitter_ai_kol_international"
                 )
                 await scheduler.trigger_source("twitter_ai_kol_international")

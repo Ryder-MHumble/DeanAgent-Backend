@@ -8,7 +8,7 @@ sources:
   group: university_leadership_official
   url: https://www.tsinghua.edu.cn/xxgk/xrld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -42,7 +42,7 @@ sources:
   group: university_leadership_official
   url: https://www.pku.edu.cn/leaders.html
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -72,7 +72,7 @@ sources:
   group: university_leadership_official
   url: https://www.ucas.ac.cn/xxgk/xrld/index.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -106,7 +106,7 @@ sources:
   group: university_leadership_official
   url: https://www.bit.edu.cn/gbxxgk/xxld_sjb/index.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -137,7 +137,7 @@ sources:
   group: university_leadership_official
   url: https://www.bnu.edu.cn/xxgk/xrld/index.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -167,7 +167,7 @@ sources:
   group: university_leadership_official
   url: https://www.ruc.edu.cn/xianrenlingdao1924735163695271937.html
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -189,7 +189,7 @@ sources:
   group: university_leadership_official
   url: https://www.ustc.edu.cn/xxgk/xrld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -207,7 +207,7 @@ sources:
   group: university_leadership_official
   url: https://www.fudan.edu.cn/448/list.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -241,7 +241,7 @@ sources:
   group: university_leadership_official
   url: https://www.hit.edu.cn/11542/list.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -263,7 +263,7 @@ sources:
   group: university_leadership_official
   url: https://www.xjtu.edu.cn/jdgk/xxld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -295,7 +295,7 @@ sources:
   group: university_leadership_official
   url: https://www.tongji.edu.cn/xxgk1/xrld1.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -328,7 +328,7 @@ sources:
   group: university_leadership_official
   url: https://www.ecnu.edu.cn/wzcd/xxgk/xxld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -360,7 +360,7 @@ sources:
   group: university_leadership_official
   url: https://www.seu.edu.cn/28446/list.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -386,7 +386,7 @@ sources:
   group: university_leadership_official
   url: https://www.nankai.edu.cn/178/list.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -420,7 +420,7 @@ sources:
   group: university_leadership_official
   url: https://www.tju.edu.cn/tdgk/xrld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -453,7 +453,7 @@ sources:
   group: university_leadership_official
   url: https://www.sdu.edu.cn/sdgk/xrld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -483,7 +483,7 @@ sources:
   group: university_leadership_official
   url: https://www.sysu.edu.cn/xxg/xrld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -516,7 +516,7 @@ sources:
   group: university_leadership_official
   url: https://www.xmu.edu.cn/sdgl/xrld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -540,7 +540,7 @@ sources:
   group: university_leadership_official
   url: https://www.whu.edu.cn/xxgk/xrld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -574,7 +574,7 @@ sources:
   group: university_leadership_official
   url: https://www.jlu.edu.cn/xxgk/xrld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -607,7 +607,7 @@ sources:
   group: university_leadership_official
   url: https://www.nwpu.edu.cn/xxgk/ld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -640,7 +640,7 @@ sources:
   group: university_leadership_official
   url: https://www.xidian.edu.cn/xxgk.htm#B
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -672,7 +672,7 @@ sources:
   group: university_leadership_official
   url: https://www.hust.edu.cn/xxgk/xrld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -705,7 +705,7 @@ sources:
   group: university_leadership_official
   url: https://www.uestc.edu.cn/xxgk/xrld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -728,7 +728,7 @@ sources:
   group: university_leadership_official
   url: https://www.sustech.edu.cn/zh/leadership.html
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -761,7 +761,7 @@ sources:
   group: university_leadership_official
   url: https://www.cupl.edu.cn/xxgk/xrld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -797,7 +797,7 @@ sources:
   group: university_leadership_official
   url: https://www.muc.edu.cn/xxgk1/xrld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -833,7 +833,7 @@ sources:
   group: university_leadership_official
   url: https://www.cnu.edu.cn/xxgk/xrld/index.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -867,7 +867,7 @@ sources:
   group: university_leadership_official
   url: https://www.bsu.edu.cn/xxgk/xrld/index.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -890,7 +890,7 @@ sources:
   group: university_leadership_official
   url: https://www.bda.edu.cn/xygk/xrld/index.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   role_aliases:
@@ -926,7 +926,7 @@ sources:
   group: university_leadership_official
   url: https://www.buaa.edu.cn/xygk/xxld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -944,7 +944,7 @@ sources:
   group: university_leadership_official
   url: https://www.cau.edu.cn/xxgk/xxld/index.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -962,7 +962,7 @@ sources:
   group: university_leadership_official
   url: https://www.dlut.edu.cn/xxgk/xrld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -983,7 +983,7 @@ sources:
   group: university_leadership_official
   url: https://gk.sjtu.edu.cn/Data/View/1535
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -1005,7 +1005,7 @@ sources:
   group: university_leadership_official
   url: https://www.nju.edu.cn/ndgk/xrld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -1023,7 +1023,7 @@ sources:
   group: university_leadership_official
   url: https://www.zju.edu.cn/xrld/list.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -1044,7 +1044,7 @@ sources:
   group: university_leadership_official
   url: https://www.ouc.edu.cn/31003/list.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -1066,7 +1066,7 @@ sources:
   group: university_leadership_official
   url: https://www.hnu.edu.cn/hdgk/xrld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -1084,7 +1084,7 @@ sources:
   group: university_leadership_official
   url: https://www.csu.edu.cn/zjzn/xxld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -1106,7 +1106,7 @@ sources:
   group: university_leadership_official
   url: https://www.nudt.edu.cn/xxgk/xxld/index.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -1124,7 +1124,7 @@ sources:
   group: university_leadership_official
   url: https://www.scut.edu.cn/new/9019/list.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -1142,7 +1142,7 @@ sources:
   group: university_leadership_official
   url: https://www.scu.edu.cn/xxgk/xrld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -1160,7 +1160,7 @@ sources:
   group: university_leadership_official
   url: https://www.cqu.edu.cn/xqgk/xrld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -1178,7 +1178,7 @@ sources:
   group: university_leadership_official
   url: https://www.nwafu.edu.cn/xxgk/xrld/index.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -1196,7 +1196,7 @@ sources:
   group: university_leadership_official
   url: https://www.lzu.edu.cn/xxgk/xrld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -1214,7 +1214,7 @@ sources:
   group: university_leadership_official
   url: https://www.neu.edu.cn/xygk/xrld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -1236,7 +1236,7 @@ sources:
   group: university_leadership_official
   url: https://www.bupt.edu.cn/bygk/ldjg.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   disable_webdriver_patch: true
@@ -1262,7 +1262,7 @@ sources:
   group: university_leadership_official
   url: https://www.sufe.edu.cn/xxgk/xrld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -1280,7 +1280,7 @@ sources:
   group: university_leadership_official
   url: https://www.cufe.edu.cn/xxgk/xrld.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:
@@ -1304,7 +1304,7 @@ sources:
   group: university_leadership_official
   url: https://www.nuaa.edu.cn/481/list.htm
   crawl_method: university_leadership
-  schedule: weekly
+  schedule: daily
   priority: 1
   is_enabled: true
   selectors:

@@ -40,6 +40,14 @@ def _make_trigger(config: dict[str, Any]) -> IntervalTrigger | CronTrigger | Non
     return factory() if factory else None
 
 
+def _make_policy_refresh_trigger() -> CronTrigger:
+    return CronTrigger(
+        hour=settings.POLICY_REFRESH_CRON_HOURS,
+        minute=settings.POLICY_REFRESH_CRON_MINUTE,
+        timezone=settings.POLICY_REFRESH_TIMEZONE,
+    )
+
+
 def is_schedulable_source(config: dict[str, Any]) -> bool:
     """Whether this source should participate in timed crawl scheduling/catalog."""
     dimension = str(config.get("dimension") or "").strip().lower()
@@ -169,7 +177,7 @@ class SchedulerManager:
 
         self.scheduler.add_job(
             execute_policy_refresh_pipeline,
-            trigger=IntervalTrigger(hours=settings.POLICY_REFRESH_INTERVAL_HOURS),
+            trigger=_make_policy_refresh_trigger(),
             id="policy_refresh_pipeline",
             replace_existing=True,
             misfire_grace_time=1800,
@@ -181,11 +189,13 @@ class SchedulerManager:
         )
         logger.info(
             "Scheduler started with %d source jobs + monthly leadership full crawl + "
-            "daily pipeline (%02d:%02d UTC) + policy refresh every %dh",
+            "daily pipeline (%02d:%02d UTC) + policy refresh at %s:%02d %s",
             enabled_count,
             settings.PIPELINE_CRON_HOUR,
             settings.PIPELINE_CRON_MINUTE,
-            settings.POLICY_REFRESH_INTERVAL_HOURS,
+            settings.POLICY_REFRESH_CRON_HOURS,
+            settings.POLICY_REFRESH_CRON_MINUTE,
+            settings.POLICY_REFRESH_TIMEZONE,
         )
 
     async def stop(self) -> None:

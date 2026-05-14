@@ -148,6 +148,10 @@ accounts:
     username: OpenAI
     category: org
     cohort: expansion
+  - name: DeepSeek
+    username: deepseek_ai
+    category: org
+    cohort: expansion
   - name: Anthropic
     username: AnthropicAI
     category: org
@@ -172,6 +176,10 @@ accounts:
     username: Cohere
     category: org
     cohort: expansion
+  - name: Qwen
+    username: Alibaba_Qwen
+    category: org
+    cohort: expansion
   - name: AI21 Labs
     username: AI21Labs
     category: org
@@ -192,6 +200,10 @@ accounts:
     username: NVIDIAAI
     category: org
     cohort: expansion
+  - name: Tencent Hunyuan
+    username: TencentHunyuan
+    category: org
+    cohort: expansion
   - name: Sakana AI
     username: SakanaAILabs
     category: org
@@ -202,5 +214,53 @@ accounts:
     cohort: expansion
   - name: Nous Research
     username: NousResearch
+    category: org
+    cohort: expansion
+  - name: Scale AI
+    username: scale_AI
+    category: org
+    cohort: expansion
+  - name: Databricks
+    username: databricks
+    category: org
+    cohort: expansion
+  - name: Runway
+    username: runwayml
+    category: org
+    cohort: expansion
+  - name: Groq
+    username: GroqInc
+    category: org
+    cohort: expansion
+  - name: Together AI
+    username: togethercompute
+    category: org
+    cohort: expansion
+  - name: Weights & Biases
+    username: wandb
+    category: org
+    cohort: expansion
+  - name: Anysphere
+    username: anysphere
+    category: org
+    cohort: expansion
+  - name: 01.AI
+    username: 01AI_Yi
+    category: org
+    cohort: expansion
+  - name: Baichuan AI
+    username: BaichuanAI
+    category: org
+    cohort: expansion
+  - name: MiniMax
+    username: MiniMax_AI
+    category: org
+    cohort: expansion
+  - name: Kimi.ai
+    username: Kimi_Moonshot
+    category: org
+    cohort: expansion
+  - name: Z.ai
+    username: Zai_org
     category: org
     cohort: expansion

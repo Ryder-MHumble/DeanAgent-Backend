@@ -67,7 +67,10 @@ class Settings(BaseSettings):
     # Pipeline schedule (UTC)
     PIPELINE_CRON_HOUR: int = 6
     PIPELINE_CRON_MINUTE: int = 0
-    POLICY_REFRESH_INTERVAL_HOURS: int = 4
+    POLICY_REFRESH_CRON_HOURS: str = "10,15,20"
+    POLICY_REFRESH_CRON_MINUTE: int = 0
+    POLICY_REFRESH_TIMEZONE: str = "Asia/Shanghai"
+    POLICY_REFRESH_INTERVAL_HOURS: int = 4  # legacy; policy refresh now uses cron
 
     # LLM enrichment in daily pipeline (requires at least one LLM provider key)
     ENABLE_LLM_ENRICHMENT: bool = True

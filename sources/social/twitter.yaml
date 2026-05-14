@@ -17,7 +17,7 @@ sources:
     # 调度（完全 YAML 可配）
     schedule: "cron"
     cron:
-      hour: 4
+      hour: "4,16"
       minute: 0
       timezone: "Asia/Shanghai"
 

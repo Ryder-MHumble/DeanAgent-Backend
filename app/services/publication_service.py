@@ -238,6 +238,18 @@ async def ensure_publication_tables(pool: asyncpg.Pool) -> None:
                 """
             )
             await conn.execute(
+                """
+                ALTER TABLE publication_candidates
+                  ADD COLUMN IF NOT EXISTS affiliation_status TEXT,
+                  ADD COLUMN IF NOT EXISTS compliance_reason TEXT,
+                  ADD COLUMN IF NOT EXISTS matched_tokens JSONB NOT NULL DEFAULT '[]'::jsonb,
+                  ADD COLUMN IF NOT EXISTS checked_affiliations JSONB NOT NULL DEFAULT '[]'::jsonb,
+                  ADD COLUMN IF NOT EXISTS assessed_at TIMESTAMPTZ,
+                  ADD COLUMN IF NOT EXISTS dedup_key TEXT,
+                  ADD COLUMN IF NOT EXISTS title_fingerprint TEXT
+                """
+            )
+            await conn.execute(
                 "CREATE INDEX IF NOT EXISTS idx_publication_candidates_owner_status ON publication_candidates(owner_type, owner_id, review_status)"
             )
             await conn.execute(

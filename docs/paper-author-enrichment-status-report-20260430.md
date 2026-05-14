@@ -1,5 +1,34 @@
 # Papers 信息补全阶段汇报（2026-04-30）
 
+## 2026-05-13 OpenReview Authors 汇总
+
+> 本节按当前 `papers` 表中 `profile_flags / author_descriptions / author_experiences` 的实际落库结果统计，版式对应当前对外汇报截图。
+
+口径说明：
+
+- `已识别唯一 OpenReview Profile`：`profile_flags[].profile_id` 去重后的唯一 profile 数
+- `已入库/覆盖 Profile`：至少具备 `description / experiences / institution / position / department` 之一的唯一 profile 数
+- `作者画像行数`：`profile_flags` 中按论文作者展开后的总行数
+- `已解析非空 profile_id`：作者画像行里 `profile_id` 非空的行数
+- `当前机构 / 职位 / 部门`：按唯一 profile 统计，对应信息来自 `author_experiences` 和作者画像合并结果
+- `研究方向/关键词`：当前 schema 未单列存储，因此不做百分比承诺
+
+| 维度 | 当前进展 |
+|---|---:|
+| 已识别唯一 OpenReview Profile | 33,282 |
+| 已入库/覆盖 Profile | 33,116，99.5% |
+| 剩余待补 Profile | 166 |
+| 作者画像行数 | 93,689 |
+| 已解析非空 `profile_id` | 64,885 |
+| 姓名/Profile URL/来源论文关联 | 100.0% |
+| 当前机构 | 99.5% |
+| 职位 | 99.5% |
+| 部门 | 46.9% |
+| 教育经历 | 99.5% |
+| 研究方向/关键词 | 暂未落独立字段 |
+| 个人主页/外链 | 11.9% |
+| 平均关联论文数 | 1.95 篇/人 |
+
 ## 2026-05-01 进展更新
 
 > 本节为 2026-05-01 的增量进展，保留原文档主体用于对比 2026-04-30 与 2026-05-01 的阶段变化。
